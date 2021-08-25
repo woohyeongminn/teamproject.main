@@ -1,7 +1,7 @@
 package com.ogong.menu;
 
 import java.util.Stack;
-import com.eomcs.util.Prompt;
+import com.ogong.util.Prompt;
 
 // 역할
 // - 다른 메뉴를 포함하는 컨테이너 역할을 수행한다.
