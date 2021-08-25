@@ -1,2 +1,2 @@
 # teamproject.main
-아에이오우
+깃 왜 안 돼 짜증짜증~
