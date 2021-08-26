@@ -2,10 +2,10 @@ package com.ogong.pms;
 
 import java.util.LinkedList;
 import java.util.List;
-import com.ogong.handler.NewStudyHandler;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Study;
+import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -52,6 +52,7 @@ public class App {
     //      public void execute() {
     //        newStudyHandler.delete(); 
     //      }});
+
 
     return mainMenuGroup;
   }

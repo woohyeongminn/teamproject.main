@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.util.Prompt;
@@ -12,19 +13,19 @@ public class NoticeBoardHandler {
     this.boardList = boardList;
   }
 
-  //  public void add() {
-  //    System.out.println("[공지사항]");
-  //
-  //    NoticeBoard notice = new NoticeBoard();
-  //
-  //    notice.setNo(Prompt.inputInt("번호? "));
-  //    notice.setTitle(Prompt.inputString("제목? "));
-  //    notice.setContent(Prompt.inputString("내용? "));
-  //    notice.setWriter(Prompt.inputString("작성자? "));
-  //    notice.setRegisteredDate(new Date(System.currentTimeMillis()));
-  //
-  //    boardList.add(notice);
-  //  }
+  public void add() {
+    System.out.println("[공지사항]");
+
+    NoticeBoard notice = new NoticeBoard();
+
+    notice.setNo(Prompt.inputInt("번호? "));
+    notice.setTitle(Prompt.inputString("제목? "));
+    notice.setContent(Prompt.inputString("내용? "));
+    notice.setWriter(Prompt.inputString("작성자? "));
+    notice.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    boardList.add(notice);
+  }
 
   public void list() {
     System.out.println("[공지사항 목록]");
