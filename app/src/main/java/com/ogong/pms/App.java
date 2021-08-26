@@ -5,10 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
+import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
+import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.NewStudyHandler;
@@ -25,6 +27,9 @@ public class App {
 
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
   NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
+
+  List<AskBoard> askBoardList = new ArrayList<>();
+  AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
 
   List<Cafe> cafeList = new ArrayList<>();
   CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
@@ -119,6 +124,31 @@ public class App {
     noticeMenu.add(new Menu("공지사항 상세보기") {
       public void execute() {
         noticeboardHandler.detail(); 
+      }});
+
+    //--------------------------------------------------------------------
+    MenuGroup askMenu = new MenuGroup("[문의사항 게시판]");
+    mainMenuGroup.add(askMenu);
+
+    askMenu.add(new Menu("문의사항 등록") {
+      public void execute() {
+        askBoardHandler.add(); 
+      }});
+    askMenu.add(new Menu("문의사항 목록") {
+      public void execute() {
+        askBoardHandler.list(); 
+      }});
+    askMenu.add(new Menu("문의사항 상세보기") {
+      public void execute() {
+        askBoardHandler.detail(); 
+      }});
+    askMenu.add(new Menu("문의사항 변경") {
+      public void execute() {
+        askBoardHandler.update(); 
+      }});
+    askMenu.add(new Menu("문의사항 삭제") {
+      public void execute() {
+        askBoardHandler.delete(); 
       }});
 
     //--------------------------------------------------------------------

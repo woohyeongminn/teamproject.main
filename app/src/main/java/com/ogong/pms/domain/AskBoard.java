@@ -7,7 +7,9 @@ public class AskBoard {
   private String askTitle; // 문의게시판 제목
   private String askContent; // 문의게시판 내용
   private String askWriter; // 문의게시판 작성자
+  private int askVeiwCount; // 문의게시판 조회수
   private Date askRegisteredDate; // 문의게시판 등록일
+
   public int getAskNo() {
     return askNo;
   }
@@ -31,6 +33,12 @@ public class AskBoard {
   }
   public void setAskWriter(String askWriter) {
     this.askWriter = askWriter;
+  }
+  public int getAskVeiwCount() {
+    return askVeiwCount;
+  }
+  public void setAskVeiwCount(int askVeiwCount) {
+    this.askVeiwCount = askVeiwCount;
   }
   public Date getAskRegisteredDate() {
     return askRegisteredDate;

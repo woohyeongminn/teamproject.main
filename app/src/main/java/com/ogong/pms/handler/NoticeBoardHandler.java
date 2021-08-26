@@ -45,9 +45,9 @@ public class NoticeBoardHandler {
 
   public void detail() {
     System.out.println("[공지사항 상세보기]");
-    int no = Prompt.inputInt("번호? ");
+    int notiNo = Prompt.inputInt("번호? ");
 
-    NoticeBoard notice = findByNo(no);
+    NoticeBoard notice = findByNo(notiNo);
 
     if (notice == null) {
       System.out.println("해당 번호의 게시글이 없습니다.");
@@ -62,17 +62,17 @@ public class NoticeBoardHandler {
 
   //    public void update() {
   //      System.out.println("[공지사항 변경]");
-  //      int no = Prompt.inputInt("번호? ");
+  //      int notiNo = Prompt.inputInt("번호? ");
   //  
-  //      NoticeBoard notice = findByNo(no);
+  //      NoticeBoard notice = findByNo(notiNo);
   //  
   //      if (notice == null) {
   //        System.out.println("해당 번호의 게시글이 없습니다.");
   //        return;
   //      }
   //  
-  //      String title = Prompt.inputString(String.format("제목(%s)? ", notice.getNotiTitle()));
-  //      String content = Prompt.inputString(String.format("내용(%s)? ", notice.getNotiContent()));
+  //      String notiTitle = Prompt.inputString(String.format("제목(%s)? ", notice.getNotiTitle()));
+  //      String notiContent = Prompt.inputString(String.format("내용(%s)? ", notice.getNotiContent()));
   //  
   //      String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
   //      if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -80,16 +80,16 @@ public class NoticeBoardHandler {
   //        return;
   //      }
   //  
-  //      notice.setNotiTitle(title);
-  //      notice.setNotiContent(content);
+  //      notice.setNotiTitle(notiTitle);
+  //      notice.setNotiContent(notiContent);
   //      System.out.println("게시글을 변경하였습니다.");
   //    }
   //  
   //    public void delete() {
   //      System.out.println("[공지사항 삭제]");
-  //      int no = Prompt.inputInt("번호? ");
+  //      int notiNo = Prompt.inputInt("번호? ");
   //  
-  //      NoticeBoard notice = findByNo(no);
+  //      NoticeBoard notice = findByNo(notiNo);
   //  
   //      if (notice == null) {
   //        System.out.println("해당 번호의 게시글이 없습니다.");
@@ -107,10 +107,10 @@ public class NoticeBoardHandler {
   //      System.out.println("게시글을 삭제하였습니다.");
   //    }
 
-  private NoticeBoard findByNo(int no) {
+  private NoticeBoard findByNo(int notiNo) {
     NoticeBoard[] arr = noticeBoardList.toArray(new NoticeBoard[0]);
     for (NoticeBoard notice : arr) {
-      if (notice.getNotiNo() == no) {
+      if (notice.getNotiNo() == notiNo) {
         return notice;
       }
     }
