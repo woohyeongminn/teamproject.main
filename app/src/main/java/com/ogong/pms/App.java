@@ -5,9 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
+import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
+import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
@@ -23,6 +25,9 @@ public class App {
 
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
   NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
+
+  List<Cafe> cafeList = new ArrayList<>();
+  CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -116,7 +121,18 @@ public class App {
         noticeboardHandler.detail(); 
       }});
 
-    return mainMenuGroup;
+    //--------------------------------------------------------------------
+    MenuGroup cafeMenu = new MenuGroup("[장소 예약]");
+    mainMenuGroup.add(cafeMenu);
+
+    cafeMenu.add(new Menu("장소 등록") {
+      public void execute() {
+        cafeHandler.add();
+      }
+    });
+    return mainMenuGroup;   
   }
+
+
 
 }
