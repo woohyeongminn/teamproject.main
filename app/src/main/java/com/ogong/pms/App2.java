@@ -35,7 +35,7 @@ public class App2 {
     System.out.println("장소: 원주");
     System.out.println("인원수: 10명");
     System.out.println("대면: 대면");
-    System.out.println("소개글: 토익 500점 이상 분들 원해요");
+    System.out.println("소개글: 토익 500점 이상 분들 원해");
 
   }
 

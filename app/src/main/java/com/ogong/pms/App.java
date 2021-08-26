@@ -117,7 +117,6 @@ public class App {
         cafeHandler.add();
       }
     });
-
     return mainMenuGroup;
   }
 }

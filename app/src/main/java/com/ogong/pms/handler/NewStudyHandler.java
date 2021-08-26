@@ -13,7 +13,7 @@ public class NewStudyHandler {
   }
 
   public void add() {
-    System.out.println("[회원 등록]");
+    System.out.println("[스터디 등록]");
     Study study = new Study();
 
     study.setStudyNo(Prompt.inputInt("번호? "));
@@ -30,7 +30,7 @@ public class NewStudyHandler {
   }
 
   public void list() {
-    System.out.println("[회원 목록]");
+    System.out.println("[스터디 목록]");
 
     Study[] list = studyList.toArray(new Study[0]);
 
@@ -46,13 +46,13 @@ public class NewStudyHandler {
   }
 
   public void detail() {
-    System.out.println("[회원 상세보기]");
+    System.out.println("[스터디 상세보기]");
     int no = Prompt.inputInt("번호? ");
 
     Study study = findByNo(no);
 
     if (study == null) {
-      System.out.println("해당 번호의 회원이 없습니다.");
+      System.out.println("해당 번호의 스터디가 없습니다.");
       return;
     }
 
@@ -67,7 +67,7 @@ public class NewStudyHandler {
   }
 
   public void update() {
-    System.out.println("[회원 변경]");
+    System.out.println("[스터디 변경]");
     int no = Prompt.inputInt("번호? ");
 
     Study study = findByNo(no);
