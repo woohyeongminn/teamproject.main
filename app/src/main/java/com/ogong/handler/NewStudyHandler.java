@@ -1,4 +1,4 @@
-package com.ogong.pms;
+package com.ogong.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Study;
