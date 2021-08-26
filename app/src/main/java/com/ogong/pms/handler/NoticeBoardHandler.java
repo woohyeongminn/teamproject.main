@@ -1,40 +1,41 @@
 package com.ogong.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.util.Prompt;
 
 public class NoticeBoardHandler {
 
-  List<NoticeBoard> boardList;
+  List<NoticeBoard> noticeBoardList;
 
-  public NoticeBoardHandler(List<NoticeBoard> boardList) {
-    this.boardList = boardList;
+  public NoticeBoardHandler(List<NoticeBoard> noticeBoardList) {
+    this.noticeBoardList = noticeBoardList;
   }
 
-  //  public void add() {
-  //    System.out.println("[공지사항]");
-  //
-  //    NoticeBoard notice = new NoticeBoard();
-  //
-  //    notice.setNo(Prompt.inputInt("번호? "));
-  //    notice.setTitle(Prompt.inputString("제목? "));
-  //    notice.setContent(Prompt.inputString("내용? "));
-  //    notice.setWriter(Prompt.inputString("작성자? "));
-  //    notice.setRegisteredDate(new Date(System.currentTimeMillis()));
-  //
-  //    boardList.add(notice);
-  //  }
+  public void add() {
+    System.out.println("[공지사항]");
+
+    NoticeBoard notice = new NoticeBoard();
+
+    notice.setNo(Prompt.inputInt("번호? "));
+    notice.setTitle(Prompt.inputString("제목? "));
+    notice.setContent(Prompt.inputString("내용? "));
+    notice.setWriter(Prompt.inputString("작성자? "));
+    notice.setRegisteredDate(new Date(System.currentTimeMillis()));
+
+    noticeBoardList.add(notice);
+  }
 
   public void list() {
     System.out.println("[공지사항 목록]");
 
-    NoticeBoard[] notices = new NoticeBoard[boardList.size()];
+    NoticeBoard[] notices = new NoticeBoard[noticeBoardList.size()];
 
-    boardList.toArray(notices);
+    noticeBoardList.toArray(notices);
 
     for (NoticeBoard notice : notices) {
-      System.out.printf("%d, %s, %s, %d\n", 
+      System.out.printf("%d, %s, %s, %s\n", 
           notice.getNo(), 
           notice.getTitle(), 
           notice.getWriter(),
@@ -56,7 +57,7 @@ public class NoticeBoardHandler {
     System.out.printf("제목: %s\n", notice.getTitle());
     System.out.printf("내용: %s\n", notice.getContent());
     System.out.printf("작성자: %s\n", notice.getWriter());
-    System.out.printf("등록일: %d\n", notice.getRegisteredDate());
+    System.out.printf("등록일: %s\n", notice.getRegisteredDate());
   }
 
   //  public void update() {
@@ -101,13 +102,13 @@ public class NoticeBoardHandler {
   //      return;
   //    }
   //
-  //    boardList.remove(notice);
+  //    noticeBoardList.remove(notice);
   //
   //    System.out.println("게시글을 삭제하였습니다.");
   //  }
 
   private NoticeBoard findByNo(int no) {
-    NoticeBoard[] arr = boardList.toArray(new NoticeBoard[0]);
+    NoticeBoard[] arr = noticeBoardList.toArray(new NoticeBoard[0]);
     for (NoticeBoard notice : arr) {
       if (notice.getNo() == no) {
         return notice;
