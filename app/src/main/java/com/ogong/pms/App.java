@@ -37,11 +37,14 @@ public class App {
   List<Cafe> cafeList = new ArrayList<>();
   CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
 
-  List<Login> loginList = new ArrayList<>();
-  LoginHandler loginHandler = new LoginHandler(loginList, memberHandler);
+  //  List<Login> loginList = new ArrayList<>();
+  //  LoginHandler loginHandler = new LoginHandler(loginList, memberHandler);
 
   List<Join> joinList = new ArrayList<>();
   JoinHandler joinHandler = new JoinHandler(joinList);
+
+  List<Login> loginList = new ArrayList<>();
+  LoginHandler loginHandler = new LoginHandler(loginList, joinHandler);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -52,6 +55,10 @@ public class App {
     Prompt.close();
   }
   Menu createMenu() {
+    System.out.println("\u0020\u002f\u0029\u002f\u0029\u0020");
+    System.out.print("\u0028\u0020\u0027\u03c0\u0027\u0029");
+    System.out.println(" < 오늘의 공부");
+    System.out.println("\u0028\u0020\u003e\u004f\u003c\u0029");
 
     //--------------------------------------------------------------------
 
@@ -69,6 +76,11 @@ public class App {
       public void execute() {
         joinHandler.add(); 
       }});
+    joinMenu.add(new Menu("기업 회원 가입") {
+      @Override
+      public void execute() {
+        joinHandler.add(); 
+      }});
 
     //--------------------------------------------------------------------
     MenuGroup loginMenu = new MenuGroup("[로그인]");
@@ -79,6 +91,7 @@ public class App {
       public void execute() {
         loginHandler.addLoginPage(); 
       }});
+
     //--------------------------------------------------------------------
     MenuGroup memberMenu = new MenuGroup("[마이페이지]");
     mainMenuGroup.add(memberMenu);

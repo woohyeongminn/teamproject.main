@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Study {
 
-  public int studyNo;
-  public String studyTitle;
-  public String owner;
-  public String subject;
-  public String area;
-  public String location;
-  public int numberOfPeple;
-  public String face;
-  public String introduction;
-  public Date registeredDate;
+  public int studyNo;  // 스터디 번호
+  public String studyTitle; // 스터디명
+  public String owner; // 작성자(조장)
+  public String subject; // 분야
+  public String area; // 지역
+  public String location; // 장소
+  public int numberOfPeple; // 인원수
+  public String face; // 대면/비대면
+  public String introduction; // 소개글
+  public Date registeredDate; // 스터디 가입일
 
   public int getStudyNo() {
     return studyNo;

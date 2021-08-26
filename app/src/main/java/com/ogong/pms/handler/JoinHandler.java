@@ -26,4 +26,16 @@ public class JoinHandler {
     joinList.add(join);
   }
 
+  public Join findByEmail(String perEmail) {
+    Join[] arr = joinList.toArray(new Join[0]);
+    for (Object obj : arr) {
+      Join join = (Join) obj;
+      if (join.getJoinEmail().equals(perEmail)) {
+        return join;
+      }
+    }
+    return null;
+  }
+
+
 }
