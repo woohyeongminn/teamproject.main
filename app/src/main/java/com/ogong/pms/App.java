@@ -55,6 +55,36 @@ public class App {
     mainMenuGroup.setPrevMenuTitle("종료");
     ////////////////////////////////////////////////////////
 
+    //--------------------------------------------------------------------
+    MenuGroup memberMenu = new MenuGroup("[개인 회원 가입]");
+    mainMenuGroup.add(memberMenu);
+
+    memberMenu.add(new Menu("회원 가입") {
+      @Override
+      public void execute() {
+        memberHandler.add(); 
+      }});
+    memberMenu.add(new Menu("내 가입 정보") {
+      @Override
+      public void execute() {
+        memberHandler.list(); 
+      }});
+    memberMenu.add(new Menu("내 가입 정보 상세") {
+      @Override
+      public void execute() {
+        memberHandler.detail(); 
+      }});
+    memberMenu.add(new Menu("개인 정보 수정하기") {
+      @Override
+      public void execute() {
+        memberHandler.update(); 
+      }});
+    memberMenu.add(new Menu("회원 탈퇴하기") {
+      @Override
+      public void execute() {
+        memberHandler.delete(); 
+      }});
+
     MenuGroup loginMenu = new MenuGroup("[로그인]");
     mainMenuGroup.add(loginMenu);
 
@@ -93,35 +123,6 @@ public class App {
     //        newStudyHandler.delete(); 
     //      }});
 
-    //--------------------------------------------------------------------
-    MenuGroup memberMenu = new MenuGroup("[개인회원]");
-    mainMenuGroup.add(memberMenu);
-
-    memberMenu.add(new Menu("등록하기") {
-      @Override
-      public void execute() {
-        memberHandler.add(); 
-      }});
-    memberMenu.add(new Menu("목록") {
-      @Override
-      public void execute() {
-        memberHandler.list(); 
-      }});
-    memberMenu.add(new Menu("내 가입정보") {
-      @Override
-      public void execute() {
-        memberHandler.detail(); 
-      }});
-    memberMenu.add(new Menu("개인정보 수정하기") {
-      @Override
-      public void execute() {
-        memberHandler.update(); 
-      }});
-    memberMenu.add(new Menu("회원 탈퇴하기") {
-      @Override
-      public void execute() {
-        memberHandler.delete(); 
-      }});
 
     //--------------------------------------------------------------------
     MenuGroup noticeMenu = new MenuGroup("[공지사항]");
@@ -177,3 +178,5 @@ public class App {
     return mainMenuGroup;
   }
 }
+
+

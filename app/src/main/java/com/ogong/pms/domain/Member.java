@@ -4,60 +4,49 @@ import java.sql.Date;
 
 public class Member {
 
-  private String personal;
-  private int perno;
-  private String pernickname;
-  private String peremail;
-  private String perpassword;
-  private String perphoto;
-  private Date perregisteredDate;
+  private int perNo;
+  private String perNickname;
+  private String perEmail;
+  private String perPassword;
+  private String perPhoto;
+  private Date perRegisteredDate;
 
-
-  public String getPersonal() {
-    return personal;
+  public int getPerNo() {
+    return perNo;
   }
-  public void setPersonal(String personal) {
-    this.personal = personal;
+  public void setPerNo(int perNo) {
+    this.perNo = perNo;
   }
-  public int getPerno() {
-    return perno;
+  public String getPerNickname() {
+    return perNickname;
   }
-  public void setPerno(int perno) {
-    this.perno = perno;
+  public void setPerNickname(String perNickname) {
+    this.perNickname = perNickname;
   }
-  public String getPernickname() {
-    return pernickname;
+  public String getPerEmail() {
+    return perEmail;
   }
-  public void setPernickname(String pernickname) {
-    this.pernickname = pernickname;
+  public void setPerEmail(String perEmail) {
+    this.perEmail = perEmail;
   }
-  public String getPeremail() {
-    return peremail;
+  public String getPerPassword() {
+    return perPassword;
   }
-  public void setPeremail(String peremail) {
-    this.peremail = peremail;
+  public void setPerPassword(String perPassword) {
+    this.perPassword = perPassword;
   }
-  public String getPerpassword() {
-    return perpassword;
+  public String getPerPhoto() {
+    return perPhoto;
   }
-  public void setPerpassword(String perpassword) {
-    this.perpassword = perpassword;
+  public void setPerPhoto(String perPhoto) {
+    this.perPhoto = perPhoto;
   }
-  public String getPerphoto() {
-    return perphoto;
+  public Date getPerRegisteredDate() {
+    return perRegisteredDate;
   }
-  public void setPerphoto(String perphoto) {
-    this.perphoto = perphoto;
+  public void setPerRegisteredDate(Date perRegisteredDate) {
+    this.perRegisteredDate = perRegisteredDate;
   }
-  public Date getPerregisteredDate() {
-    return perregisteredDate;
-  }
-  public void setPerregisteredDate(Date perregisteredDate) {
-    this.perregisteredDate = perregisteredDate;
-  }
-
-
-
 
   //  private String ceo;
   //  private int ceono;
