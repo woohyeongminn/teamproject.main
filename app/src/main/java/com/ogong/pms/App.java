@@ -1,127 +1,3 @@
-<<<<<<< HEAD
-//package com.ogong.pms;
-//
-//import java.util.ArrayList;
-//import java.util.LinkedList;
-//import java.util.List;
-//import com.ogong.menu.Menu;
-//import com.ogong.menu.MenuGroup;
-//import com.ogong.pms.domain.Member;
-//import com.ogong.pms.domain.NoticeBoard;
-//import com.ogong.pms.domain.Study;
-//import com.ogong.pms.handler.MemberHandler;
-//import com.ogong.pms.handler.NewStudyHandler;
-//import com.ogong.pms.handler.NoticeBoardHandler;
-//import com.ogong.util.Prompt;
-//
-//public class App {
-//
-//  List<Study> studyList = new LinkedList<>();
-//  NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
-//
-//  List<Member> memberList = new LinkedList<>();
-//  MemberHandler memberHandler = new MemberHandler(memberList);
-//
-//  List<NoticeBoard> noticeBoardList = new ArrayList<>();
-//  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
-//
-//  public static void main(String[] args) {
-//    App app = new App(); 
-//    app.service();
-//  }
-//
-//  void service() {
-//    createMenu().execute();
-//    Prompt.close();
-//  }
-//
-//  Menu createMenu() {
-//    //--------------------------------------------------------------------
-//    MenuGroup mainMenuGroup = new MenuGroup("메인");
-//    mainMenuGroup.setPrevMenuTitle("종료");
-//
-//    MenuGroup studyMenu = new MenuGroup("[모든 스터디]");
-//    mainMenuGroup.add(studyMenu);
-//
-//    studyMenu.add(new Menu("등록") {
-//      @Override
-//      public void execute() {
-//        newStudyHandler.add(); 
-//      }});
-//    studyMenu.add(new Menu("목록") {
-//      @Override
-//      public void execute() {
-//        newStudyHandler.list(); 
-//      }});
-//    studyMenu.add(new Menu("상세보기") {
-//      @Override
-//      public void execute() {
-//        newStudyHandler.detail(); 
-//      }});
-//    studyMenu.add(new Menu("변경") {
-//      @Override
-//      public void execute() {
-//        newStudyHandler.update(); 
-//      }});
-//
-//    //    studyMenu.add(new Menu("삭제") {
-//    //      public void execute() {
-//    //        newStudyHandler.delete(); 
-//    //      }});
-//
-//
-//    //--------------------------------------------------------------------
-//    MenuGroup memberMenu = new MenuGroup("[개인회원]");
-//    mainMenuGroup.add(memberMenu);
-//
-//    memberMenu.add(new Menu("등록하기") {
-//      @Override
-//      public void execute() {
-//        memberHandler.add(); 
-//      }});
-//    memberMenu.add(new Menu("목록") {
-//      @Override
-//      public void execute() {
-//        memberHandler.list(); 
-//      }});
-//    memberMenu.add(new Menu("내 가입정보") {
-//      @Override
-//      public void execute() {
-//        memberHandler.detail(); 
-//      }});
-//    memberMenu.add(new Menu("개인정보 수정하기") {
-//      @Override
-//      public void execute() {
-//        memberHandler.update(); 
-//      }});
-//    memberMenu.add(new Menu("회원 탈퇴하기") {
-//      @Override
-//      public void execute() {
-//        memberHandler.delete(); 
-//      }});
-//
-//    //--------------------------------------------------------------------
-//    MenuGroup noticeMenu = new MenuGroup("[공지사항 게시판]");
-//    mainMenuGroup.add(noticeMenu);
-//
-//    noticeMenu.add(new Menu("공지사항") {
-//      public void execute() {
-//        noticeboardHandler.add(); 
-//      }});
-//    noticeMenu.add(new Menu("공지사항 목록") {
-//      public void execute() {
-//        noticeboardHandler.list(); 
-//      }});
-//    noticeMenu.add(new Menu("공지사항 상세보기") {
-//      public void execute() {
-//        noticeboardHandler.detail(); 
-//      }});
-//
-//    return mainMenuGroup;
-//  }
-//
-//}
-=======
 package com.ogong.pms;
 
 import java.util.ArrayList;
@@ -140,13 +16,10 @@ import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.util.Prompt;
 
 public class App {
-
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
-
   List<Member> memberList = new LinkedList<>();
   MemberHandler memberHandler = new MemberHandler(memberList);
-
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
   NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
 
@@ -157,20 +30,16 @@ public class App {
     App app = new App(); 
     app.service();
   }
-
   void service() {
     createMenu().execute();
     Prompt.close();
   }
-
   Menu createMenu() {
     //--------------------------------------------------------------------
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
-
     MenuGroup studyMenu = new MenuGroup("[모든 스터디]");
     mainMenuGroup.add(studyMenu);
-
     studyMenu.add(new Menu("등록") {
       @Override
       public void execute() {
@@ -191,17 +60,13 @@ public class App {
       public void execute() {
         newStudyHandler.update(); 
       }});
-
     //    studyMenu.add(new Menu("삭제") {
     //      public void execute() {
     //        newStudyHandler.delete(); 
     //      }});
-
-
     //--------------------------------------------------------------------
     MenuGroup memberMenu = new MenuGroup("[개인회원]");
     mainMenuGroup.add(memberMenu);
-
     memberMenu.add(new Menu("등록하기") {
       @Override
       public void execute() {
@@ -227,11 +92,9 @@ public class App {
       public void execute() {
         memberHandler.delete(); 
       }});
-
     //--------------------------------------------------------------------
     MenuGroup noticeMenu = new MenuGroup("[공지사항 게시판]");
     mainMenuGroup.add(noticeMenu);
-
     noticeMenu.add(new Menu("공지사항") {
       public void execute() {
         noticeboardHandler.add(); 
@@ -254,10 +117,7 @@ public class App {
         cafeHandler.add();
       }
     });
-    return mainMenuGroup;   
+
+    return mainMenuGroup;
   }
-
-
-
 }
->>>>>>> 03d153ecdc6e82c3157b1c344abfa21915c53d72
