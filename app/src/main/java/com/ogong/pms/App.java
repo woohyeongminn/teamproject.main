@@ -110,10 +110,10 @@ public class App {
       }});
 
     //--------------------------------------------------------------------
-    MenuGroup noticeMenu = new MenuGroup("[공지사항 게시판]");
+    MenuGroup noticeMenu = new MenuGroup("[공지사항]");
     mainMenuGroup.add(noticeMenu);
 
-    noticeMenu.add(new Menu("공지사항") {
+    noticeMenu.add(new Menu("공지사항 등록") {
       public void execute() {
         noticeboardHandler.add(); 
       }});
@@ -127,7 +127,7 @@ public class App {
       }});
 
     //--------------------------------------------------------------------
-    MenuGroup askMenu = new MenuGroup("[문의사항 게시판]");
+    MenuGroup askMenu = new MenuGroup("[문의게시판]");
     mainMenuGroup.add(askMenu);
 
     askMenu.add(new Menu("문의사항 등록") {
