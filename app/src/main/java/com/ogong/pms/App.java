@@ -128,6 +128,11 @@ public class App {
         cafeHandler.find();
       }
     });
+    cafeMenu.add(new Menu("장소 상세보기") {
+      public void execute() {
+        cafeHandler.detail();
+      }
+    });
     return mainMenuGroup;   
   }
 }
