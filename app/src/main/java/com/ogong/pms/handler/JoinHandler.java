@@ -26,4 +26,17 @@ public class JoinHandler {
     joinList.add(join);
   }
 
+  //<2021-08-26 : 추가된 코드(woo)>
+  public Join findByEmail(String perEmail) {
+    Join[] arr = joinList.toArray(new Join[0]);
+    for (Object obj : arr) {
+      Join join = (Join) obj;
+      if (join.getJoinEmail().equals(perEmail)) {
+        return join;
+      }
+    }
+    return null;
+  }
+
+
 }

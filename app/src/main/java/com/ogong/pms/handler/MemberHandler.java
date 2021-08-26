@@ -131,6 +131,10 @@ public class MemberHandler {
     return null;
   }
 
+
+
+
+  //-------------prompt는 login에서 사용------------------------------------------------
   public boolean exist(String perEmail) {
     Member[] list = memberList.toArray(new Member[0]);
     for (Member member : list) {
