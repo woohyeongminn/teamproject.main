@@ -16,8 +16,8 @@ public class NewStudyHandler {
     System.out.println("[회원 등록]");
     Study study = new Study();
 
-    study.setNo(Prompt.inputInt("번호? "));
-    study.setTitle(Prompt.inputString("스터디명? "));
+    study.setStudyNo(Prompt.inputInt("번호? "));
+    study.setStudyTitle(Prompt.inputString("스터디명? "));
     study.setOwner(Prompt.inputString("작성자? "));
     study.setSubject(Prompt.inputString("분야? "));
     study.setArea(Prompt.inputString("지역? "));
@@ -40,7 +40,7 @@ public class NewStudyHandler {
           study.getLocation(), 
           study.getSubject(), 
           study.getNumberOfPeple(),
-          study.getTitle(),
+          study.getStudyTitle(),
           study.getFace());
     }
   }
@@ -56,7 +56,7 @@ public class NewStudyHandler {
       return;
     }
 
-    System.out.printf("스터디명: %s\n", study.getTitle());
+    System.out.printf("스터디명: %s\n", study.getStudyTitle());
     System.out.printf("조장: %s\n", study.getOwner());
     System.out.printf("분야: %s\n", study.getSubject());
     System.out.printf("지역: %s\n", study.getArea());
@@ -77,7 +77,7 @@ public class NewStudyHandler {
       return;
     }
 
-    String title = Prompt.inputString("스터디명(" + study.getTitle()  + ")? ");
+    String studyTitle = Prompt.inputString("스터디명(" + study.getStudyTitle()  + ")? ");
     String owner = Prompt.inputString("조장(" + study.getOwner() + ")? ");
     String location = Prompt.inputString("장소(" + study.getLocation() + ")? ");
     String face = Prompt.inputString("대면(" + study.getFace() + ")? ");
@@ -89,7 +89,7 @@ public class NewStudyHandler {
       return;
     }
 
-    study.setTitle(title);
+    study.setStudyTitle(studyTitle);
     study.setOwner(owner);
     study.setLocation(location);
     study.setFace(face);
@@ -124,7 +124,7 @@ public class NewStudyHandler {
     Study[] arr = studyList.toArray(new Study[0]);
     for (Object obj : arr) {
       Study study = (Study) obj;
-      if (study.getNo() == no) {
+      if (study.getStudyNo() == no) {
         return study;
       }
     }
