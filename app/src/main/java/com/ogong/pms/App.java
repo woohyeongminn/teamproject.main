@@ -7,12 +7,14 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.Join;
 import com.ogong.pms.domain.Login;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
+import com.ogong.pms.handler.JoinHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.NewStudyHandler;
@@ -38,6 +40,9 @@ public class App {
   List<Login> loginList = new ArrayList<>();
   LoginHandler loginHandler = new LoginHandler(loginList, memberHandler);
 
+  List<Join> joinList = new ArrayList<>();
+  JoinHandler joinHandler = new JoinHandler(joinList);
+
   public static void main(String[] args) {
     App app = new App(); 
     app.service();
@@ -56,14 +61,29 @@ public class App {
     ////////////////////////////////////////////////////////
 
     //--------------------------------------------------------------------
-    MenuGroup memberMenu = new MenuGroup("[개인 회원 가입]");
-    mainMenuGroup.add(memberMenu);
+    MenuGroup joinMenu = new MenuGroup("[회원가입]");
+    mainMenuGroup.add(joinMenu);
 
-    memberMenu.add(new Menu("회원 가입") {
+    joinMenu.add(new Menu("개인 회원 가입") {
       @Override
       public void execute() {
-        memberHandler.add(); 
+        joinHandler.add(); 
       }});
+
+    //--------------------------------------------------------------------
+    MenuGroup loginMenu = new MenuGroup("[로그인]");
+    mainMenuGroup.add(loginMenu);
+
+    loginMenu.add(new Menu("로그인") {
+      @Override
+      public void execute() {
+        loginHandler.addLoginPage(); 
+      }});
+    //--------------------------------------------------------------------
+    MenuGroup memberMenu = new MenuGroup("[마이페이지]");
+    mainMenuGroup.add(memberMenu);
+
+
     memberMenu.add(new Menu("내 가입 정보") {
       @Override
       public void execute() {
@@ -83,15 +103,6 @@ public class App {
       @Override
       public void execute() {
         memberHandler.delete(); 
-      }});
-
-    MenuGroup loginMenu = new MenuGroup("[로그인]");
-    mainMenuGroup.add(loginMenu);
-
-    loginMenu.add(new Menu("로그인") {
-      @Override
-      public void execute() {
-        loginHandler.addLoginPage(); 
       }});
 
     //--------------------------------------------------------------------
@@ -122,7 +133,6 @@ public class App {
     //      public void execute() {
     //        newStudyHandler.delete(); 
     //      }});
-
 
     //--------------------------------------------------------------------
     MenuGroup noticeMenu = new MenuGroup("[공지사항]");
