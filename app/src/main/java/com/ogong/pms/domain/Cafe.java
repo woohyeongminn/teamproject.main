@@ -9,14 +9,13 @@ public class Cafe {
   private String location; // 주소
   private String phone; // 전화번호
   private String hrs; // 운영시간
-  private boolean personalSeat; // 개인좌석여부
-  private boolean room; // 미팅룸여부
+  private String personalSeat; // 개인좌석여부
+  private String room; // 미팅룸여부
   private int bookable; // 예약가능인원
-  private boolean usingNotebooks; // 노트북대여여부
-  private boolean usingCopyMachine; // 복사기사용여부
-  private boolean usingWifi; // 와이파이사용여부
-  private boolean drinksProvided; // 음료제공유무
-
+  private String usingNotebooks; // 노트북대여여부
+  private String usingCopyMachine; // 복사기사용여부
+  private String usingWifi; // 와이파이사용여부
+  private String drinksProvided; // 음료제공유무
   public int getNo() {
     return no;
   }
@@ -59,16 +58,16 @@ public class Cafe {
   public void setHrs(String hrs) {
     this.hrs = hrs;
   }
-  public boolean isPersonalSeat() {
+  public String getPersonalSeat() {
     return personalSeat;
   }
-  public void setPersonalSeat(boolean personalSeat) {
+  public void setPersonalSeat(String personalSeat) {
     this.personalSeat = personalSeat;
   }
-  public boolean isRoom() {
+  public String getRoom() {
     return room;
   }
-  public void setRoom(boolean room) {
+  public void setRoom(String room) {
     this.room = room;
   }
   public int getBookable() {
@@ -77,28 +76,28 @@ public class Cafe {
   public void setBookable(int bookable) {
     this.bookable = bookable;
   }
-  public boolean isUsingNotebooks() {
+  public String getUsingNotebooks() {
     return usingNotebooks;
   }
-  public void setUsingNotebooks(boolean usingNotebooks) {
+  public void setUsingNotebooks(String usingNotebooks) {
     this.usingNotebooks = usingNotebooks;
   }
-  public boolean isUsingCopyMachine() {
+  public String getUsingCopyMachine() {
     return usingCopyMachine;
   }
-  public void setUsingCopyMachine(boolean usingCopyMachine) {
+  public void setUsingCopyMachine(String usingCopyMachine) {
     this.usingCopyMachine = usingCopyMachine;
   }
-  public boolean isUsingWifi() {
+  public String getUsingWifi() {
     return usingWifi;
   }
-  public void setUsingWifi(boolean usingWifi) {
+  public void setUsingWifi(String usingWifi) {
     this.usingWifi = usingWifi;
   }
-  public boolean isDrinksProvided() {
+  public String getDrinksProvided() {
     return drinksProvided;
   }
-  public void setDrinksProvided(boolean drinksProvided) {
+  public void setDrinksProvided(String drinksProvided) {
     this.drinksProvided = drinksProvided;
   }
 
