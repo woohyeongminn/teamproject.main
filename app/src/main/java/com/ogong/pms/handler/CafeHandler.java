@@ -96,7 +96,7 @@ public class CafeHandler {
     System.out.printf("개인좌석여부: %s\n", cafe.getPersonalSeat());
     System.out.printf("미팅룸여부: %s\n", cafe.getRoom());
     System.out.printf("예약가능인원: %d\n", cafe.getBookable());
-    System.out.printf("노트북대여여부: %s\n", cafe.getBookable());
+    System.out.printf("노트북대여여부: %s\n", cafe.getUsingNotebooks());
     System.out.printf("복사기사용여부: %s\n", cafe.getUsingCopyMachine());
     System.out.printf("와이파이유무: %s\n", cafe.getUsingWifi());
     System.out.printf("음료제공여부: %s\n", cafe.getDrinksProvided());

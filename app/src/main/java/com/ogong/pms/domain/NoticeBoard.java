@@ -3,40 +3,39 @@ package com.ogong.pms.domain;
 import java.sql.Date;
 
 public class NoticeBoard {
-  private int no;
-  private String title;
-  private String content;
-  private String writer;
-  private Date registeredDate;
-
-  public int getNo() {
-    return no;
+  private int notiNo; // 공지게시판 번호
+  private String notiTitle; // 공지게시판 제목
+  private String notiContent; // 공지게시판 내용
+  private String notiWriter; // 공지게시판 작성자
+  private Date notiRegisteredDate; // 공지게시판 등록일
+  public int getNotiNo() {
+    return notiNo;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setNotiNo(int notiNo) {
+    this.notiNo = notiNo;
   }
-  public String getTitle() {
-    return title;
+  public String getNotiTitle() {
+    return notiTitle;
   }
-  public void setTitle(String title) {
-    this.title = title;
+  public void setNotiTitle(String notiTitle) {
+    this.notiTitle = notiTitle;
   }
-  public String getContent() {
-    return content;
+  public String getNotiContent() {
+    return notiContent;
   }
-  public void setContent(String content) {
-    this.content = content;
+  public void setNotiContent(String notiContent) {
+    this.notiContent = notiContent;
   }
-  public String getWriter() {
-    return writer;
+  public String getNotiWriter() {
+    return notiWriter;
   }
-  public void setWriter(String writer) {
-    this.writer = writer;
+  public void setNotiWriter(String notiWriter) {
+    this.notiWriter = notiWriter;
   }
-  public Date getRegisteredDate() {
-    return registeredDate;
+  public Date getNotiRegisteredDate() {
+    return notiRegisteredDate;
   }
-  public void setRegisteredDate(Date registeredDate) {
-    this.registeredDate = registeredDate;
+  public void setNotiRegisteredDate(Date notiRegisteredDate) {
+    this.notiRegisteredDate = notiRegisteredDate;
   }
 }
