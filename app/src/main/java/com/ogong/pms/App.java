@@ -1,16 +1,16 @@
 package com.ogong.pms;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
-<<<<<<< HEAD
-=======
 import com.ogong.pms.handler.MemberHandler;
->>>>>>> f29bc346370916e55c27e9b587e8593ba6745c96
 import com.ogong.pms.handler.NewStudyHandler;
+import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -21,6 +21,8 @@ public class App {
   List<Member> memberList = new LinkedList<>();
   MemberHandler memberHandler = new MemberHandler(memberList);
 
+  List<NoticeBoard> noticeBoardList = new ArrayList<>();
+  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -67,8 +69,6 @@ public class App {
     //      }});
 
 
-<<<<<<< HEAD
-=======
     //--------------------------------------------------------------------
     MenuGroup memberMenu = new MenuGroup("[개인회원]");
     mainMenuGroup.add(memberMenu);
@@ -99,8 +99,23 @@ public class App {
         memberHandler.delete(); 
       }});
 
+    //--------------------------------------------------------------------
+    MenuGroup noticeMenu = new MenuGroup("[공지사항 게시판]");
+    mainMenuGroup.add(noticeMenu);
 
->>>>>>> f29bc346370916e55c27e9b587e8593ba6745c96
+    noticeMenu.add(new Menu("공지사항") {
+      public void execute() {
+        noticeboardHandler.add(); 
+      }});
+    noticeMenu.add(new Menu("공지사항 목록") {
+      public void execute() {
+        noticeboardHandler.list(); 
+      }});
+    noticeMenu.add(new Menu("공지사항 상세보기") {
+      public void execute() {
+        noticeboardHandler.detail(); 
+      }});
+
     return mainMenuGroup;
   }
 
