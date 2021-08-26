@@ -33,7 +33,7 @@ public class MemberHandler {
     Member[] list = memberList.toArray(new Member[0]);
 
     for (Member member : list) {
-      System.out.printf("닉네임 : %s, 아이디 : %s, 가입일 : %s\n",
+      System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
           member.getPernickname(), 
           member.getPeremail(),
           member.getPerregisteredDate());
@@ -47,7 +47,7 @@ public class MemberHandler {
     Member member = findByEmail(peremail);
 
     if (member == null) {
-      System.out.println("해당 아이디의 회원이 없습니다.");
+      System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
 
@@ -59,12 +59,12 @@ public class MemberHandler {
 
   public void update() {
     System.out.println("[개인회원 정보변경]");
-    String peremail = Prompt.inputString("아이디? ");
+    String peremail = Prompt.inputString("이메일? ");
 
     Member member = findByEmail(peremail);
 
     if (member == null) {
-      System.out.println("해당 아이디의 회원이 없습니다.");
+      System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
 
@@ -89,12 +89,12 @@ public class MemberHandler {
 
   public void delete() {
     System.out.println("[개인회원 탈퇴]");
-    String peremail = Prompt.inputString("아이디? ");
+    String peremail = Prompt.inputString("이메일? ");
 
     Member member = findByEmail(peremail);
 
     if (member == null) {
-      System.out.println("해당 아이디의 회원이 없습니다.");
+      System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
 
@@ -109,20 +109,35 @@ public class MemberHandler {
     System.out.println("회원이 탈퇴되었습니다.");
   }
 
-  private Member findByEmail(String peremail) {
-    Member[] list = memberList.toArray(new Member[0]);
-    for (Member member : list) {
-      if (member.getPeremail() == peremail) {
+  private Member findByNo(int no) {
+    Member[] arr = memberList.toArray(new Member[0]);
+    for (Object obj : arr) {
+      Member member = (Member) obj;
+      if (member.getPerno() == no) {
         return member;
       }
     }
     return null;
   }
 
-  public boolean exist(String name) {
+
+  private Member findByEmail(String peremail) {
+    Member[] arr = memberList.toArray(new Member[0]);
+    for (Object obj : arr) {
+      Member member = (Member) obj;
+      if (member.getPeremail().equals(peremail)) {
+        return member;
+      }
+    }
+    return null;
+  }
+
+
+
+  public boolean exist(String nickname) {
     Member[] list = memberList.toArray(new Member[0]);
     for (Member member : list) {
-      if (member.getPernickname().equals(name)) {
+      if (member.getPernickname().equals(nickname)) {
         return true;
       }
     }
