@@ -2,7 +2,7 @@ package com.ogong.pms.domain;
 
 public class Cafe {
 
-  private int no; // 번호
+  private int no; // 번호 번호
   private String name; // 이름
   private String mainImg; //카페 썸네일 이미지
   private String info; // 소개글
