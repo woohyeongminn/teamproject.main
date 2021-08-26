@@ -8,19 +8,23 @@ import com.ogong.util.Prompt;
 public class LoginHandler {
 
   List<Login> loginList;
+  //  <기존 코드>
   //MemberHandler memberHandler;
   JoinHandler joinHandler;
 
+  //   <기존 코드>
   //  public LoginHandler(List<Login> loginList, MemberHandler memberHandler) {
   //    this.loginList = loginList;
   //    this.memberHandler = memberHandler;
   //  }
 
+  //<2021-08-26 : 추가된 코드(woo)>
   public LoginHandler(List<Login> loginList, JoinHandler joinHandler) {
     this.loginList = loginList;
     this.joinHandler = joinHandler;
   }
 
+  //  <기존코드>
   //  public void addLoginPage() {
   //    String inputEmail = Prompt.inputString("이메일: ");
   //    Member member = memberHandler.findByEmail(inputEmail);

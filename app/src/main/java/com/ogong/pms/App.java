@@ -37,12 +37,14 @@ public class App {
   List<Cafe> cafeList = new ArrayList<>();
   CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
 
+  //  <기존코드>
   //  List<Login> loginList = new ArrayList<>();
   //  LoginHandler loginHandler = new LoginHandler(loginList, memberHandler);
 
   List<Join> joinList = new ArrayList<>();
   JoinHandler joinHandler = new JoinHandler(joinList);
 
+  //<2021-08-26 : 추가된 코드(woo)>
   List<Login> loginList = new ArrayList<>();
   LoginHandler loginHandler = new LoginHandler(loginList, joinHandler);
 
