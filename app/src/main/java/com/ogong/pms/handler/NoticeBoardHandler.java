@@ -1,4 +1,4 @@
-package com.ogong.handler;
+package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.NoticeBoard;
