@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Study {
 
-  public int no;
-  public String title;
+  public int studyNo;
+  public String studyTitle;
   public String owner;
   public String subject;
   public String area;
@@ -15,17 +15,17 @@ public class Study {
   public String introduction;
   public Date registeredDate;
 
-  public int getNo() {
-    return no;
+  public int getStudyNo() {
+    return studyNo;
   }
-  public void setNo(int no) {
-    this.no = no;
+  public void setStudyNo(int studyNo) {
+    this.studyNo = studyNo;
   }
-  public String getTitle() {
-    return title;
+  public String getStudyTitle() {
+    return studyTitle;
   }
-  public void setTitle(String title) {
-    this.title = title;
+  public void setStudyTitle(String studyTitle) {
+    this.studyTitle = studyTitle;
   }
   public String getOwner() {
     return owner;
