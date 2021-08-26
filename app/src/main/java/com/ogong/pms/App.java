@@ -130,6 +130,16 @@ public class App {
         cafeHandler.add();
       }
     });
+    cafeMenu.add(new Menu("장소 목록") {
+      public void execute() {
+        cafeHandler.list();
+      }
+    });
+    cafeMenu.add(new Menu("장소 검색") {
+      public void execute() {
+        cafeHandler.find();
+      }
+    });
     return mainMenuGroup;   
   }
 
