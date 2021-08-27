@@ -30,4 +30,8 @@ public class Join {
   public void setJoinPhoto(String joinPhoto) {
     this.joinPhoto = joinPhoto;
   }
+  public Object getPerRegisteredDate() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 }

@@ -25,8 +25,11 @@ public class App {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
 
+  List<Join> joinList = new ArrayList<>();
+  JoinHandler joinHandler = new JoinHandler(joinList);
+
   List<Member> memberList = new LinkedList<>();
-  MemberHandler memberHandler = new MemberHandler(memberList);
+  MemberHandler memberHandler = new MemberHandler(memberList, joinList, joinHandler);
 
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
   NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
@@ -36,13 +39,6 @@ public class App {
 
   List<Cafe> cafeList = new ArrayList<>();
   CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
-
-  //  <기존코드>
-  //  List<Login> loginList = new ArrayList<>();
-  //  LoginHandler loginHandler = new LoginHandler(loginList, memberHandler);
-
-  List<Join> joinList = new ArrayList<>();
-  JoinHandler joinHandler = new JoinHandler(joinList);
 
   //<2021-08-26 : 추가된 코드(woo)>
   List<Login> loginList = new ArrayList<>();
@@ -57,10 +53,13 @@ public class App {
     Prompt.close();
   }
   Menu createMenu() {
+
+    ////////////////////////////////////////////////////////////////
     System.out.println("\u0020\u002f\u0029\u002f\u0029\u0020");
     System.out.print("\u0028\u0020\u0027\u03c0\u0027\u0029");
     System.out.println(" < 오늘의 공부");
     System.out.println("\u0028\u0020\u003e\u004f\u003c\u0029");
+    ////////////////////////////////////////////////////////////////
 
     //--------------------------------------------------------------------
 
@@ -98,13 +97,14 @@ public class App {
     MenuGroup memberMenu = new MenuGroup("[마이페이지]");
     mainMenuGroup.add(memberMenu);
 
-
-    memberMenu.add(new Menu("내 가입 정보") {
-      @Override
-      public void execute() {
-        memberHandler.list(); 
-      }});
-    memberMenu.add(new Menu("내 가입 정보 상세") {
+    ///////////////////////관리자 페이지/////////////////////////////////// 
+    //    memberMenu.add(new Menu("회원 가입 목록 보기") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.list(); 
+    //      }});
+    ///////////////////////////////////////////////////////////////////////
+    memberMenu.add(new Menu("내 가입 정보보기") {
       @Override
       public void execute() {
         memberHandler.detail(); 

@@ -1,15 +1,20 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.pms.domain.Join;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class MemberHandler {
 
   List<Member> memberList;
+  List<Join> joinList;
+  JoinHandler joinHandler;
 
-  public MemberHandler(List memberList) {
+  public MemberHandler(List<Member> memberList, List<Join> joinList, JoinHandler joinHandler) {
     this.memberList = memberList;
+    this.joinList = joinList;
+    this.joinHandler = joinHandler;
   }
 
   //  public void add() {
@@ -29,31 +34,31 @@ public class MemberHandler {
   public void list() {
     System.out.println("[개인회원 가입확인]");
 
-    Member[] list = memberList.toArray(new Member[0]);
+    Join[] list = joinList.toArray(new Join[0]);
 
-    for (Member member : list) {
+    for (Join join : list) {
       System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
-          member.getPerNickname(), 
-          member.getPerEmail(),
-          member.getPerRegisteredDate());
+          join.getJoinNickname(), 
+          join.getJoinEmail(),
+          join.getPerRegisteredDate());
     }
   }
 
   public void detail() {
     System.out.println("[개인회원 상세보기]");
-    String peremail = Prompt.inputString("이메이? ");
+    String peremail = Prompt.inputString("이메일? ");
 
-    Member member = findByEmail(peremail);
+    Join join = joinHandler.findByEmail(peremail);
 
-    if (member == null) {
+    if (join == null) {
       System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
 
-    System.out.printf("닉네임: %s\n", member.getPerNickname());
-    System.out.printf("이메일: %s\n", member.getPerEmail());
-    System.out.printf("사진: %s\n", member.getPerPhoto());
-    System.out.printf("등록일: %s\n", member.getPerRegisteredDate());
+    System.out.printf("닉네임: %s\n", join.getJoinNickname());
+    System.out.printf("이메일: %s\n", join.getJoinEmail());
+    System.out.printf("사진: %s\n", join.getJoinPhoto());
+    System.out.printf("등록일: %s\n", join.getPerRegisteredDate());
   }
 
   public void update() {
