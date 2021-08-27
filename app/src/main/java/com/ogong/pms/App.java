@@ -78,6 +78,8 @@ public class App {
     mainMenuGroup.add(noticeMenu);
     MenuGroup askMenu = new MenuGroup("[문의게시판]");
     mainMenuGroup.add(askMenu);
+    //    MenuGroup logout = new MenuGroup("[로그아웃]");
+    //    mainMenuGroup.add(logout);
     //회원가입-------------------------------------------------------
     joinMenu.add(new Menu("개인 회원 가입") {
       @Override
@@ -95,6 +97,17 @@ public class App {
       public void execute() {
         loginHandler.addLoginPage(); 
       }});
+    loginMenu.add(new Menu("로그아웃") {
+      @Override
+      public void execute() {
+        loginHandler.logOut(); 
+      }});
+    loginMenu.add(new Menu("아이디/비밀번호 찾기") {
+      @Override
+      public void execute() {
+        loginHandler.findInfo(); 
+      }});
+
     //마이페이지-------------------------------------------------------
     //-------------------관리자 페이지
     //    memberMenu.add(new Menu("회원 가입 목록 보기") {
@@ -206,6 +219,7 @@ public class App {
         cafeHandler.detail();
       }
     });
+
     return mainMenuGroup;
   }
 }
