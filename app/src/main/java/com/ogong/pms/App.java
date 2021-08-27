@@ -23,6 +23,8 @@ import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.util.Prompt;
 
+///// 테스트 주석
+
 public class App {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
