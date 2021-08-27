@@ -14,7 +14,7 @@ public class ManagerHandler {
   }
 
   public void add() {
-    System.out.println("[공지사항]");
+    System.out.println("[공지사항 등록하기]");
 
     Manager manager = new Manager();
 
@@ -28,7 +28,7 @@ public class ManagerHandler {
   }
 
   public void update() {
-    System.out.println("[공지사항 변경]");
+    System.out.println("[공지사항 변경하기]");
     int hostNo = Prompt.inputInt("번호? ");
 
     Manager manager = findByHostNo(hostNo);
@@ -53,7 +53,7 @@ public class ManagerHandler {
   }
 
   public void delete() {
-    System.out.println("[공지사항 삭제]");
+    System.out.println("[공지사항 삭제하기]");
     int hostNo = Prompt.inputInt("번호? ");
 
     Manager manager = findByHostNo(hostNo);
