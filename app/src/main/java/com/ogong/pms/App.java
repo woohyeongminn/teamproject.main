@@ -23,13 +23,10 @@ import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.util.Prompt;
 
-///// 테스트 주석
-/// hi
-/// 세번째 
-/// test
- 
-// 하ㅏ하하하ㅏ하ㅏ하하핳
-// 푸시테스트~~~~~~~~~
+// 자 여러분!
+// 내용을 바꾸겠습니다
+// 이런이런
+// 와우 WoW~
 
 
 public class App {
