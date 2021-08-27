@@ -68,9 +68,9 @@ public class CafeHandler {
     Cafe[] findArr = new Cafe[20];
     int size = 0;
 
-    for (int i = 0; i < cafeList.size(); i++) {
-      if(arr[i].getLocation().contains(location)) {
-        findArr[size++] = arr[i];
+    for (Cafe cafe : arr) {
+      if(cafe.getLocation().contains(location)) {
+        findArr[size++] = cafe;
       }
     }
     this.findSize = size;
