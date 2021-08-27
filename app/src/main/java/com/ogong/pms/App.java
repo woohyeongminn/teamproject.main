@@ -9,6 +9,7 @@ import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.Join;
 import com.ogong.pms.domain.Login;
+import com.ogong.pms.domain.Manager;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
@@ -16,6 +17,7 @@ import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.JoinHandler;
 import com.ogong.pms.handler.LoginHandler;
+import com.ogong.pms.handler.ManagerHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
@@ -30,6 +32,10 @@ public class App {
 
   List<Member> memberList = new LinkedList<>();
   MemberHandler memberHandler = new MemberHandler(memberList, joinList, joinHandler);
+
+  //<2021-08-27 : 추가(sol)>
+  List<Manager> managerList = new ArrayList<>();
+  ManagerHandler managerHandler = new ManagerHandler(managerList);
 
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
   NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
@@ -74,6 +80,8 @@ public class App {
     mainMenuGroup.add(studyMenu);
     MenuGroup cafeMenu = new MenuGroup("[장소 예약]");
     mainMenuGroup.add(cafeMenu);
+    MenuGroup managerMenu = new MenuGroup("[공지사항-관리자]");
+    mainMenuGroup.add(managerMenu);
     MenuGroup noticeMenu = new MenuGroup("[공지사항]");
     mainMenuGroup.add(noticeMenu);
     MenuGroup askMenu = new MenuGroup("[문의게시판]");
@@ -155,11 +163,23 @@ public class App {
       public void execute() {
         newStudyHandler.delete(); 
       }});
-    //공지사항-------------------------------------------------------
-    noticeMenu.add(new Menu("공지사항 등록/관리자권한") {
+    //공지사항(관리자)----------------------------------------------------
+    managerMenu.add(new Menu("공지사항") {
       public void execute() {
-        noticeboardHandler.add(); 
+        managerHandler.add(); 
       }});
+    managerMenu.add(new Menu("공지사항 수정하기") {
+      @Override
+      public void execute() {
+        managerHandler.update(); 
+      }});
+    managerMenu.add(new Menu("공지사항 삭제하기") {
+      @Override
+      public void execute() {
+        managerHandler.delete(); 
+      }});    
+
+    //공지사항(회원)----------------------------------------------------
     noticeMenu.add(new Menu("공지사항 목록") {
       public void execute() {
         noticeboardHandler.list(); 
@@ -168,15 +188,7 @@ public class App {
       public void execute() {
         noticeboardHandler.detail(); 
       }});
-    noticeMenu.add(new Menu("공지사항 변경하기/관리자권한 ") {
-      public void execute() {
-        noticeboardHandler.update(); 
-      }});
 
-    noticeMenu.add(new Menu("공지사항 삭제하기/관리자권한 ") {
-      public void execute() {
-        noticeboardHandler.delete(); 
-      }});
     //문의게시판-------------------------------------------------------
     askMenu.add(new Menu("문의사항 등록") {
       public void execute() {
