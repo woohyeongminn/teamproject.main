@@ -26,6 +26,7 @@ import com.ogong.util.Prompt;
 ///// 테스트 주석
 /// hi
 /// 세번째
+/// test
 
 public class App {
   List<Study> studyList = new LinkedList<>();
