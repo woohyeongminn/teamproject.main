@@ -74,8 +74,8 @@ public class App {
     mainMenuGroup.add(joinMenu);
     MenuGroup loginMenu = new MenuGroup("[로그인]");
     mainMenuGroup.add(loginMenu);
-    MenuGroup memberMenu = new MenuGroup("[마이페이지]");
-    mainMenuGroup.add(memberMenu);
+    //    MenuGroup memberMenu = new MenuGroup("[마이페이지]");
+    //    mainMenuGroup.add(memberMenu);
     MenuGroup studyMenu = new MenuGroup("[모든 스터디]");
     mainMenuGroup.add(studyMenu);
     MenuGroup cafeMenu = new MenuGroup("[장소 예약]");
@@ -105,8 +105,8 @@ public class App {
       public void execute() {
         //<2021-08-27 : 추가된 코드(song)>
         Login login = loginHandler.addLoginPage();
-        System.out.println("이메일2 : " + login.getUserEmail());
-        System.out.println("비밀번호2 : " + login.getUserPassword());
+        //        System.out.println("이메일2 : " + login.getUserEmail());
+        //        System.out.println("비밀번호2 : " + login.getUserPassword());
 
         if (login.getUserEmail() != null && login.getUserPassword() != null) {
           MenuGroup memberMenu = new MenuGroup("[마이페이지]");
