@@ -38,7 +38,7 @@ public class App {
   ManagerHandler managerHandler = new ManagerHandler(managerList);
 
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
-  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList);
+  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerList, managerHandler);
 
   List<AskBoard> askBoardList = new ArrayList<>();
   AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
