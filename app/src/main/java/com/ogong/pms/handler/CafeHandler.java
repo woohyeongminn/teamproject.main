@@ -66,14 +66,14 @@ public class CafeHandler {
   private Cafe[] findByLocation(String location) {
     Cafe[] arr = cafeList.toArray(new Cafe[0]);
     Cafe[] findArr = new Cafe[20];
-    int size = 0;
+    int index = 0;
 
     for (Cafe cafe : arr) {
       if(cafe.getLocation().contains(location)) {
-        findArr[size++] = cafe;
+        findArr[index++] = cafe;
       }
     }
-    this.findSize = size;
+    this.findSize = index;
     return findArr;
   }
 
