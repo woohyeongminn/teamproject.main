@@ -52,14 +52,35 @@ public class App {
 
   public static void main(String[] args) {
     App app = new App(); 
-    app.service();
+    //<2021-08-27 : 추가된 코드(eun)>
+    app.welcomeservice();
+
   }
+
+  void welcomeservice() {
+    welcome().execute();
+    service();
+  }
+
   void service() {
     createMenu().execute();
     Prompt.close();
   }
-  Menu createMenu() {
 
+  static Menu welcome() {
+    ////////////////////////////////////////////////////////////////
+    System.out.println("\u0020\u002f\u0029\u002f\u0029\u0020");
+    System.out.print("\u0028\u0020\u0027\u03c0\u0027\u0029");
+    System.out.println(" < 오늘의 공부");
+    System.out.println("\u0028\u0020\u003e\u004f\u003c\u0029");
+    ////////////////////////////////////////////////////////////////
+    MenuGroup welcomeMenuGroup = new MenuGroup("발표를 시작하겠습니다");
+    welcomeMenuGroup.setPrevMenuTitle("시작");
+    return welcomeMenuGroup;
+  }
+
+
+  Menu createMenu() {
     ////////////////////////////////////////////////////////////////
     System.out.println("\u0020\u002f\u0029\u002f\u0029\u0020");
     System.out.print("\u0028\u0020\u0027\u03c0\u0027\u0029");
@@ -184,11 +205,13 @@ public class App {
         newStudyHandler.update(); 
       }});
     studyMenu.add(new Menu("내 스터디 삭제하기//마이페이지 권한") {
+      @Override
       public void execute() {
         newStudyHandler.delete(); 
       }});
     //공지사항(관리자)----------------------------------------------------
     managerMenu.add(new Menu("공지사항 등록하기") {
+      @Override
       public void execute() {
         managerHandler.add(); 
       }});
@@ -205,52 +228,63 @@ public class App {
 
     //공지사항(회원)----------------------------------------------------
     noticeMenu.add(new Menu("공지사항 목록") {
+      @Override
       public void execute() {
         noticeboardHandler.list(); 
       }});
     noticeMenu.add(new Menu("공지사항 상세보기") {
+      @Override
       public void execute() {
         noticeboardHandler.detail(); 
       }});
 
     //문의게시판-------------------------------------------------------
     askMenu.add(new Menu("문의사항 등록") {
+      @Override
       public void execute() {
         askBoardHandler.add(); 
       }});
     askMenu.add(new Menu("문의사항 목록") {
+      @Override
       public void execute() {
         askBoardHandler.list(); 
       }});
     askMenu.add(new Menu("문의사항 상세보기") {
+      @Override
       public void execute() {
         askBoardHandler.detail(); 
       }});
     askMenu.add(new Menu("문의사항 변경") {
+      @Override
       public void execute() {
         askBoardHandler.update(); 
       }});
     askMenu.add(new Menu("문의사항 삭제") {
+      @Override
       public void execute() {
         askBoardHandler.delete(); 
       }});
     //장소 예약-------------------------------------------------------
     cafeMenu.add(new Menu("장소 등록/기업 권한") {
+      @Override
       public void execute() {
         cafeHandler.add();
       }
     });
     cafeMenu.add(new Menu("장소 목록") {
+      @Override
       public void execute() {
         cafeHandler.list();
       }
     });
     cafeMenu.add(new Menu("장소 검색") {
+      @Override
       public void execute() {
         cafeHandler.find();
       }
     });
     cafeMenu.add(new Menu("장소 상세보기") {
+      @Override
       public void execute() {
         cafeHandler.detail();
       }
