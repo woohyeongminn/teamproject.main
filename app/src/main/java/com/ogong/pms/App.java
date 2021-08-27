@@ -164,7 +164,7 @@ public class App {
         newStudyHandler.delete(); 
       }});
     //공지사항(관리자)----------------------------------------------------
-    managerMenu.add(new Menu("공지사항") {
+    managerMenu.add(new Menu("공지사항 등록하기") {
       public void execute() {
         managerHandler.add(); 
       }});
