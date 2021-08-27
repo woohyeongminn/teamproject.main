@@ -31,6 +31,9 @@ public class Join {
     this.joinPhoto = joinPhoto;
   }
   public Object getPerRegisteredDate() {
+    return null;
+  }
+  public String getPerNo() {
     // TODO Auto-generated method stub
     return null;
   }

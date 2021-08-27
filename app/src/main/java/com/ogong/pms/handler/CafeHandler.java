@@ -55,7 +55,8 @@ public class CafeHandler {
 
     if (findSize != 0) {
       for (int i = 0; i < findSize; i++) {
-        System.out.println(list[i].getName() + ", " + list[i].getLocation() + ", " + list[i].getBookable());
+        System.out.println(list[i].getName() + ",  "
+            + list[i].getLocation() + ", " + list[i].getBookable());
       }
     } else {
       System.out.println("검색 결과가 존재하지 않습니다.");

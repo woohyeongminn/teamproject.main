@@ -14,7 +14,7 @@ public class MemberHandler {
   public MemberHandler(List<Member> memberList, List<Join> joinList, JoinHandler joinHandler) {
     this.memberList = memberList;
     this.joinList = joinList;
-    this.joinHandler = joinHandler;
+    this.joinHandler = joinHandler;  
   }
 
   //  public void add() {
@@ -31,24 +31,24 @@ public class MemberHandler {
   //    memberList.add(member);
   //  }
 
-  public void list() {
-    System.out.println("[개인회원 가입확인]");
-
-    Join[] list = joinList.toArray(new Join[0]);
-
-    for (Join join : list) {
-      System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
-          join.getJoinNickname(), 
-          join.getJoinEmail(),
-          join.getPerRegisteredDate());
-    }
-  }
+  //  public void list() {
+  //    System.out.println("[개인회원 가입확인]");
+  //
+  //    Join[] list = joinList.toArray(new Join[0]);
+  //
+  //    for (Join join : list) {
+  //      System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
+  //          join.getJoinNickname(), 
+  //          join.getJoinEmail(),
+  //          join.getPerRegisteredDate());
+  //    }
+  //  }
 
   public void detail() {
     System.out.println("[개인회원 상세보기]");
-    String peremail = Prompt.inputString("이메일? ");
+    String inputJoinEmail = Prompt.inputString("이메일? ");
 
-    Join join = joinHandler.findByEmail(peremail);
+    Join join = joinHandler.findByEmail(inputJoinEmail);
 
     if (join == null) {
       System.out.println("해당 이메일의 회원이 없습니다.");
@@ -63,19 +63,19 @@ public class MemberHandler {
 
   public void update() {
     System.out.println("[개인회원 수정하기]");
-    String inputEmail = Prompt.inputString("이메일? ");
+    String inputJoinEmail = Prompt.inputString("이메일? ");
 
-    Member member = findByEmail(inputEmail);
+    Join join = joinHandler.findByEmail(inputJoinEmail);
 
-    if (member == null) {
+    if (join == null) {
       System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
 
-    String perNickName = Prompt.inputString("닉네임(" + member.getPerNickname()  + ")? ");
-    String perEmail = Prompt.inputString("이메일(" + member.getPerEmail() + ")? ");
-    String perPassword = Prompt.inputString("암호? ");
-    String perPhoto = Prompt.inputString("사진(" + member.getPerNo() + ")? ");
+    String perNickName = Prompt.inputString("닉네임(" + join.getJoinNickname()  + ")? ");
+    String perEmail = Prompt.inputString("이메일(" + join.getJoinEmail() + ")? ");
+    String perPassword = Prompt.inputString("암호(" + join.getJoinPassword() + ")? ");
+    String perPhoto = Prompt.inputString("사진(" + join.getJoinPhoto() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -83,21 +83,21 @@ public class MemberHandler {
       return;
     }
 
-    member.setPerNickname(perNickName);
-    member.setPerEmail(perEmail);
-    member.setPerPassword(perPassword);
-    member.setPerPhoto(perPhoto);
+    join.setJoinNickname(perNickName);
+    join.setJoinEmail(perEmail);
+    join.setJoinPassword(perPassword);
+    join.setJoinPhoto(perPhoto);
 
     System.out.println("개인회원 정보를 변경하였습니다.");
   }
 
   public void delete() {
     System.out.println("[개인회원 탈퇴]");
-    String inputEmail = Prompt.inputString("이메일? ");
+    String inputJoinEmail = Prompt.inputString("이메일? ");
 
-    Member member = findByEmail(inputEmail);
+    Join join = joinHandler.findByEmail(inputJoinEmail);
 
-    if (member == null) {
+    if (join == null) {
       System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
@@ -108,7 +108,7 @@ public class MemberHandler {
       return;
     }
 
-    memberList.remove(member);
+    joinList.remove(join);
 
     System.out.println("회원이 탈퇴되었습니다.");
   }

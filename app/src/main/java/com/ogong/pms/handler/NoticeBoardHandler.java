@@ -60,52 +60,52 @@ public class NoticeBoardHandler {
     System.out.printf("등록일: %s\n", notice.getNotiRegisteredDate());
   }
 
-  //    public void update() {
-  //      System.out.println("[공지사항 변경]");
-  //      int notiNo = Prompt.inputInt("번호? ");
-  //  
-  //      NoticeBoard notice = findByNo(notiNo);
-  //  
-  //      if (notice == null) {
-  //        System.out.println("해당 번호의 게시글이 없습니다.");
-  //        return;
-  //      }
-  //  
-  //      String notiTitle = Prompt.inputString(String.format("제목(%s)? ", notice.getNotiTitle()));
-  //      String notiContent = Prompt.inputString(String.format("내용(%s)? ", notice.getNotiContent()));
-  //  
-  //      String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-  //      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-  //        System.out.println("게시글 변경을 취소하였습니다.");
-  //        return;
-  //      }
-  //  
-  //      notice.setNotiTitle(notiTitle);
-  //      notice.setNotiContent(notiContent);
-  //      System.out.println("게시글을 변경하였습니다.");
-  //    }
-  //  
-  //    public void delete() {
-  //      System.out.println("[공지사항 삭제]");
-  //      int notiNo = Prompt.inputInt("번호? ");
-  //  
-  //      NoticeBoard notice = findByNo(notiNo);
-  //  
-  //      if (notice == null) {
-  //        System.out.println("해당 번호의 게시글이 없습니다.");
-  //        return;
-  //      }
-  //  
-  //      String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-  //      if (input.equalsIgnoreCase("n") || input.length() == 0) {
-  //        System.out.println("게시글 삭제를 취소하였습니다.");
-  //        return;
-  //      }
-  //  
-  //      noticeBoardList.remove(notice);
-  //  
-  //      System.out.println("게시글을 삭제하였습니다.");
-  //    }
+  public void update() {
+    System.out.println("[공지사항 변경]");
+    int notiNo = Prompt.inputInt("번호? ");
+
+    NoticeBoard notice = findByNo(notiNo);
+
+    if (notice == null) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+
+    String notiTitle = Prompt.inputString(String.format("제목(%s)? ", notice.getNotiTitle()));
+    String notiContent = Prompt.inputString(String.format("내용(%s)? ", notice.getNotiContent()));
+
+    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("게시글 변경을 취소하였습니다.");
+      return;
+    }
+
+    notice.setNotiTitle(notiTitle);
+    notice.setNotiContent(notiContent);
+    System.out.println("게시글을 변경하였습니다.");
+  }
+
+  public void delete() {
+    System.out.println("[공지사항 삭제]");
+    int notiNo = Prompt.inputInt("번호? ");
+
+    NoticeBoard notice = findByNo(notiNo);
+
+    if (notice == null) {
+      System.out.println("해당 번호의 게시글이 없습니다.");
+      return;
+    }
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("게시글 삭제를 취소하였습니다.");
+      return;
+    }
+
+    noticeBoardList.remove(notice);
+
+    System.out.println("게시글을 삭제하였습니다.");
+  }
 
   private NoticeBoard findByNo(int notiNo) {
     NoticeBoard[] arr = noticeBoardList.toArray(new NoticeBoard[0]);

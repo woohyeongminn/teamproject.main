@@ -98,28 +98,28 @@ public class NewStudyHandler {
     System.out.println("스터디가 수정되었습니다.");
   }
 
-  //  public void delete() {
-  //    System.out.println("[회원 삭제]");
-  //    int no = Prompt.inputInt("번호? ");
-  //
-  //    Study study = findByNo(no);
-  //
-  //    if (study == null) {
-  //      System.out.println("해당 번호의 회원이 없습니다.");
-  //      return;
-  //    }
-  //
-  //    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-  //    if (input.equalsIgnoreCase("n") || input.length() == 0) {
-  //      System.out.println("회원 삭제를 취소하였습니다.");
-  //      return;
-  //    }
-  //
-  //    studyList.remove(study);
-  //
-  //    System.out.println("회원을 삭제하였습니다.");
-  //  }
-  //
+  public void delete() {
+    System.out.println("[회원 삭제]");
+    int no = Prompt.inputInt("번호? ");
+
+    Study study = findByNo(no);
+
+    if (study == null) {
+      System.out.println("해당 번호의 회원이 없습니다.");
+      return;
+    }
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("회원 삭제를 취소하였습니다.");
+      return;
+    }
+
+    studyList.remove(study);
+
+    System.out.println("회원을 삭제하였습니다.");
+  }
+
   private Study findByNo(int no) {
     Study[] arr = studyList.toArray(new Study[0]);
     for (Object obj : arr) {
