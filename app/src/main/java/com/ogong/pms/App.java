@@ -24,6 +24,12 @@ import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.util.Prompt;
 
 // 123
+// test woo
+// 자 여러분!
+// 내용을 바꾸겠습니다
+// 이런이런
+// 와우 WoW~
+
 
 public class App {
   List<Study> studyList = new LinkedList<>();
