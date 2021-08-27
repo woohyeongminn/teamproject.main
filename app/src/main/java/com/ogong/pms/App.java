@@ -103,7 +103,31 @@ public class App {
     loginMenu.add(new Menu("로그인") {
       @Override
       public void execute() {
-        loginHandler.addLoginPage(); 
+        //<2021-08-27 : 추가된 코드(song)>
+        Login login = loginHandler.addLoginPage();
+        System.out.println("이메일2 : " + login.getUserEmail());
+        System.out.println("비밀번호2 : " + login.getUserPassword());
+
+        if (login.getUserEmail() != null && login.getUserPassword() != null) {
+          MenuGroup memberMenu = new MenuGroup("[마이페이지]");
+          mainMenuGroup.add(memberMenu);
+
+          memberMenu.add(new Menu("내 가입 정보보기") {
+            @Override
+            public void execute() {
+              memberHandler.detail(); 
+            }});
+          memberMenu.add(new Menu("개인 정보 수정하기") {
+            @Override
+            public void execute() {
+              memberHandler.update(); 
+            }});
+          memberMenu.add(new Menu("회원 탈퇴하기") {
+            @Override
+            public void execute() {
+              memberHandler.delete(); 
+            }});
+        }
       }});
     loginMenu.add(new Menu("로그아웃") {
       @Override
@@ -123,21 +147,21 @@ public class App {
     //      public void execute() {
     //        memberHandler.list(); 
     //      }});
-    memberMenu.add(new Menu("내 가입 정보보기") {
-      @Override
-      public void execute() {
-        memberHandler.detail(); 
-      }});
-    memberMenu.add(new Menu("개인 정보 수정하기") {
-      @Override
-      public void execute() {
-        memberHandler.update(); 
-      }});
-    memberMenu.add(new Menu("회원 탈퇴하기") {
-      @Override
-      public void execute() {
-        memberHandler.delete(); 
-      }});
+    //    memberMenu.add(new Menu("내 가입 정보보기") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.detail(); 
+    //      }});
+    //    memberMenu.add(new Menu("개인 정보 수정하기") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.update(); 
+    //      }});
+    //    memberMenu.add(new Menu("회원 탈퇴하기") {
+    //      @Override
+    //      public void execute() {
+    //        memberHandler.delete(); 
+    //      }});
     //모든 스터디-------------------------------------------------------
     studyMenu.add(new Menu("내 스터디 등록하기") {
       @Override

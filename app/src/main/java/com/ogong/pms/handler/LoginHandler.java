@@ -43,22 +43,47 @@ public class LoginHandler {
   //    }
   //}
 
-  public void addLoginPage() {
+  // <기존코드>
+  //  public void addLoginPage() {
+  //    String inputEmail = Prompt.inputString("이메일: ");
+  //    Join join = joinHandler.findByEmail(inputEmail);
+  //    if (join == null) {
+  //      System.out.println("등록된 회원이 아닙니다.");
+  //      return;
+  //    }
+  //    while (join != null) {
+  //      String inputPassword = Prompt.inputString("비밀번호: ");
+  //      if (join.getJoinPassword().equals(inputPassword)) {
+  //        System.out.println("로그인되었습니다.");
+  //        break;
+  //      }
+  //      System.out.println("비밀번호를 다시 입력하세요.");
+  //      continue;
+  //    }
+  //  }
+
+  //<2021-08-27 : 추가된 코드(song)>
+  public Login addLoginPage() {
+    Login login = new Login();
     String inputEmail = Prompt.inputString("이메일: ");
+    String inputPassword = "";
     Join join = joinHandler.findByEmail(inputEmail);
     if (join == null) {
       System.out.println("등록된 회원이 아닙니다.");
-      return;
+      return null;
     }
     while (join != null) {
-      String inputPassword = Prompt.inputString("비밀번호: ");
+      inputPassword = Prompt.inputString("비밀번호: ");
       if (join.getJoinPassword().equals(inputPassword)) {
+        login.setUserEmail(inputEmail);
+        login.setUserPassword(inputPassword);
         System.out.println("로그인되었습니다.");
-        break;
+        return login;
       }
       System.out.println("비밀번호를 다시 입력하세요.");
       continue;
-    }
+    } 
+    return null;
   }
 
   public void logOut() {
