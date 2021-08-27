@@ -61,5 +61,14 @@ public class LoginHandler {
     }
   }
 
+  public void logOut() {
+    System.out.println("-------------------");
+    System.out.println("로그아웃 되었습니다.");
+  }
+
+  public void findInfo() {
+    System.out.println("!!!찾기 페이지 이동합니다.!!!");
+  }
+
 
 }
