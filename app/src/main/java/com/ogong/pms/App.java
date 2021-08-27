@@ -13,6 +13,7 @@ import com.ogong.pms.domain.Manager;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
+import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.JoinHandler;
@@ -21,15 +22,8 @@ import com.ogong.pms.handler.ManagerHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
+import com.ogong.pms.handler.ToDoListHandler;
 import com.ogong.util.Prompt;
-
-// 123
-// test woo
-// 자 여러분!
-// 내용을 바꾸겠습니다
-// 이런이런
-// 와우 WoW~
-
 
 public class App {
   List<Study> studyList = new LinkedList<>();
@@ -41,7 +35,6 @@ public class App {
   List<Member> memberList = new LinkedList<>();
   MemberHandler memberHandler = new MemberHandler(memberList, joinList, joinHandler);
 
-  //<2021-08-27 : 추가(sol)>
   List<Manager> managerList = new ArrayList<>();
   ManagerHandler managerHandler = new ManagerHandler(managerList);
 
@@ -54,15 +47,15 @@ public class App {
   List<Cafe> cafeList = new ArrayList<>();
   CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
 
-  //<2021-08-26 : 추가된 코드(woo)>
   List<Login> loginList = new ArrayList<>();
   LoginHandler loginHandler = new LoginHandler(loginList, joinHandler);
 
+  List<ToDo> todoList = new ArrayList();
+  ToDoListHandler todoListHandler = new ToDoListHandler(todoList);
+
   public static void main(String[] args) {
     App app = new App(); 
-    //<2021-08-27 : 추가된 코드(eun)>
     app.welcomeservice();
-
   }
 
   void welcomeservice() {
@@ -115,6 +108,8 @@ public class App {
     mainMenuGroup.add(noticeMenu);
     MenuGroup askMenu = new MenuGroup("[문의게시판]");
     mainMenuGroup.add(askMenu);
+    MenuGroup todoMenu = new MenuGroup("[To-Do List]");
+    mainMenuGroup.add(todoMenu);
     //    MenuGroup logout = new MenuGroup("[로그아웃]");
     //    mainMenuGroup.add(logout);
     //회원가입-------------------------------------------------------
@@ -297,6 +292,32 @@ public class App {
         cafeHandler.detail();
       }
     });
+    //투두 리스트-------------------------------------------------------
+    todoMenu.add(new Menu("To-Do List 등록") {
+      @Override
+      public void execute() {
+        todoListHandler.add(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 목록") {
+      @Override
+      public void execute() {
+        todoListHandler.list(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 상세보기") {
+      @Override
+      public void execute() {
+        todoListHandler.detail(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 변경") {
+      @Override
+      public void execute() {
+        todoListHandler.update(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 삭제") {
+      @Override
+      public void execute() {
+        todoListHandler.delete(); 
+      }});
 
     return mainMenuGroup;
   }
