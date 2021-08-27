@@ -70,7 +70,7 @@ public class LoginHandler {
     Join join = joinHandler.findByEmail(inputEmail);
     if (join == null) {
       System.out.println("등록된 회원이 아닙니다.");
-      return null;
+      return login;
     }
     while (join != null) {
       inputPassword = Prompt.inputString("비밀번호: ");
@@ -83,7 +83,7 @@ public class LoginHandler {
       System.out.println("비밀번호를 다시 입력하세요.");
       continue;
     } 
-    return null;
+    return login;
   }
 
   public void logOut() {
