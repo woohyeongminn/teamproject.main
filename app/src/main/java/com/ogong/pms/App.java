@@ -29,7 +29,6 @@ import com.ogong.util.Prompt;
 // 이런이런
 // 와우 WoW~
 
-
 public class App {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
