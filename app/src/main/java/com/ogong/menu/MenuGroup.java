@@ -92,7 +92,7 @@ public class MenuGroup extends Menu {
       }
 
       int menuNo = Prompt.inputInt("선택> ");
-      System.out.println("------------------");
+      System.out.println("----------------");
       if (menuNo == 0 && !disablePrevMenu) {
         // 현재 메뉴에서 나갈 때 스택에서 제거한다.
         breadCrumb.pop();
