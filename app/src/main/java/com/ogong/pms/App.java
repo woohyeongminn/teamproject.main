@@ -7,6 +7,7 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Join;
 import com.ogong.pms.domain.Login;
 import com.ogong.pms.domain.Manager;
@@ -16,6 +17,7 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
+import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.JoinHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.pms.handler.ManagerHandler;
@@ -52,6 +54,9 @@ public class App {
 
   List<ToDo> toDoList = new ArrayList<>();
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
+
+  List<FreeBoard> freeBoardList = new ArrayList<>();
+  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(loginList, freeBoardList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -208,6 +213,36 @@ public class App {
       @Override
       public void execute() {
         toDoHandler.delete(); 
+      }});
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
+    mainMenuGroup.add(freeBoardMenu);
+    freeBoardMenu.add(new Menu("자유게시판 게시글 작성") {
+      @Override
+      public void execute() {
+        freeBoardHandler.add(); 
+      }});
+    freeBoardMenu.add(new Menu("자유게시판 게시글 목록") {
+      @Override
+      public void execute() {
+        freeBoardHandler.list(); 
+      }});
+    freeBoardMenu.add(new Menu("자유게시판 게시글 상세보기") {
+      @Override
+      public void execute() {
+        freeBoardHandler.detail(); 
+      }});
+    freeBoardMenu.add(new Menu("자유게시판 게시글 수정") {
+      @Override
+      public void execute() {
+        freeBoardHandler.update(); 
+      }});
+    freeBoardMenu.add(new Menu("자유게시판 게시글 삭제") {
+      @Override
+      public void execute() {
+        freeBoardHandler.delete(); 
       }});
     //---------------------------------------------------
 
