@@ -58,11 +58,11 @@ public class ToDoListHandler {
       return;
     }
 
-    System.out.printf("To-Do List 제목: %s\n", todo.getTodoTitle());
-    System.out.printf("To-Do List 내용: %s\n", todo.getTodoContent());
-    System.out.printf("To-Do List 비고: %s\n", todo.getTodoRemark());
-    System.out.printf("To-Do List 진행 상황: %s\n", todo.getTodoStatus());
-    System.out.printf("To-Do List DATE: %s\n", todo.getTodoRegisteredDate());
+    System.out.printf("제목: %s\n", todo.getTodoTitle());
+    System.out.printf("내용: %s\n", todo.getTodoContent());
+    System.out.printf("비고: %s\n", todo.getTodoRemark());
+    System.out.printf("진행 상황: %s\n", todo.getTodoStatus());
+    System.out.printf("DATE: %s\n", todo.getTodoRegisteredDate());
   }
 
   public void update() {
