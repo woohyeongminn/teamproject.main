@@ -7,6 +7,7 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Join;
@@ -49,7 +50,8 @@ public class App {
   AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
 
   List<Cafe> cafeList = new ArrayList<>();
-  CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
+  List<CafeReview> cafeReview = new ArrayList<>();
+  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, joinHandler);
 
   List<Login> loginList = new ArrayList<>();
   LoginHandler loginHandler = new LoginHandler(loginList, joinHandler, joinList);
@@ -119,7 +121,9 @@ public class App {
     loginMenu.add(new Menu("개인") {
       @Override
       public void execute() {
-        loginHandler.addLoginPage();
+        //        loginHandler.addLoginPage();
+        Login login = loginHandler.addLoginPage();
+        cafeHandler.loginStatus(login);
       }});
     loginMenu.add(new Menu("기업") {
       @Override
@@ -330,6 +334,24 @@ public class App {
       @Override
       public void execute() {
         cafeHandler.detail();
+      }
+    });
+    cafeMenu.add(new Menu("장소 정보 변경하기") {
+      @Override
+      public void execute() {
+        cafeHandler.update();
+      }
+    });
+    cafeMenu.add(new Menu("장소 삭제하기") {
+      @Override
+      public void execute() {
+        cafeHandler.delete();
+      }
+    });
+    cafeMenu.add(new Menu("장소 리뷰등록") {
+      @Override
+      public void execute() {
+        cafeHandler.addReview();
       }
     });
     //---------------------------------------------------
