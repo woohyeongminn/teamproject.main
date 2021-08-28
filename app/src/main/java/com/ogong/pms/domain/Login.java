@@ -2,8 +2,8 @@ package com.ogong.pms.domain;
 
 public class Login {
 
-  private String userEmail;
-  private String userPassword;
+  private String userEmail;    // 로그인 이메일
+  private String userPassword; // 로그인 비밀번호
 
   public String getUserEmail() {
     return userEmail;

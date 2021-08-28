@@ -1,10 +1,10 @@
 package com.ogong.pms.domain;
 
 public class Join {
-  private String joinNickname;
-  private String joinEmail;
-  private String joinPassword;
-  private String joinPhoto;
+  private String joinNickname;   // 회원가입 닉네임
+  private String joinEmail;     // 회원가입 이메일     
+  private String joinPassword;  // 회원가입 비밀번호
+  private String joinPhoto;     // 회원가입 사진
 
   public String getJoinNickname() {
     return joinNickname;

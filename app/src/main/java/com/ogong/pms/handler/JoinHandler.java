@@ -20,7 +20,7 @@ public class JoinHandler {
 
     join.setJoinNickname(Prompt.inputString("닉네임? "));
     join.setJoinEmail(Prompt.inputString("이메일? "));
-    join.setJoinPassword(Prompt.inputString("암호? "));
+    join.setJoinPassword(Prompt.inputString("비밀번호? "));
     join.setJoinPhoto(Prompt.inputString("사진? "));
 
     joinList.add(join);
