@@ -7,9 +7,9 @@ public class Calender {
   private int month;   //월
   private int day;     //일
   private String dayOftheWeek; //요일
-  private String contents;   // 내용
-  private Date start;  // 시작일
-  private Date end;    // 종료일
+  private String calenderContent;   // 내용
+  private Date startDay;  // 시작일
+  private Date endDay;    // 종료일
 
   public int getMonth() {
     return month;
@@ -29,23 +29,23 @@ public class Calender {
   public void setDayOftheWeek(String dayOftheWeek) {
     this.dayOftheWeek = dayOftheWeek;
   }
-  public String getContents() {
-    return contents;
+  public String getCalenderContent() {
+    return calenderContent;
   }
-  public void setContents(String contents) {
-    this.contents = contents;
+  public void setCalenderContent(String calenderContent) {
+    this.calenderContent = calenderContent;
   }
-  public Date getStart() {
-    return start;
+  public Date getStartDay() {
+    return startDay;
   }
-  public void setStart(Date start) {
-    this.start = start;
+  public void setStartDay(Date startDay) {
+    this.startDay = startDay;
   }
-  public Date getEnd() {
-    return end;
+  public Date getEndDay() {
+    return endDay;
   }
-  public void setEnd(Date end) {
-    this.end = end;
+  public void setEndDay(Date endDay) {
+    this.endDay = endDay;
   }
 
 }

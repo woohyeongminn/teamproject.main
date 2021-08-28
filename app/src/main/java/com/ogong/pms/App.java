@@ -7,6 +7,7 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Join;
 import com.ogong.pms.domain.Login;
@@ -17,6 +18,7 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
+import com.ogong.pms.handler.CalenderHandler;
 import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.JoinHandler;
 import com.ogong.pms.handler.LoginHandler;
@@ -57,6 +59,9 @@ public class App {
 
   List<FreeBoard> freeBoardList = new ArrayList<>();
   FreeBoardHandler freeBoardHandler = new FreeBoardHandler(loginList, freeBoardList);
+
+  List<Calender> calenderList = new ArrayList<>();
+  CalenderHandler calenderHandler = new CalenderHandler(calenderList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -182,8 +187,38 @@ public class App {
     //---------------------------------------------------
 
     //---------------------------------------------------
-    MenuGroup myStudy = new MenuGroup("내 스터디");
-    mainMenuGroup.add(myStudy);
+    MenuGroup myStudyMenu = new MenuGroup("내 스터디");
+    mainMenuGroup.add(myStudyMenu);
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup calenderMenu = new MenuGroup("캘린더");
+    mainMenuGroup.add(calenderMenu);
+    calenderMenu.add(new Menu("일정 등록") {
+      @Override
+      public void execute() {
+        calenderHandler.add(); 
+      }});
+    calenderMenu.add(new Menu("일정 목록") {
+      @Override
+      public void execute() {
+        calenderHandler.list(); 
+      }});
+    calenderMenu.add(new Menu("일정 상세보기") {
+      @Override
+      public void execute() {
+        calenderHandler.detail(); 
+      }});
+    calenderMenu.add(new Menu("일정 변경") {
+      @Override
+      public void execute() {
+        calenderHandler.update(); 
+      }});
+    calenderMenu.add(new Menu("일정 삭제") {
+      @Override
+      public void execute() {
+        calenderHandler.delete(); 
+      }});
     //---------------------------------------------------
 
     //---------------------------------------------------
