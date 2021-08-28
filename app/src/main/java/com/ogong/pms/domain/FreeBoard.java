@@ -9,13 +9,13 @@ public class FreeBoard {
   private String freeBoardContent;      //내용 
   private String freeBoardAtcFile;      //첨부파일
   private String freeBoardWriter;       //작성자
-  private String freeBoardViewcount;    //조회수
+  private int freeBoardViewcount;    //조회수
   private Date freeBoardRegisteredDate; //작성일
 
 
 
   public int getFreeBoardNo() {
-    return freeBoardNo;
+    return freeBoardNo++;
   }
   public void setFreeBoardNo(int freeBoardNo) {
     this.freeBoardNo = freeBoardNo;
@@ -52,10 +52,10 @@ public class FreeBoard {
   }
 
 
-  public String getFreeBoardViewcount() {
+  public int getFreeBoardViewcount() {
     return freeBoardViewcount;
   }
-  public void setFreeBoardViewcount(String freeBoardViewcount) {
+  public void setFreeBoardViewcount(int freeBoardViewcount) {
     this.freeBoardViewcount = freeBoardViewcount;
   }
   public Date getFreeBoardRegisteredDate() {
