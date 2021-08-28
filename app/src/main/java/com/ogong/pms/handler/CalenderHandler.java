@@ -1,8 +1,8 @@
 package com.ogong.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
-import com.ogong.pms.domain.FreeBoard;
 import com.ogong.util.Prompt;
 
 public class CalenderHandler {
@@ -14,122 +14,114 @@ public class CalenderHandler {
   }
 
   public void add() {
-    System.out.println("[캘린더 등록]");
+    System.out.println("[일정 등록]");
     Calender calender = new Calender();
 
+    System.out.println("시작날짜를 입력해주세요");
     calender.setMonth(Prompt.inputInt("월 :"));
     calender.setDay(Prompt.inputInt("일 :"));
     calender.setDayOftheWeek(Prompt.inputString("요일 :"));
-    calender.setContents(Prompt.inputString("내용 :"));
-    calender.setStart(Prompt.inputDate("시작일"));
-    calender.setEnd(Prompt.inputDate("종료일"));
+    calender.setCalenderContent(Prompt.inputString("내용 :"));
+    calender.setEndDay(Prompt.inputDate("종료일 : "));
 
     calenderList.add(calender);
   }
 
   public void list() {
-    System.out.println("[자유게시판 게시글 목록]");
+    System.out.println("[일정 목록]");
 
-    FreeBoard[] list = freeBoardList.toArray(new FreeBoard[0]);
+    Calender[] cList = calenderList.toArray(new Calender[0]);
 
-    for (FreeBoard freeBoard : list) {
+    for (Calender calender : cList) {
       System.out.printf(
-          "%d, %s, %s, %s, %s, %s\n",
-          freeBoard.getFreeBoardNo(), 
-          freeBoard.getFreeBoardTitle(),
-          freeBoard.getFreeBoardContent(),
-          freeBoard.getFreeBoardWriter(),
-          freeBoard.getFreeBoardViewcount(),
-          freeBoard.getFreeBoardRegisteredDate()
-          );
+          "%d.%d(%s), %s\n",
+          calender.getMonth(), 
+          calender.getDay(),
+          calender.getDayOftheWeek(),
+          calender.getCalenderContent());
     }
   }
 
   //------------------------------------------------------------------------------------------------
   public void detail() {
-    System.out.println("[자유게시판 게시글 상세보기]");
-    int freeNo = Prompt.inputInt("번호? ");
+    System.out.println("[일정 상세보기]");
+    int inputDay = Prompt.inputInt("날짜? ");
 
-    FreeBoard free = findByNo(freeNo);
+    Calender calender = findByDay(inputDay);
 
-    if (free == null) {
-      System.out.println("해당 번호의 문의글이 없습니다.");
+    if (calender == null) {
+      System.out.println("해당 날짜에 일정이 없습니다.");
       return;
     }
-
-
-    System.out.printf("제목: %s\n", free.getFreeBoardTitle());
-    System.out.printf("내용: %s\n", free.getFreeBoardContent());
-    System.out.printf("첨부파일: %s\n", free.getFreeBoardAtcFile());
-    System.out.printf("작성자: %s\n", free.getFreeBoardWriter());
-    System.out.printf("등록일: %s\n", free.getFreeBoardRegisteredDate());
-    free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
-    System.out.printf("조회수: %d\n", free.getFreeBoardViewcount());
+    System.out.println("-일정시작일-");
+    System.out.printf("날짜: %d월-%d일-%s요일\n",
+        calender.getMonth(), calender.getDay(), calender.getDayOftheWeek());
+    System.out.printf("내용: %s\n", calender.getCalenderContent());
+    System.out.printf("종료일: %s\n", calender.getEndDay());
   }
 
   //------------------------------------------------------------------------------------------------
 
-
-
-
-
-
   public void update() {
-    System.out.println("[자유게시판 게시글 수정]");
+    System.out.println("[일정 수정]");
 
-    int inputNo = Prompt.inputInt("번호? ");
-    FreeBoard freeBoard = findByNo(inputNo);
+    int inputDay = Prompt.inputInt("날짜? ");
+    Calender calender = findByDay(inputDay);
 
-    if (freeBoard == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+    if (calender == null) {
+      System.out.println("해당 날짜의 일정이 없습니다.");
       return;
     }
 
-    String freeBoardTitle = Prompt.inputString("제목(" + freeBoard.getFreeBoardTitle()  + ")? ");
-    String freeBoardContent = Prompt.inputString("내용(" + freeBoard.getFreeBoardContent() + ")? ");
-    String freeBoardAtcFile = Prompt.inputString("첨부파일(" + freeBoard.getFreeBoardAtcFile() + ")? ");
+    int cMonth = Prompt.inputInt("월(" + calender.getMonth()  + ")? ");
+    int cDay = Prompt.inputInt("일(" + calender.getDay() + ")? ");
+    String cDayOfTheWeek = Prompt.inputString("요일(" + calender.getDayOftheWeek() + ")? ");
+    String cContent = Prompt.inputString("내용(" + calender.getCalenderContent() + ")? ");
+    Date cEndDay = Prompt.inputDate("종료일(" + calender.getEndDay() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("게시글 변경이 취소되었습니다.");
+      System.out.println("일정 변경이 취소되었습니다.");
       return;
     }
 
-    freeBoard.setFreeBoardTitle(freeBoardTitle);
-    freeBoard.setFreeBoardContent(freeBoardContent);
-    freeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
+    calender.setMonth(cMonth);
+    calender.setDay(cDay);
+    calender.setDayOftheWeek(cDayOfTheWeek);
+    calender.setCalenderContent(cContent);
+    calender.setEndDay(cEndDay);
 
-    System.out.println("게시글을 변경하였습니다.");
+    System.out.println("일정을 변경하였습니다.");
   }
 
   public void delete() {
-    System.out.println("[자유게시판 게시글 삭제]");
+    System.out.println("[일정 삭제]");
 
-    int inputNo = Prompt.inputInt("번호? ");
-    FreeBoard freeBoard = findByNo(inputNo);
+    int inputDay = Prompt.inputInt("날짜? ");
+    Calender calender = findByDay(inputDay);
 
-    if (freeBoard == null) {
-      System.out.println("해당 번호의 게시글이 없습니다.");
+    if (calender == null) {
+      System.out.println("해당 날짜의 일정이 없습니다.");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
-      System.out.println("게시글 삭제를 취소하였습니다.");
+      System.out.println("일정 삭제를 취소하였습니다.");
       return;
     }
 
-    freeBoardList.remove(freeBoard);
+    calenderList.remove(calender);
 
-    System.out.println("게시글이 삭제되었습니다.");
+    System.out.println("일정이 삭제되었습니다.");
   }
 
-  private FreeBoard findByNo(int freeBoardNo) {
-    FreeBoard[] arr = freeBoardList.toArray(new FreeBoard[0]);
+  private Calender findByDay(int day) {
+    Calender[] arr = calenderList.toArray(new Calender[0]);
     for (Object obj : arr) {
-      FreeBoard freeBoard = (FreeBoard) obj;
-      if (freeBoard.getFreeBoardNo() == freeBoardNo) {
-        return freeBoard;
+      Calender calender = (Calender) obj;
+      if (calender.getDay() == day) {
+        return calender;
       }
     }
     return null;
