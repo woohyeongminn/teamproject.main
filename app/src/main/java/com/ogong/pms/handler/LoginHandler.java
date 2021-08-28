@@ -24,7 +24,7 @@ public class LoginHandler {
     this.joinHandler = joinHandler;
   }
 
-  //  <기존코드>
+  //  <기존코드old>
   //  public void addLoginPage() {
   //    String inputEmail = Prompt.inputString("이메일: ");
   //    Member member = memberHandler.findByEmail(inputEmail);
@@ -43,7 +43,7 @@ public class LoginHandler {
   //    }
   //}
 
-  // <기존코드>
+  // <8/26 pm09 기존코드>
   //  public void addLoginPage() {
   //    String inputEmail = Prompt.inputString("이메일: ");
   //    Join join = joinHandler.findByEmail(inputEmail);

@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Join;
 import com.ogong.pms.domain.Member;
@@ -17,32 +18,32 @@ public class MemberHandler {
     this.joinHandler = joinHandler;  
   }
 
-  //  public void add() {
-  //    System.out.println("[개인 회원가입]");
-  //
-  //    Member member = new Member();
-  //
-  //    member.setPerNickname(Prompt.inputString("닉네임? "));
-  //    member.setPerEmail(Prompt.inputString("이메일? "));
-  //    member.setPerPassword(Prompt.inputString("암호? "));
-  //    member.setPerPhoto(Prompt.inputString("사진? "));
-  //    member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-  //
-  //    memberList.add(member);
-  //  }
+  public void add() {
+    System.out.println("[개인 회원가입]");
 
-  //  public void list() {
-  //    System.out.println("[개인회원 가입확인]");
-  //
-  //    Join[] list = joinList.toArray(new Join[0]);
-  //
-  //    for (Join join : list) {
-  //      System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
-  //          join.getJoinNickname(), 
-  //          join.getJoinEmail(),
-  //          join.getPerRegisteredDate());
-  //    }
-  //  }
+    Member member = new Member();
+
+    member.setPerNickname(Prompt.inputString("닉네임? "));
+    member.setPerEmail(Prompt.inputString("이메일? "));
+    member.setPerPassword(Prompt.inputString("암호? "));
+    member.setPerPhoto(Prompt.inputString("사진? "));
+    member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(member);
+  }
+
+  public void list() {
+    System.out.println("[개인회원 가입확인]");
+
+    Join[] list = joinList.toArray(new Join[0]);
+
+    for (Join join : list) {
+      System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
+          join.getJoinNickname(), 
+          join.getJoinEmail(),
+          join.getPerRegisteredDate());
+    }
+  }
 
   public void detail() {
     System.out.println("[개인회원 상세보기]");
