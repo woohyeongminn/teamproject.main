@@ -22,7 +22,7 @@ import com.ogong.pms.handler.ManagerHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
-import com.ogong.pms.handler.ToDoListHandler;
+import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -50,8 +50,8 @@ public class App {
   List<Login> loginList = new ArrayList<>();
   LoginHandler loginHandler = new LoginHandler(loginList, joinHandler);
 
-  List<ToDo> todoList = new ArrayList();
-  ToDoListHandler todoListHandler = new ToDoListHandler(todoList);
+  List<ToDo> toDoList = new ArrayList<>();
+  ToDoHandler toDoHandler = new ToDoHandler(toDoList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -82,37 +82,13 @@ public class App {
 
 
   Menu createMenu() {
-    ////////////////////////////////////////////////////////////////
-    System.out.println("\u0020\u002f\u0029\u002f\u0029\u0020");
-    System.out.print("\u0028\u0020\u0027\u03c0\u0027\u0029");
-    System.out.println(" < 오늘의 공부");
-    System.out.println("\u0028\u0020\u003e\u004f\u003c\u0029");
-    ////////////////////////////////////////////////////////////////
-
-    //--------------------------------------------------------------------
+    //---------------------------------------------------
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
-    MenuGroup joinMenu = new MenuGroup("[회원가입]");
+
+    //---------------------------------------------------
+    MenuGroup joinMenu = new MenuGroup("회원가입");
     mainMenuGroup.add(joinMenu);
-    MenuGroup loginMenu = new MenuGroup("[로그인]");
-    mainMenuGroup.add(loginMenu);
-    //    MenuGroup memberMenu = new MenuGroup("[마이페이지]");
-    //    mainMenuGroup.add(memberMenu);
-    MenuGroup studyMenu = new MenuGroup("[모든 스터디]");
-    mainMenuGroup.add(studyMenu);
-    MenuGroup cafeMenu = new MenuGroup("[장소 예약]");
-    mainMenuGroup.add(cafeMenu);
-    MenuGroup managerMenu = new MenuGroup("[공지사항-관리자]");
-    mainMenuGroup.add(managerMenu);
-    MenuGroup noticeMenu = new MenuGroup("[공지사항]");
-    mainMenuGroup.add(noticeMenu);
-    MenuGroup askMenu = new MenuGroup("[문의게시판]");
-    mainMenuGroup.add(askMenu);
-    MenuGroup todoMenu = new MenuGroup("[To-Do List]");
-    mainMenuGroup.add(todoMenu);
-    //    MenuGroup logout = new MenuGroup("[로그아웃]");
-    //    mainMenuGroup.add(logout);
-    //회원가입-------------------------------------------------------
     joinMenu.add(new Menu("개인 회원 가입") {
       @Override
       public void execute() {
@@ -123,35 +99,15 @@ public class App {
       public void execute() {
         joinHandler.add(); 
       }});
-    //로그인--------------------------------------------------------------------
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup loginMenu = new MenuGroup("로그인");
+    mainMenuGroup.add(loginMenu);
     loginMenu.add(new Menu("로그인") {
       @Override
       public void execute() {
-        //<2021-08-27 : 추가된 코드(song)>
-        Login login = loginHandler.addLoginPage();
-        //        System.out.println("이메일2 : " + login.getUserEmail());
-        //        System.out.println("비밀번호2 : " + login.getUserPassword());
-
-        if (login.getUserEmail() != null && login.getUserPassword() != null) {
-          MenuGroup memberMenu = new MenuGroup("[마이페이지]");
-          mainMenuGroup.add(memberMenu);
-
-          memberMenu.add(new Menu("내 가입 정보보기") {
-            @Override
-            public void execute() {
-              memberHandler.detail(); 
-            }});
-          memberMenu.add(new Menu("개인 정보 수정하기") {
-            @Override
-            public void execute() {
-              memberHandler.update(); 
-            }});
-          memberMenu.add(new Menu("회원 탈퇴하기") {
-            @Override
-            public void execute() {
-              memberHandler.delete(); 
-            }});
-        }
+        loginHandler.addLoginPage();
       }});
     loginMenu.add(new Menu("로그아웃") {
       @Override
@@ -163,30 +119,36 @@ public class App {
       public void execute() {
         loginHandler.findInfo(); 
       }});
+    //---------------------------------------------------
 
-    //마이페이지-------------------------------------------------------
-    //-------------------관리자 페이지
-    //    memberMenu.add(new Menu("회원 가입 목록 보기") {
-    //      @Override
-    //      public void execute() {
-    //        memberHandler.list(); 
-    //      }});
-    //    memberMenu.add(new Menu("내 가입 정보보기") {
-    //      @Override
-    //      public void execute() {
-    //        memberHandler.detail(); 
-    //      }});
-    //    memberMenu.add(new Menu("개인 정보 수정하기") {
-    //      @Override
-    //      public void execute() {
-    //        memberHandler.update(); 
-    //      }});
-    //    memberMenu.add(new Menu("회원 탈퇴하기") {
-    //      @Override
-    //      public void execute() {
-    //        memberHandler.delete(); 
-    //      }});
-    //모든 스터디-------------------------------------------------------
+    //---------------------------------------------------
+    MenuGroup memberMenu = new MenuGroup("마이페이지");
+    mainMenuGroup.add(memberMenu);
+    memberMenu.add(new Menu("회원 가입 목록 보기") {
+      @Override
+      public void execute() {
+        memberHandler.list(); 
+      }});
+    memberMenu.add(new Menu("내 가입 정보보기") {
+      @Override
+      public void execute() {
+        memberHandler.detail(); 
+      }});
+    memberMenu.add(new Menu("개인 정보 수정하기") {
+      @Override
+      public void execute() {
+        memberHandler.update(); 
+      }});
+    memberMenu.add(new Menu("회원 탈퇴하기") {
+      @Override
+      public void execute() {
+        memberHandler.delete(); 
+      }});
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup studyMenu = new MenuGroup("모든 스터디");
+    mainMenuGroup.add(studyMenu);
     studyMenu.add(new Menu("내 스터디 등록하기") {
       @Override
       public void execute() {
@@ -212,7 +174,75 @@ public class App {
       public void execute() {
         newStudyHandler.delete(); 
       }});
-    //공지사항(관리자)----------------------------------------------------
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup myStudy = new MenuGroup("내 스터디");
+    mainMenuGroup.add(myStudy);
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup todoMenu = new MenuGroup("To-Do List");
+    mainMenuGroup.add(todoMenu);
+    todoMenu.add(new Menu("To-Do List 등록") {
+      @Override
+      public void execute() {
+        toDoHandler.add(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 목록") {
+      @Override
+      public void execute() {
+        toDoHandler.list(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 상세보기") {
+      @Override
+      public void execute() {
+        toDoHandler.detail(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 변경") {
+      @Override
+      public void execute() {
+        toDoHandler.update(); 
+      }});
+    todoMenu.add(new Menu("To-Do List 삭제") {
+      @Override
+      public void execute() {
+        toDoHandler.delete(); 
+      }});
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup cafeMenu = new MenuGroup("스터디 장소");
+    mainMenuGroup.add(cafeMenu);
+    cafeMenu.add(new Menu("장소 등록/기업 권한") {
+      @Override
+      public void execute() {
+        cafeHandler.add();
+      }
+    });
+    cafeMenu.add(new Menu("장소 목록") {
+      @Override
+      public void execute() {
+        cafeHandler.list();
+      }
+    });
+    cafeMenu.add(new Menu("장소 검색") {
+      @Override
+      public void execute() {
+        cafeHandler.find();
+      }
+    });
+    cafeMenu.add(new Menu("장소 상세보기") {
+      @Override
+      public void execute() {
+        cafeHandler.detail();
+      }
+    });
+    //---------------------------------------------------
+
+    //---------------------------------------------------
+    MenuGroup managerMenu = new MenuGroup("고객센터/관리자");
+    mainMenuGroup.add(managerMenu);
     managerMenu.add(new Menu("공지사항 등록하기") {
       @Override
       public void execute() {
@@ -227,9 +257,12 @@ public class App {
       @Override
       public void execute() {
         managerHandler.delete(); 
-      }});    
+      }});
+    //---------------------------------------------------
 
-    //공지사항(회원)----------------------------------------------------
+    //---------------------------------------------------
+    MenuGroup noticeMenu = new MenuGroup("고객센터/회원");
+    mainMenuGroup.add(noticeMenu);
     noticeMenu.add(new Menu("공지사항 목록") {
       @Override
       public void execute() {
@@ -240,8 +273,11 @@ public class App {
       public void execute() {
         noticeboardHandler.detail(); 
       }});
+    //---------------------------------------------------
 
-    //문의게시판-------------------------------------------------------
+    //---------------------------------------------------
+    MenuGroup askMenu = new MenuGroup("문의사항/회원");
+    mainMenuGroup.add(askMenu);
     askMenu.add(new Menu("문의사항 등록") {
       @Override
       public void execute() {
@@ -267,60 +303,9 @@ public class App {
       public void execute() {
         askBoardHandler.delete(); 
       }});
-    //장소 예약-------------------------------------------------------
-    cafeMenu.add(new Menu("장소 등록/기업 권한") {
-      @Override
-      public void execute() {
-        cafeHandler.add();
-      }
-    });
-    cafeMenu.add(new Menu("장소 목록") {
-      @Override
-      public void execute() {
-        cafeHandler.list();
-      }
-    });
-    cafeMenu.add(new Menu("장소 검색") {
-      @Override
-      public void execute() {
-        cafeHandler.find();
-      }
-    });
-    cafeMenu.add(new Menu("장소 상세보기") {
-      @Override
-      public void execute() {
-        cafeHandler.detail();
-      }
-    });
-    //투두 리스트-------------------------------------------------------
-    todoMenu.add(new Menu("To-Do List 등록") {
-      @Override
-      public void execute() {
-        todoListHandler.add(); 
-      }});
-    todoMenu.add(new Menu("To-Do List 목록") {
-      @Override
-      public void execute() {
-        todoListHandler.list(); 
-      }});
-    todoMenu.add(new Menu("To-Do List 상세보기") {
-      @Override
-      public void execute() {
-        todoListHandler.detail(); 
-      }});
-    todoMenu.add(new Menu("To-Do List 변경") {
-      @Override
-      public void execute() {
-        todoListHandler.update(); 
-      }});
-    todoMenu.add(new Menu("To-Do List 삭제") {
-      @Override
-      public void execute() {
-        todoListHandler.delete(); 
-      }});
+    //---------------------------------------------------
 
     return mainMenuGroup;
   }
 }
-
 
