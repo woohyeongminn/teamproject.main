@@ -98,7 +98,10 @@ public class App {
     //---------------------------------------------------
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
+    //---------------------------------------------------
 
+
+    // 메인의 하위메뉴 시작
     //---------------------------------------------------
     MenuGroup joinMenu = new MenuGroup("회원가입");
     mainMenuGroup.add(joinMenu);
@@ -115,16 +118,21 @@ public class App {
       }});
     //---------------------------------------------------
 
+
     //---------------------------------------------------
     MenuGroup loginMenu = new MenuGroup("로그인");
     mainMenuGroup.add(loginMenu);
     loginMenu.add(new Menu("개인") {
       @Override
       public void execute() {
-        //        loginHandler.addLoginPage();
+        // loginHandler.addLoginPage();
         Login login = loginHandler.addLoginPage();
-        cafeHandler.loginStatus(login);
+
+        //0828 eun 추가
+        // 이거 왜 추가됐지는 모르겠어서 주석으로 처리함
+        //cafeHandler.loginStatus(login);
       }});
+
     loginMenu.add(new Menu("기업") {
       @Override
       public void execute() {
@@ -155,9 +163,8 @@ public class App {
       public void execute() {
         loginHandler.findInfo();
       }});
-
-
     //---------------------------------------------------
+
 
     //---------------------------------------------------
     MenuGroup memberMenu = new MenuGroup("마이페이지");
@@ -183,6 +190,7 @@ public class App {
         memberHandler.delete(); 
       }});
     //---------------------------------------------------
+
 
     //---------------------------------------------------
     MenuGroup studyMenu = new MenuGroup("모든 스터디");
@@ -214,11 +222,13 @@ public class App {
       }});
     //---------------------------------------------------
 
+
     //---------------------------------------------------
     MenuGroup myStudyMenu = new MenuGroup("내 스터디");
     mainMenuGroup.add(myStudyMenu);
     //---------------------------------------------------
 
+    // 내스터디메뉴의 하위 메뉴 시작
     //---------------------------------------------------
     MenuGroup calenderMenu = new MenuGroup("캘린더");
     mainMenuGroup.add(calenderMenu);
@@ -248,6 +258,7 @@ public class App {
         calenderHandler.delete(); 
       }});
     //---------------------------------------------------
+
 
     //---------------------------------------------------
     MenuGroup todoMenu = new MenuGroup("To-Do List");
@@ -279,6 +290,7 @@ public class App {
       }});
     //---------------------------------------------------
 
+
     //---------------------------------------------------
     MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
     mainMenuGroup.add(freeBoardMenu);
@@ -308,6 +320,7 @@ public class App {
         freeBoardHandler.delete(); 
       }});
     //---------------------------------------------------
+
 
     //---------------------------------------------------
     MenuGroup cafeMenu = new MenuGroup("스터디 장소");
@@ -352,9 +365,12 @@ public class App {
       @Override
       public void execute() {
         cafeHandler.addReview();
+        //0828 eun 추가
+        Login login = loginHandler.addLoginPage();
       }
     });
     //---------------------------------------------------
+
 
     //---------------------------------------------------
     MenuGroup managerMenu = new MenuGroup("고객센터/관리자");
@@ -376,6 +392,7 @@ public class App {
       }});
     //---------------------------------------------------
 
+
     //---------------------------------------------------
     MenuGroup noticeMenu = new MenuGroup("고객센터/회원");
     mainMenuGroup.add(noticeMenu);
@@ -390,6 +407,7 @@ public class App {
         noticeboardHandler.detail(); 
       }});
     //---------------------------------------------------
+
 
     //---------------------------------------------------
     MenuGroup askMenu = new MenuGroup("문의사항/회원");
@@ -421,9 +439,11 @@ public class App {
       }});
     //---------------------------------------------------
 
+
     return mainMenuGroup;
   }
 
+  // 로그인 호출하는거 새로운 방법?
   //  void login(MenuGroup mainMenuGroup, MenuGroup joinMenu) {
   //    joinMenu.add(new Menu("개인") {
   //      @Override
