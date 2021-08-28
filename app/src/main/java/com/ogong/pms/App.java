@@ -52,7 +52,7 @@ public class App {
   CafeHandler cafeHandler = new CafeHandler(cafeList, memberList);
 
   List<Login> loginList = new ArrayList<>();
-  LoginHandler loginHandler = new LoginHandler(loginList, joinHandler);
+  LoginHandler loginHandler = new LoginHandler(loginList, joinHandler, joinList);
 
   List<ToDo> toDoList = new ArrayList<>();
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
@@ -99,12 +99,13 @@ public class App {
     //---------------------------------------------------
     MenuGroup joinMenu = new MenuGroup("회원가입");
     mainMenuGroup.add(joinMenu);
-    joinMenu.add(new Menu("개인 회원 가입") {
+    //  login(mainMenuGroup,joinMenu);
+    joinMenu.add(new Menu("개인") {
       @Override
       public void execute() {
         joinHandler.add(); 
       }});
-    joinMenu.add(new Menu("기업 회원 가입") {
+    joinMenu.add(new Menu("기업") {
       @Override
       public void execute() {
         joinHandler.add(); 
@@ -114,21 +115,43 @@ public class App {
     //---------------------------------------------------
     MenuGroup loginMenu = new MenuGroup("로그인");
     mainMenuGroup.add(loginMenu);
-    loginMenu.add(new Menu("로그인") {
+    loginMenu.add(new Menu("개인") {
       @Override
       public void execute() {
         loginHandler.addLoginPage();
       }});
-    loginMenu.add(new Menu("로그아웃") {
+    loginMenu.add(new Menu("기업") {
       @Override
       public void execute() {
-        loginHandler.logOut(); 
+        loginHandler.addLoginPage(); 
       }});
-    loginMenu.add(new Menu("아이디/비밀번호 찾기") {
+    loginMenu.add(new Menu("NAVER로 시작하기") {
       @Override
       public void execute() {
-        loginHandler.findInfo(); 
+        loginHandler.naverLogin(); 
       }});
+    loginMenu.add(new Menu("KAKAO로 시작하기") {
+      @Override
+      public void execute() {
+        loginHandler.kakaoLogin(); 
+      }});
+    loginMenu.add(new Menu("GOOGLE로 시작하기") {
+      @Override
+      public void execute() {
+        loginHandler.googleLogin(); 
+      }});
+    loginMenu.add(new Menu("회원 가입") {
+      @Override
+      public void execute() {
+        joinHandler.add();
+      }});
+    loginMenu.add(new Menu("ID/PW 찾기") {
+      @Override
+      public void execute() {
+        loginHandler.findInfo();
+      }});
+
+
     //---------------------------------------------------
 
     //---------------------------------------------------
@@ -377,5 +400,18 @@ public class App {
 
     return mainMenuGroup;
   }
+
+  //  void login(MenuGroup mainMenuGroup, MenuGroup joinMenu) {
+  //    joinMenu.add(new Menu("개인") {
+  //      @Override
+  //      public void execute() {
+  //        joinHandler.add(); 
+  //      }});
+  //    joinMenu.add(new Menu("기업") {
+  //      @Override
+  //      public void execute() {
+  //        joinHandler.add(); 
+  //      }});
+  //  }
 }
 
