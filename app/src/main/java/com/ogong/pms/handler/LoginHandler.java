@@ -8,20 +8,14 @@ import com.ogong.util.Prompt;
 public class LoginHandler {
 
   List<Login> loginList;
-  //  <기존 코드>
-  //MemberHandler memberHandler;
   JoinHandler joinHandler;
+  List<Join> joinList;
 
-  //   <기존 코드>
-  //  public LoginHandler(List<Login> loginList, MemberHandler memberHandler) {
-  //    this.loginList = loginList;
-  //    this.memberHandler = memberHandler;
-  //  }
 
-  //<2021-08-26 : 추가된 코드(woo)>
-  public LoginHandler(List<Login> loginList, JoinHandler joinHandler) {
+  public LoginHandler(List<Login> loginList, JoinHandler joinHandler,  List<Join> joinList) {
     this.loginList = loginList;
     this.joinHandler = joinHandler;
+    this.joinList = joinList;
   }
 
   //  <기존코드old>
@@ -91,9 +85,29 @@ public class LoginHandler {
     System.out.println("로그아웃 되었습니다.");
   }
 
-  public void findInfo() {
-    System.out.println("!!!찾기 페이지 이동합니다.!!!");
+  public void naverLogin() {
+    System.out.println("NAVER 로그인");
+  }
+  public void kakaoLogin() {
+    System.out.println("KAKAO 로그인");
+  }
+  public void googleLogin() {
+    System.out.println("GOOGLE 로그인");
   }
 
-
+  public void findInfo() {
+    System.out.println("!!!찾기 페이지 이동합니다.!!!");
+    while (true) {
+      String inputNick =  Prompt.inputString("닉네임: ");
+      if (!inputNick.equals(((Join) joinList).getJoinNickname())) {
+        // 엄강사님찬스
+        System.out.println("해당 닉네임이 존재하지 않습니다.");
+        continue;
+      } else {
+        System.out.print("이메일 >> ");
+        System.out.println(((Join) joinList).getJoinEmail());
+      }
+      break;
+    }
+  }
 }
