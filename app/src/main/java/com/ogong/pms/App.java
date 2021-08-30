@@ -97,7 +97,7 @@ public class App {
     //---------------------------------------------------
     MenuGroup joinMenu = new MenuGroup("회원가입");
     mainMenuGroup.add(joinMenu);
-    //  login(mainMenuGroup,joinMenu);
+    //    login(mainMenuGroup,joinMenu);
     joinMenu.add(new Menu("개인") {
       @Override
       public void execute() {
@@ -220,6 +220,13 @@ public class App {
     //---------------------------------------------------
     MenuGroup myStudyMenu = new MenuGroup("내 스터디");
     mainMenuGroup.add(myStudyMenu);
+    MenuGroup caMenu = new MenuGroup("캘린더");
+    myStudyMenu.add(caMenu);
+    caMenu.add(new Menu("일정 등록") {
+      @Override
+      public void execute() {
+        calenderHandler.add(); 
+      }});
     //---------------------------------------------------
 
     // 내스터디메뉴의 하위 메뉴 시작
@@ -441,12 +448,12 @@ public class App {
   //    joinMenu.add(new Menu("개인") {
   //      @Override
   //      public void execute() {
-  //        joinHandler.add(); 
+  //        memberHandler.add(); 
   //      }});
   //    joinMenu.add(new Menu("기업") {
   //      @Override
   //      public void execute() {
-  //        joinHandler.add(); 
+  //        memberHandler.add(); 
   //      }});
   //  }
 }
