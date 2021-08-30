@@ -30,7 +30,7 @@ import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
 
-public class App {
+public class TestApp {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
 
@@ -68,6 +68,7 @@ public class App {
   public static void main(String[] args) {
     App app = new App(); 
     app.welcomeservice();
+
   }
 
   void welcomeservice() {
@@ -129,7 +130,7 @@ public class App {
 
         //0828 eun 추가
         // 이거 왜 추가됐지는 모르겠어서 주석으로 처리함
-        //cafeHandler.loginStatus(login);
+        cafeHandler.loginStatus(login);
       }});
 
     loginMenu.add(new Menu("기업") {
@@ -442,7 +443,7 @@ public class App {
     return mainMenuGroup;
   }
 
-  // 로그인 호출하는거 새로운 방법?
+  // 로그인 호출하는거 새로운 방법? >> 하나의 메서드로 묶음!
   //  void login(MenuGroup mainMenuGroup, MenuGroup joinMenu) {
   //    joinMenu.add(new Menu("개인") {
   //      @Override
