@@ -99,15 +99,25 @@ public class LoginHandler {
     System.out.println("!!!찾기 페이지 이동합니다.!!!");
     while (true) {
       String inputNick =  Prompt.inputString("닉네임: ");
-      if (!inputNick.equals(((Join) joinList).getJoinNickname())) {
+      Join join = findByNick(inputNick);
+      if (join == null) {
         // 엄강사님찬스
         System.out.println("해당 닉네임이 존재하지 않습니다.");
         continue;
       } else {
         System.out.print("이메일 >> ");
-        System.out.println(((Join) joinList).getJoinEmail());
+        System.out.println(join.getJoinEmail());
       }
       break;
     }
+  }
+
+  private Join findByNick(String nick) {
+    for (Join join : joinList) {
+      if (nick.equals(join.getJoinNickname())) {
+        return join;
+      }
+    }
+    return null;
   }
 }
