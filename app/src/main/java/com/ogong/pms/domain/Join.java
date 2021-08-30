@@ -1,5 +1,6 @@
 package com.ogong.pms.domain;
 
+// MemberHandler에 add 개념
 public class Join {
   private String joinNickname;   // 회원가입 닉네임
   private String joinEmail;     // 회원가입 이메일     

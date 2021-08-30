@@ -68,7 +68,6 @@ public class TestApp {
   public static void main(String[] args) {
     App app = new App(); 
     app.welcomeservice();
-
   }
 
   void welcomeservice() {
@@ -105,17 +104,17 @@ public class TestApp {
     //---------------------------------------------------
     MenuGroup joinMenu = new MenuGroup("회원가입");
     mainMenuGroup.add(joinMenu);
-    //  login(mainMenuGroup,joinMenu);
-    joinMenu.add(new Menu("개인") {
-      @Override
-      public void execute() {
-        joinHandler.add(); 
-      }});
-    joinMenu.add(new Menu("기업") {
-      @Override
-      public void execute() {
-        joinHandler.add(); 
-      }});
+    doLogin(mainMenuGroup,joinMenu);
+    //    joinMenu.add(new Menu("개인") {
+    //      @Override
+    //      public void execute() {
+    //        joinHandler.add(); 
+    //      }});
+    //    joinMenu.add(new Menu("기업") {
+    //      @Override
+    //      public void execute() {
+    //        joinHandler.add(); 
+    //      }});
     //---------------------------------------------------
 
 
@@ -130,7 +129,7 @@ public class TestApp {
 
         //0828 eun 추가
         // 이거 왜 추가됐지는 모르겠어서 주석으로 처리함
-        cafeHandler.loginStatus(login);
+        //cafeHandler.loginStatus(login);
       }});
 
     loginMenu.add(new Menu("기업") {
@@ -156,7 +155,7 @@ public class TestApp {
     loginMenu.add(new Menu("회원 가입") {
       @Override
       public void execute() {
-        joinHandler.add();
+        doLogin(mainMenuGroup, joinMenu);
       }});
     loginMenu.add(new Menu("ID/PW 찾기") {
       @Override
@@ -443,18 +442,18 @@ public class TestApp {
     return mainMenuGroup;
   }
 
-  // 로그인 호출하는거 새로운 방법? >> 하나의 메서드로 묶음!
-  //  void login(MenuGroup mainMenuGroup, MenuGroup joinMenu) {
-  //    joinMenu.add(new Menu("개인") {
-  //      @Override
-  //      public void execute() {
-  //        joinHandler.add(); 
-  //      }});
-  //    joinMenu.add(new Menu("기업") {
-  //      @Override
-  //      public void execute() {
-  //        joinHandler.add(); 
-  //      }});
-  //  }
+  //  로그인 호출하는거 새로운 방법?
+  void doLogin(MenuGroup mainMenuGroup, MenuGroup joinMenu) {
+    joinMenu.add(new Menu("개인") {
+      @Override
+      public void execute() {
+        joinHandler.add(); 
+      }});
+    joinMenu.add(new Menu("기업") {
+      @Override
+      public void execute() {
+        joinHandler.add(); 
+      }});
+  }
 }
 
