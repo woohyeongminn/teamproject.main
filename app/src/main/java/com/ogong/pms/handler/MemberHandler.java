@@ -1,68 +1,85 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
-import com.ogong.pms.domain.Join;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class MemberHandler {
 
   List<Member> memberList;
-  List<Join> joinList;
-  JoinHandler joinHandler;
 
-  public MemberHandler(List<Member> memberList, List<Join> joinList, JoinHandler joinHandler) {
+
+  public MemberHandler(List<Member> memberList) {
     this.memberList = memberList;
-    this.joinList = joinList;
-    this.joinHandler = joinHandler;  
+  }
+
+  public void add() {
+    System.out.println("[개인 회원가입]");
+
+    Member member = new Member();
+
+    member.setPerNickname(Prompt.inputString("닉네임? "));
+    member.setPerEmail(Prompt.inputString("이메일? "));
+    member.setPerPassword(Prompt.inputString("비밀번호? "));
+    while (true) {
+      String pw =  Prompt.inputString("비밀번호 확인? ");
+      if (!pw.equals(member.getPerPassword())) {
+        System.out.println("비밀번호가 일치하지 않습니다.");
+        continue;
+      } else {
+        System.out.println("확인되었습니다.");
+      }
+      break;
+    }
+    member.setPerPhoto(Prompt.inputString("사진? "));
+    memberList.add(member);
   }
 
 
   public void list() {
     System.out.println("[개인회원 가입확인]");
 
-    Join[] list = joinList.toArray(new Join[0]);
 
-    for (Join join : list) {
+    for (Member member : memberList) {
       System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
-          join.getJoinNickname(), 
-          join.getJoinEmail(),
-          join.getPerRegisteredDate());
+          member.getPerNickname(), 
+          member.getPerEmail(),
+          member.getPerRegisteredDate());
     }
   }
 
   public void detail() {
     System.out.println("[개인회원 상세보기]");
-    String inputJoinEmail = Prompt.inputString("이메일? ");
+    String inputEmail = Prompt.inputString("이메일? ");
 
-    Join join = joinHandler.findByEmail(inputJoinEmail);
+    Member member = findByEmail(inputEmail);
 
-    if (join == null) {
+    if (member == null) {
       System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
 
-    System.out.printf("닉네임: %s\n", join.getJoinNickname());
-    System.out.printf("이메일: %s\n", join.getJoinEmail());
-    System.out.printf("사진: %s\n", join.getJoinPhoto());
-    System.out.printf("등록일: %s\n", join.getPerRegisteredDate());
+    System.out.printf("닉네임: %s\n", member.getPerNickname());
+    System.out.printf("이메일: %s\n", member.getPerEmail());
+    System.out.printf("사진: %s\n", member.getPerPhoto());
+    System.out.printf("등록일: %s\n", member.getPerRegisteredDate());
   }
 
   public void update() {
     System.out.println("[개인회원 수정하기]");
-    String inputJoinEmail = Prompt.inputString("이메일? ");
+    String inputEmail = Prompt.inputString("이메일? ");
 
-    Join join = joinHandler.findByEmail(inputJoinEmail);
+    Member member = findByEmail(inputEmail);
 
-    if (join == null) {
+    if (member == null) {
       System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
 
-    String perNickName = Prompt.inputString("닉네임(" + join.getJoinNickname()  + ")? ");
-    String perEmail = Prompt.inputString("이메일(" + join.getJoinEmail() + ")? ");
-    String perPassword = Prompt.inputString("암호(" + join.getJoinPassword() + ")? ");
-    String perPhoto = Prompt.inputString("사진(" + join.getJoinPhoto() + ")? ");
+    String perNickName = Prompt.inputString("닉네임(" + member.getPerNickname()  + ")? ");
+    String perEmail = Prompt.inputString("이메일(" + member.getPerEmail() + ")? ");
+    String perPassword = Prompt.inputString("암호(" + member.getPerPassword() + ")? ");
+    String perPhoto = Prompt.inputString("사진(" + member.getPerPhoto() + ")? ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -70,21 +87,21 @@ public class MemberHandler {
       return;
     }
 
-    join.setJoinNickname(perNickName);
-    join.setJoinEmail(perEmail);
-    join.setJoinPassword(perPassword);
-    join.setJoinPhoto(perPhoto);
+    member.setPerNickname(perNickName);
+    member.setPerEmail(perEmail);
+    member.setPerPassword(perPassword);
+    member.setPerPhoto(perPhoto);
 
     System.out.println("개인회원 정보를 변경하였습니다.");
   }
 
   public void delete() {
     System.out.println("[개인회원 탈퇴]");
-    String inputJoinEmail = Prompt.inputString("이메일? ");
+    String inputEmail = Prompt.inputString("이메일? ");
 
-    Join join = joinHandler.findByEmail(inputJoinEmail);
+    Member member = findByEmail(inputEmail);
 
-    if (join == null) {
+    if (member == null) {
       System.out.println("해당 이메일의 회원이 없습니다.");
       return;
     }
@@ -95,27 +112,55 @@ public class MemberHandler {
       return;
     }
 
-    joinList.remove(join);
+    memberList.remove(member);
 
     System.out.println("회원이 탈퇴되었습니다.");
   }
 
-  //  private Member findByNo(int no) {
-  //    Member[] arr = memberList.toArray(new Member[0]);
-  //    for (Object obj : arr) {
-  //      Member member = (Member) obj;
-  //      if (member.getPerno() == no) {
-  //        return member;
-  //      }
-  //    }
-  //    return null;
-  //  }
+  public void findEmail() {
+    System.out.println("이메일 찾기");
+    while (true) {
+      String inputNick =  Prompt.inputString("닉네임: ");
+      Member member = findByNick(inputNick);
+      if (member == null) {
+        // 엄강사님찬스
+        System.out.println("해당 닉네임이 존재하지 않습니다.");
+        continue;
+      } else {
+        System.out.print("이메일 >> ");
+        System.out.println(member.getPerEmail());
+      }
+      break;
+    }
+    String input = Prompt.inputString("비밀번호 찾기로 넘어가시겠습니까?(y/N)");
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      System.out.println("찾기를 종료합니다.");
+      return;
+    } 
+    findPw();
+  }
 
+  public void findPw() {
+    System.out.println("비밀번호 찾기");
+    while (true) {
+      String inputEmail =  Prompt.inputString("이메일: ");
+      Member member = findByEmail(inputEmail);
+      if (member == null) {
+        // 엄강사님찬스
+        System.out.println("해당 이메일이 존재하지 않습니다.");
+        continue;
+      } else {
+        System.out.print("임시 비밀번호>> ");
+        System.out.println(member.getPerPassword().hashCode());
+        String hashPW = String.valueOf(member.getPerPassword().hashCode());
+        member.setPerPassword(hashPW);
+      }
+      break;
+    }
+  }
 
-  public Member findByEmail(String perEmail) {
-    Member[] arr = memberList.toArray(new Member[0]);
-    for (Object obj : arr) {
-      Member member = (Member) obj;
+  public Member findByInputEmail(String perEmail) {
+    for (Member member : memberList) {
       if (member.getPerEmail().equals(perEmail)) {
         return member;
       }
@@ -123,10 +168,25 @@ public class MemberHandler {
     return null;
   }
 
+  private Member findByNick(String inputNick) {
+    for (Member member : memberList) {
+      if (inputNick.equals(member.getPerNickname())) {
+        return member;
+      }
+    }
+    return null;
+  }
 
+  private Member findByEmail(String inputEmail) {
+    for (Member member : memberList) {
+      if (inputEmail.equals(member.getPerEmail())) {
+        return member;
+      }
+    }
+    return null;
+  }
 
-
-  //-------------prompt는 login에서 사용------------------------------------------------
+  //-------------prompt는 login에서 사용(은채)------------------------------------------------
   public boolean exist(String perEmail) {
     Member[] list = memberList.toArray(new Member[0]);
     for (Member member : list) {
@@ -160,6 +220,8 @@ public class MemberHandler {
       System.out.println("등록된 회원이 아닙니다.");
     }
   }
+
+
 }
 
 

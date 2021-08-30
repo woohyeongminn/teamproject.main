@@ -12,13 +12,13 @@ public class CafeHandler {
 
   List<Cafe> cafeList;
   List<CafeReview> reviewList;
-  JoinHandler joinHandler;
   Login loginStatus;
+  MemberHandler memberHandler;
 
-  public CafeHandler (List<Cafe> cafeList, List<CafeReview> reviewList, JoinHandler joinHandler) {
+  public CafeHandler (List<Cafe> cafeList, List<CafeReview> reviewList, MemberHandler memberHandler) {
     this.cafeList = cafeList;
     this.reviewList = reviewList;
-    this.joinHandler = joinHandler;
+    this.memberHandler = memberHandler;
   }
 
   public void add () {
@@ -110,7 +110,7 @@ public class CafeHandler {
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
       if (review.getCafeNo() == cafe.getNo()) {
-        String nickname = joinHandler.findByEmail(review.getEmail()).getJoinNickname();
+        String nickname = memberHandler.findByInputEmail(review.getEmail()).getPerNickname();
         System.out.printf("닉네임 : %s, 별점 : %d, 내용 : %s, 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;

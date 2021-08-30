@@ -10,8 +10,6 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Join;
-import com.ogong.pms.domain.Login;
 import com.ogong.pms.domain.Manager;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
@@ -21,7 +19,6 @@ import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.CalenderHandler;
 import com.ogong.pms.handler.FreeBoardHandler;
-import com.ogong.pms.handler.JoinHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.pms.handler.ManagerHandler;
 import com.ogong.pms.handler.MemberHandler;
@@ -34,11 +31,10 @@ public class App {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
 
-  List<Join> joinList = new ArrayList<>();
-  JoinHandler joinHandler = new JoinHandler(joinList);
 
   List<Member> memberList = new LinkedList<>();
-  MemberHandler memberHandler = new MemberHandler(memberList, joinList, joinHandler);
+  MemberHandler memberHandler = new MemberHandler(memberList);
+  LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
 
   List<Manager> managerList = new ArrayList<>();
   ManagerHandler managerHandler = new ManagerHandler(managerList);
@@ -51,16 +47,13 @@ public class App {
 
   List<Cafe> cafeList = new ArrayList<>();
   List<CafeReview> cafeReview = new ArrayList<>();
-  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, joinHandler);
-
-  List<Login> loginList = new ArrayList<>();
-  LoginHandler loginHandler = new LoginHandler(loginList, joinHandler, joinList);
+  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler);
 
   List<ToDo> toDoList = new ArrayList<>();
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
 
   List<FreeBoard> freeBoardList = new ArrayList<>();
-  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(loginList, freeBoardList);
+  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList);
 
   List<Calender> calenderList = new ArrayList<>();
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
@@ -108,12 +101,12 @@ public class App {
     joinMenu.add(new Menu("개인") {
       @Override
       public void execute() {
-        joinHandler.add(); 
+        memberHandler.add(); 
       }});
     joinMenu.add(new Menu("기업") {
       @Override
       public void execute() {
-        joinHandler.add(); 
+        memberHandler.add(); 
       }});
     //---------------------------------------------------
 
@@ -124,12 +117,7 @@ public class App {
     loginMenu.add(new Menu("개인") {
       @Override
       public void execute() {
-        // loginHandler.addLoginPage();
-        Login login = loginHandler.addLoginPage();
-
-        //0828 eun 추가
-        // 이거 왜 추가됐지는 모르겠어서 주석으로 처리함
-        //cafeHandler.loginStatus(login);
+        loginHandler.addLoginPage();
       }});
 
     loginMenu.add(new Menu("기업") {
@@ -155,13 +143,20 @@ public class App {
     loginMenu.add(new Menu("회원 가입") {
       @Override
       public void execute() {
-        joinHandler.add();
+        memberHandler.add();
       }});
     loginMenu.add(new Menu("ID/PW 찾기") {
       @Override
       public void execute() {
-        loginHandler.findInfo();
+        memberHandler.findEmail();
       }});
+
+    loginMenu.add(new Menu("로그아웃") {
+      @Override
+      public void execute() {
+        loginHandler.logOut();
+      }});
+
     //---------------------------------------------------
 
 
@@ -364,8 +359,7 @@ public class App {
       @Override
       public void execute() {
         cafeHandler.addReview();
-        //0828 eun 추가
-        Login login = loginHandler.addLoginPage();
+        //loginHandler.addLoginPage();
       }
     });
     //---------------------------------------------------

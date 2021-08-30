@@ -3,18 +3,18 @@ package com.ogong.pms.handler;
 import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Login;
+import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class FreeBoardHandler {
 
 
-  List<Login> loginList;
+  List<Member> memberList;
   List<FreeBoard> freeBoardList;
 
-  public FreeBoardHandler(List<Login> loginList, List<FreeBoard> freeBoardList) {
+  public FreeBoardHandler(List<Member> memberList, List<FreeBoard> freeBoardList) {
     this.freeBoardList = freeBoardList;
-    this.loginList = loginList;
+    this.memberList = memberList;
   }
 
 
