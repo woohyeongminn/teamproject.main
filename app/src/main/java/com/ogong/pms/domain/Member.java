@@ -11,6 +11,12 @@ public class Member {
   private String perPhoto;
   private Date perRegisteredDate;
 
+  @Override
+  public String toString() {
+    return "Member [perNo=" + perNo + ", perNickname=" + perNickname + ", perEmail=" + perEmail
+        + ", perPassword=" + perPassword + ", perPhoto=" + perPhoto + ", perRegisteredDate="
+        + perRegisteredDate + "]";
+  }
   public int getPerNo() {
     return perNo;
   }
