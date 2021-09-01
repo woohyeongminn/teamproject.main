@@ -7,6 +7,7 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
@@ -17,6 +18,7 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
+import com.ogong.pms.handler.CafeReservationHandler;
 import com.ogong.pms.handler.CalenderHandler;
 import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.LoginHandler;
@@ -31,9 +33,8 @@ public class App {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
 
-  List<Member> memberList = new LinkedList<>(); 
+  List<Member> memberList = new LinkedList<>();
   MemberHandler memberHandler = new MemberHandler(memberList);
-
   LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
 
   List<Manager> managerList = new ArrayList<>();
@@ -47,7 +48,8 @@ public class App {
 
   List<Cafe> cafeList = new ArrayList<>();
   List<CafeReview> cafeReview = new ArrayList<>();
-  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler);
+  List<CafeReservation> reserList = new ArrayList<>();
+  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler, reserList);
 
   List<ToDo> toDoList = new ArrayList<>();
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
@@ -57,6 +59,8 @@ public class App {
 
   List<Calender> calenderList = new ArrayList<>();
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
+
+  CafeReservationHandler cafeRservationHandler = new CafeReservationHandler(reserList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -111,7 +115,7 @@ public class App {
 
 
     //---------------------------------------------------
-    MenuGroup loginMenu = new MenuGroup("로그인" );
+    MenuGroup loginMenu = new MenuGroup("로그인");
     mainMenuGroup.add(loginMenu);
     loginMenu.add(new Menu("개인") {
       @Override
@@ -162,6 +166,11 @@ public class App {
     //---------------------------------------------------
     MenuGroup memberMenu = new MenuGroup("마이페이지");
     mainMenuGroup.add(memberMenu);
+    memberMenu.add(new Menu("회원 가입 목록 보기") {
+      @Override
+      public void execute() {
+        memberHandler.list(); 
+      }});
     memberMenu.add(new Menu("내 가입 정보보기") {
       @Override
       public void execute() {
@@ -171,16 +180,6 @@ public class App {
       @Override
       public void execute() {
         memberHandler.update(); 
-      }});
-    memberMenu.add(new Menu("문의사항 목록") {
-      @Override
-      public void execute() {
-        askBoardHandler.list(); 
-      }});
-    memberMenu.add(new Menu("문의사항 상세보기") {
-      @Override
-      public void execute() {
-        askBoardHandler.detail(); 
       }});
     memberMenu.add(new Menu("회원 탈퇴하기") {
       @Override
@@ -208,12 +207,12 @@ public class App {
       public void execute() {
         newStudyHandler.detail(); 
       }});
-    studyMenu.add(new Menu("내 스터디 변경하기/조장") {
+    studyMenu.add(new Menu("내 스터디 변경하기/마이페이지 권한") {
       @Override
       public void execute() {
         newStudyHandler.update(); 
       }});
-    studyMenu.add(new Menu("내 스터디 삭제하기//(보류)") {
+    studyMenu.add(new Menu("내 스터디 삭제하기//마이페이지 권한") {
       @Override
       public void execute() {
         newStudyHandler.delete(); 
@@ -224,6 +223,17 @@ public class App {
     //---------------------------------------------------
     MenuGroup myStudyMenu = new MenuGroup("내 스터디");
     mainMenuGroup.add(myStudyMenu);
+    MenuGroup caMenu = new MenuGroup("캘린더");
+    myStudyMenu.add(caMenu);
+    caMenu.add(new Menu("일정 등록") {
+      @Override
+      public void execute() {
+        calenderHandler.add(); 
+      }});
+    //---------------------------------------------------
+
+    // 내스터디메뉴의 하위 메뉴 시작
+    //---------------------------------------------------
     MenuGroup calenderMenu = new MenuGroup("캘린더");
     myStudyMenu.add(calenderMenu);
     calenderMenu.add(new Menu("일정 등록") {
@@ -252,8 +262,11 @@ public class App {
         calenderHandler.delete(); 
       }});
     //---------------------------------------------------
+
+
+    //---------------------------------------------------
     MenuGroup todoMenu = new MenuGroup("To-Do List");
-    myStudyMenu.add(todoMenu);
+    mainMenuGroup.add(todoMenu);
     todoMenu.add(new Menu("To-Do List 등록") {
       @Override
       public void execute() {
@@ -280,8 +293,11 @@ public class App {
         toDoHandler.delete(); 
       }});
     //---------------------------------------------------
+
+
+    //---------------------------------------------------
     MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
-    myStudyMenu.add(freeBoardMenu);
+    mainMenuGroup.add(freeBoardMenu);
     freeBoardMenu.add(new Menu("자유게시판 게시글 작성") {
       @Override
       public void execute() {
@@ -317,38 +333,51 @@ public class App {
       @Override
       public void execute() {
         cafeHandler.add();
-      }});
+      }
+    });
     cafeMenu.add(new Menu("장소 목록") {
       @Override
       public void execute() {
         cafeHandler.list();
-      }});
+      }
+    });
     cafeMenu.add(new Menu("장소 검색") {
       @Override
       public void execute() {
         cafeHandler.find();
-      }});
+      }
+    });
     cafeMenu.add(new Menu("장소 상세보기") {
       @Override
       public void execute() {
         cafeHandler.detail();
-      }});
+      }
+    });
     cafeMenu.add(new Menu("장소 정보 변경하기") {
       @Override
       public void execute() {
         cafeHandler.update();
-      }});
+      }
+    });
     cafeMenu.add(new Menu("장소 삭제하기") {
       @Override
       public void execute() {
         cafeHandler.delete();
-      }});
-    cafeMenu.add(new Menu("장소 리뷰등록") {
+      }
+    });
+    //    cafeMenu.add(new Menu("장소 리뷰등록") {
+    //      @Override
+    //      public void execute() {
+    //        cafeHandler.addReview();
+    //        //loginHandler.addLoginPage();
+    //      }
+    //    });
+    cafeMenu.add(new Menu("장소 예약 내역 보기") {
       @Override
       public void execute() {
-        cafeHandler.addReview();
-        //loginHandler.addLoginPage();
-      }});
+        cafeHandler.listReservation();
+      }
+    });
     //---------------------------------------------------
 
 
@@ -374,10 +403,8 @@ public class App {
 
 
     //---------------------------------------------------
-    MenuGroup serviceMenu = new MenuGroup("고객센터/회원");
-    mainMenuGroup.add(serviceMenu);
-    MenuGroup noticeMenu = new MenuGroup("공지사항/회원");
-    serviceMenu.add(noticeMenu);
+    MenuGroup noticeMenu = new MenuGroup("고객센터/회원");
+    mainMenuGroup.add(noticeMenu);
     noticeMenu.add(new Menu("공지사항 목록") {
       @Override
       public void execute() {
@@ -389,8 +416,11 @@ public class App {
         noticeboardHandler.detail(); 
       }});
     //---------------------------------------------------
+
+
+    //---------------------------------------------------
     MenuGroup askMenu = new MenuGroup("문의사항/회원");
-    serviceMenu.add(askMenu);
+    mainMenuGroup.add(askMenu);
     askMenu.add(new Menu("문의사항 등록") {
       @Override
       public void execute() {
@@ -417,13 +447,6 @@ public class App {
         askBoardHandler.delete(); 
       }});
     //---------------------------------------------------
-    MenuGroup memberManagerMenu = new MenuGroup("관리자/회원관리");
-    mainMenuGroup.add(memberManagerMenu);
-    memberManagerMenu.add(new Menu("회원 목록 보기") {
-      @Override
-      public void execute() {
-        memberHandler.list();
-      }});
 
 
     return mainMenuGroup;
