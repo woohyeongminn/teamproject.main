@@ -36,6 +36,11 @@ public class MenuGroup extends Menu {
     this.disablePrevMenu = disablePrevMenu;
   }
 
+  public MenuGroup(String title, int no) {
+    super(title);
+    this.enableState = no;
+  }
+
   public void setPrevMenuTitle(String prevMenuTitle) {
     this.prevMenuTitle = prevMenuTitle;
   }

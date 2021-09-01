@@ -36,7 +36,7 @@ public class LoginHandler {
         loginUser = member;
         return;
       }
-      String input = Prompt.inputString("비밀번호를 잊어버렸나요?(y/N)");
+      String input = Prompt.inputString("비밀번호를 잊어버렸나요?(y/N) ");
       if (input.equalsIgnoreCase("N") || input.length() == 0) {
         System.out.println("비밀번호를 다시 입력하세요.");
         continue;
