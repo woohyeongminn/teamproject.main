@@ -31,9 +31,9 @@ public class App {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
 
-
-  List<Member> memberList = new LinkedList<>();
+  List<Member> memberList = new LinkedList<>(); 
   MemberHandler memberHandler = new MemberHandler(memberList);
+
   LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
 
   List<Manager> managerList = new ArrayList<>();
@@ -77,7 +77,7 @@ public class App {
     ////////////////////////////////////////////////////////////////
     System.out.println("\u0020\u002f\u0029\u002f\u0029\u0020");
     System.out.print("\u0028\u0020\u0027\u03c0\u0027\u0029");
-    System.out.println(" < 오늘의 공부");
+    System.out.println(" < 오늘의 공부 >");
     System.out.println("\u0028\u0020\u003e\u004f\u003c\u0029");
     ////////////////////////////////////////////////////////////////
     MenuGroup welcomeMenuGroup = new MenuGroup("발표를 시작하겠습니다");
@@ -97,7 +97,6 @@ public class App {
     //---------------------------------------------------
     MenuGroup joinMenu = new MenuGroup("회원가입");
     mainMenuGroup.add(joinMenu);
-    //    login(mainMenuGroup,joinMenu);
     joinMenu.add(new Menu("개인") {
       @Override
       public void execute() {
@@ -112,7 +111,7 @@ public class App {
 
 
     //---------------------------------------------------
-    MenuGroup loginMenu = new MenuGroup("로그인");
+    MenuGroup loginMenu = new MenuGroup("로그인" );
     mainMenuGroup.add(loginMenu);
     loginMenu.add(new Menu("개인") {
       @Override
@@ -163,11 +162,6 @@ public class App {
     //---------------------------------------------------
     MenuGroup memberMenu = new MenuGroup("마이페이지");
     mainMenuGroup.add(memberMenu);
-    memberMenu.add(new Menu("회원 가입 목록 보기") {
-      @Override
-      public void execute() {
-        memberHandler.list(); 
-      }});
     memberMenu.add(new Menu("내 가입 정보보기") {
       @Override
       public void execute() {
@@ -177,6 +171,16 @@ public class App {
       @Override
       public void execute() {
         memberHandler.update(); 
+      }});
+    memberMenu.add(new Menu("문의사항 목록") {
+      @Override
+      public void execute() {
+        askBoardHandler.list(); 
+      }});
+    memberMenu.add(new Menu("문의사항 상세보기") {
+      @Override
+      public void execute() {
+        askBoardHandler.detail(); 
       }});
     memberMenu.add(new Menu("회원 탈퇴하기") {
       @Override
@@ -204,12 +208,12 @@ public class App {
       public void execute() {
         newStudyHandler.detail(); 
       }});
-    studyMenu.add(new Menu("내 스터디 변경하기/마이페이지 권한") {
+    studyMenu.add(new Menu("내 스터디 변경하기/조장") {
       @Override
       public void execute() {
         newStudyHandler.update(); 
       }});
-    studyMenu.add(new Menu("내 스터디 삭제하기//마이페이지 권한") {
+    studyMenu.add(new Menu("내 스터디 삭제하기//(보류)") {
       @Override
       public void execute() {
         newStudyHandler.delete(); 
@@ -220,19 +224,8 @@ public class App {
     //---------------------------------------------------
     MenuGroup myStudyMenu = new MenuGroup("내 스터디");
     mainMenuGroup.add(myStudyMenu);
-    MenuGroup caMenu = new MenuGroup("캘린더");
-    myStudyMenu.add(caMenu);
-    caMenu.add(new Menu("일정 등록") {
-      @Override
-      public void execute() {
-        calenderHandler.add(); 
-      }});
-    //---------------------------------------------------
-
-    // 내스터디메뉴의 하위 메뉴 시작
-    //---------------------------------------------------
     MenuGroup calenderMenu = new MenuGroup("캘린더");
-    mainMenuGroup.add(calenderMenu);
+    myStudyMenu.add(calenderMenu);
     calenderMenu.add(new Menu("일정 등록") {
       @Override
       public void execute() {
@@ -259,11 +252,8 @@ public class App {
         calenderHandler.delete(); 
       }});
     //---------------------------------------------------
-
-
-    //---------------------------------------------------
     MenuGroup todoMenu = new MenuGroup("To-Do List");
-    mainMenuGroup.add(todoMenu);
+    myStudyMenu.add(todoMenu);
     todoMenu.add(new Menu("To-Do List 등록") {
       @Override
       public void execute() {
@@ -290,11 +280,8 @@ public class App {
         toDoHandler.delete(); 
       }});
     //---------------------------------------------------
-
-
-    //---------------------------------------------------
     MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
-    mainMenuGroup.add(freeBoardMenu);
+    myStudyMenu.add(freeBoardMenu);
     freeBoardMenu.add(new Menu("자유게시판 게시글 작성") {
       @Override
       public void execute() {
@@ -330,45 +317,38 @@ public class App {
       @Override
       public void execute() {
         cafeHandler.add();
-      }
-    });
+      }});
     cafeMenu.add(new Menu("장소 목록") {
       @Override
       public void execute() {
         cafeHandler.list();
-      }
-    });
+      }});
     cafeMenu.add(new Menu("장소 검색") {
       @Override
       public void execute() {
         cafeHandler.find();
-      }
-    });
+      }});
     cafeMenu.add(new Menu("장소 상세보기") {
       @Override
       public void execute() {
         cafeHandler.detail();
-      }
-    });
+      }});
     cafeMenu.add(new Menu("장소 정보 변경하기") {
       @Override
       public void execute() {
         cafeHandler.update();
-      }
-    });
+      }});
     cafeMenu.add(new Menu("장소 삭제하기") {
       @Override
       public void execute() {
         cafeHandler.delete();
-      }
-    });
+      }});
     cafeMenu.add(new Menu("장소 리뷰등록") {
       @Override
       public void execute() {
         cafeHandler.addReview();
         //loginHandler.addLoginPage();
-      }
-    });
+      }});
     //---------------------------------------------------
 
 
@@ -394,8 +374,10 @@ public class App {
 
 
     //---------------------------------------------------
-    MenuGroup noticeMenu = new MenuGroup("고객센터/회원");
-    mainMenuGroup.add(noticeMenu);
+    MenuGroup serviceMenu = new MenuGroup("고객센터/회원");
+    mainMenuGroup.add(serviceMenu);
+    MenuGroup noticeMenu = new MenuGroup("공지사항/회원");
+    serviceMenu.add(noticeMenu);
     noticeMenu.add(new Menu("공지사항 목록") {
       @Override
       public void execute() {
@@ -407,11 +389,8 @@ public class App {
         noticeboardHandler.detail(); 
       }});
     //---------------------------------------------------
-
-
-    //---------------------------------------------------
     MenuGroup askMenu = new MenuGroup("문의사항/회원");
-    mainMenuGroup.add(askMenu);
+    serviceMenu.add(askMenu);
     askMenu.add(new Menu("문의사항 등록") {
       @Override
       public void execute() {
@@ -438,6 +417,13 @@ public class App {
         askBoardHandler.delete(); 
       }});
     //---------------------------------------------------
+    MenuGroup memberManagerMenu = new MenuGroup("관리자/회원관리");
+    mainMenuGroup.add(memberManagerMenu);
+    memberManagerMenu.add(new Menu("회원 목록 보기") {
+      @Override
+      public void execute() {
+        memberHandler.list();
+      }});
 
 
     return mainMenuGroup;

@@ -15,10 +15,9 @@ public class NewStudyHandler {
   public void add() {
     System.out.println("[스터디 등록]");
     Study study = new Study();
-
     study.setStudyNo(Prompt.inputInt("번호? "));
     study.setStudyTitle(Prompt.inputString("스터디명? "));
-    study.setOwner(Prompt.inputString("작성자? "));
+    study.setOwner(Prompt.inputString("작성자:"));
     study.setSubject(Prompt.inputString("분야? "));
     study.setArea(Prompt.inputString("지역? "));
     study.setLocation(Prompt.inputString("장소? "));
@@ -31,10 +30,7 @@ public class NewStudyHandler {
 
   public void list() {
     System.out.println("[스터디 목록]");
-
-    Study[] list = studyList.toArray(new Study[0]);
-
-    for (Study study : list) {
+    for (Study study : studyList) {
       System.out.printf("%s, %s, %s, %d, %s, %s\n", 
           study.getArea(), 
           study.getLocation(), 
