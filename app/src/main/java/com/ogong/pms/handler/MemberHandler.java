@@ -35,10 +35,8 @@ public class MemberHandler {
     memberList.add(member);
   }
 
-
   public void list() {
     System.out.println("[개인회원 가입확인]");
-
 
     for (Member member : memberList) {
       System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",

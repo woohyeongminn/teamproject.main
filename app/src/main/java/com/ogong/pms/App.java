@@ -33,7 +33,6 @@ public class App {
   List<Study> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
 
-
   List<Member> memberList = new LinkedList<>();
   MemberHandler memberHandler = new MemberHandler(memberList);
   LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
@@ -56,7 +55,7 @@ public class App {
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
 
   List<FreeBoard> freeBoardList = new ArrayList<>();
-  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList);
+  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
 
   List<Calender> calenderList = new ArrayList<>();
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
@@ -82,7 +81,7 @@ public class App {
     ////////////////////////////////////////////////////////////////
     System.out.println("\u0020\u002f\u0029\u002f\u0029\u0020");
     System.out.print("\u0028\u0020\u0027\u03c0\u0027\u0029");
-    System.out.println(" < 오늘의 공부");
+    System.out.println(" < 오늘의 공부 >");
     System.out.println("\u0028\u0020\u003e\u004f\u003c\u0029");
     ////////////////////////////////////////////////////////////////
     MenuGroup welcomeMenuGroup = new MenuGroup("발표를 시작하겠습니다");
@@ -102,7 +101,6 @@ public class App {
     //---------------------------------------------------
     MenuGroup joinMenu = new MenuGroup("회원가입");
     mainMenuGroup.add(joinMenu);
-    //    login(mainMenuGroup,joinMenu);
     joinMenu.add(new Menu("개인") {
       @Override
       public void execute() {
@@ -237,7 +235,7 @@ public class App {
     // 내스터디메뉴의 하위 메뉴 시작
     //---------------------------------------------------
     MenuGroup calenderMenu = new MenuGroup("캘린더");
-    mainMenuGroup.add(calenderMenu);
+    myStudyMenu.add(calenderMenu);
     calenderMenu.add(new Menu("일정 등록") {
       @Override
       public void execute() {

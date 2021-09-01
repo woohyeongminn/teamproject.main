@@ -8,14 +8,25 @@ public class FreeBoard {
   private String freeBoardTitle;        //제목
   private String freeBoardContent;      //내용 
   private String freeBoardAtcFile;      //첨부파일
-  private String freeBoardWriter;       //작성자
+  // 0831 eun 수정
+  private Member freeBoardWriter;       //작성자
   private int freeBoardViewcount;    //조회수
   private Date freeBoardRegisteredDate; //작성일
 
 
 
+  @Override
+  public String toString() {
+    return "FreeBoard [freeBoardNo=" + freeBoardNo + ", freeBoardTitle=" + freeBoardTitle
+        + ", freeBoardContent=" + freeBoardContent + ", freeBoardAtcFile=" + freeBoardAtcFile
+        + ", freeBoardWriter=" + freeBoardWriter + ", freeBoardViewcount=" + freeBoardViewcount
+        + ", freeBoardRegisteredDate=" + freeBoardRegisteredDate + "]";
+  }
   public int getFreeBoardNo() {
-    return freeBoardNo++;
+    return freeBoardNo + 1;
+    //return freeBoardNo++;
+    // ++ 로 하니까 다른 메뉴 한번씩 누를때마다 0에서 올라감...
+    // 글 등록(add) 할때만 ++되도록 바꿔야할듯
   }
   public void setFreeBoardNo(int freeBoardNo) {
     this.freeBoardNo = freeBoardNo;
@@ -44,10 +55,10 @@ public class FreeBoard {
 
 
 
-  public String getFreeBoardWriter() {
+  public Member getFreeBoardWriter() {
     return freeBoardWriter;
   }
-  public void setFreeBoardWriter(String freeBoardWriter) {
+  public void setFreeBoardWriter(Member freeBoardWriter) {
     this.freeBoardWriter = freeBoardWriter;
   }
 
