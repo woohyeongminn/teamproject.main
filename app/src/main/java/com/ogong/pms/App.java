@@ -7,6 +7,7 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
@@ -17,6 +18,7 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
+import com.ogong.pms.handler.CafeReservationHandler;
 import com.ogong.pms.handler.CalenderHandler;
 import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.LoginHandler;
@@ -47,7 +49,8 @@ public class App {
 
   List<Cafe> cafeList = new ArrayList<>();
   List<CafeReview> cafeReview = new ArrayList<>();
-  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler);
+  List<CafeReservation> reserList = new ArrayList<>();
+  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler, reserList);
 
   List<ToDo> toDoList = new ArrayList<>();
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
@@ -57,6 +60,8 @@ public class App {
 
   List<Calender> calenderList = new ArrayList<>();
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
+
+  CafeReservationHandler cafeRservationHandler = new CafeReservationHandler(reserList);
 
   public static void main(String[] args) {
     App app = new App(); 
@@ -362,11 +367,17 @@ public class App {
         cafeHandler.delete();
       }
     });
-    cafeMenu.add(new Menu("장소 리뷰등록") {
+    //    cafeMenu.add(new Menu("장소 리뷰등록") {
+    //      @Override
+    //      public void execute() {
+    //        cafeHandler.addReview();
+    //        //loginHandler.addLoginPage();
+    //      }
+    //    });
+    cafeMenu.add(new Menu("장소 예약 내역 보기") {
       @Override
       public void execute() {
-        cafeHandler.addReview();
-        //loginHandler.addLoginPage();
+        cafeHandler.listReservation();
       }
     });
     //---------------------------------------------------
