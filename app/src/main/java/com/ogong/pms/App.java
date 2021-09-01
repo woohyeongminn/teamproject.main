@@ -53,7 +53,7 @@ public class App {
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
 
   List<FreeBoard> freeBoardList = new ArrayList<>();
-  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList);
+  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
 
   List<Calender> calenderList = new ArrayList<>();
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
