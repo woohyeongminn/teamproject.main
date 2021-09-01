@@ -13,8 +13,10 @@ public class MemberHandler {
     this.memberList = memberList;
   }
 
+  // 개인
   public void add() {
-    System.out.println("[개인 회원가입]");
+    System.out.println();
+    System.out.println("▶ 회원가입");
 
     Member member = new Member();
 
@@ -35,7 +37,9 @@ public class MemberHandler {
     memberList.add(member);
   }
 
+  // 관리자
   public void list() {
+    System.out.println();
     System.out.println("[개인회원 가입확인]");
 
     for (Member member : memberList) {
@@ -47,32 +51,35 @@ public class MemberHandler {
   }
 
   public void detail() {
-    System.out.println("[개인회원 상세보기]");
-    String inputEmail = Prompt.inputString("이메일? ");
+    System.out.println();
+    System.out.println("▶ 내 프로필");
 
-    Member member = findByEmail(inputEmail);
+    //    String inputEmail = Prompt.inputString("이메일 입력하세요 ");
+    //    Member member = findByEmail(inputEmail);
+    //    if (member == null) {
+    //      System.out.println("해당 이메일의 회원이 없습니다.");
+    //      return;
+    //    }
 
-    if (member == null) {
-      System.out.println("해당 이메일의 회원이 없습니다.");
-      return;
-    }
+    Member member = LoginHandler.getLoginUser();
 
     System.out.printf("닉네임: %s\n", member.getPerNickname());
     System.out.printf("이메일: %s\n", member.getPerEmail());
     System.out.printf("사진: %s\n", member.getPerPhoto());
-    System.out.printf("등록일: %s\n", member.getPerRegisteredDate());
+    System.out.printf("가입일: %s\n", member.getPerRegisteredDate());
+
+    String input = Prompt.inputString("수정하기(y/N) ");
+    if (input.equalsIgnoreCase("n") || input.length() == 0 ) {
+      return;
+    }
+    update();
   }
 
   public void update() {
-    System.out.println("[개인회원 수정하기]");
-    String inputEmail = Prompt.inputString("이메일? ");
+    System.out.println();
+    System.out.println("▶ 프로필 수정하기");
 
-    Member member = findByEmail(inputEmail);
-
-    if (member == null) {
-      System.out.println("해당 이메일의 회원이 없습니다.");
-      return;
-    }
+    Member member = LoginHandler.getLoginUser();
 
     String perNickName = Prompt.inputString("닉네임(" + member.getPerNickname()  + ")? ");
     String perEmail = Prompt.inputString("이메일(" + member.getPerEmail() + ")? ");
@@ -93,26 +100,32 @@ public class MemberHandler {
     System.out.println("개인회원 정보를 변경하였습니다.");
   }
 
+  // 개인
   public void delete() {
-    System.out.println("[개인회원 탈퇴]");
+    System.out.println();
+    System.out.println("▶ 회원 탈퇴");
     String inputEmail = Prompt.inputString("이메일? ");
 
-    Member member = findByEmail(inputEmail);
-
-    if (member == null) {
-      System.out.println("해당 이메일의 회원이 없습니다.");
-      return;
-    }
+    //    Member member = findByEmail(inputEmail);
+    //
+    //    if (member == null) {
+    //      System.out.println("해당 이메일의 회원이 없습니다.");
+    //      return;
+    //    }
+    Member member = LoginHandler.getLoginUser();
 
     String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("회원 탈퇴를 취소하였습니다.");
       return;
+    } else {
+      String inputPW = Prompt.inputString("비밀번호를 입력하세요. ");
+      if (member.getPerPassword().equals(inputPW)) {
+        memberList.remove(member);
+        System.out.println("회원이 탈퇴되었습니다.");
+      }
     }
 
-    memberList.remove(member);
-
-    System.out.println("회원이 탈퇴되었습니다.");
   }
 
   public void selectFindEmailPw() {

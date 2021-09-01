@@ -111,14 +111,12 @@ public class App {
   Menu createUserMenu(MenuGroup mainMenuGroup) {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
     mainMenuGroup.add(userMenuGroup);
-
-    MenuGroup joinMenu = new MenuGroup("회원가입"); 
-    userMenuGroup.add(joinMenu);
-    joinMenu.add(new Menu("회원가입") {
+    userMenuGroup.add(new Menu("회원가입") {
       @Override
       public void execute() {
         memberHandler.add();
       }});
+
 
     //-------------------------------------------------------------
     //로그인o, SNS로그인o, ID/PW 찾기o, 회원가입o, 로그아웃o
@@ -163,12 +161,12 @@ public class App {
     //--------------------------------------------------------------- 
 
     //--------------------------------------------------------------- 
-    MenuGroup mypageMenu = new MenuGroup("마이 페이지"); 
+    MenuGroup mypageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
     userMenuGroup.add(mypageMenu);
-    mypageMenu.add(new Menu("개인 정보", Menu.ENABLE_LOGIN) {
+    mypageMenu.add(new Menu("개인 정보") {
       @Override
       public void execute() {
-        // TODO Auto-generated method stub
+        memberHandler.detail();
       }
     });
 
