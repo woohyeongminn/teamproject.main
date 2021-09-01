@@ -111,7 +111,7 @@ public class App {
   Menu createUserMenu(MenuGroup mainMenuGroup) {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
     mainMenuGroup.add(userMenuGroup);
-    userMenuGroup.add(new Menu("회원가입") {
+    userMenuGroup.add(new Menu("회원가입", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
         memberHandler.add();
@@ -161,12 +161,21 @@ public class App {
     //--------------------------------------------------------------- 
 
     //--------------------------------------------------------------- 
+    // 리턴위치 지정(탈퇴시 메인으로 돌아가기)
     MenuGroup mypageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
     userMenuGroup.add(mypageMenu);
     mypageMenu.add(new Menu("개인 정보") {
       @Override
       public void execute() {
         memberHandler.detail();
+        selectMyPage();
+        return;
+      }
+    });
+    mypageMenu.add(new Menu("예약 내역") {
+      @Override
+      public void execute() {
+        cafeHandler.listReservation();
       }
     });
 
@@ -175,7 +184,8 @@ public class App {
 
 
 
-    
+
+
     MenuGroup studyMenu = new MenuGroup("모든 스터디"); 
     userMenuGroup.add(studyMenu);
 
@@ -190,7 +200,7 @@ public class App {
     MenuGroup csMenu = new MenuGroup("고객 센터"); 
     userMenuGroup.add(csMenu);
     // 공지사항, 문의게시판    
-    
+
 
 
 
@@ -208,6 +218,22 @@ public class App {
   // 기업
   Menu createCeoMenu(MenuGroup mainMenuGroup) {
     return null;
+  }
+
+  private void selectMyPage() {
+    System.out.println();
+    System.out.println("1. 수정하기");
+    System.out.println("2. 문의 내역");
+    System.out.println("3. 탈퇴하기");
+    System.out.println("4. 뒤로가기");
+
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1: memberHandler.update(); break;
+      case 2: askBoardHandler.list(); break;
+      case 3: memberHandler.delete(); return;
+      default : return;
+    }
   }
 
 

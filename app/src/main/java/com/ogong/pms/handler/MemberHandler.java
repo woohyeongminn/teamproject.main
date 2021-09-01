@@ -68,11 +68,6 @@ public class MemberHandler {
     System.out.printf("사진: %s\n", member.getPerPhoto());
     System.out.printf("가입일: %s\n", member.getPerRegisteredDate());
 
-    String input = Prompt.inputString("수정하기(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0 ) {
-      return;
-    }
-    update();
   }
 
   public void update() {
@@ -104,14 +99,7 @@ public class MemberHandler {
   public void delete() {
     System.out.println();
     System.out.println("▶ 회원 탈퇴");
-    String inputEmail = Prompt.inputString("이메일? ");
 
-    //    Member member = findByEmail(inputEmail);
-    //
-    //    if (member == null) {
-    //      System.out.println("해당 이메일의 회원이 없습니다.");
-    //      return;
-    //    }
     Member member = LoginHandler.getLoginUser();
 
     String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
@@ -121,8 +109,15 @@ public class MemberHandler {
     } else {
       String inputPW = Prompt.inputString("비밀번호를 입력하세요. ");
       if (member.getPerPassword().equals(inputPW)) {
+        // memberList에서 현재 로그인된 객체를 삭제
         memberList.remove(member);
+        // loginUser 필드 자체를 빈 값으로 초기화(삭제)
+        // why? 
+        // remove만 하면 다시 로그인 되기 때문에 탈퇴가 아니다. 
+        // 새로운 멤버 객체가 로그인하면 다시 로그인유저에 값이 담긴다.
+        LoginHandler.loginUser = null;
         System.out.println("회원이 탈퇴되었습니다.");
+        return;
       }
     }
 
@@ -245,8 +240,6 @@ public class MemberHandler {
       System.out.println("등록된 회원이 아닙니다.");
     }
   }
-
-
 }
 
 
