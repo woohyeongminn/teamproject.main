@@ -2,7 +2,7 @@ package com.ogong.pms.domain;
 
 import java.util.Date;
 
-public class Study {
+public class NewStudy {
 
   public int studyNo;  // 스터디 번호
   public String studyTitle; // 스터디명

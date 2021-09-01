@@ -14,7 +14,7 @@ import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Manager;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
-import com.ogong.pms.domain.Study;
+import com.ogong.pms.domain.NewStudy;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
@@ -30,7 +30,7 @@ import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
 
 public class App {
-  List<Study> studyList = new LinkedList<>();
+  List<NewStudy> studyList = new LinkedList<>();
   NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
 
   List<Member> memberList = new LinkedList<>();

@@ -1,15 +1,15 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
-import com.ogong.pms.domain.Study;
+import com.ogong.pms.domain.NewStudy;
 import com.ogong.util.Prompt;
 
 public class NewStudyHandler {
 
   //------------------------------------------------------------------------------------------------
-  List<Study> studyList;
+  List<NewStudy> studyList;
 
-  public NewStudyHandler(List<Study> studyList) {
+  public NewStudyHandler(List<NewStudy> studyList) {
     this.studyList = studyList;
   }
   //------------------------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ public class NewStudyHandler {
   //------------------------------------------------------------------------------------------------
   public void add() {
     System.out.println("[스터디 등록]");
-    Study study = new Study();
+    NewStudy study = new NewStudy();
 
     study.setStudyNo(Prompt.inputInt("번호? "));
     study.setStudyTitle(Prompt.inputString("스터디명? "));
@@ -43,7 +43,7 @@ public class NewStudyHandler {
 
   public void list() {
     System.out.println("[스터디 목록]");
-    for (Study study : studyList) {
+    for (NewStudy study : studyList) {
       System.out.printf("%s, %s, %s, %s, %s, %s, %d, %s, %s\n",
 
           // 0831 eun 추가함
@@ -70,7 +70,7 @@ public class NewStudyHandler {
 
     String inputTitle = Prompt.inputString("제목? ");
 
-    Study study = findByTitle(inputTitle);
+    NewStudy study = findByTitle(inputTitle);
 
     if (study == null) {
       System.out.println("해당 제목의 스터디가 없습니다.");
@@ -97,7 +97,7 @@ public class NewStudyHandler {
 
     String inputTitle = Prompt.inputString("제목? ");
 
-    Study study = findByTitle(inputTitle);
+    NewStudy study = findByTitle(inputTitle);
 
     if (study == null) {
       System.out.println("해당 제목의 스터디가 없습니다.");
@@ -139,7 +139,7 @@ public class NewStudyHandler {
 
     String inputTitle = Prompt.inputString("제목? ");
 
-    Study study = findByTitle(inputTitle);
+    NewStudy study = findByTitle(inputTitle);
 
     if (study == null) {
       System.out.println("해당 제목의 스터디가 없습니다.");
@@ -170,8 +170,8 @@ public class NewStudyHandler {
   //------------------------------------------------------------------------------------------------
   // 0831 eun 수정함
   // 제목으로 찾기
-  private Study findByTitle (String title) {
-    for (Study study : studyList) {
+  private NewStudy findByTitle (String title) {
+    for (NewStudy study : studyList) {
       if (study.getStudyTitle().equalsIgnoreCase(title)) {
         return study;
       }
@@ -180,8 +180,8 @@ public class NewStudyHandler {
   }
 
   // 소개글로 찾기
-  private Study findByIntro (String intro) {
-    for (Study study : studyList) {
+  private NewStudy findByIntro (String intro) {
+    for (NewStudy study : studyList) {
       if (study.getIntroduction().equalsIgnoreCase(intro)) {
         return study;
       }
