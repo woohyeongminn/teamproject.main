@@ -13,8 +13,8 @@ import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Manager;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.NewStudy;
+import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
@@ -87,6 +87,14 @@ public class App {
     MenuGroup welcomeMenuGroup = new MenuGroup("발표를 시작하겠습니다");
     welcomeMenuGroup.setPrevMenuTitle("시작");
     return welcomeMenuGroup;
+  }
+
+  Menu user() {
+    MenuGroup mainMenuGroup = new MenuGroup("발표를 시작하겠습니다");
+    mainMenuGroup.setPrevMenuTitle("시작");
+
+
+    return mainMenuGroup;
   }
 
 
