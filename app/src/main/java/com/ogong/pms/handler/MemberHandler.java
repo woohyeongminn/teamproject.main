@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
@@ -11,6 +12,38 @@ public class MemberHandler {
 
   public MemberHandler(List<Member> memberList) {
     this.memberList = memberList;
+
+    Member testMember = new Member();
+    testMember.setPerNickname("초보초보쌩초보");
+    testMember.setPerEmail("naver");
+    testMember.setPerPassword("1111");
+    testMember.setPerPhoto("jpg");
+    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(testMember);
+
+    testMember = new Member();
+    testMember.setPerNickname("미술부장");
+    testMember.setPerEmail("gmail");
+    testMember.setPerPassword("2222");
+    testMember.setPerPhoto("jpg");
+    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+
+    memberList.add(testMember);
+    testMember = new Member();
+    testMember.setPerNickname("코딩부장");
+    testMember.setPerEmail("kakao");
+    testMember.setPerPassword("3333");
+    testMember.setPerPhoto("jpg");
+    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(testMember);
+
+    testMember = new Member();
+    testMember.setPerNickname("음악대장");
+    testMember.setPerEmail("naver");
+    testMember.setPerPassword("4444");
+    testMember.setPerPhoto("jpg");
+    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(testMember);
   }
 
   // 개인
@@ -61,13 +94,16 @@ public class MemberHandler {
     //      return;
     //    }
 
-    Member member = LoginHandler.getLoginUser();
+    try {
+      Member member = LoginHandler.getLoginUser();
 
-    System.out.printf("닉네임: %s\n", member.getPerNickname());
-    System.out.printf("이메일: %s\n", member.getPerEmail());
-    System.out.printf("사진: %s\n", member.getPerPhoto());
-    System.out.printf("가입일: %s\n", member.getPerRegisteredDate());
-
+      System.out.printf("닉네임: %s\n", member.getPerNickname());
+      System.out.printf("이메일: %s\n", member.getPerEmail());
+      System.out.printf("사진: %s\n", member.getPerPhoto());
+      System.out.printf("가입일: %s\n", member.getPerRegisteredDate());
+    } catch (NullPointerException e) {
+      System.out.println("로그인 하세요.");
+    }
   }
 
   public void update() {
@@ -100,7 +136,15 @@ public class MemberHandler {
     System.out.println();
     System.out.println("▶ 회원 탈퇴");
 
-    Member member = LoginHandler.getLoginUser();
+    //    Member member = LoginHandler.getLoginUser();
+    System.out.println("-본인 확인-");
+    String inputEmail = Prompt.inputString("이메일 입력하세요 ");
+    Member member = findByEmail(inputEmail);
+    if (member == null) {
+      System.out.println("이메일을 다시 입력해주세요.");
+      return;
+    }
+
 
     String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
