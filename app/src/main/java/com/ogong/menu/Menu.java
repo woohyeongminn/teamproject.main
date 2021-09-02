@@ -8,6 +8,9 @@ public abstract class Menu {
   public static final int ENABLE_ALL = 0; // 모든 경우
   public static final int ENABLE_LOGOUT = 1; //로그아웃인 경우
   public static final int ENABLE_LOGIN = 2;  // 로그인인 경우
+  public static final int ENABLE_ADMINLOGOUT = 3; //로그아웃인 경우
+  public static final int ENABLE_ADMINLOGIN = 4;  // 관리자 로그인인 경우
+
 
   String title;
 
