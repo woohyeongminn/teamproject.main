@@ -1,6 +1,8 @@
 package com.ogong.pms.handler;
 
+import java.util.ArrayList;
 import java.util.List;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
@@ -23,6 +25,8 @@ public class StudyHandler {
     testStudy.setNumberOfPeple(5);
     testStudy.setFace("대면");
     testStudy.setIntroduction("취업 뿌셔뿌셔");
+    testStudy.setMembers(new ArrayList<>());
+    testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
 
     testStudy = new Study();
@@ -34,6 +38,8 @@ public class StudyHandler {
     testStudy.setNumberOfPeple(6);
     testStudy.setFace("대면/비대면");
     testStudy.setIntroduction("공모전 아자");
+    testStudy.setMembers(new ArrayList<>());
+    testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
 
     testStudy = new Study();
@@ -45,6 +51,8 @@ public class StudyHandler {
     testStudy.setNumberOfPeple(3);
     testStudy.setFace("대면/비대면");
     testStudy.setIntroduction("시험 아자");
+    testStudy.setMembers(new ArrayList<>());
+    testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
 
     testStudy = new Study();
@@ -56,6 +64,8 @@ public class StudyHandler {
     testStudy.setNumberOfPeple(2);
     testStudy.setFace("비대면");
     testStudy.setIntroduction("지옥같은 SI 탈출");
+    testStudy.setMembers(new ArrayList<>());
+    testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
   }
   //------------------------------------------------------------------------------------------------
@@ -74,6 +84,9 @@ public class StudyHandler {
     study.setNumberOfPeple(Prompt.inputInt("인원수? "));
     study.setFace(Prompt.inputString("대면? "));
     study.setIntroduction(Prompt.inputString("소개글? "));
+    study.setMembers(new ArrayList<>());
+    study.setWatingMember(new ArrayList<>());
+
     System.out.println();
     String input = Prompt.inputString("등록하시겠습니까?(y/N)");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
@@ -122,8 +135,6 @@ public class StudyHandler {
   //------------------------------------------------------------------------------------------------
 
 
-
-
   //------------------------------------------------------------------------------------------------
   public void detail() {
     System.out.println("[스터디 상세보기]");
@@ -145,15 +156,88 @@ public class StudyHandler {
     System.out.printf("대면: %s\n", study.getFace());
     System.out.printf("소개글: %s\n", study.getIntroduction());
 
+    System.out.println();
     System.out.println("1. 참여 신청하기");
-    System.out.println("2. 뒤로가기");
+    System.out.println("2. 구성원보기");
+    System.out.println("3. 뒤로가기");
     int selectNo = Prompt.inputInt("선택 ");
     switch (selectNo) {
-      case 1 : System.out.println("참여 신청하기"); break;
+      case 1 : joinStudy(study); break;
+      case 2 : listMember(study); break;
       default : return;
     }
   }
   //------------------------------------------------------------------------------------------------
+
+
+  //------------------------------------------------------------------------------------------------
+  public void listMember(Study study) {
+    System.out.println();
+    System.out.println("[구성원 보기]");
+    Member member = LoginHandler.getLoginUser();
+
+    if (member == null ) {
+      System.out.println("로그인 한 회원만 조회 가능합니다.");
+      return;
+    } else if (member != null && !study.getOwner().getPerEmail().equals(member.getPerEmail())) {
+      System.out.println("조장만 조회 가능합니다.");
+      return;
+    }
+
+    System.out.println("▼▼스터디 구성원▼▼");
+    System.out.println(study.getMemberNames());
+
+    System.out.println();
+    System.out.println("▼▼승인 대기중▼▼");
+    System.out.println(study.getWatingMemberNames());
+
+    List<Member> waitingMembers = study.getWatingMember();
+
+    System.out.println();
+    if (!study.getWatingMemberNames().equals("")) {
+      String input = Prompt.inputString("대기중인 회원 중 승인할 닉네임을 입력하세요 : ");
+      Member m = new Member();
+
+      for (Member watingMember : waitingMembers) {        
+        if (watingMember.getPerNickname().equals(input)) {
+          study.getMembers().add(watingMember);
+          System.out.printf("%s님이 구성원으로 승인되었습니다.", watingMember.getPerNickname());
+          m = watingMember;
+        }
+      }
+      study.getWatingMember().remove(m);
+    }
+  }
+  //------------------------------------------------------------------------------------------------
+
+
+
+  //------------------------------------------------------------------------------------------------
+  public void joinStudy(Study study) {
+    System.out.println();
+    System.out.println("[스터디 신청]");
+    Member member = LoginHandler.getLoginUser();
+
+    if (member == null) {
+      System.out.println("로그인 한 회원만 신청 가능합니다.");
+      return;
+    }
+
+    if(study.getOwner().getPerNickname().equals(member.getPerNickname())) {
+      System.out.println("참여중인 조장은 신청할 수 없습니다.");
+      return;
+    } 
+
+    String input = Prompt.inputString("스터디에 참여하시겠습니까?(y/N) ");
+    if (input.equalsIgnoreCase("n")) {
+      return;
+    }
+    study.getWatingMember().add(member);
+    System.out.println();
+    System.out.println("참여신청이 완료 되었습니다.\n승인이 완료될때까지 기다려주세요.");
+  }
+  //------------------------------------------------------------------------------------------------
+
 
 
   //------------------------------------------------------------------------------------------------
