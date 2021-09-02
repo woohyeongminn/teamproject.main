@@ -73,8 +73,6 @@ public class CeoMemberHandler {
     String inputceoEmail = Prompt.inputString("이메일? ");
     CeoMember ceoMember = findByEmail(inputceoEmail);
 
-
-
     if (ceoMember == null) {
       System.out.println("해당 이메일의 기업회원이 없습니다.");
       return;

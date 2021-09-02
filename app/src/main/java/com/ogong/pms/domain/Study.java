@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Study {
 
-  private int studyNo;           // 스터디 번호
-  private String studyTitle;     // 스터디명
-  private Member owner;          // 작성자(조장)
-  private String subject;        // 분야
-  private String area;           // 지역
-  private int numberOfPeple;     // 인원수
-  private String face;           // 대면/비대면
-  private String introduction;   // 소개글
-  private Date registeredDate;   // 스터디 가입일
-  private List<Member> members;
-  private List<Member> watingMember;
+  private int studyNo;              // 스터디 번호
+  private String studyTitle;        // 스터디명
+  private Member owner;             // 작성자(조장)
+  private String subject;           // 분야
+  private String area;              // 지역
+  private int numberOfPeple;         // 인원수
+  private String face;              // 대면/비대면
+  private String introduction;       // 소개글
+  private Date registeredDate;       // 스터디 가입일
+  private List<Member> members;     //  참여중인 구성원
+  private List<Member> watingMember; // 참여승인을 기다리는 회원
 
 
 
