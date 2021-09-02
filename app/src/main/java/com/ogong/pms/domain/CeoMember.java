@@ -4,8 +4,7 @@ import java.sql.Date;
 
 public class CeoMember {
 
-  private int ceoNo;
-
+  private int ceoNo; // 기업회원 넘버
   private String ceoEmail;    //기업회원 이메일
   private String ceoName;   //기업회원 이름
   private String ceoPassword;   //기업회원 패스워드

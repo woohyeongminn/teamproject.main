@@ -8,6 +8,7 @@ public class NoticeBoard {
   private String notiContent; // 공지게시판 내용
   private String notiWriter; // 공지게시판 작성자
   private Date notiRegisteredDate; // 공지게시판 등록일
+
   public int getNotiNo() {
     return notiNo;
   }

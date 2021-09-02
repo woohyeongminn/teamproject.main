@@ -160,7 +160,7 @@ public class MemberHandler {
 
   public void findPw() {
     System.out.println();
-    System.out.println("☞ 임시 비밀번호 발급");
+    System.out.println("▶ 임시 비밀번호 발급");
     while (true) {
       String inputEmail =  Prompt.inputString("이메일: ");
       Member member = findByEmail(inputEmail);
