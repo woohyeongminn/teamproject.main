@@ -24,7 +24,7 @@ public class MemberHandler {
     testMember = new Member();
     testMember.setPerNickname("미술부장");
     testMember.setPerEmail("gmail");
-    testMember.setPerPassword("2222");
+    testMember.setPerPassword("1111");
     testMember.setPerPhoto("jpg");
     testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -32,7 +32,7 @@ public class MemberHandler {
     testMember = new Member();
     testMember.setPerNickname("코딩부장");
     testMember.setPerEmail("kakao");
-    testMember.setPerPassword("3333");
+    testMember.setPerPassword("1111");
     testMember.setPerPhoto("jpg");
     testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(testMember);
@@ -40,7 +40,24 @@ public class MemberHandler {
     testMember = new Member();
     testMember.setPerNickname("음악대장");
     testMember.setPerEmail("naver");
-    testMember.setPerPassword("4444");
+    testMember.setPerPassword("1111");
+    testMember.setPerPhoto("jpg");
+    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(testMember);
+
+    memberList.add(testMember);
+    testMember = new Member();
+    testMember.setPerNickname("엄강사님");
+    testMember.setPerEmail("kakao");
+    testMember.setPerPassword("1111");
+    testMember.setPerPhoto("jpg");
+    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+    memberList.add(testMember);
+
+    testMember = new Member();
+    testMember.setPerNickname("매니저님");
+    testMember.setPerEmail("kakao");
+    testMember.setPerPassword("1111");
     testMember.setPerPhoto("jpg");
     testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(testMember);
