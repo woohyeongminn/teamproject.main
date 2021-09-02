@@ -48,7 +48,7 @@ public class App {
   ManagerHandler managerHandler = new ManagerHandler(managerList);
   NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerList, managerHandler);
   AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
-  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler, reserList);
+  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, reserList);
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
   FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
@@ -203,9 +203,53 @@ public class App {
     userMenuGroup.add(myStudyMenu);
     // 캘린더, 투두, 자유 게시판, 구성원, 화상채팅
 
+
+
+
+
+    //-------------------------------------------------------------- 
+    // 리뷰, 예약 
     MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
     userMenuGroup.add(cafeMenu);
-    // 리뷰, 예약 
+
+    cafeMenu.add(new Menu("장소 등록/기업 권한") {
+      @Override
+      public void execute() {
+        cafeHandler.add();
+      }});
+    cafeMenu.add(new Menu("장소 목록") {
+      @Override
+      public void execute() {
+        cafeHandler.list();
+      }});
+    cafeMenu.add(new Menu("장소 검색") {
+      @Override
+      public void execute() {
+        cafeHandler.find();
+      }});
+    cafeMenu.add(new Menu("장소 상세보기") {
+      @Override
+      public void execute() {
+        cafeHandler.detail();
+      }});
+    cafeMenu.add(new Menu("장소 정보 변경하기") {
+      @Override
+      public void execute() {
+        cafeHandler.update();
+      }});
+    cafeMenu.add(new Menu("장소 삭제하기") {
+      @Override
+      public void execute() {
+        cafeHandler.delete();
+      }});
+    cafeMenu.add(new Menu("장소 예약 내역 보기") {
+      @Override
+      public void execute() {
+        cafeHandler.listReservation();
+      }});
+    //-------------------------------------------------------------- 
+
+
 
     MenuGroup csMenu = new MenuGroup("고객 센터"); 
     userMenuGroup.add(csMenu);
