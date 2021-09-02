@@ -150,9 +150,11 @@ public class App {
     //--------------------------------------------------------------- 
 
     //-------------------------------------------------------------- 
-    // 리턴위치 지정(탈퇴시 메인으로 돌아가기)
     MenuGroup mypageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
     userMenuGroup.add(mypageMenu);
+    // 리턴위치 지정(탈퇴시 메인으로 돌아가기)
+    // 마이페이지 - 개인정보 - (수정o 탈퇴o 문의내역x) 
+    // 마이페이지 - 예약내역 - (내역보기x 취소하기x 후기보기x) 
     mypageMenu.add(new Menu("개인 정보") {
       @Override
       public void execute() {
@@ -165,10 +167,12 @@ public class App {
       public void execute() {
         cafeHandler.listReservation();
       }});
-    //-------------------------------------------------------------- 
+    //--------------------------------------------------------------
 
+    //-------------------------------------------------------------- 
     MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
     userMenuGroup.add(allStudyMenu);
+    // 등록o 목록보기o 상세보기△(참여x) 검색x 필터x 
 
     allStudyMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
       @Override
@@ -188,12 +192,6 @@ public class App {
       public void execute() {
         studyHandler.detail();
       }});
-
-
-
-
-
-
 
 
 
