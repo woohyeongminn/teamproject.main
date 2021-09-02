@@ -99,8 +99,6 @@ public class App {
   // 관리자
   Menu createAdminMenu() {
     MenuGroup adminMenuGroup = new MenuGroup("관리자");
-    adminMenuGroup.add(adminMenuGroup);
-
     //-------------------------------------------------------------
     //로그인o, 로그아웃o
 
