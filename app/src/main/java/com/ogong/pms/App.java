@@ -13,8 +13,8 @@ import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Manager;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.NewStudy;
 import com.ogong.pms.domain.NoticeBoard;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
@@ -24,42 +24,34 @@ import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.pms.handler.ManagerHandler;
 import com.ogong.pms.handler.MemberHandler;
-import com.ogong.pms.handler.NewStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
+import com.ogong.pms.handler.StudyHandler;
 import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
 
 public class App {
-  List<NewStudy> studyList = new LinkedList<>();
-  NewStudyHandler newStudyHandler = new NewStudyHandler(studyList);
-
+  List<Study> studyList = new LinkedList<>();
   List<Member> memberList = new LinkedList<>();
-  MemberHandler memberHandler = new MemberHandler(memberList);
-  LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
-
   List<Manager> managerList = new ArrayList<>();
-  ManagerHandler managerHandler = new ManagerHandler(managerList);
-
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
-  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerList, managerHandler);
-
   List<AskBoard> askBoardList = new ArrayList<>();
-  AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
-
   List<Cafe> cafeList = new ArrayList<>();
   List<CafeReview> cafeReview = new ArrayList<>();
   List<CafeReservation> reserList = new ArrayList<>();
-  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler, reserList);
-
   List<ToDo> toDoList = new ArrayList<>();
-  ToDoHandler toDoHandler = new ToDoHandler(toDoList);
-
   List<FreeBoard> freeBoardList = new ArrayList<>();
-  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
-
   List<Calender> calenderList = new ArrayList<>();
-  CalenderHandler calenderHandler = new CalenderHandler(calenderList);
 
+  MemberHandler memberHandler = new MemberHandler(memberList);
+  StudyHandler studyHandler = new StudyHandler(studyList, memberHandler);
+  LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
+  ManagerHandler managerHandler = new ManagerHandler(managerList);
+  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerList, managerHandler);
+  AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
+  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, memberHandler, reserList);
+  ToDoHandler toDoHandler = new ToDoHandler(toDoList);
+  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
+  CalenderHandler calenderHandler = new CalenderHandler(calenderList);
   CafeReservationHandler cafeRservationHandler = new CafeReservationHandler(reserList);
 
   public static void main(String[] args) {
@@ -94,35 +86,32 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    createAdminMenu(mainMenuGroup);
-    createUserMenu(mainMenuGroup);
-    createCeoMenu(mainMenuGroup);
+    //    mainMenuGroup.add(createAdminMenu());
+    mainMenuGroup.add(createUserMenu());
+    //    mainMenuGroup.add(createCeoMenu());
 
     //---------------------------------------------------
     return mainMenuGroup;
   }
 
   // 관리자
-  Menu createAdminMenu(MenuGroup mainMenuGroup) {
+  Menu createAdminMenu() {
     return null;
   }
 
   // 회원
-  Menu createUserMenu(MenuGroup mainMenuGroup) {
+  Menu createUserMenu() {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
-    mainMenuGroup.add(userMenuGroup);
     userMenuGroup.add(new Menu("회원가입", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
         memberHandler.add();
       }});
 
-
     //-------------------------------------------------------------
     //로그인o, SNS로그인o, ID/PW 찾기o, 회원가입o, 로그아웃o
-    MenuGroup loginMenu = new MenuGroup("로그인"); 
+    MenuGroup loginMenu = new MenuGroup("로그인", Menu.ENABLE_LOGOUT); 
     userMenuGroup.add(loginMenu);
-
     loginMenu.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
@@ -153,14 +142,14 @@ public class App {
       public void execute() {
         memberHandler.add();
       }});
-    loginMenu.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
+    userMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
         loginHandler.logOut();
       }});
     //--------------------------------------------------------------- 
 
-    //--------------------------------------------------------------- 
+    //-------------------------------------------------------------- 
     // 리턴위치 지정(탈퇴시 메인으로 돌아가기)
     MenuGroup mypageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
     userMenuGroup.add(mypageMenu);
@@ -170,14 +159,35 @@ public class App {
         memberHandler.detail();
         selectMyPage();
         return;
-      }
-    });
+      }});
     mypageMenu.add(new Menu("예약 내역") {
       @Override
       public void execute() {
         cafeHandler.listReservation();
-      }
-    });
+      }});
+    //-------------------------------------------------------------- 
+
+    MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
+    userMenuGroup.add(allStudyMenu);
+
+    allStudyMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
+      @Override
+      public void execute() {
+        studyHandler.add();
+      }});
+
+    // 나중구현: 목록 안에서 상세 보기를 해야함 
+    allStudyMenu.add(new Menu("목록 보기") {
+      @Override
+      public void execute() {
+        studyHandler.list();
+      }});
+    // 나중구현: 상세 보기 안에서 참여 신청 해야함
+    allStudyMenu.add(new Menu("상세 보기") {
+      @Override
+      public void execute() {
+        studyHandler.detail();
+      }});
 
 
 
@@ -186,8 +196,8 @@ public class App {
 
 
 
-    MenuGroup studyMenu = new MenuGroup("모든 스터디"); 
-    userMenuGroup.add(studyMenu);
+
+
 
     MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
     userMenuGroup.add(myStudyMenu);
@@ -216,24 +226,28 @@ public class App {
   }
 
   // 기업
-  Menu createCeoMenu(MenuGroup mainMenuGroup) {
+  Menu createCeoMenu() {
     return null;
   }
 
   private void selectMyPage() {
-    System.out.println();
-    System.out.println("1. 수정하기");
-    System.out.println("2. 문의 내역");
-    System.out.println("3. 탈퇴하기");
-    System.out.println("4. 뒤로가기");
 
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1: memberHandler.update(); break;
-      case 2: askBoardHandler.list(); break;
-      case 3: memberHandler.delete(); return;
-      default : return;
+    if (LoginHandler.getLoginUser() != null) {
+      System.out.println();
+      System.out.println("1. 수정하기");
+      System.out.println("2. 문의 내역");
+      System.out.println("3. 탈퇴하기");
+      System.out.println("4. 뒤로가기");
+
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1: memberHandler.update(); break;
+        case 2: askBoardHandler.list(); break;
+        case 3: memberHandler.delete(); return;
+        default : return;
+      }
     }
+    return;
   }
 
 

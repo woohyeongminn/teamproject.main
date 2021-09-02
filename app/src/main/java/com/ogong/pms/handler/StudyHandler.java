@@ -1,34 +1,76 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
-import com.ogong.pms.domain.NewStudy;
+import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
-public class NewStudyHandler {
+public class StudyHandler {
 
   //------------------------------------------------------------------------------------------------
-  List<NewStudy> studyList;
+  List<Study> studyList;
+  MemberHandler memberHandler;
 
-  public NewStudyHandler(List<NewStudy> studyList) {
-    this.studyList = studyList;
+  public StudyHandler(List<Study> newStudyList, MemberHandler memberHandler) {
+    this.studyList = newStudyList;
+    this.memberHandler = memberHandler;
+
+    Study testStudy = new Study();
+    testStudy.setStudyNo(1);
+    testStudy.setStudyTitle("삼성 NCS 뿌셔뿌셔");
+    testStudy.setOwner(memberHandler.memberList.get(0));
+    testStudy.setSubject("취업");
+    testStudy.setArea("서울");
+    testStudy.setNumberOfPeple(5);
+    testStudy.setFace("대면");
+    testStudy.setIntroduction("취업 뿌셔뿌셔");
+    newStudyList.add(testStudy);
+
+    testStudy = new Study();
+    testStudy.setStudyNo(2);
+    testStudy.setStudyTitle("하반기 삼성 공모전");
+    testStudy.setOwner(memberHandler.memberList.get(1));
+    testStudy.setSubject("공모전");
+    testStudy.setArea("서울");
+    testStudy.setNumberOfPeple(6);
+    testStudy.setFace("대면/비대면");
+    testStudy.setIntroduction("공모전 아자");
+    newStudyList.add(testStudy);
+
+    testStudy = new Study();
+    testStudy.setStudyNo(3);
+    testStudy.setStudyTitle("중앙대 컴공 기말고사");
+    testStudy.setOwner(memberHandler.memberList.get(2));
+    testStudy.setSubject("기말고사");
+    testStudy.setArea("서울");
+    testStudy.setNumberOfPeple(3);
+    testStudy.setFace("대면/비대면");
+    testStudy.setIntroduction("시험 아자");
+    newStudyList.add(testStudy);
+
+    testStudy = new Study();
+    testStudy.setStudyNo(1);
+    testStudy.setStudyTitle("알고리즘 스터디");
+    testStudy.setOwner(memberHandler.memberList.get(3));
+    testStudy.setSubject("IT");
+    testStudy.setArea("서울");
+    testStudy.setNumberOfPeple(2);
+    testStudy.setFace("비대면");
+    testStudy.setIntroduction("지옥같은 SI 탈출");
+    newStudyList.add(testStudy);
   }
   //------------------------------------------------------------------------------------------------
 
-
-
-
   //------------------------------------------------------------------------------------------------
   public void add() {
+    System.out.println();
     System.out.println("[스터디 등록]");
-    NewStudy study = new NewStudy();
+    Study study = new Study();
 
     study.setStudyNo(Prompt.inputInt("번호? "));
     study.setStudyTitle(Prompt.inputString("스터디명? "));
-    // 0831 eun 추가함
     study.setOwner(LoginHandler.getLoginUser());
     study.setSubject(Prompt.inputString("분야? "));
     study.setArea(Prompt.inputString("지역? "));
-    study.setLocation(Prompt.inputString("장소? "));
     study.setNumberOfPeple(Prompt.inputInt("인원수? "));
     study.setFace(Prompt.inputString("대면? "));
     study.setIntroduction(Prompt.inputString("소개글? "));
@@ -42,22 +84,35 @@ public class NewStudyHandler {
   //------------------------------------------------------------------------------------------------
 
   public void list() {
+    System.out.println();
     System.out.println("[스터디 목록]");
-    for (NewStudy study : studyList) {
-      System.out.printf("%s, %s, %s, %s, %s, %s, %d, %s, %s\n",
 
-          // 0831 eun 추가함
+    Study newStudy = new Study();
+    printStudyList(newStudy);
+
+    System.out.println("----------------------");
+    System.out.println("1. 상세 보기");
+    System.out.println("2. 뒤로가기");
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1 : detail(); break;
+      case 2 : System.out.println("뒤로가기"); break;
+      default : return;
+
+    }
+  }
+  private void printStudyList(Study newStudy) {
+    System.out.printf("%d: ", newStudy.getStudyNo());
+    for (Study study : studyList) {
+      System.out.printf("%d, %s, %s, %s, %s, %s\n",
           study.getStudyNo(),
-          study.getStudyTitle(),
-          study.getOwner().getPerNickname(),
-          // --------------------------
-          study.getArea(), 
-          study.getLocation(), 
-          study.getSubject(), 
+          study.getSubject(),
           study.getNumberOfPeple(),
           study.getStudyTitle(),
+          study.getOwner().getPerNickname(),
           study.getFace());
     }
+
   }
   //------------------------------------------------------------------------------------------------
 
@@ -70,7 +125,7 @@ public class NewStudyHandler {
 
     String inputTitle = Prompt.inputString("제목? ");
 
-    NewStudy study = findByTitle(inputTitle);
+    Study study = findByTitle(inputTitle);
 
     if (study == null) {
       System.out.println("해당 제목의 스터디가 없습니다.");
@@ -81,14 +136,19 @@ public class NewStudyHandler {
     System.out.printf("조장: %s\n", study.getOwner().getPerNickname());
     System.out.printf("분야: %s\n", study.getSubject());
     System.out.printf("지역: %s\n", study.getArea());
-    System.out.printf("장소: %s\n", study.getLocation());
     System.out.printf("인원수: %d\n", study.getNumberOfPeple());
     System.out.printf("대면: %s\n", study.getFace());
     System.out.printf("소개글: %s\n", study.getIntroduction());
+
+    System.out.println("1. 참여 신청하기");
+    System.out.println("2. 뒤로가기");
+    int selectNo = Prompt.inputInt("선택 ");
+    switch (selectNo) {
+      case 1 : System.out.println("참여 신청하기"); break;
+      default : return;
+    }
   }
   //------------------------------------------------------------------------------------------------
-
-
 
 
   //------------------------------------------------------------------------------------------------
@@ -97,21 +157,19 @@ public class NewStudyHandler {
 
     String inputTitle = Prompt.inputString("제목? ");
 
-    NewStudy study = findByTitle(inputTitle);
+    Study study = findByTitle(inputTitle);
 
     if (study == null) {
       System.out.println("해당 제목의 스터디가 없습니다.");
       return;
     }
 
-    // 0831 eun 추가함
     if (study.getOwner().getPerNo() != LoginHandler.getLoginUser().getPerNo()) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
 
     String studyTitle = Prompt.inputString("스터디명(" + study.getStudyTitle()  + ")? ");
-    String location = Prompt.inputString("장소(" + study.getLocation() + ")? ");
     String face = Prompt.inputString("대면(" + study.getFace() + ")? ");
     String introduction = Prompt.inputString("소개글(" + study.getIntroduction() + ")? ");
 
@@ -122,7 +180,6 @@ public class NewStudyHandler {
     }
 
     study.setStudyTitle(studyTitle);
-    study.setLocation(location);
     study.setFace(face);
     study.setIntroduction(introduction);
 
@@ -131,22 +188,19 @@ public class NewStudyHandler {
   //------------------------------------------------------------------------------------------------
 
 
-
-
   //------------------------------------------------------------------------------------------------
   public void delete() {
     System.out.println("[스터디 삭제]");
 
     String inputTitle = Prompt.inputString("제목? ");
 
-    NewStudy study = findByTitle(inputTitle);
+    Study study = findByTitle(inputTitle);
 
     if (study == null) {
       System.out.println("해당 제목의 스터디가 없습니다.");
       return;
     }
 
-    // 0831 eun 추가함
     if (study.getOwner().getPerNo() != LoginHandler.getLoginUser().getPerNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
@@ -168,10 +222,9 @@ public class NewStudyHandler {
 
 
   //------------------------------------------------------------------------------------------------
-  // 0831 eun 수정함
   // 제목으로 찾기
-  private NewStudy findByTitle (String title) {
-    for (NewStudy study : studyList) {
+  private Study findByTitle (String title) {
+    for (Study study : studyList) {
       if (study.getStudyTitle().equalsIgnoreCase(title)) {
         return study;
       }
@@ -180,8 +233,8 @@ public class NewStudyHandler {
   }
 
   // 소개글로 찾기
-  private NewStudy findByIntro (String intro) {
-    for (NewStudy study : studyList) {
+  private Study findByIntro (String intro) {
+    for (Study study : studyList) {
       if (study.getIntroduction().equalsIgnoreCase(intro)) {
         return study;
       }
