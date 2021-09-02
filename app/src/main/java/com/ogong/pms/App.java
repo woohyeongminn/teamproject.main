@@ -5,17 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
+import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Manager;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
+import com.ogong.pms.handler.AdminHandler;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.CafeReservationHandler;
@@ -32,7 +33,6 @@ import com.ogong.util.Prompt;
 public class App {
   List<Study> studyList = new LinkedList<>();
   List<Member> memberList = new LinkedList<>();
-  List<Manager> managerList = new ArrayList<>();
   List<NoticeBoard> noticeBoardList = new ArrayList<>();
   List<AskBoard> askBoardList = new ArrayList<>();
   List<Cafe> cafeList = new ArrayList<>();
@@ -41,12 +41,14 @@ public class App {
   List<ToDo> toDoList = new ArrayList<>();
   List<FreeBoard> freeBoardList = new ArrayList<>();
   List<Calender> calenderList = new ArrayList<>();
+  List<Admin> adminList = new LinkedList<>();
 
+  AdminHandler adminHandler = new AdminHandler(adminList);
   MemberHandler memberHandler = new MemberHandler(memberList);
   StudyHandler studyHandler = new StudyHandler(studyList, memberHandler);
   LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
-  ManagerHandler managerHandler = new ManagerHandler(managerList);
-  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerList, managerHandler);
+  ManagerHandler managerHandler = new ManagerHandler(noticeBoardList, adminHandler);
+  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerHandler);
   AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
   CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, reserList);
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
@@ -86,7 +88,7 @@ public class App {
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
-    //    mainMenuGroup.add(createAdminMenu());
+    mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createUserMenu());
     //    mainMenuGroup.add(createCeoMenu());
 
@@ -96,7 +98,75 @@ public class App {
 
   // 관리자
   Menu createAdminMenu() {
-    return null;
+    MenuGroup adminMenuGroup = new MenuGroup("관리자");
+    adminMenuGroup.add(adminMenuGroup);
+
+    //-------------------------------------------------------------
+    //로그인o, 로그아웃o
+
+    adminMenuGroup.add(new Menu("로그인", Menu.ENABLE_ADMINLOGOUT) {
+      @Override
+      public void execute() {
+        adminHandler.addAdminLoginPage();
+      }});
+
+    // 제일 하단으로 내리기
+    adminMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_ADMINLOGIN) {
+      @Override
+      public void execute() {
+        adminHandler.logOut();
+      }});
+
+    //--------------------------------------------------------------- 
+    // 관리자 프로필o
+    MenuGroup adminpageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_ADMINLOGIN); 
+    adminMenuGroup.add(adminpageMenu);
+
+    adminpageMenu.add(new Menu("개인 정보") {
+      @Override
+      public void execute() {
+        adminHandler.detail();
+        adminHandler.selectAdminPage();
+        return;
+      }
+    });
+
+    //--------------------------------------------------------------- 
+    // 관리자 프로필
+    MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
+    adminMenuGroup.add(adminUserMenu);
+
+    adminUserMenu.add(new Menu("개인 회원 조회") {
+      @Override
+      public void execute() {
+        memberHandler.list();
+        selectUserModifyPage();
+        return;
+      }
+    });
+
+    adminUserMenu.add(new Menu("사장 회원 조회") {
+      @Override
+      public void execute() {
+        memberHandler.detail();
+        return;
+      }
+    });
+
+    //--------------------------------------------------------------- 
+    // 관리자 공지사항o
+    MenuGroup admincsMenu = new MenuGroup("공지사항", Menu.ENABLE_ADMINLOGIN); 
+    adminMenuGroup.add(admincsMenu);
+
+    admincsMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        managerHandler.add();
+        return;
+      }
+    });
+
+    return adminMenuGroup;
   }
 
   // 회원
@@ -294,6 +364,23 @@ public class App {
     return;
   }
 
+  // 들어가면 오류 뜸 권한이 없음 --------------
+  private void selectUserModifyPage() {
+    System.out.println();
+    System.out.println("1. 상세보기");
+    System.out.println("2. 수정하기");
+    System.out.println("3. 삭제하기");
+    System.out.println("4. 뒤로가기");
+
+    int selectAdminNo = Prompt.inputInt("선택> ");
+    switch (selectAdminNo) {
+      case 1: memberHandler.detail(); break;
+      case 2: memberHandler.update(); break;
+      case 3: memberHandler.delete(); break;
+      default : return;
+    }
+  }
+  // ---------------------------------------------
 
 
 

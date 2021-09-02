@@ -3,6 +3,7 @@ package com.ogong.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import com.ogong.pms.handler.AdminHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.util.Prompt;
 
@@ -143,6 +144,14 @@ public class MenuGroup extends Menu {
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN
           && LoginHandler.getLoginUser() != null) {
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_ADMINLOGOUT
+          && AdminHandler.getLoginAdmin() == null) {
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_ADMINLOGIN
+          && AdminHandler.getLoginAdmin() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
