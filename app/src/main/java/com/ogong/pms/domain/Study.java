@@ -26,71 +26,142 @@ public class Study {
         + face + ", introduction=" + introduction + ", registeredDate=" + registeredDate
         + ", members=" + members + ", watingMember=" + watingMember + "]";
   }
+
+
   public int getStudyNo() {
     return studyNo;
   }
+
+
   public void setStudyNo(int studyNo) {
     this.studyNo = studyNo;
   }
+
+
   public String getStudyTitle() {
     return studyTitle;
   }
+
+
   public void setStudyTitle(String studyTitle) {
     this.studyTitle = studyTitle;
   }
+
+
   public Member getOwner() {
     return owner;
   }
+
+
   public void setOwner(Member owner) {
     this.owner = owner;
   }
+
+
   public String getSubject() {
     return subject;
   }
+
+
   public void setSubject(String subject) {
     this.subject = subject;
   }
+
+
   public String getArea() {
     return area;
   }
+
+
   public void setArea(String area) {
     this.area = area;
   }
+
+
   public int getNumberOfPeple() {
     return numberOfPeple;
   }
+
+
   public void setNumberOfPeple(int numberOfPeple) {
     this.numberOfPeple = numberOfPeple;
   }
+
+
   public String getFace() {
     return face;
   }
+
+
   public void setFace(String face) {
     this.face = face;
   }
+
+
   public String getIntroduction() {
     return introduction;
   }
+
+
   public void setIntroduction(String introduction) {
     this.introduction = introduction;
   }
+
+
   public Date getRegisteredDate() {
     return registeredDate;
   }
+
+
   public void setRegisteredDate(Date registeredDate) {
     this.registeredDate = registeredDate;
   }
+
+
   public List<Member> getMembers() {
     return members;
   }
+
+
   public void setMembers(List<Member> members) {
     this.members = members;
   }
+
+
   public List<Member> getWatingMember() {
     return watingMember;
   }
+
+
   public void setWatingMember(List<Member> watingMember) {
     this.watingMember = watingMember;
   }
 
+  public String getMemberNames() {
+    if (this.members == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (Member member : this.members) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(member.getPerNickname());
+    }
+    return names.toString();
+  }
+
+  public String getWatingMemberNames() {
+    if (this.members == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (Member member : this.watingMember) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(member.getPerNickname());
+    }
+    return names.toString();
+  }
 }
