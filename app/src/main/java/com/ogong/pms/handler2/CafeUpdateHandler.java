@@ -2,14 +2,14 @@ package com.ogong.pms.handler2;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReservation;
+import com.ogong.pms.domain.CafeReview;
 import com.ogong.util.Prompt;
 
-public class CafeUpdateHandler {
+public class CafeUpdateHandler extends AbstractCafeHandler {
 
-  List<Cafe> cafeList;
-
-  public CafeUpdateHandler (List<Cafe> cafeList) {
-    this.cafeList = cafeList;
+  public CafeUpdateHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+    super (cafeList, reviewList, reserList);
   }
 
   public void update() {
@@ -54,14 +54,4 @@ public class CafeUpdateHandler {
     System.out.println("작업을 변경하였습니다.");
   }
 
-  private Cafe findByNo(int no) {
-    Cafe[] arr = cafeList.toArray(new Cafe[0]);
-
-    for (Cafe cafe : arr) {
-      if (cafe.getNo() == no) {
-        return cafe;
-      }
-    }
-    return null;
-  }
 }

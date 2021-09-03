@@ -8,17 +8,10 @@ import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class CafeDetailHandler {
-
-  List<Cafe> cafeList;
-  List<CafeReview> reviewList;
-  List<CafeReservation> reserList;
-  int reservationNo = 1; // 예약번호
+public class CafeDetailHandler extends AbstractCafeHandler {
 
   public CafeDetailHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
-    this.cafeList = cafeList;
-    this.reviewList = reviewList;
-    this.reserList = reserList;
+    super (cafeList, reviewList, reserList);
   }
 
   public void detail() {
@@ -65,17 +58,6 @@ public class CafeDetailHandler {
       case 1 : addReservation(cafe); break;
       default : return;
     }
-  }
-
-  private Cafe findByName(String name) {
-    Cafe[] arr = cafeList.toArray(new Cafe[0]);
-
-    for (Cafe cafe : arr) {
-      if (cafe.getName().equals(name)) {
-        return cafe;
-      }
-    }
-    return null;
   }
 
   public void addReservation(Cafe cafe) {

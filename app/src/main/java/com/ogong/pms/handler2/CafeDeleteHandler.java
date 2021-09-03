@@ -2,14 +2,14 @@ package com.ogong.pms.handler2;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReservation;
+import com.ogong.pms.domain.CafeReview;
 import com.ogong.util.Prompt;
 
-public class CafeDeleteHandler {
+public class CafeDeleteHandler extends AbstractCafeHandler {
 
-  List<Cafe> cafeList;
-
-  public CafeDeleteHandler (List<Cafe> cafeList) {
-    this.cafeList = cafeList;
+  public CafeDeleteHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+    super (cafeList, reviewList, reserList);
   }
 
   public void delete() {
@@ -33,14 +33,5 @@ public class CafeDeleteHandler {
     System.out.println("장소를 삭제하였습니다.");
   }
 
-  private Cafe findByNo(int no) {
-    Cafe[] arr = cafeList.toArray(new Cafe[0]);
 
-    for (Cafe cafe : arr) {
-      if (cafe.getNo() == no) {
-        return cafe;
-      }
-    }
-    return null;
-  }
 }

@@ -2,13 +2,14 @@ package com.ogong.pms.handler2;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReservation;
+import com.ogong.pms.domain.CafeReview;
 
-public class CafeListHandler {
+public class CafeListHandler extends AbstractCafeHandler {
 
-  List<Cafe> cafeList;
 
-  public CafeListHandler (List<Cafe> cafeList) {
-    this.cafeList = cafeList;
+  public CafeListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+    super (cafeList, reviewList, reserList);
   }
 
   public void list() {
