@@ -24,11 +24,11 @@ public class CommentHandler {
 
 
   public void add () {
-    System.out.println("[댓글 등록]");
+    System.out.println("▶ 댓글 등록");
 
     Comment comment = new Comment();
 
-    comment.setCommentText(Prompt.inputString("내용: "));
+    comment.setCommentText(Prompt.inputString("내용 : "));
 
   }
 

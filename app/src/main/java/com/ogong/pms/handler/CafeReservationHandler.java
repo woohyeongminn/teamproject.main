@@ -16,7 +16,7 @@ public class CafeReservationHandler {
   }
 
   public static void add(Cafe cafe) {
-    System.out.println("[예약하기]");
+    System.out.println("▶ 예약하기");
 
     Member member = LoginHandler.getLoginUser();
     if (member == null) {
@@ -26,7 +26,7 @@ public class CafeReservationHandler {
 
     CafeReservation reservation = new CafeReservation();
 
-    Date reservationDate = Prompt.inputDate("예약 날짜? ");
+    Date reservationDate = Prompt.inputDate("예약 날짜 : ");
     Date currentDate = new Date(System.currentTimeMillis());
 
     //    while (true) {
@@ -42,13 +42,13 @@ public class CafeReservationHandler {
     //      System.out.println("날짜를 다시 입력해주세요.\n");
     //    }
 
-    int startTime = Prompt.inputInt("시작시간? ");
-    int useTime = Prompt.inputInt("이용할 시간? ");
-    int useMemberNumber = Prompt.inputInt("사용할 인원? ");
+    int startTime = Prompt.inputInt("시작시간 : ");
+    int useTime = Prompt.inputInt("이용할 시간 : ");
+    int useMemberNumber = Prompt.inputInt("사용할 인원 : ");
 
-    String input = Prompt.inputString("정말 예약하시겠습니까?(y/n) ");
+    String input = Prompt.inputString("정말 예약하시겠습니까? (네 / 아니오) ");
 
-    if (input.equalsIgnoreCase("n")) {
+    if (input.equalsIgnoreCase("아니오")) {
       System.out.println("장소예약을 취소하였습니다.");
       return;
     }

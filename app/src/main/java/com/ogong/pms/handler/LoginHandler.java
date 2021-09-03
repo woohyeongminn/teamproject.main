@@ -23,14 +23,14 @@ public class LoginHandler {
 
   public void addLoginPage() {
     System.out.println();
-    String inputEmail = Prompt.inputString("이메일: ");
+    String inputEmail = Prompt.inputString("이메일 : ");
     String inputPassword = "";
     Member member = memberHandler.findByInputEmail(inputEmail);
     if (member == null) {
       System.out.println("등록된 회원이 아닙니다.");
     }
     while (member != null) {
-      inputPassword = Prompt.inputString("비밀번호: ");
+      inputPassword = Prompt.inputString("비밀번호 : ");
       if (member.getPerPassword().equals(inputPassword)) {
         member.setPerEmail(inputEmail);
         member.setPerPassword(inputPassword);
@@ -39,8 +39,8 @@ public class LoginHandler {
         MenuGroup.successLogin = true;
         return;
       }
-      String input = Prompt.inputString("비밀번호를 잊어버렸나요?(y/N) ");
-      if (input.equalsIgnoreCase("N") || input.length() == 0) {
+      String input = Prompt.inputString("비밀번호를 잊어버렸나요? (네 / 아니오) ");
+      if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
         System.out.println("비밀번호를 다시 입력하세요.");
         continue;
       } else {

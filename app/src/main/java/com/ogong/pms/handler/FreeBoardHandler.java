@@ -32,10 +32,10 @@ public class FreeBoardHandler {
     // 0831 eun 추가함
     int addCount = freeBoard.getFreeBoardNo();
 
-    freeBoard.setFreeBoardTitle(Prompt.inputString("제목? "));
+    freeBoard.setFreeBoardTitle(Prompt.inputString("제목 : "));
     freeBoard.setFreeBoardWriter(loginHandler.getLoginUser());
-    freeBoard.setFreeBoardContent(Prompt.inputString("내용? "));
-    freeBoard.setFreeBoardAtcFile(Prompt.inputString("첨부파일? "));
+    freeBoard.setFreeBoardContent(Prompt.inputString("내용 : "));
+    freeBoard.setFreeBoardAtcFile(Prompt.inputString("첨부파일 : "));
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
 
     addCount++;
@@ -58,7 +58,7 @@ public class FreeBoardHandler {
 
     for (FreeBoard freeBoard : list) {
       System.out.printf(
-          "%d, %s, %s, %s, %s, %s\n",
+          "(%d)\n %s\n %s\n %s\n %s\n %s\n",
           freeBoard.getFreeBoardNo(), 
           freeBoard.getFreeBoardTitle(),
           freeBoard.getFreeBoardContent(),
@@ -80,7 +80,8 @@ public class FreeBoardHandler {
     System.out.println("▶ 게시글 상세보기");
 
     // 0831 eun 수정함
-    String inputTitle = Prompt.inputString("제목? ");
+    String inputTitle = Prompt.inputString("제목 : ");
+    System.out.println();
 
     FreeBoard free = findByTitle(inputTitle);
 
@@ -89,14 +90,14 @@ public class FreeBoardHandler {
       return;
     }
 
-    System.out.printf("제목: %s\n", free.getFreeBoardTitle());
-    System.out.printf("내용: %s\n", free.getFreeBoardContent());
-    System.out.printf("첨부파일: %s\n", free.getFreeBoardAtcFile());
+    System.out.printf("제목 : %s\n", free.getFreeBoardTitle());
+    System.out.printf("내용 : %s\n", free.getFreeBoardContent());
+    System.out.printf("첨부파일 : %s\n", free.getFreeBoardAtcFile());
     // 0831 eun 추가함
-    System.out.printf("작성자: %s\n", free.getFreeBoardWriter().getPerNickname());
-    System.out.printf("등록일: %s\n", free.getFreeBoardRegisteredDate());
+    System.out.printf("작성자 : %s\n", free.getFreeBoardWriter().getPerNickname());
+    System.out.printf("등록일 : %s\n", free.getFreeBoardRegisteredDate());
     free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
-    System.out.printf("조회수: %d\n", free.getFreeBoardViewcount());
+    System.out.printf("조회수 : %d\n", free.getFreeBoardViewcount());
   }
   //------------------------------------------------------------------------------------------------
 
@@ -109,7 +110,8 @@ public class FreeBoardHandler {
     System.out.println("▶ 게시글 수정");
 
     // 0831 eun 수정함
-    String inputTitle = Prompt.inputString("제목? ");
+    String inputTitle = Prompt.inputString("제목 : ");
+    System.out.println();
 
     FreeBoard free = findByTitle(inputTitle);
 
@@ -124,12 +126,12 @@ public class FreeBoardHandler {
       return;
     }
 
-    String freeBoardTitle = Prompt.inputString("제목(" + free.getFreeBoardTitle()  + ")? ");
-    String freeBoardContent = Prompt.inputString("내용(" + free.getFreeBoardContent() + ")? ");
-    String freeBoardAtcFile = Prompt.inputString("첨부파일(" + free.getFreeBoardAtcFile() + ")? ");
+    String freeBoardTitle = Prompt.inputString("제목(" + free.getFreeBoardTitle()  + ") : ");
+    String freeBoardContent = Prompt.inputString("내용(" + free.getFreeBoardContent() + ") : ");
+    String freeBoardAtcFile = Prompt.inputString("첨부파일(" + free.getFreeBoardAtcFile() + ") : ");
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("게시글 변경이 취소되었습니다.");
       return;
     }
@@ -151,7 +153,8 @@ public class FreeBoardHandler {
     System.out.println("▶ 게시글 삭제");
 
     // 0831 eun 수정함
-    String inputTitle = Prompt.inputString("제목? ");
+    String inputTitle = Prompt.inputString("제목 : ");
+    System.out.println();
 
     FreeBoard free = findByTitle(inputTitle);
 
@@ -166,7 +169,7 @@ public class FreeBoardHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("게시글 삭제를 취소하였습니다.");
       return;

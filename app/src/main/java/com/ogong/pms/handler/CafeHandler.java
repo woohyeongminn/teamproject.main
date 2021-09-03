@@ -80,24 +80,25 @@ public class CafeHandler {
   }
 
   public void add () {
-    System.out.println("[장소 등록]");
+    System.out.println();
+    System.out.println("▶ 장소 등록");
+    System.out.println();
 
     Cafe cafe = new Cafe();
-
-    cafe.setNo(Prompt.inputInt("카페 번호? "));
-    //cafe.setCafeCeoEmail(Prompt.inputString("사장 아이디? "));
-    //cafe.setCafeceoLicenseNo(Prompt.inputString("사업자번호? "));
-    //cafe.setCafeCeoBossName(Prompt.inputString("대표자명? "));
-    cafe.setName(Prompt.inputString("상호명? "));
-    //cafe.setMainImg(Prompt.inputString("대표사진? "));
-    //cafe.setInfo(Prompt.inputString("소개글? "));
-    cafe.setLocation(Prompt.inputString("주소? "));
-    //cafe.setPhone(Prompt.inputString("전화번호? "));
-    //cafe.setOpenTime(Prompt.inputString("오픈시간? "));
-    //cafe.setCloseTime(Prompt.inputString("마감시간? "));
-    //cafe.setHoliday(Prompt.inputString("휴무일? "));
-    cafe.setBookable(Prompt.inputInt("예약가능인원? "));
-    //cafe.setTimePrice(Prompt.inputInt("시간당금액? "));
+    cafe.setNo(Prompt.inputInt("번호 : "));
+    //cafe.setCafeCeoEmail(Prompt.inputString("사장 아이디 : "));
+    //cafe.setCafeceoLicenseNo(Prompt.inputString("사업자번호 : "));
+    //cafe.setCafeCeoBossName(Prompt.inputString("대표자명 : "));
+    cafe.setName(Prompt.inputString("상호명 : "));
+    //cafe.setMainImg(Prompt.inputString("대표사진 : "));
+    //cafe.setInfo(Prompt.inputString("소개글 : "));
+    cafe.setLocation(Prompt.inputString("주소 : "));
+    //cafe.setPhone(Prompt.inputString("전화번호 : "));
+    //cafe.setOpenTime(Prompt.inputString("오픈시간 : "));
+    //cafe.setCloseTime(Prompt.inputString("마감시간 : "));
+    //cafe.setHoliday(Prompt.inputString("휴무일 : "));
+    cafe.setBookable(Prompt.inputInt("예약가능인원 : "));
+    //cafe.setTimePrice(Prompt.inputInt("시간당금액 : "));
 
     cafeList.add(cafe);
   }
@@ -105,7 +106,7 @@ public class CafeHandler {
   public void list() {
     System.out.println();
     System.out.println("▶ 장소 목록");
-
+    System.out.println();
     for(Cafe cafe : cafeList) {
       System.out.println();
       System.out.printf(" (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
@@ -119,10 +120,10 @@ public class CafeHandler {
     System.out.println("▶ 장소 검색");
 
     int count = 0;
-    String input = Prompt.inputString("지역? ");
+    String input = Prompt.inputString("지역 : ");
     for (Cafe cafe : cafeList) {
       if (cafe.getLocation().contains(input)) {
-        System.out.printf(" 번호: %s, 이름: %s, 주소: %s, 예약가능인원: %d\n"
+        System.out.printf(" 번호 : %s, 이름 : %s, 주소 : %s, 예약가능인원 : %d\n"
             , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         count++;
       }
@@ -135,14 +136,12 @@ public class CafeHandler {
   public void detail() {
     System.out.println();
     System.out.println("▶ 장소 상세보기");
-
-    Cafe cafe = findByName(Prompt.inputString("장소명? "));
-
+    Cafe cafe = findByName(Prompt.inputString("장소명 : "));
+    System.out.println();
     if (cafe == null) {
       System.out.println("해당 이름의 장소가 존재하지 않습니다.");
       return;
     }
-    System.out.println();
     System.out.printf("(%s)\n", cafe.getNo());
     System.out.printf(">> 상호명 : %s\n", cafe.getName());
     System.out.printf(">> 대표이미지 : %s\n", cafe.getMainImg());
@@ -195,26 +194,26 @@ public class CafeHandler {
     System.out.println();
     System.out.println("▶ 장소 정보 변경");
 
-    Cafe cafe = findByNo(Prompt.inputInt("장소 번호? "));
+    Cafe cafe = findByNo(Prompt.inputInt("장소 번호 : "));
 
     if (cafe == null) {
       System.out.println("해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
 
-    String name = Prompt.inputString(String.format("장소명(%s): ", cafe.getName()));
-    String mainImg = Prompt.inputString(String.format("대표이미지(%s):  ", cafe.getMainImg()));
-    String Info = Prompt.inputString(String.format("소개글(%s):  ", cafe.getInfo()));
-    String location = Prompt.inputString(String.format("주소(%s):  ", cafe.getLocation()));
-    String phone = Prompt.inputString(String.format("전화번호(%s):  ", cafe.getPhone()));
-    String openTime = Prompt.inputString(String.format("오픈시간(%s):  ", cafe.getOpenTime()));
-    String closeTime = Prompt.inputString(String.format("마감시간(%s):  ", cafe.getCloseTime()));
-    String holiday = Prompt.inputString(String.format("휴무일(%s):  ", cafe.getHoliday()));
-    int bookable = Prompt.inputInt(String.format("예약가능인원(%d):  ", cafe.getBookable()));
-    int timePrice = Prompt.inputInt(String.format("예약가능인원(%d):  ", cafe.getTimePrice()));
+    String name = Prompt.inputString(String.format("장소명(%s) : ", cafe.getName()));
+    String mainImg = Prompt.inputString(String.format("대표이미지(%s) : ", cafe.getMainImg()));
+    String Info = Prompt.inputString(String.format("소개글(%s) : ", cafe.getInfo()));
+    String location = Prompt.inputString(String.format("주소(%s) : ", cafe.getLocation()));
+    String phone = Prompt.inputString(String.format("전화번호(%s) : ", cafe.getPhone()));
+    String openTime = Prompt.inputString(String.format("오픈시간(%s) : ", cafe.getOpenTime()));
+    String closeTime = Prompt.inputString(String.format("마감시간(%s) : ", cafe.getCloseTime()));
+    String holiday = Prompt.inputString(String.format("휴무일(%s) : ", cafe.getHoliday()));
+    int bookable = Prompt.inputInt(String.format("예약가능인원(%d) : ", cafe.getBookable()));
+    int timePrice = Prompt.inputInt(String.format("예약가능인원(%d) : ", cafe.getTimePrice()));
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("작업 변경을 취소하였습니다.");
       return;
     }
@@ -237,14 +236,14 @@ public class CafeHandler {
   public void delete() {
     System.out.println();
     System.out.println("▶ 장소 삭제");
-    Cafe cafe = findByNo(Prompt.inputInt("장소 번호? "));
+    Cafe cafe = findByNo(Prompt.inputInt("장소 번호 : "));
 
     if (cafe == null) {
       System.out.println("해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("장소 삭제를 취소하였습니다.");
       return;
@@ -289,8 +288,8 @@ public class CafeHandler {
       Member member = LoginHandler.getLoginUser();
       Date registeredDate = new Date(System.currentTimeMillis());
 
-      String input = Prompt.inputString("정말 등록하시겠습니까?(y/N) ");
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
+      if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
         System.out.println("리뷰 등록을 취소하였습니다.");
         return;
       }
@@ -321,18 +320,18 @@ public class CafeHandler {
 
     CafeReservation reservation = new CafeReservation();
 
-    Date reservationDate = Prompt.inputDate("예약 날짜? ");
+    Date reservationDate = Prompt.inputDate("예약 날짜 : ");
     //Date currentDate = new Date(System.currentTimeMillis());
 
-    int startTime = Prompt.inputInt("시작시간?(0시~24시) ");
-    int useTime = Prompt.inputInt("이용할 시간? ");
-    int useMemberNumber = Prompt.inputInt("사용할 인원? ");
+    int startTime = Prompt.inputInt("시작시간(0시~24시) : ");
+    int useTime = Prompt.inputInt("이용할 시간 : ");
+    int useMemberNumber = Prompt.inputInt("사용할 인원 : ");
     int totalPrice = useTime * useMemberNumber * cafe.getTimePrice();
-    System.out.printf("==> 총금액: %d원\n" , totalPrice);
+    System.out.printf("총금액 : %d원\n" , totalPrice);
 
-    String input = Prompt.inputString("정말 예약하시겠습니까?(y/n) ");
+    String input = Prompt.inputString("정말 예약하시겠습니까? (네 / 아니오) ");
 
-    if (input.equalsIgnoreCase("n")) {
+    if (input.equalsIgnoreCase("아니오")) {
       System.out.println("장소예약을 취소하였습니다.");
       return;
     }
@@ -369,9 +368,9 @@ public class CafeHandler {
     int count = 0;
     for (CafeReservation cafeReser : reserList) {
       if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(LoginHandler.getLoginUser().getPerEmail())) {
-        System.out.printf(" 예약번호: %d, 예약날짜: %s, 예약장소: %s,"
-            + "\n 시작시간: %d시, 이용시간: %d시간, 사용인원: %d명, "
-            + "\n 결제금액: %d원, 리뷰작성여부: %s\n"
+        System.out.printf(" 예약번호 : %d, 예약날짜 : %s, 예약장소 : %s,"
+            + "\n 시작시간 : %d시, 이용시간 : %d시간, 사용인원 : %d명, "
+            + "\n 결제금액 : %d원, 리뷰작성여부 : %s\n"
             , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReser.getCafe().getName()
             , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseTime()
             , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
@@ -384,13 +383,13 @@ public class CafeHandler {
       return;
     }
 
-    if (Prompt.inputString("리뷰를 작성하시겠습니까?(y/n) ").equalsIgnoreCase("n")) {
+    if (Prompt.inputString("리뷰를 작성하시겠습니까? (네 / 아니오) ").equalsIgnoreCase("아니오")) {
       System.out.println("리뷰 작성을 취소합니다.");
       return;
     }
 
     System.out.println();
-    int input = Prompt.inputInt("리뷰 작성할 예약번호를 입력하세요 : ");
+    int input = Prompt.inputInt("리뷰 작성할 예약번호 : ");
     for (CafeReservation cafeReser : reserList) {
       if (input == cafeReser.getReservationNo() &&
           cafeReser.getMember().getPerEmail().equalsIgnoreCase(LoginHandler.getLoginUser().getPerEmail())) {

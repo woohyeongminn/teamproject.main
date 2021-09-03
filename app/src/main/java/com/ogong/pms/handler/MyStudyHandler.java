@@ -44,7 +44,7 @@ public class MyStudyHandler {
     System.out.println();
     System.out.println("▶ 스터디 상세보기");
 
-    String inputTitle = Prompt.inputString("제목? ");
+    String inputTitle = Prompt.inputString("제목 : ");
 
     Study study = findByTitle(inputTitle);
 
@@ -53,19 +53,19 @@ public class MyStudyHandler {
       return;
     }
 
-    System.out.printf("스터디명: %s\n", study.getStudyTitle());
-    System.out.printf("조장: %s\n", study.getOwner().getPerNickname());
-    System.out.printf("분야: %s\n", study.getSubject());
-    System.out.printf("지역: %s\n", study.getArea());
-    System.out.printf("인원수: %d\n", study.getNumberOfPeple());
-    System.out.printf("대면: %s\n", study.getFace());
-    System.out.printf("소개글: %s\n", study.getIntroduction());
+    System.out.printf("스터디명 : %s\n", study.getStudyTitle());
+    System.out.printf("조장 : %s\n", study.getOwner().getPerNickname());
+    System.out.printf("분야 : %s\n", study.getSubject());
+    System.out.printf("지역 : %s\n", study.getArea());
+    System.out.printf("인원수 : %d\n", study.getNumberOfPeple());
+    System.out.printf("대면 : %s\n", study.getFace());
+    System.out.printf("소개글 : %s\n", study.getIntroduction());
 
     System.out.println();
     System.out.println("1. 참여 신청하기");
     System.out.println("2. 구성원보기");
     System.out.println("3. 뒤로가기");
-    int selectNo = Prompt.inputInt("선택 ");
+    int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
       case 1 : studyHandler.joinStudy(study); break;
       case 2 : studyHandler.listMember(study); break;

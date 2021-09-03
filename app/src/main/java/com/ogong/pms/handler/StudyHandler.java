@@ -76,19 +76,19 @@ public class StudyHandler {
     System.out.println("▶ 스터디 등록");
     Study study = new Study();
 
-    study.setStudyNo(Prompt.inputInt("번호? "));
-    study.setStudyTitle(Prompt.inputString("스터디명? "));
+    study.setStudyNo(Prompt.inputInt("번호 : "));
+    study.setStudyTitle(Prompt.inputString("스터디명 : "));
     study.setOwner(LoginHandler.getLoginUser());
-    study.setSubject(Prompt.inputString("분야? "));
-    study.setArea(Prompt.inputString("지역? "));
-    study.setNumberOfPeple(Prompt.inputInt("인원수? "));
-    study.setFace(Prompt.inputString("대면? "));
-    study.setIntroduction(Prompt.inputString("소개글? "));
+    study.setSubject(Prompt.inputString("분야 : "));
+    study.setArea(Prompt.inputString("지역 : "));
+    study.setNumberOfPeple(Prompt.inputInt("인원수 : "));
+    study.setFace(Prompt.inputString("대면 : "));
+    study.setIntroduction(Prompt.inputString("소개글 : "));
     study.setMembers(new ArrayList<>());
     study.setWatingMember(new ArrayList<>());
 
     System.out.println();
-    String input = Prompt.inputString("등록하시겠습니까?(y/N)");
+    String input = Prompt.inputString("등록하시겠습니까? (네 / 아니오)");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("등록이 취소되었습니다.");
     }
@@ -140,7 +140,7 @@ public class StudyHandler {
     System.out.println();
     System.out.println("▶ 스터디 상세");
 
-    String inputTitle = Prompt.inputString("제목? ");
+    String inputTitle = Prompt.inputString("제목 : ");
 
     Study study = findByTitle(inputTitle);
 
@@ -149,20 +149,20 @@ public class StudyHandler {
       return;
     }
 
-    System.out.printf("스터디명: %s\n", study.getStudyTitle());
-    System.out.printf("조장: %s\n", study.getOwner().getPerNickname());
-    System.out.printf("분야: %s\n", study.getSubject());
-    System.out.printf("지역: %s\n", study.getArea());
-    System.out.printf("인원수: %d\n", study.getNumberOfPeple());
-    System.out.printf("대면: %s\n", study.getFace());
-    System.out.printf("소개글: %s\n", study.getIntroduction());
+    System.out.printf("스터디명 : %s\n", study.getStudyTitle());
+    System.out.printf("조장 : %s\n", study.getOwner().getPerNickname());
+    System.out.printf("분야 : %s\n", study.getSubject());
+    System.out.printf("지역 : %s\n", study.getArea());
+    System.out.printf("인원수 : %d\n", study.getNumberOfPeple());
+    System.out.printf("대면 : %s\n", study.getFace());
+    System.out.printf("소개글 : %s\n", study.getIntroduction());
 
     if (study.getOwner().getPerNickname().equals(LoginHandler.loginUser.getPerNickname())) {
       System.out.println();
       System.out.println();
       System.out.println("1. 구성원보기");
       System.out.println("2. 뒤로가기");
-      int selectNo = Prompt.inputInt("선택 ");
+      int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
         case 1 : listMember(study); break;
         case 2 : return;
@@ -175,7 +175,7 @@ public class StudyHandler {
     System.out.println("1. 참여 신청하기");
     System.out.println("2. 구성원보기");
     System.out.println("3. 뒤로가기");
-    int selectNo = Prompt.inputInt("선택 ");
+    int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
       case 1 : joinStudy(study); break;
       case 2 : listMember(study); break;
@@ -245,8 +245,8 @@ public class StudyHandler {
       return;
     } 
 
-    String input = Prompt.inputString("스터디에 참여하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n")) {
+    String input = Prompt.inputString("스터디에 참여하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오")) {
       return;
     }
     study.getWatingMember().add(member);
@@ -262,7 +262,7 @@ public class StudyHandler {
     System.out.println();
     System.out.println("▶ 스터디 변경");
 
-    String inputTitle = Prompt.inputString("제목? ");
+    String inputTitle = Prompt.inputString("제목 : ");
 
     Study study = findByTitle(inputTitle);
 
@@ -276,12 +276,12 @@ public class StudyHandler {
       return;
     }
 
-    String studyTitle = Prompt.inputString("스터디명(" + study.getStudyTitle()  + ")? ");
+    String studyTitle = Prompt.inputString("스터디명(" + study.getStudyTitle()  + ") : ");
     String face = Prompt.inputString("대면(" + study.getFace() + ")? ");
-    String introduction = Prompt.inputString("소개글(" + study.getIntroduction() + ")? ");
+    String introduction = Prompt.inputString("소개글(" + study.getIntroduction() + ") : ");
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("스터디 변경을 취소하였습니다.");
       return;
     }
@@ -300,7 +300,7 @@ public class StudyHandler {
     System.out.println();
     System.out.println("▶ 스터디 삭제");
 
-    String inputTitle = Prompt.inputString("제목? ");
+    String inputTitle = Prompt.inputString("제목  : ");
 
     Study study = findByTitle(inputTitle);
 
@@ -314,8 +314,8 @@ public class StudyHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("스터디 삭제를 취소하였습니다.");
       return;
     }

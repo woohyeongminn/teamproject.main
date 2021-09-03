@@ -69,11 +69,11 @@ public class MemberHandler {
 
     Member member = new Member();
 
-    member.setPerNickname(Prompt.inputString("닉네임? "));
-    member.setPerEmail(Prompt.inputString("이메일? "));
-    member.setPerPassword(Prompt.inputString("비밀번호? "));
+    member.setPerNickname(Prompt.inputString("닉네임 : "));
+    member.setPerEmail(Prompt.inputString("이메일 : "));
+    member.setPerPassword(Prompt.inputString("비밀번호 : "));
     while (true) {
-      String pw =  Prompt.inputString("비밀번호 확인? ");
+      String pw =  Prompt.inputString("비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
         System.out.println("비밀번호가 일치하지 않습니다.");
         continue;
@@ -82,7 +82,7 @@ public class MemberHandler {
       }
       break;
     }
-    member.setPerPhoto(Prompt.inputString("사진? "));
+    member.setPerPhoto(Prompt.inputString("사진 : "));
     memberList.add(member);
   }
 
@@ -92,7 +92,7 @@ public class MemberHandler {
     System.out.println("▶ 회원 가입 확인");
 
     for (Member member : memberList) {
-      System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
+      System.out.printf("닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
           member.getPerNickname(), 
           member.getPerEmail(),
           member.getPerRegisteredDate());
@@ -113,10 +113,10 @@ public class MemberHandler {
     try {
       Member member = LoginHandler.getLoginUser();
 
-      System.out.printf("닉네임: %s\n", member.getPerNickname());
-      System.out.printf("이메일: %s\n", member.getPerEmail());
-      System.out.printf("사진: %s\n", member.getPerPhoto());
-      System.out.printf("가입일: %s\n", member.getPerRegisteredDate());
+      System.out.printf("닉네임 : %s\n", member.getPerNickname());
+      System.out.printf("이메일 : %s\n", member.getPerEmail());
+      System.out.printf("사진 : %s\n", member.getPerPhoto());
+      System.out.printf("가입일 : %s\n", member.getPerRegisteredDate());
     } catch (NullPointerException e) {
       System.out.println("로그인 하세요.");
     }
@@ -128,12 +128,12 @@ public class MemberHandler {
 
     Member member = LoginHandler.getLoginUser();
 
-    String perNickName = Prompt.inputString("닉네임(" + member.getPerNickname()  + ")? ");
-    String perEmail = Prompt.inputString("이메일(" + member.getPerEmail() + ")? ");
-    String perPassword = Prompt.inputString("암호(" + member.getPerPassword() + ")? ");
-    String perPhoto = Prompt.inputString("사진(" + member.getPerPhoto() + ")? ");
+    String perNickName = Prompt.inputString("닉네임(" + member.getPerNickname()  + ") : ");
+    String perEmail = Prompt.inputString("이메일(" + member.getPerEmail() + ") : ");
+    String perPassword = Prompt.inputString("암호(" + member.getPerPassword() + ") : ");
+    String perPhoto = Prompt.inputString("사진(" + member.getPerPhoto() + ") : ");
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
     if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("개인회원 변경을 취소하였습니다.");
       return;
@@ -153,8 +153,8 @@ public class MemberHandler {
     System.out.println("▶ 회원 탈퇴");
 
     //    Member member = LoginHandler.getLoginUser();
-    System.out.println("-본인 확인-");
-    String inputEmail = Prompt.inputString("이메일 입력하세요 ");
+    System.out.println("<본인 확인>");
+    String inputEmail = Prompt.inputString("이메일 입력하세요 : ");
     Member member = findByEmail(inputEmail);
     if (member == null) {
       System.out.println("이메일을 다시 입력해주세요.");
@@ -162,12 +162,12 @@ public class MemberHandler {
     }
 
 
-    String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 탈퇴하시겠습니까? (네 /아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("회원 탈퇴를 취소하였습니다.");
       return;
     } else {
-      String inputPW = Prompt.inputString("비밀번호를 입력하세요. ");
+      String inputPW = Prompt.inputString("비밀번호를 입력하세요 : ");
       if (member.getPerPassword().equals(inputPW)) {
         // memberList에서 현재 로그인된 객체를 삭제
         memberList.remove(member);
@@ -199,7 +199,7 @@ public class MemberHandler {
     System.out.println();
     System.out.println("▶ 이메일 찾기");
     while (true) {
-      String inputNick =  Prompt.inputString("닉네임: ");
+      String inputNick =  Prompt.inputString("닉네임 : ");
       Member member = findByNick(inputNick);
       if (member == null) {
         System.out.println("해당 닉네임이 존재하지 않습니다.");
@@ -210,8 +210,8 @@ public class MemberHandler {
       }
       break;
     }
-    String input = Prompt.inputString("비밀번호 찾기로 넘어가시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("비밀번호 찾기로 넘어가시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("찾기를 종료합니다.");
       return;
     } 
@@ -222,14 +222,14 @@ public class MemberHandler {
     System.out.println();
     System.out.println("▶ 임시 비밀번호 발급");
     while (true) {
-      String inputEmail =  Prompt.inputString("이메일: ");
+      String inputEmail =  Prompt.inputString("이메일 : ");
       Member member = findByEmail(inputEmail);
       if (member == null) {
         // 엄강사님찬스
         System.out.println("해당 이메일이 존재하지 않습니다.");
         continue;
       } else {
-        System.out.printf("%s님의 임시 비밀번호 >> ", member.getPerNickname());
+        System.out.printf("%s님의 임시 비밀번호 : ", member.getPerNickname());
         System.out.println(member.getPerPassword().hashCode());
         System.out.println("로그인 후 비밀번호를 변경해 주세요.");
         String hashPW = String.valueOf(member.getPerPassword().hashCode());

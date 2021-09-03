@@ -16,9 +16,9 @@ public class CeoMemberHandler {
   public void add() {
     System.out.println();
     System.out.println("▶ 기업 회원가입");
+    System.out.println();
 
     CeoMember ceoMember = new CeoMember();
-
     ceoMember.setCeoEmail(Prompt.inputString("이메일 : "));
     ceoMember.setCeoName(Prompt.inputString("이름 : "));
     ceoMember.setCeoPassword(Prompt.inputString("암호 : "));
@@ -54,8 +54,9 @@ public class CeoMemberHandler {
   public void detail() {
     System.out.println();
     System.out.println("▶ 기업 상세");
-
     String inputceoEmail = Prompt.inputString("이메일 : ");
+    System.out.println();
+
     CeoMember ceoMember = findByEmail(inputceoEmail);
 
     if (ceoMember == null) {
@@ -75,8 +76,9 @@ public class CeoMemberHandler {
   public void update() {
     System.out.println();
     System.out.println("▶ 기업 정보 변경");
-
     String inputceoEmail = Prompt.inputString("이메일 : ");
+    System.out.println();
+
     CeoMember ceoMember = findByEmail(inputceoEmail);
 
     if (ceoMember == null) {
@@ -84,14 +86,14 @@ public class CeoMemberHandler {
       return;
     }
 
-    String ceoName = Prompt.inputString("이름(" + ceoMember.getCeoName()  + ")? ");
-    String ceoEmail = Prompt.inputString("이메일(" + ceoMember.getCeoEmail() + ")? ");
+    String ceoName = Prompt.inputString("이름(" + ceoMember.getCeoName()  + ") : ");
+    String ceoEmail = Prompt.inputString("이메일(" + ceoMember.getCeoEmail() + ") : ");
     String ceoPassword = Prompt.inputString("암호? ");
-    String ceoStoreName = Prompt.inputString("점포명(" + ceoMember.getCeoStoreName() + ")? ");
-    String ceoStoreDetailAddress = Prompt.inputString("점포주소(" + ceoMember.getCeoStoreDetailAddress() + ")? ");
+    String ceoStoreName = Prompt.inputString("점포명(" + ceoMember.getCeoStoreName() + ") : ");
+    String ceoStoreDetailAddress = Prompt.inputString("점포주소(" + ceoMember.getCeoStoreDetailAddress() + ") : ");
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("기업회원 변경을 취소하였습니다.");
       return;
     }
@@ -107,8 +109,8 @@ public class CeoMemberHandler {
   public void delete() {
     System.out.println();
     System.out.println("▶ 회원 탈퇴");
-
-    String inputceoEmail = Prompt.inputString("이메일? ");
+    String inputceoEmail = Prompt.inputString("이메일 : ");
+    System.out.println();
     CeoMember ceoMember = findByEmail(inputceoEmail);
 
     if (ceoMember == null) {
@@ -116,8 +118,8 @@ public class CeoMemberHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 탈퇴하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 탈퇴하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("회원 탈퇴를 취소하였습니다.");
       return;
     }
