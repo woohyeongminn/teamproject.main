@@ -177,7 +177,7 @@ public class App {
     adminMenuGroup.add(csMenu);
 
     // 관리자 고객센터 관리 - 공지사항
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항", Menu.ENABLE_ADMINLOGIN); 
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
     csMenu.add(adminNoticeMenu);
 
     adminNoticeMenu.add(new Menu("등록") {
@@ -211,7 +211,7 @@ public class App {
 
 
     // 관리자 고객센터 - 문의사항
-    MenuGroup askMenu = new MenuGroup("문의사항", Menu.ENABLE_ADMINLOGIN);
+    MenuGroup askMenu = new MenuGroup("문의사항");
     csMenu.add(askMenu);
 
     // 댓글 기능x, 회원이 쓴 문의글 삭제기능x 

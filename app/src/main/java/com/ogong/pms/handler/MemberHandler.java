@@ -38,7 +38,7 @@ public class MemberHandler {
 
     testMember = new Member();
     testMember.setPerNickname("음악대장");
-    testMember.setPerEmail("naver");
+    testMember.setPerEmail("daum");
     testMember.setPerPassword("1111");
     testMember.setPerPhoto("jpg");
     testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
@@ -47,7 +47,7 @@ public class MemberHandler {
     memberList.add(testMember);
     testMember = new Member();
     testMember.setPerNickname("엄강사님");
-    testMember.setPerEmail("kakao");
+    testMember.setPerEmail("hanmail");
     testMember.setPerPassword("1111");
     testMember.setPerPhoto("jpg");
     testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
@@ -55,7 +55,7 @@ public class MemberHandler {
 
     testMember = new Member();
     testMember.setPerNickname("매니저님");
-    testMember.setPerEmail("kakao");
+    testMember.setPerEmail("nate");
     testMember.setPerPassword("1111");
     testMember.setPerPhoto("jpg");
     testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
