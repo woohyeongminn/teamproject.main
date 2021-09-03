@@ -4,12 +4,10 @@ import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.util.Prompt;
 
-public class FreeBoardDetailHandler {
+public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
-  List<FreeBoard> freeBoardList;
-
-  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList) {
-    this.freeBoardList = freeBoardList;
+  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
+    super(freeBoardList, loginHandler);
   }
 
   public void detail() {
@@ -34,15 +32,5 @@ public class FreeBoardDetailHandler {
     free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
     System.out.printf("조회수 : %d\n", free.getFreeBoardViewcount());
   }
-
-  private FreeBoard findByTitle (String title) {
-    for (FreeBoard board : freeBoardList) {
-      if (board.getFreeBoardTitle().equalsIgnoreCase(title)) {
-        return board;
-      }
-    }
-    return null;
-  }
-
 }
 

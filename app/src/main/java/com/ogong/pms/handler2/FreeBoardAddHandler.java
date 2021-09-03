@@ -5,13 +5,10 @@ import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.util.Prompt;
 
-public class FreeBoardAddHandler {
-  List<FreeBoard> freeBoardList;
-  LoginHandler loginHandler;
+public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
 
   public FreeBoardAddHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
-    this.freeBoardList = freeBoardList;
-    this.loginHandler = loginHandler;
+    super(freeBoardList, loginHandler);
   }
 
   public void add() {

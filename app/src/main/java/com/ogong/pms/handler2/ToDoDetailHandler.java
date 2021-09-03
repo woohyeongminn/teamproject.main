@@ -4,12 +4,10 @@ import java.util.List;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.util.Prompt;
 
-public class ToDoDetailHandler {
-
-  List<ToDo> todoList;
+public class ToDoDetailHandler extends AbstractToDoHandler {
 
   public ToDoDetailHandler(List<ToDo> todoList) {
-    this.todoList = todoList;
+    super(todoList);
   }
 
   public void detail() {
@@ -29,15 +27,5 @@ public class ToDoDetailHandler {
     System.out.printf("비고: %s\n", todo.getTodoRemark());
     System.out.printf("진행 상황: %d\n", todo.getTodoStatus());
     System.out.printf("DATE: %s\n", todo.getTodoRegisteredDate());
-  }
-
-  private ToDo findBytodoNo(int todoNo) {
-    ToDo[] arr = todoList.toArray(new ToDo[0]);
-    for (ToDo todo : arr) {
-      if (todo.getTodoNo() == todoNo) {
-        return todo;
-      }
-    }
-    return null;
   }
 }

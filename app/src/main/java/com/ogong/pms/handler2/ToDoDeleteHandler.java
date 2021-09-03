@@ -4,12 +4,10 @@ import java.util.List;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.util.Prompt;
 
-public class ToDoDeleteHandler {
-
-  List<ToDo> todoList;
+public class ToDoDeleteHandler extends AbstractToDoHandler {
 
   public ToDoDeleteHandler(List<ToDo> todoList) {
-    this.todoList = todoList;
+    super(todoList);
   }
 
   public void delete() {
@@ -33,15 +31,5 @@ public class ToDoDeleteHandler {
     todoList.remove(todo);
 
     System.out.println("To-Do List를 삭제하였습니다.");
-  }
-
-  private ToDo findBytodoNo(int todoNo) {
-    ToDo[] arr = todoList.toArray(new ToDo[0]);
-    for (ToDo todo : arr) {
-      if (todo.getTodoNo() == todoNo) {
-        return todo;
-      }
-    }
-    return null;
   }
 }

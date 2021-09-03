@@ -4,15 +4,10 @@ import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.util.Prompt;
 
-public class FreeBoardUpdateHandler {
-
-
-  List<FreeBoard> freeBoardList;
-  LoginHandler loginHandler;
+public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
 
   public FreeBoardUpdateHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
-    this.freeBoardList = freeBoardList;
-    this.loginHandler = loginHandler;
+    super(freeBoardList, loginHandler);
   }
 
   public void update() {
@@ -50,15 +45,5 @@ public class FreeBoardUpdateHandler {
 
     System.out.println("게시글을 변경하였습니다.");
   }
-
-  private FreeBoard findByTitle (String title) {
-    for (FreeBoard board : freeBoardList) {
-      if (board.getFreeBoardTitle().equalsIgnoreCase(title)) {
-        return board;
-      }
-    }
-    return null;
-  }
-
 }
 

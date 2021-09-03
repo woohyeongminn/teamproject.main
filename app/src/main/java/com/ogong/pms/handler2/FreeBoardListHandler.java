@@ -3,12 +3,10 @@ package com.ogong.pms.handler2;
 import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
 
-public class FreeBoardListHandler {
+public class FreeBoardListHandler extends AbstractFreeBoardHandler {
 
-  List<FreeBoard> freeBoardList;
-
-  public FreeBoardListHandler(List<FreeBoard> freeBoardList) {
-    this.freeBoardList = freeBoardList;
+  public FreeBoardListHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
+    super(freeBoardList, loginHandler);
   }
 
   public void list() {

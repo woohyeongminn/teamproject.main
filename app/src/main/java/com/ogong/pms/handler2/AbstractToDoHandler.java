@@ -1,11 +1,10 @@
 package com.ogong.pms.handler2;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.util.Prompt;
 
-public class AbstractToDoHandler {
+public abstract class AbstractToDoHandler {
 
   List<ToDo> todoList;
 
@@ -13,7 +12,7 @@ public class AbstractToDoHandler {
     this.todoList = todoList;
   }
 
-  private String getStatusToDo(int todoStatus) {
+  public String getStatusToDo(int todoStatus) {
     switch (todoStatus) {
       case 1: return "보류";
       case 2: return "진행 중";
@@ -22,11 +21,11 @@ public class AbstractToDoHandler {
     }
   }
 
-  private int promptStatus() {
+  public int promptStatus() {
     return promptStatus(-1);
   }
 
-  private int promptStatus(int todoStatus) {
+  public int promptStatus(int todoStatus) {
     if (todoStatus == -1) {
       System.out.println("진행 상황: ");
     } else {
@@ -39,7 +38,7 @@ public class AbstractToDoHandler {
     return Prompt.inputInt("선택하세요. ");
   }
 
-  private ToDo findBytodoNo(int todoNo) {
+  public ToDo findBytodoNo(int todoNo) {
     ToDo[] arr = todoList.toArray(new ToDo[0]);
     for (ToDo todo : arr) {
       if (todo.getTodoNo() == todoNo) {

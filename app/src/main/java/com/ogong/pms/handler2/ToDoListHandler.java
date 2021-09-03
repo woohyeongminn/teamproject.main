@@ -3,12 +3,10 @@ package com.ogong.pms.handler2;
 import java.util.List;
 import com.ogong.pms.domain.ToDo;
 
-public class ToDoListHandler {
-
-  List<ToDo> todoList;
+public class ToDoListHandler extends AbstractToDoHandler {
 
   public ToDoListHandler(List<ToDo> todoList) {
-    this.todoList = todoList;
+    super(todoList);
   }
 
   public void list() {
@@ -27,15 +25,6 @@ public class ToDoListHandler {
           todo.getTodoRemark(),
           getStatusToDo(todo.getTodoStatus()),
           todo.getTodoRegisteredDate());
-    }
-  }
-
-  private String getStatusToDo(int todoStatus) {
-    switch (todoStatus) {
-      case 1: return "보류";
-      case 2: return "진행 중";
-      case 3: return "변경 예정";
-      default: return "완료";
     }
   }
 }
