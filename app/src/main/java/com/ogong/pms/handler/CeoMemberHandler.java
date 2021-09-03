@@ -19,15 +19,15 @@ public class CeoMemberHandler {
 
     CeoMember ceoMember = new CeoMember();
 
-    ceoMember.setCeoEmail(Prompt.inputString("이메일? "));
-    ceoMember.setCeoName(Prompt.inputString("이름? "));
-    ceoMember.setCeoPassword(Prompt.inputString("암호? "));
-    ceoMember.setCeoPassword(Prompt.inputString("암호 확인? "));
-    ceoMember.setCeoLicenseNo(Prompt.inputString("사업자 등록번호? "));
-    ceoMember.setCeoBossName(Prompt.inputString("대표자명? "));
-    ceoMember.setCeoStoreName(Prompt.inputString("점포명? "));
-    ceoMember.setCeoStoreDetailAddress(Prompt.inputString("점포명? "));
-    ceoMember.setCeoPhoto(Prompt.inputString("사진? "));
+    ceoMember.setCeoEmail(Prompt.inputString("이메일 : "));
+    ceoMember.setCeoName(Prompt.inputString("이름 : "));
+    ceoMember.setCeoPassword(Prompt.inputString("암호 : "));
+    ceoMember.setCeoPassword(Prompt.inputString("암호 확인 : "));
+    ceoMember.setCeoLicenseNo(Prompt.inputString("사업자 등록번호 : "));
+    ceoMember.setCeoBossName(Prompt.inputString("대표자명 : "));
+    ceoMember.setCeoStoreName(Prompt.inputString("점포명 : "));
+    ceoMember.setCeoStoreDetailAddress(Prompt.inputString("점포명 : "));
+    ceoMember.setCeoPhoto(Prompt.inputString("사진 : "));
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
 
     ceoMemberList.add(ceoMember);
@@ -40,12 +40,14 @@ public class CeoMemberHandler {
     CeoMember[] list = ceoMemberList.toArray(new CeoMember[0]);
 
     for (CeoMember ceoMember : list) {
+      System.out.println();
       System.out.printf("이름 : %s\n, 이메일 : %s\n, 대표자명 : %s\n, 점포명 : %s\n, 가입일 : %s\n",
           ceoMember.getCeoName(), 
           ceoMember.getCeoEmail(),
           ceoMember.getCeoBossName(),
           ceoMember.getCeoStoreName(),
           ceoMember.getCeoregisteredDate());
+      System.out.println();
     }
   }
 
@@ -53,7 +55,7 @@ public class CeoMemberHandler {
     System.out.println();
     System.out.println("▶ 기업 상세");
 
-    String inputceoEmail = Prompt.inputString("이메일? ");
+    String inputceoEmail = Prompt.inputString("이메일 : ");
     CeoMember ceoMember = findByEmail(inputceoEmail);
 
     if (ceoMember == null) {
@@ -61,20 +63,20 @@ public class CeoMemberHandler {
       return;
     }
 
-    System.out.printf("이름: %s\n", ceoMember.getCeoName());
-    System.out.printf("이메일: %s\n", ceoMember.getCeoEmail());
-    System.out.printf("대표자명: %s\n", ceoMember.getCeoBossName());
-    System.out.printf("점포명: %s\n", ceoMember.getCeoEmail());
-    System.out.printf("점포주소: %s\n", ceoMember.getCeoStoreDetailAddress());
-    System.out.printf("사진: %s\n", ceoMember.getCeoStoreName());
-    System.out.printf("가입일: %s\n", ceoMember.getCeoregisteredDate());
+    System.out.printf(">> 이름 : %s\n", ceoMember.getCeoName());
+    System.out.printf(">> 이메일 : %s\n", ceoMember.getCeoEmail());
+    System.out.printf(">> 대표자명 : %s\n", ceoMember.getCeoBossName());
+    System.out.printf(">> 점포명 : %s\n", ceoMember.getCeoEmail());
+    System.out.printf(">> 점포주소 : %s\n", ceoMember.getCeoStoreDetailAddress());
+    System.out.printf(">> 사진 : %s\n", ceoMember.getCeoStoreName());
+    System.out.printf(">> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
   }
 
   public void update() {
     System.out.println();
     System.out.println("▶ 기업 정보 변경");
 
-    String inputceoEmail = Prompt.inputString("이메일? ");
+    String inputceoEmail = Prompt.inputString("이메일 : ");
     CeoMember ceoMember = findByEmail(inputceoEmail);
 
     if (ceoMember == null) {

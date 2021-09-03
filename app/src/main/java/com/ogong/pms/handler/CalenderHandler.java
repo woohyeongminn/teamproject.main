@@ -17,13 +17,17 @@ public class CalenderHandler {
     System.out.println();
     System.out.println("▶ 일정 등록");
     Calender calender = new Calender();
-
+    System.out.println();
     System.out.println("시작날짜를 입력해주세요");
-    calender.setMonth(Prompt.inputInt("월 :"));
-    calender.setDay(Prompt.inputInt("일 :"));
-    calender.setDayOftheWeek(Prompt.inputString("요일 :"));
-    calender.setCalenderContent(Prompt.inputString("내용 :"));
+    calender.setMonth(Prompt.inputInt("월 : "));
+    calender.setDay(Prompt.inputInt("일 : "));
+    calender.setDayOftheWeek(Prompt.inputString("요일 : "));
+    calender.setCalenderContent(Prompt.inputString("내용 : "));
     calender.setEndDay(Prompt.inputDate("종료일 : "));
+
+    // yyyy년도 mm월 dd일 화요일
+    // 내용 : "스터디시작하기"
+    // 등록하시겠습니까?
 
     calenderList.add(calender);
   }
@@ -31,16 +35,17 @@ public class CalenderHandler {
   public void list() {
     System.out.println();
     System.out.println("▶ 일정 목록");
-
+    System.out.println();
     Calender[] cList = calenderList.toArray(new Calender[0]);
 
     for (Calender calender : cList) {
       System.out.printf(
-          "%d.%d(%s), %s\n",
+          " [ %d월 %d일 %s요일 ]\n %s\n",
           calender.getMonth(), 
           calender.getDay(),
           calender.getDayOftheWeek(),
           calender.getCalenderContent());
+      System.out.println();
     }
   }
 
@@ -48,7 +53,8 @@ public class CalenderHandler {
   public void detail() {
     System.out.println();
     System.out.println("▶ 일정 상세");
-    int inputDay = Prompt.inputInt("날짜? ");
+    System.out.println();
+    int inputDay = Prompt.inputInt("몇일? ");
 
     Calender calender = findByDay(inputDay);
 
@@ -56,11 +62,12 @@ public class CalenderHandler {
       System.out.println("해당 날짜에 일정이 없습니다.");
       return;
     }
-    System.out.println("-일정시작일-");
-    System.out.printf("날짜: %d월-%d일-%s요일\n",
+    System.out.println();
+    System.out.printf(">> 등록일 : %d월 %d일 %s요일\n",
         calender.getMonth(), calender.getDay(), calender.getDayOftheWeek());
-    System.out.printf("내용: %s\n", calender.getCalenderContent());
-    System.out.printf("종료일: %s\n", calender.getEndDay());
+    System.out.printf(">> 종료일 : %s\n", calender.getEndDay());
+    System.out.printf(">> 내  용 : %s\n", calender.getCalenderContent());
+
   }
 
   //------------------------------------------------------------------------------------------------
@@ -69,7 +76,7 @@ public class CalenderHandler {
     System.out.println();
     System.out.println("▶ 일정 수정");
 
-    int inputDay = Prompt.inputInt("날짜? ");
+    int inputDay = Prompt.inputInt("날짜 : ");
     Calender calender = findByDay(inputDay);
 
     if (calender == null) {
