@@ -168,10 +168,13 @@ public class CafeHandler {
     }
 
     System.out.println();
-    System.out.println();
-    String input = Prompt.inputString("예약하시겠습니까?(y/n) >>>>>>>> ");
-    if (input.equalsIgnoreCase("y")) {
-      addReservation(cafe);
+
+    System.out.println("1. 예약하기");
+    System.out.println("2. 뒤로가기");
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1 : addReservation(cafe); break;
+      default : return;
     }
   }
 
