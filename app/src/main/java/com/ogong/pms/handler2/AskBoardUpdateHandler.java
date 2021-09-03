@@ -5,10 +5,11 @@ import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class AskBoardUpdateHandler {
+public class AskBoardUpdateHandler extends AbstractAskBoardHandler {
 
-  List<AskBoard> askBoardList;
-  List<Member> memberList;
+  public AskBoardUpdateHandler(List<AskBoard> askBoardList, List<Member> memberList) {
+    super(askBoardList, memberList);
+  }
 
   public void update() {
     System.out.println();

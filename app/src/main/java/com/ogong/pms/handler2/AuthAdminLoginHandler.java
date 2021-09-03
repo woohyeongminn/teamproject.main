@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.Admin;
 import com.ogong.util.Prompt;
 
-public class AdminAddAdminLoginPageHandler {
+public class AuthAdminLoginHandler {
 
   List<Admin> adminList;
 
@@ -13,7 +13,7 @@ public class AdminAddAdminLoginPageHandler {
     return loginAdmin;
   }
 
-  public AdminAddAdminLoginPageHandler(List<Admin> adminList) {
+  public AuthAdminLoginHandler(List<Admin> adminList) {
     this.adminList = adminList;
 
     Admin testAdmin = new Admin();
@@ -25,6 +25,7 @@ public class AdminAddAdminLoginPageHandler {
     adminList.add(testAdmin);
   }
 
+  // ----------------------------------------------------------------------
 
   public void addAdminLoginPage() {
     System.out.println();
@@ -52,7 +53,6 @@ public class AdminAddAdminLoginPageHandler {
       }
     } 
   }
-
   public Admin findByAdminEmail(String masterEmail) {
     for (Admin admin : adminList) {
       if (admin.getMasterEmail().equals(masterEmail)) {
@@ -61,7 +61,6 @@ public class AdminAddAdminLoginPageHandler {
     }
     return null;
   }
-
 
   private void findAdminPw() {
     System.out.println();

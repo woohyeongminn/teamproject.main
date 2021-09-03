@@ -5,11 +5,11 @@ import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.util.Prompt;
 
-public class AdminNoticeDeleteHandler {
+public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
 
-  List<AdminNotice> adminNoticeList;
-  List<Admin> adminList;
-
+  public AdminNoticeDeleteHandler(List<AdminNotice> adminNoticeList, List<Admin> adminList) {
+    super(adminNoticeList, adminList);
+  }
 
   public void delete() {
     System.out.println();

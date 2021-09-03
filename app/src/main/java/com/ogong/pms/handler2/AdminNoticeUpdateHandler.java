@@ -5,10 +5,11 @@ import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.util.Prompt;
 
-public class AdminNoticeUpdateHandler {
+public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
 
-  List<AdminNotice> adminNoticeList;
-  List<Admin> adminList;
+  public AdminNoticeUpdateHandler(List<AdminNotice> adminNoticeList, List<Admin> adminList) {
+    super(adminNoticeList, adminList);
+  }
 
   public void update() {
     System.out.println();

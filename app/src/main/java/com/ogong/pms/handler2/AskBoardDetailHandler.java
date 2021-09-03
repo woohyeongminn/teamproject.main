@@ -5,10 +5,11 @@ import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class AskBoardDetailHandler {
+public class AskBoardDetailHandler extends AbstractAskBoardHandler {
 
-  List<AskBoard> askBoardList;
-  List<Member> memberList;
+  public AskBoardDetailHandler(List<AskBoard> askBoardList, List<Member> memberList) {
+    super(askBoardList, memberList);
+  }
 
   public void detail() {
     System.out.println();

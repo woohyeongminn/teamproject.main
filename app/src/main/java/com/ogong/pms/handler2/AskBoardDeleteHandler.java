@@ -5,10 +5,11 @@ import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class AskBoardDeleteHandler {
+public class AskBoardDeleteHandler extends AbstractAskBoardHandler {
 
-  List<AskBoard> askBoardList;
-  List<Member> memberList;
+  public AskBoardDeleteHandler(List<AskBoard> askBoardList, List<Member> memberList) {
+    super(askBoardList, memberList);
+  }
 
   public void delete() {
     System.out.println();

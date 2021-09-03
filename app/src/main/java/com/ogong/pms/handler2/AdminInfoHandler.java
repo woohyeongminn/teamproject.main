@@ -3,17 +3,13 @@ package com.ogong.pms.handler2;
 import java.util.List;
 import com.ogong.pms.domain.Admin;
 
-public class AdminDetailHandler {
+public class AdminInfoHandler extends AbstractAdminHandler {
 
-  List<Admin> adminList;
-
-  static Admin loginAdmin;
-  public static Admin getLoginAdmin() {
-    return loginAdmin;
+  public AdminInfoHandler(List<Admin> adminList) {
+    super(adminList);
   }
 
-
-  public void detail() {
+  public void adminInfo() {
     System.out.println();
     System.out.println("▶ 내 프로필");
     System.out.println();

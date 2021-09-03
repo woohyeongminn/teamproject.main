@@ -4,10 +4,11 @@ import java.util.List;
 import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AdminNotice;
 
-public class AdminNoticeListHandler {
+public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
 
-  List<AdminNotice> adminNoticeList;
-  List<Admin> adminList;
+  public AdminNoticeListHandler(List<AdminNotice> adminNoticeList, List<Admin> adminList) {
+    super(adminNoticeList, adminList);
+  }
 
 
   public void list() {

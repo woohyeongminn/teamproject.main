@@ -3,7 +3,7 @@ package com.ogong.pms.handler2;
 import java.util.List;
 import com.ogong.pms.domain.Admin;
 
-public class AdminLogoutHandler {
+public class AuthAdminLogoutHandler {
 
   List<Admin> adminList;
 
@@ -12,6 +12,10 @@ public class AdminLogoutHandler {
     return loginAdmin;
   }
 
+  public AuthAdminLogoutHandler(List<Admin> adminList) {
+    this.adminList = adminList;
+
+  }
 
   public void logOut() {
     System.out.println();

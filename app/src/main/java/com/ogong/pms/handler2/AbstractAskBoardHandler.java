@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
 
-public class AbstractAskBoardHandler {
+public abstract class AbstractAskBoardHandler {
 
   List<AskBoard> askBoardList;
   List<Member> memberList;

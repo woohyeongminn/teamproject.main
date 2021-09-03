@@ -4,13 +4,10 @@ import java.util.List;
 import com.ogong.pms.domain.Admin;
 import com.ogong.util.Prompt;
 
-public class AdminUpdateHandler {
+public class AdminUpdateHandler extends AbstractAdminHandler {
 
-  List<Admin> adminList;
-
-  static Admin loginAdmin;
-  public static Admin getLoginAdmin() {
-    return loginAdmin;
+  public AdminUpdateHandler(List<Admin> adminList) {
+    super(adminList);
   }
 
   public void update() {

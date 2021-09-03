@@ -4,10 +4,11 @@ import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
 
-public class AskBoardListHandler {
+public class AskBoardListHandler extends AbstractAskBoardHandler {
 
-  List<AskBoard> askBoardList;
-  List<Member> memberList;
+  public AskBoardListHandler(List<AskBoard> askBoardList, List<Member> memberList) {
+    super(askBoardList, memberList);
+  }
 
   public void list() {
     System.out.println();
