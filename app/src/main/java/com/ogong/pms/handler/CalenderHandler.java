@@ -18,7 +18,7 @@ public class CalenderHandler {
     System.out.println("▶ 일정 등록");
     Calender calender = new Calender();
     System.out.println();
-    System.out.println("시작날짜를 입력해주세요");
+    System.out.println("시작 날짜를 입력해 주세요.");
     calender.setMonth(Prompt.inputInt("월 : "));
     calender.setDay(Prompt.inputInt("일 : "));
     calender.setDayOftheWeek(Prompt.inputString("요일 : "));
@@ -90,8 +90,8 @@ public class CalenderHandler {
     String cContent = Prompt.inputString("내용(" + calender.getCalenderContent() + ")? ");
     Date cEndDay = Prompt.inputDate("종료일(" + calender.getEndDay() + ")? ");
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("일정 변경이 취소되었습니다.");
       return;
     }
@@ -109,7 +109,7 @@ public class CalenderHandler {
     System.out.println();
     System.out.println("▶ 일정 삭제");
 
-    int inputDay = Prompt.inputInt("날짜? ");
+    int inputDay = Prompt.inputInt("날짜 : ");
     Calender calender = findByDay(inputDay);
 
     if (calender == null) {
@@ -117,8 +117,8 @@ public class CalenderHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("일정 삭제를 취소하였습니다.");
       return;
     }

@@ -19,6 +19,7 @@ public class CeoMemberHandler {
     System.out.println();
 
     CeoMember ceoMember = new CeoMember();
+
     ceoMember.setCeoEmail(Prompt.inputString("이메일 : "));
     ceoMember.setCeoName(Prompt.inputString("이름 : "));
     ceoMember.setCeoPassword(Prompt.inputString("암호 : "));
@@ -36,6 +37,7 @@ public class CeoMemberHandler {
   public void list() {
     System.out.println();
     System.out.println("▶ 가입 확인");
+    System.out.println();
 
     CeoMember[] list = ceoMemberList.toArray(new CeoMember[0]);
 
