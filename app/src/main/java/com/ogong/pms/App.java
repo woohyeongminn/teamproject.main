@@ -6,6 +6,7 @@ import java.util.List;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Admin;
+import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
@@ -14,10 +15,10 @@ import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.NoticeBoard;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminHandler;
+import com.ogong.pms.handler.AdminNoticeHandler;
 import com.ogong.pms.handler.AskBoardHandler;
 import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.CafeReservationHandler;
@@ -25,10 +26,8 @@ import com.ogong.pms.handler.CalenderHandler;
 import com.ogong.pms.handler.CeoMemberHandler;
 import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.LoginHandler;
-import com.ogong.pms.handler.ManagerHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.MyStudyHandler;
-import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.pms.handler.StudyHandler;
 import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
@@ -36,7 +35,7 @@ import com.ogong.util.Prompt;
 public class App {
   List<Study> studyList = new LinkedList<>();
   List<Member> memberList = new LinkedList<>();
-  List<NoticeBoard> noticeBoardList = new ArrayList<>();
+  List<AdminNotice> adminNoticeList = new ArrayList<>();
   List<AskBoard> askBoardList = new ArrayList<>();
   List<Cafe> cafeList = new ArrayList<>();
   List<CafeReview> cafeReview = new ArrayList<>();
@@ -47,14 +46,13 @@ public class App {
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
 
+  AdminHandler adminHandler = new AdminHandler(adminList);
   MemberHandler memberHandler = new MemberHandler(memberList);
   StudyHandler studyHandler = new StudyHandler(studyList, memberHandler);
   MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
-  AdminHandler adminHandler = new AdminHandler(adminList);
   LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
-  ManagerHandler managerHandler = new ManagerHandler(noticeBoardList, adminHandler);
-  NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerHandler);
-  AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList);
+  AdminNoticeHandler adminNoticeHandler = new AdminNoticeHandler(adminNoticeList, adminList);
+  AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList, memberList);
   CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, reserList);
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
   FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
@@ -175,59 +173,69 @@ public class App {
     //---------------------------------------------------------------
 
     // 관리자 고객센터 관리
-    MenuGroup managerMenu = new MenuGroup("고객센터 관리");
-    adminMenuGroup.add(managerMenu);
+    MenuGroup csMenu = new MenuGroup("고객센터 관리");
+    adminMenuGroup.add(csMenu);
 
     // 관리자 고객센터 관리 - 공지사항
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항", Menu.ENABLE_ADMINLOGIN); 
-    managerMenu.add(adminNoticeMenu);
+    csMenu.add(adminNoticeMenu);
 
     adminNoticeMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        managerHandler.add();
+        adminNoticeHandler.add();
         return;
+      }});
+    adminNoticeMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        adminNoticeHandler.list(); 
+      }});
+    adminNoticeMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        adminNoticeHandler.detail(); 
       }});
     adminNoticeMenu.add(new Menu("수정") {
       @Override
       public void execute() {
-        managerHandler.update(); 
+        adminNoticeHandler.update(); 
       }});
     adminNoticeMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        managerHandler.delete(); 
+        adminNoticeHandler.delete(); 
       }});
 
-    adminNoticeMenu.add(new Menu("공지사항 목록") {
-      @Override
-      public void execute() {
-        noticeboardHandler.list(); 
-      }});
-    adminNoticeMenu.add(new Menu("공지사항 상세보기") {
-      @Override
-      public void execute() {
-        noticeboardHandler.detail(); 
-      }});
     //---------------------------------------------------
 
 
     // 관리자 고객센터 - 문의사항
     MenuGroup askMenu = new MenuGroup("문의사항", Menu.ENABLE_ADMINLOGIN);
-    adminMenuGroup.add(askMenu);
+    csMenu.add(askMenu);
 
-    // 댓글 기능x, 회원이 쓴 문의글 삭제기능x  
-    askMenu.add(new Menu("문의사항 목록") {
+    // 댓글 기능x, 회원이 쓴 문의글 삭제기능x 
+    askMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        askBoardHandler.add(); 
+      }});
+    askMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         askBoardHandler.list(); 
       }});
-    askMenu.add(new Menu("문의사항 상세보기") {
+    askMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         askBoardHandler.detail(); 
       }});
-    askMenu.add(new Menu("문의사항 삭제") {
+    askMenu.add(new Menu("수정") {
+      @Override
+      public void execute() {
+        askBoardHandler.update(); 
+      }});
+    askMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         askBoardHandler.delete(); 
@@ -490,40 +498,57 @@ public class App {
       }});
     //-------------------------------------------------------------- 
 
-
-
-    MenuGroup csMenu = new MenuGroup("고객 센터"); 
+    // 회원 고객센터
+    MenuGroup csMenu = new MenuGroup("고객센터");
     userMenuGroup.add(csMenu);
-    //  
-    //    //---------------------------------------------------
-    //    //---------------------------------------------------
-    //    MenuGroup askMenu = new MenuGroup("문의사항/회원");
-    //    mainMenuGroup.add(askMenu);
-    //    askMenu.add(new Menu("문의사항 등록") {
-    //      @Override
-    //      public void execute() {
-    //        askBoardHandler.add(); 
-    //      }});
-    //    askMenu.add(new Menu("문의사항 목록") {
-    //      @Override
-    //      public void execute() {
-    //        askBoardHandler.list(); 
-    //      }});
-    //    askMenu.add(new Menu("문의사항 상세보기") {
-    //      @Override
-    //      public void execute() {
-    //        askBoardHandler.detail(); 
-    //      }});
-    //    askMenu.add(new Menu("문의사항 변경") {
-    //      @Override
-    //      public void execute() {
-    //        askBoardHandler.update(); 
-    //      }});
-    //    askMenu.add(new Menu("문의사항 삭제") {
-    //      @Override
-    //      public void execute() {
-    //        askBoardHandler.delete(); 
-    //      }});
+
+    // 관리자 고객센터 관리 - 공지사항
+    MenuGroup NoticeMenu = new MenuGroup("공지사항"); 
+    csMenu.add(NoticeMenu);
+
+    NoticeMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        adminNoticeHandler.list(); 
+      }});
+    NoticeMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        adminNoticeHandler.detail(); 
+      }});
+    //---------------------------------------------------
+
+
+    //---------------------------------------------------
+    MenuGroup askMenu = new MenuGroup("문의사항");
+    csMenu.add(askMenu);
+
+    askMenu.add(new Menu("등록") {
+      @Override
+      public void execute() {
+        askBoardHandler.add(); 
+      }});
+    askMenu.add(new Menu("목록") {
+      @Override
+      public void execute() {
+        askBoardHandler.list(); 
+      }});
+    askMenu.add(new Menu("상세보기") {
+      @Override
+      public void execute() {
+        askBoardHandler.detail(); 
+      }});
+    askMenu.add(new Menu("변경") {
+      @Override
+      public void execute() {
+        askBoardHandler.update(); 
+      }});
+    askMenu.add(new Menu("삭제") {
+      @Override
+      public void execute() {
+        askBoardHandler.delete(); 
+      }});
+
     return userMenuGroup;
   }
 

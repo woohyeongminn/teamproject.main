@@ -22,11 +22,10 @@ public class FreeBoardHandler {
   //------------------------------------------------------------------------------------------------
 
 
-
-
   //------------------------------------------------------------------------------------------------
   public void add() {
-    System.out.println("[자유게시판 게시글 작성]");
+    System.out.println();
+    System.out.println("▶ 게시글 작성");
 
     FreeBoard freeBoard = new FreeBoard();
 
@@ -52,7 +51,8 @@ public class FreeBoardHandler {
 
   //------------------------------------------------------------------------------------------------
   public void list() {
-    System.out.println("[자유게시판 게시글 목록]");
+    System.out.println();
+    System.out.println("▶ 게시글 목록");
 
     FreeBoard[] list = freeBoardList.toArray(new FreeBoard[0]);
 
@@ -76,7 +76,8 @@ public class FreeBoardHandler {
 
   //------------------------------------------------------------------------------------------------
   public void detail() {
-    System.out.println("[자유게시판 게시글 상세보기]");
+    System.out.println();
+    System.out.println("▶ 게시글 상세보기");
 
     // 0831 eun 수정함
     String inputTitle = Prompt.inputString("제목? ");
@@ -104,7 +105,8 @@ public class FreeBoardHandler {
 
   //------------------------------------------------------------------------------------------------
   public void update() {
-    System.out.println("[자유게시판 게시글 수정]");
+    System.out.println();
+    System.out.println("▶ 게시글 수정");
 
     // 0831 eun 수정함
     String inputTitle = Prompt.inputString("제목? ");
@@ -145,7 +147,8 @@ public class FreeBoardHandler {
 
   //------------------------------------------------------------------------------------------------
   public void delete() {
-    System.out.println("[자유게시판 게시글 삭제]");
+    System.out.println();
+    System.out.println("▶ 게시글 삭제");
 
     // 0831 eun 수정함
     String inputTitle = Prompt.inputString("제목? ");

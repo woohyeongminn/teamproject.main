@@ -73,7 +73,7 @@ public class StudyHandler {
   //------------------------------------------------------------------------------------------------
   public void add() {
     System.out.println();
-    System.out.println("[스터디 등록]");
+    System.out.println("▶ 스터디 등록");
     Study study = new Study();
 
     study.setStudyNo(Prompt.inputInt("번호? "));
@@ -103,7 +103,7 @@ public class StudyHandler {
 
   public void list() {
     System.out.println();
-    System.out.println("[스터디 목록]");
+    System.out.println("▶ 스터디 목록");
 
     Study newStudy = new Study();
     printStudyList(newStudy);
@@ -137,7 +137,8 @@ public class StudyHandler {
 
   //------------------------------------------------------------------------------------------------
   public void detail() {
-    System.out.println("[스터디 상세보기]");
+    System.out.println();
+    System.out.println("▶ 스터디 상세");
 
     String inputTitle = Prompt.inputString("제목? ");
 
@@ -190,7 +191,7 @@ public class StudyHandler {
   //------------------------------------------------------------------------------------------------
   public void listMember(Study study) {
     System.out.println();
-    System.out.println("[구성원 보기]");
+    System.out.println("▶ 구성원 보기");
     Member member = LoginHandler.getLoginUser();
 
     if (member == null ) {
@@ -232,7 +233,7 @@ public class StudyHandler {
   //------------------------------------------------------------------------------------------------
   public void joinStudy(Study study) {
     System.out.println();
-    System.out.println("[스터디 신청]");
+    System.out.println("▶ 스터디 신청");
     Member member = LoginHandler.getLoginUser();
 
     if (member == null) {
@@ -259,7 +260,8 @@ public class StudyHandler {
 
   //------------------------------------------------------------------------------------------------
   public void update() {
-    System.out.println("[스터디 변경]");
+    System.out.println();
+    System.out.println("▶ 스터디 변경");
 
     String inputTitle = Prompt.inputString("제목? ");
 
@@ -296,7 +298,8 @@ public class StudyHandler {
 
   //------------------------------------------------------------------------------------------------
   public void delete() {
-    System.out.println("[스터디 삭제]");
+    System.out.println();
+    System.out.println("▶ 스터디 삭제");
 
     String inputTitle = Prompt.inputString("제목? ");
 

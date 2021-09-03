@@ -16,12 +16,7 @@ public class MyStudyHandler {
 
   public void list() {
     System.out.println();
-    System.out.println("[스터디 목록]");
-
-
-
-
-
+    System.out.println("▶ 스터디 목록");
 
 
     System.out.println("----------------------");
@@ -46,7 +41,8 @@ public class MyStudyHandler {
 
 
   public void detail() {
-    System.out.println("[스터디 상세보기]");
+    System.out.println();
+    System.out.println("▶ 스터디 상세보기");
 
     String inputTitle = Prompt.inputString("제목? ");
 

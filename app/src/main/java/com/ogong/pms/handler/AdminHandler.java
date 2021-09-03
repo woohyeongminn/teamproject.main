@@ -28,6 +28,7 @@ public class AdminHandler {
   // ----------------------------------------------------------------------
 
   public void addAdminLoginPage() {
+    System.out.println();
     String inputadminEmail = Prompt.inputString("이메일: ");
     String inputadminPassword = "";
     Admin admin = findByAdminEmail(inputadminEmail);

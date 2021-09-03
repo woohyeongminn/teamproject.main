@@ -14,7 +14,8 @@ public class CeoMemberHandler {
   }
 
   public void add() {
-    System.out.println("[기업 회원가입]");
+    System.out.println();
+    System.out.println("▶ 기업 회원가입");
 
     CeoMember ceoMember = new CeoMember();
 
@@ -33,7 +34,8 @@ public class CeoMemberHandler {
   }
 
   public void list() {
-    System.out.println("[기업회원 가입확인]");
+    System.out.println();
+    System.out.println("▶ 가입 확인");
 
     CeoMember[] list = ceoMemberList.toArray(new CeoMember[0]);
 
@@ -48,7 +50,8 @@ public class CeoMemberHandler {
   }
 
   public void detail() {
-    System.out.println("[기업회원 상세보기]");
+    System.out.println();
+    System.out.println("▶ 기업 상세");
 
     String inputceoEmail = Prompt.inputString("이메일? ");
     CeoMember ceoMember = findByEmail(inputceoEmail);
@@ -68,7 +71,8 @@ public class CeoMemberHandler {
   }
 
   public void update() {
-    System.out.println("[기업회원 정보변경]");
+    System.out.println();
+    System.out.println("▶ 기업 정보 변경");
 
     String inputceoEmail = Prompt.inputString("이메일? ");
     CeoMember ceoMember = findByEmail(inputceoEmail);
@@ -99,7 +103,8 @@ public class CeoMemberHandler {
   }
 
   public void delete() {
-    System.out.println("[개인회원 탈퇴]");
+    System.out.println();
+    System.out.println("▶ 회원 탈퇴");
 
     String inputceoEmail = Prompt.inputString("이메일? ");
     CeoMember ceoMember = findByEmail(inputceoEmail);

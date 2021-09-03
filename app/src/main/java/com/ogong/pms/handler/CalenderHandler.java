@@ -14,7 +14,8 @@ public class CalenderHandler {
   }
 
   public void add() {
-    System.out.println("[일정 등록]");
+    System.out.println();
+    System.out.println("▶ 일정 등록");
     Calender calender = new Calender();
 
     System.out.println("시작날짜를 입력해주세요");
@@ -28,7 +29,8 @@ public class CalenderHandler {
   }
 
   public void list() {
-    System.out.println("[일정 목록]");
+    System.out.println();
+    System.out.println("▶ 일정 목록");
 
     Calender[] cList = calenderList.toArray(new Calender[0]);
 
@@ -44,7 +46,8 @@ public class CalenderHandler {
 
   //------------------------------------------------------------------------------------------------
   public void detail() {
-    System.out.println("[일정 상세보기]");
+    System.out.println();
+    System.out.println("▶ 일정 상세");
     int inputDay = Prompt.inputInt("날짜? ");
 
     Calender calender = findByDay(inputDay);
@@ -63,7 +66,8 @@ public class CalenderHandler {
   //------------------------------------------------------------------------------------------------
 
   public void update() {
-    System.out.println("[일정 수정]");
+    System.out.println();
+    System.out.println("▶ 일정 수정");
 
     int inputDay = Prompt.inputInt("날짜? ");
     Calender calender = findByDay(inputDay);
@@ -95,7 +99,8 @@ public class CalenderHandler {
   }
 
   public void delete() {
-    System.out.println("[일정 삭제]");
+    System.out.println();
+    System.out.println("▶ 일정 삭제");
 
     int inputDay = Prompt.inputInt("날짜? ");
     Calender calender = findByDay(inputDay);

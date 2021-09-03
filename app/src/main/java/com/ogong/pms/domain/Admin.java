@@ -7,7 +7,6 @@ public class Admin {
   private String masterEmail;    // 관리자 이메일
   private String masterPassword; // 관리자 비밀번호
 
-
   @Override
   public String toString() {
     return "Admin [masterNo=" + masterNo + ", masterNickname=" + masterNickname + ", masterEmail="
@@ -20,6 +19,7 @@ public class Admin {
   public void setMasterNo(int masterNo) {
     this.masterNo = masterNo;
   }
+
   public String getMasterNickname() {
     return masterNickname;
   }

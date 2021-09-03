@@ -14,7 +14,8 @@ public class ToDoHandler {
   }
 
   public void add() {
-    System.out.println("[To-Do List 등록]");
+    System.out.println();
+    System.out.println("▶ To-Do List 등록");
 
     ToDo todo = new ToDo();
 
@@ -30,7 +31,8 @@ public class ToDoHandler {
   }
 
   public void list() {
-    System.out.println("[To-Do List 목록]");
+    System.out.println();
+    System.out.println("▶ To-Do List 목록");
 
     ToDo[] todos = new ToDo[todoList.size()];
 
@@ -48,7 +50,8 @@ public class ToDoHandler {
   }
 
   public void detail() {
-    System.out.println("[To-Do List 상세보기]");
+    System.out.println();
+    System.out.println("▶ To-Do List 상세보기");
     int todoNo = Prompt.inputInt("선택하세요. ");
 
     ToDo todo = findBytodoNo(todoNo);
@@ -66,7 +69,8 @@ public class ToDoHandler {
   }
 
   public void update() {
-    System.out.println("[To-Do List 변경]");
+    System.out.println();
+    System.out.println("▶ To-Do List 변경");
     int todoNo = Prompt.inputInt("선택하세요. ");
 
     ToDo todo = findBytodoNo(todoNo);
@@ -94,7 +98,8 @@ public class ToDoHandler {
   }
 
   public void delete() {
-    System.out.println("[To-Do List 삭제]");
+    System.out.println();
+    System.out.println("▶ To-Do List 삭제");
     int todoNo = Prompt.inputInt("번호 선택: ");
 
     ToDo todo = findBytodoNo(todoNo);

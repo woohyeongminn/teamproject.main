@@ -9,7 +9,6 @@ public class MemberHandler {
 
   List<Member> memberList;
 
-
   public MemberHandler(List<Member> memberList) {
     this.memberList = memberList;
 
@@ -90,7 +89,7 @@ public class MemberHandler {
   // 관리자
   public void list() {
     System.out.println();
-    System.out.println("[개인회원 가입확인]");
+    System.out.println("▶ 회원 가입 확인");
 
     for (Member member : memberList) {
       System.out.printf("닉네임 : %s, 이메일 : %s, 가입일 : %s\n",
@@ -125,7 +124,7 @@ public class MemberHandler {
 
   public void update() {
     System.out.println();
-    System.out.println("▶ 프로필 수정하기");
+    System.out.println("▶ 프로필 수정");
 
     Member member = LoginHandler.getLoginUser();
 
@@ -198,7 +197,7 @@ public class MemberHandler {
 
   public void findEmail() {
     System.out.println();
-    System.out.println("☞ 이메일 찾기");
+    System.out.println("▶ 이메일 찾기");
     while (true) {
       String inputNick =  Prompt.inputString("닉네임: ");
       Member member = findByNick(inputNick);
