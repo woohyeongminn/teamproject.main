@@ -16,6 +16,7 @@ public class MenuGroup extends Menu {
   int size;
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
+  static public boolean successLogin = false;
 
   // 이전으로 이동시키는 메뉴를 표현하기 위해 만든 클래스
   private static class PrevMenu extends Menu {
@@ -89,6 +90,12 @@ public class MenuGroup extends Menu {
     breadCrumb.push(this);
 
     while (true) {
+      if (successLogin) {
+        successLogin = false;
+        breadCrumb.pop();
+        return;
+      }
+
       printBreadCrumbMenuTitle();
       List<Menu> menuList = getMenuList();
       printMenuList(menuList);

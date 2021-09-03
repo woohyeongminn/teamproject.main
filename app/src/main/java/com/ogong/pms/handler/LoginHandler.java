@@ -1,6 +1,7 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
@@ -34,6 +35,7 @@ public class LoginHandler {
         member.setPerPassword(inputPassword);
         System.out.println("로그인되었습니다.");
         loginUser = member;
+        MenuGroup.successLogin = true;
         return;
       }
       String input = Prompt.inputString("비밀번호를 잊어버렸나요?(y/N) ");
