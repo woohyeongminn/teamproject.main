@@ -37,12 +37,13 @@ public class AdminNoticeHandler {
   public void add() {
     System.out.println();
     System.out.println("▶ 공지 등록");
+    System.out.println();
 
     AdminNotice adminWriteList = new AdminNotice();
 
-    adminWriteList.setAdminNotiNo(Prompt.inputInt("번호? "));
-    adminWriteList.setAdminNotiTitle(Prompt.inputString("제목? "));
-    adminWriteList.setAdminNotiContent(Prompt.inputString("내용? "));
+    adminWriteList.setAdminNotiNo(Prompt.inputInt("번호 : "));
+    adminWriteList.setAdminNotiTitle(Prompt.inputString("제목 : "));
+    adminWriteList.setAdminNotiContent(Prompt.inputString("내용 : "));
     adminWriteList.setAdminNotiWriter(AdminHandler.getLoginAdmin());
     adminWriteList.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -52,21 +53,23 @@ public class AdminNoticeHandler {
   public void list() {
     System.out.println();
     System.out.println("▶ 공지 목록");
+    System.out.println();
 
     for (AdminNotice adminWriteList : adminNoticeList) {
-      System.out.printf("%d. %s %s %s\n", 
+      System.out.printf("(%d)\n 제목 : %s\n 작성자 : %s\n 등록일 : %s\n", 
           adminWriteList.getAdminNotiNo(), 
           adminWriteList.getAdminNotiTitle(),
           adminWriteList.getAdminNotiWriter().getMasterNickname(),
           adminWriteList.getAdminNotiRegisteredDate());
+      System.out.println();
     }      
-
   }
 
   public void detail() {
     System.out.println();
     System.out.println("▶ 공지 상세");
-    int adminnotiNo = Prompt.inputInt("번호? ");
+    int adminnotiNo = Prompt.inputInt("번호 : ");
+    System.out.println();
 
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
@@ -84,7 +87,7 @@ public class AdminNoticeHandler {
   public void update() {
     System.out.println();
     System.out.println("▶ 공지 변경");
-    int adminnotiNo = Prompt.inputInt("번호? ");
+    int adminnotiNo = Prompt.inputInt("번호 : ");
 
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
@@ -93,11 +96,13 @@ public class AdminNoticeHandler {
       return;
     }
 
-    String adminNoticeTitle = Prompt.inputString(String.format("제목(%s)? ", adminWriteList.getAdminNotiTitle()));
-    String adminNoticeContent = Prompt.inputString(String.format("내용(%s)? ", adminWriteList.getAdminNotiContent()));
+    String adminNoticeTitle = Prompt.inputString(
+        String.format("제목(%s) : ", adminWriteList.getAdminNotiTitle()));
+    String adminNoticeContent = Prompt.inputString(
+        String.format("내용(%s) : ", adminWriteList.getAdminNotiContent()));
 
-    String inputnotice = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (inputnotice.equalsIgnoreCase("n") || inputnotice.length() == 0) {
+    String inputnotice = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (inputnotice.equalsIgnoreCase("아니오") || inputnotice.length() == 0) {
       System.out.println("변경이 취소되었습니다.");
       return;
     }
@@ -110,7 +115,7 @@ public class AdminNoticeHandler {
   public void delete() {
     System.out.println();
     System.out.println("▶ 공지 삭제");
-    int adminnotiNo = Prompt.inputInt("번호? ");
+    int adminnotiNo = Prompt.inputInt("번호 : ");
 
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
@@ -119,8 +124,8 @@ public class AdminNoticeHandler {
       return;
     }
 
-    String inputnotice = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (inputnotice.equalsIgnoreCase("n") || inputnotice.length() == 0) {
+    String inputnotice = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
+    if (inputnotice.equalsIgnoreCase("아니오") || inputnotice.length() == 0) {
       System.out.println("삭제가 취소되었습니다.");
       return;
     }

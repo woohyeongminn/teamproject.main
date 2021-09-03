@@ -29,12 +29,13 @@ public class AskBoardHandler {
   public void add() {
     System.out.println();
     System.out.println("▶ 문의사항");
+    System.out.println();
 
     AskBoard askList = new AskBoard();
 
-    askList.setAskNo(Prompt.inputInt("번호? "));
-    askList.setAskTitle(Prompt.inputString("제목? "));
-    askList.setAskContent(Prompt.inputString("내용? "));
+    askList.setAskNo(Prompt.inputInt("번호 : "));
+    askList.setAskTitle(Prompt.inputString("제목 : "));
+    askList.setAskContent(Prompt.inputString("내용 : "));
     askList.setAskWriter(LoginHandler.getLoginUser());
     askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -46,12 +47,13 @@ public class AskBoardHandler {
     System.out.println("▶ 문의사항 목록");
 
     for (AskBoard askList : askBoardList) {
-      System.out.printf("%d. %s %s %s %d\n", 
+      System.out.printf("(%d)\n 제목 : %s 작성자 : %s 등록일 : %s 조회수 : %d\n", 
           askList.getAskNo(), 
           askList.getAskTitle(), 
           askList.getAskWriter().getPerNickname(),
           askList.getAskRegisteredDate(),
           askList.getAskVeiwCount());
+      System.out.println();
     }
   }
 
@@ -88,11 +90,11 @@ public class AskBoardHandler {
       return;
     }
 
-    String askTitle = Prompt.inputString(String.format("제목(%s)? ", askList.getAskTitle()));
-    String askContent = Prompt.inputString(String.format("내용(%s)? ", askList.getAskContent()));
+    String askTitle = Prompt.inputString(String.format("제목(%s) : ", askList.getAskTitle()));
+    String askContent = Prompt.inputString(String.format("내용(%s) : ", askList.getAskContent()));
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("문의글 변경을 취소하였습니다.");
       return;
     }
@@ -114,8 +116,8 @@ public class AskBoardHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("문의글 삭제를 취소하였습니다.");
       return;
     }

@@ -29,14 +29,14 @@ public class AdminHandler {
 
   public void addAdminLoginPage() {
     System.out.println();
-    String inputadminEmail = Prompt.inputString("이메일: ");
+    String inputadminEmail = Prompt.inputString("이메일 : ");
     String inputadminPassword = "";
     Admin admin = findByAdminEmail(inputadminEmail);
     if (admin == null) {
       System.out.println("관리자 이메일이 아닙니다.");
     }
     while (admin != null) {
-      inputadminPassword = Prompt.inputString("비밀번호: ");
+      inputadminPassword = Prompt.inputString("비밀번호 : ");
       if (admin.getMasterPassword().equals(inputadminPassword)) {
         admin.setMasterEmail(inputadminEmail);
         admin.setMasterPassword(inputadminPassword);
@@ -44,8 +44,8 @@ public class AdminHandler {
         loginAdmin = admin;
         return;
       }
-      String input = Prompt.inputString("비밀번호를 잊어버렸나요?(y/N) ");
-      if (input.equalsIgnoreCase("n") || input.length() == 0) {
+      String input = Prompt.inputString("비밀번호를 잊어버렸나요? (네 / 아니오) ");
+      if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
         System.out.println("비밀번호를 다시 입력하세요.");
         continue;
       } else {
@@ -55,6 +55,7 @@ public class AdminHandler {
   }
 
   public void logOut() {
+    System.out.println();
     loginAdmin = null;
     System.out.println("로그아웃 되었습니다.");
   }
@@ -73,25 +74,30 @@ public class AdminHandler {
   public void detail() {
     System.out.println();
     System.out.println("▶ 내 프로필");
+    System.out.println();
 
     Admin adminpro = getLoginAdmin();
 
-    System.out.printf("닉네임: %s\n", adminpro.getMasterNickname());
-    System.out.printf("이메일: %s\n", adminpro.getMasterEmail());
+    System.out.printf("닉네임 : %s\n", adminpro.getMasterNickname());
+    System.out.printf("이메일 : %s\n", adminpro.getMasterEmail());
   }
 
   public void update() {
     System.out.println();
     System.out.println("▶ 프로필 수정하기");
+    System.out.println();
 
     Admin adminmodify = getLoginAdmin();
 
-    String adminModifyNickName = Prompt.inputString("닉네임(" + adminmodify.getMasterNickname()  + ")? ");
-    String adminModifyEmail = Prompt.inputString("이메일(" + adminmodify.getMasterEmail() + ")? ");
-    String adminModifyPassword = Prompt.inputString("비밀번호(" + adminmodify.getMasterPassword() + ")? ");
+    String adminModifyNickName = Prompt.inputString(
+        "닉네임(" + adminmodify.getMasterNickname()  + ") : ");
+    String adminModifyEmail = Prompt.inputString(
+        "이메일(" + adminmodify.getMasterEmail() + ") : ");
+    String adminModifyPassword = Prompt.inputString(
+        "비밀번호(" + adminmodify.getMasterPassword() + ") : ");
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N) ");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("취소되었습니다.");
       return;
     }
@@ -112,7 +118,7 @@ public class AdminHandler {
     System.out.println();
     System.out.println("▶ 임시 비밀번호 발급");
     while (true) {
-      String inputEmail =  Prompt.inputString("이메일: ");
+      String inputEmail =  Prompt.inputString("이메일 : ");
       Admin adminEmail = findByEmail(inputEmail);
       if (adminEmail == null) {
         System.out.printf("%s님 이메일을 다시 입력해 주세요.", adminEmail.getMasterNickname());
