@@ -27,6 +27,7 @@ import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.pms.handler.ManagerHandler;
 import com.ogong.pms.handler.MemberHandler;
+import com.ogong.pms.handler.MyStudyHandler;
 import com.ogong.pms.handler.NoticeBoardHandler;
 import com.ogong.pms.handler.StudyHandler;
 import com.ogong.pms.handler.ToDoHandler;
@@ -46,9 +47,10 @@ public class App {
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
 
-  AdminHandler adminHandler = new AdminHandler(adminList);
   MemberHandler memberHandler = new MemberHandler(memberList);
   StudyHandler studyHandler = new StudyHandler(studyList, memberHandler);
+  MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
+  AdminHandler adminHandler = new AdminHandler(adminList);
   LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
   ManagerHandler managerHandler = new ManagerHandler(noticeBoardList, adminHandler);
   NoticeBoardHandler noticeboardHandler = new NoticeBoardHandler(noticeBoardList, managerHandler);
@@ -333,6 +335,19 @@ public class App {
     MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
     userMenuGroup.add(myStudyMenu);
     // 캘린더, 투두, 자유 게시판, 구성원, 화상채팅
+
+    myStudyMenu.add(new Menu("개인 정보") {
+      @Override
+      public void execute() {
+        memberHandler.detail();
+        selectMyPage();
+        return;
+      }});
+    myStudyMenu.add(new Menu("참여 목록") {
+      @Override
+      public void execute() {
+        myStudyHandler.list();
+      }});
 
     // 내 스터디 하위 메뉴 1 - 구성원
     // 내 스터디 하위 메뉴 2 - 캘린더

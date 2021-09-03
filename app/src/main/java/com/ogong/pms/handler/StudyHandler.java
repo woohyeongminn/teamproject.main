@@ -156,16 +156,33 @@ public class StudyHandler {
     System.out.printf("대면: %s\n", study.getFace());
     System.out.printf("소개글: %s\n", study.getIntroduction());
 
-    System.out.println();
-    System.out.println("1. 참여 신청하기");
-    System.out.println("2. 구성원보기");
-    System.out.println("3. 뒤로가기");
-    int selectNo = Prompt.inputInt("선택 ");
-    switch (selectNo) {
-      case 1 : joinStudy(study); break;
-      case 2 : listMember(study); break;
-      default : return;
+    if (study.getOwner().getPerNickname().equals(LoginHandler.loginUser.getPerNickname())) {
+      System.out.println();
+      System.out.println();
+      System.out.println("1. 구성원보기");
+      System.out.println("2. 뒤로가기");
+      int selectNo = Prompt.inputInt("선택 ");
+      switch (selectNo) {
+        case 1 : listMember(study); break;
+        case 2 : return;
+        default : return;
+      }
     }
+    try {
+      System.out.println();
+      System.out.println("1. 참여 신청하기");
+      System.out.println("2. 구성원보기");
+      System.out.println("3. 뒤로가기");
+      int selectNo = Prompt.inputInt("선택 ");
+      switch (selectNo) {
+        case 1 : joinStudy(study); break;
+        case 2 : listMember(study); break;
+        default : return;
+      }
+    } catch (NullPointerException e) {
+      System.out.println("로그인 해주세요");
+    }
+
   }
   //------------------------------------------------------------------------------------------------
 
