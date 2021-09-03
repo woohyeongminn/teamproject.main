@@ -107,7 +107,8 @@ public class CafeHandler {
     System.out.println("▶ 장소 목록");
 
     for(Cafe cafe : cafeList) {
-      System.out.printf(" 번호: %s, 이름: %s, 주소: %s, 예약가능인원: %d\n"
+      System.out.println();
+      System.out.printf(" (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
           , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
     }
 
