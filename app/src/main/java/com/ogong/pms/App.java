@@ -211,31 +211,31 @@ public class App {
 
 
     // 관리자 고객센터 - 문의사항
-    MenuGroup askMenu = new MenuGroup("문의사항");
-    csMenu.add(askMenu);
+    MenuGroup adminaskMenu = new MenuGroup("문의사항");
+    csMenu.add(adminaskMenu);
 
     // 댓글 기능x, 회원이 쓴 문의글 삭제기능x 
-    askMenu.add(new Menu("등록") {
+    adminaskMenu.add(new Menu("등록") {
       @Override
       public void execute() {
         askBoardHandler.add(); 
       }});
-    askMenu.add(new Menu("목록") {
+    adminaskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         askBoardHandler.list(); 
       }});
-    askMenu.add(new Menu("상세보기") {
+    adminaskMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
         askBoardHandler.detail(); 
       }});
-    askMenu.add(new Menu("수정") {
+    adminaskMenu.add(new Menu("수정") {
       @Override
       public void execute() {
         askBoardHandler.update(); 
       }});
-    askMenu.add(new Menu("삭제") {
+    adminaskMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
         askBoardHandler.delete(); 
