@@ -5,12 +5,11 @@ import com.ogong.pms.domain.Calender;
 
 public class CalenderListHandler extends AbstractCalenderHandler {
 
-  List<Calender> calenderList;
-
   public CalenderListHandler( List<Calender> calenderList) {
     super(calenderList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 일정 목록");
