@@ -189,35 +189,39 @@ public class App {
     return welcomeMenuGroup;
   }
 
+
+  //--------------------------------------------------------
   Menu createMenu() {
-    //---------------------------------------------------
+
     MenuGroup mainMenuGroup = new MenuGroup("메인");
     mainMenuGroup.setPrevMenuTitle("종료");
 
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createMemberMenu());
-    //    mainMenuGroup.add(createCeoMenu());
+    //mainMenuGroup.add(createCeoMenu());
 
-    //---------------------------------------------------
+
     return mainMenuGroup;
   }
 
-  // 관리자
+  // -----------------------------------------------------------------------------------------------
+  // 관리자 메인
   Menu createAdminMenu() {
     MenuGroup adminMenuGroup = new MenuGroup("관리자");
 
     adminMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_ADMINLOGOUT, "/admin/login"));
     adminMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_ADMINLOGIN, "/admin/logout"));
 
-    adminMenuGroup.add(createAdminProMenu()); // 마이 페이지
-    adminMenuGroup.add(createControlMemberMenu()); // 회원 관리
-    adminMenuGroup.add(createControlStudyMenu()); // 스터디 관리
-    adminMenuGroup.add(createControlReviewMenu()); // 장소 후기 관리
-    adminMenuGroup.add(createAdminCSMenu()); // 고객센터 관리
+    adminMenuGroup.add(createAdminProMenu());       // 마이 페이지
+    adminMenuGroup.add(createControlMemberMenu());  // 회원 관리
+    adminMenuGroup.add(createControlStudyMenu());   // 스터디 관리
+    adminMenuGroup.add(createControlReviewMenu());  // 장소 후기 관리
+    adminMenuGroup.add(createAdminCSMenu());        // 고객센터 관리
 
     return adminMenuGroup;
   }
 
+  // 관리자 하위 메뉴1 - 마이페이지
   private Menu createAdminProMenu() {
     MenuGroup adminPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_ADMINLOGIN); 
 
@@ -226,6 +230,7 @@ public class App {
     return adminPageMenu;
   }
 
+  // 관리자 하위 메뉴2 - 회원 관리
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
 
@@ -235,18 +240,21 @@ public class App {
     return adminUserMenu;
   }
 
+  // 관리자 하위 메뉴3 - 스터디 관리
   private Menu createControlStudyMenu() {
     MenuGroup adminStudyMenu = new MenuGroup("스터디 관리"); 
 
     return adminStudyMenu;
   }
 
+  // 관리자 하위 메뉴4 - 장소 후기 관리
   private Menu createControlReviewMenu() {
     MenuGroup adminStudyMenu = new MenuGroup("장소 후기 관리"); 
 
     return adminStudyMenu;
   }
 
+  //관리자 하위 메뉴5 - 고객센터 관리
   private Menu createAdminCSMenu() {
     MenuGroup csMenu = new MenuGroup("고객센터 관리");
     csMenu.add(createAdminNoticeMenu());
@@ -255,6 +263,7 @@ public class App {
     return csMenu;
   }
 
+  // 5-1
   private Menu createAdminNoticeMenu() {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
     adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
@@ -266,6 +275,8 @@ public class App {
     return adminNoticeMenu;
   }
 
+
+  // 5-2
   private Menu createAdminAskMenu() {
     MenuGroup adminaskMenu = new MenuGroup("문의사항");
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
@@ -275,7 +286,7 @@ public class App {
     return adminaskMenu;
   }
 
-  // ------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------
   // 개인 회원 메인
   Menu createMemberMenu() {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
@@ -286,6 +297,7 @@ public class App {
     return userMenuGroup;
   }
 
+  //개인 하위 메뉴1 - 스터디 장소
   private Menu createCafeMenu() {
     MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
 
@@ -299,6 +311,8 @@ public class App {
 
     return cafeMenu;
   }
+
+  //개인 하위 메뉴2 - 내 스터디
 
   private Menu createCalenderMenu() {
     MenuGroup calenderMenu = new MenuGroup("캘린더");
@@ -343,6 +357,12 @@ public class App {
     toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
     return toDoMenu;
   }
+
+  //개인 하위 메뉴2 - 모든 스터디(구현전)
+
+  //개인 하위 메뉴3 - 마이페이지
+
+  //개인 하위 메뉴4 - 내 스터디
 }
 
 
