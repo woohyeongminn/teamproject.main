@@ -31,6 +31,7 @@ public class AuthPerMemberLoginHandler implements Command {
       if (member.getPerPassword().equals(inputPassword)) {
         member.setPerEmail(inputEmail);
         member.setPerPassword(inputPassword);
+        System.out.println();
         System.out.println("로그인되었습니다.");
         loginUser = member;
         MenuGroup.successLogin = true;
