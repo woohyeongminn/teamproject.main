@@ -466,27 +466,27 @@ public class App {
     todoMenu.add(new Menu("To-Do List 등록") {
       @Override
       public void execute() {
-        toDoHandler.add(); 
+        toDoAddHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 목록") {
       @Override
       public void execute() {
-        toDoHandler.list(); 
+        toDoListHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 상세보기") {
       @Override
       public void execute() {
-        toDoHandler.detail(); 
+        toDoDetailHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 변경") {
       @Override
       public void execute() {
-        toDoHandler.update(); 
+        toDoUpdateHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 삭제") {
       @Override
       public void execute() {
-        toDoHandler.delete(); 
+        toDoDeleteHandler.execute(); 
       }});
 
     // 내 스터디 하위 메뉴 4 - 자유게시판
@@ -497,27 +497,27 @@ public class App {
     freeBoardMenu.add(new Menu("자유게시판 게시글 작성") {
       @Override
       public void execute() {
-        freeBoardHandler.add(); 
+        freeBoardAddHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 목록") {
       @Override
       public void execute() {
-        freeBoardHandler.list(); 
+        freeBoardListHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 상세보기") {
       @Override
       public void execute() {
-        freeBoardHandler.detail(); 
+        freeBoardDetailHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 수정") {
       @Override
       public void execute() {
-        freeBoardHandler.update(); 
+        freeBoardUpdateHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 삭제") {
       @Override
       public void execute() {
-        freeBoardHandler.delete(); 
+        freeBoardDeleteHandler.execute(); 
       }});
 
     // 내 스터디 하위 메뉴 5 - 화상미팅
@@ -597,27 +597,27 @@ public class App {
     askMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        askBoardHandler.add(); 
+        askBoardAddHandler.execute(); 
       }});
     askMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        askBoardHandler.list(); 
+        askBoardListHandler.execute(); 
       }});
     askMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        askBoardHandler.detail(); 
+        askBoardDetailHandler.execute(); 
       }});
     askMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        askBoardHandler.update(); 
+        askBoardUpdateHandler.execute(); 
       }});
     askMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        askBoardHandler.delete(); 
+        askBoardDeleteHandler.execute(); 
       }});
 
     return userMenuGroup;
