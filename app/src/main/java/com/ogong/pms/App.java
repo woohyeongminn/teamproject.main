@@ -31,6 +31,8 @@ import com.ogong.pms.handler.AskBoardListHandler;
 import com.ogong.pms.handler.AskBoardUpdateHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
+import com.ogong.pms.handler.AuthPerMemberLoginHandler;
+import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.CafeAddHandler;
 import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
@@ -82,6 +84,9 @@ public class App {
 
   AuthAdminLoginHandler authAdminLoginHandler = new AuthAdminLoginHandler(adminList);
   AuthAdminLogoutHandler authAdminLogoutHandler = new AuthAdminLogoutHandler(adminList);
+  AuthPerMemberLoginHandler authPerMemberLoginHandler =
+      new AuthPerMemberLoginHandler(promptPerMember);
+  AuthPerMemberLogoutHandler authPerMemberLogoutHandler = new AuthPerMemberLogoutHandler();
 
   AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList);
   AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
@@ -218,8 +223,8 @@ public class App {
     adminUserMenu.add(new Menu("개인 회원 조회") {
       @Override
       public void execute() {
-        memberHandler.list();
-        //        selectUserModifyPage();
+        memberListHandler.execute();
+        selectUserModifyPage();
         return;
       }
     });
@@ -294,27 +299,27 @@ public class App {
     adminaskMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        askBoardHandler.add(); 
+        askBoardAddHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        askBoardHandler.list(); 
+        askBoardListHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        askBoardHandler.detail(); 
+        askBoardDetailHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("수정") {
       @Override
       public void execute() {
-        askBoardHandler.update(); 
+        askBoardUpdateHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        askBoardHandler.delete(); 
+        askBoardDeleteHandler.execute(); 
       }});
 
     return adminMenuGroup;
@@ -326,7 +331,7 @@ public class App {
     userMenuGroup.add(new Menu("회원가입", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        memberHandler.add();
+        memberAddHandler.execute();
       }});
 
     //-------------------------------------------------------------
@@ -336,37 +341,37 @@ public class App {
     loginMenu.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        loginHandler.addLoginPage();
+        authPerMemberLoginHandler.execute();
       }});
     loginMenu.add(new Menu("NAVER로 시작하기", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        loginHandler.naverLogin();
+        authPerMemberLoginHandler.naverLogin();
       }});
     loginMenu.add(new Menu("KAKAO로 시작하기", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        loginHandler.kakaoLogin();
+        authPerMemberLoginHandler.kakaoLogin();
       }});
     loginMenu.add(new Menu("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        loginHandler.googleLogin();
+        authPerMemberLoginHandler.googleLogin();
       }});
     loginMenu.add(new Menu("ID/PW 찾기", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        memberHandler.selectFindEmailPw();
+        promptPerMember.selectFindEmailPw();
       }});
     loginMenu.add(new Menu("회원 가입", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        memberHandler.add();
+        memberAddHandler.execute();
       }});
     userMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
       public void execute() {
-        loginHandler.logOut();
+        authPerMemberLogoutHandler.execute();
       }});
     //--------------------------------------------------------------- 
 
@@ -379,14 +384,14 @@ public class App {
     mypageMenu.add(new Menu("개인 정보") {
       @Override
       public void execute() {
-        memberHandler.detail();
+        memberDetailHandler.execute();
         selectMyPage();
         return;
       }});
     mypageMenu.add(new Menu("예약 내역") {
       @Override
       public void execute() {
-        cafeHandler.listReservation();
+        cafeReservationListHandler.execute();
       }});
     //--------------------------------------------------------------
 
@@ -423,7 +428,7 @@ public class App {
     myStudyMenu.add(new Menu("개인 정보") {
       @Override
       public void execute() {
-        memberHandler.detail();
+        memberDetailHandler.execute();
         selectMyPage();
         return;
       }});
@@ -441,27 +446,27 @@ public class App {
     calenderMenu.add(new Menu("일정 등록") {
       @Override
       public void execute() {
-        calenderHandler.add(); 
+        calenderAddHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 목록") {
       @Override
       public void execute() {
-        calenderHandler.list(); 
+        calenderListHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 상세보기") {
       @Override
       public void execute() {
-        calenderHandler.detail(); 
+        calenderDetailHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 변경") {
       @Override
       public void execute() {
-        calenderHandler.update(); 
+        calenderUpdateHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 삭제") {
       @Override
       public void execute() {
-        calenderHandler.delete(); 
+        calenderDeleteHandler.execute(); 
       }});
 
     // 내 스터디 하위 메뉴 3 - 투두리스트
@@ -471,27 +476,27 @@ public class App {
     todoMenu.add(new Menu("To-Do List 등록") {
       @Override
       public void execute() {
-        toDoHandler.add(); 
+        toDoAddHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 목록") {
       @Override
       public void execute() {
-        toDoHandler.list(); 
+        toDoListHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 상세보기") {
       @Override
       public void execute() {
-        toDoHandler.detail(); 
+        toDoDetailHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 변경") {
       @Override
       public void execute() {
-        toDoHandler.update(); 
+        toDoUpdateHandler.execute(); 
       }});
     todoMenu.add(new Menu("To-Do List 삭제") {
       @Override
       public void execute() {
-        toDoHandler.delete(); 
+        toDoDeleteHandler.execute(); 
       }});
 
     // 내 스터디 하위 메뉴 4 - 자유게시판
@@ -502,27 +507,27 @@ public class App {
     freeBoardMenu.add(new Menu("자유게시판 게시글 작성") {
       @Override
       public void execute() {
-        freeBoardHandler.add(); 
+        freeBoardAddHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 목록") {
       @Override
       public void execute() {
-        freeBoardHandler.list(); 
+        freeBoardListHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 상세보기") {
       @Override
       public void execute() {
-        freeBoardHandler.detail(); 
+        freeBoardDetailHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 수정") {
       @Override
       public void execute() {
-        freeBoardHandler.update(); 
+        freeBoardUpdateHandler.execute(); 
       }});
     freeBoardMenu.add(new Menu("자유게시판 게시글 삭제") {
       @Override
       public void execute() {
-        freeBoardHandler.delete(); 
+        freeBoardDeleteHandler.execute(); 
       }});
 
     // 내 스터디 하위 메뉴 5 - 화상미팅
@@ -540,37 +545,37 @@ public class App {
     cafeMenu.add(new Menu("장소 등록/기업 권한") {
       @Override
       public void execute() {
-        cafeHandler.add();
+        cafeAddHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 목록") {
       @Override
       public void execute() {
-        cafeHandler.list();
+        cafeListHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 검색") {
       @Override
       public void execute() {
-        cafeHandler.find();
+        cafeSearchHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 상세보기") {
       @Override
       public void execute() {
-        cafeHandler.detail();
+        cafeDetailHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 정보 변경하기") {
       @Override
       public void execute() {
-        cafeHandler.update();
+        cafeUpdateHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 삭제하기") {
       @Override
       public void execute() {
-        cafeHandler.delete();
+        cafeDeleteHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 예약 내역 보기") {
       @Override
       public void execute() {
-        cafeHandler.listReservation();
+        cafeReservationListHandler.execute();
       }});
     //-------------------------------------------------------------- 
 
@@ -585,12 +590,12 @@ public class App {
     NoticeMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        adminNoticeHandler.list(); 
+        adminNoticeListHandler.execute(); 
       }});
     NoticeMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        adminNoticeHandler.detail(); 
+        adminNoticeDetailHandler.execute(); 
       }});
     //---------------------------------------------------
 
@@ -602,27 +607,27 @@ public class App {
     askMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        askBoardHandler.add(); 
+        askBoardAddHandler.execute(); 
       }});
     askMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        askBoardHandler.list(); 
+        askBoardListHandler.execute(); 
       }});
     askMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        askBoardHandler.detail(); 
+        askBoardDetailHandler.execute(); 
       }});
     askMenu.add(new Menu("변경") {
       @Override
       public void execute() {
-        askBoardHandler.update(); 
+        askBoardUpdateHandler.execute(); 
       }});
     askMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        askBoardHandler.delete(); 
+        askBoardDeleteHandler.execute(); 
       }});
 
     return userMenuGroup;
@@ -633,43 +638,44 @@ public class App {
     return null;
   }
 
-  // 문의게시판> 관리자가 멤버 글에 들어가면 오류 뜸 권한이 없음 --------------
-  //  private void selectMyPage() {
-  //
-  //    if (LoginHandler.getLoginUser() != null) {
-  //      System.out.println();
-  //      System.out.println("1. 수정하기");
-  //      System.out.println("2. 문의 내역");
-  //      System.out.println("3. 탈퇴하기");
-  //      System.out.println("4. 뒤로가기");
-  //
-  //      int selectNo = Prompt.inputInt("선택> ");
-  //      switch (selectNo) {
-  //        case 1: memberHandler.update(); break;
-  //        case 2: askBoardHandler.list(); break;
-  //        case 3: memberHandler.delete(); return;
-  //        default : return;
-  //      }
-  //    }
-  //    return;
-  //  }
+  // 관리자용 문의사항
+  private void selectMyPage() {
 
-  // 관리자의 회원 조회> 관리자가 멤버 페이지 들어가면 오류 뜸 권한이 없음 --------------
-  //  private void selectUserModifyPage() {
-  //    System.out.println();
-  //    System.out.println("1. 상세보기");
-  //    System.out.println("2. 수정하기");
-  //    System.out.println("3. 삭제하기");
-  //    System.out.println("4. 뒤로가기");
-  //
-  //    int selectAdminNo = Prompt.inputInt("선택> ");
-  //    switch (selectAdminNo) {
-  //      case 1: memberHandler.detail(); break;
-  //      case 2: memberHandler.update(); break;
-  //      case 3: memberHandler.delete(); break;
-  //      default : return;
-  //    }
-  //  }
+    if (authPerMemberLoginHandler.getLoginUser() != null) {
+      System.out.println();
+      System.out.println("1. 수정하기");
+      System.out.println("2. 문의 내역");
+      System.out.println("3. 탈퇴하기");
+      System.out.println("4. 뒤로가기");
+
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1: memberUpdateHandler.execute(); break;
+        case 2: askBoardListHandler.execute(); break;
+        case 3: memberDeleteHandler.execute(); return;
+        default : return;
+      }
+    }
+    return;
+  }
+
+
+  // 관리자가 회원 조회 들어가면 권한이 없어서 하단 명령 처리 안 됨 --------------
+  private void selectUserModifyPage() {
+    System.out.println();
+    System.out.println("1. 상세보기");
+    System.out.println("2. 수정하기");
+    System.out.println("3. 삭제하기");
+    System.out.println("4. 뒤로가기");
+
+    int selectAdminNo = Prompt.inputInt("선택> ");
+    switch (selectAdminNo) {
+      case 1: memberDetailHandler.execute(); break;
+      case 2: memberUpdateHandler.execute(); break;
+      case 3: memberDeleteHandler.execute(); break;
+      default : return;
+    }
+  }
   // ---------------------------------------------
 
 
