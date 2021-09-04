@@ -28,6 +28,7 @@ import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.MyStudyHandler;
+import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyHandler;
 import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
@@ -45,6 +46,8 @@ public class App {
   List<Calender> calenderList = new ArrayList<>();
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
+
+  PromptPerMember promptPerMember = new PromptPerMember(memberList); 
 
   AdminHandler adminHandler = new AdminHandler(adminList);
   MemberHandler memberHandler = new MemberHandler(memberList);

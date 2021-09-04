@@ -7,9 +7,11 @@ import com.ogong.util.Prompt;
 public class MemberDeleteHandler extends AbstractMemberHandler {
 
   List<Member> memberList;
+  PromptPerMember promptPerMember; 
 
-  public MemberDeleteHandler(List<Member> memberList) {
+  public MemberDeleteHandler(List<Member> memberList, PromptPerMember promptPerMember) {
     super(memberList);
+    this.promptPerMember = promptPerMember;
   }
 
   // 개인
@@ -21,7 +23,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
     //    Member member = LoginHandler.getLoginUser();
     System.out.println("<본인 확인>");
     String inputEmail = Prompt.inputString("이메일 입력하세요 : ");
-    Member member = findByEmail(inputEmail);
+    Member member = promptPerMember.getMemberByPerEmail(inputEmail);
     if (member == null) {
       System.out.println("이메일을 다시 입력해주세요.");
       return;

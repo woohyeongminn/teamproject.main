@@ -6,15 +6,15 @@ import com.ogong.util.Prompt;
 
 public class AuthPerMemberLoginHandler implements Command {
 
-  AbstractMemberHandler abstractMemberHandler;
+  PromptPerMember promptPerMember;
 
   static Member loginUser;
   public static Member getLoginUser() {
     return loginUser;
   }
 
-  public AuthPerMemberLoginHandler(AbstractMemberHandler abstractMemberHandler) {
-    this.abstractMemberHandler = abstractMemberHandler;
+  public AuthPerMemberLoginHandler(PromptPerMember promptPerMember) {
+    this.promptPerMember = promptPerMember;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class AuthPerMemberLoginHandler implements Command {
     System.out.println();
     String inputEmail = Prompt.inputString("이메일 : ");
     String inputPassword = "";
-    Member member = abstractMemberHandler.findByEmail(inputEmail);
+    Member member = promptPerMember.getMemberByPerEmail(inputEmail);
     if (member == null) {
       System.out.println("등록된 회원이 아닙니다.");
     }
@@ -41,7 +41,7 @@ public class AuthPerMemberLoginHandler implements Command {
         System.out.println("비밀번호를 다시 입력하세요.");
         continue;
       } else {
-        abstractMemberHandler.findPw();
+        promptPerMember.findByPerPw();
       }
     } 
   }
