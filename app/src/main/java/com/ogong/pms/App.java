@@ -1,6 +1,7 @@
 package com.ogong.pms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import com.ogong.menu.Menu;
@@ -46,6 +47,7 @@ import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
 import com.ogong.pms.handler.CeoMemberHandler;      // 아직 하기전
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.FreeBoardAddHandler;
 import com.ogong.pms.handler.FreeBoardDeleteHandler;
 import com.ogong.pms.handler.FreeBoardDetailHandler;
@@ -79,6 +81,9 @@ public class App {
   List<Calender> calenderList = new ArrayList<>();
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
+
+  // 해시맵 추가(0904)
+  HashMap<String, Command> commandMap = new HashMap<>();
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
 
@@ -140,6 +145,25 @@ public class App {
   StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
   MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
 
+  class MenuItem extends Menu {
+    String menuId;
+
+    public MenuItem(String title, String menuId) {
+      this(title, ENABLE_ALL, menuId);
+    }
+
+    public MenuItem(String title, int enableState, String menuId) {
+      super(title, enableState);
+      this.menuId = menuId;
+    }
+
+    @Override
+    public void execute() {
+      Command command = commandMap.get(menuId);
+      command.execute();
+    }
+
+  }
 
   public static void main(String[] args) {
     App app = new App(); 
