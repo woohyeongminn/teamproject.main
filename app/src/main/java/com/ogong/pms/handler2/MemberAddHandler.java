@@ -5,12 +5,10 @@ import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class MemberAddHandler {
-
-  List<Member> memberList;
+public class MemberAddHandler extends AbstractMemberHandler {
 
   public MemberAddHandler(List<Member> memberList) {
-    this.memberList = memberList;
+    super(memberList);
 
     Member testMember = new Member();
     testMember.setPerNickname("초보초보쌩초보");

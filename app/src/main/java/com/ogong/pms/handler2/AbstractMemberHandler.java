@@ -13,7 +13,7 @@ public abstract class AbstractMemberHandler {
 
   }
 
-  private void selectFindEmailPw() {
+  public void selectFindEmailPw() {
     System.out.println();
     System.out.println("1. 이메일 찾기");
     System.out.println("2. 비밀번호 찾기");
@@ -78,7 +78,7 @@ public abstract class AbstractMemberHandler {
     return null;
   }
 
-  private Member findByNick(String inputNick) {
+  public Member findByNick(String inputNick) {
     for (Member member : memberList) {
       if (inputNick.equals(member.getPerNickname())) {
         return member;
@@ -87,7 +87,7 @@ public abstract class AbstractMemberHandler {
     return null;
   }
 
-  private Member findByEmail(String inputEmail) {
+  public Member findByEmail(String inputEmail) {
     for (Member member : memberList) {
       if (inputEmail.equals(member.getPerEmail())) {
         return member;

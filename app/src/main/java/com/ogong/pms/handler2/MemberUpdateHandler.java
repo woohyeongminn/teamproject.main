@@ -1,65 +1,16 @@
 package com.ogong.pms.handler2;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class MemberUpdateHandler {
+public class MemberUpdateHandler extends AbstractMemberHandler {
 
   List<Member> memberList;
 
   public MemberUpdateHandler(List<Member> memberList) {
-    this.memberList = memberList;
+    super(memberList);
 
-    Member testMember = new Member();
-    testMember.setPerNickname("초보초보쌩초보");
-    testMember.setPerEmail("naver");
-    testMember.setPerPassword("1111");
-    testMember.setPerPhoto("jpg");
-    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(testMember);
-
-    testMember = new Member();
-    testMember.setPerNickname("미술부장");
-    testMember.setPerEmail("gmail");
-    testMember.setPerPassword("1111");
-    testMember.setPerPhoto("jpg");
-    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-
-    memberList.add(testMember);
-    testMember = new Member();
-    testMember.setPerNickname("코딩부장");
-    testMember.setPerEmail("kakao");
-    testMember.setPerPassword("1111");
-    testMember.setPerPhoto("jpg");
-    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(testMember);
-
-    testMember = new Member();
-    testMember.setPerNickname("음악대장");
-    testMember.setPerEmail("daum");
-    testMember.setPerPassword("1111");
-    testMember.setPerPhoto("jpg");
-    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(testMember);
-
-    memberList.add(testMember);
-    testMember = new Member();
-    testMember.setPerNickname("엄강사님");
-    testMember.setPerEmail("hanmail");
-    testMember.setPerPassword("1111");
-    testMember.setPerPhoto("jpg");
-    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(testMember);
-
-    testMember = new Member();
-    testMember.setPerNickname("매니저님");
-    testMember.setPerEmail("nate");
-    testMember.setPerPassword("1111");
-    testMember.setPerPhoto("jpg");
-    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    memberList.add(testMember);
   }
 
   public void update() {
