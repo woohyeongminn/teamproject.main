@@ -87,16 +87,14 @@ public class App {
   MemberUpdateHandler memberUpdateHandler = new MemberUpdateHandler(memberList);
   MemberDeleteHandler memberDeleteHandler = new MemberDeleteHandler(memberList, promptPerMember);
 
-  StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
-  MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
-
   CafeAddHandler cafeAddHandler = new CafeAddHandler(cafeList, cafeReview, reserList);
   CafeListHandler cafeListHandler = new CafeListHandler(cafeList, cafeReview, reserList);
   CafeDetailHandler cafeDetailHandler = new CafeDetailHandler(cafeList, cafeReview, reserList);
   CafeUpdateHandler cafeUpdateHandler = new CafeUpdateHandler(cafeList, cafeReview, reserList);
   CafeDeleteHandler cafeDeleteHandler = new CafeDeleteHandler(cafeList, cafeReview, reserList);
   CafeSearchHandler cafeSearchHandler = new CafeSearchHandler(cafeList, cafeReview, reserList);
-  CafeReservationListHandler cafeReservationListHandler = new CafeReservationListHandler(cafeList, cafeReview, reserList);
+  CafeReservationListHandler cafeReservationListHandler = 
+      new CafeReservationListHandler(cafeList, cafeReview, reserList);
 
   AdminNoticeAddHandler adminNoticeAddHandler = new AdminNoticeAddHandler(adminNoticeList);
   AdminNoticeListHandler adminNoticeListHandler = new AdminNoticeListHandler(adminNoticeList);
@@ -116,13 +114,11 @@ public class App {
   ToDoDetailHandler toDoDetailHandler = new ToDoDetailHandler(toDoList);
   ToDoDeleteHandler toDoDeleteHandler = new ToDoDeleteHandler(toDoList);
 
-
   FreeBoardAddHandler freeBoardAddHandler = new FreeBoardAddHandler(freeBoardList);
   FreeBoardListHandler freeBoardListHandler = new FreeBoardListHandler(freeBoardList);
   FreeBoardDetailHandler freeBoardDetailHandler = new FreeBoardDetailHandler(freeBoardList);
   FreeBoardUpdateHandler freeBoardUpdateHandler = new FreeBoardUpdateHandler(freeBoardList);
   FreeBoardDeleteHandler freeBoardDeleteHandler = new FreeBoardDeleteHandler(freeBoardList);
-
 
   CalenderAddHandler calenderAddHandler = new CalenderAddHandler(calenderList);
   CalenderListHandler calenderListHandler = new CalenderListHandler(calenderList);
@@ -131,6 +127,8 @@ public class App {
   CalenderDeleteHandler calenderDeleteHandler = new CalenderDeleteHandler(calenderList);
 
   CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
+  StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
+  MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
 
 
   public static void main(String[] args) {
