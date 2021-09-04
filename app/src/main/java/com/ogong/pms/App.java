@@ -42,7 +42,6 @@ import com.ogong.pms.handler.CafeReservationListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CalenderAddHandler;
-import com.ogong.pms.handler.CalenderDeleteHandler;
 import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
@@ -96,12 +95,6 @@ public class App {
   AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
   AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList, adminUpdateHandler);
 
-  MemberAddHandler memberAddHandler = new MemberAddHandler(memberList);
-  MemberListHandler memberListHandler = new MemberListHandler(memberList);
-  MemberDetailHandler memberDetailHandler = new MemberDetailHandler(memberList);
-  MemberUpdateHandler memberUpdateHandler = new MemberUpdateHandler(memberList);
-  MemberDeleteHandler memberDeleteHandler = new MemberDeleteHandler(memberList, promptPerMember);
-
   CafeAddHandler cafeAddHandler = new CafeAddHandler(cafeList, cafeReview, reserList);
   CafeListHandler cafeListHandler = new CafeListHandler(cafeList, cafeReview, reserList);
   CafeDetailHandler cafeDetailHandler = new CafeDetailHandler(cafeList, cafeReview, reserList);
@@ -135,12 +128,6 @@ public class App {
   FreeBoardUpdateHandler freeBoardUpdateHandler = new FreeBoardUpdateHandler(freeBoardList);
   FreeBoardDeleteHandler freeBoardDeleteHandler = new FreeBoardDeleteHandler(freeBoardList);
 
-  CalenderAddHandler calenderAddHandler = new CalenderAddHandler(calenderList);
-  CalenderListHandler calenderListHandler = new CalenderListHandler(calenderList);
-  CalenderDetailHandler calenderDetailHandler = new CalenderDetailHandler(calenderList);
-  CalenderUpdateHandler calenderUpdateHandler = new CalenderUpdateHandler(calenderList);
-  CalenderDeleteHandler calenderDeleteHandler = new CalenderDeleteHandler(calenderList);
-
   CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
   StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
   MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
@@ -171,6 +158,18 @@ public class App {
   }
 
   public App() {
+    // 우형민
+    commandMap.put("/calender/add", new CalenderAddHandler(calenderList));
+    commandMap.put("/calender/list", new CalenderListHandler(calenderList));
+    commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList));
+    commandMap.put("/calender/update", new CalenderUpdateHandler(calenderList));
+    commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList));
+
+    commandMap.put("/member/add", new MemberAddHandler(memberList));
+    commandMap.put("/member/list", new MemberListHandler(memberList));
+    commandMap.put("/member/detail", new MemberDetailHandler(memberList));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberList));
+    commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
   }
 
