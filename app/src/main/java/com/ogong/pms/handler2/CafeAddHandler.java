@@ -70,7 +70,7 @@ public class CafeAddHandler extends AbstractCafeHandler {
     cafeList.add(cafe);
   }
 
-  public void add () {
+  public void execute () {
     System.out.println();
     System.out.println("▶ 장소 등록");
     System.out.println();
