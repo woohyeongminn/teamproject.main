@@ -293,7 +293,7 @@ public class App {
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
 
     userMenuGroup.add(createCafeMenu());
-
+    userMenuGroup.add(createMystudyMenu());
     return userMenuGroup;
   }
 
@@ -313,7 +313,32 @@ public class App {
   }
 
   //개인 하위 메뉴2 - 내 스터디
+  private Menu createMystudyMenu() {
+    MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
+    // 캘린더, 투두, 자유 게시판, 구성원, 화상채팅
+    //상세?구성원?
+    //    myStudyMenu.add(new Menu("개인 정보") {
+    //      @Override
+    //      public void execute() {
+    //        memberDetailHandler.execute();
+    //        selectMyPage();
+    //        return;
+    //      }});
+    //    myStudyMenu.add(new Menu("참여 목록") {
+    //      @Override
+    //      public void execute() {
+    //        myStudyHandler.list();
+    //      }});
+    // 내 스터디 하위 메뉴 1 - 구성원
+    // 내 스터디 하위 메뉴 5 - 화상미팅
+    // 내 스터디 하위 메뉴 6 - 탈퇴
+    myStudyMenu.add(createCalenderMenu());
+    myStudyMenu.add(createToDoMenu());
+    myStudyMenu.add(createFreeBoardMenu());
+    return myStudyMenu;
+  }
 
+  // 2-1
   private Menu createCalenderMenu() {
     MenuGroup calenderMenu = new MenuGroup("캘린더");
 
@@ -326,6 +351,30 @@ public class App {
     return calenderMenu;
   }
 
+  //2-2
+  private Menu createToDoMenu() {
+    MenuGroup toDoMenu = new MenuGroup("To-Do List");
+    toDoMenu.add(new MenuItem("등록" , "/todo/add"));
+    toDoMenu.add(new MenuItem("목록" , "/todo/list"));
+    toDoMenu.add(new MenuItem("상세" , "/todo/list"));
+    toDoMenu.add(new MenuItem("수정" , "/todo/update"));
+    toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
+    return toDoMenu;
+  }
+
+  //2-3
+  private Menu createFreeBoardMenu() {
+    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
+    freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
+    freeBoardMenu.add(new MenuItem("게시글 목록" , "/freeBoard/list"));
+    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/list"));
+    freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
+    freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
+    return freeBoardMenu;
+  }
+
+
+  //개인 하위 메뉴3 - 고객센터
   private Menu createAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
 
@@ -338,31 +387,11 @@ public class App {
     return askBoardMenu;
   }
 
-  private Menu createFreeBoardMenu() {
-    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
-    freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
-    freeBoardMenu.add(new MenuItem("게시글 목록" , "/freeBoard/list"));
-    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/list"));
-    freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
-    freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
-    return freeBoardMenu;
-  }
 
-  private Menu createToDoMenu() {
-    MenuGroup toDoMenu = new MenuGroup("To-Do List");
-    toDoMenu.add(new MenuItem("등록" , "/todo/add"));
-    toDoMenu.add(new MenuItem("목록" , "/todo/list"));
-    toDoMenu.add(new MenuItem("상세" , "/todo/list"));
-    toDoMenu.add(new MenuItem("수정" , "/todo/update"));
-    toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
-    return toDoMenu;
-  }
+  //개인 하위 메뉴4 - 모든 스터디(구현전)
 
-  //개인 하위 메뉴2 - 모든 스터디(구현전)
+  //개인 하위 메뉴5 - 마이페이지(구현전)
 
-  //개인 하위 메뉴3 - 마이페이지
-
-  //개인 하위 메뉴4 - 내 스터디
 }
 
 
@@ -460,29 +489,6 @@ public class App {
 
 
 //  //--------------------------------------------------------------
-//  MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
-//  userMenuGroup.add(myStudyMenu);
-//  // 캘린더, 투두, 자유 게시판, 구성원, 화상채팅
-//
-// 상세?구성원?
-//  myStudyMenu.add(new Menu("개인 정보") {
-//    @Override
-//    public void execute() {
-//      memberDetailHandler.execute();
-//      selectMyPage();
-//      return;
-//    }});
-//  myStudyMenu.add(new Menu("참여 목록") {
-//    @Override
-//    public void execute() {
-//      myStudyHandler.list();
-//    }});
-//
-//  // 내 스터디 하위 메뉴 1 - 구성원
-//  // 내 스터디 하위 메뉴 5 - 화상미팅
-//  // 내 스터디 하위 메뉴 6 - 탈퇴
-//
-////--------------------------------------------------------------
 
 
 ////--------------------------------------------------------------
