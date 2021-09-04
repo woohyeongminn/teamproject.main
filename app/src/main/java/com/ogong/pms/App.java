@@ -381,7 +381,7 @@ public class App {
     mypageMenu.add(new Menu("예약 내역") {
       @Override
       public void execute() {
-        cafeHandler.listReservation();
+        cafeReservationListHandler.execute();
       }});
     //--------------------------------------------------------------
 
@@ -535,37 +535,37 @@ public class App {
     cafeMenu.add(new Menu("장소 등록/기업 권한") {
       @Override
       public void execute() {
-        cafeHandler.add();
+        cafeAddHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 목록") {
       @Override
       public void execute() {
-        cafeHandler.list();
+        cafeListHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 검색") {
       @Override
       public void execute() {
-        cafeHandler.find();
+        cafeSearchHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 상세보기") {
       @Override
       public void execute() {
-        cafeHandler.detail();
+        cafeDetailHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 정보 변경하기") {
       @Override
       public void execute() {
-        cafeHandler.update();
+        cafeUpdateHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 삭제하기") {
       @Override
       public void execute() {
-        cafeHandler.delete();
+        cafeDeleteHandler.execute();
       }});
     cafeMenu.add(new Menu("장소 예약 내역 보기") {
       @Override
       public void execute() {
-        cafeHandler.listReservation();
+        cafeReservationListHandler.execute();
       }});
     //-------------------------------------------------------------- 
 
