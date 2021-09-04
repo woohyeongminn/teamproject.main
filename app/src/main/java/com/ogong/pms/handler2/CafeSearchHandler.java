@@ -12,7 +12,7 @@ public class CafeSearchHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
   }
 
-  public void find() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 장소 검색");
 

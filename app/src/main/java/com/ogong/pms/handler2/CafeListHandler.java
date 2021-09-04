@@ -12,7 +12,7 @@ public class CafeListHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
   }
 
-  public void list() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 장소 목록");
     System.out.println();
