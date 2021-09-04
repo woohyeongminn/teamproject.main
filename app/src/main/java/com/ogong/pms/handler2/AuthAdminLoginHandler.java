@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.Admin;
 import com.ogong.util.Prompt;
 
-public class AdminHandler {
+public class AuthAdminLoginHandler {
 
   List<Admin> adminList;
 
@@ -13,7 +13,7 @@ public class AdminHandler {
     return loginAdmin;
   }
 
-  public AdminHandler(List<Admin> adminList) {
+  public AuthAdminLoginHandler(List<Admin> adminList) {
     this.adminList = adminList;
 
     Admin testAdmin = new Admin();
@@ -53,13 +53,6 @@ public class AdminHandler {
       }
     } 
   }
-
-  public void logOut() {
-    System.out.println();
-    loginAdmin = null;
-    System.out.println("로그아웃 되었습니다.");
-  }
-
   public Admin findByAdminEmail(String masterEmail) {
     for (Admin admin : adminList) {
       if (admin.getMasterEmail().equals(masterEmail)) {
@@ -68,51 +61,6 @@ public class AdminHandler {
     }
     return null;
   }
-
-  // ----------------------------------------------------------------------
-
-  public void detail() {
-    System.out.println();
-    System.out.println("▶ 내 프로필");
-    System.out.println();
-
-    Admin adminpro = getLoginAdmin();
-
-    System.out.printf("닉네임 : %s\n", adminpro.getMasterNickname());
-    System.out.printf("이메일 : %s\n", adminpro.getMasterEmail());
-  }
-
-  public void update() {
-    System.out.println();
-    System.out.println("▶ 프로필 수정하기");
-    System.out.println();
-
-    Admin adminmodify = getLoginAdmin();
-
-    String adminModifyNickName = Prompt.inputString(
-        "닉네임(" + adminmodify.getMasterNickname()  + ") : ");
-    String adminModifyEmail = Prompt.inputString(
-        "이메일(" + adminmodify.getMasterEmail() + ") : ");
-    String adminModifyPassword = Prompt.inputString(
-        "비밀번호(" + adminmodify.getMasterPassword() + ") : ");
-
-    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
-    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
-      System.out.println("취소되었습니다.");
-      return;
-    }
-
-    adminmodify.getMasterNickname();
-    adminmodify.getMasterEmail();
-    adminmodify.getMasterPassword();
-
-    System.out.printf("%s님의 정보가 변경되었습니다.", adminmodify.getMasterNickname());
-  }
-
-  // ----------------------------------------------------------------------
-
-
-  // ----------------------------------------------------------------------
 
   private void findAdminPw() {
     System.out.println();
@@ -141,18 +89,6 @@ public class AdminHandler {
       }
     }
     return null;
-  }
-
-  public void selectAdminPage() {
-    System.out.println();
-    System.out.println("1. 수정하기");
-    System.out.println("2. 뒤로가기");
-
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      case 1: update(); break;
-      default : return;
-    }
   }
 
 }
