@@ -24,7 +24,6 @@ import com.ogong.pms.handler.AdminNoticeDeleteHandler;
 import com.ogong.pms.handler.AdminNoticeDetailHandler;
 import com.ogong.pms.handler.AdminNoticeListHandler;
 import com.ogong.pms.handler.AdminNoticeUpdateHandler;
-import com.ogong.pms.handler.AdminUpdateHandler;
 import com.ogong.pms.handler.AskBoardAddHandler;
 import com.ogong.pms.handler.AskBoardDeleteHandler;
 import com.ogong.pms.handler.AskBoardDetailHandler;
@@ -85,9 +84,6 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
-
-  AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
-  AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList, adminUpdateHandler);
 
   CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
   StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
@@ -167,6 +163,8 @@ public class App {
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(promptPerMember));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
+
+    commandMap.put("/admin/info", new AdminInfoHandler(adminList));
   }
 
   void welcomeservice() {
