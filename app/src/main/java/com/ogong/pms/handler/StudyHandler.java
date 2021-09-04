@@ -1,3 +1,5 @@
+//  수정 중.....
+
 package com.ogong.pms.handler;
 
 import java.util.ArrayList;
@@ -10,16 +12,16 @@ public class StudyHandler {
 
   //------------------------------------------------------------------------------------------------
   List<Study> studyList;
-  MemberHandler memberHandler;
+  AbstractMemberHandler abstractMemberHandler;
 
-  public StudyHandler(List<Study> newStudyList, MemberHandler memberHandler) {
+  public StudyHandler(List<Study> newStudyList, AbstractMemberHandler abstractMemberHandler) {
     this.studyList = newStudyList;
-    this.memberHandler = memberHandler;
+    this.abstractMemberHandler = abstractMemberHandler;
 
     Study testStudy = new Study();
     testStudy.setStudyNo(1);
     testStudy.setStudyTitle("삼성 NCS 뿌셔뿌셔");
-    testStudy.setOwner(memberHandler.memberList.get(0));
+    testStudy.setOwner(abstractMemberHandler.memberList.get(0));
     testStudy.setSubject("취업");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(5);
@@ -32,7 +34,7 @@ public class StudyHandler {
     testStudy = new Study();
     testStudy.setStudyNo(2);
     testStudy.setStudyTitle("하반기 삼성 공모전");
-    testStudy.setOwner(memberHandler.memberList.get(1));
+    testStudy.setOwner(abstractMemberHandler.memberList.get(1));
     testStudy.setSubject("공모전");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(6);
@@ -45,7 +47,7 @@ public class StudyHandler {
     testStudy = new Study();
     testStudy.setStudyNo(3);
     testStudy.setStudyTitle("중앙대 컴공 기말고사");
-    testStudy.setOwner(memberHandler.memberList.get(2));
+    testStudy.setOwner(abstractMemberHandler.memberList.get(2));
     testStudy.setSubject("기말고사");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(3);
@@ -58,7 +60,7 @@ public class StudyHandler {
     testStudy = new Study();
     testStudy.setStudyNo(1);
     testStudy.setStudyTitle("알고리즘 스터디");
-    testStudy.setOwner(memberHandler.memberList.get(3));
+    testStudy.setOwner(abstractMemberHandler.memberList.get(3));
     testStudy.setSubject("IT");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(2);
@@ -78,7 +80,7 @@ public class StudyHandler {
 
     study.setStudyNo(Prompt.inputInt("번호 : "));
     study.setStudyTitle(Prompt.inputString("스터디명 : "));
-    study.setOwner(LoginHandler.getLoginUser());
+    study.setOwner(PerLoginHandler.getLoginUser());
     study.setSubject(Prompt.inputString("분야 : "));
     study.setArea(Prompt.inputString("지역 : "));
     study.setNumberOfPeple(Prompt.inputInt("인원수 : "));
@@ -157,7 +159,7 @@ public class StudyHandler {
     System.out.printf("대면 : %s\n", study.getFace());
     System.out.printf("소개글 : %s\n", study.getIntroduction());
 
-    if (study.getOwner().getPerNickname().equals(LoginHandler.loginUser.getPerNickname())) {
+    if (study.getOwner().getPerNickname().equals(PerLoginHandler.loginUser.getPerNickname())) {
       System.out.println();
       System.out.println();
       System.out.println("1. 구성원보기");
@@ -191,7 +193,7 @@ public class StudyHandler {
   public void listMember(Study study) {
     System.out.println();
     System.out.println("▶ 구성원 보기");
-    Member member = LoginHandler.getLoginUser();
+    Member member = PerLoginHandler.getLoginUser();
 
     if (member == null ) {
       System.out.println("로그인 한 회원만 조회 가능합니다.");
@@ -233,7 +235,7 @@ public class StudyHandler {
   public void joinStudy(Study study) {
     System.out.println();
     System.out.println("▶ 스터디 신청");
-    Member member = LoginHandler.getLoginUser();
+    Member member = PerLoginHandler.getLoginUser();
 
     if (member == null) {
       System.out.println("로그인 한 회원만 신청 가능합니다.");
@@ -271,7 +273,7 @@ public class StudyHandler {
       return;
     }
 
-    if (study.getOwner().getPerNo() != LoginHandler.getLoginUser().getPerNo()) {
+    if (study.getOwner().getPerNo() != PerLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
@@ -309,7 +311,7 @@ public class StudyHandler {
       return;
     }
 
-    if (study.getOwner().getPerNo() != LoginHandler.getLoginUser().getPerNo()) {
+    if (study.getOwner().getPerNo() != PerLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }
