@@ -10,7 +10,6 @@ public abstract class AbstractMemberHandler implements Command {
 
   public AbstractMemberHandler(List<Member> memberList) {
     this.memberList = memberList;
-
   }
 }
 

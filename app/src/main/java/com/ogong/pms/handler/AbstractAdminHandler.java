@@ -17,6 +17,18 @@ public abstract class AbstractAdminHandler implements Command {
     this.adminList = adminList;
   }
 
+  protected void goAdminProUpdate() {
+    System.out.println();
+    System.out.println("1. 수정하기");
+    System.out.println("0. 뒤로가기");
+
+    int selectAdminNo = Prompt.inputInt("선택> ");
+    switch (selectAdminNo) {
+      case 1: update(); break;
+      default : return;
+    }
+  }
+
   public void update() {
     System.out.println();
     System.out.println("▶ 프로필 수정하기");
@@ -37,23 +49,14 @@ public abstract class AbstractAdminHandler implements Command {
       return;
     }
 
-    adminmodify.getMasterNickname();
-    adminmodify.getMasterEmail();
-    adminmodify.getMasterPassword();
+    adminmodify.setMasterNickname(adminModifyNickName);
+    adminmodify.setMasterEmail(adminModifyEmail);
+    adminmodify.setMasterPassword(adminModifyPassword);
 
     System.out.printf("%s님의 정보가 변경되었습니다.", adminmodify.getMasterNickname());
-  }
-
-  protected void goAdminProUpdate() {
     System.out.println();
-    System.out.println("1. 수정하기");
-    System.out.println("2. 뒤로가기");
-
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      case 1: update(); break;
-      default : return;
-    }
   }
+
+
 
 }

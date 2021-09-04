@@ -13,9 +13,10 @@ public class StudyUpdateHandler extends AbstractStudyHandler {
     super(newStudyList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
-    System.out.println("▶ 스터디 변경");
+    System.out.println("▶ 스터디 수정");
 
     String inputTitle = Prompt.inputString("제목 : ");
 
@@ -27,17 +28,18 @@ public class StudyUpdateHandler extends AbstractStudyHandler {
     }
 
     if (study.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
-      System.out.println("변경 권한이 없습니다.");
+      System.out.println("수정 권한이 없습니다.");
       return;
     }
 
     String studyTitle = Prompt.inputString("스터디명(" + study.getStudyTitle()  + ") : ");
     String face = Prompt.inputString("대면(" + study.getFace() + ")? ");
     String introduction = Prompt.inputString("소개글(" + study.getIntroduction() + ") : ");
+    // 인원수 변경 넣을지 말지 > 현재 참여중인 인원보다는 적게 수정할수 없음
 
-    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString("정말 수정하시겠습니까? (네 / 아니오) ");
     if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
-      System.out.println("스터디 변경을 취소하였습니다.");
+      System.out.println("스터디 수정을 취소하였습니다.");
       return;
     }
 

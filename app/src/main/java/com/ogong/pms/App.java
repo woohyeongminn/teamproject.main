@@ -55,10 +55,10 @@ import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
 import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
+import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
-import com.ogong.pms.handler.StudyDeleteHandler;
 import com.ogong.pms.handler.StudyListHandler;
 import com.ogong.pms.handler.StudyUpdateHandler;
 import com.ogong.pms.handler.ToDoAddHandler;
@@ -171,8 +171,8 @@ public class App {
     commandMap.put("/study/add", new StudyAddHandler(studyList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
-    commandMap.put("/study/delete", new StudyDeleteHandler(studyList));
 
+    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList));
   }
 
@@ -342,7 +342,6 @@ public class App {
     allStudyMenu.add(new MenuItem("등록","/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
     allStudyMenu.add(new MenuItem("변경","/study/update"));
-    allStudyMenu.add(new MenuItem("삭제","/study/delete"));
 
     return allStudyMenu; 
   }
@@ -369,6 +368,8 @@ public class App {
     // 내 스터디 하위 메뉴 5 - 화상미팅
     // 내 스터디 하위 메뉴 6 - 탈퇴
     myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
+    myStudyMenu.add(new MenuItem("내 스터디 삭제","/myStudy/delete"));    //내스터디목록 하위로 들어가야함
+
     myStudyMenu.add(createCalenderMenu());
     myStudyMenu.add(createToDoMenu());
     myStudyMenu.add(createFreeBoardMenu());

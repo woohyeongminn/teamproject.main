@@ -16,9 +16,8 @@ public abstract class AbstractStudyHandler implements Command {
   }
 
   protected void printStudyList(Study newStudy) {
-    System.out.printf("%d: ", newStudy.getStudyNo());
     for (Study study : studyList) {
-      System.out.printf("%d, %s, %s, %s, %s, %s\n",
+      System.out.printf("%d, %s, %s명, %s, %s, %s\n",
           study.getStudyNo(),
           study.getSubject(),
           study.getNumberOfPeple(),
@@ -89,6 +88,7 @@ public abstract class AbstractStudyHandler implements Command {
     }
 
     System.out.println("▼▼스터디 구성원▼▼");
+    System.out.println("조장 : " + study.getOwner().getPerNickname());
     System.out.println(study.getMemberNames());
 
     System.out.println();
@@ -140,6 +140,18 @@ public abstract class AbstractStudyHandler implements Command {
         System.out.println("이미 참여중인 스터디입니다.");
         return;
       }
+    }
+
+    for (Member memberStu : study.getWatingMember()) {
+      if (memberStu.getPerMyStudy().equals(study.getStudyTitle())) {
+        System.out.println("이미 승인대기중인 스터디입니다.");
+        return;
+      }
+    }
+
+    if(study.getMembers().size() == (study.getNumberOfPeple() - 1)) {
+      System.out.println("참여 가능 인원수를 초과하였습니다.");
+      return;
     }
 
     String input = Prompt.inputString("스터디에 참여하시겠습니까? (네 / 아니오) ");

@@ -58,7 +58,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     promptPerMember.memberList.get(2).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
-    testStudy.setStudyNo(1);
+    testStudy.setStudyNo(4);
     testStudy.setStudyTitle("알고리즘 스터디");
     testStudy.setOwner(promptPerMember.memberList.get(3));
     testStudy.setSubject("IT");
@@ -72,6 +72,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     promptPerMember.memberList.get(3).getPerMyStudy().add(testStudy);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 스터디 등록");

@@ -13,6 +13,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     super(myStudyList);
   } 
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 스터디 목록");
@@ -21,6 +22,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     for (Study study : member.getPerMyStudy()) {
       System.out.println(study.getStudyTitle());
     }
+
 
     System.out.println("----------------------");
     System.out.println("1. 상세 보기");
