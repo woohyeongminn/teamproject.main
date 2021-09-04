@@ -12,16 +12,16 @@ public class StudyHandler {
 
   //------------------------------------------------------------------------------------------------
   List<Study> studyList;
-  AbstractMemberHandler abstractMemberHandler;
+  PromptPerMember promptPerMember;
 
-  public StudyHandler(List<Study> newStudyList, AbstractMemberHandler abstractMemberHandler) {
+  public StudyHandler(List<Study> newStudyList, PromptPerMember promptPerMember) {
     this.studyList = newStudyList;
-    this.abstractMemberHandler = abstractMemberHandler;
+    this.promptPerMember = promptPerMember;
 
     Study testStudy = new Study();
     testStudy.setStudyNo(1);
     testStudy.setStudyTitle("삼성 NCS 뿌셔뿌셔");
-    testStudy.setOwner(abstractMemberHandler.memberList.get(0));
+    testStudy.setOwner(promptPerMember.memberList.get(0));
     testStudy.setSubject("취업");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(5);
@@ -34,7 +34,7 @@ public class StudyHandler {
     testStudy = new Study();
     testStudy.setStudyNo(2);
     testStudy.setStudyTitle("하반기 삼성 공모전");
-    testStudy.setOwner(abstractMemberHandler.memberList.get(1));
+    testStudy.setOwner(promptPerMember.memberList.get(1));
     testStudy.setSubject("공모전");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(6);
@@ -47,7 +47,7 @@ public class StudyHandler {
     testStudy = new Study();
     testStudy.setStudyNo(3);
     testStudy.setStudyTitle("중앙대 컴공 기말고사");
-    testStudy.setOwner(abstractMemberHandler.memberList.get(2));
+    testStudy.setOwner(promptPerMember.memberList.get(2));
     testStudy.setSubject("기말고사");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(3);
@@ -60,7 +60,7 @@ public class StudyHandler {
     testStudy = new Study();
     testStudy.setStudyNo(1);
     testStudy.setStudyTitle("알고리즘 스터디");
-    testStudy.setOwner(abstractMemberHandler.memberList.get(3));
+    testStudy.setOwner(promptPerMember.memberList.get(3));
     testStudy.setSubject("IT");
     testStudy.setArea("서울");
     testStudy.setNumberOfPeple(2);
