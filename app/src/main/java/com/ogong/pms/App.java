@@ -89,7 +89,6 @@ public class App {
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
 
   //CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
-  //StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
   //MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
 
   class MenuItem extends Menu {
