@@ -30,6 +30,7 @@ public class StudyHandler {
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
+    promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
     testStudy.setStudyNo(2);
@@ -43,6 +44,7 @@ public class StudyHandler {
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
+    promptPerMember.memberList.get(1).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
     testStudy.setStudyNo(3);
@@ -56,6 +58,7 @@ public class StudyHandler {
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
+    promptPerMember.memberList.get(2).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
     testStudy.setStudyNo(1);
@@ -69,6 +72,7 @@ public class StudyHandler {
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
     newStudyList.add(testStudy);
+    promptPerMember.memberList.get(3).getPerMyStudy().add(testStudy);
   }
   //------------------------------------------------------------------------------------------------
 
@@ -163,7 +167,7 @@ public class StudyHandler {
       System.out.println();
       System.out.println();
       System.out.println("1. 구성원보기");
-      System.out.println("2. 뒤로가기");
+      System.out.println("0. 뒤로가기");
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
         case 1 : listMember(study); break;
@@ -172,18 +176,20 @@ public class StudyHandler {
       }
       return;
     }
-
-    System.out.println();
-    System.out.println("1. 참여 신청하기");
-    System.out.println("2. 구성원보기");
-    System.out.println("3. 뒤로가기");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1 : joinStudy(study); break;
-      case 2 : listMember(study); break;
-      default : return;
+    try {
+      System.out.println();
+      System.out.println("1. 참여 신청하기");
+      System.out.println("2. 구성원보기");
+      System.out.println("0. 뒤로가기");
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1 : joinStudy(study); break;
+        case 2 : listMember(study); break;
+        default : return;
+      }
+    } catch (NullPointerException e) {
+      System.out.println("로그인 해주세요");
     }
-
 
   }
   //------------------------------------------------------------------------------------------------
@@ -221,10 +227,14 @@ public class StudyHandler {
         if (watingMember.getPerNickname().equals(input)) {
           study.getMembers().add(watingMember);
           System.out.printf("%s님이 구성원으로 승인되었습니다.", watingMember.getPerNickname());
+          List<Study> studyList = watingMember.getPerMyStudy();
+          studyList.add(study);
           m = watingMember;
         }
       }
-      study.getWatingMember().remove(m);
+      if (m != null) {
+        study.getWatingMember().remove(m);
+      }
     }
   }
   //------------------------------------------------------------------------------------------------
@@ -248,12 +258,13 @@ public class StudyHandler {
     } 
 
     String input = Prompt.inputString("스터디에 참여하시겠습니까? (네 / 아니오) ");
-    if (input.equalsIgnoreCase("아니오")) {
+    if (!input.equalsIgnoreCase("네")) {
+      System.out.println("참여 신청이 취소되었습니다.");
       return;
     }
     study.getWatingMember().add(member);
     System.out.println();
-    System.out.println("참여신청이 완료 되었습니다.\n승인이 완료될때까지 기다려주세요.");
+    System.out.println("참여 신청이 완료 되었습니다.\n승인이 완료될때까지 기다려주세요.");
   }
   //------------------------------------------------------------------------------------------------
 

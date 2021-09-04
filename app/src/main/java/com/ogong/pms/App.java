@@ -55,7 +55,12 @@ import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
 import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
+import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.PromptPerMember;
+import com.ogong.pms.handler.StudyAddHandler;
+import com.ogong.pms.handler.StudyDeleteHandler;
+import com.ogong.pms.handler.StudyListHandler;
+import com.ogong.pms.handler.StudyUpdateHandler;
 import com.ogong.pms.handler.ToDoAddHandler;
 import com.ogong.pms.handler.ToDoDeleteHandler;
 import com.ogong.pms.handler.ToDoDetailHandler;
@@ -162,6 +167,13 @@ public class App {
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
     commandMap.put("/admin/info", new AdminInfoHandler(adminList));
+
+    commandMap.put("/study/add", new StudyAddHandler(studyList, promptPerMember));
+    commandMap.put("/study/list", new StudyListHandler(studyList));
+    commandMap.put("/study/update", new StudyUpdateHandler(studyList));
+    commandMap.put("/study/delete", new StudyDeleteHandler(studyList));
+
+    commandMap.put("/myStudy/list", new MyStudyListHandler(studyList));
   }
 
   void welcomeservice() {
@@ -290,8 +302,9 @@ public class App {
     userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/member/logout"));
 
     userMenuGroup.add(createLoginMenu());
-    userMenuGroup.add(createCafeMenu());
+    userMenuGroup.add(createStudyMenu());
     userMenuGroup.add(createMystudyMenu());
+    userMenuGroup.add(createCafeMenu());
     return userMenuGroup;
   }
 
@@ -321,22 +334,20 @@ public class App {
     return loginMenu;
   }
 
-  //개인 하위 메뉴2 - 스터디 장소
-  private Menu createCafeMenu() {
-    MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
+  //개인 하위 메뉴1 - 모든스터디
+  private Menu createStudyMenu() {
+    MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
+    // 등록o 목록보기o 상세보기△(참여x) 검색x 필터x(switch문 활용) 
 
-    cafeMenu.add(new MenuItem("장소 등록/기업 권한", "/cafe/add"));
-    cafeMenu.add(new MenuItem("장소 목록", "/cafe/list"));
-    cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
-    cafeMenu.add(new MenuItem("장소 상세보기", "/cafe/detail"));
-    cafeMenu.add(new MenuItem("장소 정보 변경하기", "/cafe/update"));
-    cafeMenu.add(new MenuItem("장소 삭제하기", "/cafe/delete"));
-    cafeMenu.add(new MenuItem("장소 예약 내역 보기", "/cafe/reservationList"));
+    allStudyMenu.add(new MenuItem("등록","/study/add"));
+    allStudyMenu.add(new MenuItem("목록","/study/list"));
+    allStudyMenu.add(new MenuItem("변경","/study/update"));
+    allStudyMenu.add(new MenuItem("삭제","/study/delete"));
 
-    return cafeMenu;
+    return allStudyMenu; 
   }
 
-  //개인 하위 메뉴3 - 내 스터디
+  //개인 하위 메뉴2 - 내 스터디
   private Menu createMystudyMenu() {
     MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
 
@@ -357,14 +368,14 @@ public class App {
     // 내 스터디 하위 메뉴 1 - 구성원
     // 내 스터디 하위 메뉴 5 - 화상미팅
     // 내 스터디 하위 메뉴 6 - 탈퇴
-
+    myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
     myStudyMenu.add(createCalenderMenu());
     myStudyMenu.add(createToDoMenu());
     myStudyMenu.add(createFreeBoardMenu());
     return myStudyMenu;
   }
 
-  // 3-1
+  // 2-1
   private Menu createCalenderMenu() {
     MenuGroup calenderMenu = new MenuGroup("캘린더");
 
@@ -377,7 +388,7 @@ public class App {
     return calenderMenu;
   }
 
-  // 3-2
+  // 2-2
   private Menu createToDoMenu() {
     MenuGroup toDoMenu = new MenuGroup("To-Do List");
     toDoMenu.add(new MenuItem("등록" , "/todo/add"));
@@ -388,7 +399,7 @@ public class App {
     return toDoMenu;
   }
 
-  // 3-3
+  // 2-3
   private Menu createFreeBoardMenu() {
     MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
     freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
@@ -397,6 +408,21 @@ public class App {
     freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
     freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
     return freeBoardMenu;
+  }
+
+  //개인 하위 메뉴3 - 스터디 장소
+  private Menu createCafeMenu() {
+    MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
+
+    cafeMenu.add(new MenuItem("장소 등록/기업 권한", "/cafe/add"));
+    cafeMenu.add(new MenuItem("장소 목록", "/cafe/list"));
+    cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
+    cafeMenu.add(new MenuItem("장소 상세보기", "/cafe/detail"));
+    cafeMenu.add(new MenuItem("장소 정보 변경하기", "/cafe/update"));
+    cafeMenu.add(new MenuItem("장소 삭제하기", "/cafe/delete"));
+    cafeMenu.add(new MenuItem("장소 예약 내역 보기", "/cafe/reservationList"));
+
+    return cafeMenu;
   }
 
   //개인 하위 메뉴4 - 고객센터
