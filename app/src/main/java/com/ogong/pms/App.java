@@ -281,8 +281,8 @@ public class App {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
 
-    userMenuGroup.add(createCafeMenu());
     userMenuGroup.add(createLoginoutMenu());
+    userMenuGroup.add(createCafeMenu());
 
     return userMenuGroup;
   }
