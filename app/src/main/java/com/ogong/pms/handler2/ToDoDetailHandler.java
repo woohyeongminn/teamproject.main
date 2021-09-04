@@ -10,7 +10,8 @@ public class ToDoDetailHandler extends AbstractToDoHandler {
     super(todoList);
   }
 
-  public void detail() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 상세보기");
     int todoNo = Prompt.inputInt("선택하세요. ");

@@ -9,7 +9,8 @@ public class ToDoListHandler extends AbstractToDoHandler {
     super(todoList);
   }
 
-  public void list() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 목록");
 

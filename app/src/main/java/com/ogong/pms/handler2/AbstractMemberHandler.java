@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public abstract class AbstractMemberHandler {
+public abstract class AbstractMemberHandler implements Command {
 
   List<Member> memberList;
 

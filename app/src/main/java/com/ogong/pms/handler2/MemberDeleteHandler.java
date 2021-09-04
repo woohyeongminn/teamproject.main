@@ -13,7 +13,8 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
   }
 
   // 개인
-  public void delete() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 회원 탈퇴");
 

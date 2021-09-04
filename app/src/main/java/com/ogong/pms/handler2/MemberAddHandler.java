@@ -61,7 +61,8 @@ public class MemberAddHandler extends AbstractMemberHandler {
   }
 
   // 개인
-  public void add() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 회원가입");
 
