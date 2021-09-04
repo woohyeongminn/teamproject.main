@@ -19,6 +19,7 @@ public class AskBoardListHandler extends AbstractAskBoardHandler {
     // 0904 실행안됨
     if (askBoardList == null) {
       System.out.println("등록된 글이 없습니다.");
+      return;
     }
     //
 
