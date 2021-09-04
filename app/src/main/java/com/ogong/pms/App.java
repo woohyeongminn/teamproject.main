@@ -117,24 +117,6 @@ public class App {
   AdminNoticeDetailHandler adminNoticeDetailHandler = new AdminNoticeDetailHandler(adminNoticeList);
   AdminNoticeDeleteHandler adminNoticeDeleteHandler = new AdminNoticeDeleteHandler(adminNoticeList);
 
-  AskBoardAddHandler askBoardAddHandler = new AskBoardAddHandler(askBoardList, memberList);
-  AskBoardListHandler askBoardListHandler = new AskBoardListHandler(askBoardList, memberList);
-  AskBoardUpdateHandler askBoardUpdateHandler = new AskBoardUpdateHandler(askBoardList, memberList);
-  AskBoardDetailHandler askBoardDetailHandler = new AskBoardDetailHandler(askBoardList, memberList);
-  AskBoardDeleteHandler askBoardDeleteHandler = new AskBoardDeleteHandler(askBoardList, memberList);
-
-  ToDoAddHandler toDoAddHandler = new ToDoAddHandler(toDoList);
-  ToDoListHandler toDoListHandler = new ToDoListHandler(toDoList);
-  ToDoUpdateHandler toDoUpdateHandler = new ToDoUpdateHandler(toDoList);
-  ToDoDetailHandler toDoDetailHandler = new ToDoDetailHandler(toDoList);
-  ToDoDeleteHandler toDoDeleteHandler = new ToDoDeleteHandler(toDoList);
-
-  FreeBoardAddHandler freeBoardAddHandler = new FreeBoardAddHandler(freeBoardList);
-  FreeBoardListHandler freeBoardListHandler = new FreeBoardListHandler(freeBoardList);
-  FreeBoardDetailHandler freeBoardDetailHandler = new FreeBoardDetailHandler(freeBoardList);
-  FreeBoardUpdateHandler freeBoardUpdateHandler = new FreeBoardUpdateHandler(freeBoardList);
-  FreeBoardDeleteHandler freeBoardDeleteHandler = new FreeBoardDeleteHandler(freeBoardList);
-
   CalenderAddHandler calenderAddHandler = new CalenderAddHandler(calenderList);
   CalenderListHandler calenderListHandler = new CalenderListHandler(calenderList);
   CalenderDetailHandler calenderDetailHandler = new CalenderDetailHandler(calenderList);
@@ -171,6 +153,24 @@ public class App {
   }
 
   public App() {
+    // 은채 추가함
+    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
+
+    commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
+    commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
+    commandMap.put("/toDo/detail", new ToDoUpdateHandler(toDoList));
+    commandMap.put("/toDo/update", new ToDoDetailHandler(toDoList));
+    commandMap.put("/toDo/delete", new ToDoDeleteHandler(toDoList));
+
+    commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/detail", new AskBoardUpdateHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/update", new AskBoardDetailHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList));
 
   }
 
