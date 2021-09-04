@@ -20,8 +20,14 @@ import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminHandler;
 import com.ogong.pms.handler.AdminNoticeHandler;
 import com.ogong.pms.handler.AskBoardHandler;
-import com.ogong.pms.handler.CafeHandler;
+import com.ogong.pms.handler.CafeAddHandler;
+import com.ogong.pms.handler.CafeDeleteHandler;
+import com.ogong.pms.handler.CafeDetailHandler;
+import com.ogong.pms.handler.CafeListHandler;
 import com.ogong.pms.handler.CafeReservationHandler;
+import com.ogong.pms.handler.CafeReservationListHandler;
+import com.ogong.pms.handler.CafeSearchHandler;
+import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CalenderHandler;
 import com.ogong.pms.handler.CeoMemberHandler;
 import com.ogong.pms.handler.FreeBoardHandler;
@@ -56,7 +62,15 @@ public class App {
   LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
   AdminNoticeHandler adminNoticeHandler = new AdminNoticeHandler(adminNoticeList, adminList);
   AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList, memberList);
-  CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, reserList);
+
+  CafeAddHandler cafeAddHandler = new CafeAddHandler(cafeList, cafeReview, reserList);
+  CafeListHandler cafeListHandler = new CafeListHandler(cafeList, cafeReview, reserList);
+  CafeDetailHandler cafeDetailHandler = new CafeDetailHandler(cafeList, cafeReview, reserList);
+  CafeUpdateHandler cafeUpdateHandler = new CafeUpdateHandler(cafeList, cafeReview, reserList);
+  CafeDeleteHandler cafeDeleteHandler = new CafeDeleteHandler(cafeList, cafeReview, reserList);
+  CafeSearchHandler cafeSearchHandler = new CafeSearchHandler(cafeList, cafeReview, reserList);
+  CafeReservationListHandler cafeReservationListHandler = new CafeReservationListHandler(cafeList, cafeReview, reserList);
+
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
   FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
