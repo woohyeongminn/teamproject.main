@@ -74,7 +74,7 @@ public abstract class AbstractCafeHandler implements Command {
 
     String input = Prompt.inputString("정말 예약하시겠습니까? (네 / 아니오) ");
 
-    if (input.equalsIgnoreCase("아니오")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println("장소예약을 취소하였습니다.");
       return;
     }

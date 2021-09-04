@@ -148,7 +148,7 @@ public class App {
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList));
-    commandMap.put("/cafe/reservationsList", new CafeReservationListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/reservationList", new CafeReservationListHandler(cafeList, cafeReview, reserList));
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
@@ -287,7 +287,7 @@ public class App {
   Menu createMemberMenu() {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
-    userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGOUT, "/member/logout"));
+    userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/member/logout"));
 
     userMenuGroup.add(createLoginMenu());
     userMenuGroup.add(createCafeMenu());
