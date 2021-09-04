@@ -282,8 +282,43 @@ public class App {
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
 
     userMenuGroup.add(createCafeMenu());
+    userMenuGroup.add(createLoginoutMenu());
 
     return userMenuGroup;
+  }
+
+  private Menu createLoginoutMenu() {
+    MenuGroup loginMenu = new MenuGroup("로그인", Menu.ENABLE_LOGOUT); 
+
+    loginMenu.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
+    loginMenu.add(new MenuItem("NAVER로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    loginMenu.add(new MenuItem("KAKAO로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    loginMenu.add(new MenuItem("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    loginMenu.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    loginMenu.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
+    loginMenu.add(new MenuItem("로그아웃", Menu.ENABLE_LOGOUT, "/member/logout"));
+
+    //  loginMenu.add(new Menu("NAVER로 시작하기", Menu.ENABLE_LOGOUT) {
+    //  @Override
+    //  public void execute() {
+    //    authPerMemberLoginHandler.naverLogin();
+    //  }});
+    //loginMenu.add(new Menu("KAKAO로 시작하기", Menu.ENABLE_LOGOUT) {
+    //  @Override
+    //  public void execute() {
+    //    authPerMemberLoginHandler.kakaoLogin();
+    //  }});
+    //loginMenu.add(new Menu("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT) {
+    //  @Override
+    //  public void execute() {
+    //    authPerMemberLoginHandler.googleLogin();
+    //  }});
+    //loginMenu.add(new Menu("ID/PW 찾기", Menu.ENABLE_LOGOUT) {
+    //  @Override
+    //  public void execute() {
+    //    promptPerMember.selectFindEmailPw();
+    //  }});
+    return loginMenu;
   }
 
   private Menu createCafeMenu() {
@@ -350,44 +385,7 @@ public class App {
 
 //
 //  //-------------------------------------------------------------
-//  //로그인o, SNS로그인o, ID/PW 찾기o, 회원가입o, 로그아웃o
-//  MenuGroup loginMenu = new MenuGroup("로그인", Menu.ENABLE_LOGOUT); 
-//  userMenuGroup.add(loginMenu);
-//  loginMenu.add(new Menu("로그인", Menu.ENABLE_LOGOUT) {
-//    @Override
-//    public void execute() {
-//      authPerMemberLoginHandler.execute();
-//    }});
-//  loginMenu.add(new Menu("NAVER로 시작하기", Menu.ENABLE_LOGOUT) {
-//    @Override
-//    public void execute() {
-//      authPerMemberLoginHandler.naverLogin();
-//    }});
-//  loginMenu.add(new Menu("KAKAO로 시작하기", Menu.ENABLE_LOGOUT) {
-//    @Override
-//    public void execute() {
-//      authPerMemberLoginHandler.kakaoLogin();
-//    }});
-//  loginMenu.add(new Menu("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT) {
-//    @Override
-//    public void execute() {
-//      authPerMemberLoginHandler.googleLogin();
-//    }});
-//  loginMenu.add(new Menu("ID/PW 찾기", Menu.ENABLE_LOGOUT) {
-//    @Override
-//    public void execute() {
-//      promptPerMember.selectFindEmailPw();
-//    }});
-//  loginMenu.add(new Menu("회원 가입", Menu.ENABLE_LOGOUT) {
-//    @Override
-//    public void execute() {
-//      memberAddHandler.execute();
-//    }});
-//  userMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
-//    @Override
-//    public void execute() {
-//      authPerMemberLogoutHandler.execute();
-//    }});
+
 //  //--------------------------------------------------------------- 
 
 
