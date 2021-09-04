@@ -1,11 +1,9 @@
 package com.ogong.pms.handler2;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
-import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class CafeDetailHandler extends AbstractCafeHandler {
@@ -60,48 +58,4 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     }
   }
 
-  public void addReservation(Cafe cafe) {
-    System.out.println();
-    System.out.println("▶ 예약하기");
-
-    Member member = PerLoginHandler.getLoginUser();
-    if (member == null) {
-      System.out.println("로그인 한 회원만 예약 가능합니다.");
-      return;
-    }
-
-    CafeReservation reservation = new CafeReservation();
-
-    Date reservationDate = Prompt.inputDate("예약 날짜 : ");
-
-    int startTime = Prompt.inputInt("시작시간(0시~24시) : ");
-    int useTime = Prompt.inputInt("이용할 시간 : ");
-    int useMemberNumber = Prompt.inputInt("사용할 인원 : ");
-    int totalPrice = useTime * useMemberNumber * cafe.getTimePrice();
-    System.out.printf("총금액 : %d원\n" , totalPrice);
-
-    String input = Prompt.inputString("정말 예약하시겠습니까? (네 / 아니오) ");
-
-    if (input.equalsIgnoreCase("아니오")) {
-      System.out.println("장소예약을 취소하였습니다.");
-      return;
-    }
-
-    reservation.setReservationNo(reservationNo++);
-    reservation.setMember(member);
-    reservation.setCafe(cafe);
-    reservation.setReservationDate(reservationDate);
-    reservation.setStartTime(startTime);
-    reservation.setUseTime(useTime);
-    reservation.setUseMemberNumber(useMemberNumber);
-    reservation.setTotalPrice(totalPrice);
-    reservation.setWirteReview(false);
-
-    cafe.setBookable(cafe.getBookable() - 1);
-
-    reserList.add(reservation);
-
-    System.out.println();
-    System.out.println("*** 예약 되었습니다 ***");
-  }
 }
