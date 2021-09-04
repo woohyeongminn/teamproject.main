@@ -74,15 +74,17 @@ public class MemberAddHandler extends AbstractMemberHandler {
     while (true) {
       String pw =  Prompt.inputString("비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
-        System.out.println("비밀번호가 일치하지 않습니다.");
+        System.out.println(" >확인 실패");
         continue;
       } else {
-        System.out.println("확인되었습니다.");
+        System.out.println(" >확인 완료!");
       }
       break;
     }
     member.setPerPhoto(Prompt.inputString("사진 : "));
     memberList.add(member);
+    System.out.println();
+    System.out.println("회원가입이 완료되었습니다.");
   }
 }
 
