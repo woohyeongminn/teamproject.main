@@ -11,7 +11,8 @@ public class ToDoAddHandler extends AbstractToDoHandler {
     super(todoList);
   }
 
-  public void add() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 등록");
 

@@ -11,7 +11,8 @@ public class MemberDetailHandler extends AbstractMemberHandler {
     super(memberList);
   }
 
-  public void detail() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 내 프로필");
 

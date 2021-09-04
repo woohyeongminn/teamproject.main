@@ -14,7 +14,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
   }
 
-  public void detail() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 장소 상세보기");
     Cafe cafe = findByName(Prompt.inputString("장소명 : "));

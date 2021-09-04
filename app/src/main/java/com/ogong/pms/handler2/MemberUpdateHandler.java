@@ -13,7 +13,8 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
 
   }
 
-  public void update() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 프로필 수정");
 

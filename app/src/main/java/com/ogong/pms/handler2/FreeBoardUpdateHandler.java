@@ -10,7 +10,8 @@ public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
     super(freeBoardList, loginHandler);
   }
 
-  public void update() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 게시글 수정");
 

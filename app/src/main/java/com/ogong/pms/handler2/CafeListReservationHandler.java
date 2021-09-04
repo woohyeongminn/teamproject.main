@@ -14,48 +14,7 @@ public class CafeListReservationHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
   }
 
-  public void addReview(CafeReservation cafeReser) {
-    System.out.println();
-    System.out.println("▶ 리뷰 등록하기");
-
-    if (PerLoginHandler.getLoginUser() == null) {
-      System.out.println("로그인 한 회원만 등록 가능합니다.");
-    } else {
-
-      Cafe cafe = cafeReser.getCafe();
-
-      CafeReview cafeReview = new CafeReview();
-
-      String content = Prompt.inputString("리뷰 내용 : ");
-      int grade = Prompt.inputInt("별점(0~5점) : ");
-      while (grade < 0 || grade > 5) {
-        System.out.println("별점을 다시 입력해주세요.");
-        grade = Prompt.inputInt("별점(0~5점) : ");
-      }
-      Member member = PerLoginHandler.getLoginUser();
-      Date registeredDate = new Date(System.currentTimeMillis());
-
-      String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
-      if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
-        System.out.println("리뷰 등록을 취소하였습니다.");
-        return;
-      }
-
-      cafeReview.setReviewNo(reviewNo++);
-      cafeReview.setContent(content);
-      cafeReview.setGrade(grade);
-      cafeReview.setCafe(cafe);
-      cafeReview.setMember(member);
-      cafeReview.setRegisteredDate(registeredDate);
-
-      reviewList.add(cafeReview);
-      cafeReser.setWirteReview(true);
-
-      System.out.println("리뷰가 등록되었습니다.");
-    }
-  }
-
-  public void listReservation() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 내 예약 내역 보기");
 
@@ -99,6 +58,48 @@ public class CafeListReservationHandler extends AbstractCafeHandler {
           System.out.println("이미 리뷰를 작성한 예약입니다.");
         }
       }
+    }
+  }
+
+
+  public void addReview(CafeReservation cafeReser) {
+    System.out.println();
+    System.out.println("▶ 리뷰 등록하기");
+
+    if (PerLoginHandler.getLoginUser() == null) {
+      System.out.println("로그인 한 회원만 등록 가능합니다.");
+    } else {
+
+      Cafe cafe = cafeReser.getCafe();
+
+      CafeReview cafeReview = new CafeReview();
+
+      String content = Prompt.inputString("리뷰 내용 : ");
+      int grade = Prompt.inputInt("별점(0~5점) : ");
+      while (grade < 0 || grade > 5) {
+        System.out.println("별점을 다시 입력해주세요.");
+        grade = Prompt.inputInt("별점(0~5점) : ");
+      }
+      Member member = PerLoginHandler.getLoginUser();
+      Date registeredDate = new Date(System.currentTimeMillis());
+
+      String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
+      if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
+        System.out.println("리뷰 등록을 취소하였습니다.");
+        return;
+      }
+
+      cafeReview.setReviewNo(reviewNo++);
+      cafeReview.setContent(content);
+      cafeReview.setGrade(grade);
+      cafeReview.setCafe(cafe);
+      cafeReview.setMember(member);
+      cafeReview.setRegisteredDate(registeredDate);
+
+      reviewList.add(cafeReview);
+      cafeReser.setWirteReview(true);
+
+      System.out.println("리뷰가 등록되었습니다.");
     }
   }
 

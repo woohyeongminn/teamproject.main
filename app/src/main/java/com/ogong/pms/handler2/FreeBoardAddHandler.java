@@ -11,7 +11,8 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
     super(freeBoardList, loginHandler);
   }
 
-  public void add() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 게시글 작성");
 

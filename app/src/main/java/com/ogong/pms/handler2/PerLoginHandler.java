@@ -4,7 +4,7 @@ import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class PerLoginHandler {
+public class PerLoginHandler implements Command {
 
   AbstractMemberHandler abstractMemberHandler;
 
@@ -17,7 +17,8 @@ public class PerLoginHandler {
     this.abstractMemberHandler = abstractMemberHandler;
   }
 
-  public void addLoginPage() {
+  @Override
+  public void execute() {
     System.out.println();
     String inputEmail = Prompt.inputString("이메일 : ");
     String inputPassword = "";

@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.util.Prompt;
 
-public abstract class AbstractToDoHandler {
+public abstract class AbstractToDoHandler implements Command {
 
   List<ToDo> todoList;
 
