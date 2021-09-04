@@ -17,6 +17,7 @@ import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
+<<<<<<< HEAD
 import com.ogong.pms.handler.AdminHandler;
 import com.ogong.pms.handler.AdminNoticeHandler;
 import com.ogong.pms.handler.AskBoardHandler;
@@ -24,19 +25,50 @@ import com.ogong.pms.handler.CafeAddHandler;
 import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
 import com.ogong.pms.handler.CafeListHandler;
-import com.ogong.pms.handler.CafeReservationHandler;
+=======
+import com.ogong.pms.handler.AdminInfoHandler;
+import com.ogong.pms.handler.AdminNoticeAddHandler;
+import com.ogong.pms.handler.AdminNoticeDeleteHandler;
+import com.ogong.pms.handler.AdminNoticeDetailHandler;
+import com.ogong.pms.handler.AdminNoticeListHandler;
+import com.ogong.pms.handler.AdminNoticeUpdateHandler;
+import com.ogong.pms.handler.AdminUpdateHandler;
+import com.ogong.pms.handler.AskBoardAddHandler;
+import com.ogong.pms.handler.AskBoardDeleteHandler;
+import com.ogong.pms.handler.AskBoardDetailHandler;
+import com.ogong.pms.handler.AskBoardListHandler;
+import com.ogong.pms.handler.AskBoardUpdateHandler;
+import com.ogong.pms.handler.CafeHandler;
+>>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
+  import com.ogong.pms.handler.CafeReservationHandler;
+<<<<<<< HEAD
 import com.ogong.pms.handler.CafeReservationListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CalenderHandler;
-import com.ogong.pms.handler.CeoMemberHandler;
+=======
+import com.ogong.pms.handler.CalenderAddHandler;
+import com.ogong.pms.handler.CalenderDeleteHandler;
+import com.ogong.pms.handler.CalenderDetailHandler;
+import com.ogong.pms.handler.CalenderListHandler;
+import com.ogong.pms.handler.CalenderUpdateHandler;
+>>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
+  import com.ogong.pms.handler.CeoMemberHandler;
 import com.ogong.pms.handler.FreeBoardHandler;
 import com.ogong.pms.handler.LoginHandler;
-import com.ogong.pms.handler.MemberHandler;
+import com.ogong.pms.handler.MemberAddHandler;
+import com.ogong.pms.handler.MemberDeleteHandler;
+import com.ogong.pms.handler.MemberDetailHandler;
+import com.ogong.pms.handler.MemberListHandler;
+import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyHandler;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyHandler;
-import com.ogong.pms.handler.ToDoHandler;
+import com.ogong.pms.handler.ToDoAddHandler;
+import com.ogong.pms.handler.ToDoDeleteHandler;
+import com.ogong.pms.handler.ToDoDetailHandler;
+import com.ogong.pms.handler.ToDoListHandler;
+import com.ogong.pms.handler.ToDoUpdateHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -55,13 +87,17 @@ public class App {
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
 
-  AdminHandler adminHandler = new AdminHandler(adminList);
-  MemberHandler memberHandler = new MemberHandler(memberList);
+  AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList);
+  AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
+
+  MemberAddHandler memberAddHandler = new MemberAddHandler(memberList);
+  MemberListHandler memberListHandler = new MemberListHandler(memberList);
+  MemberDetailHandler memberDetailHandler = new MemberDetailHandler(memberList);
+  MemberUpdateHandler memberUpdateHandler = new MemberUpdateHandler(memberList);
+  MemberDeleteHandler memberDeleteHandler = new MemberDeleteHandler(memberList, promptPerMember);
+
   StudyHandler studyHandler = new StudyHandler(studyList, memberHandler);
   MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
-  LoginHandler loginHandler = new LoginHandler(memberList, memberHandler);
-  AdminNoticeHandler adminNoticeHandler = new AdminNoticeHandler(adminNoticeList, adminList);
-  AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList, memberList);
 
   CafeAddHandler cafeAddHandler = new CafeAddHandler(cafeList, cafeReview, reserList);
   CafeListHandler cafeListHandler = new CafeListHandler(cafeList, cafeReview, reserList);
@@ -71,11 +107,34 @@ public class App {
   CafeSearchHandler cafeSearchHandler = new CafeSearchHandler(cafeList, cafeReview, reserList);
   CafeReservationListHandler cafeReservationListHandler = new CafeReservationListHandler(cafeList, cafeReview, reserList);
 
-  ToDoHandler toDoHandler = new ToDoHandler(toDoList);
+  AdminNoticeAddHandler adminNoticeAddHandler = new AdminNoticeAddHandler(adminNoticeList);
+  AdminNoticeListHandler adminNoticeListHandler = new AdminNoticeListHandler(adminNoticeList);
+  AdminNoticeUpdateHandler adminNoticeUpdateHandler = new AdminNoticeUpdateHandler(adminNoticeList);
+  AdminNoticeDetailHandler adminNoticeDetailHandler = new AdminNoticeDetailHandler(adminNoticeList);
+  AdminNoticeDeleteHandler adminNoticeDeleteHandler = new AdminNoticeDeleteHandler(adminNoticeList);
+
+  AskBoardAddHandler askBoardAddHandler = new AskBoardAddHandler(askBoardList, memberList);
+  AskBoardListHandler askBoardListHandler = new AskBoardListHandler(askBoardList, memberList);
+  AskBoardUpdateHandler askBoardUpdateHandler = new AskBoardUpdateHandler(askBoardList, memberList);
+  AskBoardDetailHandler askBoardDetailHandler = new AskBoardDetailHandler(askBoardList, memberList);
+  AskBoardDeleteHandler askBoardDeleteHandler = new AskBoardDeleteHandler(askBoardList, memberList);
+
+  ToDoAddHandler toDoAddHandler = new ToDoAddHandler(toDoList);
+  ToDoListHandler toDoListHandler = new ToDoListHandler(toDoList);
+  ToDoUpdateHandler toDoUpdateHandler = new ToDoUpdateHandler(toDoList);
+  ToDoDetailHandler toDoDetailHandler = new ToDoDetailHandler(toDoList);
+  ToDoDeleteHandler toDoDeleteHandler = new ToDoDeleteHandler(toDoList);
+
   FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
-  CalenderHandler calenderHandler = new CalenderHandler(calenderList);
-  CafeReservationHandler cafeRservationHandler = new CafeReservationHandler(reserList);
+
+  CalenderAddHandler calenderAddHandler = new CalenderAddHandler(calenderList);
+  CalenderListHandler calenderListHandler = new CalenderListHandler(calenderList);
+  CalenderDetailHandler calenderDetailHandler = new CalenderDetailHandler(calenderList);
+  CalenderUpdateHandler calenderUpdateHandler = new CalenderUpdateHandler(calenderList);
+  CalenderDeleteHandler calenderDeleteHandler = new CalenderDeleteHandler(calenderList);
+
   CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
+
 
   public static void main(String[] args) {
     App app = new App(); 
