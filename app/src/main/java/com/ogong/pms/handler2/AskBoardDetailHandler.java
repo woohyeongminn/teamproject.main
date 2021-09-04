@@ -11,7 +11,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     super(askBoardList, memberList);
   }
 
-  public void detail() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 문의사항 상세");
     int askNo = Prompt.inputInt("번호? ");
@@ -30,16 +30,6 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
 
     askList.setAskVeiwCount(askList.getAskVeiwCount() + 1);
     System.out.printf(">> %d\n", askList.getAskVeiwCount());
-  }
-
-
-  private AskBoard findByNo(int askNo) {
-    for (AskBoard askList : askBoardList) {
-      if (askList.getAskNo() == askNo) {
-        return askList;
-      }
-    }
-    return null;
   }
 }
 
