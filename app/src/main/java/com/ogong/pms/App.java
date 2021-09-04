@@ -209,7 +209,11 @@ public class App {
     adminMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_ADMINLOGOUT, "/admin/login"));
     adminMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_ADMINLOGIN, "/admin/logout"));
 
-    adminMenuGroup.add(createAdminProMenu());
+    adminMenuGroup.add(createAdminProMenu()); // 마이 페이지
+    adminMenuGroup.add(createControlMemberMenu()); // 회원 관리
+    adminMenuGroup.add(createControlStudyMenu()); // 스터디 관리
+    adminMenuGroup.add(createControlReviewMenu()); // 장소 후기 관리
+    adminMenuGroup.add(createAdminCSMenu()); // 고객센터 관리
 
     return adminMenuGroup;
   }
@@ -220,6 +224,55 @@ public class App {
     adminPageMenu.add(new MenuItem("관리자 정보", "/admin/info"));
 
     return adminPageMenu;
+  }
+
+  private Menu createControlMemberMenu() {
+    MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
+
+    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
+    adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
+
+    return adminUserMenu;
+  }
+
+  private Menu createControlStudyMenu() {
+    MenuGroup adminStudyMenu = new MenuGroup("스터디 관리"); 
+
+    return adminStudyMenu;
+  }
+
+  private Menu createControlReviewMenu() {
+    MenuGroup adminStudyMenu = new MenuGroup("장소 후기 관리"); 
+
+    return adminStudyMenu;
+  }
+
+  private Menu createAdminCSMenu() {
+    MenuGroup csMenu = new MenuGroup("고객센터 관리");
+    csMenu.add(createAdminNoticeMenu());
+    csMenu.add(createAdminAskMenu());
+
+    return csMenu;
+  }
+
+  private Menu createAdminNoticeMenu() {
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
+    adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
+    adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
+    adminNoticeMenu.add(new MenuItem("상세보기", "/adminNotice/detail"));
+    adminNoticeMenu.add(new MenuItem("수정", "/adminNotice/update"));
+    adminNoticeMenu.add(new MenuItem("삭제", "/adminNotice/delete"));
+
+    return adminNoticeMenu;
+  }
+
+  private Menu createAdminAskMenu() {
+    MenuGroup adminaskMenu = new MenuGroup("문의사항");
+    adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
+    adminaskMenu.add(new MenuItem("상세보기", "/askBoard/detail"));
+    adminaskMenu.add(new MenuItem("삭제", "/askBoard/delete"));
+
+    return adminaskMenu;
   }
 
   // ------------------------------------------------------------
@@ -241,108 +294,6 @@ public class App {
   }
 
 
-  //--------------------------------------------------------------- 
-
-  //  // 관리자 회원 관리
-  //  // 목록안에서 상세보기 기능x 삭제x (수정>보류)x
-  //  MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
-  //  adminMenuGroup.add(adminUserMenu);
-  //
-  //  adminUserMenu.add(new Menu("개인 회원 조회") {
-  //    @Override
-  //    public void execute() {
-  //      memberListHandler.execute();
-  //      selectUserModifyPage();
-  //      return;
-  //    }
-  //  });
-  //
-  //  // 목록안에서 상세보기x,삭제x,(수정>보류)x,가게승인x
-  //  adminUserMenu.add(new Menu("사장 회원 조회") {
-  //    @Override
-  //    public void execute() {
-  //      ceoMemberHandler.list();
-  //      return;
-  //    }
-  //  });
-  //  //--------------------------------------------------------------- 
-  //
-  //  //--------------------------------------------------------------- 
-  //
-  //  // 스터디 관리 
-  //  // 회원이 등록한 스터디 삭제기능x, 목록x 상세보기x 
-  //  MenuGroup adminStudyMenu = new MenuGroup("스터디 관리");
-  //  adminMenuGroup.add(adminStudyMenu);
-  //  //---------------------------------------------------------------
-  //
-  //  // 장소 후기 관리 
-  //  // 회원이 쓴 후기 삭제기능x, 목록x 상세보기x 
-  //  MenuGroup adminReviewMenu = new MenuGroup("장소 후기 관리");
-  //  adminMenuGroup.add(adminReviewMenu);
-  //  //---------------------------------------------------------------
-  //
-  //  // 관리자 고객센터 관리
-  //  MenuGroup csMenu = new MenuGroup("고객센터 관리");
-  //  adminMenuGroup.add(csMenu);
-  //
-  //  // 관리자 고객센터 관리 - 공지사항
-  //  MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
-  //  csMenu.add(adminNoticeMenu);
-  //
-  //  adminNoticeMenu.add(new Menu("등록") {
-  //    @Override
-  //    public void execute() {
-  //      adminNoticeAddHandler.execute();
-  //      return;
-  //    }});
-  //  adminNoticeMenu.add(new Menu("목록") {
-  //    @Override
-  //    public void execute() {
-  //      adminNoticeListHandler.execute(); 
-  //    }});
-  //  adminNoticeMenu.add(new Menu("상세보기") {
-  //    @Override
-  //    public void execute() {
-  //      adminNoticeDetailHandler.execute(); 
-  //    }});
-  //  adminNoticeMenu.add(new Menu("수정") {
-  //    @Override
-  //    public void execute() {
-  //      adminNoticeUpdateHandler.execute(); 
-  //    }});
-  //  adminNoticeMenu.add(new Menu("삭제") {
-  //    @Override
-  //    public void execute() {
-  //      adminNoticeDeleteHandler.execute(); 
-  //    }});
-  //
-  //  //---------------------------------------------------
-  //
-  //
-  //  // 관리자 고객센터 - 문의사항
-  //  MenuGroup adminaskMenu = new MenuGroup("문의사항");
-  //  csMenu.add(adminaskMenu);
-  //
-  //  // 댓글 기능x, 회원이 쓴 문의글 삭제기능x 
-  //  adminaskMenu.add(new Menu("목록") {
-  //    @Override
-  //    public void execute() {
-  //      askBoardListHandler.execute(); 
-  //    }});
-  //  adminaskMenu.add(new Menu("상세보기") { // 댓글 > add 필요 + 추가 예정
-  //    @Override
-  //    public void execute() {
-  //      askBoardDetailHandler.execute(); 
-  //    }});
-  //  adminaskMenu.add(new Menu("삭제") {
-  //    @Override
-  //    public void execute() {
-  //      askBoardDeleteHandler.execute(); 
-  //    }});
-  //
-  //  return adminMenuGroup;
-  //}
-  //
   //// 회원
 
   //
