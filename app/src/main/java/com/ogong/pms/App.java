@@ -87,12 +87,6 @@ public class App {
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
 
-  AuthAdminLoginHandler authAdminLoginHandler = new AuthAdminLoginHandler(adminList);
-  AuthAdminLogoutHandler authAdminLogoutHandler = new AuthAdminLogoutHandler();
-  AuthPerMemberLoginHandler authPerMemberLoginHandler =
-      new AuthPerMemberLoginHandler(promptPerMember);
-  AuthPerMemberLogoutHandler authPerMemberLogoutHandler = new AuthPerMemberLogoutHandler();
-
   AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
   AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList, adminUpdateHandler);
 
@@ -110,12 +104,6 @@ public class App {
   CafeSearchHandler cafeSearchHandler = new CafeSearchHandler(cafeList, cafeReview, reserList);
   CafeReservationListHandler cafeReservationListHandler = 
       new CafeReservationListHandler(cafeList, cafeReview, reserList);
-
-  AdminNoticeAddHandler adminNoticeAddHandler = new AdminNoticeAddHandler(adminNoticeList);
-  AdminNoticeListHandler adminNoticeListHandler = new AdminNoticeListHandler(adminNoticeList);
-  AdminNoticeUpdateHandler adminNoticeUpdateHandler = new AdminNoticeUpdateHandler(adminNoticeList);
-  AdminNoticeDetailHandler adminNoticeDetailHandler = new AdminNoticeDetailHandler(adminNoticeList);
-  AdminNoticeDeleteHandler adminNoticeDeleteHandler = new AdminNoticeDeleteHandler(adminNoticeList);
 
   AskBoardAddHandler askBoardAddHandler = new AskBoardAddHandler(askBoardList, memberList);
   AskBoardListHandler askBoardListHandler = new AskBoardListHandler(askBoardList, memberList);
@@ -172,6 +160,17 @@ public class App {
 
   public App() {
 
+    // 조솔
+    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
+    commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
+    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(adminNoticeList));
+    commandMap.put("/adminNotice/datail", new AdminNoticeDetailHandler(adminNoticeList));
+    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(adminNoticeList));
+
+    commandMap.put("/admin/login", new AuthAdminLoginHandler(adminList));
+    commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
+    commandMap.put("/member/login", new AuthPerMemberLoginHandler(promptPerMember));
+    commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
   }
 
   void welcomeservice() {
