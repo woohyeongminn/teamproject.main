@@ -108,7 +108,6 @@ public class App {
       Command command = commandMap.get(menuId);
       command.execute();
     }
-
   }
 
   public static void main(String[] args) {
@@ -243,10 +242,21 @@ public class App {
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
 
-    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
+    adminUserMenu.add(createMemberLookUpMenu());    //개인 회원 조회
     adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
 
     return adminUserMenu;
+  }
+
+  // 2-1
+  private Menu createMemberLookUpMenu() {
+    MenuGroup adminMemberLookUpMenu = new MenuGroup("개인 회원 조회", Menu.ENABLE_ADMINLOGIN); 
+    //commandMap.get("/member/list").execute();
+    adminMemberLookUpMenu.add(new MenuItem("회원 상세", "/member/detail"));
+    adminMemberLookUpMenu.add(new MenuItem("회원 수정", "/member/update"));
+    adminMemberLookUpMenu.add(new MenuItem("회원 탈퇴시키기", "/member/delete"));
+
+    return adminMemberLookUpMenu;
   }
 
   // 관리자 하위 메뉴3 - 스터디 관리

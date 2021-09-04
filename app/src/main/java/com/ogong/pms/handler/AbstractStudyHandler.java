@@ -73,7 +73,6 @@ public abstract class AbstractStudyHandler implements Command {
           default : return;
         }
       }
-
     }
   }
 
@@ -142,8 +141,8 @@ public abstract class AbstractStudyHandler implements Command {
       }
     }
 
-    for (Member memberStu : study.getWatingMember()) {
-      if (memberStu.getPerMyStudy().equals(study.getStudyTitle())) {
+    for (Member memberWating : study.getWatingMember()) {
+      if (member.getPerNickname().equals(memberWating.getPerNickname())) {
         System.out.println("이미 승인대기중인 스터디입니다.");
         return;
       }

@@ -12,10 +12,13 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
     super(calenderList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 일정 등록");
+
     Calender calender = new Calender();
+
     System.out.println();
     System.out.println("시작 날짜를 입력해 주세요.");
     calender.setMonth(Prompt.inputInt("월 : "));

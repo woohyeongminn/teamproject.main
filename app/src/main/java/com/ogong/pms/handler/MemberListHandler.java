@@ -14,7 +14,7 @@ public class MemberListHandler extends AbstractMemberHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("▶ 회원 가입 확인");
+    System.out.println("▶ 회원 목록");
     System.out.println();
 
     for (Member member : memberList) {
