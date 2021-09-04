@@ -209,7 +209,11 @@ public class App {
     adminMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_ADMINLOGOUT, "/admin/login"));
     adminMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_ADMINLOGIN, "/admin/logout"));
 
-    adminMenuGroup.add(createAdminProMenu());
+    adminMenuGroup.add(createAdminProMenu()); // 마이 페이지
+    adminMenuGroup.add(createControlMemberMenu()); // 회원 관리
+    adminMenuGroup.add(createControlStudyMenu()); // 스터디 관리
+    adminMenuGroup.add(createControlReviewMenu()); // 장소 후기 관리
+    adminMenuGroup.add(createAdminCSMenu()); // 고객센터 관리
 
     return adminMenuGroup;
   }
@@ -222,27 +226,84 @@ public class App {
     return adminPageMenu;
   }
 
+  private Menu createControlMemberMenu() {
+    MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
+
+    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
+    adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
+
+    return adminUserMenu;
+  }
+
+  private Menu createControlStudyMenu() {
+    MenuGroup adminStudyMenu = new MenuGroup("스터디 관리"); 
+
+    return adminStudyMenu;
+  }
+
+  private Menu createControlReviewMenu() {
+    MenuGroup adminStudyMenu = new MenuGroup("장소 후기 관리"); 
+
+    return adminStudyMenu;
+  }
+
+  private Menu createAdminCSMenu() {
+    MenuGroup csMenu = new MenuGroup("고객센터 관리");
+    csMenu.add(createAdminNoticeMenu());
+    csMenu.add(createAdminAskMenu());
+
+    return csMenu;
+  }
+
+  private Menu createAdminNoticeMenu() {
+    MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
+    adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
+    adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
+    adminNoticeMenu.add(new MenuItem("상세보기", "/adminNotice/detail"));
+    adminNoticeMenu.add(new MenuItem("수정", "/adminNotice/update"));
+    adminNoticeMenu.add(new MenuItem("삭제", "/adminNotice/delete"));
+
+    return adminNoticeMenu;
+  }
+
+  private Menu createAdminAskMenu() {
+    MenuGroup adminaskMenu = new MenuGroup("문의사항");
+    adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
+    adminaskMenu.add(new MenuItem("상세보기", "/askBoard/detail"));
+    adminaskMenu.add(new MenuItem("삭제", "/askBoard/delete"));
+
+    return adminaskMenu;
+  }
+
   // ------------------------------------------------------------
   // 개인 회원 메인
   Menu createMemberMenu() {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
 
+    userMenuGroup.add(createCafeMenu());
 
     return userMenuGroup;
   }
 
-  private Menu createMemberLoginoutMenu() {
+  private Menu createCafeMenu() {
+    MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
 
+    cafeMenu.add(new MenuItem("장소 등록/기업 권한", "/cafe/add"));
+    cafeMenu.add(new MenuItem("장소 목록", "/cafe/list"));
+    cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
+    cafeMenu.add(new MenuItem("장소 상세보기", "/cafe/detail"));
+    cafeMenu.add(new MenuItem("장소 정보 변경하기", "/cafe/update"));
+    cafeMenu.add(new MenuItem("장소 삭제하기", "/cafe/delete"));
+    cafeMenu.add(new MenuItem("장소 예약 내역 보기", "/cafe/reservationList"));
 
-
-
-    return ; // 수정하세용
+    return cafeMenu;
   }
 
   private Menu createCalenderMenu() {
     MenuGroup calenderMenu = new MenuGroup("캘린더");
 
+<<<<<<< HEAD
     calenderMenu.add(new MenuItem("일정 등록", "/calender/add"));
     calenderMenu.add(new MenuItem("일정 목록", "/calender/list"));
     calenderMenu.add(new MenuItem("일정 상세보기", "/calender/detail"));
@@ -263,4 +324,6 @@ public class App {
 
     return askBoardMenu;
   }
+=======
+>>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
 }
