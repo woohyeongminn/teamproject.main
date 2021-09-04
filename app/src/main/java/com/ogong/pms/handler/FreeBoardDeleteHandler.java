@@ -2,13 +2,21 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList, AuthPerMemberLoginHandler loginHandler) {
-    super(freeBoardList, loginHandler);
+
+  static Member loginUser;
+  public static Member getLoginUser() {
+    return loginUser;
   }
+
+  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList) {
+    super(freeBoardList);
+  }
+
 
   @Override
   public void execute() {
@@ -25,7 +33,7 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
       return;
     }
 
-    if (free.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
+    if (free.getFreeBoardWriter().getPerNo() != getLoginUser().getPerNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }

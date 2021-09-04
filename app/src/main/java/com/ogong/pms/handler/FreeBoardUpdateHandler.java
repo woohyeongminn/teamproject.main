@@ -2,12 +2,18 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardUpdateHandler(List<FreeBoard> freeBoardList, AuthPerMemberLoginHandler loginHandler) {
-    super(freeBoardList, loginHandler);
+  static Member loginUser;
+  public static Member getLoginUser() {
+    return loginUser;
+  }
+
+  public FreeBoardUpdateHandler(List<FreeBoard> freeBoardList) {
+    super(freeBoardList);
   }
 
   @Override

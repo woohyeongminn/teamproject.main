@@ -24,7 +24,11 @@ import com.ogong.pms.handler.CafeHandler;
 import com.ogong.pms.handler.CafeReservationHandler;
 import com.ogong.pms.handler.CalenderHandler;
 import com.ogong.pms.handler.CeoMemberHandler;
-import com.ogong.pms.handler.FreeBoardHandler;
+import com.ogong.pms.handler.FreeBoardAddHandler;
+import com.ogong.pms.handler.FreeBoardDeleteHandler;
+import com.ogong.pms.handler.FreeBoardDetailHandler;
+import com.ogong.pms.handler.FreeBoardListHandler;
+import com.ogong.pms.handler.FreeBoardUpdateHandler;
 import com.ogong.pms.handler.LoginHandler;
 import com.ogong.pms.handler.MemberHandler;
 import com.ogong.pms.handler.MyStudyHandler;
@@ -58,7 +62,13 @@ public class App {
   AskBoardHandler askBoardHandler = new AskBoardHandler(askBoardList, memberList);
   CafeHandler cafeHandler = new CafeHandler(cafeList, cafeReview, reserList);
   ToDoHandler toDoHandler = new ToDoHandler(toDoList);
-  FreeBoardHandler freeBoardHandler = new FreeBoardHandler(memberList, freeBoardList, loginHandler);
+
+  FreeBoardAddHandler freeBoardAddHandler = new FreeBoardAddHandler(freeBoardList);
+  FreeBoardListHandler freeBoardListHandler = new FreeBoardListHandler(freeBoardList);
+  FreeBoardDetailHandler freeBoardDetailHandler = new FreeBoardDetailHandler(freeBoardList);
+  FreeBoardUpdateHandler freeBoardUpdateHandler = new FreeBoardUpdateHandler(freeBoardList);
+  FreeBoardDeleteHandler freeBoardDeleteHandler = new FreeBoardDeleteHandler(freeBoardList);
+
   CalenderHandler calenderHandler = new CalenderHandler(calenderList);
   CafeReservationHandler cafeRservationHandler = new CafeReservationHandler(reserList);
   CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
