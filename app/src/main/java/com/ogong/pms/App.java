@@ -102,15 +102,6 @@ public class App {
   MemberUpdateHandler memberUpdateHandler = new MemberUpdateHandler(memberList);
   MemberDeleteHandler memberDeleteHandler = new MemberDeleteHandler(memberList, promptPerMember);
 
-  CafeAddHandler cafeAddHandler = new CafeAddHandler(cafeList, cafeReview, reserList);
-  CafeListHandler cafeListHandler = new CafeListHandler(cafeList, cafeReview, reserList);
-  CafeDetailHandler cafeDetailHandler = new CafeDetailHandler(cafeList, cafeReview, reserList);
-  CafeUpdateHandler cafeUpdateHandler = new CafeUpdateHandler(cafeList, cafeReview, reserList);
-  CafeDeleteHandler cafeDeleteHandler = new CafeDeleteHandler(cafeList, cafeReview, reserList);
-  CafeSearchHandler cafeSearchHandler = new CafeSearchHandler(cafeList, cafeReview, reserList);
-  CafeReservationListHandler cafeReservationListHandler = 
-      new CafeReservationListHandler(cafeList, cafeReview, reserList);
-
   AdminNoticeAddHandler adminNoticeAddHandler = new AdminNoticeAddHandler(adminNoticeList);
   AdminNoticeListHandler adminNoticeListHandler = new AdminNoticeListHandler(adminNoticeList);
   AdminNoticeUpdateHandler adminNoticeUpdateHandler = new AdminNoticeUpdateHandler(adminNoticeList);
@@ -171,7 +162,14 @@ public class App {
   }
 
   public App() {
-
+    // 송
+    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/reservationsList", new CafeReservationListHandler(cafeList, cafeReview, reserList));
   }
 
   void welcomeservice() {
