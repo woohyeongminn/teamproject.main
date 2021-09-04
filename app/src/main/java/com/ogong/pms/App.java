@@ -213,7 +213,7 @@ public class App {
     adminUserMenu.add(new Menu("개인 회원 조회") {
       @Override
       public void execute() {
-        memberHandler.list();
+        memberListHandler.execute();
         selectUserModifyPage();
         return;
       }
@@ -321,7 +321,7 @@ public class App {
     userMenuGroup.add(new Menu("회원가입", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        memberHandler.add();
+        memberAddHandler.execute();
       }});
 
     //-------------------------------------------------------------
@@ -356,7 +356,7 @@ public class App {
     loginMenu.add(new Menu("회원 가입", Menu.ENABLE_LOGOUT) {
       @Override
       public void execute() {
-        memberHandler.add();
+        memberAddHandler.execute();
       }});
     userMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_LOGIN) {
       @Override
@@ -374,7 +374,7 @@ public class App {
     mypageMenu.add(new Menu("개인 정보") {
       @Override
       public void execute() {
-        memberHandler.detail();
+        memberDetailHandler.execute();
         selectMyPage();
         return;
       }});
@@ -418,7 +418,7 @@ public class App {
     myStudyMenu.add(new Menu("개인 정보") {
       @Override
       public void execute() {
-        memberHandler.detail();
+        memberDetailHandler.execute();
         selectMyPage();
         return;
       }});
@@ -436,27 +436,27 @@ public class App {
     calenderMenu.add(new Menu("일정 등록") {
       @Override
       public void execute() {
-        calenderHandler.add(); 
+        calenderAddHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 목록") {
       @Override
       public void execute() {
-        calenderHandler.list(); 
+        calenderListHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 상세보기") {
       @Override
       public void execute() {
-        calenderHandler.detail(); 
+        calenderDetailHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 변경") {
       @Override
       public void execute() {
-        calenderHandler.update(); 
+        calenderUpdateHandler.execute(); 
       }});
     calenderMenu.add(new Menu("일정 삭제") {
       @Override
       public void execute() {
-        calenderHandler.delete(); 
+        calenderDeleteHandler.execute(); 
       }});
 
     // 내 스터디 하위 메뉴 3 - 투두리스트
@@ -639,9 +639,9 @@ public class App {
 
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
-        case 1: memberHandler.update(); break;
+        case 1: memberUpdateHandler.execute(); break;
         case 2: askBoardHandler.list(); break;
-        case 3: memberHandler.delete(); return;
+        case 3: memberDeleteHandler.execute(); return;
         default : return;
       }
     }
