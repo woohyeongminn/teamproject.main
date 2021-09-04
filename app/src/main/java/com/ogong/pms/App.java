@@ -301,7 +301,7 @@ public class App {
       public void execute() {
         askBoardListHandler.execute(); 
       }});
-    adminaskMenu.add(new Menu("상세보기") { // 댓글 > 추가 예정
+    adminaskMenu.add(new Menu("상세보기") { // 댓글 > add 필요 + 추가 예정
       @Override
       public void execute() {
         askBoardDetailHandler.execute(); 
