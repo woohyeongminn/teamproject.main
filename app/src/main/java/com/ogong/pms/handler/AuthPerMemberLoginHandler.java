@@ -4,7 +4,7 @@ import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class PerLoginHandler implements Command {
+public class AuthPerMemberLoginHandler implements Command {
 
   AbstractMemberHandler abstractMemberHandler;
 
@@ -13,7 +13,7 @@ public class PerLoginHandler implements Command {
     return loginUser;
   }
 
-  public PerLoginHandler(AbstractMemberHandler abstractMemberHandler) {
+  public AuthPerMemberLoginHandler(AbstractMemberHandler abstractMemberHandler) {
     this.abstractMemberHandler = abstractMemberHandler;
   }
 
@@ -22,7 +22,7 @@ public class PerLoginHandler implements Command {
     System.out.println();
     String inputEmail = Prompt.inputString("이메일 : ");
     String inputPassword = "";
-    Member member = abstractMemberHandler.findByInputEmail(inputEmail);
+    Member member = abstractMemberHandler.findByEmail(inputEmail);
     if (member == null) {
       System.out.println("등록된 회원이 아닙니다.");
     }

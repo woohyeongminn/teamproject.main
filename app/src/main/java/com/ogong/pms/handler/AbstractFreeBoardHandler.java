@@ -6,14 +6,14 @@ import com.ogong.pms.domain.FreeBoard;
 public abstract class AbstractFreeBoardHandler implements Command {
 
   List<FreeBoard> freeBoardList;
-  PerLoginHandler loginHandler;
+  AuthPerMemberLoginHandler loginHandler;
 
-  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList, PerLoginHandler loginHandler) {
+  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList, AuthPerMemberLoginHandler loginHandler) {
     this.freeBoardList = freeBoardList;
     this.loginHandler = loginHandler;
   }
 
-  public FreeBoard findByTitle (String title) {
+  protected FreeBoard findByTitle (String title) {
     for (FreeBoard board : freeBoardList) {
       if (board.getFreeBoardTitle().equalsIgnoreCase(title)) {
         return board;

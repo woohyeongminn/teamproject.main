@@ -14,7 +14,7 @@ public abstract class AbstractAskBoardHandler implements Command {
     this.memberList = memberList;
   }
 
-  public AskBoard findByNo(int askNo) {
+  protected AskBoard findByNo(int askNo) {
     for (AskBoard askList : askBoardList) {
       if (askList.getAskNo() == askNo) {
         return askList;

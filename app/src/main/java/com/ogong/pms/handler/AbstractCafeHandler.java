@@ -22,7 +22,7 @@ public abstract class AbstractCafeHandler implements Command {
     this.reserList = reserList;
   }
 
-  public String getReviewStatusLabel(String status) {
+  protected String getReviewStatusLabel(String status) {
     switch (status) {
       case "true": return "작성완료";
       case "false": return "작성가능";
@@ -30,7 +30,7 @@ public abstract class AbstractCafeHandler implements Command {
     }
   }
 
-  public Cafe findByNo(int no) {
+  protected Cafe findByNo(int no) {
     Cafe[] arr = cafeList.toArray(new Cafe[0]);
 
     for (Cafe cafe : arr) {
@@ -41,7 +41,7 @@ public abstract class AbstractCafeHandler implements Command {
     return null;
   }
 
-  public Cafe findByName(String name) {
+  protected Cafe findByName(String name) {
     Cafe[] arr = cafeList.toArray(new Cafe[0]);
 
     for (Cafe cafe : arr) {
@@ -52,11 +52,11 @@ public abstract class AbstractCafeHandler implements Command {
     return null;
   }
 
-  public void addReservation(Cafe cafe) {
+  protected void addReservation(Cafe cafe) {
     System.out.println();
     System.out.println("▶ 예약하기");
 
-    Member member = PerLoginHandler.getLoginUser();
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
     if (member == null) {
       System.out.println("로그인 한 회원만 예약 가능합니다.");
       return;
@@ -97,11 +97,11 @@ public abstract class AbstractCafeHandler implements Command {
     System.out.println("*** 예약 되었습니다 ***");
   }
 
-  public void addReview(CafeReservation cafeReser) {
+  protected void addReview(CafeReservation cafeReser) {
     System.out.println();
     System.out.println("▶ 리뷰 등록하기");
 
-    if (PerLoginHandler.getLoginUser() == null) {
+    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
       System.out.println("로그인 한 회원만 등록 가능합니다.");
     } else {
 
@@ -115,7 +115,7 @@ public abstract class AbstractCafeHandler implements Command {
         System.out.println("별점을 다시 입력해주세요.");
         grade = Prompt.inputInt("별점(0~5점) : ");
       }
-      Member member = PerLoginHandler.getLoginUser();
+      Member member = AuthPerMemberLoginHandler.getLoginUser();
       Date registeredDate = new Date(System.currentTimeMillis());
 
       String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");

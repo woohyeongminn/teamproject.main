@@ -2,7 +2,7 @@ package com.ogong.pms.handler;
 
 import com.ogong.pms.domain.Member;
 
-public class PerLogoutHandler implements Command {
+public class AuthPerMemberLogoutHandler implements Command {
 
   static Member loginUser;
   public static Member getLoginUser() {

@@ -8,44 +8,10 @@ public abstract class AbstractMemberHandler implements Command {
 
   List<Member> memberList;
 
+
   public AbstractMemberHandler(List<Member> memberList) {
     this.memberList = memberList;
 
-  }
-
-  public void selectFindEmailPw() {
-    System.out.println();
-    System.out.println("1. 이메일 찾기");
-    System.out.println("2. 비밀번호 찾기");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1 : findEmail(); break;
-      case 2 : findPw(); break;
-      default : return;
-    }
-  }
-
-  public void findEmail() {
-    System.out.println();
-    System.out.println("▶ 이메일 찾기");
-    while (true) {
-      String inputNick =  Prompt.inputString("닉네임 : ");
-      Member member = findByNick(inputNick);
-      if (member == null) {
-        System.out.println("해당 닉네임이 존재하지 않습니다.");
-        continue;
-      } else {
-        System.out.printf("%s님의 이메일 >> ", member.getPerNickname());
-        System.out.println(member.getPerEmail());
-      }
-      break;
-    }
-    String input = Prompt.inputString("비밀번호 찾기로 넘어가시겠습니까? (네 / 아니오) ");
-    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
-      System.out.println("찾기를 종료합니다.");
-      return;
-    } 
-    findPw();
   }
 
   public void findPw() {
@@ -69,23 +35,6 @@ public abstract class AbstractMemberHandler implements Command {
     }
   }
 
-  public Member findByInputEmail(String perEmail) {
-    for (Member member : memberList) {
-      if (member.getPerEmail().equals(perEmail)) {
-        return member;
-      }
-    }
-    return null;
-  }
-
-  public Member findByNick(String inputNick) {
-    for (Member member : memberList) {
-      if (inputNick.equals(member.getPerNickname())) {
-        return member;
-      }
-    }
-    return null;
-  }
 
   public Member findByEmail(String inputEmail) {
     for (Member member : memberList) {
@@ -96,7 +45,54 @@ public abstract class AbstractMemberHandler implements Command {
     return null;
   }
 
-  //-------------prompt는 login에서 사용(은채)------------------------------------------------
+  protected void findEmail() {
+    System.out.println();
+    System.out.println("▶ 이메일 찾기");
+    while (true) {
+      String inputNick =  Prompt.inputString("닉네임 : ");
+      Member member = findByNick(inputNick);
+      if (member == null) {
+        System.out.println("해당 닉네임이 존재하지 않습니다.");
+        continue;
+      } else {
+        System.out.printf("%s님의 이메일 >> ", member.getPerNickname());
+        System.out.println(member.getPerEmail());
+      }
+      break;
+    }
+    String input = Prompt.inputString("비밀번호 찾기로 넘어가시겠습니까? (네 / 아니오) ");
+    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
+      System.out.println("찾기를 종료합니다.");
+      return;
+    } 
+    findPw();
+  }
+
+
+  public Member findByNick(String inputNick) {
+    for (Member member : memberList) {
+      if (inputNick.equals(member.getPerNickname())) {
+        return member;
+      }
+    }
+    return null;
+  }
+
+  //-------------login에서 사용------------------------------------------------
+
+  protected void selectFindEmailPw() {
+    System.out.println();
+    System.out.println("1. 이메일 찾기");
+    System.out.println("2. 비밀번호 찾기");
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1 : findEmail(); break;
+      case 2 : findPw(); break;
+      default : return;
+    }
+  }
+
+
   public boolean exist(String perEmail) {
     Member[] list = memberList.toArray(new Member[0]);
     for (Member member : list) {

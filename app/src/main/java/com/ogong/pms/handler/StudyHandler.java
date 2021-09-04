@@ -80,7 +80,7 @@ public class StudyHandler {
 
     study.setStudyNo(Prompt.inputInt("번호 : "));
     study.setStudyTitle(Prompt.inputString("스터디명 : "));
-    study.setOwner(PerLoginHandler.getLoginUser());
+    study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
     study.setSubject(Prompt.inputString("분야 : "));
     study.setArea(Prompt.inputString("지역 : "));
     study.setNumberOfPeple(Prompt.inputInt("인원수 : "));
@@ -159,7 +159,7 @@ public class StudyHandler {
     System.out.printf("대면 : %s\n", study.getFace());
     System.out.printf("소개글 : %s\n", study.getIntroduction());
 
-    if (study.getOwner().getPerNickname().equals(PerLoginHandler.loginUser.getPerNickname())) {
+    if (study.getOwner().getPerNickname().equals(AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
       System.out.println();
       System.out.println();
       System.out.println("1. 구성원보기");
@@ -193,7 +193,7 @@ public class StudyHandler {
   public void listMember(Study study) {
     System.out.println();
     System.out.println("▶ 구성원 보기");
-    Member member = PerLoginHandler.getLoginUser();
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     if (member == null ) {
       System.out.println("로그인 한 회원만 조회 가능합니다.");
@@ -235,7 +235,7 @@ public class StudyHandler {
   public void joinStudy(Study study) {
     System.out.println();
     System.out.println("▶ 스터디 신청");
-    Member member = PerLoginHandler.getLoginUser();
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     if (member == null) {
       System.out.println("로그인 한 회원만 신청 가능합니다.");
@@ -273,7 +273,7 @@ public class StudyHandler {
       return;
     }
 
-    if (study.getOwner().getPerNo() != PerLoginHandler.getLoginUser().getPerNo()) {
+    if (study.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }
@@ -311,7 +311,7 @@ public class StudyHandler {
       return;
     }
 
-    if (study.getOwner().getPerNo() != PerLoginHandler.getLoginUser().getPerNo()) {
+    if (study.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }

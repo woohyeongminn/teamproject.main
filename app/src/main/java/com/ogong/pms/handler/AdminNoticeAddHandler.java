@@ -13,8 +13,8 @@ public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
     return loginAdmin;
   }
 
-  public AdminNoticeAddHandler(List<AdminNotice> adminNoticeList, List<Admin> adminList) {
-    super(adminNoticeList, adminList);
+  public AdminNoticeAddHandler(List<AdminNotice> adminNoticeList) {
+    super(adminNoticeList);
   }
 
   public void execute() {

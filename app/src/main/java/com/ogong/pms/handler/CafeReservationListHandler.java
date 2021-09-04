@@ -16,14 +16,14 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
     System.out.println();
     System.out.println("▶ 내 예약 내역 보기");
 
-    if (PerLoginHandler.getLoginUser() == null) {
+    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
       System.out.println("로그인 한 회원만 볼 수 있습니다.");
       return;
     }
 
     int count = 0;
     for (CafeReservation cafeReser : reserList) {
-      if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(PerLoginHandler.getLoginUser().getPerEmail())) {
+      if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
         System.out.printf(" 예약번호 : %d, 예약날짜 : %s, 예약장소 : %s,"
             + "\n 시작시간 : %d시, 이용시간 : %d시간, 사용인원 : %d명, "
             + "\n 결제금액 : %d원, 리뷰작성여부 : %s\n"
@@ -48,7 +48,7 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
     int input = Prompt.inputInt("리뷰 작성할 예약번호 : ");
     for (CafeReservation cafeReser : reserList) {
       if (input == cafeReser.getReservationNo() &&
-          cafeReser.getMember().getPerEmail().equalsIgnoreCase(PerLoginHandler.getLoginUser().getPerEmail())) {
+          cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
         if (!cafeReser.getWirteReview()) {
           System.out.println("리뷰 작성 화면으로 이동합니다.");
           addReview(cafeReser);
