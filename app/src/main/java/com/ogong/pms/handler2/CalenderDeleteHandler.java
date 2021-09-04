@@ -1,19 +1,18 @@
 package com.ogong.pms.handler2;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.util.Prompt;
 
-public class CalenderDeleteHandler {
+public class CalenderDeleteHandler extends AbstractCalenderHandler {
 
   List<Calender> calenderList;
 
   public CalenderDeleteHandler( List<Calender> calenderList) {
-    this.calenderList = calenderList;
+    super(calenderList);
   }
 
-  public void delete() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 일정 삭제");
 
@@ -35,17 +34,5 @@ public class CalenderDeleteHandler {
 
     System.out.println("일정이 삭제되었습니다.");
   }
-
-  private Calender findByDay(int day) {
-    Calender[] arr = calenderList.toArray(new Calender[0]);
-    for (Object obj : arr) {
-      Calender calender = (Calender) obj;
-      if (calender.getDay() == day) {
-        return calender;
-      }
-    }
-    return null;
-  }
-
 
 }

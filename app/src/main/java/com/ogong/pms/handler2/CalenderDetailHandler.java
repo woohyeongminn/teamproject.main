@@ -1,20 +1,19 @@
 package com.ogong.pms.handler2;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.util.Prompt;
 
-public class CalenderDetailHandler {
+public class CalenderDetailHandler extends AbstractCalenderHandler {
 
   List<Calender> calenderList;
 
   public CalenderDetailHandler( List<Calender> calenderList) {
-    this.calenderList = calenderList;
+    super(calenderList);
   }
 
   //------------------------------------------------------------------------------------------------
-  public void detail() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 일정 상세");
     System.out.println();
@@ -35,17 +34,5 @@ public class CalenderDetailHandler {
   }
 
   //------------------------------------------------------------------------------------------------
-
-  private Calender findByDay(int day) {
-    Calender[] arr = calenderList.toArray(new Calender[0]);
-    for (Object obj : arr) {
-      Calender calender = (Calender) obj;
-      if (calender.getDay() == day) {
-        return calender;
-      }
-    }
-    return null;
-  }
-
 
 }

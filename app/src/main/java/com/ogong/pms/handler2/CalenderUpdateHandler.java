@@ -5,19 +5,19 @@ import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.util.Prompt;
 
-public class CalenderUpdateHandler {
+public class CalenderUpdateHandler extends AbstractCalenderHandler {
 
   List<Calender> calenderList;
 
   public CalenderUpdateHandler( List<Calender> calenderList) {
-    this.calenderList = calenderList;
+    super(calenderList);
   }
 
-  
+
 
   //------------------------------------------------------------------------------------------------
 
-  public void update() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 일정 수정");
 
@@ -49,17 +49,5 @@ public class CalenderUpdateHandler {
 
     System.out.println("일정을 변경하였습니다.");
   }
-
-  private Calender findByDay(int day) {
-    Calender[] arr = calenderList.toArray(new Calender[0]);
-    for (Object obj : arr) {
-      Calender calender = (Calender) obj;
-      if (calender.getDay() == day) {
-        return calender;
-      }
-    }
-    return null;
-  }
-
 
 }

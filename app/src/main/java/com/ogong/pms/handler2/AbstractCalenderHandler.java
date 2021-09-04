@@ -3,7 +3,7 @@ package com.ogong.pms.handler2;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
 
-public abstract class AbstractCalenderHandler {
+public abstract class AbstractCalenderHandler implements Command {
 
   List<Calender> calenderList;
 
@@ -13,7 +13,7 @@ public abstract class AbstractCalenderHandler {
 
   //------------------------------------------------------------------------------------------------
 
-  private Calender findByDay(int day) {
+  protected Calender findByDay(int day) {
     Calender[] arr = calenderList.toArray(new Calender[0]);
     for (Object obj : arr) {
       Calender calender = (Calender) obj;

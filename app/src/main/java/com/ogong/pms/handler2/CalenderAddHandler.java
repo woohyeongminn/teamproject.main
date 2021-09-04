@@ -1,19 +1,18 @@
 package com.ogong.pms.handler2;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.util.Prompt;
 
-public class CalenderAddHandler {
+public class CalenderAddHandler extends AbstractCalenderHandler {
 
   List<Calender> calenderList;
 
   public CalenderAddHandler( List<Calender> calenderList) {
-    this.calenderList = calenderList;
+    super(calenderList);
   }
 
-  public void add() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 일정 등록");
     Calender calender = new Calender();
