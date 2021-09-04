@@ -232,16 +232,28 @@ public class App {
     return userMenuGroup;
   }
 
-  private Menu createMemberLoginoutMenu() {
-
-
-
-
-    return ; // 수정하세용
+  //은채
+  private Menu createFreeBoardMenu() {
+    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
+    freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
+    freeBoardMenu.add(new MenuItem("게시글 목록" , "/freeBoard/list"));
+    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/list"));
+    freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
+    freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
+    return freeBoardMenu;
   }
 
+  //은채
+  private Menu createToDoMenu() {
+    MenuGroup toDoMenu = new MenuGroup("To-Do List");
+    toDoMenu.add(new MenuItem("등록" , "/todo/add"));
+    toDoMenu.add(new MenuItem("목록" , "/todo/list"));
+    toDoMenu.add(new MenuItem("상세" , "/todo/list"));
+    toDoMenu.add(new MenuItem("수정" , "/todo/update"));
+    toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
+    return toDoMenu;
+  }
 
-  //--------------------------------------------------------------- 
 
   //  // 관리자 회원 관리
   //  // 목록안에서 상세보기 기능x 삭제x (수정>보류)x
@@ -481,66 +493,7 @@ public class App {
   //      calenderDeleteHandler.execute(); 
   //    }});
   //
-  //  // 내 스터디 하위 메뉴 3 - 투두리스트
-  //  MenuGroup todoMenu = new MenuGroup("To-Do List");
-  //  myStudyMenu.add(todoMenu);
-  //
-  //  todoMenu.add(new Menu("To-Do List 등록") {
-  //    @Override
-  //    public void execute() {
-  //      toDoAddHandler.execute(); 
-  //    }});
-  //  todoMenu.add(new Menu("To-Do List 목록") {
-  //    @Override
-  //    public void execute() {
-  //      toDoListHandler.execute(); 
-  //    }});
-  //  todoMenu.add(new Menu("To-Do List 상세보기") {
-  //    @Override
-  //    public void execute() {
-  //      toDoDetailHandler.execute(); 
-  //    }});
-  //  todoMenu.add(new Menu("To-Do List 변경") {
-  //    @Override
-  //    public void execute() {
-  //      toDoUpdateHandler.execute(); 
-  //    }});
-  //  todoMenu.add(new Menu("To-Do List 삭제") {
-  //    @Override
-  //    public void execute() {
-  //      toDoDeleteHandler.execute(); 
-  //    }});
-  //
-  //  // 내 스터디 하위 메뉴 4 - 자유게시판
-  //  // 댓글 기능x
-  //  MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
-  //  myStudyMenu.add(freeBoardMenu);
-  //
-  //  freeBoardMenu.add(new Menu("자유게시판 게시글 작성") {
-  //    @Override
-  //    public void execute() {
-  //      freeBoardAddHandler.execute(); 
-  //    }});
-  //  freeBoardMenu.add(new Menu("자유게시판 게시글 목록") {
-  //    @Override
-  //    public void execute() {
-  //      freeBoardListHandler.execute(); 
-  //    }});
-  //  freeBoardMenu.add(new Menu("자유게시판 게시글 상세보기") {
-  //    @Override
-  //    public void execute() {
-  //      freeBoardDetailHandler.execute(); 
-  //    }});
-  //  freeBoardMenu.add(new Menu("자유게시판 게시글 수정") {
-  //    @Override
-  //    public void execute() {
-  //      freeBoardUpdateHandler.execute(); 
-  //    }});
-  //  freeBoardMenu.add(new Menu("자유게시판 게시글 삭제") {
-  //    @Override
-  //    public void execute() {
-  //      freeBoardDeleteHandler.execute(); 
-  //    }});
+
   //
   //  // 내 스터디 하위 메뉴 5 - 화상미팅
   //  // 내 스터디 하위 메뉴 6 - 탈퇴
