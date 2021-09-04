@@ -1,5 +1,3 @@
-//  수정 중.....
-
 package com.ogong.pms.handler;
 
 import java.util.List;
@@ -31,7 +29,6 @@ public class CommentHandler {
     Comment comment = new Comment();
 
     comment.setCommentText(Prompt.inputString("내용 : "));
-
   }
 
 }

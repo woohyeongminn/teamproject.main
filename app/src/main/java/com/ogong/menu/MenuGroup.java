@@ -134,6 +134,11 @@ public class MenuGroup extends Menu {
       path += menu.title;
     }
 
+    // 메인, 관리자 메뉴는 안보이게 (로그아웃 전에 메인, 관리자를 못가게해야함)
+    if (AuthPerMemberLoginHandler.getLoginUser() != null) {
+      path += " - " + AuthPerMemberLoginHandler.getLoginUser().getPerNickname();
+    }
+
     return path;
   }
 
