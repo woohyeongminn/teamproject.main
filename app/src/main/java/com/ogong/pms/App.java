@@ -44,7 +44,6 @@ import com.ogong.pms.handler.CalenderAddHandler;
 import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
-import com.ogong.pms.handler.CeoMemberHandler;      // 아직 하기전
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.FreeBoardAddHandler;
 import com.ogong.pms.handler.FreeBoardDeleteHandler;
@@ -56,9 +55,7 @@ import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
 import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
-import com.ogong.pms.handler.MyStudyHandler;       // 아직 하기전
 import com.ogong.pms.handler.PromptPerMember;
-import com.ogong.pms.handler.StudyHandler;      // 아직 하기전
 import com.ogong.pms.handler.ToDoAddHandler;
 import com.ogong.pms.handler.ToDoDeleteHandler;
 import com.ogong.pms.handler.ToDoDetailHandler;
@@ -85,9 +82,9 @@ public class App {
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
 
-  CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
-  StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
-  MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
+  //CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
+  //StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
+  //MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
 
   class MenuItem extends Menu {
     String menuId;
@@ -141,8 +138,8 @@ public class App {
 
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList));
     commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList));
-    commandMap.put("/askBoard/detail", new AskBoardUpdateHandler(askBoardList, memberList));
-    commandMap.put("/askBoard/update", new AskBoardDetailHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardList, memberList));
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList));
 
     commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
@@ -156,7 +153,7 @@ public class App {
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
     commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(adminNoticeList));
-    commandMap.put("/adminNotice/datail", new AdminNoticeDetailHandler(adminNoticeList));
+    commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(adminNoticeList));
     commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(adminNoticeList));
 
     commandMap.put("/admin/login", new AuthAdminLoginHandler(adminList));
