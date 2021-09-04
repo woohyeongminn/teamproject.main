@@ -1,31 +1,27 @@
 package com.ogong.pms.handler2;
 
-import java.util.List;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class LoginHandler {
+public class PerLoginHandler {
 
-  List<Member> memberList;
-  MemberHandler memberHandler;
+  AbstractMemberHandler abstractMemberHandler;
 
   static Member loginUser;
   public static Member getLoginUser() {
     return loginUser;
   }
 
-
-  public LoginHandler(List<Member> memberList, MemberHandler memberHandler) {
-    this.memberList = memberList;
-    this.memberHandler = memberHandler;
+  public PerLoginHandler(AbstractMemberHandler abstractMemberHandler) {
+    this.abstractMemberHandler = abstractMemberHandler;
   }
 
   public void addLoginPage() {
     System.out.println();
     String inputEmail = Prompt.inputString("이메일 : ");
     String inputPassword = "";
-    Member member = memberHandler.findByInputEmail(inputEmail);
+    Member member = abstractMemberHandler.findByInputEmail(inputEmail);
     if (member == null) {
       System.out.println("등록된 회원이 아닙니다.");
     }
@@ -44,15 +40,9 @@ public class LoginHandler {
         System.out.println("비밀번호를 다시 입력하세요.");
         continue;
       } else {
-        memberHandler.findPw();
+        abstractMemberHandler.findPw();
       }
     } 
-  }
-
-  public void logOut() {
-    System.out.println();
-    loginUser = null;
-    System.out.println("로그아웃 되었습니다.");
   }
 
   public void naverLogin() {

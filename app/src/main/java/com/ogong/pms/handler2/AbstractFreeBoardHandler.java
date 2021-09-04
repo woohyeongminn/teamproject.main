@@ -6,9 +6,9 @@ import com.ogong.pms.domain.FreeBoard;
 public abstract class AbstractFreeBoardHandler {
 
   List<FreeBoard> freeBoardList;
-  LoginHandler loginHandler;
+  PerLoginHandler loginHandler;
 
-  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
+  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList, PerLoginHandler loginHandler) {
     this.freeBoardList = freeBoardList;
     this.loginHandler = loginHandler;
   }

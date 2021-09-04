@@ -5,7 +5,7 @@ import com.ogong.pms.domain.FreeBoard;
 
 public class FreeBoardListHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardListHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
+  public FreeBoardListHandler(List<FreeBoard> freeBoardList, PerLoginHandler loginHandler) {
     super(freeBoardList, loginHandler);
   }
 

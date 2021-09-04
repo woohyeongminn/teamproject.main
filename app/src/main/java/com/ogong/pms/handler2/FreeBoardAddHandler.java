@@ -7,7 +7,7 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardAddHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
+  public FreeBoardAddHandler(List<FreeBoard> freeBoardList, PerLoginHandler loginHandler) {
     super(freeBoardList, loginHandler);
   }
 

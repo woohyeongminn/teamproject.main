@@ -6,7 +6,7 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardUpdateHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
+  public FreeBoardUpdateHandler(List<FreeBoard> freeBoardList, PerLoginHandler loginHandler) {
     super(freeBoardList, loginHandler);
   }
 
@@ -24,7 +24,7 @@ public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
       return;
     }
 
-    if (free.getFreeBoardWriter().getPerNo() != LoginHandler.getLoginUser().getPerNo()) {
+    if (free.getFreeBoardWriter().getPerNo() != PerLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("변경 권한이 없습니다.");
       return;
     }

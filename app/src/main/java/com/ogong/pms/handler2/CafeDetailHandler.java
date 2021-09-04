@@ -64,7 +64,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     System.out.println();
     System.out.println("▶ 예약하기");
 
-    Member member = LoginHandler.getLoginUser();
+    Member member = PerLoginHandler.getLoginUser();
     if (member == null) {
       System.out.println("로그인 한 회원만 예약 가능합니다.");
       return;

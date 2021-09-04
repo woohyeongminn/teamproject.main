@@ -6,7 +6,7 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList, LoginHandler loginHandler) {
+  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList, PerLoginHandler loginHandler) {
     super(freeBoardList, loginHandler);
   }
 
@@ -24,7 +24,7 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
       return;
     }
 
-    if (free.getFreeBoardWriter().getPerNo() != LoginHandler.getLoginUser().getPerNo()) {
+    if (free.getFreeBoardWriter().getPerNo() != PerLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("삭제 권한이 없습니다.");
       return;
     }

@@ -18,7 +18,7 @@ public class CafeListReservationHandler extends AbstractCafeHandler {
     System.out.println();
     System.out.println("▶ 리뷰 등록하기");
 
-    if (LoginHandler.getLoginUser() == null) {
+    if (PerLoginHandler.getLoginUser() == null) {
       System.out.println("로그인 한 회원만 등록 가능합니다.");
     } else {
 
@@ -32,7 +32,7 @@ public class CafeListReservationHandler extends AbstractCafeHandler {
         System.out.println("별점을 다시 입력해주세요.");
         grade = Prompt.inputInt("별점(0~5점) : ");
       }
-      Member member = LoginHandler.getLoginUser();
+      Member member = PerLoginHandler.getLoginUser();
       Date registeredDate = new Date(System.currentTimeMillis());
 
       String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
@@ -59,14 +59,14 @@ public class CafeListReservationHandler extends AbstractCafeHandler {
     System.out.println();
     System.out.println("▶ 내 예약 내역 보기");
 
-    if (LoginHandler.getLoginUser() == null) {
+    if (PerLoginHandler.getLoginUser() == null) {
       System.out.println("로그인 한 회원만 볼 수 있습니다.");
       return;
     }
 
     int count = 0;
     for (CafeReservation cafeReser : reserList) {
-      if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(LoginHandler.getLoginUser().getPerEmail())) {
+      if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(PerLoginHandler.getLoginUser().getPerEmail())) {
         System.out.printf(" 예약번호 : %d, 예약날짜 : %s, 예약장소 : %s,"
             + "\n 시작시간 : %d시, 이용시간 : %d시간, 사용인원 : %d명, "
             + "\n 결제금액 : %d원, 리뷰작성여부 : %s\n"
@@ -91,7 +91,7 @@ public class CafeListReservationHandler extends AbstractCafeHandler {
     int input = Prompt.inputInt("리뷰 작성할 예약번호 : ");
     for (CafeReservation cafeReser : reserList) {
       if (input == cafeReser.getReservationNo() &&
-          cafeReser.getMember().getPerEmail().equalsIgnoreCase(LoginHandler.getLoginUser().getPerEmail())) {
+          cafeReser.getMember().getPerEmail().equalsIgnoreCase(PerLoginHandler.getLoginUser().getPerEmail())) {
         if (!cafeReser.getWirteReview()) {
           System.out.println("리뷰 작성 화면으로 이동합니다.");
           addReview(cafeReser);

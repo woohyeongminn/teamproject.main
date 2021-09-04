@@ -23,7 +23,7 @@ public class MemberDetailHandler extends AbstractMemberHandler {
     //    }
 
     try {
-      Member member = LoginHandler.getLoginUser();
+      Member member = PerLoginHandler.getLoginUser();
 
       System.out.printf("닉네임 : %s\n", member.getPerNickname());
       System.out.printf("이메일 : %s\n", member.getPerEmail());

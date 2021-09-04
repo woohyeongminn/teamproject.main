@@ -18,7 +18,7 @@ public class CafeReservationHandler {
   public static void add(Cafe cafe) {
     System.out.println("▶ 예약하기");
 
-    Member member = LoginHandler.getLoginUser();
+    Member member = PerLoginHandler.getLoginUser();
     if (member == null) {
       System.out.println("로그인 한 유저만 예약 가능합니다.");
       //            return;

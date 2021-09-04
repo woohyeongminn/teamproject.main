@@ -40,7 +40,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
         // why? 
         // remove만 하면 다시 로그인 되기 때문에 탈퇴가 아니다. 
         // 새로운 멤버 객체가 로그인하면 다시 로그인유저에 값이 담긴다.
-        LoginHandler.loginUser = null;
+        PerLoginHandler.loginUser = null;
         System.out.println("회원이 탈퇴되었습니다.");
         return;
       }
