@@ -5,7 +5,7 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 
-public abstract class AbstractCafeHandler {
+public abstract class AbstractCafeHandler implements Command {
 
   List<Cafe> cafeList;
   List<CafeReview> reviewList;

@@ -9,7 +9,8 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
     super(freeBoardList, loginHandler);
   }
 
-  public void list() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 게시글 목록");
 

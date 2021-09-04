@@ -12,7 +12,7 @@ public class CafeDeleteHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
   }
 
-  public void delete() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 장소 삭제");
     Cafe cafe = findByNo(Prompt.inputInt("장소 번호 : "));

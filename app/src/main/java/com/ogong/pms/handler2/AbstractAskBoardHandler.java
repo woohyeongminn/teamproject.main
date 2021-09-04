@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
 
-public abstract class AbstractAskBoardHandler {
+public abstract class AbstractAskBoardHandler implements Command {
 
   List<AskBoard> askBoardList;
   List<Member> memberList;
@@ -14,7 +14,7 @@ public abstract class AbstractAskBoardHandler {
     this.memberList = memberList;
   }
 
-  private AskBoard findByNo(int askNo) {
+  public AskBoard findByNo(int askNo) {
     for (AskBoard askList : askBoardList) {
       if (askList.getAskNo() == askNo) {
         return askList;

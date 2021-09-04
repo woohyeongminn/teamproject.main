@@ -10,7 +10,8 @@ public class ToDoDeleteHandler extends AbstractToDoHandler {
     super(todoList);
   }
 
-  public void delete() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 삭제");
     int todoNo = Prompt.inputInt("번호 선택: ");

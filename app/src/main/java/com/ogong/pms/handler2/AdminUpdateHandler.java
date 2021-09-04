@@ -10,7 +10,7 @@ public class AdminUpdateHandler extends AbstractAdminHandler {
     super(adminList);
   }
 
-  public void update() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 프로필 수정하기");
     System.out.println();
@@ -36,17 +36,4 @@ public class AdminUpdateHandler extends AbstractAdminHandler {
 
     System.out.printf("%s님의 정보가 변경되었습니다.", adminmodify.getMasterNickname());
   }
-
-  public void selectAdminPage() {
-    System.out.println();
-    System.out.println("1. 수정하기");
-    System.out.println("2. 뒤로가기");
-
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      case 1: update(); break;
-      default : return;
-    }
-  }
-
 }

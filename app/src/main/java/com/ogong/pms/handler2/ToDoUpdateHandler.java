@@ -10,7 +10,8 @@ public class ToDoUpdateHandler extends AbstractToDoHandler {
     super(todoList);
   }
 
-  public void update() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 변경");
     int todoNo = Prompt.inputInt("선택하세요. ");

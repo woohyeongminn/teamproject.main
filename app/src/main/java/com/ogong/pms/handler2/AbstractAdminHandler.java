@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.Admin;
 import com.ogong.util.Prompt;
 
-public abstract class AbstractAdminHandler {
+public abstract class AbstractAdminHandler implements Command {
 
   List<Admin> adminList;
 

@@ -10,7 +10,8 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     super(freeBoardList, loginHandler);
   }
 
-  public void detail() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 게시글 상세보기");
 

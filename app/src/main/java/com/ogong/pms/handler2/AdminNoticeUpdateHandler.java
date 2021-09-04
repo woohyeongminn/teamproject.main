@@ -11,7 +11,7 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
     super(adminNoticeList, adminList);
   }
 
-  public void update() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 공지 변경");
     int adminnotiNo = Prompt.inputInt("번호 : ");
@@ -39,12 +39,4 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
     System.out.println("공지가 변경되었습니다.");
   }
 
-  public AdminNotice findByNotiNo(int adminnotiNo) {
-    for (AdminNotice adminNotice : adminNoticeList) {
-      if (adminNotice.getAdminNotiNo() == adminnotiNo) {
-        return adminNotice;
-      }
-    }
-    return null;
-  }
 }

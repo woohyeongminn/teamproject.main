@@ -11,7 +11,7 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
   }
 
 
-  public void list() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 공지 목록");
     System.out.println();

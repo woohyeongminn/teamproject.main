@@ -17,7 +17,7 @@ public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
     super(adminNoticeList, adminList);
   }
 
-  public void add() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 공지 등록");
     System.out.println();

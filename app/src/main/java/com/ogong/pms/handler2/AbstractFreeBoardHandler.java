@@ -3,7 +3,7 @@ package com.ogong.pms.handler2;
 import java.util.List;
 import com.ogong.pms.domain.FreeBoard;
 
-public abstract class AbstractFreeBoardHandler {
+public abstract class AbstractFreeBoardHandler implements Command {
 
   List<FreeBoard> freeBoardList;
   PerLoginHandler loginHandler;

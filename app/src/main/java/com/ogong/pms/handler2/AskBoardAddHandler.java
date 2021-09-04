@@ -12,7 +12,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     super(askBoardList, memberList);
   }
 
-  public void add() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 문의사항");
     System.out.println();

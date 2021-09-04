@@ -11,7 +11,7 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
     super(adminNoticeList, adminList);
   }
 
-  public void delete() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 공지 삭제");
     int adminnotiNo = Prompt.inputInt("번호 : ");
@@ -34,13 +34,4 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
     System.out.println("공지가 삭제되었습니다.");
   }
 
-
-  public AdminNotice findByNotiNo(int adminnotiNo) {
-    for (AdminNotice adminNotice : adminNoticeList) {
-      if (adminNotice.getAdminNotiNo() == adminnotiNo) {
-        return adminNotice;
-      }
-    }
-    return null;
-  }
 }

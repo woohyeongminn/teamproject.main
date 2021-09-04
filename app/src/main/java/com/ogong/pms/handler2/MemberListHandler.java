@@ -13,7 +13,8 @@ public class MemberListHandler extends AbstractMemberHandler {
   }
 
   // 관리자
-  public void list() {
+  @Override
+  public void execute() {
     System.out.println();
     System.out.println("▶ 회원 가입 확인");
 

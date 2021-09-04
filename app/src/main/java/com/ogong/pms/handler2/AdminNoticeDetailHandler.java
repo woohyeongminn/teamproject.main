@@ -12,7 +12,7 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
   }
 
 
-  public void detail() {
+  public void execute() {
     System.out.println();
     System.out.println("▶ 공지 상세");
     int adminnotiNo = Prompt.inputInt("번호 : ");
@@ -31,13 +31,4 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     System.out.printf(">> %s\n", adminWriteList.getAdminNotiRegisteredDate());
   }
 
-
-  public AdminNotice findByNotiNo(int adminnotiNo) {
-    for (AdminNotice adminNotice : adminNoticeList) {
-      if (adminNotice.getAdminNotiNo() == adminnotiNo) {
-        return adminNotice;
-      }
-    }
-    return null;
-  }
 }
