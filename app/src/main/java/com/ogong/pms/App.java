@@ -29,6 +29,8 @@ import com.ogong.pms.handler.AskBoardDeleteHandler;
 import com.ogong.pms.handler.AskBoardDetailHandler;
 import com.ogong.pms.handler.AskBoardListHandler;
 import com.ogong.pms.handler.AskBoardUpdateHandler;
+import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.AuthAdminLogoutHandler;
 import com.ogong.pms.handler.CafeAddHandler;
 import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
@@ -77,6 +79,9 @@ public class App {
   List<CeoMember> ceoMemberList = new ArrayList<>();
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
+
+  AuthAdminLoginHandler authAdminLoginHandler = new AuthAdminLoginHandler(adminList);
+  AuthAdminLogoutHandler authAdminLogoutHandler = new AuthAdminLogoutHandler(adminList);
 
   AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList);
   AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
@@ -179,14 +184,14 @@ public class App {
     adminMenuGroup.add(new Menu("로그인", Menu.ENABLE_ADMINLOGOUT) {
       @Override
       public void execute() {
-        adminHandler.addAdminLoginPage();
+        authAdminLoginHandler.execute();
       }});
 
     // 제일 하단으로 내리기
     adminMenuGroup.add(new Menu("로그아웃", Menu.ENABLE_ADMINLOGIN) {
       @Override
       public void execute() {
-        adminHandler.logOut();
+        authAdminLogoutHandler.execute();
       }});
 
     //--------------------------------------------------------------- 
@@ -197,8 +202,8 @@ public class App {
     adminpageMenu.add(new Menu("관리자 정보") {
       @Override
       public void execute() {
-        adminHandler.detail();
-        adminHandler.selectAdminPage();
+        adminInfoHandler.execute();
+        //      adminHandler.selectMyPage();
         return;
       }
     });
@@ -214,7 +219,7 @@ public class App {
       @Override
       public void execute() {
         memberHandler.list();
-        selectUserModifyPage();
+        //        selectUserModifyPage();
         return;
       }
     });
@@ -254,28 +259,28 @@ public class App {
     adminNoticeMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        adminNoticeHandler.add();
+        adminNoticeAddHandler.execute();
         return;
       }});
     adminNoticeMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        adminNoticeHandler.list(); 
+        adminNoticeListHandler.execute(); 
       }});
     adminNoticeMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        adminNoticeHandler.detail(); 
+        adminNoticeDetailHandler.execute(); 
       }});
     adminNoticeMenu.add(new Menu("수정") {
       @Override
       public void execute() {
-        adminNoticeHandler.update(); 
+        adminNoticeUpdateHandler.execute(); 
       }});
     adminNoticeMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        adminNoticeHandler.delete(); 
+        adminNoticeDeleteHandler.execute(); 
       }});
 
     //---------------------------------------------------
@@ -628,42 +633,43 @@ public class App {
     return null;
   }
 
-  private void selectMyPage() {
+  // 문의게시판> 관리자가 멤버 글에 들어가면 오류 뜸 권한이 없음 --------------
+  //  private void selectMyPage() {
+  //
+  //    if (LoginHandler.getLoginUser() != null) {
+  //      System.out.println();
+  //      System.out.println("1. 수정하기");
+  //      System.out.println("2. 문의 내역");
+  //      System.out.println("3. 탈퇴하기");
+  //      System.out.println("4. 뒤로가기");
+  //
+  //      int selectNo = Prompt.inputInt("선택> ");
+  //      switch (selectNo) {
+  //        case 1: memberHandler.update(); break;
+  //        case 2: askBoardHandler.list(); break;
+  //        case 3: memberHandler.delete(); return;
+  //        default : return;
+  //      }
+  //    }
+  //    return;
+  //  }
 
-    if (LoginHandler.getLoginUser() != null) {
-      System.out.println();
-      System.out.println("1. 수정하기");
-      System.out.println("2. 문의 내역");
-      System.out.println("3. 탈퇴하기");
-      System.out.println("4. 뒤로가기");
-
-      int selectNo = Prompt.inputInt("선택> ");
-      switch (selectNo) {
-        case 1: memberHandler.update(); break;
-        case 2: askBoardHandler.list(); break;
-        case 3: memberHandler.delete(); return;
-        default : return;
-      }
-    }
-    return;
-  }
-
-  // 들어가면 오류 뜸 권한이 없음 --------------
-  private void selectUserModifyPage() {
-    System.out.println();
-    System.out.println("1. 상세보기");
-    System.out.println("2. 수정하기");
-    System.out.println("3. 삭제하기");
-    System.out.println("4. 뒤로가기");
-
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      case 1: memberHandler.detail(); break;
-      case 2: memberHandler.update(); break;
-      case 3: memberHandler.delete(); break;
-      default : return;
-    }
-  }
+  // 관리자의 회원 조회> 관리자가 멤버 페이지 들어가면 오류 뜸 권한이 없음 --------------
+  //  private void selectUserModifyPage() {
+  //    System.out.println();
+  //    System.out.println("1. 상세보기");
+  //    System.out.println("2. 수정하기");
+  //    System.out.println("3. 삭제하기");
+  //    System.out.println("4. 뒤로가기");
+  //
+  //    int selectAdminNo = Prompt.inputInt("선택> ");
+  //    switch (selectAdminNo) {
+  //      case 1: memberHandler.detail(); break;
+  //      case 2: memberHandler.update(); break;
+  //      case 3: memberHandler.delete(); break;
+  //      default : return;
+  //    }
+  //  }
   // ---------------------------------------------
 
 

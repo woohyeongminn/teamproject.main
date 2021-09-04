@@ -3,7 +3,7 @@ package com.ogong.pms.handler;
 import java.util.List;
 import com.ogong.pms.domain.Admin;
 
-public class AuthAdminLogoutHandler {
+public class AuthAdminLogoutHandler implements Command {
 
   List<Admin> adminList;
 
@@ -17,7 +17,7 @@ public class AuthAdminLogoutHandler {
 
   }
 
-  public void logOut() {
+  public void execute() {
     System.out.println();
     loginAdmin = null;
     System.out.println("로그아웃 되었습니다.");

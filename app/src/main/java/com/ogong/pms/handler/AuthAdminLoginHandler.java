@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.Admin;
 import com.ogong.util.Prompt;
 
-public class AuthAdminLoginHandler {
+public class AuthAdminLoginHandler implements Command {
 
   List<Admin> adminList;
 
@@ -27,7 +27,7 @@ public class AuthAdminLoginHandler {
 
   // ----------------------------------------------------------------------
 
-  public void addAdminLoginPage() {
+  public void execute() {
     System.out.println();
     String inputadminEmail = Prompt.inputString("이메일 : ");
     String inputadminPassword = "";
