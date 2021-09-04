@@ -14,6 +14,10 @@ public class AskBoardListHandler extends AbstractAskBoardHandler {
     System.out.println();
     System.out.println("▶ 문의사항 목록");
 
+    if (askBoardList == null) {
+      System.out.println("등록된 글이 없습니다.");
+    }
+
     for (AskBoard askList : askBoardList) {
       System.out.printf("(%d)\n 제목 : %s 작성자 : %s 등록일 : %s 조회수 : %d\n", 
           askList.getAskNo(), 

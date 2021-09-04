@@ -3,8 +3,8 @@ package com.ogong.menu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import com.ogong.pms.handler.AdminHandler;
-import com.ogong.pms.handler.LoginHandler;
+import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.util.Prompt;
 
 
@@ -146,19 +146,19 @@ public class MenuGroup extends Menu {
     ArrayList<Menu> menuList = new ArrayList<>();
     for (int i = 0; i < this.size; i++) {
       if (this.childs[i].enableState == Menu.ENABLE_LOGOUT &&
-          LoginHandler.getLoginUser() == null) {
+          AuthPerMemberLoginHandler.getLoginUser() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN
-          && LoginHandler.getLoginUser() != null) {
+          && AuthPerMemberLoginHandler.getLoginUser() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ADMINLOGOUT
-          && AdminHandler.getLoginAdmin() == null) {
+          && AuthAdminLoginHandler.getLoginAdmin() == null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ADMINLOGIN
-          && AdminHandler.getLoginAdmin() != null) {
+          && AuthAdminLoginHandler.getLoginAdmin() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {

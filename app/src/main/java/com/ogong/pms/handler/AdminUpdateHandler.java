@@ -15,7 +15,7 @@ public class AdminUpdateHandler extends AbstractAdminHandler {
     System.out.println("▶ 프로필 수정하기");
     System.out.println();
 
-    Admin adminmodify = getLoginAdmin();
+    Admin adminmodify = AuthAdminLoginHandler.getLoginAdmin();
 
     String adminModifyNickName = Prompt.inputString(
         "닉네임(" + adminmodify.getMasterNickname()  + ") : ");

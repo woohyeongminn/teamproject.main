@@ -19,7 +19,7 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
       System.out.printf("(%d)\n 제목 : %s\n 작성자 : %s\n 등록일 : %s\n", 
           adminWriteList.getAdminNotiNo(), 
           adminWriteList.getAdminNotiTitle(),
-          adminWriteList.getAdminNotiWriter().getMasterNickname(),
+          adminWriteList.getAdminNotiWriter(),
           adminWriteList.getAdminNotiRegisteredDate());
       System.out.println();
     }      

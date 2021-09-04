@@ -24,8 +24,8 @@ public class MemberAddHandler extends AbstractMemberHandler {
     testMember.setPerPassword("1111");
     testMember.setPerPhoto("jpg");
     testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-
     memberList.add(testMember);
+
     testMember = new Member();
     testMember.setPerNickname("코딩부장");
     testMember.setPerEmail("kakao");

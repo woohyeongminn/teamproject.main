@@ -83,13 +83,13 @@ public class App {
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
 
   AuthAdminLoginHandler authAdminLoginHandler = new AuthAdminLoginHandler(adminList);
-  AuthAdminLogoutHandler authAdminLogoutHandler = new AuthAdminLogoutHandler(adminList);
+  AuthAdminLogoutHandler authAdminLogoutHandler = new AuthAdminLogoutHandler();
   AuthPerMemberLoginHandler authPerMemberLoginHandler =
       new AuthPerMemberLoginHandler(promptPerMember);
   AuthPerMemberLogoutHandler authPerMemberLogoutHandler = new AuthPerMemberLogoutHandler();
 
-  AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList);
   AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
+  AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList, adminUpdateHandler);
 
   MemberAddHandler memberAddHandler = new MemberAddHandler(memberList);
   MemberListHandler memberListHandler = new MemberListHandler(memberList);
@@ -208,7 +208,7 @@ public class App {
       @Override
       public void execute() {
         adminInfoHandler.execute();
-        //      adminHandler.selectMyPage();
+        selectMyPage();
         return;
       }
     });
@@ -296,25 +296,15 @@ public class App {
     csMenu.add(adminaskMenu);
 
     // 댓글 기능x, 회원이 쓴 문의글 삭제기능x 
-    adminaskMenu.add(new Menu("등록") {
-      @Override
-      public void execute() {
-        askBoardAddHandler.execute(); 
-      }});
     adminaskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
         askBoardListHandler.execute(); 
       }});
-    adminaskMenu.add(new Menu("상세보기") {
+    adminaskMenu.add(new Menu("상세보기") { // 댓글 > 추가 예정
       @Override
       public void execute() {
         askBoardDetailHandler.execute(); 
-      }});
-    adminaskMenu.add(new Menu("수정") {
-      @Override
-      public void execute() {
-        askBoardUpdateHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("삭제") {
       @Override

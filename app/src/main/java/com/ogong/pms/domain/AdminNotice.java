@@ -6,7 +6,7 @@ public class AdminNotice {
   private int adminNotiNo; // 공지게시판 번호
   private String adminNotiTitle; // 공지게시판 제목
   private String adminNotiContent; // 공지게시판 내용
-  private Admin adminNotiWriter; // 공지게시판 작성자
+  private String adminNotiWriter; // 공지게시판 작성자
   private Date adminNotiRegisteredDate; // 공지게시판 등록일
 
   @Override
@@ -15,6 +15,7 @@ public class AdminNotice {
         + ", adminNotiContent=" + adminNotiContent + ", adminNotiWriter=" + adminNotiWriter
         + ", adminNotiRegisteredDate=" + adminNotiRegisteredDate + "]";
   }
+
   public int getAdminNotiNo() {
     return adminNotiNo;
   }
@@ -35,10 +36,10 @@ public class AdminNotice {
   }
 
 
-  public Admin getAdminNotiWriter() {
+  public String getAdminNotiWriter() {
     return adminNotiWriter;
   }
-  public void setAdminNotiWriter(Admin adminNotiWriter) {
+  public void setAdminNotiWriter(String adminNotiWriter) {
     this.adminNotiWriter = adminNotiWriter;
   }
   public Date getAdminNotiRegisteredDate() {

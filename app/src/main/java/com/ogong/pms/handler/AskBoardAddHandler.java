@@ -10,6 +10,16 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
 
   public AskBoardAddHandler(List<AskBoard> askBoardList, List<Member> memberList) {
     super(askBoardList, memberList);
+
+    AskBoard askList = new AskBoard();
+    askList.setAskNo(1);
+    askList.setAskTitle("문의합니다.");
+    askList.setAskContent("예약 방법에 대해 알고 싶습니다.");
+    askList.setAskWriter(memberList.get(0));
+    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
+    askList.setAskVeiwCount(askList.getAskVeiwCount() + 1);
+
+    askBoardList.add(askList);
   }
 
   public void execute() {

@@ -26,7 +26,7 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
 
     System.out.printf(">> %s\n", adminWriteList.getAdminNotiTitle());
     System.out.printf(">> %s\n", adminWriteList.getAdminNotiContent());
-    System.out.printf(">> %s\n", adminWriteList.getAdminNotiWriter().getMasterNickname());
+    System.out.printf(">> %s\n", adminWriteList.getAdminNotiWriter());
     System.out.printf(">> %s\n", adminWriteList.getAdminNotiRegisteredDate());
   }
 

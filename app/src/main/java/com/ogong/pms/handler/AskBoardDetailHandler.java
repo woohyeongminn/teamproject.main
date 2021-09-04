@@ -23,6 +23,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       return;
     }
 
+    System.out.println();
     System.out.printf(">> %s\n", askList.getAskTitle());
     System.out.printf(">> %s\n", askList.getAskContent());
     System.out.printf(">> %s\n", askList.getAskWriter().getPerNickname());
