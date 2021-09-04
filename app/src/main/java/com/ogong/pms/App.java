@@ -282,7 +282,7 @@ public class App {
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
 
     userMenuGroup.add(createCafeMenu());
-
+    userMenuGroup.add(createMystudyMenu());
     return userMenuGroup;
   }
 
@@ -298,6 +298,31 @@ public class App {
     cafeMenu.add(new MenuItem("장소 예약 내역 보기", "/cafe/reservationList"));
 
     return cafeMenu;
+  }
+
+  private Menu createMystudyMenu() {
+    MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
+    // 캘린더, 투두, 자유 게시판, 구성원, 화상채팅
+    //상세?구성원?
+    //    myStudyMenu.add(new Menu("개인 정보") {
+    //      @Override
+    //      public void execute() {
+    //        memberDetailHandler.execute();
+    //        selectMyPage();
+    //        return;
+    //      }});
+    //    myStudyMenu.add(new Menu("참여 목록") {
+    //      @Override
+    //      public void execute() {
+    //        myStudyHandler.list();
+    //      }});
+    // 내 스터디 하위 메뉴 1 - 구성원
+    // 내 스터디 하위 메뉴 5 - 화상미팅
+    // 내 스터디 하위 메뉴 6 - 탈퇴
+    myStudyMenu.add(createCalenderMenu());
+    myStudyMenu.add(createAskBoardMenu());
+    myStudyMenu.add(createFreeBoardMenu());
+    return myStudyMenu;
   }
 
   private Menu createCalenderMenu() {
@@ -440,29 +465,6 @@ public class App {
 
 
 //  //--------------------------------------------------------------
-//  MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
-//  userMenuGroup.add(myStudyMenu);
-//  // 캘린더, 투두, 자유 게시판, 구성원, 화상채팅
-//
-// 상세?구성원?
-//  myStudyMenu.add(new Menu("개인 정보") {
-//    @Override
-//    public void execute() {
-//      memberDetailHandler.execute();
-//      selectMyPage();
-//      return;
-//    }});
-//  myStudyMenu.add(new Menu("참여 목록") {
-//    @Override
-//    public void execute() {
-//      myStudyHandler.list();
-//    }});
-//
-//  // 내 스터디 하위 메뉴 1 - 구성원
-//  // 내 스터디 하위 메뉴 5 - 화상미팅
-//  // 내 스터디 하위 메뉴 6 - 탈퇴
-//
-////--------------------------------------------------------------
 
 
 ////--------------------------------------------------------------
