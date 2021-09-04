@@ -42,7 +42,6 @@ import com.ogong.pms.handler.CafeReservationListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CalenderAddHandler;
-import com.ogong.pms.handler.CalenderDeleteHandler;
 import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
@@ -90,45 +89,6 @@ public class App {
   AdminUpdateHandler adminUpdateHandler = new AdminUpdateHandler(adminList);
   AdminInfoHandler adminInfoHandler = new AdminInfoHandler(adminList, adminUpdateHandler);
 
-  MemberAddHandler memberAddHandler = new MemberAddHandler(memberList);
-  MemberListHandler memberListHandler = new MemberListHandler(memberList);
-  MemberDetailHandler memberDetailHandler = new MemberDetailHandler(memberList);
-  MemberUpdateHandler memberUpdateHandler = new MemberUpdateHandler(memberList);
-  MemberDeleteHandler memberDeleteHandler = new MemberDeleteHandler(memberList, promptPerMember);
-
-  CafeAddHandler cafeAddHandler = new CafeAddHandler(cafeList, cafeReview, reserList);
-  CafeListHandler cafeListHandler = new CafeListHandler(cafeList, cafeReview, reserList);
-  CafeDetailHandler cafeDetailHandler = new CafeDetailHandler(cafeList, cafeReview, reserList);
-  CafeUpdateHandler cafeUpdateHandler = new CafeUpdateHandler(cafeList, cafeReview, reserList);
-  CafeDeleteHandler cafeDeleteHandler = new CafeDeleteHandler(cafeList, cafeReview, reserList);
-  CafeSearchHandler cafeSearchHandler = new CafeSearchHandler(cafeList, cafeReview, reserList);
-  CafeReservationListHandler cafeReservationListHandler = 
-      new CafeReservationListHandler(cafeList, cafeReview, reserList);
-
-  AskBoardAddHandler askBoardAddHandler = new AskBoardAddHandler(askBoardList, memberList);
-  AskBoardListHandler askBoardListHandler = new AskBoardListHandler(askBoardList, memberList);
-  AskBoardUpdateHandler askBoardUpdateHandler = new AskBoardUpdateHandler(askBoardList, memberList);
-  AskBoardDetailHandler askBoardDetailHandler = new AskBoardDetailHandler(askBoardList, memberList);
-  AskBoardDeleteHandler askBoardDeleteHandler = new AskBoardDeleteHandler(askBoardList, memberList);
-
-  ToDoAddHandler toDoAddHandler = new ToDoAddHandler(toDoList);
-  ToDoListHandler toDoListHandler = new ToDoListHandler(toDoList);
-  ToDoUpdateHandler toDoUpdateHandler = new ToDoUpdateHandler(toDoList);
-  ToDoDetailHandler toDoDetailHandler = new ToDoDetailHandler(toDoList);
-  ToDoDeleteHandler toDoDeleteHandler = new ToDoDeleteHandler(toDoList);
-
-  FreeBoardAddHandler freeBoardAddHandler = new FreeBoardAddHandler(freeBoardList);
-  FreeBoardListHandler freeBoardListHandler = new FreeBoardListHandler(freeBoardList);
-  FreeBoardDetailHandler freeBoardDetailHandler = new FreeBoardDetailHandler(freeBoardList);
-  FreeBoardUpdateHandler freeBoardUpdateHandler = new FreeBoardUpdateHandler(freeBoardList);
-  FreeBoardDeleteHandler freeBoardDeleteHandler = new FreeBoardDeleteHandler(freeBoardList);
-
-  CalenderAddHandler calenderAddHandler = new CalenderAddHandler(calenderList);
-  CalenderListHandler calenderListHandler = new CalenderListHandler(calenderList);
-  CalenderDetailHandler calenderDetailHandler = new CalenderDetailHandler(calenderList);
-  CalenderUpdateHandler calenderUpdateHandler = new CalenderUpdateHandler(calenderList);
-  CalenderDeleteHandler calenderDeleteHandler = new CalenderDeleteHandler(calenderList);
-
   CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
   StudyHandler studyHandler = new StudyHandler(studyList, promptPerMember);
   MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
@@ -159,8 +119,44 @@ public class App {
   }
 
   public App() {
+    commandMap.put("/calender/add", new CalenderAddHandler(calenderList));
+    commandMap.put("/calender/list", new CalenderListHandler(calenderList));
+    commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList));
+    commandMap.put("/calender/update", new CalenderUpdateHandler(calenderList));
+    commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList));
 
-    // 조솔
+    commandMap.put("/member/add", new MemberAddHandler(memberList));
+    commandMap.put("/member/list", new MemberListHandler(memberList));
+    commandMap.put("/member/detail", new MemberDetailHandler(memberList));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberList));
+    commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
+
+    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
+
+    commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
+    commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
+    commandMap.put("/toDo/detail", new ToDoUpdateHandler(toDoList));
+    commandMap.put("/toDo/update", new ToDoDetailHandler(toDoList));
+    commandMap.put("/toDo/delete", new ToDoDeleteHandler(toDoList));
+
+    commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/detail", new AskBoardUpdateHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/update", new AskBoardDetailHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList));
+
+    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/reservationsList", new CafeReservationListHandler(cafeList, cafeReview, reserList));
+
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
     commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(adminNoticeList));
