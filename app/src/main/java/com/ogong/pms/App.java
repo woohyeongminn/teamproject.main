@@ -170,6 +170,10 @@ public class App {
     app.welcomeservice();
   }
 
+  public App() {
+
+  }
+
   void welcomeservice() {
     welcome().execute();
     service();
