@@ -289,27 +289,27 @@ public class App {
     adminaskMenu.add(new Menu("등록") {
       @Override
       public void execute() {
-        askBoardHandler.add(); 
+        askBoardAddHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("목록") {
       @Override
       public void execute() {
-        askBoardHandler.list(); 
+        askBoardListHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("상세보기") {
       @Override
       public void execute() {
-        askBoardHandler.detail(); 
+        askBoardDetailHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("수정") {
       @Override
       public void execute() {
-        askBoardHandler.update(); 
+        askBoardUpdateHandler.execute(); 
       }});
     adminaskMenu.add(new Menu("삭제") {
       @Override
       public void execute() {
-        askBoardHandler.delete(); 
+        askBoardDeleteHandler.execute(); 
       }});
 
     return adminMenuGroup;
