@@ -18,7 +18,7 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
     System.out.println();
     System.out.println("▶ 프로필 수정");
 
-    Member member = PerLoginHandler.getLoginUser();
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     String perNickName = Prompt.inputString("닉네임(" + member.getPerNickname()  + ") : ");
     String perEmail = Prompt.inputString("이메일(" + member.getPerEmail() + ") : ");

@@ -1,14 +1,13 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
-import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.util.Prompt;
 
 public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
 
-  public AdminNoticeDetailHandler(List<AdminNotice> adminNoticeList, List<Admin> adminList) {
-    super(adminNoticeList, adminList);
+  public AdminNoticeDetailHandler(List<AdminNotice> adminNoticeList) {
+    super(adminNoticeList);
   }
 
 
