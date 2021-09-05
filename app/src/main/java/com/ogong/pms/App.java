@@ -123,7 +123,7 @@ public class App {
     commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList));
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
-    commandMap.put("/member/list", new MemberListHandler(memberList));
+    commandMap.put("/member/list", new MemberListHandler(memberList, commandMap));
     commandMap.put("/member/detail", new MemberDetailHandler(memberList));
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
@@ -242,21 +242,10 @@ public class App {
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
 
-    adminUserMenu.add(createMemberLookUpMenu());    //개인 회원 조회
+    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));    //개인 회원 조회
     adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
 
     return adminUserMenu;
-  }
-
-  // 2-1
-  private Menu createMemberLookUpMenu() {
-    MenuGroup adminMemberLookUpMenu = new MenuGroup("개인 회원 조회", Menu.ENABLE_ADMINLOGIN); 
-    //commandMap.get("/member/list").execute();
-    adminMemberLookUpMenu.add(new MenuItem("회원 상세", "/member/detail"));
-    adminMemberLookUpMenu.add(new MenuItem("회원 수정", "/member/update"));
-    adminMemberLookUpMenu.add(new MenuItem("회원 탈퇴시키기", "/member/delete"));
-
-    return adminMemberLookUpMenu;
   }
 
   // 관리자 하위 메뉴3 - 스터디 관리
