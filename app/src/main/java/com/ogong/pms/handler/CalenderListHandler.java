@@ -27,6 +27,7 @@ public class CalenderListHandler extends AbstractCalenderHandler {
     int selectMonth; 
 
     while (true) {
+      System.out.println();
       selectMonth = Prompt.inputInt("월: ");
       if (selectMonth > 12 || selectMonth < 1) {
         System.out.println("정확한 '월'을 입력해주세요.");
@@ -48,9 +49,27 @@ public class CalenderListHandler extends AbstractCalenderHandler {
 
       if (month == null) {
         System.out.println();
-        System.out.println("해당'월'에 등록된 일정이 없습니다.");
-        System.out.println();
-        continue;
+        System.out.printf("'%d월'에 등록된 일정이 없습니다.\n", selectMonth);
+        System.out.println("1. 재입력");
+        System.out.println("2. 취소");
+        int selectNo = Prompt.inputInt("선택> ");
+        switch (selectNo) {
+          case 1 :  continue;
+          case 2 : return;
+          default : return;
+        }
+      }
+      if (month != null) {
+        System.out.println("1. 상세보기");
+        System.out.println("2. 날짜 재입력");
+        System.out.println("3 취소");
+        int selectNo = Prompt.inputInt("선택> ");
+        switch (selectNo) {
+          case 1 : calenderDetailHandler.execute(); break;
+          case 2 : continue;
+          case 3 : return;
+          default : return;
+        }
       }
       break;
     }
