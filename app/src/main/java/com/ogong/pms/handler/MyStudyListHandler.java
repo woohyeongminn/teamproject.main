@@ -2,6 +2,7 @@
 
 package com.ogong.pms.handler;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -9,9 +10,12 @@ import com.ogong.util.Prompt;
 
 public class MyStudyListHandler extends AbstractStudyHandler {
 
-  public MyStudyListHandler(List<Study> myStudyList) {
-    super(myStudyList);
-  } 
+  HashMap<String, Command> commandMap;
+
+  public MyStudyListHandler(List<Study> studyList, HashMap<String, Command> commandMap) {
+    super(studyList);
+    this.commandMap = commandMap;
+  }
 
   @Override
   public void execute() {
@@ -19,29 +23,25 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     System.out.println("▶ 스터디 목록");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
-    for (Study study : member.getPerMyStudy()) {
-      System.out.println(study.getStudyTitle());
+    // 0905 실행안됨
+    for (Study perStudy : member.getPerMyStudy()) {
+      String obj = "";
+      if(perStudy.getStudyTitle().equals(obj)) {
+        System.out.println("가입한 스터디가 없습니다.");
+      }
+      System.out.println(perStudy.getStudyTitle());
     }
-
+    //
 
     System.out.println("----------------------");
     System.out.println("1. 상세 보기");
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");
+
     switch (selectNo) {
-      case 1 : detail(); break;
+      case 1 : commandMap.get("/myStudy/detail").execute(); break;
       case 2 : System.out.println("뒤로가기"); break;
       default : return;
-
     }
   }
-
-  //        System.out.printf("%d, %s, %s, %s, %s, %s\n",
-  //            study.getStudyNo(),
-  //            study.getSubject(),
-  //            study.getNumberOfPeple(),
-  //            study.getStudyTitle(),
-  //            study.getOwner().getPerNickname(),
-  //            study.getFace());
-
 }
