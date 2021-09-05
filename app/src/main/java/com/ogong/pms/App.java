@@ -393,7 +393,7 @@ public class App {
     MenuGroup toDoMenu = new MenuGroup("To-Do List");
     toDoMenu.add(new MenuItem("등록" , "/todo/add"));
     toDoMenu.add(new MenuItem("목록" , "/todo/list"));
-    toDoMenu.add(new MenuItem("상세" , "/todo/list"));
+    toDoMenu.add(new MenuItem("상세" , "/todo/detail"));
     toDoMenu.add(new MenuItem("수정" , "/todo/update"));
     toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
     return toDoMenu;
@@ -404,7 +404,7 @@ public class App {
     MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
     freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
     freeBoardMenu.add(new MenuItem("게시글 목록" , "/freeBoard/list"));
-    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/list"));
+    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/detail"));
     freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
     freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
     return freeBoardMenu;
