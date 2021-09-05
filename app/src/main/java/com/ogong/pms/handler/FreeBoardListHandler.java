@@ -55,15 +55,17 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
   private void selectUserModifyPage() {
     System.out.println("---------------------");
     System.out.println("1. 상세보기");
-    System.out.println("2. 수정하기");
-    System.out.println("3. 삭제하기");
+    System.out.println("2. 등록보기");
+    System.out.println("3. 수정하기");
+    System.out.println("4. 삭제하기");
     System.out.println("0. 뒤로가기");
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
       case 1: commandMap.get("/freeBoard/detail").execute(); break;
-      case 2: commandMap.get("/freeBoard/update").execute(); break;
-      case 3: commandMap.get("/freeBoard/delete").execute(); break;
+      case 2: commandMap.get("/freeBoard/add").execute(); break;
+      case 3: commandMap.get("/freeBoard/update").execute(); break;
+      case 4: commandMap.get("/freeBoard/delete").execute(); break;
       default : return;
     }
   }
