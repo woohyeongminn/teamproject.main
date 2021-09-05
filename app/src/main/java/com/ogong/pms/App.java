@@ -128,11 +128,11 @@ public class App {
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
-    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList));
-    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList));
-    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList));
-    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList));
+    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, memberList));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, memberList));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, memberList));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, memberList));
 
     commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
     commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
