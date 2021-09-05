@@ -8,9 +8,8 @@ import com.ogong.util.Prompt;
 public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
 
   public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList, List<Member> memberList) {
-    super(freeBoardList, memberList);
+    super(freeBoardList,memberList);
   }
-
 
   @Override
   public void execute() {

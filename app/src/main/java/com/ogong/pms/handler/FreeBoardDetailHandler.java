@@ -8,7 +8,7 @@ import com.ogong.util.Prompt;
 public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
   public FreeBoardDetailHandler(List<FreeBoard> freeBoardList, List<Member> memberList) {
-    super(freeBoardList, memberList);
+    super(freeBoardList,memberList);
   }
 
   @Override
@@ -26,13 +26,13 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
       return;
     }
 
-    System.out.printf("제목 : %s\n", free.getFreeBoardTitle());
-    System.out.printf("내용 : %s\n", free.getFreeBoardContent());
-    System.out.printf("첨부파일 : %s\n", free.getFreeBoardAtcFile());
-    System.out.printf("작성자 : %s\n", free.getFreeBoardWriter().getPerNickname());
-    System.out.printf("등록일 : %s\n", free.getFreeBoardRegisteredDate());
+    System.out.printf(">> 제목 : %s\n", free.getFreeBoardTitle());
+    System.out.printf(">> 내용 : %s\n", free.getFreeBoardContent());
+    System.out.printf(">> 첨부파일 : %s\n", free.getFreeBoardAtcFile());
+    System.out.printf(">> 작성자 : %s\n", free.getFreeBoardWriter().getPerNickname());
+    System.out.printf(">> 등록일 : %s\n", free.getFreeBoardRegisteredDate());
     free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
-    System.out.printf("조회수 : %d\n", free.getFreeBoardViewcount());
+    System.out.printf(">> 조회수 : %d\n", free.getFreeBoardViewcount());
   }
 }
 
