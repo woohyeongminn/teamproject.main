@@ -2,6 +2,7 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Calender;
+import com.ogong.util.Prompt;
 
 public class CalenderListHandler extends AbstractCalenderHandler {
 
@@ -14,21 +15,27 @@ public class CalenderListHandler extends AbstractCalenderHandler {
     System.out.println();
     System.out.println("▶ 일정 목록");
     System.out.println();
-    Calender[] cList = calenderList.toArray(new Calender[0]);
+    System.out.println("'월'을 입력해주세요.");
+    int selectMonth = Prompt.inputInt("월: ");
 
-    for (Calender calender : cList) {
+    Calender month = null;
+    for (Calender calender : calenderList) {
+      if (selectMonth == calender.getMonth()) {
+        month = calender;
+      }
+    }
+
+    if (month == null) {
+      System.out.println("등록된 일정이 없습니다.");
+      return;
+    } else {
       System.out.printf(
           " [ %d월 %d일 %s요일 ]\n %s\n",
-          calender.getMonth(), 
-          calender.getDay(),
-          calender.getDayOftheWeek(),
-          calender.getCalenderContent());
+          month.getMonth(), 
+          month.getDay(),
+          month.getDayOftheWeek(),
+          month.getCalenderContent());
       System.out.println();
     }
   }
-
-  //------------------------------------------------------------------------------------------------
-
-
-
 }
