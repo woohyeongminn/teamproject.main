@@ -11,11 +11,36 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
     super(calenderList);
 
     Calender testCalender = new Calender();
-    testCalender.setMonth(0);
-    testCalender.setDay(0);
-    testCalender.setDayOftheWeek(null);
-    testCalender.setCalenderContent(null);
+    testCalender.setMonth(10);
+    testCalender.setDay(15);
+    testCalender.setDayOftheWeek("금");
+    testCalender.setCalenderContent("자격증 공부");
     testCalender.setEndDay(new Date(System.currentTimeMillis()));
+    calenderList.add(testCalender);
+
+    testCalender = new Calender();
+    testCalender.setMonth(10);
+    testCalender.setDay(17);
+    testCalender.setDayOftheWeek("월");
+    testCalender.setCalenderContent("검정고시 공부");
+    testCalender.setEndDay(new Date(System.currentTimeMillis()));
+    calenderList.add(testCalender);
+
+    testCalender = new Calender();
+    testCalender.setMonth(7);
+    testCalender.setDay(31);
+    testCalender.setDayOftheWeek("수");
+    testCalender.setCalenderContent("중간고사 공부");
+    testCalender.setEndDay(new Date(System.currentTimeMillis()));
+    calenderList.add(testCalender);
+
+    testCalender = new Calender();
+    testCalender.setMonth(6);
+    testCalender.setDay(25);
+    testCalender.setDayOftheWeek("목");
+    testCalender.setCalenderContent("역사 공부");
+    testCalender.setEndDay(new Date(System.currentTimeMillis()));
+    calenderList.add(testCalender);
   }
 
   @Override
@@ -80,6 +105,7 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
 
     calender.setDay(day);
 
+    System.out.println("예시> 월");
     String inputDay;
     while (true) {
       inputDay = Prompt.inputString("요일 : ");
