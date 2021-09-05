@@ -42,7 +42,7 @@ public class MemberListHandler extends AbstractMemberHandler {
     switch (selectAdminNo) {
       case 1: commandMap.get("/member/detail").execute(); break;
       case 2: commandMap.get("/member/update").execute(); break;
-      case 3: commandMap.get("/member/detail").execute(); break;
+      case 3: commandMap.get("/adminmember/delete").execute(); break;
       default : return;
     }
   }

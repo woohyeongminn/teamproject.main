@@ -14,7 +14,7 @@ public class MemberDetailHandler extends AbstractMemberHandler {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("▶ 내 프로필");
+    System.out.println("▶ 프로필");
 
     //    String inputEmail = Prompt.inputString("이메일 입력하세요 ");
     //    Member member = findByEmail(inputEmail);

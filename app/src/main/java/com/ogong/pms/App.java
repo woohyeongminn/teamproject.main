@@ -19,11 +19,13 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminInfoHandler;
+import com.ogong.pms.handler.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.AdminNoticeAddHandler;
 import com.ogong.pms.handler.AdminNoticeDeleteHandler;
 import com.ogong.pms.handler.AdminNoticeDetailHandler;
 import com.ogong.pms.handler.AdminNoticeListHandler;
 import com.ogong.pms.handler.AdminNoticeUpdateHandler;
+import com.ogong.pms.handler.AdminStudyDeleteHandler;
 import com.ogong.pms.handler.AskBoardAddHandler;
 import com.ogong.pms.handler.AskBoardDeleteHandler;
 import com.ogong.pms.handler.AskBoardDetailHandler;
@@ -127,6 +129,7 @@ public class App {
     commandMap.put("/member/detail", new MemberDetailHandler(memberList));
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
+    commandMap.put("/adminmember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, studyList));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, memberList));
@@ -170,6 +173,7 @@ public class App {
     commandMap.put("/study/add", new StudyAddHandler(studyList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
+    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList));
@@ -252,6 +256,8 @@ public class App {
   private Menu createControlStudyMenu() {
     MenuGroup adminStudyMenu = new MenuGroup("스터디 관리"); 
 
+    adminStudyMenu.add(new MenuItem("목록","/study/list"));
+    adminStudyMenu.add(new MenuItem("삭제","/study/delete"));
     return adminStudyMenu;
   }
 
@@ -542,23 +548,4 @@ public class App {
 //  return;
 //}
 ////--------------------------------------------------------------
-
-////--------------------------------------------------------------
-//// 관리자가 회원 조회 들어가면 권한이 없어서 하단 명령 처리 안 됨 > 구현 중
-//private void selectUserModifyPage() {
-//  System.out.println();
-//  System.out.println("1. 상세보기");
-//  System.out.println("2. 수정하기");
-//  System.out.println("3. 탈퇴시키기");
-//  System.out.println("4. 뒤로가기");
-//
-//  int selectAdminNo = Prompt.inputInt("선택> ");
-//  switch (selectAdminNo) {
-//    case 1: memberDetailHandler.execute(); break;
-//    case 2: memberUpdateHandler.execute(); break;
-//    case 3: memberDeleteHandler.execute(); break;
-//    default : return;
-//  }
-//}
-//// ---------------------------------------------
 
