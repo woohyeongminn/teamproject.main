@@ -52,6 +52,12 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
     System.out.println();
     System.out.println("▶ 게시글 작성");
 
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    if (member == null ) {
+      System.out.println("로그인 한 회원만 조회 가능합니다.");
+      return;
+    }
+
     Member memeber = AuthPerMemberLoginHandler.getLoginUser();
     for(Study study : memeber.getPerMyStudy()) {
       if (study.getStudyTitle() == null) {

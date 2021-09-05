@@ -23,15 +23,21 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     System.out.println("▶ 스터디 목록");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
+    if (member == null ) {
+      System.out.println("로그인 한 회원만 조회 가능합니다.");
+      return;
+    }
+
     // 0905 실행안됨
-    for (Study perStudy : member.getPerMyStudy()) {
-      String obj = "";
-      if(perStudy.getStudyTitle().equals(obj)) {
-        System.out.println("가입한 스터디가 없습니다.");
-      }
-      System.out.println(perStudy.getStudyTitle());
+    if(member.getPerMyStudy() == null) {
+      System.out.println("가입한 스터디가 없습니다.");
+      return;
     }
     //
+
+    for (Study perStudy : member.getPerMyStudy()) {
+      System.out.println(perStudy.getStudyTitle());
+    }
 
     System.out.println("----------------------");
     System.out.println("1. 상세 보기");
