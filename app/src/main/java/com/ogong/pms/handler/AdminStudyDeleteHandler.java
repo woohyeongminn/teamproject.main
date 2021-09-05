@@ -1,8 +1,6 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
-import com.ogong.pms.domain.Admin;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
@@ -40,8 +38,8 @@ public class AdminStudyDeleteHandler extends AbstractStudyHandler {
       }
     }
 
-    Admin admin = AuthAdminLoginHandler.getLoginAdmin();
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    //    Admin admin = AuthAdminLoginHandler.getLoginAdmin();
+    //    Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     studyList.remove(study);
     //    member.getPerMyStudy().remove(study);
