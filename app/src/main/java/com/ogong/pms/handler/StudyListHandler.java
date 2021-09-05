@@ -13,12 +13,12 @@ public class StudyListHandler extends AbstractStudyHandler {
     super(newStudyList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 스터디 목록");
 
-    Study newStudy = new Study();
-    printStudyList(newStudy);
+    printStudyList();
 
     System.out.println("----------------------");
     System.out.println("1. 상세 보기");

@@ -11,11 +11,11 @@ public abstract class AbstractStudyHandler implements Command {
 
   List<Study> studyList;
 
-  public AbstractStudyHandler(List<Study> newStudyList) {
-    this.studyList = newStudyList;
+  public AbstractStudyHandler(List<Study> studyList) {
+    this.studyList = studyList;
   }
 
-  protected void printStudyList(Study newStudy) {
+  protected void printStudyList() {
     for (Study study : studyList) {
       System.out.printf("%d, %s, %s명, %s, %s, %s\n",
           study.getStudyNo(),

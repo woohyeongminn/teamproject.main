@@ -7,7 +7,7 @@ import com.ogong.pms.domain.Member;
 public class FreeBoardListHandler extends AbstractFreeBoardHandler {
 
   public FreeBoardListHandler(List<FreeBoard> freeBoardList, List<Member> memberList) {
-    super(freeBoardList,memberList);
+    super(freeBoardList, memberList);
   }
 
   @Override
@@ -15,6 +15,20 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
     System.out.println();
     System.out.println("▶ 게시글 목록");
     System.out.println();
+
+    if (freeBoardList == null ) {
+      System.out.println("게시글이 없습니다");
+      return;
+    }
+
+    // 0905 실행안됨
+    //    for() {
+    //      if(!member.getPerMyStudy().equals(AuthPerMemberLoginHandler.getLoginUser()getPerMyStudy())) {
+    //        System.out.println("가입한 스터디가 없습니다.");
+    //        return;
+    //      }
+    //    }
+
 
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf(
