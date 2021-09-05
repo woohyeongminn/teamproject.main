@@ -25,8 +25,8 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
           freeBoard.getFreeBoardContent(),
           freeBoard.getFreeBoardWriter().getPerNickname(),
           freeBoard.getFreeBoardViewcount(),
-          freeBoard.getFreeBoardRegisteredDate()
-          );
+          freeBoard.getFreeBoardRegisteredDate());
+      System.out.println();
     }
   }
 }
