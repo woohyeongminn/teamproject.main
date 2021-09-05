@@ -69,7 +69,6 @@ import com.ogong.pms.handler.ToDoListHandler;
 import com.ogong.pms.handler.ToDoUpdateHandler;
 import com.ogong.util.Prompt;
 
-
 public class App {
   List<Study> studyList = new LinkedList<>();
   List<Member> memberList = new LinkedList<>();
@@ -371,24 +370,24 @@ public class App {
     myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
     //myStudyMenu.add(new MenuItem("내 스터디 삭제","/myStudy/delete"));    //내스터디목록 하위로 들어가야함
     //
-    //    myStudyMenu.add(createCalenderMenu());
+    myStudyMenu.add(createCalenderMenu());
     //    myStudyMenu.add(createToDoMenu());
     //    myStudyMenu.add(createFreeBoardMenu());
     return myStudyMenu;
   }
 
   // 2-1
-  //  private Menu createCalenderMenu() {
-  //    MenuGroup calenderMenu = new MenuGroup("캘린더");
-  //
-  //    calenderMenu.add(new MenuItem("일정 등록", "/calender/add"));
-  //    calenderMenu.add(new MenuItem("일정 목록", "/calender/list"));
-  //    calenderMenu.add(new MenuItem("일정 상세보기", "/calender/detail"));
-  //    calenderMenu.add(new MenuItem("일정 변경", "/calender/update"));
-  //    calenderMenu.add(new MenuItem("일정 삭제", "/calender/delete"));
-  //
-  //    return calenderMenu;
-  //  }
+  private Menu createCalenderMenu() {
+    MenuGroup calenderMenu = new MenuGroup("캘린더");
+
+    calenderMenu.add(new MenuItem("일정 등록", "/calender/add"));
+    calenderMenu.add(new MenuItem("일정 목록", "/calender/list"));
+    calenderMenu.add(new MenuItem("일정 상세보기", "/calender/detail"));
+    calenderMenu.add(new MenuItem("일정 변경", "/calender/update"));
+    calenderMenu.add(new MenuItem("일정 삭제", "/calender/delete"));
+
+    return calenderMenu;
+  }
   //
   //  // 2-2
   //  private Menu createToDoMenu() {
@@ -401,7 +400,7 @@ public class App {
   //    return toDoMenu;
   //  }
   //
-  //  // 2-3
+  //  // 2-3 
   //  private Menu createFreeBoardMenu() {
   //    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
   //    freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));

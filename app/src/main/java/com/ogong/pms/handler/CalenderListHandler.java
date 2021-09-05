@@ -18,6 +18,10 @@ public class CalenderListHandler extends AbstractCalenderHandler {
     System.out.println("'월'을 입력해주세요.");
     int selectMonth = Prompt.inputInt("월: ");
 
+    if (selectMonth > 12 || selectMonth < 1) {
+      System.out.println("'일'을 정확히 입력해주세요.");
+    }
+
     Calender month = null;
     for (Calender calender : calenderList) {
       if (selectMonth == calender.getMonth()) {
