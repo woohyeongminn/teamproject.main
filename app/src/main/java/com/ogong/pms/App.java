@@ -58,6 +58,7 @@ import com.ogong.pms.handler.MemberDetailHandler;
 import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
+import com.ogong.pms.handler.MyStudyDetailHandler;
 import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
@@ -69,7 +70,6 @@ import com.ogong.pms.handler.ToDoDetailHandler;
 import com.ogong.pms.handler.ToDoListHandler;
 import com.ogong.pms.handler.ToDoUpdateHandler;
 import com.ogong.util.Prompt;
-
 
 public class App {
   List<Study> studyList = new LinkedList<>();
@@ -176,7 +176,8 @@ public class App {
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
-    commandMap.put("/myStudy/list", new MyStudyListHandler(studyList));
+    commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
+    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap));
   }
 
   void welcomeservice() {
@@ -373,11 +374,11 @@ public class App {
     // 내 스터디 하위 메뉴 5 - 화상미팅
     // 내 스터디 하위 메뉴 6 - 탈퇴
     myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
-    myStudyMenu.add(new MenuItem("내 스터디 삭제","/myStudy/delete"));    //내스터디목록 하위로 들어가야함
-
+    //myStudyMenu.add(new MenuItem("내 스터디 삭제","/myStudy/delete"));    //내스터디목록 하위로 들어가야함
+    //
     myStudyMenu.add(createCalenderMenu());
-    myStudyMenu.add(createToDoMenu());
-    myStudyMenu.add(createFreeBoardMenu());
+    //    myStudyMenu.add(createToDoMenu());
+    //    myStudyMenu.add(createFreeBoardMenu());
     return myStudyMenu;
   }
 
@@ -393,28 +394,28 @@ public class App {
 
     return calenderMenu;
   }
-
-  // 2-2
-  private Menu createToDoMenu() {
-    MenuGroup toDoMenu = new MenuGroup("To-Do List");
-    toDoMenu.add(new MenuItem("등록" , "/todo/add"));
-    toDoMenu.add(new MenuItem("목록" , "/todo/list"));
-    toDoMenu.add(new MenuItem("상세" , "/todo/detail"));
-    toDoMenu.add(new MenuItem("수정" , "/todo/update"));
-    toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
-    return toDoMenu;
-  }
-
-  // 2-3
-  private Menu createFreeBoardMenu() {
-    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
-    freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
-    freeBoardMenu.add(new MenuItem("게시글 목록" , "/freeBoard/list"));
-    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/detail"));
-    freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
-    freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
-    return freeBoardMenu;
-  }
+  //
+  //  // 2-2
+  //  private Menu createToDoMenu() {
+  //    MenuGroup toDoMenu = new MenuGroup("To-Do List");
+  //    toDoMenu.add(new MenuItem("등록" , "/todo/add"));
+  //    toDoMenu.add(new MenuItem("목록" , "/todo/list"));
+  //    toDoMenu.add(new MenuItem("상세" , "/todo/detail"));
+  //    toDoMenu.add(new MenuItem("수정" , "/todo/update"));
+  //    toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
+  //    return toDoMenu;
+  //  }
+  //
+  //  // 2-3 
+  //  private Menu createFreeBoardMenu() {
+  //    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
+  //    freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
+  //    freeBoardMenu.add(new MenuItem("게시글 목록" , "/freeBoard/list"));
+  //    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/detail"));
+  //    freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
+  //    freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
+  //    return freeBoardMenu;
+  //  }
 
   //개인 하위 메뉴3 - 스터디 장소
   private Menu createCafeMenu() {
