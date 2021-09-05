@@ -2,6 +2,7 @@ package com.ogong.pms.handler;
 
 import java.sql.Date;
 import java.util.List;
+import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -12,13 +13,13 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
   int freeBoardNo;
   List<Study> studyList;
 
-  public FreeBoardAddHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Study> studyList) {
-    super(freeBoardList, memberList);
+  public FreeBoardAddHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Study> studyList, List<Comment> commentList) {
+    super(freeBoardList, memberList, commentList);
     this.studyList =  studyList;
 
     FreeBoard test = new FreeBoard();
     test.setFreeBoardNo(++freeBoardNo);
-    test.setFreeBoardTitle("다음 모임 시간");
+    test.setFreeBoardTitle("게시글1");
     test.setFreeBoardContent("5월 10일에 만나요");
     test.setFreeBoardAtcFile("지도");
     test.setFreeBoardWriter(memberList.get(0));
@@ -28,7 +29,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
 
     test = new FreeBoard();
     test.setFreeBoardNo(++freeBoardNo);
-    test.setFreeBoardTitle("오늘 스터디 현황");
+    test.setFreeBoardTitle("게시글2");
     test.setFreeBoardContent("아주아주 잘하고 있습니다");
     test.setFreeBoardAtcFile("jpg");
     test.setFreeBoardWriter(memberList.get(1));
@@ -38,7 +39,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
 
     test = new FreeBoard();
     test.setFreeBoardNo(++freeBoardNo);
-    test.setFreeBoardTitle("땡땡문제집 이부분 질문이요");
+    test.setFreeBoardTitle("게시글3");
     test.setFreeBoardContent("159p 이상합니다");
     test.setFreeBoardAtcFile("문제집");
     test.setFreeBoardWriter(memberList.get(2));

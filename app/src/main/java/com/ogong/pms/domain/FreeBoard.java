@@ -1,6 +1,7 @@
 package com.ogong.pms.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class FreeBoard {
 
@@ -13,6 +14,7 @@ public class FreeBoard {
   private int freeBoardViewcount;    //조회수
   private Date freeBoardRegisteredDate; //작성일
 
+  private List<Comment> comment; //댓글
 
 
   @Override
@@ -20,8 +22,17 @@ public class FreeBoard {
     return "FreeBoard [freeBoardNo=" + freeBoardNo + ", freeBoardTitle=" + freeBoardTitle
         + ", freeBoardContent=" + freeBoardContent + ", freeBoardAtcFile=" + freeBoardAtcFile
         + ", freeBoardWriter=" + freeBoardWriter + ", freeBoardViewcount=" + freeBoardViewcount
-        + ", freeBoardRegisteredDate=" + freeBoardRegisteredDate + "]";
+        + ", freeBoardRegisteredDate=" + freeBoardRegisteredDate + ", comment=" + comment + "]";
   }
+
+  public List<Comment> getComment() {
+    return comment;
+  }
+
+  public void setComment(List<Comment> comment) {
+    this.comment = comment;
+  }
+
   public int getFreeBoardNo() {
     return freeBoardNo + 1;
     //return freeBoardNo++;

@@ -30,6 +30,20 @@ public class StudyAddHandler extends AbstractStudyHandler {
 
     testStudy = new Study();
     testStudy.setStudyNo(++studyNo);
+    testStudy.setStudyTitle("정처기 준비");
+    testStudy.setOwner(promptPerMember.memberList.get(0));
+    testStudy.setSubject("자격증");
+    testStudy.setArea("경기");
+    testStudy.setNumberOfPeple(5);
+    testStudy.setFace("비대면");
+    testStudy.setIntroduction("한번에 붙자");
+    testStudy.setMembers(new ArrayList<>());
+    testStudy.setWatingMember(new ArrayList<>());
+    newStudyList.add(testStudy);
+    promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
+
+    testStudy = new Study();
+    testStudy.setStudyNo(++studyNo);
     testStudy.setStudyTitle("하반기 삼성 공모전");
     testStudy.setOwner(promptPerMember.memberList.get(1));
     testStudy.setSubject("공모전");

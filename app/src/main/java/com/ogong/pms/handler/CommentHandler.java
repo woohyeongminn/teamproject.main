@@ -3,7 +3,6 @@ package com.ogong.pms.handler;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.util.Prompt;
 
 public class CommentHandler {
 
@@ -23,13 +22,8 @@ public class CommentHandler {
 
 
 
-  public void add () {
+  public void add (FreeBoard freeBoard) {
+    System.out.println();
     System.out.println("▶ 댓글 등록");
-
-    Comment comment = new Comment();
-
-    comment.setCommentText(Prompt.inputString("내용 : "));
   }
-
 }
-

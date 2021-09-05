@@ -1,14 +1,15 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList, List<Member> memberList) {
-    super(freeBoardList,memberList);
+  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Comment> commentList) {
+    super(freeBoardList, memberList, commentList);
   }
 
   @Override
@@ -16,15 +17,29 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     System.out.println();
     System.out.println("▶ 게시글 상세보기");
 
-    String inputTitle = Prompt.inputString("제목 : ");
     System.out.println();
 
-    FreeBoard free = findByTitle(inputTitle);
-
+    FreeBoard free = findByTitle(Prompt.inputString("제목 : "));
+    System.out.println();
     if (free == null) {
       System.out.println("해당 제목의 게시글이 없습니다.");
       return;
     }
+
+    //    if (!inputTitle.equals(free.getFreeBoardTitle())) {
+    //      System.out.println("해당 제목의 게시글이 없습니다.");
+    //      return;
+    //    }
+
+    //(inputTitle != free.getFreeBoardTitle())
+
+    //    for(FreeBoard freeBoard : freeBoardList) {
+    //      if (!free.equals(freeBoard.getFreeBoardTitle())) {
+    //        System.out.println("해당 제목의 게시글이 없습니다.");
+    //        return;
+    //      }
+    //    }
+
 
     System.out.printf(">> 제목 : %s\n", free.getFreeBoardTitle());
     System.out.printf(">> 내용 : %s\n", free.getFreeBoardContent());
@@ -33,6 +48,25 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     System.out.printf(">> 등록일 : %s\n", free.getFreeBoardRegisteredDate());
     free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
     System.out.printf(">> 조회수 : %d\n", free.getFreeBoardViewcount());
-  }
-}
 
+    System.out.println("=============댓글=============");
+    int commentSize = 0;
+    System.out.printf("%s\n", free.getComment());
+
+    if (commentSize == 0) {
+      System.out.println("등록된 댓글이 없습니다.");
+    }
+
+    System.out.println();
+    System.out.println();
+
+    System.out.println("1. 댓글 달기");
+    System.out.println("0. 뒤로가기");
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1 : addComment(); break;
+      default : return;
+    }
+  }
+
+}

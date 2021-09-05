@@ -14,6 +14,7 @@ import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -84,6 +85,7 @@ public class App {
   List<Calender> calenderList = new ArrayList<>();
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
+  List<Comment> commentList = new ArrayList<>();
 
   // 해시맵 추가(0904)
   HashMap<String, Command> commandMap = new HashMap<>();
@@ -131,11 +133,11 @@ public class App {
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
     commandMap.put("/adminmember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
-    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, studyList));
-    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, memberList));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, memberList));
-    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, memberList));
-    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, memberList));
+    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, studyList, commentList));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, memberList, commentList, commandMap));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, memberList, commentList));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, memberList, commentList));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, memberList, commentList));
 
     commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
     commandMap.put("/toDo/list", new ToDoListHandler(toDoList));

@@ -5,18 +5,17 @@ import java.sql.Date;
 public class Comment {
 
   private String commentText;
-
-  private Member commentOwner;
-  private Date perRegisteredDate;
-  private FreeBoard freeBoard;
+  private Member commentWiter;
+  private Date commentRegisteredDate;
+  //private FreeBoard freeBoard;
 
 
 
 
   @Override
   public String toString() {
-    return "Comment [commentText=" + commentText + ", commentOwner=" + commentOwner
-        + ", perRegisteredDate=" + perRegisteredDate + ", freeBoard=" + freeBoard + "]";
+    return "Comment [commentText=" + commentText + ", commentWiter=" + commentWiter
+        + ", commentRegisteredDate=" + commentRegisteredDate + "]";
   }
 
 
@@ -26,24 +25,24 @@ public class Comment {
   public void setCommentText(String commentText) {
     this.commentText = commentText;
   }
-  public Member getCommentOwner() {
-    return commentOwner;
+  public Member getCommentWiter() {
+    return commentWiter;
   }
-  public void setCommentOwner(Member commentOwner) {
-    this.commentOwner = commentOwner;
+  public void setCommentWiter(Member commentWiter) {
+    this.commentWiter = commentWiter;
   }
-  public Date getPerRegisteredDate() {
-    return perRegisteredDate;
+  public Date getCommentRegisteredDate() {
+    return commentRegisteredDate;
   }
-  public void setPerRegisteredDate(Date perRegisteredDate) {
-    this.perRegisteredDate = perRegisteredDate;
+  public void setCommentRegisteredDate(Date commentRegisteredDate) {
+    this.commentRegisteredDate = commentRegisteredDate;
   }
-  public FreeBoard getFreeBoard() {
-    return freeBoard;
-  }
-  public void setFreeBoard(FreeBoard freeBoard) {
-    this.freeBoard = freeBoard;
-  }
+  //  public FreeBoard getFreeBoard() {
+  //    return freeBoard;
+  //  }
+  //  public void setFreeBoard(FreeBoard freeBoard) {
+  //    this.freeBoard = freeBoard;
+  //  }
 
 
 }
