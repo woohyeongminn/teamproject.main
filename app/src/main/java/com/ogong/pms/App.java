@@ -388,9 +388,9 @@ public class App {
 
     calenderMenu.add(new MenuItem("일정 등록", "/calender/add"));
     calenderMenu.add(new MenuItem("일정 목록", "/calender/list"));
-    calenderMenu.add(new MenuItem("일정 상세보기", "/calender/detail"));
-    calenderMenu.add(new MenuItem("일정 변경", "/calender/update"));
-    calenderMenu.add(new MenuItem("일정 삭제", "/calender/delete"));
+    //    calenderMenu.add(new MenuItem("일정 상세보기", "/calender/detail"));
+    //    calenderMenu.add(new MenuItem("일정 변경", "/calender/update"));
+    //    calenderMenu.add(new MenuItem("일정 삭제", "/calender/delete"));
 
     return calenderMenu;
   }
