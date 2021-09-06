@@ -8,9 +8,17 @@ public class Calender {
   private int day;     //일
   private String dayOftheWeek; //요일
   private String calenderContent;   // 내용
-  private Date startDay;  // 시작일
+  //  private Date startDay;  // 시작일
   private Date endDay;    // 종료일
+  private String studyTitle;  // 스터디 명
 
+
+  @Override
+  public String toString() {
+    return "Calender [month=" + month + ", day=" + day + ", dayOftheWeek=" + dayOftheWeek
+        + ", calenderContent=" + calenderContent + ", endDay=" + endDay + ", studyTitle="
+        + studyTitle + "]";
+  }
   public int getMonth() {
     return month;
   }
@@ -35,11 +43,11 @@ public class Calender {
   public void setCalenderContent(String calenderContent) {
     this.calenderContent = calenderContent;
   }
-  public Date getStartDay() {
-    return startDay;
+  public String getStudyTitle() {
+    return studyTitle;
   }
-  public void setStartDay(Date startDay) {
-    this.startDay = startDay;
+  public void setStudyTitle(String studyTitle) {
+    this.studyTitle = studyTitle;
   }
   public Date getEndDay() {
     return endDay;

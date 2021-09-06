@@ -121,7 +121,7 @@ public class App {
   }
 
   public App() {
-    commandMap.put("/calender/add", new CalenderAddHandler(calenderList));
+    commandMap.put("/calender/add", new CalenderAddHandler(calenderList, studyList));
     commandMap.put("/calender/list", new CalenderListHandler(calenderList, commandMap));
     commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList, commandMap));
     commandMap.put("/calender/update", new CalenderUpdateHandler(calenderList));
@@ -155,11 +155,11 @@ public class App {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList));
 
     commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
-    commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
-    commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
     commandMap.put("/cafe/reservationList", new CafeReservationListHandler(cafeList, cafeReview, reserList));
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
@@ -426,13 +426,13 @@ public class App {
   private Menu createCafeMenu() {
     MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
 
-    cafeMenu.add(new MenuItem("장소 등록/기업 권한", "/cafe/add"));
-    cafeMenu.add(new MenuItem("장소 목록", "/cafe/list"));
-    cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
-    cafeMenu.add(new MenuItem("장소 상세보기", "/cafe/detail"));
-    cafeMenu.add(new MenuItem("장소 정보 변경하기", "/cafe/update"));
-    cafeMenu.add(new MenuItem("장소 삭제하기", "/cafe/delete"));
-    cafeMenu.add(new MenuItem("장소 예약 내역 보기", "/cafe/reservationList"));
+    cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
+    cafeMenu.add(new MenuItem("목록", "/cafe/list"));
+    //cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
+    //cafeMenu.add(new MenuItem("장소 상세보기", "/cafe/detail"));
+    cafeMenu.add(new MenuItem("수정", "/cafe/update"));
+    cafeMenu.add(new MenuItem("삭제", "/cafe/delete"));
+    cafeMenu.add(new MenuItem("예약내역", "/cafe/reservationList")); // 회원 마이페이지
 
     return cafeMenu;
   }

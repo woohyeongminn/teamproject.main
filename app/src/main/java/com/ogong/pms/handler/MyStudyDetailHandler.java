@@ -46,11 +46,11 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     if (AuthPerMemberLoginHandler.loginUser != null) {
       if (study.getOwner().getPerNickname().equals(AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
       }
-      selectUserModifyPage();
+      selectUserModifyPage(study);
     }
   }
 
-  private void selectUserModifyPage() {
+  private void selectUserModifyPage(Study study) {
     System.out.println();
     System.out.println("1. 구성원 관리");        // 대기중인 회원 목록, 참가중인 회원 목록, 인원수, 
     // 조장은 위에 3개 + 승인, 거절, 권한 넘겨주기, 탈퇴시키기 까지
@@ -63,7 +63,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
-      case 1: commandMap.get("/askBoard/list").execute(); break;   //바꿔야됨
+      case 1: listMember(study); break;
       case 2: commandMap.get("/calender/list").execute(); break;   
       case 3: commandMap.get("/toDo/list").execute(); break;
       case 4: commandMap.get("/freeBoard/list").execute(); break;
