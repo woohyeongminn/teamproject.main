@@ -17,12 +17,13 @@ public class CafeListHandler extends AbstractCafeHandler {
     this.commandMap = commandMap;
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 장소 목록");
     System.out.println();
+
     for(Cafe cafe : cafeList) {
-      System.out.println();
       System.out.printf(" (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
           , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
     }
@@ -31,7 +32,7 @@ public class CafeListHandler extends AbstractCafeHandler {
   }
 
   private void selectCafeDetailMenu() {
-    System.out.println();
+    System.out.println("\n----------------------");
     System.out.println("1. 상세보기");
     System.out.println("2. 검    색");
     System.out.println("0. 뒤로가기");

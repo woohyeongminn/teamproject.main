@@ -92,6 +92,7 @@ public abstract class AbstractFreeBoardHandler implements Command {
   }
 
   protected void listComment(FreeBoard freeBoard) {
+    System.out.println();
     System.out.println("=============댓글=============");
     int commentSize = 0;
 

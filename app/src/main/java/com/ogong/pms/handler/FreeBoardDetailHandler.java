@@ -36,7 +36,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     System.out.printf(">> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
     listComment(freeBoard); // 댓글호출
 
-    System.out.println();
+    System.out.println("\n----------------------");
     System.out.println("1. 댓글 달기");
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");

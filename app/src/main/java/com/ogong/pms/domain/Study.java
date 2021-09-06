@@ -21,8 +21,6 @@ public class Study {
 
 
 
-
-
   @Override
   public String toString() {
     return "Study [studyNo=" + studyNo + ", studyTitle=" + studyTitle + ", owner=" + owner
@@ -34,7 +32,7 @@ public class Study {
 
 
   public int getStudyNo() {
-    return studyNo;
+    return studyNo + 1;
   }
 
 
