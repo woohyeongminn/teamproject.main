@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList,
       List<Comment> commentList, HashMap<String, Command> commandMap) {
-    super(freeBoardList, memberList, commentList, commandMap);
+    super(freeBoardList, commentList, commandMap);
   }
 
   @Override

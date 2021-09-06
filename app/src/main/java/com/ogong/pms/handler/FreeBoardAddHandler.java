@@ -13,10 +13,12 @@ import com.ogong.util.Prompt;
 public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
 
   int freeBoardNo;
+  List<Member> memberList;
 
   public FreeBoardAddHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
       List<Comment> commentList, HashMap<String, Command> commandMap) {
-    super(freeBoardList, memberList, commentList, commandMap);
+    super(freeBoardList, commentList, commandMap);
+    this.memberList = memberList;
 
     FreeBoard test = new FreeBoard();
     test.setFreeBoardNo(freeBoardNo++);

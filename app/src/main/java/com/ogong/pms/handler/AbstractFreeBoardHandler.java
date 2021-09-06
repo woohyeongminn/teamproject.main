@@ -18,10 +18,9 @@ public abstract class AbstractFreeBoardHandler implements Command {
   HashMap<String, Command> commandMap;
 
 
-  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList,
       List<Comment> commentList,  HashMap<String, Command> commandMap) {
     this.freeBoardList = freeBoardList;
-    this.memberList = memberList;
     this.commentList = commentList;
     this.commandMap = commandMap;
   }

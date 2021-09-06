@@ -139,10 +139,10 @@ public class App {
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, commentList, commandMap));
-    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, memberList, commentList, commandMap));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, memberList, commentList, commandMap));
-    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, memberList, commentList, commandMap));
-    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, memberList, commentList, commandMap));
+    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, commentList, commandMap));
+    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, commentList, commandMap));
+    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, commentList, commandMap));
+    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, commentList, commandMap));
 
     commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
     commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
