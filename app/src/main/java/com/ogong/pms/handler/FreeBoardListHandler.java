@@ -24,14 +24,6 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
       return;
     }
 
-    // 0905 실행안됨
-    //    for() {
-    //      if(!member.getPerMyStudy().equals(AuthPerMemberLoginHandler.getLoginUser()getPerMyStudy())) {
-    //        System.out.println("가입한 스터디가 없습니다.");
-    //        return;
-    //      }
-    //    }
-
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf(
           "(%d)\n %s\n %s\n 첨부파일 : %s\n %s\n 조회수 : %s\n %s\n",

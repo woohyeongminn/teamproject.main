@@ -84,6 +84,17 @@ public class PromptPerMember implements Command {
     return null;
   }
 
+  //비밀번호을 통해 멤버를 찾아서 리턴한다.
+  public Member getMemberByPerPW(String inputPW) {
+    for (Member member : memberList) {
+      if (inputPW.equals(member.getPerPassword())) {
+        return member;
+      }
+    }
+    return null;
+  }
+
+  //닉네임을 통해 멤버를 찾아서 리턴한다.
   public Member getMemberByPerNick(String inputNick) {
     for (Member member : memberList) {
       if (inputNick.equals(member.getPerNickname())) {
@@ -103,6 +114,7 @@ public class PromptPerMember implements Command {
     return false;
   }
 
+  //이메일를 입력해서 등록된 회원인지 찾는다
   public String promptMemberEmail(String email) {
     while (true) {
       String emailBox = Prompt.inputString(email);
@@ -115,6 +127,7 @@ public class PromptPerMember implements Command {
     }
   }
 
+  // 비밀번호를 입력해서 등록된 회원인지 찾는다
   public String promptMemberPassword(String passWord) {
     while (true) {
       String passwordBox = Prompt.inputString(passWord);

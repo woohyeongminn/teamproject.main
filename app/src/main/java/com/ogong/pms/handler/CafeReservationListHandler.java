@@ -12,9 +12,11 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 내 예약 내역 보기");
+    System.out.println();
 
     if (AuthPerMemberLoginHandler.getLoginUser() == null) {
       System.out.println("로그인 한 회원만 볼 수 있습니다.");
@@ -24,12 +26,13 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
     int count = 0;
     for (CafeReservation cafeReser : reserList) {
       if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
-        System.out.printf(" 예약번호 : %d, 예약날짜 : %s, 예약장소 : %s,"
-            + "\n 시작시간 : %d시, 이용시간 : %d시간, 사용인원 : %d명, "
-            + "\n 결제금액 : %d원, 리뷰작성여부 : %s\n"
+        System.out.printf(" (%d)\n >> 예약날짜 : %s\n >> 예약장소 : %s\n"
+            + " >> 시작시간 : %d시\n >> 이용시간 : %d시간\n >> 사용인원 : %d명\n"
+            + " >> 결제금액 : %d원\n >> 리뷰작성여부 : %s\n"
             , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReser.getCafe().getName()
             , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseTime()
             , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
+        System.out.println();
         count++;
       } 
     }

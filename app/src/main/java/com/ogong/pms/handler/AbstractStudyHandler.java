@@ -17,19 +17,21 @@ public abstract class AbstractStudyHandler implements Command {
 
   protected void printStudyList() {
     for (Study study : studyList) {
-      System.out.printf("%d, %s, %s명, <%s>, %s, %s\n",
+      System.out.printf(" (%d)\n [%s]\n >> %s\n >> %s명\n >> %s\n >> %s\n",
           study.getStudyNo(),
+          study.getStudyTitle(),
           study.getSubject(),
           study.getNumberOfPeple(),
-          study.getStudyTitle(),
           study.getOwner().getPerNickname(),
           study.getFace());
+      System.out.println();
     }
   }
 
   protected void detail() {
     System.out.println();
     System.out.println("▶ 스터디 상세");
+    System.out.println();
 
     String inputTitle = Prompt.inputString("제목 : ");
 
@@ -40,13 +42,13 @@ public abstract class AbstractStudyHandler implements Command {
       return;
     }
 
-    System.out.printf("스터디명 : %s\n", study.getStudyTitle());
-    System.out.printf("조장 : %s\n", study.getOwner().getPerNickname());
-    System.out.printf("분야 : %s\n", study.getSubject());
-    System.out.printf("지역 : %s\n", study.getArea());
-    System.out.printf("인원수 : %d\n", study.getNumberOfPeple());
-    System.out.printf("대면 : %s\n", study.getFace());
-    System.out.printf("소개글 : %s\n", study.getIntroduction());
+    System.out.printf(" [%s]\n", study.getStudyTitle());
+    System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
+    System.out.printf(" >> 분야 : %s\n", study.getSubject());
+    System.out.printf(" >> 지역 : %s\n", study.getArea());
+    System.out.printf(" >> 인원수 : %d\n", study.getNumberOfPeple());
+    System.out.printf(" >> 대면 : %s\n", study.getFace());
+    System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
     if (AuthPerMemberLoginHandler.loginUser != null) {
 
@@ -59,7 +61,7 @@ public abstract class AbstractStudyHandler implements Command {
           default : return;
         }
       } else {
-        System.out.println();
+        System.out.println("\n----------------------");
         System.out.println("1. 참여 신청하기");
         System.out.println("0. 뒤로가기");
         int selectNo = Prompt.inputInt("선택> ");
@@ -75,6 +77,7 @@ public abstract class AbstractStudyHandler implements Command {
     System.out.println();
     System.out.println("▶ 구성원 보기");
     System.out.println();
+
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     if (member == null ) {
@@ -121,6 +124,8 @@ public abstract class AbstractStudyHandler implements Command {
   protected void joinStudy(Study study) {
     System.out.println();
     System.out.println("▶ 스터디 신청");
+    System.out.println();
+
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     if (member == null) {
@@ -129,20 +134,20 @@ public abstract class AbstractStudyHandler implements Command {
     }
 
     if(study.getOwner().getPerNickname().equals(member.getPerNickname())) {
-      System.out.println("참여중인 조장은 신청할 수 없습니다.");
+      System.out.println("조장은 신청할 수 없습니다.");
       return;
     }
 
     for (Study myStudy : member.getPerMyStudy()) {
       if (myStudy.getStudyTitle().equals(study.getStudyTitle())) {
-        System.out.println("이미 참여중인 스터디입니다.");
+        System.out.println("이미 참여 중인 스터디입니다.");
         return;
       }
     }
 
     for (Member memberWating : study.getWatingMember()) {
       if (member.getPerNickname().equals(memberWating.getPerNickname())) {
-        System.out.println("이미 승인대기중인 스터디입니다.");
+        System.out.println("이미 승인 대기 중인 스터디입니다.");
         return;
       }
     }
@@ -159,7 +164,7 @@ public abstract class AbstractStudyHandler implements Command {
     }
     study.getWatingMember().add(member);
     System.out.println();
-    System.out.println("참여 신청이 완료 되었습니다.\n승인이 완료될때까지 기다려주세요.");
+    System.out.println("참여 신청이 완료되었습니다.\n승인이 완료될 때까지 기다려 주세요.");
   }
 
 
