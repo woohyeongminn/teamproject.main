@@ -77,13 +77,14 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
     freeBoard.setFreeBoardTitle(Prompt.inputString("제목 : "));
     freeBoard.setFreeBoardContent(Prompt.inputString("내용 : "));
     freeBoard.setFreeBoardAtcFile(Prompt.inputString("첨부파일 : "));
-    freeBoard.setFreeBoardWriter(AuthPerMemberLoginHandler.getLoginUser());
+    freeBoard.setFreeBoardWriter(memberList.get(freeBoardNo));
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString("게시글을 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("게시글 등록을 취소하였습니다.");
+      selectPage();
       return;
     }
 

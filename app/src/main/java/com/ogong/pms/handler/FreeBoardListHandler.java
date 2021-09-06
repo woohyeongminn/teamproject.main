@@ -45,6 +45,11 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
           freeBoard.getFreeBoardRegisteredDate());
       System.out.println();
     }
+    selectPage();
+  }
+
+  @Override
+  protected void selectPage() {
     System.out.println("---------------------");
     System.out.println("1. 게시글 상세");
     System.out.println("2. 게시글 등록");
