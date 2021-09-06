@@ -4,9 +4,10 @@ import java.sql.Date;
 
 public class Comment {
 
-  private String commentText;
-  private Member commentWiter;
-  private Date commentRegisteredDate;
+  private String commentText;   // 댓글 내용
+  private Member commentWiter;  // 댓글 작성자
+  private Date commentRegisteredDate;   // 댓글 작성일
+
   //private FreeBoard freeBoard;
 
 

@@ -40,7 +40,7 @@ public abstract class AbstractFreeBoardHandler implements Command {
     return null;
   }
 
-  protected void addComment() {
+  protected void addComment(FreeBoard free) {
     System.out.println();
     System.out.println("▶ 댓글 작성하기");
 
@@ -56,7 +56,7 @@ public abstract class AbstractFreeBoardHandler implements Command {
 
       String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
-        System.out.println("리뷰 등록을 취소하였습니다.");
+        System.out.println("댓글 등록을 취소하였습니다.");
         return;
       }
 
@@ -65,8 +65,8 @@ public abstract class AbstractFreeBoardHandler implements Command {
       comment.setCommentRegisteredDate(date);
 
       commentList.add(comment);
-      //freeBoardList;
-      // System.out.println("리뷰가 등록되었습니다.");
+      free.getComment().add(comment);
+      System.out.println("댓글이 등록되었습니다.");
 
 
     }

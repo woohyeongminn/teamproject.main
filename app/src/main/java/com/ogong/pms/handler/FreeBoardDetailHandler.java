@@ -51,7 +51,12 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
     System.out.println("=============댓글=============");
     int commentSize = 0;
-    System.out.printf("%s\n", free.getComment());
+
+    for (Comment comment : commentList) {
+      System.out.printf("내용 : %s, 작성자 : %s, 등록일 : %s\n",
+          comment.getCommentText(), comment.getCommentWiter().getPerNickname(), comment.getCommentRegisteredDate());
+      commentSize++;
+    }
 
     if (commentSize == 0) {
       System.out.println("등록된 댓글이 없습니다.");
@@ -64,7 +69,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : addComment(); break;
+      case 1 : addComment(free); break;
       default : return;
     }
   }
