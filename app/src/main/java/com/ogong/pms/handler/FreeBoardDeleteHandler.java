@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
@@ -8,8 +9,9 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Comment> commentList) {
-    super(freeBoardList, memberList, commentList);
+  public FreeBoardDeleteHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+      List<Comment> commentList, HashMap<String, Command> commandMap) {
+    super(freeBoardList, memberList, commentList, commandMap);
   }
 
   @Override
@@ -41,6 +43,7 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
     freeBoardList.remove(free);
 
     System.out.println("게시글이 삭제되었습니다.");
+    selectPage();
   }
 }
 

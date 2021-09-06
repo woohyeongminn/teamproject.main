@@ -2,6 +2,7 @@ package com.ogong.pms.handler;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
@@ -12,11 +13,10 @@ import com.ogong.util.Prompt;
 public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
 
   int freeBoardNo;
-  List<Study> studyList;
 
-  public FreeBoardAddHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Study> studyList, List<Comment> commentList) {
-    super(freeBoardList, memberList, commentList);
-    this.studyList =  studyList;
+  public FreeBoardAddHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+      List<Comment> commentList, HashMap<String, Command> commandMap) {
+    super(freeBoardList, memberList, commentList, commandMap);
 
     FreeBoard test = new FreeBoard();
     test.setFreeBoardNo(freeBoardNo++);
@@ -89,7 +89,7 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
 
     freeBoardList.add(freeBoard);
     System.out.println("게시글이 등록되었습니다.");
-
+    selectPage();
   }
 }
 

@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
@@ -8,8 +9,9 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardUpdateHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Comment> commentList) {
-    super(freeBoardList, memberList, commentList);
+  public FreeBoardUpdateHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+      List<Comment> commentList, HashMap<String, Command> commandMap) {
+    super(freeBoardList, memberList, commentList, commandMap);
   }
 
 
@@ -48,6 +50,7 @@ public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
     free.setFreeBoardAtcFile(freeBoardAtcFile);
 
     System.out.println("게시글을 변경하였습니다.");
+    selectPage();
   }
 }
 

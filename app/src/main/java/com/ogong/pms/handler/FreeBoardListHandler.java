@@ -9,14 +9,10 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardListHandler extends AbstractFreeBoardHandler {
 
-  HashMap<String, Command> commandMap;
-
-  public FreeBoardListHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Comment> commentList, HashMap<String, Command> commandMap) {
-    super(freeBoardList, memberList, commentList);
-    this.commandMap = commandMap;
+  public FreeBoardListHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+      List<Comment> commentList, HashMap<String, Command> commandMap) {
+    super(freeBoardList, memberList, commentList, commandMap);
   }
-
-
 
   @Override
   public void execute() {
@@ -49,18 +45,15 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
           freeBoard.getFreeBoardRegisteredDate());
       System.out.println();
     }
-    selectUserModifyPage();
-  }
-
-  private void selectUserModifyPage() {
     System.out.println("---------------------");
-    System.out.println("1. 상세보기");
-    System.out.println("2. 등록보기");
-    System.out.println("3. 수정하기");
-    System.out.println("4. 삭제하기");
+    System.out.println("1. 게시글 상세");
+    System.out.println("2. 게시글 등록");
+    System.out.println("3. 게시글 수정");
+    System.out.println("4. 게시글 삭제");
     System.out.println("0. 뒤로가기");
 
     int selectAdminNo = Prompt.inputInt("선택> ");
+
     switch (selectAdminNo) {
       case 1: commandMap.get("/freeBoard/detail").execute(); break;
       case 2: commandMap.get("/freeBoard/add").execute(); break;
