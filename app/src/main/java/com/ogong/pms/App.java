@@ -121,7 +121,8 @@ public class App {
 
   public App() {
     commandMap.put("/calender/add", new CalenderAddHandler(calenderList));
-    commandMap.put("/calender/list", new CalenderListHandler(calenderList));
+    commandMap.put("/calender/list", new CalenderListHandler(calenderList, 
+        commandMap));
     commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList));
     commandMap.put("/calender/update", new CalenderUpdateHandler(calenderList));
     commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList));

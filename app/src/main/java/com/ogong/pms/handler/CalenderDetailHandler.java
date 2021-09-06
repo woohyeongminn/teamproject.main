@@ -24,7 +24,6 @@ public class CalenderDetailHandler extends AbstractCalenderHandler {
     int inputDay;
     Calender day = null;
     while (true) {
-      System.out.println();
       inputDay = Prompt.inputInt("일: ");
 
       if (inputDay > 31 || inputDay < 1) {

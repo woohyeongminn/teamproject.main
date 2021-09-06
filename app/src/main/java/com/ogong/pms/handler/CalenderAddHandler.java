@@ -80,7 +80,7 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
         }
       }
       else if (month < 8 || (month % 2) == 0) {
-        if (day > 30 || day < 1) {
+        if (day > 31 || day < 1) {
           System.out.println("등록할 수 없는 '일'입니다.");
           System.out.println("다시 등록해주세요.");
           continue;
