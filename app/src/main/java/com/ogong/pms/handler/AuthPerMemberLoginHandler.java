@@ -19,6 +19,24 @@ public class AuthPerMemberLoginHandler implements Command {
 
   @Override
   public void execute() {
+
+    System.out.println();
+    System.out.println("1. 로그인");
+    System.out.println("2. NAVER로 시작하기");
+    System.out.println("3. KAKAO로 시작하기");
+    System.out.println("4. GOOGLE로 시작하기");
+    System.out.println("0. 뒤로가기");
+    int selectLogin = Prompt.inputInt("선택> ");
+    switch (selectLogin) {
+      case 1 : siteLogin(); break;
+      case 2 : siteLogin(); break;
+      case 3 : siteLogin(); break;
+      case 4 : siteLogin(); break;
+      default : return;
+    }
+  }
+
+  private void siteLogin() {
     System.out.println();
     String inputEmail = Prompt.inputString("이메일 : ");
     String inputPassword = "";
@@ -46,15 +64,15 @@ public class AuthPerMemberLoginHandler implements Command {
       }
     } 
   }
-
-  public void naverLogin() {
-    System.out.println("NAVER 로그인");
-  }
-  public void kakaoLogin() {
-    System.out.println("KAKAO 로그인");
-  }
-  public void googleLogin() {
-    System.out.println("GOOGLE 로그인");
-  }
+  //
+  //  private void naverLogin() {
+  //    System.out.println("NAVER 로그인");
+  //  }
+  //  private void kakaoLogin() {
+  //    System.out.println("KAKAO 로그인");
+  //  }
+  //  private void googleLogin() {
+  //    System.out.println("GOOGLE 로그인");
+  //  }
 
 }

@@ -130,7 +130,7 @@ public class App {
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList, commandMap));
-    commandMap.put("/member/detail", new MemberDetailHandler(memberList));
+    commandMap.put("/member/detail", new MemberDetailHandler(memberList, commandMap));
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
@@ -172,7 +172,9 @@ public class App {
 
     commandMap.put("/admin/login", new AuthAdminLoginHandler(adminList));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
+
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(promptPerMember));
+    commandMap.put("/member/findIDPW", new PromptPerMember(memberList));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
     commandMap.put("/admin/info", new AdminInfoHandler(adminList));
@@ -327,10 +329,10 @@ public class App {
     MenuGroup loginMenu = new MenuGroup("로그인", Menu.ENABLE_LOGOUT); 
 
     loginMenu.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
-    loginMenu.add(new MenuItem("NAVER로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
-    loginMenu.add(new MenuItem("KAKAO로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
-    loginMenu.add(new MenuItem("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
-    loginMenu.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    //    loginMenu.add(new MenuItem("NAVER로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    //    loginMenu.add(new MenuItem("KAKAO로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    //    loginMenu.add(new MenuItem("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
+    loginMenu.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_LOGOUT, "/member/findIDPW"));
     loginMenu.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
 
     //  loginMenu.add(new Menu("NAVER로 시작하기", Menu.ENABLE_LOGOUT) {

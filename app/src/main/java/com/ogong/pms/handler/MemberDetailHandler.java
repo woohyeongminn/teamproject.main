@@ -1,12 +1,17 @@
 package com.ogong.pms.handler;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
+import com.ogong.util.Prompt;
 
 public class MemberDetailHandler extends AbstractMemberHandler {
 
-  public MemberDetailHandler(List<Member> memberList) {
+  HashMap<String, Command> commandMap;
+
+  public MemberDetailHandler(List<Member> memberList, HashMap<String, Command> commandMap) {
     super(memberList);
+    this.commandMap = commandMap;
   }
 
   @Override
@@ -24,6 +29,15 @@ public class MemberDetailHandler extends AbstractMemberHandler {
 
     } catch (NullPointerException e) {
       System.out.println("로그인 하세요.");
+    }
+
+    System.out.println();
+    System.out.println("1. 수정하기");
+    System.out.println("0. 뒤로가기");
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1 : commandMap.get("/member/update").execute(); break;
+      default : return;
     }
   }
 }
