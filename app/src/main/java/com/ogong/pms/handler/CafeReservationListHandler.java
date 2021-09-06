@@ -42,11 +42,24 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
       return;
     }
 
-    if (Prompt.inputString("리뷰를 작성하시겠습니까? (네 / 아니오) ").equalsIgnoreCase("아니오")) {
-      System.out.println("리뷰 작성을 취소합니다.");
-      return;
-    }
+    //    if (Prompt.inputString("리뷰를 작성하시겠습니까? (네 / 아니오) ").equalsIgnoreCase("!네")) {
+    //      System.out.println("리뷰 작성을 취소합니다.");
+    //      return;
+    //    }
+    System.out.println("----------------------");
+    System.out.println("1. 리뷰 작성");
+    System.out.println("2. 예약 취소");
+    System.out.println("0. 이전 메뉴");
 
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1: goToAddReview(); break;
+      case 2: cancelReservation(); break;
+      default : return;
+    }
+  }
+
+  private void goToAddReview() {
     System.out.println();
     int input = Prompt.inputInt("리뷰 작성할 예약번호 : ");
     for (CafeReservation cafeReser : reserList) {
@@ -57,10 +70,16 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
           addReview(cafeReser);
         } else {
           System.out.println("이미 리뷰를 작성한 예약입니다.");
+          return;
         }
+      } else {
+        System.out.println("예약번호를 잘못 선택하셨습니다.");
       }
     }
   }
 
+  private void cancelReservation() {
+    // 작성하기
+  }
 
 }

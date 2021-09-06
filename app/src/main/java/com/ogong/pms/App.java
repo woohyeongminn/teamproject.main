@@ -42,6 +42,7 @@ import com.ogong.pms.handler.CafeAddHandler;
 import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
 import com.ogong.pms.handler.CafeListHandler;
+import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeReservationListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
@@ -163,6 +164,7 @@ public class App {
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
     commandMap.put("/cafe/reservationList", new CafeReservationListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
@@ -352,6 +354,7 @@ public class App {
     myPageMenu.add(new MenuItem("개인 정보", "/member/detail"));
     myPageMenu.add(new MenuItem("문의 내역", "호출키 없음"));
     myPageMenu.add(new MenuItem("예약 내역", "/cafe/reservationList"));
+    myPageMenu.add(new MenuItem("후기 내역", "/cafe/myReviewList"));
     myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
     return myPageMenu;
   }
