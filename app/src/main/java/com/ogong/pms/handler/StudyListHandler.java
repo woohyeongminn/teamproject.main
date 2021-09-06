@@ -17,11 +17,12 @@ public class StudyListHandler extends AbstractStudyHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 스터디 목록");
+    System.out.println();
 
     printStudyList();
 
     System.out.println("----------------------");
-    System.out.println("1. 상세 보기");
+    System.out.println("1. 상세보기");
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {

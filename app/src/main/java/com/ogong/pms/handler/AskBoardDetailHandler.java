@@ -17,6 +17,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     this.adminList = adminList;
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 문의사항 상세");
@@ -31,15 +32,15 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     }
 
     System.out.println();
-    System.out.printf(">> %s\n", askBoard.getAskTitle());
-    System.out.printf(">> %s\n", askBoard.getAskContent());
-    System.out.printf(">> %s\n", askBoard.getAskWriter().getPerNickname());
-    System.out.printf(">> %s\n", askBoard.getAskRegisteredDate());
+    System.out.printf(" [%s]\n", askBoard.getAskTitle());
+    System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
+    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskWriter().getPerNickname());
+    System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
     askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
-    System.out.printf(">> %d\n", askBoard.getAskVeiwCount());
-    listComment(askBoard);
+    System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
+    listComment(askBoard);  // 댓글호출
 
-    System.out.println();
+    System.out.println("\n---------------------");
     System.out.println("1. 댓글 달기");
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");
@@ -76,18 +77,20 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       commentList.add(comment);
       askBoard.getAdminComment().add(comment);
       System.out.println("댓글이 등록되었습니다.");
-
     }
   }
+
   // 실행 안 됨
   protected void listComment(AskBoard askBoard) {
+    System.out.println();
     System.out.println("=============댓글=============");
     int commentSize = 0;
 
     for (Comment comment : askBoard.getAdminComment()) {
       System.out.printf("내용 : %s | 작성자 : %s | 등록일 : %s\n",
           comment.getCommentText(), 
-          comment.getCommentAdminWiter().getMasterNickname(), comment.getCommentRegisteredDate());
+          comment.getCommentAdminWiter().getMasterNickname(),
+          comment.getCommentRegisteredDate());
       commentSize++;
     }
 
@@ -95,12 +98,4 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       System.out.println("등록된 댓글이 없습니다.");
     }
   }
-
 }
-
-
-
-
-
-
-

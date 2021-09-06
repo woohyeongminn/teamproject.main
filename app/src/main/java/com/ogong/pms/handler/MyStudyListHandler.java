@@ -21,6 +21,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 스터디 목록");
+    System.out.println();
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     if (member == null ) {
@@ -37,10 +38,11 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     }
 
     for (Study perStudy : member.getPerMyStudy()) {
-      System.out.println(perStudy.getStudyTitle());
+      System.out.printf(" [%s]\n", perStudy.getStudyTitle());
+
     }
 
-    System.out.println("----------------------");
+    System.out.println("\n----------------------");
     System.out.println("1. 상세 보기");
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");

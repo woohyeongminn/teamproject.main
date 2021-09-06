@@ -12,7 +12,6 @@ import com.ogong.util.Prompt;
 public abstract class AbstractFreeBoardHandler implements Command {
 
   List<FreeBoard> freeBoardList;
-  List<Member> memberList;
   List<Comment> commentList;
   List<Study> studyList;
   HashMap<String, Command> commandMap;
@@ -36,7 +35,7 @@ public abstract class AbstractFreeBoardHandler implements Command {
   //  }
 
   protected void selectPage() {
-    System.out.println("---------------------");
+    System.out.println("\n---------------------");
     System.out.println("1. 게시글 목록");
     System.out.println("2. 게시글 등록");
     System.out.println("0. 뒤로가기");
@@ -76,6 +75,7 @@ public abstract class AbstractFreeBoardHandler implements Command {
       String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
         System.out.println("댓글 등록을 취소하였습니다.");
+        selectPage();
         return;
       }
 
@@ -92,12 +92,15 @@ public abstract class AbstractFreeBoardHandler implements Command {
   }
 
   protected void listComment(FreeBoard freeBoard) {
+    System.out.println();
     System.out.println("=============댓글=============");
     int commentSize = 0;
 
     for (Comment comment : freeBoard.getComment()) {
       System.out.printf("내용 : %s | 작성자 : %s | 등록일 : %s\n",
-          comment.getCommentText(), comment.getCommentWiter().getPerNickname(), comment.getCommentRegisteredDate());
+          comment.getCommentText(),
+          comment.getCommentWiter().getPerNickname(),
+          comment.getCommentRegisteredDate());
       commentSize++;
     }
 

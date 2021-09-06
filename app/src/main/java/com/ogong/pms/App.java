@@ -256,7 +256,7 @@ public class App {
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
 
-    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));    //개인 회원 조회
+    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
     adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
 
     return adminUserMenu;
@@ -272,6 +272,9 @@ public class App {
   }
 
   // 관리자 하위 메뉴4 - 장소 후기 관리
+  // <구현안됨>
+  // 모든 장소후기 목록 보기 > 장소후기 상세보기
+  // 장소후기 삭제하기
   private Menu createControlReviewMenu() {
     MenuGroup adminStudyMenu = new MenuGroup("장소 후기 관리"); 
 
@@ -292,7 +295,7 @@ public class App {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
     adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
-    adminNoticeMenu.add(new MenuItem("상세보기", "/adminNotice/detail"));
+    adminNoticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
     adminNoticeMenu.add(new MenuItem("수정", "/adminNotice/update"));
     adminNoticeMenu.add(new MenuItem("삭제", "/adminNotice/delete"));
 
@@ -300,10 +303,12 @@ public class App {
   }
 
   // 5-2
+  // <구현안됨>
+  // detail 에서 댓글 수정기능x
   private Menu createAdminAskMenu() {
     MenuGroup adminaskMenu = new MenuGroup("문의사항");
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
-    adminaskMenu.add(new MenuItem("상세보기", "/askBoard/detail"));
+    adminaskMenu.add(new MenuItem("상세", "/askBoard/detail"));
     adminaskMenu.add(new MenuItem("삭제", "/askBoard/delete"));
 
     return adminaskMenu;
@@ -321,6 +326,8 @@ public class App {
     userMenuGroup.add(createStudyMenu());
     userMenuGroup.add(createMystudyMenu());
     userMenuGroup.add(createCafeMenu());
+    userMenuGroup.add(createCSMenu());
+
     return userMenuGroup;
   }
 
@@ -329,250 +336,107 @@ public class App {
     MenuGroup loginMenu = new MenuGroup("로그인", Menu.ENABLE_LOGOUT); 
 
     loginMenu.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
-    //    loginMenu.add(new MenuItem("NAVER로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
-    //    loginMenu.add(new MenuItem("KAKAO로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
-    //    loginMenu.add(new MenuItem("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT, "해시맵 호출 안 함"));
     loginMenu.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_LOGOUT, "/member/findIDPW"));
     loginMenu.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
-
-    //  loginMenu.add(new Menu("NAVER로 시작하기", Menu.ENABLE_LOGOUT) {
-    //    authPerMemberLoginHandler.naverLogin();
-
-    //  loginMenu.add(new Menu("KAKAO로 시작하기", Menu.ENABLE_LOGOUT) {
-    //    authPerMemberLoginHandler.kakaoLogin();
-
-    //  loginMenu.add(new Menu("GOOGLE로 시작하기", Menu.ENABLE_LOGOUT) {
-    //    authPerMemberLoginHandler.googleLogin();
-
-    //  loginMenu.add(new Menu("ID/PW 찾기", Menu.ENABLE_LOGOUT) {
-    //    promptPerMember.selectFindEmailPw();
 
     return loginMenu;
   }
 
-  // 개인 하위 메뉴1 - 마이페이지 (로그인 했을때)
-  //리턴위치 지정(탈퇴시 메인으로 돌아가기)
-  //// 마이페이지 - 개인정보 - (수정o 탈퇴o 문의내역x) 
-  //// 마이페이지 - 예약내역 - (내역보기x 취소하기x 후기보기x) 
-
+  // 개인 하위 메뉴2 - 마이페이지 (로그인 했을때)
+  // <구현안됨>
+  // 탈퇴시 메인으로 돌아가기
+  // 내 문의내역x
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
 
     myPageMenu.add(new MenuItem("개인 정보", "/member/detail"));
-    //selectMyPage();
-
+    myPageMenu.add(new MenuItem("문의 내역", "호출키 없음"));
     myPageMenu.add(new MenuItem("예약 내역", "/cafe/reservationList"));
     myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
     return myPageMenu;
   }
 
-  //개인 하위 메뉴2 - 모든스터디
+  //개인 하위 메뉴3 - 모든스터디
+  // <구현안됨>
+  // 이름으로 스터디 검색x
+  // 지역으로 선택할지, 대면/비대면 선택할지, 인원수로 선택할지 필터검색x
   private Menu createStudyMenu() {
     MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
-    // 등록o 목록보기o 상세보기△(참여x) 검색x 필터x(switch문 활용) 
 
-    allStudyMenu.add(new MenuItem("등록","/study/add"));
+    allStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
-    allStudyMenu.add(new MenuItem("변경","/study/update"));
+    allStudyMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/study/update"));
 
     return allStudyMenu; 
   }
 
-  //개인 하위 메뉴2 - 내 스터디
+  //개인 하위 메뉴4 - 내 스터디
+  // <구현안됨>
+  // detail 에서 댓글 수정기능x
   private Menu createMystudyMenu() {
     MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
-
-    // 캘린더, 투두, 자유 게시판, 구성원, 화상채팅
-    //상세?구성원?
-    //    myStudyMenu.add(new Menu("개인 정보") {
-    //      @Override
-    //      public void execute() {
-    //        memberDetailHandler.execute();
-    //        selectMyPage();
-    //        return;
-    //      }});
-    //    myStudyMenu.add(new Menu("참여 목록") {
-    //      @Override
-    //      public void execute() {
-    //        myStudyHandler.list();
-    //      }});
+    // <구현안됨>
     // 내 스터디 하위 메뉴 1 - 구성원
+    // 내 스터디 하위 메뉴 3 - 투두리스트
     // 내 스터디 하위 메뉴 5 - 화상미팅
-    // 내 스터디 하위 메뉴 6 - 탈퇴
     myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
-    //myStudyMenu.add(new MenuItem("내 스터디 삭제","/myStudy/delete"));    //내스터디목록 하위로 들어가야함
-    //
-    //myStudyMenu.add(createCalenderMenu());
-    //    myStudyMenu.add(createToDoMenu());
-    //    myStudyMenu.add(createFreeBoardMenu());
     return myStudyMenu;
   }
 
-  // 2-1
-  //  private Menu createCalenderMenu() {
-  //    MenuGroup calenderMenu = new MenuGroup("캘린더");
-  //
-  //    calenderMenu.add(new MenuItem("일정 등록", "/calender/add"));
-  //    calenderMenu.add(new MenuItem("일정 목록", "/calender/list"));
-  //    calenderMenu.add(new MenuItem("일정 상세보기", "/calender/detail"));
-  //    calenderMenu.add(new MenuItem("일정 변경", "/calender/update"));
-  //    calenderMenu.add(new MenuItem("일정 삭제", "/calender/delete"));
-
-  //  return calenderMenu;
-  //}
-  //
-  //  // 2-2
-  //  private Menu createToDoMenu() {
-  //    MenuGroup toDoMenu = new MenuGroup("To-Do List");
-  //    toDoMenu.add(new MenuItem("등록" , "/todo/add"));
-  //    toDoMenu.add(new MenuItem("목록" , "/todo/list"));
-  //    toDoMenu.add(new MenuItem("상세" , "/todo/detail"));
-  //    toDoMenu.add(new MenuItem("수정" , "/todo/update"));
-  //    toDoMenu.add(new MenuItem("삭제" , "/todo/delete"));
-  //    return toDoMenu;
-  //  }
-  //
-  //  // 2-3 
-  //  private Menu createFreeBoardMenu() {
-  //    MenuGroup freeBoardMenu = new MenuGroup("자유게시판");
-  //    freeBoardMenu.add(new MenuItem("게시글 등록" , "/freeBoard/add"));
-  //    freeBoardMenu.add(new MenuItem("게시글 목록" , "/freeBoard/list"));
-  //    freeBoardMenu.add(new MenuItem("게시글 상세" , "/freeBoard/detail"));
-  //    freeBoardMenu.add(new MenuItem("게시글 수정" , "/freeBoard/update"));
-  //    freeBoardMenu.add(new MenuItem("게시글 삭제" , "/freeBoard/delete"));
-  //    return freeBoardMenu;
-  //  }
-
-  //개인 하위 메뉴3 - 스터디 장소
+  //개인 하위 메뉴5 - 스터디 장소
   private Menu createCafeMenu() {
     MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
 
     cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
     //cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
-    //cafeMenu.add(new MenuItem("장소 상세보기", "/cafe/detail"));
+    //cafeMenu.add(new MenuItem("장소 상세", "/cafe/detail"));
     cafeMenu.add(new MenuItem("수정", "/cafe/update"));
     cafeMenu.add(new MenuItem("삭제", "/cafe/delete"));
-    cafeMenu.add(new MenuItem("예약내역", "/cafe/reservationList")); // 회원 마이페이지
 
     return cafeMenu;
   }
 
-  //개인 하위 메뉴4 - 고객센터
+  //개인 하위 메뉴6 - 고객센터
   private Menu createCSMenu() {
-    MenuGroup memberCSMenu = new MenuGroup("고객센터 관리");
+    MenuGroup memberCSMenu = new MenuGroup("고객센터");
     memberCSMenu.add(createNoticeMenu());
     memberCSMenu.add(createAskBoardMenu());
 
     return memberCSMenu;
   }
 
-  // 4-1
+  // 6-1
   private Menu createNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항"); 
 
     noticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
-    noticeMenu.add(new MenuItem("상세보기", "/adminNotice/detail"));
+    noticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
 
     return noticeMenu;
   }
 
-  // 4-2
+  // 6-2
+  // 문의사항 상세보기 (댓글 목록 조회만) >> 회원 권한
   private Menu createAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
 
     askBoardMenu.add(new MenuItem("등록", "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
-    askBoardMenu.add(new MenuItem("상세보기", "/askBoard/detail"));
+    askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
     askBoardMenu.add(new MenuItem("변경", "/askBoard/update"));
     askBoardMenu.add(new MenuItem("삭제", "/askBoard/delete"));
 
     return askBoardMenu;
   }
-
-
-  //개인 하위 메뉴5 - 모든 스터디(구현 전)
-
-  //개인 하위 메뉴6 - 마이페이지(구현 전)
-
 }
 
-//  //-------------------------------------------------------------- 
-//  MenuGroup mypageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
-//  userMenuGroup.add(mypageMenu);
-//  // 리턴위치 지정(탈퇴시 메인으로 돌아가기)
-//  // 마이페이지 - 개인정보 - (수정o 탈퇴o 문의내역x) 
-//  // 마이페이지 - 예약내역 - (내역보기x 취소하기x 후기보기x) 
-//  mypageMenu.add(new Menu("개인 정보") {
-//    @Override
-//    public void execute() {
-//      memberDetailHandler.execute();
-//      selectMyPage();
-//      return;
-//    }});
-//  mypageMenu.add(new Menu("예약 내역") {
-//    @Override
-//    public void execute() {
-//      cafeReservationListHandler.execute();
-//    }});
-//  //--------------------------------------------------------------
 
 
-//  //-------------------------------------------------------------- 
-//  MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
-//  userMenuGroup.add(allStudyMenu);
-//  // 등록o 목록보기o 상세보기△(참여x) 검색x 필터x(switch문 활용) 
-//
-//  allStudyMenu.add(new Menu("등록", Menu.ENABLE_LOGIN) {
-//    @Override
-//    public void execute() {
-//      studyHandler.add();
-//    }});
-//
-//  // 나중구현: 목록 안에서 상세 보기를 해야함 
-//  allStudyMenu.add(new Menu("목록 보기") {
-//    @Override
-//    public void execute() {
-//      studyHandler.list();
-//    }});
-//  // 나중구현: 상세 보기 안에서 참여 신청 해야함
-//  allStudyMenu.add(new Menu("상세 보기") {
-//    @Override
-//    public void execute() {
-//      studyHandler.detail();
-//    }});
-//////--------------------------------------------------------------
 
-
-////--------------------------------------------------------------
-//// 기업
-//Menu createCeoMenu() {
+//--------------------------------------------------------------
+// 기업
+// Menu createCeoMenu() {
 //  return null;
-//}
-//
-
-// ---------------------------------------------------------------
-//// 관리자용 문의사항 - 권한이 없어서 하단 명령 처리 안 됨 > 구현 중
-//   -> 지금 일반 멤버만 수정 삭제가 가능해서
-//private void selectMyPage() {
-//
-//  if (authPerMemberLoginHandler.getLoginUser() != null) {
-//    System.out.println();
-//    System.out.println("1. 수정하기"); >> 회원 권한
-//    System.out.println("2. 문의하기"); >> 회원 권한
-//    System.out.println("3. 삭제하기"); >> 관리자
-//    System.out.println("4. 댓글달기"); >> 관리자
-//    System.out.println("5. 뒤로가기");
-//
-//    int selectNo = Prompt.inputInt("선택> ");
-//    switch (selectNo) {
-//      case 1: memberUpdateHandler.execute(); break;
-//      case 2: askBoardListHandler.execute(); break;
-//      case 3: memberDeleteHandler.execute(); return;
-//      default : return;
-//    }
-//  }
-//  return;
-//}
-////--------------------------------------------------------------
-
+// }
+//--------------------------------------------------------------
