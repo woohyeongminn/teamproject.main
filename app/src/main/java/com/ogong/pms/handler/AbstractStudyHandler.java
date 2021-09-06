@@ -53,23 +53,18 @@ public abstract class AbstractStudyHandler implements Command {
       if (study.getOwner().getPerNickname().equals(AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
         System.out.println();
         System.out.println();
-        System.out.println("1. 구성원보기");
         System.out.println("0. 뒤로가기");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
-          case 1 : listMember(study); break;
-          case 2 : return;
           default : return;
         }
       } else {
         System.out.println();
         System.out.println("1. 참여 신청하기");
-        System.out.println("2. 구성원보기");
         System.out.println("0. 뒤로가기");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
           case 1 : joinStudy(study); break;
-          case 2 : listMember(study); break;
           default : return;
         }
       }
