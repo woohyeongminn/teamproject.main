@@ -51,9 +51,8 @@ public class MemberAddHandler extends AbstractMemberHandler {
     testMember.setPerMyStudy(new ArrayList<>());
     memberList.add(testMember);
 
-    memberList.add(testMember);
-    testMember.setPerNo(5);
     testMember = new Member();
+    testMember.setPerNo(5);
     testMember.setPerNickname("엄강사님");
     testMember.setPerEmail("hanmail");
     testMember.setPerPassword("1111");
