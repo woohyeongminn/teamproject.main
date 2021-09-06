@@ -17,7 +17,7 @@ public abstract class AbstractStudyHandler implements Command {
 
   protected void printStudyList() {
     for (Study study : studyList) {
-      System.out.printf("%d, %s, %s명, %s, %s, %s\n",
+      System.out.printf("%d, %s, %s명, <%s>, %s, %s\n",
           study.getStudyNo(),
           study.getSubject(),
           study.getNumberOfPeple(),
@@ -74,6 +74,7 @@ public abstract class AbstractStudyHandler implements Command {
   protected void listMember(Study study) {
     System.out.println();
     System.out.println("▶ 구성원 보기");
+    System.out.println();
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     if (member == null ) {
@@ -81,12 +82,15 @@ public abstract class AbstractStudyHandler implements Command {
       return;
     }
 
-    System.out.println("▼▼스터디 구성원▼▼");
+    System.out.println(">> 스터디 구성원");
     System.out.println("조장 : " + study.getOwner().getPerNickname());
     System.out.println(study.getMemberNames());
 
     System.out.println();
-    System.out.println("▼▼승인 대기중▼▼");
+    System.out.println(">> 승인 대기중");
+    if(study.getWatingMemberNames().isEmpty()) {
+      System.out.println("승인 대기중인 회원이 없습니다.");
+    }
     System.out.println(study.getWatingMemberNames());
 
     List<Member> waitingMembers = study.getWatingMember();
