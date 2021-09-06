@@ -20,7 +20,6 @@ public class CalenderListHandler extends AbstractCalenderHandler {
     System.out.println();
     System.out.println("▶ 일정 목록");
     System.out.println();
-    System.out.println("'월'을 입력해주세요.");
 
     selectList();
 
@@ -30,16 +29,17 @@ public class CalenderListHandler extends AbstractCalenderHandler {
     int selectMonth; 
 
     while (true) {
+      System.out.println("'월'을 입력해주세요.");
       System.out.println();
       selectMonth = Prompt.inputInt("월: ");
       if (selectMonth > 12 || selectMonth < 1) {
         System.out.println("정확한 '월'을 입력해주세요.");
         continue;
       }
-      
+      Calender month = null;
       for (Calender calender : calenderList) {
         if (selectMonth == calender.getMonth()) {
-          //month = calender;
+          month = calender;
           System.out.printf(
               " [ %d월 %d일 %s요일 ]\n %s\n",
               calender.getMonth(), 
@@ -49,7 +49,7 @@ public class CalenderListHandler extends AbstractCalenderHandler {
           System.out.println();
         }
       }
-      Calender month = null;
+
       if (month == null) {
         System.out.println();
         System.out.printf("'%d월'에 등록된 일정이 없습니다.\n", selectMonth);
@@ -72,7 +72,7 @@ public class CalenderListHandler extends AbstractCalenderHandler {
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
           case 1 : commandMap.get("/calender/detail").execute(); break;
-          case 2 : commandMap.get("/calender/add").execute(); break;
+          case 2 : commandMap.get("/calender/add").execute(); return;
           case 3 : continue;
           case 4 : return;
           default : return;

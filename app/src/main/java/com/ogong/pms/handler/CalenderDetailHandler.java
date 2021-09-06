@@ -30,14 +30,13 @@ public class CalenderDetailHandler extends AbstractCalenderHandler {
         System.out.println();
         System.out.println("정확한 '일'을 입력해주세요.");
         continue;
-      } System.out.println(calenderList);
+      } 
       for (Calender calender : calenderList) {
         if (inputDay == calender.getDay()) {
           day = calender;
           System.out.println();
           System.out.printf(">> 등록일 : %d월 %d일 %s요일\n",
               day.getMonth(), day.getDay(), day.getDayOftheWeek());
-          System.out.printf(">> 제  목  : %s\n", day.getEndDay());
           System.out.printf(">> 종료일 : %s\n", day.getEndDay());
           System.out.printf(">> 내  용 : %s\n", day.getCalenderContent());
         }
@@ -59,10 +58,6 @@ public class CalenderDetailHandler extends AbstractCalenderHandler {
         }
       }
     }
-
-
-
-
 
   }
 

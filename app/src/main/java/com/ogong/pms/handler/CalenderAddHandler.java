@@ -1,46 +1,18 @@
 package com.ogong.pms.handler;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
+import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
+
 
 public class CalenderAddHandler extends AbstractCalenderHandler {
 
-  public CalenderAddHandler( List<Calender> calenderList) {
+  List<Study> studyList;
+
+  public CalenderAddHandler( List<Calender> calenderList, List<Study> studyList) {
     super(calenderList);
-
-    Calender testCalender = new Calender();
-    testCalender.setMonth(10);
-    testCalender.setDay(15);
-    testCalender.setDayOftheWeek("금");
-    testCalender.setCalenderContent("자격증 공부");
-    testCalender.setEndDay(new Date(System.currentTimeMillis()));
-    calenderList.add(testCalender);
-
-    testCalender = new Calender();
-    testCalender.setMonth(10);
-    testCalender.setDay(17);
-    testCalender.setDayOftheWeek("월");
-    testCalender.setCalenderContent("검정고시 공부");
-    testCalender.setEndDay(new Date(System.currentTimeMillis()));
-    calenderList.add(testCalender);
-
-    testCalender = new Calender();
-    testCalender.setMonth(7);
-    testCalender.setDay(31);
-    testCalender.setDayOftheWeek("수");
-    testCalender.setCalenderContent("중간고사 공부");
-    testCalender.setEndDay(new Date(System.currentTimeMillis()));
-    calenderList.add(testCalender);
-
-    testCalender = new Calender();
-    testCalender.setMonth(6);
-    testCalender.setDay(25);
-    testCalender.setDayOftheWeek("목");
-    testCalender.setCalenderContent("역사 공부");
-    testCalender.setEndDay(new Date(System.currentTimeMillis()));
-    calenderList.add(testCalender);
+    this.studyList = studyList;
   }
 
   @Override
@@ -49,6 +21,12 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
     System.out.println("▶ 일정 등록");
 
     Calender calender = new Calender();
+    String studyCalenderTitle = Prompt.inputString("스터디명: ");
+    if (!studyCalenderTitle.equals(((Calender) studyList).getStudyTitle())) {
+      System.out.println();
+      System.out.println("스터디명을 동일하게 입력해주세요.");
+      return;
+    }
 
     System.out.println();
     System.out.println("시작 날짜를 입력해 주세요.");
@@ -72,28 +50,28 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
           continue;
         }
       } 
-      else if (month < 8 || (month % 2) == 1) {
+      else if (month < 8 && (month % 2) == 1) {
         if (day > 31 || day < 1) {
           System.out.println("등록할 수 없는 '일'입니다.");
           System.out.println("다시 등록해주세요.");
           continue;
         }
       }
-      else if (month < 8 || (month % 2) == 0) {
-        if (day > 31 || day < 1) {
-          System.out.println("등록할 수 없는 '일'입니다.");
-          System.out.println("다시 등록해주세요.");
-          continue;
-        }
-      }
-      else if (month >= 8 || (month % 2) == 1) {
+      else if (month < 8 && (month % 2) == 0) {
         if (day > 30 || day < 1) {
           System.out.println("등록할 수 없는 '일'입니다.");
           System.out.println("다시 등록해주세요.");
           continue;
         }
       }
-      else if (month >= 8 || (month % 2) == 0) {
+      else if (month >= 8 && (month % 2) == 1) {
+        if (day > 30 || day < 1) {
+          System.out.println("등록할 수 없는 '일'입니다.");
+          System.out.println("다시 등록해주세요.");
+          continue;
+        }
+      }
+      else if (month >= 8 && (month % 2) == 0) {
         if (day > 31 || day < 1) {
           System.out.println("등록할 수 없는 '일'입니다.");
           System.out.println("다시 등록해주세요.");
@@ -128,6 +106,8 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
       System.out.println("등록을 취소하였습니다.");
       return;
     }
+    System.out.printf("'%d'월에 일정이 추가 되었습니다.\n",
+        calender.getMonth());
 
     calenderList.add(calender);
   }
