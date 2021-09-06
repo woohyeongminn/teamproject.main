@@ -28,16 +28,6 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
       return;
     }
 
-    //(inputTitle != free.getFreeBoardTitle())
-
-    //    for(FreeBoard freeBoard : freeBoardList) {
-    //      if (!free.equals(freeBoard.getFreeBoardTitle())) {
-    //        System.out.println("해당 제목의 게시글이 없습니다.");
-    //        return;
-    //      }
-    //    }
-
-
     System.out.printf(">> 제목 : %s\n", freeBoard.getFreeBoardTitle());
     System.out.printf(">> 내용 : %s\n", freeBoard.getFreeBoardContent());
     System.out.printf(">> 첨부파일 : %s\n", freeBoard.getFreeBoardAtcFile());
@@ -45,20 +35,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     System.out.printf(">> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
     System.out.printf(">> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
-
-    //    System.out.println("=============댓글=============");
-    //    int commentSize = 0;
-    //
-    //    for (Comment comment : commentList) {
-    //      System.out.printf("내용 : %s | 작성자 : %s | 등록일 : %s\n",
-    //          comment.getCommentText(), comment.getCommentWiter().getPerNickname(), comment.getCommentRegisteredDate());
-    //      commentSize++;
-    //    }
-    //
-    //    if (commentSize == 0) {
-    //      System.out.println("등록된 댓글이 없습니다.");
-    //    }
-    listComment(freeBoard);
+    listComment(freeBoard); // 댓글호출
 
     System.out.println();
     System.out.println("1. 댓글 달기");
