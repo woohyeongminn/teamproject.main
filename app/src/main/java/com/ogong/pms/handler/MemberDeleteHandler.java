@@ -6,7 +6,6 @@ import com.ogong.util.Prompt;
 
 public class MemberDeleteHandler extends AbstractMemberHandler {
 
-  List<Member> memberList;
   PromptPerMember promptPerMember; 
 
   public MemberDeleteHandler(List<Member> memberList, PromptPerMember promptPerMember) {

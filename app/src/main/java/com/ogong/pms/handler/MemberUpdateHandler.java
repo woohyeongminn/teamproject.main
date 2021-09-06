@@ -6,8 +6,6 @@ import com.ogong.util.Prompt;
 
 public class MemberUpdateHandler extends AbstractMemberHandler {
 
-  List<Member> memberList;
-
   public MemberUpdateHandler(List<Member> memberList) {
     super(memberList);
 

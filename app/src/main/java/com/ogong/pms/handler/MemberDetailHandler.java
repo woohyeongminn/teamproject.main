@@ -5,8 +5,6 @@ import com.ogong.pms.domain.Member;
 
 public class MemberDetailHandler extends AbstractMemberHandler {
 
-  List<Member> memberList;
-
   public MemberDetailHandler(List<Member> memberList) {
     super(memberList);
   }
