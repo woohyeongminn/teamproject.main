@@ -1,6 +1,7 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
@@ -14,11 +15,15 @@ public abstract class AbstractFreeBoardHandler implements Command {
   List<Member> memberList;
   List<Comment> commentList;
   List<Study> studyList;
+  HashMap<String, Command> commandMap;
 
-  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Comment> commentList) {
+
+  public AbstractFreeBoardHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+      List<Comment> commentList,  HashMap<String, Command> commandMap) {
     this.freeBoardList = freeBoardList;
     this.memberList = memberList;
     this.commentList = commentList;
+    this.commandMap = commandMap;
   }
 
   //  protected String findByTitleString (String title) {
@@ -30,6 +35,27 @@ public abstract class AbstractFreeBoardHandler implements Command {
   //    }
   //    return null;
   //  }
+
+  protected void selectPage() {
+    System.out.println("---------------------");
+    System.out.println("1. 목록보기");
+    System.out.println("2. 상세보기");
+    System.out.println("3. 등록보기");
+    System.out.println("4. 수정하기");
+    System.out.println("5. 삭제하기");
+    System.out.println("0. 뒤로가기");
+
+    int selectAdminNo = Prompt.inputInt("선택> ");
+
+    switch (selectAdminNo) {
+      case 1: commandMap.get("/freeBoard/list").execute(); break;
+      case 2: commandMap.get("/freeBoard/add").execute(); break;
+      case 3: commandMap.get("/freeBoard/add").execute(); break;
+      case 4: commandMap.get("/freeBoard/update").execute(); break;
+      case 5: commandMap.get("/freeBoard/delete").execute(); break;
+      default : return;
+    }
+  }
 
   protected FreeBoard findByTitle (String title) {
     for (FreeBoard freeBoard : freeBoardList) {
@@ -68,9 +94,8 @@ public abstract class AbstractFreeBoardHandler implements Command {
       free.getComment().add(comment);
       System.out.println("댓글이 등록되었습니다.");
 
-
+      selectPage();
     }
   }
-
 }
 

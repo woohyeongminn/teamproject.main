@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
@@ -8,8 +9,9 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
-  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList, List<Member> memberList, List<Comment> commentList) {
-    super(freeBoardList, memberList, commentList);
+  public FreeBoardDetailHandler(List<FreeBoard> freeBoardList, List<Member> memberList,
+      List<Comment> commentList, HashMap<String, Command> commandMap) {
+    super(freeBoardList, memberList, commentList, commandMap);
   }
 
   @Override
@@ -70,7 +72,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
       case 1 : addComment(free); break;
-      default : return;
+      default : selectPage();
     }
   }
 
