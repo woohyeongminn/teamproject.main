@@ -36,10 +36,10 @@ public class CalenderListHandler extends AbstractCalenderHandler {
         System.out.println("정확한 '월'을 입력해주세요.");
         continue;
       }
-      Calender month = null;
+      
       for (Calender calender : calenderList) {
         if (selectMonth == calender.getMonth()) {
-          month = calender;
+          //month = calender;
           System.out.printf(
               " [ %d월 %d일 %s요일 ]\n %s\n",
               calender.getMonth(), 
@@ -49,7 +49,7 @@ public class CalenderListHandler extends AbstractCalenderHandler {
           System.out.println();
         }
       }
-
+      Calender month = null;
       if (month == null) {
         System.out.println();
         System.out.printf("'%d월'에 등록된 일정이 없습니다.\n", selectMonth);
