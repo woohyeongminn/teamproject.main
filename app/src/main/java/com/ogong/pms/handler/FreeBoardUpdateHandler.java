@@ -27,11 +27,13 @@ public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
 
     if (free == null) {
       System.out.println("해당 제목의 게시글이 없습니다.");
+      selectPage();
       return;
     }
 
     if (free.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("변경 권한이 없습니다.");
+      selectPage();
       return;
     }
 

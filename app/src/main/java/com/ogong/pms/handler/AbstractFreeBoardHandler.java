@@ -38,11 +38,8 @@ public abstract class AbstractFreeBoardHandler implements Command {
 
   protected void selectPage() {
     System.out.println("---------------------");
-    System.out.println("1. 목록보기");
-    System.out.println("2. 상세보기");
-    System.out.println("3. 등록보기");
-    System.out.println("4. 수정하기");
-    System.out.println("5. 삭제하기");
+    System.out.println("1. 게시글 목록");
+    System.out.println("2. 게시글 등록");
     System.out.println("0. 뒤로가기");
 
     int selectAdminNo = Prompt.inputInt("선택> ");
@@ -50,9 +47,6 @@ public abstract class AbstractFreeBoardHandler implements Command {
     switch (selectAdminNo) {
       case 1: commandMap.get("/freeBoard/list").execute(); break;
       case 2: commandMap.get("/freeBoard/add").execute(); break;
-      case 3: commandMap.get("/freeBoard/add").execute(); break;
-      case 4: commandMap.get("/freeBoard/update").execute(); break;
-      case 5: commandMap.get("/freeBoard/delete").execute(); break;
       default : return;
     }
   }
@@ -95,6 +89,21 @@ public abstract class AbstractFreeBoardHandler implements Command {
       System.out.println("댓글이 등록되었습니다.");
 
       selectPage();
+    }
+  }
+
+  protected void listComment() {
+    System.out.println("=============댓글=============");
+    int commentSize = 0;
+
+    for (Comment comment : commentList) {
+      System.out.printf("내용 : %s | 작성자 : %s | 등록일 : %s\n",
+          comment.getCommentText(), comment.getCommentWiter().getPerNickname(), comment.getCommentRegisteredDate());
+      commentSize++;
+    }
+
+    if (commentSize == 0) {
+      System.out.println("등록된 댓글이 없습니다.");
     }
   }
 }

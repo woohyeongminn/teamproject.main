@@ -51,22 +51,21 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
     System.out.printf(">> 조회수 : %d\n", free.getFreeBoardViewcount());
 
-    System.out.println("=============댓글=============");
-    int commentSize = 0;
-
-    for (Comment comment : commentList) {
-      System.out.printf("내용 : %s, 작성자 : %s, 등록일 : %s\n",
-          comment.getCommentText(), comment.getCommentWiter().getPerNickname(), comment.getCommentRegisteredDate());
-      commentSize++;
-    }
-
-    if (commentSize == 0) {
-      System.out.println("등록된 댓글이 없습니다.");
-    }
+    //    System.out.println("=============댓글=============");
+    //    int commentSize = 0;
+    //
+    //    for (Comment comment : commentList) {
+    //      System.out.printf("내용 : %s | 작성자 : %s | 등록일 : %s\n",
+    //          comment.getCommentText(), comment.getCommentWiter().getPerNickname(), comment.getCommentRegisteredDate());
+    //      commentSize++;
+    //    }
+    //
+    //    if (commentSize == 0) {
+    //      System.out.println("등록된 댓글이 없습니다.");
+    //    }
+    listComment();
 
     System.out.println();
-    System.out.println();
-
     System.out.println("1. 댓글 달기");
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");

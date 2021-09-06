@@ -10,8 +10,8 @@ public class StudyAddHandler extends AbstractStudyHandler {
   PromptPerMember promptPerMember;
   int studyNo;
 
-  public StudyAddHandler(List<Study> newStudyList, PromptPerMember promptPerMember) {
-    super(newStudyList);
+  public StudyAddHandler(List<Study> studyList, PromptPerMember promptPerMember) {
+    super(studyList);
     this.promptPerMember = promptPerMember;
 
     Study testStudy = new Study();
@@ -25,7 +25,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setIntroduction("취업 뿌셔뿌셔");
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
-    newStudyList.add(testStudy);
+    studyList.add(testStudy);
     promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
@@ -39,7 +39,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setIntroduction("한번에 붙자");
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
-    newStudyList.add(testStudy);
+    studyList.add(testStudy);
     promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
@@ -53,7 +53,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setIntroduction("공모전 아자");
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
-    newStudyList.add(testStudy);
+    studyList.add(testStudy);
     promptPerMember.memberList.get(1).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
@@ -67,7 +67,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setIntroduction("시험 아자");
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
-    newStudyList.add(testStudy);
+    studyList.add(testStudy);
     promptPerMember.memberList.get(2).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
@@ -81,7 +81,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setIntroduction("지옥같은 SI 탈출");
     testStudy.setMembers(new ArrayList<>());
     testStudy.setWatingMember(new ArrayList<>());
-    newStudyList.add(testStudy);
+    studyList.add(testStudy);
     promptPerMember.memberList.get(3).getPerMyStudy().add(testStudy);
   }
 
