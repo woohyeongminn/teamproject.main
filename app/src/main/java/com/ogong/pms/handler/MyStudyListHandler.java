@@ -33,7 +33,6 @@ public class MyStudyListHandler extends AbstractStudyHandler {
       System.out.println("가입한 스터디가 없습니다.");
       return;
     }
-    //
 
     for (Study perStudy : member.getPerMyStudy()) {
       System.out.println(perStudy.getStudyTitle());

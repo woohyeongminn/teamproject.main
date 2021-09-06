@@ -21,12 +21,6 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
     System.out.println("▶ 일정 등록");
 
     Calender calender = new Calender();
-    String studyCalenderTitle = Prompt.inputString("스터디명: ");
-    if (!studyCalenderTitle.equals(((Calender) studyList).getStudyTitle())) {
-      System.out.println();
-      System.out.println("스터디명을 동일하게 입력해주세요.");
-      return;
-    }
 
     System.out.println();
     System.out.println("시작 날짜를 입력해 주세요.");
