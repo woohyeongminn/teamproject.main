@@ -40,9 +40,9 @@ public class MemberListHandler extends AbstractMemberHandler {
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
-      case 1: commandMap.get("/member/detail").execute(); break;
-      case 2: commandMap.get("/adminmember/update").execute(); break;
-      case 3: commandMap.get("/adminmember/delete").execute(); break;
+      case 1: commandMap.get("/adminMember/detail").execute(); break;
+      case 2: commandMap.get("/adminMember/update").execute(); break;
+      case 3: commandMap.get("/adminMember/delete").execute(); break;
       default : return;
     }
   }

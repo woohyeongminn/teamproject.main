@@ -17,9 +17,6 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
   @Override
   public void execute() {
 
-    //    for (Member member : memberList) {
-    //      if (member.getPerNickname().equals(AuthPerMemberLoginHandler.getLoginUser().getPerNickname())) {
-
     System.out.println();
     System.out.println("▶ 회원 탈퇴");
 
@@ -43,31 +40,6 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
         System.out.println("회원이 탈퇴되었습니다.");
         return;
       }
-      //        }
-      //      } 
-      //      else if (!member.getPerNickname().equals(
-      //          AuthAdminLoginHandler.getLoginAdmin().getMasterNickname())) {
-      //
-      //        System.out.println();
-      //        System.out.println("▶ 회원 삭제");
-      //
-      //        String selectMember = Prompt.inputString("회원을 선택하세요. ");
-      //
-      //        member = promptPerMember.getMemberByPerNick(selectMember);
-      //
-      //        String input = Prompt.inputString("정말 탈퇴시키겠습니까? (네 /아니오) ");
-      //
-      //        if (!input.equalsIgnoreCase("네")) {
-      //          System.out.println("회원 삭제를 취소하였습니다.");
-      //          return;
-      //        }
-      //
-      //        memberList.remove(member);
-      //        AuthPerMemberLoginHandler.loginUser = null;
-      //        System.out.println("회원이 삭제되었습니다.");
-      //        return;
-      //      }
-
     }
   }
 }

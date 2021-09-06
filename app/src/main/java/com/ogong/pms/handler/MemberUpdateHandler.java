@@ -24,7 +24,7 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
     String perPhoto = Prompt.inputString("사진(" + member.getPerPhoto() + ") : ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
+    if (input.equalsIgnoreCase("n") || input.length() == 0) {
       System.out.println("개인회원 변경을 취소하였습니다.");
       return;
     }

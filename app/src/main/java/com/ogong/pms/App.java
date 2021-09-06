@@ -21,6 +21,7 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminInfoHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
+import com.ogong.pms.handler.AdminMemberDetailHandler;
 import com.ogong.pms.handler.AdminMemberUpdateHandler;
 import com.ogong.pms.handler.AdminNoticeAddHandler;
 import com.ogong.pms.handler.AdminNoticeDeleteHandler;
@@ -129,12 +130,13 @@ public class App {
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList, commandMap));
-    commandMap.put("/member/detail", new MemberDetailHandler(memberList, promptPerMember));
+    commandMap.put("/member/detail", new MemberDetailHandler(memberList));
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
-    commandMap.put("/adminmember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
-    commandMap.put("/adminmember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
+    commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
+    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
+    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, commentList, commandMap));
     commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, memberList, commentList, commandMap));
@@ -313,6 +315,7 @@ public class App {
     userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/member/logout"));
 
     userMenuGroup.add(createLoginMenu());
+    userMenuGroup.add(createMyPageMenu());
     userMenuGroup.add(createStudyMenu());
     userMenuGroup.add(createMystudyMenu());
     userMenuGroup.add(createCafeMenu());
@@ -351,7 +354,7 @@ public class App {
   //// 마이페이지 - 예약내역 - (내역보기x 취소하기x 후기보기x) 
 
   private Menu createMyPageMenu() {
-    MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGOUT); 
+    MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
 
     myPageMenu.add(new MenuItem("개인 정보", "/member/detail"));
     //selectMyPage();
