@@ -64,10 +64,27 @@ public abstract class AbstractCafeHandler implements Command {
 
     CafeReservation reservation = new CafeReservation();
 
+    Date today = new Date(System.currentTimeMillis());
     Date reservationDate = Prompt.inputDate("예약 날짜 : ");
+    while (today.toLocalDate().compareTo(reservationDate.toLocalDate()) > 0) {
+      System.out.println("이전 날짜는 예약 불가능 합니다.");
+      System.out.println("날짜를 다시 입력해주세요.");
+      reservationDate = Prompt.inputDate("예약 날짜 : ");
+    }
 
-    int startTime = Prompt.inputInt("시작시간(0시~24시) : ");
+    String[] openTime = cafe.getOpenTime().split(":");
+    String[] lastTime = cafe.getCloseTime().split(":");
+    int lastTimeMinus1 = Integer.valueOf(lastTime[0]) - 1;
+    //String lastOrderTime = String.valueOf(lastTimeMinus1) + ":" + lastTime[1];
+
+    int startTime = Prompt.inputInt(
+        String.format("시작시간(%s시~%d시) : ", openTime[0], lastTimeMinus1));
     int useTime = Prompt.inputInt("이용할 시간 : ");
+    while (startTime + useTime > Integer.valueOf(lastTime[0])) {
+      System.out.printf("마감시간(%s시)을 초과하여 예약할 수 없습니다.\n", lastTime[0]);
+      System.out.println("이용시간을 다시 입력해주세요.");
+      useTime = Prompt.inputInt("이용할 시간 : ");
+    }
     int useMemberNumber = Prompt.inputInt("사용할 인원 : ");
     int totalPrice = useTime * useMemberNumber * cafe.getTimePrice();
     System.out.printf("총금액 : %d원\n" , totalPrice);
