@@ -44,6 +44,7 @@ public class FreeBoardUpdateHandler extends AbstractFreeBoardHandler {
     String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
     if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
       System.out.println("게시글 변경이 취소되었습니다.");
+      selectPage();
       return;
     }
 

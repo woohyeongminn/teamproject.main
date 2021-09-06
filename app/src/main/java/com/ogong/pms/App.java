@@ -345,7 +345,23 @@ public class App {
     return loginMenu;
   }
 
-  //개인 하위 메뉴1 - 모든스터디
+  // 개인 하위 메뉴1 - 마이페이지 (로그인 했을때)
+  //리턴위치 지정(탈퇴시 메인으로 돌아가기)
+  //// 마이페이지 - 개인정보 - (수정o 탈퇴o 문의내역x) 
+  //// 마이페이지 - 예약내역 - (내역보기x 취소하기x 후기보기x) 
+
+  private Menu createMyPageMenu() {
+    MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGOUT); 
+
+    myPageMenu.add(new MenuItem("개인 정보", "/member/detail"));
+    //selectMyPage();
+
+    myPageMenu.add(new MenuItem("예약 내역", "/cafe/reservationList"));
+    myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
+    return myPageMenu;
+  }
+
+  //개인 하위 메뉴2 - 모든스터디
   private Menu createStudyMenu() {
     MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
     // 등록o 목록보기o 상세보기△(참여x) 검색x 필터x(switch문 활용) 

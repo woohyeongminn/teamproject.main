@@ -6,13 +6,12 @@ import java.util.List;
 public class FreeBoard {
 
   private int freeBoardNo;              //글 번호
-  private String freeBoardTitle;        //제목
-  private String freeBoardContent;      //내용 
-  private String freeBoardAtcFile;      //첨부파일
-  // 0831 eun 수정
-  private Member freeBoardWriter;       //작성자
-  private int freeBoardViewcount;    //조회수
-  private Date freeBoardRegisteredDate; //작성일
+  private String freeBoardTitle;        //글 제목
+  private String freeBoardContent;      //글 내용 
+  private String freeBoardAtcFile;      //글 첨부파일
+  private Member freeBoardWriter;       //글 작성자
+  private int freeBoardViewcount;       //글 조회수
+  private Date freeBoardRegisteredDate; //글 작성일
 
   private List<Comment> comment; //댓글
 
