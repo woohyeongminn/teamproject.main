@@ -21,6 +21,7 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminInfoHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
+import com.ogong.pms.handler.AdminMemberUpdateHandler;
 import com.ogong.pms.handler.AdminNoticeAddHandler;
 import com.ogong.pms.handler.AdminNoticeDeleteHandler;
 import com.ogong.pms.handler.AdminNoticeDetailHandler;
@@ -131,6 +132,8 @@ public class App {
     commandMap.put("/member/detail", new MemberDetailHandler(memberList));
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
+
+    commandMap.put("/adminmember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminmember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
     commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, studyList, commentList));
