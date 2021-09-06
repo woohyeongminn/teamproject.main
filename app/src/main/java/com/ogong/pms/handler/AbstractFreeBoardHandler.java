@@ -60,7 +60,7 @@ public abstract class AbstractFreeBoardHandler implements Command {
     return null;
   }
 
-  protected void addComment(FreeBoard free) {
+  protected void addComment(FreeBoard freeBoard) {
     System.out.println();
     System.out.println("▶ 댓글 작성하기");
 
@@ -85,18 +85,18 @@ public abstract class AbstractFreeBoardHandler implements Command {
       comment.setCommentRegisteredDate(date);
 
       commentList.add(comment);
-      free.getComment().add(comment);
+      freeBoard.getComment().add(comment);
       System.out.println("댓글이 등록되었습니다.");
 
       selectPage();
     }
   }
 
-  protected void listComment() {
+  protected void listComment(FreeBoard freeBoard) {
     System.out.println("=============댓글=============");
     int commentSize = 0;
 
-    for (Comment comment : commentList) {
+    for (Comment comment : freeBoard.getComment()) {
       System.out.printf("내용 : %s | 작성자 : %s | 등록일 : %s\n",
           comment.getCommentText(), comment.getCommentWiter().getPerNickname(), comment.getCommentRegisteredDate());
       commentSize++;

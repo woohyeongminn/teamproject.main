@@ -21,17 +21,12 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
     System.out.println();
 
-    FreeBoard free = findByTitle(Prompt.inputString("제목 : "));
+    FreeBoard freeBoard = findByTitle(Prompt.inputString("제목 : "));
     System.out.println();
-    if (free == null) {
+    if (freeBoard == null) {
       System.out.println("해당 제목의 게시글이 없습니다.");
       return;
     }
-
-    //    if (!inputTitle.equals(free.getFreeBoardTitle())) {
-    //      System.out.println("해당 제목의 게시글이 없습니다.");
-    //      return;
-    //    }
 
     //(inputTitle != free.getFreeBoardTitle())
 
@@ -43,13 +38,13 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     //    }
 
 
-    System.out.printf(">> 제목 : %s\n", free.getFreeBoardTitle());
-    System.out.printf(">> 내용 : %s\n", free.getFreeBoardContent());
-    System.out.printf(">> 첨부파일 : %s\n", free.getFreeBoardAtcFile());
-    System.out.printf(">> 작성자 : %s\n", free.getFreeBoardWriter().getPerNickname());
-    System.out.printf(">> 등록일 : %s\n", free.getFreeBoardRegisteredDate());
-    free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
-    System.out.printf(">> 조회수 : %d\n", free.getFreeBoardViewcount());
+    System.out.printf(">> 제목 : %s\n", freeBoard.getFreeBoardTitle());
+    System.out.printf(">> 내용 : %s\n", freeBoard.getFreeBoardContent());
+    System.out.printf(">> 첨부파일 : %s\n", freeBoard.getFreeBoardAtcFile());
+    System.out.printf(">> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
+    System.out.printf(">> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
+    freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
+    System.out.printf(">> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
 
     //    System.out.println("=============댓글=============");
     //    int commentSize = 0;
@@ -63,14 +58,14 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
     //    if (commentSize == 0) {
     //      System.out.println("등록된 댓글이 없습니다.");
     //    }
-    listComment();
+    listComment(freeBoard);
 
     System.out.println();
     System.out.println("1. 댓글 달기");
     System.out.println("0. 뒤로가기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : addComment(free); break;
+      case 1 : addComment(freeBoard); break;
       default : selectPage();
     }
   }
