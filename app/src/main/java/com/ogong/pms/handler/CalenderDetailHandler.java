@@ -30,7 +30,7 @@ public class CalenderDetailHandler extends AbstractCalenderHandler {
         System.out.println();
         System.out.println("정확한 '일'을 입력해주세요.");
         continue;
-      }
+      } System.out.println(calenderList);
       for (Calender calender : calenderList) {
         if (inputDay == calender.getDay()) {
           day = calender;
