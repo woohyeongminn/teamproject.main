@@ -6,14 +6,12 @@ import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
 public abstract class AbstractFreeBoardHandler implements Command {
 
   List<FreeBoard> freeBoardList;
   List<Comment> commentList;
-  List<Study> studyList;
   HashMap<String, Command> commandMap;
 
 
