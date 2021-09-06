@@ -130,7 +130,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
           case 1 : commandMap.get("/calender/detail").execute(); break;
-          //case 2 : commandMap.get("/calender/add").execute(); return;
+          // case 2 : commandMap.get("/calender/add").execute(); return;
           case 2 : addCalender(study); return; 
           case 3 : continue;
           case 4 : return;
