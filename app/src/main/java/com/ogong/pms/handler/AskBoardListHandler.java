@@ -23,7 +23,7 @@ public class AskBoardListHandler extends AbstractAskBoardHandler {
     }
 
     for (AskBoard askList : askBoardList) {
-      System.out.printf("(%d)\n제목 : %s 작성자 : %s 등록일 : %s 조회수 : %d\n", 
+      System.out.printf(" (%d)\n [%s]\n >> %s\n >> %s\n >> %d\n", 
           askList.getAskNo(), 
           askList.getAskTitle(), 
           askList.getAskWriter().getPerNickname(),

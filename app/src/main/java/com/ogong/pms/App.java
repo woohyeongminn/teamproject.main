@@ -256,7 +256,7 @@ public class App {
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
 
-    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));    //개인 회원 조회
+    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
     adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
 
     return adminUserMenu;
@@ -304,11 +304,11 @@ public class App {
 
   // 5-2
   // <구현안됨>
-  // 문의사항 상세보기 (댓글목록보기, 댓글등록 오류) >> 관리자
+  // detail 에서 댓글 수정기능x
   private Menu createAdminAskMenu() {
     MenuGroup adminaskMenu = new MenuGroup("문의사항");
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
-    adminaskMenu.add(new MenuItem("상세", "/askBoard/detail")); // 댓글목록보기, 댓글등록 해야함
+    adminaskMenu.add(new MenuItem("상세", "/askBoard/detail"));
     adminaskMenu.add(new MenuItem("삭제", "/askBoard/delete"));
 
     return adminaskMenu;
@@ -357,11 +357,12 @@ public class App {
   }
 
   //개인 하위 메뉴3 - 모든스터디
+  // <구현안됨>
+  // 이름으로 스터디 검색x
+  // 지역으로 선택할지, 대면/비대면 선택할지, 인원수로 선택할지 필터검색x
   private Menu createStudyMenu() {
     MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
-    // <구현안됨>
-    // 이름으로 스터디 검색x
-    // 지역으로 선택할지, 대면/비대면 선택할지, 인원수로 선택할지 필터검색x
+
     allStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
     allStudyMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/study/update"));
@@ -370,6 +371,8 @@ public class App {
   }
 
   //개인 하위 메뉴4 - 내 스터디
+  // <구현안됨>
+  // detail 에서 댓글 수정기능x
   private Menu createMystudyMenu() {
     MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
     // <구현안됨>

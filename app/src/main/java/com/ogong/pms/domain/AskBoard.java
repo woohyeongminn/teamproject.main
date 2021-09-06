@@ -20,7 +20,7 @@ public class AskBoard {
   }
 
   public int getAskNo() {
-    return askNo;
+    return askNo + 1;
   }
   public void setAskNo(int askNo) {
     this.askNo = askNo;
