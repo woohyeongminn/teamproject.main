@@ -7,7 +7,6 @@ import com.ogong.util.Prompt;
 
 public class CalenderListHandler extends AbstractCalenderHandler {
 
-  CalenderDetailHandler calenderDetailHandler;
   HashMap<String, Command> commandMap;
 
   public CalenderListHandler( List<Calender> calenderList, HashMap<String, Command> commandMap) {

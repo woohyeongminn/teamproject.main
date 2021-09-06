@@ -22,7 +22,7 @@ public class MemberListHandler extends AbstractMemberHandler {
     System.out.println();
 
     for (Member member : memberList) {
-      System.out.printf("닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
+      System.out.printf(" 닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
           member.getPerNickname(), 
           member.getPerEmail(),
           member.getPerRegisteredDate());
