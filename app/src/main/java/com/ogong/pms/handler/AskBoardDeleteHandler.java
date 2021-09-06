@@ -2,13 +2,13 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Comment;
 import com.ogong.util.Prompt;
 
 public class AskBoardDeleteHandler extends AbstractAskBoardHandler {
 
-  public AskBoardDeleteHandler(List<AskBoard> askBoardList, List<Member> memberList) {
-    super(askBoardList, memberList);
+  public AskBoardDeleteHandler(List<AskBoard> askBoardList, List<Comment> commentList) {
+    super(askBoardList, commentList);
   }
 
   public void execute() {

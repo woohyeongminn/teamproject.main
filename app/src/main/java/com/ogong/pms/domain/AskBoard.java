@@ -1,6 +1,7 @@
 package com.ogong.pms.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 public class AskBoard {
   private int askNo; // 문의게시판 번호
@@ -9,12 +10,13 @@ public class AskBoard {
   private Member askWriter; // 문의게시판 작성자
   private int askVeiwCount; // 문의게시판 조회수
   private Date askRegisteredDate; // 문의게시판 등록일
+  private List<Comment> adminComment; // 문의게시판 관리자 댓글
 
   @Override
   public String toString() {
     return "AskBoard [askNo=" + askNo + ", askTitle=" + askTitle + ", askContent=" + askContent
         + ", askWriter=" + askWriter + ", askVeiwCount=" + askVeiwCount + ", askRegisteredDate="
-        + askRegisteredDate + "]";
+        + askRegisteredDate + ", adminComment=" + adminComment + "]";
   }
 
   public int getAskNo() {
@@ -54,5 +56,13 @@ public class AskBoard {
   public void setAskRegisteredDate(Date askRegisteredDate) {
     this.askRegisteredDate = askRegisteredDate;
   }
+  public List<Comment> getAdminComment() {
+    return adminComment;
+  }
+  public void setAdminComment(List<Comment> adminComment) {
+    this.adminComment = adminComment;
+  }
+
+
 
 }

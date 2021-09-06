@@ -150,11 +150,11 @@ public class App {
     commandMap.put("/toDo/update", new ToDoDetailHandler(toDoList));
     commandMap.put("/toDo/delete", new ToDoDeleteHandler(toDoList));
 
-    commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList));
-    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList));
-    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, memberList));
-    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardList, memberList));
-    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList));
+    commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, commentList));
+    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, commentList));
+    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, commentList, adminList));
+    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardList, commentList));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, commentList));
 
     commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));

@@ -2,16 +2,16 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Comment;
 
 public abstract class AbstractAskBoardHandler implements Command {
 
   List<AskBoard> askBoardList;
-  List<Member> memberList;
+  List<Comment> commentList;
 
-  public AbstractAskBoardHandler(List<AskBoard> askBoardList, List<Member> memberList) {
+  public AbstractAskBoardHandler(List<AskBoard> askBoardList, List<Comment> commentList) {
     this.askBoardList = askBoardList;
-    this.memberList = memberList;
+    this.commentList = commentList;
   }
 
   protected AskBoard findByNo(int askNo) {
@@ -22,6 +22,7 @@ public abstract class AbstractAskBoardHandler implements Command {
     }
     return null;
   }
+
 }
 
 
