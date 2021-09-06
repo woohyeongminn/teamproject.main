@@ -16,6 +16,10 @@ public class Study {
   private Date registeredDate;       // 스터디 가입일
   private List<Member> members;     //  참여중인 구성원
   private List<Member> watingMember; // 참여승인을 기다리는 회원
+  private List<Calender> myStudyCalender;  // 내 스터디 캘린더
+  private List<FreeBoard> myStudyFreeBoard; // 내 스터디 자유 게시판
+
+
 
 
 
@@ -24,7 +28,8 @@ public class Study {
     return "Study [studyNo=" + studyNo + ", studyTitle=" + studyTitle + ", owner=" + owner
         + ", subject=" + subject + ", area=" + area + ", numberOfPeple=" + numberOfPeple + ", face="
         + face + ", introduction=" + introduction + ", registeredDate=" + registeredDate
-        + ", members=" + members + ", watingMember=" + watingMember + "]";
+        + ", members=" + members + ", watingMember=" + watingMember + ", myStudyCalender="
+        + myStudyCalender + ", myStudyFreeBoard=" + myStudyFreeBoard + "]";
   }
 
 
@@ -150,6 +155,25 @@ public class Study {
     }
     return names.toString();
   }
+
+  public List<Calender> getMyStudyCalender() {
+    return myStudyCalender;
+  }
+
+  public void setMyStudyCalender(List<Calender> myStudyCalender) {
+    this.myStudyCalender = myStudyCalender;
+  }
+
+
+  public List<FreeBoard> getMyStudyFreeBoard() {
+    return myStudyFreeBoard;
+  }
+
+
+  public void setMyStudyFreeBoard(List<FreeBoard> myStudyFreeBoard) {
+    this.myStudyFreeBoard = myStudyFreeBoard;
+  }
+
 
   public String getWatingMemberNames() {
     if (this.members == null) {

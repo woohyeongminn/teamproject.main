@@ -28,8 +28,10 @@ public class MyStudyListHandler extends AbstractStudyHandler {
       return;
     }
 
-    // 0905 실행안됨
-    if(member.getPerMyStudy() == null) {
+    // test용으로 setPerMyStudy에 new로 생성해서
+    // 값은 안 넣었지만 null값이 있으므로 사이즈로 비교해야 한다.
+
+    if(member.getPerMyStudy().size() == 0) {
       System.out.println("가입한 스터디가 없습니다.");
       return;
     }

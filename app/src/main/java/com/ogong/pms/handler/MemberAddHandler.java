@@ -95,6 +95,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
     }
     member.setPerPhoto(Prompt.inputString("사진 : "));
     member.setPerMyStudy(new ArrayList<>());
+    member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(member);
     System.out.println();
     System.out.println("회원가입이 완료되었습니다.");
