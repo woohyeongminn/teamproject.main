@@ -58,7 +58,7 @@ public class PromptPerMember {
       break;
     }
     String input = Prompt.inputString("비밀번호 찾기로 넘어가시겠습니까? (네 / 아니오) ");
-    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println("찾기를 종료합니다.");
       return;
     } 

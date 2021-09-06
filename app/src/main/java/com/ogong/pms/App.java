@@ -129,7 +129,7 @@ public class App {
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList, commandMap));
-    commandMap.put("/member/detail", new MemberDetailHandler(memberList));
+    commandMap.put("/member/detail", new MemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
