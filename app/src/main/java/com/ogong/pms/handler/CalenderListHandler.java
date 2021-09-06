@@ -54,24 +54,27 @@ public class CalenderListHandler extends AbstractCalenderHandler {
         System.out.println();
         System.out.printf("'%d월'에 등록된 일정이 없습니다.\n", selectMonth);
         System.out.println("1. 날짜 재입력");
-        System.out.println("2. 취       소");
+        System.out.println("2. 등록   하기");
+        System.out.println("3. 취       소");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
-          case 1 :  continue;
-          case 2 : return;
+          case 1 : continue;
+          case 2 : commandMap.get("/calender/add").execute(); break;
+          case 3 : return;
           default : return;
         }
       }
       if (month != null) {
-        calenderList.add(month);
         System.out.println("1. 상세   보기");
-        System.out.println("2. 날짜 재입력");
-        System.out.println("3. 취       소");
+        System.out.println("2. 등록   하기");
+        System.out.println("3. 날짜 재입력");
+        System.out.println("4. 취       소");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
           case 1 : commandMap.get("/calender/detail").execute(); break;
-          case 2 : continue;
-          case 3 : return;
+          case 2 : commandMap.get("/calender/add").execute(); break;
+          case 3 : continue;
+          case 4 : return;
           default : return;
         }
       }

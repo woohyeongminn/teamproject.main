@@ -1,18 +1,17 @@
 package com.ogong.pms.handler;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.util.Prompt;
 
 public class CalenderDetailHandler extends AbstractCalenderHandler {
 
-  List<Calender> calenderList;
-  CalenderUpdateHandler calenderUpdateHandler;
-  CalenderDeleteHandler calenderDeleteHandler;
+  HashMap<String, Command> commandMap;
 
-
-  public CalenderDetailHandler( List<Calender> calenderList) {
+  public CalenderDetailHandler(List<Calender> calenderList, HashMap<String, Command> commandMap) {
     super(calenderList);
+    this.commandMap = commandMap;
   }
 
   //------------------------------------------------------------------------------------------------
@@ -52,8 +51,8 @@ public class CalenderDetailHandler extends AbstractCalenderHandler {
         System.out.println("3. 취    소");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
-          case 1 : calenderUpdateHandler.execute(); break;
-          case 2 : calenderDeleteHandler.execute(); break;
+          case 1 : commandMap.get("/calender/update").execute(); break;
+          case 2 : commandMap.get("/calender/delete").execute(); break;
           case 3 : return;
           default : return;
         }
