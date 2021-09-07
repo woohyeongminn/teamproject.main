@@ -11,7 +11,7 @@ public class ToDo {
   private int todoStatus;   // 투두리스트 상태
 
   public int getTodoNo() {
-    return todoNo;
+    return todoNo + 1;
   }
   public void setTodoNo(int todoNo) {
     this.todoNo = todoNo;

@@ -13,19 +13,16 @@ public class ToDoListHandler extends AbstractToDoHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 목록");
+    System.out.println();
 
-    ToDo[] todos = new ToDo[todoList.size()];
-
-    todoList.toArray(todos);
-
-    for (ToDo todo : todos) {
-      System.out.printf(" (%d) 제목 : %s 내용 : %s 비고 : %s 상태 : %s  DATE : %s\n", 
+    for (ToDo todo : todoList) {
+      System.out.printf(" (%d) - %s\n 내용 : %s\n 비고 : %s\n DATE : %s\n", 
           todo.getTodoNo(), 
-          todo.getTodoTitle(), 
+          getStatusToDo(todo.getTodoStatus()),
           todo.getTodoContent(),
           todo.getTodoRemark(),
-          getStatusToDo(todo.getTodoStatus()),
           todo.getTodoRegisteredDate());
+      System.out.println();
     }
   }
 }
