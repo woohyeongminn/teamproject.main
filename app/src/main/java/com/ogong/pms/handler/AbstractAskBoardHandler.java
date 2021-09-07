@@ -23,11 +23,13 @@ public abstract class AbstractAskBoardHandler implements Command {
     return null;
   }
 
+  protected Comment findByComment (int commentNo) {
+    for (Comment comment : commentList) {
+      if (comment.getCommentNo() == commentNo) {
+        return comment;
+      }
+    }
+    return null;
+  }
+
 }
-
-
-
-
-
-
-
