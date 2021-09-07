@@ -167,7 +167,7 @@ public class App {
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
-    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList, promptPerMember));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
@@ -299,8 +299,6 @@ public class App {
   }
 
   // 5-2
-  // <구현안됨>
-  // detail 에서 댓글 수정기능x
   private Menu createAdminAskMenu() {
     MenuGroup adminaskMenu = new MenuGroup("문의사항");
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));

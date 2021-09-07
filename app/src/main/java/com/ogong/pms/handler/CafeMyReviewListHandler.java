@@ -5,6 +5,7 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
+import com.ogong.util.Prompt;
 
 public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
@@ -40,5 +41,25 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
       System.out.println("\n >> 리뷰 내역이 존재하지 않습니다.");
       return;
     }
+
+    System.out.println("----------------------");
+    System.out.println("1. 리뷰 수정");
+    System.out.println("2. 리뷰 삭제"); // 삭제 기능 있어야 하나 고민
+    System.out.println("0. 뒤로 가기");
+
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1: updateMyReview(); break;
+      case 2: deleteMyReview(); break;
+      default : return;
+    }
+  }
+
+  public void updateMyReview() {
+    // 작성하기
+  }
+
+  public void deleteMyReview() {
+    // 작성하기
   }
 }
