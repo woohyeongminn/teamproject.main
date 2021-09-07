@@ -8,6 +8,7 @@ import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
 public class CeoMemberHandler {
+
   int ceoMemberNo;
   List<CeoMember> ceoMemberList;
 
@@ -22,6 +23,7 @@ public class CeoMemberHandler {
 
     CeoMember ceoMember = new CeoMember();
 
+    ceoMember.setCeoNo(ceoMemberNo++);
     ceoMember.setCeoEmail(Prompt.inputString(" 이메일 : "));
     ceoMember.setCeoName(Prompt.inputString(" 이름 : "));
     ceoMember.setCeoPassword(Prompt.inputString(" 암호 : "));
@@ -43,12 +45,10 @@ public class CeoMemberHandler {
 
     CeoMember[] list = ceoMemberList.toArray(new CeoMember[0]);
 
-
-
     for (CeoMember ceoMember : list) {
       System.out.println();
       System.out.printf(" (%d)\n 이름 : %s\n 이메일 : %s\n 대표자명 : %s\n 점포명 : %s\n 가입일 : %s\n",
-          ceoMember.setCeoNo(ceoMemberNo++),
+          ceoMember.getCeoNo(ceoMemberNo++),
           ceoMember.getCeoName(), 
           ceoMember.getCeoEmail(),
           ceoMember.getCeoBossName(),
