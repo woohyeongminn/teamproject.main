@@ -43,8 +43,8 @@ import com.ogong.pms.handler.CafeAddHandler;
 import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
 import com.ogong.pms.handler.CafeListHandler;
-import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeMyReservationListHandler;
+import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CalenderAddHandler;
@@ -345,10 +345,10 @@ public class App {
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
 
-    myPageMenu.add(new MenuItem("개인 정보", "/member/detail"));
-    myPageMenu.add(new MenuItem("문의 내역", "/askBoard/myList"));
-    myPageMenu.add(new MenuItem("예약 내역", "/cafe/reservationList"));
-    myPageMenu.add(new MenuItem("후기 내역", "/cafe/myReviewList"));
+    myPageMenu.add(new MenuItem("개인정보", "/member/detail"));
+    myPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
+    myPageMenu.add(new MenuItem("예약내역", "/cafe/reservationList"));
+    myPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
     myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
     return myPageMenu;
   }

@@ -34,7 +34,7 @@ public class MemberFindIdPwHandler implements Command {
       Member member = promptPerMember.getMemberByPerNick(inputNick);
       if (member == null) {
         System.out.println("해당 닉네임이 존재하지 않습니다.");
-        continue;
+        return;
       } else {
         System.out.println();
         System.out.printf("'%s님'의 이메일 >> ", member.getPerNickname());

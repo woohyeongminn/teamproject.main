@@ -48,7 +48,7 @@ public abstract class AbstractStudyHandler implements Command {
     System.out.printf(" >> 지역 : %s\n", study.getArea());
     System.out.printf(" >> 인원수 : %d\n", study.getNumberOfPeple());
     System.out.printf(" >> 대면 : %s\n", study.getFace());
-    System.out.printf(" >> 소개글 : %s", study.getIntroduction());
+    System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
     if (AuthPerMemberLoginHandler.loginUser != null) {
 
