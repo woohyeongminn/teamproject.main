@@ -36,7 +36,7 @@ public class AuthAdminLoginHandler implements Command {
     Admin admin = findByAdminEmail(inputadminEmail);
 
     if (admin == null) {
-      System.out.println("관리자 이메일이 아닙니다.");
+      System.out.println("\n >> 관리자 이메일이 아닙니다.");
     }
 
     while (admin != null) {
@@ -45,7 +45,7 @@ public class AuthAdminLoginHandler implements Command {
       if (admin.getMasterPassword().equals(inputadminPassword)) {
         admin.setMasterEmail(inputadminEmail);
         admin.setMasterPassword(inputadminPassword);
-        System.out.printf("%s님 환영합니다!\n", admin.getMasterNickname());
+        System.out.printf("\n >> '%s'님 환영합니다!\n", admin.getMasterNickname());
         loginAdmin = admin;
         return;
       }
