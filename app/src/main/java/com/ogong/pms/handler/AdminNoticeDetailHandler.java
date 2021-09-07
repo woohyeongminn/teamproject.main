@@ -11,6 +11,7 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
   }
 
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 공지 상세");
@@ -24,10 +25,10 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
       return;
     }
 
-    System.out.printf(">> %s\n", adminWriteList.getAdminNotiTitle());
-    System.out.printf(">> %s\n", adminWriteList.getAdminNotiContent());
-    System.out.printf(">> %s\n", adminWriteList.getAdminNotiWriter());
-    System.out.printf(">> %s\n", adminWriteList.getAdminNotiRegisteredDate());
+    System.out.printf(" [%s]\n", adminWriteList.getAdminNotiTitle());
+    System.out.printf(" >> 내용 : %s\n", adminWriteList.getAdminNotiContent());
+    System.out.printf(" >> 작성자 : %s\n", adminWriteList.getAdminNotiWriter());
+    System.out.printf(" >> 등록일 : %s\n", adminWriteList.getAdminNotiRegisteredDate());
   }
 
 }

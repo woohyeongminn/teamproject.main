@@ -12,6 +12,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 장소 상세보기");
@@ -21,24 +22,24 @@ public class CafeDetailHandler extends AbstractCafeHandler {
       System.out.println("해당 이름의 장소가 존재하지 않습니다.");
       return;
     }
-    System.out.printf("(%s)\n", cafe.getNo());
-    System.out.printf(">> 상호명 : %s\n", cafe.getName());
-    System.out.printf(">> 대표이미지 : %s\n", cafe.getMainImg());
-    System.out.printf(">> 소개글 : %s\n", cafe.getInfo());
-    System.out.printf(">> 주소 : %s\n", cafe.getLocation());
-    System.out.printf(">> 번호 : %s\n", cafe.getPhone());
-    System.out.printf(">> 오픈시간 : %s\n", cafe.getOpenTime());
-    System.out.printf(">> 마감시간 : %s\n", cafe.getCloseTime());
-    System.out.printf(">> 휴무일 : %s\n", cafe.getHoliday());
-    System.out.printf(">> 예약가능 인원 : %d\n", cafe.getBookable());
-    System.out.printf(">> 시간당 금액 : %d원\n", cafe.getTimePrice());
+    System.out.printf(" (%s)\n", cafe.getNo());
+    System.out.printf(" [%s]\n", cafe.getName());
+    System.out.printf(" >> 대표이미지 : %s\n", cafe.getMainImg());
+    System.out.printf(" >> 소개글 : %s\n", cafe.getInfo());
+    System.out.printf(" >> 주소 : %s\n", cafe.getLocation());
+    System.out.printf(" >> 번호 : %s\n", cafe.getPhone());
+    System.out.printf(" >> 오픈시간 : %s\n", cafe.getOpenTime());
+    System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
+    System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());
+    System.out.printf(" >> 예약가능 인원 : %d\n", cafe.getBookable());
+    System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
     System.out.println();
     System.out.println("=============리뷰=============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
       if (review.getCafe().getNo() == cafe.getNo()) {
         String nickname = review.getMember().getPerNickname();
-        System.out.printf("닉네임 : %s, 별점 : %d, 내용 : %s, 등록일 : %s\n",
+        System.out.printf("닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;
       }

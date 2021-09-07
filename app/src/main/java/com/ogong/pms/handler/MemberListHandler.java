@@ -9,6 +9,7 @@ public class MemberListHandler extends AbstractMemberHandler {
 
   HashMap<String, Command> commandMap;
 
+
   public MemberListHandler(List<Member> memberList, HashMap<String, Command> commandMap) {
     super(memberList);
     this.commandMap = commandMap;
@@ -21,8 +22,11 @@ public class MemberListHandler extends AbstractMemberHandler {
     System.out.println("▶ 회원 목록");
     System.out.println();
 
+    int no = 1;
+
     for (Member member : memberList) {
-      System.out.printf(" 닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
+      System.out.printf(" (%d)\n 닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
+          no++,
           member.getPerNickname(), 
           member.getPerEmail(),
           member.getPerRegisteredDate());

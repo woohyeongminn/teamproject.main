@@ -28,7 +28,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
     int count = 0;
     for (CafeReview cafeReview : reviewList) {
       if (cafeReview.getMember().getPerNickname().equals(member.getPerNickname())) {
-        System.out.printf("장소 : %s, 별점 : %d, 내용 : %s, 등록일 : %s\n",
+        System.out.printf(" [%s]\n 별점 : %d\n 내용 : %s\n 등록일 : %s\n",
             cafeReview.getCafe().getName(), cafeReview.getGrade(), cafeReview.getContent(),
             cafeReview.getRegisteredDate());
         System.out.println();

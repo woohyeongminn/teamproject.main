@@ -23,10 +23,10 @@ public class ToDoDetailHandler extends AbstractToDoHandler {
       return;
     }
 
-    System.out.printf("제목: %s\n", todo.getTodoTitle());
-    System.out.printf("내용: %s\n", todo.getTodoContent());
-    System.out.printf("비고: %s\n", todo.getTodoRemark());
-    System.out.printf("진행 상황: %d\n", todo.getTodoStatus());
-    System.out.printf("DATE: %s\n", todo.getTodoRegisteredDate());
+    System.out.printf(" [%s]\n", todo.getTodoTitle());
+    System.out.printf(" 내용 : %s\n", todo.getTodoContent());
+    System.out.printf(" 비고 : %s\n", todo.getTodoRemark());
+    System.out.printf(" 상태 : %d\n", todo.getTodoStatus());
+    System.out.printf(" DATE : %s\n", todo.getTodoRegisteredDate());
   }
 }

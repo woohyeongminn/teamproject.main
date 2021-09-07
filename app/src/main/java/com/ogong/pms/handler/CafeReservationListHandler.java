@@ -26,9 +26,9 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
     int count = 0;
     for (CafeReservation cafeReser : reserList) {
       if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
-        System.out.printf(" (%d)\n >> 예약날짜 : %s\n >> 예약장소 : %s\n"
-            + " >> 시작시간 : %d시\n >> 이용시간 : %d시간\n >> 사용인원 : %d명\n"
-            + " >> 결제금액 : %d원\n >> 리뷰작성여부 : %s\n"
+        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
+            + " 시작시간 : %d시\n 이용시간 : %d시간\n 사용인원 : %d명\n"
+            + " 결제금액 : %d원\n 리뷰작성여부 : %s\n"
             , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReser.getCafe().getName()
             , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseTime()
             , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
