@@ -37,7 +37,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
     }
 
     if (count == 0) {
-      System.out.println("리뷰 내역이 존재하지 않습니다.");
+      System.out.println("\n >> 리뷰 내역이 존재하지 않습니다.");
       return;
     }
   }

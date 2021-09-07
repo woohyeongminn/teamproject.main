@@ -6,9 +6,9 @@ import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.util.Prompt;
 
-public class CafeReservationListHandler extends AbstractCafeHandler {
+public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
-  public CafeReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
     super (cafeList, reviewList, reserList);
   }
 
@@ -38,7 +38,7 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
     }
 
     if (count == 0) {
-      System.out.println("예약 내역이 존재하지 않습니다.");
+      System.out.println("\n >> 예약 내역이 존재하지 않습니다.");
       return;
     }
 

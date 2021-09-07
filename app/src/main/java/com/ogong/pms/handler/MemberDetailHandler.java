@@ -24,7 +24,7 @@ public class MemberDetailHandler extends AbstractMemberHandler {
       System.out.println();
       System.out.printf(" [%s]\n", member.getPerNickname());
       System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
-      System.out.printf(" >> 사진 : %s\n", member.getPerPhoto());
+      System.out.printf(" >> 사  진 : %s\n", member.getPerPhoto());
       System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
 
     } catch (NullPointerException e) {

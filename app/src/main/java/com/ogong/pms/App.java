@@ -33,6 +33,7 @@ import com.ogong.pms.handler.AskBoardAddHandler;
 import com.ogong.pms.handler.AskBoardDeleteHandler;
 import com.ogong.pms.handler.AskBoardDetailHandler;
 import com.ogong.pms.handler.AskBoardListHandler;
+import com.ogong.pms.handler.AskBoardMyListHandler;
 import com.ogong.pms.handler.AskBoardUpdateHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -43,7 +44,7 @@ import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
 import com.ogong.pms.handler.CafeListHandler;
 import com.ogong.pms.handler.CafeMyReviewListHandler;
-import com.ogong.pms.handler.CafeReservationListHandler;
+import com.ogong.pms.handler.CafeMyReservationListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CalenderAddHandler;
@@ -59,6 +60,7 @@ import com.ogong.pms.handler.FreeBoardUpdateHandler;
 import com.ogong.pms.handler.MemberAddHandler;
 import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
+import com.ogong.pms.handler.MemberFindIdPwHandler;
 import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
@@ -156,6 +158,7 @@ public class App {
     commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, commentList, adminList));
     commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardList, commentList));
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, commentList));
+    commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, commentList));
 
     commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));
@@ -163,7 +166,7 @@ public class App {
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
-    commandMap.put("/cafe/reservationList", new CafeReservationListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
@@ -175,8 +178,8 @@ public class App {
     commandMap.put("/admin/login", new AuthAdminLoginHandler(adminList));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
 
-    commandMap.put("/member/login", new AuthPerMemberLoginHandler(promptPerMember));
-    commandMap.put("/member/findIDPW", new PromptPerMember(memberList));
+    commandMap.put("/member/login", new AuthPerMemberLoginHandler(promptPerMember, memberList));
+    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(promptPerMember));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
     commandMap.put("/admin/info", new AdminInfoHandler(adminList));
@@ -223,7 +226,6 @@ public class App {
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createMemberMenu());
     //mainMenuGroup.add(createCeoMenu());
-
 
     return mainMenuGroup;
   }
@@ -322,27 +324,19 @@ public class App {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
     userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/member/logout"));
+    userMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
+    userMenuGroup.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_LOGOUT, "/member/findIdPw"));
 
-    userMenuGroup.add(createLoginMenu());
-    userMenuGroup.add(createMyPageMenu());
-    userMenuGroup.add(createStudyMenu());
-    userMenuGroup.add(createMystudyMenu());
-    userMenuGroup.add(createCafeMenu());
-    userMenuGroup.add(createCSMenu());
+    userMenuGroup.add(createMyPageMenu());      // 마이페이지
+    userMenuGroup.add(createStudyMenu());       // 스터디 찾기
+    userMenuGroup.add(createMystudyMenu());     // 내 스터디
+    userMenuGroup.add(createCafeMenu());        // 장소 예약하기
+    userMenuGroup.add(createCSMenu());          // 고객센터
 
     return userMenuGroup;
   }
 
-  //개인 하위 메뉴1 - 로그인
-  private Menu createLoginMenu() {
-    MenuGroup loginMenu = new MenuGroup("로그인", Menu.ENABLE_LOGOUT); 
-
-    loginMenu.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
-    loginMenu.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_LOGOUT, "/member/findIDPW"));
-    loginMenu.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
-
-    return loginMenu;
-  }
+  //------------------------------------------------------------------------------------
 
   // 개인 하위 메뉴2 - 마이페이지 (로그인 했을때)
   // <구현안됨>
@@ -352,7 +346,7 @@ public class App {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
 
     myPageMenu.add(new MenuItem("개인 정보", "/member/detail"));
-    myPageMenu.add(new MenuItem("문의 내역", "호출키 없음"));
+    myPageMenu.add(new MenuItem("문의 내역", "/askBoard/myList"));
     myPageMenu.add(new MenuItem("예약 내역", "/cafe/reservationList"));
     myPageMenu.add(new MenuItem("후기 내역", "/cafe/myReviewList"));
     myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
@@ -364,7 +358,7 @@ public class App {
   // 이름으로 스터디 검색x
   // 지역으로 선택할지, 대면/비대면 선택할지, 인원수로 선택할지 필터검색x
   private Menu createStudyMenu() {
-    MenuGroup allStudyMenu = new MenuGroup("모든 스터디"); 
+    MenuGroup allStudyMenu = new MenuGroup("스터디 찾기"); 
 
     allStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
@@ -377,7 +371,7 @@ public class App {
   // <구현안됨>
   // detail 에서 댓글 수정기능x
   private Menu createMystudyMenu() {
-    MenuGroup myStudyMenu = new MenuGroup("내 스터디"); 
+    MenuGroup myStudyMenu = new MenuGroup("내 스터디", Menu.ENABLE_LOGIN); 
     // <구현안됨>
     // 내 스터디 하위 메뉴 1 - 구성원
     // 내 스터디 하위 메뉴 3 - 투두리스트
@@ -388,7 +382,7 @@ public class App {
 
   //개인 하위 메뉴5 - 스터디 장소
   private Menu createCafeMenu() {
-    MenuGroup cafeMenu = new MenuGroup("스터디 장소"); 
+    MenuGroup cafeMenu = new MenuGroup("장소 예약"); 
 
     cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));

@@ -93,7 +93,7 @@ public class MenuGroup extends Menu {
       if (successLogin) {
         successLogin = false;
         breadCrumb.pop();
-        return;
+        break;
       }
 
       printBreadCrumbMenuTitle();

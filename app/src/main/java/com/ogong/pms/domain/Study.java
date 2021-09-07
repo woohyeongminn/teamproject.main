@@ -147,7 +147,7 @@ public class Study {
     StringBuilder names = new StringBuilder();
     for (Member member : this.members) {
       if (names.length() > 0) {
-        names.append(",");
+        names.append(", ");
       }
       names.append(member.getPerNickname());
     }

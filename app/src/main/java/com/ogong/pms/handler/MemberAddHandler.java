@@ -77,27 +77,28 @@ public class MemberAddHandler extends AbstractMemberHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 회원가입");
+    System.out.println();
 
     Member member = new Member();
 
     member.setPerNickname(Prompt.inputString(" 닉네임 : "));
+    member.setPerPhoto(Prompt.inputString(" 사  진 : "));
     member.setPerEmail(Prompt.inputString(" 이메일 : "));
     member.setPerPassword(Prompt.inputString(" 비밀번호 : "));
     while (true) {
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
-        System.out.println("  >확인 실패");
+        System.out.println("  > 확인 실패!\n");
         continue;
       } else {
-        System.out.println("  >확인 완료!");
+        System.out.println("  > 확인 완료!\n");
       }
       break;
     }
-    member.setPerPhoto(Prompt.inputString(" 사진 : "));
+
     member.setPerMyStudy(new ArrayList<>());
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(member);
-    System.out.println();
     System.out.println("회원가입이 완료되었습니다.");
   }
 }

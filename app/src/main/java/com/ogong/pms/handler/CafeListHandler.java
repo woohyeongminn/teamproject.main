@@ -21,10 +21,9 @@ public class CafeListHandler extends AbstractCafeHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 장소 목록");
-    System.out.println();
 
     for(Cafe cafe : cafeList) {
-      System.out.printf(" (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
+      System.out.printf(" \n(%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
           , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
     }
 

@@ -14,14 +14,16 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 프로필 수정");
+    System.out.println();
 
     try {
       Member member = AuthPerMemberLoginHandler.getLoginUser();
 
       String perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname()  + ") : ");
+      String perPhoto = Prompt.inputString(" 사  진(" + member.getPerPhoto() + ") : ");
       String perEmail = Prompt.inputString(" 이메일(" + member.getPerEmail() + ") : ");
-      String perPassword = Prompt.inputString(" 암호(" + member.getPerPassword() + ") : ");
-      String perPhoto = Prompt.inputString(" 사진(" + member.getPerPhoto() + ") : ");
+      String perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
+
 
       System.out.println();
       String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");

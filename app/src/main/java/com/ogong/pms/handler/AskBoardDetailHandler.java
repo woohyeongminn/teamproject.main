@@ -21,6 +21,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 문의사항 상세");
+    System.out.println();
 
     int askNo = Prompt.inputInt(" 번호 : ");
 
@@ -53,6 +54,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
   protected void addComment(AskBoard askBoard) {
     System.out.println();
     System.out.println("▶ 댓글 작성하기");
+    System.out.println();
 
     if (AuthAdminLoginHandler.getLoginAdmin() == null) {
       System.out.println("로그인 한 관리자만 등록 가능합니다.");
@@ -61,6 +63,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       Comment comment = new Comment();
 
       String text = Prompt.inputString("댓글 내용 : ");
+      System.out.println();
       Admin adminWiter = AuthAdminLoginHandler.getLoginAdmin();
       Date date = new Date(System.currentTimeMillis());
 
@@ -80,7 +83,6 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     }
   }
 
-  // 실행 안 됨
   protected void listComment(AskBoard askBoard) {
     System.out.println();
     System.out.println("=============댓글=============");

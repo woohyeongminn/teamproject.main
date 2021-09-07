@@ -33,7 +33,7 @@ public abstract class AbstractStudyHandler implements Command {
     System.out.println("▶ 스터디 상세");
     System.out.println();
 
-    String inputTitle = Prompt.inputString("제목 : ");
+    String inputTitle = Prompt.inputString("스터디명 : ");
 
     Study study = findByTitle(inputTitle);
 
@@ -42,13 +42,13 @@ public abstract class AbstractStudyHandler implements Command {
       return;
     }
 
-    System.out.printf(" [%s]\n", study.getStudyTitle());
+    System.out.printf(" \n[%s]\n", study.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", study.getSubject());
     System.out.printf(" >> 지역 : %s\n", study.getArea());
     System.out.printf(" >> 인원수 : %d\n", study.getNumberOfPeple());
     System.out.printf(" >> 대면 : %s\n", study.getFace());
-    System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
+    System.out.printf(" >> 소개글 : %s", study.getIntroduction());
 
     if (AuthPerMemberLoginHandler.loginUser != null) {
 
@@ -85,9 +85,9 @@ public abstract class AbstractStudyHandler implements Command {
       return;
     }
 
-    System.out.println(">> 스터디 구성원");
-    System.out.println("조장 : " + study.getOwner().getPerNickname());
-    System.out.println(study.getMemberNames());
+    System.out.println(" >> 스터디 구성원");
+    System.out.println(" 조  장 : " + study.getOwner().getPerNickname());
+    System.out.println(" 구성원 : " + study.getMemberNames());
 
     System.out.println();
     System.out.println(">> 승인 대기중");
@@ -107,7 +107,7 @@ public abstract class AbstractStudyHandler implements Command {
         for (Member watingMember : waitingMembers) {        
           if (watingMember.getPerNickname().equals(input)) {
             study.getMembers().add(watingMember);
-            System.out.printf("%s님이 구성원으로 승인되었습니다.", watingMember.getPerNickname());
+            System.out.printf("'%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
             List<Study> studyList = watingMember.getPerMyStudy();
             studyList.add(study);
             m = watingMember;

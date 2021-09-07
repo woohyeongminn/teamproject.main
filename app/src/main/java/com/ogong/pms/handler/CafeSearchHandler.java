@@ -17,21 +17,22 @@ public class CafeSearchHandler extends AbstractCafeHandler {
     this.commandMap = commandMap;
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 장소 검색");
-
+    System.out.println();
     int count = 0;
     String input = Prompt.inputString("지역 : ");
     for (Cafe cafe : cafeList) {
       if (cafe.getLocation().contains(input)) {
-        System.out.printf(" (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
+        System.out.printf(" \n(%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
             , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         count++;
       }
     }
     if (count == 0) {
-      System.out.println("검색 결과가 존재하지 않습니다.");
+      System.out.println(" >> 검색 결과가 존재하지 않습니다.");
       System.out.println();
       System.out.println("1. 검    색");
       System.out.println("0. 뒤로가기");
