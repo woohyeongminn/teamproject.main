@@ -21,14 +21,14 @@ public class AdminMemberDetailHandler extends AbstractMemberHandler {
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String selcectMemberPro = Prompt.inputString("회원을 선택하세요. ");
+        String selcectMemberPro = Prompt.inputString("회원 닉네임 : ");
 
         member = promptPerMember.getMemberByPerNick(selcectMemberPro);
-
-        System.out.printf("닉네임 : %s\n", member.getPerNickname());
-        System.out.printf("이메일 : %s\n", member.getPerEmail());
-        System.out.printf("사진 : %s\n", member.getPerPhoto());
-        System.out.printf("가입일 : %s\n", member.getPerRegisteredDate());
+        System.out.println();
+        System.out.printf(" [%s]\n", member.getPerNickname());
+        System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
+        System.out.printf(" >> 사진 : %s\n", member.getPerPhoto());
+        System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
 
         return;
       }

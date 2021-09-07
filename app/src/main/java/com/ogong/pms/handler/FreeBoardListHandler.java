@@ -26,7 +26,7 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
 
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf(
-          "(%d)\n %s\n %s\n 첨부파일 : %s\n %s\n 조회수 : %s\n %s\n",
+          "(%d)\n 제목 : %s\n 내용 : %s\n 첨부파일 : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n",
           freeBoard.getFreeBoardNo(), 
           freeBoard.getFreeBoardTitle(),
           freeBoard.getFreeBoardContent(),

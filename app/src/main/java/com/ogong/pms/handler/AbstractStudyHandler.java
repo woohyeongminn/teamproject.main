@@ -17,7 +17,7 @@ public abstract class AbstractStudyHandler implements Command {
 
   protected void printStudyList() {
     for (Study study : studyList) {
-      System.out.printf(" (%d)\n [%s]\n >> %s\n >> %s명\n >> %s\n >> %s\n",
+      System.out.printf(" (%d)\n 스터디명 : %s\n 분류 : %s\n 인원수 : %s명\n 조장 : %s\n 대면/비대면 : %s\n",
           study.getStudyNo(),
           study.getStudyTitle(),
           study.getSubject(),

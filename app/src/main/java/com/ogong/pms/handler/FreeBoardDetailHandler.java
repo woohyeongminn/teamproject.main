@@ -27,13 +27,13 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
       return;
     }
 
-    System.out.printf(">> 제목 : %s\n", freeBoard.getFreeBoardTitle());
-    System.out.printf(">> 내용 : %s\n", freeBoard.getFreeBoardContent());
-    System.out.printf(">> 첨부파일 : %s\n", freeBoard.getFreeBoardAtcFile());
-    System.out.printf(">> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
-    System.out.printf(">> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
+    System.out.printf(" [%s]\n", freeBoard.getFreeBoardTitle());
+    System.out.printf(" >> 내용 : %s\n", freeBoard.getFreeBoardContent());
+    System.out.printf(" >> 첨부파일 : %s\n", freeBoard.getFreeBoardAtcFile());
+    System.out.printf(" >> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
+    System.out.printf(" >> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
-    System.out.printf(">> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
+    System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
     listComment(freeBoard); // 댓글호출
 
     System.out.println("\n----------------------");

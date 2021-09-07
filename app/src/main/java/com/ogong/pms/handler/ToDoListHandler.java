@@ -19,7 +19,7 @@ public class ToDoListHandler extends AbstractToDoHandler {
     todoList.toArray(todos);
 
     for (ToDo todo : todos) {
-      System.out.printf("%d, %s, %s, %s, %s, %s\n", 
+      System.out.printf(" (%d) 제목 : %s 내용 : %s 비고 : %s 상태 : %s  DATE : %s\n", 
           todo.getTodoNo(), 
           todo.getTodoTitle(), 
           todo.getTodoContent(),
