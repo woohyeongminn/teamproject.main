@@ -36,24 +36,22 @@ public abstract class AbstractAdminHandler implements Command {
 
     Admin adminmodify = AuthAdminLoginHandler.getLoginAdmin();
 
-    String adminModifyNickName = Prompt.inputString(
-        "닉네임(" + adminmodify.getMasterNickname()  + ") : ");
     String adminModifyEmail = Prompt.inputString(
-        "이메일(" + adminmodify.getMasterEmail() + ") : ");
+        " 이메일(" + adminmodify.getMasterEmail() + ") : ");
     String adminModifyPassword = Prompt.inputString(
-        "비밀번호(" + adminmodify.getMasterPassword() + ") : ");
+        " 비밀번호(" + adminmodify.getMasterPassword() + ") : ");
 
-    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    System.out.println();
+    String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("취소되었습니다.");
+      System.out.println(" 취소되었습니다.");
       return;
-    }
+    } 
 
-    adminmodify.setMasterNickname(adminModifyNickName);
     adminmodify.setMasterEmail(adminModifyEmail);
     adminmodify.setMasterPassword(adminModifyPassword);
 
-    System.out.printf("%s님의 정보가 변경되었습니다.", adminmodify.getMasterNickname());
+    System.out.printf("\n >> '%s'님의 정보가 변경되었습니다.", adminmodify.getMasterNickname());
     System.out.println();
   }
 

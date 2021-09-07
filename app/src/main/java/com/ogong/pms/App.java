@@ -237,23 +237,14 @@ public class App {
 
     adminMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_ADMINLOGOUT, "/admin/login"));
     adminMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_ADMINLOGIN, "/admin/logout"));
+    adminMenuGroup.add(new MenuItem("마이 페이지", Menu.ENABLE_ADMINLOGIN, "/admin/info"));
 
-    adminMenuGroup.add(createAdminProMenu());       // 마이 페이지
     adminMenuGroup.add(createControlMemberMenu());  // 회원 관리
     adminMenuGroup.add(createControlStudyMenu());   // 스터디 관리
     adminMenuGroup.add(createControlReviewMenu());  // 장소 후기 관리
     adminMenuGroup.add(createAdminCSMenu());        // 고객센터 관리
 
     return adminMenuGroup;
-  }
-
-  // 관리자 하위 메뉴1 - 마이페이지
-  private Menu createAdminProMenu() {
-    MenuGroup adminPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_ADMINLOGIN); 
-
-    adminPageMenu.add(new MenuItem("관리자 정보", "/admin/info"));
-
-    return adminPageMenu;
   }
 
   // 관리자 하위 메뉴2 - 회원 관리
