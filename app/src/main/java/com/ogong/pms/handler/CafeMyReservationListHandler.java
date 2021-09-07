@@ -9,8 +9,26 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
-  public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  PromptPerMember promptPerMember;
+
+  public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
+      List<CafeReservation> reserList, PromptPerMember promptPerMember) {
     super (cafeList, reviewList, reserList);
+    this.promptPerMember = promptPerMember;
+
+    CafeReservation reservation = new CafeReservation();
+
+    reservation.setReservationNo(1);
+    reservation.setMember(promptPerMember.memberList.get(0));
+    reservation.setCafe(cafeList.get(0));
+    reservation.setReservationDate(Date.valueOf("2021-9-1"));
+    reservation.setStartTime(10);
+    reservation.setUseTime(1);
+    reservation.setUseMemberNumber(1);
+    reservation.setTotalPrice(2000);
+    reservation.setWirteReview(false);
+
+    reserList.add(reservation);
   }
 
   @Override
@@ -39,7 +57,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     }
 
     if (count == 0) {
-      System.out.println("\n >> 예약 내역이 존재하지 않습니다.");
+      System.out.println(" >> 예약 내역이 존재하지 않습니다.");
       return;
     }
 
@@ -62,58 +80,64 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   private void goToAddReview() {
     System.out.println();
+
     int input = Prompt.inputInt("리뷰 작성할 예약번호 : ");
+    int count = 0;
+
     for (CafeReservation cafeReser : reserList) {
       if (input == cafeReser.getReservationNo() &&
           cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
         if (!cafeReser.getWirteReview()) {
+          count++;
           System.out.println("리뷰 작성 화면으로 이동합니다.");
           addReview(cafeReser);
         } else {
           System.out.println("이미 리뷰를 작성한 예약입니다.");
           return;
         }
-      } else {
-        System.out.println("예약번호를 잘못 선택하셨습니다.");
-      }
+      } 
+    }
+    if (count == 0) {
+      System.out.println("예약번호를 잘못 선택하셨습니다.");
     }
   }
 
   private void cancelReservation() {
-    // 작성하기
     System.out.println();
     int inputNo = Prompt.inputInt("취소할 예약번호 : ");
+    int count = 0;
+
     for (CafeReservation cafeReser : reserList) {
-      if (inputNo == cafeReser.getReservationNo() &&
-          cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
+      if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
+        if (inputNo == cafeReser.getReservationNo()) {
+          count++;
+          Date today = new Date(System.currentTimeMillis());
+          Date reserDate = cafeReser.getReservationDate();
 
-        Date today = new Date(System.currentTimeMillis());
-        Date reserDate = cafeReser.getReservationDate();
+          if (reserDate.toLocalDate().compareTo(today.toLocalDate()) > 0) {
 
-        if (reserDate.toLocalDate().compareTo(today.toLocalDate()) > 0) {
+            String input = Prompt.inputString("정말 예약 취소 하시겠습니까? (네 / 아니오) ");
 
-          String input = Prompt.inputString("정말 예약 취소 하시겠습니까? (네 / 아니오) ");
-
-          if (!input.equalsIgnoreCase("네")) {
-            System.out.println(">> 예약 취소를 취소합니다.");
+            if (!input.equalsIgnoreCase("네")) {
+              System.out.println(" >> 예약 취소를 취소합니다.");
+              return;
+            }
+            reserList.remove(cafeReser);
+            System.out.println(" >> 예약이 취소되었습니다.");
+            break;
+          } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
+            System.out.println(" >> 당일 예약은 취소 불가능 합니다.");
+            return;
+          } else {
+            System.out.println(" >> 지난 예약은 선택 불가");
             return;
           }
-
-          reserList.remove(cafeReser);
-          System.out.println(">> 예약이 취소되었습니다.");
-          break;
-        } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
-          System.out.println(">> 당일 예약은 취소 불가능 합니다.");
-          return;
-        } else {
-          System.out.println(">> 이미 지난 예약입니다.");
-          return;
         }
-
-      } else {
-        System.out.println(">> 예약번호를 잘못 선택하셨습니다.");
-        return;
       }
+    }
+
+    if (count == 0) {
+      System.out.println(" >> 예약번호를 잘못 선택하셨습니다.");
     }
   }
 
