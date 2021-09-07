@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
@@ -80,6 +81,40 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   private void cancelReservation() {
     // 작성하기
+    System.out.println();
+    int inputNo = Prompt.inputInt("취소할 예약번호 : ");
+    for (CafeReservation cafeReser : reserList) {
+      if (inputNo == cafeReser.getReservationNo() &&
+          cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
+
+        Date today = new Date(System.currentTimeMillis());
+        Date reserDate = cafeReser.getReservationDate();
+
+        if (reserDate.toLocalDate().compareTo(today.toLocalDate()) > 0) {
+
+          String input = Prompt.inputString("정말 예약 취소 하시겠습니까? (네 / 아니오) ");
+
+          if (!input.equalsIgnoreCase("네")) {
+            System.out.println(">> 예약 취소를 취소합니다.");
+            return;
+          }
+
+          reserList.remove(cafeReser);
+          System.out.println(">> 예약이 취소되었습니다.");
+          break;
+        } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
+          System.out.println(">> 당일 예약은 취소 불가능 합니다.");
+          return;
+        } else {
+          System.out.println(">> 이미 지난 예약입니다.");
+          return;
+        }
+
+      } else {
+        System.out.println(">> 예약번호를 잘못 선택하셨습니다.");
+        return;
+      }
+    }
   }
 
 }
