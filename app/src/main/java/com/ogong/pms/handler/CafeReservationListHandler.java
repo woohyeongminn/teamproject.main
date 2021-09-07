@@ -49,7 +49,7 @@ public class CafeReservationListHandler extends AbstractCafeHandler {
     System.out.println("----------------------");
     System.out.println("1. 리뷰 작성");
     System.out.println("2. 예약 취소");
-    System.out.println("0. 이전 메뉴");
+    System.out.println("0. 뒤로 가기");
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {

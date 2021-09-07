@@ -11,10 +11,11 @@ public class AskBoardUpdateHandler extends AbstractAskBoardHandler {
     super(askBoardList, commentList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 문의사항 변경");
-    int askNo = Prompt.inputInt("번호? ");
+    int askNo = Prompt.inputInt("번호 : ");
 
     AskBoard askList = findByNo(askNo);
 

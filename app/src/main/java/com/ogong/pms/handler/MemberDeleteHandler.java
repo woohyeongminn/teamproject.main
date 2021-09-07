@@ -26,7 +26,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
       return;
     }
 
-    System.out.println("<본인 확인>");
+    System.out.println("<이메일 확인>");
     String inputEmail = Prompt.inputString("이메일 입력하세요 : ");
     Member member = promptPerMember.getMemberByPerEmail(inputEmail);
     if (member == null) {
@@ -41,6 +41,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
 
     } else {
       System.out.println();
+      System.out.println("<비밀번호 확인>");
       String inputPW = Prompt.inputString("비밀번호를 입력하세요 : ");
       Member memberPW = promptPerMember.getMemberByPerPW(inputPW);
       if (memberPW == null) {

@@ -27,6 +27,7 @@ public class AuthAdminLoginHandler implements Command {
 
   // ----------------------------------------------------------------------
 
+  @Override
   public void execute() {
     System.out.println();
     String inputadminEmail = Prompt.inputString("이메일 : ");
@@ -69,10 +70,10 @@ public class AuthAdminLoginHandler implements Command {
       String inputEmail =  Prompt.inputString("이메일 : ");
       Admin adminEmail = findByEmail(inputEmail);
       if (adminEmail == null) {
-        System.out.printf("%s님 이메일을 다시 입력해 주세요.", adminEmail.getMasterNickname());
+        System.out.printf("'%s님' 이메일을 다시 입력해 주세요.", adminEmail.getMasterNickname());
         continue;
       } else {
-        System.out.printf("%s님의 임시 비밀번호 >> ", adminEmail.getMasterNickname());
+        System.out.printf("'%s님'의 임시 비밀번호 >> ", adminEmail.getMasterNickname());
         System.out.println(adminEmail.getMasterPassword().hashCode());
         System.out.println("로그인 후 비밀번호를 변경해 주세요.");
         String hashPW = String.valueOf(adminEmail.getMasterPassword().hashCode());

@@ -22,12 +22,12 @@ public class StudyListHandler extends AbstractStudyHandler {
     printStudyList();
 
     System.out.println("----------------------");
-    System.out.println("1. 상세보기");
-    System.out.println("0. 뒤로가기");
+    System.out.println("1. 상세 보기");
+    System.out.println("0. 뒤로 가기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
       case 1 : detail(); break;
-      case 2 : System.out.println("뒤로가기"); break;
+      case 2 : System.out.println("뒤로 가기"); break;
       default : return;
 
     }

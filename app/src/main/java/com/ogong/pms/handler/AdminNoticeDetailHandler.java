@@ -15,13 +15,13 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 공지 상세");
-    int adminnotiNo = Prompt.inputInt("번호 : ");
+    int adminnotiNo = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
     if (adminWriteList == null) {
-      System.out.println("공지를 다시 선택하세요.");
+      System.out.println(" 공지를 다시 선택하세요.");
       return;
     }
 

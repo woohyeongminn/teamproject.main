@@ -14,25 +14,23 @@ public class ToDoUpdateHandler extends AbstractToDoHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 변경");
-    int todoNo = Prompt.inputInt("선택하세요. ");
+    int todoNo = Prompt.inputInt(" 번호 : ");
 
     ToDo todo = findBytodoNo(todoNo);
 
-    String todoTitle = Prompt.inputString(String.format("To-Do List 제목(%s) : ", todo.getTodoTitle()));
-    String todoContent = Prompt.inputString(String.format("To-Do List 내용(%s) : ", todo.getTodoContent()));
+    String todoContent = Prompt.inputString(String.format(" 내용(%s) : ", todo.getTodoContent()));
     int todoStatus = promptStatus(todo.getTodoStatus());
-    String todoRemark = Prompt.inputString(String.format("To-Do List 비고(%s) : ", todo.getTodoRemark()));
+    String todoRemark = Prompt.inputString(String.format(" 비고(%s) : ", todo.getTodoRemark()));
 
-    String input = Prompt.inputString("정말 변경하시겠습니까?(y/N)");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오)");
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println("변경을 취소하였습니다.");
       return;
     }
 
-    todo.setTodoTitle(todoTitle);
     todo.setTodoContent(todoContent);
     todo.setTodoStatus(todoStatus);
     todo.setTodoRemark(todoRemark);
-    System.out.println("To-Do List 변경이 완료되었습니다.");
+    System.out.println("할 일이 변경되었습니다.");
   }
 }

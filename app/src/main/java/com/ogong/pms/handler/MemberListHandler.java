@@ -37,10 +37,10 @@ public class MemberListHandler extends AbstractMemberHandler {
 
   private void selectUserModifyPage() {
     System.out.println();
-    System.out.println("1. 상세보기");
-    System.out.println("2. 수정하기");
+    System.out.println("1. 상세  보기");
+    System.out.println("2. 수정  하기");
     System.out.println("3. 탈퇴시키기");
-    System.out.println("0. 뒤로가기");
+    System.out.println("0. 뒤로  가기");
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {

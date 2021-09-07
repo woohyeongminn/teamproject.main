@@ -56,7 +56,7 @@ public class AuthPerMemberLoginHandler implements Command {
         return;
       }
       String input = Prompt.inputString("비밀번호를 잊어버렸나요? (네 / 아니오) ");
-      if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
+      if (!input.equalsIgnoreCase("네")) {
         System.out.println("비밀번호를 다시 입력하세요.");
         continue;
       } else {

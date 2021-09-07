@@ -38,7 +38,7 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
     System.out.println("\n----------------------");
     System.out.println("1. 댓글 달기");
-    System.out.println("0. 뒤로가기");
+    System.out.println("0. 뒤로 가기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
       case 1 : addComment(freeBoard); break;

@@ -102,13 +102,13 @@ public class StudyAddHandler extends AbstractStudyHandler {
     Study study = new Study();
 
     study.setStudyNo(studyNo++); 
-    study.setStudyTitle(Prompt.inputString("스터디명 : "));
+    study.setStudyTitle(Prompt.inputString(" 스터디명 : "));
     study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
-    study.setSubject(Prompt.inputString("분야 : "));
-    study.setArea(Prompt.inputString("지역 : "));
-    study.setNumberOfPeple(Prompt.inputInt("인원수 : "));
-    study.setFace(Prompt.inputString("대면 : "));
-    study.setIntroduction(Prompt.inputString("소개글 : "));
+    study.setSubject(Prompt.inputString(" 분야 : "));
+    study.setArea(Prompt.inputString(" 지역 : "));
+    study.setNumberOfPeple(Prompt.inputInt(" 인원수 : "));
+    study.setFace(Prompt.inputString(" 대면 : "));
+    study.setIntroduction(Prompt.inputString(" 소개글 : "));
     study.setMembers(new ArrayList<>());
     study.setWatingMember(new ArrayList<>());
     study.setMyStudyCalender(new ArrayList<>());
@@ -116,7 +116,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
 
     System.out.println();
     String input = Prompt.inputString("등록하시겠습니까? (네 / 아니오)");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println("등록이 취소되었습니다.");
     }
     System.out.println("스터디가 등록되었습니다.");

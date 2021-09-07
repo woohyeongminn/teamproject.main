@@ -10,15 +10,16 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
     super(adminNoticeList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 공지 변경");
-    int adminnotiNo = Prompt.inputInt("번호 : ");
+    int adminnotiNo = Prompt.inputInt(" 번호 : ");
 
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
     if (adminWriteList == null) {
-      System.out.println("공지를 다시 선택하세요.");
+      System.out.println(" 공지를 다시 선택하세요.");
       return;
     }
 

@@ -80,20 +80,20 @@ public class MemberAddHandler extends AbstractMemberHandler {
 
     Member member = new Member();
 
-    member.setPerNickname(Prompt.inputString("닉네임 : "));
-    member.setPerEmail(Prompt.inputString("이메일 : "));
-    member.setPerPassword(Prompt.inputString("비밀번호 : "));
+    member.setPerNickname(Prompt.inputString(" 닉네임 : "));
+    member.setPerEmail(Prompt.inputString(" 이메일 : "));
+    member.setPerPassword(Prompt.inputString(" 비밀번호 : "));
     while (true) {
-      String pw =  Prompt.inputString("비밀번호 확인 : ");
+      String pw =  Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
-        System.out.println(" >확인 실패");
+        System.out.println("  >확인 실패");
         continue;
       } else {
-        System.out.println(" >확인 완료!");
+        System.out.println("  >확인 완료!");
       }
       break;
     }
-    member.setPerPhoto(Prompt.inputString("사진 : "));
+    member.setPerPhoto(Prompt.inputString(" 사진 : "));
     member.setPerMyStudy(new ArrayList<>());
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     memberList.add(member);

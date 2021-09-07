@@ -76,9 +76,9 @@ public class FreeBoardAddHandler extends AbstractFreeBoardHandler {
     FreeBoard freeBoard = new FreeBoard();
 
     freeBoard.setFreeBoardNo(freeBoardNo++);
-    freeBoard.setFreeBoardTitle(Prompt.inputString("제목 : "));
-    freeBoard.setFreeBoardContent(Prompt.inputString("내용 : "));
-    freeBoard.setFreeBoardAtcFile(Prompt.inputString("첨부파일 : "));
+    freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
+    freeBoard.setFreeBoardContent(Prompt.inputString(" 내용 : "));
+    freeBoard.setFreeBoardAtcFile(Prompt.inputString(" 첨부파일 : "));
     freeBoard.setFreeBoardWriter(member);
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));

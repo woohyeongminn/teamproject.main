@@ -10,10 +10,11 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
     super(adminNoticeList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 공지 삭제");
-    int adminnotiNo = Prompt.inputInt("번호 : ");
+    int adminnotiNo = Prompt.inputInt(" 번호 : ");
 
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 

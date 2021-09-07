@@ -16,7 +16,7 @@ public class PromptPerMember implements Command {
   public void execute() {
     //    public void selectFindEmailPw() {
     System.out.println();
-    System.out.println("1. 이메일 찾기");
+    System.out.println("1. 이 메 일 찾기");
     System.out.println("2. 비밀번호 찾기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
@@ -39,7 +39,7 @@ public class PromptPerMember implements Command {
         continue;
       } else {
         System.out.println();
-        System.out.printf("%s님의 이메일 >> ", member.getPerNickname());
+        System.out.printf("'%s님'의 이메일 >> ", member.getPerNickname());
         System.out.println(member.getPerEmail());
       }
       break;
@@ -63,7 +63,7 @@ public class PromptPerMember implements Command {
         System.out.println("해당 이메일이 존재하지 않습니다.");
         continue;
       } else {
-        System.out.printf("%s님의 임시 비밀번호 : ", member.getPerNickname());
+        System.out.printf("'%s님'의 임시 비밀번호 : ", member.getPerNickname());
         System.out.println(member.getPerPassword().hashCode());
         System.out.println();
         System.out.println("로그인 후 비밀번호를 변경해 주세요.");

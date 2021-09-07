@@ -15,12 +15,12 @@ public class AdminStudyDeleteHandler extends AbstractStudyHandler {
     System.out.println();
     System.out.println("▶ 스터디 삭제");
 
-    String inputTitle = Prompt.inputString("제목  : ");
+    String inputTitle = Prompt.inputString(" 제목  : ");
 
     Study study = findByTitle(inputTitle);
 
     if (study == null) {
-      System.out.println("해당 제목의 스터디가 없습니다.");
+      System.out.println(" 해당 제목의 스터디가 없습니다.");
       return;
     }
 

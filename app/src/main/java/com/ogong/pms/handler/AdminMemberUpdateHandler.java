@@ -21,7 +21,7 @@ public class AdminMemberUpdateHandler extends AbstractMemberHandler {
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String selectMember = Prompt.inputString("회원을 선택하세요. ");
+        String selectMember = Prompt.inputString("회원 닉네임 : ");
 
         member = promptPerMember.getMemberByPerNick(selectMember);
         //        AuthPerMemberLoginHandler.getLoginUser();

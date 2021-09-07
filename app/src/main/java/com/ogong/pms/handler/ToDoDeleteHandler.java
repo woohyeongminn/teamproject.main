@@ -14,7 +14,7 @@ public class ToDoDeleteHandler extends AbstractToDoHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ To-Do List 삭제");
-    int todoNo = Prompt.inputInt("번호 선택: ");
+    int todoNo = Prompt.inputInt("번호 : ");
 
     ToDo todo = findBytodoNo(todoNo);
 
@@ -23,14 +23,14 @@ public class ToDoDeleteHandler extends AbstractToDoHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까?(y/N)");
-    if (input.equalsIgnoreCase("n") || input.length() == 0) {
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오)");
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println("삭제를 취소하였습니다.");
       return;
     }
 
     todoList.remove(todo);
 
-    System.out.println("To-Do List를 삭제하였습니다.");
+    System.out.println("할 일을 삭제하였습니다.");
   }
 }

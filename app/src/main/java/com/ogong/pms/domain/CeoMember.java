@@ -18,7 +18,7 @@ public class CeoMember {
 
 
   public int getCeoNo() {
-    return ceoNo;
+    return ceoNo + 1;
   }
   public void setCeoNo(int ceoNo) {
     this.ceoNo = ceoNo;

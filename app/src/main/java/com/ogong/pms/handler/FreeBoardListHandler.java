@@ -46,7 +46,7 @@ public class FreeBoardListHandler extends AbstractFreeBoardHandler {
     System.out.println("2. 게시글 등록");
     System.out.println("3. 게시글 수정");
     System.out.println("4. 게시글 삭제");
-    System.out.println("0. 뒤로가기");
+    System.out.println("0. 뒤 로 가 기");
 
     int selectAdminNo = Prompt.inputInt("선택> ");
 

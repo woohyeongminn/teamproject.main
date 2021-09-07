@@ -52,14 +52,14 @@ public class ToDoAddHandler extends AbstractToDoHandler {
 
     ToDo todo = new ToDo();
 
-    todo.setTodoNo(Prompt.inputInt("번호: "));
-    todo.setTodoTitle(Prompt.inputString("제목: "));
-    todo.setTodoContent(Prompt.inputString("내용: "));
-    todo.setTodoRemark(Prompt.inputString("비고: "));
+    todo.setTodoNo(Prompt.inputInt(" 번호: "));
+    todo.setTodoTitle(Prompt.inputString(" 제목: "));
+    todo.setTodoContent(Prompt.inputString(" 내용: "));
+    todo.setTodoRemark(Prompt.inputString(" 비고: "));
     todo.setTodoStatus(promptStatus());
     todo.setTodoRegisteredDate(new Date(System.currentTimeMillis()));
 
     todoList.add(todo);
-    System.out.println("To-Do List가 등록되었습니다.");
+    System.out.println("할 일이 등록되었습니다.");
   }
 }

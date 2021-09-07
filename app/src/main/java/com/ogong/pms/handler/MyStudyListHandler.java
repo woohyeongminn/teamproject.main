@@ -44,12 +44,12 @@ public class MyStudyListHandler extends AbstractStudyHandler {
 
     System.out.println("\n----------------------");
     System.out.println("1. 상세 보기");
-    System.out.println("0. 뒤로가기");
+    System.out.println("0. 뒤로 가기");
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
       case 1 : commandMap.get("/myStudy/detail").execute(); break;
-      case 2 : System.out.println("뒤로가기"); break;
+      case 2 : System.out.println("뒤로 가기"); break;
       default : return;
     }
   }

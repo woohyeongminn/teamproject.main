@@ -70,25 +70,26 @@ public class CafeAddHandler extends AbstractCafeHandler {
     cafeList.add(cafe);
   }
 
+  @Override
   public void execute () {
     System.out.println();
     System.out.println("▶ 장소 등록");
     System.out.println();
 
     Cafe cafe = new Cafe();
-    cafe.setNo(Prompt.inputInt("번호 : "));
+    cafe.setNo(Prompt.inputInt(" 번호 : "));
     //cafe.setCafeCeoEmail(Prompt.inputString("사장 아이디 : "));
     //cafe.setCafeceoLicenseNo(Prompt.inputString("사업자번호 : "));
     //cafe.setCafeCeoBossName(Prompt.inputString("대표자명 : "));
-    cafe.setName(Prompt.inputString("상호명 : "));
+    cafe.setName(Prompt.inputString(" 상호명 : "));
     //cafe.setMainImg(Prompt.inputString("대표사진 : "));
     //cafe.setInfo(Prompt.inputString("소개글 : "));
-    cafe.setLocation(Prompt.inputString("주소 : "));
+    cafe.setLocation(Prompt.inputString(" 주소 : "));
     //cafe.setPhone(Prompt.inputString("전화번호 : "));
     //cafe.setOpenTime(Prompt.inputString("오픈시간 : "));
     //cafe.setCloseTime(Prompt.inputString("마감시간 : "));
     //cafe.setHoliday(Prompt.inputString("휴무일 : "));
-    cafe.setBookable(Prompt.inputInt("예약가능인원 : "));
+    cafe.setBookable(Prompt.inputInt(" 예약가능인원 : "));
     //cafe.setTimePrice(Prompt.inputInt("시간당금액 : "));
 
     cafeList.add(cafe);
