@@ -48,6 +48,7 @@ import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CalenderAddHandler;
+import com.ogong.pms.handler.CalenderDeleteHandler;
 import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
@@ -129,7 +130,7 @@ public class App {
     commandMap.put("/calender/list", new CalenderListHandler(calenderList, commandMap));
     commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList, commandMap));
     commandMap.put("/calender/update", new CalenderUpdateHandler(calenderList));
-    commandMap.put("/calender/detail", new CalenderDetailHandler(calenderList, commandMap));
+    commandMap.put("/calender/delete", new CalenderDeleteHandler(calenderList));
 
     commandMap.put("/member/add", new MemberAddHandler(memberList));
     commandMap.put("/member/list", new MemberListHandler(memberList, commandMap));
