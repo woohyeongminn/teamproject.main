@@ -48,7 +48,7 @@ public class CeoMemberHandler {
     for (CeoMember ceoMember : list) {
       System.out.println();
       System.out.printf(" (%d)\n 이름 : %s\n 이메일 : %s\n 대표자명 : %s\n 점포명 : %s\n 가입일 : %s\n",
-          ceoMember.getCeoNo(ceoMemberNo++),
+          ceoMember.getCeoNo(),      // 해결필요
           ceoMember.getCeoName(), 
           ceoMember.getCeoEmail(),
           ceoMember.getCeoBossName(),
