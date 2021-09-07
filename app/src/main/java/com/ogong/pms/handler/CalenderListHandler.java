@@ -58,7 +58,7 @@ public class CalenderListHandler extends AbstractCalenderHandler {
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
           case 1 : continue;
-          case 2 : commandMap.get("/calender/add").execute(); break;
+          case 2 : commandMap.get("/calender/add").execute(); return;
           case 3 : return;
           default : return;
         }
@@ -70,7 +70,7 @@ public class CalenderListHandler extends AbstractCalenderHandler {
         System.out.println("4. 취       소");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
-          case 1 : commandMap.get("/calender/detail").execute(); break;
+          case 1 : commandMap.get("/calender/detail").execute(); return;
           case 2 : commandMap.get("/calender/add").execute(); return;
           case 3 : continue;
           case 4 : return;

@@ -11,18 +11,9 @@ public class Calender {
   //  private Date startDay;  // 시작일
   private Date endDay;    // 종료일
 
-
-
-  @Override
-  public String toString() {
-    return "Calender [month=" + month + ", day=" + day + ", dayOftheWeek=" + dayOftheWeek
-        + ", calenderContent=" + calenderContent + ", endDay=" + endDay + "]";
-  }
-
   public int getMonth() {
     return month;
   }
-
   public void setMonth(int month) {
     this.month = month;
   }
@@ -50,5 +41,14 @@ public class Calender {
   public void setEndDay(Date endDay) {
     this.endDay = endDay;
   }
+  @Override
+  public String toString() {
+    return "Calender [month=" + month + ", day=" + day + ", dayOftheWeek=" + dayOftheWeek
+        + ", calenderContent=" + calenderContent + ", endDay=" + endDay + "]";
+  }
+
+
+
+
 
 }

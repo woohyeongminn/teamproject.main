@@ -22,8 +22,6 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
 
     Calender calender = new Calender();
 
-
-
     System.out.println();
     System.out.println("시작 날짜를 입력해 주세요.");
 
@@ -76,7 +74,6 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
       }
       break;
     }
-
     calender.setDay(day);
 
     System.out.println("예시> 월");
