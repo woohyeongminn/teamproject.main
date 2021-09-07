@@ -23,12 +23,12 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
     }
 
     String adminNoticeTitle = Prompt.inputString(
-        String.format("제목(%s) : ", adminWriteList.getAdminNotiTitle()));
+        String.format(" 제목(%s) : ", adminWriteList.getAdminNotiTitle()));
     String adminNoticeContent = Prompt.inputString(
-        String.format("내용(%s) : ", adminWriteList.getAdminNotiContent()));
+        String.format(" 내용(%s) : ", adminWriteList.getAdminNotiContent()));
 
     String inputnotice = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
-    if (inputnotice.equalsIgnoreCase("아니오") || inputnotice.length() == 0) {
+    if (!inputnotice.equalsIgnoreCase("네")) {
       System.out.println("변경이 취소되었습니다.");
       return;
     }

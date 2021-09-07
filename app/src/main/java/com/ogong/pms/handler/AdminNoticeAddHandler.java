@@ -37,9 +37,9 @@ public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
 
     AdminNotice adminWriteList = new AdminNotice();
 
-    adminWriteList.setAdminNotiNo(Prompt.inputInt("번호 : "));
-    adminWriteList.setAdminNotiTitle(Prompt.inputString("제목 : "));
-    adminWriteList.setAdminNotiContent(Prompt.inputString("내용 : "));
+    adminWriteList.setAdminNotiNo(Prompt.inputInt(" 번호 : "));
+    adminWriteList.setAdminNotiTitle(Prompt.inputString(" 제목 : "));
+    adminWriteList.setAdminNotiContent(Prompt.inputString(" 내용 : "));
     adminWriteList.setAdminNotiWriter(AuthAdminLoginHandler.getLoginAdmin().getMasterNickname());
     adminWriteList.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
 

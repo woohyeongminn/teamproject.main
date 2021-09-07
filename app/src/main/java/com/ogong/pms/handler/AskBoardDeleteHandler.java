@@ -24,7 +24,7 @@ public class AskBoardDeleteHandler extends AbstractAskBoardHandler {
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
-    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println("문의글 삭제를 취소하였습니다.");
       return;
     }

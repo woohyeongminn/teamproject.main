@@ -23,7 +23,7 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
     }
 
     String inputnotice = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
-    if (inputnotice.equalsIgnoreCase("아니오") || inputnotice.length() == 0) {
+    if (!inputnotice.equalsIgnoreCase("네")) {
       System.out.println("삭제가 취소되었습니다.");
       return;
     }

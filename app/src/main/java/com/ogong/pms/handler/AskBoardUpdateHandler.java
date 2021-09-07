@@ -23,11 +23,11 @@ public class AskBoardUpdateHandler extends AbstractAskBoardHandler {
       return;
     }
 
-    String askTitle = Prompt.inputString(String.format("제목(%s) : ", askList.getAskTitle()));
-    String askContent = Prompt.inputString(String.format("내용(%s) : ", askList.getAskContent()));
+    String askTitle = Prompt.inputString(String.format(" 제목(%s) : ", askList.getAskTitle()));
+    String askContent = Prompt.inputString(String.format(" 내용(%s) : ", askList.getAskContent()));
 
     String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
-    if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println("문의글 변경을 취소하였습니다.");
       return;
     }

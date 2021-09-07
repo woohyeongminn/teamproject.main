@@ -16,8 +16,8 @@ public class AdminInfoHandler extends AbstractAdminHandler {
 
     Admin adminpro = AuthAdminLoginHandler.getLoginAdmin();
 
-    System.out.printf("닉네임 : %s\n", adminpro.getMasterNickname());
-    System.out.printf("이메일 : %s\n", adminpro.getMasterEmail());
+    System.out.printf(" 닉네임 : %s\n", adminpro.getMasterNickname());
+    System.out.printf( "이메일 : %s\n", adminpro.getMasterEmail());
 
     goAdminProUpdate();
   }

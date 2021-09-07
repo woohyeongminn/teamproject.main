@@ -58,8 +58,8 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     AskBoard askList = new AskBoard();
 
     askList.setAskNo(askNo++);
-    askList.setAskTitle(Prompt.inputString("제목 : "));
-    askList.setAskContent(Prompt.inputString("내용 : "));
+    askList.setAskTitle(Prompt.inputString(" 제목 : "));
+    askList.setAskContent(Prompt.inputString(" 내용 : "));
     askList.setAskWriter(AuthPerMemberLoginHandler.getLoginUser());
     askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     askList.setAdminComment(new ArrayList<>());
