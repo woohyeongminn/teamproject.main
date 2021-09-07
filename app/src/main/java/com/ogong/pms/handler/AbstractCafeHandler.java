@@ -74,11 +74,26 @@ public abstract class AbstractCafeHandler implements Command {
 
     String[] openTime = cafe.getOpenTime().split(":");
     String[] lastTime = cafe.getCloseTime().split(":");
+    int openTimeHour = Integer.valueOf(openTime[0]);
     int lastTimeMinus1 = Integer.valueOf(lastTime[0]) - 1;
     //String lastOrderTime = String.valueOf(lastTimeMinus1) + ":" + lastTime[1];
 
-    int startTime = Prompt.inputInt(
-        String.format("시작시간(%s시~%d시) : ", openTime[0], lastTimeMinus1));
+    int startTime;
+    while (true) {
+      startTime = Prompt.inputInt(
+          String.format("시작시간(%s시~%d시) : ", openTime[0], lastTimeMinus1));
+      if (startTime < openTimeHour) {
+        System.out.println("오픈시간 전 입니다.");
+        System.out.println("시작시간을 다시 입력해주세요.");
+        continue;
+      } else if (startTime > lastTimeMinus1) {
+        System.out.println(lastTimeMinus1 + "시 까지만 가능합니다.");
+        System.out.println("시작시간을 다시 입력해주세요.");
+        continue;
+      }
+      break;
+    }
+
     int useTime = Prompt.inputInt("이용할 시간 : ");
     while (startTime + useTime > Integer.valueOf(lastTime[0])) {
       System.out.printf("마감시간(%s시)을 초과하여 예약할 수 없습니다.\n", lastTime[0]);
