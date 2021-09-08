@@ -12,7 +12,6 @@ public class FreeBoard {
   private Member freeBoardWriter;       //글 작성자
   private int freeBoardViewcount;       //글 조회수
   private Date freeBoardRegisteredDate; //글 작성일
-
   private List<Comment> comment; //댓글
 
 
