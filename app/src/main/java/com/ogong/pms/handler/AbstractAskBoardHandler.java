@@ -84,14 +84,13 @@ public abstract class AbstractAskBoardHandler implements Command {
     if (commentSize == 0) {
       System.out.println("등록된 댓글이 없습니다.");
     }
+
   }
 
   protected void updateComment() {
     System.out.println();
     System.out.println("▶ 댓글 수정");
     System.out.println();
-
-    Admin adminWiter = AuthAdminLoginHandler.getLoginAdmin();
 
     if (AuthAdminLoginHandler.getLoginAdmin() == null) {
       System.out.println("관리자만 변경 가능합니다.");
@@ -121,8 +120,6 @@ public abstract class AbstractAskBoardHandler implements Command {
     System.out.println();
     System.out.println("▶ 댓글 삭제");
     System.out.println();
-
-    Admin adminWiter = AuthAdminLoginHandler.getLoginAdmin();
 
     if (AuthAdminLoginHandler.getLoginAdmin() == null) {
       System.out.println("관리자만 변경 가능합니다.");

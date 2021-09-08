@@ -24,11 +24,6 @@ public class AdminStudyDeleteHandler extends AbstractStudyHandler {
       return;
     }
 
-    //    if (study.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
-    //      System.out.println("삭제 권한이 없습니다.");
-    //      return;
-    //    }
-
     if (study.getOwner().getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
       String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
@@ -38,11 +33,7 @@ public class AdminStudyDeleteHandler extends AbstractStudyHandler {
       }
     }
 
-    //    Admin admin = AuthAdminLoginHandler.getLoginAdmin();
-    //    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
     studyList.remove(study);
-    //    member.getPerMyStudy().remove(study);
 
     System.out.println("스터디를 삭제하였습니다.");
   }
