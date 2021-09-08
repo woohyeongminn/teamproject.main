@@ -169,4 +169,14 @@ public abstract class AbstractCafeHandler implements Command {
       System.out.println("리뷰가 등록되었습니다.");
     }
   }
+
+  // 0908 추가
+  protected CafeReview findByReview (int reviewNo) {
+    for (CafeReview cafeReview : reviewList) {
+      if (cafeReview.getReviewNo() == reviewNo) {
+        return cafeReview;
+      }
+    }
+    return null;
+  }
 }

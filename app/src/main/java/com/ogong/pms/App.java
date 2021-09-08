@@ -19,6 +19,8 @@ import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
+import com.ogong.pms.handler.AdminCafeControlHandler;
+import com.ogong.pms.handler.AdminCafeReviewListControlHandler;
 import com.ogong.pms.handler.AdminInfoHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.AdminMemberDetailHandler;
@@ -170,6 +172,9 @@ public class App {
     commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList, promptPerMember));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
 
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, cafeReview, reserList)); 
+
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
     commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(adminNoticeList));
@@ -268,13 +273,13 @@ public class App {
   }
 
   // 관리자 하위 메뉴4 - 장소 후기 관리
-  // <구현안됨>
-  // 모든 장소후기 목록 보기 > 장소후기 상세보기
-  // 장소후기 삭제하기
   private Menu createControlReviewMenu() {
-    MenuGroup adminStudyMenu = new MenuGroup("장소 후기 관리"); 
+    MenuGroup adminCafeReviewMenu = new MenuGroup("장소 관리"); 
 
-    return adminStudyMenu;
+    adminCafeReviewMenu.add(new MenuItem("장소 게시글 관리","/cafe/control"));
+    adminCafeReviewMenu.add(new MenuItem("장소 리뷰 관리","/cafe/reviewList")); 
+
+    return adminCafeReviewMenu;
   }
 
   //관리자 하위 메뉴5 - 고객센터 관리
