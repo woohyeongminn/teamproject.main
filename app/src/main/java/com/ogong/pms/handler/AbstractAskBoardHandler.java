@@ -81,7 +81,7 @@ public abstract class AbstractAskBoardHandler implements Command {
       commentSize++;
     }
 
-    if (commentSize == 0) {
+    if (askBoard.getAdminComment() == null) {
       System.out.println("등록된 댓글이 없습니다.");
     }
   }

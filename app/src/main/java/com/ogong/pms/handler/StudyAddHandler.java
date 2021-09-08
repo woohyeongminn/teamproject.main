@@ -2,6 +2,7 @@ package com.ogong.pms.handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
@@ -101,9 +102,11 @@ public class StudyAddHandler extends AbstractStudyHandler {
     System.out.println("▶ 스터디 등록");
     Study study = new Study();
 
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
+
     study.setStudyNo(studyNo++); 
     study.setStudyTitle(Prompt.inputString(" 스터디명 : "));
-    study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
+    study.setOwner(member);
     study.setSubject(Prompt.inputString(" 분야 : "));
     study.setArea(Prompt.inputString(" 지역 : "));
     study.setNumberOfPeple(Prompt.inputInt(" 인원수 : "));
@@ -121,5 +124,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     }
     System.out.println("스터디가 등록되었습니다.");
     studyList.add(study);
+    member.getPerMyStudy().add(study);
+
   }
 }
