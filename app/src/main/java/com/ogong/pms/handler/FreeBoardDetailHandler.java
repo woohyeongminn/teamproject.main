@@ -20,10 +20,10 @@ public class FreeBoardDetailHandler extends AbstractFreeBoardHandler {
 
     System.out.println();
 
-    FreeBoard freeBoard = findByTitle(Prompt.inputString("제목 : "));
+    FreeBoard freeBoard = findByNo(Prompt.inputInt("번호 : "));
     System.out.println();
     if (freeBoard == null) {
-      System.out.println("해당 제목의 게시글이 없습니다.");
+      System.out.println("해당 번호의 게시글이 없습니다.");
       return;
     }
 

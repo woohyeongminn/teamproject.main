@@ -47,9 +47,9 @@ public abstract class AbstractFreeBoardHandler implements Command {
     }
   }
 
-  protected FreeBoard findByTitle (String title) {
+  protected FreeBoard findByNo(int inputNo) {
     for (FreeBoard freeBoard : freeBoardList) {
-      if (freeBoard.getFreeBoardTitle().equals(title)) {
+      if (freeBoard.getFreeBoardNo() == inputNo) {
         return freeBoard;
       }
     }
