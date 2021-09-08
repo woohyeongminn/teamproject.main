@@ -29,6 +29,20 @@ public abstract class AbstractToDoHandler implements Command {
 
     todoList.add(todo);
     System.out.println("할 일이 등록되었습니다.");
+
+    System.out.println("========================");
+    System.out.println("1. To-do 목록");
+    System.out.println("2. To-do 수정");
+    System.out.println("3. To-do 삭제");
+    System.out.println("0. 뒤로가기");
+    System.out.println("========================");
+    int selete = Prompt.inputInt("선택> ");
+    switch (selete) {
+      case 1 : listToDo(); break;
+      case 2 : updateTodo(); break;
+      case 3 : deleteTodo(); break;
+      default:break;
+    }
   }
 
   //목록
@@ -84,7 +98,7 @@ public abstract class AbstractToDoHandler implements Command {
     System.out.println("1. To-do 목록");
     System.out.println("2. To-do 등록");
     System.out.println("3. To-do 수정");
-    System.out.println("3. To-do 삭제");
+    System.out.println("4. To-do 삭제");
     System.out.println("0. 뒤로가기");
     System.out.println("========================");
     int selete = Prompt.inputInt("선택> ");
