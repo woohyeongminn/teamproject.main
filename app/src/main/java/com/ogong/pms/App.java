@@ -37,6 +37,8 @@ import com.ogong.pms.handler.AskBoardMyListHandler;
 import com.ogong.pms.handler.AskBoardUpdateHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
+import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
+import com.ogong.pms.handler.AuthCeoMemberLogoutHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.CafeAddHandler;
@@ -52,6 +54,7 @@ import com.ogong.pms.handler.CalenderDeleteHandler;
 import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
+import com.ogong.pms.handler.CeoMemberAddHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.FreeBoardAddHandler;
 import com.ogong.pms.handler.FreeBoardDeleteHandler;
@@ -138,6 +141,10 @@ public class App {
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
+    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList));
+    commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
+    commandMap.put("/ceoMember/add", new CeoMemberAddHandler(ceoMemberList));
+
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
@@ -161,7 +168,7 @@ public class App {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, commentList));
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, commentList));
 
-    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList, ceoMemberList));
     commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
@@ -226,7 +233,7 @@ public class App {
 
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createMemberMenu());
-    //mainMenuGroup.add(createCeoMenu());
+    mainMenuGroup.add(createCeoMenu());
 
     return mainMenuGroup;
   }
@@ -418,14 +425,15 @@ public class App {
 
     return askBoardMenu;
   }
+
+  // 기업
+  Menu createCeoMenu() {
+    MenuGroup ceoMemberMenuGroup = new MenuGroup("기업");
+
+    ceoMemberMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_CEOLOGOUT, "/ceoMember/login"));
+    ceoMemberMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_CEOLOGOUT, "/ceoMember/add"));
+    ceoMemberMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_CEOLOGIN, "/ceoMember/logout"));
+
+    return ceoMemberMenuGroup;
+  }
 }
-
-
-
-
-//--------------------------------------------------------------
-// 기업
-// Menu createCeoMenu() {
-//  return null;
-// }
-//--------------------------------------------------------------

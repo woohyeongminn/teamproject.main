@@ -30,8 +30,8 @@ public class CeoMemberHandler {
     ceoMember.setCeoPassword(Prompt.inputString(" 암호 확인 : "));
     ceoMember.setCeoLicenseNo(Prompt.inputString(" 사업자 등록번호 : "));
     ceoMember.setCeoBossName(Prompt.inputString(" 대표자명 : "));
-    ceoMember.setCeoStoreName(Prompt.inputString(" 점포명 : "));
-    ceoMember.setCeoStoreDetailAddress(Prompt.inputString(" 점포명 : "));
+    //ceoMember.setCeoStoreName(Prompt.inputString(" 점포명 : "));
+    //ceoMember.setCeoStoreDetailAddress(Prompt.inputString(" 점포명 : "));
     ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
 
@@ -52,7 +52,7 @@ public class CeoMemberHandler {
           ceoMember.getCeoName(), 
           ceoMember.getCeoEmail(),
           ceoMember.getCeoBossName(),
-          ceoMember.getCeoStoreName(),
+          //ceoMember.getCeoStoreName(),
           ceoMember.getCeoregisteredDate());
 
       System.out.println();
@@ -76,8 +76,8 @@ public class CeoMemberHandler {
     System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
     System.out.printf(" >> 대표자명 : %s\n", ceoMember.getCeoBossName());
     System.out.printf(" >> 점포명 : %s\n", ceoMember.getCeoEmail());
-    System.out.printf(" >> 점포주소 : %s\n", ceoMember.getCeoStoreDetailAddress());
-    System.out.printf(" >> 사진 : %s\n", ceoMember.getCeoStoreName());
+    //System.out.printf(" >> 점포주소 : %s\n", ceoMember.getCeoStoreDetailAddress());
+    //System.out.printf(" >> 사진 : %s\n", ceoMember.getCeoStoreName());
     System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
   }
 
@@ -97,8 +97,8 @@ public class CeoMemberHandler {
     String ceoName = Prompt.inputString(" 이름(" + ceoMember.getCeoName()  + ") : ");
     String ceoEmail = Prompt.inputString(" 이메일(" + ceoMember.getCeoEmail() + ") : ");
     String ceoPassword = Prompt.inputString(" 암호? ");
-    String ceoStoreName = Prompt.inputString(" 점포명(" + ceoMember.getCeoStoreName() + ") : ");
-    String ceoStoreDetailAddress = Prompt.inputString("점포주소(" + ceoMember.getCeoStoreDetailAddress() + ") : ");
+    //String ceoStoreName = Prompt.inputString(" 점포명(" + ceoMember.getCeoStoreName() + ") : ");
+    //String ceoStoreDetailAddress = Prompt.inputString("점포주소(" + ceoMember.getCeoStoreDetailAddress() + ") : ");
 
     String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -108,8 +108,8 @@ public class CeoMemberHandler {
 
     ceoMember.setCeoName(ceoName);
     ceoMember.setCeoEmail(ceoEmail);
-    ceoMember.setCeoPassword(ceoStoreName);
-    ceoMember.setCeoPhoto(ceoStoreDetailAddress);
+    //ceoMember.setCeoPassword(ceoStoreName);
+    //ceoMember.setCeoPhoto(ceoStoreDetailAddress);
 
     System.out.println("기업회원 정보를 변경하였습니다.");
   }
