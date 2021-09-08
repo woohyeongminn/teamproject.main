@@ -18,13 +18,13 @@ public class FreeBoardDeleteHandler extends AbstractFreeBoardHandler {
     System.out.println();
     System.out.println("▶ 게시글 삭제");
 
-    String inputTitle = Prompt.inputString("제목 : ");
+    int inputTitle = Prompt.inputInt("번호 : ");
     System.out.println();
 
-    FreeBoard free = findByTitle(inputTitle);
+    FreeBoard free = findByNo(inputTitle);
 
     if (free == null) {
-      System.out.println("해당 제목의 게시글이 없습니다.");
+      System.out.println("해당 번호의 게시글이 없습니다.");
       selectPage();
       return;
     }
