@@ -122,7 +122,7 @@ public abstract class AbstractAskBoardHandler implements Command {
     System.out.println();
 
     if (AuthAdminLoginHandler.getLoginAdmin() == null) {
-      System.out.println("관리자만 변경 가능합니다.");
+      System.out.println("관리자만 삭제 가능합니다.");
     } else  {
 
       int admincommentNo = Prompt.inputInt("번호 : ");
