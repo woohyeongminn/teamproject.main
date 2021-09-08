@@ -10,6 +10,9 @@ public class TodoHandler extends AbstractToDoHandler{
   int ToDoNo;
   List<ToDo> todoList;
 
+  //  SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+  //  System.out.println("DATE: "+date.format(todoDate));
+
   public TodoHandler(List<ToDo> todoList) {
     super(todoList);
 
@@ -51,18 +54,21 @@ public class TodoHandler extends AbstractToDoHandler{
   public void execute() {
 
     System.out.println("========================");
-    System.out.println("1. To-do 작성");
-    System.out.println("2. To-do 목록");
+    System.out.println("1. To-do 목록");
+    System.out.println("2. To-do 등록");
     System.out.println("0. 뒤로가기");
     System.out.println("========================");
     int selete = Prompt.inputInt("선택> ");
 
     switch (selete) {
-      case 1 : addToDo(); break;
-      case 2 : listToDo(); break;
-      default:break;
+      case 1 : listToDo(); break;
+      case 2 : addToDo(); break;
+      default : return; 
     }
   }
+
+
+
 }
 
 

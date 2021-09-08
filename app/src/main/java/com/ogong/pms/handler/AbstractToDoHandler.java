@@ -81,6 +81,20 @@ public abstract class AbstractToDoHandler implements Command {
     System.out.printf(" >> 비고 : %s\n", todo.getTodoRemark());
     System.out.printf(" >> 상태 : %d\n", todo.getTodoStatus());
     System.out.printf(" >> DATE : %s\n", todo.getTodoDate());
+
+    System.out.println("========================");
+    System.out.println("1. To-do 목록");
+    System.out.println("2. To-do 등록");
+    System.out.println("3. To-do 삭제");
+    System.out.println("0. 뒤로가기");
+    System.out.println("========================");
+    int selete = Prompt.inputInt("선택> ");
+    switch (selete) {
+      case 1 : listToDo(); break;
+      case 2 : addToDo(); break;
+      case 3 : deleteTodo(); break;
+      default:break;
+    }
   }
 
   //삭제

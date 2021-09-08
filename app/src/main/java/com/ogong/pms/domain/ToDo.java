@@ -1,7 +1,6 @@
 package com.ogong.pms.domain;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 public class ToDo {
   private int todoNo;           // 투두리스트 번호
@@ -40,11 +39,6 @@ public class ToDo {
     return todoDate;
   }
   public void setTodoDate(Date todoDate) {
-
-    //Date today = new Date(todoDate);
-    SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
-    System.out.println("DATE: "+date.format(todoDate));
-
     this.todoDate = todoDate;
   }
   public int getTodoStatus() {
