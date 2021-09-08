@@ -18,7 +18,7 @@ public class CeoDetailHandler extends AbstractCeoHandler {
     System.out.println("▶ 프로필");
 
     try {
-      CeoMember CeoMember = AbstractCeoHandler.getLoginCeoMember();
+      CeoMember CeoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
       System.out.println();
       System.out.printf(" [%s]\n", CeoMember.getCeoBossName());
       System.out.printf(" >> 이메일 : %s\n", CeoMember.getCeoEmail());
