@@ -56,7 +56,8 @@ import com.ogong.pms.handler.CalenderDeleteHandler;
 import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
-import com.ogong.pms.handler.CeoMemberAddHandler;
+import com.ogong.pms.handler.CeoAddHandler;
+import com.ogong.pms.handler.CeoFindIdPwHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.FreeBoardAddHandler;
 import com.ogong.pms.handler.FreeBoardDeleteHandler;
@@ -72,6 +73,7 @@ import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
 import com.ogong.pms.handler.MyStudyListHandler;
+import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyListHandler;
@@ -102,6 +104,7 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
+  PromptCeoMember promptCeoMember = new PromptCeoMember(ceoMemberList);
 
   //CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
   //MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
@@ -145,7 +148,8 @@ public class App {
 
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
-    commandMap.put("/ceoMember/add", new CeoMemberAddHandler(ceoMemberList));
+    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
@@ -254,7 +258,7 @@ public class App {
 
     adminMenuGroup.add(createControlMemberMenu());  // 회원 관리
     adminMenuGroup.add(createControlStudyMenu());   // 스터디 관리
-    adminMenuGroup.add(createControlReviewMenu());  // 장소 후기 관리
+    adminMenuGroup.add(createControlReviewMenu());  // 장소 관리
     adminMenuGroup.add(createAdminCSMenu());        // 고객센터 관리
 
     return adminMenuGroup;
@@ -435,8 +439,9 @@ public class App {
   Menu createCeoMenu() {
     MenuGroup ceoMemberMenuGroup = new MenuGroup("기업");
 
-    ceoMemberMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_CEOLOGOUT, "/ceoMember/login"));
     ceoMemberMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_CEOLOGOUT, "/ceoMember/add"));
+    ceoMemberMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_CEOLOGOUT, "/ceoMember/login"));
+    ceoMemberMenuGroup.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_CEOLOGOUT, "/ceoMember/findIdPw"));
     ceoMemberMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_CEOLOGIN, "/ceoMember/logout"));
 
     return ceoMemberMenuGroup;

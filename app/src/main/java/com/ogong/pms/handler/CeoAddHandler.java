@@ -6,11 +6,11 @@ import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class CeoMemberAddHandler extends AbstractCeoMemberHandler {
+public class CeoAddHandler extends AbstractCeoMemberHandler {
 
   int ceoMemberNo = 3;
 
-  public CeoMemberAddHandler(List<CeoMember> ceoMemberList) {
+  public CeoAddHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);
 
     CeoMember ceoMember = new CeoMember();

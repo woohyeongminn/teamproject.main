@@ -7,12 +7,12 @@ import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class CeoMemberHandler {
+public class CeoHandler {
 
   int ceoMemberNo;
   List<CeoMember> ceoMemberList;
 
-  public CeoMemberHandler(List ceoMemberList) {
+  public CeoHandler(List ceoMemberList) {
     this.ceoMemberList = ceoMemberList;
   }
 
