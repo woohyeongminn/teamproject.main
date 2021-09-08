@@ -7,13 +7,10 @@ import com.ogong.util.Prompt;
 
 public class CalenderUpdateHandler extends AbstractCalenderHandler {
 
-  List<Calender> calenderList;
 
   public CalenderUpdateHandler( List<Calender> calenderList) {
     super(calenderList);
   }
-
-
 
   //------------------------------------------------------------------------------------------------
 

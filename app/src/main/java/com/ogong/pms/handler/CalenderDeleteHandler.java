@@ -6,8 +6,6 @@ import com.ogong.util.Prompt;
 
 public class CalenderDeleteHandler extends AbstractCalenderHandler {
 
-  List<Calender> calenderList;
-
   public CalenderDeleteHandler( List<Calender> calenderList) {
     super(calenderList);
   }
