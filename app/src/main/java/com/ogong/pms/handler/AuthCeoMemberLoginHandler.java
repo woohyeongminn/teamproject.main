@@ -23,7 +23,7 @@ public class AuthCeoMemberLoginHandler implements Command {
   public void execute() {
 
     System.out.println();
-    String inputadminEmail = Prompt.inputString("이메일 : ");
+    String inputadminEmail = Prompt.inputString(" 이메일 : ");
     String inputadminPassword = "";
     CeoMember ceoMember = findByAdminEmail(inputadminEmail);
 
@@ -32,17 +32,17 @@ public class AuthCeoMemberLoginHandler implements Command {
     }
 
     while (ceoMember != null) {
-      inputadminPassword = Prompt.inputString("비밀번호 : ");
+      inputadminPassword = Prompt.inputString(" 비밀번호 : ");
 
       if (ceoMember.getCeoPassword().equals(inputadminPassword)) {
         ceoMember.setCeoEmail(inputadminEmail);
         ceoMember.setCeoPassword(inputadminPassword);
-        System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoName());
+        System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoBossName());
         loginCeoMember = ceoMember;
         return;
       }
 
-      System.out.println("비밀번호를 다시 입력하세요.\n");
+      System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
       return;
     } 
   } 

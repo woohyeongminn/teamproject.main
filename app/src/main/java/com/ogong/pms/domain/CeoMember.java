@@ -5,9 +5,8 @@ import java.util.List;
 
 public class CeoMember {
 
-  private int ceoNo; // 기업회원 넘버
-  private String ceoEmail;    //기업회원 이메일
-  private String ceoName;   //기업회원 이름
+  private int ceoNo; // 기업회원 넘버 
+  private String ceoEmail;    //기업회원 이메일 - 회원가입, 로그인 할 때 필요
   private String ceoPassword;   //기업회원 패스워드
   private String ceoPhoto;      //기업회원 사진
   private String ceoLicenseNo;  //기업회원 사업자등록번호
@@ -15,84 +14,63 @@ public class CeoMember {
   private Date ceoregisteredDate;   //기업회원 가입일
   private List<Cafe> cafes; // 기업회원 카페리스트
 
+
   @Override
   public String toString() {
-    return "CeoMember [ceoNo=" + ceoNo + ", ceoEmail=" + ceoEmail + ", ceoName=" + ceoName
-        + ", ceoPassword=" + ceoPassword + ", ceoPhoto=" + ceoPhoto + ", ceoLicenseNo="
-        + ceoLicenseNo + ", ceoBossName=" + ceoBossName + ", ceoregisteredDate=" + ceoregisteredDate
-        + ", cafes=" + cafes + "]";
+    return "CeoMember [ceoNo=" + ceoNo + ", ceoEmail=" + ceoEmail + ", ceoPassword=" + ceoPassword
+        + ", ceoPhoto=" + ceoPhoto + ", ceoLicenseNo=" + ceoLicenseNo + ", ceoBossName="
+        + ceoBossName + ", ceoregisteredDate=" + ceoregisteredDate + ", cafes=" + cafes + "]";
   }
 
   public int getCeoNo() {
     return ceoNo;
   }
-
   public void setCeoNo(int ceoNo) {
     this.ceoNo = ceoNo;
   }
-
   public String getCeoEmail() {
     return ceoEmail;
   }
-
   public void setCeoEmail(String ceoEmail) {
     this.ceoEmail = ceoEmail;
   }
-
-  public String getCeoName() {
-    return ceoName;
-  }
-
-  public void setCeoName(String ceoName) {
-    this.ceoName = ceoName;
-  }
-
   public String getCeoPassword() {
     return ceoPassword;
   }
-
   public void setCeoPassword(String ceoPassword) {
     this.ceoPassword = ceoPassword;
   }
-
   public String getCeoPhoto() {
     return ceoPhoto;
   }
-
   public void setCeoPhoto(String ceoPhoto) {
     this.ceoPhoto = ceoPhoto;
   }
-
   public String getCeoLicenseNo() {
     return ceoLicenseNo;
   }
-
   public void setCeoLicenseNo(String ceoLicenseNo) {
     this.ceoLicenseNo = ceoLicenseNo;
   }
-
   public String getCeoBossName() {
     return ceoBossName;
   }
-
   public void setCeoBossName(String ceoBossName) {
     this.ceoBossName = ceoBossName;
   }
-
   public Date getCeoregisteredDate() {
     return ceoregisteredDate;
   }
-
   public void setCeoregisteredDate(Date ceoregisteredDate) {
     this.ceoregisteredDate = ceoregisteredDate;
   }
-
   public List<Cafe> getCafes() {
     return cafes;
   }
-
   public void setCafes(List<Cafe> cafes) {
     this.cafes = cafes;
   }
+
+
 
 }

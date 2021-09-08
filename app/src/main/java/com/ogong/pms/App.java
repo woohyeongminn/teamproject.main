@@ -57,6 +57,7 @@ import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
 import com.ogong.pms.handler.CeoAddHandler;
+import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.FreeBoardAddHandler;
@@ -150,6 +151,7 @@ public class App {
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
+    commandMap.put("/ceoMember/page", new CeoDetailHandler(ceoMemberList));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
@@ -444,6 +446,40 @@ public class App {
     ceoMemberMenuGroup.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_CEOLOGOUT, "/ceoMember/findIdPw"));
     ceoMemberMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_CEOLOGIN, "/ceoMember/logout"));
 
+    ceoMemberMenuGroup.add(createCeoPageMenu());      // 마이페이지
+
     return ceoMemberMenuGroup;
   }
+
+  // 기업 정보 >> 로그인하라고 뜸
+  private Menu createCeoPageMenu() {
+    MenuGroup ceoPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_CEOLOGIN); 
+
+    ceoPageMenu.add(new MenuItem("기업 정보", "/ceoMember/page"));
+    //    ceoPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
+    //    ceoPageMenu.add(new MenuItem("예약내역", "/cafe/reservationList"));
+    //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
+    //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
+
+    return ceoPageMenu;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

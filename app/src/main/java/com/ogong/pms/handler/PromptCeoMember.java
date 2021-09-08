@@ -14,7 +14,7 @@ public class PromptCeoMember {
   //닉네임을 통해 기업을 찾아서 리턴한다.
   public CeoMember getCeoByNick(String inputNick) {
     for (CeoMember ceoMember : ceoMemberList) {
-      if (inputNick.equals(ceoMember.getCeoName())) {
+      if (inputNick.equals(ceoMember.getCeoBossName())) {
         return ceoMember;
       }
     }

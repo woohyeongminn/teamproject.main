@@ -6,7 +6,7 @@ import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class CeoAddHandler extends AbstractCeoMemberHandler {
+public class CeoAddHandler extends AbstractCeoHandler {
 
   int ceoMemberNo = 3;
 
@@ -17,7 +17,7 @@ public class CeoAddHandler extends AbstractCeoMemberHandler {
 
     ceoMember.setCeoNo(1);
     ceoMember.setCeoEmail("study1");
-    ceoMember.setCeoName("내가사장");
+    ceoMember.setCeoBossName("내가사장");
     ceoMember.setCeoPassword("1111");
     ceoMember.setCeoPhoto("a.jpg");
     ceoMember.setCeoLicenseNo("123-45-12345");
@@ -28,14 +28,27 @@ public class CeoAddHandler extends AbstractCeoMemberHandler {
 
     ceoMember = new CeoMember();
 
-    ceoMember.setCeoNo(1);
+    ceoMember.setCeoNo(2);
     ceoMember.setCeoEmail("study2");
-    ceoMember.setCeoName("하하하");
+    ceoMember.setCeoBossName("오호라스터디");
     ceoMember.setCeoPassword("1111");
     ceoMember.setCeoPhoto("bbb.jpg");
     ceoMember.setCeoLicenseNo("123-45-67812");
     ceoMember.setCeoBossName("박사장");
     ceoMember.setCeoregisteredDate(Date.valueOf("2021-7-21"));
+    ceoMember.setCafes(new ArrayList<>());
+    ceoMemberList.add(ceoMember);
+
+    ceoMember = new CeoMember();
+
+    ceoMember.setCeoNo(3);
+    ceoMember.setCeoEmail("study3");
+    ceoMember.setCeoBossName("엄스네공부방");
+    ceoMember.setCeoPassword("1111");
+    ceoMember.setCeoPhoto("ccc.jpg");
+    ceoMember.setCeoLicenseNo("123-45-48751");
+    ceoMember.setCeoBossName("엄사장");
+    ceoMember.setCeoregisteredDate(Date.valueOf("2021-5-1"));
     ceoMember.setCafes(new ArrayList<>());
     ceoMemberList.add(ceoMember);
   }
@@ -51,7 +64,7 @@ public class CeoAddHandler extends AbstractCeoMemberHandler {
 
     ceoMember.setCeoNo(ceoMemberNo++);
     ceoMember.setCeoEmail(Prompt.inputString(" 이메일 : "));
-    ceoMember.setCeoName(Prompt.inputString(" 이 름 : "));
+    ceoMember.setCeoBossName(Prompt.inputString(" 이 름 : "));
     ceoMember.setCeoPassword(Prompt.inputString(" 비밀번호 : "));
     while (true) {
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");

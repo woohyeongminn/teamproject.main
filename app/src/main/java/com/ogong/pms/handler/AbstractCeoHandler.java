@@ -3,7 +3,7 @@ package com.ogong.pms.handler;
 import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 
-public abstract class AbstractCeoMemberHandler implements Command {
+public abstract class AbstractCeoHandler implements Command {
 
   List<CeoMember> ceoMemberList;
 
@@ -12,7 +12,7 @@ public abstract class AbstractCeoMemberHandler implements Command {
     return loginCeoMember;
   }
 
-  public AbstractCeoMemberHandler(List<CeoMember> ceoMemberList) {
+  public AbstractCeoHandler(List<CeoMember> ceoMemberList) {
     this.ceoMemberList = ceoMemberList;
   }
 }
