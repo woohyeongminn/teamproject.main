@@ -21,11 +21,25 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     reservation.setReservationNo(1);
     reservation.setMember(promptPerMember.memberList.get(0));
     reservation.setCafe(cafeList.get(0));
-    reservation.setReservationDate(Date.valueOf("2021-9-1"));
+    reservation.setReservationDate(Date.valueOf("2021-8-1"));
     reservation.setStartTime(10);
     reservation.setUseTime(1);
     reservation.setUseMemberNumber(1);
     reservation.setTotalPrice(2000);
+    reservation.setWirteReview(false);
+
+    reserList.add(reservation);
+
+    reservation = new CafeReservation();
+
+    reservation.setReservationNo(2);
+    reservation.setMember(promptPerMember.memberList.get(0));
+    reservation.setCafe(cafeList.get(1));
+    reservation.setReservationDate(Date.valueOf("2021-8-27"));
+    reservation.setStartTime(22);
+    reservation.setUseTime(1);
+    reservation.setUseMemberNumber(1);
+    reservation.setTotalPrice(1500);
     reservation.setWirteReview(false);
 
     reserList.add(reservation);
@@ -87,18 +101,27 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     for (CafeReservation cafeReser : reserList) {
       if (input == cafeReser.getReservationNo() &&
           cafeReser.getMember().getPerEmail().equalsIgnoreCase(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
-        if (!cafeReser.getWirteReview()) {
-          count++;
-          System.out.println("리뷰 작성 화면으로 이동합니다.");
-          addReview(cafeReser);
+
+        Date today = new Date(System.currentTimeMillis());
+        Date reserDate = cafeReser.getReservationDate();
+
+        if (reserDate.toLocalDate().compareTo(today.toLocalDate()) < 0) {
+          if (!cafeReser.getWirteReview()) {
+            count++;
+            System.out.println(" >> 리뷰 작성 화면으로 이동합니다.");
+            addReview(cafeReser);
+          } else {
+            System.out.println(" >> 이미 리뷰를 작성한 예약입니다.");
+            return;
+          }
         } else {
-          System.out.println("이미 리뷰를 작성한 예약입니다.");
+          System.out.println(" >> 이용 후 다음날부터 작성 가능합니다.");
           return;
         }
       } 
     }
     if (count == 0) {
-      System.out.println("예약번호를 잘못 선택하셨습니다.");
+      System.out.println(" >> 예약번호를 잘못 선택하셨습니다.");
     }
   }
 
@@ -129,7 +152,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
             System.out.println(" >> 당일 예약은 취소 불가능 합니다.");
             return;
           } else {
-            System.out.println(" >> 지난 예약은 선택 불가");
+            System.out.println(" >> 지난 예약은 선택할 수 없습니다.");
             return;
           }
         }

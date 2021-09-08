@@ -14,7 +14,7 @@ public abstract class AbstractCafeHandler implements Command {
   List<CafeReview> reviewList;
   List<CafeReservation> reserList;
   int reviewNo = 1; // 리뷰번호
-  int reservationNo = 2; // 예약번호
+  int reservationNo = 3; // 예약번호
 
   public AbstractCafeHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
     this.cafeList = cafeList;
@@ -151,7 +151,7 @@ public abstract class AbstractCafeHandler implements Command {
       Date registeredDate = new Date(System.currentTimeMillis());
 
       String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
-      if (input.equalsIgnoreCase("아니오") || input.length() == 0) {
+      if (!input.equalsIgnoreCase("네")) {
         System.out.println("리뷰 등록을 취소하였습니다.");
         return;
       }
