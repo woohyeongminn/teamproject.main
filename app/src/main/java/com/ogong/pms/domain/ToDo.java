@@ -7,7 +7,7 @@ public class ToDo {
   private String todoTitle;     // 투두리스트 제목
   private String todoContent;   // 투두리스트 내용
   private String todoRemark;    // 투두리스트 비고
-  private Date todoRegisteredDate; // 투두리스트 등록일
+  private Date todoDate; // 투두리스트 등록일
   private int todoStatus;   // 투두리스트 상태
 
   public int getTodoNo() {
@@ -34,11 +34,12 @@ public class ToDo {
   public void setTodoRemark(String todoRemark) {
     this.todoRemark = todoRemark;
   }
-  public Date getTodoRegisteredDate() {
-    return todoRegisteredDate;
+
+  public Date getTodoDate() {
+    return todoDate;
   }
-  public void setTodoRegisteredDate(Date todoRegisteredDate) {
-    this.todoRegisteredDate = todoRegisteredDate;
+  public void setTodoDate(Date todoDate) {
+    this.todoDate = todoDate;
   }
   public int getTodoStatus() {
     return todoStatus;

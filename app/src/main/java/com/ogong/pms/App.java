@@ -79,11 +79,7 @@ import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyListHandler;
 import com.ogong.pms.handler.StudyUpdateHandler;
-import com.ogong.pms.handler.ToDoAddHandler;
-import com.ogong.pms.handler.ToDoDeleteHandler;
-import com.ogong.pms.handler.ToDoDetailHandler;
-import com.ogong.pms.handler.ToDoListHandler;
-import com.ogong.pms.handler.ToDoUpdateHandler;
+import com.ogong.pms.handler.TodoHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -163,11 +159,12 @@ public class App {
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, commentList, commandMap));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, commentList, commandMap));
 
-    commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
-    commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
-    commandMap.put("/toDo/detail", new ToDoUpdateHandler(toDoList));
-    commandMap.put("/toDo/update", new ToDoDetailHandler(toDoList));
-    commandMap.put("/toDo/delete", new ToDoDeleteHandler(toDoList));
+    commandMap.put("/toDo/list", new TodoHandler(toDoList));
+    //commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
+    //commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
+    //    commandMap.put("/toDo/detail", new ToDoUpdateHandler(toDoList));
+    //    commandMap.put("/toDo/update", new ToDoDetailHandler(toDoList));
+    //    commandMap.put("/toDo/delete", new ToDoDeleteHandler(toDoList));
 
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, commentList));
     commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, commentList));
