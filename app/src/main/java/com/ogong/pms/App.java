@@ -280,6 +280,7 @@ public class App {
   //관리자 하위 메뉴5 - 고객센터 관리
   private Menu createAdminCSMenu() {
     MenuGroup csMenu = new MenuGroup("고객센터 관리");
+
     csMenu.add(createAdminNoticeMenu());
     csMenu.add(createAdminAskMenu());
 
@@ -289,6 +290,7 @@ public class App {
   // 5-1
   private Menu createAdminNoticeMenu() {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
+
     adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     adminNoticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
@@ -301,6 +303,7 @@ public class App {
   // 5-2
   private Menu createAdminAskMenu() {
     MenuGroup adminaskMenu = new MenuGroup("문의사항");
+
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
     adminaskMenu.add(new MenuItem("상세", "/askBoard/detail"));
     adminaskMenu.add(new MenuItem("삭제", "/askBoard/delete"));
@@ -312,6 +315,7 @@ public class App {
   // 개인 회원 메인
   Menu createMemberMenu() {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
+
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
     userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/member/logout"));
     userMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
@@ -384,6 +388,7 @@ public class App {
   //개인 하위 메뉴6 - 고객센터
   private Menu createCSMenu() {
     MenuGroup memberCSMenu = new MenuGroup("고객센터");
+
     memberCSMenu.add(createNoticeMenu());
     memberCSMenu.add(createAskBoardMenu());
 
