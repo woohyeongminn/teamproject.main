@@ -3,9 +3,7 @@ package com.ogong.pms.domain;
 public class Cafe {
 
   private int no; // 카페 번호
-  private String cafeCeoEmail; // 사장 이메일
-  private String cafeceoLicenseNo; // 사업자번호
-  private String cafeCeoBossName; // 대표자명
+  private CeoMember CeoMember; // 사장
   private String name; // 상호명
   private String mainImg; //카페 썸네일 이미지
   private String info; // 소개글
@@ -19,11 +17,10 @@ public class Cafe {
 
   @Override
   public String toString() {
-    return "Cafe [no=" + no + ", cafeCeoEmail=" + cafeCeoEmail + ", cafeceoLicenseNo="
-        + cafeceoLicenseNo + ", cafeCeoBossName=" + cafeCeoBossName + ", name=" + name
-        + ", mainImg=" + mainImg + ", info=" + info + ", location=" + location + ", phone=" + phone
-        + ", openTime=" + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday
-        + ", bookable=" + bookable + ", timePrice=" + timePrice + "]";
+    return "Cafe [no=" + no + ", CeoMember=" + CeoMember + ", name=" + name + ", mainImg=" + mainImg
+        + ", info=" + info + ", location=" + location + ", phone=" + phone + ", openTime="
+        + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday + ", bookable=" + bookable
+        + ", timePrice=" + timePrice + "]";
   }
 
   public int getNo() {
@@ -34,28 +31,12 @@ public class Cafe {
     this.no = no;
   }
 
-  public String getCafeCeoEmail() {
-    return cafeCeoEmail;
+  public CeoMember getCeoMember() {
+    return CeoMember;
   }
 
-  public void setCafeCeoEmail(String cafeCeoEmail) {
-    this.cafeCeoEmail = cafeCeoEmail;
-  }
-
-  public String getCafeceoLicenseNo() {
-    return cafeceoLicenseNo;
-  }
-
-  public void setCafeceoLicenseNo(String cafeceoLicenseNo) {
-    this.cafeceoLicenseNo = cafeceoLicenseNo;
-  }
-
-  public String getCafeCeoBossName() {
-    return cafeCeoBossName;
-  }
-
-  public void setCafeCeoBossName(String cafeCeoBossName) {
-    this.cafeCeoBossName = cafeCeoBossName;
+  public void setCeoMember(CeoMember ceoMember) {
+    CeoMember = ceoMember;
   }
 
   public String getName() {
