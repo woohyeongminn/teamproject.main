@@ -62,6 +62,7 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
       }
       else {
         System.out.println("등록할 수 없는 '요일'입니다.");
+        continue;
       }
     }
 

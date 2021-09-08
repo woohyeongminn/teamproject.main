@@ -46,14 +46,15 @@ public class CalenderDetailHandler extends AbstractCalenderHandler {
         System.out.println("정확한 '일'을 입력하세요");
       }
       if (day != null) {
+        System.out.println();
         System.out.println("1. 수정하기");
         System.out.println("2. 삭제하기");
         System.out.println("3. 취    소");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
-          case 1 : commandMap.get("/calender/update").execute(); break;
-          case 2 : commandMap.get("/calender/delete").execute(); break;
-          case 3 : return;
+          case 1 : commandMap.get("/calender/update").execute();
+          case 2 : commandMap.get("/calender/delete").execute(); 
+          case 3 : break;
           default : return;
         }
       }
