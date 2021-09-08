@@ -16,10 +16,10 @@ public class CafeDetailHandler extends AbstractCafeHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 장소 상세보기");
-    Cafe cafe = findByName(Prompt.inputString("장소명 : "));
+    Cafe cafe = findByNo(Prompt.inputInt("번호 : "));
     System.out.println();
     if (cafe == null) {
-      System.out.println("해당 이름의 장소가 존재하지 않습니다.");
+      System.out.println("해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
     System.out.printf(" (%s)\n", cafe.getNo());
