@@ -14,9 +14,7 @@ public abstract class AbstractCalenderHandler implements Command {
   //------------------------------------------------------------------------------------------------
 
   protected Calender findByDay(int day) {
-    Calender[] arr = calenderList.toArray(new Calender[0]);
-    for (Object obj : arr) {
-      Calender calender = (Calender) obj;
+    for (Calender calender : calenderList) {
       if (calender.getDay() == day) {
         return calender;
       }

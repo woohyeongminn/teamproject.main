@@ -16,12 +16,10 @@ public class CalenderDeleteHandler extends AbstractCalenderHandler {
     System.out.println();
     System.out.println("▶ 일정 삭제");
 
-    int inputDay = Prompt.inputInt("날짜 : ");
-    Calender calender = findByDay(inputDay);
+    Calender calender = findByDay(Prompt.inputInt("일 : ")); 
 
     if (calender == null) {
-      System.out.println("해당 날짜의 일정이 없습니다.");
-      return;
+      System.out.printf("해당 일의 일정이 없습니다.");
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
@@ -29,10 +27,21 @@ public class CalenderDeleteHandler extends AbstractCalenderHandler {
       System.out.println("일정 삭제를 취소하였습니다.");
       return;
     }
-
     calenderList.remove(calender);
-
     System.out.println("일정이 삭제되었습니다.");
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

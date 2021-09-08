@@ -15,6 +15,7 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
     this.studyList = studyList;
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public void execute() {
     System.out.println();
@@ -92,14 +93,23 @@ public class CalenderAddHandler extends AbstractCalenderHandler {
     }
 
     calender.setCalenderContent(Prompt.inputString("내용 : "));
-    calender.setEndDay(Prompt.inputDate("종료일 : "));
+    while (true) {
+      calender.setEndDay(Prompt.inputDate("종료일 : "));
+      if (calender.getEndDay().getMonth() + 1 <= month) {
+        if (calender.getEndDay().getDate() < day) {
+          System.out.println("종료일을 다시 입력해주세요.");
+          continue;
+        }
+      }
+      break;
+    }
 
     String input = Prompt.inputString("등록하시겠습니까? (네 / 아니오)");
     if (!input.equals("네")) {
       System.out.println("등록을 취소하였습니다.");
       return;
     }
-    System.out.printf("'%d'월에 일정이 추가 되었습니다.\n",
+    System.out.printf("\n'%d'월에 일정이 추가 되었습니다.\n",
         calender.getMonth());
 
     calenderList.add(calender);
