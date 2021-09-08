@@ -330,9 +330,6 @@ public class App {
   //------------------------------------------------------------------------------------
 
   // 개인 하위 메뉴2 - 마이페이지 (로그인 했을때)
-  // <구현안됨>
-  // 탈퇴시 메인으로 돌아가기
-  // 내 문의내역x
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
 
