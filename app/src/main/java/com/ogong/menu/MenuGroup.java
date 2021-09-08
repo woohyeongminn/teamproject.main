@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.util.Prompt;
 
@@ -164,6 +165,14 @@ public class MenuGroup extends Menu {
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ADMINLOGIN
           && AuthAdminLoginHandler.getLoginAdmin() != null) {
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_CEOLOGOUT
+          && AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
+        menuList.add(this.childs[i]);
+
+      } else if (this.childs[i].enableState == Menu.ENABLE_CEOLOGIN
+          && AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
         menuList.add(this.childs[i]);
 
       } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {

@@ -19,6 +19,8 @@ import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
+import com.ogong.pms.handler.AdminCafeControlHandler;
+import com.ogong.pms.handler.AdminCafeReviewListControlHandler;
 import com.ogong.pms.handler.AdminInfoHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.AdminMemberDetailHandler;
@@ -37,6 +39,8 @@ import com.ogong.pms.handler.AskBoardMyListHandler;
 import com.ogong.pms.handler.AskBoardUpdateHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
+import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
+import com.ogong.pms.handler.AuthCeoMemberLogoutHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.CafeAddHandler;
@@ -52,6 +56,8 @@ import com.ogong.pms.handler.CalenderDeleteHandler;
 import com.ogong.pms.handler.CalenderDetailHandler;
 import com.ogong.pms.handler.CalenderListHandler;
 import com.ogong.pms.handler.CalenderUpdateHandler;
+import com.ogong.pms.handler.CeoAddHandler;
+import com.ogong.pms.handler.CeoFindIdPwHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.FreeBoardAddHandler;
 import com.ogong.pms.handler.FreeBoardDeleteHandler;
@@ -67,6 +73,7 @@ import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
 import com.ogong.pms.handler.MyStudyListHandler;
+import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyListHandler;
@@ -93,6 +100,7 @@ public class App {
   HashMap<String, Command> commandMap = new HashMap<>();
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
+  PromptCeoMember promptCeoMember = new PromptCeoMember(ceoMemberList);
 
   //CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
   //MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
@@ -134,6 +142,11 @@ public class App {
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
+    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList));
+    commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
+    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
+
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
@@ -158,7 +171,7 @@ public class App {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, commentList));
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, commentList));
 
-    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList, ceoMemberList));
     commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
@@ -166,6 +179,9 @@ public class App {
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
     commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList, promptPerMember));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
+
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, cafeReview, reserList)); 
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
@@ -223,7 +239,7 @@ public class App {
 
     mainMenuGroup.add(createAdminMenu());
     mainMenuGroup.add(createMemberMenu());
-    //mainMenuGroup.add(createCeoMenu());
+    mainMenuGroup.add(createCeoMenu());
 
     return mainMenuGroup;
   }
@@ -239,7 +255,7 @@ public class App {
 
     adminMenuGroup.add(createControlMemberMenu());  // 회원 관리
     adminMenuGroup.add(createControlStudyMenu());   // 스터디 관리
-    adminMenuGroup.add(createControlReviewMenu());  // 장소 후기 관리
+    adminMenuGroup.add(createControlReviewMenu());  // 장소 관리
     adminMenuGroup.add(createAdminCSMenu());        // 고객센터 관리
 
     return adminMenuGroup;
@@ -265,18 +281,19 @@ public class App {
   }
 
   // 관리자 하위 메뉴4 - 장소 후기 관리
-  // <구현안됨>
-  // 모든 장소후기 목록 보기 > 장소후기 상세보기
-  // 장소후기 삭제하기
   private Menu createControlReviewMenu() {
-    MenuGroup adminStudyMenu = new MenuGroup("장소 후기 관리"); 
+    MenuGroup adminCafeReviewMenu = new MenuGroup("장소 관리"); 
 
-    return adminStudyMenu;
+    adminCafeReviewMenu.add(new MenuItem("장소 게시글 관리","/cafe/control"));
+    adminCafeReviewMenu.add(new MenuItem("장소 리뷰 관리","/cafe/reviewList")); 
+
+    return adminCafeReviewMenu;
   }
 
   //관리자 하위 메뉴5 - 고객센터 관리
   private Menu createAdminCSMenu() {
     MenuGroup csMenu = new MenuGroup("고객센터 관리");
+
     csMenu.add(createAdminNoticeMenu());
     csMenu.add(createAdminAskMenu());
 
@@ -286,6 +303,7 @@ public class App {
   // 5-1
   private Menu createAdminNoticeMenu() {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
+
     adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     adminNoticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
@@ -298,6 +316,7 @@ public class App {
   // 5-2
   private Menu createAdminAskMenu() {
     MenuGroup adminaskMenu = new MenuGroup("문의사항");
+
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
     adminaskMenu.add(new MenuItem("상세", "/askBoard/detail"));
     adminaskMenu.add(new MenuItem("삭제", "/askBoard/delete"));
@@ -309,6 +328,7 @@ public class App {
   // 개인 회원 메인
   Menu createMemberMenu() {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
+
     userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
     userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/member/logout"));
     userMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
@@ -381,6 +401,7 @@ public class App {
   //개인 하위 메뉴6 - 고객센터
   private Menu createCSMenu() {
     MenuGroup memberCSMenu = new MenuGroup("고객센터");
+
     memberCSMenu.add(createNoticeMenu());
     memberCSMenu.add(createAskBoardMenu());
 
@@ -410,14 +431,16 @@ public class App {
 
     return askBoardMenu;
   }
+
+  // 기업
+  Menu createCeoMenu() {
+    MenuGroup ceoMemberMenuGroup = new MenuGroup("기업");
+
+    ceoMemberMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_CEOLOGOUT, "/ceoMember/add"));
+    ceoMemberMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_CEOLOGOUT, "/ceoMember/login"));
+    ceoMemberMenuGroup.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_CEOLOGOUT, "/ceoMember/findIdPw"));
+    ceoMemberMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_CEOLOGIN, "/ceoMember/logout"));
+
+    return ceoMemberMenuGroup;
+  }
 }
-
-
-
-
-//--------------------------------------------------------------
-// 기업
-// Menu createCeoMenu() {
-//  return null;
-// }
-//--------------------------------------------------------------

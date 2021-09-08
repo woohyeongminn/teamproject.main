@@ -30,6 +30,7 @@ public class CalenderUpdateHandler extends AbstractCalenderHandler {
       }
       break;
     }
+
     int cMonth;
     while (true) {
       cMonth = Prompt.inputInt("월(" + calender.getMonth()  + ")? ");
@@ -56,18 +57,17 @@ public class CalenderUpdateHandler extends AbstractCalenderHandler {
       break;
     }
 
-
     String cDayOfTheWeek;
     while (true) {
       cDayOfTheWeek = Prompt.inputString("요일(" + calender.getDayOftheWeek() + ")? ");
       if (cDayOfTheWeek.equals("월") || cDayOfTheWeek.equals("화") ||cDayOfTheWeek.equals("수") ||
           cDayOfTheWeek.equals("목") || cDayOfTheWeek.equals("금") || cDayOfTheWeek.equals("토") ||
           cDayOfTheWeek.equals("일")) {
-        calender.setDayOftheWeek(cDayOfTheWeek);
         break;
       }
       else {
         System.out.println("등록할 수 없는 '요일'입니다.");
+        continue;
       }
     }   
 
@@ -76,9 +76,8 @@ public class CalenderUpdateHandler extends AbstractCalenderHandler {
     Date cEndDay; 
     while (true) {
       cEndDay =  Prompt.inputDate("종료일(" + calender.getEndDay() + ")? ");
-      calender.setEndDay(Prompt.inputDate("종료일 : "));
-      if ((calender.getEndDay().getMonth() + 1 <= cMonth) && 
-          (calender.getEndDay().getDate() < cDay)) {
+      if ((cEndDay.getMonth() + 1 <= cMonth) && 
+          (cEndDay.getDate() < cDay)) {
         System.out.println("\n종료일을 다시 입력해주세요.");
         continue;
       }
@@ -90,13 +89,11 @@ public class CalenderUpdateHandler extends AbstractCalenderHandler {
       System.out.println("일정 변경이 취소되었습니다.");
       return;
     }
-
     calender.setMonth(cMonth);
     calender.setDay(cDay);
     calender.setDayOftheWeek(cDayOfTheWeek);
-    calender.setCalenderContent(cContent);
     calender.setEndDay(cEndDay);
-
+    calender.setCalenderContent(cContent);
     System.out.println("일정을 변경하였습니다.");
   }
 

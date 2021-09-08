@@ -4,20 +4,22 @@ import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
 public class CafeAddHandler extends AbstractCafeHandler {
 
+  List<CeoMember> ceoMemberList;
 
-  public CafeAddHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  public CafeAddHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
+      List<CafeReservation> reserList, List<CeoMember> ceoMemberList) {
     super (cafeList, reviewList, reserList);
+    this.ceoMemberList = ceoMemberList;
 
     Cafe cafe = new Cafe();
 
     cafe.setNo(11);
-    cafe.setCafeCeoEmail("ceo@test.com");
-    cafe.setCafeceoLicenseNo("111-11-12345");
-    cafe.setCafeCeoBossName("ceo1");
+    cafe.setCeoMember(ceoMemberList.get(0));
     cafe.setName("에이스터디카페");
     cafe.setMainImg("a.jpg");
     cafe.setInfo("testtest");
@@ -34,9 +36,7 @@ public class CafeAddHandler extends AbstractCafeHandler {
     cafe = new Cafe();
 
     cafe.setNo(12);
-    cafe.setCafeCeoEmail("ceo2@test.com");
-    cafe.setCafeceoLicenseNo("111-11-12345");
-    cafe.setCafeCeoBossName("ceo2");
+    cafe.setCeoMember(ceoMemberList.get(0));
     cafe.setName("해피해피스터디카페");
     cafe.setMainImg("bbb.jpg");
     cafe.setInfo("test~~~!");
@@ -53,9 +53,7 @@ public class CafeAddHandler extends AbstractCafeHandler {
     cafe = new Cafe();
 
     cafe.setNo(13);
-    cafe.setCafeCeoEmail("ceo3@test.com");
-    cafe.setCafeceoLicenseNo("123-14-12345");
-    cafe.setCafeCeoBossName("ceo3");
+    cafe.setCeoMember(ceoMemberList.get(1));
     cafe.setName("광명스터디카페");
     cafe.setMainImg("ccccc.jpg");
     cafe.setInfo("ㅎㅎㅎㅎㅎ");
