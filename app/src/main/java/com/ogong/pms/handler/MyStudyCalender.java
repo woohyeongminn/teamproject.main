@@ -1,6 +1,7 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.Study;
@@ -92,23 +93,26 @@ public class MyStudyCalender {
   }
 
   public void listCalender(Study study) {
+
     System.out.println();
     System.out.println("▶ 일정 목록");
     System.out.println();
-
     System.out.println("'월'을 입력해주세요.");
     System.out.println();
+
     int selectMonth; 
     while (true) {
       selectMonth = Prompt.inputInt("월: ");
+      System.out.println();
       if (selectMonth > 12 || selectMonth < 1) {
         System.out.println("정확한 '월'을 입력해주세요.");
         continue;
       }
-      Calender month = null;
+
+      List<Calender> cal = new ArrayList<>();
       for (Calender calender : study.getMyStudyCalender()) {
         if (selectMonth == calender.getMonth()) {
-          month = calender;
+          cal.add(calender);
           System.out.printf(
               " [ %d월 %d일 %s요일 ]\n %s\n",
               calender.getMonth(), 
@@ -119,12 +123,12 @@ public class MyStudyCalender {
         }
       }
 
-      if (month == null) {
+      if (cal.isEmpty()) {
         System.out.println();
         System.out.printf("'%d월'에 등록된 일정이 없습니다.\n", selectMonth);
         System.out.println("\n1. 날짜 재입력");
-        System.out.println("2. 등록   하기");
-        System.out.println("3. 취       소");
+        System.out.println("2. 등록");
+        System.out.println("3. 취");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
           case 1 : continue;
@@ -133,44 +137,47 @@ public class MyStudyCalender {
           default : return;
         }
       }
-      if (month != null) {
+      if (!cal.isEmpty()) {
         System.out.println("\n1. 상세   보기");
-        System.out.println("2. 등록   하기");
-        System.out.println("3. 날짜 재입력");
-        System.out.println("4. 취       소");
+        System.out.println("2. 등록");
+        System.out.println("3. 수정");
+        System.out.println("4. 삭제");
+        System.out.println("5. 날짜 재입력");
+        System.out.println("6. 취소");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
-          case 1 : detailCalender(month); break;
+          case 1 : detailCalender(cal); break;
           case 2 : addCalender(study); break;
           case 3 : continue;
           case 4 : return;
           default : return;
         }
       }
+
     }
   }
 
-  public void detailCalender(Calender calender) {
+  public void detailCalender(List<Calender> calenderList) {
     System.out.println();
     System.out.println("▶ 일정 상세");
     System.out.println();
 
     int inputDay;
-    while (true) {
-      inputDay = Prompt.inputInt("일: ");
-      if (calender.getDay() != inputDay) {
+    Calender detailCalender = null;
+    inputDay = Prompt.inputInt("일: ");
+    for (int i = 0; i < calenderList.size(); i++) {
+      if (calenderList.get(i).getDay() == inputDay) {
         System.out.println();
-        System.out.println("정확한 '일'을 입력해주세요.");
-        continue;
-      } 
-      break;
+        detailCalender = calenderList.get(i);
+        System.out.printf(">> 등록일 : %d월 %d일 %s요일\n",
+            calenderList.get(i).getMonth(),
+            calenderList.get(i).getDay(),
+            calenderList.get(i).getDayOftheWeek());
+        System.out.printf(">> 종료일 : %s\n", calenderList.get(i).getEndDay());
+        System.out.printf(">> 내  용 : %s\n", calenderList.get(i).getCalenderContent());
+      }
     }
 
-    System.out.println();
-    System.out.printf(">> 등록일 : %d월 %d일 %s요일\n",
-        calender.getMonth(), calender.getDay(), calender.getDayOftheWeek());
-    System.out.printf(">> 종료일 : %s\n", calender.getEndDay());
-    System.out.printf(">> 내  용 : %s\n", calender.getCalenderContent());
 
     System.out.println("1. 수정하기");
     System.out.println("2. 삭제하기");
@@ -178,8 +185,8 @@ public class MyStudyCalender {
 
     int selectNo = Prompt.inputInt("선택: ");
     switch (selectNo) {
-      case 1: updateCalender(calender); break;
-      case 2: deleteCalender(calender); break;
+      case 1: updateCalender(detailCalender); break;
+      case 2: deleteCalender(detailCalender); break;
       case 3: return;
       default : return;
     }
@@ -232,13 +239,13 @@ public class MyStudyCalender {
       }
     }   
 
-    String cContent = Prompt.inputString("내용(" + calender.getCalenderContent() + ")? ");
+    String updateContent = Prompt.inputString("내용(" + calender.getCalenderContent() + ")? ");
 
-    Date cEndDay; 
+    Date updateEndDay; 
     while (true) {
-      cEndDay =  Prompt.inputDate("종료일(" + calender.getEndDay() + ")? ");
-      if ((calender.getEndDay().getMonth() + 1 <= updateMonth) && 
-          (calender.getEndDay().getDate() < updateDay)) {
+      updateEndDay =  Prompt.inputDate("종료일(" + calender.getEndDay() + ")? ");
+      if ((updateEndDay.getMonth() + 1 <= updateMonth) && 
+          (updateEndDay.getDate() < updateDay)) {
         System.out.println("\n종료일을 다시 입력해주세요.");
         continue;
       }
@@ -254,8 +261,8 @@ public class MyStudyCalender {
     calender.setMonth(updateMonth);
     calender.setDay(updateDay);
     calender.setDayOftheWeek(updateDayOfTheWeek);
-    calender.setCalenderContent(cContent);
-    calender.setEndDay(cEndDay);
+    calender.setCalenderContent(updateContent);
+    calender.setEndDay(updateEndDay);
 
     System.out.println("일정을 변경하였습니다.");
   }
