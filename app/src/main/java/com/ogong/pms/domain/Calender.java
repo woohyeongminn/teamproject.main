@@ -4,6 +4,8 @@ import java.sql.Date;
 
 public class Calender {
 
+  private int calenderNo;
+
   private int month;   //월
   private int day;     //일
   private String dayOftheWeek; //요일
@@ -11,6 +13,13 @@ public class Calender {
   //  private Date startDay;  // 시작일
   private Date endDay;    // 종료일
 
+
+  public int getCalenderNo() {
+    return calenderNo;
+  }
+  public void setCalenderNo(int calenderNo) {
+    this.calenderNo = calenderNo;
+  }
   public int getMonth() {
     return month;
   }

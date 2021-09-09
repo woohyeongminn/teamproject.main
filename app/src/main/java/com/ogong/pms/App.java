@@ -71,6 +71,7 @@ import com.ogong.pms.handler.MemberDetailHandler;
 import com.ogong.pms.handler.MemberFindIdPwHandler;
 import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
+import com.ogong.pms.handler.MyStudyCalender;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
 import com.ogong.pms.handler.MyStudyListHandler;
@@ -199,8 +200,10 @@ public class App {
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
-    MyStudyToDo toDoHandler = new MyStudyToDo(studyList);
-    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap, toDoHandler));
+    MyStudyCalender myStudyCalender = new MyStudyCalender(calenderList, studyList);
+    MyStudyToDo myStudyToDo = new MyStudyToDo(toDoList, studyList);
+    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap,
+        myStudyToDo, myStudyCalender));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));

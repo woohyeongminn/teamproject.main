@@ -40,18 +40,21 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
     listComment(askBoard);  // 댓글호출
 
-    System.out.println("\n---------------------");
-    System.out.println("1. 댓글 달기");
-    System.out.println("2. 댓글 수정");
-    System.out.println("3. 댓글 삭제");
-    System.out.println("0. 뒤로 가기");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1 : addComment(askBoard); break;
-      case 2 : updateComment(); break;
-      case 3 : deleteComment(askBoard); break;
-      default : return;
+    if (AuthAdminLoginHandler.getLoginAdmin() != null) {
+      System.out.println("\n---------------------");
+      System.out.println("1. 댓글 달기");
+      System.out.println("2. 댓글 수정");
+      System.out.println("3. 댓글 삭제");
+      System.out.println("0. 뒤로 가기");
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1 : addComment(askBoard); break;
+        case 2 : updateComment(); break;
+        case 3 : deleteComment(askBoard); break;
+        default : return;
+      }
     }
+
   }
 
 
