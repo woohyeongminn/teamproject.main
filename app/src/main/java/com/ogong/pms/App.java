@@ -60,11 +60,6 @@ import com.ogong.pms.handler.CeoAddHandler;
 import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
 import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.FreeBoardAddHandler;
-import com.ogong.pms.handler.FreeBoardDeleteHandler;
-import com.ogong.pms.handler.FreeBoardDetailHandler;
-import com.ogong.pms.handler.FreeBoardListHandler;
-import com.ogong.pms.handler.FreeBoardUpdateHandler;
 import com.ogong.pms.handler.MemberAddHandler;
 import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
@@ -154,11 +149,11 @@ public class App {
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
-    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, commentList, commandMap));
-    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, commentList, commandMap));
-    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, commentList, commandMap));
-    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, commentList, commandMap));
-    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, commentList, commandMap));
+    //    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, commentList, commandMap));
+    //    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, commentList, commandMap));
+    //    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, commentList, commandMap));
+    //    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, commentList, commandMap));
+    //    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, commentList, commandMap));
 
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, commentList));
     commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, commentList));
