@@ -56,7 +56,6 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
   public void deleteMyReview() {
     System.out.println();
     int inputNo = Prompt.inputInt("삭제할 리뷰번호 : ");
-    int count = 0;
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -65,23 +64,30 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
       return;
     }
 
+    CafeReview myReviewByNo = getMyReviewByNo(member, inputNo);
+
+    if (myReviewByNo == null) {
+      System.out.println("리뷰번호를 잘못 선택하셨습니다.");
+      return;
+    }
+
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 /아니오) ");
+    if (!input.equalsIgnoreCase("네")) {
+      System.out.println("삭제를 취소합니다.");
+      return;
+    }
+
+    reviewList.remove(myReviewByNo);
+    System.out.println("삭제를 완료하였습니다.");
+  }
+
+  private CafeReview getMyReviewByNo(Member member, int reviewNo) {
     for (CafeReview cafeReview : reviewList) {
       if (cafeReview.getMember().getPerNickname().equals(member.getPerNickname()) &&
-          cafeReview.getReviewNo() == inputNo) {
-        count++;
-        String input = Prompt.inputString("정말 삭제하시겠습니까? (네 /아니오) ");
-        if (!input.equalsIgnoreCase("네")) {
-          System.out.println("삭제를 취소합니다.");
-          return;
-        }
-
-        reviewList.remove(cafeReview);
-        System.out.println("삭제를 완료하였습니다.");
-      } 
+          cafeReview.getReviewNo() == reviewNo) {
+        return cafeReview;
+      }
     }
-
-    if (count == 0) {
-      System.out.println("리뷰번호를 잘못 선택하셨습니다.");
-    }
+    return null;
   }
 }
