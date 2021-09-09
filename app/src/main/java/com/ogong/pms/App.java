@@ -74,12 +74,12 @@ import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
 import com.ogong.pms.handler.MyStudyListHandler;
+import com.ogong.pms.handler.MyStudyToDo;
 import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyListHandler;
 import com.ogong.pms.handler.StudyUpdateHandler;
-import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -160,13 +160,6 @@ public class App {
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, commentList, commandMap));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, commentList, commandMap));
 
-    //commandMap.put("/toDo/list", new TodoHandler(toDoList));
-    //commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
-    //commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
-    //    commandMap.put("/toDo/detail", new ToDoUpdateHandler(toDoList));
-    //    commandMap.put("/toDo/update", new ToDoDetailHandler(toDoList));
-    //    commandMap.put("/toDo/delete", new ToDoDeleteHandler(toDoList));
-
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, commentList));
     commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, commentList));
     commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, commentList, adminList));
@@ -206,7 +199,7 @@ public class App {
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
-    ToDoHandler toDoHandler = new ToDoHandler(studyList);
+    MyStudyToDo toDoHandler = new MyStudyToDo(studyList);
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap, toDoHandler));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
@@ -377,27 +370,6 @@ public class App {
     return allStudyMenu; 
   }
 
-
-
-  //개인 하위 메뉴4 - 내 스터디
-  // <구현안됨>
-  // detail 에서 댓글 수정기능x
-  //  private Menu createMystudyMenu() {
-  //    MenuGroup myStudyMenu = new MenuGroup("내 스터디", Menu.ENABLE_LOGIN); 
-  //    // <구현안됨>
-  //    // 내 스터디 하위 메뉴 1 - 구성원
-  //    // 내 스터디 하위 메뉴 3 - 투두리스트
-  //    // 내 스터디 하위 메뉴 5 - 화상미팅
-  //
-  //    myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
-  //
-  //    return myStudyMenu;
-  //  }
-
-
-
-
-
   //개인 하위 메뉴5 - 스터디 장소
   private Menu createCafeMenu() {
     MenuGroup cafeMenu = new MenuGroup("장소 예약"); 
@@ -472,23 +444,5 @@ public class App {
 
     return ceoPageMenu;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

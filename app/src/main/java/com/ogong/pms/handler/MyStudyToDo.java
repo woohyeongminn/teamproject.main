@@ -7,13 +7,13 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.util.Prompt;
 
-public class ToDoHandler {
+public class MyStudyToDo {
 
   int ToDoNo;
   List<Study> studyList;
   Study study;
 
-  public ToDoHandler(List<Study> studyList) {
+  public MyStudyToDo(List<Study> studyList) {
     this.studyList = studyList;
 
     ToDo test = new ToDo();

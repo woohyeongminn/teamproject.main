@@ -9,10 +9,10 @@ import com.ogong.util.Prompt;
 public class MyStudyDetailHandler extends AbstractStudyHandler {
 
   HashMap<String, Command> commandMap;
-  ToDoHandler todoHandler;
+  MyStudyToDo todoHandler;
 
 
-  public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap, ToDoHandler todoHandler) {
+  public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap, MyStudyToDo todoHandler) {
     super(studyList);
     this.commandMap = commandMap;
     this.todoHandler = todoHandler;
