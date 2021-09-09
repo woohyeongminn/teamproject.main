@@ -79,7 +79,7 @@ import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyListHandler;
 import com.ogong.pms.handler.StudyUpdateHandler;
-import com.ogong.pms.handler.TodoHandler;
+import com.ogong.pms.handler.ToDoHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -102,6 +102,7 @@ public class App {
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
   PromptCeoMember promptCeoMember = new PromptCeoMember(ceoMemberList);
+
 
   //CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
   //MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
@@ -159,7 +160,7 @@ public class App {
     commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, commentList, commandMap));
     commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, commentList, commandMap));
 
-    commandMap.put("/toDo/list", new TodoHandler(toDoList));
+    //commandMap.put("/toDo/list", new TodoHandler(toDoList));
     //commandMap.put("/toDo/add", new ToDoAddHandler(toDoList));
     //commandMap.put("/toDo/list", new ToDoListHandler(toDoList));
     //    commandMap.put("/toDo/detail", new ToDoUpdateHandler(toDoList));
@@ -200,14 +201,17 @@ public class App {
 
     commandMap.put("/admin/info", new AdminInfoHandler(adminList));
 
-    commandMap.put("/study/add", new StudyAddHandler(studyList, promptPerMember));
+    commandMap.put("/study/add", new StudyAddHandler(studyList, toDoList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
+    ToDoHandler toDoHandler = new ToDoHandler(toDoList, studyList);
+    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap, toDoHandler));
+
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
-    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap));
+
   }
 
   void welcomeservice() {

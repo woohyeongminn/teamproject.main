@@ -10,13 +10,16 @@ import com.ogong.util.Prompt;
 public class MyStudyDetailHandler extends AbstractStudyHandler {
 
   HashMap<String, Command> commandMap;
+  ToDoHandler todoHandler;
 
-  public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap) {
+
+  public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap, ToDoHandler todoHandler) {
     super(studyList);
     this.commandMap = commandMap;
+    this.todoHandler = todoHandler;
   }
 
-  List<TodoHandler> toDoHandler = new ArrayList<>();
+  List<ToDoHandler> toDoHandler = new ArrayList<>();
 
   @Override
   public void execute() {
@@ -77,7 +80,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     switch (selectAdminNo) {
       case 1: listMember(study); break;
       case 2: commandMap.get("/calender/list").execute(); break;
-      case 3: commandMap.get("/toDo/list").execute(); break;
+      case 3: todoHandler.listToDo(study); break;
       case 4: commandMap.get("/freeBoard/list").execute(); break;
       case 5: commandMap.get("/mystudy/detail").execute(); break;   // 임시로 넣었음
       case 6: commandMap.get("/study/update").execute(); break;   //구현 덜 했음

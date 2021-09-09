@@ -4,20 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
+import com.ogong.pms.domain.ToDo;
 import com.ogong.util.Prompt;
 
 public class StudyAddHandler extends AbstractStudyHandler {
 
   PromptPerMember promptPerMember;
   int studyNo;
+  int ToDoNo;
+  List<ToDo> todoList;
 
-  public StudyAddHandler(List<Study> studyList, PromptPerMember promptPerMember) {
+  public StudyAddHandler(List<Study> studyList, List<ToDo> todoList, PromptPerMember promptPerMember) {
     super(studyList);
     this.promptPerMember = promptPerMember;
+    this.todoList = todoList;
 
     Study testStudy = new Study();
     testStudy.setStudyNo(studyNo++);
-    testStudy.setStudyTitle("삼성 NCS 뿌셔뿌셔");
+    testStudy.setStudyTitle("삼성뿌셔");
     testStudy.setOwner(promptPerMember.memberList.get(0));
     testStudy.setSubject("취업");
     testStudy.setArea("서울");
@@ -28,12 +32,13 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setWatingMember(new ArrayList<>());
     testStudy.setMyStudyCalender(new ArrayList<>());
     testStudy.setMyStudyFreeBoard(new ArrayList<>());
+    testStudy.setMyStudyToDo(new ArrayList<>());
     studyList.add(testStudy);
     promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
 
     testStudy = new Study();
     testStudy.setStudyNo(studyNo++);
-    testStudy.setStudyTitle("정처기 준비");
+    testStudy.setStudyTitle("정처기준비");
     testStudy.setOwner(promptPerMember.memberList.get(0));
     testStudy.setSubject("자격증");
     testStudy.setArea("경기");
@@ -44,6 +49,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setWatingMember(new ArrayList<>());
     testStudy.setMyStudyCalender(new ArrayList<>());
     testStudy.setMyStudyFreeBoard(new ArrayList<>());
+    testStudy.setMyStudyToDo(new ArrayList<>());
     studyList.add(testStudy);
     promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
 
@@ -60,6 +66,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setWatingMember(new ArrayList<>());
     testStudy.setMyStudyCalender(new ArrayList<>());
     testStudy.setMyStudyFreeBoard(new ArrayList<>());
+    testStudy.setMyStudyToDo(new ArrayList<>());
     studyList.add(testStudy);
     promptPerMember.memberList.get(1).getPerMyStudy().add(testStudy);
 
@@ -76,6 +83,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setWatingMember(new ArrayList<>());
     testStudy.setMyStudyCalender(new ArrayList<>());
     testStudy.setMyStudyFreeBoard(new ArrayList<>());
+    testStudy.setMyStudyToDo(new ArrayList<>());
     studyList.add(testStudy);
     promptPerMember.memberList.get(2).getPerMyStudy().add(testStudy);
 
@@ -92,8 +100,10 @@ public class StudyAddHandler extends AbstractStudyHandler {
     testStudy.setWatingMember(new ArrayList<>());
     testStudy.setMyStudyCalender(new ArrayList<>());
     testStudy.setMyStudyFreeBoard(new ArrayList<>());
+    testStudy.setMyStudyToDo(new ArrayList<>());
     studyList.add(testStudy);
     promptPerMember.memberList.get(3).getPerMyStudy().add(testStudy);
+
   }
 
   @Override

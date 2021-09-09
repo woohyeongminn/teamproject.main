@@ -16,8 +16,11 @@ public class Study {
   private Date registeredDate;       // 스터디 가입일
   private List<Member> members;     //  참여중인 구성원
   private List<Member> watingMember; // 참여승인을 기다리는 회원
+
   private List<Calender> myStudyCalender;  // 내 스터디 캘린더
   private List<FreeBoard> myStudyFreeBoard; // 내 스터디 자유 게시판
+  private List<ToDo> myStudyToDo; // 내 스터디 투두리스트
+
 
 
 
@@ -27,7 +30,8 @@ public class Study {
         + ", subject=" + subject + ", area=" + area + ", numberOfPeple=" + numberOfPeple + ", face="
         + face + ", introduction=" + introduction + ", registeredDate=" + registeredDate
         + ", members=" + members + ", watingMember=" + watingMember + ", myStudyCalender="
-        + myStudyCalender + ", myStudyFreeBoard=" + myStudyFreeBoard + "]";
+        + myStudyCalender + ", myStudyFreeBoard=" + myStudyFreeBoard + ", myStudyToDo="
+        + myStudyToDo + "]";
   }
 
 
@@ -186,4 +190,14 @@ public class Study {
     }
     return names.toString();
   }
+
+  public List<ToDo> getMyStudyToDo() {
+    return myStudyToDo;
+  }
+
+
+  public void setMyStudyToDo(List<ToDo> myStudyToDo) {
+    this.myStudyToDo = myStudyToDo;
+  }
+
 }
