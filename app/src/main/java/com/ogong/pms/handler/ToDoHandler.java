@@ -10,11 +10,10 @@ import com.ogong.util.Prompt;
 public class ToDoHandler {
 
   int ToDoNo;
-  List<ToDo> todoList;
   List<Study> studyList;
+  Study study;
 
-  public ToDoHandler(List<ToDo> todoList, List<Study> studyList) {
-    this.todoList = todoList;
+  public ToDoHandler(List<Study> studyList) {
     this.studyList = studyList;
 
     ToDo test = new ToDo();
@@ -23,7 +22,6 @@ public class ToDoHandler {
     test.setTodoRemark("자바의 정석");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(0);
-    todoList.add(test);
     studyList.get(1).getMyStudyToDo().add(test);
 
     test = new ToDo();
@@ -32,7 +30,6 @@ public class ToDoHandler {
     test.setTodoRemark("자격증");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(1);
-    todoList.add(test);
     studyList.get(1).getMyStudyToDo().add(test);
 
     test = new ToDo();
@@ -41,7 +38,6 @@ public class ToDoHandler {
     test.setTodoRemark("에이스터디카페");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(2);
-    todoList.add(test);
     studyList.get(0).getMyStudyToDo().add(test);
 
     test = new ToDo();
@@ -50,7 +46,6 @@ public class ToDoHandler {
     test.setTodoRemark("배고프다");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(1);
-    todoList.add(test);
     studyList.get(0).getMyStudyToDo().add(test);
 
   }
@@ -68,8 +63,13 @@ public class ToDoHandler {
     todo.setTodoStatus(promptStatus());
     todo.setTodoDate(new Date(System.currentTimeMillis()));
 
-    study.getMyStudyToDo().add(todo);
+    String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오)");
+    if (!input.equalsIgnoreCase("네")) {
+      System.out.println("등록을 취소하였습니다.");
+      listToDo(study);
+    }
 
+    study.getMyStudyToDo().add(todo);
     System.out.println("할 일이 등록되었습니다.");
 
     listToDo(study);
@@ -98,6 +98,7 @@ public class ToDoHandler {
 
     if (toDoArrayList.isEmpty()) {
       System.out.println("등록된 To-Do List가 없습니다.");
+      return;
     }
 
     System.out.println("========================");
@@ -109,7 +110,7 @@ public class ToDoHandler {
     switch (selete) {
       case 1 : detailToDo(toDoArrayList, study); break;
       case 2 : addToDo(study); break;
-      default:break;
+      default : return;
     }
   }
 
@@ -119,25 +120,29 @@ public class ToDoHandler {
     System.out.println("▶ To-Do List 상세보기");
     System.out.println();
 
-    int todoNo = Prompt.inputInt("번호 : ");
-    System.out.println();
-
+    int todoNo;
     ToDo detailToDo = new ToDo();
 
-    for (int i = 0; i < toDoArrayList.size(); i++) {
-      if (toDoArrayList.get(i).getTodoNo() == todoNo) {
-        System.out.printf(" >> 내용 : %s\n", toDoArrayList.get(i).getTodoContent());
-        System.out.printf(" >> 비고 : %s\n", toDoArrayList.get(i).getTodoRemark());
-        System.out.printf(" >> 상태 : %d\n", toDoArrayList.get(i).getTodoStatus());
-        System.out.printf(" >> DATE : %s\n", toDoArrayList.get(i).getTodoDate());
-        detailToDo = toDoArrayList.get(i);
-      }
-    }
-    if (toDoArrayList.isEmpty()) {
-      System.out.println("다시 선택하세요.");
-      return;
-    }
+    while (true) {
+      todoNo = Prompt.inputInt("번호 : ");
+      System.out.println();
 
+      if (toDoArrayList.isEmpty()) {
+        System.out.println("다시 선택하세요.");
+        continue;
+      }
+
+      for (int i = 0; i < toDoArrayList.size(); i++) {
+        if (toDoArrayList.get(i).getTodoNo() == todoNo) {
+          System.out.printf(" >> 내용 : %s\n", toDoArrayList.get(i).getTodoContent());
+          System.out.printf(" >> 비고 : %s\n", toDoArrayList.get(i).getTodoRemark());
+          System.out.printf(" >> 상태 : %d\n", toDoArrayList.get(i).getTodoStatus());
+          System.out.printf(" >> DATE : %s\n", toDoArrayList.get(i).getTodoDate());
+          detailToDo = toDoArrayList.get(i);
+        }
+      }
+      break;
+    }
 
     System.out.println("========================");
     System.out.println("1. To-do 수정");
@@ -146,14 +151,15 @@ public class ToDoHandler {
     System.out.println("========================");
     int selete = Prompt.inputInt("선택> ");
     switch (selete) {
-      case 1 : updateToDo(detailToDo); break;
+      case 1 : updateToDo(detailToDo, study); break;
       case 2 : deleteToDo(detailToDo, study); break;
-      default:break;
+      case 0 : listToDo(study); break;
+      default : return;
     }
   }
 
   // 수정
-  protected void updateToDo(ToDo detailToDo) {
+  protected void updateToDo(ToDo detailToDo, Study study) {
     System.out.println();
     System.out.println("▶ To-Do List 변경");
     System.out.println();
@@ -165,13 +171,15 @@ public class ToDoHandler {
     String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오)");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("변경을 취소하였습니다.");
-      return;
+      listToDo(study);
     }
 
     detailToDo.setTodoContent(todoContent);
     detailToDo.setTodoStatus(todoStatus);
     detailToDo.setTodoRemark(todoRemark);
+
     System.out.println("할 일이 변경되었습니다.");
+    listToDo(study);
   }
 
 
@@ -184,14 +192,13 @@ public class ToDoHandler {
     String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오)");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("삭제를 취소하였습니다.");
-      return;
+      listToDo(study);
     }
 
-    todoList.remove(detailToDo);
     study.getMyStudyToDo().remove(detailToDo);
 
-
     System.out.println("할 일을 삭제하였습니다.");
+    listToDo(study);
   }
 
 
@@ -202,16 +209,20 @@ public class ToDoHandler {
 
   public int promptStatus(int todoStatus) {
     if (todoStatus == -1) {
+      System.out.println();
       System.out.println("진행 상황: ");
       System.out.println("1: 진행 중");
       System.out.println("2: 변경 예정");
+      System.out.println();
       return Prompt.inputInt("선택하세요. ");
     } else {
       System.out.printf("진행 상황(%s): \n", getStatusToDo(todoStatus));
     }
+    System.out.println();
     System.out.println("1: 진행 중");
     System.out.println("2: 변경 예정");
     System.out.println("3: 완료");
+    System.out.println();
     return Prompt.inputInt("선택하세요. ");
   }
 
@@ -225,16 +236,14 @@ public class ToDoHandler {
   }
 
   //번호로 객체 찾기
-  public ToDo findBytodoNo(int todoNo) {
-    for (ToDo todo : todoList) {
-      if (todo.getTodoNo() == todoNo) {
-        return todo;
-      }
-    }
-    return null;
-  }
-
-
+  //  public ToDo findBytodoNo(int todoNo) {
+  //    for (ToDo todo : todoList) {
+  //      if (todo.getTodoNo() == todoNo) {
+  //        return todo;
+  //      }
+  //    }
+  //    return null;
+  //  }
 }
 
 

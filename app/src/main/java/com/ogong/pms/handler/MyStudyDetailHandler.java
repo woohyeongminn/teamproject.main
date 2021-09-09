@@ -1,6 +1,5 @@
 package com.ogong.pms.handler;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
@@ -18,8 +17,6 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     this.commandMap = commandMap;
     this.todoHandler = todoHandler;
   }
-
-  List<ToDoHandler> toDoHandler = new ArrayList<>();
 
   @Override
   public void execute() {

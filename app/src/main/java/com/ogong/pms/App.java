@@ -206,7 +206,7 @@ public class App {
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
-    ToDoHandler toDoHandler = new ToDoHandler(toDoList, studyList);
+    ToDoHandler toDoHandler = new ToDoHandler(studyList);
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap, toDoHandler));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
@@ -342,7 +342,7 @@ public class App {
 
     userMenuGroup.add(createMyPageMenu());      // 마이페이지
     userMenuGroup.add(createStudyMenu());       // 스터디 찾기
-    userMenuGroup.add(createMystudyMenu());     // 내 스터디
+    userMenuGroup.add(new MenuItem("내 스터디", Menu.ENABLE_LOGIN, "/myStudy/list"));     // 내 스터디
     userMenuGroup.add(createCafeMenu());        // 장소 예약하기
     userMenuGroup.add(createCSMenu());          // 고객센터
 
@@ -377,18 +377,26 @@ public class App {
     return allStudyMenu; 
   }
 
+
+
   //개인 하위 메뉴4 - 내 스터디
   // <구현안됨>
   // detail 에서 댓글 수정기능x
-  private Menu createMystudyMenu() {
-    MenuGroup myStudyMenu = new MenuGroup("내 스터디", Menu.ENABLE_LOGIN); 
-    // <구현안됨>
-    // 내 스터디 하위 메뉴 1 - 구성원
-    // 내 스터디 하위 메뉴 3 - 투두리스트
-    // 내 스터디 하위 메뉴 5 - 화상미팅
-    myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
-    return myStudyMenu;
-  }
+  //  private Menu createMystudyMenu() {
+  //    MenuGroup myStudyMenu = new MenuGroup("내 스터디", Menu.ENABLE_LOGIN); 
+  //    // <구현안됨>
+  //    // 내 스터디 하위 메뉴 1 - 구성원
+  //    // 내 스터디 하위 메뉴 3 - 투두리스트
+  //    // 내 스터디 하위 메뉴 5 - 화상미팅
+  //
+  //    myStudyMenu.add(new MenuItem("내 스터디 목록", "/myStudy/list"));
+  //
+  //    return myStudyMenu;
+  //  }
+
+
+
+
 
   //개인 하위 메뉴5 - 스터디 장소
   private Menu createCafeMenu() {
