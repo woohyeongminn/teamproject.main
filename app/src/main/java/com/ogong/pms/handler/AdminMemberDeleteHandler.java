@@ -36,14 +36,14 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
 
         //    if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String selectMember = Prompt.inputString("회원을 선택하세요. ");
+        String selectMember = Prompt.inputString(" 회원 닉네임 : ");
 
         member = promptPerMember.getMemberByPerNick(selectMember);
 
-        String input = Prompt.inputString("정말 탈퇴시키겠습니까? (네 /아니오) ");
+        String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 /아니오) ");
 
         if (!input.equalsIgnoreCase("네")) {
-          System.out.println("회원 삭제를 취소하였습니다.");
+          System.out.println(" 회원 삭제를 취소하였습니다.");
           return;
         }
 
@@ -52,7 +52,7 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
 
         memberList.remove(member);
         AuthPerMemberLoginHandler.loginUser = null;
-        System.out.println("회원이 삭제되었습니다.");
+        System.out.println(" 회원이 삭제되었습니다.");
         return;
         //      return member;
       }

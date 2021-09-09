@@ -9,13 +9,17 @@ import com.ogong.util.Prompt;
 public class MyStudyDetailHandler extends AbstractStudyHandler {
 
   HashMap<String, Command> commandMap;
-  MyStudyToDo todoHandler;
+  MyStudyToDo myStudyToDo;
+  MyStudyCalender myStudyCalender;
 
 
-  public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap, MyStudyToDo todoHandler) {
+
+  public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap,
+      MyStudyToDo myStudyToDo, MyStudyCalender myStudyCalender) {
     super(studyList);
     this.commandMap = commandMap;
-    this.todoHandler = todoHandler;
+    this.myStudyToDo = myStudyToDo;
+    this.myStudyCalender = myStudyCalender;
   }
 
   @Override
@@ -76,8 +80,9 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
       case 1: listMember(study); break;
-      case 2: commandMap.get("/calender/list").execute(); break;
-      case 3: todoHandler.listToDo(study); break;
+      //      case 2: commandMap.get("/calender/list").execute(); break;
+      case 2: myStudyCalender.listCalender(study); break;
+      case 3: myStudyToDo.listToDo(study); break;
       case 4: commandMap.get("/freeBoard/list").execute(); break;
       case 5: commandMap.get("/mystudy/detail").execute(); break;   // 임시로 넣었음
       case 6: commandMap.get("/study/update").execute(); break;   //구현 덜 했음

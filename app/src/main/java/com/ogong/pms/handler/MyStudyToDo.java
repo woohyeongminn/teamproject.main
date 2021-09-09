@@ -11,9 +11,11 @@ public class MyStudyToDo {
 
   int ToDoNo;
   List<Study> studyList;
+  List<ToDo> toDoList;
   Study study;
 
-  public MyStudyToDo(List<Study> studyList) {
+  public MyStudyToDo(List<ToDo> toDoList, List<Study> studyList) {
+    this.toDoList = toDoList;
     this.studyList = studyList;
 
     ToDo test = new ToDo();
@@ -22,6 +24,7 @@ public class MyStudyToDo {
     test.setTodoRemark("자바의 정석");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(0);
+    toDoList.add(test);
     studyList.get(1).getMyStudyToDo().add(test);
 
     test = new ToDo();
@@ -30,6 +33,7 @@ public class MyStudyToDo {
     test.setTodoRemark("자격증");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(1);
+    toDoList.add(test);
     studyList.get(1).getMyStudyToDo().add(test);
 
     test = new ToDo();
@@ -38,6 +42,7 @@ public class MyStudyToDo {
     test.setTodoRemark("에이스터디카페");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(2);
+    toDoList.add(test);
     studyList.get(0).getMyStudyToDo().add(test);
 
     test = new ToDo();
@@ -46,6 +51,7 @@ public class MyStudyToDo {
     test.setTodoRemark("배고프다");
     test.setTodoDate(new Date(System.currentTimeMillis()));
     test.setTodoStatus(1);
+    toDoList.add(test);
     studyList.get(0).getMyStudyToDo().add(test);
 
   }
@@ -69,7 +75,7 @@ public class MyStudyToDo {
       listToDo(study);
       return;
     }
-
+    toDoList.add(todo);
     study.getMyStudyToDo().add(todo);
     System.out.println("할 일이 등록되었습니다.");
 
@@ -199,6 +205,7 @@ public class MyStudyToDo {
       return;
     }
 
+    toDoList.remove(detailToDo);
     study.getMyStudyToDo().remove(detailToDo);
 
     System.out.println("할 일을 삭제하였습니다.");
