@@ -67,12 +67,14 @@ public class ToDoHandler {
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("등록을 취소하였습니다.");
       listToDo(study);
+      return;
     }
 
     study.getMyStudyToDo().add(todo);
     System.out.println("할 일이 등록되었습니다.");
 
     listToDo(study);
+    return;
   }
 
   //목록
@@ -172,6 +174,7 @@ public class ToDoHandler {
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("변경을 취소하였습니다.");
       listToDo(study);
+      return;
     }
 
     detailToDo.setTodoContent(todoContent);
@@ -193,6 +196,7 @@ public class ToDoHandler {
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("삭제를 취소하였습니다.");
       listToDo(study);
+      return;
     }
 
     study.getMyStudyToDo().remove(detailToDo);
