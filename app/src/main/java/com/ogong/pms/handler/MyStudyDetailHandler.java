@@ -60,34 +60,37 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
   }
 
   private void selectUserModifyPage(Study study) {
-    System.out.println("\n----------------------");
+    while (true) {
+      System.out.println("\n----------------------");
 
-    System.out.println("1. 구성원");
-    // 대기중인 회원 목록, 참가중인 회원 목록, 인원수, 
-    // 조장은 위에 3개 + 승인, 거절, 권한 넘겨주기, 탈퇴시키기 까지
+      System.out.println("1. 구성원");
+      // 대기중인 회원 목록, 참가중인 회원 목록, 인원수, 
+      // 조장은 위에 3개 + 승인, 거절, 권한 넘겨주기, 탈퇴시키기 까지
 
-    System.out.println("2. 캘린더");
-    System.out.println("3. To-do");
-    System.out.println("4. 자유게시판");
-    System.out.println("5. 화상미팅");
-    System.out.println("6. 수정하기");
-    System.out.println("7. 삭제&탈퇴하기");
-    // 스터디 삭제는 되는데 탈퇴하기가 없음
-    // 구성원은 탈퇴만 해야함, 조장은 스터디삭제도 할수 있음
+      System.out.println("2. 캘린더");
+      System.out.println("3. To-do");
+      System.out.println("4. 자유게시판");
+      System.out.println("5. 화상미팅");
+      System.out.println("6. 수정하기");
+      System.out.println("7. 삭제&탈퇴하기");
+      // 스터디 삭제는 되는데 탈퇴하기가 없음
+      // 구성원은 탈퇴만 해야함, 조장은 스터디삭제도 할수 있음
 
-    System.out.println("0. 뒤로 가기");
+      System.out.println("0. 뒤로 가기");
 
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      case 1: listMember(study); break;
-      //      case 2: commandMap.get("/calender/list").execute(); break;
-      case 2: myStudyCalender.listCalender(study); break;
-      case 3: myStudyToDo.listToDo(study); break;
-      case 4: commandMap.get("/freeBoard/list").execute(); break;
-      case 5: commandMap.get("/mystudy/detail").execute(); break;   // 임시로 넣었음
-      case 6: commandMap.get("/study/update").execute(); break;   //구현 덜 했음
-      case 7: commandMap.get("/myStudy/delete").execute(); break;   //구현 덜 했음
-      default : return;
+      int selectAdminNo = Prompt.inputInt("선택> ");
+      switch (selectAdminNo) {
+        case 1: listMember(study); break;
+        //      case 2: commandMap.get("/calender/list").execute(); break;
+        case 2: myStudyCalender.listCalender(study); break;
+        case 3: myStudyToDo.listToDo(study); break;
+        case 4: commandMap.get("/freeBoard/list").execute(); break;
+        case 5: commandMap.get("/mystudy/detail").execute(); break;   // 임시로 넣었음
+        case 6: commandMap.get("/study/update").execute(); break;   //구현 덜 했음
+        case 7: commandMap.get("/myStudy/delete").execute(); break;   //구현 덜 했음
+        default : return;
+      }
     }
+
   }
 }
