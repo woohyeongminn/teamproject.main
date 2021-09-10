@@ -54,8 +54,6 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
         default : return;
       }
     }
-
   }
-
 
 }
