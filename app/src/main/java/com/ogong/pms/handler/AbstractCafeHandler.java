@@ -1,6 +1,8 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
@@ -31,10 +33,8 @@ public abstract class AbstractCafeHandler implements Command {
   }
 
   protected Cafe findByNo(int no) {
-    Cafe[] arr = cafeList.toArray(new Cafe[0]);
-
-    for (Cafe cafe : arr) {
-      if (cafe.getNo() == no) {
+    for (Cafe cafe : cafeList) {
+      if (cafe.getNo() == no && cafe.getCafeStatus() != 0 && cafe.getCafeStatus() != 3) {
         return cafe;
       }
     }
@@ -42,9 +42,7 @@ public abstract class AbstractCafeHandler implements Command {
   }
 
   protected Cafe findByName(String name) {
-    Cafe[] arr = cafeList.toArray(new Cafe[0]);
-
-    for (Cafe cafe : arr) {
+    for (Cafe cafe : cafeList) {
       if (cafe.getName().equals(name)) {
         return cafe;
       }
@@ -67,47 +65,53 @@ public abstract class AbstractCafeHandler implements Command {
     Date today = new Date(System.currentTimeMillis());
     Date reservationDate = Prompt.inputDate("예약 날짜 : ");
     while (today.toLocalDate().compareTo(reservationDate.toLocalDate()) > 0) {
-      System.out.println("이전 날짜는 예약 불가능 합니다.");
-      System.out.println("날짜를 다시 입력해주세요.");
+      System.out.println(" >> 이전 날짜는 예약 불가능 합니다.");
+      System.out.println("    날짜를 다시 입력해주세요.\n");
       reservationDate = Prompt.inputDate("예약 날짜 : ");
     }
 
-    String[] openTime = cafe.getOpenTime().split(":");
-    String[] lastTime = cafe.getCloseTime().split(":");
-    int openTimeHour = Integer.valueOf(openTime[0]);
-    int lastTimeMinus1 = Integer.valueOf(lastTime[0]) - 1;
+    //    String[] openTime = cafe.getOpenTime().split(":");
+    //    String[] lastTime = cafe.getCloseTime().split(":");
+    //    int openTimeHour = Integer.valueOf(openTime[0]);
+    //    int lastTimeMinus1 = Integer.valueOf(lastTime[0]) - 1;
     //String lastOrderTime = String.valueOf(lastTimeMinus1) + ":" + lastTime[1];
 
-    int startTime;
+    String openTime = cafe.getOpenTime().toString();    
+    String closeTime = cafe.getCloseTime().toString();
+    String closeTimeMinus1 = cafe.getCloseTime().minusHours(1).toString();
+
+    LocalTime startTime;
     while (true) {
-      startTime = Prompt.inputInt(
-          String.format("시작시간(%s시~%d시) : ", openTime[0], lastTimeMinus1));
-      if (startTime < openTimeHour) {
-        System.out.println("오픈시간 전 입니다.");
-        System.out.println("시작시간을 다시 입력해주세요.");
+      startTime = LocalTime.parse(Prompt.inputString(
+          String.format("시작 시간 (%s~%s) : ", openTime, closeTimeMinus1)));
+      if (startTime.isBefore(cafe.getOpenTime())) {
+        System.out.println(" >> 오픈 시간 전 입니다.");
+        System.out.println("    시작 시간을 다시 입력해주세요.\n");
         continue;
-      } else if (startTime > lastTimeMinus1) {
-        System.out.println(lastTimeMinus1 + "시 까지만 가능합니다.");
-        System.out.println("시작시간을 다시 입력해주세요.");
+      } else if (startTime.isAfter(cafe.getCloseTime().minusHours(1))) {
+        System.out.println(" >> " + closeTimeMinus1 + " 까지만 가능합니다.");
+        System.out.println("    시작 시간을 다시 입력해주세요.\n");
         continue;
       }
       break;
     }
 
-    int useTime = Prompt.inputInt("이용할 시간 : ");
-    while (startTime + useTime > Integer.valueOf(lastTime[0])) {
-      System.out.printf("마감시간(%s시)을 초과하여 예약할 수 없습니다.\n", lastTime[0]);
-      System.out.println("이용시간을 다시 입력해주세요.");
-      useTime = Prompt.inputInt("이용할 시간 : ");
+    int useTime = Prompt.inputInt(String.format("이용 시간 (%s 마감) : ", closeTime));
+    int availableTime = (int) ChronoUnit.HOURS.between(startTime, cafe.getCloseTime());
+    while (useTime > availableTime) {
+      System.out.printf(" >> 마감 시간(%s)을 초과하여 예약할 수 없습니다.\n", closeTime);
+      System.out.println("    이용 시간을 다시 입력해주세요.\n");
+      useTime = Prompt.inputInt(String.format("이용 할 시간 (%s 마감) : ", closeTime));
     }
-    int useMemberNumber = Prompt.inputInt("사용할 인원 : ");
+
+    int useMemberNumber = Prompt.inputInt("사용 인원 : ");
     int totalPrice = useTime * useMemberNumber * cafe.getTimePrice();
     System.out.printf("총금액 : %d원\n" , totalPrice);
 
     String input = Prompt.inputString("정말 예약하시겠습니까? (네 / 아니오) ");
 
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("장소예약을 취소하였습니다.");
+      System.out.println(" >> 장소예약을 취소하였습니다.");
       return;
     }
 
@@ -115,7 +119,7 @@ public abstract class AbstractCafeHandler implements Command {
     reservation.setMember(member);
     reservation.setCafe(cafe);
     reservation.setReservationDate(reservationDate);
-    reservation.setStartTime(startTime);
+    reservation.setStartTime(Integer.valueOf(totalPrice));
     reservation.setUseTime(useTime);
     reservation.setUseMemberNumber(useMemberNumber);
     reservation.setTotalPrice(totalPrice);

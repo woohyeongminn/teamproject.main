@@ -50,9 +50,9 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     System.out.println();
 
-    System.out.println("1. 예약하기");
-    System.out.println("0. 뒤로가기");
-    int selectNo = Prompt.inputInt("선택> ");
+    System.out.println("1. 예약");
+    System.out.println("0. 이전");
+    int selectNo = Prompt.inputInt(" 선택> ");
     switch (selectNo) {
       case 1 : addReservation(cafe); break;
       default : return;

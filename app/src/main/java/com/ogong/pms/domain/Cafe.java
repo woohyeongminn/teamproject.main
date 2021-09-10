@@ -1,26 +1,29 @@
 package com.ogong.pms.domain;
 
+import java.time.LocalTime;
+
 public class Cafe {
 
   private int no; // 카페 번호
-  private CeoMember CeoMember; // 사장
+  private int CeoNo; // 사장
   private String name; // 상호명
   private String mainImg; //카페 썸네일 이미지
   private String info; // 소개글
   private String location; // 주소
   private String phone; // 전화번호
-  private String openTime; // 오픈시간
-  private String closeTime; // 마감시간
+  private LocalTime openTime; // 오픈시간
+  private LocalTime closeTime; // 마감시간
   private String holiday; // 휴무일
   private int bookable; // 예약가능인원
   private int timePrice; // 시간당금액
+  private int cafeStatus; // 0 : 승인대기 , 1 : 운영중 , 2 : 운영중단 3 : 삭제 -> cafeStatus 관리자, 사장 한테만 보임
 
   @Override
   public String toString() {
-    return "Cafe [no=" + no + ", CeoMember=" + CeoMember + ", name=" + name + ", mainImg=" + mainImg
+    return "Cafe [no=" + no + ", CeoNo=" + CeoNo + ", name=" + name + ", mainImg=" + mainImg
         + ", info=" + info + ", location=" + location + ", phone=" + phone + ", openTime="
         + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday + ", bookable=" + bookable
-        + ", timePrice=" + timePrice + "]";
+        + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus + "]";
   }
 
   public int getNo() {
@@ -31,12 +34,12 @@ public class Cafe {
     this.no = no;
   }
 
-  public CeoMember getCeoMember() {
-    return CeoMember;
+  public int getCeoNo() {
+    return CeoNo;
   }
 
-  public void setCeoMember(CeoMember ceoMember) {
-    CeoMember = ceoMember;
+  public void setCeoNo(int ceoNo) {
+    CeoNo = ceoNo;
   }
 
   public String getName() {
@@ -79,19 +82,19 @@ public class Cafe {
     this.phone = phone;
   }
 
-  public String getOpenTime() {
+  public LocalTime getOpenTime() {
     return openTime;
   }
 
-  public void setOpenTime(String openTime) {
+  public void setOpenTime(LocalTime openTime) {
     this.openTime = openTime;
   }
 
-  public String getCloseTime() {
+  public LocalTime getCloseTime() {
     return closeTime;
   }
 
-  public void setCloseTime(String closeTime) {
+  public void setCloseTime(LocalTime closeTime) {
     this.closeTime = closeTime;
   }
 
@@ -119,4 +122,11 @@ public class Cafe {
     this.timePrice = timePrice;
   }
 
+  public int getCafeStatus() {
+    return cafeStatus;
+  }
+
+  public void setCafeStatus(int cafeStatus) {
+    this.cafeStatus = cafeStatus;
+  }
 }

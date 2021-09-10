@@ -23,8 +23,10 @@ public class CafeListHandler extends AbstractCafeHandler {
     System.out.println("▶ 장소 목록");
 
     for(Cafe cafe : cafeList) {
-      System.out.printf(" \n(%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
-          , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
+      if (cafe.getCafeStatus() != 0 && cafe.getCafeStatus() != 3) {
+        System.out.printf(" \n(%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
+            , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
+      }
     }
 
     selectCafeDetailMenu();
@@ -32,10 +34,10 @@ public class CafeListHandler extends AbstractCafeHandler {
 
   private void selectCafeDetailMenu() {
     System.out.println("\n----------------------");
-    System.out.println("1. 상세보기");
-    System.out.println("2. 검    색");
-    System.out.println("0. 뒤로가기");
-    int input = Prompt.inputInt("선택> ");
+    System.out.println("1. 상세");
+    System.out.println("2. 검색");
+    System.out.println("0. 이전");
+    int input = Prompt.inputInt(" 선택> ");
     switch (input) {
       case 1: commandMap.get("/cafe/detail").execute(); break;
       case 2: commandMap.get("/cafe/search").execute(); break;

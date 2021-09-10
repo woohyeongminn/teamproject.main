@@ -29,8 +29,8 @@ public class CafeUpdateHandler extends AbstractCafeHandler {
     String Info = Prompt.inputString(String.format(" 소개글(%s) : ", cafe.getInfo()));
     String location = Prompt.inputString(String.format(" 주소(%s) : ", cafe.getLocation()));
     String phone = Prompt.inputString(String.format(" 전화번호(%s) : ", cafe.getPhone()));
-    String openTime = Prompt.inputString(String.format(" 오픈시간(%s) : ", cafe.getOpenTime()));
-    String closeTime = Prompt.inputString(String.format(" 마감시간(%s) : ", cafe.getCloseTime()));
+    //String openTime = Prompt.inputString(String.format(" 오픈시간(%s) : ", cafe.getOpenTime()));
+    //String closeTime = Prompt.inputString(String.format(" 마감시간(%s) : ", cafe.getCloseTime()));
     String holiday = Prompt.inputString(String.format(" 휴무일(%s) : ", cafe.getHoliday()));
     int bookable = Prompt.inputInt(String.format(" 예약가능인원(%d) : ", cafe.getBookable()));
     int timePrice = Prompt.inputInt(String.format(" 예약가능인원(%d) : ", cafe.getTimePrice()));
@@ -46,8 +46,8 @@ public class CafeUpdateHandler extends AbstractCafeHandler {
     cafe.setInfo(Info);
     cafe.setLocation(location);
     cafe.setPhone(phone);
-    cafe.setOpenTime(openTime);
-    cafe.setCloseTime(closeTime);
+    //cafe.setOpenTime(openTime);
+    //cafe.setCloseTime(closeTime);
     cafe.setHoliday(holiday);
     cafe.setBookable(bookable);
     cafe.setTimePrice(timePrice);
