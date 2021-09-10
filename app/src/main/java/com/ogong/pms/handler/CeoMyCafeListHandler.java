@@ -160,7 +160,18 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
   }
 
   private void myCafeDelete(Cafe cafe) {
+    System.out.println();
+    System.out.println("▶ 장소 삭제");
 
+    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
+    if (!input.equalsIgnoreCase("네")) {
+      System.out.println("장소 삭제를 취소하였습니다.");
+      return;
+    }
+
+    cafeList.remove(cafe);
+
+    System.out.println("장소를 삭제하였습니다.");
   }
 
   private Cafe findByNo(int cafeNo) {

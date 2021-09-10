@@ -39,8 +39,9 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     for (CafeReview review : reviewList) {
       if (review.getCafe().getNo() == cafe.getNo()) {
         String nickname = review.getMember().getPerNickname();
-        System.out.printf("닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
-            nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
+        System.out.printf("닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
+            nickname, getReviewGradeStatusLabel(review.getGrade()), review.getContent()
+            , review.getRegisteredDate());
         reviewSize++;
       }
     }
