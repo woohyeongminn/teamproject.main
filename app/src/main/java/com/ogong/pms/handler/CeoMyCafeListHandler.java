@@ -40,13 +40,13 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     }
 
     System.out.println();
-    System.out.println("1. 등록");
-    System.out.println("2. 상세");
+    System.out.println("1. 상세");
+    System.out.println("2. 등록");
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : myCafeAdd(); break;
-      case 2 : myCafeDetail(); break;
+      case 1 : myCafeDetail(); break;
+      case 2 : myCafeAdd(); break;
       default : return;
     }
   }
@@ -66,8 +66,8 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     cafe.setInfo(Prompt.inputString(" 소개글 : "));
     cafe.setLocation(Prompt.inputString(" 주소 : "));
     cafe.setPhone(Prompt.inputString(" 전화번호 : "));
-    cafe.setOpenTime(LocalTime.parse(Prompt.inputString(" 오픈시간 (입력 예> 09:00) : ")));
-    cafe.setCloseTime(LocalTime.parse(Prompt.inputString(" 마감시간 (입력 예> 21:00) : ")));
+    cafe.setOpenTime(LocalTime.parse(Prompt.inputString(" 오픈시간 (예시 > 09:00) : ")));
+    cafe.setCloseTime(LocalTime.parse(Prompt.inputString(" 마감시간 (예시 > 21:00) : ")));
     cafe.setHoliday(Prompt.inputString(" 휴무일 : "));
     cafe.setBookable(Prompt.inputInt(" 예약가능인원 : "));
     cafe.setTimePrice(Prompt.inputInt(" 시간당금액 : "));
@@ -118,9 +118,49 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt(" 선택> ");
     switch (selectNo) {
-      case 1 : break;
+      case 1 : myCafeUpdate(cafe); break;
+      case 2 : myCafeDelete(cafe); break;
       default : return;
     }
+  }
+
+  private void myCafeUpdate(Cafe cafe) {
+    System.out.println();
+    System.out.println("▶ 장소 수정");
+
+    String name = Prompt.inputString(String.format(" 상호명(%s) : ", cafe.getName()));
+    String mainImg = Prompt.inputString(String.format(" 대표이미지(%s) : ", cafe.getMainImg()));
+    String Info = Prompt.inputString(String.format(" 소개글(%s) : ", cafe.getInfo()));
+    String location = Prompt.inputString(String.format(" 주소(%s) : ", cafe.getLocation()));
+    String phone = Prompt.inputString(String.format(" 전화번호(%s) : ", cafe.getPhone()));
+    String openTime = Prompt.inputString(String.format(" 오픈시간(%s) : ", cafe.getOpenTime()));
+    String closeTime = Prompt.inputString(String.format(" 마감시간(%s) : ", cafe.getCloseTime()));
+    String holiday = Prompt.inputString(String.format(" 휴무일(%s) : ", cafe.getHoliday()));
+    int bookable = Prompt.inputInt(String.format(" 예약가능인원(%d) : ", cafe.getBookable()));
+    int timePrice = Prompt.inputInt(String.format(" 시간당금액(%d) : ", cafe.getTimePrice()));
+
+    String input = Prompt.inputString(" >> 정말 수정하시겠습니까? (네 / 아니오) ");
+    if (!input.equalsIgnoreCase("네")) {
+      System.out.println(" >> 수정을 취소하였습니다.");
+      return;
+    }
+
+    cafe.setName(name);
+    cafe.setMainImg(mainImg);
+    cafe.setInfo(Info);
+    cafe.setLocation(location);
+    cafe.setPhone(phone);
+    cafe.setOpenTime(LocalTime.parse(openTime));
+    cafe.setCloseTime(LocalTime.parse(closeTime));
+    cafe.setHoliday(holiday);
+    cafe.setBookable(bookable);
+    cafe.setTimePrice(timePrice);
+
+    System.out.println(" >> 수정이 완료 되었습니다.");
+  }
+
+  private void myCafeDelete(Cafe cafe) {
+
   }
 
   private Cafe findByNo(int cafeNo) {
