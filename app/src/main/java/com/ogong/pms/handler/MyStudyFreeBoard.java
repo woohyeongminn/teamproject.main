@@ -12,15 +12,17 @@ import com.ogong.util.Prompt;
 public class MyStudyFreeBoard {
 
   int freeBoardNo;
-  List<Study> studyList;
   List<FreeBoard> freeBoardList;
   List<Comment> commentList;
+  List<Member> memberList;
+  List<Study> studyList;
   Study study;
 
-
-  public MyStudyFreeBoard(List<FreeBoard> freeBoardList, List<Comment> commentList, List<Study> studyList) {
+  public MyStudyFreeBoard(List<FreeBoard> freeBoardList, List<Comment> commentList,
+      List<Member> memberList, List<Study> studyList) {
     this.freeBoardList = freeBoardList;
     this.commentList = commentList;
+    this.memberList = memberList;
     this.studyList = studyList;
 
     FreeBoard test = new FreeBoard();
@@ -28,7 +30,7 @@ public class MyStudyFreeBoard {
     test.setFreeBoardTitle("게시글1");
     test.setFreeBoardContent("5월 10일에 만나요");
     test.setFreeBoardAtcFile("지도");
-    test.setFreeBoardWriter(studyList.get(0).getMembers());
+    test.setFreeBoardWriter(memberList.get(0));
     test.setFreeBoardViewcount(test.getFreeBoardViewcount());
     test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     test.setComment(new ArrayList<>());
@@ -39,7 +41,7 @@ public class MyStudyFreeBoard {
     test.setFreeBoardTitle("게시글2");
     test.setFreeBoardContent("아주아주 잘하고 있습니다");
     test.setFreeBoardAtcFile("jpg");
-    test.setFreeBoardWriter(studyList.get(1).getMembers());
+    test.setFreeBoardWriter(memberList.get(1));
     test.setFreeBoardViewcount(test.getFreeBoardViewcount());
     test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     test.setComment(new ArrayList<>());
@@ -50,13 +52,12 @@ public class MyStudyFreeBoard {
     test.setFreeBoardTitle("게시글3");
     test.setFreeBoardContent("159p 이상합니다");
     test.setFreeBoardAtcFile("문제집");
-    test.setFreeBoardWriter(studyList.get(2).getMembers());
+    test.setFreeBoardWriter(memberList.get(2));
     test.setFreeBoardViewcount(test.getFreeBoardViewcount());
     test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     test.setComment(new ArrayList<>());
     freeBoardList.add(test);
   }
-
 
   // 등록
   private void addFreeBoard(Study study) {
@@ -81,7 +82,7 @@ public class MyStudyFreeBoard {
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
     freeBoard.setFreeBoardContent(Prompt.inputString(" 내용 : "));
     freeBoard.setFreeBoardAtcFile(Prompt.inputString(" 첨부파일 : "));
-    freeBoard.setFreeBoardWriter(studyList.get(2).getMembers());
+    freeBoard.setFreeBoardWriter(member);
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -112,7 +113,7 @@ public class MyStudyFreeBoard {
           freeBoard.getFreeBoardTitle(),
           freeBoard.getFreeBoardContent(),
           freeBoard.getFreeBoardAtcFile(),
-          freeBoard.getFreeBoardWriter().get(0).getPerNickname(),
+          freeBoard.getFreeBoardWriter().getPerNickname(),
           freeBoard.getFreeBoardViewcount(),
           freeBoard.getFreeBoardRegisteredDate());
       System.out.println();
@@ -161,14 +162,13 @@ public class MyStudyFreeBoard {
           System.out.printf(" [%s]\n", freeBoardArrayList.get(i).getFreeBoardTitle());
           System.out.printf(" >> 내용 : %s\n", freeBoardArrayList.get(i).getFreeBoardContent());
           System.out.printf(" >> 첨부파일 : %s\n", freeBoardArrayList.get(i).getFreeBoardAtcFile());
-          System.out.printf(" >> 작성자 : %s\n", freeBoardArrayList.get(i).getFreeBoardWriter().get(i).getPerNickname());
+          System.out.printf(" >> 작성자 : %s\n", freeBoardArrayList.get(i).getFreeBoardWriter().getPerNickname());
           System.out.printf(" >> 등록일 : %s\n", freeBoardArrayList.get(i).getFreeBoardRegisteredDate());
-          freeBoardArrayList.setFreeBoardViewcount(freeBoardArrayList.get(i).getFreeBoardViewcount() + 1);
+          freeBoardArrayList.get(i).setFreeBoardViewcount(freeBoardArrayList.get(i).getFreeBoardViewcount() + 1);
           System.out.printf(" >> 조회수 : %d\n", freeBoardArrayList.get(i).getFreeBoardViewcount());
           detailfreeBoard = freeBoardArrayList.get(i);
 
           listComment(detailfreeBoard); // 댓글호출
-
         }
       }
       break;
@@ -195,21 +195,6 @@ public class MyStudyFreeBoard {
     System.out.println("▶ 게시글 수정");
     System.out.println();
 
-    //    int inputTitle = Prompt.inputInt("번호 : ");
-    //    System.out.println();
-    //
-    //    FreeBoard free = findByNo(inputTitle);
-    //
-    //    if (free == null) {
-    //      System.out.println("해당 번호의 게시글이 없습니다.");
-    //      return;
-    //    }
-    //
-    //    if (free.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
-    //      System.out.println("변경 권한이 없습니다.");
-    //      return;
-    //    }
-
     String freeBoardTitle = Prompt.inputString("제목(" + detailFreeBoard.getFreeBoardTitle()  + ") : ");
     String freeBoardContent = Prompt.inputString("내용(" + detailFreeBoard.getFreeBoardContent() + ") : ");
     String freeBoardAtcFile = Prompt.inputString("첨부파일(" + detailFreeBoard.getFreeBoardAtcFile() + ") : ");
@@ -234,21 +219,6 @@ public class MyStudyFreeBoard {
     System.out.println("▶ 게시글 삭제");
     System.out.println();
 
-    //    int inputTitle = Prompt.inputInt("번호 : ");
-    //    System.out.println();
-    //
-    //    FreeBoard free = findByNo(inputTitle);
-    //
-    //    if (free == null) {
-    //      System.out.println("해당 번호의 게시글이 없습니다.");
-    //      return;
-    //    }
-    //
-    //    if (free.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
-    //      System.out.println("삭제 권한이 없습니다.");
-    //      return;
-    //    }
-
     String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("삭제를 취소하였습니다.");
@@ -262,21 +232,7 @@ public class MyStudyFreeBoard {
     listFreeBoard(study);
   }
 
-
-
-  //  protected FreeBoard findByNo(int inputNo) {
-  //    for (FreeBoard freeBoard : freeBoardList) {
-  //      if (freeBoard.getFreeBoardNo() == inputNo) {
-  //        return freeBoard;
-  //      }
-  //    }
-  //    return null;
-  //  }
-
-
-  //---------------댓글------------------------------------------------------
-
-  // 수정
+  //--------------------------댓글--------------------------
   protected void addComment(FreeBoard freeBoard) {
     System.out.println();
     System.out.println("▶ 댓글 작성하기");
@@ -304,7 +260,6 @@ public class MyStudyFreeBoard {
       commentList.add(comment);
       freeBoard.getComment().add(comment);
       System.out.println("댓글이 등록되었습니다.");
-
     }
   }
 
@@ -325,54 +280,31 @@ public class MyStudyFreeBoard {
       System.out.println("등록된 댓글이 없습니다.");
     }
   }
-
-  // 기존
-  //  protected void addComment(FreeBoard freeBoard) {
-  //    System.out.println();
-  //    System.out.println("▶ 댓글 작성하기");
-  //
-  //    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-  //      System.out.println("로그인 한 회원만 등록 가능합니다.");
-  //    } else {
-  //
-  //      Comment comment = new Comment();
-  //
-  //      String text = Prompt.inputString("댓글 내용 : ");
-  //      Member witer = AuthPerMemberLoginHandler.getLoginUser();
-  //      Date date = new Date(System.currentTimeMillis());
-  //
-  //      String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
-  //      if (!input.equalsIgnoreCase("네")) {
-  //        System.out.println("댓글 등록을 취소하였습니다.");
-  //        return;
-  //      }
-  //
-  //      comment.setCommentText(text);
-  //      comment.setCommentWiter(witer);
-  //      comment.setCommentRegisteredDate(date);
-  //
-  //      commentList.add(comment);
-  //      freeBoard.getComment().add(comment);
-  //      System.out.println("댓글이 등록되었습니다.");
-  //
-  //    }
-  //  }
-  //
-  //  protected void listComment(FreeBoard freeBoard) {
-  //    System.out.println();
-  //    System.out.println("=============댓글=============");
-  //    int commentSize = 0;
-  //
-  //    for (Comment comment : freeBoard.getComment()) {
-  //      System.out.printf("내용 : %s | 작성자 : %s | 등록일 : %s\n",
-  //          comment.getCommentText(),
-  //          comment.getCommentWiter().getPerNickname(),
-  //          comment.getCommentRegisteredDate());
-  //      commentSize++;
-  //    }
-  //
-  //    if (commentSize == 0) {
-  //      System.out.println("등록된 댓글이 없습니다.");
-  //    }
-  //  }
 }
+
+
+// 번호 입력
+//    int inputTitle = Prompt.inputInt("번호 : ");
+//    System.out.println();
+//
+//    FreeBoard free = findByNo(inputTitle);
+//
+//    if (free == null) {
+//      System.out.println("해당 번호의 게시글이 없습니다.");
+//      return;
+//    }
+//
+//    if (free.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
+//      System.out.println("삭제 권한이 없습니다.");
+//      return;
+//    }
+
+// 번호 찾기
+//  protected FreeBoard findByNo(int inputNo) {
+//    for (FreeBoard freeBoard : freeBoardList) {
+//      if (freeBoard.getFreeBoardNo() == inputNo) {
+//        return freeBoard;
+//      }
+//    }
+//    return null;
+//  }

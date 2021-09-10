@@ -182,7 +182,7 @@ public class App {
     // 내 스터디 하위
     MyStudyCalender myStudyCalender = new MyStudyCalender(calenderList, studyList);
     MyStudyToDo myStudyToDo = new MyStudyToDo(toDoList, studyList);
-    MyStudyFreeBoard myStudyFreeBoard = new MyStudyFreeBoard(freeBoardList, commentList, studyList);
+    MyStudyFreeBoard myStudyFreeBoard = new MyStudyFreeBoard(freeBoardList, commentList, memberList, studyList);
 
     // 내 스터디 
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap,
