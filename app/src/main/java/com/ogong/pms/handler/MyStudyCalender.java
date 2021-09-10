@@ -45,7 +45,7 @@ public class MyStudyCalender {
 
   }
 
-  public void addCalender(Study study) {
+  private void addCalender(Study study) {
     System.out.println();
     System.out.println("▶ 일정 등록");
 
@@ -189,10 +189,14 @@ public class MyStudyCalender {
     System.out.println();
 
     int inputDay;
+    String inputContent;
+
     Calender detailCalender = null;
     inputDay = Prompt.inputInt(" 일 : ");
+    inputContent = Prompt.inputString(" 내용 : " );
     for (int i = 0; i < calenderList.size(); i++) {
-      if (calenderList.get(i).getDay() == inputDay) {
+      if (calenderList.get(i).getDay() == inputDay &&
+          calenderList.get(i).getCalenderContent().contains(inputContent)) {
         System.out.println();
         detailCalender = calenderList.get(i);
         System.out.printf(" >> 등록일 : %d월 %d일 %s요일\n",
@@ -224,8 +228,6 @@ public class MyStudyCalender {
       default : return;
     }
   }
-
-
 
   private void updateCalender(Calender calender) {
     System.out.println("▶ 일정 수정");
@@ -332,6 +334,7 @@ public class MyStudyCalender {
         default : return false;
       }
     }
+
     if (!calenderList.isEmpty()) {
       System.out.println("---------------------");
       System.out.println("1. 상세");
