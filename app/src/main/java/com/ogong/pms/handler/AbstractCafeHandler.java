@@ -27,7 +27,7 @@ public abstract class AbstractCafeHandler implements Command {
   protected String getReviewStatusLabel(String status) {
     switch (status) {
       case "true": return "작성완료";
-      case "false": return "작성가능";
+      case "false": return "작성대기";
       default: return "오류";
     }
   }
