@@ -3,6 +3,7 @@ package com.ogong.pms.handler;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.util.Prompt;
@@ -60,6 +61,18 @@ public class MyStudyToDo {
   protected void addToDo(Study study) {
     System.out.println();
     System.out.println("▶ To-Do List 등록");
+    System.out.println();
+
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    if (member == null ) {
+      System.out.println("로그인 한 회원만 조회 가능합니다.");
+      return;
+    }
+
+    if (study.getStudyTitle() == null) {
+      System.out.println("가입된 스터디가 없습니다.");
+      return;
+    }
 
     ToDo todo = new ToDo();
 
@@ -75,6 +88,7 @@ public class MyStudyToDo {
       listToDo(study);
       return;
     }
+
     toDoList.add(todo);
     study.getMyStudyToDo().add(todo);
     System.out.println("할 일이 등록되었습니다.");
@@ -109,11 +123,10 @@ public class MyStudyToDo {
       return;
     }
 
-    System.out.println("========================");
-    System.out.println("1. To-do 상세");
-    System.out.println("2. To-do 등록");
-    System.out.println("0. 뒤로가기");
-    System.out.println("========================");
+    System.out.println("---------------------");
+    System.out.println("1. 상세");
+    System.out.println("2. 등록");
+    System.out.println("0. 이전");
     int selete = Prompt.inputInt("선택> ");
     switch (selete) {
       case 1 : detailToDo(toDoArrayList, study); break;
@@ -152,11 +165,10 @@ public class MyStudyToDo {
       break;
     }
 
-    System.out.println("========================");
-    System.out.println("1. To-do 수정");
-    System.out.println("2. To-do 삭제");
-    System.out.println("0. 뒤로가기");
-    System.out.println("========================");
+    System.out.println("\n----------------------");
+    System.out.println("1. 수정");
+    System.out.println("2. 삭제");
+    System.out.println("0. 이전");
     int selete = Prompt.inputInt("선택> ");
     switch (selete) {
       case 1 : updateToDo(detailToDo, study); break;

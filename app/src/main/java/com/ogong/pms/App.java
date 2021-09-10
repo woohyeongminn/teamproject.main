@@ -64,6 +64,7 @@ import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyCalender;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
+import com.ogong.pms.handler.MyStudyFreeBoard;
 import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.MyStudyToDo;
 import com.ogong.pms.handler.PromptCeoMember;
@@ -139,12 +140,6 @@ public class App {
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
-    //    commandMap.put("/freeBoard/add", new FreeBoardAddHandler(freeBoardList, memberList, commentList, commandMap));
-    //    commandMap.put("/freeBoard/list", new FreeBoardListHandler(freeBoardList, commentList, commandMap));
-    //    commandMap.put("/freeBoard/detail", new FreeBoardDetailHandler(freeBoardList, commentList, commandMap));
-    //    commandMap.put("/freeBoard/update", new FreeBoardUpdateHandler(freeBoardList, commentList, commandMap));
-    //    commandMap.put("/freeBoard/delete", new FreeBoardDeleteHandler(freeBoardList, commentList, commandMap));
-
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, commentList));
     commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, commentList));
     commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, commentList, adminList));
@@ -184,10 +179,14 @@ public class App {
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
+    // 내 스터디 하위
     MyStudyCalender myStudyCalender = new MyStudyCalender(calenderList, studyList);
     MyStudyToDo myStudyToDo = new MyStudyToDo(toDoList, studyList);
+    MyStudyFreeBoard myStudyFreeBoard = new MyStudyFreeBoard(freeBoardList, commentList, studyList);
+
+    // 내 스터디 
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap,
-        myStudyToDo, myStudyCalender));
+        myStudyToDo, myStudyCalender, myStudyFreeBoard));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
@@ -322,7 +321,10 @@ public class App {
 
     userMenuGroup.add(createMyPageMenu());      // 마이페이지
     userMenuGroup.add(createStudyMenu());       // 스터디 찾기
-    userMenuGroup.add(new MenuItem("내 스터디", Menu.ENABLE_LOGIN, "/myStudy/list"));     // 내 스터디
+
+    userMenuGroup.add(new MenuItem("내 스터디", // 내 스터디
+        Menu.ENABLE_LOGIN, "/myStudy/list"));     
+
     userMenuGroup.add(createCafeMenu());        // 장소 예약하기
     userMenuGroup.add(createCSMenu());          // 고객센터
 
