@@ -83,9 +83,31 @@ public class MemberAddHandler extends AbstractMemberHandler {
 
     Member member = new Member();
 
-    member.setPerNickname(Prompt.inputString(" 닉네임 : "));
+    String inputNewNick;
+    while (true) {
+      inputNewNick = Prompt.inputString(" 닉네임 : ");
+      for (Member comparisonMember : memberList) {
+        if (inputNewNick.equals(comparisonMember.getPerNickname())) {
+          System.out.println(" 중복된 닉네임 입니다.");
+          continue;
+        }
+      }
+      break;
+    }
+    member.setPerNickname(inputNewNick);
     member.setPerPhoto(Prompt.inputString(" 사  진 : "));
-    member.setPerEmail(Prompt.inputString(" 이메일 : "));
+
+    String inputNewEmail;
+    while (true) {
+      inputNewEmail = Prompt.inputString(" 이메일 : ");
+      if (!inputNewEmail.contains("@") ||
+          !inputNewEmail.contains(".com")) {
+        System.out.println(" 정확한 이메일 양식으로 입력해주세요.");
+        continue;
+      }
+      break;
+    }
+    member.setPerEmail(inputNewEmail);
     member.setPerPassword(Prompt.inputString(" 비밀번호 : "));
     while (true) {
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");
