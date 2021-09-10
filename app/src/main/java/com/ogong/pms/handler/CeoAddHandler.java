@@ -8,7 +8,7 @@ import com.ogong.util.Prompt;
 
 public class CeoAddHandler extends AbstractCeoHandler {
 
-  int ceoMemberNo = 3;
+  int ceoMemberNo = 4;
 
   public CeoAddHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);

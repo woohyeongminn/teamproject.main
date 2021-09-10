@@ -54,6 +54,7 @@ import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CeoAddHandler;
 import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
+import com.ogong.pms.handler.CeoMyCafeListHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.MemberAddHandler;
 import com.ogong.pms.handler.MemberDeleteHandler;
@@ -134,6 +135,7 @@ public class App {
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/page", new CeoDetailHandler(ceoMemberList));
+    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
@@ -424,6 +426,8 @@ public class App {
     MenuGroup ceoPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_CEOLOGIN); 
 
     ceoPageMenu.add(new MenuItem("기업 정보", "/ceoMember/page"));
+    //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
+    ceoPageMenu.add(new MenuItem("카페 목록", "/ceoMember/myCafeList"));
     //    ceoPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
     //    ceoPageMenu.add(new MenuItem("예약내역", "/cafe/reservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
