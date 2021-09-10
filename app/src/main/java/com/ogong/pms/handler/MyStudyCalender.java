@@ -123,7 +123,6 @@ public class MyStudyCalender {
 
   // 캘린더 목록
   public void listCalender(Study study) {
-
     System.out.println();
     System.out.println("▶ 일정 목록");
     System.out.println();
@@ -145,22 +144,10 @@ public class MyStudyCalender {
         System.out.println();
       }
     }
-    if (tempCal.isEmpty()) {
-      System.out.println();
-      System.out.printf(" '%d월'에 등록된 일정이 없습니다.\n", now.getMonth() + 1);
-    }
 
-
-    System.out.println("---------------------");
-    System.out.println("1. 다른 월");
-    System.out.println("2. 등록");
-    System.out.println("3. 취소");
-    int tempNo = Prompt.inputInt("선택> ");
-    System.out.println();
-    switch (tempNo) {
-      case 1 : break;
-      case 2 : addCalender(study); break;
-      default : return;
+    boolean selectBack = selectCategory(tempCal, study);
+    if (!selectBack) {
+      return;
     }
 
     int selectMonth; 
@@ -171,15 +158,13 @@ public class MyStudyCalender {
         System.out.println(" >> 정확한 '월'을 입력해 주세요.\n");
         continue;
       }
-
-
       System.out.printf("      << %d월 >>\n", selectMonth);
       System.out.println();
 
-      List<Calender> cal = new ArrayList<>();
+      List<Calender> selecMontCal = new ArrayList<>();
       for (Calender calender : study.getMyStudyCalender()) {
         if (selectMonth == calender.getMonth()) {
-          cal.add(calender);
+          selecMontCal.add(calender);
           System.out.printf(
               " [ %d월 %d일 %s요일 ]\n %s\n",
               calender.getMonth(), 
@@ -189,46 +174,16 @@ public class MyStudyCalender {
           System.out.println();
         }
       }
-
-
-      if (cal.isEmpty()) {
-        System.out.println();
-        System.out.printf(" '%d월'에 등록된 일정이 없습니다.\n", selectMonth);
-        System.out.println("---------------------");
-        System.out.println("1. 다른 월");
-        System.out.println("2. 등록");
-        System.out.println("3. 취소");
-        int selectNo = Prompt.inputInt("선택> ");
-        System.out.println();
-        switch (selectNo) {
-          case 1 : continue;
-          case 2 : addCalender(study); break;
-          case 3 : return;
-          default : return;
-        }
-      }
-      if (!cal.isEmpty()) {
-        System.out.println("---------------------");
-        System.out.println("1. 상세");
-        System.out.println("2. 다른 월");
-        System.out.println("3. 등록");
-        System.out.println("4. 취소");
-        int selectNo = Prompt.inputInt("선택> ");
-        System.out.println();
-        switch (selectNo) {
-          case 1 : detailCalender(cal, study); break;
-          case 2 : continue;
-          case 3 : addCalender(study); break;
-          case 4 : return;
-          default : return;
-        }
+      selectBack = selectCategory(selecMontCal, study);
+      if (!selectBack) {
+        return;
       }
 
     }
   }
 
   // 캘린더 상세보기
-  public void detailCalender(List<Calender> calenderList, Study study) {
+  private void detailCalender(List<Calender> calenderList, Study study) {
     System.out.println();
     System.out.println("▶ 일정 상세");
     System.out.println();
@@ -272,7 +227,7 @@ public class MyStudyCalender {
 
 
 
-  public void updateCalender(Calender calender) {
+  private void updateCalender(Calender calender) {
     System.out.println("▶ 일정 수정");
     System.out.println();
 
@@ -345,7 +300,7 @@ public class MyStudyCalender {
     System.out.println(" 일정을 변경하였습니다.\n");
   }
 
-  public void deleteCalender(Calender calender, Study study) {
+  private void deleteCalender(Calender calender, Study study) {
     System.out.println();
     System.out.println("▶ 일정 삭제");
 
@@ -358,6 +313,43 @@ public class MyStudyCalender {
     study.getMyStudyCalender().remove(calender);
     System.out.println("일정이 삭제되었습니다.");
     listCalender(study);
+  }
+
+  private boolean selectCategory(List<Calender> calenderList, Study study) {
+    if (calenderList.isEmpty()) {
+      System.out.println();
+      System.out.println(" 등록된 일정이 없습니다.");
+      System.out.println("---------------------");
+      System.out.println("1. 다른 월");
+      System.out.println("2. 등록");
+      System.out.println("3. 취소");
+      int selectNo = Prompt.inputInt("선택> ");
+      System.out.println();
+      switch (selectNo) {
+        case 1 : return true;
+        case 2 : addCalender(study); break;
+        case 3 : return false;
+        default : return false;
+      }
+    }
+    if (!calenderList.isEmpty()) {
+      System.out.println("---------------------");
+      System.out.println("1. 상세");
+      System.out.println("2. 다른 월");
+      System.out.println("3. 등록");
+      System.out.println("4. 취소");
+      int selectNo = Prompt.inputInt("선택> ");
+      System.out.println();
+      switch (selectNo) {
+        case 1 : detailCalender(calenderList, study); break;
+        case 2 : return true;
+        case 3 : addCalender(study); break;
+        case 4 : return false;
+        default : return false;
+      }
+    }
+    return true;
+
   }
 
 }
