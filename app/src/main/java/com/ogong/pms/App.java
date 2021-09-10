@@ -136,7 +136,7 @@ public class App {
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/page", new CeoDetailHandler(ceoMemberList));
-    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList));
+    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReview));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
