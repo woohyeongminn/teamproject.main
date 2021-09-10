@@ -21,6 +21,7 @@ public class MyStudyCalender {
     testCal.setDay(10);
     testCal.setDayOftheWeek("월");
     testCal.setCalenderContent("제발1");
+    testCal.setImportanceCalender("★★★★★");
     testCal.setEndDay(Date.valueOf("2021-12-25"));
     calenderList.add(testCal);
     studyList.get(1).getMyStudyCalender().add(testCal);
@@ -30,6 +31,7 @@ public class MyStudyCalender {
     testCal.setDay(15);
     testCal.setDayOftheWeek("월");
     testCal.setCalenderContent("제발2");
+    testCal.setImportanceCalender("★★★");
     testCal.setEndDay(Date.valueOf("2021-10-17"));
     calenderList.add(testCal);
     studyList.get(1).getMyStudyCalender().add(testCal);
@@ -39,6 +41,7 @@ public class MyStudyCalender {
     testCal.setDay(13);
     testCal.setDayOftheWeek("월");
     testCal.setCalenderContent("제발3");
+    testCal.setImportanceCalender("★");
     testCal.setEndDay(Date.valueOf("2021-9-16"));
     calenderList.add(testCal);
     studyList.get(1).getMyStudyCalender().add(testCal);
@@ -97,11 +100,19 @@ public class MyStudyCalender {
     }
 
     calender.setCalenderContent(Prompt.inputString(" 내용 : "));
+
+    String important = stateImportant();
+    if (important == null) {
+      System.out.println(" 입력 오류 입니다.");
+      return;
+    }
+    calender.setImportanceCalender(important);
+
     while (true) {
       calender.setEndDay(Prompt.inputDate(" 종료일 : "));
-      if ((calender.getEndDay().getMonth() + 1 <= month) && 
+      if ((calender.getEndDay().getMonth() + 1 <= month) || 
           (calender.getEndDay().getDate() < day)) {
-        System.out.println("\n >> 종료일을 다시 입력해 주세요.");
+        System.out.println("\n >> 등록일 이후 날짜를 입력하세요.\n");
         continue;
       }
       break;
@@ -135,7 +146,8 @@ public class MyStudyCalender {
     for (Calender calender : study.getMyStudyCalender()) {
       if (now.getMonth() + 1 == calender.getMonth()) {
         System.out.printf(
-            " [ %d월 %d일 %s요일 ]\n %s\n",
+            " 중요도<%s>\n[ %d월 %d일 %s요일 ]\n %s\n",
+            calender.getImportanceCalender(),
             calender.getMonth(), 
             calender.getDay(),
             calender.getDayOftheWeek(),
@@ -166,7 +178,8 @@ public class MyStudyCalender {
         if (selectMonth == calender.getMonth()) {
           selecMontCal.add(calender);
           System.out.printf(
-              " [ %d월 %d일 %s요일 ]\n %s\n",
+              " 중요도<%s> \n[ %d월 %d일 %s요일 ]\n %s\n",
+              calender.getImportanceCalender(),
               calender.getMonth(), 
               calender.getDay(),
               calender.getDayOftheWeek(),
@@ -205,6 +218,8 @@ public class MyStudyCalender {
             calenderList.get(i).getDayOftheWeek());
         System.out.printf(" >> 종료일 : %s\n", calenderList.get(i).getEndDay());
         System.out.printf(" >> 내  용 : %s\n", calenderList.get(i).getCalenderContent());
+        System.out.printf(" >> 종료일 : %s\n", 
+            calenderList.get(i).getImportanceCalender());
         System.out.println();
       }
     }
@@ -250,8 +265,10 @@ public class MyStudyCalender {
       if (((updateMonth == 2) && (updateDay > 28 || updateDay < 1)) ||
           ((((updateMonth < 8 && (updateMonth % 2) == 1) && (updateDay > 31 || updateDay < 1)) ||
               ((updateMonth < 8 && (updateMonth % 2) == 0) && (updateDay > 30 || updateDay < 1))) ||
-              (((updateMonth >= 8 && (updateMonth % 2) == 1) && (updateDay > 30 || updateDay < 1)) ||
-                  ((updateMonth >= 8 && (updateMonth % 2) == 0) && (updateDay > 31 || updateDay < 1))))) {
+              (((updateMonth >= 8 && (updateMonth % 2) == 1)
+                  && (updateDay > 30 || updateDay < 1)) ||
+                  ((updateMonth >= 8 && (updateMonth % 2) == 0)
+                      && (updateDay > 31 || updateDay < 1))))) {
         System.out.println(" >> 등록할 수 없는 '일'입니다.");
         System.out.println("    다시 등록해 주세요.");
         continue;
@@ -276,10 +293,17 @@ public class MyStudyCalender {
 
     String updateContent = Prompt.inputString(" 내용(" + calender.getCalenderContent() + ") : ");
 
+    String updateImportant = stateImportant();
+
+    if (updateImportant == null) {
+      System.out.println(" 입력 오류 입니다.");
+      return;
+    }
+
     Date updateEndDay; 
     while (true) {
       updateEndDay =  Prompt.inputDate(" 종료일(" + calender.getEndDay() + ") : ");
-      if ((updateEndDay.getMonth() + 1 <= updateMonth) && 
+      if ((updateEndDay.getMonth() + 1 <= updateMonth) || 
           (updateEndDay.getDate() < updateDay)) {
         System.out.println("\n >> 등록일 이후 날짜를 입력하세요.\n");
         continue;
@@ -297,6 +321,7 @@ public class MyStudyCalender {
     calender.setDay(updateDay);
     calender.setDayOftheWeek(updateDayOfTheWeek);
     calender.setCalenderContent(updateContent);
+    calender.setImportanceCalender(updateImportant);
     calender.setEndDay(updateEndDay);
 
     System.out.println(" 일정을 변경하였습니다.\n");
@@ -317,6 +342,7 @@ public class MyStudyCalender {
     listCalender(study);
   }
 
+  // 등록,상세,재입력 카테고리 선택 메서드
   private boolean selectCategory(List<Calender> calenderList, Study study) {
     if (calenderList.isEmpty()) {
       System.out.println();
@@ -352,7 +378,25 @@ public class MyStudyCalender {
       }
     }
     return true;
+  }
 
+  // 일정 중요도 상태 입력 메서드
+  private String stateImportant() {
+    System.out.println(" 1. 매우중요");
+    System.out.println(" 2. 중요");
+    System.out.println(" 3. 보통");
+    System.out.println(" 4. 약간 중요");
+    System.out.println(" 5. 중요하지 않음");
+
+    int selectNo = Prompt.inputInt(" 선택> ");
+    switch (selectNo) {
+      case 1 : return "★★★★★";
+      case 2 : return "★★★★";
+      case 3 : return "★★★";
+      case 4 : return "★★";
+      case 5 : return "★";
+    }
+    return null;
   }
 
 }
