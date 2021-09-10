@@ -9,7 +9,7 @@ public class FreeBoard {
   private String freeBoardTitle;        //글 제목
   private String freeBoardContent;      //글 내용 
   private String freeBoardAtcFile;      //글 첨부파일
-  private Member freeBoardWriter;       //글 작성자
+  private List<Member> freeBoardWriter;       //글 작성자
   private int freeBoardViewcount;       //글 조회수
   private Date freeBoardRegisteredDate; //글 작성일
   private List<Comment> comment; //댓글
@@ -32,7 +32,7 @@ public class FreeBoard {
   }
 
   public int getFreeBoardNo() {
-    return freeBoardNo + 1;
+    return freeBoardNo;
   }
 
   public void setFreeBoardNo(int freeBoardNo) {
@@ -61,11 +61,11 @@ public class FreeBoard {
     this.freeBoardAtcFile = freeBoardAtcFile;
   }
 
-  public Member getFreeBoardWriter() {
+  public List<Member> getFreeBoardWriter() {
     return freeBoardWriter;
   }
 
-  public void setFreeBoardWriter(Member freeBoardWriter) {
+  public void setFreeBoardWriter(List<Member> freeBoardWriter) {
     this.freeBoardWriter = freeBoardWriter;
   }
 
