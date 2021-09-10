@@ -43,7 +43,7 @@ public abstract class AbstractCafeHandler implements Command {
 
   protected Cafe findByName(String name) {
     for (Cafe cafe : cafeList) {
-      if (cafe.getName().equals(name)) {
+      if (cafe.getName().equals(name) && cafe.getCafeStatus() != 0 && cafe.getCafeStatus() != 3) {
         return cafe;
       }
     }
@@ -116,10 +116,10 @@ public abstract class AbstractCafeHandler implements Command {
     }
 
     reservation.setReservationNo(reservationNo++);
-    reservation.setMember(member);
-    reservation.setCafe(cafe);
+    reservation.setMemberNo(member.getPerNo());
+    reservation.setCafeNo(cafe.getNo());
     reservation.setReservationDate(reservationDate);
-    reservation.setStartTime(Integer.valueOf(totalPrice));
+    reservation.setStartTime(startTime);
     reservation.setUseTime(useTime);
     reservation.setUseMemberNumber(useMemberNumber);
     reservation.setTotalPrice(totalPrice);
@@ -141,7 +141,7 @@ public abstract class AbstractCafeHandler implements Command {
       System.out.println("로그인 한 회원만 등록 가능합니다.");
     } else {
 
-      Cafe cafe = cafeReser.getCafe();
+      Cafe cafe = findByNo(cafeReser.getCafeNo());
 
       CafeReview cafeReview = new CafeReview();
 

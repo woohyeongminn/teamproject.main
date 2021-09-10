@@ -1,6 +1,7 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
@@ -21,10 +22,10 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     CafeReservation reservation = new CafeReservation();
 
     reservation.setReservationNo(1);
-    reservation.setMember(promptPerMember.memberList.get(0));
-    reservation.setCafe(cafeList.get(0));
+    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
+    reservation.setCafeNo(cafeList.get(0).getNo());
     reservation.setReservationDate(Date.valueOf("2021-8-1"));
-    reservation.setStartTime(10);
+    reservation.setStartTime(LocalTime.of(10, 00));
     reservation.setUseTime(1);
     reservation.setUseMemberNumber(1);
     reservation.setTotalPrice(2000);
@@ -35,10 +36,10 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     reservation = new CafeReservation();
 
     reservation.setReservationNo(2);
-    reservation.setMember(promptPerMember.memberList.get(0));
-    reservation.setCafe(cafeList.get(1));
+    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
+    reservation.setCafeNo(cafeList.get(1).getNo());
     reservation.setReservationDate(Date.valueOf("2021-8-27"));
-    reservation.setStartTime(22);
+    reservation.setStartTime(LocalTime.of(15, 00));
     reservation.setUseTime(1);
     reservation.setUseMemberNumber(1);
     reservation.setTotalPrice(1500);
@@ -147,15 +148,20 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
   }
 
   private List<CafeReservation> printMyReserList(Member member) {
+
     List<CafeReservation> myReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {
-      if (cafeReser.getMember().getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
+
+      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMemberNo());
+
+      if (cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
+        Cafe cafeReserCafe = findByNo(cafeReser.getCafeNo());
         myReserList.add(cafeReser);
         System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
-            + " 시작시간 : %d시\n 이용시간 : %d시간\n 사용인원 : %d명\n"
+            + " 시작시간 : %s\n 이용시간 : %s시간\n 사용인원 : %d명\n"
             + " 결제금액 : %d원\n 리뷰작성여부 : %s\n"
-            , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReser.getCafe().getName()
-            , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseTime()
+            , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
+            , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseMemberNumber()   
             , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
         System.out.println();
       } 
@@ -165,8 +171,9 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   private CafeReservation getMyReserByNo(Member member, int reserNo) {
     for (CafeReservation cafeReser : reserList) {
+      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMemberNo());
       if (reserNo == cafeReser.getReservationNo() &&
-          cafeReser.getMember().getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
+          cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
         return cafeReser;
       }
     }

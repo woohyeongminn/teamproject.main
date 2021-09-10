@@ -40,4 +40,14 @@ public class PromptPerMember {
     }
     return null;
   }
+
+  //번호를 통해 멤버를 찾아서 리턴한다.
+  public Member getMemberByPerNo(int inputPerNo) {
+    for (Member member : memberList) {
+      if (inputPerNo == member.getPerNo()) {
+        return member;
+      }
+    }
+    return null;
+  }
 }

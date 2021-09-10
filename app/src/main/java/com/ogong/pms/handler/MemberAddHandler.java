@@ -8,6 +8,8 @@ import com.ogong.util.Prompt;
 
 public class MemberAddHandler extends AbstractMemberHandler {
 
+  int perNo = 7; // add할때 테스트 용이랑 번호 안겹치게 임시로...
+
   public MemberAddHandler(List<Member> memberList) {
     super(memberList);
 
@@ -98,6 +100,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
 
     member.setPerMyStudy(new ArrayList<>());
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+    member.setPerNo(perNo++);
     memberList.add(member);
     System.out.println("회원가입이 완료되었습니다.");
   }

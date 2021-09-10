@@ -1,14 +1,15 @@
 package com.ogong.pms.domain;
 
 import java.sql.Date;
+import java.time.LocalTime;
 
 public class CafeReservation {
 
   private int reservationNo; // 예약 번호
-  private Member member; // 예약 회원
-  private Cafe cafe; // 예약 카페
+  private int memberNo; // 예약 회원
+  private int cafeNo; // 예약 카페
   private Date reservationDate; // 예약 날짜
-  private int startTime; // 시작시간
+  private LocalTime startTime; // 시작시간
   private int useTime; // 사용시간
   private int useMemberNumber; // 사용인원
   private int totalPrice; // 총금액
@@ -16,10 +17,10 @@ public class CafeReservation {
 
   @Override
   public String toString() {
-    return "CafeReservation [reservationNo=" + reservationNo + ", member=" + member + ", cafe="
-        + cafe + ", reservationDate=" + reservationDate + ", startTime=" + startTime + ", useTime="
-        + useTime + ", useMemberNumber=" + useMemberNumber + ", totalPrice=" + totalPrice
-        + ", wirteReview=" + wirteReview + "]";
+    return "CafeReservation [reservationNo=" + reservationNo + ", memberNo=" + memberNo
+        + ", cafeNo=" + cafeNo + ", reservationDate=" + reservationDate + ", useTime=" + useTime
+        + ", useMemberNumber=" + useMemberNumber + ", totalPrice=" + totalPrice + ", wirteReview="
+        + wirteReview + "]";
   }
 
   public int getReservationNo() {
@@ -30,20 +31,20 @@ public class CafeReservation {
     this.reservationNo = reservationNo;
   }
 
-  public Member getMember() {
-    return member;
+  public int getMemberNo() {
+    return memberNo;
   }
 
-  public void setMember(Member member) {
-    this.member = member;
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
   }
 
-  public Cafe getCafe() {
-    return cafe;
+  public int getCafeNo() {
+    return cafeNo;
   }
 
-  public void setCafe(Cafe cafe) {
-    this.cafe = cafe;
+  public void setCafeNo(int cafeNo) {
+    this.cafeNo = cafeNo;
   }
 
   public Date getReservationDate() {
@@ -54,11 +55,11 @@ public class CafeReservation {
     this.reservationDate = reservationDate;
   }
 
-  public int getStartTime() {
+  public LocalTime getStartTime() {
     return startTime;
   }
 
-  public void setStartTime(int startTime) {
+  public void setStartTime(LocalTime startTime) {
     this.startTime = startTime;
   }
 
@@ -93,5 +94,4 @@ public class CafeReservation {
   public void setWirteReview(boolean wirteReview) {
     this.wirteReview = wirteReview;
   }
-
 }
