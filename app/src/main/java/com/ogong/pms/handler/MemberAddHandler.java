@@ -84,15 +84,12 @@ public class MemberAddHandler extends AbstractMemberHandler {
     Member member = new Member();
 
     String inputNewNick;
-    while (true) {
-      inputNewNick = Prompt.inputString(" 닉네임 : ");
-      for (Member comparisonMember : memberList) {
-        if (inputNewNick.equals(comparisonMember.getPerNickname())) {
-          System.out.println(" 중복된 닉네임 입니다.");
-          continue;
-        }
+    inputNewNick = Prompt.inputString(" 닉네임 : ");
+    for (Member comparisonMember : memberList) {
+      if (inputNewNick.equals(comparisonMember.getPerNickname())) {
+        System.out.println(" 중복된 닉네임 입니다.");
+        return;
       }
-      break;
     }
     member.setPerNickname(inputNewNick);
     member.setPerPhoto(Prompt.inputString(" 사  진 : "));
@@ -108,7 +105,21 @@ public class MemberAddHandler extends AbstractMemberHandler {
       break;
     }
     member.setPerEmail(inputNewEmail);
-    member.setPerPassword(Prompt.inputString(" 비밀번호 : "));
+
+    String inputNewPW;
+    while (true) {
+      inputNewPW = Prompt.inputString(" 비밀번호 : ");
+      if (inputNewPW.length() < 8 || (!inputNewPW.contains("!") && !inputNewPW.contains("@")
+          && !inputNewPW.contains("#") && !inputNewPW.contains("$")
+          && !inputNewPW.contains("^") && !inputNewPW.contains("%")
+          && !inputNewPW.contains("&") && !inputNewPW.contains("*"))) {
+        System.out.println(" 8자 이상 특수문자를 포함시켜 주세요.");
+        continue;
+      }
+      break;
+    }
+    member.setPerPassword(inputNewPW);
+
     while (true) {
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
