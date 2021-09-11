@@ -111,8 +111,8 @@ public class MyStudyCalender {
     Date inputEndDate;
     while (true) {
       inputEndDate = Prompt.inputDate(" 종료일 : ");
-      if ((inputEndDate.getMonth() + 1 <= month) || 
-          (inputEndDate.getDate() < day)) {
+      if ((inputEndDate.getMonth() + 1 < month) || 
+          ((inputEndDate.getMonth() + 1 == month) && (inputEndDate.getDate() < day))) {
         System.out.println("\n >> 등록일 이후 날짜를 입력하세요.\n");
         continue;
       }
@@ -305,8 +305,8 @@ public class MyStudyCalender {
     Date updateEndDay; 
     while (true) {
       updateEndDay =  Prompt.inputDate(" 종료일(" + calender.getEndDay() + ") : ");
-      if ((updateEndDay.getMonth() + 1 <= updateMonth) || 
-          (updateEndDay.getDate() < updateDay)) {
+      if ((updateEndDay.getMonth() + 1 < updateMonth) || 
+          ((updateEndDay.getMonth() + 1 == updateMonth) && (updateEndDay.getDate() < updateDay))) {
         System.out.println("\n >> 등록일 이후 날짜를 입력하세요.\n");
         continue;
       }
@@ -384,11 +384,12 @@ public class MyStudyCalender {
 
   // 일정 중요도 상태 입력 메서드
   private String stateImportant() {
-    System.out.println(" 1. 매우중요");
-    System.out.println(" 2. 중요");
-    System.out.println(" 3. 보통");
-    System.out.println(" 4. 약간 중요");
-    System.out.println(" 5. 중요하지 않음");
+    System.out.println(" 중요도 ");
+    System.out.println("  1. 매우중요");
+    System.out.println("  2. 중요");
+    System.out.println("  3. 보통");
+    System.out.println("  4. 약간 중요");
+    System.out.println("  5. 중요하지 않음");
 
     int selectNo = Prompt.inputInt(" 선택> ");
     switch (selectNo) {
