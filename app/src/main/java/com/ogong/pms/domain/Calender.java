@@ -1,8 +1,10 @@
 package com.ogong.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Calender {
+@SuppressWarnings("serial")
+public class Calender implements Serializable{
 
   private int calenderNo;
 

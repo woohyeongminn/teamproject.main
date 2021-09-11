@@ -19,41 +19,41 @@ public class MyStudyToDo {
     this.toDoList = toDoList;
     this.studyList = studyList;
 
-    ToDo test = new ToDo();
-    test.setTodoNo(ToDoNo++);
-    test.setTodoContent("문제집 주문하기");
-    test.setTodoRemark("자바의 정석");
-    test.setTodoDate(new Date(System.currentTimeMillis()));
-    test.setTodoStatus(0);
-    toDoList.add(test);
-    studyList.get(1).getMyStudyToDo().add(test);
-
-    test = new ToDo();
-    test.setTodoNo(ToDoNo++);
-    test.setTodoContent("다음달 시험 일정 확인하기");
-    test.setTodoRemark("자격증");
-    test.setTodoDate(new Date(System.currentTimeMillis()));
-    test.setTodoStatus(1);
-    toDoList.add(test);
-    studyList.get(1).getMyStudyToDo().add(test);
-
-    test = new ToDo();
-    test.setTodoNo(ToDoNo++);
-    test.setTodoContent("장소 예약 리뷰 적어주기");
-    test.setTodoRemark("에이스터디카페");
-    test.setTodoDate(new Date(System.currentTimeMillis()));
-    test.setTodoStatus(2);
-    toDoList.add(test);
-    studyList.get(0).getMyStudyToDo().add(test);
-
-    test = new ToDo();
-    test.setTodoNo(ToDoNo++);
-    test.setTodoContent("내일 점심 샌드위치 사먹기");
-    test.setTodoRemark("배고프다");
-    test.setTodoDate(new Date(System.currentTimeMillis()));
-    test.setTodoStatus(1);
-    toDoList.add(test);
-    studyList.get(0).getMyStudyToDo().add(test);
+    //    ToDo test = new ToDo();
+    //    test.setTodoNo(ToDoNo++);
+    //    test.setTodoContent("문제집 주문하기");
+    //    test.setTodoRemark("자바의 정석");
+    //    test.setTodoDate(new Date(System.currentTimeMillis()));
+    //    test.setTodoStatus(0);
+    //    toDoList.add(test);
+    //    studyList.get(1).getMyStudyToDo().add(test);
+    //
+    //    test = new ToDo();
+    //    test.setTodoNo(ToDoNo++);
+    //    test.setTodoContent("다음달 시험 일정 확인하기");
+    //    test.setTodoRemark("자격증");
+    //    test.setTodoDate(new Date(System.currentTimeMillis()));
+    //    test.setTodoStatus(1);
+    //    toDoList.add(test);
+    //    studyList.get(1).getMyStudyToDo().add(test);
+    //
+    //    test = new ToDo();
+    //    test.setTodoNo(ToDoNo++);
+    //    test.setTodoContent("장소 예약 리뷰 적어주기");
+    //    test.setTodoRemark("에이스터디카페");
+    //    test.setTodoDate(new Date(System.currentTimeMillis()));
+    //    test.setTodoStatus(2);
+    //    toDoList.add(test);
+    //    studyList.get(0).getMyStudyToDo().add(test);
+    //
+    //    test = new ToDo();
+    //    test.setTodoNo(ToDoNo++);
+    //    test.setTodoContent("내일 점심 샌드위치 사먹기");
+    //    test.setTodoRemark("배고프다");
+    //    test.setTodoDate(new Date(System.currentTimeMillis()));
+    //    test.setTodoStatus(1);
+    //    toDoList.add(test);
+    //    studyList.get(0).getMyStudyToDo().add(test);
 
   }
 

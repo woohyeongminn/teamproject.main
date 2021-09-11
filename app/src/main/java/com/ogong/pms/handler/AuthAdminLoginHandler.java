@@ -16,13 +16,13 @@ public class AuthAdminLoginHandler implements Command {
   public AuthAdminLoginHandler(List<Admin> adminList) {
     this.adminList = adminList;
 
-    Admin testAdmin = new Admin();
-    testAdmin.setMasterNo(1);
-    testAdmin.setMasterNickname("관리자");
-    testAdmin.setMasterEmail("ogong");
-    testAdmin.setMasterPassword("1234");
-
-    adminList.add(testAdmin);
+    //    Admin testAdmin = new Admin();
+    //    testAdmin.setMasterNo(1);
+    //    testAdmin.setMasterNickname("관리자");
+    //    testAdmin.setMasterEmail("ogong");
+    //    testAdmin.setMasterPassword("1234");
+    //
+    //    adminList.add(testAdmin);
   }
 
   // ----------------------------------------------------------------------

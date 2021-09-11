@@ -16,35 +16,35 @@ public class MyStudyCalender {
     this.calenderList = calenderList;
     this.studyList = studyList;
 
-    Calender testCal = new Calender();
-    testCal.setMonth(9);
-    testCal.setDay(10);
-    testCal.setDayOftheWeek("월");
-    testCal.setCalenderContent("제발1");
-    testCal.setImportanceCalender("★★★★★");
-    testCal.setEndDay(Date.valueOf("2021-12-25"));
-    calenderList.add(testCal);
-    studyList.get(1).getMyStudyCalender().add(testCal);
-
-    testCal = new Calender();
-    testCal.setMonth(10);
-    testCal.setDay(15);
-    testCal.setDayOftheWeek("월");
-    testCal.setCalenderContent("제발2");
-    testCal.setImportanceCalender("★★★");
-    testCal.setEndDay(Date.valueOf("2021-10-17"));
-    calenderList.add(testCal);
-    studyList.get(1).getMyStudyCalender().add(testCal);
-
-    testCal = new Calender();
-    testCal.setMonth(9);
-    testCal.setDay(13);
-    testCal.setDayOftheWeek("월");
-    testCal.setCalenderContent("제발3");
-    testCal.setImportanceCalender("★");
-    testCal.setEndDay(Date.valueOf("2021-9-16"));
-    calenderList.add(testCal);
-    studyList.get(1).getMyStudyCalender().add(testCal);
+    //    Calender testCal = new Calender();
+    //    testCal.setMonth(9);
+    //    testCal.setDay(10);
+    //    testCal.setDayOftheWeek("월");
+    //    testCal.setCalenderContent("제발1");
+    //    testCal.setImportanceCalender("★★★★★");
+    //    testCal.setEndDay(Date.valueOf("2021-12-25"));
+    //    calenderList.add(testCal);
+    //    studyList.get(1).getMyStudyCalender().add(testCal);
+    //
+    //    testCal = new Calender();
+    //    testCal.setMonth(10);
+    //    testCal.setDay(15);
+    //    testCal.setDayOftheWeek("월");
+    //    testCal.setCalenderContent("제발2");
+    //    testCal.setImportanceCalender("★★★");
+    //    testCal.setEndDay(Date.valueOf("2021-10-17"));
+    //    calenderList.add(testCal);
+    //    studyList.get(1).getMyStudyCalender().add(testCal);
+    //
+    //    testCal = new Calender();
+    //    testCal.setMonth(9);
+    //    testCal.setDay(13);
+    //    testCal.setDayOftheWeek("월");
+    //    testCal.setCalenderContent("제발3");
+    //    testCal.setImportanceCalender("★");
+    //    testCal.setEndDay(Date.valueOf("2021-9-16"));
+    //    calenderList.add(testCal);
+    //    studyList.get(1).getMyStudyCalender().add(testCal);
 
   }
 

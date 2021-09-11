@@ -1,9 +1,11 @@
 package com.ogong.pms.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Study {
+@SuppressWarnings("serial")
+public class Study implements Serializable{
 
   private int studyNo;              // 스터디 번호
   private String studyTitle;        // 스터디명

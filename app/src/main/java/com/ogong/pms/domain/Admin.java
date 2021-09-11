@@ -1,6 +1,9 @@
 package com.ogong.pms.domain;
 
-public class Admin {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Admin implements Serializable{
 
   private int masterNo; // 관리자 번호
   private String masterNickname; // 관리자 닉네임

@@ -1,7 +1,6 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
@@ -19,33 +18,33 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     super (cafeList, reviewList, reserList);
     this.promptPerMember = promptPerMember;
 
-    CafeReservation reservation = new CafeReservation();
-
-    reservation.setReservationNo(1);
-    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
-    reservation.setCafeNo(cafeList.get(0).getNo());
-    reservation.setReservationDate(Date.valueOf("2021-8-1"));
-    reservation.setStartTime(LocalTime.of(10, 00));
-    reservation.setUseTime(1);
-    reservation.setUseMemberNumber(1);
-    reservation.setTotalPrice(2000);
-    reservation.setWirteReview(false);
-
-    reserList.add(reservation);
-
-    reservation = new CafeReservation();
-
-    reservation.setReservationNo(2);
-    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
-    reservation.setCafeNo(cafeList.get(1).getNo());
-    reservation.setReservationDate(Date.valueOf("2021-8-27"));
-    reservation.setStartTime(LocalTime.of(15, 00));
-    reservation.setUseTime(1);
-    reservation.setUseMemberNumber(1);
-    reservation.setTotalPrice(1500);
-    reservation.setWirteReview(false);
-
-    reserList.add(reservation);
+    //    CafeReservation reservation = new CafeReservation();
+    //
+    //    reservation.setReservationNo(1);
+    //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
+    //    reservation.setCafeNo(cafeList.get(0).getNo());
+    //    reservation.setReservationDate(Date.valueOf("2021-8-1"));
+    //    reservation.setStartTime(LocalTime.of(10, 00));
+    //    reservation.setUseTime(1);
+    //    reservation.setUseMemberNumber(1);
+    //    reservation.setTotalPrice(2000);
+    //    reservation.setWirteReview(false);
+    //
+    //    reserList.add(reservation);
+    //
+    //    reservation = new CafeReservation();
+    //
+    //    reservation.setReservationNo(2);
+    //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
+    //    reservation.setCafeNo(cafeList.get(1).getNo());
+    //    reservation.setReservationDate(Date.valueOf("2021-8-27"));
+    //    reservation.setStartTime(LocalTime.of(15, 00));
+    //    reservation.setUseTime(1);
+    //    reservation.setUseMemberNumber(1);
+    //    reservation.setTotalPrice(1500);
+    //    reservation.setWirteReview(false);
+    //
+    //    reserList.add(reservation);
   }
 
   @Override
