@@ -108,15 +108,17 @@ public class MyStudyCalender {
     }
     calender.setImportanceCalender(important);
 
+    Date inputEndDate;
     while (true) {
-      calender.setEndDay(Prompt.inputDate(" 종료일 : "));
-      if ((calender.getEndDay().getMonth() + 1 <= month) || 
-          (calender.getEndDay().getDate() < day)) {
+      inputEndDate = Prompt.inputDate(" 종료일 : ");
+      if ((inputEndDate.getMonth() + 1 <= month) || 
+          (inputEndDate.getDate() < day)) {
         System.out.println("\n >> 등록일 이후 날짜를 입력하세요.\n");
         continue;
       }
       break;
     }
+    calender.setEndDay(inputEndDate);
 
     String input = Prompt.inputString("\n 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equals("네")) {
