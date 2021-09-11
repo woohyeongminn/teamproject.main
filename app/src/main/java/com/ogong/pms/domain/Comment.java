@@ -1,8 +1,10 @@
 package com.ogong.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Comment {
+@SuppressWarnings("serial")
+public class Comment implements Serializable{
 
   private int commentNo; // 댓글 번호
   private String commentText;   // 댓글 내용

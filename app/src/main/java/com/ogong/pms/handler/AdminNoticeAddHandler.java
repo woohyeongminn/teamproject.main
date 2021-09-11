@@ -11,23 +11,23 @@ public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
   public AdminNoticeAddHandler(List<AdminNotice> adminNoticeList) {
     super(adminNoticeList);
 
-    AdminNotice adminWriteList = new AdminNotice();
-    adminWriteList.setAdminNotiNo(1);
-    adminWriteList.setAdminNotiTitle("오늘의 공부 회원 가입을 환영합니다!");
-    adminWriteList.setAdminNotiContent("오늘의 공부와 함께 목표를 향해 으쌰으쌰!");
-    adminWriteList.setAdminNotiWriter("관리자");
-    adminWriteList.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
-
-    adminNoticeList.add(adminWriteList);
-
-    adminWriteList = new AdminNotice();
-    adminWriteList.setAdminNotiNo(2);
-    adminWriteList.setAdminNotiTitle("오늘의 공부 홈페이지 이용 방법");
-    adminWriteList.setAdminNotiContent("내용 업데이트 예정입니다.");
-    adminWriteList.setAdminNotiWriter("관리자");
-    adminWriteList.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
-
-    adminNoticeList.add(adminWriteList);
+    //    AdminNotice adminWriteList = new AdminNotice();
+    //    adminWriteList.setAdminNotiNo(1);
+    //    adminWriteList.setAdminNotiTitle("오늘의 공부 회원 가입을 환영합니다!");
+    //    adminWriteList.setAdminNotiContent("오늘의 공부와 함께 목표를 향해 으쌰으쌰!");
+    //    adminWriteList.setAdminNotiWriter("관리자");
+    //    adminWriteList.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
+    //
+    //    adminNoticeList.add(adminWriteList);
+    //
+    //    adminWriteList = new AdminNotice();
+    //    adminWriteList.setAdminNotiNo(2);
+    //    adminWriteList.setAdminNotiTitle("오늘의 공부 홈페이지 이용 방법");
+    //    adminWriteList.setAdminNotiContent("내용 업데이트 예정입니다.");
+    //    adminWriteList.setAdminNotiWriter("관리자");
+    //    adminWriteList.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
+    //
+    //    adminNoticeList.add(adminWriteList);
   }
 
   public void execute() {

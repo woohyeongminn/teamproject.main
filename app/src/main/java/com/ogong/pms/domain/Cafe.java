@@ -1,8 +1,10 @@
 package com.ogong.pms.domain;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Cafe {
+@SuppressWarnings("serial")
+public class Cafe implements Serializable{
 
   private int no; // 카페 번호
   private int CeoNo; // 사장

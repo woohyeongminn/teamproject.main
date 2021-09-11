@@ -1,9 +1,11 @@
 package com.ogong.pms.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class Member {
+@SuppressWarnings("serial")
+public class Member implements Serializable{
 
   private int perNo;
   private String perNickname;
