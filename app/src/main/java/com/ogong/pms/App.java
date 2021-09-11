@@ -231,6 +231,240 @@ public class App {
     return mainMenuGroup;
   }
 
+  //파일 입출력 -----------------------------------------------------------------------
+  //  @SuppressWarnings("unchecked")
+  //  private void loadAdmin() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("admin.data3"))) {
+  //
+  //      adminList.addAll((List<Admin>) in.readObject());
+  //
+  //      System.out.println("관리자 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 관리자 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveAdmin() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("admin.data3"))) {
+  //
+  //      out.writeObject(adminList);
+  //
+  //      System.out.println("관리자 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("관리자 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  @SuppressWarnings("unchecked")
+  //  private void loadAdminNotice() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("adminNotice.data3"))) {
+  //
+  //      adminNoticeList.addAll((List<AdminNotice>) in.readObject());
+  //
+  //      System.out.println("관리자 공지사항 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 관리자 공지사항 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveAdminNotice() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("adminNotice.data3"))) {
+  //
+  //      out.writeObject(adminNoticeList);
+  //
+  //      System.out.println("관리자 공지사항 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("관리자 공지사항 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  @SuppressWarnings("unchecked")
+  //  private void loadAskBoard() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("askBoard.data3"))) {
+  //
+  //      askBoardList.addAll((List<AskBoard>) in.readObject());
+  //
+  //      System.out.println("문의사항 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 문의사항 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveAskBoard() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("askBoard.data3"))) {
+  //
+  //      out.writeObject(askBoardList);
+  //
+  //      System.out.println("문의사항 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("문의사항 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  @SuppressWarnings("unchecked")
+  //  private void loadCafe() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("cafe.data3"))) {
+  //
+  //      cafeList.addAll((List<Cafe>) in.readObject());
+  //
+  //      System.out.println("카페 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 카페 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveCafe() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("cafe.data3"))) {
+  //
+  //      out.writeObject(cafeList);
+  //
+  //      System.out.println("카페 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("카페 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  @SuppressWarnings("unchecked")
+  //  private void loadCafeReview() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("cafeReview.data3"))) {
+  //
+  //      cafeReview.addAll((List<CafeReview>) in.readObject());
+  //
+  //      System.out.println("카페 리뷰 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 카페 리뷰 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveCafeReview() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("cafeReview.data3"))) {
+  //
+  //      out.writeObject(cafeReview);
+  //
+  //      System.out.println("카페 리뷰 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("카페 리뷰 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  @SuppressWarnings("unchecked")
+  //  private void loadCeoMember() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("ceoMember.data3"))) {
+  //
+  //      ceoMemberList.addAll((List<CeoMember>) in.readObject());
+  //
+  //      System.out.println("기업 회원 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 기업 회원 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveCeoMember() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("ceoMember.data3"))) {
+  //
+  //      out.writeObject(ceoMemberList);
+  //
+  //      System.out.println("기업 회원 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("기업 회원 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  @SuppressWarnings("unchecked")
+  //  private void loadMember() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("member.data3"))) {
+  //
+  //      memberList.addAll((List<Member>) in.readObject());
+  //
+  //      System.out.println("개인 회원 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 개인 회원 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveMember() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("member.data3"))) {
+  //
+  //      out.writeObject(memberList);
+  //
+  //      System.out.println("개인 회원 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("개인 회원 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  @SuppressWarnings("unchecked")
+  //  private void loadStudy() {
+  //    try (ObjectInputStream in = new ObjectInputStream(
+  //        new FileInputStream("study.data3"))) {
+  //
+  //      studyList.addAll((List<Study>) in.readObject());
+  //
+  //      System.out.println("스터디 데이터 로딩 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("파일에서 스터디 데이터를 읽어 오는 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+  //
+  //  private void saveStudy() {
+  //    try (ObjectOutputStream out = new ObjectOutputStream(
+  //        new FileOutputStream("study.data3"))) {
+  //
+  //      out.writeObject(studyList);
+  //
+  //      System.out.println("스터디 데이터 저장 완료!");
+  //
+  //    } catch (Exception e) {
+  //      System.out.println("스터디 데이터를 파일에 저장 중 오류 발생!");
+  //      e.printStackTrace();
+  //    }
+  //  }
+
+
   // -----------------------------------------------------------------------------------------------
   // 관리자 메인
   Menu createAdminMenu() {
