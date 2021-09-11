@@ -30,6 +30,7 @@ public class AdminNoticeAddHandler extends AbstractAdminNoticeHandler {
     //    adminNoticeList.add(adminWriteList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 공지 등록");
