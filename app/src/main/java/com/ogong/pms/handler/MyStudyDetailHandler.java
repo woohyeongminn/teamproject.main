@@ -86,6 +86,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
         case 2: myStudyCalender.listCalender(study); break;
         case 3: myStudyToDo.listToDo(study); break;
         case 4: myStudyFreeBoard.listFreeBoard(study); break;
+
         case 5: commandMap.get("/mystudy/detail").execute(); break;   // 임시로 넣었음
         case 6: commandMap.get("/study/update").execute(); break;     // 구현 덜 했음
         case 7: commandMap.get("/myStudy/delete").execute(); break;   // 구현 덜 했음

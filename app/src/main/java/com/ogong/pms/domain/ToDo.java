@@ -3,13 +3,21 @@ package com.ogong.pms.domain;
 import java.sql.Date;
 
 public class ToDo {
-  private int todoNo;           // 투두리스트 번호
-  private String todoTitle;     // 투두리스트 제목
-  private String todoContent;   // 투두리스트 내용
-  private String todoRemark;    // 투두리스트 비고
-  private Date todoDate; // 투두리스트 등록일
-  private int todoStatus;   // 투두리스트 상태
+  private int todoNo;           // 번호
+  private String todoTitle;     // 제목
+  private String todoContent;   // 내용
+  private String todoRemark;    // 비고
+  private Date todoDate;        // 등록일
+  private int todoStatus;       // 상태
+  private String todocomplete;  // 완료된 투두리스트
 
+
+  public String getTodocomplete() {
+    return todocomplete;
+  }
+  public void setTodocomplete(String todocomplete) {
+    this.todocomplete = todocomplete;
+  }
   public int getTodoNo() {
     return todoNo;
   }

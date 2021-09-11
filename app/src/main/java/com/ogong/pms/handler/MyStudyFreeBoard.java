@@ -35,6 +35,7 @@ public class MyStudyFreeBoard {
     test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     test.setComment(new ArrayList<>());
     freeBoardList.add(test);
+    studyList.get(1).getMyStudyFreeBoard().add(test);
 
     test = new FreeBoard();
     test.setFreeBoardNo(freeBoardNo++);
@@ -46,6 +47,7 @@ public class MyStudyFreeBoard {
     test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     test.setComment(new ArrayList<>());
     freeBoardList.add(test);
+    studyList.get(1).getMyStudyFreeBoard().add(test);
 
     test = new FreeBoard();
     test.setFreeBoardNo(freeBoardNo++);
@@ -57,6 +59,7 @@ public class MyStudyFreeBoard {
     test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     test.setComment(new ArrayList<>());
     freeBoardList.add(test);
+    studyList.get(0).getMyStudyFreeBoard().add(test);
   }
 
   // 등록
