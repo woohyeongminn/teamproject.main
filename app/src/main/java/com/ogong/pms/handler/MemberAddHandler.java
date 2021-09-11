@@ -98,7 +98,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
       if (!inputNewEmail.contains("@") ||
-          !inputNewEmail.contains(".com")) {
+          !inputNewEmail.contains(".com") || inputNewEmail.length() < 6) {
         System.out.println(" 정확한 이메일 양식으로 입력해주세요.");
         continue;
       }
