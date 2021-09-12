@@ -262,7 +262,7 @@ public class MyStudyFreeBoard {
   // 댓글 등록
   protected void addComment(FreeBoard freeBoard, List<Comment> commentList) {
     System.out.println();
-    System.out.println("▶ 댓글 작성하기");
+    System.out.println("▶ 댓글 작성");
 
     if (AuthPerMemberLoginHandler.getLoginUser() == null) {
       System.out.println("로그인 한 회원만 등록 가능합니다.");
@@ -270,9 +270,10 @@ public class MyStudyFreeBoard {
 
       Comment comment = new Comment();
 
-      String text = Prompt.inputString("댓글 내용 : ");
-      Member witer = AuthPerMemberLoginHandler.getLoginUser();
-      Date date = new Date(System.currentTimeMillis());
+      comment.setCommentNo(commentNo++);
+      comment.setCommentText(Prompt.inputString("댓글 내용 : "));
+      comment.setCommentWiter(AuthPerMemberLoginHandler.getLoginUser());
+      comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
 
       String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
@@ -280,11 +281,6 @@ public class MyStudyFreeBoard {
         listFreeBoard(commentList, study);
         return;
       }
-
-      comment.setCommentNo(commentNo++);
-      comment.setCommentText(text);
-      comment.setCommentWiter(witer);
-      comment.setCommentRegisteredDate(date);
 
       commentList.add(comment);
       freeBoard.getComment().add(comment);
@@ -296,18 +292,29 @@ public class MyStudyFreeBoard {
     }
   }
 
-  // 댓글 찾기
-  protected Comment findByComment (int commentNo) {
-    for (Comment comment : commentList) {
-      if (comment.getCommentNo() == commentNo) {
-        return comment;
-      }
+  // 댓글 출력
+  protected void listComment(FreeBoard freeBoard) {
+    System.out.println();
+    System.out.println("=============댓글=============");
+
+    int countFreeBoard = 0;
+
+    //for(int i = 0 ; i < commentList.size(); i++) {
+    for (Comment comment : freeBoard.getComment()) {
+      System.out.printf("(%d) | 내용 : %s | 작성자 : %s | 등록일 : %s\n",
+          comment.getCommentNo(),
+          comment.getCommentText(),
+          comment.getCommentWiter().getPerNickname(),
+          comment.getCommentRegisteredDate());
+      countFreeBoard++;
     }
-    return null;
+    // }
+    if (countFreeBoard == 0) {
+      System.out.println("등록된 댓글이 없습니다.");
+    }
   }
 
   // 댓글 수정
-
   static int commentNo1;
 
   protected void updateComment() {
@@ -376,53 +383,14 @@ public class MyStudyFreeBoard {
 
       commentList.remove(comment);
       freeBoard.getComment().remove(comment);
+
       System.out.println("댓글이 삭제되었습니다.");
       listFreeBoard(commentList, study);
       return;
     }
   }
 
-  // 댓글 출력
-  protected void listComment(FreeBoard freeBoard) {
-    System.out.println();
-    System.out.println("=============댓글=============");
-
-    int countFreeBoard = 0;
-
-    for(int i = 0 ; i < commentList.size(); i++)
-      for (Comment comment : freeBoard.getComment()) {
-        System.out.printf("(%d) | 내용 : %s | 작성자 : %s | 등록일 : %s\n",
-            comment.getCommentNo(),
-            comment.getCommentText(),
-            comment.getCommentWiter().getPerNickname(),
-            comment.getCommentRegisteredDate());
-        countFreeBoard++;
-      }
-
-    if (countFreeBoard == 0) {
-      System.out.println("등록된 댓글이 없습니다.");
-    }
-
-  }
-
-  // 하위메뉴 선택
-  //  private void seleteMene(List<FreeBoard> freeBoardArrayList) {
-  //    System.out.println("---------------------");
-  //    System.out.println("1. 목록");
-  //    System.out.println("2. 상세");
-  //    System.out.println("3. 등록");
-  //    System.out.println("0. 이전");
-  //    int selete = Prompt.inputInt("선택> ");
-  //    switch (selete) {
-  //      case 1 : listFreeBoard(study); break;
-  //      case 2 : detailFreeBoard(freeBoardArrayList, study); break;
-  //      case 3 : addFreeBoard(study); break;
-  //      case 0 : listFreeBoard(study); break;
-  //      default : return;
-  //    }
-  //  }
-
-  //번호 찾기
+  //게시글 번호로 찾기
   protected FreeBoard findByNo(int inputNo) {
     for (FreeBoard freeBoard : freeBoardList) {
       if (freeBoard.getFreeBoardNo() == inputNo) {
@@ -432,8 +400,16 @@ public class MyStudyFreeBoard {
     return null;
   }
 
+  //댓글 번호로 찾기
+  protected Comment findByComment (int commentNo) {
+    for (Comment comment : commentList) {
+      if (comment.getCommentNo() == commentNo) {
+        return comment;
+      }
+    }
+    return null;
+  }
 }
-
 
 // 번호 입력
 //    int inputTitle = Prompt.inputInt("번호 : ");
