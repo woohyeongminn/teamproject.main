@@ -15,6 +15,13 @@ public class ToDo implements Serializable{
   private String todocomplete;  // 완료된 투두리스트
 
 
+
+  @Override
+  public String toString() {
+    return "ToDo [todoNo=" + todoNo + ", todoTitle=" + todoTitle + ", todoContent=" + todoContent
+        + ", todoRemark=" + todoRemark + ", todoDate=" + todoDate + ", todoStatus=" + todoStatus
+        + ", todocomplete=" + todocomplete + "]";
+  }
   public String getTodocomplete() {
     return todocomplete;
   }
