@@ -169,12 +169,14 @@ public class MyStudyToDo {
       todoNo = Prompt.inputInt("번호 : ");
       System.out.println();
 
-      if (toDoArrayList.isEmpty() && toDoCompleteList.isEmpty()) {
-        System.out.println("다시 선택하세요.");
-        continue;
-      }
 
       for (int i = 0; i < toDoArrayList.size(); i++) {
+
+        //        if (toDoArrayList.isEmpty() && toDoCompleteList.isEmpty()) {
+        //          System.out.println("다시 선택하세요.");
+        //          continue;
+        //        }
+
         if (toDoArrayList.get(i).getTodoNo() == todoNo || toDoCompleteList.get(i).getTodoNo() == todoNo) {
           System.out.printf(" >> 내용 : %s\n", toDoArrayList.get(i).getTodoContent());
           System.out.printf(" >> 비고 : %s\n", toDoArrayList.get(i).getTodoRemark());
@@ -185,6 +187,10 @@ public class MyStudyToDo {
           }
           System.out.printf(" >> DATE : %s\n", toDoArrayList.get(i).getTodoDate());
           detailToDo = toDoArrayList.get(i);
+
+        } else {
+          System.out.println("해당 번호의 To-Do List가 없습니다.");
+          break;
         }
       }
       break;
@@ -270,7 +276,13 @@ public class MyStudyToDo {
       System.out.println("진행 상황: ");
       System.out.println("1: 진행 중");
       System.out.println();
-      return Prompt.inputInt("선택> ");
+
+      try{
+        return Prompt.inputInt("선택> ");
+      } catch(Exception e) {
+        System.out.println("잘못 입력하셨습니다.");
+      }
+
     } else {
       System.out.printf(" 진행 상황(%s):", getStatusToDo(todoStatus));
     }
@@ -279,6 +291,8 @@ public class MyStudyToDo {
     System.out.println(" 2: 완료");
     return Prompt.inputInt(" 선택> ");
   }
+
+
 
   //상태 꺼내기
   public String getStatusToDo(int todoStatus) {
