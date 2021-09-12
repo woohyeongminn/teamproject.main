@@ -175,9 +175,10 @@ public abstract class AbstractCafeHandler implements Command {
       cafeReview.setReviewNo(reviewNo++);
       cafeReview.setContent(content);
       cafeReview.setGrade(grade);
-      cafeReview.setCafe(cafe);
-      cafeReview.setMember(member);
+      cafeReview.setCafeNo(cafe.getNo());
+      cafeReview.setMemberNo(member.getPerNo());
       cafeReview.setRegisteredDate(registeredDate);
+      cafeReview.setReviewStatus(0);
 
       reviewList.add(cafeReview);
       cafeReser.setWirteReview(true);

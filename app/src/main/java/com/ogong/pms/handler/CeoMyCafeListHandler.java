@@ -13,11 +13,14 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
   List<Cafe> cafeList;
   List<CafeReview> reviewList;
   int cafeNo = 15;
+  PromptPerMember promptPerMember;
 
-  public CeoMyCafeListHandler(List<CeoMember> ceoMemberList, List<Cafe> cafeList, List<CafeReview> reviewList) {
+  public CeoMyCafeListHandler(List<CeoMember> ceoMemberList, List<Cafe> cafeList
+      , List<CafeReview> reviewList, PromptPerMember promptPerMember) {
     super(ceoMemberList);
     this.cafeList = cafeList;
     this.reviewList = reviewList;
+    this.promptPerMember = promptPerMember;
   }
 
   @Override
@@ -29,8 +32,16 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
       CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
 
       for (Cafe cafe : cafeList) {
+        //        if (cafe.getCafeStatus() == 3) {
+        //          System.out.printf(" \n (%s)\n", cafe.getNo());
+        //          System.out.println(" 삭제 된 장소입니다.");
+        //          continue;
+        //        }
+        if (cafe.getCafeStatus() == 3) {
+          continue;
+        }
         if (cafe.getCeoNo() == ceoMember.getCeoNo()) {
-          System.out.printf(" \n(%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
+          System.out.printf(" \n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
               , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         }
       }
@@ -39,7 +50,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
       System.out.println("로그인 하세요.");
     }
 
-    System.out.println();
+    System.out.println("\n----------------------");
     System.out.println("1. 상세");
     System.out.println("2. 등록");
     System.out.println("0. 이전");
@@ -71,7 +82,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     cafe.setHoliday(Prompt.inputString(" 휴무일 : "));
     cafe.setBookable(Prompt.inputInt(" 예약가능인원 : "));
     cafe.setTimePrice(Prompt.inputInt(" 시간당금액 : "));
-    cafe.setCafeStatus(1);
+    cafe.setCafeStatus(1); // 원래는 기본적으로 0(승인대기)이 들어가야 하는데 일단 1(운영중)으로 설정
 
     cafeList.add(cafe);
   }
@@ -96,12 +107,13 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());
     System.out.printf(" >> 예약가능 인원 : %d\n", cafe.getBookable());
     System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
+    System.out.printf(" >> 상태 : %s\n", getCafeStatusLabel(cafe.getCafeStatus()));
     System.out.println();
     System.out.println("=============리뷰=============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
-      if (review.getCafe().getNo() == cafe.getNo()) {
-        String nickname = review.getMember().getPerNickname();
+      if (review.getCafeNo() == cafe.getNo()) {
+        String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
         System.out.printf("닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;
@@ -112,7 +124,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     }
 
     System.out.println();
-
+    System.out.println("----------------------");
     System.out.println("1. 수정");
     System.out.println("2. 삭제");
     System.out.println("0. 이전");
@@ -138,6 +150,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     String holiday = Prompt.inputString(String.format(" 휴무일(%s) : ", cafe.getHoliday()));
     int bookable = Prompt.inputInt(String.format(" 예약가능인원(%d) : ", cafe.getBookable()));
     int timePrice = Prompt.inputInt(String.format(" 시간당금액(%d) : ", cafe.getTimePrice()));
+    int cafeStatus = promptCafeStatus(cafe.getCafeStatus());
 
     String input = Prompt.inputString(" >> 정말 수정하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -155,6 +168,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     cafe.setHoliday(holiday);
     cafe.setBookable(bookable);
     cafe.setTimePrice(timePrice);
+    cafe.setCafeStatus(cafeStatus);
 
     System.out.println(" >> 수정이 완료 되었습니다.");
   }
@@ -169,7 +183,20 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
       return;
     }
 
-    cafeList.remove(cafe);
+    cafe.setName("");
+    cafe.setMainImg("");
+    cafe.setInfo("");
+    cafe.setLocation("");
+    cafe.setPhone("");
+    cafe.setOpenTime(LocalTime.of(00, 00));
+    cafe.setCloseTime(LocalTime.of(00, 00));
+    cafe.setHoliday("");
+    cafe.setBookable(0);
+    cafe.setTimePrice(0);
+    cafe.setCafeStatus(3);
+
+    //cafeList.remove(cafe);
+
 
     System.out.println("장소를 삭제하였습니다.");
   }

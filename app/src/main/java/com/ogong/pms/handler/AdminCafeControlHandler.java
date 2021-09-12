@@ -8,9 +8,12 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeControlHandler extends AbstractCafeHandler {
 
+  PromptPerMember promptPerMember;
+
   public AdminCafeControlHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
-      List<CafeReservation> reserList) {
+      List<CafeReservation> reserList, PromptPerMember promptPerMember) {
     super (cafeList, reviewList, reserList);
+    this.promptPerMember = promptPerMember;
   }
 
   @Override
@@ -24,6 +27,11 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     }
 
     for(Cafe cafe : cafeList) {
+      if (cafe.getCafeStatus() == 3) {
+        System.out.printf(" \n (%s)\n", cafe.getNo());
+        System.out.println(" 삭제 된 장소입니다.");
+        continue;
+      }
       System.out.printf(" \n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
           , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
     }
@@ -69,8 +77,8 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     System.out.println("=============리뷰=============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
-      if (review.getCafe().getNo() == cafe.getNo()) {
-        String nickname = review.getMember().getPerNickname();
+      if (review.getCafeNo() == cafe.getNo()) {
+        String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
         System.out.printf("닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;

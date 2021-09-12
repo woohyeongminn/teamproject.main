@@ -140,7 +140,7 @@ public class App {
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/page", new CeoDetailHandler(ceoMemberList));
-    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReview));
+    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReview, promptPerMember));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
@@ -155,14 +155,14 @@ public class App {
 
     commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList, ceoMemberList));
     commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));
-    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList, promptPerMember));
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
     commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList, promptPerMember));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
 
-    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReview, reserList, promptPerMember));
     commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, cafeReview, reserList)); 
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
@@ -221,18 +221,18 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
-    saveMember();
-    saveCeoMember();
-    saveAdmin();
-    saveAdminNotice();
-    saveAskBoard();
-    saveCafe();
-    saveCafeReservation();
-    saveCafeReview();
-    saveStudy();
-    saveToDo();
-    saveCalender();
-    saveFreeBoard();
+    //    saveMember();
+    //    saveCeoMember();
+    //    saveAdmin();
+    //    saveAdminNotice();
+    //    saveAskBoard();
+    //    saveCafe();
+    //    saveCafeReservation();
+    //    saveCafeReview();
+    //    saveStudy();
+    //    saveToDo();
+    //    saveCalender();
+    //    saveFreeBoard();
   }
 
   static Menu welcome() {
@@ -745,12 +745,12 @@ public class App {
   private Menu createCafeMenu() {
     MenuGroup cafeMenu = new MenuGroup("장소 예약"); 
 
-    cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
+    //cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
     //cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
     //cafeMenu.add(new MenuItem("장소 상세", "/cafe/detail"));
-    cafeMenu.add(new MenuItem("수정", "/cafe/update"));
-    cafeMenu.add(new MenuItem("삭제", "/cafe/delete"));
+    //cafeMenu.add(new MenuItem("수정", "/cafe/update"));
+    //cafeMenu.add(new MenuItem("삭제", "/cafe/delete"));
 
     return cafeMenu;
   }
