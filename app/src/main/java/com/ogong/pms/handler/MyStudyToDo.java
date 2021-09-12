@@ -76,7 +76,7 @@ public class MyStudyToDo {
 
     ToDo todo = new ToDo();
 
-    todo.setTodoNo(Prompt.inputInt(" 번호: "));
+    todo.setTodoNo(ToDoNo++);
     todo.setTodoContent(Prompt.inputString(" 내용: "));
     todo.setTodoRemark(Prompt.inputString(" 비고: "));
     todo.setTodoStatus(promptStatus());
@@ -97,75 +97,15 @@ public class MyStudyToDo {
     return;
   }
 
-  //목록
-  //  protected void listToDo(Study study) {
-  //    System.out.println();
-  //    System.out.println("▶ To-Do List 목록");
-  //    System.out.println();
-  //
-  //    System.out.println(" ▼▼ 진행중인 To-do ▼▼ ");
-  //
-  //    List<ToDo> toDoArrayList = new ArrayList<>(); // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
-  //
-  //    for (ToDo todo : study.getMyStudyToDo()) {
-  //      if (todo.getTodoStatus() != 2 || todo.getTodoStatus() == 1) {
-  //        System.out.printf(" %s | %s 내용 : %s 비고 : %s DATE : %s\n", 
-  //            getStatusToDo(todo.getTodoStatus()),
-  //            todo.getTodoNo(),
-  //            todo.getTodoContent(),
-  //            todo.getTodoRemark(),
-  //            todo.getTodoDate());
-  //        System.out.println();
-  //
-  //        toDoArrayList.add(todo); 
-  //      }
-  //    }
-  //    if (toDoArrayList.isEmpty()) {
-  //      System.out.println("등록된 To-Do List가 없습니다.");
-  //    }
-  //
-  //    System.out.println(" ▼▼ 완료된 To-do ▼▼ ");
-  //
-  //    for(int i = 0; i < toDoArrayList.size(); i++) {
-  //      //int todoStatus = toDoArrayList.get(i).getTodoStatus();
-  //
-  //      for (ToDo todo : study.getMyStudyToDo()) {
-  //        if (todo.getTodoStatus() != 2 || todo.getTodoStatus() == 1) {
-  //          System.out.println(" 완료된 To-Do List가 없습니다.");
-  //          break;
-  //
-  //        }else if (todo.getTodoStatus() != 1 || todo.getTodoStatus() == 2) {
-  //          System.out.printf(" %s | %s 내용 : %s 비고 : %s DATE : %s\n", 
-  //              getStatusToDo(todo.getTodoStatus()),
-  //              todo.getTodoNo(),
-  //              todo.getTodoContent(),
-  //              todo.getTodoRemark(),
-  //              todo.getTodoDate());
-  //          System.out.println();
-  //          break;
-  //        }
-  //      }
-  //    }
-  //
-  //    System.out.println("---------------------");
-  //    System.out.println("1. 상세");
-  //    System.out.println("2. 등록");
-  //    System.out.println("0. 이전");
-  //    int selete = Prompt.inputInt("선택> ");
-  //    switch (selete) {
-  //      case 1 : detailToDo(toDoArrayList, study); break;
-  //      case 2 : addToDo(study); break;
-  //      default : return;
-  //    }
-  //  }
-
+  // 목록
   protected void listToDo(Study study) {
     System.out.println();
     System.out.println("▶ To-Do List 목록");
     System.out.println();
 
 
-    List<ToDo> toDoArrayList = new ArrayList<>(); // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
+    List<ToDo> toDoArrayList = new ArrayList<>();       // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
+    List<ToDo> toDoCompleteList = new ArrayList<>();    
 
     System.out.println(" ▼▼ 진행중인 To-do ▼▼ ");
     for (ToDo todo : study.getMyStudyToDo()) {
@@ -177,12 +117,11 @@ public class MyStudyToDo {
             todo.getTodoRemark(),
             todo.getTodoDate());
         System.out.println();
-        toDoArrayList.add(todo); 
-
+        toDoArrayList.add(todo);
       }
     }
     if (toDoArrayList.isEmpty()) {
-      System.out.println("등록된 To-Do List가 없습니다.");
+      System.out.println("등록된 To-Do List가 없습니다.\n");
     }
 
     System.out.println(" ▼▼ 완료된 To-do ▼▼ ");
@@ -195,11 +134,11 @@ public class MyStudyToDo {
             todo.getTodoRemark(),
             todo.getTodoDate());
         System.out.println();
-        todo.getTodocomplete();
+        toDoCompleteList.add(todo);
       }
-      //      if () {
-      //        System.out.println("완료된 To-Do List가 없습니다.");
-      //      }
+      if (toDoCompleteList.isEmpty()) {
+        System.out.println("완료된 To-Do List가 없습니다.\n");
+      }
     }
 
     System.out.println("---------------------");
@@ -208,7 +147,7 @@ public class MyStudyToDo {
     System.out.println("0. 이전");
     int selete = Prompt.inputInt("선택> ");
     switch (selete) {
-      case 1 : detailToDo(toDoArrayList, study); break;
+      case 1 : detailToDo(toDoArrayList, toDoCompleteList, study); break;
       case 2 : addToDo(study); break;
       default : return;
     }
@@ -217,7 +156,7 @@ public class MyStudyToDo {
 
 
   //상세
-  protected void detailToDo(List<ToDo> toDoArrayList, Study study) {
+  protected void detailToDo(List<ToDo> toDoArrayList, List<ToDo> toDoCompleteList, Study study) {
     System.out.println();
     System.out.println("▶ To-Do List 상세보기");
     System.out.println();
@@ -230,13 +169,13 @@ public class MyStudyToDo {
       todoNo = Prompt.inputInt("번호 : ");
       System.out.println();
 
-      if (toDoArrayList.isEmpty()) {
+      if (toDoArrayList.isEmpty() && toDoCompleteList.isEmpty()) {
         System.out.println("다시 선택하세요.");
         continue;
       }
 
       for (int i = 0; i < toDoArrayList.size(); i++) {
-        if (toDoArrayList.get(i).getTodoNo() == todoNo) {
+        if (toDoArrayList.get(i).getTodoNo() == todoNo || toDoCompleteList.get(i).getTodoNo() == todoNo) {
           System.out.printf(" >> 내용 : %s\n", toDoArrayList.get(i).getTodoContent());
           System.out.printf(" >> 비고 : %s\n", toDoArrayList.get(i).getTodoRemark());
           if (toDoArrayList.get(i).getTodoStatus() == 1) {
@@ -257,7 +196,7 @@ public class MyStudyToDo {
     System.out.println("0. 이전");
     int selete = Prompt.inputInt("선택> ");
     switch (selete) {
-      case 1 : updateToDo(detailToDo, study); break;
+      case 1 : updateToDo(detailToDo, toDoCompleteList, study); break;
       case 2 : deleteToDo(detailToDo, study); break;
       case 0 : listToDo(study); break;
       default : return;
@@ -265,7 +204,7 @@ public class MyStudyToDo {
   }
 
   // 수정
-  protected void updateToDo(ToDo detailToDo, Study study) {
+  protected void updateToDo(ToDo detailToDo, List<ToDo> toDoCompleteList, Study study) {
     System.out.println();
     System.out.println("▶ To-Do List 변경");
     System.out.println();
@@ -274,6 +213,7 @@ public class MyStudyToDo {
     String todoRemark = Prompt.inputString(String.format(" 비고(%s) : ", detailToDo.getTodoRemark()));
 
     int todoStatus = promptStatus(detailToDo.getTodoStatus());
+
 
     System.out.println();
     String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
@@ -286,6 +226,10 @@ public class MyStudyToDo {
     detailToDo.setTodoContent(todoContent);
     detailToDo.setTodoStatus(todoStatus);
     detailToDo.setTodoRemark(todoRemark);
+
+    if(todoStatus == 2) {
+      toDoCompleteList.add(detailToDo);
+    }
 
     System.out.println("할 일이 변경되었습니다.");
     listToDo(study);
