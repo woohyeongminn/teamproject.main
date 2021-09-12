@@ -65,12 +65,12 @@ public class MyStudyToDo {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     if (member == null ) {
-      System.out.println("로그인 한 회원만 조회 가능합니다.");
+      System.out.println(" >> 로그인 한 회원만 조회 가능합니다.");
       return;
     }
 
     if (study.getStudyTitle() == null) {
-      System.out.println("가입된 스터디가 없습니다.");
+      System.out.println(" >> 가입된 스터디가 없습니다.");
       return;
     }
 
@@ -82,9 +82,9 @@ public class MyStudyToDo {
     todo.setTodoStatus(promptStatus());
     todo.setTodoDate(new Date(System.currentTimeMillis()));
 
-    String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오)");
+    String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오)");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("등록을 취소하였습니다.");
+      System.out.println(" >> 등록을 취소하였습니다.");
       listToDo(study);
       return;
     }
@@ -92,7 +92,7 @@ public class MyStudyToDo {
     toDoList.add(todo);
     study.getMyStudyToDo().add(todo);
 
-    System.out.println("할 일이 등록되었습니다.");
+    System.out.println(" >> 할 일이 등록되었습니다.");
 
     listToDo(study);
     return;
@@ -163,13 +163,13 @@ public class MyStudyToDo {
     ToDo detailArrayToDo = new ToDo();
 
     while (true) {
-      int inputToDoNo = Prompt.inputInt("번호 : ");
+      int inputToDoNo = Prompt.inputInt(" 번호 : ");
       System.out.println();
 
       ToDo toDo = findBytodoNo(inputToDoNo, toDoArrayList);
 
       if (toDo == null) {
-        System.out.println("해당 번호의 게시글이 없습니다.");
+        System.out.println(" >> 해당 번호의 게시글이 없습니다.");
         System.out.println();
         return;
       }
@@ -188,7 +188,7 @@ public class MyStudyToDo {
           detailArrayToDo = toDoArrayList.get(i);
           break;
         } else {
-          System.out.println("해당 번호의 To-Do List가 없습니다.");
+          System.out.println(" >> 해당 번호의 To-Do List가 없습니다.");
           break;
         }
       }
@@ -222,9 +222,9 @@ public class MyStudyToDo {
 
 
     System.out.println();
-    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("변경을 취소하였습니다.");
+      System.out.println(" >> 변경을 취소하였습니다.");
       listToDo(study);
       return;
     }
@@ -235,7 +235,7 @@ public class MyStudyToDo {
 
     todoComplete.add(detailArrayToDo);
 
-    System.out.println("할 일이 변경되었습니다.");
+    System.out.println(" >> 할 일이 변경되었습니다.");
     listToDo(study);
     return;
   }
@@ -247,9 +247,9 @@ public class MyStudyToDo {
     System.out.println("▶ To-Do List 삭제");
     System.out.println();
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오)");
+    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오)");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("삭제를 취소하였습니다.");
+      System.out.println(" >> 삭제를 취소하였습니다.");
       listToDo(study);
       return;
     }
@@ -257,7 +257,7 @@ public class MyStudyToDo {
     toDoList.remove(detailToDo);
     study.getMyStudyToDo().remove(detailToDo);
 
-    System.out.println("할 일을 삭제하였습니다.");
+    System.out.println(" >> 할 일을 삭제하였습니다.");
     listToDo(study);
     return;
   }
@@ -271,14 +271,14 @@ public class MyStudyToDo {
   private int promptStatus(int todoStatus) {
     if (todoStatus == -1) {
       System.out.println();
-      System.out.println("진행 상황: ");
-      System.out.println("1: 진행 중");
+      System.out.println(" 진행 상황: ");
+      System.out.println(" 1: 진행 중");
       System.out.println();
 
       try{
         return Prompt.inputInt("선택> ");
       } catch(Exception e) {
-        System.out.println("잘못 입력하셨습니다.");
+        System.out.println(" 잘못 입력하셨습니다.");
       }
 
     } else {

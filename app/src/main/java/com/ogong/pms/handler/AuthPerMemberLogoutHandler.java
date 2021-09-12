@@ -6,7 +6,7 @@ public class AuthPerMemberLogoutHandler implements Command {
   public void execute() {
     System.out.println();
     AuthPerMemberLoginHandler.loginUser = null;
-    System.out.println("로그아웃되었습니다.");
+    System.out.println(" >> 로그아웃 되었습니다.");
   }
 
 }

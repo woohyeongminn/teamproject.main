@@ -20,10 +20,10 @@ public class CafeDetailHandler extends AbstractCafeHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 장소 상세보기");
-    Cafe cafe = findByNo(Prompt.inputInt("번호 : "));
+    Cafe cafe = findByNo(Prompt.inputInt(" 번호 : "));
     System.out.println();
     if (cafe == null) {
-      System.out.println("해당 번호의 장소가 존재하지 않습니다.");
+      System.out.println(" 해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
     System.out.printf(" (%s)\n", cafe.getNo());
@@ -38,7 +38,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     System.out.printf(" >> 예약가능 인원 : %d\n", cafe.getBookable());
     System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
     System.out.println();
-    System.out.println("=============리뷰=============");
+    System.out.println("============= 리뷰 =============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
       if (review.getCafeNo() == cafe.getNo()) {
@@ -49,14 +49,14 @@ public class CafeDetailHandler extends AbstractCafeHandler {
           continue;
         }
         String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
-        System.out.printf("닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
+        System.out.printf(" 닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
             nickname, getReviewGradeStatusLabel(review.getGrade()), review.getContent()
             , review.getRegisteredDate());
         reviewSize++;
       }
     }
     if (reviewSize == 0) {
-      System.out.println("등록된 리뷰가 없습니다.");
+      System.out.println(" 등록된 리뷰가 없습니다.");
     }
 
     System.out.println();

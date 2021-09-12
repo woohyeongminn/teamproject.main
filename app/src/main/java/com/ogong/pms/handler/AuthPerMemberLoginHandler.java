@@ -23,26 +23,26 @@ public class AuthPerMemberLoginHandler implements Command {
   public void execute() {
 
     System.out.println();
-    String inputEmail = Prompt.inputString("이메일 : ");
+    String inputEmail = Prompt.inputString(" 이메일 : ");
     String inputPassword = "";
     Member member = promptPerMember.getMemberByPerEmail(inputEmail);
 
     if (member == null) {
-      System.out.println("등록된 회원이 아닙니다.");
+      System.out.println(" >> 등록된 회원이 아닙니다.");
     }
 
     while (member != null) {
-      inputPassword = Prompt.inputString("비밀번호 : ");
+      inputPassword = Prompt.inputString(" 비밀번호 : ");
 
       if (member.getPerPassword().equals(inputPassword)) {
         member.setPerEmail(inputEmail);
         member.setPerPassword(inputPassword);
         System.out.println();
-        System.out.printf("%s님 환영합니다!\n", member.getPerNickname());
+        System.out.printf(" >> '%s'님 환영합니다!\n", member.getPerNickname());
         loginUser = member;
         return;
       }
-      System.out.println("비밀번호를 다시 입력하세요.\n");
+      System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
       return;
     }
   } 

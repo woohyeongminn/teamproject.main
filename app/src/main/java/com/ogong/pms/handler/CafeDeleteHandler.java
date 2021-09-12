@@ -23,15 +23,15 @@ public class CafeDeleteHandler extends AbstractCafeHandler {
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("장소 삭제를 취소하였습니다.");
+      System.out.println(" 장소 삭제를 취소하였습니다.");
       return;
     }
 
     cafeList.remove(cafe);
 
-    System.out.println("장소를 삭제하였습니다.");
+    System.out.println(" 장소를 삭제하였습니다.");
   }
 
 

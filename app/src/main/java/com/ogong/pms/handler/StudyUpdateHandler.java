@@ -19,17 +19,17 @@ public class StudyUpdateHandler extends AbstractStudyHandler {
     System.out.println("▶ 스터디 수정");
     System.out.println();
 
-    int inputNo = Prompt.inputInt("번호  : ");
+    int inputNo = Prompt.inputInt(" 번호  : ");
 
     Study study = findByNo(inputNo);
 
     if (study == null) {
-      System.out.println("해당 번호의 스터디가 없습니다.");
+      System.out.println(" >> 해당 번호의 스터디가 없습니다.");
       return;
     }
 
     if (study.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
-      System.out.println("수정 권한이 없습니다.");
+      System.out.println(" >> 수정 권한이 없습니다.");
       return;
     }
 
@@ -40,7 +40,7 @@ public class StudyUpdateHandler extends AbstractStudyHandler {
     System.out.println();
     String input = Prompt.inputString(" 정말 수정하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" 스터디 수정을 취소하였습니다.");
+      System.out.println(" >> 스터디 수정을 취소하였습니다.");
       return;
     }
 
@@ -48,7 +48,7 @@ public class StudyUpdateHandler extends AbstractStudyHandler {
     study.setFace(face);
     study.setIntroduction(introduction);
 
-    System.out.println("스터디가 수정되었습니다.");
+    System.out.println(" >> 스터디가 수정되었습니다.");
   }
 
 }

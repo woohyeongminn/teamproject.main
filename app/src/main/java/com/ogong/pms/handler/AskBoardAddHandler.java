@@ -55,6 +55,12 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     System.out.println("▶ 문의사항");
     System.out.println();
 
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    if (member == null ) {
+      System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
+      return;
+    }
+
     AskBoard askList = new AskBoard();
 
     askList.setAskNo(askNo++);

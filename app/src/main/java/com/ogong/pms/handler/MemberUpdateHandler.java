@@ -26,9 +26,9 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
 
 
       System.out.println();
-      String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+      String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
-        System.out.println("개인회원 변경을 취소하였습니다.");
+        System.out.println(" >> 회원 변경을 취소하였습니다.");
         return;
       }
       member.setPerNickname(perNickName);
@@ -36,10 +36,10 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
       member.setPerPassword(perPassword);
       member.setPerPhoto(perPhoto);
 
-      System.out.println("개인회원 정보를 변경하였습니다.");
+      System.out.println(" >> 회원 정보를 변경하였습니다.");
 
     } catch (NullPointerException e) {
-      System.out.println("로그인 하세요.");
+      System.out.println(" >> 로그인 하세요.");
     }
   }
 }

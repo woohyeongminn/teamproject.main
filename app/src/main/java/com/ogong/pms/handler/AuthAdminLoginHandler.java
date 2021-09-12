@@ -31,7 +31,7 @@ public class AuthAdminLoginHandler implements Command {
   public void execute() {
 
     System.out.println();
-    String inputadminEmail = Prompt.inputString("이메일 : ");
+    String inputadminEmail = Prompt.inputString(" 이메일 : ");
     String inputadminPassword = "";
     Admin admin = findByAdminEmail(inputadminEmail);
 
@@ -40,7 +40,7 @@ public class AuthAdminLoginHandler implements Command {
     }
 
     while (admin != null) {
-      inputadminPassword = Prompt.inputString("비밀번호 : ");
+      inputadminPassword = Prompt.inputString(" 비밀번호 : ");
 
       if (admin.getMasterPassword().equals(inputadminPassword)) {
         admin.setMasterEmail(inputadminEmail);
@@ -50,7 +50,7 @@ public class AuthAdminLoginHandler implements Command {
         return;
       }
 
-      System.out.println("비밀번호를 다시 입력하세요.\n");
+      System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
       return;
     } 
   } 

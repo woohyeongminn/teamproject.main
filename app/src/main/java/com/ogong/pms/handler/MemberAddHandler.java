@@ -87,7 +87,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
     inputNewNick = Prompt.inputString(" 닉네임 : ");
     for (Member comparisonMember : memberList) {
       if (inputNewNick.equals(comparisonMember.getPerNickname())) {
-        System.out.println(" 중복된 닉네임 입니다.");
+        System.out.println(" >> 중복된 닉네임 입니다.");
         return;
       }
     }
@@ -99,7 +99,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
       if (!inputNewEmail.contains("@") ||
           !inputNewEmail.contains(".com") || inputNewEmail.length() < 6) {
-        System.out.println(" 정확한 이메일 양식으로 입력해주세요.");
+        System.out.println(" >> 정확한 이메일 양식으로 입력해주세요.");
         continue;
       }
       break;
@@ -113,7 +113,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
           && !inputNewPW.contains("#") && !inputNewPW.contains("$")
           && !inputNewPW.contains("^") && !inputNewPW.contains("%")
           && !inputNewPW.contains("&") && !inputNewPW.contains("*"))) {
-        System.out.println(" 8자 이상 특수문자를 포함시켜 주세요.");
+        System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
         continue;
       }
       break;
@@ -123,10 +123,10 @@ public class MemberAddHandler extends AbstractMemberHandler {
     while (true) {
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
-        System.out.println("  > 확인 실패!\n");
+        System.out.println(" >> 확인 실패!\n");
         continue;
       } else {
-        System.out.println("  > 확인 완료!\n");
+        System.out.println(" >> 확인 완료!\n");
       }
       break;
     }
@@ -135,7 +135,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     member.setPerNo(perNo++);
     memberList.add(member);
-    System.out.println("회원가입이 완료되었습니다.");
+    System.out.println(" >> 회원가입이 완료되었습니다.");
   }
 }
 

@@ -56,7 +56,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     Member member = AuthPerMemberLoginHandler.getLoginUser(); 
 
     if (member == null) {
-      System.out.println("로그인 한 회원만 볼 수 있습니다.");
+      System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
       return;
     }
 
@@ -83,7 +83,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
   private void goToAddReview() {
     System.out.println();
 
-    int inputNo = Prompt.inputInt("리뷰 작성할 예약번호 : ");
+    int inputNo = Prompt.inputInt(" 리뷰 작성할 예약번호 : ");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -113,7 +113,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   private void cancelReservation() {
     System.out.println();
-    int inputNo = Prompt.inputInt("취소할 예약번호 : ");
+    int inputNo = Prompt.inputInt(" 취소할 예약번호 : ");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -129,7 +129,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
     if (reserDate.toLocalDate().compareTo(today.toLocalDate()) > 0) {
 
-      String input = Prompt.inputString("정말 예약 취소 하시겠습니까? (네 / 아니오) ");
+      String input = Prompt.inputString(" 정말 예약 취소 하시겠습니까? (네 / 아니오) ");
 
       if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 예약 취소를 취소합니다.");

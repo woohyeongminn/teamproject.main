@@ -19,8 +19,8 @@ public abstract class AbstractAdminHandler implements Command {
 
   protected void goAdminProUpdate() {
     System.out.println();
-    System.out.println("1. 수정하기");
-    System.out.println("0. 뒤로가기");
+    System.out.println("1. 수정");
+    System.out.println("0. 이전");
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
@@ -44,7 +44,7 @@ public abstract class AbstractAdminHandler implements Command {
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" 취소되었습니다.");
+      System.out.println(" >> 취소되었습니다.");
       return;
     } 
 

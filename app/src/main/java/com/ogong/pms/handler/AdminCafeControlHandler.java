@@ -41,8 +41,8 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
 
   private void selectCafeDetailMenu() {
     System.out.println("\n----------------------");
-    System.out.println("1. 상세보기");
-    System.out.println("0. 뒤로가기");
+    System.out.println("1. 상세");
+    System.out.println("0. 이전");
     int input = Prompt.inputInt("선택> ");
     switch (input) {
       case 1: detail(); break;
@@ -74,12 +74,12 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     System.out.printf(" >> 예약 가능 인원 : %d\n", cafe.getBookable());
     System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
     System.out.println();
-    System.out.println("=============리뷰=============");
+    System.out.println("============= 리뷰 =============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
       if (review.getCafeNo() == cafe.getNo()) {
         String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
-        System.out.printf("닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
+        System.out.printf(" 닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;
       }
@@ -90,8 +90,8 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
 
     System.out.println();
 
-    System.out.println("1. 장소삭제");
-    System.out.println("0. 뒤로가기");
+    System.out.println("1. 장소 삭제");
+    System.out.println("0. 뒤로 가기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
       case 1 : delete(); break;

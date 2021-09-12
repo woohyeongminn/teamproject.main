@@ -35,17 +35,17 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     Member memeber = AuthPerMemberLoginHandler.getLoginUser();
     for(Study study : memeber.getPerMyStudy()) {
       if (study.getStudyTitle() == null) {
-        System.out.println("가입된 스터디가 없습니다.");
+        System.out.println(" >> 가입된 스터디가 없습니다.");
         return;
       }
     }
 
-    int inputNo = Prompt.inputInt("번호  : ");
+    int inputNo = Prompt.inputInt(" 번호  : ");
 
     Study study = findByNo(inputNo);
 
     if (study == null) {
-      System.out.println("해당 번호의 스터디가 없습니다.");
+      System.out.println(" >> 해당 번호의 스터디가 없습니다.");
       return;
     }
 
@@ -78,7 +78,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
       System.out.println("4. 자유게시판");
       System.out.println("5. 화상미팅");
       System.out.println("6. 수정하기");
-      System.out.println("7. 삭제&탈퇴하기");
+      System.out.println("7. 삭제 & 탈퇴하기");
       // 스터디 삭제는 되는데 탈퇴하기가 없음
       // 구성원은 탈퇴만 해야함, 조장은 스터디삭제도 할수 있음
 

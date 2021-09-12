@@ -22,7 +22,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     if (member == null) {
-      System.out.println("로그인 한 회원만 볼 수 있습니다.");
+      System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
       return;
     }
 
@@ -31,7 +31,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
       if (cafeReview.getMemberNo() == member.getPerNo()) {
         if (cafeReview.getReviewStatus() == 1) {
           System.out.printf(" \n (%s)", cafeReview.getReviewNo());
-          System.out.println(" 삭제 한 리뷰입니다.\n");
+          System.out.println(" >> 삭제한 리뷰입니다.\n");
           count++;
           continue;
         }
@@ -63,23 +63,23 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
   public void deleteMyReview() {
     System.out.println();
-    int inputNo = Prompt.inputInt("삭제할 리뷰번호 : ");
+    int inputNo = Prompt.inputInt("삭제할 리뷰 번호 : ");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     if (member == null) {
-      System.out.println("로그인 한 회원만 삭제할 수 있습니다.");
+      System.out.println(" >> 로그인 한 회원만 삭제할 수 있습니다.");
       return;
     }
 
     CafeReview myReviewByNo = getMyReviewByNo(member, inputNo);
 
     if (myReviewByNo == null) {
-      System.out.println(" >> 리뷰번호를 잘못 선택하셨습니다.");
+      System.out.println(" >> 리뷰 번호를 잘못 선택하셨습니다.");
       return;
     }
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 /아니오) ");
+    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 /아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 삭제를 취소합니다.");
       return;

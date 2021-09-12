@@ -69,10 +69,10 @@ public class CeoAddHandler extends AbstractCeoHandler {
     while (true) {
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(ceoMember.getCeoPassword())) {
-        System.out.println("  > 확인 실패!\n");
+        System.out.println(" >> 확인 실패!\n");
         continue;
       } else {
-        System.out.println("  > 확인 완료!\n");
+        System.out.println(" >> 확인 완료!\n");
       }
       break;
     }
@@ -84,7 +84,7 @@ public class CeoAddHandler extends AbstractCeoHandler {
 
     ceoMemberList.add(ceoMember);
 
-    System.out.println("가입이 완료되었습니다.");
+    System.out.println(" >> 가입이 완료되었습니다.");
   }
 }
 

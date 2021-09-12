@@ -35,7 +35,8 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
         System.out.println("\n >> 내가 등록한 문의글이 없습니다.");
       }
     } else {
-      System.out.println("로그인 하세요.");
+      System.out.println();
+      System.out.println(" >> 로그인 하세요.");
       return;
     }
   }

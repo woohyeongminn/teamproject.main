@@ -25,7 +25,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     if (member == null ) {
-      System.out.println("로그인 한 회원만 조회 가능합니다.");
+      System.out.println(" >> 로그인 한 회원만 조회 가능합니다.");
       return;
     }
 
@@ -33,7 +33,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     // 값은 안 넣었지만 null값이 있으므로 사이즈로 비교해야 한다.
 
     if(member.getPerMyStudy().size() == 0) {
-      System.out.println("가입한 스터디가 없습니다.");
+      System.out.println(" >> 가입한 스터디가 없습니다.");
       return;
     }
 
@@ -43,13 +43,13 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     }
 
     System.out.println("\n----------------------");
-    System.out.println("1. 상세 보기");
-    System.out.println("0. 뒤로 가기");
+    System.out.println("1. 상세");
+    System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
       case 1 : commandMap.get("/myStudy/detail").execute(); break;
-      case 2 : System.out.println("뒤로 가기"); break;
+      case 2 : System.out.println(" 이전"); break;
       default : return;
     }
   }

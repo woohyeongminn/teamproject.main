@@ -22,12 +22,13 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     System.out.println("▶ 문의사항 상세");
     System.out.println();
 
-    int askNo = Prompt.inputInt("번호 : ");
+    int askNo = Prompt.inputInt(" 번호 : ");
 
     AskBoard askBoard = findByNo(askNo);
 
     if (askBoard == null) {
-      System.out.println("해당 번호의 문의글이 없습니다.");
+      System.out.println();
+      System.out.println(" >> 해당 번호의 문의글이 없습니다.");
       return;
     }
 

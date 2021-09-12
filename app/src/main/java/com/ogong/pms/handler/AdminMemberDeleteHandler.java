@@ -43,18 +43,14 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
         String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 /아니오) ");
 
         if (!input.equalsIgnoreCase("네")) {
-          System.out.println(" 회원 삭제를 취소하였습니다.");
+          System.out.println(" >> 회원 삭제를 취소하였습니다.");
           return;
         }
 
-        //      Admin admin = AuthAdminLoginHandler.getLoginAdmin();
-        //      Member member = AuthPerMemberLoginHandler.getLoginUser();
-
         memberList.remove(member);
         AuthPerMemberLoginHandler.loginUser = null;
-        System.out.println(" 회원이 삭제되었습니다.");
+        System.out.println(" >> 회원이 삭제되었습니다.");
         return;
-        //      return member;
       }
     }
   }

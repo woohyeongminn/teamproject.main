@@ -21,9 +21,9 @@ public class AdminMemberDetailHandler extends AbstractMemberHandler {
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String selcectMemberPro = Prompt.inputString("회원 닉네임 : ");
+        String selectMemberPro = Prompt.inputString(" 회원 닉네임 : ");
 
-        member = promptPerMember.getMemberByPerNick(selcectMemberPro);
+        member = promptPerMember.getMemberByPerNick(selectMemberPro);
         System.out.println();
         System.out.printf(" [%s]\n", member.getPerNickname());
         System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
@@ -33,6 +33,6 @@ public class AdminMemberDetailHandler extends AbstractMemberHandler {
         return;
       }
     }
-    System.out.println("로그인 하세요.");
+    System.out.println(" >> 로그인 하세요.");
   }
 }

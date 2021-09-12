@@ -35,9 +35,9 @@ public class CafeUpdateHandler extends AbstractCafeHandler {
     int bookable = Prompt.inputInt(String.format(" 예약가능인원(%d) : ", cafe.getBookable()));
     int timePrice = Prompt.inputInt(String.format(" 예약가능인원(%d) : ", cafe.getTimePrice()));
 
-    String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("작업 변경을 취소하였습니다.");
+      System.out.println(" >> 작업 변경을 취소하였습니다.");
       return;
     }
 
@@ -52,7 +52,7 @@ public class CafeUpdateHandler extends AbstractCafeHandler {
     cafe.setBookable(bookable);
     cafe.setTimePrice(timePrice);
 
-    System.out.println("작업을 변경하였습니다.");
+    System.out.println(" >> 작업을 변경하였습니다.");
   }
 
 }

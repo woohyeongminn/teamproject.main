@@ -41,13 +41,13 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
           continue;
         }
         if (cafe.getCeoNo() == ceoMember.getCeoNo()) {
-          System.out.printf(" \n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
+          System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
               , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         }
       }
 
     } catch (NullPointerException e) {
-      System.out.println("로그인 하세요.");
+      System.out.println(" >> 로그인 하세요.");
     }
 
     System.out.println("\n----------------------");
@@ -90,7 +90,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
   private void myCafeDetail () {
     System.out.println();
     System.out.println("▶ 장소 상세보기");
-    Cafe cafe = findByNo(Prompt.inputInt("번호 : "));
+    Cafe cafe = findByNo(Prompt.inputInt(" 번호 : "));
     System.out.println();
     if (cafe == null) {
       System.out.println(" >> 번호를 다시 선택하세요.");
@@ -109,18 +109,18 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
     System.out.printf(" >> 상태 : %s\n", getCafeStatusLabel(cafe.getCafeStatus()));
     System.out.println();
-    System.out.println("=============리뷰=============");
+    System.out.println("============= 리뷰 =============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
       if (review.getCafeNo() == cafe.getNo()) {
         String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
-        System.out.printf("닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
+        System.out.printf(" 닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;
       }
     }
     if (reviewSize == 0) {
-      System.out.println("등록된 리뷰가 없습니다.");
+      System.out.println(" >> 등록된 리뷰가 없습니다.");
     }
 
     System.out.println();
@@ -177,9 +177,9 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     System.out.println();
     System.out.println("▶ 장소 삭제");
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("장소 삭제를 취소하였습니다.");
+      System.out.println(" >> 장소 삭제를 취소하였습니다.");
       return;
     }
 
@@ -198,7 +198,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     //cafeList.remove(cafe);
 
 
-    System.out.println("장소를 삭제하였습니다.");
+    System.out.println(" >> 장소를 삭제하였습니다.");
   }
 
   private Cafe findByNo(int cafeNo) {

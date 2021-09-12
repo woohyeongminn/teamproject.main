@@ -23,10 +23,10 @@ public class CafeSearchHandler extends AbstractCafeHandler {
     System.out.println("▶ 장소 검색");
     System.out.println();
     int count = 0;
-    String input = Prompt.inputString("지역 : ");
+    String input = Prompt.inputString(" 지역 : ");
     for (Cafe cafe : cafeList) {
       if (cafe.getLocation().contains(input)) {
-        System.out.printf(" \n(%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
+        System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
             , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         count++;
       }
@@ -43,8 +43,8 @@ public class CafeSearchHandler extends AbstractCafeHandler {
       }
     } else {
       System.out.println();
-      System.out.println("1. 상세보기");
-      System.out.println("0. 뒤로가기");
+      System.out.println("1. 상세");
+      System.out.println("0. 이전");
       int selectInput = Prompt.inputInt("선택> ");
       switch (selectInput) {
         case 1: commandMap.get("/cafe/detail").execute(); break;
