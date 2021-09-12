@@ -221,18 +221,18 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
-    saveMember();
-    saveCeoMember();
-    saveAdmin();
-    saveAdminNotice();
-    saveAskBoard();
-    saveCafe();
-    saveCafeReservation();
-    saveCafeReview();
-    saveStudy();
-    saveToDo();
-    saveCalender();
-    saveFreeBoard();
+    //    saveMember();
+    //    saveCeoMember();
+    //    saveAdmin();
+    //    saveAdminNotice();
+    //    saveAskBoard();
+    //    saveCafe();
+    //    saveCafeReservation();
+    //    saveCafeReview();
+    //    saveStudy();
+    //    saveToDo();
+    //    saveCalender();
+    //    saveFreeBoard();
   }
 
   static Menu welcome() {

@@ -128,7 +128,7 @@ public class MyStudyToDo {
 
     System.out.println(" >> 완료된 To-do");
     for (ToDo todo : study.getMyStudyToDo()) {
-      if(todo.getTodocomplete().isEmpty()) {
+      if(todo.getTodocomplete() == null) {
         System.out.println("완료된 To-Do List가 없습니다.\n");
       }
 
