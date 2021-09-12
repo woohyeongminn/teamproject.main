@@ -9,14 +9,16 @@ public class CafeReview implements Serializable{
   int reviewNo; // 리뷰 번호
   String content; // 리뷰 내용
   int grade; // 별점
-  Cafe cafe; // 가게 번호
-  Member member; // 리뷰 등록한 아이디
+  int cafeNo; // 가게 번호
+  int memberNo; // 리뷰 등록한 아이디
   Date RegisteredDate; // 리뷰 등록일
+  int reviewStatus; // 0 : 기본 1 : 삭제
 
   @Override
   public String toString() {
     return "CafeReview [reviewNo=" + reviewNo + ", content=" + content + ", grade=" + grade
-        + ", cafe=" + cafe + ", member=" + member + ", RegisteredDate=" + RegisteredDate + "]";
+        + ", cafeNo=" + cafeNo + ", memberNo=" + memberNo + ", RegisteredDate=" + RegisteredDate
+        + ", reviewStatus=" + reviewStatus + "]";
   }
 
   public int getReviewNo() {
@@ -43,20 +45,20 @@ public class CafeReview implements Serializable{
     this.grade = grade;
   }
 
-  public Cafe getCafe() {
-    return cafe;
+  public int getCafeNo() {
+    return cafeNo;
   }
 
-  public void setCafe(Cafe cafe) {
-    this.cafe = cafe;
+  public void setCafeNo(int cafeNo) {
+    this.cafeNo = cafeNo;
   }
 
-  public Member getMember() {
-    return member;
+  public int getMemberNo() {
+    return memberNo;
   }
 
-  public void setMember(Member member) {
-    this.member = member;
+  public void setMemberNo(int memberNo) {
+    this.memberNo = memberNo;
   }
 
   public Date getRegisteredDate() {
@@ -65,6 +67,14 @@ public class CafeReview implements Serializable{
 
   public void setRegisteredDate(Date registeredDate) {
     RegisteredDate = registeredDate;
+  }
+
+  public int getReviewStatus() {
+    return reviewStatus;
+  }
+
+  public void setReviewStatus(int reviewStatus) {
+    this.reviewStatus = reviewStatus;
   }
 
 }

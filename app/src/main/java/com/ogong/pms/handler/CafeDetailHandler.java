@@ -8,8 +8,12 @@ import com.ogong.util.Prompt;
 
 public class CafeDetailHandler extends AbstractCafeHandler {
 
-  public CafeDetailHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  PromptPerMember promptPerMember;
+
+  public CafeDetailHandler (List<Cafe> cafeList, List<CafeReview> reviewList
+      , List<CafeReservation> reserList, PromptPerMember promptPerMember) {
     super (cafeList, reviewList, reserList);
+    this.promptPerMember = promptPerMember;
   }
 
   @Override
@@ -37,8 +41,14 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     System.out.println("=============리뷰=============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
-      if (review.getCafe().getNo() == cafe.getNo()) {
-        String nickname = review.getMember().getPerNickname();
+      if (review.getCafeNo() == cafe.getNo()) {
+        if (review.getReviewStatus() == 1) {
+          //System.out.printf(" \n (%s)\n", review.getReviewNo());
+          System.out.println(" | 삭제 된 리뷰입니다. |");
+          reviewSize++;
+          continue;
+        }
+        String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
         System.out.printf("닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
             nickname, getReviewGradeStatusLabel(review.getGrade()), review.getContent()
             , review.getRegisteredDate());
@@ -51,6 +61,10 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     System.out.println();
 
+    if (cafe.getCafeStatus() == 2) {
+      return;
+    }
+    System.out.println("----------------------");
     System.out.println("1. 예약");
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt(" 선택> ");

@@ -28,9 +28,16 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
     int count = 0;
     for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getMember().getPerNickname().equals(member.getPerNickname())) {
+      if (cafeReview.getMemberNo() == member.getPerNo()) {
+        if (cafeReview.getReviewStatus() == 1) {
+          System.out.printf(" \n (%s)", cafeReview.getReviewNo());
+          System.out.println(" 삭제 한 리뷰입니다.\n");
+          count++;
+          continue;
+        }
+        Cafe cafe = findByNo(cafeReview.getCafeNo());
         System.out.printf(" (%d)\n [%s]\n 별점 : %s\n 내용 : %s\n 등록일 : %s\n",
-            cafeReview.getReviewNo(), cafeReview.getCafe().getName()
+            cafeReview.getReviewNo(), cafe.getName()
             , getReviewGradeStatusLabel(cafeReview.getGrade()),
             cafeReview.getContent(), cafeReview.getRegisteredDate());
         System.out.println();
@@ -44,8 +51,8 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
     }
 
     System.out.println("----------------------");
-    System.out.println("1. 리뷰 삭제");
-    System.out.println("0. 뒤로 가기");
+    System.out.println("1. 삭제");
+    System.out.println("0. 이전");
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
@@ -68,23 +75,24 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
     CafeReview myReviewByNo = getMyReviewByNo(member, inputNo);
 
     if (myReviewByNo == null) {
-      System.out.println("리뷰번호를 잘못 선택하셨습니다.");
+      System.out.println(" >> 리뷰번호를 잘못 선택하셨습니다.");
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까? (네 /아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println("삭제를 취소합니다.");
+      System.out.println(" >> 삭제를 취소합니다.");
       return;
     }
 
-    reviewList.remove(myReviewByNo);
-    System.out.println("삭제를 완료하였습니다.");
+    myReviewByNo.setReviewStatus(1);
+    //reviewList.remove(myReviewByNo);
+    System.out.println(" >> 삭제를 완료하였습니다.");
   }
 
   private CafeReview getMyReviewByNo(Member member, int reviewNo) {
     for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getMember().getPerNickname().equals(member.getPerNickname()) &&
+      if (cafeReview.getMemberNo() == member.getPerNo() &&
           cafeReview.getReviewNo() == reviewNo) {
         return cafeReview;
       }
