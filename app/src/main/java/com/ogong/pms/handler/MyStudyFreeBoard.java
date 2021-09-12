@@ -153,10 +153,10 @@ public class MyStudyFreeBoard {
     FreeBoard detailfreeBoard = new FreeBoard();
 
     while (true) {
-      int inputTitle = Prompt.inputInt("번호 : ");
+      int inputNo = Prompt.inputInt("번호 : ");
       System.out.println();
 
-      FreeBoard free = findByNo(inputTitle);
+      FreeBoard free = findByNo(inputNo);
 
       if (free == null) {
         System.out.println("해당 번호의 게시글이 없습니다.");
@@ -166,7 +166,7 @@ public class MyStudyFreeBoard {
 
       for (int i = 0; i < freeBoardArrayList.size(); i++) {
 
-        if (freeBoardArrayList.get(i).getFreeBoardNo() == inputTitle) {
+        if (freeBoardArrayList.get(i).getFreeBoardNo() == inputNo) {
           System.out.printf(" [%s]\n", freeBoardArrayList.get(i).getFreeBoardTitle());
           System.out.printf(" >> 내용 : %s\n", freeBoardArrayList.get(i).getFreeBoardContent());
           System.out.printf(" >> 첨부파일 : %s\n", freeBoardArrayList.get(i).getFreeBoardAtcFile());
