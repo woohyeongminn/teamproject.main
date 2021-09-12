@@ -105,6 +105,7 @@ public class MyStudyToDo {
     System.out.println();
 
 
+
     List<ToDo> toDoArrayList = new ArrayList<>();       // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
 
 
@@ -130,6 +131,7 @@ public class MyStudyToDo {
     for (ToDo todo : study.getMyStudyToDo()) {
       if(todo.getTodocomplete() == null) {
         System.out.println("완료된 To-Do List가 없습니다.\n");
+        break;
       }
 
       if (todo.getTodocomplete() != null) {
@@ -166,7 +168,7 @@ public class MyStudyToDo {
       int inputToDoNo = Prompt.inputInt("번호 : ");
       System.out.println();
 
-      ToDo toDo = findBytodoNo(inputToDoNo);
+      ToDo toDo = findBytodoNo(inputToDoNo, toDoArrayList);
 
       if (toDo == null) {
         System.out.println("해당 번호의 게시글이 없습니다.");
@@ -302,8 +304,8 @@ public class MyStudyToDo {
   }
 
   //번호로 객체 찾기
-  public ToDo findBytodoNo(int todoNo) {
-    for (ToDo todo : toDoList) {
+  public ToDo findBytodoNo(int todoNo, List<ToDo> toDoArrayList) {
+    for (ToDo todo : toDoArrayList) {
       if (todo.getTodoNo() == todoNo) {
         return todo;
       }

@@ -221,18 +221,18 @@ public class App {
     createMenu().execute();
     Prompt.close();
 
-    //    saveMember();
-    //    saveCeoMember();
-    //    saveAdmin();
-    //    saveAdminNotice();
-    //    saveAskBoard();
-    //    saveCafe();
-    //    saveCafeReservation();
+    //    saveMember();               // MemberAddHandler
+    //    saveCeoMember();            // CeoAddHandler
+    //    saveAdmin();                // AuthAdminLoginHandler
+    //    saveAdminNotice();          // AdminNoticeAddHandler
+    //    saveAskBoard();             // AskBoardAddHandler
+    //    saveCafe();                 // CafeAddHandler
+    //    saveCafeReservation();      // CafeMyReservationListHandler
     //    saveCafeReview();
-    //    saveStudy();
-    //    saveToDo();
-    //    saveCalender();
-    //    saveFreeBoard();
+    //    saveStudy();                // StudyAddHandler
+    //    saveToDo();                 // MyStudyToDo
+    //    saveCalender();             // MyStudyCalender
+    //    saveFreeBoard();            // MyStudyFreeBoard
   }
 
   static Menu welcome() {
