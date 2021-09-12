@@ -2,6 +2,7 @@ package com.ogong.pms.handler;
 
 import java.util.HashMap;
 import java.util.List;
+import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
@@ -12,17 +13,18 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
   MyStudyToDo myStudyToDo;
   MyStudyCalender myStudyCalender;
   MyStudyFreeBoard myStudyFreeBoard;
-
-
+  List<Comment> commentList;
 
   public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap,
-      MyStudyToDo myStudyToDo, MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard) {
+      MyStudyToDo myStudyToDo, MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard, List<Comment> commentList) {
     super(studyList);
     this.commandMap = commandMap;
     this.myStudyToDo = myStudyToDo;
     this.myStudyCalender = myStudyCalender;
     this.myStudyFreeBoard = myStudyFreeBoard;
+    this.commentList = commentList;
   }
+
 
   @Override
   public void execute() {
@@ -85,7 +87,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
         case 1: listMember(study); break;
         case 2: myStudyCalender.listCalender(study); break;
         case 3: myStudyToDo.listToDo(study); break;
-        case 4: myStudyFreeBoard.listFreeBoard(study); break;
+        case 4: myStudyFreeBoard.listFreeBoard(commentList, study); break;
 
         case 5: commandMap.get("/mystudy/detail").execute(); break;   // 임시로 넣었음
         case 6: commandMap.get("/study/update").execute(); break;     // 구현 덜 했음

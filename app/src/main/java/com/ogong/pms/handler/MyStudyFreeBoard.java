@@ -11,7 +11,7 @@ import com.ogong.util.Prompt;
 
 public class MyStudyFreeBoard {
 
-  int freeBoardNo;
+  int freeBoardNo = 10;
   List<FreeBoard> freeBoardList;
   List<Comment> commentList;
   List<Member> memberList;
@@ -62,21 +62,21 @@ public class MyStudyFreeBoard {
   }
 
   // 등록
-  private void addFreeBoard(Study study) {
+  private void addFreeBoard(List<Comment> commentList, Study study) {
     System.out.println();
     System.out.println("▶ 게시글 작성");
     System.out.println();
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
-    if (member == null ) {
-      System.out.println("로그인 한 회원만 조회 가능합니다.");
-      return;
-    }
+    //    if (member == null ) {
+    //      System.out.println("로그인 한 회원만 조회 가능합니다.");
+    //      return;
+    //    }
 
-    if (study.getStudyTitle() == null) {
-      System.out.println("가입된 스터디가 없습니다.");
-      return;
-    }
+    //    if (study.getStudyTitle() == null) {
+    //      System.out.println("가입된 스터디가 없습니다.");
+    //      return;
+    //    }
 
     FreeBoard freeBoard = new FreeBoard();
 
@@ -86,12 +86,12 @@ public class MyStudyFreeBoard {
     freeBoard.setFreeBoardAtcFile(Prompt.inputString(" 첨부파일 : "));
     freeBoard.setFreeBoardWriter(member);
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
+    freeBoard.setComment(new ArrayList<>());
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString("게시글을 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("게시글 등록을 취소하였습니다.");
-      seleteMene(freeBoardList);
       return;
     }
 
@@ -99,12 +99,12 @@ public class MyStudyFreeBoard {
     study.getMyStudyFreeBoard().add(freeBoard);
 
     System.out.println("게시글이 등록되었습니다.");
-    listFreeBoard(study); 
+    listFreeBoard(commentList, study); 
     return;
   }
 
   // 목록
-  public void listFreeBoard(Study study) {
+  public void listFreeBoard(List<Comment> commentList, Study study) {
     System.out.println();
     System.out.println("▶ 게시글 목록");
     System.out.println();
@@ -128,7 +128,6 @@ public class MyStudyFreeBoard {
 
     if (freeBoardArrayList.isEmpty()) {
       System.out.println("등록된 게시글이 없습니다");
-      return;
     }
 
     System.out.println("---------------------");
@@ -137,15 +136,15 @@ public class MyStudyFreeBoard {
     System.out.println("0. 이전");
     int selete = Prompt.inputInt("선택> ");
     switch (selete) {
-      case 1 : detailFreeBoard(freeBoardArrayList, study); break;
-      case 2 : addFreeBoard(study); break;
+      case 1 : detailFreeBoard(freeBoardArrayList, commentList, study); break;
+      case 2 : addFreeBoard(commentList, study); break;
       default : return;
     }
 
   }
 
   // 상세
-  private void detailFreeBoard(List<FreeBoard> freeBoardArrayList, Study study) {
+  private void detailFreeBoard(List<FreeBoard> freeBoardArrayList, List<Comment> commentList, Study study) {
     System.out.println();
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
@@ -159,8 +158,7 @@ public class MyStudyFreeBoard {
       FreeBoard free = findByNo(inputNo);
 
       if (free == null) {
-        System.out.println("해당 번호의 게시글이 없습니다.");
-        System.out.println();
+        System.out.println("해당 번호의 게시글이 없습니다.\n");
         return;
       }
 
@@ -174,6 +172,7 @@ public class MyStudyFreeBoard {
           System.out.printf(" >> 등록일 : %s\n", freeBoardArrayList.get(i).getFreeBoardRegisteredDate());
           freeBoardArrayList.get(i).setFreeBoardViewcount(freeBoardArrayList.get(i).getFreeBoardViewcount() + 1);
           System.out.printf(" >> 조회수 : %d\n", freeBoardArrayList.get(i).getFreeBoardViewcount());
+
           detailfreeBoard = freeBoardArrayList.get(i);
 
           listComment(detailfreeBoard); // 댓글호출
@@ -191,25 +190,24 @@ public class MyStudyFreeBoard {
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : updateFreeBoard(detailfreeBoard, study); break;
+      case 1 : updateFreeBoard(detailfreeBoard, commentList, study); break;
       case 2 : deleteFreeBoard(detailfreeBoard, study); break;
-      case 3 : addComment(detailfreeBoard); break;
+      case 3 : addComment(detailfreeBoard, commentList); break;
       case 4 : updateComment(); break;
       case 5 : deleteComment(detailfreeBoard); break;
-      case 0 : listFreeBoard(study); break;
+      case 0 : listFreeBoard(commentList, study); break;
       default : 
     }
   }
 
   // 수정
-  private void updateFreeBoard(FreeBoard detailFreeBoard, Study study) {
+  private void updateFreeBoard(FreeBoard detailFreeBoard, List<Comment> commentList, Study study) {
     System.out.println();
     System.out.println("▶ 게시글 수정");
     System.out.println();
 
     if (detailFreeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("수정 권한이 없습니다.");
-      listFreeBoard(study);
       return;
     }
 
@@ -220,7 +218,6 @@ public class MyStudyFreeBoard {
     String input = Prompt.inputString("정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("변경을 취소되었습니다.");
-      listFreeBoard(study);
       return;
     }
 
@@ -229,7 +226,7 @@ public class MyStudyFreeBoard {
     detailFreeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
 
     System.out.println("게시글을 변경하였습니다.");
-    listFreeBoard(study);
+    listFreeBoard(commentList, study);
     return;
   }
 
@@ -241,14 +238,12 @@ public class MyStudyFreeBoard {
 
     if (detailFreeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println("삭제 권한이 없습니다.");
-      listFreeBoard(study);
       return;
     }
 
     String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println("삭제를 취소하였습니다.");
-      listFreeBoard(study);
       return;
     }
 
@@ -256,15 +251,16 @@ public class MyStudyFreeBoard {
     study.getMyStudyFreeBoard().remove(detailFreeBoard);
 
     System.out.println("게시글이 삭제되었습니다.");
-
-    listFreeBoard(study);
+    listFreeBoard(commentList, study);
     return;
   }
 
   //--------------------------댓글--------------------------
 
+  int commentNo = 0;
+
   // 댓글 등록
-  protected void addComment(FreeBoard freeBoard) {
+  protected void addComment(FreeBoard freeBoard, List<Comment> commentList) {
     System.out.println();
     System.out.println("▶ 댓글 작성하기");
 
@@ -273,9 +269,7 @@ public class MyStudyFreeBoard {
     } else {
 
       Comment comment = new Comment();
-      int commentNo = 1;
 
-      comment.setCommentNo(commentNo++);
       String text = Prompt.inputString("댓글 내용 : ");
       Member witer = AuthPerMemberLoginHandler.getLoginUser();
       Date date = new Date(System.currentTimeMillis());
@@ -283,9 +277,11 @@ public class MyStudyFreeBoard {
       String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
         System.out.println("댓글 등록을 취소하였습니다.");
+        listFreeBoard(commentList, study);
         return;
       }
 
+      comment.setCommentNo(commentNo++);
       comment.setCommentText(text);
       comment.setCommentWiter(witer);
       comment.setCommentRegisteredDate(date);
@@ -295,7 +291,7 @@ public class MyStudyFreeBoard {
 
       System.out.println("댓글이 등록되었습니다.");
 
-      listFreeBoard(study);
+      listFreeBoard(commentList, study);
       return;
     }
   }
@@ -311,6 +307,9 @@ public class MyStudyFreeBoard {
   }
 
   // 댓글 수정
+
+  static int commentNo1;
+
   protected void updateComment() {
     System.out.println();
     System.out.println("▶ 댓글 수정");
@@ -320,9 +319,15 @@ public class MyStudyFreeBoard {
       System.out.println("변경 권한이 없습니다.");
     } else  {
 
-      int commentNo = Prompt.inputInt("번호 : ");
+      try {
+        commentNo1 = Prompt.inputInt("번호 : ");
+      } catch (Exception e){
+        System.out.println("번호를 입력해주세요.");
+        listFreeBoard(commentList, study);
+        return;
+      }
 
-      Comment comment = findByComment(commentNo);
+      Comment comment = findByComment(commentNo1);
 
       String commentTitle = Prompt.inputString(
           "댓글 내용(" +  comment.getCommentText() + ") : ");
@@ -337,6 +342,8 @@ public class MyStudyFreeBoard {
       comment.setCommentText(commentTitle);
 
       System.out.println("댓글을 변경하였습니다.");
+      listFreeBoard(commentList, study);
+      return;
     }
   }
 
@@ -350,9 +357,15 @@ public class MyStudyFreeBoard {
       System.out.println("삭제 권한이 없습니다.");
     } else  {
 
-      int commentNo = Prompt.inputInt("번호 : ");
+      try {
+        commentNo1 = Prompt.inputInt("번호 : ");
+      } catch (Exception e) {
+        System.out.println("번호를 입력해주세요");
+        listFreeBoard(commentList, study);
+        return;
+      }
 
-      Comment comment = findByComment(commentNo);
+      Comment comment = findByComment(commentNo1);
 
       System.out.println();
       String inputno = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
@@ -364,6 +377,8 @@ public class MyStudyFreeBoard {
       commentList.remove(comment);
       freeBoard.getComment().remove(comment);
       System.out.println("댓글이 삭제되었습니다.");
+      listFreeBoard(commentList, study);
+      return;
     }
   }
 
@@ -374,14 +389,15 @@ public class MyStudyFreeBoard {
 
     int countFreeBoard = 0;
 
-    for (Comment comment : freeBoard.getComment()) {
-      System.out.printf("(%d) | 내용 : %s | 작성자 : %s | 등록일 : %s\n",
-          comment.getCommentNo(),
-          comment.getCommentText(),
-          comment.getCommentWiter().getPerNickname(),
-          comment.getCommentRegisteredDate());
-      countFreeBoard++;
-    }
+    for(int i = 0 ; i < commentList.size(); i++)
+      for (Comment comment : freeBoard.getComment()) {
+        System.out.printf("(%d) | 내용 : %s | 작성자 : %s | 등록일 : %s\n",
+            comment.getCommentNo(),
+            comment.getCommentText(),
+            comment.getCommentWiter().getPerNickname(),
+            comment.getCommentRegisteredDate());
+        countFreeBoard++;
+      }
 
     if (countFreeBoard == 0) {
       System.out.println("등록된 댓글이 없습니다.");
@@ -390,21 +406,21 @@ public class MyStudyFreeBoard {
   }
 
   // 하위메뉴 선택
-  private void seleteMene(List<FreeBoard> freeBoardArrayList) {
-    System.out.println("---------------------");
-    System.out.println("1. 목록");
-    System.out.println("2. 상세");
-    System.out.println("3. 등록");
-    System.out.println("0. 이전");
-    int selete = Prompt.inputInt("선택> ");
-    switch (selete) {
-      case 1 : listFreeBoard(study); break;
-      case 2 : detailFreeBoard(freeBoardArrayList, study); break;
-      case 3 : addFreeBoard(study); break;
-      case 0 : listFreeBoard(study); break;
-      default : return;
-    }
-  }
+  //  private void seleteMene(List<FreeBoard> freeBoardArrayList) {
+  //    System.out.println("---------------------");
+  //    System.out.println("1. 목록");
+  //    System.out.println("2. 상세");
+  //    System.out.println("3. 등록");
+  //    System.out.println("0. 이전");
+  //    int selete = Prompt.inputInt("선택> ");
+  //    switch (selete) {
+  //      case 1 : listFreeBoard(study); break;
+  //      case 2 : detailFreeBoard(freeBoardArrayList, study); break;
+  //      case 3 : addFreeBoard(study); break;
+  //      case 0 : listFreeBoard(study); break;
+  //      default : return;
+  //    }
+  //  }
 
   //번호 찾기
   protected FreeBoard findByNo(int inputNo) {

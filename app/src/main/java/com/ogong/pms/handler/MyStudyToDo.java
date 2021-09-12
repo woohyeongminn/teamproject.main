@@ -104,10 +104,7 @@ public class MyStudyToDo {
     System.out.println("▶ To-Do List 목록");
     System.out.println();
 
-
-
     List<ToDo> toDoArrayList = new ArrayList<>();       // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
-
 
     System.out.println(" >> 진행중인 To-do");
     for (ToDo todo : study.getMyStudyToDo()) {
@@ -121,16 +118,17 @@ public class MyStudyToDo {
         System.out.println();
         toDoArrayList.add(todo);
       } else {
-        System.out.println("등록된 To-Do List가 없습니다.\n");
+        System.out.println(" ○ | 등록된 To-Do List가 없습니다.\n");
         break;
       }
     }
+
     //    todoComplete
 
     System.out.println(" >> 완료된 To-do");
     for (ToDo todo : study.getMyStudyToDo()) {
       if(todo.getTodocomplete() == null) {
-        System.out.println("완료된 To-Do List가 없습니다.\n");
+        System.out.println(" ✔ | 완료된 To-Do List가 없습니다.\n");
         break;
       }
 
@@ -266,11 +264,11 @@ public class MyStudyToDo {
 
 
   //상태 선택
-  public int promptStatus() {
+  private int promptStatus() {
     return promptStatus(-1);
   }
 
-  public int promptStatus(int todoStatus) {
+  private int promptStatus(int todoStatus) {
     if (todoStatus == -1) {
       System.out.println();
       System.out.println("진행 상황: ");
@@ -295,7 +293,7 @@ public class MyStudyToDo {
 
 
   //상태 꺼내기
-  public String getStatusToDo(int todoStatus) {
+  private String getStatusToDo(int todoStatus) {
     switch (todoStatus) {
       case 1: return "○";
       case 2: return "✔";
@@ -304,7 +302,7 @@ public class MyStudyToDo {
   }
 
   //번호로 객체 찾기
-  public ToDo findBytodoNo(int todoNo, List<ToDo> toDoArrayList) {
+  private ToDo findBytodoNo(int todoNo, List<ToDo> toDoArrayList) {
     for (ToDo todo : toDoArrayList) {
       if (todo.getTodoNo() == todoNo) {
         return todo;
