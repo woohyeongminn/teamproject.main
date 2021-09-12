@@ -24,9 +24,9 @@ public class MyStudyToDo {
     //    test.setTodoContent("문제집 주문하기");
     //    test.setTodoRemark("자바의 정석");
     //    test.setTodoDate(new Date(System.currentTimeMillis()));
-    //    test.setTodoStatus(0);
+    //    test.setTodoStatus(1);
     //    toDoList.add(test);
-    //    studyList.get(1).getMyStudyToDo().add(test);
+    //    studyList.get(0).getMyStudyToDo().add(test);
     //
     //    test = new ToDo();
     //    test.setTodoNo(ToDoNo++);
@@ -35,16 +35,16 @@ public class MyStudyToDo {
     //    test.setTodoDate(new Date(System.currentTimeMillis()));
     //    test.setTodoStatus(1);
     //    toDoList.add(test);
-    //    studyList.get(1).getMyStudyToDo().add(test);
+    //    studyList.get(0).getMyStudyToDo().add(test);
     //
     //    test = new ToDo();
     //    test.setTodoNo(ToDoNo++);
     //    test.setTodoContent("장소 예약 리뷰 적어주기");
     //    test.setTodoRemark("에이스터디카페");
     //    test.setTodoDate(new Date(System.currentTimeMillis()));
-    //    test.setTodoStatus(2);
+    //    test.setTodoStatus(1);
     //    toDoList.add(test);
-    //    studyList.get(0).getMyStudyToDo().add(test);
+    //    studyList.get(1).getMyStudyToDo().add(test);
     //
     //    test = new ToDo();
     //    test.setTodoNo(ToDoNo++);
@@ -53,7 +53,7 @@ public class MyStudyToDo {
     //    test.setTodoDate(new Date(System.currentTimeMillis()));
     //    test.setTodoStatus(1);
     //    toDoList.add(test);
-    //    studyList.get(0).getMyStudyToDo().add(test);
+    //    studyList.get(1).getMyStudyToDo().add(test);
 
   }
 
