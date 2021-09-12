@@ -19,12 +19,12 @@ public class StudyUpdateHandler extends AbstractStudyHandler {
     System.out.println("▶ 스터디 수정");
     System.out.println();
 
-    String inputTitle = Prompt.inputString(" 스터디명 : ");
+    int inputNo = Prompt.inputInt("번호  : ");
 
-    Study study = findByTitle(inputTitle);
+    Study study = findByNo(inputNo);
 
     if (study == null) {
-      System.out.println("해당 제목의 스터디가 없습니다.");
+      System.out.println("해당 번호의 스터디가 없습니다.");
       return;
     }
 

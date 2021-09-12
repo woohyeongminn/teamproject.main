@@ -28,21 +28,35 @@ public abstract class AbstractStudyHandler implements Command {
     }
   }
 
+  protected void printStudyList(List<Study> studyList) {
+    for (Study study : studyList) {
+      System.out.printf(" (%d)\n 스터디명 : %s\n 분류 : %s\n 인원수 : %s명\n 조장 : %s\n 대면/비대면 : %s\n",
+          study.getStudyNo(),
+          study.getStudyTitle(),
+          study.getSubject(),
+          study.getNumberOfPeple(),
+          study.getOwner().getPerNickname(),
+          study.getFace());
+      System.out.println();
+    }
+  }
+
   protected void detail() {
     System.out.println();
     System.out.println("▶ 스터디 상세");
     System.out.println();
 
-    String inputTitle = Prompt.inputString("스터디명 : ");
+    int inputNo = Prompt.inputInt("번호 : ");
 
-    Study study = findByTitle(inputTitle);
+    Study study = findByNo(inputNo);
 
     if (study == null) {
       System.out.println("해당 제목의 스터디가 없습니다.");
       return;
     }
 
-    System.out.printf(" \n[%s]\n", study.getStudyTitle());
+    System.out.printf(" \n(%s)\n", study.getStudyNo());
+    System.out.printf(" [%s]\n", study.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", study.getSubject());
     System.out.printf(" >> 지역 : %s\n", study.getArea());
@@ -73,6 +87,46 @@ public abstract class AbstractStudyHandler implements Command {
     }
   }
 
+  // 검색
+  protected void search() {
+    System.out.println();
+    System.out.println("▶ 스터디 검색");
+    System.out.println();
+
+    System.out.println("지역, 분야, 스터디명, 대면/비대면으로 검색할 수 있습니다.");
+    String input = Prompt.inputString("검색어 : ");
+    System.out.println();
+
+    Study study = new Study();
+
+    for (Study searchstudy : studyList) {
+      if (!searchstudy.getStudyTitle().contains(input) &&
+          !searchstudy.getSubject().contains(input) &&
+          !searchstudy.getArea().contains(input) &&
+          !searchstudy.getFace().contains(input)) {
+        continue;
+      }
+      System.out.printf(" \n (%s)\n", searchstudy.getStudyNo());
+      System.out.printf(" [%s]\n", searchstudy.getStudyTitle());
+      System.out.printf(" >> 조장 : %s\n", searchstudy.getOwner().getPerNickname());
+      System.out.printf(" >> 분야 : %s\n", searchstudy.getSubject());
+      System.out.printf(" >> 지역 : %s\n", searchstudy.getArea());
+      System.out.printf(" >> 인원수 : %d\n", searchstudy.getNumberOfPeple());
+      System.out.printf(" >> 대면 : %s\n", searchstudy.getFace());
+      System.out.printf(" >> 소개글 : %s\n", searchstudy.getIntroduction());
+      study = searchstudy;
+    }
+    System.out.println("\n----------------------");
+    System.out.println("1. 상세보기(참여신청)");
+    System.out.println("0. 뒤로가기");
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1 : detail(); break;
+      default : return;
+    }
+  }
+
+  // 스터디 구성원 목록
   protected void listMember(Study study) {
     System.out.println();
     System.out.println("▶ 구성원 보기");
@@ -121,6 +175,7 @@ public abstract class AbstractStudyHandler implements Command {
     }
   }
 
+  // 스터디 가입
   protected void joinStudy(Study study) {
     System.out.println();
     System.out.println("▶ 스터디 신청");
@@ -167,11 +222,10 @@ public abstract class AbstractStudyHandler implements Command {
     System.out.println("참여 신청이 완료되었습니다.\n승인이 완료될 때까지 기다려 주세요.");
   }
 
-
   // 제목으로 찾기
-  protected Study findByTitle (String title) {
+  protected Study findByNo(int inputNo) {
     for (Study study : studyList) {
-      if (study.getStudyTitle().equalsIgnoreCase(title)) {
+      if (study.getStudyNo() == inputNo) {
         return study;
       }
     }

@@ -10,7 +10,7 @@ import com.ogong.util.Prompt;
 public class StudyAddHandler extends AbstractStudyHandler {
 
   PromptPerMember promptPerMember;
-  int studyNo;
+  int studyNo = 10;
   int ToDoNo;
   List<ToDo> todoList;
 

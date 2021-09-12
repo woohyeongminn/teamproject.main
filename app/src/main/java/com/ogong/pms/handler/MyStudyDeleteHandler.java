@@ -16,12 +16,12 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
     System.out.println();
     System.out.println("▶ 스터디 삭제");
 
-    String inputTitle = Prompt.inputString("제목  : ");
+    int inputNo = Prompt.inputInt("번호  : ");
 
-    Study study = findByTitle(inputTitle);
+    Study study = findByNo(inputNo);
 
     if (study == null) {
-      System.out.println("해당 제목의 스터디가 없습니다.");
+      System.out.println("해당 번호의 스터디가 없습니다.");
       return;
     }
 

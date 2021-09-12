@@ -76,6 +76,7 @@ import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyListHandler;
+import com.ogong.pms.handler.StudySearchHandler;
 import com.ogong.pms.handler.StudyUpdateHandler;
 import com.ogong.util.Prompt;
 
@@ -183,7 +184,9 @@ public class App {
     commandMap.put("/study/add", new StudyAddHandler(studyList, toDoList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));
     commandMap.put("/study/update", new StudyUpdateHandler(studyList));
+    commandMap.put("/study/search", new StudySearchHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
+
 
     // 내 스터디 하위
     MyStudyCalender myStudyCalender = new MyStudyCalender(calenderList, studyList);
@@ -728,14 +731,12 @@ public class App {
   }
 
   //개인 하위 메뉴3 - 모든스터디
-  // <구현안됨>
-  // 이름으로 스터디 검색x
-  // 지역으로 선택할지, 대면/비대면 선택할지, 인원수로 선택할지 필터검색x
   private Menu createStudyMenu() {
     MenuGroup allStudyMenu = new MenuGroup("스터디 찾기"); 
 
     allStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
+    allStudyMenu.add(new MenuItem("검색","/study/search"));
     allStudyMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/study/update"));
 
     return allStudyMenu; 

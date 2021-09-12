@@ -40,14 +40,16 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
       }
     }
 
-    String inputTitle = Prompt.inputString("스터디명 : ");
-    System.out.println();
-    Study study = findByTitle(inputTitle);
+    int inputNo = Prompt.inputInt("번호  : ");
+
+    Study study = findByNo(inputNo);
+
     if (study == null) {
-      System.out.println("해당 제목의 스터디가 없습니다.");
+      System.out.println("해당 번호의 스터디가 없습니다.");
       return;
     }
 
+    System.out.printf(" \n(%s)\n", study.getStudyNo());
     System.out.printf(" [%s]\n", study.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", study.getSubject());
