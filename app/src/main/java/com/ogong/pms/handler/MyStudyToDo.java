@@ -10,7 +10,7 @@ import com.ogong.util.Prompt;
 
 public class MyStudyToDo {
 
-  int ToDoNo;
+  int ToDoNo = 10;
   List<Study> studyList;
   List<ToDo> toDoList;
   Study study;
