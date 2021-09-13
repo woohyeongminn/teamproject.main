@@ -11,7 +11,7 @@ import com.ogong.util.Prompt;
 
 public class MyStudyFreeBoard {
 
-  int freeBoardNo = 0;
+  int freeBoardNo = 10;
   List<FreeBoard> freeBoardList;
   List<Comment> commentList;
   List<Member> memberList;
@@ -35,30 +35,31 @@ public class MyStudyFreeBoard {
     //    test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     //    test.setComment(new ArrayList<>());
     //    freeBoardList.add(test);
-    //    studyList.get(1).getMyStudyFreeBoard().add(test);
+    //    studyList.get(0).getMyStudyFreeBoard().add(test);
     //
     //    test = new FreeBoard();
     //    test.setFreeBoardNo(freeBoardNo++);
     //    test.setFreeBoardTitle("게시글2");
     //    test.setFreeBoardContent("아주아주 잘하고 있습니다");
     //    test.setFreeBoardAtcFile("jpg");
-    //    test.setFreeBoardWriter(memberList.get(1));
+    //    test.setFreeBoardWriter(memberList.get(0));
     //    test.setFreeBoardViewcount(test.getFreeBoardViewcount());
     //    test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     //    test.setComment(new ArrayList<>());
     //    freeBoardList.add(test);
-    //    studyList.get(1).getMyStudyFreeBoard().add(test);
+    //    studyList.get(0).getMyStudyFreeBoard().add(test);
     //
     //    test = new FreeBoard();
     //    test.setFreeBoardNo(freeBoardNo++);
     //    test.setFreeBoardTitle("게시글3");
     //    test.setFreeBoardContent("159p 이상합니다");
     //    test.setFreeBoardAtcFile("문제집");
-    //    test.setFreeBoardWriter(memberList.get(2));
+    //    test.setFreeBoardWriter(memberList.get(0));
     //    test.setFreeBoardViewcount(test.getFreeBoardViewcount());
     //    test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
     //    test.setComment(new ArrayList<>());
     //    freeBoardList.add(test);
+    //    studyList.get(0).getMyStudyFreeBoard().add(test);
   }
 
   // 등록
@@ -68,16 +69,6 @@ public class MyStudyFreeBoard {
     System.out.println();
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
-    //    if (member == null ) {
-    //      System.out.println("로그인 한 회원만 조회 가능합니다.");
-    //      return;
-    //    }
-
-    //    if (study.getStudyTitle() == null) {
-    //      System.out.println("가입된 스터디가 없습니다.");
-    //      return;
-    //    }
-
     FreeBoard freeBoard = new FreeBoard();
 
     freeBoard.setFreeBoardNo(freeBoardNo++);
@@ -99,8 +90,6 @@ public class MyStudyFreeBoard {
     study.getMyStudyFreeBoard().add(freeBoard);
 
     System.out.println(" >> 게시글이 등록되었습니다.");
-    listFreeBoard(commentList, study); 
-    return;
   }
 
   // 목록
@@ -111,7 +100,7 @@ public class MyStudyFreeBoard {
 
     List<FreeBoard> freeBoardArrayList = new ArrayList<>();
 
-    for (FreeBoard freeBoard : freeBoardList) {
+    for (FreeBoard freeBoard : study.getMyStudyFreeBoard()) {
       System.out.printf(
           " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일 : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n",
           freeBoard.getFreeBoardNo(), 
@@ -162,21 +151,18 @@ public class MyStudyFreeBoard {
         return;
       }
 
-      for (int i = 0; i < freeBoardArrayList.size(); i++) {
+      if (free.getFreeBoardNo() == inputNo) {
+        System.out.printf(" [%s]\n", free.getFreeBoardTitle());
+        System.out.printf(" >> 내용 : %s\n", free.getFreeBoardContent());
+        System.out.printf(" >> 첨부파일 : %s\n", free.getFreeBoardAtcFile());
+        System.out.printf(" >> 작성자 : %s\n", free.getFreeBoardWriter().getPerNickname());
+        System.out.printf(" >> 등록일 : %s\n", free.getFreeBoardRegisteredDate());
+        free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
+        System.out.printf(" >> 조회수 : %d\n", free.getFreeBoardViewcount());
 
-        if (freeBoardArrayList.get(i).getFreeBoardNo() == inputNo) {
-          System.out.printf(" [%s]\n", freeBoardArrayList.get(i).getFreeBoardTitle());
-          System.out.printf(" >> 내용 : %s\n", freeBoardArrayList.get(i).getFreeBoardContent());
-          System.out.printf(" >> 첨부파일 : %s\n", freeBoardArrayList.get(i).getFreeBoardAtcFile());
-          System.out.printf(" >> 작성자 : %s\n", freeBoardArrayList.get(i).getFreeBoardWriter().getPerNickname());
-          System.out.printf(" >> 등록일 : %s\n", freeBoardArrayList.get(i).getFreeBoardRegisteredDate());
-          freeBoardArrayList.get(i).setFreeBoardViewcount(freeBoardArrayList.get(i).getFreeBoardViewcount() + 1);
-          System.out.printf(" >> 조회수 : %d\n", freeBoardArrayList.get(i).getFreeBoardViewcount());
+        detailfreeBoard = free;
 
-          detailfreeBoard = freeBoardArrayList.get(i);
-
-          listComment(detailfreeBoard); // 댓글호출
-        }
+        listComment(detailfreeBoard); // 댓글호출
       }
       break;
     }
@@ -226,8 +212,6 @@ public class MyStudyFreeBoard {
     detailFreeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
 
     System.out.println(" >> 게시글을 변경하였습니다.");
-    listFreeBoard(commentList, study);
-    return;
   }
 
   // 삭제
@@ -251,8 +235,6 @@ public class MyStudyFreeBoard {
     study.getMyStudyFreeBoard().remove(detailFreeBoard);
 
     System.out.println(" >> 게시글이 삭제되었습니다.");
-    listFreeBoard(commentList, study);
-    return;
   }
 
   //--------------------------댓글--------------------------
@@ -260,7 +242,7 @@ public class MyStudyFreeBoard {
   int commentNo = 0;
 
   // 댓글 등록
-  protected void addComment(FreeBoard freeBoard, List<Comment> commentList) {
+  private void addComment(FreeBoard freeBoard, List<Comment> commentList) {
     System.out.println();
     System.out.println("▶ 댓글 작성");
 
@@ -278,22 +260,17 @@ public class MyStudyFreeBoard {
       String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 댓글 등록을 취소하였습니다.");
-        listFreeBoard(commentList, study);
-        return;
       }
 
       commentList.add(comment);
       freeBoard.getComment().add(comment);
 
       System.out.println(" >> 댓글이 등록되었습니다.");
-
-      listFreeBoard(commentList, study);
-      return;
     }
   }
 
   // 댓글 출력
-  protected void listComment(FreeBoard freeBoard) {
+  private void listComment(FreeBoard freeBoard) {
     System.out.println();
     System.out.println("============= 댓글 =============");
 
@@ -317,7 +294,7 @@ public class MyStudyFreeBoard {
   // 댓글 수정
   static int commentNo1;
 
-  protected void updateComment() {
+  private void updateComment() {
     System.out.println();
     System.out.println("▶ 댓글 수정");
     System.out.println();
@@ -330,8 +307,6 @@ public class MyStudyFreeBoard {
         commentNo1 = Prompt.inputInt(" 번호 : ");
       } catch (Exception e){
         System.out.println(" >> 번호를 입력해주세요.");
-        listFreeBoard(commentList, study);
-        return;
       }
 
       Comment comment = findByComment(commentNo1);
@@ -349,13 +324,11 @@ public class MyStudyFreeBoard {
       comment.setCommentText(commentTitle);
 
       System.out.println(" >> 댓글을 변경하였습니다.");
-      listFreeBoard(commentList, study);
-      return;
     }
   }
 
   // 댓글 삭제
-  protected void deleteComment(FreeBoard freeBoard) {
+  private void deleteComment(FreeBoard freeBoard) {
     System.out.println();
     System.out.println("▶ 댓글 삭제");
     System.out.println();
@@ -368,8 +341,6 @@ public class MyStudyFreeBoard {
         commentNo1 = Prompt.inputInt("번호 : ");
       } catch (Exception e) {
         System.out.println(" >> 번호를 입력해주세요");
-        listFreeBoard(commentList, study);
-        return;
       }
 
       Comment comment = findByComment(commentNo1);
@@ -385,13 +356,11 @@ public class MyStudyFreeBoard {
       freeBoard.getComment().remove(comment);
 
       System.out.println(" >> 댓글이 삭제되었습니다.");
-      listFreeBoard(commentList, study);
-      return;
     }
   }
 
   //게시글 번호로 찾기
-  protected FreeBoard findByNo(int inputNo) {
+  private FreeBoard findByNo(int inputNo) {
     for (FreeBoard freeBoard : freeBoardList) {
       if (freeBoard.getFreeBoardNo() == inputNo) {
         return freeBoard;
@@ -401,7 +370,7 @@ public class MyStudyFreeBoard {
   }
 
   //댓글 번호로 찾기
-  protected Comment findByComment (int commentNo) {
+  private Comment findByComment (int commentNo) {
     for (Comment comment : commentList) {
       if (comment.getCommentNo() == commentNo) {
         return comment;
