@@ -11,6 +11,7 @@ public abstract class AbstractAskBoardHandler implements Command {
 
   List<AskBoard> askBoardList;
   List<Comment> commentList;
+  int commentCount = 1;
 
   public AbstractAskBoardHandler(List<AskBoard> askBoardList, List<Comment> commentList) {
     this.askBoardList = askBoardList;
@@ -48,7 +49,7 @@ public abstract class AbstractAskBoardHandler implements Command {
 
       Comment comment = new Comment();
 
-      comment.setCommentNo(Prompt.inputInt("번호 : "));
+      comment.setCommentNo(commentCount++);
       comment.setCommentText(Prompt.inputString("댓글 내용 : "));
       System.out.println();
       comment.setCommentAdminWiter(adminWiter);

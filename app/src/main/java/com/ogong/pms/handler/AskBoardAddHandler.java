@@ -70,6 +70,12 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     askList.setAdminComment(new ArrayList<>());
 
+    String input = Prompt.inputString(" 문의글을 등록하시겠습니까? (네 / 아니오) ");
+    if (!input.equalsIgnoreCase("네")) {
+      System.out.println(" >> 문의글 등록을 취소하였습니다.");
+      return;
+    }
+
     askBoardList.add(askList);
   }
 

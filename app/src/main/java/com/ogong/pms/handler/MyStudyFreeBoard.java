@@ -115,19 +115,29 @@ public class MyStudyFreeBoard {
       freeBoardArrayList.add(freeBoard); 
     }
 
-    if (freeBoardArrayList.isEmpty()) {
-      System.out.println(" >> 등록된 게시글이 없습니다");
+    if (!freeBoardArrayList.isEmpty()) {
+      System.out.println("---------------------");
+      System.out.println("1. 상세");
+      System.out.println("2. 등록");
+      System.out.println("0. 이전");
+      int selete = Prompt.inputInt("선택> ");
+      switch (selete) {
+        case 1 : detailFreeBoard(freeBoardArrayList, commentList, study); break;
+        case 2 : addFreeBoard(commentList, study); break;
+        default : return;
+      }
     }
 
-    System.out.println("---------------------");
-    System.out.println("1. 상세");
-    System.out.println("2. 등록");
-    System.out.println("0. 이전");
-    int selete = Prompt.inputInt("선택> ");
-    switch (selete) {
-      case 1 : detailFreeBoard(freeBoardArrayList, commentList, study); break;
-      case 2 : addFreeBoard(commentList, study); break;
-      default : return;
+    if (freeBoardArrayList.isEmpty()) {
+      System.out.println(" >> 등록된 게시글이 없습니다");
+      System.out.println("---------------------");
+      System.out.println("1. 등록");
+      System.out.println("0. 이전");
+      int selete = Prompt.inputInt("선택> ");
+      switch (selete) {
+        case 1 : addFreeBoard(commentList, study); break;
+        default : return;
+      }
     }
 
   }
@@ -138,13 +148,14 @@ public class MyStudyFreeBoard {
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
 
-    FreeBoard detailfreeBoard = new FreeBoard();
+    int inputNo;
+    FreeBoard free = null;
 
     while (true) {
-      int inputNo = Prompt.inputInt(" 번호 : ");
+      inputNo = Prompt.inputInt(" 번호 : ");
       System.out.println();
 
-      FreeBoard free = findByNo(inputNo);
+      free = findByNo(inputNo, freeBoardArrayList);
 
       if (free == null) {
         System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
@@ -160,9 +171,7 @@ public class MyStudyFreeBoard {
         free.setFreeBoardViewcount(free.getFreeBoardViewcount() + 1);
         System.out.printf(" >> 조회수 : %d\n", free.getFreeBoardViewcount());
 
-        detailfreeBoard = free;
-
-        listComment(detailfreeBoard); // 댓글호출
+        listComment(free); // 댓글호출
       }
       break;
     }
@@ -176,11 +185,11 @@ public class MyStudyFreeBoard {
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : updateFreeBoard(detailfreeBoard, commentList, study); break;
-      case 2 : deleteFreeBoard(detailfreeBoard, study); break;
-      case 3 : addComment(detailfreeBoard, commentList); break;
+      case 1 : updateFreeBoard(free, commentList, study); break;
+      case 2 : deleteFreeBoard(free, study); break;
+      case 3 : addComment(free, commentList); break;
       case 4 : updateComment(); break;
-      case 5 : deleteComment(detailfreeBoard); break;
+      case 5 : deleteComment(free); break;
       case 0 : listFreeBoard(commentList, study); break;
       default : 
     }
@@ -239,7 +248,7 @@ public class MyStudyFreeBoard {
 
   //--------------------------댓글--------------------------
 
-  int commentNo = 0;
+  int commentNo = 1;
 
   // 댓글 등록
   private void addComment(FreeBoard freeBoard, List<Comment> commentList) {
@@ -276,7 +285,6 @@ public class MyStudyFreeBoard {
 
     int countFreeBoard = 0;
 
-    //for(int i = 0 ; i < commentList.size(); i++) {
     for (Comment comment : freeBoard.getComment()) {
       System.out.printf(" (%d) | 내용 : %s | 작성자 : %s | 등록일 : %s\n",
           comment.getCommentNo(),
@@ -285,7 +293,7 @@ public class MyStudyFreeBoard {
           comment.getCommentRegisteredDate());
       countFreeBoard++;
     }
-    // }
+
     if (countFreeBoard == 0) {
       System.out.println(" >> 등록된 댓글이 없습니다.");
     }
@@ -301,6 +309,7 @@ public class MyStudyFreeBoard {
 
     if (AuthPerMemberLoginHandler.getLoginUser() == null) {
       System.out.println(" >> 변경 권한이 없습니다.");
+
     } else  {
 
       try {
@@ -360,8 +369,8 @@ public class MyStudyFreeBoard {
   }
 
   //게시글 번호로 찾기
-  private FreeBoard findByNo(int inputNo) {
-    for (FreeBoard freeBoard : freeBoardList) {
+  private FreeBoard findByNo(int inputNo, List<FreeBoard> freeBoardArrayList) {
+    for (FreeBoard freeBoard : freeBoardArrayList) {
       if (freeBoard.getFreeBoardNo() == inputNo) {
         return freeBoard;
       }
