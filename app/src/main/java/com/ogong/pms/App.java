@@ -781,11 +781,11 @@ public class App {
   private Menu createAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
 
-    askBoardMenu.add(new MenuItem("등록", "/askBoard/add"));
+    askBoardMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
     askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
-    askBoardMenu.add(new MenuItem("변경", "/askBoard/update"));
-    askBoardMenu.add(new MenuItem("삭제", "/askBoard/delete"));
+    askBoardMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/askBoard/update"));
+    askBoardMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/askBoard/delete"));
 
     return askBoardMenu;
   }
