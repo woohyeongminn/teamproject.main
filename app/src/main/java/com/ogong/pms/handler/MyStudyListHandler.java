@@ -38,11 +38,12 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     }
 
     for (Study perStudy : member.getPerMyStudy()) {
-      System.out.printf(" [%s]\n", perStudy.getStudyTitle());
+      System.out.printf(" (%s)\n [%s]\n", perStudy.getStudyNo(), perStudy.getStudyTitle());
+      System.out.println();
 
     }
 
-    System.out.println("\n----------------------");
+    System.out.println("----------------------");
     System.out.println("1. 상세");
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
