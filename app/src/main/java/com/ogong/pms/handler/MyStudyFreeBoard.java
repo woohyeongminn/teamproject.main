@@ -11,7 +11,7 @@ import com.ogong.util.Prompt;
 
 public class MyStudyFreeBoard {
 
-  int freeBoardNo = 20;
+  int freeBoardNo = 0;
   List<FreeBoard> freeBoardList;
   List<Comment> commentList;
   List<Member> memberList;
