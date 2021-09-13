@@ -11,7 +11,7 @@ import com.ogong.util.Prompt;
 public class AskBoardAddHandler extends AbstractAskBoardHandler {
 
   List<Member> memberList;
-  int askNo;
+  int askNo = 4;
 
   public AskBoardAddHandler(List<AskBoard> askBoardList, 
       List<Member> memberList, List<Comment> commentList) {
@@ -19,7 +19,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     this.memberList = memberList;
 
     //    AskBoard askList = new AskBoard();
-    //    askList.setAskNo(askNo++);
+    //    askList.setAskNo(1);
     //    askList.setAskTitle("문의합니다.");
     //    askList.setAskContent("예약 방법에 대해 알고 싶습니다.");
     //    askList.setAskWriter(memberList.get(0));
@@ -29,7 +29,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askBoardList.add(askList);
     //
     //    askList = new AskBoard();
-    //    askList.setAskNo(askNo++);
+    //    askList.setAskNo(2);
     //    askList.setAskTitle("질문있어요.");
     //    askList.setAskContent("스터디 참여 방법이 궁금해요.");
     //    askList.setAskWriter(memberList.get(1));
@@ -39,7 +39,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askBoardList.add(askList);
     //
     //    askList = new AskBoard();
-    //    askList.setAskNo(askNo++);
+    //    askList.setAskNo(3);
     //    askList.setAskTitle("이런이런!");
     //    askList.setAskContent("개발자님!! 이 부분 좀 고쳐 주세요!");
     //    askList.setAskWriter(memberList.get(2));

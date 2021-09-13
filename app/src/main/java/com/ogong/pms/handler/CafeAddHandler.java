@@ -18,7 +18,7 @@ public class CafeAddHandler extends AbstractCafeHandler {
 
     //    Cafe cafe = new Cafe();
     //
-    //    cafe.setNo(11);
+    //    cafe.setNo(1);
     //    cafe.setCeoNo(ceoMemberList.get(0).getCeoNo());
     //    cafe.setName("에이스터디카페");
     //    cafe.setMainImg("a.jpg");
@@ -36,7 +36,7 @@ public class CafeAddHandler extends AbstractCafeHandler {
     //
     //    cafe = new Cafe();
     //
-    //    cafe.setNo(12);
+    //    cafe.setNo(2);
     //    cafe.setCeoNo(ceoMemberList.get(0).getCeoNo());
     //    cafe.setName("해피해피스터디카페");
     //    cafe.setMainImg("bbb.jpg");
@@ -54,7 +54,7 @@ public class CafeAddHandler extends AbstractCafeHandler {
     //
     //    cafe = new Cafe();
     //
-    //    cafe.setNo(13);
+    //    cafe.setNo(3);
     //    cafe.setCeoNo(ceoMemberList.get(1).getCeoNo());
     //    cafe.setName("광명스터디카페");
     //    cafe.setMainImg("ccccc.jpg");
@@ -72,7 +72,7 @@ public class CafeAddHandler extends AbstractCafeHandler {
     //
     //    cafe = new Cafe();
     //
-    //    cafe.setNo(14);
+    //    cafe.setNo(4);
     //    cafe.setCeoNo(ceoMemberList.get(1).getCeoNo());
     //    cafe.setName("비트스터디카페");
     //    cafe.setMainImg("bit.jpg");

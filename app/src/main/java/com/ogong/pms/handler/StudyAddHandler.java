@@ -10,7 +10,7 @@ import com.ogong.util.Prompt;
 public class StudyAddHandler extends AbstractStudyHandler {
 
   PromptPerMember promptPerMember;
-  int studyNo = 10;
+  int studyNo = 6;
   int ToDoNo;
   List<ToDo> todoList;
 
@@ -20,7 +20,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     this.todoList = todoList;
 
     //    Study testStudy = new Study();
-    //    testStudy.setStudyNo(studyNo++);
+    //    testStudy.setStudyNo(1);
     //    testStudy.setStudyTitle("삼성뿌셔");
     //    testStudy.setOwner(promptPerMember.memberList.get(0));
     //    testStudy.setSubject("취업");
@@ -37,7 +37,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
-    //    testStudy.setStudyNo(studyNo++);
+    //    testStudy.setStudyNo(2);
     //    testStudy.setStudyTitle("정처기준비");
     //    testStudy.setOwner(promptPerMember.memberList.get(0));
     //    testStudy.setSubject("자격증");
@@ -54,7 +54,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
-    //    testStudy.setStudyNo(studyNo++);
+    //    testStudy.setStudyNo(3);
     //    testStudy.setStudyTitle("하반기 삼성 공모전");
     //    testStudy.setOwner(promptPerMember.memberList.get(1));
     //    testStudy.setSubject("공모전");
@@ -71,7 +71,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    promptPerMember.memberList.get(1).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
-    //    testStudy.setStudyNo(studyNo++);
+    //    testStudy.setStudyNo(4);
     //    testStudy.setStudyTitle("중앙대 컴공 기말고사");
     //    testStudy.setOwner(promptPerMember.memberList.get(2));
     //    testStudy.setSubject("기말고사");
@@ -88,7 +88,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    promptPerMember.memberList.get(2).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
-    //    testStudy.setStudyNo(studyNo++);
+    //    testStudy.setStudyNo(5);
     //    testStudy.setStudyTitle("알고리즘 스터디");
     //    testStudy.setOwner(promptPerMember.memberList.get(3));
     //    testStudy.setSubject("IT");

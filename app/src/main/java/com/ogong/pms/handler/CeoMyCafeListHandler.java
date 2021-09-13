@@ -12,7 +12,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
   List<CeoMember> ceoMemberList;
   List<Cafe> cafeList;
   List<CafeReview> reviewList;
-  int cafeNo = 15;
+  int cafeNo = 5;
   PromptPerMember promptPerMember;
 
   public CeoMyCafeListHandler(List<CeoMember> ceoMemberList, List<Cafe> cafeList

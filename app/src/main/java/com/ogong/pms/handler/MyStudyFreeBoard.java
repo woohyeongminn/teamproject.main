@@ -11,7 +11,7 @@ import com.ogong.util.Prompt;
 
 public class MyStudyFreeBoard {
 
-  int freeBoardNo = 10;
+  int freeBoardNo = 4;
   List<FreeBoard> freeBoardList;
   List<Comment> commentList;
   List<Member> memberList;
@@ -26,7 +26,7 @@ public class MyStudyFreeBoard {
     this.studyList = studyList;
 
     //    FreeBoard test = new FreeBoard();
-    //    test.setFreeBoardNo(freeBoardNo++);
+    //    test.setFreeBoardNo(1);
     //    test.setFreeBoardTitle("게시글1");
     //    test.setFreeBoardContent("5월 10일에 만나요");
     //    test.setFreeBoardAtcFile("지도");
@@ -38,7 +38,7 @@ public class MyStudyFreeBoard {
     //    studyList.get(0).getMyStudyFreeBoard().add(test);
     //
     //    test = new FreeBoard();
-    //    test.setFreeBoardNo(freeBoardNo++);
+    //    test.setFreeBoardNo(2);
     //    test.setFreeBoardTitle("게시글2");
     //    test.setFreeBoardContent("아주아주 잘하고 있습니다");
     //    test.setFreeBoardAtcFile("jpg");
@@ -50,7 +50,7 @@ public class MyStudyFreeBoard {
     //    studyList.get(0).getMyStudyFreeBoard().add(test);
     //
     //    test = new FreeBoard();
-    //    test.setFreeBoardNo(freeBoardNo++);
+    //    test.setFreeBoardNo(3);
     //    test.setFreeBoardTitle("게시글3");
     //    test.setFreeBoardContent("159p 이상합니다");
     //    test.setFreeBoardAtcFile("문제집");

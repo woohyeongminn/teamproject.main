@@ -38,7 +38,7 @@ public class Study implements Serializable{
 
 
   public int getStudyNo() {
-    return studyNo + 1;
+    return studyNo;
   }
 
 

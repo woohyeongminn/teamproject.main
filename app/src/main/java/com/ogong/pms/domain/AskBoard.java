@@ -22,7 +22,7 @@ public class AskBoard implements Serializable{
   }
 
   public int getAskNo() {
-    return askNo + 1;
+    return askNo;
   }
   public void setAskNo(int askNo) {
     this.askNo = askNo;

@@ -55,7 +55,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //
     //    testMember = new Member();
     //    testMember.setPerNo(5);
-    //    testMember.setPerNickname("엄강사님");
+    //    testMember.setPerNickname("고수고수왕고수");
     //    testMember.setPerEmail("hanmail");
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
@@ -65,7 +65,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //
     //    testMember = new Member();
     //    testMember.setPerNo(6);
-    //    testMember.setPerNickname("매니저님");
+    //    testMember.setPerNickname("중수중수중중수");
     //    testMember.setPerEmail("nate");
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
