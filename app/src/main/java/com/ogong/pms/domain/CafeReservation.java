@@ -16,13 +16,17 @@ public class CafeReservation implements Serializable{
   private int useMemberNumber; // 사용인원
   private int totalPrice; // 총금액
   private boolean wirteReview; // 리뷰작성 여부
+  private int roomNo; // 룸 예약시 룸 번호
+  private int paymentNo; // 결제시 결제 번호
+  private int reservationStatus; // 0 : 결제대기 , 1 : 결제완료 , 2 : 예약취소 , 3 : 결제취소
 
   @Override
   public String toString() {
     return "CafeReservation [reservationNo=" + reservationNo + ", memberNo=" + memberNo
-        + ", cafeNo=" + cafeNo + ", reservationDate=" + reservationDate + ", useTime=" + useTime
-        + ", useMemberNumber=" + useMemberNumber + ", totalPrice=" + totalPrice + ", wirteReview="
-        + wirteReview + "]";
+        + ", cafeNo=" + cafeNo + ", reservationDate=" + reservationDate + ", startTime=" + startTime
+        + ", useTime=" + useTime + ", useMemberNumber=" + useMemberNumber + ", totalPrice="
+        + totalPrice + ", wirteReview=" + wirteReview + ", roomNo=" + roomNo + ", paymentNo="
+        + paymentNo + ", reservationStatus=" + reservationStatus + "]";
   }
 
   public int getReservationNo() {
@@ -95,5 +99,29 @@ public class CafeReservation implements Serializable{
 
   public void setWirteReview(boolean wirteReview) {
     this.wirteReview = wirteReview;
+  }
+
+  public int getRoomNo() {
+    return roomNo;
+  }
+
+  public void setRoomNo(int roomNo) {
+    this.roomNo = roomNo;
+  }
+
+  public int getPaymentNo() {
+    return paymentNo;
+  }
+
+  public void setPaymentNo(int paymentNo) {
+    this.paymentNo = paymentNo;
+  }
+
+  public int getReservationStatus() {
+    return reservationStatus;
+  }
+
+  public void setReservationStatus(int reservationStatus) {
+    this.reservationStatus = reservationStatus;
   }
 }

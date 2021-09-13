@@ -16,8 +16,8 @@ public class Cafe implements Serializable{
   private LocalTime openTime; // 오픈시간
   private LocalTime closeTime; // 마감시간
   private String holiday; // 휴무일
-  private int bookable; // 예약가능인원
-  private int timePrice; // 시간당금액
+  private int bookable; // 예약가능인원(개인좌석)
+  private int timePrice; // 시간당금액(개인좌석)
   private int cafeStatus; // 0 : 승인대기 , 1 : 운영중 , 2 : 운영중단 3 : 삭제 -> cafeStatus 관리자, 사장 한테만 보임
 
   @Override
