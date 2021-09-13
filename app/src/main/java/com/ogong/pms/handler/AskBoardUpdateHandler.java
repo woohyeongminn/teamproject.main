@@ -3,7 +3,6 @@ package com.ogong.pms.handler;
 import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Comment;
-import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class AskBoardUpdateHandler extends AbstractAskBoardHandler {
@@ -16,14 +15,7 @@ public class AskBoardUpdateHandler extends AbstractAskBoardHandler {
   public void execute() {
     System.out.println();
     System.out.println("▶ 문의사항 변경");
-
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
-    if (member == null) {
-      System.out.println();
-      System.out.println(" >> 로그인 한 회원만 조회 가능합니다.");
-      return;
-    }
+    System.out.println();
 
     int askNo = Prompt.inputInt(" 번호 : ");
 

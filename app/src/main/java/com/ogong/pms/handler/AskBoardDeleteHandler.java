@@ -17,14 +17,6 @@ public class AskBoardDeleteHandler extends AbstractAskBoardHandler {
     System.out.println("▶ 문의사항 삭제");
     System.out.println();
 
-    //    Member member = AuthPerMemberLoginHandler.getLoginUser();
-    //    Admin admin = AuthAdminLoginHandler.getLoginAdmin();
-    //
-    //    if (member == null || admin == null) {
-    //      System.out.println(" >> 로그인 한 회원만 조회 가능합니다.");
-    //      return;
-    //    }
-
     int askNo = Prompt.inputInt(" 번호 : ");
 
     AskBoard askList = findByNo(askNo);
