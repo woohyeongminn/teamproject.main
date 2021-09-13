@@ -220,7 +220,7 @@ public class MyStudyCalender {
             calenderList.get(i).getDayOftheWeek());
         System.out.printf(" >> 종료일 : %s\n", calenderList.get(i).getEndDay());
         System.out.printf(" >> 내  용 : %s\n", calenderList.get(i).getCalenderContent());
-        System.out.printf(" >> 종료일 : %s\n", 
+        System.out.printf(" >> 중요도 : %s\n", 
             calenderList.get(i).getImportanceCalender());
         System.out.println();
       }

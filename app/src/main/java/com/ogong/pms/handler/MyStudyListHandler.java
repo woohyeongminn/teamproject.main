@@ -31,17 +31,35 @@ public class MyStudyListHandler extends AbstractStudyHandler {
 
     // test용으로 setPerMyStudy에 new로 생성해서
     // 값은 안 넣었지만 null값이 있으므로 사이즈로 비교해야 한다.
+    int joinCount = 0;
 
-    if(member.getPerMyStudy().size() == 0) {
-      System.out.println(" >> 가입한 스터디가 없습니다.");
-      return;
-    }
 
+
+    System.out.println(" <<참여중>> \n");
     for (Study perStudy : member.getPerMyStudy()) {
       System.out.printf(" (%s)\n [%s]\n", perStudy.getStudyNo(), perStudy.getStudyTitle());
       System.out.println();
-
+      joinCount++;
     }
+
+    if(joinCount == 0) {
+      System.out.println(" 가입한 스터디가 없습니다.\n");
+    }
+
+    int waitCount = 0;
+    System.out.println(" <<승인 대기중>> \n"); 
+    for (int i = 0; i < studyList.size(); i++) {
+      if (studyList.get(i).getWatingMemberNames().equals(member.getPerNickname())) {
+        System.out.printf(" (%s)\n [%s]\n", studyList.get(i).getStudyNo(),
+            studyList.get(i).getStudyTitle());
+        System.out.println();
+        waitCount++;
+      }
+    } 
+    if (waitCount == 0) {
+      System.out.println(" 승인대기 중인 스터디가 없습니다.\n");
+    }
+
 
     System.out.println("----------------------");
     System.out.println("1. 상세");
