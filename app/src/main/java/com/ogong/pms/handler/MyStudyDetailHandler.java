@@ -23,6 +23,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     this.commentList = commentList;
   }
 
+
   @Override
   public void execute() {
     System.out.println();
@@ -39,10 +40,9 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
     int inputNo = Prompt.inputInt(" 번호  : ");
 
-    Study study = findByNo(inputNo);
+    Study study = findByMyStudyNo(inputNo);
 
     if (study == null) {
-      System.out.println(" >> 해당 번호의 스터디가 없습니다.");
       return;
     }
 
@@ -64,13 +64,31 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     }
   }
 
+
+  private Study findByMyStudyNo(int inputNo) {
+    Member memeber = AuthPerMemberLoginHandler.getLoginUser();
+
+    try {
+      for (int i = 0; i < studyList.size(); i++) {
+        if (memeber.getPerMyStudy().get(i).getStudyNo() == inputNo) {
+          Study study = memeber.getPerMyStudy().get(i);
+          return study;
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(" >> 해당 번호의 스터디가 없습니다.");
+    }
+    return null;
+  }
+
   private void selectUserModifyPage(Study study) {
     while (true) {
       System.out.println("\n----------------------");
 
       System.out.println("1. 구성원");
-      // 대기중인 회원 목록, 참가중인 회원 목록, 인원수, 
-      // 조장은 위에 3개 + 승인, 거절, 권한 넘겨주기, 탈퇴시키기 까지
+      // 대기중인 회원 거절하기
+      // 대기중인 회원 승인할때 회원 고유번호로 입력하도록
+      // 조장 : 권한 넘겨주기, 탈퇴시키기 까지
 
       System.out.println("2. 캘린더");
       System.out.println("3. To-do");

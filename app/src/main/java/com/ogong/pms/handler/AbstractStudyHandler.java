@@ -141,7 +141,7 @@ public abstract class AbstractStudyHandler implements Command {
     System.out.println();
     System.out.println(">> 승인 대기중");
     if(study.getWatingMemberNames().isEmpty()) {
-      System.out.println("승인 대기중인 회원이 없습니다.");
+      System.out.println(" 승인 대기중인 회원이 없습니다.");
     }
     System.out.println(study.getWatingMemberNames());
 
@@ -217,7 +217,7 @@ public abstract class AbstractStudyHandler implements Command {
     System.out.println("참여 신청이 완료되었습니다.\n승인이 완료될 때까지 기다려 주세요.");
   }
 
-  // 제목으로 찾기
+  // 번호으로 찾기
   protected Study findByNo(int inputNo) {
     for (Study study : studyList) {
       if (study.getStudyNo() == inputNo) {
