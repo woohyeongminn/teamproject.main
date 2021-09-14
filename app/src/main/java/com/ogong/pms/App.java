@@ -1,5 +1,12 @@
 package com.ogong.pms;
 
+import static com.ogong.menu.Menu.ADMIN_LOGIN;
+//import static com.ogong.menu.Menu.ADMIN_LOGOUT;
+import static com.ogong.menu.Menu.CEO_LOGIN;
+//import static com.ogong.menu.Menu.PER_LOGOUT;
+import static com.ogong.menu.Menu.LOGOUT;
+//import static com.ogong.menu.Menu.CEO_LOGOUT;
+import static com.ogong.menu.Menu.PER_LOGIN;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -109,11 +116,12 @@ public class App {
     String menuId;
 
     public MenuItem(String title, String menuId) {
-      this(title, ENABLE_ALL, menuId);
+      super(title);
+      this.menuId = menuId;
     }
 
-    public MenuItem(String title, int enableState, String menuId) {
-      super(title, enableState);
+    public MenuItem(String title, int accessScope, String menuId) {
+      super(title, accessScope);
       this.menuId = menuId;
     }
 
@@ -619,9 +627,9 @@ public class App {
   Menu createAdminMenu() {
     MenuGroup adminMenuGroup = new MenuGroup("관리자");
 
-    adminMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_ADMINLOGOUT, "/admin/login"));
-    adminMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_ADMINLOGIN, "/admin/logout"));
-    adminMenuGroup.add(new MenuItem("마이 페이지", Menu.ENABLE_ADMINLOGIN, "/admin/info"));
+    adminMenuGroup.add(new MenuItem("로그인", LOGOUT, "/admin/login"));
+    adminMenuGroup.add(new MenuItem("로그아웃", ADMIN_LOGIN, "/admin/logout"));
+    adminMenuGroup.add(new MenuItem("마이 페이지", ADMIN_LOGIN, "/admin/info"));
 
     adminMenuGroup.add(createControlMemberMenu());  // 회원 관리
     adminMenuGroup.add(createControlStudyMenu());   // 스터디 관리
@@ -633,7 +641,7 @@ public class App {
 
   // 관리자 하위 메뉴2 - 회원 관리
   private Menu createControlMemberMenu() {
-    MenuGroup adminUserMenu = new MenuGroup("회원 관리", Menu.ENABLE_ADMINLOGIN); 
+    MenuGroup adminUserMenu = new MenuGroup("회원 관리", ADMIN_LOGIN); 
 
     adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
     adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
@@ -699,16 +707,16 @@ public class App {
   Menu createMemberMenu() {
     MenuGroup userMenuGroup = new MenuGroup("개인"); 
 
-    userMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_LOGOUT, "/member/add"));
-    userMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_LOGIN, "/member/logout"));
-    userMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_LOGOUT, "/member/login"));
-    userMenuGroup.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_LOGOUT, "/member/findIdPw"));
+    userMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/member/add"));
+    userMenuGroup.add(new MenuItem("로그아웃", PER_LOGIN, "/member/logout"));
+    userMenuGroup.add(new MenuItem("로그인", LOGOUT, "/member/login"));
+    userMenuGroup.add(new MenuItem("ID/PW 찾기", LOGOUT, "/member/findIdPw"));
 
     userMenuGroup.add(createMyPageMenu());      // 마이페이지
     userMenuGroup.add(createStudyMenu());       // 스터디 찾기
 
     userMenuGroup.add(new MenuItem("내 스터디", // 내 스터디
-        Menu.ENABLE_LOGIN, "/myStudy/list"));     
+        PER_LOGIN, "/myStudy/list"));     
 
     userMenuGroup.add(createCafeMenu());        // 장소 예약하기
     userMenuGroup.add(createCSMenu());          // 고객센터
@@ -720,7 +728,7 @@ public class App {
 
   // 개인 하위 메뉴2 - 마이페이지 (로그인 했을때)
   private Menu createMyPageMenu() {
-    MenuGroup myPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_LOGIN); 
+    MenuGroup myPageMenu = new MenuGroup("마이 페이지", PER_LOGIN); 
 
     myPageMenu.add(new MenuItem("개인정보", "/member/detail"));
     myPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
@@ -734,10 +742,10 @@ public class App {
   private Menu createStudyMenu() {
     MenuGroup allStudyMenu = new MenuGroup("스터디 찾기"); 
 
-    allStudyMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/study/add"));
+    allStudyMenu.add(new MenuItem("등록", PER_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
     allStudyMenu.add(new MenuItem("검색","/study/search"));
-    allStudyMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/study/update"));
+    allStudyMenu.add(new MenuItem("변경", PER_LOGIN, "/study/update"));
 
     return allStudyMenu; 
   }
@@ -781,11 +789,11 @@ public class App {
   private Menu createAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
 
-    askBoardMenu.add(new MenuItem("등록", Menu.ENABLE_LOGIN, "/askBoard/add"));
+    askBoardMenu.add(new MenuItem("등록", PER_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
     askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
-    askBoardMenu.add(new MenuItem("변경", Menu.ENABLE_LOGIN, "/askBoard/update"));
-    askBoardMenu.add(new MenuItem("삭제", Menu.ENABLE_LOGIN, "/askBoard/delete"));
+    askBoardMenu.add(new MenuItem("변경", PER_LOGIN, "/askBoard/update"));
+    askBoardMenu.add(new MenuItem("삭제", PER_LOGIN, "/askBoard/delete"));
 
     return askBoardMenu;
   }
@@ -794,10 +802,10 @@ public class App {
   Menu createCeoMenu() {
     MenuGroup ceoMemberMenuGroup = new MenuGroup("기업");
 
-    ceoMemberMenuGroup.add(new MenuItem("회원가입", Menu.ENABLE_CEOLOGOUT, "/ceoMember/add"));
-    ceoMemberMenuGroup.add(new MenuItem("로그인", Menu.ENABLE_CEOLOGOUT, "/ceoMember/login"));
-    ceoMemberMenuGroup.add(new MenuItem("ID/PW 찾기", Menu.ENABLE_CEOLOGOUT, "/ceoMember/findIdPw"));
-    ceoMemberMenuGroup.add(new MenuItem("로그아웃", Menu.ENABLE_CEOLOGIN, "/ceoMember/logout"));
+    ceoMemberMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/ceoMember/add"));
+    ceoMemberMenuGroup.add(new MenuItem("로그인", LOGOUT, "/ceoMember/login"));
+    ceoMemberMenuGroup.add(new MenuItem("ID/PW 찾기", LOGOUT, "/ceoMember/findIdPw"));
+    ceoMemberMenuGroup.add(new MenuItem("로그아웃", CEO_LOGIN, "/ceoMember/logout"));
 
     ceoMemberMenuGroup.add(createCeoPageMenu());      // 마이페이지
 
@@ -806,7 +814,7 @@ public class App {
 
   // 기업 정보 >> 로그인하라고 뜸
   private Menu createCeoPageMenu() {
-    MenuGroup ceoPageMenu = new MenuGroup("마이 페이지", Menu.ENABLE_CEOLOGIN); 
+    MenuGroup ceoPageMenu = new MenuGroup("마이 페이지", CEO_LOGIN); 
 
     ceoPageMenu.add(new MenuItem("기업 정보", "/ceoMember/page"));
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));

@@ -1,16 +1,21 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.menu.Menu;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class AuthCeoMemberLoginHandler implements Command {
+public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
 
   List<CeoMember> ceoMemberList;
 
   static CeoMember loginCeoMember;
   public static CeoMember getLoginCeoMember() {
     return loginCeoMember;
+  }
+
+  public static int getUserAccessLevel() {
+    return accessLevel;
   }
 
   public AuthCeoMemberLoginHandler(List<CeoMember> ceoMemberList) {
@@ -39,6 +44,7 @@ public class AuthCeoMemberLoginHandler implements Command {
         ceoMember.setCeoPassword(inputadminPassword);
         System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoBossName());
         loginCeoMember = ceoMember;
+        accessLevel = Menu.CEO_LOGIN;
         return;
       }
 

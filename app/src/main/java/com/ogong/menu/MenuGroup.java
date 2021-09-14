@@ -13,13 +13,12 @@ public class MenuGroup extends Menu {
 
   static Stack<Menu> breadCrumb = new Stack<>();
 
-  Menu[] childs = new Menu[100];
-  int size;
+  ArrayList<Menu> childs = new ArrayList<>();
+
   boolean disablePrevMenu;
   String prevMenuTitle = "이전 메뉴";
   static public boolean successLogin = false;
 
-  // 이전으로 이동시키는 메뉴를 표현하기 위해 만든 클래스
   private static class PrevMenu extends Menu {
     public PrevMenu() {
       super("");
@@ -33,15 +32,18 @@ public class MenuGroup extends Menu {
   public MenuGroup(String title) {
     super(title);
   }
+  public MenuGroup(String title, int accessScope) {
+    super(title, accessScope);
+  }
 
   public MenuGroup(String title, boolean disablePrevMenu) {
     super(title);
     this.disablePrevMenu = disablePrevMenu;
   }
 
-  public MenuGroup(String title, int no) {
+  public MenuGroup(String title, boolean disablePrevMenu, int accessScope) {
     super(title);
-    this.enableState = no;
+    this.accessScope = accessScope;
   }
 
   public void setPrevMenuTitle(String prevMenuTitle) {
@@ -49,48 +51,24 @@ public class MenuGroup extends Menu {
   }
 
   public void add(Menu child) {
-    if (this.size == this.childs.length) {
-      return; 
-    }
-    this.childs[this.size++] = child; 
+    childs.add(child);
   }
 
   public Menu remove(Menu child) {
-    int index = indexOf(child);
-    if (index == -1) {
-      return null;
-    }
-    for (int i = index + 1; i < this.size; i++) {
-      this.childs[i - 1] = this.childs[i];
-    }
-    childs[--this.size] = null;
-    return child;
-  }
-
-  public int indexOf(Menu child) {
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i] == child) {
-        return i;
-      }
-    }
-    return -1;
-  }
-
-  // 배열에 들어 있는 Menu 객체를 찾는다.
-  public Menu getMenu(String title) { 
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i].title.equals(title)) {
-        return this.childs[i];
-      }
-    }
+    if (childs.remove(child)) 
+      return child;
     return null;
   }
 
   @Override 
   public void execute() {
+
     breadCrumb.push(this);
 
+
+
     while (true) {
+
       if (successLogin) {
         successLogin = false;
         breadCrumb.pop();
@@ -150,37 +128,25 @@ public class MenuGroup extends Menu {
   //   시간을 줄이기 위함.
   private List<Menu> getMenuList() {
     ArrayList<Menu> menuList = new ArrayList<>();
-    for (int i = 0; i < this.size; i++) {
-      if (this.childs[i].enableState == Menu.ENABLE_LOGOUT &&
-          AuthPerMemberLoginHandler.getLoginUser() == null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_LOGIN
-          && AuthPerMemberLoginHandler.getLoginUser() != null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ADMINLOGOUT
-          && AuthAdminLoginHandler.getLoginAdmin() == null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ADMINLOGIN
-          && AuthAdminLoginHandler.getLoginAdmin() != null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_CEOLOGOUT
-          && AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_CEOLOGIN
-          && AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
-        menuList.add(this.childs[i]);
-
-      } else if (this.childs[i].enableState == Menu.ENABLE_ALL) {
-        menuList.add(this.childs[i]);
+    for (Menu menu : childs) {
+      if ((menu.accessScope & 
+          AuthAdminLoginHandler.getUserAccessLevel()) > 0 ) {
+        menuList.add(menu);
+      } 
+      else if ((menu.accessScope & 
+          AuthPerMemberLoginHandler.getUserAccessLevel()) > 0 ) {
+        menuList.add(menu);
+      }
+      else if ((menu.accessScope & 
+          AuthCeoMemberLoginHandler.getUserAccessLevel()) > 0 ) {
+        menuList.add(menu);
       }
     }
+
+
     return menuList;
   }
+
 
   private void printBreadCrumbMenuTitle() {
     System.out.printf("\n[%s]\n", getBreadCrumb());
