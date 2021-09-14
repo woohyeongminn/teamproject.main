@@ -101,7 +101,8 @@ public class MyStudyToDo {
     System.out.println("▶ To-Do List 목록");
     System.out.println();
 
-    List<ToDo> toDoArrayList = new ArrayList<>();       // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
+    // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
+    List<ToDo> toDoArrayList = new ArrayList<>(); 
 
     System.out.println(" >> 진행중 ");
 

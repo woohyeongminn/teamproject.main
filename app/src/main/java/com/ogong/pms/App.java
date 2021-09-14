@@ -212,8 +212,8 @@ public class App {
     MyStudyFreeBoard myStudyFreeBoard = new MyStudyFreeBoard(freeBoardList, commentList, memberList, studyList);
 
     // 내 스터디 
-    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, commandMap,
-        myStudyToDo, myStudyCalender, myStudyFreeBoard, commentList));
+    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
+        myStudyCalender, myStudyFreeBoard, commentList));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));

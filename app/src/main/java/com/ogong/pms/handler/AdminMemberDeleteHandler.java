@@ -19,22 +19,8 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
     System.out.println();
     System.out.println("▶ 회원 삭제");
 
-    //    Member member = LoginHandler.getLoginUser();
-    //    System.out.println("<본인 확인>");
-    //    String inputEmail = Prompt.inputString("이메일 입력하세요 : ");
-    //    Member member = promptPerMember.getMemberByPerEmail(inputEmail);
-    //    if (member == null) {
-    //      System.out.println("이메일을 다시 입력해주세요.");
-    //      return;
-    //    }
-
-
-    //    Member member = promptPerMember.getMemberByPerNick(member.getPerNickname());
-
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
-
-        //    if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
         String selectMember = Prompt.inputString(" 회원 닉네임 : ");
 

@@ -1,6 +1,5 @@
 package com.ogong.pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.Member;
@@ -9,22 +8,20 @@ import com.ogong.util.Prompt;
 
 public class MyStudyDetailHandler extends AbstractStudyHandler {
 
-  HashMap<String, Command> commandMap;
   MyStudyToDo myStudyToDo;
   MyStudyCalender myStudyCalender;
   MyStudyFreeBoard myStudyFreeBoard;
   List<Comment> commentList;
 
-  public MyStudyDetailHandler(List<Study> studyList, HashMap<String, Command> commandMap,
-      MyStudyToDo myStudyToDo, MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard, List<Comment> commentList) {
+  public MyStudyDetailHandler(List<Study> studyList, MyStudyToDo myStudyToDo, 
+      MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard,
+      List<Comment> commentList) {
     super(studyList);
-    this.commandMap = commandMap;
     this.myStudyToDo = myStudyToDo;
     this.myStudyCalender = myStudyCalender;
     this.myStudyFreeBoard = myStudyFreeBoard;
     this.commentList = commentList;
   }
-
 
   @Override
   public void execute() {
@@ -54,12 +51,14 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", study.getSubject());
     System.out.printf(" >> 지역 : %s\n", study.getArea());
-    System.out.printf(" >> 인원수 : %s/%s명\n", study.getMembers().size() + 1, study.getNumberOfPeple());
+    System.out.printf(" >> 인원수 : %s/%s명\n",
+        study.getMembers().size() + 1, study.getNumberOfPeple());
     System.out.printf(" >> 대면 : %s\n", study.getFace());
     System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
     if (AuthPerMemberLoginHandler.loginUser != null) {
-      if (study.getOwner().getPerNickname().equals(AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
+      if (study.getOwner().getPerNickname().equals(
+          AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
       }
       selectUserModifyPage(study);
     }
@@ -91,9 +90,9 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
         case 3: myStudyToDo.listToDo(study); break;
         case 4: myStudyFreeBoard.listFreeBoard(commentList, study); break;
 
-        case 5: commandMap.get("/mystudy/detail").execute(); break;   // 임시로 넣었음
-        case 6: commandMap.get("/study/update").execute(); break;     // 구현 덜 했음
-        case 7: commandMap.get("/myStudy/delete").execute(); break;   // 구현 덜 했음
+        case 5: myStudyCalender.listCalender(study); break;   // 임시로 넣었음
+        case 6: myStudyCalender.listCalender(study); break;     // 구현 덜 했음
+        case 7: myStudyCalender.listCalender(study); break;   // 구현 덜 했음
         default : return;
       }
     }

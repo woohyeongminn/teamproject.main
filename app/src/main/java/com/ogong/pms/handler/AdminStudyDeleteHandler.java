@@ -24,7 +24,8 @@ public class AdminStudyDeleteHandler extends AbstractStudyHandler {
       return;
     }
 
-    if (study.getOwner().getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
+    if (study.getOwner().getPerNickname() 
+        != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
       String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {

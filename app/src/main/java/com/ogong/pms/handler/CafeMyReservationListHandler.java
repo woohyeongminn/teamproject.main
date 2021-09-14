@@ -16,7 +16,9 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
   List<CafeRoom> roomList;
 
   public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
-      List<CafeReservation> reserList, PromptPerMember promptPerMember, List<CafeRoom> roomList) {
+      List<CafeReservation> reserList, PromptPerMember promptPerMember,
+      List<CafeRoom> roomList) {
+
     super (cafeList, reviewList, reserList);
     this.promptPerMember = promptPerMember;
     this.roomList = roomList;

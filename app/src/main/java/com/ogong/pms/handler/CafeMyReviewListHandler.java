@@ -9,7 +9,8 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
-  public CafeMyReviewListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  public CafeMyReviewListHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
+      List<CafeReservation> reserList) {
     super (cafeList, reviewList, reserList);
   }
 

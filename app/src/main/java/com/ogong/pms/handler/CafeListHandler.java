@@ -13,6 +13,7 @@ public class CafeListHandler extends AbstractCafeHandler {
 
   public CafeListHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
       List<CafeReservation> reserList, HashMap<String, Command> commandMap) {
+
     super (cafeList, reviewList, reserList);
     this.commandMap = commandMap;
   }

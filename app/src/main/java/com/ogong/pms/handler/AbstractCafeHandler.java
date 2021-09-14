@@ -18,7 +18,8 @@ public abstract class AbstractCafeHandler implements Command {
   int reviewNo = 1; // 리뷰번호
   int reservationNo = 4; // 예약번호
 
-  public AbstractCafeHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  public AbstractCafeHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
+      List<CafeReservation> reserList) {
     this.cafeList = cafeList;
     this.reviewList = reviewList;
     this.reserList = reserList;

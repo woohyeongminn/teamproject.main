@@ -8,7 +8,8 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
 
-  public AdminCafeReviewListControlHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  public AdminCafeReviewListControlHandler(
+      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
     super (cafeList, reviewList, reserList);
   }
 

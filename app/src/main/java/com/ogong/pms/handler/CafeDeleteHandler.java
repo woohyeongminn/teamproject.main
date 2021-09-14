@@ -8,7 +8,8 @@ import com.ogong.util.Prompt;
 
 public class CafeDeleteHandler extends AbstractCafeHandler {
 
-  public CafeDeleteHandler (List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+  public CafeDeleteHandler (
+      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
     super (cafeList, reviewList, reserList);
   }
 

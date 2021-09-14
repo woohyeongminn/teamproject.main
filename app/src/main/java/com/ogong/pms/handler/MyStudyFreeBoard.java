@@ -143,7 +143,8 @@ public class MyStudyFreeBoard {
   }
 
   // 상세
-  private void detailFreeBoard(List<FreeBoard> freeBoardArrayList, List<Comment> commentList, Study study) {
+  private void detailFreeBoard(List<FreeBoard> freeBoardArrayList,
+      List<Comment> commentList, Study study) {
     System.out.println();
     System.out.println("▶ 게시글 상세보기");
     System.out.println();

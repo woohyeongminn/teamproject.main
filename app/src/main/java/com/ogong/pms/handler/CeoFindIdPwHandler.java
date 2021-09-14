@@ -17,7 +17,7 @@ public class CeoFindIdPwHandler implements Command {
   @Override
   public void execute() {
     System.out.println();
-    System.out.println("1. 이 메 일 찾기");
+    System.out.println("1. 이메일 찾기");
     System.out.println("2. 비밀번호 찾기");
 
     int selectNo = Prompt.inputInt("선택> ");

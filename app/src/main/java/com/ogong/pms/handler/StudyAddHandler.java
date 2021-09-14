@@ -14,7 +14,8 @@ public class StudyAddHandler extends AbstractStudyHandler {
   int ToDoNo;
   List<ToDo> todoList;
 
-  public StudyAddHandler(List<Study> studyList, List<ToDo> todoList, PromptPerMember promptPerMember) {
+  public StudyAddHandler(List<Study> studyList, List<ToDo> todoList,
+      PromptPerMember promptPerMember) {
     super(studyList);
     this.promptPerMember = promptPerMember;
     this.todoList = todoList;
