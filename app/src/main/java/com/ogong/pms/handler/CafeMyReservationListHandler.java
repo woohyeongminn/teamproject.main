@@ -6,17 +6,20 @@ import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   PromptPerMember promptPerMember;
+  List<CafeRoom> roomList;
 
   public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
-      List<CafeReservation> reserList, PromptPerMember promptPerMember) {
+      List<CafeReservation> reserList, PromptPerMember promptPerMember, List<CafeRoom> roomList) {
     super (cafeList, reviewList, reserList);
     this.promptPerMember = promptPerMember;
+    this.roomList = roomList;
 
     //    CafeReservation reservation = new CafeReservation();
     //
@@ -36,13 +39,29 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     //
     //    reservation.setReservationNo(2);
     //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
-    //    reservation.setCafeNo(cafeList.get(1).getNo());
-    //    reservation.setReservationDate(Date.valueOf("2021-8-27"));
-    //    reservation.setStartTime(LocalTime.of(15, 00));
-    //    reservation.setUseTime(1);
-    //    reservation.setUseMemberNumber(1);
-    //    reservation.setTotalPrice(1500);
+    //    reservation.setCafeNo(cafeList.get(0).getNo());
+    //    reservation.setReservationDate(Date.valueOf("2021-10-10"));
+    //    reservation.setStartTime(LocalTime.of(10, 00));
+    //    reservation.setUseTime(3);
+    //    reservation.setUseMemberNumber(0);
+    //    reservation.setTotalPrice(45000);
     //    reservation.setWirteReview(false);
+    //    reservation.setRoomNo(4);
+    //
+    //    reserList.add(reservation);
+    //
+    //    reservation = new CafeReservation();
+    //
+    //    reservation.setReservationNo(3);
+    //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
+    //    reservation.setCafeNo(cafeList.get(0).getNo());
+    //    reservation.setReservationDate(Date.valueOf("2021-10-10"));
+    //    reservation.setStartTime(LocalTime.of(15, 00));
+    //    reservation.setUseTime(2);
+    //    reservation.setUseMemberNumber(0);
+    //    reservation.setTotalPrice(30000);
+    //    reservation.setWirteReview(false);
+    //    reservation.setRoomNo(4);
     //
     //    reserList.add(reservation);
   }
@@ -155,14 +174,25 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
       if (cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
         Cafe cafeReserCafe = findByNo(cafeReser.getCafeNo());
+        CafeRoom cafeRoom = getCafeRoomName(cafeReser.getRoomNo());
         myReserList.add(cafeReser);
-        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
-            + " 시작시간 : %s\n 이용시간 : %s시간\n 사용인원 : %d명\n"
-            + " 결제금액 : %d원\n 리뷰작성여부 : %s\n"
-            , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
-            , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseMemberNumber()   
-            , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
-        System.out.println();
+        if (cafeReser.getUseMemberNumber() == 0) {
+          System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
+              + " 시작시간 : %s\n 이용시간 : %s시간\n 스터디룸 : %s\n"
+              + " 결제금액 : %d원\n 리뷰작성여부 : %s\n"
+              , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
+              , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeRoom.getRoomName()  
+              , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
+          System.out.println();  
+        } else {
+          System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
+              + " 시작시간 : %s\n 이용시간 : %s시간\n 사용인원 : %d명\n"
+              + " 결제금액 : %d원\n 리뷰작성여부 : %s\n"
+              , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
+              , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseMemberNumber()   
+              , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
+          System.out.println();
+        }
       } 
     }
     return myReserList;
@@ -174,6 +204,15 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
       if (reserNo == cafeReser.getReservationNo() &&
           cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
         return cafeReser;
+      }
+    }
+    return null;
+  }
+
+  private CafeRoom getCafeRoomName(int roomNo) {
+    for (CafeRoom cafeRoom : roomList) {
+      if (cafeRoom.getRoomNo() == roomNo) {
+        return cafeRoom;
       }
     }
     return null;

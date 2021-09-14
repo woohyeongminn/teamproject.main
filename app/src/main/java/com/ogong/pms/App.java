@@ -16,6 +16,7 @@ import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Comment;
@@ -94,6 +95,7 @@ public class App {
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
   List<Comment> commentList = new ArrayList<>();
+  List<CafeRoom> roomList = new  ArrayList<>();
 
   // 해시맵 추가(0904)
   HashMap<String, Command> commandMap = new HashMap<>();
@@ -156,11 +158,11 @@ public class App {
 
     commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList, ceoMemberList));
     commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));
-    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList, promptPerMember));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList, promptPerMember, roomList));
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
-    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList, promptPerMember));
+    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList, promptPerMember, roomList));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
 
     commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReview, reserList, promptPerMember));
@@ -216,6 +218,7 @@ public class App {
     loadCafe();
     loadCafeReservation();
     loadCafeReview();
+    loadCafeRoom();
     loadStudy();
     loadToDo();
     loadCalender();
@@ -232,6 +235,7 @@ public class App {
     //    saveCafe();                 // CafeAddHandler
     //    saveCafeReservation();      // CafeMyReservationListHandler
     //    saveCafeReview();           
+    //    saveCafeRoom();             // CafeDetailHandler 테스트값 : 2021-10-10
     //    saveStudy();                // StudyAddHandler
     //    saveToDo();                 // MyStudyToDo
     //    saveCalender();             // MyStudyCalender
@@ -613,6 +617,35 @@ public class App {
     }
   }
 
+  @SuppressWarnings("unchecked")
+  private void loadCafeRoom() {
+    try (ObjectInputStream in = new ObjectInputStream(
+        new FileInputStream("cafeRoom.data3"))) {
+
+      roomList.addAll((List<CafeRoom>) in.readObject());
+
+      System.out.println("스터디룸 데이터 로딩 완료!");
+
+    } catch (Exception e) {
+      System.out.println("파일에서 스터디룸 데이터를 읽어 오는 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
+  private void saveCafeRoom() {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new FileOutputStream("cafeRoom.data3"))) {
+
+      out.writeObject(roomList);
+
+      System.out.println("스터디룸 데이터 저장 완료!");
+
+    } catch (Exception e) {
+      System.out.println("스터디룸 데이터를 파일에 저장 중 오류 발생!");
+      e.printStackTrace();
+    }
+  }
+
 
   // -----------------------------------------------------------------------------------------------
   // 관리자 메인
@@ -748,7 +781,7 @@ public class App {
 
     //cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
-    //cafeMenu.add(new MenuItem("장소 검색", "/cafe/search"));
+    cafeMenu.add(new MenuItem("검색", "/cafe/search"));
     //cafeMenu.add(new MenuItem("장소 상세", "/cafe/detail"));
     //cafeMenu.add(new MenuItem("수정", "/cafe/update"));
     //cafeMenu.add(new MenuItem("삭제", "/cafe/delete"));
