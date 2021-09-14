@@ -94,15 +94,15 @@ public class App {
   List<AdminNotice> adminNoticeList = new ArrayList<>();
   List<AskBoard> askBoardList = new ArrayList<>();
   List<Cafe> cafeList = new ArrayList<>();
-  List<CafeReview> cafeReview = new ArrayList<>();
-  List<CafeReservation> reserList = new ArrayList<>();
+  List<CafeReview> cafeReviewList = new ArrayList<>();
+  List<CafeReservation> cafeReservationList = new ArrayList<>();
   List<ToDo> toDoList = new ArrayList<>();
   List<FreeBoard> freeBoardList = new ArrayList<>();
   List<Calender> calenderList = new ArrayList<>();
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
   List<Comment> commentList = new ArrayList<>();
-  List<CafeRoom> roomList = new  ArrayList<>();
+  List<CafeRoom> cafeRoomList = new  ArrayList<>();
 
   // 해시맵 추가(0904)
   HashMap<String, Command> commandMap = new HashMap<>();
@@ -151,7 +151,7 @@ public class App {
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/page", new CeoDetailHandler(ceoMemberList));
-    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReview, promptPerMember));
+    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
@@ -164,17 +164,25 @@ public class App {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, commentList));
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, commentList));
 
-    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, cafeReview, reserList, ceoMemberList));
-    commandMap.put("/cafe/list", new CafeListHandler(cafeList, cafeReview, reserList, commandMap));
-    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReview, reserList, promptPerMember, roomList));
-    commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, cafeReview, reserList));
-    commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, cafeReview, reserList));
-    commandMap.put("/cafe/search", new CafeSearchHandler(cafeList, cafeReview, reserList, commandMap));
-    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, cafeReview, reserList, promptPerMember, roomList));
-    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReview, reserList));
+    commandMap.put("/cafe/add",
+        new CafeAddHandler(cafeList, cafeReviewList, cafeReservationList, ceoMemberList));
+    commandMap.put("/cafe/list", 
+        new CafeListHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
+    commandMap.put("/cafe/detail",
+        new CafeDetailHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList));
+    commandMap.put("/cafe/update",
+        new CafeUpdateHandler(cafeList, cafeReviewList, cafeReservationList));
+    commandMap.put("/cafe/delete",
+        new CafeDeleteHandler(cafeList, cafeReviewList, cafeReservationList));
+    commandMap.put("/cafe/search", 
+        new CafeSearchHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
+    commandMap.put("/cafe/reservationList",
+        new CafeMyReservationListHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList));
+    commandMap.put("/cafe/myReviewList", 
+        new CafeMyReviewListHandler(cafeList, cafeReviewList, cafeReservationList));
 
-    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReview, reserList, promptPerMember));
-    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, cafeReview, reserList)); 
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember));
+    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, cafeReviewList, cafeReservationList)); 
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
@@ -218,36 +226,37 @@ public class App {
   }
 
   void service() {
-    loadMember();
-    loadCeoMember();
-    loadAdmin();
-    loadAdminNotice();
-    loadAskBoard();
-    loadCafe();
-    loadCafeReservation();
-    loadCafeReview();
-    loadCafeRoom();
-    loadStudy();
-    loadToDo();
-    loadCalender();
-    loadFreeBoard();
+    loadObjects("member.data3", memberList);
+    loadObjects("ceoMember.data3", ceoMemberList);
+    loadObjects("admin.data3", adminList);
+    loadObjects("adminNotice.data3" , adminNoticeList);
+    loadObjects("askBoard.data3", askBoardList);
+    loadObjects("cafe.data3", cafeList);
+    loadObjects("cafeReservation.data3", cafeReservationList);
+    loadObjects("cafeReview.data3", cafeReviewList);
+    loadObjects("cafeRoom.data3", cafeRoomList);
+    loadObjects("study.data3", studyList);
+    loadObjects("toDo.data3", toDoList);
+    loadObjects("calender.data3", calenderList);
+    loadObjects("freeBoard.data3", freeBoardList);
 
     createMenu().execute();
     Prompt.close();
 
-    //    saveMember();               // MemberAddHandler
-    //    saveCeoMember();            // CeoAddHandler
-    //    saveAdmin();                // AuthAdminLoginHandler
-    //    saveAdminNotice();          // AdminNoticeAddHandler
-    //    saveAskBoard();             // AskBoardAddHandler
-    //    saveCafe();                 // CafeAddHandler
-    //    saveCafeReservation();      // CafeMyReservationListHandler
-    //    saveCafeReview();           
-    //    saveCafeRoom();             // CafeDetailHandler 테스트값 : 2021-10-10
-    //    saveStudy();                // StudyAddHandler
-    //    saveToDo();                 // MyStudyToDo
-    //    saveCalender();             // MyStudyCalender
-    //    saveFreeBoard();            // MyStudyFreeBoard
+    //    saveObjects("member.data3", memberList);  // MemberAddHandler
+    //    saveObjects("ceoMember.data3", ceoMemberList);   // CeoAddHandler
+    //    saveObjects("admin.data3", adminList); // AuthAdminLoginHandler
+    //    saveObjects("adminNotice.data3" , adminNoticeList);  // AdminNoticeAddHandler
+    //    saveObjects("askBoard.data3", askBoardList);  // AskBoardAddHandler
+    //    saveObjects("cafe.data3", cafeList); // CafeAddHandler
+    //    saveObjects("cafeReservation.data3", cafeReservationList);  // CafeMyReservationListHandler
+    //    saveObjects("cafeReview.data3", cafeReviewList);
+    //    saveObjects("cafeRoom.data3", cafeRoomList); // CafeDetailHandler 테스트값 : 2021-10-10
+    //    saveObjects("study.data3", studyList);   // StudyAddHandler
+    //    saveObjects("toDo.data3", toDoList);  // MyStudyToDo
+    //    saveObjects("calender.data3", calenderList); // MyStudyCalender
+    //    saveObjects("freeBoard.data3", freeBoardList); // MyStudyFreeBoard
+
   }
 
   static Menu welcome() {
@@ -278,378 +287,31 @@ public class App {
 
   //파일 입출력 -----------------------------------------------------------------------
   @SuppressWarnings("unchecked")
-  private void loadAdmin() {
+  private <E> void loadObjects(String filepath, List<E> list) {
     try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("admin.data3"))) {
+        new FileInputStream(filepath))) {
 
-      adminList.addAll((List<Admin>) in.readObject());
+      list.addAll((List<E>) in.readObject());
 
-      System.out.println("관리자 데이터 로딩 완료!");
+      System.out.printf("%s 파일 로딩 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.println("파일에서 관리자 데이터를 읽어 오는 중 오류 발생!");
+      System.out.printf("%s 파일에서 데이터를 읽어 오는 중 오류 발생!\n", filepath);
       e.printStackTrace();
     }
   }
 
-  private void saveAdmin() {
+  @SuppressWarnings("unused")
+  private <E> void saveObjects(String filepath, List<E> list) {
     try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("admin.data3"))) {
+        new FileOutputStream(filepath))) {
 
-      out.writeObject(adminList);
+      out.writeObject(list);
 
-      System.out.println("관리자 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("관리자 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadAdminNotice() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("adminNotice.data3"))) {
-
-      adminNoticeList.addAll((List<AdminNotice>) in.readObject());
-
-      System.out.println("관리자 공지사항 데이터 로딩 완료!");
+      System.out.printf("%s 파일 저장 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.println("파일에서 관리자 공지사항 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveAdminNotice() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("adminNotice.data3"))) {
-
-      out.writeObject(adminNoticeList);
-
-      System.out.println("관리자 공지사항 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("관리자 공지사항 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadAskBoard() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("askBoard.data3"))) {
-
-      askBoardList.addAll((List<AskBoard>) in.readObject());
-
-      System.out.println("문의사항 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 문의사항 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveAskBoard() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("askBoard.data3"))) {
-
-      out.writeObject(askBoardList);
-
-      System.out.println("문의사항 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("문의사항 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCafe() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("cafe.data3"))) {
-
-      cafeList.addAll((List<Cafe>) in.readObject());
-
-      System.out.println("카페 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 카페 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCafe() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("cafe.data3"))) {
-
-      out.writeObject(cafeList);
-
-      System.out.println("카페 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("카페 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCafeReservation() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("cafeReservation.data3"))) {
-
-      reserList.addAll((List<CafeReservation>) in.readObject());
-
-      System.out.println("카페 예약 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 카페 예약 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCafeReservation() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("cafeReservation.data3"))) {
-
-      out.writeObject(reserList);
-
-      System.out.println("카페 예약 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("카페 예약 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCafeReview() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("cafeReview.data3"))) {
-
-      cafeReview.addAll((List<CafeReview>) in.readObject());
-
-      System.out.println("카페 리뷰 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 카페 리뷰 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCafeReview() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("cafeReview.data3"))) {
-
-      out.writeObject(cafeReview);
-
-      System.out.println("카페 리뷰 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("카페 리뷰 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCeoMember() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("ceoMember.data3"))) {
-
-      ceoMemberList.addAll((List<CeoMember>) in.readObject());
-
-      System.out.println("기업 회원 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 기업 회원 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCeoMember() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("ceoMember.data3"))) {
-
-      out.writeObject(ceoMemberList);
-
-      System.out.println("기업 회원 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("기업 회원 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadMember() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("member.data3"))) {
-
-      memberList.addAll((List<Member>) in.readObject());
-
-      System.out.println("개인 회원 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 개인 회원 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveMember() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("member.data3"))) {
-
-      out.writeObject(memberList);
-
-      System.out.println("개인 회원 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("개인 회원 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadStudy() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("study.data3"))) {
-
-      studyList.addAll((List<Study>) in.readObject());
-
-      System.out.println("스터디 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 스터디 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveStudy() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("study.data3"))) {
-
-      out.writeObject(studyList);
-
-      System.out.println("스터디 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("스터디 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadToDo() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("toDo.data3"))) {
-
-      toDoList.addAll((List<ToDo>) in.readObject());
-
-      System.out.println("투두 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 투두 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveToDo() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("toDo.data3"))) {
-
-      out.writeObject(toDoList);
-
-      System.out.println("투두 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("투두 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCalender() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("calender.data3"))) {
-
-      calenderList.addAll((List<Calender>) in.readObject());
-
-      System.out.println("캘린더 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 캘린더 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCalender() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("calender.data3"))) {
-
-      out.writeObject(calenderList);
-
-      System.out.println("캘린더 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("캘린더 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadFreeBoard() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("freeBoard.data3"))) {
-
-      freeBoardList.addAll((List<FreeBoard>) in.readObject());
-
-      System.out.println("스터디게시판 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 스터디게시판 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveFreeBoard() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("freeBoard.data3"))) {
-
-      out.writeObject(freeBoardList);
-
-      System.out.println("스터디게시판 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("스터디게시판 데이터를 파일에 저장 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  @SuppressWarnings("unchecked")
-  private void loadCafeRoom() {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream("cafeRoom.data3"))) {
-
-      roomList.addAll((List<CafeRoom>) in.readObject());
-
-      System.out.println("스터디룸 데이터 로딩 완료!");
-
-    } catch (Exception e) {
-      System.out.println("파일에서 스터디룸 데이터를 읽어 오는 중 오류 발생!");
-      e.printStackTrace();
-    }
-  }
-
-  private void saveCafeRoom() {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream("cafeRoom.data3"))) {
-
-      out.writeObject(roomList);
-
-      System.out.println("스터디룸 데이터 저장 완료!");
-
-    } catch (Exception e) {
-      System.out.println("스터디룸 데이터를 파일에 저장 중 오류 발생!");
+      System.out.printf("%s 데이터를 파일에 저장 중 오류 발생!\n", filepath);
       e.printStackTrace();
     }
   }
