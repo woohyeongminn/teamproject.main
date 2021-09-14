@@ -1,12 +1,14 @@
 package com.ogong.pms.domain;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class CafeRoom {
+@SuppressWarnings("serial")
+public class CafeRoom implements Serializable{
 
   private int roomNo; // 룸 고유번호
   private int cafeNo; // 카페번호
-  private int roomName; // 룸 이름
+  private String roomName; // 룸 이름
   private String roomImg; // 룸 이미지
   private String roomInfo; // 룸 설명
   private LocalTime startTime; // 룸 시작시간
@@ -37,11 +39,11 @@ public class CafeRoom {
     this.cafeNo = cafeNo;
   }
 
-  public int getRoomName() {
+  public String getRoomName() {
     return roomName;
   }
 
-  public void setRoomName(int roomName) {
+  public void setRoomName(String roomName) {
     this.roomName = roomName;
   }
 
