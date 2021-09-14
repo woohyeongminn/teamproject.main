@@ -90,7 +90,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
         case 3: myStudyToDo.listToDo(study); break;
         case 4: myStudyFreeBoard.listFreeBoard(commentList, study); break;
 
-        case 5: myStudyCalender.listCalender(study); break;   // 임시로 넣었음
+        case 5: MyStudyCheating.cheat();  // 임시로 넣었음
         case 6: myStudyCalender.listCalender(study); break;     // 구현 덜 했음
         case 7: myStudyCalender.listCalender(study); break;   // 구현 덜 했음
         default : return;
