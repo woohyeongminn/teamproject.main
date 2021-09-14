@@ -346,7 +346,7 @@ public class App {
 
   // 관리자 하위 메뉴3 - 스터디 관리
   private Menu createControlStudyMenu() {
-    MenuGroup adminStudyMenu = new MenuGroup("스터디 관리"); 
+    MenuGroup adminStudyMenu = new MenuGroup("스터디 관리", ADMIN_LOGIN); 
 
     adminStudyMenu.add(new MenuItem("목록","/study/list"));
     adminStudyMenu.add(new MenuItem("삭제","/study/delete"));
@@ -355,7 +355,7 @@ public class App {
 
   // 관리자 하위 메뉴4 - 장소 후기 관리
   private Menu createControlReviewMenu() {
-    MenuGroup adminCafeReviewMenu = new MenuGroup("장소 관리"); 
+    MenuGroup adminCafeReviewMenu = new MenuGroup("장소 관리", ADMIN_LOGIN); 
 
     adminCafeReviewMenu.add(new MenuItem("장소 게시글 관리","/cafe/control"));
     adminCafeReviewMenu.add(new MenuItem("장소 리뷰 관리","/cafe/reviewList")); 
@@ -365,7 +365,7 @@ public class App {
 
   //관리자 하위 메뉴5 - 고객센터 관리
   private Menu createAdminCSMenu() {
-    MenuGroup csMenu = new MenuGroup("고객센터 관리");
+    MenuGroup csMenu = new MenuGroup("고객센터 관리", ADMIN_LOGIN);
 
     csMenu.add(createAdminNoticeMenu());
     csMenu.add(createAdminAskMenu());
@@ -418,8 +418,6 @@ public class App {
 
     return userMenuGroup;
   }
-
-  //------------------------------------------------------------------------------------
 
   // 개인 하위 메뉴2 - 마이페이지 (로그인 했을때)
   private Menu createMyPageMenu() {
@@ -492,6 +490,8 @@ public class App {
 
     return askBoardMenu;
   }
+
+  //-----------------------------------------------------------------------------------------------
 
   // 기업
   Menu createCeoMenu() {
