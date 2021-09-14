@@ -1,16 +1,21 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.menu.Menu;
 import com.ogong.pms.domain.Admin;
 import com.ogong.util.Prompt;
 
-public class AuthAdminLoginHandler implements Command {
+public class AuthAdminLoginHandler extends AbstractLoginHandler {
 
   List<Admin> adminList;
 
   static Admin loginAdmin;
   public static Admin getLoginAdmin() {
     return loginAdmin;
+  }
+
+  public static int getUserAccessLevel() {
+    return accessLevel;
   }
 
   public AuthAdminLoginHandler(List<Admin> adminList) {
@@ -47,6 +52,7 @@ public class AuthAdminLoginHandler implements Command {
         admin.setMasterPassword(inputadminPassword);
         System.out.printf("\n >> '%s'님 환영합니다!\n", admin.getMasterNickname());
         loginAdmin = admin;
+        accessLevel = Menu.ADMIN_LOGIN;
         return;
       }
 
