@@ -2,12 +2,15 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Comment;
+import com.ogong.pms.domain.Member;
 
 public class AskBoardListHandler extends AbstractAskBoardHandler {
 
-  public AskBoardListHandler(List<AskBoard> askBoardList, List<Comment> commentList) {
-    super(askBoardList, commentList);
+  public AskBoardListHandler(List<AskBoard> askBoardList, List<Member> memberList,
+      List<CeoMember> ceoMemberList, List<Comment> commentList) {
+    super(askBoardList, commentList, memberList, ceoMemberList);
   }
 
   @Override
@@ -21,12 +24,39 @@ public class AskBoardListHandler extends AbstractAskBoardHandler {
     }
 
     for (AskBoard askList : askBoardList) {
-      System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
-          askList.getAskNo(), 
-          askList.getAskTitle(), 
-          askList.getAskWriter().getPerNickname(),
-          askList.getAskRegisteredDate(),
-          askList.getAskVeiwCount());
+
+      //      try {
+      //        writer = askList.getAskMemberWriter().getPerNickname();
+      //      } catch (NullPointerException e) {
+      //
+      //      }
+      //
+      //      try {
+      //        writer = askList.getAskCeoWriter().getCeoBossName();
+      //      } catch (NullPointerException e) {
+      //
+      //      }
+
+      if (askList.getAskMemberWriter().getPerNickname() == null) {
+        System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+            askList.getAskNo(), 
+            askList.getAskTitle(), 
+            askList.getAskCeoWriter().getCeoBossName(),
+            askList.getAskRegisteredDate(),
+            askList.getAskVeiwCount());
+      }
+
+      else if (askList.getAskCeoWriter().getCeoBossName() == null) {
+
+        System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+            askList.getAskNo(), 
+            askList.getAskTitle(), 
+            askList.getAskMemberWriter().getPerNickname(),
+            askList.getAskRegisteredDate(),
+            askList.getAskVeiwCount());
+
+      }
+
     }
   }
 }

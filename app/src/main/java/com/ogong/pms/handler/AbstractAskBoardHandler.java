@@ -4,18 +4,25 @@ import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Comment;
+import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public abstract class AbstractAskBoardHandler implements Command {
 
   List<AskBoard> askBoardList;
   List<Comment> commentList;
+  List<Member> memberList;
+  List<CeoMember> ceoMemberList;
   int commentCount = 1;
 
-  public AbstractAskBoardHandler(List<AskBoard> askBoardList, List<Comment> commentList) {
+  public AbstractAskBoardHandler(List<AskBoard> askBoardList, List<Comment> commentList, 
+      List<Member> memberList, List<CeoMember> ceoMemberList) {
     this.askBoardList = askBoardList;
     this.commentList = commentList;
+    this.memberList = memberList;
+    this.ceoMemberList = ceoMemberList;
   }
 
   protected AskBoard findByNo(int askNo) {

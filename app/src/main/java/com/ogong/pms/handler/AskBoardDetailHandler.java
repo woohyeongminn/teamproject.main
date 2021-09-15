@@ -1,19 +1,20 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
-import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Comment;
+import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class AskBoardDetailHandler extends AbstractAskBoardHandler {
 
-  List<Admin> adminList;
+  //  List<Admin> adminList;
 
-  public AskBoardDetailHandler(List<AskBoard> askBoardList, 
-      List<Comment> commentList, List<Admin> adminList) {
-    super(askBoardList, commentList);
-    this.adminList = adminList;
+  public AskBoardDetailHandler(List<AskBoard> askBoardList, List<Member> memberList,
+      List<CeoMember> ceoMemberList, List<Comment> commentList) {
+    super(askBoardList, commentList, memberList, ceoMemberList);
+    //    this.adminList = adminList;
   }
 
   @Override
@@ -32,14 +33,31 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       return;
     }
 
-    System.out.println();
-    System.out.printf(" [%s]\n", askBoard.getAskTitle());
-    System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
-    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskWriter().getPerNickname());
-    System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
-    askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
-    System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
-    listComment(askBoard);  // 댓글호출
+    if (AuthPerMemberLoginHandler.getLoginUser() != null) {
+
+      System.out.println();
+      System.out.printf(" [%s]\n", askBoard.getAskTitle());
+      System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
+      System.out.printf(" >> 작성자 : %s\n", askBoard.getAskMemberWriter().getPerNickname());
+      System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
+      askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
+      System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
+      listComment(askBoard);  // 댓글호출
+
+    }
+
+    else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
+
+      System.out.println();
+      System.out.printf(" [%s]\n", askBoard.getAskTitle());
+      System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
+      System.out.printf(" >> 작성자 : %s\n", askBoard.getAskCeoWriter().getCeoBossName());
+      System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
+      askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
+      System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
+      listComment(askBoard);  // 댓글호출
+
+    }
 
     if (AuthAdminLoginHandler.getLoginAdmin() != null) {
       System.out.println("\n---------------------");
@@ -55,6 +73,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
         default : return;
       }
     }
+
   }
 
 }
