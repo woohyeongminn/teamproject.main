@@ -44,8 +44,8 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
       // 기업이 쓴 문의글
       int count = 0;
       for (AskBoard askList : askBoardList) {
-        String member = AuthPerMemberLoginHandler.getLoginUser().getPerNickname();
-        if(member.equals(askList.getAskCeoWriter().getCeoBossName())) {
+        String ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoBossName();
+        if(ceoMember.equals(askList.getAskCeoWriter().getCeoBossName())) {
           System.out.println();
           System.out.printf(" (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
               askList.getAskNo(), 

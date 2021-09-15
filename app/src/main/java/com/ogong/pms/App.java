@@ -516,7 +516,7 @@ public class App {
     ceoPageMenu.add(new MenuItem("기업 정보", "/ceoMember/page"));
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     ceoPageMenu.add(new MenuItem("카페 목록", "/ceoMember/myCafeList"));
-    //    ceoPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
+    ceoPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
     //    ceoPageMenu.add(new MenuItem("예약내역", "/cafe/reservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
     //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
@@ -546,7 +546,7 @@ public class App {
   }
 
   // 6-2
-  // 문의사항 상세보기 (댓글 목록 조회만) >> 회원 권한
+  // 문의사항 상세보기 (댓글 목록 조회만) >> 기업 권한
   private Menu createCeoAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
 
