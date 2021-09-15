@@ -26,7 +26,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     this.promptPerMember = promptPerMember;
     this.roomList = roomList;
 
-    CafeRoom cafeRoom = new CafeRoom();
+    //    CafeRoom cafeRoom = new CafeRoom();
     //    cafeRoom.setRoomNo(0);
     //    cafeRoom.setCafeNo(cafeList.get(0).getNo());
     //    cafeRoom.setRoomName("A타입(2~3인)");
@@ -202,21 +202,14 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     try {
       if (!todayReserList.isEmpty()) {
-        int count = 0;
         for (CafeReservation cafeReser : todayReserList) {
           for (int i = 0; i < cafeReser.getUseTime(); i++) {
-            if (count == 0) {
+            if (i == 0) {
               useTimeList.add(cafeReser.getStartTime().plusHours(1));
-              count++;
               continue;
-            } else if (count > 0) {
+            } else if (i > 0) {
               LocalTime tempTime = useTimeList.get(useTimeList.size()-1).plusHours(1);
               useTimeList.add(tempTime);
-              count++;
-            }
-            if (useTimeList.get(i).compareTo(cafeReser.getStartTime().plusHours(cafeReser.getUseTime())) == 0) {
-              count = 0;
-              break;
             }
           }
         }
