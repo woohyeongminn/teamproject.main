@@ -66,6 +66,7 @@ import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CeoAddHandler;
 import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
+import com.ogong.pms.handler.CeoListHandler;
 import com.ogong.pms.handler.CeoMyCafeListHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.MemberAddHandler;
@@ -151,6 +152,7 @@ public class App {
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/page", new CeoDetailHandler(ceoMemberList));
+    commandMap.put("/ceoMember/list", new CeoListHandler(ceoMemberList));
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
@@ -339,7 +341,7 @@ public class App {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", ADMIN_LOGIN); 
 
     adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
-    adminUserMenu.add(new MenuItem("사장 회원 조회", "ceo 구현 전"));
+    adminUserMenu.add(new MenuItem("사장 회원 조회", "/ceoMember/list"));
 
     return adminUserMenu;
   }
