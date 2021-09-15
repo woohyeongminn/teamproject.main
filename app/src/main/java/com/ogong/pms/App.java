@@ -157,12 +157,12 @@ public class App {
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
 
-    commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, commentList));
-    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, commentList));
-    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, commentList, adminList));
-    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardList, commentList));
-    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, commentList));
-    commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, commentList));
+    commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, ceoMemberList, commentList));
+    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList, ceoMemberList, commentList));
+    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, memberList, ceoMemberList, commentList));
+    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardList, memberList, ceoMemberList, commentList));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList, ceoMemberList, commentList));
+    commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, memberList, ceoMemberList, commentList));
 
     commandMap.put("/cafe/add",
         new CafeAddHandler(cafeList, cafeReviewList, cafeReservationList, ceoMemberList));
@@ -414,7 +414,7 @@ public class App {
         PER_LOGIN, "/myStudy/list"));     
 
     userMenuGroup.add(createCafeMenu());        // 장소 예약하기
-    userMenuGroup.add(createCSMenu());          // 고객센터
+    userMenuGroup.add(createMemberCSMenu());          // 고객센터
 
     return userMenuGroup;
   }
@@ -458,17 +458,17 @@ public class App {
   }
 
   //개인 하위 메뉴6 - 고객센터
-  private Menu createCSMenu() {
+  private Menu createMemberCSMenu() {
     MenuGroup memberCSMenu = new MenuGroup("고객센터");
 
-    memberCSMenu.add(createNoticeMenu());
-    memberCSMenu.add(createAskBoardMenu());
+    memberCSMenu.add(createMemberNoticeMenu());
+    memberCSMenu.add(createMemberAskBoardMenu());
 
     return memberCSMenu;
   }
 
   // 6-1
-  private Menu createNoticeMenu() {
+  private Menu createMemberNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항"); 
 
     noticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
@@ -479,7 +479,7 @@ public class App {
 
   // 6-2
   // 문의사항 상세보기 (댓글 목록 조회만) >> 회원 권한
-  private Menu createAskBoardMenu() {
+  private Menu createMemberAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
 
     askBoardMenu.add(new MenuItem("등록", PER_LOGIN, "/askBoard/add"));
@@ -504,6 +504,8 @@ public class App {
 
     ceoMemberMenuGroup.add(createCeoPageMenu());      // 마이페이지
 
+    ceoMemberMenuGroup.add(createCeoCSMenu());          // 고객센터
+
     return ceoMemberMenuGroup;
   }
 
@@ -520,6 +522,41 @@ public class App {
     //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
 
     return ceoPageMenu;
+  }
+
+
+  //기업 하위 메뉴6 - 고객센터
+  private Menu createCeoCSMenu() {
+    MenuGroup memberCSMenu = new MenuGroup("고객센터");
+
+    memberCSMenu.add(createCeoNoticeMenu());
+    memberCSMenu.add(createCeoAskBoardMenu());
+
+    return memberCSMenu;
+  }
+
+  // 6-1
+  private Menu createCeoNoticeMenu() {
+    MenuGroup noticeMenu = new MenuGroup("공지사항"); 
+
+    noticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
+    noticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
+
+    return noticeMenu;
+  }
+
+  // 6-2
+  // 문의사항 상세보기 (댓글 목록 조회만) >> 회원 권한
+  private Menu createCeoAskBoardMenu() {
+    MenuGroup askBoardMenu = new MenuGroup("문의사항");
+
+    askBoardMenu.add(new MenuItem("등록", CEO_LOGIN, "/askBoard/add"));
+    askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
+    askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
+    askBoardMenu.add(new MenuItem("변경", CEO_LOGIN, "/askBoard/update"));
+    askBoardMenu.add(new MenuItem("삭제", CEO_LOGIN, "/askBoard/delete"));
+
+    return askBoardMenu;
   }
 
 }
