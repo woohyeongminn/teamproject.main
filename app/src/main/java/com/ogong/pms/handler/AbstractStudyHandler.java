@@ -29,53 +29,7 @@ public abstract class AbstractStudyHandler implements Command {
     }
   }
 
-  protected void detail() {
-    System.out.println();
-    System.out.println("▶ 스터디 상세");
-    System.out.println();
 
-    int inputNo = Prompt.inputInt("번호 : ");
-
-    Study study = findByNo(inputNo);
-
-    if (study == null) {
-      System.out.println("해당 번호의 스터디가 없습니다.");
-      return;
-    }
-
-    System.out.printf(" \n(%s)\n", study.getStudyNo());
-    System.out.printf(" [%s]\n", study.getStudyTitle());
-    System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
-    System.out.printf(" >> 분야 : %s\n", study.getSubject());
-    System.out.printf(" >> 지역 : %s\n", study.getArea());
-    System.out.printf(" >> 인원수 : %s/%s명\n",
-        study.getMembers().size() + 1, study.getNumberOfPeple());
-    System.out.printf(" >> 대면 : %s\n", study.getFace());
-    System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
-
-    if (AuthPerMemberLoginHandler.loginUser != null) {
-
-      if (study.getOwner().getPerNickname().equals(
-          AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
-        System.out.println();
-        System.out.println();
-        System.out.println("0. 뒤로가기");
-        int selectNo = Prompt.inputInt("선택> ");
-        switch (selectNo) {
-          default : return;
-        }
-      } else {
-        System.out.println("\n----------------------");
-        System.out.println("1. 참여 신청하기");
-        System.out.println("0. 뒤로가기");
-        int selectNo = Prompt.inputInt("선택> ");
-        switch (selectNo) {
-          case 1 : joinStudy(study); break;
-          default : return;
-        }
-      }
-    }
-  }
 
   // 검색
   protected void search() {
@@ -111,64 +65,64 @@ public abstract class AbstractStudyHandler implements Command {
       return;
     }
 
-    System.out.println("\n----------------------");
-    System.out.println("1. 상세보기(참여신청)");
-    System.out.println("0. 뒤로가기");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1 : detail(); return;
-      default : return;
-    }
+    //    System.out.println("\n----------------------");
+    //    System.out.println("1. 상세보기(참여신청)");
+    //    System.out.println("0. 뒤로가기");
+    //    int selectNo = Prompt.inputInt("선택> ");
+    //    switch (selectNo) {
+    //      case 1 : detail(); return;
+    //      default : return;
+    //    }
   }
 
-  // 스터디 구성원 목록
-  protected void listMember(Study study) {
-    System.out.println();
-    System.out.println("▶ 구성원 보기");
-    System.out.println();
-
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
-    if (member == null ) {
-      System.out.println("로그인 한 회원만 조회 가능합니다.");
-      return;
-    }
-
-    System.out.println(" >> 스터디 구성원");
-    System.out.println(" 조  장 : " + study.getOwner().getPerNickname());
-    System.out.println(" 구성원 : " + study.getMemberNames());
-
-    System.out.println();
-    System.out.println(">> 승인 대기중");
-    if(study.getWatingMemberNames().isEmpty()) {
-      System.out.println(" 승인 대기중인 회원이 없습니다.");
-    }
-    System.out.println(study.getWatingMemberNames());
-
-    List<Member> waitingMembers = study.getWatingMember();
-
-    if (member != null && study.getOwner().getPerEmail().equals(member.getPerEmail())) {
-      System.out.println();
-      if (!study.getWatingMemberNames().equals("")) {
-        String input = Prompt.inputString("대기중인 회원 중 승인할 닉네임을 입력하세요 : ");
-        Member m = new Member();
-
-        for (Member watingMember : waitingMembers) {        
-          if (watingMember.getPerNickname().equals(input)) {
-            study.getMembers().add(watingMember);
-            System.out.printf("'%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
-            List<Study> studyList = watingMember.getPerMyStudy();
-            studyList.add(study);
-            m = watingMember;
-          }
-        }
-        if (m != null) {
-          study.getWatingMember().remove(m);
-        }
-        return;
-      }
-    }
-  }
+  //  // 스터디 구성원 목록
+  //  protected void listMember(Study study) {
+  //    System.out.println();
+  //    System.out.println("▶ 구성원 보기");
+  //    System.out.println();
+  //
+  //    Member member = AuthPerMemberLoginHandler.getLoginUser();
+  //
+  //    if (member == null ) {
+  //      System.out.println("로그인 한 회원만 조회 가능합니다.");
+  //      return;
+  //    }
+  //
+  //    System.out.println(" >> 스터디 구성원");
+  //    System.out.println(" 조  장 : " + study.getOwner().getPerNickname());
+  //    System.out.println(" 구성원 : " + study.getMemberNames());
+  //
+  //    System.out.println();
+  //    System.out.println(">> 승인 대기중");
+  //    if(study.getWatingMemberNames().isEmpty()) {
+  //      System.out.println(" 승인 대기중인 회원이 없습니다.");
+  //    }
+  //    System.out.println(study.getWatingMemberNames());
+  //
+  //    List<Member> waitingMembers = study.getWatingMember();
+  //
+  //    if (member != null && study.getOwner().getPerEmail().equals(member.getPerEmail())) {
+  //      System.out.println();
+  //      if (!study.getWatingMemberNames().equals("")) {
+  //        String input = Prompt.inputString("대기중인 회원 중 승인할 닉네임을 입력하세요 : ");
+  //        Member m = new Member();
+  //
+  //        for (Member watingMember : waitingMembers) {        
+  //          if (watingMember.getPerNickname().equals(input)) {
+  //            study.getMembers().add(watingMember);
+  //            System.out.printf("'%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
+  //            List<Study> studyList = watingMember.getPerMyStudy();
+  //            studyList.add(study);
+  //            m = watingMember;
+  //          }
+  //        }
+  //        if (m != null) {
+  //          study.getWatingMember().remove(m);
+  //        }
+  //        return;
+  //      }
+  //    }
+  //  }
 
   // 스터디 가입
   protected void joinStudy(Study study) {
@@ -237,5 +191,21 @@ public abstract class AbstractStudyHandler implements Command {
     return null;
   }
 
+  // 내 스터디에서만 번호 찾기
+  protected Study findByMyStudyNo(int inputNo) {
+    Member memeber = AuthPerMemberLoginHandler.getLoginUser();
+
+    try {
+      for (int i = 0; i < studyList.size(); i++) {
+        if (memeber.getPerMyStudy().get(i).getStudyNo() == inputNo) {
+          Study study = memeber.getPerMyStudy().get(i);
+          return study;
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(" >> 해당 번호의 스터디가 없습니다.");
+    }
+    return null;
+  }
 
 }

@@ -18,14 +18,13 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
 
     int inputNo = Prompt.inputInt(" 번호  : ");
 
-    Study study = findByNo(inputNo);
+    Study myStudy = findByMyStudyNo(inputNo);
 
-    if (study == null) {
-      System.out.println(" >> 해당 번호의 스터디가 없습니다.");
+    if (myStudy == null) {
       return;
     }
 
-    if (study.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
+    if (myStudy.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println(" >> 삭제 권한이 없습니다.");
       return;
     }
@@ -38,8 +37,8 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    studyList.remove(study);
-    member.getPerMyStudy().remove(study);
+    studyList.remove(myStudy);
+    member.getPerMyStudy().remove(myStudy);
 
     System.out.println(" >> 스터디를 삭제하였습니다.");
   }

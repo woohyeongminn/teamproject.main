@@ -79,14 +79,16 @@ import com.ogong.pms.handler.MyStudyCalender;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
 import com.ogong.pms.handler.MyStudyFreeBoard;
+import com.ogong.pms.handler.MyStudyGuilder;
 import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.MyStudyToDo;
+import com.ogong.pms.handler.MyStudyUpdateHandler;
 import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.StudyAddHandler;
+import com.ogong.pms.handler.StudyDetailHandler;
 import com.ogong.pms.handler.StudyListHandler;
 import com.ogong.pms.handler.StudySearchHandler;
-import com.ogong.pms.handler.StudyUpdateHandler;
 import com.ogong.util.Prompt;
 
 public class App {
@@ -203,7 +205,7 @@ public class App {
 
     commandMap.put("/study/add", new StudyAddHandler(studyList, toDoList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));
-    commandMap.put("/study/update", new StudyUpdateHandler(studyList));
+    commandMap.put("/study/detail", new StudyDetailHandler(studyList));
     commandMap.put("/study/search", new StudySearchHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 
@@ -212,13 +214,15 @@ public class App {
     MyStudyCalender myStudyCalender = new MyStudyCalender(calenderList, studyList);
     MyStudyToDo myStudyToDo = new MyStudyToDo(toDoList, studyList);
     MyStudyFreeBoard myStudyFreeBoard = new MyStudyFreeBoard(freeBoardList, commentList, memberList, studyList);
+    MyStudyGuilder myStudyGuilder = new MyStudyGuilder();
 
     // 내 스터디 
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
-        myStudyCalender, myStudyFreeBoard, commentList));
+        myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
+    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyList));
 
   }
 
@@ -412,8 +416,7 @@ public class App {
     userMenuGroup.add(createMyPageMenu());      // 마이페이지
     userMenuGroup.add(createStudyMenu());       // 스터디 찾기
 
-    userMenuGroup.add(new MenuItem("내 스터디", // 내 스터디
-        PER_LOGIN, "/myStudy/list"));     
+    userMenuGroup.add(createMystudyMenu());     // 내 스터디
 
     userMenuGroup.add(createCafeMenu());        // 장소 예약하기
     userMenuGroup.add(createMemberCSMenu());          // 고객센터
@@ -433,16 +436,29 @@ public class App {
     return myPageMenu;
   }
 
-  //개인 하위 메뉴3 - 모든스터디
+  //개인 하위 메뉴3 - 스터디 찾기
   private Menu createStudyMenu() {
     MenuGroup allStudyMenu = new MenuGroup("스터디 찾기"); 
 
     allStudyMenu.add(new MenuItem("등록", PER_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
     allStudyMenu.add(new MenuItem("검색","/study/search"));
-    allStudyMenu.add(new MenuItem("변경", PER_LOGIN, "/study/update"));
+    allStudyMenu.add(new MenuItem("상세","/study/detail"));
 
     return allStudyMenu; 
+  }
+
+  // 이거 일단 다 보이게 하고 들어갔을 때 if문으로 필터하기 !!!!!!!
+  // (조장 아니면 들어는 갈 수 있는데 if문으로 팅김)
+  //개인 하위 메뉴4 - 내 스터디
+  private Menu createMystudyMenu() {
+    MenuGroup myStudyMenu = new MenuGroup("내 스터디", PER_LOGIN);
+    myStudyMenu.add(new MenuItem("목록", "/myStudy/list"));
+    myStudyMenu.add(new MenuItem("상세", "/myStudy/detail"));
+    myStudyMenu.add(new MenuItem("수정", "/myStudy/update"));
+    myStudyMenu.add(new MenuItem("삭제", "/myStudy/delete"));
+
+    return myStudyMenu; 
   }
 
   //개인 하위 메뉴5 - 스터디 장소

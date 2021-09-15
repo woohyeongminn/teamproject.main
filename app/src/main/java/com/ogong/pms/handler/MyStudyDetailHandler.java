@@ -11,15 +11,17 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
   MyStudyToDo myStudyToDo;
   MyStudyCalender myStudyCalender;
   MyStudyFreeBoard myStudyFreeBoard;
+  MyStudyGuilder myStudyGuilder;
   List<Comment> commentList;
 
   public MyStudyDetailHandler(List<Study> studyList, MyStudyToDo myStudyToDo, 
       MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard,
-      List<Comment> commentList) {
+      List<Comment> commentList, MyStudyGuilder myStudyGuilder) {
     super(studyList);
     this.myStudyToDo = myStudyToDo;
     this.myStudyCalender = myStudyCalender;
     this.myStudyFreeBoard = myStudyFreeBoard;
+    this.myStudyGuilder = myStudyGuilder;
     this.commentList = commentList;
   }
 
@@ -40,48 +42,31 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
     int inputNo = Prompt.inputInt(" 번호  : ");
 
-    Study study = findByMyStudyNo(inputNo);
+    Study myStudy = findByMyStudyNo(inputNo);
 
-    if (study == null) {
+    if (myStudy == null) {
       return;
     }
 
-    System.out.printf(" \n(%s)\n", study.getStudyNo());
-    System.out.printf(" [%s]\n", study.getStudyTitle());
-    System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
-    System.out.printf(" >> 분야 : %s\n", study.getSubject());
-    System.out.printf(" >> 지역 : %s\n", study.getArea());
+    System.out.printf(" \n(%s)\n", myStudy.getStudyNo());
+    System.out.printf(" [%s]\n", myStudy.getStudyTitle());
+    System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());
+    System.out.printf(" >> 분야 : %s\n", myStudy.getSubject());
+    System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
     System.out.printf(" >> 인원수 : %s/%s명\n",
-        study.getMembers().size() + 1, study.getNumberOfPeple());
-    System.out.printf(" >> 대면 : %s\n", study.getFace());
-    System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
+        myStudy.getMembers().size() + 1, myStudy.getNumberOfPeple());
+    System.out.printf(" >> 대면 : %s\n", myStudy.getFace());
+    System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
 
     if (AuthPerMemberLoginHandler.loginUser != null) {
-      if (study.getOwner().getPerNickname().equals(
+      if (myStudy.getOwner().getPerNickname().equals(
           AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
       }
-      selectUserModifyPage(study);
+      selectUserModifyPage(myStudy);
     }
   }
 
-
-  private Study findByMyStudyNo(int inputNo) {
-    Member memeber = AuthPerMemberLoginHandler.getLoginUser();
-
-    try {
-      for (int i = 0; i < studyList.size(); i++) {
-        if (memeber.getPerMyStudy().get(i).getStudyNo() == inputNo) {
-          Study study = memeber.getPerMyStudy().get(i);
-          return study;
-        }
-      }
-    } catch (Exception e) {
-      System.out.println(" >> 해당 번호의 스터디가 없습니다.");
-    }
-    return null;
-  }
-
-  private void selectUserModifyPage(Study study) {
+  private void selectUserModifyPage(Study myStudy) {
     while (true) {
       System.out.println("\n----------------------");
 
@@ -101,19 +86,19 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
       System.out.println("0. 뒤로 가기");
 
-      int selectAdminNo = Prompt.inputInt("선택> ");
-      switch (selectAdminNo) {
-        case 1: listMember(study); break;
-        case 2: myStudyCalender.listCalender(study); break;
-        case 3: myStudyToDo.listToDo(study); break;
-        case 4: myStudyFreeBoard.listFreeBoard(commentList, study); break;
-
-        case 5: MyStudyCheating.cheat();  // 임시로 넣었음
-        case 6: myStudyCalender.listCalender(study); break;     // 구현 덜 했음
-        case 7: myStudyCalender.listCalender(study); break;   // 구현 덜 했음
+      int selectNo = Prompt.inputInt("선택> "); 
+      switch (selectNo) {
+        case 1: myStudyGuilder.listGuilder(myStudy); break;
+        case 2: myStudyCalender.listCalender(myStudy); break;
+        case 3: myStudyToDo.listToDo(myStudy); break;
+        case 4: myStudyFreeBoard.listFreeBoard(commentList, myStudy); break;
+        case 5:  MyStudyCheating.cheat() ;  // 임시로 넣었음
+        case 6: myStudyCalender.listCalender(myStudy); break;     // 구현 덜 했음
+        case 7: myStudyCalender.listCalender(myStudy); break;   // 삭제/탈퇴 구현 덜 했음
         default : return;
       }
     }
-
   }
+
+  //  private void deleteO
 }
