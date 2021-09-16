@@ -1,11 +1,8 @@
 package com.ogong.pms;
 
 import static com.ogong.menu.Menu.ADMIN_LOGIN;
-//import static com.ogong.menu.Menu.ADMIN_LOGOUT;
 import static com.ogong.menu.Menu.CEO_LOGIN;
-//import static com.ogong.menu.Menu.PER_LOGOUT;
 import static com.ogong.menu.Menu.LOGOUT;
-//import static com.ogong.menu.Menu.CEO_LOGOUT;
 import static com.ogong.menu.Menu.PER_LOGIN;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
