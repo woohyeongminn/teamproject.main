@@ -6,22 +6,19 @@ import com.ogong.util.Prompt;
 
 public class CeoListHandler extends AbstractCeoHandler  {
 
-  List<CeoMember> ceoMemberList;
-
   public CeoListHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);
   }
 
+  // 관리자가 사용
   @Override
   public void execute() {
-
     System.out.println();
     System.out.println("▶ 기업회원 목록");
     System.out.println();
 
     for (CeoMember ceoMember : ceoMemberList) {
-      System.out.println();
-      System.out.printf(" (%d)\n 대표자명 : %s\n  이메일 : %s\n 가입일 : %s\n",
+      System.out.printf(" (%d)\n 대표자명 : %s\n 이메일 : %s\n 가입일 : %s\n",
           ceoMember.getCeoNo(),
           ceoMember.getCeoBossName(),
           ceoMember.getCeoEmail(),
@@ -33,7 +30,6 @@ public class CeoListHandler extends AbstractCeoHandler  {
   }
 
   private void selectUserModifyPage() {
-    System.out.println();
     System.out.println("1. 상세");
     System.out.println("2. 수정");
     System.out.println("3. 탈퇴");

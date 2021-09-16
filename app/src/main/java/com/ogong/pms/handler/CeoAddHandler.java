@@ -13,7 +13,7 @@ public class CeoAddHandler extends AbstractCeoHandler {
   public CeoAddHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);
 
-    //    CeoMember ceoMember = new CeoMember();
+    //  CeoMember ceoMember = new CeoMember();
     //
     //    ceoMember.setCeoNo(1);
     //    ceoMember.setCeoEmail("study1");
@@ -63,28 +63,69 @@ public class CeoAddHandler extends AbstractCeoHandler {
     CeoMember ceoMember = new CeoMember();
 
     ceoMember.setCeoNo(ceoMemberNo++);
-    ceoMember.setCeoEmail(Prompt.inputString(" 이메일 : "));
-    ceoMember.setCeoBossName(Prompt.inputString(" 이 름 : "));
-    ceoMember.setCeoPassword(Prompt.inputString(" 비밀번호 : "));
+
+    String inputNewEmail;
     while (true) {
-      String pw =  Prompt.inputString(" 비밀번호 확인 : ");
-      if (!pw.equals(ceoMember.getCeoPassword())) {
-        System.out.println(" >> 확인 실패!\n");
+      inputNewEmail = Prompt.inputString(" 이메일 : ");
+      if (!inputNewEmail.contains("@") ||
+          !inputNewEmail.contains(".com") ||
+          inputNewEmail.length() < 6) {
+        System.out.println(" >> 정확한 이메일 양식으로 입력해주세요.\n");
         continue;
-      } else {
-        System.out.println(" >> 확인 완료!\n");
       }
       break;
     }
-    ceoMember.setCeoLicenseNo(Prompt.inputString(" 사업자 등록번호 : "));
+    ceoMember.setCeoEmail(inputNewEmail);
+
+
+    String inputNewPW;
+    while (true) {
+      System.out.println();
+      inputNewPW = Prompt.inputString(" 비밀번호 : ");
+      if (inputNewPW.length() < 8 || (!inputNewPW.contains("!") && !inputNewPW.contains("@")
+          && !inputNewPW.contains("#") && !inputNewPW.contains("$")
+          && !inputNewPW.contains("^") && !inputNewPW.contains("%")
+          && !inputNewPW.contains("&") && !inputNewPW.contains("*"))) {
+        System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
+        continue;
+      }
+      break;
+    }
+    ceoMember.setCeoPassword(inputNewPW);
+
+    while (true) {
+      System.out.println();
+      String pw =  Prompt.inputString(" 비밀번호 확인 : ");
+      if (!pw.equals(ceoMember.getCeoPassword())) {
+        System.out.println(" >> 확인 실패!");
+        continue;
+      } else {
+        System.out.println(" >> 확인 완료!");
+      }
+      break;
+    }
+
+    String inputLicenseNo;
+    while (true) {
+      System.out.println();
+      inputLicenseNo = Prompt.inputString(" 사업자 등록번호 : ");
+      if (inputLicenseNo.length() != 10) {
+        System.out.println(" >> 10자리 숫자를 입력해주세요.");
+        continue;
+      }
+      break;
+    }
+    ceoMember.setCeoLicenseNo(inputLicenseNo);
+    System.out.println();
     ceoMember.setCeoBossName(Prompt.inputString(" 대표자명 : "));
+    System.out.println();
     ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
     ceoMember.setCafes(new ArrayList<>());
 
     ceoMemberList.add(ceoMember);
 
-    System.out.println(" >> 가입이 완료되었습니다.");
+    System.out.println(" >> 기업회원 가입이 완료되었습니다.");
   }
 }
 

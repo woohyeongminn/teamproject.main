@@ -153,7 +153,7 @@ public class App {
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
-    commandMap.put("/ceoMember/page", new CeoDetailHandler(ceoMemberList));
+    commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberList));
     commandMap.put("/ceoMember/list", new CeoListHandler(ceoMemberList));
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
 
@@ -531,7 +531,7 @@ public class App {
   private Menu createCeoPageMenu() {
     MenuGroup ceoPageMenu = new MenuGroup("마이 페이지", CEO_LOGIN); 
 
-    ceoPageMenu.add(new MenuItem("기업 정보", "/ceoMember/page"));
+    ceoPageMenu.add(new MenuItem("기업 프로필", "/ceoMember/detail"));
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     ceoPageMenu.add(new MenuItem("카페 목록", "/ceoMember/myCafeList"));
     ceoPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));

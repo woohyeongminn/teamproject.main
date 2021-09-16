@@ -28,20 +28,20 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
   public void execute() {
 
     System.out.println();
-    String inputadminEmail = Prompt.inputString(" 이메일 : ");
-    String inputadminPassword = "";
-    CeoMember ceoMember = findByAdminEmail(inputadminEmail);
+    String inputEmail = Prompt.inputString(" 이메일 : ");
+    String inputPassword = "";
+    CeoMember ceoMember = findByEmail(inputEmail);
 
     if (ceoMember == null) {
       System.out.println("\n >> 등록된 회원이 아닙니다.");
     }
 
     while (ceoMember != null) {
-      inputadminPassword = Prompt.inputString(" 비밀번호 : ");
+      inputPassword = Prompt.inputString(" 비밀번호 : ");
 
-      if (ceoMember.getCeoPassword().equals(inputadminPassword)) {
-        ceoMember.setCeoEmail(inputadminEmail);
-        ceoMember.setCeoPassword(inputadminPassword);
+      if (ceoMember.getCeoPassword().equals(inputPassword)) {
+        ceoMember.setCeoEmail(inputEmail);
+        ceoMember.setCeoPassword(inputPassword);
         System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoBossName());
         loginCeoMember = ceoMember;
         accessLevel = Menu.CEO_LOGIN;
@@ -51,16 +51,16 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
       System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
       return;
     } 
-  } 
+  }
 
-
-  private CeoMember findByAdminEmail (String inputEmail) {
+  private CeoMember findByEmail(String ceoEmail) {
     for (CeoMember ceoMember : ceoMemberList) {
-      if (inputEmail.equals(ceoMember.getCeoEmail())) {
+      if (ceoMember.getCeoEmail().equals(ceoEmail)) {
         return ceoMember;
       }
     }
     return null;
   }
+
 }
 

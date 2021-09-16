@@ -15,13 +15,13 @@ public abstract class AbstractCeoHandler implements Command {
   public void detail() {
     System.out.println();
     System.out.println("▶ 기업회원 상세");
-    String inputceoEmail = Prompt.inputString(" 이메일 : ");
+    int inputceoEmail = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    CeoMember ceoMember = findByEmail(inputceoEmail);
+    CeoMember ceoMember = findByCeoMemberNo(inputceoEmail);
 
     if (ceoMember == null) {
-      System.out.println(" >> 해당 이메일의 기업 회원이 없습니다.");
+      System.out.println(" >> 해당 번호의 기업 회원이 없습니다.");
       return;
     }
 
@@ -36,13 +36,13 @@ public abstract class AbstractCeoHandler implements Command {
   public void update() {
     System.out.println();
     System.out.println("▶ 기업회원 변경"); 
-    String inputceoEmail = Prompt.inputString(" 이메일 : ");
+    int inputceoEmail = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    CeoMember ceoMember = findByEmail(inputceoEmail);
+    CeoMember ceoMember = findByCeoMemberNo(inputceoEmail);
 
     if (ceoMember == null) {
-      System.out.println(" >> 해당 이메일의 기업 회원이 없습니다.");
+      System.out.println(" >> 해당 번호의 기업 회원이 없습니다.");
       return;
     }
 
@@ -69,12 +69,13 @@ public abstract class AbstractCeoHandler implements Command {
   public void delete() {
     System.out.println();
     System.out.println("▶ 기업회원 탈퇴");
-    String inputceoEmail = Prompt.inputString("이메일 : ");
+    int inputceoEmail = Prompt.inputInt(" 번호 : ");
     System.out.println();
-    CeoMember ceoMember = findByEmail(inputceoEmail);
+
+    CeoMember ceoMember = findByCeoMemberNo(inputceoEmail);
 
     if (ceoMember == null) {
-      System.out.println(" >> 해당 이메일의 기업 회원이 없습니다.");
+      System.out.println(" >> 해당 번호의 기업 회원이 없습니다.");
       return;
     }
 
@@ -91,9 +92,7 @@ public abstract class AbstractCeoHandler implements Command {
 
 
   public CeoMember findByEmail(String ceoEmail) {
-    CeoMember[] arr = ceoMemberList.toArray(new CeoMember[0]);
-    for (Object obj : arr) {
-      CeoMember ceoMember = (CeoMember) obj;
+    for (CeoMember ceoMember : ceoMemberList) {
       if (ceoMember.getCeoEmail().equals(ceoEmail)) {
         return ceoMember;
       }
@@ -102,6 +101,15 @@ public abstract class AbstractCeoHandler implements Command {
   }
 
 
+
+  public CeoMember findByCeoMemberNo(int inputceoNo) {
+    for (CeoMember ceo : ceoMemberList) {
+      if (inputceoNo == ceo.getCeoNo()) {
+        return ceo;
+      }
+    }
+    return null;
+  }
 
 
   //-------------prompt는 login에서 사용------------------------------------------------

@@ -6,8 +6,6 @@ import com.ogong.util.Prompt;
 
 public class CeoDetailHandler extends AbstractCeoHandler {
 
-  List<CeoMember> ceoMemberList;
-
   public CeoDetailHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);
   }
@@ -18,12 +16,14 @@ public class CeoDetailHandler extends AbstractCeoHandler {
     System.out.println("▶ 프로필");
 
     try {
-      CeoMember CeoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+      CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
       System.out.println();
-      System.out.printf(" [%s]\n", CeoMember.getCeoBossName());
-      System.out.printf(" >> 이메일 : %s\n", CeoMember.getCeoEmail());
-      System.out.printf(" >> 사  진 : %s\n", CeoMember.getCeoPhoto());
-      System.out.printf(" >> 가입일 : %s\n", CeoMember.getCeoregisteredDate());
+      System.out.printf(" [%s]\n", ceoMember.getCeoBossName());
+      System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
+      System.out.printf(" >> 사  진 : %s\n", ceoMember.getCeoPhoto());
+      System.out.printf(" >> 대표자명 : %s\n", ceoMember.getCeoBossName());
+      System.out.printf(" >> 사업자 번호 : %s\n", ceoMember.getCeoLicenseNo());
+      System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
 
     } catch (NullPointerException e) {
       System.out.println(" >> 로그인 하세요.");
