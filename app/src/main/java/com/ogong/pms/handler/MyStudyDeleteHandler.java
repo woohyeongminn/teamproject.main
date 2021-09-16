@@ -1,7 +1,6 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
@@ -20,6 +19,7 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
 
     Study myStudy = findByMyStudyNo(inputNo);
 
+    // 조건내용 조금 수정해서 '해당 번호의 스터디가 없습니다' 출력되도록 수정해야함
     if (myStudy == null) {
       return;
     }
@@ -35,10 +35,7 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
       return;
     }
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
     studyList.remove(myStudy);
-    member.getPerMyStudy().remove(myStudy);
 
     System.out.println(" >> 스터디를 삭제하였습니다.");
   }

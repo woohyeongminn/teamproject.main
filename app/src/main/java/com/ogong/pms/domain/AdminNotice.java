@@ -1,10 +1,8 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-@SuppressWarnings("serial")
-public class AdminNotice implements Serializable{
+public class AdminNotice {
   private int adminNotiNo; // 공지게시판 번호
   private String adminNotiTitle; // 공지게시판 제목
   private String adminNotiContent; // 공지게시판 내용

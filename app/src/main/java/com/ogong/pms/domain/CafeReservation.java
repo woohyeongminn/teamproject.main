@@ -1,11 +1,9 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalTime;
 
-@SuppressWarnings("serial")
-public class CafeReservation implements Serializable{
+public class CafeReservation {
 
   private int reservationNo; // 예약 번호
   private int memberNo; // 예약 회원

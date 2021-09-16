@@ -1,11 +1,9 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@SuppressWarnings("serial")
-public class CeoMember implements Serializable{
+public class CeoMember {
 
   private int ceoNo; // 기업회원 넘버 
   private String ceoEmail;    //기업회원 이메일 - 회원가입, 로그인 할 때 필요

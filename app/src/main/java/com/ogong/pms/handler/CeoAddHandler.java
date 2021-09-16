@@ -13,11 +13,10 @@ public class CeoAddHandler extends AbstractCeoHandler {
   public CeoAddHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);
 
-    //  CeoMember ceoMember = new CeoMember();
+    //    CeoMember ceoMember = new CeoMember();
     //
     //    ceoMember.setCeoNo(1);
     //    ceoMember.setCeoEmail("study1");
-    //    ceoMember.setCeoBossName("내가사장");
     //    ceoMember.setCeoPassword("1111");
     //    ceoMember.setCeoPhoto("a.jpg");
     //    ceoMember.setCeoLicenseNo("123-45-12345");
@@ -30,7 +29,6 @@ public class CeoAddHandler extends AbstractCeoHandler {
     //
     //    ceoMember.setCeoNo(2);
     //    ceoMember.setCeoEmail("study2");
-    //    ceoMember.setCeoBossName("오호라스터디");
     //    ceoMember.setCeoPassword("1111");
     //    ceoMember.setCeoPhoto("bbb.jpg");
     //    ceoMember.setCeoLicenseNo("123-45-67812");
@@ -43,7 +41,6 @@ public class CeoAddHandler extends AbstractCeoHandler {
     //
     //    ceoMember.setCeoNo(3);
     //    ceoMember.setCeoEmail("study3");
-    //    ceoMember.setCeoBossName("엄스네공부방");
     //    ceoMember.setCeoPassword("1111");
     //    ceoMember.setCeoPhoto("ccc.jpg");
     //    ceoMember.setCeoLicenseNo("123-45-48751");

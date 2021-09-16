@@ -1,11 +1,9 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 
-@SuppressWarnings("serial")
-public class ToDo implements Serializable{
+public class ToDo {
   private int todoNo;           // 투두리스트 번호
   private String todoTitle;     // 투두리스트 제목
   private String todoContent;   // 투두리스트 내용

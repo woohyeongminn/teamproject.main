@@ -1,10 +1,8 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 
-@SuppressWarnings("serial")
-public class CafeReview implements Serializable{
+public class CafeReview {
 
   int reviewNo; // 리뷰 번호
   String content; // 리뷰 내용

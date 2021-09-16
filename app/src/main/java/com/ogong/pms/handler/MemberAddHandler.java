@@ -1,7 +1,6 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
@@ -20,7 +19,6 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
     //    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    //    testMember.setPerMyStudy(new ArrayList<>());
     //    memberList.add(testMember);
     //
     //    testMember = new Member();
@@ -30,7 +28,6 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
     //    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    //    testMember.setPerMyStudy(new ArrayList<>());
     //    memberList.add(testMember);
     //
     //    testMember = new Member();
@@ -40,7 +37,6 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
     //    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    //    testMember.setPerMyStudy(new ArrayList<>());
     //    memberList.add(testMember);
     //
     //    testMember = new Member();
@@ -50,7 +46,6 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
     //    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    //    testMember.setPerMyStudy(new ArrayList<>());
     //    memberList.add(testMember);
     //
     //    testMember = new Member();
@@ -60,7 +55,6 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
     //    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    //    testMember.setPerMyStudy(new ArrayList<>());
     //    memberList.add(testMember);
     //
     //    testMember = new Member();
@@ -70,7 +64,6 @@ public class MemberAddHandler extends AbstractMemberHandler {
     //    testMember.setPerPassword("1111");
     //    testMember.setPerPhoto("jpg");
     //    testMember.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    //    testMember.setPerMyStudy(new ArrayList<>());
     //    memberList.add(testMember);
   }
 
@@ -131,7 +124,6 @@ public class MemberAddHandler extends AbstractMemberHandler {
       break;
     }
 
-    member.setPerMyStudy(new ArrayList<>());
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     member.setPerNo(perNo++);
     memberList.add(member);

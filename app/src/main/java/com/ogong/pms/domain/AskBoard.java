@@ -1,11 +1,9 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@SuppressWarnings("serial")
-public class AskBoard implements Serializable{
+public class AskBoard {
   private int askNo; // 문의게시판 번호
   private String askTitle; // 문의게시판 제목
   private String askContent; // 문의게시판 내용

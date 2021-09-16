@@ -32,12 +32,19 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     System.out.println("▶ 내 스터디 상세");
     System.out.println();
 
-    Member memeber = AuthPerMemberLoginHandler.getLoginUser();
-    for(Study study : memeber.getPerMyStudy()) {
-      if (study.getStudyTitle() == null) {
-        System.out.println(" >> 가입된 스터디가 없습니다.");
-        return;
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    int myStudyCount = 0;
+
+    for (int i = 0; i < studyList.size(); i++) {
+      if (studyList.get(i).getMemberNames().contains(member.getPerNickname()) ||
+          studyList.get(i).getOwner().getPerNickname().equals(member.getPerNickname())) {
+        myStudyCount++;
       }
+    }
+
+    if(myStudyCount == 0) {
+      System.out.println(" >> 가입된 스터디가 없습니다.");
+      return;
     }
 
     int inputNo = Prompt.inputInt(" 번호  : ");
@@ -98,5 +105,4 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     }
   }
 
-  //  private void deleteO
 }

@@ -1,11 +1,8 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 
-@SuppressWarnings("serial")
-public class Member implements Serializable{
+public class Member {
 
   private int perNo;
   private String perNickname;
@@ -13,13 +10,12 @@ public class Member implements Serializable{
   private String perPassword;
   private String perPhoto;
   private Date perRegisteredDate;
-  private List<Study> perMyStudy;
 
   @Override
   public String toString() {
     return "Member [perNo=" + perNo + ", perNickname=" + perNickname + ", perEmail=" + perEmail
         + ", perPassword=" + perPassword + ", perPhoto=" + perPhoto + ", perRegisteredDate="
-        + perRegisteredDate + ", perMyStudy=" + perMyStudy + "]";
+        + perRegisteredDate + "]";
   }
 
   public int getPerNo() {
@@ -69,34 +65,5 @@ public class Member implements Serializable{
   public void setPerRegisteredDate(Date perRegisteredDate) {
     this.perRegisteredDate = perRegisteredDate;
   }
-
-  public List<Study> getPerMyStudy() {
-    return perMyStudy;
-  }
-
-  public void setPerMyStudy(List<Study> perMyStudy) {
-    this.perMyStudy = perMyStudy;
-  }
-
-
-
-  //  private String ceo;
-  //  private int ceono;
-  //  private int ceoid;
-  //  private String ceoname;
-  //  private String ceopassword;
-  //  private String ceophoto;
-  //  private String ceo사업자등록번호;
-  //  private String ceo대표자명;
-  //  private String ceo점포명;
-  //  private String ceo점포주소상세주소;
-  //  private Date ceoregisteredDate;
-
-
-
-
-
-
-
 
 }

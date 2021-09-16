@@ -7,14 +7,20 @@ import static com.ogong.menu.Menu.CEO_LOGIN;
 import static com.ogong.menu.Menu.LOGOUT;
 //import static com.ogong.menu.Menu.CEO_LOGOUT;
 import static com.ogong.menu.Menu.PER_LOGIN;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.domain.Admin;
@@ -232,36 +238,37 @@ public class App {
   }
 
   void service() {
-    loadObjects("member.data3", memberList);
-    loadObjects("ceoMember.data3", ceoMemberList);
-    loadObjects("admin.data3", adminList);
-    loadObjects("adminNotice.data3" , adminNoticeList);
-    loadObjects("askBoard.data3", askBoardList);
-    loadObjects("cafe.data3", cafeList);
-    loadObjects("cafeReservation.data3", cafeReservationList);
-    loadObjects("cafeReview.data3", cafeReviewList);
-    loadObjects("cafeRoom.data3", cafeRoomList);
-    loadObjects("study.data3", studyList);
-    loadObjects("toDo.data3", toDoList);
-    loadObjects("calender.data3", calenderList);
-    loadObjects("freeBoard.data3", freeBoardList);
+
+    loadObjects("member.json", memberList, Member.class);
+    loadObjects("ceoMember.json", ceoMemberList, CeoMember.class);
+    loadObjects("admin.json", adminList, Admin.class);
+    loadObjects("adminNotice.json" , adminNoticeList, AdminNotice.class);
+    loadObjects("askBoard.json", askBoardList, AskBoard.class);
+    loadObjects("cafe.json", cafeList, Cafe.class);
+    loadObjects("cafeReservation.json", cafeReservationList, CafeReservation.class);
+    loadObjects("cafeReview.json", cafeReviewList, CafeReview.class);
+    loadObjects("cafeRoom.json", cafeRoomList, CafeRoom.class);
+    loadObjects("study.json", studyList, Study.class);
+    loadObjects("toDo.json", toDoList, ToDo.class);
+    loadObjects("calender.json", calenderList, Calender.class);
+    loadObjects("freeBoard.json", freeBoardList, FreeBoard.class);
 
     createMenu().execute();
     Prompt.close();
 
-    //    saveObjects("member.data3", memberList);  // MemberAddHandler
-    //    saveObjects("ceoMember.data3", ceoMemberList);   // CeoAddHandler
-    //    saveObjects("admin.data3", adminList); // AuthAdminLoginHandler
-    //    saveObjects("adminNotice.data3" , adminNoticeList);  // AdminNoticeAddHandler
-    //    saveObjects("askBoard.data3", askBoardList);  // AskBoardAddHandler
-    //    saveObjects("cafe.data3", cafeList); // CafeAddHandler
-    //    saveObjects("cafeReservation.data3", cafeReservationList);  // CafeMyReservationListHandler
-    //    saveObjects("cafeReview.data3", cafeReviewList);
-    //    saveObjects("cafeRoom.data3", cafeRoomList); // CafeDetailHandler 테스트값 : 2021-10-10
-    //    saveObjects("study.data3", studyList);   // StudyAddHandler
-    //    saveObjects("toDo.data3", toDoList);  // MyStudyToDo
-    //    saveObjects("calender.data3", calenderList); // MyStudyCalender
-    //    saveObjects("freeBoard.data3", freeBoardList); // MyStudyFreeBoard
+    //    saveObjects("member.json", memberList);  // MemberAddHandler
+    //    saveObjects("askBoard.json", askBoardList);  // AskBoardAddHandler
+    //    saveObjects("study.json", studyList);   // StudyAddHandler
+    //    saveObjects("freeBoard.json", freeBoardList); // MyStudyFreeBoard
+    //    saveObjects("ceoMember.json", ceoMemberList);   // CeoAddHandler
+    //    saveObjects("admin.json", adminList); // AuthAdminLoginHandler
+    //    saveObjects("adminNotice.json" , adminNoticeList);  // AdminNoticeAddHandler
+    //    saveObjects("cafe.json", cafeList); // CafeAddHandler
+    //    saveObjects("cafeReservation.json", cafeReservationList);  // CafeMyReservationListHandler
+    //    saveObjects("cafeReview.json", cafeReviewList);
+    //    saveObjects("cafeRoom.json", cafeRoomList); // CafeDetailHandler 테스트값 : 2021-10-10
+    //    saveObjects("toDo.json", toDoList);  // MyStudyToDo
+    //    saveObjects("calender.json", calenderList); // MyStudyCalender
 
   }
 
@@ -291,37 +298,55 @@ public class App {
     return mainMenuGroup;
   }
 
-  //파일 입출력 -----------------------------------------------------------------------
-  @SuppressWarnings("unchecked")
-  private <E> void loadObjects(String filepath, List<E> list) {
-    try (ObjectInputStream in = new ObjectInputStream(
-        new FileInputStream(filepath))) {
 
-      list.addAll((List<E>) in.readObject());
-
-      System.out.printf("%s 파일 로딩 완료!\n", filepath);
-
-    } catch (Exception e) {
-      System.out.printf("%s 파일에서 데이터를 읽어 오는 중 오류 발생!\n", filepath);
-      e.printStackTrace();
-    }
-  }
-
+  // JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
   @SuppressWarnings("unused")
-  private <E> void saveObjects(String filepath, List<E> list) {
-    try (ObjectOutputStream out = new ObjectOutputStream(
-        new FileOutputStream(filepath))) {
+  private <E> void loadObjects(
+      String filepath, // 데이터를 읽어 올 파일 경로 
+      List<E> list, // 로딩한 데이터를 객체로 만든 후 저장할 목록 
+      Class<E> domainType // 생성할 객체의 타입정보
+      ) {
 
-      out.writeObject(list);
+    // CSV 형식으로 저장된 게시글 데이터를 파일에서 읽어 객체에 담는다. 
+    try (BufferedReader in = new BufferedReader(
+        new FileReader(filepath, Charset.forName("UTF-8")))) {
 
-      System.out.printf("%s 파일 저장 완료!\n", filepath);
+      StringBuilder strBuilder = new StringBuilder();
+      String str;
+      while ((str = in.readLine()) != null) { // 파일 전체를 읽는다.
+        strBuilder.append(str);
+      }
+
+      // *StringBuilder로 읽어온 JSON 문자열을 객체로 바꾼다.
+      Type type = TypeToken.getParameterized(Collection.class, domainType).getType();
+      Collection<E> collection = new Gson().fromJson(strBuilder.toString(), type);
+
+      // JSON 데이터로 읽어온 목록을 파라미터로 받은 List 에 저장한다.
+      list.addAll(collection);
+
+      System.out.printf("%s 데이터 로딩 완료!\n", filepath);
 
     } catch (Exception e) {
-      System.out.printf("%s 데이터를 파일에 저장 중 오류 발생!\n", filepath);
-      e.printStackTrace();
+      System.out.printf("%s 데이터 로딩 오류!\n", filepath);
     }
   }
 
+  // 객체를 JSON 형식으로 저장한다.
+  @SuppressWarnings("unused")
+  private void saveObjects(String filepath, List<?> list) {
+    try (PrintWriter out = new PrintWriter(
+        new BufferedWriter(
+            new FileWriter(filepath, Charset.forName("UTF-8"))))) {
+
+      out.print(new Gson().toJson(list));
+
+      System.out.printf("%s 데이터 출력 완료!\n", filepath);
+
+    } catch (Exception e) {
+      System.out.printf("%s 데이터 출력 오류!\n", filepath);
+      e.printStackTrace();
+    }
+  }
 
   // -----------------------------------------------------------------------------------------------
   // 관리자 메인

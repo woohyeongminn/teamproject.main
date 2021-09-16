@@ -1,11 +1,9 @@
 package com.ogong.pms.domain;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@SuppressWarnings("serial")
-public class FreeBoard implements Serializable{
+public class FreeBoard {
 
   private int freeBoardNo;              //글 번호
   private String freeBoardTitle;        //글 제목

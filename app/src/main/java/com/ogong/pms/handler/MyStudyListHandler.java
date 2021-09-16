@@ -43,11 +43,6 @@ public class MyStudyListHandler extends AbstractStudyHandler {
         joinCount++;
       }
     }
-    //    for (Study perStudy : member.getPerMyStudy()) {
-    //      System.out.printf(" (%s)\n [%s]\n", perStudy.getStudyNo(), perStudy.getStudyTitle());
-    //      System.out.println();
-    //      joinCount++;
-    //    }
 
     if(joinCount == 0) {
       System.out.println(" 가입한 스터디가 없습니다.\n");

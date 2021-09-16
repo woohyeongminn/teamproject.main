@@ -35,7 +35,6 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    testStudy.setMyStudyFreeBoard(new ArrayList<>());
     //    testStudy.setMyStudyToDo(new ArrayList<>());
     //    studyList.add(testStudy);
-    //    promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
     //    testStudy.setStudyNo(2);
@@ -52,7 +51,6 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    testStudy.setMyStudyFreeBoard(new ArrayList<>());
     //    testStudy.setMyStudyToDo(new ArrayList<>());
     //    studyList.add(testStudy);
-    //    promptPerMember.memberList.get(0).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
     //    testStudy.setStudyNo(3);
@@ -69,7 +67,6 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    testStudy.setMyStudyFreeBoard(new ArrayList<>());
     //    testStudy.setMyStudyToDo(new ArrayList<>());
     //    studyList.add(testStudy);
-    //    promptPerMember.memberList.get(1).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
     //    testStudy.setStudyNo(4);
@@ -86,7 +83,6 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    testStudy.setMyStudyFreeBoard(new ArrayList<>());
     //    testStudy.setMyStudyToDo(new ArrayList<>());
     //    studyList.add(testStudy);
-    //    promptPerMember.memberList.get(2).getPerMyStudy().add(testStudy);
     //
     //    testStudy = new Study();
     //    testStudy.setStudyNo(5);
@@ -103,7 +99,6 @@ public class StudyAddHandler extends AbstractStudyHandler {
     //    testStudy.setMyStudyFreeBoard(new ArrayList<>());
     //    testStudy.setMyStudyToDo(new ArrayList<>());
     //    studyList.add(testStudy);
-    //    promptPerMember.memberList.get(3).getPerMyStudy().add(testStudy);
 
   }
 
@@ -135,7 +130,6 @@ public class StudyAddHandler extends AbstractStudyHandler {
     }
     System.out.println(" >> 스터디가 등록되었습니다.");
     studyList.add(study);
-    member.getPerMyStudy().add(study);
 
   }
 }

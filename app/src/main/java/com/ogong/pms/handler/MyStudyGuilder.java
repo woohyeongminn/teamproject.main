@@ -40,8 +40,6 @@ public class MyStudyGuilder  {
           if (watingMember.getPerNickname().equals(input)) {
             myStudy.getMembers().add(watingMember);
             System.out.printf("'%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
-            List<Study> studyList = watingMember.getPerMyStudy();
-            studyList.add(myStudy);
             m = watingMember;
           }
         }

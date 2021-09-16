@@ -75,55 +75,6 @@ public abstract class AbstractStudyHandler implements Command {
     //    }
   }
 
-  //  // 스터디 구성원 목록
-  //  protected void listMember(Study study) {
-  //    System.out.println();
-  //    System.out.println("▶ 구성원 보기");
-  //    System.out.println();
-  //
-  //    Member member = AuthPerMemberLoginHandler.getLoginUser();
-  //
-  //    if (member == null ) {
-  //      System.out.println("로그인 한 회원만 조회 가능합니다.");
-  //      return;
-  //    }
-  //
-  //    System.out.println(" >> 스터디 구성원");
-  //    System.out.println(" 조  장 : " + study.getOwner().getPerNickname());
-  //    System.out.println(" 구성원 : " + study.getMemberNames());
-  //
-  //    System.out.println();
-  //    System.out.println(">> 승인 대기중");
-  //    if(study.getWatingMemberNames().isEmpty()) {
-  //      System.out.println(" 승인 대기중인 회원이 없습니다.");
-  //    }
-  //    System.out.println(study.getWatingMemberNames());
-  //
-  //    List<Member> waitingMembers = study.getWatingMember();
-  //
-  //    if (member != null && study.getOwner().getPerEmail().equals(member.getPerEmail())) {
-  //      System.out.println();
-  //      if (!study.getWatingMemberNames().equals("")) {
-  //        String input = Prompt.inputString("대기중인 회원 중 승인할 닉네임을 입력하세요 : ");
-  //        Member m = new Member();
-  //
-  //        for (Member watingMember : waitingMembers) {        
-  //          if (watingMember.getPerNickname().equals(input)) {
-  //            study.getMembers().add(watingMember);
-  //            System.out.printf("'%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
-  //            List<Study> studyList = watingMember.getPerMyStudy();
-  //            studyList.add(study);
-  //            m = watingMember;
-  //          }
-  //        }
-  //        if (m != null) {
-  //          study.getWatingMember().remove(m);
-  //        }
-  //        return;
-  //      }
-  //    }
-  //  }
-
   // 스터디 가입
   protected void joinStudy(Study study) {
     System.out.println();
@@ -132,18 +83,8 @@ public abstract class AbstractStudyHandler implements Command {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    if (member == null) {
-      System.out.println("로그인 한 회원만 신청 가능합니다.");
-      return;
-    }
-
-    if(study.getOwner().getPerNickname().equals(member.getPerNickname())) {
-      System.out.println("조장은 신청할 수 없습니다.");
-      return;
-    }
-
-    for (Study myStudy : member.getPerMyStudy()) {
-      if (myStudy.getStudyTitle().equals(study.getStudyTitle())) {
+    for (Member pM : study.getMembers()) {
+      if (pM.getPerNickname().equals(member.getPerNickname())) {
         System.out.println("이미 참여 중인 스터디입니다.");
         return;
       }
@@ -191,13 +132,15 @@ public abstract class AbstractStudyHandler implements Command {
     return null;
   }
 
-  // 내 스터디에서만 번호 찾기
+  //내 스터디에서만 번호 찾기
   protected Study findByMyStudyNo(int inputNo) {
-    Member memeber = AuthPerMemberLoginHandler.getLoginUser();
+
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     try {
       for (int i = 0; i < studyList.size(); i++) {
-        if (memeber.getPerMyStudy().get(i).getStudyNo() == inputNo) {
+        if (studyList.get(i).getMemberNames().contains(member.getPerNickname()) ||
+            studyList.get(i).getOwner().getPerNickname().equals(member.getPerNickname())) {
           return findByNo(inputNo);
         }
       }
