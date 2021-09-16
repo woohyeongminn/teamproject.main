@@ -119,10 +119,6 @@ public class App {
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
   PromptCeoMember promptCeoMember = new PromptCeoMember(ceoMemberList);
 
-
-  //CeoMemberHandler ceoMemberHandler = new CeoMemberHandler(ceoMemberList);
-  //MyStudyHandler myStudyHandler = new MyStudyHandler(studyList, studyHandler);
-
   class MenuItem extends Menu {
     String menuId;
 
