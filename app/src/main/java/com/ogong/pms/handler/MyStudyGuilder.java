@@ -7,6 +7,8 @@ import com.ogong.util.Prompt;
 
 public class MyStudyGuilder  {
 
+
+
   // 스터디 구성원 목록
   protected void listGuilder(Study myStudy) {
     System.out.println();

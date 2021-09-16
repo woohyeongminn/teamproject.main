@@ -12,7 +12,8 @@ public abstract class AbstractCeoHandler implements Command {
     this.ceoMemberList = ceoMemberList;
   }
 
-  public void detail() {
+  // 관리자용
+  public void adminCeoMemberdetail() {
     System.out.println();
     System.out.println("▶ 기업회원 상세");
     int inputceoEmail = Prompt.inputInt(" 번호 : ");
@@ -33,7 +34,8 @@ public abstract class AbstractCeoHandler implements Command {
     System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
   }
 
-  public void update() {
+  //관리자용
+  public void adminCeoMemberupdate() {
     System.out.println();
     System.out.println("▶ 기업회원 변경"); 
     int inputceoEmail = Prompt.inputInt(" 번호 : ");
@@ -47,10 +49,9 @@ public abstract class AbstractCeoHandler implements Command {
     }
 
     String ceoBossName = Prompt.inputString(" 대표자명(" + ceoMember.getCeoBossName()  + ") : ");
+    String ceophoto = Prompt.inputString(" 사진(" + ceoMember.getCeoPhoto()  + ") : ");
     String ceoEmail = Prompt.inputString(" 이메일(" + ceoMember.getCeoEmail() + ") : ");
-    String ceoPassword = Prompt.inputString(" 비밀번호? ");
-    //String ceoStoreName = Prompt.inputString(" 점포명(" + ceoMember.getCeoStoreName() + ") : ");
-    //String ceoStoreDetailAddress = Prompt.inputString("점포주소(" + ceoMember.getCeoStoreDetailAddress() + ") : ");
+    String ceoPassword = Prompt.inputString(" 비밀번호(" + ceoMember.getCeoPassword() + ") : ");
 
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -60,13 +61,14 @@ public abstract class AbstractCeoHandler implements Command {
 
     ceoMember.setCeoBossName(ceoBossName);
     ceoMember.setCeoEmail(ceoEmail);
-    //ceoMember.setCeoPassword(ceoStoreName);
-    //ceoMember.setCeoPhoto(ceoStoreDetailAddress);
+    ceoMember.setCeoPassword(ceoPassword);
+    ceoMember.setCeoPhoto(ceophoto);
 
     System.out.println(" >> 기업 회원 정보를 변경하였습니다.");
   }
 
-  public void delete() {
+  //관리자용
+  public void adminCeoMemberdelete() {
     System.out.println();
     System.out.println("▶ 기업회원 탈퇴");
     int inputceoEmail = Prompt.inputInt(" 번호 : ");

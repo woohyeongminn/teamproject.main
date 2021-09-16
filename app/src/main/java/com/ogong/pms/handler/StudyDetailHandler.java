@@ -6,11 +6,13 @@ import com.ogong.util.Prompt;
 
 public class StudyDetailHandler extends AbstractStudyHandler {
 
+  MyStudyDetailHandler myStudyDetailHandler;
 
   public StudyDetailHandler(List<Study> studyList) {
     super(studyList);
   }
 
+  @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 스터디 상세");

@@ -37,9 +37,9 @@ public class CeoListHandler extends AbstractCeoHandler  {
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
-      case 1: detail(); break;
-      case 2: update(); break;
-      case 3: delete(); break;
+      case 1: adminCeoMemberdetail(); break;
+      case 2: adminCeoMemberupdate(); break;
+      case 3: adminCeoMemberdelete(); break;
       default : return;
     }
   }
