@@ -8,6 +8,7 @@ import com.ogong.util.Prompt;
 public class MyStudyUpdateHandler extends AbstractStudyHandler {
 
 
+
   public MyStudyUpdateHandler(List<Study> newStudyList) {
     super(newStudyList);
   }
@@ -32,9 +33,19 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
     }
 
     String studyTitle = Prompt.inputString(" 스터디명(" + myStudy.getStudyTitle()  + ") : ");
-    String face = Prompt.inputString(" 대면(" + myStudy.getFace() + ")? ");
+    String face = Prompt.inputString(" 대면(" + myStudy.getFace() + ") : ");
     String introduction = Prompt.inputString(" 소개글(" + myStudy.getIntroduction() + ") : ");
-    // 인원수 변경 넣을지 말지 > 현재 참여중인 인원보다는 적게 수정할수 없음
+
+    int nop;
+    while (true) {
+      nop = Prompt.inputInt(" 인원수(" + myStudy.getNumberOfPeple() + ") : ");
+      if (nop < myStudy.getNumberOfPeple()) {
+        System.out.println(" 현재 참여 중인 인원보다 적게 수정할 수 없습니다.");
+        continue;
+      }
+      break;
+    }
+
     System.out.println();
     String input = Prompt.inputString(" 정말 수정하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -45,6 +56,7 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
     myStudy.setStudyTitle(studyTitle);
     myStudy.setFace(face);
     myStudy.setIntroduction(introduction);
+    myStudy.setNumberOfPeple(nop);
 
     System.out.println(" >> 스터디가 수정되었습니다.");
   }

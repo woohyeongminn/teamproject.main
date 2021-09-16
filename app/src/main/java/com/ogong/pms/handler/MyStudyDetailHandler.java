@@ -42,7 +42,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
     int inputNo = Prompt.inputInt(" 번호  : ");
 
-    Study myStudy = findByMyStudyNo(inputNo);
+    Study myStudy = findByMyStudyNo(inputNo); 
 
     if (myStudy == null) {
       return;
@@ -79,8 +79,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
       System.out.println("3. To-do");
       System.out.println("4. 자유게시판");
       System.out.println("5. 화상미팅");
-      System.out.println("6. 수정하기");
-      System.out.println("7. 삭제 & 탈퇴하기");
+      System.out.println("6. 탈퇴하기");  // 메서드
       // 스터디 삭제는 되는데 탈퇴하기가 없음
       // 구성원은 탈퇴만 해야함, 조장은 스터디삭제도 할수 있음
 
@@ -93,8 +92,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
         case 3: myStudyToDo.listToDo(myStudy); break;
         case 4: myStudyFreeBoard.listFreeBoard(commentList, myStudy); break;
         case 5:  MyStudyCheating.cheat() ;  // 임시로 넣었음
-        case 6: myStudyCalender.listCalender(myStudy); break;     // 구현 덜 했음
-        case 7: myStudyCalender.listCalender(myStudy); break;   // 삭제/탈퇴 구현 덜 했음
+        case 6: /* 탈퇴 메서드 구현 예정 */; break;     
         default : return;
       }
     }

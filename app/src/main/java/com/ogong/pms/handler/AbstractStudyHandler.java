@@ -198,8 +198,7 @@ public abstract class AbstractStudyHandler implements Command {
     try {
       for (int i = 0; i < studyList.size(); i++) {
         if (memeber.getPerMyStudy().get(i).getStudyNo() == inputNo) {
-          Study study = memeber.getPerMyStudy().get(i);
-          return study;
+          return findByNo(inputNo);
         }
       }
     } catch (Exception e) {

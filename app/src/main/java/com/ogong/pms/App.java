@@ -406,7 +406,7 @@ public class App {
   // -----------------------------------------------------------------------------------------------
   // 개인 회원 메인
   Menu createMemberMenu() {
-    MenuGroup userMenuGroup = new MenuGroup("개인"); 
+    MenuGroup userMenuGroup = new MenuGroup("오늘의 공부"); 
 
     userMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/member/add"));
     userMenuGroup.add(new MenuItem("로그아웃", PER_LOGIN, "/member/logout"));
@@ -513,7 +513,7 @@ public class App {
 
   // 기업
   Menu createCeoMenu() {
-    MenuGroup ceoMemberMenuGroup = new MenuGroup("기업");
+    MenuGroup ceoMemberMenuGroup = new MenuGroup("오늘의 공부 - 사장님");
 
     ceoMemberMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/ceoMember/add"));
     ceoMemberMenuGroup.add(new MenuItem("로그인", LOGOUT, "/ceoMember/login"));
