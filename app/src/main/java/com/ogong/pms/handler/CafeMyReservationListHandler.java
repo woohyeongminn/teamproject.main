@@ -14,6 +14,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   PromptPerMember promptPerMember;
   List<CafeRoom> roomList;
+  int reviewNo = 1; // 리뷰번호
 
   public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
       List<CafeReservation> reserList, PromptPerMember promptPerMember,
@@ -123,6 +124,48 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     } else {
       System.out.println(" >> 이용 후 다음 날부터 작성 가능합니다.");
       return;
+    }
+  }
+
+  protected void addReview(CafeReservation cafeReser) {
+    System.out.println();
+    System.out.println("▶ 리뷰 등록하기");
+
+    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
+      System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
+    } else {
+
+      Cafe cafe = findByNo(cafeReser.getCafe().getNo());
+
+      CafeReview cafeReview = new CafeReview();
+
+      String content = Prompt.inputString(" 리뷰 내용 : ");
+      int grade = Prompt.inputInt(" 별점(0~5점) : ");
+      while (grade < 0 || grade > 5) {
+        System.out.println(" 별점을 다시 입력해 주세요.");
+        grade = Prompt.inputInt(" 별점(0~5점) : ");
+      }
+      Member member = AuthPerMemberLoginHandler.getLoginUser();
+      Date registeredDate = new Date(System.currentTimeMillis());
+
+      String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
+      if (!input.equalsIgnoreCase("네")) {
+        System.out.println(" >> 리뷰 등록을 취소하였습니다.");
+        return;
+      }
+
+      cafeReview.setReviewNo(reviewNo++);
+      cafeReview.setContent(content);
+      cafeReview.setGrade(grade);
+      cafeReview.setCafe(cafe);
+      cafeReview.setMember(member);
+      cafeReview.setRegisteredDate(registeredDate);
+      cafeReview.setReviewStatus(0);
+
+      reviewList.add(cafeReview);
+      cafeReser.setWirteReview(true);
+
+      System.out.println(" >> 리뷰가 등록되었습니다.");
     }
   }
 

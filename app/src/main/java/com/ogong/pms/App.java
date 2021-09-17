@@ -110,7 +110,7 @@ public class App {
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
   List<Comment> commentList = new ArrayList<>();
-  List<CafeRoom> cafeRoomList = new  ArrayList<>();
+  List<CafeRoom> cafeRoomList = new ArrayList<>();
 
   // 해시맵 추가(0904)
   HashMap<String, Command> commandMap = new HashMap<>();
