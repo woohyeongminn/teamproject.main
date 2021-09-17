@@ -11,7 +11,7 @@ public class MemberUpdateHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 프로필 수정");
     System.out.println();

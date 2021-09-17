@@ -16,7 +16,7 @@ public class StudyDetailHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 스터디 상세");
     System.out.println();

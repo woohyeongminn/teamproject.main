@@ -13,7 +13,7 @@ public class StudyListHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 스터디 목록");
     System.out.println();

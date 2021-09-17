@@ -69,7 +69,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
 
   // 개인
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 회원가입");
     System.out.println();

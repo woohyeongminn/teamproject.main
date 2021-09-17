@@ -15,7 +15,7 @@ public class MemberDetailHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 프로필");
 
@@ -37,7 +37,7 @@ public class MemberDetailHandler extends AbstractMemberHandler {
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : commandMap.get("/member/update").execute(); break;
+      //case 1 : commandMap.get("/member/update").execute(); break;
       default : return;
     }
   }

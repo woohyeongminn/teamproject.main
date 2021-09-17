@@ -15,10 +15,11 @@ public class CeoUpdateHandler extends AbstractCeoMemberHandler {
 
   // 기업회원 개인정보 수정은 이름,이메일,비밀번호만 가능
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 기업 정보 변경"); 
     int inputceoNo = Prompt.inputInt(" 번호 : ");
+    int ni = (int) request.getAttribute("no");
     System.out.println();
 
     CeoMember ceoMember = promptCeoMember.findByCeoMemberNo(inputceoNo);
