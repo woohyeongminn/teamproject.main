@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class CeoDetailHandler extends AbstractCeoHandler {
+public class CeoDetailHandler extends AbstractCeoMemberHandler {
 
   public CeoDetailHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);

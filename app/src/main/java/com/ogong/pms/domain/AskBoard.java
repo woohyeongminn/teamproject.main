@@ -11,7 +11,8 @@ public class AskBoard {
   private CeoMember askCeoWriter = new CeoMember(); // 문의게시판 기업 작성자
   private int askVeiwCount; // 문의게시판 조회수
   private Date askRegisteredDate; // 문의게시판 등록일
-  private List<Comment> adminComment; // 문의게시판 관리자 댓글
+  private List<Comment> adminComment; // 문의게시판 관리자 (댓글)// 답변 1개!
+  // String type 으로....하는 것이 좋다!
 
   @Override
   public String toString() {

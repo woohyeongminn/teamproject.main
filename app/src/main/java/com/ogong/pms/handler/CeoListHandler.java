@@ -2,9 +2,8 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.util.Prompt;
 
-public class CeoListHandler extends AbstractCeoHandler  {
+public class CeoListHandler extends AbstractCeoMemberHandler  {
 
   public CeoListHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);
@@ -26,21 +25,21 @@ public class CeoListHandler extends AbstractCeoHandler  {
 
       System.out.println();
     }
-    selectUserModifyPage();
+    //selectUserModifyPage();
   }
 
-  private void selectUserModifyPage() {
-    System.out.println("1. 상세");
-    System.out.println("2. 수정");
-    System.out.println("3. 탈퇴");
-    System.out.println("0. 이전");
-
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      case 1: adminCeoMemberdetail(); break;
-      case 2: adminCeoMemberupdate(); break;
-      case 3: adminCeoMemberdelete(); break;
-      default : return;
-    }
-  }
+  //  private void selectUserModifyPage() {
+  //    System.out.println("1. 상세");
+  //    System.out.println("2. 수정");
+  //    System.out.println("3. 탈퇴");
+  //    System.out.println("0. 이전");
+  //
+  //    int selectAdminNo = Prompt.inputInt("선택> ");
+  //    switch (selectAdminNo) {
+  //      case 1: adminCeoMemberdetail(); break;
+  //      case 2: adminCeoMemberupdate(); break;
+  //      case 3: adminCeoMemberdelete(); break;
+  //      default : return;
+  //    }
+  //  }
 }

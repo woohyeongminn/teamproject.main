@@ -8,6 +8,7 @@ import com.ogong.util.Prompt;
 public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
 
   List<CeoMember> ceoMemberList;
+  PromptCeoMember promptCeoMember;
 
   static CeoMember loginCeoMember;
   public static CeoMember getLoginCeoMember() {
@@ -30,7 +31,7 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
     System.out.println();
     String inputEmail = Prompt.inputString(" 이메일 : ");
     String inputPassword = "";
-    CeoMember ceoMember = findByEmail(inputEmail);
+    CeoMember ceoMember = promptCeoMember.findByCeoMemberEmail(inputEmail);
 
     if (ceoMember == null) {
       System.out.println("\n >> 등록된 회원이 아닙니다.");
@@ -51,15 +52,6 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
       System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
       return;
     } 
-  }
-
-  private CeoMember findByEmail(String ceoEmail) {
-    for (CeoMember ceoMember : ceoMemberList) {
-      if (ceoMember.getCeoEmail().equals(ceoEmail)) {
-        return ceoMember;
-      }
-    }
-    return null;
   }
 
 }

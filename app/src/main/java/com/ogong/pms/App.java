@@ -36,7 +36,7 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminCafeControlHandler;
 import com.ogong.pms.handler.AdminCafeReviewListControlHandler;
-import com.ogong.pms.handler.AdminInfoHandler;
+import com.ogong.pms.handler.AdminDetailHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.AdminMemberDetailHandler;
 import com.ogong.pms.handler.AdminMemberUpdateHandler;
@@ -202,7 +202,7 @@ public class App {
     commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(promptPerMember));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
-    commandMap.put("/admin/info", new AdminInfoHandler(adminList));
+    commandMap.put("/admin/info", new AdminDetailHandler(adminList));
 
     commandMap.put("/study/add", new StudyAddHandler(studyList, toDoList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));

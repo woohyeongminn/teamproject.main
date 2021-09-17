@@ -7,7 +7,7 @@ import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class CeoMyCafeListHandler extends AbstractCeoHandler {
+public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
 
   List<Cafe> cafeList;
   List<CafeReview> reviewList;

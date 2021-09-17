@@ -35,7 +35,7 @@ public class CeoFindIdPwHandler implements Command {
     while (true) {
       System.out.println();
       String inputNick =  Prompt.inputString(" 닉네임 : ");
-      CeoMember ceoMember = promptCeoMember.getCeoByNick(inputNick);
+      CeoMember ceoMember = promptCeoMember.findByCeoMemberNick(inputNick);
       if (ceoMember == null) {
         System.out.println(" >> 해당 닉네임이 존재하지 않습니다.");
         return;
@@ -60,7 +60,7 @@ public class CeoFindIdPwHandler implements Command {
     while (true) {
       System.out.println();
       String inputEmail =  Prompt.inputString(" 이메일 : ");
-      CeoMember ceoMember = promptCeoMember.getCeoByEmail(inputEmail);
+      CeoMember ceoMember = promptCeoMember.findByCeoMemberEmail(inputEmail);
       if (ceoMember == null) {
         System.out.println(" >> 해당 이메일이 존재하지 않습니다.");
         continue;

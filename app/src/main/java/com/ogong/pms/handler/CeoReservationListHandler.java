@@ -4,7 +4,7 @@ import java.util.List;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CeoMember;
 
-public class CeoReservationListHandler extends AbstractCeoHandler {
+public class CeoReservationListHandler extends AbstractCeoMemberHandler {
 
   List<CafeReservation> reserList;
 

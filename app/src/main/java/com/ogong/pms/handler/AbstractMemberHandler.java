@@ -7,15 +7,7 @@ public abstract class AbstractMemberHandler implements Command {
 
   List<Member> memberList;
 
-
   public AbstractMemberHandler(List<Member> memberList) {
     this.memberList = memberList;
   }
 }
-
-
-
-
-
-
-

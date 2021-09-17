@@ -5,7 +5,7 @@ import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class CeoAddHandler extends AbstractCeoHandler {
+public class CeoAddHandler extends AbstractCeoMemberHandler {
 
   int ceoMemberNo = 4;
 
