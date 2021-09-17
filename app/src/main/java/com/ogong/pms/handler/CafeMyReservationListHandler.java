@@ -14,6 +14,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   PromptPerMember promptPerMember;
   List<CafeRoom> roomList;
+  int reviewNo = 1; // 리뷰번호
 
   public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
       List<CafeReservation> reserList, PromptPerMember promptPerMember,
