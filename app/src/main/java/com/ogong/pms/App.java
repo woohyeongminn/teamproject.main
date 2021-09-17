@@ -158,8 +158,6 @@ public class App {
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
     commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList));
 
-
-
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberList, commandMap));
