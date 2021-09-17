@@ -62,7 +62,7 @@ public class MyStudyCalender {
       month = Prompt.inputInt(" 월(1~12) : ");
       if (month > 12) {
         System.out.println("\n >> 등록할 수 없는 '일'입니다.");
-        System.out.println("    다시 등록해주세요.");
+        System.out.println("    다시 등록해 주세요.");
         continue;
       }
       break;
@@ -121,7 +121,7 @@ public class MyStudyCalender {
     calender.setEndDay(inputEndDate);
 
     String input = Prompt.inputString("\n 등록하시겠습니까? (네 / 아니오) ");
-    if (!input.equals("네")) {
+    if (!input.equals(" 네")) {
       System.out.println(" >> 등록을 취소하였습니다.");
       return;
     }
@@ -298,7 +298,7 @@ public class MyStudyCalender {
     String updateImportant = stateImportant();
 
     if (updateImportant == null) {
-      System.out.println(" 입력 오류 입니다.");
+      System.out.println(" 입력 오류입니다.");
       return;
     }
 
