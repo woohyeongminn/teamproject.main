@@ -9,9 +9,12 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
+  PromptCafe promptcafe;
+
   public CafeMyReviewListHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
-      List<CafeReservation> reserList) {
+      List<CafeReservation> reserList, PromptCafe promptcafe) {
     super (cafeList, reviewList, reserList);
+    this.promptcafe = promptcafe;
   }
 
   @Override
@@ -36,7 +39,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
           count++;
           continue;
         }
-        Cafe cafe = findByNo(cafeReview.getCafe().getNo());
+        Cafe cafe = promptcafe.findByCafeNo(cafeReview.getCafe().getNo());
         System.out.printf(" (%d)\n [%s]\n 별점 : %s\n 내용 : %s\n 등록일 : %s\n",
             cafeReview.getReviewNo(), cafe.getName()
             , getReviewGradeStatusLabel(cafeReview.getGrade()),

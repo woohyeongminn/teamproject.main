@@ -23,6 +23,12 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     System.out.println("▶ 문의사항 상세");
     System.out.println();
 
+    if (AuthPerMemberLoginHandler.getLoginUser() == null ||
+        AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
+      System.out.println(" >> 로그인 하세요.");
+      return;
+    }
+
     int askNo = Prompt.inputInt(" 번호 : ");
 
     AskBoard askBoard = findByNo(askNo);

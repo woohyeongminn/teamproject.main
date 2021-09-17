@@ -88,8 +88,10 @@ import com.ogong.pms.handler.MyStudyGuilder;
 import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.MyStudyToDo;
 import com.ogong.pms.handler.MyStudyUpdateHandler;
+import com.ogong.pms.handler.PromptCafe;
 import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
+import com.ogong.pms.handler.PromptStudy;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyDetailHandler;
 import com.ogong.pms.handler.StudyListHandler;
@@ -117,6 +119,8 @@ public class App {
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
   PromptCeoMember promptCeoMember = new PromptCeoMember(ceoMemberList);
+  PromptCafe promptcafe = new PromptCafe(cafeList, cafeReviewList);
+  PromptStudy promptStudy = new PromptStudy(studyList);
 
   class MenuItem extends Menu {
     String menuId;
@@ -178,20 +182,22 @@ public class App {
     commandMap.put("/cafe/list", 
         new CafeListHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
     commandMap.put("/cafe/detail",
-        new CafeDetailHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList));
+        new CafeDetailHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
     commandMap.put("/cafe/update",
-        new CafeUpdateHandler(cafeList, cafeReviewList, cafeReservationList));
+        new CafeUpdateHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe));
     commandMap.put("/cafe/delete",
-        new CafeDeleteHandler(cafeList, cafeReviewList, cafeReservationList));
+        new CafeDeleteHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe));
     commandMap.put("/cafe/search", 
         new CafeSearchHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
     commandMap.put("/cafe/reservationList",
-        new CafeMyReservationListHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList));
+        new CafeMyReservationListHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
     commandMap.put("/cafe/myReviewList", 
-        new CafeMyReviewListHandler(cafeList, cafeReviewList, cafeReservationList));
+        new CafeMyReviewListHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe));
 
-    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember));
-    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, cafeReviewList, cafeReservationList)); 
+    commandMap.put("/cafe/control",
+        new AdminCafeControlHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, promptcafe));
+    commandMap.put("/cafe/reviewList",
+        new AdminCafeReviewListControlHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe)); 
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
@@ -210,7 +216,7 @@ public class App {
 
     commandMap.put("/study/add", new StudyAddHandler(studyList, toDoList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));
-    commandMap.put("/study/detail", new StudyDetailHandler(studyList));
+    commandMap.put("/study/detail", new StudyDetailHandler(studyList, promptStudy));
     commandMap.put("/study/search", new StudySearchHandler(studyList));
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
 

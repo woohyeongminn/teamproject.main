@@ -8,16 +8,19 @@ import com.ogong.util.Prompt;
 
 public class CafeDeleteHandler extends AbstractCafeHandler {
 
+  PromptCafe promptcafe;
+
   public CafeDeleteHandler (
-      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList, PromptCafe promptcafe) {
     super (cafeList, reviewList, reserList);
+    this.promptcafe = promptcafe;
   }
 
   @Override
   public void execute() {
     System.out.println();
     System.out.println("▶ 장소 삭제");
-    Cafe cafe = findByNo(Prompt.inputInt(" 장소 번호 : "));
+    Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
 
     if (cafe == null) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");

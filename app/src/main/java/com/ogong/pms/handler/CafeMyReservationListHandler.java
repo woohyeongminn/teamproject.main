@@ -12,17 +12,19 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
+  PromptCafe promptcafe;
   PromptPerMember promptPerMember;
   List<CafeRoom> roomList;
   int reviewNo = 1; // 리뷰번호
 
   public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
       List<CafeReservation> reserList, PromptPerMember promptPerMember,
-      List<CafeRoom> roomList) {
+      List<CafeRoom> roomList, PromptCafe promptcafe) {
 
     super (cafeList, reviewList, reserList);
     this.promptPerMember = promptPerMember;
     this.roomList = roomList;
+    this.promptcafe = promptcafe;
 
     //    CafeReservation reservation = new CafeReservation();
     //    reservation.setReservationNo(1);
@@ -135,7 +137,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
       System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
     } else {
 
-      Cafe cafe = findByNo(cafeReser.getCafe().getNo());
+      Cafe cafe = promptcafe.findByCafeNo(cafeReser.getCafe().getNo());
 
       CafeReview cafeReview = new CafeReview();
 
@@ -212,7 +214,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
       Member cafeReserMember = promptPerMember.findByMemberNo(cafeReser.getMember().getPerNo());
 
       if (cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
-        Cafe cafeReserCafe = findByNo(cafeReser.getCafe().getNo());
+        Cafe cafeReserCafe = promptcafe.findByCafeNo(cafeReser.getCafe().getNo());
         CafeRoom cafeRoom = getCafeRoomName(cafeReser.getRoomNo());
         myReserList.add(cafeReser);
         if (cafeReser.getUseMemberNumber() == 0) {

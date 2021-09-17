@@ -8,9 +8,12 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
 
+  PromptCafe promptcafe;
+
   public AdminCafeReviewListControlHandler(
-      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
+      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList, PromptCafe promptcafe) {
     super (cafeList, reviewList, reserList);
+    this.promptcafe = promptcafe;
   }
 
   @Override
@@ -23,7 +26,7 @@ public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
     for (CafeReview cafeReview : reviewList) {
       //      if (cafeReview.getMember().getPerNickname() 
       //          != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
-      Cafe cafe = findByNo(cafeReview.getCafe().getNo());
+      Cafe cafe = promptcafe.findByCafeNo(cafeReview.getCafe().getNo());
       System.out.printf(" (%d)\n [%s]\n 별점 : %d\n 내용 : %s\n 등록일 : %s\n",
           cafeReview.getReviewNo(), cafe.getName(), cafeReview.getGrade(),
           cafeReview.getContent(), cafeReview.getRegisteredDate());
@@ -57,7 +60,7 @@ public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
 
     int userReviewNo = Prompt.inputInt(" 번호 : ");
 
-    CafeReview cafeReview = findByReview(userReviewNo);
+    CafeReview cafeReview = promptcafe.findByCafeReview(userReviewNo);
 
     if (cafeReview == null) {
       System.out.println(" >> 리뷰 번호를 잘못 선택하셨습니다.");

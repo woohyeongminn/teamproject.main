@@ -38,30 +38,5 @@ public abstract class AbstractCafeHandler implements Command {
     }
   }
 
-  protected Cafe findByNo(int no) {
-    for (Cafe cafe : cafeList) {
-      if (cafe.getNo() == no && cafe.getCafeStatus() != 0 && cafe.getCafeStatus() != 3) {
-        return cafe;
-      }
-    }
-    return null;
-  }
 
-  protected Cafe findByName(String name) {
-    for (Cafe cafe : cafeList) {
-      if (cafe.getName().equals(name) && cafe.getCafeStatus() != 0 && cafe.getCafeStatus() != 3) {
-        return cafe;
-      }
-    }
-    return null;
-  }
-
-  protected CafeReview findByReview (int reviewNo) {
-    for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getReviewNo() == reviewNo) {
-        return cafeReview;
-      }
-    }
-    return null;
-  }
 }

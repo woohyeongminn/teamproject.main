@@ -9,11 +9,14 @@ import com.ogong.util.Prompt;
 public class AdminCafeControlHandler extends AbstractCafeHandler {
 
   PromptPerMember promptPerMember;
+  PromptCafe promptcafe;
 
   public AdminCafeControlHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
-      List<CafeReservation> reserList, PromptPerMember promptPerMember) {
+      List<CafeReservation> reserList, PromptPerMember promptPerMember, 
+      PromptCafe promptcafe) {
     super (cafeList, reviewList, reserList);
     this.promptPerMember = promptPerMember;
+    this.promptcafe = promptcafe;
   }
 
   @Override
@@ -55,7 +58,7 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     System.out.println("▶ 장소 상세");
     System.out.println();
 
-    Cafe cafe = findByNo(Prompt.inputInt(" 장소 번호 : "));
+    Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
     System.out.println();
 
     if (cafe == null) {
@@ -104,7 +107,7 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     System.out.println("▶ 장소 삭제");
     System.out.println();
 
-    Cafe cafe = findByNo(Prompt.inputInt(" 장소 번호 : "));
+    Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
 
     if (cafe == null) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");

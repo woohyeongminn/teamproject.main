@@ -10,8 +10,9 @@ public class StudyDetailHandler extends AbstractStudyHandler {
   MyStudyDetailHandler myStudyDetailHandler;
   PromptStudy promptStudy;
 
-  public StudyDetailHandler(List<Study> studyList) {
+  public StudyDetailHandler(List<Study> studyList, PromptStudy promptStudy) {
     super(studyList);
+    this.promptStudy = promptStudy;
   }
 
   @Override
