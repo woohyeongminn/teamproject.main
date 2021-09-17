@@ -28,7 +28,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     //    CafeRoom cafeRoom = new CafeRoom();
     //    cafeRoom.setRoomNo(0);
-    //    cafeRoom.setCafeNo(cafeList.get(0).getNo());
+    //    cafeRoom.setCafe(cafeList.get(0));
     //    cafeRoom.setRoomName("A타입(2~3인)");
     //    cafeRoom.setRoomImg("a_room.jpg");
     //    cafeRoom.setRoomInfo("2~3인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷");
@@ -40,7 +40,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     //
     //    cafeRoom = new CafeRoom();
     //    cafeRoom.setRoomNo(1);
-    //    cafeRoom.setCafeNo(cafeList.get(1).getNo());
+    //    cafeRoom.setCafe(cafeList.get(1));
     //    cafeRoom.setRoomName("A타입(2인)");
     //    cafeRoom.setRoomImg("a_room.jpg");
     //    cafeRoom.setRoomInfo("최대 2인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷");
@@ -52,7 +52,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     //
     //    cafeRoom = new CafeRoom();
     //    cafeRoom.setRoomNo(2);
-    //    cafeRoom.setCafeNo(cafeList.get(0).getNo());
+    //    cafeRoom.setCafe(cafeList.get(0));
     //    cafeRoom.setRoomName("B타입(3~4인)");
     //    cafeRoom.setRoomImg("b_room.jpg");
     //    cafeRoom.setRoomInfo("3~4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷");
@@ -64,7 +64,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     //
     //    cafeRoom = new CafeRoom();
     //    cafeRoom.setRoomNo(3);
-    //    cafeRoom.setCafeNo(cafeList.get(1).getNo());
+    //    cafeRoom.setCafe(cafeList.get(1));
     //    cafeRoom.setRoomName("B타입(4인)");
     //    cafeRoom.setRoomImg("b_room.jpg");
     //    cafeRoom.setRoomInfo("최대 4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷");
@@ -76,7 +76,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     //
     //    cafeRoom = new CafeRoom();
     //    cafeRoom.setRoomNo(4);
-    //    cafeRoom.setCafeNo(cafeList.get(0).getNo());
+    //    cafeRoom.setCafe(cafeList.get(0));
     //    cafeRoom.setRoomName("C타입(5~6인)");
     //    cafeRoom.setRoomImg("c_room.jpg");
     //    cafeRoom.setRoomInfo("5~6인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷");
@@ -112,14 +112,14 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     System.out.println("============= 리뷰 =============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
-      if (review.getCafeNo() == cafe.getNo()) {
+      if (review.getCafe().getNo() == cafe.getNo()) {
         if (review.getReviewStatus() == 1) {
           //System.out.printf(" \n (%s)\n", review.getReviewNo());
           System.out.println(" | 삭제 된 리뷰입니다. |");
           reviewSize++;
           continue;
         }
-        String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
+        String nickname = promptPerMember.getMemberByPerNo(review.getMember().getPerNo()).getPerNickname();
         System.out.printf(" 닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
             nickname, getReviewGradeStatusLabel(review.getGrade()), review.getContent()
             , review.getRegisteredDate());
@@ -160,7 +160,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     int i = 1;
     HashMap<Integer, Integer> selectRoomNo = new HashMap<>();
     for (CafeRoom cafeRoom : roomList) {
-      if (cafe.getNo() == cafeRoom.getCafeNo()) {
+      if (cafe.getNo() == cafeRoom.getCafe().getNo()) {
         System.out.println(" " + i + ". " + cafeRoom.getRoomName());
         selectRoomNo.put(i, cafeRoom.getRoomNo());
         i++;
@@ -288,7 +288,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     String input = Prompt.inputString("\n 정말 예약하시겠습니까? (네 / 아니오) ");
 
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 스터디룸 예약을 취소하였습니다.");
       return;
     }
@@ -301,8 +301,8 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     CafeReservation reservation = new CafeReservation();
 
     reservation.setReservationNo(reservationNo++);
-    reservation.setMemberNo(member.getPerNo());
-    reservation.setCafeNo(cafe.getNo());
+    reservation.setMember(member);
+    reservation.setCafe(cafe);
     reservation.setReservationDate(reservationDate);
     reservation.setStartTime(realStartTime);
     reservation.setUseTime(selectStatusOfNumber.size());
@@ -319,7 +319,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
   private CafeRoom getCafeRoomByNo(int roomNo, Cafe cafe) {
     for (CafeRoom cafeRoom : roomList) {
-      if (cafeRoom.getRoomNo() == roomNo && cafeRoom.getCafeNo() == cafe.getNo()) {
+      if (cafeRoom.getRoomNo() == roomNo && cafeRoom.getCafe().getNo() == cafe.getNo()) {
         return cafeRoom;
       }
     }
@@ -330,7 +330,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     List<CafeReservation> todayReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {
       if (reservationDate.toLocalDate().compareTo(cafeReser.getReservationDate().toLocalDate()) == 0 &&
-          cafeReser.getCafeNo() == cafe.getNo() &&
+          cafeReser.getCafe().getNo() == cafe.getNo() &&
           cafeReser.getRoomNo() == roomNo) {
         todayReserList.add(cafeReser);
       }

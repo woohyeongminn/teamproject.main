@@ -25,8 +25,8 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
     //    CafeReservation reservation = new CafeReservation();
     //    reservation.setReservationNo(1);
-    //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
-    //    reservation.setCafeNo(cafeList.get(0).getNo());
+    //    reservation.setMember(promptPerMember.memberList.get(0));
+    //    reservation.setCafe(cafeList.get(0));
     //    reservation.setReservationDate(Date.valueOf("2021-8-1"));
     //    reservation.setStartTime(LocalTime.of(10, 00));
     //    reservation.setUseTime(1);
@@ -37,8 +37,8 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     //
     //    reservation = new CafeReservation();
     //    reservation.setReservationNo(2);
-    //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
-    //    reservation.setCafeNo(cafeList.get(0).getNo());
+    //    reservation.setMember(promptPerMember.memberList.get(0));
+    //    reservation.setCafe(cafeList.get(0));
     //    reservation.setReservationDate(Date.valueOf("2021-10-10"));
     //    reservation.setStartTime(LocalTime.of(10, 00));
     //    reservation.setUseTime(3);
@@ -50,8 +50,8 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     //
     //    reservation = new CafeReservation();
     //    reservation.setReservationNo(3);
-    //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
-    //    reservation.setCafeNo(cafeList.get(0).getNo());
+    //    reservation.setMember(promptPerMember.memberList.get(0));
+    //    reservation.setCafe(cafeList.get(0));
     //    reservation.setReservationDate(Date.valueOf("2021-10-10"));
     //    reservation.setStartTime(LocalTime.of(15, 00));
     //    reservation.setUseTime(2);
@@ -166,10 +166,10 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     List<CafeReservation> myReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {
 
-      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMemberNo());
+      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMember().getPerNo());
 
       if (cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
-        Cafe cafeReserCafe = findByNo(cafeReser.getCafeNo());
+        Cafe cafeReserCafe = findByNo(cafeReser.getCafe().getNo());
         CafeRoom cafeRoom = getCafeRoomName(cafeReser.getRoomNo());
         myReserList.add(cafeReser);
         if (cafeReser.getUseMemberNumber() == 0) {
@@ -196,7 +196,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   private CafeReservation getMyReserByNo(Member member, int reserNo) {
     for (CafeReservation cafeReser : reserList) {
-      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMemberNo());
+      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMember().getPerNo());
       if (reserNo == cafeReser.getReservationNo() &&
           cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
         return cafeReser;

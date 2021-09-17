@@ -23,7 +23,7 @@ public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
     for (CafeReview cafeReview : reviewList) {
       //      if (cafeReview.getMember().getPerNickname() 
       //          != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
-      Cafe cafe = findByNo(cafeReview.getCafeNo());
+      Cafe cafe = findByNo(cafeReview.getCafe().getNo());
       System.out.printf(" (%d)\n [%s]\n 별점 : %d\n 내용 : %s\n 등록일 : %s\n",
           cafeReview.getReviewNo(), cafe.getName(), cafeReview.getGrade(),
           cafeReview.getContent(), cafeReview.getRegisteredDate());

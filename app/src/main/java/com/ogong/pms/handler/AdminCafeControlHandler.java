@@ -77,8 +77,8 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     System.out.println("============= 리뷰 =============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
-      if (review.getCafeNo() == cafe.getNo()) {
-        String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
+      if (review.getCafe().getNo() == cafe.getNo()) {
+        String nickname = promptPerMember.getMemberByPerNo(review.getMember().getPerNo()).getPerNickname();
         System.out.printf(" 닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;
