@@ -115,7 +115,7 @@ public abstract class AbstractAskBoardHandler implements Command {
       System.out.println();
 
       String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
-      if (!input.equalsIgnoreCase(" 네")) {
+      if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 댓글 변경이 취소되었습니다.");
         return;
       }

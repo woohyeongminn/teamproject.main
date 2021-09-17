@@ -121,7 +121,7 @@ public class MyStudyCalender {
     calender.setEndDay(inputEndDate);
 
     String input = Prompt.inputString("\n 등록하시겠습니까? (네 / 아니오) ");
-    if (!input.equals(" 네")) {
+    if (!input.equals("네")) {
       System.out.println(" >> 등록을 취소하였습니다.");
       return;
     }
@@ -314,7 +314,7 @@ public class MyStudyCalender {
     }
 
     String input = Prompt.inputString("\n 정말 변경하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 일정 변경이 취소되었습니다.\n");
       return;
     }
@@ -334,7 +334,7 @@ public class MyStudyCalender {
     System.out.println("▶ 일정 삭제");
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 일정 삭제를 취소하였습니다.\n");
       return;
     }

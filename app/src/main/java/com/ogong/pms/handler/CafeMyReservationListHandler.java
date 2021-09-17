@@ -146,7 +146,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
       String input = Prompt.inputString(" 정말 예약 취소 하시겠습니까? (네 / 아니오) ");
 
-      if (!input.equalsIgnoreCase(" 네")) {
+      if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 예약 취소를 취소합니다.");
         return;
       }

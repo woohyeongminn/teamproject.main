@@ -83,7 +83,7 @@ public class MyStudyToDo {
     todo.setTodoDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오)");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 등록을 취소하였습니다.");
       listToDo(study);
       return;
@@ -217,7 +217,7 @@ public class MyStudyToDo {
 
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 변경을 취소하였습니다.");
       return;
     }
@@ -239,7 +239,7 @@ public class MyStudyToDo {
     System.out.println();
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오)");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 삭제를 취소하였습니다.");
       return;
     }

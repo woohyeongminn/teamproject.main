@@ -30,7 +30,7 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
     }
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 스터디 삭제를 취소하였습니다.");
       return;
     }

@@ -49,7 +49,7 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
 
     System.out.println();
     String input = Prompt.inputString(" 정말 수정하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 스터디 수정을 취소하였습니다.");
       return;
     }
