@@ -94,7 +94,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     Cafe cafe = findByNo(Prompt.inputInt(" 번호 : "));
     System.out.println();
     if (cafe == null) {
-      System.out.println(" 해당 번호의 장소가 존재하지 않습니다.");
+      System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
     System.out.printf(" (%s)\n", cafe.getNo());
@@ -127,7 +127,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
       }
     }
     if (reviewSize == 0) {
-      System.out.println(" 등록된 리뷰가 없습니다.");
+      System.out.println(" >> 등록된 리뷰가 없습니다.");
     }
 
     System.out.println();
@@ -153,7 +153,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     if (member == null) {
-      System.out.println("로그인 한 회원만 예약 가능합니다.");
+      System.out.println(" >> 로그인 한 회원만 예약 가능합니다.");
       return;
     }
 
@@ -168,7 +168,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     }
 
     if (i == 0) {
-      System.out.println("등록된 스터디룸이 없습니다.");
+      System.out.println(" >> 등록된 스터디룸이 없습니다.");
       return;
     }
 
@@ -193,8 +193,8 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     Date reservationDate = Prompt.inputDate("\n 예약 날짜(당일 예약 불가) : ");
     while (today.toLocalDate().compareTo(reservationDate.toLocalDate()) > 0) {
       System.out.println(" >> 이전 날짜는 예약 불가능 합니다.");
-      System.out.println("    날짜를 다시 입력해주세요.\n");
-      reservationDate = Prompt.inputDate("예약 날짜 : ");
+      System.out.println("    날짜를 다시 입력해 주세요.\n");
+      reservationDate = Prompt.inputDate(" 예약 날짜 : ");
     }
 
     List<CafeReservation> todayReserList = getCafeReserList(cafe, roomNo, reservationDate);
@@ -227,7 +227,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     //System.out.println("스터디룸 시작 시간 : " + startTime + ", 끝 시간 : " + endTime);
 
-    System.out.println("\n [예약현황]");
+    System.out.println("\n [ 예약 현황 ]");
     for (int i = 0; i < availableTime; i++) {
       if (i == 0) {
         tempEndTime = startTime.plusHours(1);
@@ -236,12 +236,12 @@ public class CafeDetailHandler extends AbstractCafeHandler {
         tempEndTime = startTime.plusHours(1);
       }
 
-      String status = "예약가능";
+      String status = " 예약 가능";
 
       if (useTimeList.size() != 0) {
         for (int j = 0; j < useTimeList.size(); j++) {
           if (useTimeList.get(j).compareTo(tempEndTime) == 0) {
-            status = "예약불가";
+            status = " 예약 불가";
           }
         }
       }
@@ -256,7 +256,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
         break;
       }
       if (!ReservationStatus(statusOfNumber, number)) {
-        System.out.println(" >> 예약 가능한 시간이 아닙니다. 다시 선택해주세요.");
+        System.out.println(" >> 예약 가능한 시간이 아닙니다. 다시 선택해 주세요.");
         continue;
       } else if (ReservationStatus(statusOfNumber, number)) {
         if (selectStatusOfNumber.size() == 0) {
@@ -267,19 +267,19 @@ public class CafeDetailHandler extends AbstractCafeHandler {
             selectStatusOfNumber.add(number);
             continue;
           } else {
-            System.out.println(" >> 연속된 시간만 선택 가능합니다. 다시 선택해주세요.");
+            System.out.println(" >> 연속된 시간만 선택 가능합니다. 다시 선택해 주세요.");
             continue;
           }
         }
       }
     }
 
-    System.out.println("\n [예약시간]");
+    System.out.println("\n [ 예약 시간 ]");
     for (int i = 0; i < selectStatusOfNumber.size(); i++) {
       String[] reserTimeInfo = statusOfNumber.get(selectStatusOfNumber.get(i)).split(","); 
       System.out.printf(" %d. %s ~ %s\n", i+1, reserTimeInfo[0], reserTimeInfo[1]);
     }
-    System.out.println(" 총 이용시간 : " + selectStatusOfNumber.size() +"시간");
+    System.out.println(" 총 이용 시간 : " + selectStatusOfNumber.size() +"시간");
 
     if (selectStatusOfNumber.size() == 0) {
       System.out.println(" >> 종료");
@@ -288,7 +288,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
 
     String input = Prompt.inputString("\n 정말 예약하시겠습니까? (네 / 아니오) ");
 
-    if (!input.equalsIgnoreCase("네")) {
+    if (!input.equalsIgnoreCase(" 네")) {
       System.out.println(" >> 스터디룸 예약을 취소하였습니다.");
       return;
     }
@@ -314,7 +314,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     reserList.add(reservation);
 
     System.out.println();
-    System.out.println("*** 예약 되었습니다 ***");
+    System.out.println("*** 예약되었습니다 ***");
   }
 
   private CafeRoom getCafeRoomByNo(int roomNo, Cafe cafe) {
@@ -346,7 +346,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     for (int i = 0; i < statusOfNumber.size(); i++) {
       if (i == number) {
         String[] reserInfo = statusOfNumber.get(i).split(",");
-        if (reserInfo[2].equals("예약불가")) {
+        if (reserInfo[2].equals(" 예약 불가")) {
           return false;
         }
       }

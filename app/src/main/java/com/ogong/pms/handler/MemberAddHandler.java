@@ -80,7 +80,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
     inputNewNick = Prompt.inputString(" 닉네임 : ");
     for (Member comparisonMember : memberList) {
       if (inputNewNick.equals(comparisonMember.getPerNickname())) {
-        System.out.println(" >> 중복된 닉네임 입니다.");
+        System.out.println(" >> 중복된 닉네임입니다.");
         return;
       }
     }
@@ -92,7 +92,7 @@ public class MemberAddHandler extends AbstractMemberHandler {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
       if (!inputNewEmail.contains("@") ||
           !inputNewEmail.contains(".com") || inputNewEmail.length() < 6) {
-        System.out.println(" >> 정확한 이메일 양식으로 입력해주세요.");
+        System.out.println(" >> 정확한 이메일 양식으로 입력해 주세요.");
         continue;
       }
       break;

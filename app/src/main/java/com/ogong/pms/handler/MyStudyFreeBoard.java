@@ -81,7 +81,7 @@ public class MyStudyFreeBoard {
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString(" 게시글을 등록하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
+    if (!input.equalsIgnoreCase(" 네")) {
       System.out.println(" >> 게시글 등록을 취소하였습니다.");
       return;
     }
@@ -213,7 +213,7 @@ public class MyStudyFreeBoard {
 
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" 변경을 취소되었습니다.");
+      System.out.println(" >> 변경을 취소되었습니다.");
       return;
     }
 
@@ -268,7 +268,7 @@ public class MyStudyFreeBoard {
       comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
 
       String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
-      if (!input.equalsIgnoreCase("네")) {
+      if (!input.equalsIgnoreCase(" 네")) {
         System.out.println(" >> 댓글 등록을 취소하였습니다.");
       }
 
@@ -316,7 +316,7 @@ public class MyStudyFreeBoard {
       try {
         commentNo1 = Prompt.inputInt(" 번호 : ");
       } catch (Exception e){
-        System.out.println(" >> 번호를 입력해주세요.");
+        System.out.println(" >> 번호를 입력해 주세요.");
       }
 
       Comment comment = findByComment(commentNo1);
@@ -326,7 +326,7 @@ public class MyStudyFreeBoard {
       System.out.println();
 
       String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
-      if (!input.equalsIgnoreCase("네")) {
+      if (!input.equalsIgnoreCase(" 네")) {
         System.out.println(" >> 댓글 변경이 취소되었습니다.");
         return;
       }
@@ -357,7 +357,7 @@ public class MyStudyFreeBoard {
 
       System.out.println();
       String inputno = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
-      if (!inputno.equalsIgnoreCase("네")) {
+      if (!inputno.equalsIgnoreCase(" 네")) {
         System.out.println(" >> 댓글 삭제를 취소하였습니다.");
         return;
       }

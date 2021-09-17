@@ -83,7 +83,7 @@ public class MyStudyToDo {
     todo.setTodoDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오)");
-    if (!input.equalsIgnoreCase("네")) {
+    if (!input.equalsIgnoreCase(" 네")) {
       System.out.println(" >> 등록을 취소하였습니다.");
       listToDo(study);
       return;
@@ -104,7 +104,7 @@ public class MyStudyToDo {
     // 메서드 안에서 선언할때는 초기화해야한다 (null 쓰지 마세요)
     List<ToDo> toDoArrayList = new ArrayList<>(); 
 
-    System.out.println(" >> 진행중 ");
+    System.out.println(" >> 진행 중 ");
 
     int count1 = 0;
 
@@ -123,7 +123,7 @@ public class MyStudyToDo {
     }
 
     if (count1 == 0) {
-      System.out.println(" ○ | 진행중인 To-Do List가 없습니다.\n");
+      System.out.println(" ○ | 진행 중인 To-Do List가 없습니다.\n");
     }
 
     System.out.println(" >> 완료 ");
@@ -217,7 +217,7 @@ public class MyStudyToDo {
 
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
+    if (!input.equalsIgnoreCase(" 네")) {
       System.out.println(" >> 변경을 취소하였습니다.");
       return;
     }
@@ -239,7 +239,7 @@ public class MyStudyToDo {
     System.out.println();
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오)");
-    if (!input.equalsIgnoreCase("네")) {
+    if (!input.equalsIgnoreCase(" 네")) {
       System.out.println(" >> 삭제를 취소하였습니다.");
       return;
     }
@@ -266,7 +266,7 @@ public class MyStudyToDo {
       try{
         return Prompt.inputInt("선택> ");
       } catch(Exception e) {
-        System.out.println(" 잘못 입력하셨습니다.");
+        System.out.println(" >> 잘못 입력하셨습니다.");
       }
 
     } else {

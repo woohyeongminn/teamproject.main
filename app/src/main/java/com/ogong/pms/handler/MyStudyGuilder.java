@@ -22,9 +22,9 @@ public class MyStudyGuilder  {
     System.out.println(" 구성원 : " + myStudy.getMemberNames());
 
     System.out.println();
-    System.out.println(">> 승인 대기중");
+    System.out.println(">> 승인 대기 중");
     if(myStudy.getWatingMemberNames().isEmpty()) {
-      System.out.println(" 승인 대기중인 회원이 없습니다.");
+      System.out.println(" 승인 대기 중인 회원이 없습니다.");
     }
     System.out.println(myStudy.getWatingMemberNames());
 
@@ -33,13 +33,13 @@ public class MyStudyGuilder  {
     if (member != null && myStudy.getOwner().getPerEmail().equals(member.getPerEmail())) {
       System.out.println();
       if (!myStudy.getWatingMemberNames().equals("")) {
-        String input = Prompt.inputString("대기중인 회원 중 승인할 닉네임을 입력하세요 : ");
+        String input = Prompt.inputString(" 대기 중인 회원 중 승인할 닉네임을 입력하세요 : ");
         Member m = new Member();
 
         for (Member watingMember : waitingMembers) {        
           if (watingMember.getPerNickname().equals(input)) {
             myStudy.getMembers().add(watingMember);
-            System.out.printf("'%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
+            System.out.printf(" '%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
             m = watingMember;
           }
         }

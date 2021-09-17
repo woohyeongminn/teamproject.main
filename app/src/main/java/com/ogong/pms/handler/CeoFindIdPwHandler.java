@@ -37,7 +37,7 @@ public class CeoFindIdPwHandler implements Command {
       String inputNick =  Prompt.inputString(" 닉네임 : ");
       CeoMember ceoMember = promptCeoMember.getCeoByNick(inputNick);
       if (ceoMember == null) {
-        System.out.println(" 해당 닉네임이 존재하지 않습니다.");
+        System.out.println(" >> 해당 닉네임이 존재하지 않습니다.");
         return;
       } else {
         System.out.println();
@@ -48,7 +48,7 @@ public class CeoFindIdPwHandler implements Command {
     }
     String input = Prompt.inputString(" 비밀번호 찾기로 넘어가시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" 찾기를 종료합니다.");
+      System.out.println(" >> 찾기를 종료합니다.");
       return;
     } 
     findByCeoPw();
@@ -62,13 +62,13 @@ public class CeoFindIdPwHandler implements Command {
       String inputEmail =  Prompt.inputString(" 이메일 : ");
       CeoMember ceoMember = promptCeoMember.getCeoByEmail(inputEmail);
       if (ceoMember == null) {
-        System.out.println(" 해당 이메일이 존재하지 않습니다.");
+        System.out.println(" >> 해당 이메일이 존재하지 않습니다.");
         continue;
       } else {
         System.out.printf(" '%s님'의 임시 비밀번호 : ", ceoMember.getCeoBossName());
         System.out.println(ceoMember.getCeoPassword().hashCode());
         System.out.println();
-        System.out.println(" 로그인 후 비밀번호를 변경해 주세요.");
+        System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
         String hashPW = String.valueOf(ceoMember.getCeoPassword().hashCode());
         ceoMember.setCeoPassword(hashPW);
       }

@@ -21,7 +21,7 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
     if (adminWriteList == null) {
-      System.out.println(" 공지를 다시 선택하세요.");
+      System.out.println(" >> 공지를 다시 선택하세요.");
       return;
     }
 

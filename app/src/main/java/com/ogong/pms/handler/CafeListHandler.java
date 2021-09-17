@@ -28,7 +28,7 @@ public class CafeListHandler extends AbstractCafeHandler {
         System.out.printf(" \n(%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
             , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         if (cafe.getCafeStatus() == 2) {
-          System.out.println(" * 운영중단");
+          System.out.println(" * 운영 중단");
         }
       }
     }

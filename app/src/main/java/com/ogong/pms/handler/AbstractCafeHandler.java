@@ -69,18 +69,18 @@ public abstract class AbstractCafeHandler implements Command {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     if (member == null) {
-      System.out.println("로그인 한 회원만 예약 가능합니다.");
+      System.out.println(" >> 로그인 한 회원만 예약 가능합니다.");
       return;
     }
 
     CafeReservation reservation = new CafeReservation();
 
     Date today = new Date(System.currentTimeMillis());
-    Date reservationDate = Prompt.inputDate("예약 날짜 : ");
+    Date reservationDate = Prompt.inputDate(" 예약 날짜 : ");
     while (today.toLocalDate().compareTo(reservationDate.toLocalDate()) > 0) {
-      System.out.println(" >> 이전 날짜는 예약 불가능 합니다.");
-      System.out.println("    날짜를 다시 입력해주세요.\n");
-      reservationDate = Prompt.inputDate("예약 날짜 : ");
+      System.out.println(" >> 이전 날짜는 예약 불가능합니다.");
+      System.out.println("    날짜를 다시 입력해 주세요.\n");
+      reservationDate = Prompt.inputDate(" 예약 날짜 : ");
     }
 
     //    String[] openTime = cafe.getOpenTime().split(":");
@@ -96,35 +96,35 @@ public abstract class AbstractCafeHandler implements Command {
     LocalTime startTime;
     while (true) {
       startTime = LocalTime.parse(Prompt.inputString(
-          String.format("시작 시간 (%s~%s) : ", openTime, closeTimeMinus1)));
+          String.format(" 시작 시간 (%s~%s) : ", openTime, closeTimeMinus1)));
       if (startTime.isBefore(cafe.getOpenTime())) {
-        System.out.println(" >> 오픈 시간 전 입니다.");
-        System.out.println("    시작 시간을 다시 입력해주세요.\n");
+        System.out.println(" >> 오픈 시간 전입니다.");
+        System.out.println("    시작 시간을 다시 입력해 주세요.\n");
         continue;
       } else if (startTime.isAfter(cafe.getCloseTime().minusHours(1))) {
         System.out.println(" >> " + closeTimeMinus1 + " 까지만 가능합니다.");
-        System.out.println("    시작 시간을 다시 입력해주세요.\n");
+        System.out.println("    시작 시간을 다시 입력해 주세요.\n");
         continue;
       }
       break;
     }
 
-    int useTime = Prompt.inputInt(String.format("이용 시간 (%s 마감) : ", closeTime));
+    int useTime = Prompt.inputInt(String.format(" 이용 시간 (%s 마감) : ", closeTime));
     int availableTime = (int) ChronoUnit.HOURS.between(startTime, cafe.getCloseTime());
     while (useTime > availableTime) {
       System.out.printf(" >> 마감 시간(%s)을 초과하여 예약할 수 없습니다.\n", closeTime);
-      System.out.println("    이용 시간을 다시 입력해주세요.\n");
-      useTime = Prompt.inputInt(String.format("이용 할 시간 (%s 마감) : ", closeTime));
+      System.out.println("    이용 시간을 다시 입력해 주세요.\n");
+      useTime = Prompt.inputInt(String.format(" 이용할 시간 (%s 마감) : ", closeTime));
     }
 
-    int useMemberNumber = Prompt.inputInt("사용 인원 : ");
+    int useMemberNumber = Prompt.inputInt(" 사용 인원 : ");
     int totalPrice = useTime * useMemberNumber * cafe.getTimePrice();
-    System.out.printf("총금액 : %d원\n" , totalPrice);
+    System.out.printf(" 총 금액 : %d원\n" , totalPrice);
 
-    String input = Prompt.inputString("정말 예약하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString(" 정말 예약하시겠습니까? (네 / 아니오) ");
 
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 장소예약을 취소하였습니다.");
+      System.out.println(" >> 장소 예약을 취소하였습니다.");
       return;
     }
 
@@ -151,25 +151,25 @@ public abstract class AbstractCafeHandler implements Command {
     System.out.println("▶ 리뷰 등록하기");
 
     if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-      System.out.println("로그인 한 회원만 등록 가능합니다.");
+      System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
     } else {
 
       Cafe cafe = findByNo(cafeReser.getCafeNo());
 
       CafeReview cafeReview = new CafeReview();
 
-      String content = Prompt.inputString("리뷰 내용 : ");
-      int grade = Prompt.inputInt("별점(0~5점) : ");
+      String content = Prompt.inputString(" 리뷰 내용 : ");
+      int grade = Prompt.inputInt(" 별점(0~5점) : ");
       while (grade < 0 || grade > 5) {
-        System.out.println("별점을 다시 입력해주세요.");
-        grade = Prompt.inputInt("별점(0~5점) : ");
+        System.out.println(" 별점을 다시 입력해 주세요.");
+        grade = Prompt.inputInt(" 별점(0~5점) : ");
       }
       Member member = AuthPerMemberLoginHandler.getLoginUser();
       Date registeredDate = new Date(System.currentTimeMillis());
 
-      String input = Prompt.inputString("정말 등록하시겠습니까? (네 / 아니오) ");
+      String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
-        System.out.println("리뷰 등록을 취소하였습니다.");
+        System.out.println(" >> 리뷰 등록을 취소하였습니다.");
         return;
       }
 
@@ -184,7 +184,7 @@ public abstract class AbstractCafeHandler implements Command {
       reviewList.add(cafeReview);
       cafeReser.setWirteReview(true);
 
-      System.out.println("리뷰가 등록되었습니다.");
+      System.out.println(" >> 리뷰가 등록되었습니다.");
     }
   }
 

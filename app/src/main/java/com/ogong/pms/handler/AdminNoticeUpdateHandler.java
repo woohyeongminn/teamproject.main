@@ -19,7 +19,7 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
     if (adminWriteList == null) {
-      System.out.println(" 공지를 다시 선택하세요.");
+      System.out.println(" >> 공지를 다시 선택하세요.");
       return;
     }
 
@@ -30,13 +30,13 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
 
     String inputnotice = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!inputnotice.equalsIgnoreCase("네")) {
-      System.out.println(" 변경이 취소되었습니다.");
+      System.out.println(" >> 변경이 취소되었습니다.");
       return;
     }
 
     adminWriteList.setAdminNotiTitle(adminNoticeTitle);
     adminWriteList.setAdminNotiContent(adminNoticeContent);
-    System.out.println(" 공지가 변경되었습니다.");
+    System.out.println(" >> 공지가 변경되었습니다.");
   }
 
 }

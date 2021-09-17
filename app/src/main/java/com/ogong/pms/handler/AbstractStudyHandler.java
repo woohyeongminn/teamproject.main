@@ -37,8 +37,8 @@ public abstract class AbstractStudyHandler implements Command {
     System.out.println("▶ 스터디 검색");
     System.out.println();
 
-    System.out.println("지역, 분야, 스터디명으로 검색할 수 있습니다.");
-    String input = Prompt.inputString("검색어 : ");
+    System.out.println(" 지역 / 분야 / 스터디명으로 검색할 수 있습니다.");
+    String input = Prompt.inputString(" 검색어 : ");
     System.out.println();
 
     int count = 0;
@@ -61,7 +61,7 @@ public abstract class AbstractStudyHandler implements Command {
     }
 
     if (count == 0) {
-      System.out.println("검색어를 다시 입력해주세요.");
+      System.out.println(" >> 검색어를 다시 입력해 주세요.");
       return;
     }
 
@@ -85,31 +85,31 @@ public abstract class AbstractStudyHandler implements Command {
 
     for (Member pM : study.getMembers()) {
       if (pM.getPerNickname().equals(member.getPerNickname())) {
-        System.out.println("이미 참여 중인 스터디입니다.");
+        System.out.println(" >> 이미 참여 중인 스터디입니다.");
         return;
       }
     }
 
     for (Member memberWating : study.getWatingMember()) {
       if (member.getPerNickname().equals(memberWating.getPerNickname())) {
-        System.out.println("이미 승인 대기 중인 스터디입니다.");
+        System.out.println(" >> 이미 승인 대기 중인 스터디입니다.");
         return;
       }
     }
 
     if(study.getMembers().size() == (study.getNumberOfPeple() - 1)) {
-      System.out.println("참여 가능 인원수를 초과하였습니다.");
+      System.out.println(" >> 참여 가능 인원수를 초과하였습니다.");
       return;
     }
 
-    String input = Prompt.inputString("스터디에 참여하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println("참여 신청이 취소되었습니다.");
+    String input = Prompt.inputString(" 스터디에 참여하시겠습니까? (네 / 아니오) ");
+    if (!input.equalsIgnoreCase(" 네")) {
+      System.out.println(" >> 참여 신청이 취소되었습니다.");
       return;
     }
     study.getWatingMember().add(member);
     System.out.println();
-    System.out.println("참여 신청이 완료되었습니다.\n승인이 완료될 때까지 기다려 주세요.");
+    System.out.println(" >> 참여 신청이 완료되었습니다.\n   승인이 완료될 때까지 기다려 주세요.");
   }
 
   // 번호으로 찾기

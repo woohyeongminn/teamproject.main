@@ -78,7 +78,7 @@ public class MyStudyCalender {
               (((month >= 8 && (month % 2) == 1) && (day > 30 || day < 1)) ||
                   ((month >= 8 && (month % 2) == 0) && (day > 31 || day < 1))))) {
         System.out.println(" >> 등록할 수 없는 '일'입니다.");
-        System.out.println("    다시 등록해주세요.");
+        System.out.println("    다시 등록해 주세요.");
         continue;
       } 
       break;
@@ -103,7 +103,7 @@ public class MyStudyCalender {
 
     String important = stateImportant();
     if (important == null) {
-      System.out.println(" 입력 오류 입니다.");
+      System.out.println(" 입력 오류입니다.");
       return;
     }
     calender.setImportanceCalender(important);
@@ -314,8 +314,8 @@ public class MyStudyCalender {
     }
 
     String input = Prompt.inputString("\n 정말 변경하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" 일정 변경이 취소되었습니다.\n");
+    if (!input.equalsIgnoreCase(" 네")) {
+      System.out.println(" >> 일정 변경이 취소되었습니다.\n");
       return;
     }
 
@@ -326,21 +326,21 @@ public class MyStudyCalender {
     calender.setImportanceCalender(updateImportant);
     calender.setEndDay(updateEndDay);
 
-    System.out.println(" 일정을 변경하였습니다.\n");
+    System.out.println(" >> 일정을 변경하였습니다.\n");
   }
 
   private void deleteCalender(Calender calender, Study study) {
     System.out.println();
     System.out.println("▶ 일정 삭제");
 
-    String input = Prompt.inputString("정말 삭제하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println("일정 삭제를 취소하였습니다.\n");
+    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
+    if (!input.equalsIgnoreCase(" 네")) {
+      System.out.println(" >> 일정 삭제를 취소하였습니다.\n");
       return;
     }
     calenderList.remove(calender);
     study.getMyStudyCalender().remove(calender);
-    System.out.println("일정이 삭제되었습니다.");
+    System.out.println(" >> 일정이 삭제되었습니다.");
     listCalender(study);
   }
 

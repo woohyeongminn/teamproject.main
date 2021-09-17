@@ -41,7 +41,7 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
     while (true) {
       nop = Prompt.inputInt(" 인원수(" + myStudy.getNumberOfPeple() + ") : ");
       if (nop < myStudy.getNumberOfPeple()) {
-        System.out.println(" 현재 참여 중인 인원보다 적게 수정할 수 없습니다.");
+        System.out.println(" >> 현재 참여 중인 인원보다 적게 수정할 수 없습니다.");
         continue;
       }
       break;
@@ -49,7 +49,7 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
 
     System.out.println();
     String input = Prompt.inputString(" 정말 수정하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
+    if (!input.equalsIgnoreCase(" 네")) {
       System.out.println(" >> 스터디 수정을 취소하였습니다.");
       return;
     }

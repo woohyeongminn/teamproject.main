@@ -64,7 +64,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
   public void deleteMyReview() {
     System.out.println();
-    int inputNo = Prompt.inputInt("삭제할 리뷰 번호 : ");
+    int inputNo = Prompt.inputInt(" 삭제할 리뷰 번호 : ");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
