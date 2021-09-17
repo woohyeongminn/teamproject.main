@@ -39,7 +39,7 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
         if (cafe.getCafeStatus() == 3) {
           continue;
         }
-        if (cafe.getCeoNo() == ceoMember.getCeoNo()) {
+        if (cafe.getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
           System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
               , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         }
@@ -70,7 +70,7 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
 
     Cafe cafe = new Cafe();
     cafe.setNo(cafeNo++);
-    cafe.setCeoNo(ceoMember.getCeoNo());
+    cafe.setCeoMember(ceoMember);
     cafe.setName(Prompt.inputString(" 상호명 : "));
     cafe.setCafeLicenseNo(Prompt.inputString("사업자 등록번호 : "));
     cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
@@ -113,8 +113,8 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
     System.out.println("============= 리뷰 =============");
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
-      if (review.getCafeNo() == cafe.getNo()) {
-        String nickname = promptPerMember.getMemberByPerNo(review.getMemberNo()).getPerNickname();
+      if (review.getCafe().getNo() == cafe.getNo()) {
+        String nickname = promptPerMember.getMemberByPerNo(review.getMember().getPerNo()).getPerNickname();
         System.out.printf(" 닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;
@@ -186,19 +186,19 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
       return;
     }
 
-    cafe.setName("");
-    cafe.setMainImg("");
-    cafe.setInfo("");
-    cafe.setLocation("");
-    cafe.setPhone("");
-    cafe.setOpenTime(LocalTime.of(00, 00));
-    cafe.setCloseTime(LocalTime.of(00, 00));
-    cafe.setHoliday("");
-    cafe.setBookable(0);
-    cafe.setTimePrice(0);
-    cafe.setCafeStatus(3);
+    //    cafe.setName("");
+    //    cafe.setMainImg("");
+    //    cafe.setInfo("");
+    //    cafe.setLocation("");
+    //    cafe.setPhone("");
+    //    cafe.setOpenTime(LocalTime.of(00, 00));
+    //    cafe.setCloseTime(LocalTime.of(00, 00));
+    //    cafe.setHoliday("");
+    //    cafe.setBookable(0);
+    //    cafe.setTimePrice(0);
+    //    cafe.setCafeStatus(3);
 
-    //cafeList.remove(cafe);
+    cafeList.remove(cafe);
 
 
     System.out.println(" >> 장소를 삭제하였습니다.");
@@ -208,7 +208,7 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
     CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
 
     for (Cafe cafe : cafeList) {
-      if (cafe.getNo() == cafeNo && cafe.getCeoNo() == ceoMember.getCeoNo()) {
+      if (cafe.getNo() == cafeNo && cafe.getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
         return cafe;
       }
     }

@@ -4,18 +4,18 @@ import java.sql.Date;
 
 public class CafeReview {
 
-  int reviewNo; // 리뷰 번호
-  String content; // 리뷰 내용
-  int grade; // 별점
-  int cafeNo; // 가게 번호
-  int memberNo; // 리뷰 등록한 아이디
-  Date RegisteredDate; // 리뷰 등록일
-  int reviewStatus; // 0 : 기본 1 : 삭제
+  private int reviewNo; // 리뷰 번호
+  private String content; // 리뷰 내용
+  private int grade; // 별점
+  private Cafe cafe; // 가게 번호
+  private Member member; // 리뷰 등록한 아이디
+  private Date RegisteredDate; // 리뷰 등록일
+  private int reviewStatus; // 0 : 기본 1 : 삭제
 
   @Override
   public String toString() {
     return "CafeReview [reviewNo=" + reviewNo + ", content=" + content + ", grade=" + grade
-        + ", cafeNo=" + cafeNo + ", memberNo=" + memberNo + ", RegisteredDate=" + RegisteredDate
+        + ", cafe=" + cafe + ", member=" + member + ", RegisteredDate=" + RegisteredDate
         + ", reviewStatus=" + reviewStatus + "]";
   }
 
@@ -43,20 +43,20 @@ public class CafeReview {
     this.grade = grade;
   }
 
-  public int getCafeNo() {
-    return cafeNo;
+  public Cafe getCafe() {
+    return cafe;
   }
 
-  public void setCafeNo(int cafeNo) {
-    this.cafeNo = cafeNo;
+  public void setCafe(Cafe cafe) {
+    this.cafe = cafe;
   }
 
-  public int getMemberNo() {
-    return memberNo;
+  public Member getMember() {
+    return member;
   }
 
-  public void setMemberNo(int memberNo) {
-    this.memberNo = memberNo;
+  public void setMember(Member member) {
+    this.member = member;
   }
 
   public Date getRegisteredDate() {
@@ -74,5 +74,4 @@ public class CafeReview {
   public void setReviewStatus(int reviewStatus) {
     this.reviewStatus = reviewStatus;
   }
-
 }

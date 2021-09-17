@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public class Cafe {
 
   private int no; // 카페 번호
-  private int CeoNo; // 사장
+  private CeoMember ceoMember; // 사장
   private String cafeLicenseNo; // 사업자등록번호
   private String name; // 상호명
   private String mainImg; //카페 썸네일 이미지
@@ -21,11 +21,11 @@ public class Cafe {
 
   @Override
   public String toString() {
-    return "Cafe [no=" + no + ", CeoNo=" + CeoNo + ", cafeLicenseNo=" + cafeLicenseNo + ", name="
-        + name + ", mainImg=" + mainImg + ", info=" + info + ", location=" + location + ", phone="
-        + phone + ", openTime=" + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday
-        + ", bookable=" + bookable + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus
-        + "]";
+    return "Cafe [no=" + no + ", ceoMember=" + ceoMember + ", cafeLicenseNo=" + cafeLicenseNo
+        + ", name=" + name + ", mainImg=" + mainImg + ", info=" + info + ", location=" + location
+        + ", phone=" + phone + ", openTime=" + openTime + ", closeTime=" + closeTime + ", holiday="
+        + holiday + ", bookable=" + bookable + ", timePrice=" + timePrice + ", cafeStatus="
+        + cafeStatus + "]";
   }
 
   public int getNo() {
@@ -36,12 +36,20 @@ public class Cafe {
     this.no = no;
   }
 
-  public int getCeoNo() {
-    return CeoNo;
+  public CeoMember getCeoMember() {
+    return ceoMember;
   }
 
-  public void setCeoNo(int ceoNo) {
-    CeoNo = ceoNo;
+  public void setCeoMember(CeoMember ceoMember) {
+    this.ceoMember = ceoMember;
+  }
+
+  public String getCafeLicenseNo() {
+    return cafeLicenseNo;
+  }
+
+  public void setCafeLicenseNo(String cafeLicenseNo) {
+    this.cafeLicenseNo = cafeLicenseNo;
   }
 
   public String getName() {
@@ -132,11 +140,4 @@ public class Cafe {
     this.cafeStatus = cafeStatus;
   }
 
-  public String getCafeLicenseNo() {
-    return cafeLicenseNo;
-  }
-
-  public void setCafeLicenseNo(String cafeLicenseNo) {
-    this.cafeLicenseNo = cafeLicenseNo;
-  }
 }

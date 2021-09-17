@@ -129,8 +129,8 @@ public abstract class AbstractCafeHandler implements Command {
     }
 
     reservation.setReservationNo(reservationNo++);
-    reservation.setMemberNo(member.getPerNo());
-    reservation.setCafeNo(cafe.getNo());
+    reservation.setMember(member);
+    reservation.setCafe(cafe);
     reservation.setReservationDate(reservationDate);
     reservation.setStartTime(startTime);
     reservation.setUseTime(useTime);
@@ -154,7 +154,7 @@ public abstract class AbstractCafeHandler implements Command {
       System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
     } else {
 
-      Cafe cafe = findByNo(cafeReser.getCafeNo());
+      Cafe cafe = findByNo(cafeReser.getCafe().getNo());
 
       CafeReview cafeReview = new CafeReview();
 
@@ -176,8 +176,8 @@ public abstract class AbstractCafeHandler implements Command {
       cafeReview.setReviewNo(reviewNo++);
       cafeReview.setContent(content);
       cafeReview.setGrade(grade);
-      cafeReview.setCafeNo(cafe.getNo());
-      cafeReview.setMemberNo(member.getPerNo());
+      cafeReview.setCafe(cafe);
+      cafeReview.setMember(member);
       cafeReview.setRegisteredDate(registeredDate);
       cafeReview.setReviewStatus(0);
 

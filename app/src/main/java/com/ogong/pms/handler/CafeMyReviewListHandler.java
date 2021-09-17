@@ -29,14 +29,14 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
     int count = 0;
     for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getMemberNo() == member.getPerNo()) {
+      if (cafeReview.getMember().getPerNo() == member.getPerNo()) {
         if (cafeReview.getReviewStatus() == 1) {
           System.out.printf(" \n (%s)", cafeReview.getReviewNo());
           System.out.println(" >> 삭제한 리뷰입니다.\n");
           count++;
           continue;
         }
-        Cafe cafe = findByNo(cafeReview.getCafeNo());
+        Cafe cafe = findByNo(cafeReview.getCafe().getNo());
         System.out.printf(" (%d)\n [%s]\n 별점 : %s\n 내용 : %s\n 등록일 : %s\n",
             cafeReview.getReviewNo(), cafe.getName()
             , getReviewGradeStatusLabel(cafeReview.getGrade()),
@@ -93,7 +93,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
   private CafeReview getMyReviewByNo(Member member, int reviewNo) {
     for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getMemberNo() == member.getPerNo() &&
+      if (cafeReview.getMember().getPerNo() == member.getPerNo() &&
           cafeReview.getReviewNo() == reviewNo) {
         return cafeReview;
       }

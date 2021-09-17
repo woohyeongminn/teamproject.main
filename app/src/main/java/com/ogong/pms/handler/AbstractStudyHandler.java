@@ -57,7 +57,7 @@ public abstract class AbstractStudyHandler implements Command {
     }
 
     String input = Prompt.inputString(" 스터디에 참여하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase(" 네")) {
+    if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 참여 신청이 취소되었습니다.");
       return;
     }
