@@ -119,7 +119,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
           reviewSize++;
           continue;
         }
-        String nickname = promptPerMember.getMemberByPerNo(review.getMember().getPerNo()).getPerNickname();
+        String nickname = promptPerMember.findByMemberNo(review.getMember().getPerNo()).getPerNickname();
         System.out.printf(" 닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
             nickname, getReviewGradeStatusLabel(review.getGrade()), review.getContent()
             , review.getRegisteredDate());

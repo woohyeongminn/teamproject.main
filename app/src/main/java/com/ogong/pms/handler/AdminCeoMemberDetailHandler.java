@@ -8,8 +8,9 @@ public class AdminCeoMemberDetailHandler extends AbstractCeoMemberHandler {
 
   PromptCeoMember promptCeoMember;
 
-  public AdminCeoMemberDetailHandler(List<CeoMember> ceoMemberList) {
+  public AdminCeoMemberDetailHandler(List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
     super(ceoMemberList);
+    this.promptCeoMember = promptCeoMember;
   }
 
   @Override

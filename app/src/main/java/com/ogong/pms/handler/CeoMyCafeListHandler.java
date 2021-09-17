@@ -114,7 +114,7 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
     int reviewSize = 0;
     for (CafeReview review : reviewList) {
       if (review.getCafe().getNo() == cafe.getNo()) {
-        String nickname = promptPerMember.getMemberByPerNo(review.getMember().getPerNo()).getPerNickname();
+        String nickname = promptPerMember.findByMemberNo(review.getMember().getPerNo()).getPerNickname();
         System.out.printf(" 닉네임 : %s | 별점 : %d | 내용 : %s | 등록일 : %s\n",
             nickname, review.getGrade(), review.getContent(), review.getRegisteredDate());
         reviewSize++;

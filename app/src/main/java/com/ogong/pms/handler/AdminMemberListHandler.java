@@ -5,12 +5,12 @@ import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
-public class MemberListHandler extends AbstractMemberHandler {
+public class AdminMemberListHandler extends AbstractMemberHandler {
 
   HashMap<String, Command> commandMap;
 
 
-  public MemberListHandler(List<Member> memberList, HashMap<String, Command> commandMap) {
+  public AdminMemberListHandler(List<Member> memberList, HashMap<String, Command> commandMap) {
     super(memberList);
     this.commandMap = commandMap;
   }
@@ -22,11 +22,9 @@ public class MemberListHandler extends AbstractMemberHandler {
     System.out.println("▶ 회원 목록");
     System.out.println();
 
-    int no = 1;
-
     for (Member member : memberList) {
       System.out.printf(" (%d)\n 닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
-          no++,
+          member.getPerNo(),
           member.getPerNickname(), 
           member.getPerEmail(),
           member.getPerRegisteredDate());
@@ -38,15 +36,13 @@ public class MemberListHandler extends AbstractMemberHandler {
   private void selectUserModifyPage() {
     System.out.println();
     System.out.println("1. 상세");
-    System.out.println("2. 수정");
-    System.out.println("3. 탈퇴");
+    System.out.println("2. 탈퇴");
     System.out.println("0. 이전");
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
       case 1: commandMap.get("/adminMember/detail").execute(); break;
-      case 2: commandMap.get("/adminMember/update").execute(); break;
-      case 3: commandMap.get("/adminMember/delete").execute(); break;
+      case 2: commandMap.get("/adminMember/delete").execute(); break;
       default : return;
     }
   }

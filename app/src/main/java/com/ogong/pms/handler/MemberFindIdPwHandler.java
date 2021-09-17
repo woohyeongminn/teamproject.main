@@ -31,7 +31,7 @@ public class MemberFindIdPwHandler implements Command {
     while (true) {
       System.out.println();
       String inputNick =  Prompt.inputString(" 닉네임 : ");
-      Member member = promptPerMember.getMemberByPerNick(inputNick);
+      Member member = promptPerMember.findByMemberNick(inputNick);
       if (member == null) {
         System.out.println(" >> 해당 닉네임이 존재하지 않습니다.");
         return;
@@ -56,7 +56,7 @@ public class MemberFindIdPwHandler implements Command {
     while (true) {
       System.out.println();
       String inputEmail =  Prompt.inputString(" 이메일 : ");
-      Member member = promptPerMember.getMemberByPerEmail(inputEmail);
+      Member member = promptPerMember.findByMemberEmail(inputEmail);
       if (member == null) {
         System.out.println(" >> 해당 이메일이 존재하지 않습니다.");
         continue;

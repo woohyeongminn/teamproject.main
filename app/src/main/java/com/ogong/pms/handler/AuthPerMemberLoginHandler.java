@@ -30,7 +30,7 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler {
     System.out.println();
     String inputEmail = Prompt.inputString(" 이메일 : ");
     String inputPassword = "";
-    Member member = promptPerMember.getMemberByPerEmail(inputEmail);
+    Member member = promptPerMember.findByMemberEmail(inputEmail);
 
     if (member == null) {
       System.out.println(" >> 등록된 회원이 아닙니다.");

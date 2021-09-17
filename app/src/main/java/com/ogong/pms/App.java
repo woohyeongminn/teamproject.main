@@ -36,10 +36,13 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminCafeControlHandler;
 import com.ogong.pms.handler.AdminCafeReviewListControlHandler;
+import com.ogong.pms.handler.AdminCeoMemberDeleteHandler;
+import com.ogong.pms.handler.AdminCeoMemberDetailHandler;
+import com.ogong.pms.handler.AdminCeoMemberListHandler;
 import com.ogong.pms.handler.AdminDetailHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.AdminMemberDetailHandler;
-import com.ogong.pms.handler.AdminMemberUpdateHandler;
+import com.ogong.pms.handler.AdminMemberListHandler;
 import com.ogong.pms.handler.AdminNoticeAddHandler;
 import com.ogong.pms.handler.AdminNoticeDeleteHandler;
 import com.ogong.pms.handler.AdminNoticeDetailHandler;
@@ -69,7 +72,6 @@ import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CeoAddHandler;
 import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
-import com.ogong.pms.handler.CeoListHandler;
 import com.ogong.pms.handler.CeoMyCafeListHandler;
 import com.ogong.pms.handler.CeoReservationListHandler;
 import com.ogong.pms.handler.Command;
@@ -77,7 +79,6 @@ import com.ogong.pms.handler.MemberAddHandler;
 import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
 import com.ogong.pms.handler.MemberFindIdPwHandler;
-import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyCalender;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
@@ -144,23 +145,28 @@ public class App {
 
   public App() {
     commandMap.put("/member/add", new MemberAddHandler(memberList));
-    commandMap.put("/member/list", new MemberListHandler(memberList, commandMap));
+
     commandMap.put("/member/detail", new MemberDetailHandler(memberList, commandMap));
     commandMap.put("/member/update", new MemberUpdateHandler(memberList));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
-    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList));
+    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberList));
-    commandMap.put("/ceoMember/list", new CeoListHandler(ceoMemberList));
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
     commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList));
 
+
+
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
-    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
+    commandMap.put("/adminMember/list", new AdminMemberListHandler(memberList, commandMap));
+
+    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberList, commandMap));
 
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, ceoMemberList, commentList));
     commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList, ceoMemberList, commentList));
@@ -364,8 +370,8 @@ public class App {
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", ADMIN_LOGIN); 
 
-    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
-    adminUserMenu.add(new MenuItem("사장 회원 조회", "/ceoMember/list"));
+    adminUserMenu.add(new MenuItem("개인 회원 조회", "/adminMember/list"));
+    adminUserMenu.add(new MenuItem("사장 회원 조회", "/adminCeoMember/list"));
 
     return adminUserMenu;
   }

@@ -6,6 +6,8 @@ import com.ogong.util.Prompt;
 
 public class AdminStudyDeleteHandler extends AbstractStudyHandler {
 
+  PromptStudy promptStudy;
+
   public AdminStudyDeleteHandler(List<Study> newStudyList) {
     super(newStudyList);
   }
@@ -17,7 +19,7 @@ public class AdminStudyDeleteHandler extends AbstractStudyHandler {
 
     int inputNo = Prompt.inputInt(" 번호 : ");
 
-    Study study = findByNo(inputNo);
+    Study study = promptStudy.findByStudyNo(inputNo);
 
     if (study == null) {
       System.out.println(" >> 해당 제목의 스터디가 없습니다.");

@@ -166,7 +166,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     List<CafeReservation> myReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {
 
-      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMember().getPerNo());
+      Member cafeReserMember = promptPerMember.findByMemberNo(cafeReser.getMember().getPerNo());
 
       if (cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
         Cafe cafeReserCafe = findByNo(cafeReser.getCafe().getNo());
@@ -196,7 +196,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
   private CafeReservation getMyReserByNo(Member member, int reserNo) {
     for (CafeReservation cafeReser : reserList) {
-      Member cafeReserMember = promptPerMember.getMemberByPerNo(cafeReser.getMember().getPerNo());
+      Member cafeReserMember = promptPerMember.findByMemberNo(cafeReser.getMember().getPerNo());
       if (reserNo == cafeReser.getReservationNo() &&
           cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
         return cafeReser;

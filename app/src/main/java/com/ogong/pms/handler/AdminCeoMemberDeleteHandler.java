@@ -8,8 +8,10 @@ public class AdminCeoMemberDeleteHandler extends AbstractCeoMemberHandler {
 
   PromptCeoMember promptCeoMember;
 
-  public AdminCeoMemberDeleteHandler(List<CeoMember> ceoMemberList) {
+  public AdminCeoMemberDeleteHandler(
+      List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
     super(ceoMemberList);
+    this.promptCeoMember = promptCeoMember;
   }
 
   //관리자용

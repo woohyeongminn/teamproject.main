@@ -21,10 +21,9 @@ public class AdminMemberUpdateHandler extends AbstractMemberHandler {
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String selectMember = Prompt.inputString(" 회원 닉네임 : ");
+        int inputMemberNo = Prompt.inputInt(" 번호 : ");
 
-        member = promptPerMember.getMemberByPerNick(selectMember);
-        //        AuthPerMemberLoginHandler.getLoginUser();
+        member = promptPerMember.findByMemberNo(inputMemberNo);
 
         String perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname()  + ") : ");
         String perEmail = Prompt.inputString(" 이메일(" + member.getPerEmail() + ") : ");

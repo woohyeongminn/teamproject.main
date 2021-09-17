@@ -8,8 +8,10 @@ public class AdminCeoMemberUpdateHandler extends AbstractCeoMemberHandler {
 
   PromptCeoMember promptCeoMember;
 
-  public AdminCeoMemberUpdateHandler(List<CeoMember> ceoMemberList) {
+  public AdminCeoMemberUpdateHandler(
+      List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
     super(ceoMemberList);
+    this.promptCeoMember = promptCeoMember;
   }
 
   //관리자용

@@ -7,7 +7,7 @@ import com.ogong.util.Prompt;
 
 public class MyStudyUpdateHandler extends AbstractStudyHandler {
 
-
+  PromptStudy promptstudy;
 
   public MyStudyUpdateHandler(List<Study> newStudyList) {
     super(newStudyList);
@@ -21,7 +21,7 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
 
     int inputNo = Prompt.inputInt(" 번호  : ");
 
-    Study myStudy = findByMyStudyNo(inputNo);
+    Study myStudy = promptstudy.findByMyStudyNo(inputNo);
 
     // 조건내용 조금 수정해서 '해당 번호의 스터디가 없습니다' 출력되도록 수정해야함
     if (myStudy == null) {

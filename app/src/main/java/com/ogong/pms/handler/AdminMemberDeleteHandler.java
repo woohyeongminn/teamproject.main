@@ -22,9 +22,9 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String selectMember = Prompt.inputString(" 회원 닉네임 : ");
+        int inputMemberNo = Prompt.inputInt(" 번호 : ");
 
-        member = promptPerMember.getMemberByPerNick(selectMember);
+        member = promptPerMember.findByMemberNo(inputMemberNo);
 
         String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 /아니오) ");
 
@@ -42,10 +42,3 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
   }
 
 }
-
-
-
-
-
-
-

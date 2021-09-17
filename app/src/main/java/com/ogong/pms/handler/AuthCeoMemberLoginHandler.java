@@ -19,8 +19,9 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
     return accessLevel;
   }
 
-  public AuthCeoMemberLoginHandler(List<CeoMember> ceoMemberList) {
+  public AuthCeoMemberLoginHandler(List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
     this.ceoMemberList = ceoMemberList;
+    this.promptCeoMember = promptCeoMember;
   }
 
   // ----------------------------------------------------------------------
