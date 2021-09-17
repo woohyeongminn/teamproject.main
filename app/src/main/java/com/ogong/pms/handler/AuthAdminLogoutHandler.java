@@ -4,7 +4,7 @@ import com.ogong.menu.Menu;
 
 public class AuthAdminLogoutHandler implements Command {
 
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     AuthAdminLoginHandler.loginAdmin = null;
     AuthAdminLoginHandler.accessLevel = Menu.LOGOUT;

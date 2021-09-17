@@ -27,7 +27,7 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
   // ----------------------------------------------------------------------
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
 
     System.out.println();
     String inputEmail = Prompt.inputString(" 이메일 : ");

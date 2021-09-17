@@ -66,7 +66,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 내 예약 내역 보기");
     System.out.println();
