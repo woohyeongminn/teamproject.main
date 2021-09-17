@@ -11,7 +11,7 @@ public class AdminUpdateHandler extends AbstractAdminHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 프로필 수정하기");
     System.out.println();
