@@ -24,7 +24,6 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     this.roomList = roomList;
 
     //    CafeReservation reservation = new CafeReservation();
-    //
     //    reservation.setReservationNo(1);
     //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
     //    reservation.setCafeNo(cafeList.get(0).getNo());
@@ -34,11 +33,9 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     //    reservation.setUseMemberNumber(1);
     //    reservation.setTotalPrice(2000);
     //    reservation.setWirteReview(false);
-    //
     //    reserList.add(reservation);
     //
     //    reservation = new CafeReservation();
-    //
     //    reservation.setReservationNo(2);
     //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
     //    reservation.setCafeNo(cafeList.get(0).getNo());
@@ -49,11 +46,9 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     //    reservation.setTotalPrice(45000);
     //    reservation.setWirteReview(false);
     //    reservation.setRoomNo(4);
-    //
     //    reserList.add(reservation);
     //
     //    reservation = new CafeReservation();
-    //
     //    reservation.setReservationNo(3);
     //    reservation.setMemberNo(promptPerMember.memberList.get(0).getPerNo());
     //    reservation.setCafeNo(cafeList.get(0).getNo());
@@ -64,7 +59,6 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     //    reservation.setTotalPrice(30000);
     //    reservation.setWirteReview(false);
     //    reservation.setRoomNo(4);
-    //
     //    reserList.add(reservation);
   }
 

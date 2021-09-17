@@ -1,7 +1,6 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
@@ -14,7 +13,6 @@ public class CeoAddHandler extends AbstractCeoHandler {
     super(ceoMemberList);
 
     //    CeoMember ceoMember = new CeoMember();
-    //
     //    ceoMember.setCeoNo(1);
     //    ceoMember.setCeoEmail("study1");
     //    ceoMember.setCeoPassword("1111");
@@ -22,31 +20,36 @@ public class CeoAddHandler extends AbstractCeoHandler {
     //    ceoMember.setCeoLicenseNo("123-45-12345");
     //    ceoMember.setCeoBossName("김사장");
     //    ceoMember.setCeoregisteredDate(Date.valueOf("2020-12-10"));
-    //    ceoMember.setCafes(new ArrayList<>());
     //    ceoMemberList.add(ceoMember);
     //
     //    ceoMember = new CeoMember();
-    //
     //    ceoMember.setCeoNo(2);
     //    ceoMember.setCeoEmail("study2");
     //    ceoMember.setCeoPassword("1111");
     //    ceoMember.setCeoPhoto("bbb.jpg");
     //    ceoMember.setCeoLicenseNo("123-45-67812");
-    //    ceoMember.setCeoBossName("박사장");
+    //    ceoMember.setCeoBossName("우사장");
     //    ceoMember.setCeoregisteredDate(Date.valueOf("2021-7-21"));
-    //    ceoMember.setCafes(new ArrayList<>());
     //    ceoMemberList.add(ceoMember);
     //
     //    ceoMember = new CeoMember();
-    //
     //    ceoMember.setCeoNo(3);
     //    ceoMember.setCeoEmail("study3");
     //    ceoMember.setCeoPassword("1111");
     //    ceoMember.setCeoPhoto("ccc.jpg");
     //    ceoMember.setCeoLicenseNo("123-45-48751");
-    //    ceoMember.setCeoBossName("엄사장");
+    //    ceoMember.setCeoBossName("조사장");
     //    ceoMember.setCeoregisteredDate(Date.valueOf("2021-5-1"));
-    //    ceoMember.setCafes(new ArrayList<>());
+    //    ceoMemberList.add(ceoMember);
+    //
+    //    ceoMember = new CeoMember();
+    //    ceoMember.setCeoNo(4);
+    //    ceoMember.setCeoEmail("study4");
+    //    ceoMember.setCeoPassword("1111");
+    //    ceoMember.setCeoPhoto("ddd.jpg");
+    //    ceoMember.setCeoLicenseNo("789-56-12345");
+    //    ceoMember.setCeoBossName("송사장");
+    //    ceoMember.setCeoregisteredDate(Date.valueOf("2021-3-1"));
     //    ceoMemberList.add(ceoMember);
   }
 
@@ -118,7 +121,6 @@ public class CeoAddHandler extends AbstractCeoHandler {
     System.out.println();
     ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
-    ceoMember.setCafes(new ArrayList<>());
 
     ceoMemberList.add(ceoMember);
 

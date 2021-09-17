@@ -9,7 +9,6 @@ import com.ogong.util.Prompt;
 
 public class CeoMyCafeListHandler extends AbstractCeoHandler {
 
-  List<CeoMember> ceoMemberList;
   List<Cafe> cafeList;
   List<CafeReview> reviewList;
   int cafeNo = 5;
@@ -73,6 +72,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     cafe.setNo(cafeNo++);
     cafe.setCeoNo(ceoMember.getCeoNo());
     cafe.setName(Prompt.inputString(" 상호명 : "));
+    cafe.setCafeLicenseNo(Prompt.inputString("사업자 등록번호 : "));
     cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
     cafe.setInfo(Prompt.inputString(" 소개글 : "));
     cafe.setLocation(Prompt.inputString(" 주소 : "));
@@ -98,6 +98,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     }
     System.out.printf(" (%s)\n", cafe.getNo());
     System.out.printf(" [%s]\n", cafe.getName());
+    System.out.printf(" >> 사업자 등록번호 : %s\n", cafe.getCafeLicenseNo());
     System.out.printf(" >> 대표이미지 : %s\n", cafe.getMainImg());
     System.out.printf(" >> 소개글 : %s\n", cafe.getInfo());
     System.out.printf(" >> 주소 : %s\n", cafe.getLocation());
@@ -141,6 +142,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     System.out.println("▶ 장소 수정");
 
     String name = Prompt.inputString(String.format(" 상호명(%s) : ", cafe.getName()));
+    String cafeLicenseNo = Prompt.inputString(String.format(" 사업자 등록번호(%s) : ", cafe.getCafeLicenseNo()));
     String mainImg = Prompt.inputString(String.format(" 대표이미지(%s) : ", cafe.getMainImg()));
     String Info = Prompt.inputString(String.format(" 소개글(%s) : ", cafe.getInfo()));
     String location = Prompt.inputString(String.format(" 주소(%s) : ", cafe.getLocation()));
@@ -159,6 +161,7 @@ public class CeoMyCafeListHandler extends AbstractCeoHandler {
     }
 
     cafe.setName(name);
+    cafe.setCafeLicenseNo(cafeLicenseNo);
     cafe.setMainImg(mainImg);
     cafe.setInfo(Info);
     cafe.setLocation(location);

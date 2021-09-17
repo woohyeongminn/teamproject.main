@@ -6,6 +6,7 @@ public class Cafe {
 
   private int no; // 카페 번호
   private int CeoNo; // 사장
+  private String cafeLicenseNo; // 사업자등록번호
   private String name; // 상호명
   private String mainImg; //카페 썸네일 이미지
   private String info; // 소개글
@@ -20,10 +21,11 @@ public class Cafe {
 
   @Override
   public String toString() {
-    return "Cafe [no=" + no + ", CeoNo=" + CeoNo + ", name=" + name + ", mainImg=" + mainImg
-        + ", info=" + info + ", location=" + location + ", phone=" + phone + ", openTime="
-        + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday + ", bookable=" + bookable
-        + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus + "]";
+    return "Cafe [no=" + no + ", CeoNo=" + CeoNo + ", cafeLicenseNo=" + cafeLicenseNo + ", name="
+        + name + ", mainImg=" + mainImg + ", info=" + info + ", location=" + location + ", phone="
+        + phone + ", openTime=" + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday
+        + ", bookable=" + bookable + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus
+        + "]";
   }
 
   public int getNo() {
@@ -128,5 +130,13 @@ public class Cafe {
 
   public void setCafeStatus(int cafeStatus) {
     this.cafeStatus = cafeStatus;
+  }
+
+  public String getCafeLicenseNo() {
+    return cafeLicenseNo;
+  }
+
+  public void setCafeLicenseNo(String cafeLicenseNo) {
+    this.cafeLicenseNo = cafeLicenseNo;
   }
 }
