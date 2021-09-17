@@ -75,6 +75,7 @@ import com.ogong.pms.handler.CeoFindIdPwHandler;
 import com.ogong.pms.handler.CeoMyCafeListHandler;
 import com.ogong.pms.handler.CeoReservationListHandler;
 import com.ogong.pms.handler.Command;
+import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.MemberAddHandler;
 import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
@@ -138,7 +139,12 @@ public class App {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
   }
 
