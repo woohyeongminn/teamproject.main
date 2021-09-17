@@ -18,7 +18,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 내가 쓴 후기 보기");
     System.out.println();

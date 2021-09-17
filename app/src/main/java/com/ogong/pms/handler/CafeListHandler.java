@@ -19,7 +19,7 @@ public class CafeListHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 목록");
 
@@ -43,8 +43,8 @@ public class CafeListHandler extends AbstractCafeHandler {
     System.out.println("0. 이전");
     int input = Prompt.inputInt(" 선택> ");
     switch (input) {
-      case 1: commandMap.get("/cafe/detail").execute(); break;
-      case 2: commandMap.get("/cafe/search").execute(); break;
+      //      case 1: commandMap.get("/cafe/detail").execute(); break;
+      //      case 2: commandMap.get("/cafe/search").execute(); break;
       default : return;
     }
   }
