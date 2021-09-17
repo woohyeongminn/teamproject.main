@@ -14,7 +14,7 @@ public class AdminCeoMemberDetailHandler extends AbstractCeoMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 기업회원 상세");
     int inputceoNo = Prompt.inputInt(" 번호 : ");

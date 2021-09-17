@@ -15,7 +15,7 @@ public class AdminCeoMemberDeleteHandler extends AbstractCeoMemberHandler {
   }
 
   //관리자용
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 기업회원 탈퇴");
     int inputceoNo = Prompt.inputInt(" 번호 : ");

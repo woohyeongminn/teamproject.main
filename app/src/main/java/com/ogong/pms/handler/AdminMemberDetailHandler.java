@@ -14,7 +14,7 @@ public class AdminMemberDetailHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 회원 프로필 상세보기");
 

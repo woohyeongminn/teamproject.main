@@ -10,7 +10,7 @@ public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
   }
 
 
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 공지 목록");
     System.out.println();
