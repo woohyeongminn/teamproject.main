@@ -17,7 +17,7 @@ public class CafeUpdateHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 정보 변경");
 

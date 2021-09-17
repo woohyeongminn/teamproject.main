@@ -15,7 +15,7 @@ public class CeoFindIdPwHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("1. 이메일 찾기");
     System.out.println("2. 비밀번호 찾기");

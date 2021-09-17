@@ -17,7 +17,7 @@ public class AdminMemberListHandler extends AbstractMemberHandler {
 
   // 관리자
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 회원 목록");
     System.out.println();
@@ -41,8 +41,8 @@ public class AdminMemberListHandler extends AbstractMemberHandler {
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
-      case 1: commandMap.get("/adminMember/detail").execute(); break;
-      case 2: commandMap.get("/adminMember/delete").execute(); break;
+      //      case 1: commandMap.get("/adminMember/detail").execute(); break;
+      //      case 2: commandMap.get("/adminMember/delete").execute(); break;
       default : return;
     }
   }

@@ -90,7 +90,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 상세보기");
     Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 번호 : "));

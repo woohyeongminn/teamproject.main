@@ -11,7 +11,7 @@ public class CeoDetailHandler extends AbstractCeoMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 프로필");
 

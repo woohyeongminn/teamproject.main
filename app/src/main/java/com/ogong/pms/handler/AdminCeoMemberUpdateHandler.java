@@ -16,7 +16,7 @@ public class AdminCeoMemberUpdateHandler extends AbstractCeoMemberHandler {
 
   //관리자용
   @Override 
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 기업회원 변경"); 
     int inputceoNo = Prompt.inputInt(" 번호 : ");

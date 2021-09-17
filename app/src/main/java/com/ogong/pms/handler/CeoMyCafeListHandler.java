@@ -23,7 +23,7 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 카페 목록");
 

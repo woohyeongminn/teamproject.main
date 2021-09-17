@@ -20,7 +20,7 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 목록");
 

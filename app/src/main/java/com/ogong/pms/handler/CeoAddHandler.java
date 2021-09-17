@@ -55,7 +55,7 @@ public class CeoAddHandler extends AbstractCeoMemberHandler {
 
   // 개인
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 기업 회원가입");
     System.out.println();

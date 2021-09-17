@@ -15,7 +15,7 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
 
   // 마이페이지 - 내가 쓴 문의내역
   @Override
-  public void execute(){
+  public void execute(CommandRequest request){
     if (AuthPerMemberLoginHandler.getLoginUser() != null) {
 
       // 개인이 쓴 문의글

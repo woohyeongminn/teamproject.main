@@ -11,7 +11,7 @@ public class AdminDetailHandler extends AbstractAdminHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 내 프로필");
     System.out.println();

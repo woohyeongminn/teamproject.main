@@ -16,7 +16,7 @@ public class AdminCeoMemberListHandler extends AbstractCeoMemberHandler  {
 
   // 관리자가 사용
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 기업회원 목록");
     System.out.println();
@@ -40,8 +40,8 @@ public class AdminCeoMemberListHandler extends AbstractCeoMemberHandler  {
 
     int selectAdminNo = Prompt.inputInt("선택> ");
     switch (selectAdminNo) {
-      case 1: commandMap.get("/adminCeoMember/detail").execute(); break;
-      case 2: commandMap.get("/adminCeoMember/delete").execute(); break;
+      //      case 1: commandMap.get("/adminCeoMember/detail").execute(); break;
+      //      case 2: commandMap.get("/adminCeoMember/delete").execute(); break;
       default : return;
     }
   }

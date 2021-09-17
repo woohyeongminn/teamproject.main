@@ -17,7 +17,7 @@ public class CafeDeleteHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 삭제");
     Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));

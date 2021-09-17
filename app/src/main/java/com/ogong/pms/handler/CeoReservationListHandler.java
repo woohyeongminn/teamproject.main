@@ -14,7 +14,7 @@ public class CeoReservationListHandler extends AbstractCeoMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 예약 목록");
     // 구현해야됨

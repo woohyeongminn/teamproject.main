@@ -78,7 +78,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 문의사항");
     System.out.println();
