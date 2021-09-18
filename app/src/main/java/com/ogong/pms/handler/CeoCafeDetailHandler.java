@@ -1,8 +1,11 @@
 package com.ogong.pms.handler;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
@@ -11,12 +14,14 @@ public class CeoCafeDetailHandler extends AbstractCeoMemberHandler {
   List<CeoMember> ceoMemberList;
   List<Cafe> cafeList;
   List<CafeReview> reviewList;
+  List<CafeRoom> roomList;
 
   public CeoCafeDetailHandler (List<CeoMember> ceoMemberList, List<Cafe> cafeList,
-      List<CafeReview> reviewList) {
+      List<CafeReview> reviewList, List<CafeRoom> roomList) {
     super (ceoMemberList);
     this.cafeList = cafeList;
     this.reviewList = reviewList;
+    this.roomList = roomList;
   }
 
   @Override
@@ -84,20 +89,107 @@ public class CeoCafeDetailHandler extends AbstractCeoMemberHandler {
     System.out.println();
     // 구현중
 
+    List<CafeRoom> cafeRoom = myCafeStudyRoomList(cafe);
+
+    if (cafeRoom == null) {
+      System.out.println(" >> 등록된 스터디룸이 없습니다.");
+      System.out.println("\n----------------------");
+      System.out.println("1. 등록");
+      System.out.println("0. 이전");
+      int selectNo = Prompt.inputInt(" 선택> ");
+      switch (selectNo) {
+        case 1: return;
+        case 0: return;
+        default : 
+          System.out.println(" >> 번호를 다시 선택해 주세요."); return;
+      }
+    }
+
+    int i = 1;
+    HashMap<Integer, Integer> selectRoomNo = new HashMap<>();
+    for (CafeRoom myCafeRoom : cafeRoom) {
+      if (cafe.getNo() == myCafeRoom.getCafe().getNo()) {
+        System.out.println(" " + i + ". " + myCafeRoom.getRoomName());
+        selectRoomNo.put(i, myCafeRoom.getRoomNo());
+        i++;
+      }
+    }
+
+    System.out.println("\n----------------------");
     System.out.println("1. 등록");
-    System.out.println("2. 목록");
-    System.out.println("3. 수정");
-    System.out.println("4. 삭제");
+    System.out.println("2. 상세");
+    System.out.println("0. 이전");
+    int selectNo = Prompt.inputInt(" 선택> ");
+    switch (selectNo) {
+      case 1: return;
+      case 2: myCafeStudyRoomDetail(selectRoomNo, cafe); return;
+      case 0: return;
+      default : 
+        System.out.println(" >> 번호를 다시 선택해 주세요.");
+    }
+  }
+
+  private List<CafeRoom> myCafeStudyRoomList(Cafe cafe) {
+    List<CafeRoom> myCafeStudyRoomList = new ArrayList<>();
+    for (CafeRoom cafeRoom : roomList) {
+      if (cafeRoom.getCafe().getNo() == cafe.getNo()) {
+        myCafeStudyRoomList.add(cafeRoom);
+      }
+    }
+    return myCafeStudyRoomList;
+  } 
+
+  private void myCafeStudyRoomDetail(HashMap<Integer, Integer> selectRoomNo, Cafe cafe) {
+    System.out.println();
+    System.out.println("▶ 스터디룸 상세");
+
+    int input;
+    CafeRoom cafeRoom = new CafeRoom();
+    // 오류,, 고쳐야함
+    while (true) {
+      System.out.println();
+      input = Prompt.inputInt(" 번호 : ");
+      cafeRoom = getCafeRoomByNo(selectRoomNo.get(input), cafe);
+
+      if (cafeRoom == null) {
+        System.out.println(" >> 번호를 다시 선택해 주세요.");
+        continue;
+      } else {
+        break;
+      }
+    }
+
+    System.out.printf(" (%s)\n", cafeRoom.getRoomNo());
+    System.out.printf(" [%s - %s]\n", cafeRoom.getCafe().getName(), cafeRoom.getRoomName());
+    System.out.printf(" >> 대표이미지 : %s\n", cafeRoom.getRoomImg());
+    System.out.printf(" >> 소개글 : %s\n", cafeRoom.getRoomInfo());
+    System.out.printf(" >> 시작시간 : %s\n", cafe.getOpenTime());
+    System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
+    System.out.printf(" >> 시간당 금액 : %d원\n", cafeRoom.getRoomPrice());
+
+    System.out.println("\n----------------------");
+    System.out.println("1. 수정");
+    System.out.println("2. 삭제");
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt(" 선택> ");
     switch (selectNo) {
       case 1: return;
       case 2: return;
-      case 3: return;
       case 0: return;
       default : 
         System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
+
+  }
+
+  private CafeRoom getCafeRoomByNo(int roomNo, Cafe cafe) {
+    CafeRoom myCafeRoom = new CafeRoom();
+    for (CafeRoom cafeRoom : roomList) {
+      if (cafeRoom.getRoomNo() == roomNo && cafeRoom.getCafe().getNo() == cafe.getNo()) {
+        return cafeRoom;
+      }
+    }
+    return myCafeRoom;
   }
 
   private Cafe findByNo(int cafeNo) {
