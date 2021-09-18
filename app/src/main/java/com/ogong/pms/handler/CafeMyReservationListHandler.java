@@ -89,11 +89,14 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
     System.out.println("----------------------");
     System.out.println("1. 상세");
     System.out.println("0. 이전");
-
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1: request.getRequestDispatcher("/cafeReservation/detail").forward(request); return;
-      default : return;
+    while (true) {
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1: request.getRequestDispatcher("/cafeReservation/detail").forward(request); return;
+        case 0: return;
+        default : 
+          System.out.println(" >> 번호를 다시 선택해 주세요.");
+      }
     }
   }
 }
