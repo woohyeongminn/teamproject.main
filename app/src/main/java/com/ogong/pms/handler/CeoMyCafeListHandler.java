@@ -36,9 +36,9 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
         //          System.out.println(" 삭제 된 장소입니다.");
         //          continue;
         //        }
-        if (cafe.getCafeStatus() == 3) {
-          continue;
-        }
+        //        if (cafe.getCafeStatus() == 3) {
+        //          continue;
+        //        }
         if (cafe.getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
           System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
               , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());

@@ -36,8 +36,8 @@ public class CafeListHandler extends AbstractCafeHandler {
     System.out.println("0. 이전");
     int input = Prompt.inputInt(" 선택> ");
     switch (input) {
-      case 1: request.getRequestDispatcher("/cafe/detail").forward(request);
-      case 2: request.getRequestDispatcher("/cafe/search").forward(request);
+      case 1: request.getRequestDispatcher("/cafe/detail").forward(request); break;
+      case 2: request.getRequestDispatcher("/cafe/search").forward(request); break;
       case 0: return;
       default : System.out.println(" >> 명령어가 올바르지 않습니다.");
     }

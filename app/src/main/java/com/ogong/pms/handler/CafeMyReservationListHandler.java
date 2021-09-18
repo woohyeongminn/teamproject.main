@@ -1,34 +1,22 @@
 package com.ogong.pms.handler;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CafeReview;
-import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
-  List<CafeReview> reviewList;
   List<CafeReservation> reserList;
-  List<CafeRoom> roomList;
-  PromptCafe promptcafe;
   PromptPerMember promptPerMember;
-  int reviewNo = 1; // 리뷰번호
 
-  public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
-      List<CafeReservation> reserList, PromptPerMember promptPerMember,
-      List<CafeRoom> roomList, PromptCafe promptcafe) {
+  public CafeMyReservationListHandler (List<Cafe> cafeList,
+      List<CafeReservation> reserList, PromptPerMember promptPerMember) {
 
     super (cafeList);
-    this.reviewList = reviewList;
     this.reserList = reserList;
     this.promptPerMember = promptPerMember;
-    this.roomList = roomList;
-    this.promptcafe = promptcafe;
 
     //    CafeReservation reservation = new CafeReservation();
     //    reservation.setReservationNo(1);
@@ -70,7 +58,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 내 예약 내역 보기");
     System.out.println();
@@ -81,185 +69,31 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
       System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
       return;
     }
+    int reservationCount = 0;
 
-    List<CafeReservation> myReserList = printMyReserList(member);
+    for (CafeReservation myReservationList : reserList) {
+      if (myReservationList.getMember().getPerNo() == member.getPerNo()) {
+        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n 결제금액 : %d원\n"
+            , myReservationList.getReservationNo(), myReservationList.getReservationDate(), 
+            myReservationList.getCafe().getName(), myReservationList.getTotalPrice());
+        System.out.println();
+        reservationCount++;
+      }
+    }
 
-    if (myReserList.size() == 0) {
+    if (reservationCount == 0) {
       System.out.println(" >> 예약 내역이 존재하지 않습니다.");
       return;
     }
 
     System.out.println("----------------------");
-    System.out.println("1. 리뷰 작성");
-    System.out.println("2. 예약 취소");
-    System.out.println("0. 뒤로 가기");
+    System.out.println("1. 상세");
+    System.out.println("0. 이전");
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1: goToAddReview(); break;
-      case 2: cancelReservation(); break;
+      case 1: request.getRequestDispatcher("/cafeReservation/detail").forward(request); break;
       default : return;
     }
-  }
-
-  private void goToAddReview() {
-    System.out.println();
-
-    int inputNo = Prompt.inputInt(" 리뷰 작성할 예약번호 : ");
-
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
-    CafeReservation myReserByNo = getMyReserByNo(member, inputNo);
-
-    if (myReserByNo == null) {
-      System.out.println(" >> 예약번호를 잘못 선택하셨습니다.");
-      return;
-    }
-
-    Date today = new Date(System.currentTimeMillis());
-    Date reserDate = myReserByNo.getReservationDate();
-
-    if (reserDate.toLocalDate().compareTo(today.toLocalDate()) < 0) {
-      if (!myReserByNo.getWirteReview()) {
-        System.out.println(" >> 리뷰 작성 화면으로 이동합니다.");
-        addReview(myReserByNo);
-      } else {
-        System.out.println(" >> 이미 리뷰를 작성한 예약입니다.");
-        return;
-      }
-    } else {
-      System.out.println(" >> 이용 후 다음 날부터 작성 가능합니다.");
-      return;
-    }
-  }
-
-  protected void addReview(CafeReservation cafeReser) {
-    System.out.println();
-    System.out.println("▶ 리뷰 등록하기");
-
-    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-      System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
-    } else {
-
-      Cafe cafe = promptcafe.findByCafeNo(cafeReser.getCafe().getNo());
-
-      CafeReview cafeReview = new CafeReview();
-
-      String content = Prompt.inputString(" 리뷰 내용 : ");
-      int grade = Prompt.inputInt(" 별점(0~5점) : ");
-      while (grade < 0 || grade > 5) {
-        System.out.println(" 별점을 다시 입력해 주세요.");
-        grade = Prompt.inputInt(" 별점(0~5점) : ");
-      }
-      Member member = AuthPerMemberLoginHandler.getLoginUser();
-      Date registeredDate = new Date(System.currentTimeMillis());
-
-      String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
-      if (!input.equalsIgnoreCase("네")) {
-        System.out.println(" >> 리뷰 등록을 취소하였습니다.");
-        return;
-      }
-
-      cafeReview.setReviewNo(reviewNo++);
-      cafeReview.setContent(content);
-      cafeReview.setGrade(grade);
-      cafeReview.setCafe(cafe);
-      cafeReview.setMember(member);
-      cafeReview.setRegisteredDate(registeredDate);
-      cafeReview.setReviewStatus(0);
-
-      reviewList.add(cafeReview);
-      cafeReser.setWirteReview(true);
-
-      System.out.println(" >> 리뷰가 등록되었습니다.");
-    }
-  }
-
-  private void cancelReservation() {
-    System.out.println();
-    int inputNo = Prompt.inputInt(" 취소할 예약 번호 : ");
-
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
-    CafeReservation myReserByNo = getMyReserByNo(member, inputNo);
-
-    if (myReserByNo == null) {
-      System.out.println(" >> 예약 번호를 잘못 선택하셨습니다.");
-      return;
-    }
-
-    Date today = new Date(System.currentTimeMillis());
-    Date reserDate = myReserByNo.getReservationDate();
-
-    if (reserDate.toLocalDate().compareTo(today.toLocalDate()) > 0) {
-
-      String input = Prompt.inputString(" 정말 예약 취소 하시겠습니까? (네 / 아니오) ");
-
-      if (!input.equalsIgnoreCase("네")) {
-        System.out.println(" >> 예약 취소를 취소합니다.");
-        return;
-      }
-      reserList.remove(myReserByNo);
-      System.out.println(" >> 예약이 취소되었습니다.");
-    } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
-      System.out.println(" >> 당일 예약은 취소 불가능합니다.");
-      return;
-    } else {
-      System.out.println(" >> 지난 예약은 선택할 수 없습니다.");
-      return;
-    }
-  }
-
-  private List<CafeReservation> printMyReserList(Member member) {
-
-    List<CafeReservation> myReserList = new ArrayList<>();
-    for (CafeReservation cafeReser : reserList) {
-
-      Member cafeReserMember = promptPerMember.findByMemberNo(cafeReser.getMember().getPerNo());
-
-      if (cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
-        Cafe cafeReserCafe = promptcafe.findByCafeNo(cafeReser.getCafe().getNo());
-        CafeRoom cafeRoom = getCafeRoomName(cafeReser.getRoomNo());
-        myReserList.add(cafeReser);
-        if (cafeReser.getUseMemberNumber() == 0) {
-          System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
-              + " 시작시간 : %s\n 이용시간 : %s시간\n 스터디룸 : %s\n"
-              + " 결제금액 : %d원\n 리뷰작성여부 : %s\n"
-              , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
-              , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeRoom.getRoomName()  
-              , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
-          System.out.println();  
-        } else {
-          System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
-              + " 시작시간 : %s\n 이용시간 : %s시간\n 사용인원 : %d명\n"
-              + " 결제금액 : %d원\n 리뷰작성여부 : %s\n"
-              , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
-              , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseMemberNumber()   
-              , cafeReser.getTotalPrice() ,getReviewStatusLabel(String.valueOf(cafeReser.getWirteReview())));
-          System.out.println();
-        }
-      } 
-    }
-    return myReserList;
-  }
-
-  private CafeReservation getMyReserByNo(Member member, int reserNo) {
-    for (CafeReservation cafeReser : reserList) {
-      Member cafeReserMember = promptPerMember.findByMemberNo(cafeReser.getMember().getPerNo());
-      if (reserNo == cafeReser.getReservationNo() &&
-          cafeReserMember.getPerEmail().equalsIgnoreCase(member.getPerEmail())) {
-        return cafeReser;
-      }
-    }
-    return null;
-  }
-
-  private CafeRoom getCafeRoomName(int roomNo) {
-    for (CafeRoom cafeRoom : roomList) {
-      if (cafeRoom.getRoomNo() == roomNo) {
-        return cafeRoom;
-      }
-    }
-    return null;
   }
 }
