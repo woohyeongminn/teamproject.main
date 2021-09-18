@@ -183,27 +183,21 @@ public class App {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList, ceoMemberList, commentList));
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, memberList, ceoMemberList, commentList));
 
-    commandMap.put("/cafe/add",
-        new CafeAddHandler(cafeList, ceoMemberList));
-    commandMap.put("/cafe/list", 
-        new CafeListHandler(cafeList));
-    commandMap.put("/cafe/detail",
-        new CafeDetailHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
-    commandMap.put("/cafe/update",
-        new CafeUpdateHandler(cafeList, promptcafe));
-    commandMap.put("/cafe/delete",
-        new CafeDeleteHandler(cafeList, promptcafe));
-    commandMap.put("/cafe/search", 
-        new CafeSearchHandler(cafeList));
-    commandMap.put("/cafe/reservationList",
-        new CafeMyReservationListHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
-    commandMap.put("/cafe/myReviewList", 
-        new CafeMyReviewListHandler(cafeList, cafeReviewList, promptcafe));
+    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, ceoMemberList));
+    commandMap.put("/cafe/list", new CafeListHandler(cafeList));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReviewList, 
+        cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
+    commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, promptcafe));
+    commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, promptcafe));
+    commandMap.put("/cafe/search", new CafeSearchHandler(cafeList));
+    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, 
+        cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
+    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReviewList, promptcafe));
 
-    commandMap.put("/cafe/control",
-        new AdminCafeControlHandler(cafeList, cafeReviewList, promptPerMember, promptcafe));
-    commandMap.put("/cafe/reviewList",
-        new AdminCafeReviewListControlHandler(cafeList, cafeReviewList, promptcafe)); 
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReviewList, 
+        promptPerMember, promptcafe));
+    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, 
+        cafeReviewList, promptcafe)); 
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
