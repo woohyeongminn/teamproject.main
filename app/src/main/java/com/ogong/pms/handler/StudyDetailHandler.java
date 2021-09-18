@@ -51,21 +51,30 @@ public class StudyDetailHandler extends AbstractStudyHandler {
         System.out.println("1. 수정");
         System.out.println("2. 삭제");
         System.out.println("0. 이전");
-        int selectNo = Prompt.inputInt("선택> ");
-        switch (selectNo) {
-          case 1: request.getRequestDispatcher("/myStudy/update").forward(request); return;
-          case 2: request.getRequestDispatcher("/myStudy/delete").forward(request); return;
-          default : return;
+
+        while (true) {
+          int selectNo = Prompt.inputInt("선택> ");
+          switch (selectNo) {
+            case 1: request.getRequestDispatcher("/myStudy/update").forward(request); return;
+            case 2: request.getRequestDispatcher("/myStudy/delete").forward(request); return;
+            default : 
+              System.out.println(" >> 번호를 다시 선택해 주세요.");
+          }
         }
       } else {
 
         System.out.println("\n----------------------");
         System.out.println("1. 참여 신청하기");
         System.out.println("0. 이전");
-        int selectNo = Prompt.inputInt("선택> ");
-        switch (selectNo) {
-          case 1: joinStudy(study); break;
-          default : return;
+
+        while (true) {
+          int selectNo = Prompt.inputInt("선택> ");
+          switch (selectNo) {
+            case 1: joinStudy(study); break;
+            case 0: return;
+            default : 
+              System.out.println(" >> 번호를 다시 선택해 주세요.");
+          }
         }
       }
     }
