@@ -93,7 +93,7 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
       System.out.println(" >> 등록이 취소되었습니다.");
       return;
     }
-    System.out.println(" >> 스터디가 등록되었습니다.");
+    System.out.println(" >> 등록되었습니다.");
     cafeList.add(cafe);
   }
 
