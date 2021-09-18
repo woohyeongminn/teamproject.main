@@ -41,7 +41,7 @@ public class CafeMyReservationDetailHandler extends AbstractCafeHandler {
     int input = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    CafeReservation myReservation = printMyReserList(member, input);
+    CafeReservation myReservation = printMyReserDetail(member, input);
     if (myReservation == null) {
       System.out.println(" >> 번호를 다시 선택하세요. ");
       return;
@@ -157,14 +157,14 @@ public class CafeMyReservationDetailHandler extends AbstractCafeHandler {
     }
   }
 
-  private CafeReservation printMyReserList(Member member, int input) {
+  private CafeReservation printMyReserDetail(Member member, int input) {
 
     for (CafeReservation cafeReser : reserList) {
 
       if (cafeReser.getMember().getPerNo() == member.getPerNo() &&
           cafeReser.getReservationNo() == input) {
         Cafe cafeReserCafe = cafeReser.getCafe();
-        CafeRoom cafeRoom = getCafeRoomName(cafeReser.getRoomNo());
+        CafeRoom cafeRoom = getCafeRoom(cafeReser.getRoomNo());
         if (cafeReser.getUseMemberNumber() == 0) {
           System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
               + " 시작시간 : %s\n 이용시간 : %s시간\n 스터디룸 : %s\n"
@@ -189,7 +189,7 @@ public class CafeMyReservationDetailHandler extends AbstractCafeHandler {
     return null;
   }
 
-  private CafeRoom getCafeRoomName(int roomNo) {
+  private CafeRoom getCafeRoom(int roomNo) {
     for (CafeRoom cafeRoom : roomList) {
       if (cafeRoom.getRoomNo() == roomNo) {
         return cafeRoom;
