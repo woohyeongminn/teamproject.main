@@ -15,12 +15,15 @@ public class MemberDetailHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 프로필");
 
+    Member member = null;
+
+
     try {
-      Member member = AuthPerMemberLoginHandler.getLoginUser();
+      member = AuthPerMemberLoginHandler.getLoginUser();
       System.out.println();
       System.out.printf(" [%s]\n", member.getPerNickname());
       System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
@@ -32,13 +35,19 @@ public class MemberDetailHandler extends AbstractMemberHandler {
       System.out.println(" >> 로그인 하세요.");
     }
 
-    System.out.println();
-    System.out.println("1. 수정");
-    System.out.println("0. 이전");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      //case 1 : commandMap.get("/member/update").execute(); break;
-      default : return;
+
+    request.setAttribute("inputNo", member.getPerNo());
+
+    while (true) {
+      System.out.println();
+      System.out.println("1. 수정");
+      System.out.println("0. 이전");
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        //case 1 : commandMap.get("/member/update").execute(); break;
+        default : return;
+      }
     }
+
   }
 }
