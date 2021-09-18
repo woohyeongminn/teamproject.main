@@ -14,7 +14,7 @@ public class AdminNoticeUpdateHandler extends AbstractAdminNoticeHandler {
   public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 공지 변경");
-    int adminnotiNo = Prompt.inputInt(" 번호 : ");
+    int adminnotiNo = (int) request.getAttribute("adminnotiNo");
 
     AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
 
