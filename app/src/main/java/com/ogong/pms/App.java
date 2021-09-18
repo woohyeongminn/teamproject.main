@@ -173,7 +173,8 @@ public class App {
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberList));
     commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberList, promptCeoMember));
-    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/ceoMember/delete", 
+        new CeoDeleteHandler(ceoMemberList, promptCeoMember, cafeList));
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
     commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList, cafeList, cafeRoomList));
 
@@ -184,7 +185,8 @@ public class App {
 
     commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(ceoMemberList, promptCeoMember));
-    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/adminCeoMember/delete",
+        new AdminCeoMemberDeleteHandler(ceoMemberList, promptCeoMember, cafeList));
     commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberList, commandMap));
 
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, ceoMemberList, commentList));
@@ -243,7 +245,7 @@ public class App {
 
     // 내 스터디 
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
-        myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder));
+        myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder, promptStudy));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList, promptStudy));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));

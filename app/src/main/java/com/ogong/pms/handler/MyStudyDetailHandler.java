@@ -17,13 +17,14 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
   public MyStudyDetailHandler(List<Study> studyList, MyStudyToDo myStudyToDo, 
       MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard,
-      List<Comment> commentList, MyStudyGuilder myStudyGuilder) {
+      List<Comment> commentList, MyStudyGuilder myStudyGuilder, PromptStudy promptStudy) {
     super(studyList);
     this.myStudyToDo = myStudyToDo;
     this.myStudyCalender = myStudyCalender;
     this.myStudyFreeBoard = myStudyFreeBoard;
     this.myStudyGuilder = myStudyGuilder;
     this.commentList = commentList;
+    this.promptStudy = promptStudy;
   }
 
 

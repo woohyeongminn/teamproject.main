@@ -1,17 +1,21 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
 public class AdminCeoMemberDeleteHandler extends AbstractCeoMemberHandler {
 
   PromptCeoMember promptCeoMember;
+  List<Cafe> cafeList;
 
   public AdminCeoMemberDeleteHandler(
-      List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
+      List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember,
+      List<Cafe> cafeList) {
     super(ceoMemberList);
     this.promptCeoMember = promptCeoMember;
+    this.cafeList = cafeList;
   }
 
   //관리자용
@@ -32,6 +36,12 @@ public class AdminCeoMemberDeleteHandler extends AbstractCeoMemberHandler {
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 기업 회원 삭제를 취소하였습니다.");
       return;
+    }
+
+    for (int i = cafeList.size() - 1; i >= 0; i--) {
+      if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
+        cafeList.remove(cafeList.get(i));
+      }
     }
 
     ceoMemberList.remove(ceoMember);
