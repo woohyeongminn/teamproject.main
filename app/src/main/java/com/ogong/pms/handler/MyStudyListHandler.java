@@ -1,17 +1,14 @@
 package com.ogong.pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 public class MyStudyListHandler extends AbstractStudyHandler {
 
-  HashMap<String, Command> commandMap;
 
-  public MyStudyListHandler(List<Study> studyList, HashMap<String, Command> commandMap) {
+  public MyStudyListHandler(List<Study> studyList) {
     super(studyList);
-    this.commandMap = commandMap;
   }
 
   @Override

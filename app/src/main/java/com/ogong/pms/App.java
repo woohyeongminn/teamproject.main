@@ -253,7 +253,7 @@ public class App {
         myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder, promptStudy));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList, promptStudy));
-    commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
+    commandMap.put("/myStudy/list", new MyStudyListHandler(studyList));
     commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyList, promptStudy));
 
   }
@@ -508,8 +508,6 @@ public class App {
     MenuGroup myStudyMenu = new MenuGroup("내 스터디", PER_LOGIN);
     myStudyMenu.add(new MenuItem("목록", "/myStudy/list"));
     myStudyMenu.add(new MenuItem("상세", "/myStudy/detail"));
-    myStudyMenu.add(new MenuItem("수정", "/myStudy/update"));
-    myStudyMenu.add(new MenuItem("삭제", "/myStudy/delete"));
 
     return myStudyMenu; 
   }
