@@ -30,8 +30,8 @@ public class AdminMemberUpdateHandler extends AbstractMemberHandler {
         String perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
         String perPhoto = Prompt.inputString(" 사진(" + member.getPerPhoto() + ") : ");
 
+        System.out.println();
         String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
-
         if (!input.equalsIgnoreCase("네")) {
           System.out.println(" >> 회원 변경을 취소하였습니다.");
           return;

@@ -1,6 +1,7 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.menu.Menu;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
@@ -51,6 +52,7 @@ public class CeoDeleteHandler extends AbstractCeoMemberHandler {
 
     ceoMemberList.remove(ceoMember);
     AuthCeoMemberLoginHandler.loginCeoMember = null;
+    AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
     System.out.println();
     System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
     return;

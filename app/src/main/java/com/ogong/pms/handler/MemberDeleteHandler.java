@@ -1,16 +1,21 @@
 package com.ogong.pms.handler;
 
 import java.util.List;
+import com.ogong.menu.Menu;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
 public class MemberDeleteHandler extends AbstractMemberHandler {
 
   PromptPerMember promptPerMember; 
+  List<Study> studyList;
 
-  public MemberDeleteHandler(List<Member> memberList, PromptPerMember promptPerMember) {
+  public MemberDeleteHandler(List<Member> memberList, PromptPerMember promptPerMember,
+      List<Study> studyList) {
     super(memberList);
     this.promptPerMember = promptPerMember;
+    this.studyList = studyList;
   }
 
   // 개인
@@ -51,8 +56,16 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
       System.out.println(" >> 회원 탈퇴를 취소하였습니다.");
       return;
     }
+
+    for (int i = studyList.size() - 1; i >= 0; i--) {
+      if (studyList.get(i).getOwner().getPerNo() == member.getPerNo()) {
+        studyList.remove(studyList.get(i));
+      }
+    }
+
     memberList.remove(member);
     AuthPerMemberLoginHandler.loginUser = null;
+    AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
     System.out.println();
     System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
     return;

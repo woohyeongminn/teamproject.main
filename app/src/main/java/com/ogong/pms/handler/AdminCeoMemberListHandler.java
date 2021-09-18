@@ -3,7 +3,6 @@ package com.ogong.pms.handler;
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.util.Prompt;
 
 public class AdminCeoMemberListHandler extends AbstractCeoMemberHandler  {
 
@@ -30,19 +29,19 @@ public class AdminCeoMemberListHandler extends AbstractCeoMemberHandler  {
 
       System.out.println();
     }
-    selectUserModifyPage();
+    //    selectUserModifyPage();
   }
 
-  private void selectUserModifyPage() {
-    System.out.println("1. 상세");
-    System.out.println("2. 탈퇴");
-    System.out.println("0. 이전");
-
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      //      case 1: commandMap.get("/adminCeoMember/detail").execute(); break;
-      //      case 2: commandMap.get("/adminCeoMember/delete").execute(); break;
-      default : return;
-    }
-  }
+  //  private void selectUserModifyPage() {
+  //    System.out.println("1. 상세");
+  //    System.out.println("2. 탈퇴");
+  //    System.out.println("0. 이전");
+  //
+  //    int selectAdminNo = Prompt.inputInt("선택> ");
+  //    switch (selectAdminNo) {
+  //      //      case 1: commandMap.get("/adminCeoMember/detail").execute(); break;
+  //      //      case 2: commandMap.get("/adminCeoMember/delete").execute(); break;
+  //      default : return;
+  //    }
+  //  }
 }
