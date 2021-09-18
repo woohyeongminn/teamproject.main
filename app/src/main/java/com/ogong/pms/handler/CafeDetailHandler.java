@@ -125,7 +125,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
           reviewSize++;
           continue;
         }
-        String nickname = promptPerMember.findByMemberNo(review.getMember().getPerNo()).getPerNickname();
+        String nickname = review.getMember().getPerNickname();
         System.out.printf(" 닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
             nickname, getReviewGradeStatusLabel(review.getGrade()), review.getContent()
             , review.getRegisteredDate());
@@ -172,12 +172,6 @@ public class CafeDetailHandler extends AbstractCafeHandler {
       System.out.println("    날짜를 다시 입력해 주세요.\n");
       reservationDate = Prompt.inputDate(" 예약 날짜 : ");
     }
-
-    //    String[] openTime = cafe.getOpenTime().split(":");
-    //    String[] lastTime = cafe.getCloseTime().split(":");
-    //    int openTimeHour = Integer.valueOf(openTime[0]);
-    //    int lastTimeMinus1 = Integer.valueOf(lastTime[0]) - 1;
-    //String lastOrderTime = String.valueOf(lastTimeMinus1) + ":" + lastTime[1];
 
     String openTime = cafe.getOpenTime().toString();    
     String closeTime = cafe.getCloseTime().toString();

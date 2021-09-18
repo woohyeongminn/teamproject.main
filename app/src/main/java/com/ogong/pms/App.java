@@ -65,6 +65,7 @@ import com.ogong.pms.handler.CafeAddHandler;
 import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
 import com.ogong.pms.handler.CafeListHandler;
+import com.ogong.pms.handler.CafeMyReservationDetailHandler;
 import com.ogong.pms.handler.CafeMyReservationListHandler;
 import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
@@ -170,7 +171,7 @@ public class App {
     commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
-    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList));
+    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList, cafeList));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
@@ -194,8 +195,10 @@ public class App {
     commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, promptcafe));
     commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, promptcafe));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList));
-    commandMap.put("/cafe/reservationList", new CafeMyReservationListHandler(cafeList, 
-        cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
+    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(cafeList, 
+        cafeReservationList, promptPerMember));
+    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(cafeList, 
+        cafeReviewList, cafeReservationList, cafeRoomList));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReviewList, promptcafe));
 
     commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReviewList, 
@@ -464,7 +467,7 @@ public class App {
 
     myPageMenu.add(new MenuItem("개인정보", "/member/detail"));
     myPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
-    myPageMenu.add(new MenuItem("예약내역", "/cafe/reservationList"));
+    myPageMenu.add(new MenuItem("예약내역", "/cafeReservation/list"));
     myPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
     myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
     return myPageMenu;

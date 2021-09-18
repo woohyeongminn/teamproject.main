@@ -31,7 +31,7 @@ public class CafeSearchHandler extends AbstractCafeHandler {
       System.out.println("0. 이전");
       int selectInput = Prompt.inputInt("선택> ");
       switch (selectInput) {
-        case 1: request.getRequestDispatcher("/cafe/search").forward(request);
+        case 1: request.getRequestDispatcher("/cafe/search").forward(request); break;
         case 0: return;
         default : System.out.println(" >> 명령어가 올바르지 않습니다.");
       }
@@ -41,7 +41,7 @@ public class CafeSearchHandler extends AbstractCafeHandler {
       System.out.println("0. 이전");
       int selectInput = Prompt.inputInt("선택> ");
       switch (selectInput) {
-        case 1: request.getRequestDispatcher("/cafe/detail").forward(request);
+        case 1: request.getRequestDispatcher("/cafe/detail").forward(request); break;
         case 0: return;
         default : System.out.println(" >> 명령어가 올바르지 않습니다.");
       }
