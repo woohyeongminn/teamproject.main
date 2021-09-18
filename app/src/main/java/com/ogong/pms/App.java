@@ -243,7 +243,7 @@ public class App {
 
     // 내 스터디 
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
-        myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder));
+        myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder, promptStudy));
 
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList, promptStudy));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
