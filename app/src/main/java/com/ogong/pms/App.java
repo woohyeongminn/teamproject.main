@@ -289,7 +289,7 @@ public class App {
     //    saveObjects("ceoMember.json", ceoMemberList);   // CeoAddHandler
     //    saveObjects("admin.json", adminList); // AuthAdminLoginHandler
     //    saveObjects("adminNotice.json" , adminNoticeList);  // AdminNoticeAddHandler
-    //    saveObjects("cafe.json", cafeList); // CafeAddHandler
+    //    saveObjects("cafe.json", cafeList); // CeoCafeAddHandler
     //    saveObjects("cafeReservation.json", cafeReservationList);  // CafeMyReservationListHandler
     //    saveObjects("cafeReview.json", cafeReviewList);
     //    saveObjects("cafeRoom.json", cafeRoomList); // CafeDetailHandler 테스트값 : 2021-10-10
