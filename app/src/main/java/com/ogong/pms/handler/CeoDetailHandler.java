@@ -4,19 +4,21 @@ import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
-public class CeoDetailHandler extends AbstractCeoHandler {
+public class CeoDetailHandler extends AbstractCeoMemberHandler {
 
   public CeoDetailHandler(List<CeoMember> ceoMemberList) {
     super(ceoMemberList);
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 프로필");
 
+    CeoMember ceoMember = null;
+
     try {
-      CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+      ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
       System.out.println();
       System.out.printf(" [%s]\n", ceoMember.getCeoBossName());
       System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
@@ -29,13 +31,26 @@ public class CeoDetailHandler extends AbstractCeoHandler {
       System.out.println(" >> 로그인 하세요.");
     }
 
+    if (ceoMember == null) {
+      return;
+    }
+
+    request.setAttribute("inputceoNo", ceoMember.getCeoNo());
+
     System.out.println();
     System.out.println("1. 수정");
+    System.out.println("2. 탈퇴");
     System.out.println("0. 이전");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      //      case 1 : commandMap.get("/member/update").execute(); break;
-      default : return;
+
+    while (true) {
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1: request.getRequestDispatcher("/ceoMember/update").forward(request); return;
+        case 2: request.getRequestDispatcher("/ceoMember/delete").forward(request); return;
+        case 0: return;
+        default : 
+          System.out.println(" >> 번호를 다시 선택해 주세요.");
+      }
     }
   }
 }

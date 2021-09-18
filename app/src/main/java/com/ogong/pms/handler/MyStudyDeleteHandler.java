@@ -6,18 +6,21 @@ import com.ogong.util.Prompt;
 
 public class MyStudyDeleteHandler extends AbstractStudyHandler {
 
-  public MyStudyDeleteHandler(List<Study> newStudyList) {
+  PromptStudy promptStudy;
+
+  public MyStudyDeleteHandler(List<Study> newStudyList, PromptStudy promptstudy) {
     super(newStudyList);
+    this.promptStudy = promptstudy;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 스터디 삭제");
 
-    int inputNo = Prompt.inputInt(" 번호  : ");
+    int inputNo = (int) request.getAttribute("inputNo");
 
-    Study myStudy = findByMyStudyNo(inputNo);
+    Study myStudy = promptStudy.findByMyStudyNo(inputNo);
 
     // 조건내용 조금 수정해서 '해당 번호의 스터디가 없습니다' 출력되도록 수정해야함
     if (myStudy == null) {

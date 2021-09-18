@@ -2,19 +2,23 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.util.Prompt;
 
 public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
 
+  List<CafeReview> reviewList;
+  PromptCafe promptcafe;
+
   public AdminCafeReviewListControlHandler(
-      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList) {
-    super (cafeList, reviewList, reserList);
+      List<Cafe> cafeList, List<CafeReview> reviewList, PromptCafe promptcafe) {
+    super (cafeList);
+    this.reviewList = reviewList;
+    this.promptcafe = promptcafe;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 후기 목록");
     System.out.println();
@@ -23,7 +27,7 @@ public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
     for (CafeReview cafeReview : reviewList) {
       //      if (cafeReview.getMember().getPerNickname() 
       //          != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
-      Cafe cafe = findByNo(cafeReview.getCafeNo());
+      Cafe cafe = promptcafe.findByCafeNo(cafeReview.getCafe().getNo());
       System.out.printf(" (%d)\n [%s]\n 별점 : %d\n 내용 : %s\n 등록일 : %s\n",
           cafeReview.getReviewNo(), cafe.getName(), cafeReview.getGrade(),
           cafeReview.getContent(), cafeReview.getRegisteredDate());
@@ -57,7 +61,7 @@ public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
 
     int userReviewNo = Prompt.inputInt(" 번호 : ");
 
-    CafeReview cafeReview = findByReview(userReviewNo);
+    CafeReview cafeReview = promptcafe.findByCafeReview(userReviewNo);
 
     if (cafeReview == null) {
       System.out.println(" >> 리뷰 번호를 잘못 선택하셨습니다.");

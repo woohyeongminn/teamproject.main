@@ -18,10 +18,16 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 문의사항 상세");
     System.out.println();
+
+    if (AuthPerMemberLoginHandler.getLoginUser() == null ||
+        AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
+      System.out.println(" >> 로그인 하세요.");
+      return;
+    }
 
     int askNo = Prompt.inputInt(" 번호 : ");
 
@@ -58,6 +64,8 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       listComment(askBoard);  // 댓글호출
 
     }
+
+
 
     if (AuthAdminLoginHandler.getLoginAdmin() != null) {
       System.out.println("\n---------------------");

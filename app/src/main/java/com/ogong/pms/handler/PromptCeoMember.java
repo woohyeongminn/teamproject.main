@@ -12,7 +12,7 @@ public class PromptCeoMember {
   }
 
   //닉네임을 통해 기업을 찾아서 리턴한다.
-  public CeoMember getCeoByNick(String inputNick) {
+  public CeoMember findByCeoMemberNick(String inputNick) {
     for (CeoMember ceoMember : ceoMemberList) {
       if (inputNick.equals(ceoMember.getCeoBossName())) {
         return ceoMember;
@@ -22,7 +22,7 @@ public class PromptCeoMember {
   }
 
   //이메일을 통해 기업을 찾아서 리턴한다.
-  public CeoMember getCeoByEmail(String inputEmail) {
+  public CeoMember findByCeoMemberEmail(String inputEmail) {
     for (CeoMember ceoMember : ceoMemberList) {
       if (ceoMember.getCeoEmail().equals(inputEmail)) {
         return ceoMember;
@@ -32,7 +32,7 @@ public class PromptCeoMember {
   }
 
   //비밀번호를 통해 기업을 찾아서 리턴한다.
-  public CeoMember getCeoByPW(String inputPW) {
+  public CeoMember findByCeoMemberPW(String inputPW) {
     for (CeoMember ceoMember : ceoMemberList) {
       if (inputPW.equals(ceoMember.getCeoPassword())) {
         return ceoMember;
@@ -40,4 +40,15 @@ public class PromptCeoMember {
     }
     return null;
   }
+
+  // 번호를 통해 기업을 찾아서 리턴한다.
+  public CeoMember findByCeoMemberNo(int inputceoNo) {
+    for (CeoMember ceo : ceoMemberList) {
+      if (inputceoNo == ceo.getCeoNo()) {
+        return ceo;
+      }
+    }
+    return null;
+  }
+
 }

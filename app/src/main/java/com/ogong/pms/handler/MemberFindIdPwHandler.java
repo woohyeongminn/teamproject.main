@@ -12,26 +12,26 @@ public class MemberFindIdPwHandler implements Command {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("1. 이메일 찾기");
     System.out.println("2. 비밀번호 찾기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : findByPerEmail(); break;
-      case 2 : findByPerPw(); break;
+      case 1 : wantPerEmail(); break;
+      case 2 : wantByPerPw(); break;
       default : return;
     }
   }
 
 
-  public void findByPerEmail() {
+  public void wantPerEmail() {
     System.out.println();
     System.out.println("▶ 이메일 찾기");
     while (true) {
       System.out.println();
       String inputNick =  Prompt.inputString(" 닉네임 : ");
-      Member member = promptPerMember.getMemberByPerNick(inputNick);
+      Member member = promptPerMember.findByMemberNick(inputNick);
       if (member == null) {
         System.out.println(" >> 해당 닉네임이 존재하지 않습니다.");
         return;
@@ -47,16 +47,16 @@ public class MemberFindIdPwHandler implements Command {
       System.out.println(" >> 찾기를 종료합니다.");
       return;
     } 
-    findByPerPw();
+    wantByPerPw();
   }
 
-  public void findByPerPw() {
+  public void wantByPerPw() {
     System.out.println();
     System.out.println("▶ 임시 비밀번호 발급");
     while (true) {
       System.out.println();
       String inputEmail =  Prompt.inputString(" 이메일 : ");
-      Member member = promptPerMember.getMemberByPerEmail(inputEmail);
+      Member member = promptPerMember.findByMemberEmail(inputEmail);
       if (member == null) {
         System.out.println(" >> 해당 이메일이 존재하지 않습니다.");
         continue;

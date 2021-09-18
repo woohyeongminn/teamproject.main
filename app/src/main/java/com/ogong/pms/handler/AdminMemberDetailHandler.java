@@ -14,25 +14,40 @@ public class AdminMemberDetailHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("▶ 회원 프로필 상세보기");
+    System.out.println("▶ 개인회원 상세");
+    int inputMemberNo = Prompt.inputInt(" 번호 : ");
+    System.out.println();
 
-    for (Member member : memberList) {
-      if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
+    Member member = promptPerMember.findByMemberNo(inputMemberNo);
 
-        String selectMemberPro = Prompt.inputString(" 회원 닉네임 : ");
+    if (member == null) {
+      System.out.println(" >> 해당 번호의 회원이 없습니다.");
+      return;
+    }
 
-        member = promptPerMember.getMemberByPerNick(selectMemberPro);
-        System.out.println();
-        System.out.printf(" [%s]\n", member.getPerNickname());
-        System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
-        System.out.printf(" >> 사진 : %s\n", member.getPerPhoto());
-        System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
+    System.out.printf(" [%s]\n", member.getPerNickname());
+    System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
+    System.out.printf(" >> 사진 : %s\n", member.getPerPhoto());
+    System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
 
-        return;
+    request.setAttribute("inputMemberNo", inputMemberNo);
+
+    System.out.println();
+    System.out.println("1. 수정");
+    System.out.println("2. 탈퇴");
+    System.out.println("0. 이전");
+
+    while (true) {
+      int selcetNo = Prompt.inputInt("선택> ");
+      switch (selcetNo) {
+        case 1: request.getRequestDispatcher("/adminMember/update").forward(request); return;
+        case 2: request.getRequestDispatcher("/adminMember/delete").forward(request); return;
+        case 0: return;
+        default :
+          System.out.println(" >> 번호를 다시 선택해 주세요.");
       }
     }
-    System.out.println(" >> 로그인 하세요.");
   }
 }

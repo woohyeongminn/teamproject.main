@@ -14,25 +14,24 @@ public class AdminMemberUpdateHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 회원 프로필 수정");
 
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String selectMember = Prompt.inputString(" 회원 닉네임 : ");
+        int inputMemberNo = (int) request.getAttribute("inputMemberNo");
 
-        member = promptPerMember.getMemberByPerNick(selectMember);
-        //        AuthPerMemberLoginHandler.getLoginUser();
+        member = promptPerMember.findByMemberNo(inputMemberNo);
 
         String perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname()  + ") : ");
         String perEmail = Prompt.inputString(" 이메일(" + member.getPerEmail() + ") : ");
         String perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
         String perPhoto = Prompt.inputString(" 사진(" + member.getPerPhoto() + ") : ");
 
+        System.out.println();
         String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
-
         if (!input.equalsIgnoreCase("네")) {
           System.out.println(" >> 회원 변경을 취소하였습니다.");
           return;

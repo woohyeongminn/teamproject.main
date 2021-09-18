@@ -6,8 +6,8 @@ import java.time.LocalTime;
 public class CafeReservation {
 
   private int reservationNo; // 예약 번호
-  private int memberNo; // 예약 회원
-  private int cafeNo; // 예약 카페
+  private Member member; // 예약 회원
+  private Cafe cafe; // 예약 카페
   private Date reservationDate; // 예약 날짜
   private LocalTime startTime; // 시작시간
   private int useTime; // 사용시간
@@ -20,11 +20,11 @@ public class CafeReservation {
 
   @Override
   public String toString() {
-    return "CafeReservation [reservationNo=" + reservationNo + ", memberNo=" + memberNo
-        + ", cafeNo=" + cafeNo + ", reservationDate=" + reservationDate + ", startTime=" + startTime
-        + ", useTime=" + useTime + ", useMemberNumber=" + useMemberNumber + ", totalPrice="
-        + totalPrice + ", wirteReview=" + wirteReview + ", roomNo=" + roomNo + ", paymentNo="
-        + paymentNo + ", reservationStatus=" + reservationStatus + "]";
+    return "CafeReservation [reservationNo=" + reservationNo + ", member=" + member + ", cafe="
+        + cafe + ", reservationDate=" + reservationDate + ", startTime=" + startTime + ", useTime="
+        + useTime + ", useMemberNumber=" + useMemberNumber + ", totalPrice=" + totalPrice
+        + ", wirteReview=" + wirteReview + ", roomNo=" + roomNo + ", paymentNo=" + paymentNo
+        + ", reservationStatus=" + reservationStatus + "]";
   }
 
   public int getReservationNo() {
@@ -35,20 +35,20 @@ public class CafeReservation {
     this.reservationNo = reservationNo;
   }
 
-  public int getMemberNo() {
-    return memberNo;
+  public Member getMember() {
+    return member;
   }
 
-  public void setMemberNo(int memberNo) {
-    this.memberNo = memberNo;
+  public void setMember(Member member) {
+    this.member = member;
   }
 
-  public int getCafeNo() {
-    return cafeNo;
+  public Cafe getCafe() {
+    return cafe;
   }
 
-  public void setCafeNo(int cafeNo) {
-    this.cafeNo = cafeNo;
+  public void setCafe(Cafe cafe) {
+    this.cafe = cafe;
   }
 
   public Date getReservationDate() {

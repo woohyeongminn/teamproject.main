@@ -2,8 +2,6 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
@@ -11,15 +9,14 @@ public class CafeAddHandler extends AbstractCafeHandler {
 
   List<CeoMember> ceoMemberList;
 
-  public CafeAddHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
-      List<CafeReservation> reserList, List<CeoMember> ceoMemberList) {
-    super (cafeList, reviewList, reserList);
+  public CafeAddHandler (List<Cafe> cafeList, List<CeoMember> ceoMemberList) {
+    super (cafeList);
     this.ceoMemberList = ceoMemberList;
 
     //    Cafe cafe = new Cafe();
-    //
     //    cafe.setNo(1);
-    //    cafe.setCeoNo(ceoMemberList.get(0).getCeoNo());
+    //    cafe.setCeoMember(ceoMemberList.get(0));
+    //    cafe.setCafeLicenseNo("159-75-45678");
     //    cafe.setName("에이스터디카페");
     //    cafe.setMainImg("a.jpg");
     //    cafe.setInfo("testtest");
@@ -31,13 +28,12 @@ public class CafeAddHandler extends AbstractCafeHandler {
     //    cafe.setBookable(30);
     //    cafe.setTimePrice(2000);
     //    cafe.setCafeStatus(1);
-    //
     //    cafeList.add(cafe);
     //
     //    cafe = new Cafe();
-    //
     //    cafe.setNo(2);
-    //    cafe.setCeoNo(ceoMemberList.get(0).getCeoNo());
+    //    cafe.setCeoMember(ceoMemberList.get(0));
+    //    cafe.setCafeLicenseNo("456-78-12345");
     //    cafe.setName("해피해피스터디카페");
     //    cafe.setMainImg("bbb.jpg");
     //    cafe.setInfo("test~~~!");
@@ -49,13 +45,12 @@ public class CafeAddHandler extends AbstractCafeHandler {
     //    cafe.setBookable(24);
     //    cafe.setTimePrice(1500);
     //    cafe.setCafeStatus(1);
-    //
     //    cafeList.add(cafe);
     //
     //    cafe = new Cafe();
-    //
     //    cafe.setNo(3);
-    //    cafe.setCeoNo(ceoMemberList.get(1).getCeoNo());
+    //    cafe.setCeoMember(ceoMemberList.get(1));
+    //    cafe.setCafeLicenseNo("456-45-78945");
     //    cafe.setName("광명스터디카페");
     //    cafe.setMainImg("ccccc.jpg");
     //    cafe.setInfo("ㅎㅎㅎㅎㅎ");
@@ -67,13 +62,12 @@ public class CafeAddHandler extends AbstractCafeHandler {
     //    cafe.setBookable(40);
     //    cafe.setTimePrice(3000);
     //    cafe.setCafeStatus(1);
-    //
     //    cafeList.add(cafe);
     //
     //    cafe = new Cafe();
-    //
     //    cafe.setNo(4);
-    //    cafe.setCeoNo(ceoMemberList.get(1).getCeoNo());
+    //    cafe.setCeoMember(ceoMemberList.get(2));
+    //    cafe.setCafeLicenseNo("123-45-45612");
     //    cafe.setName("비트스터디카페");
     //    cafe.setMainImg("bit.jpg");
     //    cafe.setInfo("비트주세요");
@@ -85,12 +79,11 @@ public class CafeAddHandler extends AbstractCafeHandler {
     //    cafe.setBookable(100);
     //    cafe.setTimePrice(3500);
     //    cafe.setCafeStatus(0);
-    //
     //    cafeList.add(cafe);
   }
 
   @Override
-  public void execute () {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 등록");
     System.out.println();

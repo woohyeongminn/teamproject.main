@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public class CafeRoom {
 
   private int roomNo; // 룸 고유번호
-  private int cafeNo; // 카페번호
+  private Cafe cafe; // 카페번호
   private String roomName; // 룸 이름
   private String roomImg; // 룸 이미지
   private String roomInfo; // 룸 설명
@@ -16,9 +16,9 @@ public class CafeRoom {
 
   @Override
   public String toString() {
-    return "CafeRoom [roomNo=" + roomNo + ", cafeNo=" + cafeNo + ", roomName=" + roomName
-        + ", roomImg=" + roomImg + ", roomInfo=" + roomInfo + ", startTime=" + startTime
-        + ", endTime=" + endTime + ", roomPrice=" + roomPrice + ", roomStatus=" + roomStatus + "]";
+    return "CafeRoom [roomNo=" + roomNo + ", cafe=" + cafe + ", roomName=" + roomName + ", roomImg="
+        + roomImg + ", roomInfo=" + roomInfo + ", startTime=" + startTime + ", endTime=" + endTime
+        + ", roomPrice=" + roomPrice + ", roomStatus=" + roomStatus + "]";
   }
 
   public int getRoomNo() {
@@ -29,12 +29,12 @@ public class CafeRoom {
     this.roomNo = roomNo;
   }
 
-  public int getCafeNo() {
-    return cafeNo;
+  public Cafe getCafe() {
+    return cafe;
   }
 
-  public void setCafeNo(int cafeNo) {
-    this.cafeNo = cafeNo;
+  public void setCafe(Cafe cafe) {
+    this.cafe = cafe;
   }
 
   public String getRoomName() {

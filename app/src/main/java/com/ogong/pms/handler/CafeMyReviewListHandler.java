@@ -2,20 +2,24 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
 import com.ogong.util.Prompt;
 
 public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
+  PromptCafe promptcafe;
+  List<CafeReview> reviewList;
+
   public CafeMyReviewListHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
-      List<CafeReservation> reserList) {
-    super (cafeList, reviewList, reserList);
+      PromptCafe promptcafe) {
+    super (cafeList);
+    this.reviewList = reviewList;
+    this.promptcafe = promptcafe;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 내가 쓴 후기 보기");
     System.out.println();
@@ -29,14 +33,14 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
     int count = 0;
     for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getMemberNo() == member.getPerNo()) {
+      if (cafeReview.getMember().getPerNo() == member.getPerNo()) {
         if (cafeReview.getReviewStatus() == 1) {
           System.out.printf(" \n (%s)", cafeReview.getReviewNo());
           System.out.println(" >> 삭제한 리뷰입니다.\n");
           count++;
           continue;
         }
-        Cafe cafe = findByNo(cafeReview.getCafeNo());
+        Cafe cafe = promptcafe.findByCafeNo(cafeReview.getCafe().getNo());
         System.out.printf(" (%d)\n [%s]\n 별점 : %s\n 내용 : %s\n 등록일 : %s\n",
             cafeReview.getReviewNo(), cafe.getName()
             , getReviewGradeStatusLabel(cafeReview.getGrade()),
@@ -64,7 +68,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
   public void deleteMyReview() {
     System.out.println();
-    int inputNo = Prompt.inputInt("삭제할 리뷰 번호 : ");
+    int inputNo = Prompt.inputInt(" 삭제할 리뷰 번호 : ");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -93,7 +97,7 @@ public class CafeMyReviewListHandler extends AbstractCafeHandler {
 
   private CafeReview getMyReviewByNo(Member member, int reviewNo) {
     for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getMemberNo() == member.getPerNo() &&
+      if (cafeReview.getMember().getPerNo() == member.getPerNo() &&
           cafeReview.getReviewNo() == reviewNo) {
         return cafeReview;
       }

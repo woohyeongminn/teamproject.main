@@ -15,12 +15,15 @@ public class MemberDetailHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 프로필");
 
+    Member member = null;
+
+
     try {
-      Member member = AuthPerMemberLoginHandler.getLoginUser();
+      member = AuthPerMemberLoginHandler.getLoginUser();
       System.out.println();
       System.out.printf(" [%s]\n", member.getPerNickname());
       System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
@@ -32,13 +35,25 @@ public class MemberDetailHandler extends AbstractMemberHandler {
       System.out.println(" >> 로그인 하세요.");
     }
 
+    if(member == null) {
+      return;
+    }
+
+    request.setAttribute("inputNo", member.getPerNo());
+
     System.out.println();
     System.out.println("1. 수정");
+    System.out.println("2. 탈퇴");      
     System.out.println("0. 이전");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1 : commandMap.get("/member/update").execute(); break;
-      default : return;
+    while (true) {
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1 : request.getRequestDispatcher("/member/update").forward(request); return;
+        case 2 : request.getRequestDispatcher("/member/delete").forward(request); return;
+        case 0 : return;
+        default : System.out.println(" >> 번호를 다시 선택해 주세요.");
+      }
     }
+
   }
 }

@@ -13,6 +13,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
   MyStudyFreeBoard myStudyFreeBoard;
   MyStudyGuilder myStudyGuilder;
   List<Comment> commentList;
+  PromptStudy promptStudy;
 
   public MyStudyDetailHandler(List<Study> studyList, MyStudyToDo myStudyToDo, 
       MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard,
@@ -27,7 +28,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 내 스터디 상세");
     System.out.println();
@@ -49,7 +50,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
     int inputNo = Prompt.inputInt(" 번호  : ");
 
-    Study myStudy = findByMyStudyNo(inputNo); 
+    Study myStudy = promptStudy.findByMyStudyNo(inputNo); 
 
     if (myStudy == null) {
       return;

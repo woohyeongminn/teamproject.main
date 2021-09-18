@@ -11,27 +11,27 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 공지 삭제");
-    int adminnotiNo = Prompt.inputInt(" 번호 : ");
+    int adminnotiNo = (int) request.getAttribute("adminnotiNo");
 
-    AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
+    AdminNotice adminNotice = findByNotiNo(adminnotiNo);
 
-    if (adminWriteList == null) {
-      System.out.println(" 공지를 다시 선택하세요.");
+    if (adminNotice == null) {
+      System.out.println(" >> 공지를 다시 선택하세요.");
       return;
     }
 
     String inputnotice = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!inputnotice.equalsIgnoreCase("네")) {
-      System.out.println(" 삭제가 취소되었습니다.");
+      System.out.println(" >> 삭제가 취소되었습니다.");
       return;
     }
 
-    adminNoticeList.remove(adminWriteList);
+    adminNoticeList.remove(adminNotice);
 
-    System.out.println(" 공지가 삭제되었습니다.");
+    System.out.println(" >> 공지가 삭제되었습니다.");
   }
 
 }

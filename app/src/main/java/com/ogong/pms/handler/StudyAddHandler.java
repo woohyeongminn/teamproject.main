@@ -103,7 +103,7 @@ public class StudyAddHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 스터디 등록");
     Study study = new Study();

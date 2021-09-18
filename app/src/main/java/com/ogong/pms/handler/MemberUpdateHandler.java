@@ -6,18 +6,28 @@ import com.ogong.util.Prompt;
 
 public class MemberUpdateHandler extends AbstractMemberHandler {
 
-  public MemberUpdateHandler(List<Member> memberList) {
+  PromptPerMember promptPerMember;
+
+  public MemberUpdateHandler(List<Member> memberList, PromptPerMember promptPerMember) {
     super(memberList);
+    this.promptPerMember = promptPerMember;
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 프로필 수정");
     System.out.println();
 
+    int inputNo = (int) request.getAttribute("inputNo");
+    Member member = promptPerMember.findByMemberNo(inputNo);
+
+    if (member == null) {
+      System.out.println(" >> 해당 회원이 없습니다.");
+    }
+
     try {
-      Member member = AuthPerMemberLoginHandler.getLoginUser();
+      member = AuthPerMemberLoginHandler.getLoginUser();
 
       String perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname()  + ") : ");
       String perPhoto = Prompt.inputString(" 사  진(" + member.getPerPhoto() + ") : ");

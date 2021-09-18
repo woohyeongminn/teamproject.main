@@ -12,7 +12,7 @@ public class PromptPerMember {
   }
 
   //닉네임을 통해 멤버를 찾아서 리턴한다.
-  public Member getMemberByPerNick(String inputNick) {
+  public Member findByMemberNick(String inputNick) {
     for (Member member : memberList) {
       if (inputNick.equals(member.getPerNickname())) {
         return member;
@@ -22,7 +22,7 @@ public class PromptPerMember {
   }
 
   //이메일을 통해 멤버를 찾아서 리턴한다.
-  public Member getMemberByPerEmail(String inputEmail) {
+  public Member findByMemberEmail(String inputEmail) {
     for (Member member : memberList) {
       if (member.getPerEmail().equals(inputEmail)) {
         return member;
@@ -32,7 +32,7 @@ public class PromptPerMember {
   }
 
   //비밀번호를 통해 멤버를 찾아서 리턴한다.
-  public Member getMemberByPerPW(String inputPW) {
+  public Member findByMemberPW(String inputPW) {
     for (Member member : memberList) {
       if (inputPW.equals(member.getPerPassword())) {
         return member;
@@ -42,7 +42,7 @@ public class PromptPerMember {
   }
 
   //번호를 통해 멤버를 찾아서 리턴한다.
-  public Member getMemberByPerNo(int inputPerNo) {
+  public Member findByMemberNo(int inputPerNo) {
     for (Member member : memberList) {
       if (inputPerNo == member.getPerNo()) {
         return member;

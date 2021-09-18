@@ -213,7 +213,7 @@ public class MyStudyFreeBoard {
 
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" 변경을 취소되었습니다.");
+      System.out.println(" >> 변경을 취소되었습니다.");
       return;
     }
 
@@ -316,7 +316,7 @@ public class MyStudyFreeBoard {
       try {
         commentNo1 = Prompt.inputInt(" 번호 : ");
       } catch (Exception e){
-        System.out.println(" >> 번호를 입력해주세요.");
+        System.out.println(" >> 번호를 입력해 주세요.");
       }
 
       Comment comment = findByComment(commentNo1);
@@ -348,9 +348,9 @@ public class MyStudyFreeBoard {
     } else  {
 
       try {
-        commentNo1 = Prompt.inputInt("번호 : ");
+        commentNo1 = Prompt.inputInt(" 번호 : ");
       } catch (Exception e) {
-        System.out.println(" >> 번호를 입력해주세요");
+        System.out.println(" >> 번호를 입력해 주세요");
       }
 
       Comment comment = findByComment(commentNo1);

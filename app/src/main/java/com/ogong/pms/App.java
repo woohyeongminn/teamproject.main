@@ -36,9 +36,14 @@ import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminCafeControlHandler;
 import com.ogong.pms.handler.AdminCafeReviewListControlHandler;
-import com.ogong.pms.handler.AdminInfoHandler;
+import com.ogong.pms.handler.AdminCeoMemberDeleteHandler;
+import com.ogong.pms.handler.AdminCeoMemberDetailHandler;
+import com.ogong.pms.handler.AdminCeoMemberListHandler;
+import com.ogong.pms.handler.AdminCeoMemberUpdateHandler;
+import com.ogong.pms.handler.AdminDetailHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.AdminMemberDetailHandler;
+import com.ogong.pms.handler.AdminMemberListHandler;
 import com.ogong.pms.handler.AdminMemberUpdateHandler;
 import com.ogong.pms.handler.AdminNoticeAddHandler;
 import com.ogong.pms.handler.AdminNoticeDeleteHandler;
@@ -46,6 +51,7 @@ import com.ogong.pms.handler.AdminNoticeDetailHandler;
 import com.ogong.pms.handler.AdminNoticeListHandler;
 import com.ogong.pms.handler.AdminNoticeUpdateHandler;
 import com.ogong.pms.handler.AdminStudyDeleteHandler;
+import com.ogong.pms.handler.AdminUpdateHandler;
 import com.ogong.pms.handler.AskBoardAddHandler;
 import com.ogong.pms.handler.AskBoardDeleteHandler;
 import com.ogong.pms.handler.AskBoardDetailHandler;
@@ -62,21 +68,24 @@ import com.ogong.pms.handler.CafeAddHandler;
 import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
 import com.ogong.pms.handler.CafeListHandler;
+import com.ogong.pms.handler.CafeMyReservationDetailHandler;
 import com.ogong.pms.handler.CafeMyReservationListHandler;
 import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CeoAddHandler;
+import com.ogong.pms.handler.CeoDeleteHandler;
 import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
-import com.ogong.pms.handler.CeoListHandler;
 import com.ogong.pms.handler.CeoMyCafeListHandler;
+import com.ogong.pms.handler.CeoReservationListHandler;
+import com.ogong.pms.handler.CeoUpdateHandler;
 import com.ogong.pms.handler.Command;
+import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.MemberAddHandler;
 import com.ogong.pms.handler.MemberDeleteHandler;
 import com.ogong.pms.handler.MemberDetailHandler;
 import com.ogong.pms.handler.MemberFindIdPwHandler;
-import com.ogong.pms.handler.MemberListHandler;
 import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyCalender;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
@@ -86,8 +95,10 @@ import com.ogong.pms.handler.MyStudyGuilder;
 import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.MyStudyToDo;
 import com.ogong.pms.handler.MyStudyUpdateHandler;
+import com.ogong.pms.handler.PromptCafe;
 import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
+import com.ogong.pms.handler.PromptStudy;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyDetailHandler;
 import com.ogong.pms.handler.StudyListHandler;
@@ -108,13 +119,15 @@ public class App {
   List<Admin> adminList = new ArrayList<>();
   List<CeoMember> ceoMemberList = new ArrayList<>();
   List<Comment> commentList = new ArrayList<>();
-  List<CafeRoom> cafeRoomList = new  ArrayList<>();
+  List<CafeRoom> cafeRoomList = new ArrayList<>();
 
   // 해시맵 추가(0904)
   HashMap<String, Command> commandMap = new HashMap<>();
 
   PromptPerMember promptPerMember = new PromptPerMember(memberList); 
   PromptCeoMember promptCeoMember = new PromptCeoMember(ceoMemberList);
+  PromptCafe promptcafe = new PromptCafe(cafeList, cafeReviewList);
+  PromptStudy promptStudy = new PromptStudy(studyList);
 
   class MenuItem extends Menu {
     String menuId;
@@ -132,7 +145,12 @@ public class App {
     @Override
     public void execute() {
       Command command = commandMap.get(menuId);
-      command.execute();
+      try {
+        command.execute(new CommandRequest(commandMap));
+      } catch (Exception e) {
+        System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
+        e.printStackTrace();
+      }
     }
   }
 
@@ -143,22 +161,31 @@ public class App {
 
   public App() {
     commandMap.put("/member/add", new MemberAddHandler(memberList));
-    commandMap.put("/member/list", new MemberListHandler(memberList, commandMap));
-    commandMap.put("/member/detail", new MemberDetailHandler(memberList, commandMap));
-    commandMap.put("/member/update", new MemberUpdateHandler(memberList));
-    commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
-    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList));
+    commandMap.put("/member/detail", new MemberDetailHandler(memberList, commandMap));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberList, promptPerMember));
+    commandMap.put("/member/delete", 
+        new MemberDeleteHandler(memberList, promptPerMember, studyList));
+
+    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberList));
-    commandMap.put("/ceoMember/list", new CeoListHandler(ceoMemberList));
+    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
+    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList, cafeList, cafeRoomList));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
-    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
+    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember, studyList));
+    commandMap.put("/adminMember/list", new AdminMemberListHandler(memberList, commandMap));
+
+    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberList, commandMap));
 
     commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, ceoMemberList, commentList));
     commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList, ceoMemberList, commentList));
@@ -167,25 +194,23 @@ public class App {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList, ceoMemberList, commentList));
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, memberList, ceoMemberList, commentList));
 
-    commandMap.put("/cafe/add",
-        new CafeAddHandler(cafeList, cafeReviewList, cafeReservationList, ceoMemberList));
-    commandMap.put("/cafe/list", 
-        new CafeListHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
-    commandMap.put("/cafe/detail",
-        new CafeDetailHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList));
-    commandMap.put("/cafe/update",
-        new CafeUpdateHandler(cafeList, cafeReviewList, cafeReservationList));
-    commandMap.put("/cafe/delete",
-        new CafeDeleteHandler(cafeList, cafeReviewList, cafeReservationList));
-    commandMap.put("/cafe/search", 
-        new CafeSearchHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
-    commandMap.put("/cafe/reservationList",
-        new CafeMyReservationListHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList));
-    commandMap.put("/cafe/myReviewList", 
-        new CafeMyReviewListHandler(cafeList, cafeReviewList, cafeReservationList));
+    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, ceoMemberList));
+    commandMap.put("/cafe/list", new CafeListHandler(cafeList));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReviewList, 
+        cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
+    commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, promptcafe));
+    commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, promptcafe));
+    commandMap.put("/cafe/search", new CafeSearchHandler(cafeList));
+    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(cafeList, 
+        cafeReservationList, promptPerMember));
+    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(cafeList, 
+        cafeReviewList, cafeReservationList, cafeRoomList));
+    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeList, cafeReviewList, promptcafe));
 
-    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember));
-    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, cafeReviewList, cafeReservationList)); 
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeList, cafeReviewList, 
+        promptPerMember, promptcafe));
+    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeList, 
+        cafeReviewList, promptcafe)); 
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
@@ -200,13 +225,14 @@ public class App {
     commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(promptPerMember));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
-    commandMap.put("/admin/info", new AdminInfoHandler(adminList));
+    commandMap.put("/admin/detail", new AdminDetailHandler(adminList));
+    commandMap.put("/admin/update", new AdminUpdateHandler(adminList));
 
     commandMap.put("/study/add", new StudyAddHandler(studyList, toDoList, promptPerMember));
     commandMap.put("/study/list", new StudyListHandler(studyList));
-    commandMap.put("/study/detail", new StudyDetailHandler(studyList));
+    commandMap.put("/study/detail", new StudyDetailHandler(studyList, promptStudy));
     commandMap.put("/study/search", new StudySearchHandler(studyList));
-    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList));
+    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyList, promptStudy));
 
 
     // 내 스터디 하위
@@ -219,9 +245,9 @@ public class App {
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
         myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder));
 
-    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
+    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList, promptStudy));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
-    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyList));
+    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyList, promptStudy));
 
   }
 
@@ -348,7 +374,7 @@ public class App {
 
     adminMenuGroup.add(new MenuItem("로그인", LOGOUT, "/admin/login"));
     adminMenuGroup.add(new MenuItem("로그아웃", ADMIN_LOGIN, "/admin/logout"));
-    adminMenuGroup.add(new MenuItem("마이 페이지", ADMIN_LOGIN, "/admin/info"));
+    adminMenuGroup.add(new MenuItem("마이 페이지", ADMIN_LOGIN, "/admin/detail"));
 
     adminMenuGroup.add(createControlMemberMenu());  // 회원 관리
     adminMenuGroup.add(createControlStudyMenu());   // 스터디 관리
@@ -362,8 +388,10 @@ public class App {
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", ADMIN_LOGIN); 
 
-    adminUserMenu.add(new MenuItem("개인 회원 조회", "/member/list"));
-    adminUserMenu.add(new MenuItem("사장 회원 조회", "/ceoMember/list"));
+    adminUserMenu.add(new MenuItem("개인 회원 조회", "/adminMember/list"));
+    adminUserMenu.add(new MenuItem("개인 회원 상세", "/adminMember/detail"));
+    adminUserMenu.add(new MenuItem("사장 회원 조회", "/adminCeoMember/list"));
+    adminUserMenu.add(new MenuItem("사장 회원 상세", "/adminCeoMember/detail"));
 
     return adminUserMenu;
   }
@@ -448,7 +476,7 @@ public class App {
 
     myPageMenu.add(new MenuItem("개인정보", "/member/detail"));
     myPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
-    myPageMenu.add(new MenuItem("예약내역", "/cafe/reservationList"));
+    myPageMenu.add(new MenuItem("예약내역", "/cafeReservation/list"));
     myPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
     myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
     return myPageMenu;
@@ -486,9 +514,9 @@ public class App {
     //cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
     cafeMenu.add(new MenuItem("검색", "/cafe/search"));
-    //cafeMenu.add(new MenuItem("장소 상세", "/cafe/detail"));
-    //cafeMenu.add(new MenuItem("수정", "/cafe/update"));
-    //cafeMenu.add(new MenuItem("삭제", "/cafe/delete"));
+    cafeMenu.add(new MenuItem("상세", "/cafe/detail"));
+    //cafeMenu.add(new MenuItem("수정", "/cafe/update")); // 기업권한
+    //cafeMenu.add(new MenuItem("삭제", "/cafe/delete")); // 기업권한
 
     return cafeMenu;
   }
@@ -553,7 +581,7 @@ public class App {
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     ceoPageMenu.add(new MenuItem("카페 목록", "/ceoMember/myCafeList"));
     ceoPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
-    //    ceoPageMenu.add(new MenuItem("예약내역", "/cafe/reservationList"));
+    ceoPageMenu.add(new MenuItem("예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
     //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
 

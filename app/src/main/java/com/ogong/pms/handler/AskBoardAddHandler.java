@@ -1,7 +1,6 @@
 package com.ogong.pms.handler;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.CeoMember;
@@ -24,7 +23,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askList.setAskMemberWriter(memberList.get(0));
     //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAdminComment(new ArrayList<>());
+    //    askList.setAnswer("예약 방법에 대해..");
     //    askBoardList.add(askList);
     //
     //    askList = new AskBoard();
@@ -34,7 +33,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askList.setAskCeoWriter(ceoMemberList.get(0));
     //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAdminComment(new ArrayList<>());
+    //    askList.setAnswer("가게 승인 요청 방법은..");
     //    askBoardList.add(askList);
     //
     //    askList = new AskBoard();
@@ -44,7 +43,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askList.setAskMemberWriter(memberList.get(1));
     //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAdminComment(new ArrayList<>());
+    //    askList.setAnswer("오호라! 알겠습니다!");
     //    askBoardList.add(askList);
     //
     //    askList = new AskBoard();
@@ -54,7 +53,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askList.setAskCeoWriter(ceoMemberList.get(1));
     //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAdminComment(new ArrayList<>());
+    //    askList.setAnswer("수정하겠습니다.");
     //    askBoardList.add(askList);
     //
     //    askList = new AskBoard();
@@ -64,7 +63,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askList.setAskMemberWriter(memberList.get(2));
     //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAdminComment(new ArrayList<>());
+    //    askList.setAnswer("스터디 참여 방법은..");
     //    askBoardList.add(askList);
     //
     //    askList = new AskBoard();
@@ -74,12 +73,12 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
     //    askList.setAskCeoWriter(ceoMemberList.get(2));
     //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
     //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAdminComment(new ArrayList<>());
+    //    askList.setAnswer("헐! 헐! 헐!");
     //    askBoardList.add(askList);
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 문의사항");
     System.out.println();
@@ -93,7 +92,8 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
       askList.setAskContent(Prompt.inputString(" 내용 : "));
       askList.setAskMemberWriter(AuthPerMemberLoginHandler.getLoginUser());
       askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-      askList.setAdminComment(new ArrayList<>());
+      // 0917 관리자 댓글 수정 필요!
+      //      askList.setAdminComment(new ArrayList<>());
 
     }
 
@@ -104,7 +104,8 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
       askList.setAskContent(Prompt.inputString(" 내용 : "));
       askList.setAskCeoWriter(AuthCeoMemberLoginHandler.getLoginCeoMember());
       askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-      askList.setAdminComment(new ArrayList<>());
+      // 0917 관리자 댓글 수정 필요!
+      //      askList.setAdminComment(new ArrayList<>());
 
     }
 

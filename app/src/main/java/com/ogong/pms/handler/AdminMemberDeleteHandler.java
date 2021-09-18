@@ -2,50 +2,51 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Study;
 import com.ogong.util.Prompt;
 
 public class AdminMemberDeleteHandler extends AbstractMemberHandler {
 
   PromptPerMember promptPerMember; 
+  List<Study> studyList;
 
-  public AdminMemberDeleteHandler(List<Member> memberList, PromptPerMember promptPerMember) {
+  public AdminMemberDeleteHandler(List<Member> memberList, PromptPerMember promptPerMember,
+      List<Study> studyList) {
     super(memberList);
     this.promptPerMember = promptPerMember;
+    this.studyList = studyList;
   }
 
   // 개인
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 회원 삭제");
 
-    for (Member member : memberList) {
-      if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
+    int inputMemberNo = (int) request.getAttribute("inputMemberNo");
 
-        String selectMember = Prompt.inputString(" 회원 닉네임 : ");
+    Member member = promptPerMember.findByMemberNo(inputMemberNo);
 
-        member = promptPerMember.getMemberByPerNick(selectMember);
+    if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 /아니오) ");
+      String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 /아니오) ");
 
-        if (!input.equalsIgnoreCase("네")) {
-          System.out.println(" >> 회원 삭제를 취소하였습니다.");
-          return;
-        }
-
-        memberList.remove(member);
-        AuthPerMemberLoginHandler.loginUser = null;
-        System.out.println(" >> 회원이 삭제되었습니다.");
+      if (!input.equalsIgnoreCase("네")) {
+        System.out.println(" >> 회원 삭제를 취소하였습니다.");
         return;
       }
+
+      for (int i = studyList.size() - 1; i >= 0; i--) { 
+        if (studyList.get(i).getOwner().getPerNo() == member.getPerNo()) {
+          studyList.remove(studyList.get(i));
+        }
+      }
+
+      memberList.remove(member);
+
+      System.out.println(" >> 회원이 삭제되었습니다.");
+      return;
     }
   }
 
 }
-
-
-
-
-
-
-

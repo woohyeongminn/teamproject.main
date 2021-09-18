@@ -18,7 +18,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute() {
+  public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 스터디 목록");
     System.out.println();
@@ -33,7 +33,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     // 값은 안 넣었지만 null값이 있으므로 사이즈로 비교해야 한다.
     int joinCount = 0;
 
-    System.out.println(" <<참여중>> \n");
+    System.out.println(" << 참여 중 >> \n");
     for (int i = 0; i < studyList.size(); i++) {
       if (studyList.get(i).getMemberNames().contains(member.getPerNickname()) ||
           studyList.get(i).getOwner().getPerNickname().equals(member.getPerNickname())) {
@@ -45,11 +45,11 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     }
 
     if(joinCount == 0) {
-      System.out.println(" 가입한 스터디가 없습니다.\n");
+      System.out.println(" >> 가입한 스터디가 없습니다.\n");
     }
 
     int waitCount = 0;
-    System.out.println(" <<승인 대기중>> \n"); 
+    System.out.println(" << 승인 대기 중>> \n"); 
     for (int i = 0; i < studyList.size(); i++) {
       if (studyList.get(i).getWatingMemberNames().equals(member.getPerNickname())) {
         System.out.printf(" (%s)\n [%s]\n", studyList.get(i).getStudyNo(),
@@ -59,7 +59,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
       }
     } 
     if (waitCount == 0) {
-      System.out.println(" 승인대기 중인 스터디가 없습니다.\n");
+      System.out.println(" >> 승인 대기 중인 스터디가 없습니다.\n");
     }
 
 
@@ -69,7 +69,7 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
-      case 1 : commandMap.get("/myStudy/detail").execute(); break;
+      //case 1 : commandMap.get("/myStudy/detail").execute(); break;
       case 2 : System.out.println(" 이전"); break;
       default : return;
     }
