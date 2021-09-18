@@ -17,7 +17,8 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
 
   public MyStudyDetailHandler(List<Study> studyList, MyStudyToDo myStudyToDo, 
       MyStudyCalender myStudyCalender, MyStudyFreeBoard myStudyFreeBoard,
-      List<Comment> commentList, MyStudyGuilder myStudyGuilder, PromptStudy promptStudy) {
+      List<Comment> commentList, MyStudyGuilder myStudyGuilder,
+      PromptStudy promptStudy) {
     super(studyList);
     this.myStudyToDo = myStudyToDo;
     this.myStudyCalender = myStudyCalender;

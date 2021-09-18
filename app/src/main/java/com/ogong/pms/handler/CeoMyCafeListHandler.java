@@ -43,6 +43,9 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
           System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
               , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
         }
+        if (cafe.getCafeStatus() == 0) {
+          System.out.println(" * 승인 대기중인 카페입니다.");
+        }
       }
 
     } catch (NullPointerException e) {
@@ -72,7 +75,7 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
     cafe.setNo(cafeNo++);
     cafe.setCeoMember(ceoMember);
     cafe.setName(Prompt.inputString(" 상호명 : "));
-    cafe.setCafeLicenseNo(Prompt.inputString("사업자 등록번호 : "));
+    cafe.setCafeLicenseNo(Prompt.inputString(" 사업자 등록번호 : "));
     cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
     cafe.setInfo(Prompt.inputString(" 소개글 : "));
     cafe.setLocation(Prompt.inputString(" 주소 : "));
@@ -82,8 +85,15 @@ public class CeoMyCafeListHandler extends AbstractCeoMemberHandler {
     cafe.setHoliday(Prompt.inputString(" 휴무일 : "));
     cafe.setBookable(Prompt.inputInt(" 예약가능인원 : "));
     cafe.setTimePrice(Prompt.inputInt(" 시간당금액 : "));
-    cafe.setCafeStatus(1); // 원래는 기본적으로 0(승인대기)이 들어가야 하는데 일단 1(운영중)으로 설정
+    cafe.setCafeStatus(0); // 0 : 승인대기
 
+    System.out.println();
+    String input = Prompt.inputString(" 등록하시겠습니까? (네 / 아니오) ");
+    if (!input.equalsIgnoreCase("네")) {
+      System.out.println(" >> 등록이 취소되었습니다.");
+      return;
+    }
+    System.out.println(" >> 등록되었습니다.");
     cafeList.add(cafe);
   }
 
