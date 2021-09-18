@@ -54,9 +54,11 @@ public class CafeMyReservationDetailHandler extends AbstractCafeHandler {
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1: goToAddReview(myReservation); break;
-      case 2: cancelReservation(myReservation); break;
-      default : return;
+      case 1: goToAddReview(myReservation); return;
+      case 2: cancelReservation(myReservation); return;
+      case 0: return;
+      default :
+        System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
   }
 

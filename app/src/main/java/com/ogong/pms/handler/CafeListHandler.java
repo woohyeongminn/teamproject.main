@@ -39,7 +39,7 @@ public class CafeListHandler extends AbstractCafeHandler {
       case 1: request.getRequestDispatcher("/cafe/detail").forward(request); break;
       case 2: request.getRequestDispatcher("/cafe/search").forward(request); break;
       case 0: return;
-      default : System.out.println(" >> 명령어가 올바르지 않습니다.");
+      default : System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
   }
 }

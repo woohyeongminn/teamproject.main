@@ -92,7 +92,7 @@ public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1: request.getRequestDispatcher("/cafeReservation/detail").forward(request); break;
+      case 1: request.getRequestDispatcher("/cafeReservation/detail").forward(request); return;
       default : return;
     }
   }
