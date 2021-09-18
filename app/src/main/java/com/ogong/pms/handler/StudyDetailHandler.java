@@ -16,7 +16,7 @@ public class StudyDetailHandler extends AbstractStudyHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 스터디 상세");
     System.out.println();
@@ -40,24 +40,31 @@ public class StudyDetailHandler extends AbstractStudyHandler {
     System.out.printf(" >> 대면 : %s\n", study.getFace());
     System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
+    request.setAttribute("inputNo", inputNo);
+
     if (AuthPerMemberLoginHandler.loginUser != null) {
 
       if (study.getOwner().getPerNickname().equals(
           AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
         System.out.println();
         System.out.println();
-        System.out.println("0. 뒤로가기");
+        System.out.println("1. 수정");
+        System.out.println("2. 삭제");
+        System.out.println("0. 이전");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
+          case 1: request.getRequestDispatcher("/myStudy/update").forward(request); return;
+          case 2: request.getRequestDispatcher("/myStudy/delete").forward(request); return;
           default : return;
         }
       } else {
+
         System.out.println("\n----------------------");
         System.out.println("1. 참여 신청하기");
-        System.out.println("0. 뒤로가기");
+        System.out.println("0. 이전");
         int selectNo = Prompt.inputInt("선택> ");
         switch (selectNo) {
-          case 1 : joinStudy(study); break;
+          case 1: joinStudy(study); break;
           default : return;
         }
       }
