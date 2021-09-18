@@ -39,7 +39,7 @@ public class CeoDetailHandler extends AbstractCeoMemberHandler {
 
     System.out.println();
     System.out.println("1. 수정");
-    System.out.println("2. 삭제");
+    System.out.println("2. 탈퇴");
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
