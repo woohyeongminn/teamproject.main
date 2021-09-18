@@ -4,11 +4,11 @@ import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.util.Prompt;
 
-public class CafeDeleteHandler extends AbstractCafeHandler {
+public class CeoCafeDeleteHandler extends AbstractCafeHandler {
 
   PromptCafe promptcafe;
 
-  public CafeDeleteHandler (List<Cafe> cafeList, PromptCafe promptcafe) {
+  public CeoCafeDeleteHandler (List<Cafe> cafeList, PromptCafe promptcafe) {
     super (cafeList);
     this.promptcafe = promptcafe;
   }
@@ -17,12 +17,6 @@ public class CafeDeleteHandler extends AbstractCafeHandler {
   public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 장소 삭제");
-    Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
-
-    if (cafe == null) {
-      System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
-      return;
-    }
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -30,7 +24,20 @@ public class CafeDeleteHandler extends AbstractCafeHandler {
       return;
     }
 
-    cafeList.remove(cafe);
+    //    cafe.setName("");
+    //    cafe.setMainImg("");
+    //    cafe.setInfo("");
+    //    cafe.setLocation("");
+    //    cafe.setPhone("");
+    //    cafe.setOpenTime(LocalTime.of(00, 00));
+    //    cafe.setCloseTime(LocalTime.of(00, 00));
+    //    cafe.setHoliday("");
+    //    cafe.setBookable(0);
+    //    cafe.setTimePrice(0);
+    //    cafe.setCafeStatus(3);
+
+    cafeList.remove(request.getAttribute("cafe"));
+
 
     System.out.println(" >> 장소를 삭제하였습니다.");
   }

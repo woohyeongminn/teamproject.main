@@ -64,16 +64,17 @@ import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLogoutHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
-import com.ogong.pms.handler.CafeAddHandler;
-import com.ogong.pms.handler.CafeDeleteHandler;
 import com.ogong.pms.handler.CafeDetailHandler;
 import com.ogong.pms.handler.CafeListHandler;
 import com.ogong.pms.handler.CafeMyReservationDetailHandler;
 import com.ogong.pms.handler.CafeMyReservationListHandler;
 import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
-import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CeoAddHandler;
+import com.ogong.pms.handler.CeoCafeAddHandler;
+import com.ogong.pms.handler.CeoCafeDeleteHandler;
+import com.ogong.pms.handler.CeoCafeDetailHandler;
+import com.ogong.pms.handler.CeoCafeUpdateHandler;
 import com.ogong.pms.handler.CeoDeleteHandler;
 import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
@@ -175,8 +176,14 @@ public class App {
     commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/delete", 
         new CeoDeleteHandler(ceoMemberList, promptCeoMember, cafeList));
-    commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
-    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList, cafeList, cafeRoomList));
+    commandMap.put("/ceoMember/myCafeList", 
+        new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
+    commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(cafeList, ceoMemberList));
+    commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(ceoMemberList));
+    commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(cafeList, promptcafe));
+    commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(ceoMemberList, cafeList, cafeReviewList));
+    commandMap.put("/ceoMember/ReservationList", 
+        new CeoReservationListHandler(ceoMemberList, cafeReservationList, cafeList, cafeRoomList));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
@@ -196,12 +203,9 @@ public class App {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList, ceoMemberList, commentList));
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, memberList, ceoMemberList, commentList));
 
-    commandMap.put("/cafe/add", new CafeAddHandler(cafeList, ceoMemberList));
     commandMap.put("/cafe/list", new CafeListHandler(cafeList));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReviewList, 
         cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
-    commandMap.put("/cafe/update", new CafeUpdateHandler(cafeList, promptcafe));
-    commandMap.put("/cafe/delete", new CafeDeleteHandler(cafeList, promptcafe));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeList));
     commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(cafeList, 
         cafeReservationList, promptPerMember));
