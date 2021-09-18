@@ -2,17 +2,14 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CafeReview;
 import com.ogong.util.Prompt;
 
 public class CafeDeleteHandler extends AbstractCafeHandler {
 
   PromptCafe promptcafe;
 
-  public CafeDeleteHandler (
-      List<Cafe> cafeList, List<CafeReview> reviewList, List<CafeReservation> reserList, PromptCafe promptcafe) {
-    super (cafeList, reviewList, reserList);
+  public CafeDeleteHandler (List<Cafe> cafeList, PromptCafe promptcafe) {
+    super (cafeList);
     this.promptcafe = promptcafe;
   }
 

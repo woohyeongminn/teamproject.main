@@ -12,16 +12,20 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler extends AbstractCafeHandler {
 
+  List<CafeReview> reviewList;
+  List<CafeReservation> reserList;
+  List<CafeRoom> roomList;
   PromptCafe promptcafe;
   PromptPerMember promptPerMember;
-  List<CafeRoom> roomList;
   int reviewNo = 1; // 리뷰번호
 
   public CafeMyReservationListHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
       List<CafeReservation> reserList, PromptPerMember promptPerMember,
       List<CafeRoom> roomList, PromptCafe promptcafe) {
 
-    super (cafeList, reviewList, reserList);
+    super (cafeList);
+    this.reviewList = reviewList;
+    this.reserList = reserList;
     this.promptPerMember = promptPerMember;
     this.roomList = roomList;
     this.promptcafe = promptcafe;

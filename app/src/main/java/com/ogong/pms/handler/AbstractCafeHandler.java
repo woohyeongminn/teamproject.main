@@ -2,20 +2,13 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CafeReview;
 
 public abstract class AbstractCafeHandler implements Command {
 
   List<Cafe> cafeList;
-  List<CafeReview> reviewList;
-  List<CafeReservation> reserList;
 
-  public AbstractCafeHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
-      List<CafeReservation> reserList) {
+  public AbstractCafeHandler (List<Cafe> cafeList) {
     this.cafeList = cafeList;
-    this.reviewList = reviewList;
-    this.reserList = reserList;
   }
 
   protected String getReviewStatusLabel(String status) {

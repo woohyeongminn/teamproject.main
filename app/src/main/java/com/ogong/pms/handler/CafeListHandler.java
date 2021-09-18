@@ -1,25 +1,18 @@
 package com.ogong.pms.handler;
 
-import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CafeReview;
 import com.ogong.util.Prompt;
 
 public class CafeListHandler extends AbstractCafeHandler {
 
-  HashMap<String, Command> commandMap;
 
-  public CafeListHandler (List<Cafe> cafeList, List<CafeReview> reviewList,
-      List<CafeReservation> reserList, HashMap<String, Command> commandMap) {
-
-    super (cafeList, reviewList, reserList);
-    this.commandMap = commandMap;
+  public CafeListHandler (List<Cafe> cafeList) {
+    super (cafeList);
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 장소 목록");
 
@@ -33,19 +26,20 @@ public class CafeListHandler extends AbstractCafeHandler {
       }
     }
 
-    selectCafeDetailMenu();
+    selectCafeDetailMenu(request);
   }
 
-  private void selectCafeDetailMenu() {
+  private void selectCafeDetailMenu(CommandRequest request) throws Exception {
     System.out.println("\n----------------------");
     System.out.println("1. 상세");
     System.out.println("2. 검색");
     System.out.println("0. 이전");
     int input = Prompt.inputInt(" 선택> ");
     switch (input) {
-      //      case 1: commandMap.get("/cafe/detail").execute(); break;
-      //      case 2: commandMap.get("/cafe/search").execute(); break;
-      default : return;
+      case 1: request.getRequestDispatcher("/cafe/detail").forward(request);
+      case 2: request.getRequestDispatcher("/cafe/search").forward(request);
+      case 0: return;
+      default : System.out.println(" >> 명령어가 올바르지 않습니다.");
     }
   }
 }

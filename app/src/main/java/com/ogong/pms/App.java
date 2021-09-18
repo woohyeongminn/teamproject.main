@@ -184,26 +184,26 @@ public class App {
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, memberList, ceoMemberList, commentList));
 
     commandMap.put("/cafe/add",
-        new CafeAddHandler(cafeList, cafeReviewList, cafeReservationList, ceoMemberList));
+        new CafeAddHandler(cafeList, ceoMemberList));
     commandMap.put("/cafe/list", 
-        new CafeListHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
+        new CafeListHandler(cafeList));
     commandMap.put("/cafe/detail",
         new CafeDetailHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
     commandMap.put("/cafe/update",
-        new CafeUpdateHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe));
+        new CafeUpdateHandler(cafeList, promptcafe));
     commandMap.put("/cafe/delete",
-        new CafeDeleteHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe));
+        new CafeDeleteHandler(cafeList, promptcafe));
     commandMap.put("/cafe/search", 
-        new CafeSearchHandler(cafeList, cafeReviewList, cafeReservationList, commandMap));
+        new CafeSearchHandler(cafeList));
     commandMap.put("/cafe/reservationList",
         new CafeMyReservationListHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, cafeRoomList, promptcafe));
     commandMap.put("/cafe/myReviewList", 
-        new CafeMyReviewListHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe));
+        new CafeMyReviewListHandler(cafeList, cafeReviewList, promptcafe));
 
     commandMap.put("/cafe/control",
-        new AdminCafeControlHandler(cafeList, cafeReviewList, cafeReservationList, promptPerMember, promptcafe));
+        new AdminCafeControlHandler(cafeList, cafeReviewList, promptPerMember, promptcafe));
     commandMap.put("/cafe/reviewList",
-        new AdminCafeReviewListControlHandler(cafeList, cafeReviewList, cafeReservationList, promptcafe)); 
+        new AdminCafeReviewListControlHandler(cafeList, cafeReviewList, promptcafe)); 
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminNoticeList));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminNoticeList));
@@ -504,9 +504,9 @@ public class App {
     //cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
     cafeMenu.add(new MenuItem("검색", "/cafe/search"));
-    //cafeMenu.add(new MenuItem("장소 상세", "/cafe/detail"));
-    //cafeMenu.add(new MenuItem("수정", "/cafe/update"));
-    //cafeMenu.add(new MenuItem("삭제", "/cafe/delete"));
+    cafeMenu.add(new MenuItem("상세", "/cafe/detail"));
+    //cafeMenu.add(new MenuItem("수정", "/cafe/update")); // 기업권한
+    //cafeMenu.add(new MenuItem("삭제", "/cafe/delete")); // 기업권한
 
     return cafeMenu;
   }

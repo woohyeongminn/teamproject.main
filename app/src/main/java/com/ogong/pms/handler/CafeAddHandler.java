@@ -2,8 +2,6 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.util.Prompt;
 
@@ -11,9 +9,8 @@ public class CafeAddHandler extends AbstractCafeHandler {
 
   List<CeoMember> ceoMemberList;
 
-  public CafeAddHandler (List<Cafe> cafeList, List<CafeReview> reviewList, 
-      List<CafeReservation> reserList, List<CeoMember> ceoMemberList) {
-    super (cafeList, reviewList, reserList);
+  public CafeAddHandler (List<Cafe> cafeList, List<CeoMember> ceoMemberList) {
+    super (cafeList);
     this.ceoMemberList = ceoMemberList;
 
     //    Cafe cafe = new Cafe();
