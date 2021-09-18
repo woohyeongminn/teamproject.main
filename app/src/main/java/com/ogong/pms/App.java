@@ -70,10 +70,12 @@ import com.ogong.pms.handler.CafeMyReviewListHandler;
 import com.ogong.pms.handler.CafeSearchHandler;
 import com.ogong.pms.handler.CafeUpdateHandler;
 import com.ogong.pms.handler.CeoAddHandler;
+import com.ogong.pms.handler.CeoDeleteHandler;
 import com.ogong.pms.handler.CeoDetailHandler;
 import com.ogong.pms.handler.CeoFindIdPwHandler;
 import com.ogong.pms.handler.CeoMyCafeListHandler;
 import com.ogong.pms.handler.CeoReservationListHandler;
+import com.ogong.pms.handler.CeoUpdateHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.MemberAddHandler;
@@ -165,6 +167,8 @@ public class App {
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberList));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberList));
+    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberList, promptCeoMember));
+    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberList, promptCeoMember));
     commandMap.put("/ceoMember/myCafeList", new CeoMyCafeListHandler(ceoMemberList, cafeList, cafeReviewList, promptPerMember));
     commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList));
 

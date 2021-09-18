@@ -21,7 +21,7 @@ public class MemberDeleteHandler extends AbstractMemberHandler {
     System.out.println("▶ 회원 탈퇴");
     System.out.println();
 
-    if ( AuthPerMemberLoginHandler.getLoginUser() == null) {
+    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
       System.out.println(" >> 로그인 하세요.");
       return;
     }

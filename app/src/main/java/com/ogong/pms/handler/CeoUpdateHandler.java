@@ -8,8 +8,9 @@ public class CeoUpdateHandler extends AbstractCeoMemberHandler {
 
   PromptCeoMember promptCeoMember;
 
-  public CeoUpdateHandler(List<CeoMember> ceoMemberList) {
+  public CeoUpdateHandler(List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
     super(ceoMemberList);
+    this.promptCeoMember = promptCeoMember;
   }
 
 
@@ -18,8 +19,7 @@ public class CeoUpdateHandler extends AbstractCeoMemberHandler {
   public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 기업 정보 변경"); 
-    int inputceoNo = Prompt.inputInt(" 번호 : ");
-    int ni = (int) request.getAttribute("no");
+    int inputceoNo = (int) request.getAttribute("inputceoNo");
     System.out.println();
 
     CeoMember ceoMember = promptCeoMember.findByCeoMemberNo(inputceoNo);
@@ -36,6 +36,7 @@ public class CeoUpdateHandler extends AbstractCeoMemberHandler {
     //    String ceoStoreName = Prompt.inputString(" 점포명(" + ceoMember.getCeoStoreName() + ") : ");
     //    String ceoStoreDetailAddress = Prompt.inputString("점포주소(" + ceoMember.getCeoStoreDetailAddress() + ") : ");
 
+    System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 기업 회원 변경을 취소하였습니다.");

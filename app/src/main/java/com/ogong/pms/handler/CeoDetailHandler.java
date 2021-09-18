@@ -11,12 +11,14 @@ public class CeoDetailHandler extends AbstractCeoMemberHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 프로필");
 
+    CeoMember ceoMember = null;
+
     try {
-      CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+      ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
       System.out.println();
       System.out.printf(" [%s]\n", ceoMember.getCeoBossName());
       System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
@@ -29,12 +31,20 @@ public class CeoDetailHandler extends AbstractCeoMemberHandler {
       System.out.println(" >> 로그인 하세요.");
     }
 
+    if (ceoMember == null) {
+      return;
+    }
+
+    request.setAttribute("inputceoNo", ceoMember.getCeoNo());
+
     System.out.println();
     System.out.println("1. 수정");
+    System.out.println("2. 삭제");
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      //      case 1 : commandMap.get("/member/update").execute(); break;
+      case 1 : request.getRequestDispatcher("/ceoMember/update").forward(request); return;
+      case 2 : request.getRequestDispatcher("/ceoMember/delete").forward(request); return;
       default : return;
     }
   }
