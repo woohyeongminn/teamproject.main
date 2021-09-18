@@ -18,14 +18,14 @@ public class MemberFindIdPwHandler implements Command {
     System.out.println("2. 비밀번호 찾기");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : findByPerEmail(); break;
-      case 2 : findByPerPw(); break;
+      case 1 : wantPerEmail(); break;
+      case 2 : wantByPerPw(); break;
       default : return;
     }
   }
 
 
-  public void findByPerEmail() {
+  public void wantPerEmail() {
     System.out.println();
     System.out.println("▶ 이메일 찾기");
     while (true) {
@@ -47,10 +47,10 @@ public class MemberFindIdPwHandler implements Command {
       System.out.println(" >> 찾기를 종료합니다.");
       return;
     } 
-    findByPerPw();
+    wantByPerPw();
   }
 
-  public void findByPerPw() {
+  public void wantByPerPw() {
     System.out.println();
     System.out.println("▶ 임시 비밀번호 발급");
     while (true) {

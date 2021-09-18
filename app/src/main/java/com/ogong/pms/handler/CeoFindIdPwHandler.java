@@ -22,14 +22,14 @@ public class CeoFindIdPwHandler implements Command {
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1 : findByCeoEmail(); break;
-      case 2 : findByCeoPw(); break;
+      case 1 : wantCeoEmail(); break;
+      case 2 : wantCeoPw(); break;
       default : return;
     }
   }
 
 
-  public void findByCeoEmail() {
+  public void wantCeoEmail() {
     System.out.println();
     System.out.println("▶ 이메일 찾기");
     while (true) {
@@ -51,10 +51,10 @@ public class CeoFindIdPwHandler implements Command {
       System.out.println(" >> 찾기를 종료합니다.");
       return;
     } 
-    findByCeoPw();
+    wantCeoPw();
   }
 
-  public void findByCeoPw() {
+  public void wantCeoPw() {
     System.out.println();
     System.out.println("▶ 임시 비밀번호 발급");
     while (true) {
