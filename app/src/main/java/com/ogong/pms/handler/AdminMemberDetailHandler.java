@@ -14,14 +14,16 @@ public class AdminMemberDetailHandler extends AbstractMemberHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 회원 프로필 상세보기");
+
+    int inputMemberNo = 0;
 
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        int inputMemberNo = Prompt.inputInt(" 번호 : ");
+        inputMemberNo = Prompt.inputInt(" 번호 : ");
 
         member = promptPerMember.findByMemberNo(inputMemberNo);
         System.out.println();
@@ -34,5 +36,19 @@ public class AdminMemberDetailHandler extends AbstractMemberHandler {
       }
     }
     System.out.println(" >> 로그인 하세요.");
+
+    request.setAttribute("inputMemberNo", inputMemberNo);
+
+    System.out.println();
+    System.out.println("1. 수정");
+    System.out.println("2. 탈퇴");
+    System.out.println("0. 이전");
+
+    int selcetNo = Prompt.inputInt("선택> ");
+    switch (selcetNo) {
+      case 1: request.getRequestDispatcher("/adminMember/update").forward(request); return;
+      case 2: request.getRequestDispatcher("/adminMember/delete").forward(request); return;
+      default : return;
+    }
   }
 }

@@ -3,7 +3,6 @@ package com.ogong.pms.handler;
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
-import com.ogong.util.Prompt;
 
 public class AdminMemberListHandler extends AbstractMemberHandler {
 
@@ -30,24 +29,8 @@ public class AdminMemberListHandler extends AbstractMemberHandler {
           member.getPerRegisteredDate());
       System.out.println();
     }
-    selectUserModifyPage();
-  }
-
-  private void selectUserModifyPage() {
-    System.out.println();
-    System.out.println("1. 상세");
-    System.out.println("2. 탈퇴");
-    System.out.println("0. 이전");
-
-    int selectAdminNo = Prompt.inputInt("선택> ");
-    switch (selectAdminNo) {
-      //      case 1: commandMap.get("/adminMember/detail").execute(); break;
-      //      case 2: commandMap.get("/adminMember/delete").execute(); break;
-      default : return;
-    }
   }
 }
-
 
 
 

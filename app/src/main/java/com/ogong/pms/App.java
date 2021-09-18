@@ -43,6 +43,7 @@ import com.ogong.pms.handler.AdminDetailHandler;
 import com.ogong.pms.handler.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.AdminMemberDetailHandler;
 import com.ogong.pms.handler.AdminMemberListHandler;
+import com.ogong.pms.handler.AdminMemberUpdateHandler;
 import com.ogong.pms.handler.AdminNoticeAddHandler;
 import com.ogong.pms.handler.AdminNoticeDeleteHandler;
 import com.ogong.pms.handler.AdminNoticeDetailHandler;
@@ -174,6 +175,7 @@ public class App {
     commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(ceoMemberList, cafeReservationList, cafeList));
 
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberList, promptPerMember));
+    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberList, promptPerMember));
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberList, commandMap));
 
