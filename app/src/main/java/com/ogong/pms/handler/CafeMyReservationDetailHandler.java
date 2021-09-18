@@ -48,7 +48,7 @@ public class CafeMyReservationDetailHandler extends AbstractCafeHandler {
     }
 
     System.out.println("----------------------");
-    System.out.println("1. 리뷰 작성");
+    System.out.println("1. 리뷰 등록");
     System.out.println("2. 예약 취소");
     System.out.println("0. 이전");
 
