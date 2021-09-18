@@ -65,6 +65,8 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
 
     }
 
+
+
     if (AuthAdminLoginHandler.getLoginAdmin() != null) {
       System.out.println("\n---------------------");
       System.out.println("1. 댓글 달기");

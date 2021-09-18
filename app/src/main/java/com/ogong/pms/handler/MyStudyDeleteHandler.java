@@ -8,8 +8,9 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
 
   PromptStudy promptStudy;
 
-  public MyStudyDeleteHandler(List<Study> newStudyList) {
+  public MyStudyDeleteHandler(List<Study> newStudyList, PromptStudy promptstudy) {
     super(newStudyList);
+    this.promptStudy = promptstudy;
   }
 
   @Override
@@ -17,7 +18,7 @@ public class MyStudyDeleteHandler extends AbstractStudyHandler {
     System.out.println();
     System.out.println("▶ 스터디 삭제");
 
-    int inputNo = Prompt.inputInt(" 번호  : ");
+    int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = promptStudy.findByMyStudyNo(inputNo);
 

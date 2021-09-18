@@ -9,8 +9,9 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
 
   PromptStudy promptstudy;
 
-  public MyStudyUpdateHandler(List<Study> newStudyList) {
+  public MyStudyUpdateHandler(List<Study> newStudyList, PromptStudy promptstudy) {
     super(newStudyList);
+    this.promptstudy = promptstudy;
   }
 
   @Override
@@ -19,7 +20,7 @@ public class MyStudyUpdateHandler extends AbstractStudyHandler {
     System.out.println("▶ 스터디 수정");
     System.out.println();
 
-    int inputNo = Prompt.inputInt(" 번호  : ");
+    int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = promptstudy.findByMyStudyNo(inputNo);
 

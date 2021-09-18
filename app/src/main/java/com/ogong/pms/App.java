@@ -237,9 +237,9 @@ public class App {
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
         myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder));
 
-    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList));
+    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList, promptStudy));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList, commandMap));
-    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyList));
+    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyList, promptStudy));
 
   }
 
