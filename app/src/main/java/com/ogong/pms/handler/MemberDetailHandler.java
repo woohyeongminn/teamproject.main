@@ -35,16 +35,21 @@ public class MemberDetailHandler extends AbstractMemberHandler {
       System.out.println(" >> 로그인 하세요.");
     }
 
+    if(member == null) {
+      return;
+    }
 
     request.setAttribute("inputNo", member.getPerNo());
 
     while (true) {
       System.out.println();
       System.out.println("1. 수정");
+      System.out.println("2. 탈퇴");      
       System.out.println("0. 이전");
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
-        //case 1 : commandMap.get("/member/update").execute(); break;
+        case 1 : request.getRequestDispatcher("/member/update").forward(request); return;
+        case 2 : request.getRequestDispatcher("/member/delete").forward(request); return;
         default : return;
       }
     }

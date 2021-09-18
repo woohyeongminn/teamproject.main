@@ -159,7 +159,7 @@ public class App {
     commandMap.put("/member/add", new MemberAddHandler(memberList));
 
     commandMap.put("/member/detail", new MemberDetailHandler(memberList, commandMap));
-    commandMap.put("/member/update", new MemberUpdateHandler(memberList));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberList, promptPerMember));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberList, promptPerMember));
 
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberList, promptCeoMember));
