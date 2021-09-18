@@ -35,4 +35,5 @@ public class AdminCeoMemberDetailHandler extends AbstractCeoMemberHandler {
     System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
   }
 
+
 }

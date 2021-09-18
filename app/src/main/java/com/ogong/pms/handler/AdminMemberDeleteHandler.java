@@ -22,7 +22,7 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
     for (Member member : memberList) {
       if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-        int inputMemberNo = Prompt.inputInt(" 번호 : ");
+        int inputMemberNo = (int) request.getAttribute("inputMemberNo");
 
         member = promptPerMember.findByMemberNo(inputMemberNo);
 

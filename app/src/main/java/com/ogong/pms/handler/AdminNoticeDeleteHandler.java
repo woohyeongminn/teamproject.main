@@ -14,11 +14,11 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
   public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 공지 삭제");
-    int adminnotiNo = Prompt.inputInt(" 번호 : ");
+    int adminnotiNo = (int) request.getAttribute("adminnotiNo");
 
-    AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
+    AdminNotice adminNotice = findByNotiNo(adminnotiNo);
 
-    if (adminWriteList == null) {
+    if (adminNotice == null) {
       System.out.println(" >> 공지를 다시 선택하세요.");
       return;
     }
@@ -29,7 +29,7 @@ public class AdminNoticeDeleteHandler extends AbstractAdminNoticeHandler {
       return;
     }
 
-    adminNoticeList.remove(adminWriteList);
+    adminNoticeList.remove(adminNotice);
 
     System.out.println(" >> 공지가 삭제되었습니다.");
   }
