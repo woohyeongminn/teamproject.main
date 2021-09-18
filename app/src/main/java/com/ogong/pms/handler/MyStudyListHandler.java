@@ -1,12 +1,9 @@
-//  수정 중.....
-
 package com.ogong.pms.handler;
 
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
-import com.ogong.util.Prompt;
 
 public class MyStudyListHandler extends AbstractStudyHandler {
 
@@ -60,18 +57,6 @@ public class MyStudyListHandler extends AbstractStudyHandler {
     } 
     if (waitCount == 0) {
       System.out.println(" >> 승인 대기 중인 스터디가 없습니다.\n");
-    }
-
-
-    System.out.println("----------------------");
-    System.out.println("1. 상세");
-    System.out.println("0. 이전");
-    int selectNo = Prompt.inputInt("선택> ");
-
-    switch (selectNo) {
-      //case 1 : commandMap.get("/myStudy/detail").execute(); break;
-      case 2 : System.out.println(" 이전"); break;
-      default : return;
     }
   }
 }
