@@ -116,7 +116,6 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
             default : return;
           }
         }
-
       }
     }
   }
