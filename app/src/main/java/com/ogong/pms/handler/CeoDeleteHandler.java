@@ -31,6 +31,7 @@ public class CeoDeleteHandler extends AbstractCeoMemberHandler {
       System.out.println(" >> 이메일이 일치하지 않습니다.");
       return;
     } 
+
     System.out.println();
     System.out.println(" << 비밀번호 확인 >>");
     String inputPW = Prompt.inputString(" 비밀번호를 입력하세요 : ");
@@ -40,6 +41,7 @@ public class CeoDeleteHandler extends AbstractCeoMemberHandler {
       System.out.println(" >> 비밀번호가 일치하지 않습니다.");
       return;
     }
+
     System.out.println();
     String input = Prompt.inputString(" 정말 탈퇴하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -47,12 +49,10 @@ public class CeoDeleteHandler extends AbstractCeoMemberHandler {
       return;
     }
 
-    if (ceoMember.getCeoPassword().equals(inputPW)) {
-      ceoMemberList.remove(ceoMember);
-      AuthCeoMemberLoginHandler.loginCeoMember = null;
-      System.out.println();
-      System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
-      return;
-    }
+    ceoMemberList.remove(ceoMember);
+    AuthCeoMemberLoginHandler.loginCeoMember = null;
+    System.out.println();
+    System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
+    return;
   }
 }
