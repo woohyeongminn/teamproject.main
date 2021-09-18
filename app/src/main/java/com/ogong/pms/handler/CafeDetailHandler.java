@@ -145,12 +145,15 @@ public class CafeDetailHandler extends AbstractCafeHandler {
     System.out.println("1. 일반 예약");
     System.out.println("2. 스터디룸 예약");
     System.out.println("0. 이전");
+
     int selectNo = Prompt.inputInt(" 선택> ");
     switch (selectNo) {
-      case 1 : addReservation(cafe); break;
-      case 2 : addRoomReservation(cafe); break;
-      default : return;
-    }
+      case 1 : addReservation(cafe); return;
+      case 2 : addRoomReservation(cafe); return;
+      case 0 : return;
+      default : 
+        System.out.println(" >> 번호를 다시 선택해 주세요.");
+    }      
   }
 
   protected void addReservation(Cafe cafe) {

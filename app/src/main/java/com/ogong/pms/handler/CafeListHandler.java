@@ -2,7 +2,6 @@ package com.ogong.pms.handler;
 
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.util.Prompt;
 
 public class CafeListHandler extends AbstractCafeHandler {
 
@@ -26,20 +25,23 @@ public class CafeListHandler extends AbstractCafeHandler {
       }
     }
 
-    selectCafeDetailMenu(request);
+    //    selectCafeDetailMenu(request);
   }
 
-  private void selectCafeDetailMenu(CommandRequest request) throws Exception {
-    System.out.println("\n----------------------");
-    System.out.println("1. 상세");
-    System.out.println("2. 검색");
-    System.out.println("0. 이전");
-    int input = Prompt.inputInt(" 선택> ");
-    switch (input) {
-      case 1: request.getRequestDispatcher("/cafe/detail").forward(request); break;
-      case 2: request.getRequestDispatcher("/cafe/search").forward(request); break;
-      case 0: return;
-      default : System.out.println(" >> 명령어가 올바르지 않습니다.");
-    }
-  }
+  //  private void selectCafeDetailMenu(CommandRequest request) throws Exception {
+  //    System.out.println("\n----------------------");
+  //    System.out.println("1. 상세");
+  //    System.out.println("2. 검색");
+  //    System.out.println("0. 이전");
+  //    while (true) {
+  //      int input = Prompt.inputInt(" 선택> ");
+  //      switch (input) {
+  //        case 1: request.getRequestDispatcher("/cafe/detail").forward(request); return;
+  //        case 2: request.getRequestDispatcher("/cafe/search").forward(request); return;
+  //        case 0: return;
+  //        default : 
+  //          System.out.println(" >> 번호를 다시 선택해 주세요.");
+  //      }
+  //    }
+  //  }
 }

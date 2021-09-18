@@ -48,15 +48,17 @@ public class CafeMyReservationDetailHandler extends AbstractCafeHandler {
     }
 
     System.out.println("----------------------");
-    System.out.println("1. 리뷰 작성");
+    System.out.println("1. 리뷰 등록");
     System.out.println("2. 예약 취소");
     System.out.println("0. 이전");
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1: goToAddReview(myReservation); break;
-      case 2: cancelReservation(myReservation); break;
-      default : return;
+      case 1: goToAddReview(myReservation); return;
+      case 2: cancelReservation(myReservation); return;
+      case 0: return;
+      default :
+        System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
   }
 
