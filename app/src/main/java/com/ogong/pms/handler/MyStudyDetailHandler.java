@@ -110,7 +110,7 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
             case 3: myStudyToDo.listToDo(myStudy); break;
             case 4: myStudyFreeBoard.listFreeBoard(commentList, myStudy); break;
             case 5:  MyStudyCheating.cheat() ;  // 임시로 넣었음
-            case 6: /* 탈퇴 메서드 구현 예정 */; break;  
+            case 6: /* 탈퇴 메서드 구현 예정 */; break;
             case 7: request.getRequestDispatcher("/myStudy/update").forward(request); return;
             case 8: request.getRequestDispatcher("/myStudy/delete").forward(request); return;
             default : return;
