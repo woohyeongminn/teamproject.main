@@ -50,6 +50,7 @@ public abstract class AbstractAskBoardHandler implements Command {
     Admin adminWiter = AuthAdminLoginHandler.getLoginAdmin();
 
     if (AuthAdminLoginHandler.getLoginAdmin() == null) {
+      System.out.println();
       System.out.println(" >> 관리자만 등록 가능합니다.");
     } else {
       // 0917 관리자 댓글 수정 필요!
@@ -95,7 +96,8 @@ public abstract class AbstractAskBoardHandler implements Command {
 
     //  0917 테스트값 잘 들어갔는지 확인하려고 일단 넣어놓음!
     if (askBoard.getAnswer() == null) {
-      System.out.println("등록된 댓글이 없습니다.");
+      System.out.println();
+      System.out.println(" >> 등록된 댓글이 없습니다.");
       return;
     }
     System.out.printf(" >> %s\n",askBoard.getAnswer());
@@ -109,6 +111,7 @@ public abstract class AbstractAskBoardHandler implements Command {
     System.out.println();
 
     if (AuthAdminLoginHandler.getLoginAdmin() == null) {
+      System.out.println();
       System.out.println(" >> 관리자만 변경 가능합니다.");
     } else  {
 
@@ -122,12 +125,14 @@ public abstract class AbstractAskBoardHandler implements Command {
 
       String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
+        System.out.println();
         System.out.println(" >> 댓글 변경이 취소되었습니다.");
         return;
       }
 
       comment.setCommentText(AdmincommentTitle);
 
+      System.out.println();
       System.out.println(" >> 댓글을 변경하였습니다.");
     }
   }
@@ -138,6 +143,7 @@ public abstract class AbstractAskBoardHandler implements Command {
     System.out.println();
 
     if (AuthAdminLoginHandler.getLoginAdmin() == null) {
+      System.out.println();
       System.out.println(" >> 관리자만 삭제 가능합니다.");
     } else  {
       // 0917 관리자 댓글 수정 필요!

@@ -17,6 +17,7 @@ public class AskBoardListHandler extends AbstractAskBoardHandler {
   public void execute(CommandRequest request) {
     System.out.println();
     System.out.println("▶ 문의사항 목록");
+    System.out.println();
 
     if (askBoardList.isEmpty()) {
       System.out.println(" >> 등록된 글이 없습니다.");
