@@ -23,11 +23,12 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
     System.out.println("▶ 문의사항 상세");
     System.out.println();
 
-    if (AuthPerMemberLoginHandler.getLoginUser() == null ||
-        AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
-      System.out.println(" >> 로그인 하세요.");
-      return;
-    }
+    // 없어도 될 것 같음
+    //    if (AuthPerMemberLoginHandler.getLoginUser() == null &&
+    //        AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
+    //      System.out.println(" >> 로그인 하세요.");
+    //      return;
+    //    }
 
     int askNo = Prompt.inputInt(" 번호 : ");
 
@@ -39,7 +40,8 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       return;
     }
 
-    if (AuthPerMemberLoginHandler.getLoginUser() != null) {
+    if (AuthPerMemberLoginHandler.getLoginUser() != null ||
+        AuthAdminLoginHandler.getLoginAdmin() != null) {
 
       System.out.println();
       System.out.printf(" [%s]\n", askBoard.getAskTitle());
@@ -52,7 +54,8 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
 
     }
 
-    else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
+    else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null ||
+        AuthAdminLoginHandler.getLoginAdmin() != null) {
 
       System.out.println();
       System.out.printf(" [%s]\n", askBoard.getAskTitle());
@@ -64,8 +67,6 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       listComment(askBoard);  // 댓글호출
 
     }
-
-
 
     if (AuthAdminLoginHandler.getLoginAdmin() != null) {
       System.out.println("\n---------------------");
