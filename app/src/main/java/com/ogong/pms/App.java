@@ -93,6 +93,9 @@ import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
 import com.ogong.pms.handler.MyStudyFreeBoard;
 import com.ogong.pms.handler.MyStudyGuilder;
+import com.ogong.pms.handler.MyStudyGuilderDelete;
+import com.ogong.pms.handler.MyStudyGuilderEntrust;
+import com.ogong.pms.handler.MyStudyGuilderList;
 import com.ogong.pms.handler.MyStudyListHandler;
 import com.ogong.pms.handler.MyStudyToDo;
 import com.ogong.pms.handler.MyStudyUpdateHandler;
@@ -246,7 +249,10 @@ public class App {
     MyStudyCalender myStudyCalender = new MyStudyCalender(calenderList, studyList);
     MyStudyToDo myStudyToDo = new MyStudyToDo(toDoList, studyList);
     MyStudyFreeBoard myStudyFreeBoard = new MyStudyFreeBoard(freeBoardList, commentList, memberList, studyList);
-    MyStudyGuilder myStudyGuilder = new MyStudyGuilder();
+    MyStudyGuilderList myStudyGuilderList = new MyStudyGuilderList();
+    MyStudyGuilderDelete myStudyGuilderDelete = new MyStudyGuilderDelete();
+    MyStudyGuilderEntrust myStudyGuilderEntrust = new MyStudyGuilderEntrust();
+    MyStudyGuilder myStudyGuilder = new MyStudyGuilder(myStudyGuilderList, myStudyGuilderDelete, myStudyGuilderEntrust);
 
     // 내 스터디 
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
