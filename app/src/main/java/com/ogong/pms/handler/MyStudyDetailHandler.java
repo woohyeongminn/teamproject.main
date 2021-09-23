@@ -28,7 +28,6 @@ public class MyStudyDetailHandler extends AbstractStudyHandler {
     this.promptStudy = promptStudy;
   }
 
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
