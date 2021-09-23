@@ -12,6 +12,7 @@ public class AskBoard {
   private Date askRegisteredDate; // 문의게시판 등록일
   private String answer; // 문의게시판 관리자 댓글
 
+
   @Override
   public String toString() {
     return "AskBoard [askNo=" + askNo + ", askTitle=" + askTitle + ", askContent=" + askContent

@@ -18,7 +18,7 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 문의사항 상세");
     System.out.println();
@@ -40,49 +40,80 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
       return;
     }
 
-    if (AuthPerMemberLoginHandler.getLoginUser() != null ||
-        AuthAdminLoginHandler.getLoginAdmin() != null) {
+    System.out.println();
+    System.out.printf(" [%s]\n", askBoard.getAskTitle());
+    System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
 
-      System.out.println();
-      System.out.printf(" [%s]\n", askBoard.getAskTitle());
-      System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
-      System.out.printf(" >> 작성자 : %s\n", askBoard.getAskMemberWriter().getPerNickname());
-      System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
-      askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
-      System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
-      listComment(askBoard);  // 댓글호출
-
+    String writer = "";
+    if (askBoard.getAskMemberWriter().getPerNickname() != null) {
+      writer = askBoard.getAskMemberWriter().getPerNickname();
+    } else if (askBoard.getAskCeoWriter().getCeoBossName() != null) {
+      writer = askBoard.getAskCeoWriter().getCeoBossName();
     }
+    System.out.printf(" >> 작성자 : %s\n", writer);
 
-    else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null ||
-        AuthAdminLoginHandler.getLoginAdmin() != null) {
+    System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
+    askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
+    System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
+    listComment(askBoard);  // 댓글호출
 
-      System.out.println();
-      System.out.printf(" [%s]\n", askBoard.getAskTitle());
-      System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
-      System.out.printf(" >> 작성자 : %s\n", askBoard.getAskCeoWriter().getCeoBossName());
-      System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
-      askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
-      System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
-      listComment(askBoard);  // 댓글호출
+    //
+    //    if (AuthPerMemberLoginHandler.getLoginUser() != null ||
+    //        AuthAdminLoginHandler.getLoginAdmin() != null) {
+    //
+    //      System.out.println();
+    //      System.out.printf(" [%s]\n", askBoard.getAskTitle());
+    //      System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
+    //      System.out.printf(" >> 작성자 : %s\n", askBoard.getAskMemberWriter().getPerNickname());
+    //      System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
+    //      askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
+    //      System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
+    //      listComment(askBoard);  // 댓글호출
+    //
+    //    }
+    //
+    //    else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null ||
+    //        AuthAdminLoginHandler.getLoginAdmin() != null) {
+    //
+    //      System.out.println();
+    //      System.out.printf(" [%s]\n", askBoard.getAskTitle());
+    //      System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
+    //      System.out.printf(" >> 작성자 : %s\n", askBoard.getAskCeoWriter().getCeoBossName());
+    //      System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
+    //      askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
+    //      System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
+    //      listComment(askBoard);  // 댓글호출
+    //
+    //    }
 
-    }
+    request.setAttribute("askNo", askNo);
 
-    if (AuthAdminLoginHandler.getLoginAdmin() != null) {
+    if (AuthAdminLoginHandler.getLoginAdmin() == null) {
       System.out.println("\n---------------------");
-      System.out.println("1. 댓글 달기");
-      System.out.println("2. 댓글 수정");
-      System.out.println("3. 댓글 삭제");
+      System.out.println("1. 수정");
+      System.out.println("2. 삭제");
+      System.out.println("0. 이전");
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1 : request.getRequestDispatcher("/askBoard/update").forward(request); return;
+        case 2 : request.getRequestDispatcher("/askBoard/delete").forward(request); return;
+        default : return;
+      }
+    } else if (AuthAdminLoginHandler.getLoginAdmin() != null) {
+      System.out.println("\n---------------------");
+      System.out.println("1. 삭제");
+      System.out.println("2. 댓글 등록");
+      System.out.println("3. 댓글 수정");
+      System.out.println("4. 댓글 삭제");
       System.out.println("0. 뒤로 가기");
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
-        case 1 : addComment(askBoard); break;
-        case 2 : updateComment(); break;
-        case 3 : deleteComment(askBoard); break;
+        case 1 : request.getRequestDispatcher("/askBoard/delete").forward(request); return;
+        case 2 : addComment(askBoard); break;
+        case 3 : updateComment(); break;
+        case 4 : deleteComment(askBoard); break;
         default : return;
       }
     }
-
   }
-
 }
