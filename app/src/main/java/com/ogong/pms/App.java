@@ -83,6 +83,7 @@ import com.ogong.pms.handler.MemberUpdateHandler;
 import com.ogong.pms.handler.MyStudyCalender;
 import com.ogong.pms.handler.MyStudyDeleteHandler;
 import com.ogong.pms.handler.MyStudyDetailHandler;
+import com.ogong.pms.handler.MyStudyExit;
 import com.ogong.pms.handler.MyStudyFreeBoard;
 import com.ogong.pms.handler.MyStudyGuilder;
 import com.ogong.pms.handler.MyStudyGuilderDelete;
@@ -276,10 +277,10 @@ public class App {
     MyStudyGuilderDelete myStudyGuilderDelete = new MyStudyGuilderDelete();
     MyStudyGuilderEntrust myStudyGuilderEntrust = new MyStudyGuilderEntrust();
     MyStudyGuilder myStudyGuilder = new MyStudyGuilder(myStudyGuilderList, myStudyGuilderDelete, myStudyGuilderEntrust);
-
+    MyStudyExit myStudyExit = new MyStudyExit();
     // 내 스터디 
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyList, myStudyToDo,
-        myStudyCalender, myStudyFreeBoard, commentList, myStudyGuilder, promptStudy));
+        myStudyCalender, myStudyFreeBoard, myStudyGuilder, myStudyExit, commentList, promptStudy));
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyList, promptStudy));
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyList));
     commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyList, promptStudy));
@@ -343,7 +344,6 @@ public class App {
   }
 
   static Menu welcome() {
-
     MenuGroup welcomeMenuGroup = new MenuGroup("발표를 시작하겠습니다");
     welcomeMenuGroup.setPrevMenuTitle("시작");
     return welcomeMenuGroup;
