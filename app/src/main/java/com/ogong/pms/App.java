@@ -23,6 +23,7 @@ import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Reply;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AdminCafeControlHandler;
@@ -94,6 +95,8 @@ import com.ogong.pms.handler.PromptCafe;
 import com.ogong.pms.handler.PromptCeoMember;
 import com.ogong.pms.handler.PromptPerMember;
 import com.ogong.pms.handler.PromptStudy;
+import com.ogong.pms.handler.ReplyAddHandler;
+import com.ogong.pms.handler.ReplyDetailHandler;
 import com.ogong.pms.handler.StudyAddHandler;
 import com.ogong.pms.handler.StudyDetailHandler;
 import com.ogong.pms.handler.StudyListHandler;
@@ -210,12 +213,22 @@ public class App {
         new AdminCeoMemberDeleteHandler(ceoMemberList, promptCeoMember, cafeList));
     commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberList, commandMap));
 
-    commandMap.put("/askBoard/add",  new AskBoardAddHandler(askBoardList, memberList, ceoMemberList, commentList));
-    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardList, memberList, ceoMemberList, commentList));
-    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardList, memberList, ceoMemberList, commentList));
-    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardList, memberList, ceoMemberList, commentList));
-    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardList, memberList, ceoMemberList, commentList));
-    commandMap.put("/askBoard/myList", new AskBoardMyListHandler(askBoardList, memberList, ceoMemberList, commentList));
+    ReplyAddHandler replyAddHandler = new ReplyAddHandler();
+    ReplyDetailHandler replyDetailHandler = new ReplyDetailHandler();
+    List<Reply> replyList = new ArrayList<>();
+    commandMap.put("/askBoard/add",  
+        new AskBoardAddHandler(askBoardList, memberList, ceoMemberList, replyList));
+    commandMap.put("/askBoard/list", 
+        new AskBoardListHandler(askBoardList, memberList, ceoMemberList, replyList));
+    commandMap.put("/askBoard/detail", 
+        new AskBoardDetailHandler(
+            askBoardList, memberList, ceoMemberList, replyList, replyAddHandler, replyDetailHandler));
+    commandMap.put("/askBoard/update", 
+        new AskBoardUpdateHandler(askBoardList, memberList, ceoMemberList, replyList));
+    commandMap.put("/askBoard/delete", 
+        new AskBoardDeleteHandler(askBoardList, memberList, ceoMemberList, replyList));
+    commandMap.put("/askBoard/myList", 
+        new AskBoardMyListHandler(askBoardList, memberList, ceoMemberList, replyList, replyDetailHandler));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeList));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeList, cafeReviewList, 
@@ -430,7 +443,6 @@ public class App {
 
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
     adminaskMenu.add(new MenuItem("상세", "/askBoard/detail"));
-    adminaskMenu.add(new MenuItem("삭제", "/askBoard/delete"));
 
     return adminaskMenu;
   }
@@ -495,12 +507,9 @@ public class App {
   private Menu createCafeMenu() {
     MenuGroup cafeMenu = new MenuGroup("장소 예약"); 
 
-    //cafeMenu.add(new MenuItem("등록", "/cafe/add")); // 기업권한
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
     cafeMenu.add(new MenuItem("검색", "/cafe/search"));
     cafeMenu.add(new MenuItem("상세", "/cafe/detail"));
-    //cafeMenu.add(new MenuItem("수정", "/cafe/update")); // 기업권한
-    //cafeMenu.add(new MenuItem("삭제", "/cafe/delete")); // 기업권한
 
     return cafeMenu;
   }
@@ -533,8 +542,6 @@ public class App {
     askBoardMenu.add(new MenuItem("등록", PER_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
     askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
-    askBoardMenu.add(new MenuItem("변경", PER_LOGIN, "/askBoard/update"));
-    askBoardMenu.add(new MenuItem("삭제", PER_LOGIN, "/askBoard/delete"));
 
     return askBoardMenu;
   }
@@ -601,8 +608,6 @@ public class App {
     askBoardMenu.add(new MenuItem("등록", CEO_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
     askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
-    askBoardMenu.add(new MenuItem("변경", CEO_LOGIN, "/askBoard/update"));
-    askBoardMenu.add(new MenuItem("삭제", CEO_LOGIN, "/askBoard/delete"));
 
     return askBoardMenu;
   }

@@ -3,14 +3,14 @@ package com.ogong.pms.handler;
 import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Reply;
 
 public class AskBoardListHandler extends AbstractAskBoardHandler {
 
   public AskBoardListHandler(List<AskBoard> askBoardList, List<Member> memberList,
-      List<CeoMember> ceoMemberList, List<Comment> commentList) {
-    super(askBoardList, commentList, memberList, ceoMemberList);
+      List<CeoMember> ceoMemberList, List<Reply> replyList) {
+    super(askBoardList, replyList, memberList, ceoMemberList);
   }
 
   @Override
