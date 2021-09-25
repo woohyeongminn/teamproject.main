@@ -431,8 +431,6 @@ public class App {
     adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     adminNoticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
-    adminNoticeMenu.add(new MenuItem("수정", "/adminNotice/update"));
-    adminNoticeMenu.add(new MenuItem("삭제", "/adminNotice/delete"));
 
     return adminNoticeMenu;
   }
