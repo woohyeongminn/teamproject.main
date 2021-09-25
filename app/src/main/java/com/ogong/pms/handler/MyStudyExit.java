@@ -14,7 +14,7 @@ public class MyStudyExit {
 
     if (myStudy.getOwner().getPerNickname().equals(str) &&
         myStudy.getMembers().size() > 0) {
-      System.out.println(" 구성원에게 조장권한을 위임하고 탈퇴를 진행해주세요");
+      System.out.println(" >> 구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.");
       return;
     }
 
@@ -24,12 +24,12 @@ public class MyStudyExit {
 
       String input = Prompt.inputString(" 정말 탈퇴하시겠습니까?(네 / 아니오)");
       if (!input.equals("네")) {
-        System.out.println(" 탈퇴를 취소하였습니다.");
+        System.out.println(" >> 탈퇴를 취소하였습니다.");
         return;
       }
 
       myStudy.getMembers().remove(AuthPerMemberLoginHandler.getLoginUser());
-      System.out.println(" 탈퇴 되었습니다.");
+      System.out.println(" >> 탈퇴되었습니다.");
 
     }
 
