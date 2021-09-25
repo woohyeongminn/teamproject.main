@@ -105,6 +105,7 @@ import com.ogong.pms.handler.StudySearchHandler;
 import com.ogong.pms.listener.AppInitListener;
 import com.ogong.pms.listener.FileListener;
 import com.ogong.util.Prompt;
+import com.ogong.util.RandomPw;
 
 public class App {
   List<Study> studyList = new LinkedList<>();
@@ -255,8 +256,9 @@ public class App {
     commandMap.put("/admin/login", new AuthAdminLoginHandler(adminList));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
 
+    RandomPw randomPw = new RandomPw();
+    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(promptPerMember, randomPw));
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(promptPerMember, memberList));
-    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(promptPerMember));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
     commandMap.put("/admin/detail", new AdminDetailHandler(adminList));
