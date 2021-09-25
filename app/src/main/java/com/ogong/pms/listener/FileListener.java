@@ -80,19 +80,19 @@ public class FileListener implements ApplicationContextListener {
     List<Calender> calenderList = (List<Calender>) params.get("calenderList");
     List<FreeBoard> freeBoardList = (List<FreeBoard>) params.get("freeBoardList");
 
-    saveObjects("member.json", memberList);  // MemberAddHandler
-    saveObjects("askBoard.json", askBoardList);  // AskBoardAddHandler
-    saveObjects("study.json", studyList);   // StudyAddHandler
-    saveObjects("freeBoard.json", freeBoardList); // MyStudyFreeBoard
-    saveObjects("ceoMember.json", ceoMemberList);   // CeoAddHandler
-    saveObjects("admin.json", adminList); // AuthAdminLoginHandler
-    saveObjects("adminNotice.json" , adminNoticeList);  // AdminNoticeAddHandler
-    saveObjects("cafe.json", cafeList); // CeoCafeAddHandler
-    saveObjects("cafeReservation.json", cafeReservationList);  // CafeMyReservationListHandler
-    saveObjects("cafeReview.json", cafeReviewList);
-    saveObjects("cafeRoom.json", cafeRoomList); // CafeDetailHandler 테스트값 : 2021-10-10
-    saveObjects("toDo.json", toDoList);  // MyStudyToDo
-    saveObjects("calender.json", calenderList); // MyStudyCalender
+    //    saveObjects("member.json", memberList);  // MemberAddHandler
+    //    saveObjects("askBoard.json", askBoardList);  // AskBoardAddHandler
+    //    saveObjects("study.json", studyList);   // StudyAddHandler
+    //    saveObjects("freeBoard.json", freeBoardList); // MyStudyFreeBoard
+    //    saveObjects("ceoMember.json", ceoMemberList);   // CeoAddHandler
+    //    saveObjects("admin.json", adminList); // AuthAdminLoginHandler
+    //    saveObjects("adminNotice.json" , adminNoticeList);  // AdminNoticeAddHandler
+    //    saveObjects("cafe.json", cafeList); // CeoCafeAddHandler
+    //    saveObjects("cafeReservation.json", cafeReservationList);  // CafeMyReservationListHandler
+    //    saveObjects("cafeReview.json", cafeReviewList);
+    //    saveObjects("cafeRoom.json", cafeRoomList); // CafeDetailHandler 테스트값 : 2021-10-10
+    //    saveObjects("toDo.json", toDoList);  // MyStudyToDo
+    //    saveObjects("calender.json", calenderList); // MyStudyCalender
   }
 
   //JSON 형식으로 저장된 데이터를 읽어서 객체로 만든다.
