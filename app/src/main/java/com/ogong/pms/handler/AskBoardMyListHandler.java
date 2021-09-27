@@ -42,6 +42,11 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
       }
       System.out.println("---------------------");
 
+      if (count == 0) {
+        System.out.println("\n >> 내가 등록한 문의글이 없습니다.");
+        return;
+      }
+
       if (myAskBoard.getReply() == null) {
         System.out.println();
         System.out.println(" >> 등록된 답변이 없습니다.");
@@ -50,10 +55,6 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
         replyDetailHandler.detailReply(myAskBoard);  // 답변 호출
       }
 
-
-      if (count == 0) {
-        System.out.println("\n >> 내가 등록한 문의글이 없습니다.");
-      }
     } 
 
     else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
@@ -78,6 +79,11 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
 
       System.out.println("---------------------");
 
+      if (count == 0) {
+        System.out.println("\n >> 내가 등록한 문의글이 없습니다.");
+        return;
+      }
+
       if (ceoAskBoard.getReply() == null) {
         System.out.println();
         System.out.println(" >> 등록된 답변이 없습니다.");
@@ -86,9 +92,6 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
         replyDetailHandler.detailReply(ceoAskBoard);  // 답변 호출
       }
 
-      if (count == 0) {
-        System.out.println("\n >> 내가 등록한 문의글이 없습니다.");
-      }
     }
 
     else {

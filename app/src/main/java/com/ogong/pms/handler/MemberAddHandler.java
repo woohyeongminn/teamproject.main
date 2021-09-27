@@ -116,10 +116,10 @@ public class MemberAddHandler extends AbstractMemberHandler {
     while (true) {
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
-        System.out.println(" >> 확인 실패!\n");
+        System.out.println("\n >> 확인 실패!\n");
         continue;
       } else {
-        System.out.println(" >> 확인 완료!\n");
+        System.out.println("\n >> 확인 완료!\n");
       }
       break;
     }

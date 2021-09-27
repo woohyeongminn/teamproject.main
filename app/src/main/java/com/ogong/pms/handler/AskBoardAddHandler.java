@@ -97,7 +97,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
       while (true) {
 
         try {
-          statusNo = Prompt.inputInt(" 1: 공개 / 2: 비공개 > ");
+          statusNo = Prompt.inputInt("\n 1: 공개 / 2: 비공개 > ");
           System.out.println();
           if (statusNo >= 3) {
             System.out.println(" >> 번호를 다시 입력하세요.\n");
@@ -132,7 +132,7 @@ public class AskBoardAddHandler extends AbstractAskBoardHandler {
       while (true) {
 
         try {
-          statusNo = Prompt.inputInt(" 1: 공개 / 2: 비공개 > ");
+          statusNo = Prompt.inputInt("\n 1: 공개 / 2: 비공개 > ");
           System.out.println();
           if (statusNo >= 3) {
             System.out.println(" >> 번호를 다시 입력하세요.\n");
