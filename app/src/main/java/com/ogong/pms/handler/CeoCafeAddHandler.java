@@ -1,9 +1,13 @@
 package com.ogong.pms.handler;
 
+import static com.ogong.pms.domain.Cafe.WAIT;
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
+import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CeoMember;
+import com.ogong.util.AddressSearchApi;
 import com.ogong.util.Prompt;
 
 public class CeoCafeAddHandler extends AbstractCafeHandler {
@@ -85,7 +89,7 @@ public class CeoCafeAddHandler extends AbstractCafeHandler {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws IOException {
     System.out.println();
     System.out.println("▶ 장소 등록");
     System.out.println();
@@ -99,14 +103,20 @@ public class CeoCafeAddHandler extends AbstractCafeHandler {
     cafe.setCafeLicenseNo(Prompt.inputString(" 사업자 등록번호 : "));
     cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
     cafe.setInfo(Prompt.inputString(" 소개글 : "));
-    cafe.setLocation(Prompt.inputString(" 주소 : "));
+
+    AddressSearchApi api = new AddressSearchApi();
+    Address address = api.searchAddress();
+    String addressString = address.getRnAdres();
+    System.out.println(" 기본주소 : " + addressString);
+    cafe.setLocation(addressString + " " + Prompt.inputString(" 상세주소 : "));
+
     cafe.setPhone(Prompt.inputString(" 전화번호 : "));
     cafe.setOpenTime(LocalTime.parse(Prompt.inputString(" 오픈시간 (예시 > 09:00) : ")));
     cafe.setCloseTime(LocalTime.parse(Prompt.inputString(" 마감시간 (예시 > 21:00) : ")));
     cafe.setHoliday(Prompt.inputString(" 휴무일 : "));
     cafe.setBookable(Prompt.inputInt(" 예약가능인원 : "));
     cafe.setTimePrice(Prompt.inputInt(" 시간당금액 : "));
-    cafe.setCafeStatus(0); // 0 : 승인대기
+    cafe.setCafeStatus(WAIT); // 0 : 승인대기
 
     System.out.println();
     String input = Prompt.inputString(" 등록하시겠습니까? (네 / 아니오) ");

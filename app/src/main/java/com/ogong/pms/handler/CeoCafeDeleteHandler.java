@@ -1,5 +1,7 @@
 package com.ogong.pms.handler;
 
+import static com.ogong.pms.domain.Cafe.DELETE;
+import java.time.LocalTime;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.util.Prompt;
@@ -24,20 +26,21 @@ public class CeoCafeDeleteHandler extends AbstractCafeHandler {
       return;
     }
 
-    //    cafe.setName("");
-    //    cafe.setMainImg("");
-    //    cafe.setInfo("");
-    //    cafe.setLocation("");
-    //    cafe.setPhone("");
-    //    cafe.setOpenTime(LocalTime.of(00, 00));
-    //    cafe.setCloseTime(LocalTime.of(00, 00));
-    //    cafe.setHoliday("");
-    //    cafe.setBookable(0);
-    //    cafe.setTimePrice(0);
-    //    cafe.setCafeStatus(3);
+    Cafe cafe = (Cafe) request.getAttribute("cafe");
 
-    cafeList.remove(request.getAttribute("cafe"));
+    cafe.setName("");
+    cafe.setMainImg("");
+    cafe.setInfo("");
+    cafe.setLocation("");
+    cafe.setPhone("");
+    cafe.setOpenTime(LocalTime.of(00, 00));
+    cafe.setCloseTime(LocalTime.of(00, 00));
+    cafe.setHoliday("");
+    cafe.setBookable(0);
+    cafe.setTimePrice(0);
+    cafe.setCafeStatus(DELETE);
 
+    //    cafeList.remove(request.getAttribute("cafe"));
 
     System.out.println(" >> 장소를 삭제하였습니다.");
   }

@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import static com.ogong.pms.domain.Cafe.DELETE;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
@@ -34,15 +35,12 @@ public class CeoCafeListHandler extends AbstractCeoMemberHandler {
         //          System.out.println(" 삭제 된 장소입니다.");
         //          continue;
         //        }
-        //        if (cafe.getCafeStatus() == 3) {
-        //          continue;
-        //        }
+        if (cafe.getCafeStatus() == DELETE) {
+          continue;
+        }
         if (cafe.getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
-          System.out.printf("\n (%s)\n [%s]\n"
-              , cafe.getNo(), cafe.getName());
-          if (cafe.getCafeStatus() == 0) {
-            System.out.println(" * 승인 대기중인 카페입니다.");
-          }
+          System.out.printf("\n (%s)\n [%s] | %s\n"
+              , cafe.getNo(), cafe.getName(), getCafeStatusLabel(cafe.getCafeStatus()));
         }
       }
 

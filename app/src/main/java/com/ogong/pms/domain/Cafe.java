@@ -4,6 +4,11 @@ import java.time.LocalTime;
 
 public class Cafe {
 
+  public static final int WAIT = 0;
+  public static final int GENERAL = 1;
+  public static final int STOP = 2;
+  public static final int DELETE = 3;
+
   private int no; // 카페 번호
   private CeoMember ceoMember; // 사장
   private String cafeLicenseNo; // 사업자등록번호

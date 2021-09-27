@@ -1,5 +1,9 @@
 package com.ogong.pms.handler;
 
+import static com.ogong.pms.domain.Cafe.DELETE;
+import static com.ogong.pms.domain.Cafe.GENERAL;
+import static com.ogong.pms.domain.Cafe.STOP;
+import static com.ogong.pms.domain.Cafe.WAIT;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
@@ -30,14 +34,14 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     }
 
     for(Cafe cafe : cafeList) {
-      if (cafe.getCafeStatus() == 3) {
+      if (cafe.getCafeStatus() == DELETE) {
         System.out.printf(" \n (%s)\n", cafe.getNo());
         System.out.println(" 삭제 된 장소입니다.");
         continue;
       }
       System.out.printf(" \n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
           , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
-      if (cafe.getCafeStatus() == 0) {
+      if (cafe.getCafeStatus() == WAIT) {
         System.out.println(" * 승인 대기중인 카페입니다.");
       }
     }
@@ -63,10 +67,10 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     System.out.println("▶ 장소 상세");
     System.out.println();
 
-    Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
+    Cafe cafe = findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
     System.out.println();
 
-    if (cafe == null) {
+    if (cafe == null || cafe.getCafeStatus() == DELETE) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
@@ -81,6 +85,7 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
     System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());
     System.out.printf(" >> 예약 가능 인원 : %d\n", cafe.getBookable());
     System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
+    System.out.printf(" >> 상태 : %s\n", getCafeStatusLabel(cafe.getCafeStatus()));
     System.out.println();
     System.out.println("============= 리뷰 =============");
     int reviewSize = 0;
@@ -154,7 +159,7 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
           System.out.println(" >> 장소 승인을 취소하였습니다.");
           return;
         }
-        cafe.setCafeStatus(1);
+        cafe.setCafeStatus(GENERAL);
         System.out.printf(" >> '%s'를 승인하였습니다.\n", cafe.getName());
         return;
       }
@@ -169,5 +174,15 @@ public class AdminCafeControlHandler extends AbstractCafeHandler {
       }
     }
     return null;
+  }
+
+  protected static String getCafeStatusLabel(int status) {
+    switch (status) {
+      case WAIT: return "승인대기";
+      case GENERAL: return "운영중";
+      case STOP: return "운영중단";
+      case DELETE: return "삭제";
+      default: return "오류";
+    }
   }
 }
