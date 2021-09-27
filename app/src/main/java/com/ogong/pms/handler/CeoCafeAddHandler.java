@@ -106,7 +106,7 @@ public class CeoCafeAddHandler extends AbstractCafeHandler {
 
     AddressSearchApi api = new AddressSearchApi();
     Address address = api.searchAddress();
-    String addressString = address.getRnAdres();
+    String addressString = address.getLnmAdres();
     System.out.println(" 기본주소 : " + addressString);
     cafe.setLocation(addressString + " " + Prompt.inputString(" 상세주소 : "));
 

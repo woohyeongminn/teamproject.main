@@ -15,20 +15,31 @@ import com.ogong.pms.domain.Address;
 public class AddressSearchApi {
 
   public Address searchAddress() throws IOException {
-    System.out.println();
-    System.out.println(" > 주소 검색");
-    String searchKeyword = Prompt.inputString(" 예) 판교역로 235, 분당 주공, 삼평동 681 > ");
-    System.out.println();
+    Address address = null;
 
-    StringBuilder urlBuilder = 
-        new StringBuilder("http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdSearchAllService/retrieveNewAdressAreaCdSearchAllService/getNewAddressListAreaCdSearchAll"); /*URL*/
-    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=jdTdDJnUw0kp/YUP/kTSolkPIS45XusfzTcL5a15e394LlBKFhZCsp6N/fnYBUjrHHfu7rHSkVgljiBOQtjQNA=="); /*Service Key*/
-    urlBuilder.append("&" + URLEncoder.encode("srchwrd","UTF-8") + "=" + URLEncoder.encode(searchKeyword, "UTF-8")); /*검색어*/
-    urlBuilder.append("&" + URLEncoder.encode("countPerPage","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*페이지당 출력될 개수를 지정(최대50)*/
-    urlBuilder.append("&" + URLEncoder.encode("currentPage","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*출력될 페이지 번호*/
-    //    System.out.println(urlBuilder.toString());
+    while (true) {
+      System.out.println();
+      System.out.println(" > 주소 검색");
+      String searchKeyword = Prompt.inputString(" 예) 판교역로 235, 분당 주공, 삼평동 681 > ");
+      System.out.println();
 
-    return xmlParsing(urlBuilder.toString());
+      StringBuilder urlBuilder = 
+          new StringBuilder("http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdSearchAllService/retrieveNewAdressAreaCdSearchAllService/getNewAddressListAreaCdSearchAll"); /*URL*/
+      urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=jdTdDJnUw0kp/YUP/kTSolkPIS45XusfzTcL5a15e394LlBKFhZCsp6N/fnYBUjrHHfu7rHSkVgljiBOQtjQNA=="); /*Service Key*/
+      urlBuilder.append("&" + URLEncoder.encode("srchwrd","UTF-8") + "=" + URLEncoder.encode(searchKeyword, "UTF-8")); /*검색어*/
+      urlBuilder.append("&" + URLEncoder.encode("countPerPage","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*페이지당 출력될 개수를 지정(최대50)*/
+      urlBuilder.append("&" + URLEncoder.encode("currentPage","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*출력될 페이지 번호*/
+      //      System.out.println(urlBuilder.toString());
+
+      address = xmlParsing(urlBuilder.toString());
+
+      if (address == null) {
+        continue;
+      } else {
+        break;
+      }
+    }
+    return address;
   }
 
   private Address xmlParsing(String url) {
@@ -47,6 +58,10 @@ public class AddressSearchApi {
       NodeList nList = doc.getElementsByTagName("newAddressListAreaCdSearchAll");
       //      System.out.println("파싱할 리스트 수 : "+ nList.getLength());
 
+      if (nList.getLength() == 0) {
+        System.out.println(" 검색 결과가 존재하지 않습니다.");
+      }
+
       for (int i = 0; i < nList.getLength(); i++) {
         Address address = new Address();
         Node nNode = nList.item(i);
@@ -62,23 +77,28 @@ public class AddressSearchApi {
           addressMapper.put((i+1), address);
         }
       }
+
       while (true) {
         System.out.println();
-        inputNo = Prompt.inputInt(" 주소 선택 > ");
+        inputNo = Prompt.inputInt(" 주소 선택(다시 검색(0)) > ");
 
-        if (inputNo <= 0 || inputNo > addressMapper.size()) {
+        if (inputNo < 0 || inputNo > addressMapper.size()) {
           System.out.println(" >> 잘못된 번호입니다. 다시 입력해 주세요.");
           continue;
         } else {
-          System.out.println();
           break;
-        }
+        } 
       }
 
     } catch (Exception e) {
       e.printStackTrace();
     }
 
+    if (inputNo == 0) {
+      return null;
+    }
+
+    System.out.println();
     return addressMapper.get(inputNo);
   }
 
