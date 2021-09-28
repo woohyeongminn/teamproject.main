@@ -10,7 +10,7 @@ import com.ogong.util.Prompt;
 
 public abstract class AbstractCeoMemberHandler implements Command {
 
-  List<CeoMember> ceoMemberList;
+  protected List<CeoMember> ceoMemberList;
 
   public AbstractCeoMemberHandler(List<CeoMember> ceoMemberList) {
     this.ceoMemberList = ceoMemberList;

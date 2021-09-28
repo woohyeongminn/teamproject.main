@@ -10,7 +10,7 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler {
   PromptPerMember promptPerMember;
   List<Member> memberList;
 
-  static Member loginUser;
+  public static Member loginUser;
   public static Member getLoginUser() {
     return loginUser;
   }
