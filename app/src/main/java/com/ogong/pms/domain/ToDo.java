@@ -4,6 +4,10 @@ import java.sql.Date;
 
 
 public class ToDo {
+
+  public static final int PROGRESSING = 1;      // 진행중
+  public static final int COMPLETE = 2;         // 완료
+
   private int todoNo;           // 투두리스트 번호
   private String todoTitle;     // 투두리스트 제목
   private String todoContent;   // 투두리스트 내용

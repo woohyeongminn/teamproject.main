@@ -82,7 +82,7 @@ public class MyStudyToDo {
     todo.setTodoStatus(1);
     todo.setTodoDate(new Date(System.currentTimeMillis()));
 
-    String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오)");
+    String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 등록을 취소하였습니다.");
       listToDo(study);
@@ -107,10 +107,10 @@ public class MyStudyToDo {
 
     System.out.println(" >> 진행 중 ");
 
-    int count1 = 0;
+    int countProgressing = 0;
 
     for (ToDo todo : study.getMyStudyToDo()) {
-      if (todo.getTodoStatus() == 1) {
+      if (todo.getTodoStatus() == ToDo.PROGRESSING) {
         System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
             getStatusToDo(todo.getTodoStatus()),
             todo.getTodoNo(),
@@ -118,21 +118,21 @@ public class MyStudyToDo {
             todo.getTodoRemark(),
             todo.getTodoDate());
         System.out.println();
-        count1++;
+        countProgressing++;
       }
       toDoArrayList.add(todo);
     }
 
-    if (count1 == 0) {
+    if (countProgressing == 0) {
       System.out.println(" ○ | 진행 중인 To-Do List가 없습니다.\n");
     }
 
     System.out.println(" >> 완료 ");
 
-    int count2 = 0;
+    int countComplete = 0;
 
     for (ToDo todo : study.getMyStudyToDo()) {
-      if (todo.getTodoStatus() == 2) {
+      if (todo.getTodoStatus() == ToDo.COMPLETE) {
         System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
             getStatusToDo(todo.getTodoStatus()),
             todo.getTodoNo(),
@@ -140,11 +140,11 @@ public class MyStudyToDo {
             todo.getTodoRemark(),
             todo.getTodoDate());
         System.out.println();
-        count2++;
+        countComplete++;
       }
     }
 
-    if (count2 == 0) {
+    if (countComplete == 0) {
       System.out.println(" ✔ | 완료된 To-Do List가 없습니다.\n");
     }
 
@@ -182,9 +182,9 @@ public class MyStudyToDo {
 
       System.out.printf(" >> 내용 : %s\n", toDo.getTodoContent());
       System.out.printf(" >> 비고 : %s\n", toDo.getTodoRemark());
-      if (toDo.getTodoStatus() == 1) {
+      if (toDo.getTodoStatus() == ToDo.PROGRESSING) {
         System.out.println(" >> 상태 : 진행 중");
-      } else if (toDo.getTodoStatus() == 2) {
+      } else if (toDo.getTodoStatus() == ToDo.COMPLETE) {
         System.out.println(" >> 상태 : 완료");
       }
       System.out.printf(" >> DATE : %s\n", toDo.getTodoDate());
@@ -271,12 +271,9 @@ public class MyStudyToDo {
       }
 
     } else {
-      System.out.printf(" 진행 상황(%s):", getStatusToDo(todoStatus));
+      System.out.printf(" 진행 상황(%s) : " , todoStatus);
     }
-    System.out.println();
-    System.out.println(" 1: 진행 중");
-    System.out.println(" 2: 완료");
-    return Prompt.inputInt(" 선택> ");
+    return Prompt.inputInt("1. 진행 중 / 2. 완료 > ");
   }
 
 
