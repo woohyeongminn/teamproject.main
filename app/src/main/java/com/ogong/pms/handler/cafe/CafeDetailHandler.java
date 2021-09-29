@@ -25,7 +25,7 @@ public class CafeDetailHandler extends AbstractCafeHandler {
   List<CafeRoom> roomList;
   PromptCafe promptcafe;
   PromptPerMember promptPerMember;
-  int reservationNo = 4; // 예약번호
+  int reservationNo = 5; // 예약번호
 
   public CafeDetailHandler (List<Cafe> cafeList, List<CafeReview> reviewList
       , List<CafeReservation> reserList, PromptPerMember promptPerMember,
