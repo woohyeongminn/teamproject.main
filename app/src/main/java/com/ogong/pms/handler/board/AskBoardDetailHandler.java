@@ -47,6 +47,13 @@ public class AskBoardDetailHandler extends AbstractAskBoardHandler {
 
     else if (askBoard.getAskStatus() == 2) {
 
+      if (AuthPerMemberLoginHandler.getLoginUser() == null &&
+          AuthCeoMemberLoginHandler.getLoginCeoMember() == null &&
+          AuthAdminLoginHandler.getLoginAdmin() == null) {
+        System.out.println(" >> 열람 권한이 없습니다.");
+        return;
+      }
+
       if (AuthPerMemberLoginHandler.getLoginUser() != null) {
 
         if (AuthPerMemberLoginHandler.getLoginUser().getPerNo() !=
