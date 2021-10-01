@@ -36,8 +36,13 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler {
       System.out.println(" >> 등록된 회원이 아닙니다.");
     }
 
+    int logincount = 0;
     while (member != null) {
       inputPassword = Prompt.inputString(" 비밀번호 : ");
+      if (logincount == 5) {
+        System.out.println("비밀번호를 5회 틀렸습니다.");
+        return;
+      }
 
       if (member.getPerPassword().equals(inputPassword)) {
         member.setPerEmail(inputEmail);
@@ -49,7 +54,7 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler {
         return;
       }
       System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
-      return;
+      logincount++;
     }
   } 
 }

@@ -1,4 +1,4 @@
-package com.ogong.pms.server;
+package com.ogong.server;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

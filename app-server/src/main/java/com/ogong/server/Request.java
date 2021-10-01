@@ -1,4 +1,4 @@
-package com.ogong.pms.server;
+package com.ogong.server;
 
 import com.google.gson.Gson;
 
@@ -20,7 +20,7 @@ public class Request {
     return command;
   }
 
-  public <T> T getValue(Class<T> type) {
+  public <T> T getObject(Class<T> type) {
     if (jsonData == null || jsonData.length() == 0) {
       return null;
     }
