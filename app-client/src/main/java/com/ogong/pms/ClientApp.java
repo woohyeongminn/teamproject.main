@@ -9,10 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
+import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
+import com.ogong.pms.handler.AbstractLoginHandler;
+import com.ogong.pms.handler.AuthPerMemberLoginHandler;
+import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.member.MemberAddHandler;
+import com.ogong.pms.handler.member.MemberDetailHandler;
+import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.listener.AppInitListener;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
@@ -22,11 +28,6 @@ public class ClientApp {
   RequestAgent requestAgent;
 
   HashMap<String, Command> commandMap = new HashMap<>();
-
-  public ClientApp() throws Exception {
-    requestAgent = new RequestAgent("127.0.0.1", 5050);
-    commandMap.put("/member/add", new MemberAddHandler(requestAgent));
-  }  
 
   //=> 옵저버(리스너) 목록
   List<ApplicationContextListener> listeners = new ArrayList<>();
@@ -68,19 +69,6 @@ public class ClientApp {
 
   private void notifyOnApplicationStarted() {
     HashMap<String,Object> params = new HashMap<>();
-    //    params.put("memberList", memberList);
-    //    params.put("ceoMemberList", ceoMemberList);
-    //    params.put("adminList", adminList);
-    //    params.put("adminNoticeList", adminNoticeList);
-    //    params.put("askBoardList", askBoardList);
-    //    params.put("cafeList", cafeList);
-    //    params.put("cafeReservationList", cafeReservationList);
-    //    params.put("cafeReviewList", cafeReviewList);
-    //    params.put("cafeRoomList", cafeRoomList);
-    //    params.put("studyList", studyList);
-    //    params.put("toDoList", toDoList);
-    //    params.put("calenderList", calenderList);
-    //    params.put("freeBoardList", freeBoardList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextInitialized(params);
@@ -89,24 +77,33 @@ public class ClientApp {
 
   private void notifyOnApplicationEnded() {
     HashMap<String,Object> params = new HashMap<>();
-    //    params.put("memberList", memberList);
-    //    params.put("ceoMemberList", ceoMemberList);
-    //    params.put("adminList", adminList);
-    //    params.put("adminNoticeList", adminNoticeList);
-    //    params.put("askBoardList", askBoardList);
-    //    params.put("cafeList", cafeList);
-    //    params.put("cafeReservationList", cafeReservationList);
-    //    params.put("cafeReviewList", cafeReviewList);
-    //    params.put("cafeRoomList", cafeRoomList);
-    //    params.put("studyList", studyList);
-    //    params.put("toDoList", toDoList);
-    //    params.put("calenderList", calenderList);
-    //    params.put("freeBoardList", freeBoardList);
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
     }
   }
+
+  public ClientApp() throws Exception {
+    requestAgent = new RequestAgent("127.0.0.1", 5050);
+
+    commandMap.put("/member/login", new AuthPerMemberLoginHandler(requestAgent));
+    commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
+
+    commandMap.put("/member/add", new MemberAddHandler(requestAgent));
+    commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
+    //commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(requestAgent));
+    commandMap.put("/member/update", new MemberUpdateHandler(requestAgent));
+    //commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
+  }  
+
+  //  class MyFilter implements MenuFilter {
+  //    @Override
+  //    public boolean accept(Menu menu) {
+  //      return (menu.getAccessScope() & AbstractLoginHandler.getUserAccessLevel()) > 0; 
+  //    }
+  //  }
+
+  MenuFilter menuFilter = menu -> (menu.getAccessScope() & AbstractLoginHandler.getUserAccessLevel()) > 0;
 
   static Menu welcome() {
     MenuGroup welcomeMenuGroup = new MenuGroup("발표를 시작하겠습니다");
@@ -213,7 +210,7 @@ public class ClientApp {
   // 개인 회원 메인
   Menu createMemberMenu() {
     MenuGroup userMenuGroup = new MenuGroup("오늘의 공부"); 
-
+    userMenuGroup.setMenuFilter(menuFilter);
     userMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/member/add"));
     userMenuGroup.add(new MenuItem("로그아웃", PER_LOGIN, "/member/logout"));
     userMenuGroup.add(new MenuItem("로그인", LOGOUT, "/member/login"));
@@ -233,7 +230,7 @@ public class ClientApp {
   // 개인 하위 메뉴2 - 마이페이지 (로그인 했을때)
   private Menu createMyPageMenu() {
     MenuGroup myPageMenu = new MenuGroup("마이 페이지", PER_LOGIN); 
-
+    myPageMenu.setMenuFilter(menuFilter);
     myPageMenu.add(new MenuItem("개인정보", "/member/detail"));
     myPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
     myPageMenu.add(new MenuItem("예약내역", "/cafeReservation/list"));
@@ -245,7 +242,7 @@ public class ClientApp {
   //개인 하위 메뉴3 - 스터디 찾기
   private Menu createStudyMenu() {
     MenuGroup allStudyMenu = new MenuGroup("스터디 찾기"); 
-
+    allStudyMenu.setMenuFilter(menuFilter);
     allStudyMenu.add(new MenuItem("등록", PER_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
     allStudyMenu.add(new MenuItem("검색","/study/search"));
@@ -259,6 +256,7 @@ public class ClientApp {
   //개인 하위 메뉴4 - 내 스터디
   private Menu createMystudyMenu() {
     MenuGroup myStudyMenu = new MenuGroup("내 스터디", PER_LOGIN);
+    myStudyMenu.setMenuFilter(menuFilter);
     myStudyMenu.add(new MenuItem("목록", "/myStudy/list"));
     myStudyMenu.add(new MenuItem("상세", "/myStudy/detail"));
 
@@ -268,7 +266,7 @@ public class ClientApp {
   //개인 하위 메뉴5 - 스터디 장소
   private Menu createCafeMenu() {
     MenuGroup cafeMenu = new MenuGroup("장소 예약"); 
-
+    cafeMenu.setMenuFilter(menuFilter);
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
     cafeMenu.add(new MenuItem("검색", "/cafe/search"));
     cafeMenu.add(new MenuItem("상세", "/cafe/detail"));
@@ -279,7 +277,7 @@ public class ClientApp {
   //개인 하위 메뉴6 - 고객센터
   private Menu createMemberCSMenu() {
     MenuGroup memberCSMenu = new MenuGroup("고객센터");
-
+    memberCSMenu.setMenuFilter(menuFilter);
     memberCSMenu.add(createMemberNoticeMenu());
     memberCSMenu.add(createMemberAskBoardMenu());
 
@@ -289,7 +287,7 @@ public class ClientApp {
   // 6-1
   private Menu createMemberNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항"); 
-
+    noticeMenu.setMenuFilter(menuFilter);
     noticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     noticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
 
@@ -300,7 +298,7 @@ public class ClientApp {
   // 문의사항 상세보기 (댓글 목록 조회만) >> 회원 권한
   private Menu createMemberAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
-
+    askBoardMenu.setMenuFilter(menuFilter);
     askBoardMenu.add(new MenuItem("등록", PER_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
     askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
@@ -313,7 +311,7 @@ public class ClientApp {
   // 기업
   Menu createCeoMenu() {
     MenuGroup ceoMemberMenuGroup = new MenuGroup("오늘의 공부 - 사장님");
-
+    ceoMemberMenuGroup.setMenuFilter(menuFilter);
     ceoMemberMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/ceoMember/add"));
     ceoMemberMenuGroup.add(new MenuItem("로그인", LOGOUT, "/ceoMember/login"));
     ceoMemberMenuGroup.add(new MenuItem("ID/PW 찾기", LOGOUT, "/ceoMember/findIdPw"));
@@ -329,7 +327,7 @@ public class ClientApp {
   // 기업 정보 >> 로그인하라고 뜸
   private Menu createCeoPageMenu() {
     MenuGroup ceoPageMenu = new MenuGroup("마이 페이지", CEO_LOGIN); 
-
+    ceoPageMenu.setMenuFilter(menuFilter);
     ceoPageMenu.add(new MenuItem("기업 프로필", "/ceoMember/detail"));
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     ceoPageMenu.add(new MenuItem("카페 목록", "/ceoMember/myCafeList"));
@@ -345,7 +343,7 @@ public class ClientApp {
   //기업 하위 메뉴6 - 고객센터
   private Menu createCeoCSMenu() {
     MenuGroup memberCSMenu = new MenuGroup("고객센터");
-
+    memberCSMenu.setMenuFilter(menuFilter);
     memberCSMenu.add(createCeoNoticeMenu());
     memberCSMenu.add(createCeoAskBoardMenu());
 
@@ -355,7 +353,7 @@ public class ClientApp {
   // 6-1
   private Menu createCeoNoticeMenu() {
     MenuGroup noticeMenu = new MenuGroup("공지사항"); 
-
+    noticeMenu.setMenuFilter(menuFilter);
     noticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     noticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
 
@@ -366,7 +364,7 @@ public class ClientApp {
   // 문의사항 상세보기 (댓글 목록 조회만) >> 기업 권한
   private Menu createCeoAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("문의사항");
-
+    askBoardMenu.setMenuFilter(menuFilter);
     askBoardMenu.add(new MenuItem("등록", CEO_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
     askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
@@ -382,8 +380,8 @@ public class ClientApp {
   void service() throws Exception{
     notifyOnApplicationStarted();
 
-    createMenu().execute();
-    requestAgent.request("quit", null);
+    createMenu().execute(); 
+    //requestAgent.request("quit", null);
     Prompt.close();
 
     notifyOnApplicationEnded();

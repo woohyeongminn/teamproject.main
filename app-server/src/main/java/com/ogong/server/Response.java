@@ -9,7 +9,14 @@ public class Response {
   public static final String FAIL = "fail";
 
   String status;
-  String value;
+  Object value;
+
+  public Response() {}
+
+  public Response(String status, Object value) {
+    this.status = status;
+    this.value = value;
+  }
 
   public String getStatus() {
     return status;
@@ -17,10 +24,10 @@ public class Response {
   public void setStatus(String status) {
     this.status = status;
   }
-  public String getValue() {
+  public Object getValue() {
     return value;
   }
-  public void setValue(String value) {
+  public void setValue(Object value) {
     this.value = value;
   }
 }
