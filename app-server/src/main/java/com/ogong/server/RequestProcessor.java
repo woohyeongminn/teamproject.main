@@ -61,7 +61,7 @@ public class RequestProcessor implements AutoCloseable {
 
       for (String dataProcessorName : dataProcessorNames) {
         if (command.startsWith(dataProcessorName)) {
-          dataProcessor = dataProcessorMap.get(dataProcessorNames);
+          dataProcessor = dataProcessorMap.get(dataProcessorName);
           break;
         }
       }
