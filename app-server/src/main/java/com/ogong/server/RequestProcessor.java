@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Map;
+import java.util.Set;
 import com.google.gson.Gson;
-import com.ogong.pms.table.MemberTable;
 
 // 역할
 //- 클라이언트와 통신하는 일을 담당한다.
@@ -19,10 +20,11 @@ public class RequestProcessor implements AutoCloseable {
   PrintWriter out;
   BufferedReader in;
 
-  MemberTable memberTable = new MemberTable();
+  Map<String,DataProcessor> dataProcessorMap;
 
-  public RequestProcessor(Socket socket) throws Exception {
+  public RequestProcessor(Socket socket, Map<String,DataProcessor> dataProcessorMap) throws Exception {
     this.socket = socket;
+    this.dataProcessorMap = dataProcessorMap;
     out = new PrintWriter(socket.getOutputStream());
     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
   }
@@ -40,8 +42,12 @@ public class RequestProcessor implements AutoCloseable {
 
   public void service() throws Exception {
 
+    Set<String> dataProcessorNames = dataProcessorMap.keySet();
+
     while (true) {
       String command = in.readLine();
+      Request request = new Request(command, in.readLine());
+      Response response = new Response();
 
       if (command.equalsIgnoreCase("quit")) {
         in.readLine();
@@ -49,30 +55,39 @@ public class RequestProcessor implements AutoCloseable {
         out.println("goodbye");
         out.flush();
         break;
+      }
 
-      } else if (command.startsWith("/member/")) {
-        Request request = new Request(command, in.readLine());
-        Response response = new Response();
+      DataProcessor dataProcessor = null;
 
-        memberTable.execute(request, response);
-
-        out.println(response.status);
-
-        if (response.getValue() != null) {
-          out.println(new Gson().toJson(response.getValue()));
-
-        } else {
-          out.println();
+      for (String dataProcessorName : dataProcessorNames) {
+        if (command.startsWith(dataProcessorName)) {
+          dataProcessor = dataProcessorMap.get(dataProcessorNames);
+          break;
         }
-        out.flush();
+      }
+
+      if (dataProcessor != null) {
+        dataProcessor.execute(request, response);
 
       } else {
-        in.readLine();
-        out.println("success");
-        out.println(command);
-        out.flush();
+        response.setStatus(Response.FAIL);
+        response.setValue("해당 명령어를 처리할 수 없습니다.");
       }
+
+      sendResult(response);
     }
+  }
+
+  private void sendResult(Response response) {
+    out.println(response.status);
+
+    if (response.getValue() != null) {
+      out.println(new Gson().toJson(response.getValue()));
+
+    } else {
+      out.println();
+    }
+    out.flush();
   }
 
 }

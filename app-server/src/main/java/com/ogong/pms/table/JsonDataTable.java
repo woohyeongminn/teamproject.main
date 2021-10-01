@@ -48,6 +48,7 @@ public abstract class JsonDataTable<T> {
       list.addAll(collection);
 
       System.out.printf("%s 데이터 로딩 완료!\n", filename);
+      System.out.println("이게 왜?");
 
     } catch (Exception e) {
       System.out.printf("%s 데이터 로딩 오류!\n", filename);

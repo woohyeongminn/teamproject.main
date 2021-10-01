@@ -9,7 +9,7 @@ import com.ogong.util.Prompt;
 
 public class MemberAddHandler implements Command {
 
-  int perNo = 1;
+  int perNo = 7;
   RequestAgent requestAgent;
 
   public MemberAddHandler(RequestAgent requestAgent) {

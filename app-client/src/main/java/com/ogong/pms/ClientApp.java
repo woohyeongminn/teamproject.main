@@ -23,7 +23,8 @@ public class ClientApp {
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
-  public ClientApp() {
+  public ClientApp() throws Exception {
+    requestAgent = new RequestAgent("127.0.0.1", 5050);
     commandMap.put("/member/add", new MemberAddHandler(requestAgent));
   }  
 
