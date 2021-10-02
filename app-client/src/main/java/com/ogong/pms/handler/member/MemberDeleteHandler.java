@@ -2,6 +2,7 @@ package com.ogong.pms.handler.member;
 
 import java.util.HashMap;
 import com.ogong.menu.Menu;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -29,17 +30,23 @@ public class MemberDeleteHandler implements Command {
       return;
     }
 
-    int no = (int) request.getAttribute("memberNo");
+    int no;
+    try {
+      no = (int)request.getAttribute("memberNo");
+    } catch (NullPointerException e) {
+      no = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
+    }
 
     HashMap<String,String> params = new HashMap<>();
     params.put("memberNo", String.valueOf(no));
 
     requestAgent.request("member.selectOne", params);
+    Member member = requestAgent.getObject(Member.class);
 
     System.out.println(" << 이메일 확인 >>");
     String inputEmail = Prompt.inputString(" 이메일을 입력하세요 : ");
 
-    if (!inputEmail.equals(AuthPerMemberLoginHandler.getLoginUser().getPerEmail())) {
+    if (!inputEmail.equals(member.getPerEmail())) {
       System.out.println();
       System.out.println(" >> 이메일이 일치하지 않습니다.");
       return;
@@ -49,7 +56,7 @@ public class MemberDeleteHandler implements Command {
     System.out.println(" << 비밀번호 확인 >>");
     String inputPassword = Prompt.inputString(" 비밀번호를 입력하세요 : ");
 
-    if (!inputPassword.equals(AuthPerMemberLoginHandler.getLoginUser().getPerPassword())) {
+    if (!inputPassword.equals(member.getPerPassword())) {
       System.out.println();
       System.out.println(" >> 비밀번호가 일치하지 않습니다.");
       return;

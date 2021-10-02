@@ -1,6 +1,5 @@
 package com.ogong.pms.handler.member;
 
-import java.util.HashMap;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -21,25 +20,38 @@ public class MemberDetailHandler implements Command {
     System.out.println();
     System.out.println("▶ 프로필");
 
-    String memberEmail = AuthPerMemberLoginHandler.getLoginUser().getPerEmail();
+    //    String memberEmail = AuthPerMemberLoginHandler.getLoginUser().getPerEmail();
+    //
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("memberEmail", memberEmail);
+    //
+    //    requestAgent.request("member.selectOne", params);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("해당 번호의 회원이 없습니다.");
+    //      return;
+    //    }
+    //
+    //    Member member = requestAgent.getObject(Member.class);
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("memberEmail", memberEmail);
+    Member member = null;
 
-    requestAgent.request("member.selectOne", params);
+    try {
+      member = AuthPerMemberLoginHandler.getLoginUser();
+      System.out.println();
+      System.out.printf(" [%s]\n", member.getPerNickname());
+      System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
+      System.out.printf(" >> 사  진 : %s\n", member.getPerPhoto());
+      System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 회원이 없습니다.");
-      return;
+    } catch (NullPointerException e) {
+      System.out.println();
+      System.out.println(" >> 프로필 실행 오류");
     }
 
-    Member member = requestAgent.getObject(Member.class);
-
-    System.out.println();
-    System.out.printf(" [%s]\n", member.getPerNickname());
-    System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
-    System.out.printf(" >> 사  진 : %s\n", member.getPerPhoto());
-    System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
+    if (member == null) {
+      return;
+    }
 
     request.setAttribute("memberNo", member.getPerNo());
 
