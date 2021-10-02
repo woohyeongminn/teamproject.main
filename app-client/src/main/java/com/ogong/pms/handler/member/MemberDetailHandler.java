@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.member;
 
+import java.util.HashMap;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -20,26 +21,27 @@ public class MemberDetailHandler implements Command {
     System.out.println();
     System.out.println("▶ 프로필");
 
-    Member member = null;
+    String memberEmail = AuthPerMemberLoginHandler.getLoginUser().getPerEmail();
 
-    try {
-      member = AuthPerMemberLoginHandler.getLoginUser();
-      System.out.println();
-      System.out.printf(" [%s]\n", member.getPerNickname());
-      System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
-      System.out.printf(" >> 사  진 : %s\n", member.getPerPhoto());
-      System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
+    HashMap<String,String> params = new HashMap<>();
+    params.put("memberEmail", memberEmail);
 
-    } catch (NullPointerException e) {
-      System.out.println();
-      System.out.println(" >> 로그인 하세요.");
-    }
+    requestAgent.request("member.selectOne", params);
 
-    if(member == null) {
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
 
-    request.setAttribute("inputNo", member.getPerNo());
+    Member member = requestAgent.getObject(Member.class);
+
+    System.out.println();
+    System.out.printf(" [%s]\n", member.getPerNickname());
+    System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
+    System.out.printf(" >> 사  진 : %s\n", member.getPerPhoto());
+    System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
+
+    request.setAttribute("memberNo", member.getPerNo());
 
     System.out.println();
     System.out.println("1. 수정");

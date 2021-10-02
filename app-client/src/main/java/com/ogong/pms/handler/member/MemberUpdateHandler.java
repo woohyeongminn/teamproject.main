@@ -21,10 +21,10 @@ public class MemberUpdateHandler implements Command {
     System.out.println("▶ 프로필 수정");
     System.out.println();
 
-    int inputNo = (int) request.getAttribute("inputNo");
+    int no = (int) request.getAttribute("memberNo");
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("inputNo", String.valueOf(inputNo));
+    params.put("memberNo", String.valueOf(no));
 
     requestAgent.request("member.selectOne", params);
 

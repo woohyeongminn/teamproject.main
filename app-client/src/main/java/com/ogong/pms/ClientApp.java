@@ -17,6 +17,7 @@ import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.member.MemberAddHandler;
+import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.listener.AppInitListener;
@@ -93,7 +94,7 @@ public class ClientApp {
     commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
     //commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(requestAgent));
     commandMap.put("/member/update", new MemberUpdateHandler(requestAgent));
-    //commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
+    commandMap.put("/member/delete", new MemberDeleteHandler(requestAgent));
   }  
 
   //  class MyFilter implements MenuFilter {
@@ -249,7 +250,7 @@ public class ClientApp {
     allStudyMenu.add(new MenuItem("상세","/study/detail"));
 
     return allStudyMenu; 
-  }
+  }     
 
   // 이거 일단 다 보이게 하고 들어갔을 때 if문으로 필터하기 !!!!!!!
   // (조장 아니면 들어는 갈 수 있는데 if문으로 팅김)
