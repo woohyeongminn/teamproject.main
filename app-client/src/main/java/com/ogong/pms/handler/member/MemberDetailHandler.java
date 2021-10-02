@@ -20,20 +20,6 @@ public class MemberDetailHandler implements Command {
     System.out.println();
     System.out.println("▶ 프로필");
 
-    //    String memberEmail = AuthPerMemberLoginHandler.getLoginUser().getPerEmail();
-    //
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("memberEmail", memberEmail);
-    //
-    //    requestAgent.request("member.selectOne", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("해당 번호의 회원이 없습니다.");
-    //      return;
-    //    }
-    //
-    //    Member member = requestAgent.getObject(Member.class);
-
     Member member = null;
 
     try {

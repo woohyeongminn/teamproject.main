@@ -2,22 +2,24 @@ package com.ogong.pms.handler;
 
 import java.util.HashMap;
 import com.ogong.menu.Menu;
-import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements Command {
+public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements Command  {
 
   RequestAgent requestAgent;
 
-  public static Member loginUser;
-  public static Member getLoginUser() {
-    return loginUser;
+  public static CeoMember loginCeoMember;
+  public static CeoMember getLoginCeoMember() {
+    return loginCeoMember;
   }
 
-  public AuthPerMemberLoginHandler(RequestAgent requestAgent) {
+  public AuthCeoMemberLoginHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
+
+  // ----------------------------------------------------------------------
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -30,17 +32,17 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements C
     params.put("email", inputEmail);
     params.put("password", inputPassword);
 
-    requestAgent.request("member.selectOneByEmailPassword", params);
+    requestAgent.request("ceoMember.selectOneByEmailPassword", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      Member member = requestAgent.getObject(Member.class);
-      System.out.printf("%s님 환영합니다!\n", member.getPerNickname());
-      loginUser = member;
-      accessLevel = Menu.PER_LOGIN;
-
-    } else {
+      CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
+      System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoBossName());
+      loginCeoMember = ceoMember;
+      accessLevel = Menu.CEO_LOGIN;
+      return;
+    } else if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;
     }
-  } 
+  }
 }
