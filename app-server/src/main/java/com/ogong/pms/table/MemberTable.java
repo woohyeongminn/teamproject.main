@@ -23,6 +23,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
       case "member.selectOne" : selectOne(request, response); break;
       case "member.update" : update(request, response); break;
       case "member.delete" : delete(request, response); break;
+      case "member.selectOnByNickname" : selectOnByNickname(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -93,6 +94,28 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("비밀번호가 일치하지 않습니다.");
+    }
+  }
+
+  private void selectOnByNickname(Request request, Response response) throws Exception {
+    String nickname = request.getParameter("memberNick");
+
+    Member member = null;
+    for (Member m : list) {
+      if (m.getPerNickname().equals(nickname)) {
+        member = m;
+        break;
+      }
+    }
+
+    System.out.println("test");
+
+    if (member != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(member);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 닉네임을 가진 회원을 찾을 수 없습니다.");
     }
   }
 

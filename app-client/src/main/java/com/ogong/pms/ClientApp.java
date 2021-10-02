@@ -16,13 +16,17 @@ import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.pms.handler.board.AskBoardAddHandler;
+import com.ogong.pms.handler.board.AskBoardListHandler;
 import com.ogong.pms.handler.member.MemberAddHandler;
 import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
+import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.listener.AppInitListener;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
+import com.ogong.util.RandomPw;
 
 public class ClientApp {
 
@@ -82,19 +86,22 @@ public class ClientApp {
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
     }
-  }
+  }       
 
   public ClientApp() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 5050);
-
+    RandomPw randomPw = new RandomPw();
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(requestAgent));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
     commandMap.put("/member/add", new MemberAddHandler(requestAgent));
     commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
-    //commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(requestAgent));
+    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, requestAgent));
     commandMap.put("/member/update", new MemberUpdateHandler(requestAgent));
     commandMap.put("/member/delete", new MemberDeleteHandler(requestAgent));
+
+    commandMap.put("/askBoard/add", new AskBoardAddHandler(requestAgent));
+    commandMap.put("/askBoard/list", new AskBoardListHandler(requestAgent));
   }  
 
   //  class MyFilter implements MenuFilter {
@@ -123,7 +130,7 @@ public class ClientApp {
     mainMenuGroup.add(createCeoMenu());
 
     return mainMenuGroup;
-  }
+  }        
 
 
 

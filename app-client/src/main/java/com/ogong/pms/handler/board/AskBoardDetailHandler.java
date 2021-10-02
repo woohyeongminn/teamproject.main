@@ -1,18 +1,16 @@
 package com.ogong.pms.handler.board;
 
-import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Reply;
-import com.ogong.pms.handler.AbstractAskBoardHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
 
-public class AskBoardDetailHandler extends AbstractAskBoardHandler {
+public class AskBoardDetailHandler implements Command {
 
   ReplyAddHandler replyAddHandler;
   ReplyDetailHandler replyDetailHandler;
