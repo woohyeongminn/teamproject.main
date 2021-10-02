@@ -40,6 +40,7 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements C
 
     } else {
       System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+      return;
     }
   } 
 }

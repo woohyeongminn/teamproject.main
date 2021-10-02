@@ -34,6 +34,7 @@ public class MemberDetailHandler implements Command {
       return;
     }
 
+    //Member member = null;
 
     try {
       member = AuthPerMemberLoginHandler.getLoginUser();

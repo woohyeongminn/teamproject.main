@@ -1,59 +1,48 @@
 package com.ogong.pms.handler;
 
-import java.util.List;
+import java.util.HashMap;
 import com.ogong.menu.Menu;
 import com.ogong.pms.domain.CeoMember;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class AuthCeoMemberLoginHandler extends AbstractLoginHandler {
+public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements Command  {
 
-  List<CeoMember> ceoMemberList;
-  PromptCeoMember promptCeoMember;
+  RequestAgent requestAgent;
 
   public static CeoMember loginCeoMember;
   public static CeoMember getLoginCeoMember() {
     return loginCeoMember;
   }
 
-  public static int getUserAccessLevel() {
-    return accessLevel;
-  }
-
-  public AuthCeoMemberLoginHandler(List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
-    this.ceoMemberList = ceoMemberList;
-    this.promptCeoMember = promptCeoMember;
+  public AuthCeoMemberLoginHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   // ----------------------------------------------------------------------
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
     String inputEmail = Prompt.inputString(" 이메일 : ");
-    String inputPassword = "";
-    CeoMember ceoMember = promptCeoMember.findByCeoMemberEmail(inputEmail);
+    String inputPassword = Prompt.inputString(" 비밀번호 : ");
 
-    if (ceoMember == null) {
-      System.out.println("\n >> 등록된 회원이 아닙니다.");
-    }
+    HashMap<String,String> params = new HashMap<>();
+    params.put("email", inputEmail);
+    params.put("password", inputPassword);
 
-    while (ceoMember != null) {
-      inputPassword = Prompt.inputString(" 비밀번호 : ");
+    requestAgent.request("ceoMember.selectOneByEmailPassword", params);
 
-      if (ceoMember.getCeoPassword().equals(inputPassword)) {
-        ceoMember.setCeoEmail(inputEmail);
-        ceoMember.setCeoPassword(inputPassword);
-        System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoBossName());
-        loginCeoMember = ceoMember;
-        accessLevel = Menu.CEO_LOGIN;
-        return;
-      }
-
-      System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
+      System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoBossName());
+      loginCeoMember = ceoMember;
+      accessLevel = Menu.CEO_LOGIN;
       return;
-    } 
+    } else if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+      return;
+    }
   }
-
 }
-
