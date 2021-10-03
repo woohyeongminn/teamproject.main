@@ -29,20 +29,20 @@ public class AskBoardListHandler implements Command {
     HashMap<String,String> params = new HashMap<>();
     params.put("askBoard.selectList", null);
 
-    Collection<AskBoard> aksBoards = requestAgent.getObjects(AskBoard.class);
-
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 게시글 목록 조회 실패");
     }
 
-    if (aksBoards.isEmpty()) {
+    Collection<AskBoard> aksBoards = requestAgent.getObjects(AskBoard.class);
+
+    if (aksBoards == null) {
       System.out.println(" >> 등록된 글이 없습니다.");
       return;
     }
 
     for (AskBoard askList : aksBoards) {
 
-      //      // 기업
+      // 기업
       if (askList.getAskMemberWriter().getPerNickname() == null) {
 
         if (askList.getAskStatus() == 1) {

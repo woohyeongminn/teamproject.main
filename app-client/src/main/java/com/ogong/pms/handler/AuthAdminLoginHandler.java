@@ -1,5 +1,6 @@
 package com.ogong.pms.handler;
 
+import java.util.HashMap;
 import com.ogong.menu.Menu;
 import com.ogong.pms.domain.Admin;
 import com.ogong.request.RequestAgent;
@@ -32,39 +33,24 @@ public class AuthAdminLoginHandler extends AbstractLoginHandler implements Comma
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    String inputadminEmail = Prompt.inputString(" 이메일 : ");
-    String inputadminPassword = "";
-    Admin admin = findByAdminEmail(inputadminEmail);
+    String adminEmail = Prompt.inputString(" 이메일 : ");
+    String adminPassword = Prompt.inputString(" 비밀번호 : ");
 
-    if (admin == null) {
-      System.out.println("\n >> 관리자 이메일이 아닙니다.");
+    HashMap<String,String> params = new HashMap<>();
+    params.put("adminEmail", adminEmail);
+    params.put("adminPassword", adminPassword);
+
+    requestAgent.request("admin.selectOneByEmailPassword", params);
+
+
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      Admin admin = requestAgent.getObject(Admin.class);
+      System.out.printf(" >> %s님 환영합니다!\n", admin.getMasterNickname());
+      loginAdmin = admin;
+      accessLevel = Menu.ADMIN_LOGIN;
+
+    } else {
+      System.out.println(" >> 이메일과 암호가 일치하지 않습니다.");
     }
-
-    while (admin != null) {
-      inputadminPassword = Prompt.inputString(" 비밀번호 : ");
-
-      if (admin.getMasterPassword().equals(inputadminPassword)) {
-        admin.setMasterEmail(inputadminEmail);
-        admin.setMasterPassword(inputadminPassword);
-        System.out.printf("\n >> '%s'님 환영합니다!\n", admin.getMasterNickname());
-        loginAdmin = admin;
-        accessLevel = Menu.ADMIN_LOGIN;
-        return;
-      }
-
-      System.out.println(" >> 비밀번호를 다시 입력하세요.\n");
-      return;
-    } 
-  } 
-
-
-  private Admin findByAdminEmail (String inputEmail) {
-    for (Admin adminEmail : adminList) {
-      if (inputEmail.equals(adminEmail.getMasterEmail())) {
-        return adminEmail;
-      }
-    }
-    return null;
   }
 }
-

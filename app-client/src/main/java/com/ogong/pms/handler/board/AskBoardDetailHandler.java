@@ -1,26 +1,32 @@
 package com.ogong.pms.handler.board;
 
+import java.util.HashMap;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.domain.Reply;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AskBoardDetailHandler implements Command {
 
-  ReplyAddHandler replyAddHandler;
-  ReplyDetailHandler replyDetailHandler;
+  //  ReplyAddHandler replyAddHandler;
+  //  ReplyDetailHandler replyDetailHandler;
+  //
+  //  public AskBoardDetailHandler(List<AskBoard> askBoardList, List<Member> memberList,
+  //      List<CeoMember> ceoMemberList, List<Reply> replyList, ReplyAddHandler replyAddHandler,
+  //      ReplyDetailHandler replyDetailHandler) {
+  //    super(askBoardList, replyList, memberList, ceoMemberList);
+  //    this.replyAddHandler = replyAddHandler;
+  //    this.replyDetailHandler = replyDetailHandler;
+  //  }
 
-  public AskBoardDetailHandler(List<AskBoard> askBoardList, List<Member> memberList,
-      List<CeoMember> ceoMemberList, List<Reply> replyList, ReplyAddHandler replyAddHandler,
-      ReplyDetailHandler replyDetailHandler) {
-    super(askBoardList, replyList, memberList, ceoMemberList);
-    this.replyAddHandler = replyAddHandler;
-    this.replyDetailHandler = replyDetailHandler;
+  RequestAgent requestAgent; 
+
+  public AskBoardDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -31,13 +37,17 @@ public class AskBoardDetailHandler implements Command {
 
     int askNo = Prompt.inputInt(" 번호 : ");
 
-    AskBoard askBoard = findByAskBoardNo(askNo);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("no", String.valueOf(askNo));
 
-    if (askBoard == null) {
-      System.out.println();
-      System.out.println(" >> 해당 번호의 문의글이 없습니다.");
+    requestAgent.request("askBoard.selcetOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 해당 번호의 문의글이 없습니다. ");
       return;
     }
+
+    AskBoard askBoard = requestAgent.getObject(AskBoard.class);
 
     if (askBoard.getAskStatus() == 1) {
       detailList(askBoard);
@@ -102,7 +112,7 @@ public class AskBoardDetailHandler implements Command {
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
         case 1 : request.getRequestDispatcher("/askBoard/delete").forward(request); return;
-        case 2 : replyAddHandler.addReply(askBoard);
+        //case 2 : replyAddHandler.addReply(askBoard);
         //        case 3 : updateComment(); break;
         //        case 4 : deleteComment(askBoard); break;
         default : return;
@@ -124,18 +134,17 @@ public class AskBoardDetailHandler implements Command {
     }
   }
 
-
-  private void reply(AskBoard askBoard) {
-
-    if (askBoard.getReply() == null) {
-      System.out.println();
-      System.out.println(" >> 등록된 답변이 없습니다.");
-    }
-    else if (askBoard.getReply() != null) {
-      replyDetailHandler.detailReply(askBoard);  // 답변 호출
-    }
-    return;
-  }
+  //  private void reply(AskBoard askBoard) {
+  //
+  //    if (askBoard.getReply() == null) {
+  //      System.out.println();
+  //      System.out.println(" >> 등록된 답변이 없습니다.");
+  //    }
+  //    else if (askBoard.getReply() != null) {
+  //      replyDetailHandler.detailReply(askBoard);  // 답변 호출
+  //    }
+  //    return;
+  //  }
 
   private void detailList(AskBoard askBoard) {
 
@@ -155,6 +164,6 @@ public class AskBoardDetailHandler implements Command {
     askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
     System.out.println("---------------------");
-    reply(askBoard);
+    //reply(askBoard);
   }
 }

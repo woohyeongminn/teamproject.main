@@ -19,7 +19,10 @@ import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.board.AskBoardAddHandler;
+import com.ogong.pms.handler.board.AskBoardDeleteHandler;
+import com.ogong.pms.handler.board.AskBoardDetailHandler;
 import com.ogong.pms.handler.board.AskBoardListHandler;
+import com.ogong.pms.handler.board.AskBoardUpdateHandler;
 import com.ogong.pms.handler.member.CeoAddHandler;
 import com.ogong.pms.handler.member.CeoDeleteHandler;
 import com.ogong.pms.handler.member.CeoDetailHandler;
@@ -109,6 +112,10 @@ public class ClientApp {
 
     commandMap.put("/askBoard/add", new AskBoardAddHandler(requestAgent));
     commandMap.put("/askBoard/list", new AskBoardListHandler(requestAgent));
+    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(requestAgent));
+    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(requestAgent));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(requestAgent));
+
     commandMap.put("/ceoMember/add", new CeoAddHandler(requestAgent));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(requestAgent));
     commandMap.put("/ceoMember/update", new CeoUpdateHandler(requestAgent));
@@ -244,7 +251,7 @@ public class ClientApp {
     userMenuGroup.add(createMystudyMenu());     // 내 스터디
 
     userMenuGroup.add(createCafeMenu());        // 장소 예약하기
-    userMenuGroup.add(createMemberCSMenu());          // 고객센터
+    userMenuGroup.add(createMemberCSMenu());    // 고객센터
 
     return userMenuGroup;
   }
