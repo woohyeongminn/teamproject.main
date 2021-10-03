@@ -1,29 +1,28 @@
 package com.ogong.pms.table;
 
-import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Admin;
 import com.ogong.server.DataProcessor;
 import com.ogong.server.Request;
 import com.ogong.server.Response;
 
 // 역할 
 // - 회원 데이터를 저장하고 조회하는 일을 한다.
-public class MemberTable extends JsonDataTable<Member> implements DataProcessor {
+public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
 
-  public MemberTable() {
-    super("member.json", Member.class);
+  public AdminTable() {
+    super("admin.json", Admin.class);
   }
 
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      case "member.insert" : insert(request, response); break;
-      case "member.selectList" : selectList(request, response); break;
-      case "member.selectOneByEmailPassword" : selectOneByEmailPassword(request, response); break;
-      case "member.selectOneByEmail" : selectOneByEmail(request, response); break;
-      case "member.selectOneByPassword" : selectOneByPassword(request, response); break;
-      case "member.selectOne" : selectOne(request, response); break;
-      case "member.update" : update(request, response); break;
-      case "member.delete" : delete(request, response); break;
+      //case "admin.insert" : insert(request, response); break;
+      case "admin.selectOneByEmailPassword" : selectOneByEmailPassword(request, response); break;
+      //      case "admin.selectOneByEmail" : selectOneByEmail(request, response); break;
+      //      case "admin.selectOneByPassword" : selectOneByPassword(request, response); break;
+      //      case "admin.selectOne" : selectOne(request, response); break;
+      //      case "admin.update" : update(request, response); break;
+      //      case "admin.delete" : delete(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -31,31 +30,26 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   }
 
   private void insert(Request request, Response response) throws Exception {
-    Member member = request.getObject(Member.class);
-    list.add(member);
+    Admin admin = request.getObject(Admin.class);
+    list.add(admin);
     response.setStatus(Response.SUCCESS);
-  }
-
-  private void selectList(Request request, Response response) throws Exception {
-    response.setStatus(Response.SUCCESS);
-    response.setValue(list);
   }
 
   private void selectOneByEmailPassword(Request request, Response response) throws Exception {
-    String email = request.getParameter("email");
-    String password = request.getParameter("password");
+    String email = request.getParameter("adminEmail");
+    String password = request.getParameter("adminPassword");
 
-    Member member = null;
-    for (Member m : list) {
-      if (m.getPerEmail().equals(email) && m.getPerPassword().equals(password)) {
-        member = m;
+    Admin admin = null;
+    for (Admin a : list) {
+      if (a.getMasterEmail().equals(email) && a.getMasterPassword().equals(password)) {
+        admin = a;
         break;
       }
     }
 
-    if (member != null) {
+    if (admin != null) {
       response.setStatus(Response.SUCCESS);
-      response.setValue(member);
+      response.setValue(admin);
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 이메일과 암호를 가진 회원을 찾을 수 없습니다.");
@@ -65,17 +59,17 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   private void selectOneByEmail(Request request, Response response) throws Exception {
     String email = request.getParameter("email");
 
-    Member member = null;
-    for (Member m : list) {
-      if (m.getPerEmail().equals(email)) {
-        member = m;
+    Admin admin = null;
+    for (Admin a : list) {
+      if (a.getMasterEmail().equals(email)) {
+        admin = a;
         break;
       }
     }
 
-    if (member != null) {
+    if (admin != null) {
       response.setStatus(Response.SUCCESS);
-      response.setValue(member);
+      response.setValue(admin);
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 이메일을 가진 회원을 찾을 수 없습니다.");
@@ -85,17 +79,17 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   private void selectOneByPassword(Request request, Response response) throws Exception {
     String password = request.getParameter("password");
 
-    Member member = null;
-    for (Member m : list) {
-      if (m.getPerPassword().equals(password)) {
-        member = m;
+    Admin admin = null;
+    for (Admin a : list) {
+      if (a.getMasterPassword().equals(password)) {
+        admin = a;
         break;
       }
     }
 
-    if (member != null) {
+    if (admin != null) {
       response.setStatus(Response.SUCCESS);
-      response.setValue(member);
+      response.setValue(admin);
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("비밀번호가 일치하지 않습니다.");
@@ -103,12 +97,12 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("memberNo"));
-    Member m = findByNo(no);
+    int no = Integer.parseInt(request.getParameter("adminNo"));
+    Admin a = findByNo(no);
 
-    if (m != null) {
+    if (a != null) {
       response.setStatus(Response.SUCCESS);
-      response.setValue(m);
+      response.setValue(a);
     } else {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
@@ -116,21 +110,21 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   }
 
   private void update(Request request, Response response) throws Exception {
-    Member member = request.getObject(Member.class);
+    Admin admin = request.getObject(Admin.class);
 
-    int index = indexOf(member.getPerNo());
+    int index = indexOf(admin.getMasterNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, member);
+    list.set(index, admin);
     response.setStatus(Response.SUCCESS);
   }
 
   private void delete(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("memberNo"));
+    int no = Integer.parseInt(request.getParameter("adminNo"));
     int index = indexOf(no);
 
     if (index == -1) {
@@ -143,18 +137,18 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     response.setStatus(Response.SUCCESS);
   }
 
-  private Member findByNo(int no) {
-    for (Member m : list) {
-      if (m.getPerNo() == no) {
-        return m;
+  private Admin findByNo(int no) {
+    for (Admin a : list) {
+      if (a.getMasterNo() == no) {
+        return a;
       }
     }
     return null;
   }
 
-  private int indexOf(int memberNo) {
+  private int indexOf(int adminNo) {
     for (int i = 0; i < list.size(); i++) {
-      if (list.get(i).getPerNo() == memberNo) {
+      if (list.get(i).getMasterNo() == adminNo) {
         return i;
       }
     }

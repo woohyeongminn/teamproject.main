@@ -12,12 +12,19 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.handler.AbstractLoginHandler;
+import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.AuthAdminLogoutHandler;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLogoutHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.pms.handler.admin.AdminCeoMemberDeleteHandler;
+import com.ogong.pms.handler.admin.AdminCeoMemberDetailHandler;
+import com.ogong.pms.handler.admin.AdminCeoMemberListHandler;
+import com.ogong.pms.handler.admin.AdminCeoMemberUpdateHandler;
+import com.ogong.pms.handler.admin.AdminMemberListHandler;
 import com.ogong.pms.handler.member.CeoAddHandler;
 import com.ogong.pms.handler.member.CeoDeleteHandler;
 import com.ogong.pms.handler.member.CeoDetailHandler;
@@ -27,6 +34,8 @@ import com.ogong.pms.handler.member.MemberAddHandler;
 import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
+import com.ogong.pms.handler.study.StudyListHandler;
+import com.ogong.pms.handler.study.StudySearchHandler;
 import com.ogong.pms.listener.AppInitListener;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
@@ -110,6 +119,22 @@ public class ClientApp {
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(requestAgent));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(requestAgent));
+
+    commandMap.put("/admin/login", new AuthAdminLoginHandler(requestAgent));
+    commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
+
+    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(requestAgent));
+    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(requestAgent));
+    commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(requestAgent));
+    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(requestAgent));
+
+    commandMap.put("/adminMember/list", new AdminMemberListHandler(requestAgent));
+
+    commandMap.put("/study/list", new StudyListHandler(requestAgent));
+    commandMap.put("/study/search", new StudySearchHandler(requestAgent));
+
+    //commandMap.put("/myStudy/list", new MyStudyListHandler(requestAgent));
+    //commandMap.put("/myStudy/detail", new MyStudyDetailHandler(requestAgent));
   }  
 
   //  class MyFilter implements MenuFilter {
