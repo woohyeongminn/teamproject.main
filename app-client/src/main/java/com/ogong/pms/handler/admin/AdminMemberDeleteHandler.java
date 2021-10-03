@@ -1,37 +1,42 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.List;
+import java.util.HashMap;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
-import com.ogong.pms.handler.AbstractMemberHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.PromptPerMember;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class AdminMemberDeleteHandler extends AbstractMemberHandler {
+public class AdminMemberDeleteHandler implements Command {
 
-  PromptPerMember promptPerMember; 
-  List<Study> studyList;
+  RequestAgent requestAgent;
 
-  public AdminMemberDeleteHandler(List<Member> memberList, PromptPerMember promptPerMember,
-      List<Study> studyList) {
-    super(memberList);
-    this.promptPerMember = promptPerMember;
-    this.studyList = studyList;
+  public AdminMemberDeleteHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   // 개인
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 회원 삭제");
 
-    int inputMemberNo = (int) request.getAttribute("inputMemberNo");
+    int memberNo = (int) request.getAttribute("memberNo");
 
-    Member member = promptPerMember.findByMemberNo(inputMemberNo);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("memberNo", String.valueOf(memberNo));
 
-    if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
+    requestAgent.request("member.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 해당 회원이 없습니다.");
+      return;
+    }
+
+    Member user = requestAgent.getObject(Member.class);
+
+    if (user.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
       String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 /아니오) ");
 
@@ -39,14 +44,40 @@ public class AdminMemberDeleteHandler extends AbstractMemberHandler {
         System.out.println(" >> 회원 삭제를 취소하였습니다.");
         return;
       }
+      //      for (int i = studyList.size() - 1; i >= 0; i--) { 
+      //        if (studyList.get(i).getOwner().getPerNo() == member.getPerNo()) {
+      //          studyList.remove(studyList.get(i));
+      //        }
+      //      }
 
-      for (int i = studyList.size() - 1; i >= 0; i--) { 
-        if (studyList.get(i).getOwner().getPerNo() == member.getPerNo()) {
-          studyList.remove(studyList.get(i));
-        }
-      }
+      requestAgent.request("member.delete", params);
 
-      memberList.remove(member);
+      //      int no = (int) request.getAttribute("studyNo");
+      //
+      //      HashMap<String,String> studyparams = new HashMap<>();
+      //      params.put("studyNo", String.valueOf(no));
+      //
+      //      requestAgent.request("study.selectOne", studyparams);
+      //
+      //      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      //        System.out.println(" >> 해당 스터디가 없습니다.");
+      //        return;
+      //      }
+      //
+      //      Collection<Study> studyList = requestAgent.getObjects(Study.class);
+      //      List<Study> s = new ArrayList<>(studyList);
+      //
+      //      //      for (Study userStudy : studyList) {
+      //      //        if (userStudy.getOwner().getPerNo() == user.getPerNo()) {
+      //      //          requestAgent.request("study.delete", studyparams);
+      //      //        }
+      //      //      }
+      //
+      //      for (int i = s.size() -1; i >= 0; i--) {
+      //        if (s.get(i).getOwner().getPerNo() == user.getPerNo()) {
+      //          requestAgent.request("study.delete", studyparams);
+      //        }
+      //      }
 
       System.out.println(" >> 회원이 삭제되었습니다.");
       return;

@@ -1,16 +1,19 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.List;
+import java.util.HashMap;
 import com.ogong.pms.domain.Admin;
-import com.ogong.pms.handler.AbstractAdminHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class AdminDetailHandler extends AbstractAdminHandler {
+public class AdminDetailHandler implements Command {
 
-  public AdminDetailHandler(List<Admin> adminList) {
-    super(adminList);
+  RequestAgent requestAgent;
+
+  public AdminDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
@@ -19,7 +22,14 @@ public class AdminDetailHandler extends AbstractAdminHandler {
     System.out.println("▶ 내 프로필");
     System.out.println();
 
-    Admin adminpro = AuthAdminLoginHandler.getLoginAdmin();
+    int no = AuthAdminLoginHandler.getLoginAdmin().getMasterNo();
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("adminNo", String.valueOf(no));
+
+    requestAgent.request("admin.selectOne", params);
+
+    Admin adminpro = requestAgent.getObject(Admin.class);
 
     System.out.printf(" 닉네임 : %s\n", adminpro.getMasterNickname());
     System.out.printf(" 이메일 : %s\n", adminpro.getMasterEmail());

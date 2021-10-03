@@ -4,8 +4,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
+import com.ogong.pms.table.AdminTable;
 import com.ogong.pms.table.JsonDataTable;
 import com.ogong.pms.table.MemberTable;
+import com.ogong.pms.table.StudyTable;
 import com.ogong.server.DataProcessor;
 import com.ogong.server.RequestProcessor;
 
@@ -23,6 +25,8 @@ public class ServerApp {
 
     HashMap<String,DataProcessor> dataProcessorMap = new HashMap<String,DataProcessor>();
     dataProcessorMap.put("member.", new MemberTable());
+    dataProcessorMap.put("admin.", new AdminTable());
+    dataProcessorMap.put("study.", new StudyTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
 

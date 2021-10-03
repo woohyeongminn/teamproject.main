@@ -1,30 +1,44 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.List;
+import java.util.HashMap;
 import com.ogong.pms.domain.Admin;
-import com.ogong.pms.handler.AbstractAdminHandler;
-import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class AdminUpdateHandler extends AbstractAdminHandler {
+public class AdminUpdateHandler implements Command {
 
-  public AdminUpdateHandler(List<Admin> adminList) {
-    super(adminList);
+  RequestAgent requestAgent;
+
+  public AdminUpdateHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 프로필 수정하기");
     System.out.println();
 
-    Admin adminmodify = AuthAdminLoginHandler.getLoginAdmin();
+    int adminNo = (int) request.getAttribute("inputNo");
 
-    String adminModifyEmail = Prompt.inputString(
-        " 이메일(" + adminmodify.getMasterEmail() + ") : ");
-    String adminModifyPassword = Prompt.inputString(
-        " 비밀번호(" + adminmodify.getMasterPassword() + ") : ");
+    HashMap<String,String> params = new HashMap<>();
+    params.put("adminNo", String.valueOf(adminNo));
+
+    requestAgent.request("admin.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" 해당 번호의 관리자가 없습니다.");
+      return;
+    }
+
+    Admin admin = requestAgent.getObject(Admin.class);
+
+    String adminEmail = Prompt.inputString(
+        " 이메일(" + admin.getMasterEmail() + ") : ");
+    String adminPassword = Prompt.inputString(
+        " 비밀번호(" + admin.getMasterPassword() + ") : ");
 
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
@@ -33,10 +47,12 @@ public class AdminUpdateHandler extends AbstractAdminHandler {
       return;
     } 
 
-    adminmodify.setMasterEmail(adminModifyEmail);
-    adminmodify.setMasterPassword(adminModifyPassword);
+    admin.setMasterEmail(adminEmail);
+    admin.setMasterPassword(adminPassword);
 
-    System.out.printf("\n >> '%s'님의 정보가 변경되었습니다.", adminmodify.getMasterNickname());
+    requestAgent.request("admin.update", admin);
+
+    System.out.printf("\n >> '%s'님의 정보가 변경되었습니다.", admin.getMasterNickname());
     System.out.println();
   }
 
