@@ -33,25 +33,23 @@ public class AuthAdminLoginHandler extends AbstractLoginHandler implements Comma
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    String inputadminEmail = Prompt.inputString(" 이메일 : ");
-    String inputadminPassword = "";
-    inputadminPassword = Prompt.inputString(" 비밀번호 : ");
+    String adminEmail = Prompt.inputString(" 이메일 : ");
+    String adminPassword = Prompt.inputString(" 비밀번호 : ");
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("adminEmail", inputadminEmail);
-    params.put("adminPassword", inputadminPassword);
+    params.put("adminEmail", adminEmail);
+    params.put("adminPassword", adminPassword);
 
     requestAgent.request("admin.selectOneByEmailPassword", params);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
-      return;
+    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+      Admin admin = requestAgent.getObject(Admin.class);
+      System.out.printf(" >> %s님 환영합니다!\n", admin.getMasterNickname());
+      loginAdmin = admin;
+      accessLevel = Menu.ADMIN_LOGIN;
+
+    } else {
+      System.out.println(" >> 이메일과 암호가 일치하지 않습니다.");
     }
-
-    Admin admin = requestAgent.getObject(Admin.class);
-
-    System.out.printf("\n >> '%s'님 환영합니다!\n", admin.getMasterNickname());
-    loginAdmin = admin;
-    accessLevel = Menu.ADMIN_LOGIN;
   }
 }

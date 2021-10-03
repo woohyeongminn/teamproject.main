@@ -5,8 +5,8 @@ import com.ogong.server.DataProcessor;
 import com.ogong.server.Request;
 import com.ogong.server.Response;
 
-// 역할 
-// - 회원 데이터를 저장하고 조회하는 일을 한다.
+//역할 
+//- 관리자 데이터를 저장하고 조회하는 일을 한다.
 public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
 
   public AdminTable() {
@@ -16,23 +16,30 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
   @Override
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
-      //case "admin.insert" : insert(request, response); break;
+      case "admin.update" : update(request, response); break;
+      case "admin.selectOne" : selectOne(request, response); break;
       case "admin.selectOneByEmailPassword" : selectOneByEmailPassword(request, response); break;
-      //      case "admin.selectOneByEmail" : selectOneByEmail(request, response); break;
-      //      case "admin.selectOneByPassword" : selectOneByPassword(request, response); break;
-      //      case "admin.selectOne" : selectOne(request, response); break;
-      //      case "admin.update" : update(request, response); break;
-      //      case "admin.delete" : delete(request, response); break;
+      //      case "member.selectOneByEmail" : selectOneByEmail(request, response); break;
+      //      case "member.selectOneByPassword" : selectOneByPassword(request, response); break;
+      //      case "member.update" : update(request, response); break;
+      //      case "member.delete" : delete(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
   }
 
-  private void insert(Request request, Response response) throws Exception {
-    Admin admin = request.getObject(Admin.class);
-    list.add(admin);
-    response.setStatus(Response.SUCCESS);
+  private void selectOne(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("adminNo"));
+    Admin admin = findByAdminNo(no);
+
+    if (admin != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(admin);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 관리자를 찾을 수 없습니다.");
+    }
   }
 
   private void selectOneByEmailPassword(Request request, Response response) throws Exception {
@@ -40,9 +47,9 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
     String password = request.getParameter("adminPassword");
 
     Admin admin = null;
-    for (Admin a : list) {
-      if (a.getMasterEmail().equals(email) && a.getMasterPassword().equals(password)) {
-        admin = a;
+    for (Admin ad : list) {
+      if (ad.getMasterEmail().equals(email) && ad.getMasterPassword().equals(password)) {
+        admin = ad;
         break;
       }
     }
@@ -52,60 +59,7 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
       response.setValue(admin);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 이메일과 암호를 가진 회원을 찾을 수 없습니다.");
-    }
-  }
-
-  private void selectOneByEmail(Request request, Response response) throws Exception {
-    String email = request.getParameter("email");
-
-    Admin admin = null;
-    for (Admin a : list) {
-      if (a.getMasterEmail().equals(email)) {
-        admin = a;
-        break;
-      }
-    }
-
-    if (admin != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(admin);
-    } else {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 이메일을 가진 회원을 찾을 수 없습니다.");
-    }
-  }
-
-  private void selectOneByPassword(Request request, Response response) throws Exception {
-    String password = request.getParameter("password");
-
-    Admin admin = null;
-    for (Admin a : list) {
-      if (a.getMasterPassword().equals(password)) {
-        admin = a;
-        break;
-      }
-    }
-
-    if (admin != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(admin);
-    } else {
-      response.setStatus(Response.FAIL);
-      response.setValue("비밀번호가 일치하지 않습니다.");
-    }
-  }
-
-  private void selectOne(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("adminNo"));
-    Admin a = findByNo(no);
-
-    if (a != null) {
-      response.setStatus(Response.SUCCESS);
-      response.setValue(a);
-    } else {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 이메일과 암호를 가진 관리자를 찾을 수 없습니다.");
     }
   }
 
@@ -115,7 +69,7 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
     int index = indexOf(admin.getMasterNo());
     if (index == -1) {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      response.setValue("해당 번호의 관리자를 찾을 수 없습니다.");
       return;
     }
 
@@ -123,24 +77,12 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
     response.setStatus(Response.SUCCESS);
   }
 
-  private void delete(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("adminNo"));
-    int index = indexOf(no);
 
-    if (index == -1) {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
-      return;
-    }
 
-    list.remove(index);
-    response.setStatus(Response.SUCCESS);
-  }
-
-  private Admin findByNo(int no) {
-    for (Admin a : list) {
-      if (a.getMasterNo() == no) {
-        return a;
+  private Admin findByAdminNo(int no) {
+    for (Admin admin : list) {
+      if (admin.getMasterNo() == no) {
+        return admin;
       }
     }
     return null;
@@ -155,4 +97,16 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
     return -1;
   }
 
+
+
+
+
+  //  private Admin findByAdminEmail (String inputEmail) {
+  //    for (Admin adminEmail : adminList) {
+  //      if (inputEmail.equals(adminEmail.getMasterEmail())) {
+  //        return adminEmail;
+  //      }
+  //    }
+  //    return null;
+  //  }
 }

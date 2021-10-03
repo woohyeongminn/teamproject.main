@@ -15,16 +15,10 @@ public class StudyListHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception{
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 스터디 목록");
     System.out.println();
-
-    printStudyList();
-
-  }
-
-  protected void printStudyList() throws Exception{
 
     requestAgent.request("study.selectList", null);
 
@@ -36,6 +30,7 @@ public class StudyListHandler implements Command {
     Collection<Study> studyList = requestAgent.getObjects(Study.class);
 
     for (Study study : studyList) {
+
       System.out.printf(" (%d)\n 스터디명 : %s\n 분류 : %s\n 인원수 : %s/%s명\n 조장 : %s\n 대면/비대면 : %s\n",
           study.getStudyNo(),
           study.getStudyTitle(),
