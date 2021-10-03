@@ -12,6 +12,8 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.handler.AbstractLoginHandler;
+import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.AuthAdminLogoutHandler;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLogoutHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -23,6 +25,29 @@ import com.ogong.pms.handler.board.AskBoardDeleteHandler;
 import com.ogong.pms.handler.board.AskBoardDetailHandler;
 import com.ogong.pms.handler.board.AskBoardListHandler;
 import com.ogong.pms.handler.board.AskBoardUpdateHandler;
+import com.ogong.pms.handler.admin.AdminCeoMemberDeleteHandler;
+import com.ogong.pms.handler.admin.AdminCeoMemberDetailHandler;
+import com.ogong.pms.handler.admin.AdminCeoMemberListHandler;
+import com.ogong.pms.handler.admin.AdminCeoMemberUpdateHandler;
+import com.ogong.pms.handler.admin.AdminDetailHandler;
+import com.ogong.pms.handler.admin.AdminMemberDeleteHandler;
+import com.ogong.pms.handler.admin.AdminMemberDetailHandler;
+import com.ogong.pms.handler.admin.AdminMemberListHandler;
+import com.ogong.pms.handler.admin.AdminMemberUpdateHandler;
+import com.ogong.pms.handler.admin.AdminUpdateHandler;
+import com.ogong.pms.handler.cafe.CafeDetailHandler;
+import com.ogong.pms.handler.cafe.CafeListHandler;
+import com.ogong.pms.handler.cafe.CafeMyReservationDetailHandler;
+import com.ogong.pms.handler.cafe.CafeMyReservationListHandler;
+import com.ogong.pms.handler.cafe.CafeMyReviewListHandler;
+import com.ogong.pms.handler.cafe.CafeSearchHandler;
+import com.ogong.pms.handler.cafe.CeoCafeAddHandler;
+import com.ogong.pms.handler.cafe.CeoCafeDeleteHandler;
+import com.ogong.pms.handler.cafe.CeoCafeDetailHandler;
+import com.ogong.pms.handler.cafe.CeoCafeListHandler;
+import com.ogong.pms.handler.cafe.CeoCafeUpdateHandler;
+import com.ogong.pms.handler.cafe.CeoReservationListHandler;
+import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.pms.handler.member.CeoAddHandler;
 import com.ogong.pms.handler.member.CeoDeleteHandler;
 import com.ogong.pms.handler.member.CeoDetailHandler;
@@ -33,6 +58,10 @@ import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
 import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
+import com.ogong.pms.handler.study.StudyAddHandler;
+import com.ogong.pms.handler.study.StudyDetailHandler;
+import com.ogong.pms.handler.study.StudyListHandler;
+import com.ogong.pms.handler.study.StudySearchHandler;
 import com.ogong.pms.listener.AppInitListener;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
@@ -123,6 +152,44 @@ public class ClientApp {
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(requestAgent));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(requestAgent));
+
+    commandMap.put("/admin/login", new AuthAdminLoginHandler(requestAgent));
+    commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
+
+    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
+    commandMap.put("/admin/detail", new AdminDetailHandler(requestAgent));
+
+    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(requestAgent));
+    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(requestAgent));
+    commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(requestAgent));
+    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(requestAgent));
+
+    commandMap.put("/adminMember/list", new AdminMemberListHandler(requestAgent));
+    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(requestAgent));
+    commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(requestAgent));
+    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(requestAgent));
+
+    commandMap.put("/study/add", new StudyAddHandler(requestAgent));
+    commandMap.put("/study/list", new StudyListHandler(requestAgent));
+    commandMap.put("/study/detail", new StudyDetailHandler(requestAgent));
+    commandMap.put("/study/search", new StudySearchHandler(requestAgent));
+
+    PromptCafe promptcafe = new PromptCafe(requestAgent);
+    commandMap.put("/cafe/list", new CafeListHandler(requestAgent));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(requestAgent, promptcafe));
+    commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
+    commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
+    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(requestAgent, promptcafe));
+    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(requestAgent, promptcafe));
+    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(promptcafe));
+
+    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(promptcafe));
+    commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(promptcafe));
+    commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(promptcafe));
+    commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(promptcafe));
+    commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(promptcafe));
+    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(promptcafe));
+
   }  
 
   //  class MyFilter implements MenuFilter {
@@ -160,7 +227,7 @@ public class ClientApp {
   // 관리자 메인
   Menu createAdminMenu() {
     MenuGroup adminMenuGroup = new MenuGroup("관리자");
-
+    adminMenuGroup.setMenuFilter(menuFilter);
     adminMenuGroup.add(new MenuItem("로그인", LOGOUT, "/admin/login"));
     adminMenuGroup.add(new MenuItem("로그아웃", ADMIN_LOGIN, "/admin/logout"));
     adminMenuGroup.add(new MenuItem("마이 페이지", ADMIN_LOGIN, "/admin/detail"));
@@ -176,7 +243,7 @@ public class ClientApp {
   // 관리자 하위 메뉴2 - 회원 관리
   private Menu createControlMemberMenu() {
     MenuGroup adminUserMenu = new MenuGroup("회원 관리", ADMIN_LOGIN); 
-
+    adminUserMenu.setMenuFilter(menuFilter);
     adminUserMenu.add(new MenuItem("개인 회원 조회", "/adminMember/list"));
     adminUserMenu.add(new MenuItem("개인 회원 상세", "/adminMember/detail"));
     adminUserMenu.add(new MenuItem("사장 회원 조회", "/adminCeoMember/list"));
@@ -188,7 +255,7 @@ public class ClientApp {
   // 관리자 하위 메뉴3 - 스터디 관리
   private Menu createControlStudyMenu() {
     MenuGroup adminStudyMenu = new MenuGroup("스터디 관리", ADMIN_LOGIN); 
-
+    adminStudyMenu.setMenuFilter(menuFilter);
     adminStudyMenu.add(new MenuItem("목록","/study/list"));
     adminStudyMenu.add(new MenuItem("삭제","/study/delete"));
     return adminStudyMenu;
@@ -197,7 +264,7 @@ public class ClientApp {
   // 관리자 하위 메뉴4 - 장소 후기 관리
   private Menu createControlReviewMenu() {
     MenuGroup adminCafeReviewMenu = new MenuGroup("장소 관리", ADMIN_LOGIN); 
-
+    adminCafeReviewMenu.setMenuFilter(menuFilter);
     adminCafeReviewMenu.add(new MenuItem("장소 게시글 관리","/cafe/control"));
     adminCafeReviewMenu.add(new MenuItem("장소 리뷰 관리","/cafe/reviewList")); 
 
@@ -207,7 +274,7 @@ public class ClientApp {
   //관리자 하위 메뉴5 - 고객센터 관리
   private Menu createAdminCSMenu() {
     MenuGroup csMenu = new MenuGroup("고객센터 관리", ADMIN_LOGIN);
-
+    csMenu.setMenuFilter(menuFilter);
     csMenu.add(createAdminNoticeMenu());
     csMenu.add(createAdminAskMenu());
 
@@ -217,7 +284,7 @@ public class ClientApp {
   // 5-1
   private Menu createAdminNoticeMenu() {
     MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
-
+    adminNoticeMenu.setMenuFilter(menuFilter);
     adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     adminNoticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
@@ -228,7 +295,7 @@ public class ClientApp {
   // 5-2
   private Menu createAdminAskMenu() {
     MenuGroup adminaskMenu = new MenuGroup("문의사항");
-
+    adminaskMenu.setMenuFilter(menuFilter);
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
     adminaskMenu.add(new MenuItem("상세", "/askBoard/detail"));
 

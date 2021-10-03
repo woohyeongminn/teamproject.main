@@ -1,8 +1,12 @@
 package com.ogong.pms.handler.member;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import com.ogong.menu.Menu;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -69,12 +73,30 @@ public class MemberDeleteHandler implements Command {
       return;
     }
 
-    // 멤버탈퇴 구현만 진행 중...
-    //    for (int i = studyList.size() - 1; i >= 0; i--) {
-    //      if (studyList.get(i).getOwner().getPerNo() == member.getPerNo()) {
-    //        studyList.remove(studyList.get(i));
-    //      }
-    //    }
+    requestAgent.request("study.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 해당 스터디가 없습니다.");
+      return;
+    }
+
+    Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    List<Study> s = new ArrayList<>(studyList);
+
+    for (int i = s.size() -1; i >= 0; i--) {
+      if (s.get(i).getOwner().getPerNo() == member.getPerNo()) {
+
+        HashMap<String,String> studyParams = new HashMap<>();
+        studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
+
+        requestAgent.request("study.delete", studyParams);
+
+        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+          System.out.println(" >> 스터디 삭제가 실패되었습니다.");
+          return;
+        }
+      }
+    }
 
     requestAgent.request("member.delete", params);
 

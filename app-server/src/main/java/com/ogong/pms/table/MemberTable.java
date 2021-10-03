@@ -17,6 +17,7 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "member.insert" : insert(request, response); break;
+      case "member.selectList" : selectList(request, response); break;
       case "member.selectOneByEmailPassword" : selectOneByEmailPassword(request, response); break;
       case "member.selectOneByEmail" : selectOneByEmail(request, response); break;
       case "member.selectOneByPassword" : selectOneByPassword(request, response); break;
@@ -34,6 +35,11 @@ public class MemberTable extends JsonDataTable<Member> implements DataProcessor 
     Member member = request.getObject(Member.class);
     list.add(member);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectList(Request request, Response response) throws Exception {
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
   }
 
   private void selectOneByEmailPassword(Request request, Response response) throws Exception {

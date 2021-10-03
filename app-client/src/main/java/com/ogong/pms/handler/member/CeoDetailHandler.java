@@ -21,11 +21,17 @@ public class CeoDetailHandler implements Command {
     System.out.println();
     System.out.println("▶ 프로필");
 
-    //CeoMember ceoMember = null;
+    // 아니 개발자님!! 필터를 해 줬는데 여기는 왜 또 조건을 넣어 줬나요??
+    // 지우면 안 됨 --> 탈퇴하고 내 프로필 못 누르게 해야 해서!!!!!!
+    if (AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
+      System.out.println(" >> 로그인 하세요.");
+      return;
+    }
+
     int no = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("ceoMemberNo", String.valueOf(no));
+    params.put("inputCeoNo", String.valueOf(no));
 
     requestAgent.request("ceoMember.selectOne", params);
 
@@ -49,7 +55,7 @@ public class CeoDetailHandler implements Command {
       System.out.println(" >> 로그인 하세요.");
     }
 
-    request.setAttribute("ceoMemberNo", ceoMember.getCeoNo());
+    request.setAttribute("inputCeoNo", ceoMember.getCeoNo());
 
     System.out.println();
     System.out.println("1. 수정");

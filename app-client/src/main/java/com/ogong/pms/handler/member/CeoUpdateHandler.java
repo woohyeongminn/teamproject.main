@@ -23,10 +23,10 @@ public class CeoUpdateHandler implements Command {
     System.out.println("▶ 기업 정보 변경"); 
     System.out.println();
 
-    int no = (int) request.getAttribute("ceoMemberNo");
+    int no = (int) request.getAttribute("inputCeoNo");
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("ceoMemberNo", String.valueOf(no));
+    params.put("inputCeoNo", String.valueOf(no));
 
     requestAgent.request("ceoMember.selectOne", params);
 

@@ -17,6 +17,7 @@ public class CeoMemberTable extends JsonDataTable<CeoMember> implements DataProc
   public void execute(Request request, Response response) throws Exception {
     switch (request.getCommand()) {
       case "ceoMember.insert" : insert(request, response); break;
+      case "ceoMember.selectList" : selectList(request, response); break;
       case "ceoMember.selectOneByEmailPassword" : selectOneByEmailPassword(request, response); break;
       case "ceoMember.selectOneByNickname" : selectOneByNickname(request, response); break;
       case "ceoMember.selectOneByEmail" : selectOneByEmail(request, response); break;
@@ -33,6 +34,11 @@ public class CeoMemberTable extends JsonDataTable<CeoMember> implements DataProc
     CeoMember ceoMember = request.getObject(CeoMember.class);
     list.add(ceoMember);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectList(Request request, Response response) throws Exception {
+    response.setStatus(Response.SUCCESS);
+    response.setValue(list);
   }
 
   private void selectOneByEmailPassword(Request request, Response response) throws Exception {
@@ -97,7 +103,7 @@ public class CeoMemberTable extends JsonDataTable<CeoMember> implements DataProc
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("ceoMemberNo"));
+    int no = Integer.parseInt(request.getParameter("inputCeoNo"));
     CeoMember m = findByNo(no);
 
     if (m != null) {
@@ -124,7 +130,7 @@ public class CeoMemberTable extends JsonDataTable<CeoMember> implements DataProc
   }
 
   private void delete(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("ceoMemberNo"));
+    int no = Integer.parseInt(request.getParameter("inputCeoNo"));
     int index = indexOf(no);
 
     if (index == -1) {
