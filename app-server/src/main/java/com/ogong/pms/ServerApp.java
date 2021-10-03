@@ -4,8 +4,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
-import com.ogong.pms.table.AskBoardTable;
 import com.ogong.pms.table.AdminTable;
+import com.ogong.pms.table.AskBoardTable;
 import com.ogong.pms.table.CafeReservationTable;
 import com.ogong.pms.table.CafeReviewTable;
 import com.ogong.pms.table.CafeRoomTable;
@@ -13,6 +13,7 @@ import com.ogong.pms.table.CafeTable;
 import com.ogong.pms.table.CeoMemberTable;
 import com.ogong.pms.table.JsonDataTable;
 import com.ogong.pms.table.MemberTable;
+import com.ogong.pms.table.NoticeTable;
 import com.ogong.pms.table.StudyTable;
 import com.ogong.server.DataProcessor;
 import com.ogong.server.RequestProcessor;
@@ -39,6 +40,7 @@ public class ServerApp {
     dataProcessorMap.put("cafeReview.", new CafeReviewTable());
     dataProcessorMap.put("cafeRoom.", new CafeRoomTable());
     dataProcessorMap.put("cafeReservation.", new CafeReservationTable());
+    dataProcessorMap.put("notice.", new NoticeTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
 

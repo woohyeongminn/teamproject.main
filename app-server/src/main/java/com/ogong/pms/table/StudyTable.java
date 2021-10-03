@@ -22,9 +22,6 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
       case "study.selectList" : selectList(request, response); break;
       case "study.delete" : delete(request, response); break;
       case "study.selectByKeyword" : selectByKeyword(request, response); break;
-      //      case "member.selectOneByEmail" : selectOneByEmail(request, response); break;
-      //      case "member.selectOneByPassword" : selectOneByPassword(request, response); break;
-      //      case "member.update" : update(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");

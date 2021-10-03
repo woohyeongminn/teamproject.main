@@ -29,6 +29,11 @@ import com.ogong.pms.handler.admin.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.admin.AdminMemberDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberListHandler;
 import com.ogong.pms.handler.admin.AdminMemberUpdateHandler;
+import com.ogong.pms.handler.admin.AdminNoticeAddHandler;
+import com.ogong.pms.handler.admin.AdminNoticeDeleteHandler;
+import com.ogong.pms.handler.admin.AdminNoticeDetailHandler;
+import com.ogong.pms.handler.admin.AdminNoticeListHandler;
+import com.ogong.pms.handler.admin.AdminNoticeUpdateHandler;
 import com.ogong.pms.handler.admin.AdminStudyDeleteHandler;
 import com.ogong.pms.handler.admin.AdminUpdateHandler;
 import com.ogong.pms.handler.board.AskBoardAddHandler;
@@ -171,6 +176,12 @@ public class ClientApp {
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(requestAgent));
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(requestAgent));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(requestAgent));
+
+    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(requestAgent));
+    commandMap.put("/adminNotice/list", new AdminNoticeListHandler(requestAgent));
+    commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(requestAgent));
+    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(requestAgent));
+    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(requestAgent));
 
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(requestAgent));
 
