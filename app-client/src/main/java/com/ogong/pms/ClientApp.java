@@ -34,6 +34,7 @@ import com.ogong.pms.handler.board.AskBoardAddHandler;
 import com.ogong.pms.handler.board.AskBoardDeleteHandler;
 import com.ogong.pms.handler.board.AskBoardDetailHandler;
 import com.ogong.pms.handler.board.AskBoardListHandler;
+import com.ogong.pms.handler.board.AskBoardMyListHandler;
 import com.ogong.pms.handler.board.AskBoardUpdateHandler;
 import com.ogong.pms.handler.cafe.CafeDetailHandler;
 import com.ogong.pms.handler.cafe.CafeListHandler;
@@ -144,6 +145,7 @@ public class ClientApp {
     commandMap.put("/askBoard/detail", new AskBoardDetailHandler(requestAgent));
     commandMap.put("/askBoard/update", new AskBoardUpdateHandler(requestAgent));
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(requestAgent));
+    commandMap.put("/askBoard/myList", new AskBoardMyListHandler(requestAgent));
 
     commandMap.put("/ceoMember/add", new CeoAddHandler(requestAgent));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(requestAgent));

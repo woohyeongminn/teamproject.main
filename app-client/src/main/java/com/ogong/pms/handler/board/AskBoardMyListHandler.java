@@ -20,7 +20,7 @@ public class AskBoardMyListHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public AskBoardMyListHandler(RequestAgent requestAgent, ReplyDetailHandler replyDetailHandler) {
+  public AskBoardMyListHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

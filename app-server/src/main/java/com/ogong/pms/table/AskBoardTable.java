@@ -50,7 +50,7 @@ public class AskBoardTable extends JsonDataTable<AskBoard> implements DataProces
       response.setValue(askBoard);
     } else {
       response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 프로젝트를 찾을 수 없습니다.");
+      response.setValue("해당 번호의 문의글을 찾을 수 없습니다.");
     }
   }
 

@@ -40,7 +40,7 @@ public class AskBoardDetailHandler implements Command {
     HashMap<String,String> params = new HashMap<>();
     params.put("no", String.valueOf(askNo));
 
-    requestAgent.request("askBoard.selcetOne", params);
+    requestAgent.request("askBoard.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 해당 번호의 문의글이 없습니다. ");

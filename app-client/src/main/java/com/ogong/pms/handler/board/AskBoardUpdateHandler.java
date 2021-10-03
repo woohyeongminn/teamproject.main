@@ -65,10 +65,9 @@ public class AskBoardUpdateHandler implements Command {
         return;
       }
 
-
       askBoard.setAskTitle(askTitle);
       askBoard.setAskContent(askContent);
-      System.out.println(" >> 문의글을 변경하였습니다.");
+
     }
 
     else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
@@ -95,17 +94,16 @@ public class AskBoardUpdateHandler implements Command {
 
       askBoard.setAskTitle(askTitle);
       askBoard.setAskContent(askContent);
-
-      requestAgent.request("askBoard.update", params);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(" >> 문의글 변경 실패!");
-        System.out.println(requestAgent.getObject(String.class));
-        return;
-      }
-      System.out.println(" >> 문의글을 변경하였습니다.");
     }
 
+    requestAgent.request("askBoard.update", askBoard);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 문의글 변경 실패!");
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
+    System.out.println(" >> 문의글을 변경하였습니다.");
 
   }
 

@@ -1,7 +1,6 @@
 package com.ogong.pms.handler.board;
 
 import java.util.Collection;
-import java.util.HashMap;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -26,8 +25,10 @@ public class AskBoardListHandler implements Command {
     System.out.println("▶ 문의사항 목록");
     System.out.println();
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("askBoard.selectList", null);
+    //HashMap<String,String> params = new HashMap<>();
+    //params.put("askBoard.selectList", null);
+
+    requestAgent.request("askBoard.selectList", null);;
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 게시글 목록 조회 실패");
