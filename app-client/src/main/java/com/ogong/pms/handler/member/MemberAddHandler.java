@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.member;
 
 import java.sql.Date;
+import java.util.Collection;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -25,23 +26,23 @@ public class MemberAddHandler implements Command {
 
     Member member = new Member();
 
-    //    requestAgent.request("member.selectList", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println("목록 조회 실패!");
-    //      return;
-    //    }
+    requestAgent.request("member.selectList", null);
 
-    //    Collection<Member> memberList = requestAgent.getObjects(Member.class);
-    //
-    //    String inputNewNick;
-    //    inputNewNick = Prompt.inputString(" 닉네임 : ");
-    //    for (Member comparisonMember : memberList) {
-    //      if (inputNewNick.equals(comparisonMember.getPerNickname())) {
-    //        System.out.println(" >> 중복된 닉네임입니다.");
-    //        return;
-    //      }
-    //    }
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("목록 조회 실패!");
+      return;
+    }
+
+    Collection<Member> memberList = requestAgent.getObjects(Member.class);
+
+    String inputNewNick;
+    inputNewNick = Prompt.inputString(" 닉네임 : ");
+    for (Member comparisonMember : memberList) {
+      if (inputNewNick.equals(comparisonMember.getPerNickname())) {
+        System.out.println(" >> 중복된 닉네임입니다.");
+        return;
+      }
+    }
     String inputNewNick = Prompt.inputString(" 닉네임 : ");
     member.setPerNickname(inputNewNick);
     member.setPerPhoto(Prompt.inputString(" 사  진 : "));
