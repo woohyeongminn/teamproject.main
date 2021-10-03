@@ -1,7 +1,11 @@
 package com.ogong.pms.handler.admin;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -44,40 +48,33 @@ public class AdminMemberDeleteHandler implements Command {
         System.out.println(" >> 회원 삭제를 취소하였습니다.");
         return;
       }
-      //      for (int i = studyList.size() - 1; i >= 0; i--) { 
-      //        if (studyList.get(i).getOwner().getPerNo() == member.getPerNo()) {
-      //          studyList.remove(studyList.get(i));
-      //        }
-      //      }
+
+      requestAgent.request("study.selectList", null);
+
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println(" >> 해당 스터디가 없습니다.");
+        return;
+      }
+
+      Collection<Study> studyList = requestAgent.getObjects(Study.class);
+      List<Study> s = new ArrayList<>(studyList);
+
+      for (int i = s.size() -1; i >= 0; i--) {
+        if (s.get(i).getOwner().getPerNo() == user.getPerNo()) {
+
+          HashMap<String,String> studyParams = new HashMap<>();
+          studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
+
+          requestAgent.request("study.delete", studyParams);
+
+          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+            System.out.println(" >> 스터디 삭제가 실패되었습니다.");
+            return;
+          }
+        }
+      }
 
       requestAgent.request("member.delete", params);
-
-      //      int no = (int) request.getAttribute("studyNo");
-      //
-      //      HashMap<String,String> studyparams = new HashMap<>();
-      //      params.put("studyNo", String.valueOf(no));
-      //
-      //      requestAgent.request("study.selectOne", studyparams);
-      //
-      //      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      //        System.out.println(" >> 해당 스터디가 없습니다.");
-      //        return;
-      //      }
-      //
-      //      Collection<Study> studyList = requestAgent.getObjects(Study.class);
-      //      List<Study> s = new ArrayList<>(studyList);
-      //
-      //      //      for (Study userStudy : studyList) {
-      //      //        if (userStudy.getOwner().getPerNo() == user.getPerNo()) {
-      //      //          requestAgent.request("study.delete", studyparams);
-      //      //        }
-      //      //      }
-      //
-      //      for (int i = s.size() -1; i >= 0; i--) {
-      //        if (s.get(i).getOwner().getPerNo() == user.getPerNo()) {
-      //          requestAgent.request("study.delete", studyparams);
-      //        }
-      //      }
 
       System.out.println(" >> 회원이 삭제되었습니다.");
       return;
