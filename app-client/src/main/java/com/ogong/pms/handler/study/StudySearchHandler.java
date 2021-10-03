@@ -61,16 +61,6 @@ public class StudySearchHandler implements Command {
       System.out.println(" >> 검색어를 다시 입력해 주세요.");
       return;
     }
-
-    //    System.out.println("\n----------------------");
-    //    System.out.println("1. 상세보기(참여신청)");
-    //    System.out.println("0. 뒤로가기");
-    //    int selectNo = Prompt.inputInt("선택> ");
-    //    switch (selectNo) {
-    //      case 1 : detail(); return;
-    //      default : return;
-    //    }
   }
-
 }
 

@@ -42,7 +42,6 @@ public class AuthAdminLoginHandler extends AbstractLoginHandler implements Comma
 
     requestAgent.request("admin.selectOneByEmailPassword", params);
 
-
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       Admin admin = requestAgent.getObject(Admin.class);
       System.out.printf(" >> %s님 환영합니다!\n", admin.getMasterNickname());
@@ -54,4 +53,3 @@ public class AuthAdminLoginHandler extends AbstractLoginHandler implements Comma
     }
   }
 }
-

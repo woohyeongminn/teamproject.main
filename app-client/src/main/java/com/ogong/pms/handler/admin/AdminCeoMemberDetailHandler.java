@@ -1,43 +1,47 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.List;
+import java.util.HashMap;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.handler.AbstractCeoMemberHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.PromptCeoMember;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class AdminCeoMemberDetailHandler extends AbstractCeoMemberHandler {
+public class AdminCeoMemberDetailHandler implements Command {
 
-  PromptCeoMember promptCeoMember;
+  RequestAgent requestAgent;
 
-  public AdminCeoMemberDetailHandler(List<CeoMember> ceoMemberList, PromptCeoMember promptCeoMember) {
-    super(ceoMemberList);
-    this.promptCeoMember = promptCeoMember;
+  public AdminCeoMemberDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 기업회원 상세");
-    int inputceoNo = Prompt.inputInt(" 번호 : ");
+    int inputCeoNo = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    CeoMember ceoMember = promptCeoMember.findByCeoMemberNo(inputceoNo);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("inputCeoNo", String.valueOf(inputCeoNo));
 
-    if (ceoMember == null) {
-      System.out.println(" >> 해당 번호의 기업 회원이 없습니다.");
+    requestAgent.request("ceoMember.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(">> 해당 번호의 기업 회원이 없습니다.");
       return;
     }
+
+    CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
 
     System.out.printf(" [%s]\n", ceoMember.getCeoBossName());
     System.out.printf(" >> 점포명 : %s\n", ceoMember.getCeoEmail());
     System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
-    //System.out.printf(" >> 점포주소 : %s\n", ceoMember.getCeoStoreDetailAddress());
-    //System.out.printf(" >> 사진 : %s\n", ceoMember.getCeoStoreName());
+    System.out.printf(" >> 사업자등록번호 : %s\n", ceoMember.getCeoLicenseNo());
+    System.out.printf(" >> 사진 : %s\n", ceoMember.getCeoPhoto());
     System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
 
-    request.setAttribute("inputceoNo", inputceoNo);
+    request.setAttribute("inputCeoNo", inputCeoNo);
 
     System.out.println();
     System.out.println("1. 수정");

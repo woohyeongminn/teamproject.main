@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.Collection;
 import java.util.HashMap;
 import com.ogong.pms.table.AdminTable;
+import com.ogong.pms.table.CeoMemberTable;
 import com.ogong.pms.table.JsonDataTable;
 import com.ogong.pms.table.MemberTable;
 import com.ogong.pms.table.StudyTable;
@@ -25,6 +26,7 @@ public class ServerApp {
 
     HashMap<String,DataProcessor> dataProcessorMap = new HashMap<String,DataProcessor>();
     dataProcessorMap.put("member.", new MemberTable());
+    dataProcessorMap.put("ceoMember.", new CeoMemberTable());
     dataProcessorMap.put("admin.", new AdminTable());
     dataProcessorMap.put("study.", new StudyTable());
 
@@ -39,7 +41,6 @@ public class ServerApp {
         ((JsonDataTable<?>)dataProcessor).save();
       }
     }
-
 
     System.out.println("서버 종료");
     serverSocket.close();

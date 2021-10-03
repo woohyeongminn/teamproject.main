@@ -1,27 +1,35 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Collection;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.handler.AbstractCeoMemberHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 
-public class AdminCeoMemberListHandler extends AbstractCeoMemberHandler  {
+public class AdminCeoMemberListHandler implements Command  {
 
-  HashMap<String, Command> commandMap;
+  //HashMap<String, Command> commandMap;
+  RequestAgent requestAgent;
 
-  public AdminCeoMemberListHandler(List<CeoMember> ceoMemberList, HashMap<String, Command> commandMap) {
-    super(ceoMemberList);
-    this.commandMap = commandMap;
+  public AdminCeoMemberListHandler(RequestAgent requestAgent /*, HashMap<String, Command> commandMap*/) {
+    this.requestAgent = requestAgent;
   }
 
   // 관리자가 사용
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 기업회원 목록");
     System.out.println();
+
+    requestAgent.request("ceoMember.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("목록 조회 실패!");
+      return;
+    }
+
+    Collection<CeoMember> ceoMemberList = requestAgent.getObjects(CeoMember.class);
 
     for (CeoMember ceoMember : ceoMemberList) {
       System.out.printf(" (%d)\n 대표자명 : %s\n 이메일 : %s\n 가입일 : %s\n",
