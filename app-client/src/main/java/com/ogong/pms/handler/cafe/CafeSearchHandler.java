@@ -22,7 +22,7 @@ public class CafeSearchHandler implements Command {
 
     String input = Prompt.inputString(" 지역 : ");
 
-    Collection<Cafe> cafeList = promptCafe.getCafeListByLocation(input);
+    Collection<Cafe> cafeList = promptCafe.findCafeListByLocation(input);
 
     if (!cafeList.isEmpty()) {
       for (Cafe cafe : cafeList) {

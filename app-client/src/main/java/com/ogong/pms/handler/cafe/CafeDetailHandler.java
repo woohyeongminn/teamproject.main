@@ -171,17 +171,15 @@ public class CafeDetailHandler implements Command {
     int starRatingCount = 0;
     double starRatingAverage = 0;
 
-    Collection<CafeReview> reviewList = promptcafe.getCafeReviewList();
+    Collection<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
 
     if (!reviewList.isEmpty()) {
       for (CafeReview review : reviewList) {
-        if (review.getCafe().getNo() == cafe.getNo()) {
-          if (review.getReviewStatus() == 1) {
-            continue;
-          }
-          starRating += review.getGrade();
-          starRatingAverage =(double) starRating / ++starRatingCount;
+        if (review.getReviewStatus() == 1) {
+          continue;
         }
+        starRating += review.getGrade();
+        starRatingAverage =(double) starRating / ++starRatingCount;
       }
     } 
 
@@ -193,23 +191,21 @@ public class CafeDetailHandler implements Command {
     System.out.println();
     System.out.println("============= 리뷰 =============");
 
-    Collection<CafeReview> reviewList = promptcafe.getCafeReviewList();
+    Collection<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 등록된 리뷰가 없습니다.");
     } else {
       for (CafeReview review : reviewList) {
-        if (review.getCafe().getNo() == cafe.getNo()) {
-          if (review.getReviewStatus() == 1) {
-            //System.out.printf(" \n (%s)\n", review.getReviewNo());
-            System.out.printf(" (%d) | 삭제 된 리뷰입니다. |\n", i++);
-            continue;
-          }
-          String nickname = review.getMember().getPerNickname();
-          System.out.printf(" (%d) 닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
-              i++, nickname, CafeHandlerHelper.getReviewGradeStatusLabel(review.getGrade())
-              , review.getContent(), review.getRegisteredDate());
+        if (review.getReviewStatus() == 1) {
+          //System.out.printf(" \n (%s)\n", review.getReviewNo());
+          System.out.printf(" (%d) | 삭제 된 리뷰입니다. |\n", i++);
+          continue;
         }
+        String nickname = review.getMember().getPerNickname();
+        System.out.printf(" (%d) 닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
+            i++, nickname, CafeHandlerHelper.getReviewGradeStatusLabel(review.getGrade())
+            , review.getContent(), review.getRegisteredDate());
       }
     }
   }
@@ -318,7 +314,7 @@ public class CafeDetailHandler implements Command {
     int selectNo = Prompt.inputInt(" 선택> ");
     CafeRoom cafeRoom = null;
     try {
-      cafeRoom = promptcafe.getCafeRoomByNo(selectRoomNo.get(selectNo), cafe);      
+      cafeRoom = promptcafe.findByRoomNo(selectRoomNo.get(selectNo));
     } catch (NullPointerException e) {
       System.out.println(" >> 번호를 잘못 선택하셨습니다.");
       return;
@@ -464,9 +460,10 @@ public class CafeDetailHandler implements Command {
 
     List<CafeReservation> todayReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {
+
       if (reservationDate.toLocalDate().compareTo(cafeReser.getReservationDate().toLocalDate()) == 0 &&
-          cafeReser.getCafe().getNo() == cafe.getNo() &&
-          cafeReser.getRoomNo() == roomNo) {
+          cafeReser.getCafe().getNo() == cafe.getNo() && cafeReser.getRoomNo() == roomNo &&
+          cafeReser.getReservationStatus() == 0 || cafeReser.getReservationStatus() == 1) {
         todayReserList.add(cafeReser);
       }
     }

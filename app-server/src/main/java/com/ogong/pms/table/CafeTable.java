@@ -17,9 +17,12 @@ public class CafeTable extends JsonDataTable<Cafe> implements DataProcessor {
     switch(request.getCommand()) {
       case "cafe.selectList" : selectList(request, response); break;
       case "cafe.selectListByMember" : selectListByMember(request, response); break;
+      case "cafe.selectListByCeoMember" : selectListByCeoMember(request, response); break;
       case "cafe.selectListByLocation" : selectListByLocation(request, response); break;
       case "cafe.selectOne" : selectOne(request, response); break;
       case "cafe.selectOneByMember" : selectOneByMember(request, response); break;
+      case "cafe.insert" : insert(request, response); break;
+      case "cafe.update" : update(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -43,6 +46,20 @@ public class CafeTable extends JsonDataTable<Cafe> implements DataProcessor {
 
     response.setStatus(Response.SUCCESS);
     response.setValue(listByMember);
+  }
+
+  //사장용 카페리스트
+  private void selectListByCeoMember(Request request, Response response) throws Exception {
+    ArrayList<Cafe> listByCeoMember = new ArrayList<>();
+    int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
+    for(Cafe cafe : list) {
+      if (cafe.getCeoMember().getCeoNo() == ceoNo && cafe.getCafeStatus() != Cafe.DELETE) {
+        listByCeoMember.add(cafe);
+      }
+    }
+
+    response.setStatus(Response.SUCCESS);
+    response.setValue(listByCeoMember);
   }
 
   private void selectListByLocation(Request request, Response response) throws Exception {
@@ -86,6 +103,12 @@ public class CafeTable extends JsonDataTable<Cafe> implements DataProcessor {
     }
   }
 
+  private void insert(Request request, Response response) throws Exception {
+    Cafe cafe = request.getObject(Cafe.class);
+    list.add(cafe);
+    response.setStatus(Response.SUCCESS);
+  }
+
   private Cafe findByCafeNo(int no) {
     for (Cafe cafe : list) {
       if (cafe.getNo() == no) {
@@ -93,6 +116,20 @@ public class CafeTable extends JsonDataTable<Cafe> implements DataProcessor {
       }
     }
     return null;
+  }
+
+  private void update(Request request, Response response) throws Exception {
+    Cafe cafe = request.getObject(Cafe.class);
+
+    int index = indexOf(cafe.getNo());
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 카페를 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, cafe);
+    response.setStatus(Response.SUCCESS);
   }
 
   private Cafe findByCafeNoByMember(int no) {
@@ -104,5 +141,14 @@ public class CafeTable extends JsonDataTable<Cafe> implements DataProcessor {
       }
     }
     return null;
+  }
+
+  private int indexOf(int cafeNo) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i).getNo() == cafeNo) {
+        return i;
+      }
+    }
+    return -1;
   }
 }
