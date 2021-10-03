@@ -30,6 +30,19 @@ import com.ogong.pms.handler.admin.AdminMemberDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberListHandler;
 import com.ogong.pms.handler.admin.AdminMemberUpdateHandler;
 import com.ogong.pms.handler.admin.AdminUpdateHandler;
+import com.ogong.pms.handler.cafe.CafeDetailHandler;
+import com.ogong.pms.handler.cafe.CafeListHandler;
+import com.ogong.pms.handler.cafe.CafeMyReservationDetailHandler;
+import com.ogong.pms.handler.cafe.CafeMyReservationListHandler;
+import com.ogong.pms.handler.cafe.CafeMyReviewListHandler;
+import com.ogong.pms.handler.cafe.CafeSearchHandler;
+import com.ogong.pms.handler.cafe.CeoCafeAddHandler;
+import com.ogong.pms.handler.cafe.CeoCafeDeleteHandler;
+import com.ogong.pms.handler.cafe.CeoCafeDetailHandler;
+import com.ogong.pms.handler.cafe.CeoCafeListHandler;
+import com.ogong.pms.handler.cafe.CeoCafeUpdateHandler;
+import com.ogong.pms.handler.cafe.CeoReservationListHandler;
+import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.pms.handler.member.CeoAddHandler;
 import com.ogong.pms.handler.member.CeoDeleteHandler;
 import com.ogong.pms.handler.member.CeoDetailHandler;
@@ -147,6 +160,23 @@ public class ClientApp {
     commandMap.put("/study/list", new StudyListHandler(requestAgent));
     commandMap.put("/study/detail", new StudyDetailHandler(requestAgent));
     commandMap.put("/study/search", new StudySearchHandler(requestAgent));
+
+    PromptCafe promptcafe = new PromptCafe(requestAgent);
+    commandMap.put("/cafe/list", new CafeListHandler(requestAgent));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(requestAgent, promptcafe));
+    commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
+    commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
+    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(requestAgent, promptcafe));
+    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(requestAgent, promptcafe));
+    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(promptcafe));
+
+    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(promptcafe));
+    commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(promptcafe));
+    commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(promptcafe));
+    commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(promptcafe));
+    commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(promptcafe));
+    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(promptcafe));
+
   }  
 
   //  class MyFilter implements MenuFilter {
