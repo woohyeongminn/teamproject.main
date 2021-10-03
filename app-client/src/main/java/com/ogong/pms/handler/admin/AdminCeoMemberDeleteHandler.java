@@ -1,6 +1,11 @@
 package com.ogong.pms.handler.admin;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
@@ -35,22 +40,45 @@ public class AdminCeoMemberDeleteHandler implements Command {
       return;
     }
 
+    CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
+
     String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 기업 회원 삭제를 취소하였습니다.");
       return;
     }
 
-    //    for (int i = cafeList.size() - 1; i >= 0; i--) {
-    //      if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
-    //        cafeList.remove(cafeList.get(i));
-    //      }
-    //    }
+    // 카페삭제
+    requestAgent.request("cafe.selectList", null);
 
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 스터디카페가 없습니다.");
+      return;
+    }
+
+    Collection<Cafe> cafeCollection = requestAgent.getObjects(Cafe.class);
+    List<Cafe> cafeList = new ArrayList<>(cafeCollection);
+
+    for (int i = cafeList.size() -1; i >= 0; i--) {
+      if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
+
+        HashMap<String,String> cafeParams = new HashMap<>();
+        cafeParams.put("cafeNo", String.valueOf(cafeList.get(i).getNo()));
+
+        requestAgent.request("cafe.delete", cafeParams);
+
+        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+          System.out.println(" >> 스터디 삭제가 실패되었습니다.");
+          return;
+        }
+      }
+    }
+
+    // 회원 삭제
     requestAgent.request("ceoMember.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("회원 삭제 실패!");
+      System.out.println("기업 회원 삭제 실패!");
       System.out.println(requestAgent.getObject(String.class));
       return;
     }
