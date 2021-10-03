@@ -29,6 +29,7 @@ import com.ogong.pms.handler.admin.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.admin.AdminMemberDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberListHandler;
 import com.ogong.pms.handler.admin.AdminMemberUpdateHandler;
+import com.ogong.pms.handler.admin.AdminStudyDeleteHandler;
 import com.ogong.pms.handler.admin.AdminUpdateHandler;
 import com.ogong.pms.handler.board.AskBoardAddHandler;
 import com.ogong.pms.handler.board.AskBoardDeleteHandler;
@@ -168,6 +169,8 @@ public class ClientApp {
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(requestAgent));
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(requestAgent));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(requestAgent));
+
+    commandMap.put("/study/delete", new AdminStudyDeleteHandler(requestAgent));
 
     commandMap.put("/study/add", new StudyAddHandler(requestAgent));
     commandMap.put("/study/list", new StudyListHandler(requestAgent));
