@@ -43,7 +43,7 @@ public class MemberAddHandler implements Command {
         return;
       }
     }
-    String inputNewNick = Prompt.inputString(" 닉네임 : ");
+    inputNewNick = Prompt.inputString(" 닉네임 : ");
     member.setPerNickname(inputNewNick);
     member.setPerPhoto(Prompt.inputString(" 사  진 : "));
 
