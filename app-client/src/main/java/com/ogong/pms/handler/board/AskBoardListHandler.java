@@ -32,6 +32,7 @@ public class AskBoardListHandler implements Command {
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 게시글 목록 조회 실패");
+      return;
     }
 
     Collection<AskBoard> aksBoards = requestAgent.getObjects(AskBoard.class);

@@ -86,7 +86,7 @@ public class PromptCafe {
     requestAgent.request("cafe.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 번호의 카페가 존재하지 않습니다.");
+      //      System.out.println(" >> 해당 번호의 카페가 존재하지 않습니다.");
       return null;
     }
     return requestAgent.getObject(Cafe.class);
@@ -108,7 +108,7 @@ public class PromptCafe {
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 카페 수정을 실패하였습니다.");
     } else {
-      System.out.println(" >> 수정이 완료 되었습니다.");
+      //      System.out.println(" >> 수정이 완료 되었습니다.");
     }
   }
 
@@ -155,6 +155,18 @@ public class PromptCafe {
       return null;
     }
     return requestAgent.getObjects(CafeReview.class);
+  }
+
+  public CafeReview findByReviewNo(int reviewNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("reviewNo", String.valueOf(reviewNo));
+    requestAgent.request("cafeReview.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 해당 번호의 리뷰가 존재하지 않습니다.");
+    } else {
+    }
+    return requestAgent.getObject(CafeReview.class);
   }
 
   public void deleteCafeReview(int reviewNo) throws Exception {

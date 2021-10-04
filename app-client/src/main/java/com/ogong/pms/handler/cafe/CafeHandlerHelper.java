@@ -40,7 +40,7 @@ public abstract class CafeHandlerHelper {
     }
   }
 
-  protected static String getCafeStatusLabel(int status) {
+  public static String getCafeStatusLabel(int status) {
     switch (status) {
       case WAIT: return "승인대기";
       case GENERAL: return "운영중";
@@ -50,7 +50,7 @@ public abstract class CafeHandlerHelper {
     }
   }
 
-  protected static int promptCafeStatus(int status) {
+  public static int promptCafeStatus(int status) {
     System.out.printf(" 상태(%s) : \n", getCafeStatusLabel(status));
     int input = 0;
     do {

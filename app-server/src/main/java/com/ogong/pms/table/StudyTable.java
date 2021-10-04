@@ -21,9 +21,10 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
       case "study.selectOne" : selectOne(request, response); break;
       case "study.selectList" : selectList(request, response); break;
       case "study.delete" : delete(request, response); break;
+      //case "study.update" : update(request, response); break;
       case "study.selectByKeyword" : selectByKeyword(request, response); break;
       case "study.my.selectOneByNicknameStudyNo" : selectOneByNicknameStudyNo(request, response); break;
-      default : 
+      default :  
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
     }
@@ -40,6 +41,32 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
   }
+
+  //  private void selectMyStudyList(Request request, Response response) throws Exception {
+  //    List<Member> memberList = new ArrayList<>();
+  //    //List<Study> myStudyList = new ArrayList<>();
+  //
+  //    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+  //
+  //    for (Member member : memberList) {
+  //      if (member.getPerNo() == memberNo) {
+  //        for (Study myStudyList : list) {
+  //          if (myStudyList.getMemberNames().contains(member.getPerNickname()) ||
+  //              myStudyList.getOwner().getPerNickname().equals(member.getPerNickname())) {
+  //            response.setStatus(Response.SUCCESS);
+  //            response.setValue(myStudyList);
+  //          }
+  //          else {
+  //            response.setStatus(Response.FAIL);
+  //            response.setValue("내 스터디를 찾을 수 없습니다.");
+  //          }
+  //        }
+  //      }
+  //      else {
+  //        System.out.println("회원 정보 조회 실패!");
+  //      }
+  //    }
+  //  }
 
   private void selectOne(Request request, Response response) throws Exception {
     int no = Integer.parseInt(request.getParameter("studyNo"));

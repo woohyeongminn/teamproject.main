@@ -66,8 +66,8 @@ public class CeoCafeUpdateHandler implements Command {
     cafe.setTimePrice(timePrice);
     cafe.setCafeStatus(cafeStatus);
 
-
     promptcafe.updateCafe(cafe);
+    System.out.println(" >> 수정이 완료 되었습니다.");
   }
 
 
