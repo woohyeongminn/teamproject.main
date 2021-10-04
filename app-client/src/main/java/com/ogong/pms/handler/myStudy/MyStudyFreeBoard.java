@@ -2,15 +2,19 @@ package com.ogong.pms.handler.myStudy;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
+import com.ogong.pms.handler.Command;
+import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyFreeBoard {
+public class MyStudyFreeBoard implements Command {
 
   int freeBoardNo = 4;
   List<FreeBoard> freeBoardList;
@@ -19,48 +23,21 @@ public class MyStudyFreeBoard {
   List<Study> studyList;
   Study study;
 
+  RequestAgent requestAgent;
+
   public MyStudyFreeBoard(List<FreeBoard> freeBoardList, List<Comment> commentList,
-      List<Member> memberList, List<Study> studyList) {
+      List<Member> memberList, List<Study> studyList, RequestAgent requestAgent) {
     this.freeBoardList = freeBoardList;
     this.commentList = commentList;
     this.memberList = memberList;
     this.studyList = studyList;
+    this.requestAgent = requestAgent;
+  }
 
-    //    FreeBoard test = new FreeBoard();
-    //    test.setFreeBoardNo(1);
-    //    test.setFreeBoardTitle("게시글1");
-    //    test.setFreeBoardContent("5월 10일에 만나요");
-    //    test.setFreeBoardAtcFile("지도");
-    //    test.setFreeBoardWriter(memberList.get(0));
-    //    test.setFreeBoardViewcount(test.getFreeBoardViewcount());
-    //    test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
-    //    test.setComment(new ArrayList<>());
-    //    freeBoardList.add(test);
-    //    studyList.get(0).getMyStudyFreeBoard().add(test);
-    //
-    //    test = new FreeBoard();
-    //    test.setFreeBoardNo(2);
-    //    test.setFreeBoardTitle("게시글2");
-    //    test.setFreeBoardContent("아주아주 잘하고 있습니다");
-    //    test.setFreeBoardAtcFile("jpg");
-    //    test.setFreeBoardWriter(memberList.get(0));
-    //    test.setFreeBoardViewcount(test.getFreeBoardViewcount());
-    //    test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
-    //    test.setComment(new ArrayList<>());
-    //    freeBoardList.add(test);
-    //    studyList.get(0).getMyStudyFreeBoard().add(test);
-    //
-    //    test = new FreeBoard();
-    //    test.setFreeBoardNo(3);
-    //    test.setFreeBoardTitle("게시글3");
-    //    test.setFreeBoardContent("159p 이상합니다");
-    //    test.setFreeBoardAtcFile("문제집");
-    //    test.setFreeBoardWriter(memberList.get(0));
-    //    test.setFreeBoardViewcount(test.getFreeBoardViewcount());
-    //    test.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
-    //    test.setComment(new ArrayList<>());
-    //    freeBoardList.add(test);
-    //    studyList.get(0).getMyStudyFreeBoard().add(test);
+  @Override
+  public void execute(CommandRequest request) throws Exception {
+
+
   }
 
   // 등록
@@ -69,7 +46,20 @@ public class MyStudyFreeBoard {
     System.out.println("▶ 게시글 작성");
     System.out.println();
 
+    HashMap<String,String> params = new HashMap<>();
+    params.put("studyNo", String.valueOf(request.getAttribute("inputNo")));
+
+    requestAgent.request("study.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 스터디 상세 오류.");
+      return;
+    }
+
+    Study myStudy = requestAgent.getObject(Study.class);
+
     Member member = AuthPerMemberLoginHandler.getLoginUser();
+
     FreeBoard freeBoard = new FreeBoard();
 
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));

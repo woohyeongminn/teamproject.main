@@ -82,7 +82,7 @@ public class MyStudyDetailHandler implements Command {
       case 1: request.getRequestDispatcher("/myStudy/guilder").forward(request); return;
       //case 2: myStudyCalender.listCalender(myStudy); break;
       //case 3: myStudyToDo.listToDo(myStudy); break;
-      //case 4: myStudyFreeBoard.listFreeBoard(commentList, myStudy); break;
+      case 4: request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
       //case 5:  MyStudyCheating.cheat() ;  // 임시로 넣었음
       case 6: request.getRequestDispatcher("/myStudy/exit").forward(request); return;  
       case 7: request.getRequestDispatcher("/myStudy/update").forward(request); return;
