@@ -1,10 +1,12 @@
-package com.ogong.pms.handler.cafe;
+package com.ogong.pms.handler.ceoCafe;
 
 import java.time.LocalTime;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.pms.handler.cafe.CafeHandlerHelper;
+import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.AddressSearchApi;
 import com.ogong.util.Prompt;
 
@@ -22,7 +24,7 @@ public class CeoCafeUpdateHandler implements Command {
     System.out.println("▶ 장소 수정");
     System.out.println();
 
-    Cafe cafe =(Cafe) request.getAttribute("cafe");
+    Cafe cafe = promptcafe.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     String name = Prompt.inputString(String.format(" 상호명(%s) : ", cafe.getName()));
     String cafeLicenseNo = Prompt.inputString(String.format(" 사업자 등록번호(%s) : ", cafe.getCafeLicenseNo()));
