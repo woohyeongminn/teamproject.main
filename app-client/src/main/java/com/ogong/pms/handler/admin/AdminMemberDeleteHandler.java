@@ -52,7 +52,7 @@ public class AdminMemberDeleteHandler implements Command {
       requestAgent.request("study.selectList", null);
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(" >> 해당 스터디가 없습니다.");
+        System.out.println(" >> 스터디가 없습니다.");
         return;
       }
 
@@ -75,6 +75,12 @@ public class AdminMemberDeleteHandler implements Command {
       }
 
       requestAgent.request("member.delete", params);
+
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println("회원 삭제 실패!");
+        System.out.println(requestAgent.getObject(String.class));
+        return;
+      }
 
       System.out.println(" >> 회원이 삭제되었습니다.");
       return;

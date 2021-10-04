@@ -23,6 +23,7 @@ public class CafeTable extends JsonDataTable<Cafe> implements DataProcessor {
       case "cafe.selectOneByMember" : selectOneByMember(request, response); break;
       case "cafe.insert" : insert(request, response); break;
       case "cafe.update" : update(request, response); break;
+      case "cafe.delete" : delete(request, response); break;
       default:
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -33,6 +34,21 @@ public class CafeTable extends JsonDataTable<Cafe> implements DataProcessor {
   private void selectList(Request request, Response response) throws Exception {
     response.setStatus(Response.SUCCESS);
     response.setValue(list);
+  }
+
+  // 관리자 카페 삭제
+  private void delete(Request request, Response response) throws Exception {
+    int no = Integer.parseInt(request.getParameter("cafeNo"));
+    int index = indexOf(no);
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 회원을 찾을 수 없습니다.");
+      return;
+    }
+
+    list.remove(index);
+    response.setStatus(Response.SUCCESS);
   }
 
   // 일반회원용 전체리스트

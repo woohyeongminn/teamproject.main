@@ -45,6 +45,12 @@ public class MemberDeleteHandler implements Command {
     params.put("memberNo", String.valueOf(no));
 
     requestAgent.request("member.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("해당 번호의 회원이 없습니다.");
+      return;
+    }
+
     Member member = requestAgent.getObject(Member.class);
 
     System.out.println(" << 이메일 확인 >>");

@@ -1,7 +1,11 @@
 package com.ogong.pms.handler.member;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import com.ogong.menu.Menu;
+import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -70,11 +74,31 @@ public class CeoDeleteHandler implements Command {
       return;
     }
 
-    //    for (int i = cafeList.size() - 1; i >= 0; i--) {
-    //      if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
-    //        cafeList.remove(cafeList.get(i));
-    //      }
-    //    }
+    // 카페삭제
+    requestAgent.request("cafe.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 스터디카페가 없습니다.");
+      return;
+    }
+
+    Collection<Cafe> cafeCollection = requestAgent.getObjects(Cafe.class);
+    List<Cafe> cafeList = new ArrayList<>(cafeCollection);
+
+    for (int i = cafeList.size() -1; i >= 0; i--) {
+      if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
+
+        HashMap<String,String> cafeParams = new HashMap<>();
+        cafeParams.put("cafeNo", String.valueOf(cafeList.get(i).getNo()));
+
+        requestAgent.request("cafe.delete", cafeParams);
+
+        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+          System.out.println(" >> 스터디 삭제가 실패되었습니다.");
+          return;
+        }
+      }
+    }
 
     requestAgent.request("ceoMember.delete", params);
 

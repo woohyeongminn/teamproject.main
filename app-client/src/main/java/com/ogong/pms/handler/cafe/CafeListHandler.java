@@ -26,6 +26,11 @@ public class CafeListHandler implements Command {
     } else {
       Collection<Cafe> cafeList = requestAgent.getObjects(Cafe.class);
 
+      if (cafeList == null) {
+        System.out.println("등록된 장소가 없습니다.");
+        return;
+      }
+
       for(Cafe cafe : cafeList) {
         System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
             , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
