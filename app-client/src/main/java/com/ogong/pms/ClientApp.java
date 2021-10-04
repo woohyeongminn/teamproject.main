@@ -14,6 +14,7 @@ import com.ogong.menu.MenuGroup;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
+import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLogoutHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
@@ -58,7 +59,11 @@ import com.ogong.pms.handler.cafe.CeoCafeListHandler;
 import com.ogong.pms.handler.cafe.CeoCafeUpdateHandler;
 import com.ogong.pms.handler.cafe.CeoReservationListHandler;
 import com.ogong.pms.handler.cafe.PromptCafe;
+import com.ogong.pms.handler.member.CeoAddHandler;
+import com.ogong.pms.handler.member.CeoDeleteHandler;
+import com.ogong.pms.handler.member.CeoDetailHandler;
 import com.ogong.pms.handler.member.CeoFindIdPwHandler;
+import com.ogong.pms.handler.member.CeoUpdateHandler;
 import com.ogong.pms.handler.member.MemberAddHandler;
 import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
@@ -161,6 +166,11 @@ public class ClientApp {
     commandMap.put("/reply/add", new ReplyAddHandler(requestAgent));
     commandMap.put("/reply/detail", new ReplyDetailHandler(requestAgent));
 
+    commandMap.put("/ceoMember/add", new CeoAddHandler(requestAgent));
+    commandMap.put("/ceoMember/detail", new CeoDetailHandler(requestAgent));
+    commandMap.put("/ceoMember/update", new CeoUpdateHandler(requestAgent));
+    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(requestAgent));
+    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(requestAgent));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(requestAgent));
 
