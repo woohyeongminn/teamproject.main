@@ -1,28 +1,39 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.List;
+import java.util.Collection;
 import com.ogong.pms.domain.AdminNotice;
-import com.ogong.pms.handler.AbstractAdminNoticeHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 
-public class AdminNoticeListHandler extends AbstractAdminNoticeHandler {
+public class AdminNoticeListHandler implements Command {
 
-  public AdminNoticeListHandler(List<AdminNotice> adminNoticeList) {
-    super(adminNoticeList);
+  RequestAgent requestAgent;
+
+  public AdminNoticeListHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
 
-
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 공지 목록");
     System.out.println();
 
-    for (AdminNotice adminWriteList : adminNoticeList) {
+    requestAgent.request("notice.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 공지글이 없습니다.");
+      return;
+    }
+
+    Collection<AdminNotice> adminNoticeList = requestAgent.getObjects(AdminNotice.class);
+
+    for (AdminNotice noticeList : adminNoticeList) {
       System.out.printf(" (%d)\n 제목 : %s\n 작성자 : %s\n 등록일 : %s\n", 
-          adminWriteList.getAdminNotiNo(), 
-          adminWriteList.getAdminNotiTitle(),
-          adminWriteList.getAdminNotiWriter(),
-          adminWriteList.getAdminNotiRegisteredDate());
+          noticeList.getAdminNotiNo(), 
+          noticeList.getAdminNotiTitle(),
+          noticeList.getAdminNotiWriter(),
+          noticeList.getAdminNotiRegisteredDate());
       System.out.println();
     }      
   }

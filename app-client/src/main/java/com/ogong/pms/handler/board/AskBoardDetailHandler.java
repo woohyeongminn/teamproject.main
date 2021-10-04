@@ -12,17 +12,6 @@ import com.ogong.util.Prompt;
 
 public class AskBoardDetailHandler implements Command {
 
-  //  ReplyAddHandler replyAddHandler;
-  //  ReplyDetailHandler replyDetailHandler;
-  //
-  //  public AskBoardDetailHandler(List<AskBoard> askBoardList, List<Member> memberList,
-  //      List<CeoMember> ceoMemberList, List<Reply> replyList, ReplyAddHandler replyAddHandler,
-  //      ReplyDetailHandler replyDetailHandler) {
-  //    super(askBoardList, replyList, memberList, ceoMemberList);
-  //    this.replyAddHandler = replyAddHandler;
-  //    this.replyDetailHandler = replyDetailHandler;
-  //  }
-
   RequestAgent requestAgent; 
 
   public AskBoardDetailHandler(RequestAgent requestAgent) {
@@ -50,7 +39,7 @@ public class AskBoardDetailHandler implements Command {
     AskBoard askBoard = requestAgent.getObject(AskBoard.class);
 
     if (askBoard.getAskStatus() == 1) {
-      detailList(askBoard);
+      detailList(askBoard, request);
     }
 
     else if (askBoard.getAskStatus() == 2) {
@@ -97,7 +86,7 @@ public class AskBoardDetailHandler implements Command {
           return;
         }
       }
-      detailList(askBoard);
+      detailList(askBoard, request);
     }
 
     request.setAttribute("askNo", askNo);
@@ -106,15 +95,16 @@ public class AskBoardDetailHandler implements Command {
       System.out.println("\n---------------------");
       System.out.println("1. 문의글 삭제");
       System.out.println("2. 답변 등록");
-      System.out.println("3. 답변 수정");
-      System.out.println("4. 답변 삭제");
+      //      System.out.println("3. 답변 수정");
+      //      System.out.println("4. 답변 삭제");
       System.out.println("0. 뒤로 가기");
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
         case 1 : request.getRequestDispatcher("/askBoard/delete").forward(request); return;
-        //case 2 : replyAddHandler.addReply(askBoard);
-        //        case 3 : updateComment(); break;
-        //        case 4 : deleteComment(askBoard); break;
+        case 2 : request.getRequestDispatcher("/reply/add").forward(request); return;
+        //case 2 : replyAddHandler.execute(request); return;
+        //case 3 : updateComment(); break;
+        //case 4 : deleteComment(askBoard); break;
         default : return;
       }
     }
@@ -146,7 +136,7 @@ public class AskBoardDetailHandler implements Command {
   //    return;
   //  }
 
-  private void detailList(AskBoard askBoard) {
+  private void detailList(AskBoard askBoard, CommandRequest request) throws Exception {
 
     System.out.println();
     System.out.printf(" (%d)\n", askBoard.getAskNo());
@@ -164,6 +154,12 @@ public class AskBoardDetailHandler implements Command {
     askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
     System.out.println("---------------------");
-    //reply(askBoard);
+
+    if (askBoard.getReply() == null) {
+      System.out.println("등록된 답변이 없습니다.");
+      return;
+    }
+    request.setAttribute("askNo", askBoard.getAskNo());
+    request.getRequestDispatcher("/reply/detail").forward(request); 
   }
 }

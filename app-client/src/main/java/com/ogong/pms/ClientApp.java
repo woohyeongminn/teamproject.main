@@ -14,7 +14,6 @@ import com.ogong.menu.MenuGroup;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
-import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLogoutHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
@@ -29,6 +28,11 @@ import com.ogong.pms.handler.admin.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.admin.AdminMemberDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberListHandler;
 import com.ogong.pms.handler.admin.AdminMemberUpdateHandler;
+import com.ogong.pms.handler.admin.AdminNoticeAddHandler;
+import com.ogong.pms.handler.admin.AdminNoticeDeleteHandler;
+import com.ogong.pms.handler.admin.AdminNoticeDetailHandler;
+import com.ogong.pms.handler.admin.AdminNoticeListHandler;
+import com.ogong.pms.handler.admin.AdminNoticeUpdateHandler;
 import com.ogong.pms.handler.admin.AdminStudyDeleteHandler;
 import com.ogong.pms.handler.admin.AdminUpdateHandler;
 import com.ogong.pms.handler.board.AskBoardAddHandler;
@@ -37,6 +41,8 @@ import com.ogong.pms.handler.board.AskBoardDetailHandler;
 import com.ogong.pms.handler.board.AskBoardListHandler;
 import com.ogong.pms.handler.board.AskBoardMyListHandler;
 import com.ogong.pms.handler.board.AskBoardUpdateHandler;
+import com.ogong.pms.handler.board.ReplyAddHandler;
+import com.ogong.pms.handler.board.ReplyDetailHandler;
 import com.ogong.pms.handler.cafe.CafeDetailHandler;
 import com.ogong.pms.handler.cafe.CafeListHandler;
 import com.ogong.pms.handler.cafe.CafeMyReservationDetailHandler;
@@ -50,11 +56,7 @@ import com.ogong.pms.handler.cafe.CeoCafeListHandler;
 import com.ogong.pms.handler.cafe.CeoCafeUpdateHandler;
 import com.ogong.pms.handler.cafe.CeoReservationListHandler;
 import com.ogong.pms.handler.cafe.PromptCafe;
-import com.ogong.pms.handler.member.CeoAddHandler;
-import com.ogong.pms.handler.member.CeoDeleteHandler;
-import com.ogong.pms.handler.member.CeoDetailHandler;
 import com.ogong.pms.handler.member.CeoFindIdPwHandler;
-import com.ogong.pms.handler.member.CeoUpdateHandler;
 import com.ogong.pms.handler.member.MemberAddHandler;
 import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
@@ -145,6 +147,8 @@ public class ClientApp {
     commandMap.put("/member/update", new MemberUpdateHandler(requestAgent));
     commandMap.put("/member/delete", new MemberDeleteHandler(requestAgent));
 
+    // ReplyAddHandler replyAddHandler = new ReplyAddHandler(requestAgent);
+
     commandMap.put("/askBoard/add", new AskBoardAddHandler(requestAgent));
     commandMap.put("/askBoard/list", new AskBoardListHandler(requestAgent));
     commandMap.put("/askBoard/detail", new AskBoardDetailHandler(requestAgent));
@@ -152,11 +156,9 @@ public class ClientApp {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(requestAgent));
     commandMap.put("/askBoard/myList", new AskBoardMyListHandler(requestAgent));
 
-    commandMap.put("/ceoMember/add", new CeoAddHandler(requestAgent));
-    commandMap.put("/ceoMember/detail", new CeoDetailHandler(requestAgent));
-    commandMap.put("/ceoMember/update", new CeoUpdateHandler(requestAgent));
-    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(requestAgent));
-    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(requestAgent));
+    commandMap.put("/reply/add", new ReplyAddHandler(requestAgent));
+    commandMap.put("/reply/detail", new ReplyDetailHandler(requestAgent));
+
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(requestAgent));
 
@@ -175,6 +177,12 @@ public class ClientApp {
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(requestAgent));
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(requestAgent));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(requestAgent));
+
+    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(requestAgent));
+    commandMap.put("/adminNotice/list", new AdminNoticeListHandler(requestAgent));
+    commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(requestAgent));
+    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(requestAgent));
+    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(requestAgent));
 
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(requestAgent));
 

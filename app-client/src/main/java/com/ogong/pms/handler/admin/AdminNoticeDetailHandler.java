@@ -1,18 +1,20 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.List;
+import java.util.HashMap;
 import com.ogong.pms.domain.AdminNotice;
-import com.ogong.pms.handler.AbstractAdminNoticeHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
+public class AdminNoticeDetailHandler implements Command {
 
-  public AdminNoticeDetailHandler(List<AdminNotice> adminNoticeList) {
-    super(adminNoticeList);
+  RequestAgent requestAgent;
+
+  public AdminNoticeDetailHandler(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
   }
-
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -21,21 +23,26 @@ public class AdminNoticeDetailHandler extends AbstractAdminNoticeHandler {
     int adminnotiNo = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    AdminNotice adminWriteList = findByNotiNo(adminnotiNo);
+    HashMap<String,String> params = new HashMap<>();
+    params.put("noticeNo", String.valueOf(adminnotiNo));
 
-    if (adminWriteList == null) {
+    requestAgent.request("notice.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 공지를 다시 선택하세요.");
       return;
     }
 
-    System.out.printf(" [%s]\n", adminWriteList.getAdminNotiTitle());
-    System.out.printf(" >> 내용 : %s\n", adminWriteList.getAdminNotiContent());
-    System.out.printf(" >> 작성자 : %s\n", adminWriteList.getAdminNotiWriter());
-    System.out.printf(" >> 등록일 : %s\n", adminWriteList.getAdminNotiRegisteredDate());
+    AdminNotice adminNotice = requestAgent.getObject(AdminNotice.class);
+
+    System.out.printf(" [%s]\n", adminNotice.getAdminNotiTitle());
+    System.out.printf(" >> 내용 : %s\n", adminNotice.getAdminNotiContent());
+    System.out.printf(" >> 작성자 : %s\n", adminNotice.getAdminNotiWriter());
+    System.out.printf(" >> 등록일 : %s\n", adminNotice.getAdminNotiRegisteredDate());
 
     if (AuthAdminLoginHandler.getLoginAdmin() != null) {
 
-      request.setAttribute("adminnotiNo", adminnotiNo);
+      request.setAttribute("noticeNo", adminNotice.getAdminNotiNo());
 
       System.out.println();
       System.out.println("1. 수정");
