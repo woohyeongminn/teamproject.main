@@ -48,8 +48,11 @@ import com.ogong.pms.handler.board.ReplyAddHandler;
 import com.ogong.pms.handler.board.ReplyDetailHandler;
 import com.ogong.pms.handler.cafe.CafeDetailHandler;
 import com.ogong.pms.handler.cafe.CafeListHandler;
+import com.ogong.pms.handler.cafe.CafeMyReservationDeleteHandler;
 import com.ogong.pms.handler.cafe.CafeMyReservationDetailHandler;
 import com.ogong.pms.handler.cafe.CafeMyReservationListHandler;
+import com.ogong.pms.handler.cafe.CafeMyReviewAddHandler;
+import com.ogong.pms.handler.cafe.CafeMyReviewDeleteHandler;
 import com.ogong.pms.handler.cafe.CafeMyReviewListHandler;
 import com.ogong.pms.handler.cafe.CafeReservationHandler;
 import com.ogong.pms.handler.cafe.CafeSearchHandler;
@@ -64,7 +67,9 @@ import com.ogong.pms.handler.ceoCafe.CeoCafeRoomDetailHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeRoomListHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeRoomUpdateHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeUpdateHandler;
+import com.ogong.pms.handler.ceoCafe.CeoReservationDetailHandler;
 import com.ogong.pms.handler.ceoCafe.CeoReservationListHandler;
+import com.ogong.pms.handler.ceoCafe.CeoReservationRejectHandler;
 import com.ogong.pms.handler.member.CeoAddHandler;
 import com.ogong.pms.handler.member.CeoDeleteHandler;
 import com.ogong.pms.handler.member.CeoDetailHandler;
@@ -240,7 +245,10 @@ public class ClientApp {
     commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
     commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(promptcafe));
     commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(promptcafe));
+    commandMap.put("/cafeReservation/delete", new CafeMyReservationDeleteHandler(promptcafe));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(promptcafe));
+    commandMap.put("/cafe/myReviewAdd", new CafeMyReviewAddHandler(promptcafe));
+    commandMap.put("/cafe/myReviewDelete", new CafeMyReviewDeleteHandler(promptcafe));
 
     commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(promptcafe));
     commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(promptcafe));
@@ -253,6 +261,8 @@ public class ClientApp {
     commandMap.put("/ceoMember/cafeRoomDelete", new CeoCafeRoomDeleteHandler(promptcafe));
     commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(promptcafe));
     commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(promptcafe));
+    commandMap.put("/ceoMember/ReservationDetail", new CeoReservationDetailHandler(promptcafe));
+    commandMap.put("/ceoMember/ReservationReject", new CeoReservationRejectHandler(promptcafe));
 
     commandMap.put("/cafe/control", new AdminCafeControlHandler(promptcafe));
     commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(promptcafe)); 
