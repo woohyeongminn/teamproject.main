@@ -21,8 +21,6 @@ public class AskBoardTable extends JsonDataTable<AskBoard> implements DataProces
       case "askBoard.selectOne" : selectOne(request, response); break;
       case "askBoard.update" : update(request, response); break;
       case "askBoard.delete" : delete(request, response); break;
-      //case "askBoard.reply.insert" : insertReply(request, response); break;
-      //case "askBoard.reply.selectOne" : selectOneReply(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");

@@ -62,6 +62,9 @@ import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
 import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
+import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
+import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
+import com.ogong.pms.handler.myStudy.MyStudyListHandler;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
 import com.ogong.pms.handler.study.StudyListHandler;
@@ -187,6 +190,10 @@ public class ClientApp {
     commandMap.put("/study/detail", new StudyDetailHandler(requestAgent));
     commandMap.put("/study/search", new StudySearchHandler(requestAgent));
 
+    commandMap.put("/myStudy/list", new MyStudyListHandler(requestAgent));
+    commandMap.put("/myStudy/detail", new MyStudyDetailHandler(requestAgent));
+    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(requestAgent));
+
     PromptCafe promptcafe = new PromptCafe(requestAgent);
     commandMap.put("/cafe/list", new CafeListHandler(requestAgent));
     commandMap.put("/cafe/detail", new CafeDetailHandler(requestAgent, promptcafe));
@@ -205,6 +212,7 @@ public class ClientApp {
 
   }  
 
+  // 람다 문법 적용 전
   //  class MyFilter implements MenuFilter {
   //    @Override
   //    public boolean accept(Menu menu) {

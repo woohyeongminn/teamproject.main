@@ -22,6 +22,7 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
       case "study.selectList" : selectList(request, response); break;
       case "study.delete" : delete(request, response); break;
       case "study.selectByKeyword" : selectByKeyword(request, response); break;
+      case "study.my.selectOneByNicknameStudyNo" : selectOneByNicknameStudyNo(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -84,6 +85,29 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
     response.setStatus(Response.SUCCESS);
   }
 
+  private void selectOneByNicknameStudyNo(Request request, Response response) {
+    String nickname = request.getParameter("nickname");
+    int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+
+    Study study = null;
+    for (Study s : list) {
+      if (s.getStudyNo() == studyNo && 
+          (s.getMemberNames().contains(nickname) || 
+              s.getOwner().getPerNickname().equals(nickname))) {
+        study = s;
+        break;
+      }
+    }
+
+    if (study != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(study);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 스터디를 찾을 수 없습니다.");
+    }
+  }
+
   private int indexOf(int studyNo) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getStudyNo() == studyNo) {
@@ -106,8 +130,6 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
   //  public Study findByMyStudyNo(int inputNo) {
   //
   //    Member member = AuthPerMemberLoginHandler.getLoginUser();
-  //    
-  //    
   //    
   //    for (Study study : list) {
   //      if (study.getStudyNo() == inputNo) {
