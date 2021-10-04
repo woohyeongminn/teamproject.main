@@ -19,6 +19,8 @@ import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.pms.handler.admin.AdminCafeControlHandler;
+import com.ogong.pms.handler.admin.AdminCafeReviewListControlHandler;
 import com.ogong.pms.handler.admin.AdminCeoMemberDeleteHandler;
 import com.ogong.pms.handler.admin.AdminCeoMemberDetailHandler;
 import com.ogong.pms.handler.admin.AdminCeoMemberListHandler;
@@ -202,6 +204,9 @@ public class ClientApp {
     commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(promptcafe));
     commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(promptcafe));
     commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(promptcafe));
+
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(promptcafe));
+    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(promptcafe)); 
 
   }  
 

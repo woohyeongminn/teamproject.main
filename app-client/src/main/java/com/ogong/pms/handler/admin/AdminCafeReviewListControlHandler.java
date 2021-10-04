@@ -1,44 +1,46 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.List;
+import java.util.Collection;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
-import com.ogong.pms.handler.AbstractCafeHandler;
+import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.PromptCafe;
+import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
-public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
+public class AdminCafeReviewListControlHandler implements Command{
 
-  List<CafeReview> reviewList;
   PromptCafe promptcafe;
 
-  public AdminCafeReviewListControlHandler(
-      List<Cafe> cafeList, List<CafeReview> reviewList, PromptCafe promptcafe) {
-    super (cafeList);
-    this.reviewList = reviewList;
+  public AdminCafeReviewListControlHandler(PromptCafe promptcafe) {
     this.promptcafe = promptcafe;
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 장소 후기 목록");
     System.out.println();
 
-    int count = 0;
+    Collection<CafeReview> reviewList = promptcafe.getCafeReviewList();
+
+    if (reviewList.isEmpty()) {
+      System.out.println(" >> 리뷰 내역이 존재하지 않습니다.");
+      return;
+    }
+
     for (CafeReview cafeReview : reviewList) {
+      if (cafeReview.getReviewStatus() == 1) {
+        System.out.printf(" \n (%s)", cafeReview.getReviewNo());
+        System.out.println(" >> 삭제한 리뷰입니다.\n");
+        continue;
+      }
+
       Cafe cafe = promptcafe.findByCafeNo(cafeReview.getCafe().getNo());
       System.out.printf(" (%d)\n [%s]\n 별점 : %d\n 내용 : %s\n 등록일 : %s\n",
           cafeReview.getReviewNo(), cafe.getName(), cafeReview.getGrade(),
           cafeReview.getContent(), cafeReview.getRegisteredDate());
       System.out.println();
-      count++;
-    }
-
-    if (count == 0) {
-      System.out.println(" >> 리뷰 내역이 존재하지 않습니다.");
-      return;
     }
 
     System.out.println("----------------------");
@@ -53,18 +55,21 @@ public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
   }
 
 
-  protected void deleteReview() {
+  protected void deleteReview() throws Exception {
     System.out.println();
     System.out.println("▶ 리뷰 삭제하기");
     System.out.println();
-    int count = 0;
 
     int userReviewNo = Prompt.inputInt(" 번호 : ");
 
-    CafeReview cafeReview = promptcafe.findByCafeReview(userReviewNo);
+    CafeReview cafeReview = promptcafe.findByReviewNo(userReviewNo);
 
     if (cafeReview == null) {
-      System.out.println(" >> 리뷰 번호를 잘못 선택하셨습니다.");
+      return;
+    }
+
+    if (cafeReview.getReviewStatus() == 1) {
+      System.out.println(" >> 이미 삭제된 리뷰입니다.");
       return;
     }
 
@@ -75,8 +80,6 @@ public class AdminCafeReviewListControlHandler extends AbstractCafeHandler {
       return;
     }
 
-    reviewList.remove(cafeReview);
-    System.out.println(" >> 삭제를 완료하였습니다.");
-
+    promptcafe.deleteCafeReview(userReviewNo);
   }
 }

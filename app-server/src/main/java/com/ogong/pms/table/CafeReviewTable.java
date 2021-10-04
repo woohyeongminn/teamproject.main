@@ -18,6 +18,7 @@ public class CafeReviewTable extends JsonDataTable<CafeReview> implements DataPr
       case "cafeReview.selectList" : selectList(request, response); break;
       case "cafeReview.selectListByCafeNo" : selectListByCafeNo(request, response); break;
       case "cafeReview.selectListByMember" : selectListByMember(request, response); break;
+      case "cafeReview.selectOne" : selectOne(request, response); break;
       case "cafeReview.insert" : insert(request, response); break;
       case "cafeReview.updateReviewStatus" : updateReviewStatus(request, response); break;
       default:
@@ -61,6 +62,18 @@ public class CafeReviewTable extends JsonDataTable<CafeReview> implements DataPr
     CafeReview cafeReview = request.getObject(CafeReview.class);
     list.add(cafeReview);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectOne(Request request, Response response) throws Exception {
+    int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+    CafeReview cafeReview = findByNo(reviewNo);
+
+    if (cafeReview != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(cafeReview);
+    } else {
+      response.setStatus(Response.FAIL);
+    }
   }
 
   private void updateReviewStatus(Request request, Response response) throws Exception {
