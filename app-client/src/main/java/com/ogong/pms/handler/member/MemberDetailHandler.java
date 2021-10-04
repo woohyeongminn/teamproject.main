@@ -27,14 +27,13 @@ public class MemberDetailHandler implements Command {
     params.put("memberNo", String.valueOf(no));
 
     requestAgent.request("member.selectOne", params);
-    Member member = requestAgent.getObject(Member.class);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("해당 번호의 회원이 없습니다.");
       return;
     }
 
-    //Member member = null;
+    Member member = requestAgent.getObject(Member.class);
 
     try {
       member = AuthPerMemberLoginHandler.getLoginUser();
