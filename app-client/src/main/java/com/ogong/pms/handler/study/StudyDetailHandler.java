@@ -1,7 +1,6 @@
 package com.ogong.pms.handler.study;
 
 import java.util.HashMap;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -48,7 +47,7 @@ public class StudyDetailHandler implements Command {
     System.out.printf(" >> 대면 : %s\n", study.getFace());
     System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
-    request.setAttribute("studyNo", study.getStudyNo());
+    request.setAttribute("inputNo", study.getStudyNo());
 
     if (AuthPerMemberLoginHandler.loginUser != null) {
 
@@ -79,7 +78,7 @@ public class StudyDetailHandler implements Command {
         while (true) {
           int selectNo = Prompt.inputInt("선택> ");
           switch (selectNo) {
-            case 1: joinStudy(study); return;
+            case 1: request.getRequestDispatcher("/study/join").forward(request); return;
             case 0: return;
             default : 
               System.out.println(" >> 번호를 다시 선택해 주세요.");
@@ -89,42 +88,42 @@ public class StudyDetailHandler implements Command {
     }
   }
 
-  //스터디 가입
-  protected void joinStudy(Study study) {
-    System.out.println();
-    System.out.println("▶ 스터디 신청");
-    System.out.println();
-
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
-    for (Member pM : study.getMembers()) {
-      if (pM.getPerNickname().equals(member.getPerNickname())) {
-        System.out.println(" >> 이미 참여 중인 스터디입니다.");
-        return;
-      }
-    }
-
-    for (Member memberWating : study.getWatingMember()) {
-      if (member.getPerNickname().equals(memberWating.getPerNickname())) {
-        System.out.println(" >> 이미 승인 대기 중인 스터디입니다.");
-        return;
-      }
-    }
-
-    if(study.getMembers().size() == (study.getNumberOfPeple() - 1)) {
-      System.out.println(" >> 참여 가능 인원수를 초과하였습니다.");
-      return;
-    }
-
-    String input = Prompt.inputString(" 스터디에 참여하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 참여 신청이 취소되었습니다.");
-      return;
-    }
-    study.getWatingMember().add(member);
-    System.out.println();
-    System.out.println(" >> 참여 신청이 완료되었습니다.\n   승인이 완료될 때까지 기다려 주세요.");
-  }
+  //  //스터디 가입
+  //  protected void joinStudy(Study study) {
+  //    System.out.println();
+  //    System.out.println("▶ 스터디 신청");
+  //    System.out.println();
+  //
+  //    Member member = AuthPerMemberLoginHandler.getLoginUser();
+  //
+  //    for (Member pM : study.getMembers()) {
+  //      if (pM.getPerNickname().equals(member.getPerNickname())) {
+  //        System.out.println(" >> 이미 참여 중인 스터디입니다.");
+  //        return;
+  //      }
+  //    }
+  //
+  //    for (Member memberWating : study.getWatingMember()) {
+  //      if (member.getPerNickname().equals(memberWating.getPerNickname())) {
+  //        System.out.println(" >> 이미 승인 대기 중인 스터디입니다.");
+  //        return;
+  //      }
+  //    }
+  //
+  //    if(study.getMembers().size() == (study.getNumberOfPeple() - 1)) {
+  //      System.out.println(" >> 참여 가능 인원수를 초과하였습니다.");
+  //      return;
+  //    }
+  //
+  //    String input = Prompt.inputString(" 스터디에 참여하시겠습니까? (네 / 아니오) ");
+  //    if (!input.equalsIgnoreCase("네")) {
+  //      System.out.println(" >> 참여 신청이 취소되었습니다.");
+  //      return;
+  //    }
+  //    study.getWatingMember().add(member);
+  //    System.out.println();
+  //    System.out.println(" >> 참여 신청이 완료되었습니다.\n   승인이 완료될 때까지 기다려 주세요.");
+  //  }
 
 
 }

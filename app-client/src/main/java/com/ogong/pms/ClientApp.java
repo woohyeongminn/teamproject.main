@@ -71,9 +71,16 @@ import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
+import com.ogong.pms.handler.myStudy.MyStudyExit;
+import com.ogong.pms.handler.myStudy.MyStudyGuilder;
+import com.ogong.pms.handler.myStudy.MyStudyGuilderDelete;
+import com.ogong.pms.handler.myStudy.MyStudyGuilderEntrust;
+import com.ogong.pms.handler.myStudy.MyStudyGuilderList;
 import com.ogong.pms.handler.myStudy.MyStudyListHandler;
+import com.ogong.pms.handler.myStudy.MyStudyUpdateHandler;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
+import com.ogong.pms.handler.study.StudyJoinHandler;
 import com.ogong.pms.handler.study.StudyListHandler;
 import com.ogong.pms.handler.study.StudySearchHandler;
 import com.ogong.pms.listener.AppInitListener;
@@ -201,11 +208,20 @@ public class ClientApp {
     commandMap.put("/study/list", new StudyListHandler(requestAgent));
     commandMap.put("/study/detail", new StudyDetailHandler(requestAgent));
     commandMap.put("/study/search", new StudySearchHandler(requestAgent));
+    commandMap.put("/study/join", new StudyJoinHandler(requestAgent));
 
     commandMap.put("/myStudy/list", new MyStudyListHandler(requestAgent));
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(requestAgent));
-    // commandMap.put("/myStudy/update", new MyStudyUpdateHandler(requestAgent));
+    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(requestAgent));
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(requestAgent));
+    commandMap.put("/myStudy/exit", new MyStudyExit(requestAgent));
+    commandMap.put("/myStudy/guilder", new MyStudyGuilder(requestAgent));
+
+    commandMap.put("/myStudy/listGuilder", new MyStudyGuilderList(requestAgent));
+    commandMap.put("/myStudy/entrustGuilder", new MyStudyGuilderEntrust(requestAgent));
+    commandMap.put("/myStudy/deleteGuilder", new MyStudyGuilderDelete(requestAgent));
+
+
 
     PromptCafe promptcafe = new PromptCafe(requestAgent);
     commandMap.put("/cafe/list", new CafeListHandler(promptcafe));

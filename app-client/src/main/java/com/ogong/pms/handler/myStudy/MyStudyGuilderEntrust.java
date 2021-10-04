@@ -4,16 +4,28 @@ import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
+import com.ogong.pms.handler.Command;
+import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyGuilderEntrust { 
+public class MyStudyGuilderEntrust implements Command { 
 
-  protected void entrustGuilder(Study myStudy) {
+  RequestAgent requestAgent;
+
+  public MyStudyGuilderEntrust(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
+  }
+
+  @Override
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 조장 권한 위임");
     System.out.println();
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
+
+    Study myStudy = requestAgent.getObject(Study.class);
 
     List<Member> entrustGuilers = myStudy.getMembers();
 
@@ -74,6 +86,14 @@ public class MyStudyGuilderEntrust {
           System.out.println(" >> 구성원이 되셨습니다.");
         }
       }
+
+      requestAgent.request("study.update", myStudy);
+
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println("조장 위임 실패!");
+        return;
+      }
+
       return;
     }
   }

@@ -1,18 +1,41 @@
 package com.ogong.pms.handler.myStudy;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
+import com.ogong.pms.handler.Command;
+import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyGuilderList {
+public class MyStudyGuilderList implements Command {
+
+  RequestAgent requestAgent;
+
+  public MyStudyGuilderList(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
+  }
 
   // 스터디 구성원 목록
-  protected void listGuilder(Study myStudy) {
+  @Override
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 승인 대기 목록");
     System.out.println();
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
+
+    requestAgent.request("study.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 스터디 상세 오류.");
+      return;
+    }
+
+    Study myStudy = requestAgent.getObject(Study.class);
 
     if (!myStudy.getWatingMemberNames().isEmpty()) {
 
@@ -27,15 +50,15 @@ public class MyStudyGuilderList {
 
       int inputGuilerNo = Prompt.inputInt("선택> ");
       switch (inputGuilerNo) {
-        case 1: agreeStudyMember(myStudy); break;
-        case 2: disagreeStudyMember(myStudy); return;
+        case 1: agreeStudyMember(myStudy, requestAgent); return;
+        case 2: disagreeStudyMember(myStudy, requestAgent); return;
         case 0: return;
         default: return;
       }
     }
   }
 
-  private void agreeStudyMember(Study myStudy) {
+  private void agreeStudyMember(Study myStudy, RequestAgent requestAgent) throws Exception {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -67,12 +90,19 @@ public class MyStudyGuilderList {
         else {
           myStudy.getWatingMember().remove(m);
         }
+
+        requestAgent.request("study.update", myStudy);
+
+        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+          System.out.println("구성원 승인 실패!");
+          return;
+        }
         return;
       }
     }
   }
 
-  private void disagreeStudyMember(Study myStudy) {
+  private void disagreeStudyMember(Study myStudy, RequestAgent requestAgent) throws Exception {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -91,13 +121,20 @@ public class MyStudyGuilderList {
           }
 
           if (watingMember.getPerNickname().equals(input)) {
-            myStudy.getWatingMember().remove(m);
+            //myStudy.getWatingMember().remove(m);
             System.out.printf(" >> '%s님'의 구성원 신청이 거절되었습니다.\n", watingMember.getPerNickname());
             m = watingMember;
           }
         }
         if (m != null) {
           myStudy.getWatingMember().remove(m);
+
+          requestAgent.request("study.update", myStudy);
+
+          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+            System.out.println("스터디 거절 실패!");
+            return;
+          }
         }
         return;
       }

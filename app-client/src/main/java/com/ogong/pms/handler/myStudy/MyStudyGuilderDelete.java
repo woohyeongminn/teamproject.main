@@ -1,16 +1,39 @@
 package com.ogong.pms.handler.myStudy;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
+import com.ogong.pms.handler.Command;
+import com.ogong.pms.handler.CommandRequest;
+import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyGuilderDelete {
+public class MyStudyGuilderDelete implements Command {
 
-  protected void guilderDelete(Study myStudy) {
+  RequestAgent requestAgent;
+
+  public MyStudyGuilderDelete(RequestAgent requestAgent) {
+    this.requestAgent = requestAgent;
+  }
+
+  @Override
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 구성원 탈퇴시키기");
     System.out.println();
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("studyNo", String.valueOf(request.getAttribute("inputNo")));
+
+    requestAgent.request("study.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 스터디 상세 오류.");
+      return;
+    }
+
+    Study myStudy = requestAgent.getObject(Study.class);
 
     List<Member> guilerMembers = myStudy.getMembers();
 
@@ -49,6 +72,13 @@ public class MyStudyGuilderDelete {
       }
       if (guilerList != null) {
         myStudy.getMembers().remove(guilerList);
+      }
+
+      requestAgent.request("study.update", myStudy);
+
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println(" >> 구성원 탈퇴 실패!");
+        return;
       }
       return;
     }
