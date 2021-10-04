@@ -16,38 +16,29 @@ public class PromptCafe {
     this.requestAgent = requestAgent;
   }
 
-  //  public Cafe findByCafeNo(int no) throws Exception {
-  //    Collection<Cafe> cafeList = getCafeList();
-  //    for (Cafe cafe : cafeList) {
-  //      if (cafe.getNo() == no && cafe.getCafeStatus() != 0 && cafe.getCafeStatus() != 3) {
-  //        return cafe;
-  //      }
-  //    }
-  //    return null;
-  //  }
-
-  public Cafe findByCafeName(String name) throws Exception {
-    Collection<Cafe> cafeList = getCafeList();
-    for (Cafe cafe : cafeList) {
-      if (cafe.getName().equals(name) && cafe.getCafeStatus() != 0 && cafe.getCafeStatus() != 3) {
-        return cafe;
-      }
-    }
-    return null;
-  }
-
-  public CafeReview findByCafeReview (int reviewNo) throws Exception {
-    Collection<CafeReview> cafeReviewList = getCafeReviewList();
-    for (CafeReview cafeReview : cafeReviewList) {
-      if (cafeReview.getReviewNo() == reviewNo) {
-        return cafeReview;
-      }
-    }
-    return null;
-  }
   // -----------------------Cafe--------------------------------------
   public Collection<Cafe> getCafeList() throws Exception {
     requestAgent.request("cafe.selectList", null);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 장소 목록 조회를 실패하였습니다.");
+      return null;
+    }
+    return requestAgent.getObjects(Cafe.class);
+  }
+
+  public Collection<Cafe> getCafeListByMember() throws Exception {
+    requestAgent.request("cafe.selectListByMember", null);
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 장소 목록 조회를 실패하였습니다.");
+      return null;
+    }
+    return requestAgent.getObjects(Cafe.class);
+  }
+
+  public Collection<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("ceoNo", String.valueOf(ceoNo));
+    requestAgent.request("cafe.selectListByCeoMember", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 장소 목록 조회를 실패하였습니다.");
@@ -68,25 +59,23 @@ public class PromptCafe {
     return requestAgent.getObjects(Cafe.class);
   }
 
-  public Collection<Cafe> findCafeListByCeoMember(int ceoNo) throws Exception {
-    HashMap<String,String> params = new HashMap<>();
-    params.put("ceoNo", String.valueOf(ceoNo));
-    requestAgent.request("cafe.selectListByCeoMember", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 장소 목록 조회를 실패하였습니다.");
-      return null;
-    }
-    return requestAgent.getObjects(Cafe.class);
-  }
-
   public Cafe findByCafeNo(int cafeNo) throws Exception {
     HashMap<String,String> params = new HashMap<>();
     params.put("cafeNo", String.valueOf(cafeNo));
     requestAgent.request("cafe.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      //      System.out.println(" >> 해당 번호의 카페가 존재하지 않습니다.");
+      return null;
+    }
+    return requestAgent.getObject(Cafe.class);
+  }
+
+  public Cafe findByCafeNoMember(int cafeNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("cafeNo", String.valueOf(cafeNo));
+    requestAgent.request("cafe.selectOneByMember", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       return null;
     }
     return requestAgent.getObject(Cafe.class);
@@ -167,6 +156,17 @@ public class PromptCafe {
     } else {
     }
     return requestAgent.getObject(CafeReview.class);
+  }
+
+  public void insertCafeReview(CafeReview cafeReview) throws Exception {
+    requestAgent.request("cafeReview.insert", cafeReview);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 리뷰 등록 실패");
+    } else {
+      System.out.println();
+      System.out.println(" >> 리뷰가 등록되었습니다.");
+    }
   }
 
   public void deleteCafeReview(int reviewNo) throws Exception {
@@ -306,6 +306,20 @@ public class PromptCafe {
     } else {
       System.out.println();
       System.out.println(" *** 예약 되었습니다 ***");
+    }
+  }
+
+  public void updateWirteReview(int reservationNo) throws Exception {
+    HashMap<String,String> params = new HashMap<>();
+    params.put("reservationNo", String.valueOf(reservationNo));
+
+    requestAgent.request("cafeReservation.updateWirteReview", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 상태 변경 실패");
+    } else {
+      //        System.out.println();
+      //        System.out.println(" >> 상태 변경 성공");
     }
   }
 
