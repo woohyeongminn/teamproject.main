@@ -165,15 +165,12 @@ public class AskBoardAddHandler implements Command {
 
     else if ((statusNo > 0) && (statusNo < 3)) {
       requestAgent.request("askBoard.insert", askList);
-      System.out.println("test");
       if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
         System.out.println(" >> 문의글이 등록되었습니다.");
       } else {
         System.out.println(" >> 문의글 등록이 실패되었습니다.");
       }
 
-      //      System.out.println(" >> 문의글이 등록되었습니다.");
-      //      askBoardList.add(askList);
     }
 
   }

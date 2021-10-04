@@ -69,7 +69,8 @@ public class AskBoardMyListHandler implements Command {
       }
       else if (myAskBoard.getReply() != null) {
 
-        replyDetailHandler.detailReply(myAskBoard);  // 답변 호출
+        request.setAttribute("askNo", myAskBoard.getAskNo());
+        request.getRequestDispatcher("/reply/detail").forward(request);  // 답변 호출
       }
 
     } 
@@ -106,7 +107,8 @@ public class AskBoardMyListHandler implements Command {
         System.out.println(" >> 등록된 답변이 없습니다.");
       }
       else if (ceoAskBoard.getReply() != null) {
-        replyDetailHandler.detailReply(ceoAskBoard);  // 답변 호출
+        request.setAttribute("askNo", ceoAskBoard.getAskNo());
+        request.getRequestDispatcher("/reply/detail").forward(request); 
       }
 
     }

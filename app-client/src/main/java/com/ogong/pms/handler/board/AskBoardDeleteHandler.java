@@ -11,11 +11,6 @@ import com.ogong.util.Prompt;
 
 public class AskBoardDeleteHandler implements Command {
 
-  //  public AskBoardDeleteHandler(List<AskBoard> askBoardList, List<Member> memberList,
-  //      List<CeoMember> ceoMemberList, List<Reply> replyList) {
-  //    super(askBoardList, replyList, memberList, ceoMemberList);
-  //  }
-
   RequestAgent requestAgent;
 
   public AskBoardDeleteHandler(RequestAgent requestAgent) {

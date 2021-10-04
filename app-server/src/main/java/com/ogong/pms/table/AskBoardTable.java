@@ -1,7 +1,6 @@
 package com.ogong.pms.table;
 
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.Reply;
 import com.ogong.server.DataProcessor;
 import com.ogong.server.Request;
 import com.ogong.server.Response;
@@ -22,7 +21,7 @@ public class AskBoardTable extends JsonDataTable<AskBoard> implements DataProces
       case "askBoard.selectOne" : selectOne(request, response); break;
       case "askBoard.update" : update(request, response); break;
       case "askBoard.delete" : delete(request, response); break;
-      case "askBoard.reply.insert" : insertReply(request, response); break;
+      //case "askBoard.reply.insert" : insertReply(request, response); break;
       //case "askBoard.reply.selectOne" : selectOneReply(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
@@ -98,13 +97,6 @@ public class AskBoardTable extends JsonDataTable<AskBoard> implements DataProces
       }
     } 
     return -1;
-  }
-
-  private void insertReply(Request request, Response response) throws Exception {
-    Reply reply = request.getObject(Reply.class);
-    AskBoard askBoard = findByNo(reply.getReplyNo());
-    askBoard.setReply(reply);
-    response.setStatus(Response.SUCCESS);
   }
 
 }
