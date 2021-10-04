@@ -4,14 +4,13 @@ import java.util.Collection;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 
 public class CafeListHandler implements Command {
 
-  RequestAgent requestAgent;
+  PromptCafe promptcafe;
 
-  public CafeListHandler (RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CafeListHandler (PromptCafe promptcafe) {
+    this.promptcafe = promptcafe;
   }
 
   @Override
@@ -19,24 +18,18 @@ public class CafeListHandler implements Command {
     System.out.println();
     System.out.println("▶ 장소 목록");
 
-    requestAgent.request("cafe.selectListByMember", null);
+    Collection<Cafe> cafeList = promptcafe.getCafeListByMember();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("장소 목록 조회 실패!");
-    } else {
-      Collection<Cafe> cafeList = requestAgent.getObjects(Cafe.class);
+    if (cafeList == null) {
+      System.out.println("등록된 장소가 없습니다.");
+      return;
+    }
 
-      if (cafeList == null) {
-        System.out.println("등록된 장소가 없습니다.");
-        return;
-      }
-
-      for(Cafe cafe : cafeList) {
-        System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
-            , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
-        if (cafe.getCafeStatus() == Cafe.STOP) {
-          System.out.println(" * 운영 중단");
-        }
+    for(Cafe cafe : cafeList) {
+      System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
+          , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
+      if (cafe.getCafeStatus() == Cafe.STOP) {
+        System.out.println(" * 운영 중단");
       }
     }
 

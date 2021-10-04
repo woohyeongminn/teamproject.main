@@ -1,7 +1,6 @@
 package com.ogong.pms.handler.cafe;
 
 import java.sql.Date;
-import java.util.HashMap;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
@@ -10,17 +9,14 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class CafeMyReservationDetailHandler implements Command {
 
-  RequestAgent requestAgent;
   PromptCafe promptcafe;
   int reviewNo = 1; // 리뷰번호
 
-  public CafeMyReservationDetailHandler(RequestAgent requestAgent, PromptCafe promptcafe) {
-    this.requestAgent = requestAgent;
+  public CafeMyReservationDetailHandler(PromptCafe promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -130,26 +126,8 @@ public class CafeMyReservationDetailHandler implements Command {
       cafeReview.setRegisteredDate(registeredDate);
       cafeReview.setReviewStatus(0);
 
-      requestAgent.request("cafeReview.insert", cafeReview);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(" >> 리뷰 등록 실패");
-      } else {
-        System.out.println();
-        System.out.println(" >> 리뷰가 등록되었습니다.");
-      }
-
-      HashMap<String,String> params = new HashMap<>();
-      params.put("reservationNo", String.valueOf(myReservation.getReservationNo()));
-
-      requestAgent.request("cafeReservation.updateWirteReview", params);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(" >> 상태 변경 실패");
-      } else {
-        //        System.out.println();
-        //        System.out.println(" >> 상태 변경 성공");
-      }
+      promptcafe.insertCafeReview(cafeReview);
+      promptcafe.updateWirteReview(myReservation.getReservationNo());
     }
   }
 

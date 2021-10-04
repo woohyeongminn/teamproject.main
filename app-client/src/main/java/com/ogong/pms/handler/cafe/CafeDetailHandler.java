@@ -15,18 +15,14 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class CafeDetailHandler implements Command {
 
-  RequestAgent requestAgent;
   PromptCafe promptcafe;
   int reservationNo = 5; // 예약번호
 
-  public CafeDetailHandler (RequestAgent requestAgent, PromptCafe promptcafe) {
-
-    this.requestAgent = requestAgent;
+  public CafeDetailHandler (PromptCafe promptcafe) {
     this.promptcafe = promptcafe;
 
     //    CafeRoom cafeRoom = new CafeRoom();
@@ -97,16 +93,12 @@ public class CafeDetailHandler implements Command {
 
     int inputNo = Prompt.inputInt(" 번호 : ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("cafeNo", String.valueOf(inputNo));
+    Cafe cafe = promptcafe.findByCafeNoMember(inputNo);
 
-    requestAgent.request("cafe.selectOneByMember", params);
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    if (cafe == null) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
-
-    Cafe cafe = requestAgent.getObject(Cafe.class);
 
     System.out.println();
     System.out.printf(" (%s)\n", cafe.getNo());

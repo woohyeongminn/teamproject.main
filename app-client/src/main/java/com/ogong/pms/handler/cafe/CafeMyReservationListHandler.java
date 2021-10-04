@@ -6,17 +6,13 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler implements Command {
 
-  RequestAgent requestAgent;
   PromptCafe promptcafe;
 
-  public CafeMyReservationListHandler (RequestAgent requestAgent, PromptCafe promptcafe) {
-
-    this.requestAgent = requestAgent;
+  public CafeMyReservationListHandler (PromptCafe promptcafe) {
     this.promptcafe = promptcafe;
 
     //    CafeReservation reservation = new CafeReservation();

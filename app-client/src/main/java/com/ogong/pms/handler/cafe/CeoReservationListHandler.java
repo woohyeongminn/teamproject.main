@@ -28,7 +28,7 @@ public class CeoReservationListHandler implements Command {
 
     CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
 
-    Collection<Cafe> cafeList = promptcafe.findCafeListByCeoMember(ceoMember.getCeoNo());
+    Collection<Cafe> cafeList = promptcafe.getCafeListByCeoMember(ceoMember.getCeoNo());
 
     if (cafeList.isEmpty()) {
       System.out.println(" >> 등록된 카페가 없습니다. ");

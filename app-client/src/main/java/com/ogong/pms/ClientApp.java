@@ -208,12 +208,12 @@ public class ClientApp {
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(requestAgent));
 
     PromptCafe promptcafe = new PromptCafe(requestAgent);
-    commandMap.put("/cafe/list", new CafeListHandler(requestAgent));
-    commandMap.put("/cafe/detail", new CafeDetailHandler(requestAgent, promptcafe));
+    commandMap.put("/cafe/list", new CafeListHandler(promptcafe));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(promptcafe));
     commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
     commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
-    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(requestAgent, promptcafe));
-    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(requestAgent, promptcafe));
+    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(promptcafe));
+    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(promptcafe));
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(promptcafe));
 
     commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(promptcafe));

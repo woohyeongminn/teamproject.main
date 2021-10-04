@@ -29,7 +29,7 @@ public class CeoCafeListHandler implements Command {
       System.out.println(" >> 로그인 하세요.");
     }
 
-    Collection<Cafe> cafeList = promptcafe.findCafeListByCeoMember(ceoMember.getCeoNo());
+    Collection<Cafe> cafeList = promptcafe.getCafeListByCeoMember(ceoMember.getCeoNo());
 
     if (cafeList.isEmpty()) {
       System.out.println(" >> 등록된 카페가 없습니다.");
