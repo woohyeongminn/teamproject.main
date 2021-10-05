@@ -31,7 +31,7 @@ public class MyStudyDetailHandler implements Command {
     params.put("memberNo",String.valueOf(member.getPerNo()));
     params.put("studyNo", String.valueOf(inputNo));
 
-    requestAgent.request("study.my.selectOneByMemberNoStudyNo", params);
+    requestAgent.request("study.my.selectOne", params);
 
     Study s = new Study();
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {

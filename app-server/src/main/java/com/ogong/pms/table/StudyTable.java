@@ -1,6 +1,8 @@
 package com.ogong.pms.table;
 
 import java.util.ArrayList;
+import java.util.List;
+import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.server.DataProcessor;
@@ -24,9 +26,9 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
       case "study.update" : update(request, response); break;
       case "study.delete" : delete(request, response); break;
       case "study.selectByKeyword" : selectByKeyword(request, response); break;
-      case "study.my.selectOneByMemberNoStudyNo" : selectOneByMemberNoStudyNo(request, response); break;
-      //case "study.freeBoard.insert" : insertFreeBoard(request, response); break;
-      //case "study.freeBoard.update" : updateFreeBoard(request, response); break;
+      case "study.my.selectOne" : selectOneMyStudy(request, response); break;
+      case "study.freeBoard.selectOne" : selectOneFreeBoard(request, response); break;
+      case "study.freeBoard.update" : updateFreeBoard(request, response); break;
       default :  
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -104,7 +106,8 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
     response.setStatus(Response.SUCCESS);
   }
 
-  private void selectOneByMemberNoStudyNo(Request request, Response response) {
+  // 내 스터디 상세보기
+  private void selectOneMyStudy(Request request, Response response) {
     int memberNo = Integer.parseInt(request.getParameter("memberNo"));
     int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
@@ -135,6 +138,54 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
     }
   }
 
+  //---------------자유게시판----------------------------------------------------
+  // 내 스터디 선택 후 자유게시판 상세선택
+  private void selectOneFreeBoard(Request request, Response response) {
+
+    int freeBoardNo = Integer.parseInt(request.getParameter("FreeBoardNo"));
+    int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+
+    Study s = findByMyStudy(studyNo, memberNo);
+
+    if (s != null) {
+      for (FreeBoard freeBoard : s.getMyStudyFreeBoard()) {
+        if (freeBoard.getFreeBoardNo() == freeBoardNo) {
+          response.setStatus(Response.SUCCESS);
+          response.setValue(freeBoard);
+          return;
+        }
+      }
+    } 
+    response.setStatus(Response.FAIL);
+    response.setValue("해당 스터디를 찾을 수 없습니다.");
+  }
+
+  //내 스터디 선택 후 자유게시판 수정
+  private void updateFreeBoard(Request request, Response response) throws Exception {
+    FreeBoard freeBoard = request.getObject(FreeBoard.class);
+    int index = -1;
+
+    for (int i = 0; i < list.size(); i++) {
+      for (FreeBoard f : list.get(i).getMyStudyFreeBoard()) {
+        if (f.getFreeBoardNo() == freeBoard.getFreeBoardNo()) {
+          f = freeBoard;
+          index = i;
+        }
+      }
+    }
+
+    if (index == -1) {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 번호의 스터디를 찾을 수 없습니다.");
+      return;
+    }
+
+    list.set(index, list.get(index));
+    response.setStatus(Response.SUCCESS);
+  }
+  //---------------------------------------------------------------------------------------  
+
   private int indexOf(int studyNo) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getStudyNo() == studyNo) {
@@ -144,10 +195,53 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
     return -1;
   }
 
+  private int indexOfFreeBoard(int freeBoardNo, List<FreeBoard> freeBoardList) {
+    for (int i = 0; i < freeBoardList.size(); i++) {
+      if (freeBoardList.get(i).getFreeBoardNo() == freeBoardNo) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  // 스터디 전체리스트에서 찾기
   public Study findByStudyNo(int studyinputNo) {
     for (Study study : list) {
       if (study.getStudyNo() == studyinputNo) {
         return study;
+      }
+    }
+    return null;
+  }
+
+  // 내 스터디 찾기
+  private Study findByMyStudy(int studyNo, int memberNo) {
+
+    Study study = null;
+
+    for (Study s : list) {
+      if (s.getStudyNo() == studyNo) {
+        if (s.getOwner().getPerNo() == memberNo) {
+          study = s;
+          return study;
+        } else {
+          for (Member m : s.getMembers()) {
+            if(m.getPerNo() == memberNo) {
+              study = s;
+              return study;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  // 자유게시판 번호로 찾기
+  public FreeBoard findFreeBoardByNo(int inputFreeBoardNo, List<FreeBoard> freeBoardList) {
+    for (FreeBoard freeBoard : freeBoardList) {
+      if (freeBoard.getFreeBoardNo() == inputFreeBoardNo) {
+        return freeBoard;
       }
     }
     return null;

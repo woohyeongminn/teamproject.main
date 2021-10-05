@@ -35,7 +35,7 @@ public class MyStudyGuilderDelete implements Command {
 
     Study myStudy = requestAgent.getObject(Study.class);
 
-    List<Member> guilerMembers = myStudy.getMembers();
+    List<Member> guilderList = myStudy.getMembers();
 
     if (myStudy.getMembers().isEmpty()) {
       System.out.println(" >> 탈퇴시킬 구성원이 없습니다.");
@@ -44,17 +44,11 @@ public class MyStudyGuilderDelete implements Command {
 
     if (!myStudy.getMemberNames().equals("")) {
       String inputGuilderName = Prompt.inputString(" >> 탈퇴시킬 구성원의 닉네임을 입력하세요 : ");
-      Member guilerList = new Member();
+      Member guilder = null;
 
-      for (Member guilerMember : guilerMembers) {        
+      for (Member guilderMember : guilderList) { 
 
-        if (!guilerMember.getPerNickname().equals(inputGuilderName)) {
-          System.out.println();
-          System.out.println(" >> 닉네임을 다시 입력하세요.");
-        }
-
-        if (guilerMember.getPerNickname().equals(inputGuilderName)) {
-
+        if (guilderMember.getPerNickname().equals(inputGuilderName)) {
           System.out.println();
           String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 / 아니오) ");
 
@@ -64,16 +58,22 @@ public class MyStudyGuilderDelete implements Command {
             return;
           }
 
-          myStudy.getMembers().remove(guilerList);
+          //          myStudy.getMembers().remove(guilder);
           System.out.println();
           System.out.println(" >> 구성원이 탈퇴되었습니다.");
-          guilerList = guilerMember;
-        }
-      }
-      if (guilerList != null) {
-        myStudy.getMembers().remove(guilerList);
+          guilder = guilderMember;
+          break;
+
+        } 
       }
 
+      if (guilder == null) {
+        System.out.println();
+        System.out.println(" >> 해당 구성원이 존재하지 않습니다.");
+        return;
+      }
+
+      myStudy.getMembers().remove(guilder);
       requestAgent.request("study.update", myStudy);
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {

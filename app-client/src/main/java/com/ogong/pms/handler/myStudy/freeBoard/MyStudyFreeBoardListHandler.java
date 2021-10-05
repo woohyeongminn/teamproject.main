@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.myStudy;
+package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,12 +24,13 @@ public class MyStudyFreeBoardListHandler implements Command {
     System.out.println();
 
     HashMap<String,String> params = new HashMap<>();
+    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
     params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
 
-    requestAgent.request("study.selectOne", params);
+    requestAgent.request("study.my.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 스터디 상세 오류.");
+      System.out.println(" >> 내 스터디 상세 오류.");
       return;
     }
 

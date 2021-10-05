@@ -133,16 +133,14 @@ public class CafeReservationHandler implements Command {
     int i = 1;
     HashMap<Integer, Integer> selectRoomNo = new HashMap<>();
 
-    Collection<CafeRoom> roomList = promptcafe.getCafeRoomList();
+    Collection<CafeRoom> roomList = promptcafe.findCafeRoomListByCafe(cafe.getNo());
     for (CafeRoom cafeRoom : roomList) {
-      if (cafe.getNo() == cafeRoom.getCafe().getNo()) {
-        System.out.println(" " + i + ". " + cafeRoom.getRoomName());
-        selectRoomNo.put(i, cafeRoom.getRoomNo());
-        i++;
-      }
+      System.out.println(" " + i + ". " + cafeRoom.getRoomName());
+      selectRoomNo.put(i, cafeRoom.getRoomNo());
+      i++;
     }
 
-    if (i == 0) {
+    if (roomList.isEmpty()) {
       System.out.println(" >> 등록된 스터디룸이 없습니다.");
       return;
     }
@@ -152,15 +150,17 @@ public class CafeReservationHandler implements Command {
     try {
       cafeRoom = promptcafe.findByRoomNo(selectRoomNo.get(selectNo));
     } catch (NullPointerException e) {
-      System.out.println(" >> 번호를 잘못 선택하셨습니다.");
+      System.out.println(" >> 스터디룸 번호를 잘못 선택하셨습니다.");
       return;
     }
 
-    detailRoomReservation(cafe, selectRoomNo.get(selectNo), cafeRoom);
+    detailRoomReservation(cafe.getNo(), selectRoomNo.get(selectNo));
   }
 
-  private void detailRoomReservation(Cafe cafe, Integer selectNo, CafeRoom cafeRoom) throws Exception {
-    int roomNo = selectNo; // room 고유번호
+  private void detailRoomReservation(int cafeNo, Integer selectNo) throws Exception {
+    //    int roomNo = selectNo; // room 고유번호
+    Cafe cafe = promptcafe.findByCafeNoMember(cafeNo);
+    CafeRoom cafeRoom = promptcafe.findByRoomNo(selectNo);
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -172,7 +172,7 @@ public class CafeReservationHandler implements Command {
       reservationDate = Prompt.inputDate(" 예약 날짜 : ");
     }
 
-    List<CafeReservation> todayReserList = getCafeReserList(cafe, roomNo, reservationDate);
+    List<CafeReservation> todayReserList = getCafeReserList(cafeNo, selectNo, reservationDate);
     ArrayList<LocalTime> useTimeList = new ArrayList<>();
 
     try {
@@ -284,13 +284,13 @@ public class CafeReservationHandler implements Command {
     reservation.setUseMemberNumber(0);
     reservation.setTotalPrice(totalPrice);
     reservation.setWirteReview(false);
-    reservation.setRoomNo(roomNo);
+    reservation.setRoomNo(selectNo);
 
     promptcafe.insertReservation(reservation);
   }
 
   private List<CafeReservation> getCafeReserList(
-      Cafe cafe, int roomNo, Date reservationDate) throws Exception {
+      int cafeNo, int roomNo, Date reservationDate) throws Exception {
 
     Collection<CafeReservation> reserList = promptcafe.getCafeReservationList();
 
@@ -298,7 +298,7 @@ public class CafeReservationHandler implements Command {
     for (CafeReservation cafeReser : reserList) {
 
       if (reservationDate.toLocalDate().compareTo(cafeReser.getReservationDate().toLocalDate()) == 0 &&
-          cafeReser.getCafe().getNo() == cafe.getNo() && cafeReser.getRoomNo() == roomNo &&
+          cafeReser.getCafe().getNo() == cafeNo && cafeReser.getRoomNo() == roomNo &&
           cafeReser.getReservationStatus() == 0 || cafeReser.getReservationStatus() == 1) {
         todayReserList.add(cafeReser);
       }
