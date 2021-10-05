@@ -58,6 +58,7 @@ public class MyStudyGuilderList implements Command {
     }
   }
 
+  // 승인
   private void agreeStudyMember(Study myStudy, RequestAgent requestAgent) throws Exception {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
@@ -102,6 +103,7 @@ public class MyStudyGuilderList implements Command {
     }
   }
 
+  // 거절
   private void disagreeStudyMember(Study myStudy, RequestAgent requestAgent) throws Exception {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
@@ -121,9 +123,9 @@ public class MyStudyGuilderList implements Command {
           }
 
           if (watingMember.getPerNickname().equals(input)) {
-            //myStudy.getWatingMember().remove(m);
             System.out.printf(" >> '%s님'의 구성원 신청이 거절되었습니다.\n", watingMember.getPerNickname());
             m = watingMember;
+            break;
           }
         }
         if (m != null) {

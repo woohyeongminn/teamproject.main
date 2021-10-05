@@ -37,7 +37,7 @@ public class MyStudyFreeBoardDetailHandler implements Command {
 
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
-    if (freeBoardList == null) {
+    if (freeBoardList.isEmpty()) {
       System.out.println("자유게시판 게시글 목록이 없습니다!");
       return;
     }
