@@ -40,7 +40,7 @@ public class MyStudyFreeBoardUpdateHandler implements Command {
 
     for (FreeBoard freeBoard : freeBoardList) {
 
-      //      int no = (int) request.getAttribute("FreeBoardNo");
+      int no = (int) request.getAttribute("FreeBoardNo");
       //      HashMap<String,String> paramsFreeBoardNo = new HashMap<>();
       //      paramsFreeBoardNo.put("FreeBoardNo", String.valueOf(no));
       //

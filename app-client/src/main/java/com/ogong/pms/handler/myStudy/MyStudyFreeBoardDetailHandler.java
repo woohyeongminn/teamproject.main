@@ -50,15 +50,15 @@ public class MyStudyFreeBoardDetailHandler implements Command {
       for (FreeBoard freeBoard : freeBoardList) {
         if (freeBoard.getFreeBoardNo() == inputNo) {
 
-          //          HashMap<String,String> paramsfreeBoard = new HashMap<>();
-          //          paramsfreeBoard.put("freeBoardNo", String.valueOf(inputNo));
+          HashMap<String,String> paramsfreeBoard = new HashMap<>();
+          paramsfreeBoard.put("freeBoardNo", String.valueOf(inputNo));
 
-          //          requestAgent.request("study.freeBoard.selectOne", freeBoard.getFreeBoardNo());
-          //
-          //          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          //            System.out.println(" >> 게시글 상세 오류.");
-          //            return;
-          //          }
+          requestAgent.request("study.freeBoard.selectOne", freeBoard.getFreeBoardNo());
+
+          if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+            System.out.println(" >> 게시글 상세 오류.");
+            return;
+          }
 
           System.out.printf(" [%s]\n", freeBoard.getFreeBoardTitle());
           System.out.printf(" >> 내용 : %s\n", freeBoard.getFreeBoardContent());
@@ -72,33 +72,29 @@ public class MyStudyFreeBoardDetailHandler implements Command {
 
           request.setAttribute("freeBoardNo", freeBoard.getFreeBoardNo());
 
-        } else if (freeBoard.getFreeBoardNo() != inputNo) {
-          System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
-          continue;
+          break;
         }
-        break;
-      }
 
-      System.out.println("\n----------------------");
-      System.out.println("1. 수정");
-      System.out.println("2. 삭제");
-      System.out.println("3. 댓글 등록");
-      System.out.println("4. 댓글 수정");
-      System.out.println("5. 댓글 삭제");
-      System.out.println("0. 이전");
-      int selectNo = Prompt.inputInt("선택> ");
-      switch (selectNo) {
-        case 1 : request.getRequestDispatcher("/myStudy/freeBoardUpdate").forward(request); return;
-        case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;
-        //      case 3 : addComment(free, commentList); break;
-        //      case 4 : updateComment(); break;
-        //      case 5 : deleteComment(free); break;
-        case 0 : return;
-        default : 
-      }
+        System.out.println("\n----------------------");
+        System.out.println("1. 수정");
+        System.out.println("2. 삭제");
+        System.out.println("3. 댓글 등록");
+        System.out.println("4. 댓글 수정");
+        System.out.println("5. 댓글 삭제");
+        System.out.println("0. 이전");
+        int selectNo = Prompt.inputInt("선택> ");
+        switch (selectNo) {
+          case 1 : request.getRequestDispatcher("/myStudy/freeBoardUpdate").forward(request); return;
+          case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;
+          //      case 3 : addComment(free, commentList); break;
+          //      case 4 : updateComment(); break;
+          //      case 5 : deleteComment(free); break;
+          case 0 : return;
+          default : 
+        }
 
+      }
     }
   }
 }
-
 

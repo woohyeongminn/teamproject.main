@@ -44,6 +44,7 @@ public class MyStudyFreeBoardAddHandler implements Command {
     Study myStudy = requestAgent.getObject(Study.class);
 
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
+
     FreeBoard freeBoard = new FreeBoard();
 
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
@@ -61,9 +62,11 @@ public class MyStudyFreeBoardAddHandler implements Command {
     }
 
     freeBoard.setFreeBoardNo(freeBoardNo++);
-    freeBoardList.add(freeBoard);
 
-    requestAgent.request("study.update", freeBoardList);
+    freeBoardList.add(freeBoard);
+    myStudy.setMyStudyFreeBoard(freeBoardList);
+
+    requestAgent.request("study.update", myStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println("스터디 수정 / 자유게시판 글 등록 실패!");
