@@ -2,7 +2,9 @@ package com.ogong.pms.handler.myStudy.calender;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 import com.ogong.pms.domain.Calender;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
@@ -11,17 +13,28 @@ import com.ogong.util.Prompt;
 public class MyStudyCalenderAddHandler implements Command {
 
   RequestAgent requestAgent;
+  List<Calender> calenderList;
 
-  public MyStudyCalenderAddHandler(RequestAgent requestAgent) {
+  public MyStudyCalenderAddHandler(RequestAgent requestAgent, List<Calender> calenderList) {
     this.requestAgent = requestAgent;
+    this.calenderList = calenderList;
   }
 
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 일정 등록");
 
     HashMap<String,String> params = new HashMap<>();
     params.put("studyNo", String.valueOf(request.getAttribute(null)));
+
+    requestAgent.request("study.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("스터디 조회 실패");
+      return;
+    }
+
+    Study study = requestAgent.getObject(Study.class);
 
     Calender calender = new Calender();
 
@@ -104,6 +117,11 @@ public class MyStudyCalenderAddHandler implements Command {
     study.getMyStudyCalender().add(calender);
 
     requestAgent.request("study.update", study);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 캘린더 저장 실패");
+      return;
+    }
 
   }
 

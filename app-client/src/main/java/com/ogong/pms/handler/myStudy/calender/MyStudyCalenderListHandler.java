@@ -2,6 +2,7 @@ package com.ogong.pms.handler.myStudy.calender;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.Study;
@@ -19,10 +20,24 @@ public class MyStudyCalenderListHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 일정 목록");
     System.out.println();
+
+    int no = (int) request.getAttribute("inputNo");
+
+    HashMap<String, String> params = new HashMap<>();
+    params.put("studyNo", String.valueOf(no));
+
+    requestAgent.request("study.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("스터디 조회 실패");
+      return;
+    }
+
+    Study study = requestAgent.getObject(Study.class);
 
     Date now = new Date(System.currentTimeMillis());
     System.out.printf("      << %d월 >>\n", now.getMonth() + 1 );
@@ -43,7 +58,7 @@ public class MyStudyCalenderListHandler implements Command {
       }
     }
 
-    boolean selectBack = selectCategory(tempCal, study);
+    boolean selectBack = selectCategory(no, tempCal, request);
     if (!selectBack) {
       return;
     }
@@ -59,10 +74,10 @@ public class MyStudyCalenderListHandler implements Command {
       System.out.printf("      << %d월 >>\n", selectMonth);
       System.out.println();
 
-      List<Calender> selecMontCal = new ArrayList<>();
+      List<Calender> selecMonthCal = new ArrayList<>();
       for (Calender calender : study.getMyStudyCalender()) {
         if (selectMonth == calender.getMonth()) {
-          selecMontCal.add(calender);
+          selecMonthCal.add(calender);
           System.out.printf(
               " 중요도<%s> \n[ %d월 %d일 %s요일 ]\n %s\n",
               calender.getImportanceCalender(),
@@ -73,7 +88,8 @@ public class MyStudyCalenderListHandler implements Command {
           System.out.println();
         }
       }
-      selectBack = selectCategory(selecMontCal, study);
+
+      selectBack = selectCategory(no, selecMonthCal, request);
       if (!selectBack) {
         return;
       }
@@ -81,7 +97,10 @@ public class MyStudyCalenderListHandler implements Command {
     }
   }
 
-  private boolean selectCategory(List<Calender> calenderList, Study study) {
+  private boolean selectCategory(int no, List<Calender> calenderList, CommandRequest request) {
+
+    request.setAttribute("inputNo", no);
+
     if (calenderList.isEmpty()) {
       System.out.println();
       System.out.println(" 등록된 일정이 없습니다.");
@@ -93,7 +112,7 @@ public class MyStudyCalenderListHandler implements Command {
       System.out.println();
       switch (selectNo) {
         case 1 : return true;
-        case 2 : addCalender(study); break;
+        case 2 : request.getRequestDispatcher("/myStudy/calenderAdd"); break;
         case 3 : return false;
         default : return false;
       }
@@ -108,9 +127,9 @@ public class MyStudyCalenderListHandler implements Command {
       int selectNo = Prompt.inputInt("선택> ");
       System.out.println();
       switch (selectNo) {
-        case 1 : detailCalender(calenderList, study); break;
+        case 1 : request.getRequestDispatcher("/myStudy/calenderDetail"); break;
         case 2 : return true;
-        case 3 : addCalender(study); break;
+        case 3 : request.getRequestDispatcher("/myStudy/calenderAdd"); break;
         case 4 : return false;
         default : return false;
       }
