@@ -25,11 +25,12 @@ public class MyStudyFreeBoardDetailHandler implements Command {
 
     HashMap<String,String> params = new HashMap<>();
     params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
+    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
 
-    requestAgent.request("study.selectOne", params);
+    requestAgent.request("study.my.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 스터디 상세 오류.");
+      System.out.println(" >> 내 스터디 상세 오류.");
       return;
     }
 
