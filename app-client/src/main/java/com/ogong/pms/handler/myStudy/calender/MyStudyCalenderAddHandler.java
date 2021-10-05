@@ -23,8 +23,9 @@ public class MyStudyCalenderAddHandler implements Command {
     System.out.println();
     System.out.println("▶ 일정 등록");
 
+    int[] arr = (int[]) request.getAttribute("inputNo");
     HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo", String.valueOf(request.getAttribute("inputNo")));
+    params.put("studyNo", String.valueOf(arr[0]));
 
     requestAgent.request("study.selectOne", params);
 

@@ -1,6 +1,9 @@
 package com.ogong.pms.handler.myStudy.calender;
 
 import java.sql.Date;
+import java.util.HashMap;
+import com.ogong.pms.domain.Calender;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
@@ -15,11 +18,24 @@ public class MyStudyCalenderUpdateHandler implements Command {
   }
 
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CommandRequest request) throws Exception {
     System.out.println("▶ 일정 수정");
     System.out.println();
 
-    Hash
+    int[] arry = (int[]) request.getAttribute("studyNocalNo");
+
+    HashMap<String,String> params = new HashMap<>();
+    params.put("studyNo", String.valueOf(arry[0]));
+
+    requestAgent.request("study.selectOne", params);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 스터디 상세 오류.");
+      return;
+    }
+
+    Study myStudy = requestAgent.getObject(Study.class);
+    Calender calender = myStudy.getMyStudyCalender().get(arry[1]);
 
     int updateMonth;
     while (true) {
@@ -66,12 +82,12 @@ public class MyStudyCalenderUpdateHandler implements Command {
 
     String updateContent = Prompt.inputString(" 내용(" + calender.getCalenderContent() + ") : ");
 
-    String updateImportant = stateImportant();
-
-    if (updateImportant == null) {
-      System.out.println(" 입력 오류입니다.");
-      return;
-    }
+    //    String updateImportant = stateImportant();
+    //
+    //    if (updateImportant == null) {
+    //      System.out.println(" 입력 오류입니다.");
+    //      return;
+    //    }
 
     Date updateEndDay; 
     while (true) {
@@ -94,8 +110,15 @@ public class MyStudyCalenderUpdateHandler implements Command {
     calender.setDay(updateDay);
     calender.setDayOftheWeek(updateDayOfTheWeek);
     calender.setCalenderContent(updateContent);
-    calender.setImportanceCalender(updateImportant);
+    //calender.setImportanceCalender(updateImportant);
     calender.setEndDay(updateEndDay);
+
+    requestAgent.request("study.update", myStudy);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" 일정 변경 오류");
+      return;
+    }
 
     System.out.println(" >> 일정을 변경하였습니다.\n");
   }

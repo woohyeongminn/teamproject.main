@@ -1,9 +1,7 @@
 package com.ogong.pms.handler.myStudy.calender;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
@@ -25,8 +23,7 @@ public class MyStudyCalenderListHandler implements Command {
     System.out.println("▶ 일정 목록");
     System.out.println();
 
-    int no = (int) request.getAttribute("inputNo");
-
+    int no = (int)request.getAttribute("inputNo");
     HashMap<String, String> params = new HashMap<>();
     params.put("studyNo", String.valueOf(no));
 
@@ -43,7 +40,7 @@ public class MyStudyCalenderListHandler implements Command {
     System.out.printf("      << %d월 >>\n", now.getMonth() + 1 );
     System.out.println();
 
-    List<Calender> tempCal = new ArrayList<>();
+    int month = 0;
     for (Calender calender : study.getMyStudyCalender()) {
       if (now.getMonth() + 1 == calender.getMonth()) {
         System.out.printf(
@@ -54,17 +51,17 @@ public class MyStudyCalenderListHandler implements Command {
             calender.getDay(),
             calender.getDayOftheWeek(),
             calender.getCalenderContent());
-        tempCal.add(calender);
+        month = calender.getMonth();
         System.out.println();
       }
     }
 
-    boolean selectBack = selectCategory(no, tempCal, request);
-    if (!selectBack) {
+
+    if (!selectCategory(no, month, request)) {
       return;
     }
 
-    int selectMonth; 
+    int count = 0; 
     while (true) {
 
       requestAgent.request("study.selectOne", params);
@@ -76,19 +73,20 @@ public class MyStudyCalenderListHandler implements Command {
 
       study = requestAgent.getObject(Study.class);
 
-      selectMonth = Prompt.inputInt(" >> 다른 '월' 일정 보기 : ");
+      int selectMonth = Prompt.inputInt(" >> 다른 '월' 일정 보기 : ");
       System.out.println();
+
       if (selectMonth > 12 || selectMonth < 1) {
         System.out.println(" >> 정확한 '월'을 입력해 주세요.\n");
         continue;
       }
+
       System.out.printf("      << %d월 >>\n", selectMonth);
       System.out.println();
 
-      List<Calender> selecMonthCal = new ArrayList<>();
       for (Calender calender : study.getMyStudyCalender()) {
         if (selectMonth == calender.getMonth()) {
-          selecMonthCal.add(calender);
+          ;
           System.out.printf(
               " 중요도<%s> \n[(%d) %d월 %d일 %s요일 ]\n %s\n",
               calender.getImportanceCalender(),
@@ -97,24 +95,25 @@ public class MyStudyCalenderListHandler implements Command {
               calender.getDay(),
               calender.getDayOftheWeek(),
               calender.getCalenderContent());
+          count = selectMonth;
           System.out.println();
         }
       }
 
-      selectBack = selectCategory(no, selecMonthCal, request);
-      if (!selectBack) {
+      if (!selectCategory(no, count, request)) {
+        count = 0;
         return;
       }
-
     }
   }
 
-  private boolean selectCategory(int no,
-      List<Calender> calenderList, CommandRequest request) throws Exception {
+  private boolean selectCategory(int no, int selectMonth, CommandRequest request) throws Exception {
 
-    request.setAttribute("inputNo", no);
+    int[] arry = {no, selectMonth};
 
-    if (calenderList.isEmpty()) {
+    request.setAttribute("inputNo", arry);
+
+    if (selectMonth == 0) {
       System.out.println();
       System.out.println(" 등록된 일정이 없습니다.");
       System.out.println("---------------------");
@@ -126,12 +125,10 @@ public class MyStudyCalenderListHandler implements Command {
       switch (selectNo) {
         case 1 : return true;
         case 2 : request.getRequestDispatcher("/myStudy/calenderAdd").forward(request); break;
-        case 3 : return false;
         default : return false;
       }
-    }
 
-    if (!calenderList.isEmpty()) {
+    } else {
       System.out.println("---------------------");
       System.out.println("1. 상세");
       System.out.println("2. 다른 월");
@@ -143,7 +140,6 @@ public class MyStudyCalenderListHandler implements Command {
         case 1 : request.getRequestDispatcher("/myStudy/calenderDetail").forward(request); break;
         case 2 : return true;
         case 3 : request.getRequestDispatcher("/myStudy/calenderAdd").forward(request); break;
-        case 4 : return false;
         default : return false;
       }
     }

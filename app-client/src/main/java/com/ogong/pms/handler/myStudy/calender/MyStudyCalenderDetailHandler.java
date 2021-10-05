@@ -24,8 +24,10 @@ public class MyStudyCalenderDetailHandler implements Command {
     System.out.println();
 
 
+    int[] arry = (int[]) request.getAttribute("inputNo");
+
     HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo", String.valueOf(request.getAttribute("inputNo")));
+    params.put("studyNo", String.valueOf(arry[0]));
 
     requestAgent.request("study.selectOne", params);
 
@@ -38,30 +40,28 @@ public class MyStudyCalenderDetailHandler implements Command {
 
     List<Calender> calenderList = myStudy.getMyStudyCalender();
 
-    int inputNo;
-
-    Calender detailCalender = null;
-    inputNo = Prompt.inputInt(" 번호> ");
+    int inputNo = Prompt.inputInt(" 번호 > ");
 
     for (int i = 0; i < calenderList.size(); i++) {
-      if (calenderList.get(i).getCalenderNo() == inputNo) {
+      if (calenderList.get(i).getCalenderNo() == inputNo && 
+          calenderList.get(i).getMonth() == arry[1]) {
         System.out.println();
-        detailCalender = calenderList.get(i);
-        System.out.println("["+detailCalender.getCalenderNo()+"]");
+        System.out.println("["+calenderList.get(i).getCalenderNo()+"]");
         System.out.printf(" >> 등록일 : %d월 %d일 %s요일\n",
-            detailCalender.getMonth(),
-            detailCalender.getDay(),
-            detailCalender.getDayOftheWeek());
-        System.out.printf(" >> 종료일 : %s\n", detailCalender.getEndDay());
-        System.out.printf(" >> 내  용 : %s\n", detailCalender.getCalenderContent());
+            calenderList.get(i).getMonth(),
+            calenderList.get(i).getDay(),
+            calenderList.get(i).getDayOftheWeek());
+        System.out.printf(" >> 종료일 : %s\n", calenderList.get(i).getEndDay());
+        System.out.printf(" >> 내  용 : %s\n", calenderList.get(i).getCalenderContent());
         System.out.printf(" >> 중요도 : %s\n", 
-            detailCalender.getImportanceCalender());
-        inputNo = i;
+            calenderList.get(i).getImportanceCalender());
+        arry[1] = i;
+        inputNo = 0;
         System.out.println();
       }
     }
-    if (detailCalender == null) {
-      System.out.println(" >> 일정이 없습니다.");
+    if (inputNo != 0) {
+      System.out.println(" >> 해당 월에 정확한 번호를 입력해주세요");
       return;
     }
 
@@ -70,7 +70,7 @@ public class MyStudyCalenderDetailHandler implements Command {
     System.out.println("2. 삭제");
     System.out.println("3. 취소");
 
-    request.setAttribute("calenderNo", inputNo);
+    request.setAttribute("studyNocalNo", arry);
 
     int selectNo = Prompt.inputInt("선택> ");
     System.out.println();
