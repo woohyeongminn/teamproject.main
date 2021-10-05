@@ -62,6 +62,7 @@ public class MyStudyDetailHandler implements Command {
     System.out.println("5. 화상미팅");
     System.out.println("6. 탈퇴하기");  
 
+
     if (s.getOwner().getPerNickname().equals(
         AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
       System.out.println("7. 스터디 수정");
@@ -74,7 +75,7 @@ public class MyStudyDetailHandler implements Command {
     int selectNo = Prompt.inputInt("선택> "); 
     switch (selectNo) {
       case 1: request.getRequestDispatcher("/myStudy/guilder").forward(request); return;
-      //case 2: myStudyCalender.listCalender(myStudy); break;
+      case 2: request.getRequestDispatcher("/myStudy/calenderList").forward(request); return;
       //case 3: myStudyToDo.listToDo(myStudy); break;
       case 4: request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
       //case 5:  MyStudyCheating.cheat() ;  // 임시로 넣었음
@@ -84,5 +85,4 @@ public class MyStudyDetailHandler implements Command {
       default : return;
     }
   }
-
 }

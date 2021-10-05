@@ -47,8 +47,9 @@ public class MyStudyCalenderListHandler implements Command {
     for (Calender calender : study.getMyStudyCalender()) {
       if (now.getMonth() + 1 == calender.getMonth()) {
         System.out.printf(
-            " 중요도<%s>\n[ %d월 %d일 %s요일 ]\n %s\n",
+            " 중요도<%s>\n[(%d) %d월 %d일 %s요일 ]\n %s\n",
             calender.getImportanceCalender(),
+            calender.getCalenderNo(),
             calender.getMonth(), 
             calender.getDay(),
             calender.getDayOftheWeek(),
@@ -65,6 +66,16 @@ public class MyStudyCalenderListHandler implements Command {
 
     int selectMonth; 
     while (true) {
+
+      requestAgent.request("study.selectOne", params);
+
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println("스터디 조회 실패");
+        return;
+      }
+
+      study = requestAgent.getObject(Study.class);
+
       selectMonth = Prompt.inputInt(" >> 다른 '월' 일정 보기 : ");
       System.out.println();
       if (selectMonth > 12 || selectMonth < 1) {
@@ -79,8 +90,9 @@ public class MyStudyCalenderListHandler implements Command {
         if (selectMonth == calender.getMonth()) {
           selecMonthCal.add(calender);
           System.out.printf(
-              " 중요도<%s> \n[ %d월 %d일 %s요일 ]\n %s\n",
+              " 중요도<%s> \n[(%d) %d월 %d일 %s요일 ]\n %s\n",
               calender.getImportanceCalender(),
+              calender.getCalenderNo(),
               calender.getMonth(), 
               calender.getDay(),
               calender.getDayOftheWeek(),
@@ -97,7 +109,8 @@ public class MyStudyCalenderListHandler implements Command {
     }
   }
 
-  private boolean selectCategory(int no, List<Calender> calenderList, CommandRequest request) {
+  private boolean selectCategory(int no,
+      List<Calender> calenderList, CommandRequest request) throws Exception {
 
     request.setAttribute("inputNo", no);
 
@@ -112,7 +125,7 @@ public class MyStudyCalenderListHandler implements Command {
       System.out.println();
       switch (selectNo) {
         case 1 : return true;
-        case 2 : request.getRequestDispatcher("/myStudy/calenderAdd"); break;
+        case 2 : request.getRequestDispatcher("/myStudy/calenderAdd").forward(request); break;
         case 3 : return false;
         default : return false;
       }
@@ -127,9 +140,9 @@ public class MyStudyCalenderListHandler implements Command {
       int selectNo = Prompt.inputInt("선택> ");
       System.out.println();
       switch (selectNo) {
-        case 1 : request.getRequestDispatcher("/myStudy/calenderDetail"); break;
+        case 1 : request.getRequestDispatcher("/myStudy/calenderDetail").forward(request); break;
         case 2 : return true;
-        case 3 : request.getRequestDispatcher("/myStudy/calenderAdd"); break;
+        case 3 : request.getRequestDispatcher("/myStudy/calenderAdd").forward(request); break;
         case 4 : return false;
         default : return false;
       }

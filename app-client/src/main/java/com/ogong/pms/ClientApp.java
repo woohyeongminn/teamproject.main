@@ -11,7 +11,6 @@ import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
-import com.ogong.pms.domain.Calender;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -116,8 +115,6 @@ import com.ogong.util.RandomPw;
 public class ClientApp {
 
   RequestAgent requestAgent;
-
-  List<Calender> calenderList = new ArrayList<>();
 
   HashMap<String, Command> commandMap = new HashMap<>();
 
@@ -248,7 +245,7 @@ public class ClientApp {
     commandMap.put("/myStudy/entrustGuilder", new MyStudyGuilderEntrust(requestAgent));
     commandMap.put("/myStudy/deleteGuilder", new MyStudyGuilderDelete(requestAgent));
 
-    commandMap.put("/myStudy/calenderAdd", new MyStudyCalenderAddHandler(requestAgent, calenderList));
+    commandMap.put("/myStudy/calenderAdd", new MyStudyCalenderAddHandler(requestAgent));
     commandMap.put("/myStudy/calenderList", new MyStudyCalenderListHandler(requestAgent));
     commandMap.put("/myStudy/calenderDetail", new MyStudyCalenderDetailHandler(requestAgent));
     commandMap.put("/myStudy/calenderUpdate", new MyStudyCalenderUpdateHandler(requestAgent));
