@@ -24,7 +24,6 @@ public class MyStudyFreeBoardUpdateHandler implements Command {
     System.out.println("▶ 게시글 수정");
     System.out.println();
 
-    // 스터디 상세
     HashMap<String,String> params = new HashMap<>();
     params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
 
@@ -39,43 +38,39 @@ public class MyStudyFreeBoardUpdateHandler implements Command {
 
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
-    // 게시글 목록 중 상세
-    int no = (int) request.getAttribute("FreeBoardNo");
-
-    HashMap<String,String> paramsFreeBoardNo = new HashMap<>();
-    paramsFreeBoardNo.put("FreeBoardNo", String.valueOf(no));
-
-    requestAgent.request("freeBoard.selectOne", paramsFreeBoardNo);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 회원이 없습니다.");
-      return;
-    }
-
-    FreeBoard detailFreeBoard = requestAgent.getObject(FreeBoard.class);
-
     for (FreeBoard freeBoard : freeBoardList) {
-      if (!freeBoard.getFreeBoardWriter().equals(AuthPerMemberLoginHandler.getLoginUser().getPerNickname())) {
+
+      //      int no = (int) request.getAttribute("FreeBoardNo");
+      //      HashMap<String,String> paramsFreeBoardNo = new HashMap<>();
+      //      paramsFreeBoardNo.put("FreeBoardNo", String.valueOf(no));
+      //
+      //      requestAgent.request("study.freeBoard.selectOne", paramsFreeBoardNo);
+      //
+      //      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      //        System.out.println("내 스터디 자유게시판 상세 실패!");
+      //        return;
+      //      }
+      //
+      //      FreeBoard detailFreeBoard = requestAgent.getObject(FreeBoard.class);
+
+      if (freeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
         System.out.println(" >> 수정 권한이 없습니다.");
         return;
       }
 
-      else if (freeBoard.getFreeBoardWriter().equals(AuthPerMemberLoginHandler.getLoginUser().getPerNickname())) {
+      String freeBoardTitle = Prompt.inputString(" 제목(" + freeBoard.getFreeBoardTitle()  + ") : ");
+      String freeBoardContent = Prompt.inputString(" 내용(" + freeBoard.getFreeBoardContent() + ") : ");
+      String freeBoardAtcFile = Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardAtcFile() + ") : ");
 
-        String freeBoardTitle = Prompt.inputString(" 제목(" + freeBoard.getFreeBoardTitle()  + ") : ");
-        String freeBoardContent = Prompt.inputString(" 내용(" + freeBoard.getFreeBoardContent() + ") : ");
-        String freeBoardAtcFile = Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardAtcFile() + ") : ");
-
-        String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
-        if (!input.equalsIgnoreCase("네")) {
-          System.out.println(" >> 변경을 취소되었습니다.");
-          return;
-        }
-        freeBoard.setFreeBoardTitle(freeBoardTitle);
-        freeBoard.setFreeBoardContent(freeBoardContent);
-        freeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
+      String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
+      if (!input.equalsIgnoreCase("네")) {
+        System.out.println(" >> 변경을 취소되었습니다.");
+        return;
       }
-      return;
+
+      freeBoard.setFreeBoardTitle(freeBoardTitle);
+      freeBoard.setFreeBoardContent(freeBoardContent);
+      freeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
     }
 
     requestAgent.request("study.update", myStudy);
@@ -85,15 +80,13 @@ public class MyStudyFreeBoardUpdateHandler implements Command {
       return;
     }
 
-    requestAgent.request("freeBoard.update", detailFreeBoard);
+    requestAgent.request("study.freeBoard.update", myStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 게시글 변경 실패!");
-      System.out.println(requestAgent.getObject(String.class));
+      System.out.println(" >> 게시글 수정 실패!");
       return;
     }
 
     System.out.println(" >> 게시글을 변경하였습니다.");
-
   }
 }
