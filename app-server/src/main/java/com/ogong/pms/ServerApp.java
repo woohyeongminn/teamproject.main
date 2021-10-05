@@ -24,13 +24,15 @@ public class ServerApp {
     System.out.println("[오늘의 공부 서버]");   
 
     System.out.println("서버 실행 중....");
-
     ServerSocket serverSocket = new ServerSocket(5050);
-    Socket socket = serverSocket.accept();
 
+    Socket socket = serverSocket.accept();
     System.out.println("클라이언트 접속");
 
+    // RequestProcessor 가 사용할 DataProcessor 맵 준비
     HashMap<String,DataProcessor> dataProcessorMap = new HashMap<String,DataProcessor>();
+
+    // => 데이터 처리 담당자를 등록한다.
     dataProcessorMap.put("member.", new MemberTable());
     dataProcessorMap.put("askBoard.", new AskBoardTable());
     dataProcessorMap.put("ceoMember.", new CeoMemberTable());
@@ -44,10 +46,10 @@ public class ServerApp {
     //dataProcessorMap.put("freeBoard.", new FreeBoardTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
-
     requestProcessor.service();
     requestProcessor.close();
 
+    // => 데이터를 파일에 저장한다.
     Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
     for (DataProcessor dataProcessor : dataProcessors) {
       if (dataProcessor instanceof JsonDataTable) {
