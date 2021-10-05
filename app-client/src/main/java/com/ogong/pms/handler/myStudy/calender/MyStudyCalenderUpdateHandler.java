@@ -19,6 +19,8 @@ public class MyStudyCalenderUpdateHandler implements Command {
     System.out.println("▶ 일정 수정");
     System.out.println();
 
+    Hash
+
     int updateMonth;
     while (true) {
       updateMonth = Prompt.inputInt(" 월(" + calender.getMonth()  + ") : ");
