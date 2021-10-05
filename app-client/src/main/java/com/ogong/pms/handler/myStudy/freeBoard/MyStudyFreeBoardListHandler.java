@@ -24,8 +24,8 @@ public class MyStudyFreeBoardListHandler implements Command {
     System.out.println();
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
     params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
+    params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
 
     requestAgent.request("study.my.selectOne", params);
 

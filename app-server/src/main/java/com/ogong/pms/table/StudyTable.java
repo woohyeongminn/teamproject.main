@@ -164,20 +164,24 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
   //내 스터디 선택 후 자유게시판 수정
   private void updateFreeBoard(Request request, Response response) throws Exception {
     FreeBoard freeBoard = request.getObject(FreeBoard.class);
+    int index = -1;
 
-    Study study = findByStudyNo(freeBoard.getFreeBoardNo());
+    for (int i = 0; i < list.size(); i++) {
+      for (FreeBoard f : list.get(i).getMyStudyFreeBoard()) {
+        if (f.getFreeBoardNo() == freeBoard.getFreeBoardNo()) {
+          f = freeBoard;
+          index = i;
+        }
+      }
+    }
 
-
-    int freeBoardNo = Integer.parseInt(request.getParameter("FreeBoardNo"));
-    FreeBoard freeBoard = findFreeBoardByNo(freeBoardNo, study.getMyStudyFreeBoard());
-
-    if (freeBoard == null) {
+    if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 스터디를 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, study);
+    list.set(index, list.get(index));
     response.setStatus(Response.SUCCESS);
   }
   //---------------------------------------------------------------------------------------  
