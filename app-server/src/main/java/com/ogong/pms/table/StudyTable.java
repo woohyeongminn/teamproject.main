@@ -1,6 +1,7 @@
 package com.ogong.pms.table;
 
 import java.util.ArrayList;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.server.DataProcessor;
 import com.ogong.server.Request;
@@ -23,7 +24,7 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
       case "study.update" : update(request, response); break;
       case "study.delete" : delete(request, response); break;
       case "study.selectByKeyword" : selectByKeyword(request, response); break;
-      case "study.my.selectOneByNicknameStudyNo" : selectOneByNicknameStudyNo(request, response); break;
+      case "study.my.selectOneByMemberNoStudyNo" : selectOneByMemberNoStudyNo(request, response); break;
       //case "study.freeBoard.insert" : insertFreeBoard(request, response); break;
       //case "study.freeBoard.update" : updateFreeBoard(request, response); break;
       default :  
@@ -103,13 +104,13 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
     response.setStatus(Response.SUCCESS);
   }
 
-  private void selectOneByNicknameStudyNo(Request request, Response response) {
-    String nickname = request.getParameter("nickname");
+  private void selectOneByMemberNoStudyNo(Request request, Response response) {
+    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
     int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
     Study study = null;
+
     for (Study s : list) {
-<<<<<<< HEAD
       if (s.getStudyNo() == studyNo) {
         if (s.getOwner().getPerNo() == memberNo) {
           study = s;
@@ -122,13 +123,6 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
             }
           }
         }
-=======
-      if (s.getStudyNo() == studyNo && 
-          (s.getMemberNames().contains(nickname) || 
-              s.getOwner().getPerNickname().equals(nickname))) {
-        study = s;
-        break;
->>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
       }
     }
 
