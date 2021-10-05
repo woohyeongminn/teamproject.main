@@ -88,10 +88,6 @@ import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
 import com.ogong.pms.handler.myStudy.MyStudyExit;
-import com.ogong.pms.handler.myStudy.MyStudyFreeBoardAddHandler;
-import com.ogong.pms.handler.myStudy.MyStudyFreeBoardDetailHandler;
-import com.ogong.pms.handler.myStudy.MyStudyFreeBoardListHandler;
-import com.ogong.pms.handler.myStudy.MyStudyFreeBoardUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyListHandler;
 import com.ogong.pms.handler.myStudy.MyStudyUpdateHandler;
 import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderAddHandler;
@@ -99,6 +95,10 @@ import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderDeleteHandler;
 import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderDetailHandler;
 import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderListHandler;
 import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderUpdateHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.MyStudyFreeBoardAddHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.MyStudyFreeBoardDetailHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.MyStudyFreeBoardListHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.MyStudyFreeBoardUpdateHandler;
 import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilder;
 import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderDelete;
 import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderEntrust;
@@ -584,7 +584,7 @@ public class ClientApp {
     notifyOnApplicationStarted();
 
     createMenu().execute(); 
-    //requestAgent.request("quit", null);
+    requestAgent.request("quit", null);
     Prompt.close();
 
     notifyOnApplicationEnded();

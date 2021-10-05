@@ -1,3 +1,4 @@
+package com.ogong.pms.handler.myStudy.freeBoard;
 //package com.ogong.pms.handler.myStudy;
 //
 //import java.sql.Date;

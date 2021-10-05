@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.myStudy;
+package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.HashMap;
 import java.util.List;
