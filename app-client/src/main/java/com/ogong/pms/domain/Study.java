@@ -176,6 +176,14 @@ public class Study {
     this.myStudyFreeBoard = myStudyFreeBoard;
   }
 
+  public FreeBoard findFreeBoardByNo(int inputFreeBoardNo) {
+    for (FreeBoard freeBoard : this.myStudyFreeBoard) {
+      if (freeBoard.getFreeBoardNo() == inputFreeBoardNo) {
+        return freeBoard;
+      }
+    }
+    return null;
+  }
 
   public String getWatingMemberNames() {
     if (this.members == null) {

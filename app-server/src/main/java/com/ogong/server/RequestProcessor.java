@@ -42,6 +42,7 @@ public class RequestProcessor implements AutoCloseable {
 
   public void service() throws Exception {
 
+    // 데이터 처리 담당자의 이름 목록 가져오기
     Set<String> dataProcessorNames = dataProcessorMap.keySet();
 
     while (true) {
@@ -50,15 +51,14 @@ public class RequestProcessor implements AutoCloseable {
       Response response = new Response();
 
       if (command.equalsIgnoreCase("quit")) {
-        in.readLine();
-        out.println("success");
-        out.println("goodbye");
-        out.flush();
+        response.setStatus(Response.SUCCESS);
+        response.setValue("goodbye");
+        sendResult(response);
         break;
-      }
+      } 
 
+      // 명령어에 해당하는 데이터 처리 담당자를 찾는다.
       DataProcessor dataProcessor = null;
-
       for (String dataProcessorName : dataProcessorNames) {
         if (command.startsWith(dataProcessorName)) {
           dataProcessor = dataProcessorMap.get(dataProcessorName);

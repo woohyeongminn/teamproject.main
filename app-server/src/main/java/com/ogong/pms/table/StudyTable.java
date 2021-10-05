@@ -112,10 +112,15 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
 
     for (Study s : list) {
       if (s.getStudyNo() == studyNo) {
-        for (Member m : s.getMembers()) {
-          if(m.getPerNo() == memberNo || s.getOwner().getPerNo() == memberNo) {
-            study = s;
-            break;
+        if (s.getOwner().getPerNo() == memberNo) {
+          study = s;
+          break;
+        } else {
+          for (Member m : s.getMembers()) {
+            if(m.getPerNo() == memberNo) {
+              study = s;
+              break;
+            }
           }
         }
       }
