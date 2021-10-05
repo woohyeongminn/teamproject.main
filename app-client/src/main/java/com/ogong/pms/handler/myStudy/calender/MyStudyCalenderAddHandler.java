@@ -13,19 +13,19 @@ import com.ogong.util.Prompt;
 public class MyStudyCalenderAddHandler implements Command {
 
   RequestAgent requestAgent;
-  List<Calender> calenderList;
+  int calenderNo;
 
-  public MyStudyCalenderAddHandler(RequestAgent requestAgent, List<Calender> calenderList) {
+  public MyStudyCalenderAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
-    this.calenderList = calenderList;
   }
 
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 일정 등록");
 
+    int[] arr = (int[]) request.getAttribute("inputNo");
     HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo", String.valueOf(request.getAttribute(null)));
+    params.put("studyNo", String.valueOf(arr[0]));
 
     requestAgent.request("study.selectOne", params);
 
@@ -34,7 +34,9 @@ public class MyStudyCalenderAddHandler implements Command {
       return;
     }
 
-    Study study = requestAgent.getObject(Study.class);
+    Study myStudy = requestAgent.getObject(Study.class);
+
+    List<Calender> calenderList = myStudy.getMyStudyCalender();
 
     Calender calender = new Calender();
 
@@ -113,10 +115,12 @@ public class MyStudyCalenderAddHandler implements Command {
         calender.getMonth());
     System.out.println();
 
+    calender.setCalenderNo(++calenderNo);
     calenderList.add(calender);
-    study.getMyStudyCalender().add(calender);
+    myStudy.setMyStudyCalender(calenderList);
 
-    requestAgent.request("study.update", study);
+
+    requestAgent.request("study.update", myStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 캘린더 저장 실패");
