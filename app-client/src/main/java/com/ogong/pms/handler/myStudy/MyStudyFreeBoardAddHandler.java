@@ -44,12 +44,13 @@ public class MyStudyFreeBoardAddHandler implements Command {
     Study myStudy = requestAgent.getObject(Study.class);
 
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
+
     FreeBoard freeBoard = new FreeBoard();
 
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
     freeBoard.setFreeBoardContent(Prompt.inputString(" 내용 : "));
     freeBoard.setFreeBoardAtcFile(Prompt.inputString(" 첨부파일 : "));
-    freeBoard.setFreeBoardWriter(member.getPerNickname());
+    freeBoard.setFreeBoardWriter(member);
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
     freeBoard.setComment(new ArrayList<>());
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
@@ -61,21 +62,23 @@ public class MyStudyFreeBoardAddHandler implements Command {
     }
 
     freeBoard.setFreeBoardNo(freeBoardNo++);
+
     freeBoardList.add(freeBoard);
+    myStudy.setMyStudyFreeBoard(freeBoardList);
 
-    requestAgent.request("study.update", freeBoardList);
+    requestAgent.request("study.update", myStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("스터디 수정 실패!");
+      System.out.println("스터디 수정 / 자유게시판 글 등록 실패!");
       return;
     }
 
-    requestAgent.request("freeBoard.insert", freeBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("게시글 등록 실패!");
-      return;
-    }
+    //    requestAgent.request("study.freeBoard.insert", freeBoard);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println("게시글 등록 실패!");
+    //      return;
+    //    }
 
     System.out.println(" >> 게시글이 등록되었습니다.");
   }

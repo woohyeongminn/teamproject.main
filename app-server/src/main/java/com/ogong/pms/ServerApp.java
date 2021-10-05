@@ -11,7 +11,6 @@ import com.ogong.pms.table.CafeReviewTable;
 import com.ogong.pms.table.CafeRoomTable;
 import com.ogong.pms.table.CafeTable;
 import com.ogong.pms.table.CeoMemberTable;
-import com.ogong.pms.table.FreeBoardTable;
 import com.ogong.pms.table.JsonDataTable;
 import com.ogong.pms.table.MemberTable;
 import com.ogong.pms.table.NoticeTable;
@@ -42,7 +41,7 @@ public class ServerApp {
     dataProcessorMap.put("cafeRoom.", new CafeRoomTable());
     dataProcessorMap.put("cafeReservation.", new CafeReservationTable());
     dataProcessorMap.put("notice.", new NoticeTable());
-    dataProcessorMap.put("freeBoard.", new FreeBoardTable());
+    //dataProcessorMap.put("freeBoard.", new FreeBoardTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
 

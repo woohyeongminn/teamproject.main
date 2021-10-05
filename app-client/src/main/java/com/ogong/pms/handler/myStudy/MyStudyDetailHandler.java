@@ -28,14 +28,16 @@ public class MyStudyDetailHandler implements Command {
     int inputNo = Prompt.inputInt(" 번호  : ");
 
     HashMap<String,String> params = new HashMap<>();
-    params.put("nickname",member.getPerNickname());
+    params.put("memberNo", String.valueOf(member.getPerNo()));
     params.put("studyNo", String.valueOf(inputNo));
 
-    requestAgent.request("study.my.selectOneByNicknameStudyNo", params);
+    requestAgent.request("study.my.selectOneByMemberNoStudyNo", params);
 
     Study s = new Study();
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
+
       Study myStudy = requestAgent.getObject(Study.class);
+
       System.out.printf(" \n(%s)\n", myStudy.getStudyNo());
       System.out.printf(" [%s]\n", myStudy.getStudyTitle());
       System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());

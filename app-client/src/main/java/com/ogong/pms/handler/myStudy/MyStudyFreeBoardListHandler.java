@@ -37,11 +37,6 @@ public class MyStudyFreeBoardListHandler implements Command {
 
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
-    if (freeBoardList == null) {
-      System.out.println("게시글 목록이 없습니다.");
-      return;
-    }
-
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf(
           " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일 : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n",
@@ -49,7 +44,7 @@ public class MyStudyFreeBoardListHandler implements Command {
           freeBoard.getFreeBoardTitle(),
           freeBoard.getFreeBoardContent(),
           freeBoard.getFreeBoardAtcFile(),
-          freeBoard.getFreeBoardWriter(),
+          freeBoard.getFreeBoardWriter().getPerNickname(),
           freeBoard.getFreeBoardViewcount(),
           freeBoard.getFreeBoardRegisteredDate());
       System.out.println();
@@ -62,25 +57,24 @@ public class MyStudyFreeBoardListHandler implements Command {
       System.out.println("0. 이전");
       int selete = Prompt.inputInt("선택> ");
       switch (selete) {
-        case 1 : request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request); return;
+        case 1 :request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request); return;
         case 2 : request.getRequestDispatcher("/myStudy/freeBoardAdd").forward(request); return;
+        default : return;
+      }
+    }
+
+    if (freeBoardList.isEmpty()) {
+      System.out.println(" >> 등록된 게시글이 없습니다");
+      System.out.println("---------------------");
+      System.out.println("1. 등록");
+      System.out.println("0. 이전");
+      int selete = Prompt.inputInt("선택> ");
+      switch (selete) {
+        case 1 : request.getRequestDispatcher("/myStudy/freeBoardAdd").forward(request); return;
         default : return;
       }
     }
   }
 }
 
-
-//
-//    if (freeBoardList.isEmpty()) {
-//      System.out.println(" >> 등록된 게시글이 없습니다");
-//      System.out.println("---------------------");
-//      System.out.println("1. 등록");
-//      System.out.println("0. 이전");
-//      int selete = Prompt.inputInt("선택> ");
-//      switch (selete) {
-//        case 1 : addFreeBoard(commentList, study); break;
-//        default : return;
-//      }
-//    }
 
