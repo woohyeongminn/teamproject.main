@@ -23,14 +23,26 @@ public class MyStudyFreeBoardDetailHandler implements Command {
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
 
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
+    //    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
+    //
+    //    requestAgent.request("study.my.selectOne", params);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println(" >> 내 스터디 상세 오류.");
+    //      return;
+    //    }
+    //
+    //    Study myStudy = requestAgent.getObject(Study.class);
+
     HashMap<String,String> params = new HashMap<>();
     params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
-    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
 
-    requestAgent.request("study.my.selectOne", params);
+    requestAgent.request("study.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 내 스터디 상세 오류.");
+      System.out.println(" >> 스터디 상세 오류.");
       return;
     }
 
@@ -68,7 +80,8 @@ public class MyStudyFreeBoardDetailHandler implements Command {
 
     //listComment(free); // 댓글호출
 
-    request.setAttribute("freeBoardNo", freeBoard.getFreeBoardNo());
+    request.setAttribute("myStudy", myStudy);
+    request.setAttribute("freeBoardNo", freeBoard);
 
     System.out.println("\n----------------------");
     System.out.println("1. 수정");
