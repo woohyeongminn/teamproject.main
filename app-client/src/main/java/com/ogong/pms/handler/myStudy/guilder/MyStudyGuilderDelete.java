@@ -44,15 +44,9 @@ public class MyStudyGuilderDelete implements Command {
 
     if (!myStudy.getMemberNames().equals("")) {
       String inputGuilderName = Prompt.inputString(" >> 탈퇴시킬 구성원의 닉네임을 입력하세요 : ");
-      Member guilder = new Member();
+      Member guilder = null;
 
       for (Member guilderMember : guilderList) { 
-
-        if (!guilderMember.getPerNickname().equals(inputGuilderName)) {
-          System.out.println();
-          System.out.println(" >> 닉네임을 다시 입력하세요.");
-          return;
-        }
 
         if (guilderMember.getPerNickname().equals(inputGuilderName)) {
           System.out.println();
@@ -64,19 +58,22 @@ public class MyStudyGuilderDelete implements Command {
             return;
           }
 
-          myStudy.getMembers().remove(guilder);
+          //          myStudy.getMembers().remove(guilder);
           System.out.println();
           System.out.println(" >> 구성원이 탈퇴되었습니다.");
           guilder = guilderMember;
           break;
 
         } 
-
-      }
-      if (guilder != null) {
-        myStudy.getMembers().remove(guilder);
       }
 
+      if (guilder == null) {
+        System.out.println();
+        System.out.println(" >> 해당 구성원이 존재하지 않습니다.");
+        return;
+      }
+
+      myStudy.getMembers().remove(guilder);
       requestAgent.request("study.update", myStudy);
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
