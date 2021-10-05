@@ -84,7 +84,9 @@ import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
 import com.ogong.pms.handler.myStudy.MyStudyExit;
 import com.ogong.pms.handler.myStudy.MyStudyFreeBoardAddHandler;
+import com.ogong.pms.handler.myStudy.MyStudyFreeBoardDetailHandler;
 import com.ogong.pms.handler.myStudy.MyStudyFreeBoardListHandler;
+import com.ogong.pms.handler.myStudy.MyStudyFreeBoardUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyGuilder;
 import com.ogong.pms.handler.myStudy.MyStudyGuilderDelete;
 import com.ogong.pms.handler.myStudy.MyStudyGuilderEntrust;
@@ -236,6 +238,9 @@ public class ClientApp {
 
     commandMap.put("/myStudy/freeBoardList", new MyStudyFreeBoardListHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardAdd", new MyStudyFreeBoardAddHandler(requestAgent));
+    commandMap.put("/myStudy/freeBoardDetail", new MyStudyFreeBoardDetailHandler(requestAgent));
+    commandMap.put("/myStudy/freeBoardUpdate", new MyStudyFreeBoardUpdateHandler(requestAgent));
+    //commandMap.put("/myStudy/freeBoardDelete", new MyStudyFreeBoardDeleteHandler(requestAgent));
 
     PromptCafe promptcafe = new PromptCafe(requestAgent);
     commandMap.put("/cafe/list", new CafeListHandler(promptcafe));

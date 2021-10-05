@@ -11,8 +11,6 @@ import com.ogong.util.Prompt;
 
 public class MyStudyFreeBoardListHandler implements Command {
 
-  int freeBoardNo = 4;
-
   RequestAgent requestAgent;
 
   public MyStudyFreeBoardListHandler(RequestAgent requestAgent) {
@@ -39,6 +37,11 @@ public class MyStudyFreeBoardListHandler implements Command {
 
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
+    if (freeBoardList == null) {
+      System.out.println("게시글 목록이 없습니다.");
+      return;
+    }
+
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf(
           " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일 : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n",
@@ -52,13 +55,6 @@ public class MyStudyFreeBoardListHandler implements Command {
       System.out.println();
     }
 
-    requestAgent.request("freeBoard.selectList", freeBoardList);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 내 스터디 자유게시판 목록 오류");
-      return;
-    }
-
     if (!freeBoardList.isEmpty()) {
       System.out.println("---------------------");
       System.out.println("1. 상세");
@@ -66,7 +62,7 @@ public class MyStudyFreeBoardListHandler implements Command {
       System.out.println("0. 이전");
       int selete = Prompt.inputInt("선택> ");
       switch (selete) {
-        case 1 : request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
+        case 1 : request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request); return;
         case 2 : request.getRequestDispatcher("/myStudy/freeBoardAdd").forward(request); return;
         default : return;
       }
