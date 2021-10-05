@@ -80,7 +80,7 @@ public class MyStudyDetailHandler implements Command {
     int selectNo = Prompt.inputInt("선택> "); 
     switch (selectNo) {
       case 1: request.getRequestDispatcher("/myStudy/guilder").forward(request); return;
-      //case 2: myStudyCalender.listCalender(myStudy); break;
+      case 2: request.getRequestDispatcher("/myStudy/calenderList"); break;
       //case 3: myStudyToDo.listToDo(myStudy); break;
       //case 4: myStudyFreeBoard.listFreeBoard(commentList, myStudy); break;
       //case 5:  MyStudyCheating.cheat() ;  // 임시로 넣었음

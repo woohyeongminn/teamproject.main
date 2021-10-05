@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.myStudy;
+package com.ogong.pms.handler.myStudy.guilder;
 
 import java.util.List;
 import com.ogong.pms.domain.Member;

@@ -83,12 +83,17 @@ import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
 import com.ogong.pms.handler.myStudy.MyStudyExit;
-import com.ogong.pms.handler.myStudy.MyStudyGuilder;
-import com.ogong.pms.handler.myStudy.MyStudyGuilderDelete;
-import com.ogong.pms.handler.myStudy.MyStudyGuilderEntrust;
-import com.ogong.pms.handler.myStudy.MyStudyGuilderList;
 import com.ogong.pms.handler.myStudy.MyStudyListHandler;
 import com.ogong.pms.handler.myStudy.MyStudyUpdateHandler;
+import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderAddHandler;
+import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderDeleteHandler;
+import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderDetailHandler;
+import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderListHandler;
+import com.ogong.pms.handler.myStudy.calender.MyStudyCalenderUpdateHandler;
+import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilder;
+import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderDelete;
+import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderEntrust;
+import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderList;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
 import com.ogong.pms.handler.study.StudyJoinHandler;
@@ -231,6 +236,12 @@ public class ClientApp {
     commandMap.put("/myStudy/listGuilder", new MyStudyGuilderList(requestAgent));
     commandMap.put("/myStudy/entrustGuilder", new MyStudyGuilderEntrust(requestAgent));
     commandMap.put("/myStudy/deleteGuilder", new MyStudyGuilderDelete(requestAgent));
+
+    commandMap.put("/myStudy/calenderAdd", new MyStudyCalenderAddHandler(requestAgent));
+    commandMap.put("/myStudy/calenderList", new MyStudyCalenderListHandler(requestAgent));
+    commandMap.put("/myStudy/calenderDetail", new MyStudyCalenderDetailHandler(requestAgent));
+    commandMap.put("/myStudy/calenderUpdate", new MyStudyCalenderUpdateHandler(requestAgent));
+    commandMap.put("/myStudy/calenderDelete", new MyStudyCalenderDeleteHandler(requestAgent));
 
 
 
