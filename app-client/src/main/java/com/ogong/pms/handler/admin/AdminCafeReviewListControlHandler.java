@@ -49,37 +49,10 @@ public class AdminCafeReviewListControlHandler implements Command{
 
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
-      case 1: deleteReview(); break;
-      default : return;
+      case 1: request.getRequestDispatcher("/cafe/reviewListDelete").forward(request); return;
+      case 0: return;
+      default :
+        System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
-  }
-
-
-  protected void deleteReview() throws Exception {
-    System.out.println();
-    System.out.println("▶ 리뷰 삭제하기");
-    System.out.println();
-
-    int userReviewNo = Prompt.inputInt(" 번호 : ");
-
-    CafeReview cafeReview = promptcafe.findByReviewNo(userReviewNo);
-
-    if (cafeReview == null) {
-      return;
-    }
-
-    if (cafeReview.getReviewStatus() == 1) {
-      System.out.println(" >> 이미 삭제된 리뷰입니다.");
-      return;
-    }
-
-    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 /아니오) ");
-    System.out.println();
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 삭제를 취소합니다.");
-      return;
-    }
-
-    promptcafe.deleteCafeReview(userReviewNo);
   }
 }
