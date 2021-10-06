@@ -9,11 +9,11 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyFreeBoardListHandler implements Command {
+public class FreeBoardListHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public MyStudyFreeBoardListHandler(RequestAgent requestAgent) {
+  public FreeBoardListHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

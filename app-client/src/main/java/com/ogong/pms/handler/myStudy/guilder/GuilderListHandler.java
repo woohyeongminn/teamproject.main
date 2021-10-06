@@ -8,7 +8,7 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyGuilder implements Command {
+public class GuilderListHandler implements Command {
 
   //  MyStudyGuilderList myStudyGuilderList; // 구성원 목록
   //  MyStudyGuilderDelete myStudyGuilderDelete; // 구성원 탈퇴
@@ -23,7 +23,7 @@ public class MyStudyGuilder implements Command {
 
   RequestAgent requestAgent;
 
-  public MyStudyGuilder(RequestAgent requestAgent) {
+  public GuilderListHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

@@ -13,13 +13,13 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyFreeBoardAddHandler implements Command {
+public class FreeBoardAddHandler implements Command {
 
   int freeBoardNo = 4;
 
   RequestAgent requestAgent;
 
-  public MyStudyFreeBoardAddHandler(RequestAgent requestAgent) {
+  public FreeBoardAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

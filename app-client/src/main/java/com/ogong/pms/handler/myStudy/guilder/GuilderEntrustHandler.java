@@ -9,11 +9,11 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyGuilderEntrust implements Command { 
+public class GuilderEntrustHandler implements Command { 
 
   RequestAgent requestAgent;
 
-  public MyStudyGuilderEntrust(RequestAgent requestAgent) {
+  public GuilderEntrustHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

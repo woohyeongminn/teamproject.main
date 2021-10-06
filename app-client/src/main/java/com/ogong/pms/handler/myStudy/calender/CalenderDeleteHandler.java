@@ -1,29 +1,27 @@
-package com.ogong.pms.handler.myStudy.freeBoard;
+package com.ogong.pms.handler.myStudy.calender;
 
 import java.util.HashMap;
-import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Calender;
 import com.ogong.pms.domain.Study;
-import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyFreeBoardDeleteHandler implements Command {
+public class CalenderDeleteHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public MyStudyFreeBoardDeleteHandler(RequestAgent requestAgent) {
+  public CalenderDeleteHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
-  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("▶ 게시글 삭제");
-    System.out.println();
+    System.out.println("▶ 일정 삭제");
 
-    int[] arry = (int[]) request.getAttribute("studyNoFreeNo");
+    int[] arry = (int[]) request.getAttribute("studyNocalNo");
+
     HashMap<String,String> params = new HashMap<>();
     params.put("studyNo", String.valueOf(arry[0]));
 
@@ -36,31 +34,23 @@ public class MyStudyFreeBoardDeleteHandler implements Command {
 
     Study myStudy = requestAgent.getObject(Study.class);
 
-    FreeBoard freeBoard = myStudy.getMyStudyFreeBoard().get(arry[1]);
-
-    if (freeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
-      System.out.println(" >> 삭제 권한이 없습니다.");
-      return;
-    }
+    Calender calender = myStudy.getMyStudyCalender().get(arry[1]);
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 삭제를 취소하였습니다.");
+      System.out.println(" >> 일정 삭제를 취소하였습니다.\n");
       return;
     }
-
-    myStudy.getMyStudyFreeBoard().remove(freeBoard);
+    myStudy.getMyStudyCalender().remove(calender);
 
     requestAgent.request("study.update", myStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" 게시글 삭제 오류");
+      System.out.println(" 일정 삭제 오류");
       return;
     }
 
-    System.out.println(" >> 게시글이 삭제되었습니다.");
-
+    System.out.println(" >> 일정이 삭제되었습니다.");
   }
+
 }
-
-

@@ -9,11 +9,11 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyCalenderDetailHandler implements Command {
+public class CalenderDetailHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public MyStudyCalenderDetailHandler(RequestAgent requestAgent) {
+  public CalenderDetailHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
