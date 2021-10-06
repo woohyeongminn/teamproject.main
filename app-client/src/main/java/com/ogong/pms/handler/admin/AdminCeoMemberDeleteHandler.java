@@ -45,6 +45,7 @@ public class AdminCeoMemberDeleteHandler implements Command {
     String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 기업 회원 삭제를 취소하였습니다.");
+      request.getRequestDispatcher("/adminCeoMember/list").forward(request);
       return;
     }
 
@@ -78,12 +79,13 @@ public class AdminCeoMemberDeleteHandler implements Command {
     requestAgent.request("ceoMember.delete", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("기업 회원 삭제 실패!");
+      System.out.println(" >> 기업 회원 삭제 실패.");
       System.out.println(requestAgent.getObject(String.class));
       return;
     }
 
     System.out.println(" >> 기업 회원이 삭제되었습니다.");
+    request.getRequestDispatcher("/adminCeoMember/list").forward(request);
   }
 
 }

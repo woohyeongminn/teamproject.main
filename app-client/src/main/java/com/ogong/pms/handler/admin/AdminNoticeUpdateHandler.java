@@ -39,9 +39,10 @@ public class AdminNoticeUpdateHandler implements Command {
         String.format(" 내용(%s) : ", notice.getAdminNotiContent()));
 
     System.out.println();
-    String inputnotice = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
+    String inputnotice = Prompt.inputString("\n 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!inputnotice.equalsIgnoreCase("네")) {
       System.out.println(" >> 변경이 취소되었습니다.");
+      request.getRequestDispatcher("/adminNotice/list").forward(request);
       return;
     }
 
@@ -51,6 +52,7 @@ public class AdminNoticeUpdateHandler implements Command {
     requestAgent.request("notice.update", notice);
 
     System.out.println(" >> 공지가 변경되었습니다.");
+    request.getRequestDispatcher("/adminNotice/list").forward(request);
   }
 
 }

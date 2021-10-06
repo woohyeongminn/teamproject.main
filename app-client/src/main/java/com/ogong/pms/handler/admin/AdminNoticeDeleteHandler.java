@@ -33,9 +33,10 @@ public class AdminNoticeDeleteHandler implements Command {
 
     AdminNotice notice = requestAgent.getObject(AdminNotice.class);
 
-    String inputnotice = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
+    String inputnotice = Prompt.inputString("\n 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!inputnotice.equalsIgnoreCase("네")) {
       System.out.println(" >> 삭제가 취소되었습니다.");
+      request.getRequestDispatcher("/adminNotice/list").forward(request);
       return;
     }
 
@@ -48,6 +49,7 @@ public class AdminNoticeDeleteHandler implements Command {
 
 
     System.out.println(" >> 공지가 삭제되었습니다.");
+    request.getRequestDispatcher("/adminNotice/list").forward(request);
   }
 
 }

@@ -34,7 +34,8 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements C
 
     if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
       Member member = requestAgent.getObject(Member.class);
-      System.out.printf("%s님 환영합니다!\n", member.getPerNickname());
+      System.out.println();
+      System.out.printf(" %s님 환영합니다!\n", member.getPerNickname());
       loginUser = member;
       accessLevel = Menu.PER_LOGIN;
 

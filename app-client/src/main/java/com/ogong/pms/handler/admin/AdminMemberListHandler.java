@@ -24,7 +24,7 @@ public class AdminMemberListHandler implements Command {
     requestAgent.request("member.selectList", null);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록 조회 실패!");
+      System.out.println(" >> 목록 조회 실패");
       return;
     }
 

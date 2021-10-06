@@ -46,6 +46,7 @@ public class AdminMemberDeleteHandler implements Command {
 
       if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 회원 삭제를 취소하였습니다.");
+        request.getRequestDispatcher("/adminMember/list").forward(request);
         return;
       }
 
@@ -79,7 +80,7 @@ public class AdminMemberDeleteHandler implements Command {
               requestAgent.request("study.update", s.get(i));
 
               if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-                System.out.println(" >> 구성원 탈퇴 실패!");
+                System.out.println(" >> 구성원 탈퇴 실패.");
                 return;
               }
               break;
@@ -91,12 +92,13 @@ public class AdminMemberDeleteHandler implements Command {
       requestAgent.request("member.delete", params);
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("회원 삭제 실패!");
+        System.out.println(" >> 회원 삭제 실패.");
         System.out.println(requestAgent.getObject(String.class));
         return;
       }
 
       System.out.println(" >> 회원이 삭제되었습니다.");
+      request.getRequestDispatcher("/adminMember/list").forward(request);
       return;
     }
   }
