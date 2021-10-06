@@ -94,14 +94,18 @@ import com.ogong.pms.handler.myStudy.calender.CalenderDeleteHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderDetailHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderListHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderUpdateHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.CommentAddHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.CommentDeleteHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.CommentUpdateHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDetailHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardListHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardUpdateHandler;
-import com.ogong.pms.handler.myStudy.guilder.GuilderListHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.PromptFreeBoard;
 import com.ogong.pms.handler.myStudy.guilder.GuilderDeleteHandler;
 import com.ogong.pms.handler.myStudy.guilder.GuilderEntrustHandler;
+import com.ogong.pms.handler.myStudy.guilder.GuilderListHandler;
 import com.ogong.pms.handler.myStudy.guilder.WatingGuilderListHandler;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
@@ -252,11 +256,16 @@ public class ClientApp {
     commandMap.put("/myStudy/calenderUpdate", new CalenderUpdateHandler(requestAgent));
     commandMap.put("/myStudy/calenderDelete", new CalenderDeleteHandler(requestAgent));
 
+    PromptFreeBoard promptFreeBoard = new PromptFreeBoard(requestAgent);
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(requestAgent));
-    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(requestAgent));
+    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(requestAgent, promptFreeBoard));
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(requestAgent));
+
+    commandMap.put("/myStudy/freeBoard/commentDelete", new CommentDeleteHandler(requestAgent));
+    commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(requestAgent));
+    commandMap.put("/myStudy/freeBoard/commentUpdate", new CommentUpdateHandler(requestAgent));
 
     PromptCafe promptcafe = new PromptCafe(requestAgent);
     commandMap.put("/cafe/list", new CafeListHandler(promptcafe));

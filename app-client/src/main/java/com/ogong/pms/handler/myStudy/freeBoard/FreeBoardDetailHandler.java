@@ -12,9 +12,12 @@ import com.ogong.util.Prompt;
 public class FreeBoardDetailHandler implements Command {
 
   RequestAgent requestAgent;
+  PromptFreeBoard promptFreeBoard;
 
-  public FreeBoardDetailHandler(RequestAgent requestAgent) {
+  public FreeBoardDetailHandler(RequestAgent requestAgent, PromptFreeBoard promptFreeBoard) {
     this.requestAgent = requestAgent;
+    this.promptFreeBoard = promptFreeBoard;
+
   }
 
   @Override
@@ -43,6 +46,10 @@ public class FreeBoardDetailHandler implements Command {
     }
 
     int inputNo = Prompt.inputInt(" 번호 : ");
+
+    HashMap<String,String> paramsComment = new HashMap<>();
+    paramsComment.put("freeinputNo", String.valueOf(inputNo));
+
     System.out.println();
 
     int[] arry = new int[2];
@@ -57,7 +64,10 @@ public class FreeBoardDetailHandler implements Command {
         System.out.printf(" >> 등록일 : %s\n", freeBoardList.get(i).getFreeBoardRegisteredDate());
         freeBoardList.get(i).setFreeBoardViewcount(freeBoardList.get(i).getFreeBoardViewcount() + 1);
         System.out.printf(" >> 조회수 : %d\n", freeBoardList.get(i).getFreeBoardViewcount());
-        //listComment(free); // 댓글호출
+
+        FreeBoard freeComment = freeBoardList.get(i);
+
+        promptFreeBoard.printComments(freeComment); // 댓글호출
 
         arry[1] = i;
         inputNo = 0;
@@ -81,9 +91,11 @@ public class FreeBoardDetailHandler implements Command {
     switch (selectNo) {
       case 1 : request.getRequestDispatcher("/myStudy/freeBoardUpdate").forward(request); return;
       case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;
-      //      case 3 : addComment(free, commentList); break;
-      //      case 4 : updateComment(); break;
-      //      case 5 : deleteComment(free); break;
+      case 3 : request.getRequestDispatcher("/myStudy/freeBoard/commentAdd").forward(request); return;
+      case 4 : 
+        request.setAttribute("freeinputNo", inputNo);
+        request.getRequestDispatcher("/myStudy/freeBoard/commentUpdate").forward(request); return;
+      case 5 : request.getRequestDispatcher("/myStudy/freeBoard/commentDelete").forward(request); return;
       case 0 : return;
       default : 
     }
