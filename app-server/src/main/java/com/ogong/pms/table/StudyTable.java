@@ -163,25 +163,46 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
 
   //내 스터디 선택 후 자유게시판 수정
   private void updateFreeBoard(Request request, Response response) throws Exception {
-    FreeBoard freeBoard = request.getObject(FreeBoard.class);
 
-    Study study = findByStudyNo(freeBoard.getFreeBoardNo());
+    int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 
+    Study myStudy = findByMyStudy(studyNo, memberNo);
 
-    int freeBoardNo = Integer.parseInt(request.getParameter("FreeBoardNo"));
-    FreeBoard freeBoard = findFreeBoardByNo(freeBoardNo, study.getMyStudyFreeBoard());
+    // 내스터디에 기존 게시글
+    List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
-    if (freeBoard == null) {
+    // 수정한 자유게시판 글
+    int index = -1;
+    FreeBoard updateFreeBoard = request.getObject(FreeBoard.class);
+
+    for (int i = 0; i < freeBoardList.size(); i++) {
+      if (freeBoardList.get(i).getFreeBoardNo() == updateFreeBoard.getFreeBoardNo()) {
+
+        index = i;
+        freeBoardList.set(i, updateFreeBoard);
+        myStudy.setMyStudyFreeBoard(freeBoardList);
+      }
+    }
+
+    if (index == -1) {
       response.setStatus(Response.FAIL);
       response.setValue("해당 번호의 스터디를 찾을 수 없습니다.");
       return;
     }
 
-    list.set(index, study);
     response.setStatus(Response.SUCCESS);
   }
   //---------------------------------------------------------------------------------------  
 
+  //    for (int i = 0; i < list.size(); i++) {
+  //      for (FreeBoard f : list.get(i).getMyStudyFreeBoard()) {
+  //        if (study.getFreeBoardNo() == freeBoard.getFreeBoardNo()) {
+  //          f = freeBoard;
+  //          index = i;
+  //        }
+  //      }
+  //    }
   private int indexOf(int studyNo) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getStudyNo() == studyNo) {
