@@ -99,9 +99,9 @@ import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDetailHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardListHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardUpdateHandler;
-import com.ogong.pms.handler.myStudy.guilder.GuilderListHandler;
 import com.ogong.pms.handler.myStudy.guilder.GuilderDeleteHandler;
 import com.ogong.pms.handler.myStudy.guilder.GuilderEntrustHandler;
+import com.ogong.pms.handler.myStudy.guilder.GuilderListHandler;
 import com.ogong.pms.handler.myStudy.guilder.WatingGuilderListHandler;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
@@ -130,7 +130,7 @@ public class ClientApp {
   // => 옵저버(리스너)를 제거하는 메서드
   public void removeApplicationContextListener(ApplicationContextListener listener) {
     this.listeners.remove(listener);
-  }
+  }   
 
   class MenuItem extends Menu {
     String menuId;
@@ -175,6 +175,9 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
     requestAgent = new RequestAgent("127.0.0.1", 5050);
+
+    System.out.println("서버에 접속 성공!"); // 접속 확인용
+
     RandomPw randomPw = new RandomPw();
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(requestAgent));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
@@ -257,6 +260,8 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(requestAgent));
+
+    //  commandMap.put("/myStudy/chat", new MySocketClient(requestAgent));
 
     PromptCafe promptcafe = new PromptCafe(requestAgent);
     commandMap.put("/cafe/list", new CafeListHandler(promptcafe));

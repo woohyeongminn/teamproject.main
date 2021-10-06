@@ -61,7 +61,7 @@ public class FreeBoardAddHandler implements Command {
       return;
     }
 
-    freeBoard.setFreeBoardNo(freeBoardNo++);
+    freeBoard.setFreeBoardNo(++freeBoardNo);
 
     freeBoardList.add(freeBoard);
     myStudy.setMyStudyFreeBoard(freeBoardList);
