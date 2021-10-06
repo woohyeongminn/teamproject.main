@@ -71,6 +71,20 @@ public class AdminMemberDeleteHandler implements Command {
             System.out.println(" >> 스터디 삭제가 실패되었습니다.");
             return;
           }
+        } else {
+          for (Member m : s.get(i).getMembers()) {
+            if(m.getPerNo() == user.getPerNo()) {
+              s.get(i).getMembers().remove(m);
+
+              requestAgent.request("study.update", s.get(i));
+
+              if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+                System.out.println(" >> 구성원 탈퇴 실패!");
+                return;
+              }
+              break;
+            }
+          }
         }
       }
 
