@@ -8,11 +8,11 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyExit implements Command {
+public class MyStudyExitHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public MyStudyExit(RequestAgent requestAgent) {
+  public MyStudyExitHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

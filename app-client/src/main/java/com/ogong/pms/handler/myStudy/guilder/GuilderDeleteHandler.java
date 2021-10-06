@@ -9,11 +9,11 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyGuilderDelete implements Command {
+public class GuilderDeleteHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public MyStudyGuilderDelete(RequestAgent requestAgent) {
+  public GuilderDeleteHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 

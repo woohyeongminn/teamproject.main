@@ -10,11 +10,11 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
-public class MyStudyGuilderList implements Command {
+public class WatingGuilderListHandler implements Command {
 
   RequestAgent requestAgent;
 
-  public MyStudyGuilderList(RequestAgent requestAgent) {
+  public WatingGuilderListHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
