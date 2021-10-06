@@ -1,6 +1,5 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
-import java.util.HashMap;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -83,9 +82,9 @@ public class MyStudyFreeBoardUpdateHandler implements Command {
     detailFreeBoard.setFreeBoardContent(freeBoardContent);
     detailFreeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo", String.valueOf(request.getAttribute("studyNo")));
-    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("studyNo", String.valueOf(request.getAttribute("studyNo")));
+    //    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
 
     requestAgent.request("study.freeBoard.update", detailFreeBoard);
 
