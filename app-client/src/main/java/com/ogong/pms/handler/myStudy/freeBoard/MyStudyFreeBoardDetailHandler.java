@@ -23,19 +23,6 @@ public class MyStudyFreeBoardDetailHandler implements Command {
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
 
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
-    //    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
-    //
-    //    requestAgent.request("study.my.selectOne", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 내 스터디 상세 오류.");
-    //      return;
-    //    }
-    //
-    //    Study myStudy = requestAgent.getObject(Study.class);
-
     HashMap<String,String> params = new HashMap<>();
     params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
 
@@ -58,30 +45,30 @@ public class MyStudyFreeBoardDetailHandler implements Command {
     int inputNo = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    FreeBoard freeBoard = null;
-    for (FreeBoard myfreeBoard : freeBoardList) {
-      if (myfreeBoard.getFreeBoardNo() == inputNo) {
-        freeBoard = myStudy.findFreeBoardByNo(inputNo);
+    int[] arry = new int[2];
+    arry[0] = (int) request.getAttribute("inputNo");
+
+    for (int i = 0; i < freeBoardList.size(); i++) {
+      if (freeBoardList.get(i).getFreeBoardNo() == inputNo) {
+        System.out.printf(" [%s]\n", freeBoardList.get(i).getFreeBoardTitle());
+        System.out.printf(" >> 내용 : %s\n", freeBoardList.get(i).getFreeBoardContent());
+        System.out.printf(" >> 첨부파일 : %s\n", freeBoardList.get(i).getFreeBoardAtcFile());
+        System.out.printf(" >> 작성자 : %s\n", freeBoardList.get(i).getFreeBoardWriter().getPerNickname());
+        System.out.printf(" >> 등록일 : %s\n", freeBoardList.get(i).getFreeBoardRegisteredDate());
+        freeBoardList.get(i).setFreeBoardViewcount(freeBoardList.get(i).getFreeBoardViewcount() + 1);
+        System.out.printf(" >> 조회수 : %d\n", freeBoardList.get(i).getFreeBoardViewcount());
+        //listComment(free); // 댓글호출
+
+        arry[1] = i;
+        inputNo = 0;
       }
     }
-
-    if (freeBoard == null) {
+    if (inputNo != 0) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
       return;
     }
 
-    System.out.printf(" [%s]\n", freeBoard.getFreeBoardTitle());
-    System.out.printf(" >> 내용 : %s\n", freeBoard.getFreeBoardContent());
-    System.out.printf(" >> 첨부파일 : %s\n", freeBoard.getFreeBoardAtcFile());
-    System.out.printf(" >> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
-    System.out.printf(" >> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
-    freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
-    System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
-
-    //listComment(free); // 댓글호출
-
-    request.setAttribute("myStudy", myStudy);
-    request.setAttribute("freeBoardNo", freeBoard);
+    request.setAttribute("studyNoFreeNo", arry);
 
     System.out.println("\n----------------------");
     System.out.println("1. 수정");

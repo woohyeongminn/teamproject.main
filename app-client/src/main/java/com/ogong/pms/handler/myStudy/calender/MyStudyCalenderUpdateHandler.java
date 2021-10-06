@@ -116,11 +116,11 @@ public class MyStudyCalenderUpdateHandler implements Command {
     requestAgent.request("study.update", myStudy);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" 일정 변경 오류");
+      System.out.println(" 일정 수정 오류");
       return;
     }
 
-    System.out.println(" >> 일정을 변경하였습니다.\n");
+    System.out.println(" >> 일정을 수정하였습니다.\n");
   }
 
 }
