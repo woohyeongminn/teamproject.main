@@ -33,6 +33,7 @@ public class MyStudyCalenderDeleteHandler implements Command {
     }
 
     Study myStudy = requestAgent.getObject(Study.class);
+
     Calender calender = myStudy.getMyStudyCalender().get(arry[1]);
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
@@ -41,7 +42,6 @@ public class MyStudyCalenderDeleteHandler implements Command {
       return;
     }
     myStudy.getMyStudyCalender().remove(calender);
-
 
     requestAgent.request("study.update", myStudy);
 
