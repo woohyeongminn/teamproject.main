@@ -30,7 +30,7 @@ public class MyStudyCalenderListHandler implements Command {
     requestAgent.request("study.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("스터디 조회 실패");
+      System.out.println(" >> 스터디 상세 오류");
       return;
     }
 
@@ -67,7 +67,7 @@ public class MyStudyCalenderListHandler implements Command {
       requestAgent.request("study.selectOne", params);
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("스터디 조회 실패");
+        System.out.println(" >> 스터디 상세 오류");
         return;
       }
 

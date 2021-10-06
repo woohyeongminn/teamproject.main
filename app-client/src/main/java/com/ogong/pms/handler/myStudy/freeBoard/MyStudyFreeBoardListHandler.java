@@ -23,27 +23,13 @@ public class MyStudyFreeBoardListHandler implements Command {
     System.out.println("▶ 게시글 목록");
     System.out.println();
 
-    // 이거 실행하면 오류뜸
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("memberNo", String.valueOf(request.getAttribute("memberNo")));
-    //    params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
-    //
-    //    requestAgent.request("study.my.selectOne", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 내 스터디 상세 오류.");
-    //      return;
-    //    }
-    //
-    //    Study myStudy = requestAgent.getObject(Study.class);
-
     HashMap<String,String> params = new HashMap<>();
     params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
 
     requestAgent.request("study.selectOne", params);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 스터디 상세 오류.");
+      System.out.println(" >> 스터디 상세 오류");
       return;
     }
 

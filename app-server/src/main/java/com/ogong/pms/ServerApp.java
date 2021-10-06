@@ -43,7 +43,6 @@ public class ServerApp {
     dataProcessorMap.put("cafeRoom.", new CafeRoomTable());
     dataProcessorMap.put("cafeReservation.", new CafeReservationTable());
     dataProcessorMap.put("notice.", new NoticeTable());
-    //dataProcessorMap.put("freeBoard.", new FreeBoardTable());
 
     RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
     requestProcessor.service();

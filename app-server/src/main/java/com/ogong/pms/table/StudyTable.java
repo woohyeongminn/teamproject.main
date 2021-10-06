@@ -27,8 +27,6 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
       case "study.delete" : delete(request, response); break;
       case "study.selectByKeyword" : selectByKeyword(request, response); break;
       case "study.my.selectOne" : selectOneMyStudy(request, response); break;
-      case "study.freeBoard.selectOne" : selectOneFreeBoard(request, response); break;
-      case "study.freeBoard.update" : updateFreeBoard(request, response); break;
       default :  
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -139,70 +137,55 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
   }
 
   //---------------자유게시판----------------------------------------------------
-  // 내 스터디 선택 후 자유게시판 상세선택
-  private void selectOneFreeBoard(Request request, Response response) {
+  // 자유게시판 상세선택
+  //  private void selectOneFreeBoard(Request request, Response response) {
+  //
+  //    int freeBoardNo = Integer.parseInt(request.getParameter("FreeBoardNo"));
+  //    int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+  //    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+  //
+  //    Study s = findByMyStudy(studyNo, memberNo);
+  //
+  //    if (s != null) {
+  //      for (FreeBoard freeBoard : s.getMyStudyFreeBoard()) {
+  //        if (freeBoard.getFreeBoardNo() == freeBoardNo) {
+  //          response.setStatus(Response.SUCCESS);
+  //          response.setValue(freeBoard);
+  //          return;
+  //        }
+  //      }
+  //    } 
+  //    response.setStatus(Response.FAIL);
+  //    response.setValue("해당 스터디를 찾을 수 없습니다.");
+  //  }
 
-    int freeBoardNo = Integer.parseInt(request.getParameter("FreeBoardNo"));
-    int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-
-    Study s = findByMyStudy(studyNo, memberNo);
-
-    if (s != null) {
-      for (FreeBoard freeBoard : s.getMyStudyFreeBoard()) {
-        if (freeBoard.getFreeBoardNo() == freeBoardNo) {
-          response.setStatus(Response.SUCCESS);
-          response.setValue(freeBoard);
-          return;
-        }
-      }
-    } 
-    response.setStatus(Response.FAIL);
-    response.setValue("해당 스터디를 찾을 수 없습니다.");
-  }
-
-  //내 스터디 선택 후 자유게시판 수정
-  private void updateFreeBoard(Request request, Response response) throws Exception {
-
-    int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-
-    Study myStudy = findByMyStudy(studyNo, memberNo);
-
-    // 내스터디에 기존 게시글
-    List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
-
-    // 수정한 자유게시판 글
-    int index = -1;
-    FreeBoard updateFreeBoard = request.getObject(FreeBoard.class);
-
-    for (int i = 0; i < freeBoardList.size(); i++) {
-      if (freeBoardList.get(i).getFreeBoardNo() == updateFreeBoard.getFreeBoardNo()) {
-
-        index = i;
-        freeBoardList.set(i, updateFreeBoard);
-        myStudy.setMyStudyFreeBoard(freeBoardList);
-      }
-    }
-
-    if (index == -1) {
-      response.setStatus(Response.FAIL);
-      response.setValue("해당 번호의 스터디를 찾을 수 없습니다.");
-      return;
-    }
-
-    response.setStatus(Response.SUCCESS);
-  }
-  //---------------------------------------------------------------------------------------  
-
+  //자유게시판 수정
+  //  private void updateFreeBoard(Request request, Response response) throws Exception {
+  //
+  //    int index = -1;
+  //    FreeBoard freeBoard = request.getObject(FreeBoard.class);
+  //
   //    for (int i = 0; i < list.size(); i++) {
   //      for (FreeBoard f : list.get(i).getMyStudyFreeBoard()) {
-  //        if (study.getFreeBoardNo() == freeBoard.getFreeBoardNo()) {
+  //        if (f.getFreeBoardNo() == freeBoard.getFreeBoardNo()) {
   //          f = freeBoard;
   //          index = i;
   //        }
   //      }
   //    }
+  //
+  //    if (index == -1) {
+  //      response.setStatus(Response.FAIL);
+  //      response.setValue("해당 번호의 스터디를 찾을 수 없습니다.");
+  //      return;
+  //    }
+  //
+  //    response.setStatus(Response.SUCCESS);
+  //  }
+
+  //---------------------------------------------------------------------------------------  
+
+
   private int indexOf(int studyNo) {
     for (int i = 0; i < list.size(); i++) {
       if (list.get(i).getStudyNo() == studyNo) {
