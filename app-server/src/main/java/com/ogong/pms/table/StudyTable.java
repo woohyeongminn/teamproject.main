@@ -264,4 +264,8 @@ public class StudyTable extends JsonDataTable<Study> implements DataProcessor {
     return null;
   }
 
+  //----[ToDo에 사용]------------------------------------------------------------------------  
+
+
+
 }

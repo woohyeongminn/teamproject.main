@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.myStudy;
+package com.ogong.pms.handler.myStudy.todo;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -9,14 +9,14 @@ import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.util.Prompt;
 
-public class MyStudyToDo {
+public class MyStudyToDoUpdate {
 
   int ToDoNo = 5;
   List<Study> studyList;
   List<ToDo> toDoList;
   Study study;
 
-  public MyStudyToDo(List<ToDo> toDoList, List<Study> studyList) {
+  public MyStudyToDoUpdate(List<ToDo> toDoList, List<Study> studyList) {
     this.toDoList = toDoList;
     this.studyList = studyList;
 
