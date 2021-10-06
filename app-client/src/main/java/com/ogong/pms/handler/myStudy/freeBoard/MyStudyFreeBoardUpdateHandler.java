@@ -2,7 +2,6 @@ package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.HashMap;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -39,7 +38,7 @@ public class MyStudyFreeBoardUpdateHandler implements Command {
       return;
     }
 
-    Study myStudy = requestAgent.getObject(Study.class);
+    //Study myStudy = requestAgent.getObject(Study.class);
     FreeBoard detailFreeBoard = requestAgent.getObject(FreeBoard.class);
 
     if (detailFreeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
@@ -61,14 +60,7 @@ public class MyStudyFreeBoardUpdateHandler implements Command {
     detailFreeBoard.setFreeBoardContent(freeBoardContent);
     detailFreeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
 
-    requestAgent.request("study.update", detailFreeBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 게시글 수정 실패!");
-      return;
-    }
-
-    requestAgent.request("study.freeBoard.update", myStudy);
+    requestAgent.request("study.freeBoard.update", detailFreeBoard);
 
     if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
       System.out.println(" >> 게시글 수정 실패!");

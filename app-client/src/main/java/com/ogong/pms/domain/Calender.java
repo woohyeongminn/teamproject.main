@@ -13,6 +13,7 @@ public class Calender {
   private Date endDay;    // 종료일
   private String importanceCalender;  // 중요도 정하기
 
+
   public int getCalenderNo() {
     return calenderNo;
   }
@@ -62,9 +63,4 @@ public class Calender {
         + ", dayOftheWeek=" + dayOftheWeek + ", calenderContent=" + calenderContent + ", endDay="
         + endDay + ", importanceCalender=" + importanceCalender + "]";
   }
-
-
-
-
-
 }

@@ -91,7 +91,6 @@ public class MemberDeleteHandler implements Command {
 
     for (int i = s.size() -1; i >= 0; i--) {
       if (s.get(i).getOwner().getPerNo() == member.getPerNo()) {
-
         HashMap<String,String> studyParams = new HashMap<>();
         studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
 
@@ -100,6 +99,20 @@ public class MemberDeleteHandler implements Command {
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
           System.out.println(" >> 스터디 삭제가 실패되었습니다.");
           return;
+        }
+      } else {
+        for (Member m : s.get(i).getMembers()) {
+          if(m.getPerNo() == member.getPerNo()) {
+            s.get(i).getMembers().remove(m);
+
+            requestAgent.request("study.update", s.get(i));
+
+            if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+              System.out.println(" >> 구성원 탈퇴 실패!");
+              return;
+            }
+            break;
+          }
         }
       }
     }
