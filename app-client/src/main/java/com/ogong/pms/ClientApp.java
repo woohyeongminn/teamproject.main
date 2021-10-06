@@ -103,6 +103,11 @@ import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilder;
 import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderDelete;
 import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderEntrust;
 import com.ogong.pms.handler.myStudy.guilder.MyStudyGuilderList;
+import com.ogong.pms.handler.myStudy.todo.ToDoAdd;
+import com.ogong.pms.handler.myStudy.todo.ToDoDelete;
+import com.ogong.pms.handler.myStudy.todo.ToDoDetail;
+import com.ogong.pms.handler.myStudy.todo.ToDoList;
+import com.ogong.pms.handler.myStudy.todo.ToDoUpdate;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
 import com.ogong.pms.handler.study.StudyJoinHandler;
@@ -257,6 +262,12 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardDetail", new MyStudyFreeBoardDetailHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardUpdate", new MyStudyFreeBoardUpdateHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardDelete", new MyStudyFreeBoardDeleteHandler(requestAgent));
+
+    commandMap.put("/myStudy/todoAdd", new ToDoAdd(requestAgent));
+    commandMap.put("/myStudy/todoList", new ToDoList(requestAgent));
+    commandMap.put("/myStudy/todoDetail", new ToDoDetail(requestAgent));
+    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(requestAgent));
+    commandMap.put("/myStudy/todoDelete", new ToDoDelete(requestAgent));
 
     PromptCafe promptcafe = new PromptCafe(requestAgent);
     commandMap.put("/cafe/list", new CafeListHandler(promptcafe));
