@@ -78,7 +78,7 @@ public class MyStudyDetailHandler implements Command {
       case 2: request.getRequestDispatcher("/myStudy/calenderList").forward(request); return;
       case 3: request.getRequestDispatcher("/myStudy/todoList").forward(request); break;
       case 4: request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
-      case 5:  request.getRequestDispatcher("/myStudy/chat").forward(request); return;
+      case 5: request.getRequestDispatcher("/myStudy/chat").forward(request); return;
       case 6: request.getRequestDispatcher("/myStudy/exit").forward(request); return;  
       case 7: request.getRequestDispatcher("/myStudy/update").forward(request); return;
       case 8: request.getRequestDispatcher("/myStudy/delete").forward(request); return;

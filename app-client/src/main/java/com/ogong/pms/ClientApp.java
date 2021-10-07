@@ -4,9 +4,12 @@ import static com.ogong.menu.Menu.ADMIN_LOGIN;
 import static com.ogong.menu.Menu.CEO_LOGIN;
 import static com.ogong.menu.Menu.LOGOUT;
 import static com.ogong.menu.Menu.PER_LOGIN;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.ogong.chat.MySocketClient;
+import com.ogong.chat.MySocketServer;
 import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
@@ -84,6 +87,7 @@ import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
 import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
+import com.ogong.pms.handler.myStudy.MyStudyChat;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
 import com.ogong.pms.handler.myStudy.MyStudyExitHandler;
@@ -183,8 +187,12 @@ public class ClientApp {
   }       
 
   public ClientApp() throws Exception {
-    //    requestAgent = new RequestAgent("127.0.0.1", 5050);
-    requestAgent = new RequestAgent("192.168.0.68", 5050);
+    // 로컬
+    //requestAgent = new RequestAgent("127.0.0.1", 5050);
+
+    requestAgent = new RequestAgent("192.168.0.92", 5050);
+
+    //requestAgent = new RequestAgent("192.168.0.68", 5050);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -272,7 +280,10 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(requestAgent));
 
-    //  commandMap.put("/myStudy/chat", new MySocketClient(requestAgent));
+    Socket chatSocket = new Socket();
+    commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
+    commandMap.put("/myStudy/chatOpen", new MySocketServer(chatSocket, requestAgent));
+    commandMap.put("/myStudy/chatStart", new MySocketClient(requestAgent));
 
     commandMap.put("/myStudy/freeBoard/commentDelete", new CommentDeleteHandler(requestAgent));
     commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(requestAgent));
