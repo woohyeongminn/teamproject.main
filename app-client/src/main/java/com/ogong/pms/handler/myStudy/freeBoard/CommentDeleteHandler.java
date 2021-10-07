@@ -48,12 +48,15 @@ public class CommentDeleteHandler implements Command {
     List<Comment> commentList = freeBoard.getComment();
 
     int commentNo = 0;
-    try {
-      commentNo = Prompt.inputInt(" 번호 : ");
-    } catch (Exception e) {
-      System.out.println(" >> 번호를 입력해 주세요");
+    while (true) {
+      try {
+        commentNo = Prompt.inputInt(" 번호 : ");
+      } catch (NumberFormatException e){
+        System.out.println(" >> 숫자를 입력해 주세요.");
+        continue;
+      }
+      break;
     }
-
     int index = -1;
     String perNickname = AuthPerMemberLoginHandler.getLoginUser().getPerNickname();
 
@@ -66,14 +69,14 @@ public class CommentDeleteHandler implements Command {
 
     if (index == -1) {
       System.out.println(" >> 알맞는 번호를 입력해 주세요.");
-      return;
+      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
     }
 
     System.out.println();
     String inputno = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!inputno.equalsIgnoreCase("네")) {
       System.out.println(" >> 댓글 삭제를 취소하였습니다.");
-      return;
+      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
     }
 
     commentList.remove(commentList.get(index));
@@ -90,6 +93,6 @@ public class CommentDeleteHandler implements Command {
 
     System.out.println(" >> 댓글이 삭제되었습니다.");
 
-    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+    request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
   }
 }

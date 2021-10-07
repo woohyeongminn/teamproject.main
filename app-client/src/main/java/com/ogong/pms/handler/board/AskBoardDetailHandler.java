@@ -155,11 +155,20 @@ public class AskBoardDetailHandler implements Command {
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
     System.out.println("---------------------");
 
+    requestAgent.request("askBoard.update", askBoard);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 문의글 상세에서 조회수 업데이트 실패!");
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
+
     if (askBoard.getReply() == null) {
       System.out.println("등록된 답변이 없습니다.");
       return;
     }
     request.setAttribute("askNo", askBoard.getAskNo());
-    request.getRequestDispatcher("/reply/detail").forward(request); 
+
+    request.getRequestDispatcher("/reply/detail").forward(request);
   }
 }

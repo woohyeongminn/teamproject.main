@@ -59,7 +59,7 @@ public class FreeBoardListHandler implements Command {
       switch (selete) {
         case 1 :request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request); return;
         case 2 : request.getRequestDispatcher("/myStudy/freeBoardAdd").forward(request); return;
-        default : return;
+        default :request.getRequestDispatcher("/myStudy/detail").forward(request); return;
       }
     }
 
@@ -71,7 +71,7 @@ public class FreeBoardListHandler implements Command {
       int selete = Prompt.inputInt("선택> ");
       switch (selete) {
         case 1 : request.getRequestDispatcher("/myStudy/freeBoardAdd").forward(request); return;
-        default : return;
+        default :request.getRequestDispatcher("/myStudy/detail").forward(request); return;
       }
     }
   }

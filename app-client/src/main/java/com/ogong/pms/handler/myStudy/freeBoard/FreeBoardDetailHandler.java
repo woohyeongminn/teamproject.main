@@ -64,7 +64,6 @@ public class FreeBoardDetailHandler implements Command {
         System.out.printf(" >> 등록일 : %s\n", freeBoardList.get(i).getFreeBoardRegisteredDate());
         freeBoardList.get(i).setFreeBoardViewcount(freeBoardList.get(i).getFreeBoardViewcount() + 1);
         System.out.printf(" >> 조회수 : %d\n", freeBoardList.get(i).getFreeBoardViewcount());
-
         promptFreeBoard.printComments(freeBoardList.get(i)); // 댓글호출
 
         arry[1] = i;
@@ -78,6 +77,16 @@ public class FreeBoardDetailHandler implements Command {
 
     request.setAttribute("studyNoFreeNo", arry);
 
+    freeBoardList.set(arry[1], freeBoardList.get(arry[1]));
+    myStudy.setMyStudyFreeBoard(freeBoardList);
+
+    requestAgent.request("study.update", myStudy);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" 게시글 상세보기에서 조회수 업데이트 실패!");
+      return;
+    }
+
     System.out.println("\n----------------------");
     System.out.println("1. 수정");
     System.out.println("2. 삭제");
@@ -90,12 +99,10 @@ public class FreeBoardDetailHandler implements Command {
       case 1 : request.getRequestDispatcher("/myStudy/freeBoardUpdate").forward(request); return;
       case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;
       case 3 : request.getRequestDispatcher("/myStudy/freeBoard/commentAdd").forward(request); return;
-      case 4 : 
-        //request.setAttribute("freeinputNo", inputNo);
-        request.getRequestDispatcher("/myStudy/freeBoard/commentUpdate").forward(request); return;
+      case 4 : request.getRequestDispatcher("/myStudy/freeBoard/commentUpdate").forward(request); return;
       case 5 : request.getRequestDispatcher("/myStudy/freeBoard/commentDelete").forward(request); return;
       case 0 : request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
-      default : 
+      default : return;
     }
 
 

@@ -48,10 +48,14 @@ public class CommentUpdateHandler implements Command {
     List<Comment> commentList = freeBoard.getComment();
 
     int commentNo = 0;
-    try {
-      commentNo = Prompt.inputInt(" 번호 : ");
-    } catch (Exception e){
-      System.out.println(" >> 번호를 입력해 주세요.");
+    while (true) {
+      try {
+        commentNo = Prompt.inputInt(" 번호 : ");
+      } catch (NumberFormatException e){
+        System.out.println(" >> 숫자를 입력해 주세요.");
+        continue;
+      }
+      break;
     }
 
     String commentTitle = null;
@@ -71,13 +75,13 @@ public class CommentUpdateHandler implements Command {
 
     if (index < 0) {
       System.out.println(" >> 알맞는 번호를 입력해 주세요.");
-      return;
+      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
     }
 
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 댓글 변경이 취소되었습니다.");
-      return;
+      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
     }
 
     commentList.get(index).setCommentText(commentTitle);
@@ -94,7 +98,8 @@ public class CommentUpdateHandler implements Command {
 
     System.out.println(" >> 댓글을 변경하였습니다.");
 
-    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+    request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
+    return;
   }
 }
 
