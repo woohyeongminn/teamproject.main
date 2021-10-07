@@ -65,9 +65,7 @@ public class FreeBoardDetailHandler implements Command {
         freeBoardList.get(i).setFreeBoardViewcount(freeBoardList.get(i).getFreeBoardViewcount() + 1);
         System.out.printf(" >> 조회수 : %d\n", freeBoardList.get(i).getFreeBoardViewcount());
 
-        FreeBoard freeComment = freeBoardList.get(i);
-
-        promptFreeBoard.printComments(freeComment); // 댓글호출
+        promptFreeBoard.printComments(freeBoardList.get(i)); // 댓글호출
 
         arry[1] = i;
         inputNo = 0;

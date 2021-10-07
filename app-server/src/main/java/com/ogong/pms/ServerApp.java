@@ -18,7 +18,7 @@ import com.ogong.pms.table.StudyTable;
 import com.ogong.server.DataProcessor;
 import com.ogong.server.RequestProcessor;
 
-public class ServerApp /* extends Thread */ {
+public class ServerApp extends Thread {
 
   //  static ArrayList<Socket> list = new ArrayList<Socket>(); // 유저 확인용
   //  static Socket socket = null;
