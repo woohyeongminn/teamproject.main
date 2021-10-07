@@ -71,7 +71,7 @@ public class ServerApp extends Thread {
   //  }   
 
   public static void main(String[] args) throws Exception {
-    System.out.println("[오늘의 공부 서버]");   
+    System.out.println("[ 🎓 오늘의 공부 서버 ]");   
 
     System.out.println("서버 실행 중....");
 

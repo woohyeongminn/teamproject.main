@@ -356,11 +356,11 @@ public class ClientApp {
   // -----------------------------------------------------------------------------------------------
   // 관리자 메인
   Menu createAdminMenu() {
-    MenuGroup adminMenuGroup = new MenuGroup("관리자");
+    MenuGroup adminMenuGroup = new MenuGroup("👑 관리자");
     adminMenuGroup.setMenuFilter(menuFilter);
-    adminMenuGroup.add(new MenuItem("로그인", LOGOUT, "/admin/login"));
-    adminMenuGroup.add(new MenuItem("로그아웃", ADMIN_LOGIN, "/admin/logout"));
-    adminMenuGroup.add(new MenuItem("마이 페이지", ADMIN_LOGIN, "/admin/detail"));
+    adminMenuGroup.add(new MenuItem("🖐 로그인", LOGOUT, "/admin/login"));
+    adminMenuGroup.add(new MenuItem("🖐 로그아웃", ADMIN_LOGIN, "/admin/logout"));
+    adminMenuGroup.add(new MenuItem("🙂 마이 페이지", ADMIN_LOGIN, "/admin/detail"));
 
     adminMenuGroup.add(createControlMemberMenu());  // 회원 관리
     adminMenuGroup.add(createControlStudyMenu());   // 스터디 관리
@@ -372,7 +372,7 @@ public class ClientApp {
 
   // 관리자 하위 메뉴2 - 회원 관리
   private Menu createControlMemberMenu() {
-    MenuGroup adminUserMenu = new MenuGroup("회원 관리", ADMIN_LOGIN); 
+    MenuGroup adminUserMenu = new MenuGroup("📁 회원 관리", ADMIN_LOGIN); 
     adminUserMenu.setMenuFilter(menuFilter);
     adminUserMenu.add(new MenuItem("개인 회원 조회", "/adminMember/list"));
     adminUserMenu.add(new MenuItem("개인 회원 상세", "/adminMember/detail"));
@@ -384,7 +384,7 @@ public class ClientApp {
 
   // 관리자 하위 메뉴3 - 스터디 관리
   private Menu createControlStudyMenu() {
-    MenuGroup adminStudyMenu = new MenuGroup("스터디 관리", ADMIN_LOGIN); 
+    MenuGroup adminStudyMenu = new MenuGroup("📖 스터디 관리", ADMIN_LOGIN); 
     adminStudyMenu.setMenuFilter(menuFilter);
     adminStudyMenu.add(new MenuItem("목록","/study/list"));
     adminStudyMenu.add(new MenuItem("삭제","/study/delete"));
@@ -393,7 +393,7 @@ public class ClientApp {
 
   // 관리자 하위 메뉴4 - 장소 후기 관리
   private Menu createControlReviewMenu() {
-    MenuGroup adminCafeReviewMenu = new MenuGroup("장소 관리", ADMIN_LOGIN); 
+    MenuGroup adminCafeReviewMenu = new MenuGroup("🏘 장소 관리", ADMIN_LOGIN); 
     adminCafeReviewMenu.setMenuFilter(menuFilter);
     adminCafeReviewMenu.add(new MenuItem("장소 게시글 관리","/cafe/control"));
     adminCafeReviewMenu.add(new MenuItem("장소 리뷰 관리","/cafe/reviewList")); 
@@ -403,7 +403,7 @@ public class ClientApp {
 
   //관리자 하위 메뉴5 - 고객센터 관리
   private Menu createAdminCSMenu() {
-    MenuGroup csMenu = new MenuGroup("고객센터 관리", ADMIN_LOGIN);
+    MenuGroup csMenu = new MenuGroup("💌 고객센터 관리", ADMIN_LOGIN);
     csMenu.setMenuFilter(menuFilter);
     csMenu.add(createAdminNoticeMenu());
     csMenu.add(createAdminAskMenu());
@@ -413,7 +413,7 @@ public class ClientApp {
 
   // 5-1
   private Menu createAdminNoticeMenu() {
-    MenuGroup adminNoticeMenu = new MenuGroup("공지사항"); 
+    MenuGroup adminNoticeMenu = new MenuGroup("📢 공지사항"); 
     adminNoticeMenu.setMenuFilter(menuFilter);
     adminNoticeMenu.add(new MenuItem("등록", "/adminNotice/add"));
     adminNoticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
@@ -424,7 +424,7 @@ public class ClientApp {
 
   // 5-2
   private Menu createAdminAskMenu() {
-    MenuGroup adminaskMenu = new MenuGroup("문의사항");
+    MenuGroup adminaskMenu = new MenuGroup("💬 문의사항");
     adminaskMenu.setMenuFilter(menuFilter);
     adminaskMenu.add(new MenuItem("목록", "/askBoard/list"));
     adminaskMenu.add(new MenuItem("상세", "/askBoard/detail"));
@@ -435,12 +435,12 @@ public class ClientApp {
   // -----------------------------------------------------------------------------------------------
   // 개인 회원 메인
   Menu createMemberMenu() {
-    MenuGroup userMenuGroup = new MenuGroup("오늘의 공부"); 
+    MenuGroup userMenuGroup = new MenuGroup("🎓 오늘의 공부"); 
     userMenuGroup.setMenuFilter(menuFilter);
-    userMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/member/add"));
-    userMenuGroup.add(new MenuItem("로그아웃", PER_LOGIN, "/member/logout"));
-    userMenuGroup.add(new MenuItem("로그인", LOGOUT, "/member/login"));
-    userMenuGroup.add(new MenuItem("ID/PW 찾기", LOGOUT, "/member/findIdPw"));
+    userMenuGroup.add(new MenuItem("💕 회원가입", LOGOUT, "/member/add"));
+    userMenuGroup.add(new MenuItem("🖐 로그아웃", PER_LOGIN, "/member/logout"));
+    userMenuGroup.add(new MenuItem("🖐 로그인", LOGOUT, "/member/login"));
+    userMenuGroup.add(new MenuItem("❔ ID/PW 찾기", LOGOUT, "/member/findIdPw"));
 
     userMenuGroup.add(createMyPageMenu());      // 마이페이지
     userMenuGroup.add(createStudyMenu());       // 스터디 찾기
@@ -455,19 +455,19 @@ public class ClientApp {
 
   // 개인 하위 메뉴2 - 마이페이지 (로그인 했을때)
   private Menu createMyPageMenu() {
-    MenuGroup myPageMenu = new MenuGroup("마이 페이지", PER_LOGIN); 
+    MenuGroup myPageMenu = new MenuGroup("🔒 마이 페이지", PER_LOGIN); 
     myPageMenu.setMenuFilter(menuFilter);
-    myPageMenu.add(new MenuItem("개인정보", "/member/detail"));
-    myPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
-    myPageMenu.add(new MenuItem("예약내역", "/cafeReservation/list"));
-    myPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
-    myPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
+    myPageMenu.add(new MenuItem("🙂 개인정보", "/member/detail"));
+    myPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/myList"));
+    myPageMenu.add(new MenuItem("📞 예약내역", "/cafeReservation/list"));
+    myPageMenu.add(new MenuItem("📝 후기내역", "/cafe/myReviewList"));
+    myPageMenu.add(new MenuItem("😢 탈퇴하기", "/member/delete"));
     return myPageMenu;
   }
 
   //개인 하위 메뉴3 - 스터디 찾기
   private Menu createStudyMenu() {
-    MenuGroup allStudyMenu = new MenuGroup("스터디 찾기"); 
+    MenuGroup allStudyMenu = new MenuGroup("📖 스터디 찾기"); 
     allStudyMenu.setMenuFilter(menuFilter);
     allStudyMenu.add(new MenuItem("등록", PER_LOGIN, "/study/add"));
     allStudyMenu.add(new MenuItem("목록","/study/list"));
@@ -481,7 +481,7 @@ public class ClientApp {
   // (조장 아니면 들어는 갈 수 있는데 if문으로 팅김)
   //개인 하위 메뉴4 - 내 스터디
   private Menu createMystudyMenu() {
-    MenuGroup myStudyMenu = new MenuGroup("내 스터디", PER_LOGIN);
+    MenuGroup myStudyMenu = new MenuGroup("🖊 내 스터디", PER_LOGIN);
     myStudyMenu.setMenuFilter(menuFilter);
     myStudyMenu.add(new MenuItem("목록", "/myStudy/list"));
     myStudyMenu.add(new MenuItem("상세", "/myStudy/detail"));
@@ -491,7 +491,7 @@ public class ClientApp {
 
   //개인 하위 메뉴5 - 스터디 장소
   private Menu createCafeMenu() {
-    MenuGroup cafeMenu = new MenuGroup("장소 예약"); 
+    MenuGroup cafeMenu = new MenuGroup("🏘 장소 예약"); 
     cafeMenu.setMenuFilter(menuFilter);
     cafeMenu.add(new MenuItem("목록", "/cafe/list"));
     cafeMenu.add(new MenuItem("검색", "/cafe/search"));
@@ -502,7 +502,7 @@ public class ClientApp {
 
   //개인 하위 메뉴6 - 고객센터
   private Menu createMemberCSMenu() {
-    MenuGroup memberCSMenu = new MenuGroup("고객센터");
+    MenuGroup memberCSMenu = new MenuGroup("💌 고객센터");
     memberCSMenu.setMenuFilter(menuFilter);
     memberCSMenu.add(createMemberNoticeMenu());
     memberCSMenu.add(createMemberAskBoardMenu());
@@ -512,7 +512,7 @@ public class ClientApp {
 
   // 6-1
   private Menu createMemberNoticeMenu() {
-    MenuGroup noticeMenu = new MenuGroup("공지사항"); 
+    MenuGroup noticeMenu = new MenuGroup("📢 공지사항"); 
     noticeMenu.setMenuFilter(menuFilter);
     noticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     noticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
@@ -523,7 +523,7 @@ public class ClientApp {
   // 6-2
   // 문의사항 상세보기 (댓글 목록 조회만) >> 회원 권한
   private Menu createMemberAskBoardMenu() {
-    MenuGroup askBoardMenu = new MenuGroup("문의사항");
+    MenuGroup askBoardMenu = new MenuGroup("💬 문의사항");
     askBoardMenu.setMenuFilter(menuFilter);
     askBoardMenu.add(new MenuItem("등록", PER_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
@@ -536,12 +536,12 @@ public class ClientApp {
 
   // 기업
   Menu createCeoMenu() {
-    MenuGroup ceoMemberMenuGroup = new MenuGroup("오늘의 공부 - 사장님");
+    MenuGroup ceoMemberMenuGroup = new MenuGroup("🏘 오늘의 공부 - 사장님");
     ceoMemberMenuGroup.setMenuFilter(menuFilter);
-    ceoMemberMenuGroup.add(new MenuItem("회원가입", LOGOUT, "/ceoMember/add"));
-    ceoMemberMenuGroup.add(new MenuItem("로그인", LOGOUT, "/ceoMember/login"));
-    ceoMemberMenuGroup.add(new MenuItem("ID/PW 찾기", LOGOUT, "/ceoMember/findIdPw"));
-    ceoMemberMenuGroup.add(new MenuItem("로그아웃", CEO_LOGIN, "/ceoMember/logout"));
+    ceoMemberMenuGroup.add(new MenuItem("💕 회원가입", LOGOUT, "/ceoMember/add"));
+    ceoMemberMenuGroup.add(new MenuItem("🖐 로그인", LOGOUT, "/ceoMember/login"));
+    ceoMemberMenuGroup.add(new MenuItem("❔ ID/PW 찾기", LOGOUT, "/ceoMember/findIdPw"));
+    ceoMemberMenuGroup.add(new MenuItem("🖐 로그아웃", CEO_LOGIN, "/ceoMember/logout"));
 
     ceoMemberMenuGroup.add(createCeoPageMenu());      // 마이페이지
 
@@ -552,13 +552,13 @@ public class ClientApp {
 
   // 기업 정보 >> 로그인하라고 뜸
   private Menu createCeoPageMenu() {
-    MenuGroup ceoPageMenu = new MenuGroup("마이 페이지", CEO_LOGIN); 
+    MenuGroup ceoPageMenu = new MenuGroup("🔒 마이 페이지", CEO_LOGIN); 
     ceoPageMenu.setMenuFilter(menuFilter);
-    ceoPageMenu.add(new MenuItem("기업 프로필", "/ceoMember/detail"));
+    ceoPageMenu.add(new MenuItem("🙂 기업 프로필", "/ceoMember/detail"));
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
-    ceoPageMenu.add(new MenuItem("카페 목록", "/ceoMember/myCafeList"));
-    ceoPageMenu.add(new MenuItem("문의내역", "/askBoard/myList"));
-    ceoPageMenu.add(new MenuItem("예약내역", "/ceoMember/ReservationList"));
+    ceoPageMenu.add(new MenuItem("🏘 카페 목록", "/ceoMember/myCafeList"));
+    ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/myList"));
+    ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
     //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
 
@@ -568,7 +568,7 @@ public class ClientApp {
 
   //기업 하위 메뉴6 - 고객센터
   private Menu createCeoCSMenu() {
-    MenuGroup memberCSMenu = new MenuGroup("고객센터");
+    MenuGroup memberCSMenu = new MenuGroup("💌 고객센터");
     memberCSMenu.setMenuFilter(menuFilter);
     memberCSMenu.add(createCeoNoticeMenu());
     memberCSMenu.add(createCeoAskBoardMenu());
@@ -578,7 +578,7 @@ public class ClientApp {
 
   // 6-1
   private Menu createCeoNoticeMenu() {
-    MenuGroup noticeMenu = new MenuGroup("공지사항"); 
+    MenuGroup noticeMenu = new MenuGroup("📢 공지사항"); 
     noticeMenu.setMenuFilter(menuFilter);
     noticeMenu.add(new MenuItem("목록", "/adminNotice/list"));
     noticeMenu.add(new MenuItem("상세", "/adminNotice/detail"));
@@ -589,7 +589,7 @@ public class ClientApp {
   // 6-2
   // 문의사항 상세보기 (댓글 목록 조회만) >> 기업 권한
   private Menu createCeoAskBoardMenu() {
-    MenuGroup askBoardMenu = new MenuGroup("문의사항");
+    MenuGroup askBoardMenu = new MenuGroup("💬 문의사항");
     askBoardMenu.setMenuFilter(menuFilter);
     askBoardMenu.add(new MenuItem("등록", CEO_LOGIN, "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
@@ -614,7 +614,7 @@ public class ClientApp {
   }
 
   public static void main(String[] args) throws Exception {
-    System.out.println("[오늘의 공부 클라이언트]");
+    System.out.println("[ 🎓 오늘의 공부 클라이언트 ]");
     ClientApp app = new ClientApp(); 
 
     app.addApplicationContextListener(new AppInitListener());
