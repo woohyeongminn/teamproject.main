@@ -93,10 +93,10 @@ public class FreeBoardDetailHandler implements Command {
       case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;
       case 3 : request.getRequestDispatcher("/myStudy/freeBoard/commentAdd").forward(request); return;
       case 4 : 
-        request.setAttribute("freeinputNo", inputNo);
+        //request.setAttribute("freeinputNo", inputNo);
         request.getRequestDispatcher("/myStudy/freeBoard/commentUpdate").forward(request); return;
       case 5 : request.getRequestDispatcher("/myStudy/freeBoard/commentDelete").forward(request); return;
-      case 0 : return;
+      case 0 : request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
       default : 
     }
 
