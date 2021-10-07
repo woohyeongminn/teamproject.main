@@ -183,7 +183,8 @@ public class ClientApp {
   }       
 
   public ClientApp() throws Exception {
-    requestAgent = new RequestAgent("127.0.0.1", 5050);
+    //    requestAgent = new RequestAgent("127.0.0.1", 5050);
+    requestAgent = new RequestAgent("192.168.0.68", 5050);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
