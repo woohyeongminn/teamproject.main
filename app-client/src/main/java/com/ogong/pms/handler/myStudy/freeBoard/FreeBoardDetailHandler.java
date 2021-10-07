@@ -65,9 +65,7 @@ public class FreeBoardDetailHandler implements Command {
         freeBoardList.get(i).setFreeBoardViewcount(freeBoardList.get(i).getFreeBoardViewcount() + 1);
         System.out.printf(" >> 조회수 : %d\n", freeBoardList.get(i).getFreeBoardViewcount());
 
-        FreeBoard freeComment = freeBoardList.get(i);
-
-        promptFreeBoard.printComments(freeComment); // 댓글호출
+        promptFreeBoard.printComments(freeBoardList.get(i)); // 댓글호출
 
         arry[1] = i;
         inputNo = 0;
@@ -93,7 +91,7 @@ public class FreeBoardDetailHandler implements Command {
       case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;
       case 3 : request.getRequestDispatcher("/myStudy/freeBoard/commentAdd").forward(request); return;
       case 4 : 
-        request.setAttribute("freeinputNo", inputNo);
+        //request.setAttribute("freeinputNo", inputNo);
         request.getRequestDispatcher("/myStudy/freeBoard/commentUpdate").forward(request); return;
       case 5 : request.getRequestDispatcher("/myStudy/freeBoard/commentDelete").forward(request); return;
       case 0 : return;

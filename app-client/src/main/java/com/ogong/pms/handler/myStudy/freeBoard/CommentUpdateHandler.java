@@ -54,25 +54,22 @@ public class CommentUpdateHandler implements Command {
       System.out.println(" >> 번호를 입력해 주세요.");
     }
 
-    int index = 0;
     String commentTitle = null;
     String perNickname = AuthPerMemberLoginHandler.getLoginUser().getPerNickname();
 
-    // 여기 수정해야함
+    int index = -1;
     for (int i = 0; i < commentList.size(); i++) {
-
       if ((commentList.get(i).getCommentNo() == commentNo) &&
-          (commentList.get(i).getCommentWiter().equals(perNickname))){
+          (commentList.get(i).getCommentWiter().getPerNickname().equals(perNickname))){
 
         commentTitle = 
             Prompt.inputString( "댓글 내용(" +  commentList.get(i).getCommentText() + ") : ");
         System.out.println();
-
         index = i;
       }
     }
 
-    if (index == 0) {
+    if (index < 0) {
       System.out.println(" >> 알맞는 번호를 입력해 주세요.");
       return;
     }
@@ -96,6 +93,8 @@ public class CommentUpdateHandler implements Command {
     }
 
     System.out.println(" >> 댓글을 변경하였습니다.");
+
+    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
   }
 }
 
