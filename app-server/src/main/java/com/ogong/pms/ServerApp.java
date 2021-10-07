@@ -2,7 +2,6 @@ package com.ogong.pms;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Collection;
 import java.util.HashMap;
 import com.ogong.pms.table.AdminTable;
 import com.ogong.pms.table.AskBoardTable;
@@ -11,7 +10,6 @@ import com.ogong.pms.table.CafeReviewTable;
 import com.ogong.pms.table.CafeRoomTable;
 import com.ogong.pms.table.CafeTable;
 import com.ogong.pms.table.CeoMemberTable;
-import com.ogong.pms.table.JsonDataTable;
 import com.ogong.pms.table.MemberTable;
 import com.ogong.pms.table.NoticeTable;
 import com.ogong.pms.table.StudyTable;
@@ -78,7 +76,7 @@ public class ServerApp extends Thread {
     System.out.println("서버 실행 중....");
 
     ServerSocket serverSocket = new ServerSocket(5050);
-    Socket socket = serverSocket.accept();
+    //    Socket socket = serverSocket.accept();
 
     //    try {
     //      System.out.println("클라이언트 접속");
@@ -110,20 +108,26 @@ public class ServerApp extends Thread {
     dataProcessorMap.put("cafeReservation.", new CafeReservationTable());
     dataProcessorMap.put("notice.", new NoticeTable());
 
-    RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
-    requestProcessor.service();
-    requestProcessor.close();
+    while (true) {
+      Socket socket = serverSocket.accept();
+      System.out.println("클라이언트 접속");
 
-    // => 데이터를 파일에 저장한다.
-    Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
-    for (DataProcessor dataProcessor : dataProcessors) {
-      if (dataProcessor instanceof JsonDataTable) {
-        ((JsonDataTable<?>)dataProcessor).save();
-      }
+      RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
+      requestProcessor.start();
     }
 
-    System.out.println("서버 종료");
-    serverSocket.close();
+    //    requestProcessor.close();
+
+    // => 데이터를 파일에 저장한다.
+    //    Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
+    //    for (DataProcessor dataProcessor : dataProcessors) {
+    //      if (dataProcessor instanceof JsonDataTable) {
+    //        ((JsonDataTable<?>)dataProcessor).save();
+    //      }
+    //    }
+
+    //    System.out.println("서버 종료");
+    //    serverSocket.close();
 
   }
 
