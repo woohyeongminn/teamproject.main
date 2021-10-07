@@ -97,9 +97,7 @@ public class CommentUpdateHandler implements Command {
     }
 
     System.out.println(" >> 댓글을 변경하였습니다.");
-
-    request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
-    return;
+    //request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
   }
 }
 

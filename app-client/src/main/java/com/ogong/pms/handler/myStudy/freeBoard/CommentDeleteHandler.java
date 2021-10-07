@@ -92,7 +92,6 @@ public class CommentDeleteHandler implements Command {
     }
 
     System.out.println(" >> 댓글이 삭제되었습니다.");
-
-    request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
+    //request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
   }
 }

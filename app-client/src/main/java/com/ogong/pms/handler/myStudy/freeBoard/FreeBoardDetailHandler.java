@@ -104,8 +104,6 @@ public class FreeBoardDetailHandler implements Command {
       case 0 : request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
       default : return;
     }
-
-
   }
 }
 

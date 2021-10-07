@@ -59,8 +59,7 @@ public class FreeBoardDeleteHandler implements Command {
     }
 
     System.out.println(" >> 게시글이 삭제되었습니다.");
-    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
-
+    //request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
   }
 }
 

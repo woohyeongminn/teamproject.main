@@ -65,6 +65,6 @@ public class FreeBoardUpdateHandler implements Command {
     }
 
     System.out.println(" >> 게시글을 수정하였습니다.");
-    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+    //request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
   }
 }
