@@ -156,6 +156,7 @@ public class StudyAddHandler implements Command {
     study.setWatingMember(new ArrayList<>());
     study.setMyStudyCalender(new ArrayList<>());
     study.setMyStudyFreeBoard(new ArrayList<>());
+    study.setMyStudyToDo(new ArrayList<>());
 
     System.out.println();
     String input = Prompt.inputString(" 등록하시겠습니까? (네 / 아니오) ");
