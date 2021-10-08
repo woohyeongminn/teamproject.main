@@ -71,7 +71,7 @@ public class AskBoardCeoMyListHandler implements Command {
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
-      case 1: request.getRequestDispatcher("/askBoard/detail").forward(request); return;
+      case 1: request.getRequestDispatcher("/askBoard/CeoMydetail").forward(request); return;
       case 2: return;
       default : System.out.println(" >> 번호를 다시 선택해 주세요.");
     }

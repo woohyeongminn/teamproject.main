@@ -21,6 +21,8 @@ public class AskBoardTable extends JsonDataTable<AskBoard> implements DataProces
       case "askBoard.selectOne" : selectOne(request, response); break;
       case "askBoard.update" : update(request, response); break;
       case "askBoard.delete" : delete(request, response); break;
+      case "askBoard.perMy.selectOne" : selectOnePerMyAskBoard(request, response); break;
+      case "askBoard.ceoMy.selectOne" : selectOneCeoMyAskBoard(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -77,6 +79,54 @@ public class AskBoardTable extends JsonDataTable<AskBoard> implements DataProces
 
     list.remove(index);
     response.setStatus(Response.SUCCESS);
+  }
+
+  private void selectOnePerMyAskBoard(Request request, Response response) {
+    int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+    int askNo = Integer.parseInt(request.getParameter("askNo"));
+
+    AskBoard askBoard = null;
+
+    for (AskBoard a : list) {
+      if (a.getAskMemberWriter().getPerNo() == memberNo) {
+        if (a.getAskNo() == askNo) {
+          askBoard = a;
+          break;
+        }
+      }
+    }
+
+    if (askBoard != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(askBoard);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 문의글을 찾을 수 없습니다.");
+    }
+  }
+
+  private void selectOneCeoMyAskBoard(Request request, Response response) {
+    int ceoMemberNo = Integer.parseInt(request.getParameter("ceoMemberNo"));
+    int askNo = Integer.parseInt(request.getParameter("askNo"));
+
+    AskBoard askBoard = null;
+
+    for (AskBoard a : list) {
+      if (a.getAskCeoWriter().getCeoNo() == ceoMemberNo) {
+        if (a.getAskNo() == askNo) {
+          askBoard = a;
+          break;
+        }
+      }
+    }
+
+    if (askBoard != null) {
+      response.setStatus(Response.SUCCESS);
+      response.setValue(askBoard);
+    } else {
+      response.setStatus(Response.FAIL);
+      response.setValue("해당 문의글을 찾을 수 없습니다.");
+    }
   }
 
   private AskBoard findByNo(int no) {

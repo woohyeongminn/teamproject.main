@@ -43,9 +43,12 @@ import com.ogong.pms.handler.admin.AdminNoticeUpdateHandler;
 import com.ogong.pms.handler.admin.AdminStudyDeleteHandler;
 import com.ogong.pms.handler.admin.AdminUpdateHandler;
 import com.ogong.pms.handler.board.AskBoardAddHandler;
+import com.ogong.pms.handler.board.AskBoardCeoMyDetailHandler;
+import com.ogong.pms.handler.board.AskBoardCeoMyListHandler;
 import com.ogong.pms.handler.board.AskBoardDeleteHandler;
 import com.ogong.pms.handler.board.AskBoardDetailHandler;
 import com.ogong.pms.handler.board.AskBoardListHandler;
+import com.ogong.pms.handler.board.AskBoardPerMyDetailHandler;
 import com.ogong.pms.handler.board.AskBoardPerMyListHandler;
 import com.ogong.pms.handler.board.AskBoardUpdateHandler;
 import com.ogong.pms.handler.board.ReplyAddHandler;
@@ -209,7 +212,10 @@ public class ClientApp {
     commandMap.put("/askBoard/detail", new AskBoardDetailHandler(requestAgent));
     commandMap.put("/askBoard/update", new AskBoardUpdateHandler(requestAgent));
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(requestAgent));
-    commandMap.put("/askBoard/myList", new AskBoardPerMyListHandler(requestAgent));
+    commandMap.put("/askBoard/perMyList", new AskBoardPerMyListHandler(requestAgent));
+    commandMap.put("/askBoard/ceoMyList", new AskBoardCeoMyListHandler(requestAgent));
+    commandMap.put("/askBoard/PerMydetail", new AskBoardPerMyDetailHandler(requestAgent));
+    commandMap.put("/askBoard/CeoMydetail", new AskBoardCeoMyDetailHandler(requestAgent));
 
     commandMap.put("/reply/add", new ReplyAddHandler(requestAgent));
     commandMap.put("/reply/detail", new ReplyDetailHandler(requestAgent));
@@ -466,7 +472,7 @@ public class ClientApp {
     MenuGroup myPageMenu = new MenuGroup("🔒 마이 페이지", PER_LOGIN); 
     myPageMenu.setMenuFilter(menuFilter);
     myPageMenu.add(new MenuItem("🙂 개인정보", "/member/detail"));
-    myPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/myList"));
+    myPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/perMyList"));
     myPageMenu.add(new MenuItem("📞 예약내역", "/cafeReservation/list"));
     myPageMenu.add(new MenuItem("📝 후기내역", "/cafe/myReviewList"));
     myPageMenu.add(new MenuItem("😢 탈퇴하기", "/member/delete"));
@@ -565,7 +571,7 @@ public class ClientApp {
     ceoPageMenu.add(new MenuItem("🙂 기업 프로필", "/ceoMember/detail"));
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     ceoPageMenu.add(new MenuItem("🏘 카페 목록", "/ceoMember/myCafeList"));
-    ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/myList"));
+    ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/ceoMyList"));
     ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
 

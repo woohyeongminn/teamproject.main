@@ -36,21 +36,18 @@ public class AskBoardPerMyListHandler implements Command {
         int memberNo = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
         if(askBoard.getAskMemberWriter().getPerNo() == memberNo) {
           System.out.println();
-          System.out.printf(" (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+          String reply = "";
+          if (askBoard.getReply() != null) {
+            reply = "📨";
+          } else {
+            reply = "X";
+          }
+          System.out.printf("답변%s\n (%d)\n 제목 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+              reply,
               askBoard.getAskNo(), 
               askBoard.getAskTitle(), 
-              askBoard.getAskMemberWriter().getPerNickname(),
               askBoard.getAskRegisteredDate(),
               askBoard.getAskVeiwCount());
-
-          if (askBoard.getReply() != null) {
-            request.setAttribute("askNo", askBoard.getAskNo());
-            request.getRequestDispatcher("/reply/detail").forward(request);  // 답변 호출
-          } else {
-            System.out.println("---------------------");
-            System.out.println();
-            System.out.println(" >> 등록된 답변이 없습니다.");
-          }
           count++;
         } 
 
@@ -65,13 +62,14 @@ public class AskBoardPerMyListHandler implements Command {
       System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
       return;
     }
-
+    System.out.println();
+    System.out.println("---------------------");
     System.out.println("1. 상세");
     System.out.println("2. 이전");
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
-      case 1: request.getRequestDispatcher("/askBoard/detail").forward(request); return;
+      case 1: request.getRequestDispatcher("/askBoard/PerMydetail").forward(request); return;
       case 2: return;
       default : System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
