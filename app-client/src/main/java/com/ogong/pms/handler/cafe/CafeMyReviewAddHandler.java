@@ -12,7 +12,7 @@ import com.ogong.util.Prompt;
 public class CafeMyReviewAddHandler implements Command {
 
   PromptCafe promptcafe;
-  int reviewNo = 1; // 리뷰번호
+  int reviewNo = 100; // 리뷰번호
 
   public CafeMyReviewAddHandler(PromptCafe promptcafe) {
     this.promptcafe = promptcafe;

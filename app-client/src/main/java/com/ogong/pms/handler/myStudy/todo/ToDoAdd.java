@@ -14,7 +14,7 @@ import com.ogong.util.Prompt;
 
 public class ToDoAdd implements Command {
 
-  int ToDoNo = 5;
+  int ToDoNo = 100;
   RequestAgent requestAgent;
 
   public ToDoAdd(RequestAgent requestAgent) {

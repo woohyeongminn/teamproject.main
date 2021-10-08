@@ -14,7 +14,7 @@ import com.ogong.util.Prompt;
 
 public class CommentAddHandler implements Command {
 
-  int commentNo = 1;
+  int commentNo = 100;
 
   RequestAgent requestAgent;
 

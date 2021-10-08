@@ -12,7 +12,7 @@ import com.ogong.util.Prompt;
 
 public class ReplyAddHandler implements Command {
 
-  int replyNo = 1;
+  int replyNo = 100;
   RequestAgent requestAgent;
 
   public ReplyAddHandler(RequestAgent requestAgent) {
