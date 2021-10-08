@@ -31,6 +31,13 @@ public class StudyListHandler implements Command {
 
     for (Study study : studyList) {
 
+      if (study.getStudyTitle().contains("탈퇴")) {
+        System.out.printf(" (%d)\n 스터디명 : %s\n",
+            study.getStudyNo(),
+            study.getStudyTitle());
+        System.out.println();
+      }
+
       System.out.printf(" (%d)\n 스터디명 : %s\n 분류 : %s\n 인원수 : %s/%s명\n 조장 : %s\n 대면/비대면 : %s\n",
           study.getStudyNo(),
           study.getStudyTitle(),

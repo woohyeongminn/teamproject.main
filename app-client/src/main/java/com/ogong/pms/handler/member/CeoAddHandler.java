@@ -84,6 +84,7 @@ public class CeoAddHandler implements Command {
     ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
     ceoMember.setCeoNo(ceoMemberNo++);
+    ceoMember.setCeoStatus(CeoMember.INUSER);
 
     requestAgent.request("ceoMember.insert", ceoMember);
 

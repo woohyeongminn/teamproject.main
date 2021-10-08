@@ -49,7 +49,7 @@ public class ReplyAddHandler implements Command {
     reply.setReplyAdminWiter(AuthAdminLoginHandler.getLoginAdmin());
     reply.setReplyRegisteredDate(new Date(System.currentTimeMillis()));
 
-    String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString("\n 정말 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equals("네")) {
       System.out.println(" >> 등록을 취소하였습니다.");
       return;

@@ -21,7 +21,16 @@ public class AdminMemberDetailHandler implements Command {
     System.out.println("▶ 개인회원 상세");
     System.out.println();
 
-    int no = Prompt.inputInt(" 번호 : ");
+    int no = 0;
+    while (true) {
+      try {
+        no = Prompt.inputInt(" 번호 : ");
+      } catch (NumberFormatException e) {
+        System.out.println(" >> 숫자를 입력해 주세요.\n");
+        continue;
+      } 
+      break;
+    }
 
     HashMap<String,String> params = new HashMap<>();
     params.put("memberNo", String.valueOf(no));
