@@ -107,16 +107,18 @@ public class StudyAddHandler implements Command {
 
     // 인원수
     int nop = 0;
+    System.out.println();
     while (true) {
       try {
-        System.out.println();
         nop = Prompt.inputInt(" 인원수(1~30) : ");
         if ((nop == 0) || (nop > 30)) {
           System.out.println(" >> 인원수는 1명 이상 30명 이하로만 입력 가능합니다.");
+          System.out.println();
           continue;
         }
       } catch (NumberFormatException e) {
-        System.out.println(" >> 숫자만 입력하세요.\n");
+        System.out.println(" >> 숫자만 입력하세요.");
+        System.out.println();
         continue;
       }
       break;
@@ -125,8 +127,8 @@ public class StudyAddHandler implements Command {
 
     // 대면,비대면
     String face;
+    System.out.println();
     while (true) {
-      System.out.println();
       face = Prompt.inputString(" 대면 , 비대면 , 대면/비대면 : ");
       if ((face.length() == 3 && face.equals("비대면")) ||
           (face.length() == 2 && face.equals("대면")) ||
@@ -134,6 +136,7 @@ public class StudyAddHandler implements Command {
         break;
       }
       System.out.println(" >> 대면/비대면 중에 입력하세요.");
+      System.out.println();
     }
     study.setFace(face);
 

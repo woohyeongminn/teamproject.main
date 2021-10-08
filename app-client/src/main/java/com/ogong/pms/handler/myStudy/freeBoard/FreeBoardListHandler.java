@@ -39,14 +39,16 @@ public class FreeBoardListHandler implements Command {
 
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf(
-          " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일 : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n",
-          freeBoard.getFreeBoardNo(), 
-          freeBoard.getFreeBoardTitle(),
-          freeBoard.getFreeBoardContent(),
-          freeBoard.getFreeBoardAtcFile(),
-          freeBoard.getFreeBoardWriter().getPerNickname(),
-          freeBoard.getFreeBoardViewcount(),
-          freeBoard.getFreeBoardRegisteredDate());
+          " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일 : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n"
+              + " 댓글수 : %d\n",
+              freeBoard.getFreeBoardNo(), 
+              freeBoard.getFreeBoardTitle(),
+              freeBoard.getFreeBoardContent(),
+              freeBoard.getFreeBoardAtcFile(),
+              freeBoard.getFreeBoardWriter().getPerNickname(),
+              freeBoard.getFreeBoardViewcount(),
+              freeBoard.getFreeBoardRegisteredDate(),
+              freeBoard.getComment().size());
       System.out.println();
     }
 
