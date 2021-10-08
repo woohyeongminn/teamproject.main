@@ -10,7 +10,7 @@ import com.ogong.util.Prompt;
 
 public class AdminNoticeAddHandler implements Command {
 
-  int adminNotiNo = 3;
+  int adminNotiNo = 100;
   RequestAgent requestAgent;
 
   public AdminNoticeAddHandler(RequestAgent requestAgent) {

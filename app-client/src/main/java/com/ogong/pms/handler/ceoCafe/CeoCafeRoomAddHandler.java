@@ -10,7 +10,7 @@ import com.ogong.util.Prompt;
 public class CeoCafeRoomAddHandler implements Command {
 
   PromptCafe promptcafe;
-  int roomNo = 5;
+  int roomNo = 100;
 
   public CeoCafeRoomAddHandler (PromptCafe promptcafe) {
     this.promptcafe = promptcafe;

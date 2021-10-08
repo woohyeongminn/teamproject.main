@@ -15,7 +15,7 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardAddHandler implements Command {
 
-  int freeBoardNo = 4;
+  int freeBoardNo = 100;
 
   RequestAgent requestAgent;
 

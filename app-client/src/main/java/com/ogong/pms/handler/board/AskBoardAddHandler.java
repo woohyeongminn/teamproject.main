@@ -11,71 +11,11 @@ import com.ogong.util.Prompt;
 
 public class AskBoardAddHandler implements Command {
 
-  int askNo = 7;
+  int askNo = 100;
   RequestAgent requestAgent;
 
   public AskBoardAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
-
-    //    AskBoard askList = new AskBoard();
-    //    askList.setAskNo(1);
-    //    askList.setAskTitle("문의합니다.");
-    //    askList.setAskContent("예약 방법에 대해 알고 싶습니다.");
-    //    askList.setAskMemberWriter(memberList.get(0));
-    //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-    //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAskStatus(1);
-    //    askBoardList.add(askList);
-    //
-    //    askList = new AskBoard();
-    //    askList.setAskNo(2);
-    //    askList.setAskTitle("가게 등록..");
-    //    askList.setAskContent("가게 승인 요청 어떻게 하나요?");
-    //    askList.setAskCeoWriter(ceoMemberList.get(0));
-    //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-    //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAskStatus(1);
-    //    askBoardList.add(askList);
-    //
-    //    askList = new AskBoard();
-    //    askList.setAskNo(3);
-    //    askList.setAskTitle("이런이런!");
-    //    askList.setAskContent("개발자님!! 이 부분 좀 고쳐 주세요!");
-    //    askList.setAskMemberWriter(memberList.get(1));
-    //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-    //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAskStatus(1);
-    //    askBoardList.add(askList);
-    //
-    //    askList = new AskBoard();
-    //    askList.setAskNo(4);
-    //    askList.setAskTitle("헐! 헐! 헐!");
-    //    askList.setAskContent("예약 내역이 안 보여요 ㅠㅠ");
-    //    askList.setAskCeoWriter(ceoMemberList.get(1));
-    //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-    //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAskStatus(1);
-    //    askBoardList.add(askList);
-    //
-    //    askList = new AskBoard();
-    //    askList.setAskNo(5);
-    //    askList.setAskTitle("질문있어요.");
-    //    askList.setAskContent("스터디 참여 방법이 궁금해요.");
-    //    askList.setAskMemberWriter(memberList.get(2));
-    //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-    //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAskStatus(1);
-    //    askBoardList.add(askList);
-    //
-    //    askList = new AskBoard();
-    //    askList.setAskNo(6);
-    //    askList.setAskTitle("고객 예약 관련 문의");
-    //    askList.setAskContent("실수로 고객 예약 내역을 삭제했어요..");
-    //    askList.setAskCeoWriter(ceoMemberList.get(2));
-    //    askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
-    //    askList.setAskVeiwCount(askList.getAskVeiwCount());
-    //    askList.setAskStatus(1);
-    //    askBoardList.add(askList);
   }
 
   @Override

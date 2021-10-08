@@ -11,7 +11,7 @@ import com.ogong.util.Prompt;
 public class StudyAddHandler implements Command {
 
   RequestAgent requestAgent;
-  int studyNo = 6;
+  int studyNo = 100;
 
   public StudyAddHandler(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;

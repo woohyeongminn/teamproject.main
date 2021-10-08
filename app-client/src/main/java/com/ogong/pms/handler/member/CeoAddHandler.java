@@ -9,7 +9,7 @@ import com.ogong.util.Prompt;
 
 public class CeoAddHandler implements Command {
 
-  int ceoMemberNo = 5;
+  int ceoMemberNo = 100;
 
   RequestAgent requestAgent;
 
