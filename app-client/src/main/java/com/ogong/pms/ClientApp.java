@@ -4,12 +4,9 @@ import static com.ogong.menu.Menu.ADMIN_LOGIN;
 import static com.ogong.menu.Menu.CEO_LOGIN;
 import static com.ogong.menu.Menu.LOGOUT;
 import static com.ogong.menu.Menu.PER_LOGIN;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import com.ogong.chat.MySocketClient;
-import com.ogong.chat.MySocketServer;
 import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
@@ -87,7 +84,6 @@ import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
 import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
-import com.ogong.pms.handler.myStudy.MyStudyChat;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
 import com.ogong.pms.handler.myStudy.MyStudyExitHandler;
@@ -280,10 +276,10 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(requestAgent));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(requestAgent));
 
-    Socket chatSocket = new Socket();
-    commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
-    commandMap.put("/myStudy/chatOpen", new MySocketServer(chatSocket, requestAgent));
-    commandMap.put("/myStudy/chatStart", new MySocketClient(requestAgent));
+    //    Socket chatSocket = new Socket();
+    //    commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
+    //    commandMap.put("/myStudy/chatOpen", new MySocketServer(chatSocket, requestAgent));
+    //    commandMap.put("/myStudy/chatStart", new MySocketClient(requestAgent));
 
     commandMap.put("/myStudy/freeBoard/commentDelete", new CommentDeleteHandler(requestAgent));
     commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(requestAgent));
@@ -562,7 +558,7 @@ public class ClientApp {
     return ceoMemberMenuGroup;
   }
 
-  // 기업 정보 >> 로그인하라고 뜸
+  // 기업
   private Menu createCeoPageMenu() {
     MenuGroup ceoPageMenu = new MenuGroup("🔒 마이 페이지", CEO_LOGIN); 
     ceoPageMenu.setMenuFilter(menuFilter);
@@ -572,6 +568,8 @@ public class ClientApp {
     ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/myList"));
     ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
+
+    // 이거 기업프로필에 있음 지우기~~~
     //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
 
     return ceoPageMenu;

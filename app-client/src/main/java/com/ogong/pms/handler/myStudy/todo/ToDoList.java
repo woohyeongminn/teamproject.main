@@ -18,6 +18,7 @@ public class ToDoList implements Command {
   }
 
   //등록
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 목록");
@@ -35,6 +36,11 @@ public class ToDoList implements Command {
 
     Study myStudy = requestAgent.getObject(Study.class);
     List <ToDo> todoList = myStudy.getMyStudyToDo();
+
+    if (todoList.isEmpty()) {
+      System.out.println(" 등록된 TodoList가 없습니다.");
+      return;
+    }
 
     System.out.println(" >> 진행 중 ");
 

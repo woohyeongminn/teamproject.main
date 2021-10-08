@@ -18,6 +18,7 @@ public class ToDoDetail implements Command {
   }
 
   //상세
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 상세보기");
@@ -57,13 +58,13 @@ public class ToDoDetail implements Command {
           System.out.printf(" >> DATE : %s\n", todoList.get(i).getTodoDate());
 
           arry[1] = i; // 해당 todo 넘겨 줌
-          inputTodoNo = 0; // 0으로 초기화 시키면 아래 if문 실행 안 되고 바로 아래로 내려감
+          inputTodoNo = -1; // -1으로 초기화 시키면 아래 if문 실행 안 되고 바로 아래로 내려감
         }
       }
 
-      if (inputTodoNo != 0) {
+      if (inputTodoNo != -1) {
         System.out.println(" >> 해당 번호의 To-Do가 없습니다.");
-        System.out.println();
+        request.getRequestDispatcher("/myStudy/todoList").forward(request);
         return;
       }
 

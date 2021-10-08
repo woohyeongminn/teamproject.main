@@ -2,7 +2,6 @@ package com.ogong.pms.handler.ceoCafe;
 
 import java.util.Collection;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -24,14 +23,20 @@ public class CeoCafeListHandler implements Command {
     System.out.println("▶ 카페 목록");
     System.out.println();
 
-    CeoMember ceoMember = null;
-    try {
-      ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
-    } catch (NullPointerException e) {
+    //    CeoMember ceoMember = null;
+    //    try {
+    //      ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+    //    } catch (NullPointerException e) {
+    //      System.out.println(" >> 로그인 하세요.");
+    //    }
+
+    if (AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
       System.out.println(" >> 로그인 하세요.");
+      return;
     }
 
-    Collection<Cafe> cafeList = promptcafe.getCafeListByCeoMember(ceoMember.getCeoNo());
+    Collection<Cafe> cafeList =
+        promptcafe.getCafeListByCeoMember(AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo());
 
     if (cafeList.isEmpty()) {
       System.out.println(" >> 등록된 카페가 없습니다.");

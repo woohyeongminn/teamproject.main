@@ -86,7 +86,7 @@ public class CafeReservationHandler implements Command {
       break;
     }
 
-    int useTime = Prompt.inputInt(String.format(" 이용 시간 (%s 마감) : ", closeTime));
+    int useTime = Prompt.inputInt(String.format(" 이용 시간 (%s 마감) 예시 > 2 : ", closeTime));
     int availableTime = (int) ChronoUnit.HOURS.between(startTime, cafe.getCloseTime());
     while (useTime > availableTime) {
       System.out.printf(" >> 마감 시간(%s)을 초과하여 예약할 수 없습니다.\n", closeTime);
