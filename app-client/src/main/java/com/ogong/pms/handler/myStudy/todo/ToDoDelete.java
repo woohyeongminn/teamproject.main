@@ -17,6 +17,7 @@ public class ToDoDelete implements Command {
   }
 
   //삭제
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 삭제");
@@ -39,6 +40,7 @@ public class ToDoDelete implements Command {
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오)");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 삭제를 취소하였습니다.");
+      request.getRequestDispatcher("/myStudy/todoList").forward(request);
       return;
     }
 

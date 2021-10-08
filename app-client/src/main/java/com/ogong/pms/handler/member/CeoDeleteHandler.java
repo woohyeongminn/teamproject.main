@@ -29,6 +29,7 @@ public class CeoDeleteHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 기업회원 탈퇴");
+    System.out.println();
 
     if (AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
       System.out.println(" >> 로그인 하세요.");

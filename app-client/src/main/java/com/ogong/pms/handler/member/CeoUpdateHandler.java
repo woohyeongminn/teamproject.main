@@ -41,6 +41,7 @@ public class CeoUpdateHandler implements Command {
     System.out.println("2. 사진");
     System.out.println("3. 이메일");
     System.out.println("4. 비밀번호");
+    System.out.println("0. 이전");
     System.out.println();
     int selectNo = Prompt.inputInt(" 수정하고 싶은 정보를 선택해 주세요. > ");
 
@@ -62,6 +63,7 @@ public class CeoUpdateHandler implements Command {
       case 4:
         ceoPassword = Prompt.inputString(" 비밀번호(" + ceoMember.getCeoPassword() + ") : ");
         break;
+      case 0: return;
       default : 
         System.out.println(" >> 올바른 번호를 입력해 주세요.");
         return;

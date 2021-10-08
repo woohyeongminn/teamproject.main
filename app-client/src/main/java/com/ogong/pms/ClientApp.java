@@ -558,7 +558,7 @@ public class ClientApp {
     return ceoMemberMenuGroup;
   }
 
-  // 기업 정보 >> 로그인하라고 뜸
+  // 기업
   private Menu createCeoPageMenu() {
     MenuGroup ceoPageMenu = new MenuGroup("🔒 마이 페이지", CEO_LOGIN); 
     ceoPageMenu.setMenuFilter(menuFilter);
@@ -568,6 +568,8 @@ public class ClientApp {
     ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/myList"));
     ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
+
+    // 이거 기업프로필에 있음 지우기~~~
     //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
 
     return ceoPageMenu;
