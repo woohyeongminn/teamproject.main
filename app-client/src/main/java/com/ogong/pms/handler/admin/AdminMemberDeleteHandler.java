@@ -50,6 +50,22 @@ public class AdminMemberDeleteHandler implements Command {
         return;
       }
 
+      if (input.equals("네")) {
+        user.setPerStatus(Member.OUTUSER);
+        user.setPerNickname("탈퇴된 회원: ( " + user.getPerNickname() + " )");
+        user.setPerEmail("Deleted Email");
+        user.setPerPassword("Deleted Password");
+        user.setPerPhoto("Deleted Photo");
+      }
+
+      requestAgent.request("member.update", user);
+
+      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        System.out.println(" >> 회원 삭제 실패.");
+        return;
+      }
+
+      // ------------------- 스터디에 반영 --------------------
       requestAgent.request("study.selectList", null);
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -63,15 +79,20 @@ public class AdminMemberDeleteHandler implements Command {
       for (int i = s.size() -1; i >= 0; i--) {
         if (s.get(i).getOwner().getPerNo() == user.getPerNo()) {
 
-          HashMap<String,String> studyParams = new HashMap<>();
-          studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
+          if (user.getPerNickname().contains("탈퇴")) {
+            s.get(i).setStudyTitle(" >> 탈퇴된 회원의 스터디입니다.");
+          }
 
-          requestAgent.request("study.delete", studyParams);
+          //          HashMap<String,String> studyParams = new HashMap<>();
+          //          studyParams.put("studyNo", String.valueOf(s.get(i)));
+
+          requestAgent.request("study.update", s.get(i));
 
           if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
             System.out.println(" >> 스터디 삭제가 실패되었습니다.");
             return;
           }
+
         } else {
           for (Member m : s.get(i).getMembers()) {
             if(m.getPerNo() == user.getPerNo()) {
@@ -89,18 +110,11 @@ public class AdminMemberDeleteHandler implements Command {
         }
       }
 
-      requestAgent.request("member.delete", params);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(" >> 회원 삭제 실패.");
-        System.out.println(requestAgent.getObject(String.class));
-        return;
-      }
-
       System.out.println(" >> 회원이 삭제되었습니다.");
       request.getRequestDispatcher("/adminMember/list").forward(request);
       return;
     }
+
   }
 
 }

@@ -22,16 +22,24 @@ public class AdminCafeApprovalHandler implements Command {
 
     while (true) {
       System.out.println();
-      int inputCafeNo = Prompt.inputInt(" 장소 번호 : ");
+      int inputCafeNo = 0;
+      try {
+        inputCafeNo = Prompt.inputInt(" 장소 번호 : ");
+      } catch (NumberFormatException e) {
+        System.out.println(" >> 숫자만 입력해 주세요.");
+        continue;
+      }
 
       Cafe cafe = promptcafe.findByCafeNo(inputCafeNo);
 
       if (cafe == null) {
         System.out.println(" >> 번호를 다시 선택하세요.");
-        continue;
+        request.getRequestDispatcher("/cafe/control").forward(request);
+        return;
       } else if (cafe.getCafeStatus() != 0) {
         System.out.println(" >> 승인 대기 중인 카페가 아닙니다.\n    번호를 다시 선택하세요.");
-        continue;
+        request.getRequestDispatcher("/cafe/control").forward(request);
+        return;
       } else if (cafe.getCafeStatus() == 0) {
         String input = Prompt.inputString(" 정말 승인하시겠습니까? (네 / 아니오) ");
         System.out.println();
