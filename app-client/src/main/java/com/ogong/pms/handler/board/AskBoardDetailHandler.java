@@ -109,8 +109,14 @@ public class AskBoardDetailHandler implements Command {
       }
     }
 
-    else if (AuthPerMemberLoginHandler.getLoginUser() != null ||
-        AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
+    else if ((AuthPerMemberLoginHandler.getLoginUser() != null && 
+        askBoard.getAskMemberWriter().getPerNo() == 
+        AuthPerMemberLoginHandler.getLoginUser().getPerNo()) ||
+
+        (AuthCeoMemberLoginHandler.getLoginCeoMember() != null && 
+        askBoard.getAskCeoWriter().getCeoNo() == 
+        AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo())) {
+
       System.out.println("\n---------------------");
       System.out.println("1. 수정");
       System.out.println("2. 삭제");
