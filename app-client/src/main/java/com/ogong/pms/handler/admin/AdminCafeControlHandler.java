@@ -32,13 +32,13 @@ public class AdminCafeControlHandler implements Command {
     for(Cafe cafe : cafeList) {
       if (cafe.getCafeStatus() == DELETE) {
         System.out.printf(" \n (%s)\n", cafe.getNo());
-        System.out.println(" 삭제 된 장소입니다.");
+        System.out.println(" 삭제된 장소입니다.");
         continue;
       }
       System.out.printf(" \n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
           , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
       if (cafe.getCafeStatus() == WAIT) {
-        System.out.println(" * 승인 대기중인 카페입니다.");
+        System.out.println(" * 승인 대기 중인 카페입니다.");
       }
     }
 

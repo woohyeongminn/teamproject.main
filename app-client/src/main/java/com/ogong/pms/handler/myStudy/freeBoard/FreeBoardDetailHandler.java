@@ -67,11 +67,12 @@ public class FreeBoardDetailHandler implements Command {
         promptFreeBoard.printComments(freeBoardList.get(i)); // 댓글호출
 
         arry[1] = i;
-        inputNo = 0;
+        inputNo = -1;
       }
     }
-    if (inputNo != 0) {
+    if (inputNo != -1) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
+      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
       return;
     }
 
@@ -91,8 +92,10 @@ public class FreeBoardDetailHandler implements Command {
     System.out.println("1. 수정");
     System.out.println("2. 삭제");
     System.out.println("3. 댓글 등록");
-    System.out.println("4. 댓글 수정");
-    System.out.println("5. 댓글 삭제");
+    if (!freeBoardList.get(arry[1]).getComment().isEmpty()) {
+      System.out.println("4. 댓글 수정");
+      System.out.println("5. 댓글 삭제");
+    }
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {

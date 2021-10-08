@@ -86,6 +86,7 @@ public class MemberAddHandler implements Command {
 
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
     member.setPerNo(perNo++);
+    member.setPerStatus(Member.INUSER);
     //memberList.add(member);
 
     requestAgent.request("member.insert", member);

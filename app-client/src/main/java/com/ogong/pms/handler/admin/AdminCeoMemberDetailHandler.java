@@ -19,7 +19,18 @@ public class AdminCeoMemberDetailHandler implements Command {
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 기업회원 상세");
-    int inputCeoNo = Prompt.inputInt(" 번호 : ");
+
+    int inputCeoNo = 0;
+    while (true) {
+      try {
+        inputCeoNo = Prompt.inputInt(" 번호 : ");
+      } catch (NumberFormatException e) {
+        System.out.println(" >> 숫자를 입력해 주세요.\n");
+        continue;
+      } 
+      break;
+    }
+
     System.out.println();
 
     HashMap<String,String> params = new HashMap<>();

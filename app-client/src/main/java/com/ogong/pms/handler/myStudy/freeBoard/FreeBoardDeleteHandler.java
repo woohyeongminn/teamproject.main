@@ -40,12 +40,14 @@ public class FreeBoardDeleteHandler implements Command {
 
     if (freeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println(" >> 삭제 권한이 없습니다.");
+      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
       return;
     }
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 삭제를 취소하였습니다.");
+      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
       return;
     }
 
@@ -59,7 +61,8 @@ public class FreeBoardDeleteHandler implements Command {
     }
 
     System.out.println(" >> 게시글이 삭제되었습니다.");
-    //request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+    return;
   }
 }
 

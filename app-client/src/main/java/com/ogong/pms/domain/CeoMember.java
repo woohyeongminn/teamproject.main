@@ -4,6 +4,9 @@ import java.sql.Date;
 
 public class CeoMember {
 
+  public static final int INUSER = 0;   // 일반 유저
+  public static final int OUTUSER = 1;       // 탈퇴 유저
+
   private int ceoNo;                // 사장회원 고유번호 
   private String ceoEmail;          // 사장회원 이메일 - 회원가입, 로그인 할 때 필요
   private String ceoPassword;       // 사장회원 패스워드
@@ -11,12 +14,14 @@ public class CeoMember {
   private String ceoLicenseNo;      // 사장회원 사업자등록번호
   private String ceoBossName;       // 사장회원 대표자명
   private Date ceoregisteredDate;   // 사장회원 가입일
+  private int ceoStatus;
 
   @Override
   public String toString() {
     return "CeoMember [ceoNo=" + ceoNo + ", ceoEmail=" + ceoEmail + ", ceoPassword=" + ceoPassword
         + ", ceoPhoto=" + ceoPhoto + ", ceoLicenseNo=" + ceoLicenseNo + ", ceoBossName="
-        + ceoBossName + ", ceoregisteredDate=" + ceoregisteredDate + "]";
+        + ceoBossName + ", ceoregisteredDate=" + ceoregisteredDate + ", ceoStatus=" + ceoStatus
+        + "]";
   }
 
   public int getCeoNo() {
@@ -74,5 +79,15 @@ public class CeoMember {
   public void setCeoregisteredDate(Date ceoregisteredDate) {
     this.ceoregisteredDate = ceoregisteredDate;
   }
+
+  public int getCeoStatus() {
+    return ceoStatus;
+  }
+
+  public void setCeoStatus(int ceoStatus) {
+    this.ceoStatus = ceoStatus;
+  }
+
+
 
 }

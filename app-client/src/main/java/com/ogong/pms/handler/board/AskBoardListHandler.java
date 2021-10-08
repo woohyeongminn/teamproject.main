@@ -62,6 +62,12 @@ public class AskBoardListHandler implements Command {
               askList.getAskCeoWriter().getCeoBossName());
           System.out.println(" 비밀글입니다.");
         }
+
+        if (askList.getReply() != null) {
+          System.out.println(" 📖 > 등록된 답변이 있습니다.");
+        } else {
+          System.out.println(" 📕 > 등록된 답변이 없습니다.");
+        }
       }
 
       // 개인
@@ -83,7 +89,14 @@ public class AskBoardListHandler implements Command {
           System.out.println();
           System.out.println(" 비밀글입니다.");
         }
+
+        if (askList.getReply() != null) {
+          System.out.println(" 📖 > 등록된 답변이 있습니다.");
+        } else {
+          System.out.println(" 📕 > 등록된 답변이 없습니다.");
+        }
       }
+
     }
   }
 }

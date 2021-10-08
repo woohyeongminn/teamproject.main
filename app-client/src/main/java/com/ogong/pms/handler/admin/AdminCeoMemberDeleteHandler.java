@@ -49,6 +49,24 @@ public class AdminCeoMemberDeleteHandler implements Command {
       return;
     }
 
+    if (input.equals("네")) {
+      ceoMember.setCeoStatus(CeoMember.OUTUSER);
+      ceoMember.setCeoBossName("탈퇴된 회원: (" + ceoMember.getCeoBossName() + ")");
+      ceoMember.setCeoEmail("Deleted Email");
+      ceoMember.setCeoPassword("Deleted Password");
+      ceoMember.setCeoPhoto("Deleted Photo");
+      ceoMember.setCeoLicenseNo("Deleted LicenseNo");
+    }
+
+    // 회원 삭제
+    requestAgent.request("ceoMember.update", ceoMember);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 기업 회원 삭제 실패.");
+      System.out.println(requestAgent.getObject(String.class));
+      return;
+    }
+
     // 카페삭제
     requestAgent.request("cafe.selectList", null);
 
@@ -63,25 +81,20 @@ public class AdminCeoMemberDeleteHandler implements Command {
     for (int i = cafeList.size() -1; i >= 0; i--) {
       if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
 
-        HashMap<String,String> cafeParams = new HashMap<>();
-        cafeParams.put("cafeNo", String.valueOf(cafeList.get(i).getNo()));
+        if (ceoMember.getCeoBossName().contains("탈퇴")) {
+          cafeList.get(i).setCafeStatus(Cafe.DELETE);
+        }
 
-        requestAgent.request("cafe.delete", cafeParams);
+        //        HashMap<String,String> cafeParams = new HashMap<>();
+        //        cafeParams.put("cafeNo", String.valueOf(cafeList.get(i).getNo()));
+
+        requestAgent.request("cafe.update", cafeList.get(i));
 
         if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println(" >> 스터디 삭제가 실패되었습니다.");
+          System.out.println(" >> 스터디카페 삭제가 실패되었습니다.");
           return;
         }
       }
-    }
-
-    // 회원 삭제
-    requestAgent.request("ceoMember.delete", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 기업 회원 삭제 실패.");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
     }
 
     System.out.println(" >> 기업 회원이 삭제되었습니다.");
