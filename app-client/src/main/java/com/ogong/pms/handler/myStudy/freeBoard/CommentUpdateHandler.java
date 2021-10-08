@@ -76,12 +76,14 @@ public class CommentUpdateHandler implements Command {
     if (index < 0) {
       System.out.println(" >> 알맞는 번호를 입력해 주세요.");
       request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
+      return;
     }
 
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 댓글 변경이 취소되었습니다.");
       request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+      return;
     }
 
     commentList.get(index).setCommentText(commentTitle);
@@ -97,7 +99,8 @@ public class CommentUpdateHandler implements Command {
     }
 
     System.out.println(" >> 댓글을 변경하였습니다.");
-    //request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
+    request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
+    return;
   }
 }
 
