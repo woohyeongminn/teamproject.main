@@ -49,7 +49,7 @@ import com.ogong.pms.handler.board.AskBoardAddHandler;
 import com.ogong.pms.handler.board.AskBoardDeleteHandler;
 import com.ogong.pms.handler.board.AskBoardDetailHandler;
 import com.ogong.pms.handler.board.AskBoardListHandler;
-import com.ogong.pms.handler.board.AskBoardMyListHandler;
+import com.ogong.pms.handler.board.AskBoardPerMyListHandler;
 import com.ogong.pms.handler.board.AskBoardUpdateHandler;
 import com.ogong.pms.handler.board.ReplyAddHandler;
 import com.ogong.pms.handler.board.ReplyDetailHandler;
@@ -188,9 +188,9 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
     // 로컬
-    //requestAgent = new RequestAgent("127.0.0.1", 5050);
+    requestAgent = new RequestAgent("127.0.0.1", 5050);
 
-    requestAgent = new RequestAgent("192.168.0.92", 5050);
+    //requestAgent = new RequestAgent("192.168.0.92", 5050);
 
     //requestAgent = new RequestAgent("192.168.0.68", 5050);
 
@@ -213,7 +213,7 @@ public class ClientApp {
     commandMap.put("/askBoard/detail", new AskBoardDetailHandler(requestAgent));
     commandMap.put("/askBoard/update", new AskBoardUpdateHandler(requestAgent));
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(requestAgent));
-    commandMap.put("/askBoard/myList", new AskBoardMyListHandler(requestAgent));
+    commandMap.put("/askBoard/myList", new AskBoardPerMyListHandler(requestAgent));
 
     commandMap.put("/reply/add", new ReplyAddHandler(requestAgent));
     commandMap.put("/reply/detail", new ReplyDetailHandler(requestAgent));

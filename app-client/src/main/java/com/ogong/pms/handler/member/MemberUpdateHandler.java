@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.member;
 
+import java.util.Collection;
 import java.util.HashMap;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
@@ -22,6 +23,15 @@ public class MemberUpdateHandler implements Command {
     System.out.println();
 
     int no = (int) request.getAttribute("memberNo");
+
+    requestAgent.request("member.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("목록 조회 실패!");
+      return;
+    }
+
+    Collection<Member> memberList = requestAgent.getObjects(Member.class);
 
     HashMap<String,String> params = new HashMap<>();
     params.put("memberNo", String.valueOf(no));
@@ -50,16 +60,58 @@ public class MemberUpdateHandler implements Command {
     switch (selectNo) {
       case 1: 
         perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname()  + ") : ");
+        while (true) {
+          for (Member comparisonMember : memberList) {
+            if (perNickName.equals(comparisonMember.getPerNickname())) {
+              System.out.println(" >> 이미 사용중인 닉네임입니다.");
+              continue;
+            }
+          }
+          break;
+        }
         break;
+
       case 2: 
         perPhoto = Prompt.inputString(" 사  진(" + member.getPerPhoto() + ") : ");
         break;
+
       case 3:
-        perEmail = Prompt.inputString(" 이메일(" + member.getPerEmail() + ") : ");
+        while (true) {
+          perEmail = Prompt.inputString(" 이메일(" + member.getPerEmail() + ") : ");
+          if (!perEmail.contains("@") ||
+              !perEmail.contains(".com") || perEmail.length() < 6) {
+            System.out.println(" >> 정확한 이메일 양식으로 입력해 주세요.");
+            continue;
+          }
+          break;
+        }
         break;
+
       case 4:
-        perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
+        while (true) {
+          perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
+          if (perPassword.length() < 8 || (!perPassword.contains("!") && !perPassword.contains("@")
+              && !perPassword.contains("#") && !perPassword.contains("$")
+              && !perPassword.contains("^") && !perPassword.contains("%")
+              && !perPassword.contains("&") && !perPassword.contains("*"))) {
+            System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
+            continue;
+          }
+          break;
+        }
+
+        while (true) {
+          String pw =  Prompt.inputString(" 비밀번호 확인 : ");
+          if (!pw.equals(member.getPerPassword())) {
+            System.out.println("\n >> 확인 실패!\n");
+            continue;
+          } else {
+            System.out.println("\n >> 확인 완료!\n");
+          }
+          break;
+        }
         break;
+
       default : 
         System.out.println(" >> 올바른 번호를 입력해 주세요.");
         return;

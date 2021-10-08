@@ -25,7 +25,6 @@ public class MemberDetailHandler extends AbstractMemberHandler {
 
     Member member = null;
 
-
     try {
       member = AuthPerMemberLoginHandler.getLoginUser();
       System.out.println();

@@ -29,8 +29,8 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
       int count = 0;
       AskBoard myAskBoard = new AskBoard();
       for (AskBoard askBoard : askBoardList) {
-        String member = AuthPerMemberLoginHandler.getLoginUser().getPerNickname();
-        if(member.equals(askBoard.getAskMemberWriter().getPerNickname())) {
+        int memberNo = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
+        if(askBoard.getAskMemberWriter().getPerNo() == memberNo) {
           System.out.println();
           System.out.printf(" (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
               askBoard.getAskNo(), 
@@ -42,7 +42,6 @@ public class AskBoardMyListHandler extends AbstractAskBoardHandler {
           count++;
 
         } 
-
       }
       System.out.println("---------------------");
 

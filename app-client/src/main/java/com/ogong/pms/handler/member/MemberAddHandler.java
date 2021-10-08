@@ -39,7 +39,7 @@ public class MemberAddHandler implements Command {
     inputNewNick = Prompt.inputString(" 닉네임 : ");
     for (Member comparisonMember : memberList) {
       if (inputNewNick.equals(comparisonMember.getPerNickname())) {
-        System.out.println(" >> 중복된 닉네임입니다.");
+        System.out.println(" >> 이미 사용중인 닉네임입니다.");
         return;
       }
     }

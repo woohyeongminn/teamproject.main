@@ -21,7 +21,13 @@ public class MemberDetailHandler implements Command {
     System.out.println();
     System.out.println("▶ 프로필");
 
-    int no = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
+    int no;
+    try {
+      no = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
+    } catch (NullPointerException e) {
+      System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
+      return;
+    }
 
     HashMap<String,String> params = new HashMap<>();
     params.put("memberNo", String.valueOf(no));
