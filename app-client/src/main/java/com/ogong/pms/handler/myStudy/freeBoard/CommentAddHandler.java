@@ -57,6 +57,8 @@ public class CommentAddHandler implements Command {
       String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 댓글 등록을 취소하였습니다.");
+        request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+        return;
       }
 
       freeBoard.getComment().add(comment);
@@ -67,11 +69,13 @@ public class CommentAddHandler implements Command {
 
       if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
         System.out.println("댓글 등록 실패!");
+        request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
         return;
       }
 
       System.out.println(" >> 댓글이 등록되었습니다.");
-      //request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
+      return;
     }
   }
 }
