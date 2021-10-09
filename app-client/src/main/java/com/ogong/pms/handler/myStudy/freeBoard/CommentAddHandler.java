@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Comment;
@@ -13,8 +14,6 @@ import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class CommentAddHandler implements Command {
-
-  int commentNo = 100;
 
   RequestAgent requestAgent;
 
@@ -47,9 +46,18 @@ public class CommentAddHandler implements Command {
       List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
       FreeBoard freeBoard = freeBoardList.get(arry[1]);
 
+      List<Comment> arrayComment = new ArrayList<>(freeBoard.getComment());
+
       Comment comment = new Comment();
 
-      comment.setCommentNo(commentNo++);
+      // 마지막 댓글 번호 찾아서 새 댓글 등록시 +1 되도록 기능 구현
+      Comment lastComment = null;
+      if (!arrayComment.isEmpty()) {
+        lastComment = arrayComment.get(arrayComment.size() -1);
+        comment.setCommentNo(lastComment.getCommentNo() + 1);
+      } else {
+        comment.setCommentNo(1);
+      }
       comment.setCommentText(Prompt.inputString(" 댓글 내용 : "));
       comment.setCommentWiter(AuthPerMemberLoginHandler.getLoginUser());
       comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
