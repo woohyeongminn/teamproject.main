@@ -103,7 +103,7 @@ public class CeoMemberTable extends JsonDataTable<CeoMember> implements DataProc
   }
 
   private void selectOne(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("inputCeoNo"));
+    int no = Integer.parseInt(request.getParameter("ceoMemberNo"));
     CeoMember m = findByNo(no);
 
     if (m != null) {
@@ -130,7 +130,7 @@ public class CeoMemberTable extends JsonDataTable<CeoMember> implements DataProc
   }
 
   private void delete(Request request, Response response) throws Exception {
-    int no = Integer.parseInt(request.getParameter("inputCeoNo"));
+    int no = Integer.parseInt(request.getParameter("ceoMemberNo"));
     int index = indexOf(no);
 
     if (index == -1) {

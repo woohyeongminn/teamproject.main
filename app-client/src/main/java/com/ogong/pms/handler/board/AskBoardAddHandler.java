@@ -1,23 +1,21 @@
 package com.ogong.pms.handler.board;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AskBoardAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  AskBoardDao askBoardDao;
 
-  public AskBoardAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AskBoardAddHandler(AskBoardDao askBoardDao) {
+    this.askBoardDao = askBoardDao;
   }
 
   @Override
@@ -26,26 +24,18 @@ public class AskBoardAddHandler implements Command {
     System.out.println("▶ 문의사항");
     System.out.println();
 
-    AskBoard askList = new AskBoard();
+    AskBoard askBoard = new AskBoard();
 
-    requestAgent.request("askBoard.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 문의글 목록 조회 실패");
-      return;
-    }
-
-    Collection<AskBoard> askBoardList = requestAgent.getObjects(AskBoard.class);
-    List<AskBoard> arrayAskBoard = new ArrayList<>(askBoardList);
+    List<AskBoard> askBoardList = askBoardDao.findAll();
 
     int statusNo = 0;
 
     if (AuthPerMemberLoginHandler.getLoginUser() != null) {
 
-      askList.setAskTitle(Prompt.inputString(" 제목 : "));
-      askList.setAskContent(Prompt.inputString(" 내용 : "));
-      askList.setAskMemberWriter(AuthPerMemberLoginHandler.getLoginUser());
-      askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
+      askBoard.setAskTitle(Prompt.inputString(" 제목 : "));
+      askBoard.setAskContent(Prompt.inputString(" 내용 : "));
+      askBoard.setAskMemberWriter(AuthPerMemberLoginHandler.getLoginUser());
+      askBoard.setAskRegisteredDate(new Date(System.currentTimeMillis()));
 
       while (true) {
 
@@ -65,11 +55,11 @@ public class AskBoardAddHandler implements Command {
 
             // 마지막 고유번호를 찾아서 신규 등록시 +1 되도록 기능 구현
             AskBoard lastAskBoard = null;
-            if (!arrayAskBoard.isEmpty()) {
-              lastAskBoard = arrayAskBoard.get(arrayAskBoard.size() - 1);
-              askList.setAskNo(lastAskBoard.getAskNo() + 1);
+            if (!askBoardList.isEmpty()) {
+              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
+              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
             } else {
-              askList.setAskNo(1);
+              askBoard.setAskNo(1);
             }
             break;
           }
@@ -80,15 +70,15 @@ public class AskBoardAddHandler implements Command {
         break;
       } 
 
-      askList.setAskStatus(statusNo);
+      askBoard.setAskStatus(statusNo);
     }
 
     else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
 
-      askList.setAskTitle(Prompt.inputString(" 제목 : "));
-      askList.setAskContent(Prompt.inputString(" 내용 : "));
-      askList.setAskCeoWriter(AuthCeoMemberLoginHandler.getLoginCeoMember());
-      askList.setAskRegisteredDate(new Date(System.currentTimeMillis()));
+      askBoard.setAskTitle(Prompt.inputString(" 제목 : "));
+      askBoard.setAskContent(Prompt.inputString(" 내용 : "));
+      askBoard.setAskCeoWriter(AuthCeoMemberLoginHandler.getLoginCeoMember());
+      askBoard.setAskRegisteredDate(new Date(System.currentTimeMillis()));
 
       while (true) {
 
@@ -106,11 +96,11 @@ public class AskBoardAddHandler implements Command {
               return;
             }     
             AskBoard lastAskBoard = null;
-            if (!arrayAskBoard.isEmpty()) {
-              lastAskBoard = arrayAskBoard.get(arrayAskBoard.size() - 1);
-              askList.setAskNo(lastAskBoard.getAskNo() + 1);
+            if (!askBoardList.isEmpty()) {
+              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
+              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
             } else {
-              askList.setAskNo(1);
+              askBoard.setAskNo(1);
             }
             break;
           }
@@ -121,7 +111,7 @@ public class AskBoardAddHandler implements Command {
         break;
       } 
 
-      askList.setAskStatus(statusNo);
+      askBoard.setAskStatus(statusNo);
     }
 
     if (statusNo == 0) {
@@ -130,12 +120,8 @@ public class AskBoardAddHandler implements Command {
     } 
 
     else if ((statusNo > 0) && (statusNo < 3)) {
-      requestAgent.request("askBoard.insert", askList);
-      if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-        System.out.println(" >> 문의글이 등록되었습니다.");
-      } else {
-        System.out.println(" >> 문의글 등록이 실패되었습니다.");
-      }
+      askBoardDao.insert(askBoard);
+      System.out.println(" >> 문의글이 등록되었습니다.");
     }
   }
 }

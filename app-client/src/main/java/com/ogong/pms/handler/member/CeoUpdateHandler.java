@@ -1,20 +1,18 @@
 package com.ogong.pms.handler.member;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class CeoUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  CeoMemberDao ceoMemberDao;
 
-  public CeoUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CeoUpdateHandler(CeoMemberDao ceoMemberDao) {
+    this.ceoMemberDao = ceoMemberDao;
   }
-
 
   // 기업회원 개인정보 수정은 이름,이메일,비밀번호만 가능
   @Override
@@ -25,17 +23,7 @@ public class CeoUpdateHandler implements Command {
 
     int no = (int) request.getAttribute("inputCeoNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("inputCeoNo", String.valueOf(no));
-
-    requestAgent.request("ceoMember.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 회원이 없습니다.");
-      return;
-    }
-
-    CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
+    CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
     System.out.println("1. 대표자명");
     System.out.println("2. 사진");
@@ -55,7 +43,7 @@ public class CeoUpdateHandler implements Command {
         ceoBossName = Prompt.inputString(" 대표자명(" + ceoMember.getCeoBossName()  + ") : ");
         break;
       case 2:
-        ceoBossName = Prompt.inputString(" 사  진(" + ceoMember.getCeoPhoto()  + ") : ");
+        ceophoto = Prompt.inputString(" 사  진(" + ceoMember.getCeoPhoto()  + ") : ");
         break;
       case 3:
         ceoEmail = Prompt.inputString(" 이메일(" + ceoMember.getCeoEmail() + ") : ");
@@ -87,17 +75,10 @@ public class CeoUpdateHandler implements Command {
     } else if (selectNo == 4) {
       ceoMember.setCeoPassword(ceoPassword);
     }
-    //    ceoMember.setCeoPassword(ceoStoreName);
-    //    ceoMember.setCeoPhoto(ceoStoreDetailAddress);
+    //    ceoMember.setceoStoreName(ceoStoreName);
+    //    ceoMember.setceoStoreDetailAddress(ceoStoreDetailAddress);
 
-    requestAgent.request("ceoMember.update", ceoMember);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 회원 변경 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-
+    ceoMemberDao.update(ceoMember);
     System.out.println(" >> 회원 정보를 변경하였습니다.");
 
   }

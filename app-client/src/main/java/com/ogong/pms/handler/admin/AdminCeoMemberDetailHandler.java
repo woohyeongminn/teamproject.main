@@ -1,18 +1,17 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AdminCeoMemberDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  CeoMemberDao ceoMemberDao;
 
-  public AdminCeoMemberDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AdminCeoMemberDetailHandler(CeoMemberDao ceoMemberDao) {
+    this.ceoMemberDao = ceoMemberDao;
   }
 
   @Override
@@ -33,17 +32,7 @@ public class AdminCeoMemberDetailHandler implements Command {
 
     System.out.println();
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("inputCeoNo", String.valueOf(inputCeoNo));
-
-    requestAgent.request("ceoMember.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(">> 해당 번호의 기업 회원이 없습니다.");
-      return;
-    }
-
-    CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
+    CeoMember ceoMember = ceoMemberDao.findByNo(inputCeoNo);
 
     System.out.printf(" [%s]\n", ceoMember.getCeoBossName());
     System.out.printf(" >> 점포명 : %s\n", ceoMember.getCeoEmail());

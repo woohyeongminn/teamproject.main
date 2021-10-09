@@ -13,7 +13,9 @@ import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.impl.NetAdminDao;
+import com.ogong.pms.dao.impl.NetAskBoardDao;
 import com.ogong.pms.dao.impl.NetCafeDao;
+import com.ogong.pms.dao.impl.NetCeoMemberDao;
 import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
@@ -197,7 +199,9 @@ public class ClientApp {
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
     NetAdminDao adminDao = new NetAdminDao(requestAgent);
-
+    NetCeoMemberDao ceoMemberDao = new NetCeoMemberDao(requestAgent);
+    NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
+    
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
     RandomPw randomPw = new RandomPw();
@@ -210,26 +214,26 @@ public class ClientApp {
     commandMap.put("/member/update", new MemberUpdateHandler(memberDao));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberDao));
 
-    commandMap.put("/askBoard/add", new AskBoardAddHandler(requestAgent));
-    commandMap.put("/askBoard/list", new AskBoardListHandler(requestAgent));
-    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(requestAgent));
-    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(requestAgent));
-    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(requestAgent));
-    commandMap.put("/askBoard/perMyList", new AskBoardPerMyListHandler(requestAgent));
-    commandMap.put("/askBoard/ceoMyList", new AskBoardCeoMyListHandler(requestAgent));
-    commandMap.put("/askBoard/PerMydetail", new AskBoardPerMyDetailHandler(requestAgent));
-    commandMap.put("/askBoard/CeoMydetail", new AskBoardCeoMyDetailHandler(requestAgent));
+    commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao));
+    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardDao));
+    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardDao));
+    commandMap.put("/askBoard/perMyList", new AskBoardPerMyListHandler(askBoardDao));
+    commandMap.put("/askBoard/ceoMyList", new AskBoardCeoMyListHandler(askBoardDao));
+    commandMap.put("/askBoard/PerMydetail", new AskBoardPerMyDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/CeoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao));
 
-    commandMap.put("/reply/add", new ReplyAddHandler(requestAgent));
-    commandMap.put("/reply/detail", new ReplyDetailHandler(requestAgent));
+    commandMap.put("/reply/add", new ReplyAddHandler(askBoardDao));
+    commandMap.put("/reply/detail", new ReplyDetailHandler(askBoardDao));
 
-    commandMap.put("/ceoMember/add", new CeoAddHandler(requestAgent));
-    commandMap.put("/ceoMember/detail", new CeoDetailHandler(requestAgent));
-    commandMap.put("/ceoMember/update", new CeoUpdateHandler(requestAgent));
-    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(requestAgent));
+    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberDao));
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(requestAgent));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
-    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(requestAgent));
+    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(randomPw, ceoMemberDao));
 
     commandMap.put("/admin/login", new AuthAdminLoginHandler(requestAgent));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
@@ -237,10 +241,10 @@ public class ClientApp {
     commandMap.put("/admin/update", new AdminUpdateHandler(adminDao));
     commandMap.put("/admin/detail", new AdminDetailHandler(adminDao));
 
-    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(requestAgent));
-    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(requestAgent));
-    commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(requestAgent));
-    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(requestAgent));
+    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberDao));
+    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(ceoMemberDao));
+    commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(ceoMemberDao));
+    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberDao));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));

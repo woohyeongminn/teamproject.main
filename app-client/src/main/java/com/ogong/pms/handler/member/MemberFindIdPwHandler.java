@@ -46,6 +46,7 @@ public class MemberFindIdPwHandler implements Command {
         System.out.println();
         System.out.printf(" '%s님'의 이메일 >> ", member.getPerNickname());
         System.out.println(member.getPerEmail());
+
       } else {
         System.out.println(" >> 해당 닉네임이 존재하지 않습니다.");
         return;
@@ -71,8 +72,8 @@ public class MemberFindIdPwHandler implements Command {
       System.out.println();
       String inputEmail =  Prompt.inputString(" 이메일 : ");
 
-
       Member member = memberDao.findByEmail(inputEmail);
+
       if (member != null) {
         String pw = randomPw.randomPw();
         member.setPerPassword(pw);
