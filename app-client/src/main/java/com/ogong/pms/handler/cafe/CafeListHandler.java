@@ -1,15 +1,16 @@
 package com.ogong.pms.handler.cafe;
 
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 
 public class CafeListHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CafeListHandler (PromptCafe promptcafe) {
+  public CafeListHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -18,7 +19,7 @@ public class CafeListHandler implements Command {
     System.out.println();
     System.out.println("▶ 장소 목록");
 
-    Collection<Cafe> cafeList = promptcafe.getCafeListByMember();
+    List<Cafe> cafeList = promptcafe.getCafeListByMember();
 
     if (cafeList == null) {
       System.out.println("등록된 장소가 없습니다.");

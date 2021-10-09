@@ -2,17 +2,17 @@ package com.ogong.pms.handler.ceoCafe;
 
 import static com.ogong.pms.domain.Cafe.DELETE;
 import java.time.LocalTime;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class CeoCafeDeleteHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CeoCafeDeleteHandler (PromptCafe promptcafe) {
+  public CeoCafeDeleteHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 

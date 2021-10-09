@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.cafe;
 
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -10,9 +11,9 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CafeMyReservationListHandler (PromptCafe promptcafe) {
+  public CafeMyReservationListHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
 
     //    CafeReservation reservation = new CafeReservation();
@@ -70,7 +71,7 @@ public class CafeMyReservationListHandler implements Command {
       return;
     }
 
-    Collection<CafeReservation> reserList = 
+    List<CafeReservation> reserList = 
         promptcafe.findReservationListByMember(member.getPerNo());
 
     if (reserList.isEmpty()) {

@@ -3,17 +3,17 @@ package com.ogong.pms.handler.ceoCafe;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class CeoReservationRejectHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CeoReservationRejectHandler(PromptCafe promptcafe) {
+  public CeoReservationRejectHandler(CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 

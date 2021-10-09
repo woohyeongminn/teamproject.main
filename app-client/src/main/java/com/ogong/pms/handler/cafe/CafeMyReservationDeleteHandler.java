@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.cafe;
 
 import java.sql.Date;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -8,9 +9,9 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationDeleteHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CafeMyReservationDeleteHandler(PromptCafe promptcafe) {
+  public CafeMyReservationDeleteHandler(CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 

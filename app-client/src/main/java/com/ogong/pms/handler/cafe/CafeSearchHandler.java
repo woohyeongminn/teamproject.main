@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.cafe;
 
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -8,9 +9,9 @@ import com.ogong.util.Prompt;
 
 public class CafeSearchHandler implements Command {
 
-  PromptCafe promptCafe;
+  CafeDao promptCafe;
 
-  public CafeSearchHandler (PromptCafe promptCafe) {
+  public CafeSearchHandler (CafeDao promptCafe) {
     this.promptCafe = promptCafe;
   }
 
@@ -22,7 +23,7 @@ public class CafeSearchHandler implements Command {
 
     String input = Prompt.inputString(" 지역 : ");
 
-    Collection<Cafe> cafeList = promptCafe.findCafeListByLocation(input);
+    List<Cafe> cafeList = promptCafe.findCafeListByLocation(input);
 
     if (!cafeList.isEmpty()) {
       for (Cafe cafe : cafeList) {

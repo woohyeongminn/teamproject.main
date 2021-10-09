@@ -1,19 +1,18 @@
 package com.ogong.pms.handler.ceoCafe;
 
-import java.util.ArrayList;
 import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class CeoCafeRoomAddHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CeoCafeRoomAddHandler (PromptCafe promptcafe) {
+  public CeoCafeRoomAddHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -42,7 +41,7 @@ public class CeoCafeRoomAddHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<CafeRoom> cafeRoomList = new ArrayList<>(promptcafe.getCafeRoomList());
+    List<CafeRoom> cafeRoomList = promptcafe.getCafeRoomList();
     if (!cafeRoomList.isEmpty()) {
       cafeRoom.setRoomNo(cafeRoomList.get(cafeRoomList.size() - 1).getRoomNo() + 1);
     } else {

@@ -2,18 +2,18 @@ package com.ogong.pms.handler.admin;
 
 import static com.ogong.pms.domain.Cafe.DELETE;
 import static com.ogong.pms.domain.Cafe.WAIT;
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class AdminCafeControlHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public AdminCafeControlHandler (PromptCafe promptcafe) {
+  public AdminCafeControlHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -22,7 +22,7 @@ public class AdminCafeControlHandler implements Command {
     System.out.println();
     System.out.println("▶ 장소 목록");
 
-    Collection<Cafe> cafeList = promptcafe.getCafeList();
+    List<Cafe> cafeList = promptcafe.getCafeList();
 
     if (cafeList.isEmpty()) {
       System.out.println(" >> 등록된 장소가 없습니다.");

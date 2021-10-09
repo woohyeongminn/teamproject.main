@@ -4,9 +4,9 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
@@ -18,10 +18,9 @@ import com.ogong.util.Prompt;
 
 public class CafeReservationHandler implements Command {
 
-  PromptCafe promptcafe;
-  int reservationNo = 5; // 예약번호
+  CafeDao promptcafe;
 
-  public CafeReservationHandler (PromptCafe promptcafe) {
+  public CafeReservationHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -105,7 +104,15 @@ public class CafeReservationHandler implements Command {
       return;
     }
 
-    reservation.setReservationNo(reservationNo++);
+    // 고유번호 + 1
+    List<CafeReservation> cafeReservationList = promptcafe.getCafeReservationList();
+    if (!cafeReservationList.isEmpty()) {
+      reservation.setReservationNo(
+          cafeReservationList.get(cafeReservationList.size() - 1).getReservationNo() + 1);
+    } else {
+      reservation.setReservationNo(1);
+    }
+
     reservation.setMember(member);
     reservation.setCafe(cafe);
     reservation.setReservationDate(reservationDate);
@@ -133,7 +140,7 @@ public class CafeReservationHandler implements Command {
     int i = 1;
     HashMap<Integer, Integer> selectRoomNo = new HashMap<>();
 
-    Collection<CafeRoom> roomList = promptcafe.findCafeRoomListByCafe(cafe.getNo());
+    List<CafeRoom> roomList = promptcafe.findCafeRoomListByCafe(cafe.getNo());
     for (CafeRoom cafeRoom : roomList) {
       System.out.println(" " + i + ". " + cafeRoom.getRoomName());
       selectRoomNo.put(i, cafeRoom.getRoomNo());
@@ -275,7 +282,15 @@ public class CafeReservationHandler implements Command {
 
     CafeReservation reservation = new CafeReservation();
 
-    reservation.setReservationNo(reservationNo++);
+    // 고유번호 + 1
+    List<CafeReservation> cafeReservationList = promptcafe.getCafeReservationList();
+    if (!cafeReservationList.isEmpty()) {
+      reservation.setReservationNo(
+          cafeReservationList.get(cafeReservationList.size() - 1).getReservationNo() + 1);
+    } else {
+      reservation.setReservationNo(1);
+    }
+
     reservation.setMember(member);
     reservation.setCafe(cafe);
     reservation.setReservationDate(reservationDate);
@@ -292,7 +307,7 @@ public class CafeReservationHandler implements Command {
   private List<CafeReservation> getCafeReserList(
       int cafeNo, int roomNo, Date reservationDate) throws Exception {
 
-    Collection<CafeReservation> reserList = promptcafe.getCafeReservationList();
+    List<CafeReservation> reserList = promptcafe.getCafeReservationList();
 
     List<CafeReservation> todayReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {

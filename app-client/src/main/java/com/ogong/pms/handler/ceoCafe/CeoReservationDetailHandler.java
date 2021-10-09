@@ -1,8 +1,8 @@
 package com.ogong.pms.handler.ceoCafe;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
@@ -11,14 +11,13 @@ import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.cafe.CafeHandlerHelper;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class CeoReservationDetailHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CeoReservationDetailHandler(PromptCafe promptcafe) {
+  public CeoReservationDetailHandler(CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -56,7 +55,7 @@ public class CeoReservationDetailHandler implements Command {
 
   private List<CafeReservation> printMyCafeReserDetail(CeoMember ceoMember, int input) throws Exception {
     List<CafeReservation> myCafeReserList = new ArrayList<>();
-    Collection<CafeReservation> reserList = 
+    List<CafeReservation> reserList = 
         promptcafe.findReservationListByCeoMember(ceoMember.getCeoNo(), input);
 
     for (CafeReservation cafeReser : reserList) {
