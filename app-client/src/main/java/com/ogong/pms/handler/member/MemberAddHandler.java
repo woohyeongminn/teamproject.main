@@ -1,7 +1,9 @@
 package com.ogong.pms.handler.member;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -10,7 +12,6 @@ import com.ogong.util.Prompt;
 
 public class MemberAddHandler implements Command {
 
-  int perNo = 100;
   RequestAgent requestAgent;
 
   public MemberAddHandler(RequestAgent requestAgent) {
@@ -34,6 +35,8 @@ public class MemberAddHandler implements Command {
     }
 
     Collection<Member> memberList = requestAgent.getObjects(Member.class);
+    List<Member> arrayMember = new ArrayList<>(memberList);
+
 
     String inputNewNick;
     inputNewNick = Prompt.inputString(" 닉네임 : ");
@@ -85,9 +88,14 @@ public class MemberAddHandler implements Command {
     }
 
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
-    member.setPerNo(perNo++);
+
+    // 마지막 회원번호 찾아서 신규회원 등록시 +1 되도록 기능 구현
+    Member lastMember = null;
+    if (!arrayMember.isEmpty()) {
+      lastMember = arrayMember.get(arrayMember.size() - 1);
+    }
+    member.setPerNo(lastMember.getPerNo() +1);
     member.setPerStatus(Member.INUSER);
-    //memberList.add(member);
 
     requestAgent.request("member.insert", member);
 
@@ -96,7 +104,6 @@ public class MemberAddHandler implements Command {
     } else {
       System.out.println(" >> 회원가입이 실패되었습니다.");
     }
-
   }
 }
 

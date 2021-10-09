@@ -56,7 +56,7 @@ public class MemberDeleteHandler implements Command {
     System.out.println(" << 이메일 확인 >>");
     String inputEmail = Prompt.inputString(" 이메일을 입력하세요 : ");
 
-    if (!inputEmail.equals(member.getPerEmail())) {
+    if (!(inputEmail.equals(member.getPerEmail()))) {
       System.out.println();
       System.out.println(" >> 이메일이 일치하지 않습니다.");
       return;

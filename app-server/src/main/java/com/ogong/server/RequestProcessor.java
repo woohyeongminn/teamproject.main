@@ -81,7 +81,7 @@ public class RequestProcessor extends Thread {
       }
 
       sendResult(response, out); // 클라이언트에게 실행 결과를 보낸다.
-      saveData();
+      //saveData();
 
       System.out.println(" 클라이언트 접속 종료!");
 
