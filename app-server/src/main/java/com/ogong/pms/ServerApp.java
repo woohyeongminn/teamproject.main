@@ -26,22 +26,6 @@ public class ServerApp extends Thread {
     System.out.println("서버 실행 중....");
 
     ServerSocket serverSocket = new ServerSocket(5050);
-    //    Socket socket = serverSocket.accept();
-
-    //    try {
-    //      System.out.println("클라이언트 접속");
-    //
-    //      // 소켓 서버가 종료될 때까지 무한루프
-    //      while(true) {
-    //        Socket socketUser = serverSocket.accept(); // 서버에 클라이언트 접속 시
-    //        // Thread 안에 클라이언트 정보를 담아줌
-    //        Thread thd = new MySocketServer(socketUser);
-    //        thd.start(); // Thread 시작
-    //      }                 
-    //
-    //    } catch (IOException e) {
-    //      e.printStackTrace(); // 예외처리
-    //    }
 
     // RequestProcessor 가 사용할 DataProcessor 맵 준비
     HashMap<String,DataProcessor> dataProcessorMap = new HashMap<String,DataProcessor>();
@@ -65,20 +49,6 @@ public class ServerApp extends Thread {
       RequestProcessor requestProcessor = new RequestProcessor(socket, dataProcessorMap);
       requestProcessor.start();
     }
-
-    //    requestProcessor.close();
-
-    // => 데이터를 파일에 저장한다.
-    //    Collection<DataProcessor> dataProcessors = dataProcessorMap.values();
-    //    for (DataProcessor dataProcessor : dataProcessors) {
-    //      if (dataProcessor instanceof JsonDataTable) {
-    //        ((JsonDataTable<?>)dataProcessor).save();
-    //      }
-    //    }
-
-    //    System.out.println("서버 종료");
-    //    serverSocket.close();
-
   }
 
 }
