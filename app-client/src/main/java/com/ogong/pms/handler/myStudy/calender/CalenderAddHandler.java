@@ -19,6 +19,7 @@ public class CalenderAddHandler implements Command {
     this.requestAgent = requestAgent;
   }
 
+  @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 일정 등록");
@@ -37,7 +38,6 @@ public class CalenderAddHandler implements Command {
     Study myStudy = requestAgent.getObject(Study.class);
 
     List<Calender> calenderList = myStudy.getMyStudyCalender();
-
     Calender calender = new Calender();
 
     System.out.println();
@@ -115,10 +115,17 @@ public class CalenderAddHandler implements Command {
         calender.getMonth());
     System.out.println();
 
-    calender.setCalenderNo(++calenderNo);
+    // 고유번호+1
+    Calender lastCalender = null;
+    if (!calenderList.isEmpty()) {
+      lastCalender = calenderList.get(calenderList.size() - 1);
+      calender.setCalenderNo(lastCalender.getCalenderNo() +1);
+    } else {
+      calender.setCalenderNo(1);
+    }
+
     calenderList.add(calender);
     myStudy.setMyStudyCalender(calenderList);
-
 
     requestAgent.request("study.update", myStudy);
 
@@ -126,7 +133,6 @@ public class CalenderAddHandler implements Command {
       System.out.println(" >> 캘린더 저장 실패");
       return;
     }
-
   }
 
   private String stateImportant() {

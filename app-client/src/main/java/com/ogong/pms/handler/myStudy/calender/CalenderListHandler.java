@@ -119,7 +119,7 @@ public class CalenderListHandler implements Command {
       System.out.println("---------------------");
       System.out.println("1. 다른 월");
       System.out.println("2. 등록");
-      System.out.println("3. 취소");
+      System.out.println("0. 이전");
       int selectNo = Prompt.inputInt("선택> ");
       System.out.println();
       switch (selectNo) {
@@ -133,7 +133,7 @@ public class CalenderListHandler implements Command {
       System.out.println("1. 상세");
       System.out.println("2. 다른 월");
       System.out.println("3. 등록");
-      System.out.println("4. 취소");
+      System.out.println("0. 이전");
       int selectNo = Prompt.inputInt("선택> ");
       System.out.println();
       switch (selectNo) {

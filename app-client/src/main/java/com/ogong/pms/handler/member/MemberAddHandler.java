@@ -37,7 +37,6 @@ public class MemberAddHandler implements Command {
     Collection<Member> memberList = requestAgent.getObjects(Member.class);
     List<Member> arrayMember = new ArrayList<>(memberList);
 
-
     String inputNewNick;
     inputNewNick = Prompt.inputString(" 닉네임 : ");
     for (Member comparisonMember : memberList) {

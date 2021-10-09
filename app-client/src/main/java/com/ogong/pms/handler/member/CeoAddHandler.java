@@ -1,6 +1,9 @@
 package com.ogong.pms.handler.member;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -26,6 +29,16 @@ public class CeoAddHandler implements Command {
 
     CeoMember ceoMember = new CeoMember();
 
+    requestAgent.request("ceoMember.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println("목록 조회 실패!");
+      return;
+    }
+
+    Collection<CeoMember> ceoMemberList = requestAgent.getObjects(CeoMember.class);
+    List<CeoMember> arrayCeoMember = new ArrayList<>(ceoMemberList);
+
     String inputNewEmail;
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
@@ -38,7 +51,6 @@ public class CeoAddHandler implements Command {
       break;
     }
     ceoMember.setCeoEmail(inputNewEmail);
-
 
     String inputNewPW;
     while (true) {
@@ -83,7 +95,16 @@ public class CeoAddHandler implements Command {
     System.out.println();
     ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
-    ceoMember.setCeoNo(ceoMemberNo++);
+
+    // 고유번호 +1
+    CeoMember lastCeoMember = null;
+    if (!arrayCeoMember.isEmpty()) {
+      lastCeoMember = arrayCeoMember.get(arrayCeoMember.size() - 1);
+      ceoMember.setCeoNo(lastCeoMember.getCeoNo() +1);
+    } else {
+      ceoMember.setCeoNo(1);
+    }
+
     ceoMember.setCeoStatus(CeoMember.INUSER);
 
     requestAgent.request("ceoMember.insert", ceoMember);
