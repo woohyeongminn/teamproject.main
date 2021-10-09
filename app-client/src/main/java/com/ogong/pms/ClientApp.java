@@ -11,9 +11,10 @@ import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
-import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.impl.NetCafeDao;
+import com.ogong.pms.dao.impl.NetCeoMemberDao;
+import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -195,6 +196,7 @@ public class ClientApp {
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
+    NetCeoMemberDao ceoMemberDao = new NetCeoMemberDao(requestAgent);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -221,13 +223,13 @@ public class ClientApp {
     commandMap.put("/reply/add", new ReplyAddHandler(requestAgent));
     commandMap.put("/reply/detail", new ReplyDetailHandler(requestAgent));
 
-    commandMap.put("/ceoMember/add", new CeoAddHandler(requestAgent));
-    commandMap.put("/ceoMember/detail", new CeoDetailHandler(requestAgent));
-    commandMap.put("/ceoMember/update", new CeoUpdateHandler(requestAgent));
-    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(requestAgent));
+    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberDao));
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(requestAgent));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
-    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(requestAgent));
+    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(randomPw, ceoMemberDao));
 
     commandMap.put("/admin/login", new AuthAdminLoginHandler(requestAgent));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
@@ -235,10 +237,10 @@ public class ClientApp {
     commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
     commandMap.put("/admin/detail", new AdminDetailHandler(requestAgent));
 
-    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(requestAgent));
-    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(requestAgent));
-    commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(requestAgent));
-    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(requestAgent));
+    commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberDao));
+    commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(ceoMemberDao));
+    commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(ceoMemberDao));
+    commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberDao));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(requestAgent));

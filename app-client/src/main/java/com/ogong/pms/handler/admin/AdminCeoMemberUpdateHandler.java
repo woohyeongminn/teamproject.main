@@ -1,18 +1,17 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AdminCeoMemberUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  CeoMemberDao ceoMemberDao;
 
-  public AdminCeoMemberUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AdminCeoMemberUpdateHandler(CeoMemberDao ceoMemberDao) {
+    this.ceoMemberDao = ceoMemberDao;
   }
 
   //관리자용
@@ -24,17 +23,7 @@ public class AdminCeoMemberUpdateHandler implements Command {
 
     int updateCeoNo = (int) request.getAttribute("inputCeoNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("inputCeoNo", String.valueOf(updateCeoNo));
-
-    requestAgent.request("ceoMember.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 번호의 기업 회원이 없습니다.");
-      return;
-    }
-
-    CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
+    CeoMember ceoMember = ceoMemberDao.findByNo(updateCeoNo);
 
     String ceoBossName = Prompt.inputString(" 대표자명(" + ceoMember.getCeoBossName()  + ") : ");
     String ceophoto = Prompt.inputString(" 사진(" + ceoMember.getCeoPhoto()  + ") : ");
@@ -53,14 +42,7 @@ public class AdminCeoMemberUpdateHandler implements Command {
     ceoMember.setCeoPassword(ceoPassword);
     ceoMember.setCeoPhoto(ceophoto);
 
-    requestAgent.request("ceoMember.update", ceoMember);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("기업회원 변경 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-
+    ceoMemberDao.update(ceoMember);
     System.out.println(" >> 기업 회원 정보를 변경하였습니다.");
   }
 

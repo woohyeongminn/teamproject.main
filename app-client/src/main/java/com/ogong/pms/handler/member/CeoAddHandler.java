@@ -4,20 +4,18 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class CeoAddHandler implements Command {
 
-  int ceoMemberNo = 100;
+  CeoMemberDao ceoMemberDao;
 
-  RequestAgent requestAgent;
-
-  public CeoAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CeoAddHandler(CeoMemberDao ceoMemberDao) {
+    this.ceoMemberDao = ceoMemberDao;
   }
 
   // 기업 개인
@@ -27,18 +25,10 @@ public class CeoAddHandler implements Command {
     System.out.println("▶ 기업 회원가입");
     System.out.println();
 
-    CeoMember ceoMember = new CeoMember();
-
-    requestAgent.request("ceoMember.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록 조회 실패!");
-      return;
-    }
-
-    Collection<CeoMember> ceoMemberList = requestAgent.getObjects(CeoMember.class);
+    Collection<CeoMember> ceoMemberList = ceoMemberDao.findAll();
     List<CeoMember> arrayCeoMember = new ArrayList<>(ceoMemberList);
 
+    CeoMember ceoMember = new CeoMember();
     String inputNewEmail;
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
@@ -107,13 +97,7 @@ public class CeoAddHandler implements Command {
 
     ceoMember.setCeoStatus(CeoMember.INUSER);
 
-    requestAgent.request("ceoMember.insert", ceoMember);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println(" >> 회원가입이 완료되었습니다.");
-    } else {
-      System.out.println(" >> 회원가입이 실패되었습니다.");
-    }
-
+    ceoMemberDao.insert(ceoMember);
+    System.out.println(" >> 회원가입이 완료되었습니다.");
   }
 }

@@ -31,7 +31,6 @@ public class MemberDetailHandler implements Command {
     Member member = memberDao.findByNo(no);
 
     try {
-      member = AuthPerMemberLoginHandler.getLoginUser();
       System.out.println();
       System.out.printf(" [%s]\n", member.getPerNickname());
       System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());

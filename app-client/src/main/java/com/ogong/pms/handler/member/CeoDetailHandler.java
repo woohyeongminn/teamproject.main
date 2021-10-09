@@ -1,19 +1,18 @@
 package com.ogong.pms.handler.member;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class CeoDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  CeoMemberDao ceoMemberDao;
 
-  public CeoDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public CeoDetailHandler(CeoMemberDao ceoMemberDao) {
+    this.ceoMemberDao = ceoMemberDao;
   }
 
   @Override
@@ -21,26 +20,15 @@ public class CeoDetailHandler implements Command {
     System.out.println();
     System.out.println("▶ 프로필");
 
-    // 아니 개발자님!! 필터를 해 줬는데 여기는 왜 또 조건을 넣어 줬나요??
-    // 지우면 안 됨 --> 탈퇴하고 내 프로필 못 누르게 해야 해서!!!!!!
-    if (AuthCeoMemberLoginHandler.getLoginCeoMember() == null) {
-      System.out.println(" >> 로그인 하세요.");
+    int no;
+    try {
+      no = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
+    } catch (NullPointerException e) {
+      System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
       return;
     }
 
-    int no = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("inputCeoNo", String.valueOf(no));
-
-    requestAgent.request("ceoMember.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 회원이 없습니다.");
-      return;
-    }
-
-    CeoMember ceoMember = requestAgent.getObject(CeoMember.class);
+    CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
     try {
       System.out.println();
@@ -52,7 +40,12 @@ public class CeoDetailHandler implements Command {
       System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
 
     } catch (NullPointerException e) {
-      System.out.println(" >> 로그인 하세요.");
+      System.out.println();
+      System.out.println(" >> 프로필 실행 오류");
+    }
+
+    if (ceoMember == null) {
+      return;
     }
 
     request.setAttribute("inputCeoNo", ceoMember.getCeoNo());
