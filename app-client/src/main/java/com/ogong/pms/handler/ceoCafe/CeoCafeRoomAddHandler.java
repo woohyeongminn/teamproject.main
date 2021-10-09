@@ -12,7 +12,6 @@ import com.ogong.util.Prompt;
 public class CeoCafeRoomAddHandler implements Command {
 
   PromptCafe promptcafe;
-  int roomNo = 100;
 
   public CeoCafeRoomAddHandler (PromptCafe promptcafe) {
     this.promptcafe = promptcafe;
@@ -43,9 +42,9 @@ public class CeoCafeRoomAddHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<CafeRoom> cafeList = new ArrayList<>(promptcafe.getCafeRoomList());
-    if (!cafeList.isEmpty()) {
-      cafeRoom.setRoomNo(cafeList.get(cafeList.size() - 1).getRoomNo() + 1);
+    List<CafeRoom> cafeRoomList = new ArrayList<>(promptcafe.getCafeRoomList());
+    if (!cafeRoomList.isEmpty()) {
+      cafeRoom.setRoomNo(cafeRoomList.get(cafeRoomList.size() - 1).getRoomNo() + 1);
     } else {
       cafeRoom.setRoomNo(1);
     }

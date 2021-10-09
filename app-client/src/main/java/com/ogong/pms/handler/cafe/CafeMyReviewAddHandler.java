@@ -14,7 +14,6 @@ import com.ogong.util.Prompt;
 public class CafeMyReviewAddHandler implements Command {
 
   PromptCafe promptcafe;
-  int reviewNo = 100; // 리뷰번호
 
   public CafeMyReviewAddHandler(PromptCafe promptcafe) {
     this.promptcafe = promptcafe;
@@ -50,9 +49,9 @@ public class CafeMyReviewAddHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<CafeReview> cafeList = new ArrayList<>(promptcafe.getCafeReviewList());
-    if (!cafeList.isEmpty()) {
-      cafeReview.setReviewNo(cafeList.get(cafeList.size() - 1).getReviewNo() + 1);
+    List<CafeReview> cafeReviewList = new ArrayList<>(promptcafe.getCafeReviewList());
+    if (!cafeReviewList.isEmpty()) {
+      cafeReview.setReviewNo(cafeReviewList.get(cafeReviewList.size() - 1).getReviewNo() + 1);
     } else {
       cafeReview.setReviewNo(1);
     }
