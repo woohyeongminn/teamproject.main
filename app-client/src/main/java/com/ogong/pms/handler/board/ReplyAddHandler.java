@@ -1,21 +1,20 @@
 package com.ogong.pms.handler.board;
 
 import java.sql.Date;
-import java.util.HashMap;
+import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Reply;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class ReplyAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  AskBoardDao askBoardDao;
 
-  public ReplyAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ReplyAddHandler(AskBoardDao askBoardDao) {
+    this.askBoardDao = askBoardDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -25,17 +24,7 @@ public class ReplyAddHandler implements Command {
 
     int askNo = (int) request.getAttribute("askNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(askNo));
-
-    requestAgent.request("askBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 번호의 문의글이 없습니다.");
-      return;
-    }
-
-    AskBoard askBoard = requestAgent.getObject(AskBoard.class);
+    AskBoard askBoard = askBoardDao.findByNo(askNo);
 
     if (askBoard.getReply() != null) {
       System.out.println(" >> 이미 등록된 답변이 있습니다.");
@@ -57,13 +46,7 @@ public class ReplyAddHandler implements Command {
     reply.setReplyNo(1);
     askBoard.setReply(reply);
 
-    requestAgent.request("askBoard.update", askBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 답글 등록 실패");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    askBoardDao.update(askBoard);
     System.out.println(" >> 답글이 등록되었습니다.");
   }
 }

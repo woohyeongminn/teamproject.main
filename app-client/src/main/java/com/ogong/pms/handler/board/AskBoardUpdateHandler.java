@@ -1,25 +1,19 @@
 package com.ogong.pms.handler.board;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AskBoardUpdateHandler implements Command {
 
-  //  public AskBoardUpdateHandler(List<AskBoard> askBoardList, List<Member> memberList,
-  //      List<CeoMember> ceoMemberList, List<Reply> replyList) {
-  //    super(askBoardList, replyList, memberList, ceoMemberList);
-  //  }
+  AskBoardDao askBoardDao;
 
-  RequestAgent requestAgent;
-
-  public AskBoardUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AskBoardUpdateHandler(AskBoardDao askBoardDao) {
+    this.askBoardDao = askBoardDao;
   }
 
 
@@ -31,17 +25,7 @@ public class AskBoardUpdateHandler implements Command {
 
     int askNo = (int) request.getAttribute("askNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(askNo));
-
-    requestAgent.request("askBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 번호의 문의글이 없습니다.");
-      return;
-    }
-
-    AskBoard askBoard = requestAgent.getObject(AskBoard.class);
+    AskBoard askBoard = askBoardDao.findByNo(askNo);
 
     if (AuthPerMemberLoginHandler.getLoginUser() != null) {
 
@@ -96,13 +80,7 @@ public class AskBoardUpdateHandler implements Command {
       askBoard.setAskContent(askContent);
     }
 
-    requestAgent.request("askBoard.update", askBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 문의글 변경 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    askBoardDao.update(askBoard);
     System.out.println(" >> 문의글을 변경하였습니다.");
 
   }

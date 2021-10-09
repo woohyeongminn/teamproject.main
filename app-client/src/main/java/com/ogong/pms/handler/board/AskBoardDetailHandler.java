@@ -1,21 +1,20 @@
 package com.ogong.pms.handler.board;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AskBoardDetailHandler implements Command {
 
-  RequestAgent requestAgent; 
+  AskBoardDao askBoardDao; 
 
-  public AskBoardDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AskBoardDetailHandler(AskBoardDao askBoardDao) {
+    this.askBoardDao = askBoardDao;
   }
 
   @Override
@@ -26,17 +25,7 @@ public class AskBoardDetailHandler implements Command {
 
     int askNo = Prompt.inputInt(" 번호 : ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("no", String.valueOf(askNo));
-
-    requestAgent.request("askBoard.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 번호의 문의글이 없습니다. ");
-      return;
-    }
-
-    AskBoard askBoard = requestAgent.getObject(AskBoard.class);
+    AskBoard askBoard = askBoardDao.findByNo(askNo);
 
     if (askBoard.getAskStatus() == 1) {
       detailList(askBoard, request);
@@ -95,16 +84,11 @@ public class AskBoardDetailHandler implements Command {
       System.out.println("\n---------------------");
       System.out.println("1. 문의글 삭제");
       System.out.println("2. 답변 등록");
-      //      System.out.println("3. 답변 수정");
-      //      System.out.println("4. 답변 삭제");
       System.out.println("0. 뒤로 가기");
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
         case 1 : request.getRequestDispatcher("/askBoard/delete").forward(request); return;
         case 2 : request.getRequestDispatcher("/reply/add").forward(request); return;
-        //case 2 : replyAddHandler.execute(request); return;
-        //case 3 : updateComment(); break;
-        //case 4 : deleteComment(askBoard); break;
         default : return;
       }
     }
@@ -130,17 +114,6 @@ public class AskBoardDetailHandler implements Command {
     }
   }
 
-  //  private void reply(AskBoard askBoard) {
-  //
-  //    if (askBoard.getReply() == null) {
-  //      System.out.println();
-  //      System.out.println(" >> 등록된 답변이 없습니다.");
-  //    }
-  //    else if (askBoard.getReply() != null) {
-  //      replyDetailHandler.detailReply(askBoard);  // 답변 호출
-  //    }
-  //    return;
-  //  }
 
   private void detailList(AskBoard askBoard, CommandRequest request) throws Exception {
 
@@ -161,20 +134,13 @@ public class AskBoardDetailHandler implements Command {
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
     System.out.println("---------------------");
 
-    requestAgent.request("askBoard.update", askBoard);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 문의글 상세에서 조회수 업데이트 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    askBoardDao.update(askBoard);
 
     if (askBoard.getReply() == null) {
       System.out.println("등록된 답변이 없습니다.");
       return;
     }
     request.setAttribute("askNo", askBoard.getAskNo());
-
     request.getRequestDispatcher("/reply/detail").forward(request);
   }
 }

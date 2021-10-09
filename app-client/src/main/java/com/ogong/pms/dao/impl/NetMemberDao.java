@@ -11,7 +11,7 @@ public class NetMemberDao implements MemberDao {
 
   RequestAgent requestAgent;
 
-  public NetMemberDao(RequestAgent requestAgent){
+  public NetMemberDao(RequestAgent requestAgent) {
     this.requestAgent = requestAgent;
   }
 
