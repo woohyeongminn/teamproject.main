@@ -1,19 +1,18 @@
 package com.ogong.pms.handler.member;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.List;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class MemberUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public MemberUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MemberUpdateHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -24,26 +23,8 @@ public class MemberUpdateHandler implements Command {
 
     int no = (int) request.getAttribute("memberNo");
 
-    requestAgent.request("member.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록 조회 실패!");
-      return;
-    }
-
-    Collection<Member> memberList = requestAgent.getObjects(Member.class);
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("memberNo", String.valueOf(no));
-
-    requestAgent.request("member.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 회원이 없습니다.");
-      return;
-    }
-
-    Member member = requestAgent.getObject(Member.class);
+    List<Member> memberList = memberDao.findAll();
+    Member member = memberDao.findByNo(no);
 
     System.out.println("1. 닉네임");
     System.out.println("2. 사진");
@@ -102,7 +83,7 @@ public class MemberUpdateHandler implements Command {
 
         while (true) {
           String pw =  Prompt.inputString(" 비밀번호 확인 : ");
-          if (!pw.equals(member.getPerPassword())) {
+          if (!pw.equals(perPassword)) {
             System.out.println("\n >> 확인 실패!\n");
             continue;
           } else {
@@ -133,14 +114,7 @@ public class MemberUpdateHandler implements Command {
       member.setPerPassword(perPassword);
     }
 
-    requestAgent.request("member.update", member);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 회원 변경 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
-
+    memberDao.update(member);
     System.out.println(" >> 회원 정보를 변경하였습니다.");
 
   }
