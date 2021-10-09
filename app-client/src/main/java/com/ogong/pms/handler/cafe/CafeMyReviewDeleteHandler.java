@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.cafe;
 
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -10,9 +11,9 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewDeleteHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CafeMyReviewDeleteHandler (PromptCafe promptcafe) {
+  public CafeMyReviewDeleteHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -50,7 +51,7 @@ public class CafeMyReviewDeleteHandler implements Command {
   }
 
   private CafeReview getMyReviewByNo(Member member, int reviewNo) throws Exception {
-    Collection<CafeReview> reviewList = promptcafe.getCafeReviewList();
+    List<CafeReview> reviewList = promptcafe.getCafeReviewList();
     for (CafeReview cafeReview : reviewList) {
       if (cafeReview.getMember().getPerNo() == member.getPerNo() &&
           cafeReview.getReviewNo() == reviewNo) {

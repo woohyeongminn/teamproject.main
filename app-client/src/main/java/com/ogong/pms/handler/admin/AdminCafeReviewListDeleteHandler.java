@@ -1,16 +1,16 @@
 package com.ogong.pms.handler.admin;
 
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class AdminCafeReviewListDeleteHandler implements Command{
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public AdminCafeReviewListDeleteHandler(PromptCafe promptcafe) {
+  public AdminCafeReviewListDeleteHandler(CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 

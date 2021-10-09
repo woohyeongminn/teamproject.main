@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.cafe;
 
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
@@ -11,9 +12,9 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewListHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CafeMyReviewListHandler (PromptCafe promptcafe) {
+  public CafeMyReviewListHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -30,7 +31,7 @@ public class CafeMyReviewListHandler implements Command {
       return;
     }
 
-    Collection<CafeReview> reviewList = promptcafe.findReviewListByMember(member.getPerNo());
+    List<CafeReview> reviewList = promptcafe.findReviewListByMember(member.getPerNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 리뷰 내역이 존재하지 않습니다.");

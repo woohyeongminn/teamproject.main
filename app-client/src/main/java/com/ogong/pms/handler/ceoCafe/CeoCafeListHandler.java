@@ -1,19 +1,19 @@
 package com.ogong.pms.handler.ceoCafe;
 
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.cafe.CafeHandlerHelper;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class CeoCafeListHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public CeoCafeListHandler(PromptCafe promptcafe) {
+  public CeoCafeListHandler(CafeDao promptcafe) {
     this.promptcafe = promptcafe; 
   }
 
@@ -35,7 +35,7 @@ public class CeoCafeListHandler implements Command {
       return;
     }
 
-    Collection<Cafe> cafeList =
+    List<Cafe> cafeList =
         promptcafe.getCafeListByCeoMember(AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo());
 
     if (cafeList.isEmpty()) {

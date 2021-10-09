@@ -1,20 +1,20 @@
 package com.ogong.pms.handler.admin;
 
 import static com.ogong.pms.domain.Cafe.DELETE;
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.cafe.CafeHandlerHelper;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.util.Prompt;
 
 public class AdminCafeDetailHandler implements Command {
 
-  PromptCafe promptcafe;
+  CafeDao promptcafe;
 
-  public AdminCafeDetailHandler (PromptCafe promptcafe) {
+  public AdminCafeDetailHandler (CafeDao promptcafe) {
     this.promptcafe = promptcafe;
   }
 
@@ -66,7 +66,7 @@ public class AdminCafeDetailHandler implements Command {
     int starRatingCount = 0;
     double starRatingAverage = 0;
 
-    Collection<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
+    List<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
 
     if (!reviewList.isEmpty()) {
       for (CafeReview review : reviewList) {
@@ -86,7 +86,7 @@ public class AdminCafeDetailHandler implements Command {
     System.out.println();
     System.out.println("============= 리뷰 =============");
 
-    Collection<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
+    List<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 등록된 리뷰가 없습니다.");

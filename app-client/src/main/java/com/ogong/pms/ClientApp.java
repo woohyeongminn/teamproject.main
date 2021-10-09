@@ -11,6 +11,8 @@ import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
+import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.impl.NetCafeDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -63,7 +65,6 @@ import com.ogong.pms.handler.cafe.CafeMyReviewDeleteHandler;
 import com.ogong.pms.handler.cafe.CafeMyReviewListHandler;
 import com.ogong.pms.handler.cafe.CafeReservationHandler;
 import com.ogong.pms.handler.cafe.CafeSearchHandler;
-import com.ogong.pms.handler.cafe.PromptCafe;
 import com.ogong.pms.handler.ceoCafe.CeoCafeAddHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeDeleteHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeDetailHandler;
@@ -297,7 +298,7 @@ public class ClientApp {
     commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(requestAgent));
     commandMap.put("/myStudy/todoDelete", new ToDoDelete(requestAgent));
 
-    PromptCafe promptcafe = new PromptCafe(requestAgent);
+    CafeDao promptcafe = new NetCafeDao(requestAgent);
     commandMap.put("/cafe/list", new CafeListHandler(promptcafe));
     commandMap.put("/cafe/detail", new CafeDetailHandler(promptcafe));
     commandMap.put("/cafe/reservation", new CafeReservationHandler(promptcafe));
