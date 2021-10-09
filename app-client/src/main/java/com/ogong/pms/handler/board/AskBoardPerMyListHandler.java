@@ -1,32 +1,26 @@
 package com.ogong.pms.handler.board;
 
-import java.util.Collection;
+import java.util.List;
+import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AskBoardPerMyListHandler implements Command {
 
-  RequestAgent requestAgent;
+  AskBoardDao askBoardDao;
 
-  public AskBoardPerMyListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AskBoardPerMyListHandler(AskBoardDao askBoardDao) {
+    this.askBoardDao = askBoardDao;
   }
 
   // 마이페이지 - 내가 쓴 문의내역(개인)
   @Override
   public void execute(CommandRequest request) throws Exception {
 
-    requestAgent.request("askBoard.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 문의글 목록 조회 실패");
-      return;
-    }
-    Collection<AskBoard> askBoardList = requestAgent.getObjects(AskBoard.class);
+    List<AskBoard> askBoardList = askBoardDao.findAll();
 
     if (AuthPerMemberLoginHandler.getLoginUser() != null) {
 
