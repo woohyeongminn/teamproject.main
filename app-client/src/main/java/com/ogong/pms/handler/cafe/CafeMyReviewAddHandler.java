@@ -13,10 +13,10 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewAddHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeMyReviewAddHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CafeMyReviewAddHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -29,7 +29,7 @@ public class CafeMyReviewAddHandler implements Command {
       return;
     }
 
-    Cafe cafe = promptcafe.findByCafeNoMember((int) request.getAttribute("cafeNo"));
+    Cafe cafe = cafeDao.findByCafeNoMember((int) request.getAttribute("cafeNo"));
 
     CafeReview cafeReview = new CafeReview();
 
@@ -49,7 +49,7 @@ public class CafeMyReviewAddHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<CafeReview> cafeReviewList = promptcafe.getCafeReviewList();
+    List<CafeReview> cafeReviewList = cafeDao.getCafeReviewList();
     if (!cafeReviewList.isEmpty()) {
       cafeReview.setReviewNo(cafeReviewList.get(cafeReviewList.size() - 1).getReviewNo() + 1);
     } else {
@@ -63,8 +63,8 @@ public class CafeMyReviewAddHandler implements Command {
     cafeReview.setRegisteredDate(registeredDate);
     cafeReview.setReviewStatus(0);
 
-    promptcafe.insertCafeReview(cafeReview);
-    promptcafe.updateWirteReview((int) request.getAttribute("reservationNo"));
+    cafeDao.insertCafeReview(cafeReview);
+    cafeDao.updateWirteReview((int) request.getAttribute("reservationNo"));
 
   }
 }

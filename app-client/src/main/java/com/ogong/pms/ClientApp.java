@@ -11,7 +11,6 @@ import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
-import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.impl.NetAdminDao;
 import com.ogong.pms.dao.impl.NetAskBoardDao;
 import com.ogong.pms.dao.impl.NetCafeDao;
@@ -201,7 +200,8 @@ public class ClientApp {
     NetAdminDao adminDao = new NetAdminDao(requestAgent);
     NetCeoMemberDao ceoMemberDao = new NetCeoMemberDao(requestAgent);
     NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
-    
+    NetCafeDao cafeDao = new NetCafeDao(requestAgent);
+
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
     RandomPw randomPw = new RandomPw();
@@ -304,44 +304,43 @@ public class ClientApp {
     commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(requestAgent));
     commandMap.put("/myStudy/todoDelete", new ToDoDelete(requestAgent));
 
-    CafeDao promptcafe = new NetCafeDao(requestAgent);
-    commandMap.put("/cafe/list", new CafeListHandler(promptcafe));
-    commandMap.put("/cafe/detail", new CafeDetailHandler(promptcafe));
-    commandMap.put("/cafe/reservation", new CafeReservationHandler(promptcafe));
-    commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
-    commandMap.put("/cafe/search", new CafeSearchHandler(promptcafe));
+    commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));
+    commandMap.put("/cafe/reservation", new CafeReservationHandler(cafeDao));
+    commandMap.put("/cafe/search", new CafeSearchHandler(cafeDao));
+    commandMap.put("/cafe/search", new CafeSearchHandler(cafeDao));
 
-    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(promptcafe));
-    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(promptcafe));
-    commandMap.put("/cafeReservation/delete", new CafeMyReservationDeleteHandler(promptcafe));
+    commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(cafeDao));
+    commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(cafeDao));
+    commandMap.put("/cafeReservation/delete", new CafeMyReservationDeleteHandler(cafeDao));
 
-    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(promptcafe));
-    commandMap.put("/cafe/myReviewAdd", new CafeMyReviewAddHandler(promptcafe));
-    commandMap.put("/cafe/myReviewDelete", new CafeMyReviewDeleteHandler(promptcafe));
+    commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeDao));
+    commandMap.put("/cafe/myReviewAdd", new CafeMyReviewAddHandler(cafeDao));
+    commandMap.put("/cafe/myReviewDelete", new CafeMyReviewDeleteHandler(cafeDao));
 
-    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(promptcafe));
-    commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(promptcafe));
-    commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(promptcafe));
-    commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(promptcafe));
-    commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(promptcafe));
+    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(cafeDao));
+    commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(cafeDao));
 
-    commandMap.put("/ceoMember/cafeRoomList", new CeoCafeRoomListHandler(promptcafe));
-    commandMap.put("/ceoMember/cafeRoomDetail", new CeoCafeRoomDetailHandler(promptcafe));
-    commandMap.put("/ceoMember/cafeRoomAdd", new CeoCafeRoomAddHandler(promptcafe));
-    commandMap.put("/ceoMember/cafeRoomUpdate", new CeoCafeRoomUpdateHandler(promptcafe));
-    commandMap.put("/ceoMember/cafeRoomDelete", new CeoCafeRoomDeleteHandler(promptcafe));
+    commandMap.put("/ceoMember/cafeRoomList", new CeoCafeRoomListHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeRoomDetail", new CeoCafeRoomDetailHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeRoomAdd", new CeoCafeRoomAddHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeRoomUpdate", new CeoCafeRoomUpdateHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeRoomDelete", new CeoCafeRoomDeleteHandler(cafeDao));
 
-    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(promptcafe));
-    commandMap.put("/ceoMember/ReservationDetail", new CeoReservationDetailHandler(promptcafe));
-    commandMap.put("/ceoMember/ReservationReject", new CeoReservationRejectHandler(promptcafe));
+    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(cafeDao));
+    commandMap.put("/ceoMember/ReservationDetail", new CeoReservationDetailHandler(cafeDao));
+    commandMap.put("/ceoMember/ReservationReject", new CeoReservationRejectHandler(cafeDao));
 
-    commandMap.put("/cafe/control", new AdminCafeControlHandler(promptcafe));
-    commandMap.put("/cafe/controlDetail", new AdminCafeDetailHandler(promptcafe));
-    commandMap.put("/cafe/controlApproval", new AdminCafeApprovalHandler(promptcafe));
-    commandMap.put("/cafe/controlDelete", new AdminCafeDeleteHandler(promptcafe));
+    commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeDao));
+    commandMap.put("/cafe/controlDetail", new AdminCafeDetailHandler(cafeDao));
+    commandMap.put("/cafe/controlApproval", new AdminCafeApprovalHandler(cafeDao));
+    commandMap.put("/cafe/controlDelete", new AdminCafeDeleteHandler(cafeDao));
 
-    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(promptcafe)); 
-    commandMap.put("/cafe/reviewListDelete", new AdminCafeReviewListDeleteHandler(promptcafe)); 
+    commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeDao)); 
+    commandMap.put("/cafe/reviewListDelete", new AdminCafeReviewListDeleteHandler(cafeDao)); 
 
   }  
 

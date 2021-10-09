@@ -9,10 +9,10 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeApprovalHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public AdminCafeApprovalHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public AdminCafeApprovalHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -30,7 +30,7 @@ public class AdminCafeApprovalHandler implements Command {
         continue;
       }
 
-      Cafe cafe = promptcafe.findByCafeNo(inputCafeNo);
+      Cafe cafe = cafeDao.findByCafeNo(inputCafeNo);
 
       if (cafe == null) {
         System.out.println(" >> 번호를 다시 선택하세요.");
@@ -48,7 +48,7 @@ public class AdminCafeApprovalHandler implements Command {
           return;
         }
         cafe.setCafeStatus(GENERAL);
-        promptcafe.updateCafe(cafe);
+        cafeDao.updateCafe(cafe);
         System.out.printf(" >> '%s'를 승인하였습니다.\n", cafe.getName());
         return;
       }

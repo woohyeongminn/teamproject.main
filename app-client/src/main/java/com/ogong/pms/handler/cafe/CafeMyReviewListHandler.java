@@ -12,10 +12,10 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewListHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeMyReviewListHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CafeMyReviewListHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -31,7 +31,7 @@ public class CafeMyReviewListHandler implements Command {
       return;
     }
 
-    List<CafeReview> reviewList = promptcafe.findReviewListByMember(member.getPerNo());
+    List<CafeReview> reviewList = cafeDao.findReviewListByMember(member.getPerNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 리뷰 내역이 존재하지 않습니다.");
@@ -45,12 +45,15 @@ public class CafeMyReviewListHandler implements Command {
         continue;
       }
 
-      Cafe cafe = promptcafe.findByCafeNo(cafeReview.getCafe().getNo());
+      Cafe cafe = cafeDao.findByCafeNo(cafeReview.getCafe().getNo());
 
       System.out.printf(" (%d)\n [%s]\n 별점 : %s (%d)\n 내용 : %s\n 등록일 : %s\n",
-          cafeReview.getReviewNo(), cafe.getName()
-          , CafeHandlerHelper.getReviewGradeStatusLabel(cafeReview.getGrade()), cafeReview.getGrade()
-          , cafeReview.getContent(), cafeReview.getRegisteredDate());
+          cafeReview.getReviewNo(), 
+          cafe.getName(), 
+          CafeHandlerHelper.getReviewGradeStatusLabel(cafeReview.getGrade()), 
+          cafeReview.getGrade(), 
+          cafeReview.getContent(), 
+          cafeReview.getRegisteredDate());
       System.out.println();
     }
 

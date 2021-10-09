@@ -1,7 +1,6 @@
 package com.ogong.pms.handler.ceoCafe;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReservation;
@@ -11,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class CeoReservationRejectHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoReservationRejectHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoReservationRejectHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -23,8 +22,7 @@ public class CeoReservationRejectHandler implements Command {
     System.out.println("▶ 예약 거절");
     System.out.println();
 
-    List<CafeReservation> cafeReservationList = 
-        (ArrayList) request.getAttribute("cafeReservationList"); 
+    List<CafeReservation> cafeReservationList = cafeDao.getCafeReservationList(); 
 
     int reservationNo = Prompt.inputInt(" 번호 : ");
     for (CafeReservation cafeReservation : cafeReservationList) {
@@ -50,7 +48,7 @@ public class CeoReservationRejectHandler implements Command {
           }
           //          cafeReservation.setReservationStatus(4);
           //      reserList.remove(myReservation);
-          promptcafe.deleteReservation(cafeReservation, 4);
+          cafeDao.deleteReservation(cafeReservation, 4);
           return;
 
         } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {

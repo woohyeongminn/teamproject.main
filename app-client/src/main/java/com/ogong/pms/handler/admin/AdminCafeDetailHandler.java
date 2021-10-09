@@ -12,10 +12,10 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeDetailHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public AdminCafeDetailHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public AdminCafeDetailHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -24,7 +24,7 @@ public class AdminCafeDetailHandler implements Command {
     System.out.println("▶ 장소 상세");
     System.out.println();
 
-    Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
+    Cafe cafe = cafeDao.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
     System.out.println();
 
     if (cafe == null || cafe.getCafeStatus() == DELETE) {
@@ -66,7 +66,7 @@ public class AdminCafeDetailHandler implements Command {
     int starRatingCount = 0;
     double starRatingAverage = 0;
 
-    List<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
+    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
 
     if (!reviewList.isEmpty()) {
       for (CafeReview review : reviewList) {
@@ -86,7 +86,7 @@ public class AdminCafeDetailHandler implements Command {
     System.out.println();
     System.out.println("============= 리뷰 =============");
 
-    List<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
+    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 등록된 리뷰가 없습니다.");

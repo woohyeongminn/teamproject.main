@@ -15,10 +15,10 @@ import com.ogong.util.Prompt;
 
 public class CeoReservationDetailHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoReservationDetailHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoReservationDetailHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -56,12 +56,12 @@ public class CeoReservationDetailHandler implements Command {
   private List<CafeReservation> printMyCafeReserDetail(CeoMember ceoMember, int input) throws Exception {
     List<CafeReservation> myCafeReserList = new ArrayList<>();
     List<CafeReservation> reserList = 
-        promptcafe.findReservationListByCeoMember(ceoMember.getCeoNo(), input);
+        cafeDao.findReservationListByCeoMember(ceoMember.getCeoNo(), input);
 
     for (CafeReservation cafeReser : reserList) {
       myCafeReserList.add(cafeReser);
-      Cafe cafeReserCafe = promptcafe.findByCafeNo(cafeReser.getCafe().getNo());
-      CafeRoom cafeRoom = promptcafe.findByRoomNo(cafeReser.getRoomNo());
+      Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
+      CafeRoom cafeRoom = cafeDao.findByRoomNo(cafeReser.getRoomNo());
       String reserStatusLable = 
           CafeHandlerHelper.getReservationStatus(cafeReser.getReservationStatus());
 

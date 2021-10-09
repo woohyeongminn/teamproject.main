@@ -11,10 +11,10 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewDeleteHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeMyReviewDeleteHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CafeMyReviewDeleteHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -47,11 +47,11 @@ public class CafeMyReviewDeleteHandler implements Command {
       return;
     }
 
-    promptcafe.deleteCafeReview(myReviewByNo.getReviewNo());
+    cafeDao.deleteCafeReview(myReviewByNo.getReviewNo());
   }
 
   private CafeReview getMyReviewByNo(Member member, int reviewNo) throws Exception {
-    List<CafeReview> reviewList = promptcafe.getCafeReviewList();
+    List<CafeReview> reviewList = cafeDao.getCafeReviewList();
     for (CafeReview cafeReview : reviewList) {
       if (cafeReview.getMember().getPerNo() == member.getPerNo() &&
           cafeReview.getReviewNo() == reviewNo) {

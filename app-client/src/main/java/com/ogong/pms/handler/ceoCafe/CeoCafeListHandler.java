@@ -11,10 +11,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeListHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeListHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe; 
+  public CeoCafeListHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao; 
   }
 
   @Override
@@ -36,7 +36,7 @@ public class CeoCafeListHandler implements Command {
     }
 
     List<Cafe> cafeList =
-        promptcafe.getCafeListByCeoMember(AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo());
+        cafeDao.getCafeListByCeoMember(AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo());
 
     if (cafeList.isEmpty()) {
       System.out.println(" >> 등록된 카페가 없습니다.");
@@ -52,8 +52,10 @@ public class CeoCafeListHandler implements Command {
     } else {
 
       for (Cafe cafe : cafeList) {
-        System.out.printf(" (%s)\n [%s] | %s\n" , cafe.getNo(), cafe.getName()
-            , CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus()));
+        System.out.printf(" (%s)\n [%s] | %s\n" , 
+            cafe.getNo(), 
+            cafe.getName(), 
+            CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus()));
       }
 
       System.out.println("\n----------------------");

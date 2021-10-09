@@ -9,10 +9,10 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeDeleteHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public AdminCafeDeleteHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public AdminCafeDeleteHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -21,7 +21,7 @@ public class AdminCafeDeleteHandler implements Command {
     System.out.println("▶ 장소 삭제");
     System.out.println();
 
-    Cafe cafe = promptcafe.findByCafeNo((int) request.getAttribute("cafeNo"));
+    Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     if (cafe == null) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
@@ -37,6 +37,6 @@ public class AdminCafeDeleteHandler implements Command {
 
     cafe.setCafeStatus(DELETE);
 
-    promptcafe.deleteCafe(cafe);
+    cafeDao.deleteCafe(cafe);
   }
 }

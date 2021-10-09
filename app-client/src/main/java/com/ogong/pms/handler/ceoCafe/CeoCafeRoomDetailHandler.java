@@ -10,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeRoomDetailHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeRoomDetailHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeRoomDetailHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -24,7 +24,7 @@ public class CeoCafeRoomDetailHandler implements Command {
     CafeRoom cafeRoom = null;
     int input;
     HashMap<Integer,Integer> selectRoomNo = (HashMap) request.getAttribute("selectRoomNo");
-    Cafe cafe = promptcafe.findByCafeNo((int) request.getAttribute("cafeNo"));
+    Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     while (true) {
       System.out.println();
@@ -35,7 +35,7 @@ public class CeoCafeRoomDetailHandler implements Command {
         continue;
       }
 
-      cafeRoom = promptcafe.findByRoomNo(selectRoomNo.get(input));
+      cafeRoom = cafeDao.findByRoomNo(selectRoomNo.get(input));
 
       if (cafeRoom != null && cafeRoom.getCafe().getNo() == cafe.getNo()) {
         break;
