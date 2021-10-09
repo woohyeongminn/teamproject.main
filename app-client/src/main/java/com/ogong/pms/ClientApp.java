@@ -11,6 +11,7 @@ import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
+import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -188,10 +189,11 @@ public class ClientApp {
   public ClientApp() throws Exception {
     // 로컬
     requestAgent = new RequestAgent("127.0.0.1", 5050);
-
     //requestAgent = new RequestAgent("192.168.0.92", 5050);
-
     //requestAgent = new RequestAgent("192.168.0.68", 5050);
+
+    // 데이터 관리를 담당할 DAO 객체를 준비한다.
+    NetMemberDao memberDao = new NetMemberDao(requestAgent);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -199,13 +201,11 @@ public class ClientApp {
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(requestAgent));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
-    commandMap.put("/member/add", new MemberAddHandler(requestAgent));
-    commandMap.put("/member/detail", new MemberDetailHandler(requestAgent));
-    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, requestAgent));
-    commandMap.put("/member/update", new MemberUpdateHandler(requestAgent));
-    commandMap.put("/member/delete", new MemberDeleteHandler(requestAgent));
-
-    // ReplyAddHandler replyAddHandler = new ReplyAddHandler(requestAgent);
+    commandMap.put("/member/add", new MemberAddHandler(memberDao));
+    commandMap.put("/member/detail", new MemberDetailHandler(memberDao));
+    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, memberDao));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberDao));
+    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao));
 
     commandMap.put("/askBoard/add", new AskBoardAddHandler(requestAgent));
     commandMap.put("/askBoard/list", new AskBoardListHandler(requestAgent));
@@ -239,7 +239,7 @@ public class ClientApp {
     commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(requestAgent));
     commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(requestAgent));
 
-    commandMap.put("/adminMember/list", new AdminMemberListHandler(requestAgent));
+    commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
     commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(requestAgent));
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(requestAgent));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(requestAgent));

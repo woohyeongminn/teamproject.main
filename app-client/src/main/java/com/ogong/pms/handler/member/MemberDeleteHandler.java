@@ -1,24 +1,19 @@
 package com.ogong.pms.handler.member;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import com.ogong.menu.Menu;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class MemberDeleteHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public MemberDeleteHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MemberDeleteHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   // 개인
@@ -41,17 +36,10 @@ public class MemberDeleteHandler implements Command {
       no = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
     }
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("memberNo", String.valueOf(no));
+    //    HashMap<String,String> params = new HashMap<>();
+    //    params.put("memberNo", String.valueOf(no));
 
-    requestAgent.request("member.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("해당 번호의 회원이 없습니다.");
-      return;
-    }
-
-    Member member = requestAgent.getObject(Member.class);
+    Member member = memberDao.findByNo(no);
 
     System.out.println(" << 이메일 확인 >>");
     String inputEmail = Prompt.inputString(" 이메일을 입력하세요 : ");
@@ -79,51 +67,45 @@ public class MemberDeleteHandler implements Command {
       return;
     }
 
-    requestAgent.request("study.selectList", null);
+    //    requestAgent.request("study.selectList", null);
+    //
+    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //      System.out.println(" >> 해당 스터디가 없습니다.");
+    //      return;
+    //    }
+    //
+    //    Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    //    List<Study> s = new ArrayList<>(studyList);
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 스터디가 없습니다.");
-      return;
-    }
+    //    for (int i = s.size() -1; i >= 0; i--) {
+    //      if (s.get(i).getOwner().getPerNo() == member.getPerNo()) {
+    //        HashMap<String,String> studyParams = new HashMap<>();
+    //        studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
+    //
+    //        requestAgent.request("study.delete", studyParams);
+    //
+    //        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //          System.out.println(" >> 스터디 삭제가 실패되었습니다.");
+    //          return;
+    //        }
+    //      } else {
+    //        for (Member m : s.get(i).getMembers()) {
+    //          if(m.getPerNo() == member.getPerNo()) {
+    //            s.get(i).getMembers().remove(m);
+    //
+    //            requestAgent.request("study.update", s.get(i));
+    //
+    //            if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+    //              System.out.println(" >> 구성원 탈퇴 실패!");
+    //              return;
+    //            }
+    //            break;
+    //          }
+    //        }
+    //      }
+    //    }
 
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
-    List<Study> s = new ArrayList<>(studyList);
-
-    for (int i = s.size() -1; i >= 0; i--) {
-      if (s.get(i).getOwner().getPerNo() == member.getPerNo()) {
-        HashMap<String,String> studyParams = new HashMap<>();
-        studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
-
-        requestAgent.request("study.delete", studyParams);
-
-        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-          System.out.println(" >> 스터디 삭제가 실패되었습니다.");
-          return;
-        }
-      } else {
-        for (Member m : s.get(i).getMembers()) {
-          if(m.getPerNo() == member.getPerNo()) {
-            s.get(i).getMembers().remove(m);
-
-            requestAgent.request("study.update", s.get(i));
-
-            if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-              System.out.println(" >> 구성원 탈퇴 실패!");
-              return;
-            }
-            break;
-          }
-        }
-      }
-    }
-
-    requestAgent.request("member.delete", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("회원 삭제 실패!");
-      System.out.println(requestAgent.getObject(String.class));
-      return;
-    }
+    memberDao.delete(no);
     AuthPerMemberLoginHandler.loginUser = null;
     AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
     System.out.println();
