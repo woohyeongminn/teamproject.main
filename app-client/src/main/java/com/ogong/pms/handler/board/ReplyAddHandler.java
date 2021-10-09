@@ -12,7 +12,6 @@ import com.ogong.util.Prompt;
 
 public class ReplyAddHandler implements Command {
 
-  int replyNo = 100;
   RequestAgent requestAgent;
 
   public ReplyAddHandler(RequestAgent requestAgent) {
@@ -55,7 +54,7 @@ public class ReplyAddHandler implements Command {
       return;
     }
 
-    reply.setReplyNo(replyNo++);
+    reply.setReplyNo(1);
     askBoard.setReply(reply);
 
     requestAgent.request("askBoard.update", askBoard);

@@ -1,6 +1,9 @@
 package com.ogong.pms.handler.board;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -11,7 +14,6 @@ import com.ogong.util.Prompt;
 
 public class AskBoardAddHandler implements Command {
 
-  int askNo = 100;
   RequestAgent requestAgent;
 
   public AskBoardAddHandler(RequestAgent requestAgent) {
@@ -25,6 +27,16 @@ public class AskBoardAddHandler implements Command {
     System.out.println();
 
     AskBoard askList = new AskBoard();
+
+    requestAgent.request("askBoard.selectList", null);
+
+    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+      System.out.println(" >> 문의글 목록 조회 실패");
+      return;
+    }
+
+    Collection<AskBoard> askBoardList = requestAgent.getObjects(AskBoard.class);
+    List<AskBoard> arrayAskBoard = new ArrayList<>(askBoardList);
 
     int statusNo = 0;
 
@@ -49,8 +61,16 @@ public class AskBoardAddHandler implements Command {
             if (!input.equalsIgnoreCase("네")) {
               System.out.println(" >> 문의글 등록을 취소하였습니다.");
               return;
-            }    
-            askList.setAskNo(askNo++);
+            }  
+
+            // 마지막 고유번호를 찾아서 신규 등록시 +1 되도록 기능 구현
+            AskBoard lastAskBoard = null;
+            if (!arrayAskBoard.isEmpty()) {
+              lastAskBoard = arrayAskBoard.get(arrayAskBoard.size() - 1);
+              askList.setAskNo(lastAskBoard.getAskNo() + 1);
+            } else {
+              askList.setAskNo(1);
+            }
             break;
           }
         } catch (NumberFormatException e) {
@@ -85,7 +105,13 @@ public class AskBoardAddHandler implements Command {
               System.out.println(" >> 문의글 등록을 취소하였습니다.");
               return;
             }     
-            askList.setAskNo(askNo++);
+            AskBoard lastAskBoard = null;
+            if (!arrayAskBoard.isEmpty()) {
+              lastAskBoard = arrayAskBoard.get(arrayAskBoard.size() - 1);
+              askList.setAskNo(lastAskBoard.getAskNo() + 1);
+            } else {
+              askList.setAskNo(1);
+            }
             break;
           }
         } catch (NumberFormatException e) {
@@ -110,9 +136,6 @@ public class AskBoardAddHandler implements Command {
       } else {
         System.out.println(" >> 문의글 등록이 실패되었습니다.");
       }
-
     }
-
   }
-
 }

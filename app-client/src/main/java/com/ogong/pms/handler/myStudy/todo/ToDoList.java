@@ -39,49 +39,49 @@ public class ToDoList implements Command {
 
     if (todoList.isEmpty()) {
       System.out.println(" 등록된 TodoList가 없습니다.");
-      return;
     }
+    if (!todoList.isEmpty()) {
+      System.out.println(" >> 진행 중 ");
 
-    System.out.println(" >> 진행 중 ");
+      int countProgressing = 0;
 
-    int countProgressing = 0;
-
-    for (ToDo todo : todoList) {
-      if (todo.getTodoStatus() == ToDo.PROGRESSING) {
-        System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
-            getStatusToDo(todo.getTodoStatus()),
-            todo.getTodoNo(),
-            todo.getTodoContent(),
-            todo.getTodoRemark(),
-            todo.getTodoDate());
-        System.out.println();
-        countProgressing++;
+      for (ToDo todo : todoList) {
+        if (todo.getTodoStatus() == ToDo.PROGRESSING) {
+          System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
+              getStatusToDo(todo.getTodoStatus()),
+              todo.getTodoNo(),
+              todo.getTodoContent(),
+              todo.getTodoRemark(),
+              todo.getTodoDate());
+          System.out.println();
+          countProgressing++;
+        }
       }
-    }
 
-    if (countProgressing == 0) {
-      System.out.println(" ○ | 진행 중인 To-Do List가 없습니다.\n");
-    }
-
-    System.out.println(" >> 완료 ");
-
-    int countComplete = 0;
-
-    for (ToDo todo : todoList) {
-      if (todo.getTodoStatus() == ToDo.COMPLETE) {
-        System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
-            getStatusToDo(todo.getTodoStatus()),
-            todo.getTodoNo(),
-            todo.getTodoContent(),
-            todo.getTodoRemark(),
-            todo.getTodoDate());
-        System.out.println();
-        countComplete++;
+      if (countProgressing == 0) {
+        System.out.println(" ○ | 진행 중인 To-Do List가 없습니다.\n");
       }
-    }
 
-    if (countComplete == 0) {
-      System.out.println(" ✔ | 완료된 To-Do List가 없습니다.\n");
+      System.out.println(" >> 완료 ");
+
+      int countComplete = 0;
+
+      for (ToDo todo : todoList) {
+        if (todo.getTodoStatus() == ToDo.COMPLETE) {
+          System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
+              getStatusToDo(todo.getTodoStatus()),
+              todo.getTodoNo(),
+              todo.getTodoContent(),
+              todo.getTodoRemark(),
+              todo.getTodoDate());
+          System.out.println();
+          countComplete++;
+        }
+      }
+
+      if (countComplete == 0) {
+        System.out.println(" ✔ | 완료된 To-Do List가 없습니다.\n");
+      }
     }
 
     System.out.println("---------------------");
