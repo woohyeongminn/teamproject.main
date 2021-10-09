@@ -16,7 +16,7 @@ public class AskBoardCeoMyListHandler implements Command {
     this.requestAgent = requestAgent;
   }
 
-  // 마이페이지 - 내가 쓴 문의내역(기업)
+  // 마이페이지 - 내가 쓴 문의내역(개인)
   @Override
   public void execute(CommandRequest request) throws Exception {
 
@@ -30,48 +30,46 @@ public class AskBoardCeoMyListHandler implements Command {
 
     if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
 
+      // 개인이 쓴 문의글
       int count = 0;
       for (AskBoard askBoard : askBoardList) {
-        int ceoMemberNo = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
-        if(askBoard.getAskCeoWriter().getCeoNo() == ceoMemberNo) {
+        int memberNo = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
+        if(askBoard.getAskCeoWriter().getCeoNo() == memberNo) {
           System.out.println();
-          System.out.printf(" (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+          String reply = "";
+          if (askBoard.getReply() != null) {
+            reply = "📨";
+          } else {
+            reply = "X";
+          }
+          System.out.printf("(%d) 답변%s\n 제목 : %s\n 작성일 : %s\n 조회수 : %d\n", 
               askBoard.getAskNo(), 
+              reply,
               askBoard.getAskTitle(), 
-              askBoard.getAskCeoWriter().getCeoBossName(),
               askBoard.getAskRegisteredDate(),
               askBoard.getAskVeiwCount());
-
-          if (askBoard.getReply() != null) {
-            request.setAttribute("askNo", askBoard.getAskNo());
-            request.getRequestDispatcher("/reply/detail").forward(request);  // 답변 호출
-          } else {
-            System.out.println("---------------------");
-            System.out.println();
-            System.out.println(" >> 등록된 답변이 없습니다.");
-          }
           count++;
         } 
-      }
 
+      }
       if (count == 0) {
         System.out.println("\n >> 내가 등록한 문의글이 없습니다.");
         return;
       }
-    }
 
-    else {
+    } else {
       System.out.println();
       System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
       return;
     }
-
+    System.out.println();
+    System.out.println("---------------------");
     System.out.println("1. 상세");
     System.out.println("2. 이전");
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
-      case 1: request.getRequestDispatcher("/askBoard/CeoMydetail").forward(request); return;
+      case 1: request.getRequestDispatcher("/askBoard/PerMydetail").forward(request); return;
       case 2: return;
       default : System.out.println(" >> 번호를 다시 선택해 주세요.");
     }

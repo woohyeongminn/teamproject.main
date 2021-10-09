@@ -42,9 +42,9 @@ public class AskBoardPerMyListHandler implements Command {
           } else {
             reply = "X";
           }
-          System.out.printf("답변%s\n (%d)\n 제목 : %s\n 작성일 : %s\n 조회수 : %d\n", 
-              reply,
+          System.out.printf("(%d) 답변%s\n 제목 : %s\n 작성일 : %s\n 조회수 : %d\n", 
               askBoard.getAskNo(), 
+              reply,
               askBoard.getAskTitle(), 
               askBoard.getAskRegisteredDate(),
               askBoard.getAskVeiwCount());
