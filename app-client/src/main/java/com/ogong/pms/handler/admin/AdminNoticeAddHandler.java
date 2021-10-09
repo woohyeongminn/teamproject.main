@@ -1,6 +1,9 @@
 package com.ogong.pms.handler.admin;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -10,7 +13,6 @@ import com.ogong.util.Prompt;
 
 public class AdminNoticeAddHandler implements Command {
 
-  int adminNotiNo = 100;
   RequestAgent requestAgent;
 
   public AdminNoticeAddHandler(RequestAgent requestAgent) {
@@ -32,6 +34,9 @@ public class AdminNoticeAddHandler implements Command {
       return;
     }
 
+    Collection<AdminNotice> adminNoticeList = requestAgent.getObjects(AdminNotice.class);
+    List<AdminNotice> arrayAdminNotice = new ArrayList<>(adminNoticeList);
+
     adminNotice.setAdminNotiTitle(Prompt.inputString(" 제목 : "));
     adminNotice.setAdminNotiContent(Prompt.inputString(" 내용 : "));
     adminNotice.setAdminNotiWriter(AuthAdminLoginHandler.getLoginAdmin().getMasterNickname());
@@ -44,7 +49,15 @@ public class AdminNoticeAddHandler implements Command {
       request.getRequestDispatcher("/adminNotice/list").forward(request);
       return;
     }
-    adminNotice.setAdminNotiNo(adminNotiNo++);
+
+    // 마지막 고유번호를 찾아서 신규 등록시 +1 되도록 기능 구현
+    AdminNotice lastAdminNotice = null;
+    if (!arrayAdminNotice.isEmpty()) {
+      lastAdminNotice = arrayAdminNotice.get(arrayAdminNotice.size() - 1);
+      adminNotice.setAdminNotiNo(lastAdminNotice.getAdminNotiNo() +1);
+    } else {
+      adminNotice.setAdminNotiNo(1);
+    }
 
     requestAgent.request("notice.insert", adminNotice);
 

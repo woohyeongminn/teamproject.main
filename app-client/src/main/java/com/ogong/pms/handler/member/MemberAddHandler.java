@@ -93,8 +93,10 @@ public class MemberAddHandler implements Command {
     Member lastMember = null;
     if (!arrayMember.isEmpty()) {
       lastMember = arrayMember.get(arrayMember.size() - 1);
+      member.setPerNo(lastMember.getPerNo() +1);
+    } else {
+      member.setPerNo(1);
     }
-    member.setPerNo(lastMember.getPerNo() +1);
     member.setPerStatus(Member.INUSER);
 
     requestAgent.request("member.insert", member);
