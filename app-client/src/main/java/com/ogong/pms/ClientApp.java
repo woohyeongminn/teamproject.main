@@ -11,9 +11,10 @@ import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
-import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.impl.NetAdminDao;
 import com.ogong.pms.dao.impl.NetCafeDao;
+import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -195,6 +196,7 @@ public class ClientApp {
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
+    NetAdminDao adminDao = new NetAdminDao(requestAgent);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -232,8 +234,8 @@ public class ClientApp {
     commandMap.put("/admin/login", new AuthAdminLoginHandler(requestAgent));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
 
-    commandMap.put("/admin/update", new AdminUpdateHandler(requestAgent));
-    commandMap.put("/admin/detail", new AdminDetailHandler(requestAgent));
+    commandMap.put("/admin/update", new AdminUpdateHandler(adminDao));
+    commandMap.put("/admin/detail", new AdminDetailHandler(adminDao));
 
     commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(requestAgent));
     commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(requestAgent));
@@ -241,15 +243,15 @@ public class ClientApp {
     commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(requestAgent));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
-    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(requestAgent));
-    commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(requestAgent));
-    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(requestAgent));
+    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));
+    commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
+    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao));
 
-    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(requestAgent));
-    commandMap.put("/adminNotice/list", new AdminNoticeListHandler(requestAgent));
-    commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(requestAgent));
-    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(requestAgent));
-    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(requestAgent));
+    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminDao));
+    commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminDao));
+    commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(adminDao));
+    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(adminDao));
+    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(adminDao));
 
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(requestAgent));
 

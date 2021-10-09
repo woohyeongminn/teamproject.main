@@ -1,18 +1,17 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.domain.Admin;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AdminUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  AdminDao adminDao;
 
-  public AdminUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AdminUpdateHandler(AdminDao adminDao) {
+    this.adminDao = adminDao;
   }
 
   @Override
@@ -23,22 +22,33 @@ public class AdminUpdateHandler implements Command {
 
     int adminNo = (int) request.getAttribute("inputNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("adminNo", String.valueOf(adminNo));
+    Admin admin = adminDao.findByAdminNo(adminNo);
 
-    requestAgent.request("admin.selectOne", params);
+    System.out.println("1. 닉네임");
+    System.out.println("2. 이메일");
+    System.out.println("3. 비밀번호");
+    System.out.println();
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" 해당 번호의 관리자가 없습니다.");
-      return;
+    int selectNo = Prompt.inputInt(" 수정하고 싶은 정보를 선택해 주세요. > ");
+
+    String adminNickname = admin.getMasterNickname();
+    String adminEmail = admin.getMasterNickname();
+    String adminPassword = admin.getMasterPassword();
+
+    switch (selectNo) {
+      case 1:
+        adminNickname = Prompt.inputString(" 닉네임(" + admin.getMasterNickname() + ") : ");
+        break;
+      case 2:
+        adminEmail = Prompt.inputString(" 이메일(" + admin.getMasterEmail() + ") : ");
+        break;
+      case 3:
+        adminPassword =  Prompt.inputString(" 비밀번호(" + admin.getMasterPassword() + ") : ");
+        break;
+      default:
+        System.out.println(" >> 올바른 번호를 입력해 주세요.");
+        return;
     }
-
-    Admin admin = requestAgent.getObject(Admin.class);
-
-    String adminEmail = Prompt.inputString(
-        " 이메일(" + admin.getMasterEmail() + ") : ");
-    String adminPassword = Prompt.inputString(
-        " 비밀번호(" + admin.getMasterPassword() + ") : ");
 
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
@@ -47,10 +57,15 @@ public class AdminUpdateHandler implements Command {
       return;
     } 
 
-    admin.setMasterEmail(adminEmail);
-    admin.setMasterPassword(adminPassword);
+    if (selectNo == 1) {
+      admin.setMasterNickname(adminNickname);
+    } else if (selectNo == 2) {
+      admin.setMasterEmail(adminEmail);
+    } else if (selectNo == 3) {
+      admin.setMasterPassword(adminPassword);
+    }
 
-    requestAgent.request("admin.update", admin);
+    adminDao.update(admin);
 
     System.out.printf("\n >> '%s'님의 정보가 변경되었습니다.", admin.getMasterNickname());
     System.out.println();

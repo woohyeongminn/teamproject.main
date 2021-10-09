@@ -1,18 +1,17 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AdminMemberDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public AdminMemberDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AdminMemberDetailHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -32,17 +31,7 @@ public class AdminMemberDetailHandler implements Command {
       break;
     }
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("memberNo", String.valueOf(no));
-
-    requestAgent.request("member.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 회원이 없습니다.");
-      return;
-    }
-
-    Member member = requestAgent.getObject(Member.class);
+    Member member = memberDao.findByNo(no);
 
     System.out.printf(" [%s]\n", member.getPerNickname());
     System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
@@ -50,7 +39,6 @@ public class AdminMemberDetailHandler implements Command {
     System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
 
     request.setAttribute("memberNo", member.getPerNo());
-    //    requestAgent.request("member.detail", member);
 
     System.out.println();
     System.out.println("1. 수정");

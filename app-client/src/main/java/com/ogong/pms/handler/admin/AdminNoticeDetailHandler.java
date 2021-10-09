@@ -1,19 +1,18 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AdminNoticeDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  AdminDao adminDao;
 
-  public AdminNoticeDetailHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AdminNoticeDetailHandler(AdminDao adminDao) {
+    this.adminDao = adminDao;
   }
 
   @Override
@@ -23,17 +22,7 @@ public class AdminNoticeDetailHandler implements Command {
     int adminnotiNo = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("noticeNo", String.valueOf(adminnotiNo));
-
-    requestAgent.request("notice.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 공지를 다시 선택하세요.");
-      return;
-    }
-
-    AdminNotice adminNotice = requestAgent.getObject(AdminNotice.class);
+    AdminNotice adminNotice = adminDao.findByNoticeNo(adminnotiNo);
 
     System.out.printf(" [%s]\n", adminNotice.getAdminNotiTitle());
     System.out.printf(" >> 내용 : %s\n", adminNotice.getAdminNotiContent());

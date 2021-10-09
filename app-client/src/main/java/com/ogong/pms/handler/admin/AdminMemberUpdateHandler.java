@@ -1,19 +1,19 @@
 package com.ogong.pms.handler.admin;
 
-import java.util.HashMap;
+import java.util.List;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AdminMemberUpdateHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
-  public AdminMemberUpdateHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AdminMemberUpdateHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -23,24 +23,82 @@ public class AdminMemberUpdateHandler implements Command {
 
     int no = (int) request.getAttribute("memberNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("memberNo", String.valueOf(no));
+    List<Member> memberList = memberDao.findAll();
+    Member member = memberDao.findByNo(no);
 
-    requestAgent.request("member.selectOne", params);
+    if (member.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 회원이 없습니다.");
-      return;
-    }
+      System.out.println("1. 닉네임");
+      System.out.println("2. 사진");
+      System.out.println("3. 이메일");
+      System.out.println("4. 비밀번호");
+      System.out.println();
+      int selectNo = Prompt.inputInt(" 수정하고 싶은 정보를 선택해 주세요. > ");
 
-    Member user = requestAgent.getObject(Member.class);
+      String perNickName = member.getPerNickname();
+      String perPhoto = member.getPerPhoto();
+      String perEmail = member.getPerEmail();
+      String perPassword = member.getPerPassword();
 
-    if (user.getPerNickname() != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
+      switch (selectNo) {
+        case 1: 
+          perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname()  + ") : ");
+          while (true) {
+            for (Member comparisonMember : memberList) {
+              if (perNickName.equals(comparisonMember.getPerNickname())) {
+                System.out.println(" >> 이미 사용중인 닉네임입니다.");
+                continue;
+              }
+            }
+            break;
+          }
+          break;
 
-      String perNickName = Prompt.inputString(" 닉네임(" + user.getPerNickname()  + ") : ");
-      String perEmail = Prompt.inputString(" 이메일(" + user.getPerEmail() + ") : ");
-      String perPassword = Prompt.inputString(" 비밀번호(" + user.getPerPassword() + ") : ");
-      String perPhoto = Prompt.inputString(" 사진(" + user.getPerPhoto() + ") : ");
+        case 2: 
+          perPhoto = Prompt.inputString(" 사  진(" + member.getPerPhoto() + ") : ");
+          break;
+
+        case 3:
+          while (true) {
+            perEmail = Prompt.inputString(" 이메일(" + member.getPerEmail() + ") : ");
+            if (!perEmail.contains("@") ||
+                !perEmail.contains(".com") || perEmail.length() < 6) {
+              System.out.println(" >> 정확한 이메일 양식으로 입력해 주세요.");
+              continue;
+            }
+            break;
+          }
+          break;
+
+        case 4:
+          while (true) {
+            perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
+            if (perPassword.length() < 8 || (!perPassword.contains("!") && !perPassword.contains("@")
+                && !perPassword.contains("#") && !perPassword.contains("$")
+                && !perPassword.contains("^") && !perPassword.contains("%")
+                && !perPassword.contains("&") && !perPassword.contains("*"))) {
+              System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
+              continue;
+            }
+            break;
+          }
+
+          while (true) {
+            String pw =  Prompt.inputString(" 비밀번호 확인 : ");
+            if (!pw.equals(perPassword)) {
+              System.out.println("\n >> 확인 실패!\n");
+              continue;
+            } else {
+              System.out.println("\n >> 확인 완료!\n");
+            }
+            break;
+          }
+          break;
+
+        default : 
+          System.out.println(" >> 올바른 번호를 입력해 주세요.");
+          return;
+      }
 
       System.out.println();
       String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
@@ -49,14 +107,20 @@ public class AdminMemberUpdateHandler implements Command {
         return;
       }
 
-      user.setPerNickname(perNickName);
-      user.setPerEmail(perEmail);
-      user.setPerPassword(perPassword);
-      user.setPerPhoto(perPhoto);
+      if (selectNo == 1) {
+        member.setPerNickname(perNickName);
+      } else if (selectNo == 2) {
+        member.setPerPhoto(perPhoto);
+      } else if (selectNo == 3) {
+        member.setPerEmail(perEmail);
+      } else if (selectNo == 4) {
+        member.setPerPassword(perPassword);
+      }
 
-      requestAgent.request("member.update", user);
+      memberDao.update(member);
 
       System.out.println(" >> 회원 정보를 변경하였습니다.");
+      request.getRequestDispatcher("/adminMember/list").forward(request);
       return;
     }
   }

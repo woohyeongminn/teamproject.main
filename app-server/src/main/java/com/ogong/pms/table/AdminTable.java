@@ -19,10 +19,6 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
       case "admin.update" : update(request, response); break;
       case "admin.selectOne" : selectOne(request, response); break;
       case "admin.selectOneByEmailPassword" : selectOneByEmailPassword(request, response); break;
-      //      case "member.selectOneByEmail" : selectOneByEmail(request, response); break;
-      //      case "member.selectOneByPassword" : selectOneByPassword(request, response); break;
-      //      case "member.update" : update(request, response); break;
-      //      case "member.delete" : delete(request, response); break;
       default : 
         response.setStatus(Response.FAIL);
         response.setValue("해당 명령을 지원하지 않습니다.");
@@ -96,17 +92,4 @@ public class AdminTable extends JsonDataTable<Admin> implements DataProcessor {
     }
     return -1;
   }
-
-
-
-
-
-  //  private Admin findByAdminEmail (String inputEmail) {
-  //    for (Admin adminEmail : adminList) {
-  //      if (inputEmail.equals(adminEmail.getMasterEmail())) {
-  //        return adminEmail;
-  //      }
-  //    }
-  //    return null;
-  //  }
 }
