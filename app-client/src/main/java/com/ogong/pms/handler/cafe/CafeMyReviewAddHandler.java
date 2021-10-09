@@ -1,6 +1,8 @@
 package com.ogong.pms.handler.cafe;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
@@ -47,7 +49,14 @@ public class CafeMyReviewAddHandler implements Command {
       return;
     }
 
-    cafeReview.setReviewNo(reviewNo++);
+    // 고유번호 + 1
+    List<CafeReview> cafeList = new ArrayList<>(promptcafe.getCafeReviewList());
+    if (!cafeList.isEmpty()) {
+      cafeReview.setReviewNo(cafeList.get(cafeList.size() - 1).getReviewNo() + 1);
+    } else {
+      cafeReview.setReviewNo(1);
+    }
+
     cafeReview.setContent(content);
     cafeReview.setGrade(grade);
     cafeReview.setCafe(cafe);
