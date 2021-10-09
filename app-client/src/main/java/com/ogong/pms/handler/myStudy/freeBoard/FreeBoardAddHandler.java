@@ -15,8 +15,6 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardAddHandler implements Command {
 
-  int freeBoardNo = 100;
-
   RequestAgent requestAgent;
 
   public FreeBoardAddHandler(RequestAgent requestAgent) {
@@ -61,7 +59,14 @@ public class FreeBoardAddHandler implements Command {
       return;
     }
 
-    freeBoard.setFreeBoardNo(freeBoardNo++);
+    // 마지막 자유게시판 번호 찾아서 새 게시글 등록시 +1 되도록 기능 구현
+    FreeBoard lastFreeBoard = null;
+    if (!freeBoardList.isEmpty()) {
+      lastFreeBoard = freeBoardList.get(freeBoardList.size() - 1);
+      freeBoard.setFreeBoardNo(lastFreeBoard.getFreeBoardNo() + 1);
+    } else {
+      freeBoard.setFreeBoardNo(1);
+    }
     freeBoardList.add(freeBoard);
     myStudy.setMyStudyFreeBoard(freeBoardList);
 

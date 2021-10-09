@@ -14,7 +14,6 @@ import com.ogong.util.Prompt;
 
 public class ToDoAdd implements Command {
 
-  int ToDoNo = 100;
   RequestAgent requestAgent;
 
   public ToDoAdd(RequestAgent requestAgent) {
@@ -65,7 +64,14 @@ public class ToDoAdd implements Command {
       return;
     }
 
-    todo.setTodoNo(ToDoNo++);
+    // 마지막 Todo 번호 찾아서 새 Todo 등록시 +1 되도록 기능 구현
+    ToDo lastTodo = null;
+    if (!todoList.isEmpty()) {
+      lastTodo = todoList.get(todoList.size() - 1);
+      todo.setTodoNo(lastTodo.getTodoNo() + 1);
+    } else {
+      todo.setTodoNo(1);
+    }
     todoList.add(todo);
     myStudy.setMyStudyToDo(todoList);
 
