@@ -2,6 +2,8 @@ package com.ogong.pms.handler.ceoCafe;
 
 import static com.ogong.pms.domain.Cafe.WAIT;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CeoMember;
@@ -15,7 +17,6 @@ import com.ogong.util.Prompt;
 public class CeoCafeAddHandler implements Command {
 
   PromptCafe promptcafe;
-  int cafeNo = 100;
 
   public CeoCafeAddHandler (PromptCafe promptcafe) {
     this.promptcafe = promptcafe;
@@ -57,7 +58,14 @@ public class CeoCafeAddHandler implements Command {
       System.out.println(" >> 등록이 취소되었습니다.");
       return;
     }
-    cafe.setNo(cafeNo++);
+
+    // 고유번호 + 1
+    List<Cafe> cafeList = new ArrayList<>(promptcafe.getCafeList());
+    if (!cafeList.isEmpty()) {
+      cafe.setNo(cafeList.get(cafeList.size() -1).getNo() + 1);
+    } else {
+      cafe.setNo(1);
+    }
 
     promptcafe.insertCafe(cafe);
   }
