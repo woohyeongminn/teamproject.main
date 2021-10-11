@@ -192,16 +192,16 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
     // 로컬
-    requestAgent = new RequestAgent("127.0.0.1", 5050);
+    //    requestAgent = new RequestAgent("127.0.0.1", 5050);
     //requestAgent = new RequestAgent("192.168.0.92", 5050);
-    //requestAgent = new RequestAgent("192.168.0.68", 5050);
+    requestAgent = new RequestAgent("192.168.0.68", 5050);
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
     NetAdminDao adminDao = new NetAdminDao(requestAgent);
     NetCeoMemberDao ceoMemberDao = new NetCeoMemberDao(requestAgent);
     NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
-    
+
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
     RandomPw randomPw = new RandomPw();
