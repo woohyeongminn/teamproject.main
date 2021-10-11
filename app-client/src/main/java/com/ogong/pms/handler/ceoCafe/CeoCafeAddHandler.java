@@ -15,10 +15,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeAddHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeAddHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeAddHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -59,14 +59,14 @@ public class CeoCafeAddHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<Cafe> cafeList = promptcafe.getCafeList();
+    List<Cafe> cafeList = cafeDao.getCafeList();
     if (!cafeList.isEmpty()) {
       cafe.setNo(cafeList.get(cafeList.size() -1).getNo() + 1);
     } else {
       cafe.setNo(1);
     }
 
-    promptcafe.insertCafe(cafe);
+    cafeDao.insertCafe(cafe);
   }
 
 }

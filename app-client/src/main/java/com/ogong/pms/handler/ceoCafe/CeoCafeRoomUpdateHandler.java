@@ -8,10 +8,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeRoomUpdateHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeRoomUpdateHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeRoomUpdateHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -39,6 +39,6 @@ public class CeoCafeRoomUpdateHandler implements Command {
     cafeRoom.setRoomInfo(Info);
     cafeRoom.setRoomPrice(timePrice);
 
-    promptcafe.updateCafeRoom(cafeRoom);
+    cafeDao.updateCafeRoom(cafeRoom);
   }
 }

@@ -9,10 +9,10 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationDeleteHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeMyReservationDeleteHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CafeMyReservationDeleteHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -40,7 +40,7 @@ public class CafeMyReservationDeleteHandler implements Command {
 
       //      myReservation.setReservationStatus(2);
       //      reserList.remove(myReservation);
-      promptcafe.deleteReservation(myReservation, 2);
+      cafeDao.deleteReservation(myReservation, 2);
 
     } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
       System.out.println(" >> 당일 예약은 취소 불가능합니다.");

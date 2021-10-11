@@ -8,10 +8,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeRoomDeleteHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeRoomDeleteHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeRoomDeleteHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -28,7 +28,7 @@ public class CeoCafeRoomDeleteHandler implements Command {
       return;
     }
 
-    promptcafe.deleteCafeRoom(cafeRoom.getRoomNo());
+    cafeDao.deleteCafeRoom(cafeRoom.getRoomNo());
   }
 
 }

@@ -10,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeRoomAddHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeRoomAddHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeRoomAddHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class CeoCafeRoomAddHandler implements Command {
     System.out.println("▶ 스터디룸 등록");
     System.out.println();
 
-    Cafe cafe = promptcafe.findByCafeNo((int) request.getAttribute("cafeNo"));
+    Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     CafeRoom cafeRoom = new CafeRoom();
     cafeRoom.setCafe(cafe);
@@ -41,13 +41,13 @@ public class CeoCafeRoomAddHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<CafeRoom> cafeRoomList = promptcafe.getCafeRoomList();
+    List<CafeRoom> cafeRoomList = cafeDao.getCafeRoomList();
     if (!cafeRoomList.isEmpty()) {
       cafeRoom.setRoomNo(cafeRoomList.get(cafeRoomList.size() - 1).getRoomNo() + 1);
     } else {
       cafeRoom.setRoomNo(1);
     }
 
-    promptcafe.insertCafeRoom(cafeRoom);
+    cafeDao.insertCafeRoom(cafeRoom);
   }
 }

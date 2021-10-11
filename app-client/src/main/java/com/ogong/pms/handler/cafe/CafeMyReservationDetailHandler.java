@@ -13,10 +13,10 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationDetailHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeMyReservationDetailHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CafeMyReservationDetailHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -99,11 +99,11 @@ public class CafeMyReservationDetailHandler implements Command {
 
   private CafeReservation printMyReserDetail(Member member, int input) throws Exception {
     CafeReservation cafeReser = 
-        promptcafe.findReservationByMember(member.getPerNo(), input);
+        cafeDao.findReservationByMember(member.getPerNo(), input);
 
     if (cafeReser != null) {
-      Cafe cafeReserCafe = promptcafe.findByCafeNo(cafeReser.getCafe().getNo());
-      CafeRoom cafeRoom = promptcafe.findByRoomNo(cafeReser.getRoomNo());
+      Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
+      CafeRoom cafeRoom = cafeDao.findByRoomNo(cafeReser.getRoomNo());
 
       String reviewStatusLable = CafeHandlerHelper.getReviewStatusLabel(
           String.valueOf(cafeReser.getWirteReview()));

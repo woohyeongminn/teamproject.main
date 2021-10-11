@@ -10,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeRoomListHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeRoomListHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeRoomListHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -24,7 +24,7 @@ public class CeoCafeRoomListHandler implements Command {
 
     int cafeNo = (int) request.getAttribute("cafeNo");
 
-    List<CafeRoom> cafeRoom = promptcafe.findCafeRoomListByCafe(cafeNo);
+    List<CafeRoom> cafeRoom = cafeDao.findCafeRoomListByCafe(cafeNo);
 
     if (cafeRoom.isEmpty()) {
       System.out.println(" >> 등록된 스터디룸이 없습니다.");

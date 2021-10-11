@@ -13,10 +13,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeDetailHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeDetailHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeDetailHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -26,7 +26,7 @@ public class CeoCafeDetailHandler implements Command {
     System.out.println();
 
     CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
-    Cafe cafe = promptcafe.findByCafeNo(Prompt.inputInt(" 번호 : "));
+    Cafe cafe = cafeDao.findByCafeNo(Prompt.inputInt(" 번호 : "));
     System.out.println();
     if (cafe == null || ceoMember.getCeoNo() != cafe.getCeoMember().getCeoNo() ||
         cafe.getCafeStatus() == Cafe.DELETE) {
@@ -74,7 +74,7 @@ public class CeoCafeDetailHandler implements Command {
     int starRatingCount = 0;
     double starRatingAverage = 0;
 
-    List<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
+    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
 
     if (!reviewList.isEmpty()) {
       for (CafeReview review : reviewList) {
@@ -94,7 +94,7 @@ public class CeoCafeDetailHandler implements Command {
     System.out.println();
     System.out.println("============= 리뷰 =============");
 
-    List<CafeReview> reviewList = promptcafe.findReviewListByCafeNo(cafe.getNo());
+    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 등록된 리뷰가 없습니다.");

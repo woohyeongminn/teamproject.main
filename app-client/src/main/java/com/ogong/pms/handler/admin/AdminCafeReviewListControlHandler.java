@@ -10,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeReviewListControlHandler implements Command{
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public AdminCafeReviewListControlHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public AdminCafeReviewListControlHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class AdminCafeReviewListControlHandler implements Command{
     System.out.println("▶ 장소 후기 목록");
     System.out.println();
 
-    List<CafeReview> reviewList = promptcafe.getCafeReviewList();
+    List<CafeReview> reviewList = cafeDao.getCafeReviewList();
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 리뷰 내역이 존재하지 않습니다.");
@@ -36,10 +36,13 @@ public class AdminCafeReviewListControlHandler implements Command{
         continue;
       }
 
-      Cafe cafe = promptcafe.findByCafeNo(cafeReview.getCafe().getNo());
+      Cafe cafe = cafeDao.findByCafeNo(cafeReview.getCafe().getNo());
       System.out.printf(" (%d)\n [%s]\n 별점 : %d\n 내용 : %s\n 등록일 : %s\n",
-          cafeReview.getReviewNo(), cafe.getName(), cafeReview.getGrade(),
-          cafeReview.getContent(), cafeReview.getRegisteredDate());
+          cafeReview.getReviewNo(), 
+          cafe.getName(), 
+          cafeReview.getGrade(),
+          cafeReview.getContent(), 
+          cafeReview.getRegisteredDate());
       System.out.println();
     }
 

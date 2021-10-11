@@ -8,10 +8,10 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeReviewListDeleteHandler implements Command{
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public AdminCafeReviewListDeleteHandler(CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public AdminCafeReviewListDeleteHandler(CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class AdminCafeReviewListDeleteHandler implements Command{
 
     int userReviewNo = Prompt.inputInt(" 번호 : ");
 
-    CafeReview cafeReview = promptcafe.findByReviewNo(userReviewNo);
+    CafeReview cafeReview = cafeDao.findByReviewNo(userReviewNo);
 
     if (cafeReview == null) {
       return;
@@ -40,6 +40,6 @@ public class AdminCafeReviewListDeleteHandler implements Command{
       return;
     }
 
-    promptcafe.deleteCafeReview(userReviewNo);
+    cafeDao.deleteCafeReview(userReviewNo);
   }
 }

@@ -18,10 +18,10 @@ import com.ogong.util.Prompt;
 
 public class CafeReservationHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeReservationHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CafeReservationHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -30,7 +30,7 @@ public class CafeReservationHandler implements Command {
     int cafeNo = (int) request.getAttribute("cafeNo");
     String selectReservation = (String) request.getAttribute("selectReservation");
 
-    Cafe cafe = promptcafe.findByCafeNoMember(cafeNo);
+    Cafe cafe = cafeDao.findByCafeNoMember(cafeNo);
 
     if (cafe == null) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
@@ -105,7 +105,7 @@ public class CafeReservationHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<CafeReservation> cafeReservationList = promptcafe.getCafeReservationList();
+    List<CafeReservation> cafeReservationList = cafeDao.getCafeReservationList();
     if (!cafeReservationList.isEmpty()) {
       reservation.setReservationNo(
           cafeReservationList.get(cafeReservationList.size() - 1).getReservationNo() + 1);
@@ -124,7 +124,7 @@ public class CafeReservationHandler implements Command {
 
     cafe.setBookable(cafe.getBookable() - 1);
 
-    promptcafe.insertReservation(reservation);
+    cafeDao.insertReservation(reservation);
   }
 
   private void addRoomReservation(Cafe cafe) throws Exception {
@@ -140,7 +140,7 @@ public class CafeReservationHandler implements Command {
     int i = 1;
     HashMap<Integer, Integer> selectRoomNo = new HashMap<>();
 
-    List<CafeRoom> roomList = promptcafe.findCafeRoomListByCafe(cafe.getNo());
+    List<CafeRoom> roomList = cafeDao.findCafeRoomListByCafe(cafe.getNo());
     for (CafeRoom cafeRoom : roomList) {
       System.out.println(" " + i + ". " + cafeRoom.getRoomName());
       selectRoomNo.put(i, cafeRoom.getRoomNo());
@@ -155,7 +155,7 @@ public class CafeReservationHandler implements Command {
     int selectNo = Prompt.inputInt(" 선택> ");
     CafeRoom cafeRoom = null;
     try {
-      cafeRoom = promptcafe.findByRoomNo(selectRoomNo.get(selectNo));
+      cafeRoom = cafeDao.findByRoomNo(selectRoomNo.get(selectNo));
     } catch (NullPointerException e) {
       System.out.println(" >> 스터디룸 번호를 잘못 선택하셨습니다.");
       return;
@@ -166,8 +166,8 @@ public class CafeReservationHandler implements Command {
 
   private void detailRoomReservation(int cafeNo, Integer selectNo) throws Exception {
     //    int roomNo = selectNo; // room 고유번호
-    Cafe cafe = promptcafe.findByCafeNoMember(cafeNo);
-    CafeRoom cafeRoom = promptcafe.findByRoomNo(selectNo);
+    Cafe cafe = cafeDao.findByCafeNoMember(cafeNo);
+    CafeRoom cafeRoom = cafeDao.findByRoomNo(selectNo);
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -283,7 +283,7 @@ public class CafeReservationHandler implements Command {
     CafeReservation reservation = new CafeReservation();
 
     // 고유번호 + 1
-    List<CafeReservation> cafeReservationList = promptcafe.getCafeReservationList();
+    List<CafeReservation> cafeReservationList = cafeDao.getCafeReservationList();
     if (!cafeReservationList.isEmpty()) {
       reservation.setReservationNo(
           cafeReservationList.get(cafeReservationList.size() - 1).getReservationNo() + 1);
@@ -301,13 +301,13 @@ public class CafeReservationHandler implements Command {
     reservation.setWirteReview(false);
     reservation.setRoomNo(selectNo);
 
-    promptcafe.insertReservation(reservation);
+    cafeDao.insertReservation(reservation);
   }
 
   private List<CafeReservation> getCafeReserList(
       int cafeNo, int roomNo, Date reservationDate) throws Exception {
 
-    List<CafeReservation> reserList = promptcafe.getCafeReservationList();
+    List<CafeReservation> reserList = cafeDao.getCafeReservationList();
 
     List<CafeReservation> todayReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {

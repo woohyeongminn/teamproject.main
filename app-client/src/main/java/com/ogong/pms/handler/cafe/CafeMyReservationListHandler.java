@@ -11,51 +11,10 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeMyReservationListHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
-
-    //    CafeReservation reservation = new CafeReservation();
-    //    reservation.setReservationNo(1);
-    //    reservation.setMember(promptPerMember.memberList.get(0));
-    //    reservation.setCafe(cafeList.get(0));
-    //    reservation.setReservationDate(Date.valueOf("2021-8-1"));
-    //    reservation.setStartTime(LocalTime.of(10, 00));
-    //    reservation.setUseTime(1);
-    //    reservation.setUseMemberNumber(1);
-    //    reservation.setTotalPrice(2000);
-    //    reservation.setWirteReview(false);
-    //    reservation.setReservationStatus(0);
-    //    reserList.add(reservation);
-    //
-    //    reservation = new CafeReservation();
-    //    reservation.setReservationNo(2);
-    //    reservation.setMember(promptPerMember.memberList.get(0));
-    //    reservation.setCafe(cafeList.get(0));
-    //    reservation.setReservationDate(Date.valueOf("2021-10-10"));
-    //    reservation.setStartTime(LocalTime.of(10, 00));
-    //    reservation.setUseTime(3);
-    //    reservation.setUseMemberNumber(0);
-    //    reservation.setTotalPrice(45000);
-    //    reservation.setWirteReview(false);
-    //    reservation.setRoomNo(4);
-    //    reservation.setReservationStatus(0);
-    //    reserList.add(reservation);
-    //
-    //    reservation = new CafeReservation();
-    //    reservation.setReservationNo(3);
-    //    reservation.setMember(promptPerMember.memberList.get(0));
-    //    reservation.setCafe(cafeList.get(0));
-    //    reservation.setReservationDate(Date.valueOf("2021-10-10"));
-    //    reservation.setStartTime(LocalTime.of(15, 00));
-    //    reservation.setUseTime(2);
-    //    reservation.setUseMemberNumber(0);
-    //    reservation.setTotalPrice(30000);
-    //    reservation.setWirteReview(false);
-    //    reservation.setRoomNo(4);
-    //    reservation.setReservationStatus(0);
-    //    reserList.add(reservation);
+  public CafeMyReservationListHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -72,16 +31,18 @@ public class CafeMyReservationListHandler implements Command {
     }
 
     List<CafeReservation> reserList = 
-        promptcafe.findReservationListByMember(member.getPerNo());
+        cafeDao.findReservationListByMember(member.getPerNo());
 
     if (reserList.isEmpty()) {
       System.out.println(" >> 예약 내역이 존재하지 않습니다.");
       return;
     } else {
       for (CafeReservation myReservationList : reserList) {
-        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n 결제금액 : %d원\n 상태 : %s\n"
-            , myReservationList.getReservationNo(), myReservationList.getReservationDate(), 
-            myReservationList.getCafe().getName(), myReservationList.getTotalPrice(),
+        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n 결제금액 : %d원\n 상태 : %s\n", 
+            myReservationList.getReservationNo(), 
+            myReservationList.getReservationDate(), 
+            myReservationList.getCafe().getName(), 
+            myReservationList.getTotalPrice(),
             CafeHandlerHelper.getReservationStatus(myReservationList.getReservationStatus()));
         System.out.println();
       }

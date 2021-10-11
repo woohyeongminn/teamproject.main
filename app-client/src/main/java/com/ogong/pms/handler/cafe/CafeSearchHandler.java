@@ -9,10 +9,10 @@ import com.ogong.util.Prompt;
 
 public class CafeSearchHandler implements Command {
 
-  CafeDao promptCafe;
+  CafeDao cafeDao;
 
-  public CafeSearchHandler (CafeDao promptCafe) {
-    this.promptCafe = promptCafe;
+  public CafeSearchHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -23,12 +23,15 @@ public class CafeSearchHandler implements Command {
 
     String input = Prompt.inputString(" 지역 : ");
 
-    List<Cafe> cafeList = promptCafe.findCafeListByLocation(input);
+    List<Cafe> cafeList = cafeDao.findCafeListByLocation(input);
 
     if (!cafeList.isEmpty()) {
       for (Cafe cafe : cafeList) {
-        System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
-            , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
+        System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n", 
+            cafe.getNo(), 
+            cafe.getName(), 
+            cafe.getLocation(), 
+            cafe.getBookable());
       }
     } else {
       System.out.println(" >> 검색 결과가 존재하지 않습니다.");

@@ -8,10 +8,10 @@ import com.ogong.pms.handler.CommandRequest;
 
 public class CafeListHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CafeListHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CafeListHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -19,7 +19,7 @@ public class CafeListHandler implements Command {
     System.out.println();
     System.out.println("▶ 장소 목록");
 
-    List<Cafe> cafeList = promptcafe.getCafeListByMember();
+    List<Cafe> cafeList = cafeDao.getCafeListByMember();
 
     if (cafeList == null) {
       System.out.println("등록된 장소가 없습니다.");
@@ -27,8 +27,11 @@ public class CafeListHandler implements Command {
     }
 
     for(Cafe cafe : cafeList) {
-      System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n"
-          , cafe.getNo(), cafe.getName(), cafe.getLocation(), cafe.getBookable());
+      System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n", 
+          cafe.getNo(), 
+          cafe.getName(), 
+          cafe.getLocation(), 
+          cafe.getBookable());
       if (cafe.getCafeStatus() == Cafe.STOP) {
         System.out.println(" * 운영 중단");
       }

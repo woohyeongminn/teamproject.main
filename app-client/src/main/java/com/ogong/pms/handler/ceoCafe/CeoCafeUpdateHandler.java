@@ -12,10 +12,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeUpdateHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeUpdateHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeUpdateHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -24,7 +24,7 @@ public class CeoCafeUpdateHandler implements Command {
     System.out.println("▶ 장소 수정");
     System.out.println();
 
-    Cafe cafe = promptcafe.findByCafeNo((int) request.getAttribute("cafeNo"));
+    Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     String name = Prompt.inputString(String.format(" 상호명(%s) : ", cafe.getName()));
     String cafeLicenseNo = Prompt.inputString(String.format(" 사업자 등록번호(%s) : ", cafe.getCafeLicenseNo()));
@@ -68,7 +68,7 @@ public class CeoCafeUpdateHandler implements Command {
     cafe.setTimePrice(timePrice);
     cafe.setCafeStatus(cafeStatus);
 
-    promptcafe.updateCafe(cafe);
+    cafeDao.updateCafe(cafe);
     System.out.println(" >> 수정이 완료 되었습니다.");
   }
 

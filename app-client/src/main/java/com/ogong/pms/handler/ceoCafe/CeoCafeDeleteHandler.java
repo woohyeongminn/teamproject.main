@@ -10,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeDeleteHandler implements Command {
 
-  CafeDao promptcafe;
+  CafeDao cafeDao;
 
-  public CeoCafeDeleteHandler (CafeDao promptcafe) {
-    this.promptcafe = promptcafe;
+  public CeoCafeDeleteHandler (CafeDao cafeDao) {
+    this.cafeDao = cafeDao;
   }
 
   @Override
@@ -28,7 +28,7 @@ public class CeoCafeDeleteHandler implements Command {
       return;
     }
 
-    Cafe cafe = promptcafe.findByCafeNo((int) request.getAttribute("cafeNo"));
+    Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     cafe.setName("");
     cafe.setMainImg("");
@@ -42,7 +42,7 @@ public class CeoCafeDeleteHandler implements Command {
     cafe.setTimePrice(0);
     cafe.setCafeStatus(DELETE);
 
-    promptcafe.deleteCafe(cafe);
+    cafeDao.deleteCafe(cafe);
   }
 
 
