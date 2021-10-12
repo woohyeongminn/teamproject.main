@@ -292,7 +292,7 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
 
-    //Socket chatSocket = new Socket();
+    //Socket chatSocket = new Socket(); 
     commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
     //commandMap.put("/myStudy/chatOpen", new MySocketServer(chatSocket, requestAgent));
     //commandMap.put("/myStudy/chatStart", new MySocketClient(requestAgent));
