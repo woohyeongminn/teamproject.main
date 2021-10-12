@@ -31,19 +31,27 @@ public class MyStudyDetailHandler implements Command {
 
     Study myStudy = studyDao.findMyStudy(member.getPerNo(), studyNo);
 
-    System.out.printf(" \n(%s)\n", myStudy.getStudyNo());
-    System.out.printf(" [%s]\n", myStudy.getStudyTitle());
-    System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());
-    System.out.printf(" >> 분야 : %s\n", myStudy.getSubject());
-    System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
-    System.out.printf(" >> 인원수 : %s/%s명\n",
-        myStudy.getMembers().size() + 1, myStudy.getNumberOfPeple());
-    System.out.printf(" >> 대면 : %s\n", myStudy.getFace());
-    System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
+    if (myStudy != null) {
+      System.out.printf("\n (%s)", myStudy.getStudyNo());
 
-    s = myStudy;
+      if (myStudy.getOwner().getPerNickname().equals(member.getPerNickname())) {
+        System.out.println(" 👤");
+      } else if (myStudy.getMemberNames().contains(member.getPerNickname())) {
+        System.out.println(" 👥");
+      }
 
-    if (studyNo < 1) {
+      System.out.printf(" [%s]\n", myStudy.getStudyTitle());
+      System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());
+      System.out.printf(" >> 분야 : %s\n", myStudy.getSubject());
+      System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
+      System.out.printf(" >> 인원수 : %s/%s명\n",
+          myStudy.getMembers().size() + 1, myStudy.getNumberOfPeple());
+      System.out.printf(" >> 대면 : %s\n", myStudy.getFace());
+      System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
+
+      s = myStudy;
+
+    } else {
       System.out.println();
       System.out.println(" >> 스터디 번호가 일치하지 않습니다.");
       return;

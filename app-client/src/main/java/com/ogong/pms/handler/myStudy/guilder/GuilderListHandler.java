@@ -28,8 +28,8 @@ public class GuilderListHandler implements Command {
 
     System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , myStudy.getMembers().size() + 1,
         myStudy.getNumberOfPeple());
-    System.out.println(" 조  장 : " + myStudy.getOwner().getPerNickname());
-    System.out.println(" 구성원 : " + myStudy.getMemberNames());
+    System.out.println(" 👤 조  장 : " + myStudy.getOwner().getPerNickname());
+    System.out.println(" 👥 구성원 : " + myStudy.getMemberNames());
 
     // 조장만 보임
     if (!AuthPerMemberLoginHandler.getLoginUser().getPerNickname().equals(
