@@ -1,37 +1,27 @@
 package com.ogong.pms.handler.myStudy;
 
-import java.util.HashMap;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class MyStudyExitHandler implements Command {
 
-  RequestAgent requestAgent;
+  StudyDao studyDao;
 
-  public MyStudyExitHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public MyStudyExitHandler(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ 탈퇴하기");
     System.out.println();
+    int inputNo = (int) request.getAttribute("inputNo");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo", String.valueOf(request.getAttribute("inputNo")));
-
-    requestAgent.request("study.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 스터디 상세 오류.");
-      return;
-    }
-
-    Study myStudy = requestAgent.getObject(Study.class);
+    Study myStudy = studyDao.findByNo(inputNo);
 
     if (myStudy.getOwner().getPerNickname().equals(
         AuthPerMemberLoginHandler.getLoginUser().getPerNickname()) &&
@@ -50,12 +40,7 @@ public class MyStudyExitHandler implements Command {
       }
 
       myStudy.getMembers().remove(AuthPerMemberLoginHandler.getLoginUser());
-      requestAgent.request("study.update", myStudy);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("스터디 탈퇴 실패!");
-        return;
-      }
+      studyDao.update(myStudy);
 
       System.out.println(" >> 탈퇴되었습니다.");
     }
@@ -70,11 +55,8 @@ public class MyStudyExitHandler implements Command {
         return;
       }
 
-      requestAgent.request("study.delete", params);
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println(" >> 스터디 탈퇴 실패.");
-        return;
-      }
+      studyDao.delete(inputNo);
+
       System.out.println(" >> 스터디가 삭제 되었습니다.");
     }
   }

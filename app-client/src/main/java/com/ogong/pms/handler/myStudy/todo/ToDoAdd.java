@@ -1,23 +1,22 @@
 package com.ogong.pms.handler.myStudy.todo;
 
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class ToDoAdd implements Command {
 
-  RequestAgent requestAgent;
+  StudyDao studyDao;
 
-  public ToDoAdd(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public ToDoAdd(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
 
   //등록
@@ -26,18 +25,10 @@ public class ToDoAdd implements Command {
     System.out.println("▶ To-Do List 등록");
     System.out.println();
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo", String.valueOf(request.getAttribute("inputNo")));
-
-    requestAgent.request("study.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 스터디 출력 오류.");
-      return;
-    }
+    int inputNo = (int) request.getAttribute("inputNo");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
-    Study myStudy = requestAgent.getObject(Study.class);
+    Study myStudy = studyDao.findByNo(inputNo);
 
     if (member == null) {
       System.out.println(" >> 로그인 한 회원만 조회 가능합니다.");
@@ -75,12 +66,7 @@ public class ToDoAdd implements Command {
     todoList.add(todo);
     myStudy.setMyStudyToDo(todoList);
 
-    requestAgent.request("study.update", myStudy);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 해당 스터디에서 등록 실패.");
-      return;
-    }
+    studyDao.update(myStudy);
 
     System.out.println(" >> 할 일이 등록되었습니다.");
     request.getRequestDispatcher("/myStudy/todoList").forward(request);

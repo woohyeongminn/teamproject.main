@@ -1,21 +1,22 @@
 package com.ogong.pms.handler.myStudy.guilder;
 
 import java.util.List;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class GuilderEntrustHandler implements Command { 
 
-  RequestAgent requestAgent;
+  StudyDao studyDao;
 
-  public GuilderEntrustHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public GuilderEntrustHandler(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -23,9 +24,11 @@ public class GuilderEntrustHandler implements Command {
     System.out.println("▶ 조장 권한 위임");
     System.out.println();
 
+    int inputNo = (int) request.getAttribute("inputNo");
+
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    Study myStudy = requestAgent.getObject(Study.class);
+    Study myStudy = studyDao.findMyStudy(member.getPerNo(), inputNo);
 
     List<Member> entrustGuilers = myStudy.getMembers();
 
@@ -45,11 +48,6 @@ public class GuilderEntrustHandler implements Command {
 
       for (Member entrustGuiler : entrustGuilers) {
 
-        if (!entrustGuiler.getPerNickname().equals(inputGuilderName)) {
-          System.out.println();
-          System.out.println(" >> 구성원의 닉네임을 다시 입력하세요.");
-        }
-
         if (entrustGuiler.getPerNickname().equals(inputGuilderName)) {
           System.out.println();
           System.out.printf(" '%s'님에게 조장 권한을 위임하시겠습니까?", entrustGuiler.getPerNickname());
@@ -59,6 +57,12 @@ public class GuilderEntrustHandler implements Command {
             System.out.println();
             System.out.println(" >> 다시 진행해 주세요.");
             return;
+          } 
+
+          if (!entrustGuiler.getPerNickname().equals(inputGuilderName)) {
+            System.out.println();
+            System.out.println(" >> 구성원의 닉네임을 다시 입력하세요.");
+            break;
           }
 
           System.out.printf(" >> '%s'님이 조장이 되셨습니다.", inputGuilderName);
@@ -67,6 +71,7 @@ public class GuilderEntrustHandler implements Command {
           if (entrustList != null) {
             myStudy.getMembers().remove(entrustList);
           }
+          myStudy.getMembers().remove(entrustList); // 추가
 
           System.out.println();
           String inputGuilder = Prompt.inputString(" >> 구성원으로 다시 돌아가시겠습니까? (네 / 아니오) ");
@@ -76,23 +81,18 @@ public class GuilderEntrustHandler implements Command {
             myStudy.setOwner(entrustGuiler);
             System.out.println();
             System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
+            studyDao.update(myStudy);
             return;
           }
-
           myStudy.getMembers().add(member);
           myStudy.setOwner(null);
-          myStudy.setOwner(entrustGuiler);
+          myStudy.setOwner(entrustList);
           System.out.println();
           System.out.println(" >> 구성원이 되셨습니다.");
         }
       }
 
-      requestAgent.request("study.update", myStudy);
-
-      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-        System.out.println("조장 위임 실패!");
-        return;
-      }
+      studyDao.update(myStudy);
 
       return;
     }

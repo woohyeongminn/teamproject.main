@@ -1,19 +1,18 @@
 package com.ogong.pms.handler.study;
 
 import java.util.Collection;
-import java.util.HashMap;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class StudySearchHandler implements Command {
 
-  RequestAgent requestAgent;
+  StudyDao studyDao;
 
-  public StudySearchHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public StudySearchHandler(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
 
   @Override
@@ -26,19 +25,9 @@ public class StudySearchHandler implements Command {
     String input = Prompt.inputString(" 검색어 : ");
     System.out.println();
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("keyword", String.valueOf(input));
-
-    requestAgent.request("study.selectByKeyword", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 다시 입력해 주세요.");
-      return;
-    }
-
     int count = 0;
 
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    Collection<Study> studyList = studyDao.findByKeyword(input);
 
     for (Study searchStudy : studyList) {
 

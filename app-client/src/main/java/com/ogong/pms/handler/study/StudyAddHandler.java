@@ -1,21 +1,20 @@
 package com.ogong.pms.handler.study;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class StudyAddHandler implements Command {
 
-  RequestAgent requestAgent;
+  StudyDao studyDao;
 
-  public StudyAddHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public StudyAddHandler(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
 
   @Override
@@ -24,17 +23,9 @@ public class StudyAddHandler implements Command {
     System.out.println("▶ 스터디 등록");
     System.out.println();
 
-    requestAgent.request("study.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("실패");
-      return;
-    }
-
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
-    List<Study> arrayStudy = new ArrayList<>(studyList);
-
     Study study = new Study();
+
+    List<Study> arrayStudy = studyDao.findAll();
 
     // 스터디명
     String studyTitle;
@@ -186,10 +177,7 @@ public class StudyAddHandler implements Command {
       return;
     }
     // 고유번호
-    requestAgent.request("study.insert", study);
-
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      System.out.println(" >> 스터디가 등록되었습니다.");
-    } 
+    studyDao.insert(study);
+    System.out.println(" >> 스터디가 등록되었습니다.");
   }
 }

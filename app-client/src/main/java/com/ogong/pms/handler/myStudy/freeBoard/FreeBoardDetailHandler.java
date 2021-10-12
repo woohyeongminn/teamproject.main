@@ -2,22 +2,21 @@ package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.HashMap;
 import java.util.List;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class FreeBoardDetailHandler implements Command {
 
-  RequestAgent requestAgent;
+  StudyDao studyDao;
   PromptFreeBoard promptFreeBoard;
 
-  public FreeBoardDetailHandler(RequestAgent requestAgent, PromptFreeBoard promptFreeBoard) {
-    this.requestAgent = requestAgent;
+  public FreeBoardDetailHandler(StudyDao studyDao, PromptFreeBoard promptFreeBoard) {
+    this.studyDao = studyDao;
     this.promptFreeBoard = promptFreeBoard;
-
   }
 
   @Override
@@ -26,17 +25,9 @@ public class FreeBoardDetailHandler implements Command {
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("studyNo",String.valueOf(request.getAttribute("inputNo")));
+    int freeBoadNo = (int) request.getAttribute("inputNo");
 
-    requestAgent.request("study.selectOne", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 스터디 상세 오류.");
-      return;
-    }
-
-    Study myStudy = requestAgent.getObject(Study.class);
+    Study myStudy = studyDao.findByNo(freeBoadNo);
 
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
@@ -81,12 +72,7 @@ public class FreeBoardDetailHandler implements Command {
     freeBoardList.set(arry[1], freeBoardList.get(arry[1]));
     myStudy.setMyStudyFreeBoard(freeBoardList);
 
-    requestAgent.request("study.update", myStudy);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" 게시글 상세보기에서 조회수 업데이트 실패!");
-      return;
-    }
+    studyDao.update(myStudy);
 
     System.out.println("\n----------------------");
     System.out.println("1. 수정");

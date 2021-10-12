@@ -1,20 +1,21 @@
 package com.ogong.pms.handler.myStudy;
 
 import java.util.Collection;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.request.RequestAgent;
 
 public class MyStudyListHandler implements Command {
 
   private static final String Collection = null;
-  RequestAgent requestAgent;
 
-  public MyStudyListHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  StudyDao studyDao;
+
+  public MyStudyListHandler(StudyDao studyDao) {
+    this.studyDao = studyDao;
   }
 
   @Override
@@ -29,14 +30,7 @@ public class MyStudyListHandler implements Command {
       return;
     }
 
-    requestAgent.request("study.selectList", null);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("목록 조회 실패!");
-      return;
-    }
-
-    Collection<Study> studyList = requestAgent.getObjects(Study.class);
+    Collection<Study> studyList = studyDao.findAll();
 
     // test용으로 setPerMyStudy에 new로 생성해서
     // 값은 안 넣었지만 null값이 있으므로 사이즈로 비교해야 한다.
