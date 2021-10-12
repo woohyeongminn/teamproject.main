@@ -92,7 +92,6 @@ import com.ogong.pms.handler.member.MemberDeleteHandler;
 import com.ogong.pms.handler.member.MemberDetailHandler;
 import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
-import com.ogong.pms.handler.myStudy.MyStudyChat;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
 import com.ogong.pms.handler.myStudy.MyStudyExitHandler;
@@ -193,9 +192,9 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
     // 로컬
-    //requestAgent = new RequestAgent("127.0.0.1", 5050);
+    requestAgent = new RequestAgent("127.0.0.1", 5050);
     //requestAgent = new RequestAgent("192.168.0.92", 5050);
-    requestAgent = new RequestAgent("192.168.0.68", 5050);
+    //    requestAgent = new RequestAgent("192.168.0.68", 5050);
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     NetMemberDao memberDao = new NetMemberDao(requestAgent);
@@ -293,7 +292,7 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
 
     //Socket chatSocket = new Socket(); 
-    commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
+    //    commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
     //commandMap.put("/myStudy/chatOpen", new MySocketServer(chatSocket, requestAgent));
     //commandMap.put("/myStudy/chatStart", new MySocketClient(requestAgent));
 
