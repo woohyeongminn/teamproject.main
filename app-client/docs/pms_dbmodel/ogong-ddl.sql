@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS notice_file RESTRICT;
 DROP TABLE IF EXISTS payment_status RESTRICT;
 
 -- 좋아요
-DROP TABLE IF EXISTS like  RESTRICT;
+DROP TABLE IF EXISTS boardlike RESTRICT;
 
 -- 스터디북마크
 DROP TABLE IF EXISTS bookmark RESTRICT;
@@ -116,8 +116,8 @@ CREATE TABLE member (
   tel        VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo      VARCHAR(255) NULL     COMMENT '사진', -- 사진
   created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '가입일', -- 가입일
-  leave      INTEGER      NULL     COMMENT '탈퇴', -- 탈퇴
-  stauts     INTEGER      NOT NULL COMMENT '상태' -- 상태
+  active     INTEGER      NULL     COMMENT '탈퇴', -- 탈퇴
+  status     INTEGER      NOT NULL COMMENT '상태' -- 상태
 )
 COMMENT '회원';
 
@@ -146,7 +146,7 @@ CREATE TABLE study (
   no_people     INTEGER     NOT NULL COMMENT '인원수', -- 인원수
   face_no       INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
   introduction  TEXT        NOT NULL COMMENT '소개글', -- 소개글
-  created_dt    DATE        NOT NULL DEFAULT datetime() COMMENT '스터디등록일', -- 스터디등록일
+  created_dt    DATE        NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
   per_member_no INTEGER     NOT NULL COMMENT '개인번호', -- 개인번호
   score         INTEGER     NOT NULL DEFAULT 0 COMMENT '스터디활동점수' -- 스터디활동점수
 )
@@ -206,7 +206,7 @@ CREATE TABLE calender (
   calender_dt   DATE         NOT NULL COMMENT '날짜', -- 날짜
   day_week      VARCHAR(3)   NOT NULL COMMENT '요일', -- 요일
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  end_dt        DATE         NOT NULL DEFAULT datetime() COMMENT '종료일', -- 종료일
+  end_dt        DATE         NOT NULL COMMENT '종료일', -- 종료일
   importance_no INTEGER      NOT NULL COMMENT '중요도상태번호' -- 중요도상태번호
 )
 COMMENT '캘린더';
@@ -229,7 +229,8 @@ CREATE TABLE study_board (
   title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   view_ct       INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  created_dt    DATETIME     NOT NULL DEFAULT datetime() COMMENT '작성일' -- 작성일
+  created_dt    DATETIME     NOT NULL DEFAULT now()
+   COMMENT '작성일' -- 작성일
 )
 COMMENT '스터디-자유게시판';
 
@@ -621,7 +622,7 @@ CREATE TABLE comment (
   st_board_no   INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   per_member_no INTEGER      NOT NULL COMMENT '개인번호', -- 개인번호
-  created_dt    DATETIME     NOT NULL DEFAULT datetime() COMMENT '작성일' -- 작성일
+  created_dt    DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
 )
 COMMENT '댓글';
 
@@ -861,17 +862,18 @@ CREATE UNIQUE INDEX UIX_payment_status
   );
 
 -- 좋아요
-CREATE TABLE like  (
+CREATE TABLE boardlike (
   study_no      INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
   per_member_no INTEGER NOT NULL COMMENT '개인번호', -- 개인번호
   st_board_no   INTEGER NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
-  create_dt     DATE    NOT NULL COMMENT '등록일' -- 등록일
+  create_dt     DATE    NOT NULL DEFAULT curdate()
+   COMMENT '등록일' -- 등록일
 )
 COMMENT '좋아요';
 
 -- 좋아요
-ALTER TABLE like 
-  ADD CONSTRAINT PK_like  -- 좋아요 기본키
+ALTER TABLE boardlike
+  ADD CONSTRAINT PK_boardlike -- 좋아요 기본키
     PRIMARY KEY (
       study_no,      -- 스터디번호
       per_member_no, -- 개인번호
@@ -1261,8 +1263,8 @@ ALTER TABLE notice_file
     );
 
 -- 좋아요
-ALTER TABLE like 
-  ADD CONSTRAINT FK_study_guilder_TO_like  -- 스터디구성원 -> 좋아요
+ALTER TABLE boardlike
+  ADD CONSTRAINT FK_study_guilder_TO_boardlike -- 스터디구성원 -> 좋아요
     FOREIGN KEY (
       study_no,      -- 스터디번호
       per_member_no  -- 개인번호
@@ -1273,8 +1275,8 @@ ALTER TABLE like
     );
 
 -- 좋아요
-ALTER TABLE like 
-  ADD CONSTRAINT FK_study_board_TO_like  -- 스터디-자유게시판 -> 좋아요
+ALTER TABLE boardlike
+  ADD CONSTRAINT FK_study_board_TO_boardlike -- 스터디-자유게시판 -> 좋아요
     FOREIGN KEY (
       st_board_no -- 스터디자유게시판번호
     )
