@@ -115,8 +115,8 @@ CREATE TABLE member (
   password   VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호
   tel        VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo      VARCHAR(255) NULL     COMMENT '사진', -- 사진
-  created_dt DATE         NOT NULL DEFAULT date() COMMENT '가입일', -- 가입일
-  leave      INTEGER      NULL     DEFAULT 1 COMMENT '탈퇴', -- 탈퇴
+  created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '가입일', -- 가입일
+  leave      INTEGER      NULL     COMMENT '탈퇴', -- 탈퇴
   stauts     INTEGER      NOT NULL COMMENT '상태' -- 상태
 )
 COMMENT '회원';
@@ -1301,4 +1301,3 @@ ALTER TABLE bookmark
     REFERENCES per_member ( -- 개인
       per_member_no -- 개인번호
     );
-    
