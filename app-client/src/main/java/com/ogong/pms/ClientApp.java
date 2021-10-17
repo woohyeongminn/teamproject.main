@@ -101,6 +101,7 @@ import com.ogong.pms.handler.myStudy.calender.CalenderAddHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderDeleteHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderDetailHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderListHandler;
+import com.ogong.pms.handler.myStudy.calender.CalenderMonthListHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderUpdateHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentDeleteHandler;
@@ -280,6 +281,7 @@ public class ClientApp {
 
     commandMap.put("/myStudy/calenderAdd", new CalenderAddHandler(studyDao));
     commandMap.put("/myStudy/calenderList", new CalenderListHandler(studyDao));
+    commandMap.put("/myStudy/calenderMonthList", new CalenderMonthListHandler(studyDao));
     commandMap.put("/myStudy/calenderDetail", new CalenderDetailHandler(studyDao));
     commandMap.put("/myStudy/calenderUpdate", new CalenderUpdateHandler(studyDao));
     commandMap.put("/myStudy/calenderDelete", new CalenderDeleteHandler(studyDao));
