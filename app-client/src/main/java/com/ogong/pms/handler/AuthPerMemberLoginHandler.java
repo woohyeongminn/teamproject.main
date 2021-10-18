@@ -1,6 +1,5 @@
 package com.ogong.pms.handler;
 
-import java.util.HashMap;
 import com.ogong.menu.Menu;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
@@ -26,15 +25,11 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements C
     String inputEmail = Prompt.inputString(" 이메일 : ");
     String inputPassword = Prompt.inputString(" 비밀번호 : ");
 
-    HashMap<String,String> params = new HashMap<>();
-    params.put("email", inputEmail);
-    params.put("password", inputPassword);
-
     Member member = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
 
     if (member != null) {
 
-      if (member.getPerStatus() == Member.OUTUSER) {
+      if (member.getActive() == Member.OUTUSER) {
         System.out.println(" >> 회원가입을 진행해 주세요.");
         return;
       }

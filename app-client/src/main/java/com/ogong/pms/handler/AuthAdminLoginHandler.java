@@ -1,6 +1,5 @@
 package com.ogong.pms.handler;
 
-import java.util.HashMap;
 import com.ogong.menu.Menu;
 import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.domain.Admin;
@@ -28,10 +27,6 @@ public class AuthAdminLoginHandler extends AbstractLoginHandler implements Comma
     System.out.println();
     String adminEmail = Prompt.inputString(" 이메일 : ");
     String adminPassword = Prompt.inputString(" 비밀번호 : ");
-
-    HashMap<String,String> params = new HashMap<>();
-    params.put("adminEmail", adminEmail);
-    params.put("adminPassword", adminPassword);
 
     Admin admin = adminDao.findByEmailAndPassword(adminEmail, adminPassword);
 

@@ -31,12 +31,12 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements C
 
     if (ceoMember != null) {
 
-      if (ceoMember.getCeoStatus() == CeoMember.OUTUSER) {
+      if (ceoMember.getActive() == CeoMember.OUTUSER) {
         System.out.println(" >> 회원가입을 진행해 주세요.");
         return;
       }
 
-      System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoBossName());
+      System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoName());
       loginCeoMember = ceoMember;
       accessLevel = Menu.CEO_LOGIN;
       return;

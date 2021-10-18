@@ -4,6 +4,8 @@ import static com.ogong.menu.Menu.ADMIN_LOGIN;
 import static com.ogong.menu.Menu.CEO_LOGIN;
 import static com.ogong.menu.Menu.LOGOUT;
 import static com.ogong.menu.Menu.PER_LOGIN;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +13,14 @@ import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
-import com.ogong.pms.dao.impl.NetAdminDao;
+import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.dao.CeoMemberDao;
+import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.dao.impl.MariadbAdminDao;
+import com.ogong.pms.dao.impl.MariadbCeoMemberDao;
+import com.ogong.pms.dao.impl.MariadbMemberDao;
 import com.ogong.pms.dao.impl.NetAskBoardDao;
 import com.ogong.pms.dao.impl.NetCafeDao;
-import com.ogong.pms.dao.impl.NetCeoMemberDao;
-import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.dao.impl.NetStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
@@ -137,6 +142,7 @@ import com.ogong.util.RandomPw;
 
 public class ClientApp {
 
+  Connection con;
   RequestAgent requestAgent;
 
   HashMap<String, Command> commandMap = new HashMap<>();
@@ -197,14 +203,19 @@ public class ClientApp {
 
   public ClientApp() throws Exception {
     // 로컬
+    // null로 바꿔야함!
     requestAgent = new RequestAgent("127.0.0.1", 5050);
     //requestAgent = new RequestAgent("192.168.0.92", 5050);
-    //    requestAgent = new RequestAgent("192.168.0.68", 5050);
+    //requestAgent = new RequestAgent("192.168.0.68", 5050);
+
+    // DBMS와 연결한다.
+    con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/ogongdb?user=ogong&password=1111");
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
-    NetMemberDao memberDao = new NetMemberDao(requestAgent);
-    NetAdminDao adminDao = new NetAdminDao(requestAgent);
-    NetCeoMemberDao ceoMemberDao = new NetCeoMemberDao(requestAgent);
+    AdminDao adminDao = new MariadbAdminDao(con);
+    MemberDao memberDao = new MariadbMemberDao(con);
+    CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
     NetCafeDao cafeDao = new NetCafeDao(requestAgent);
     NetStudyDao studyDao = new NetStudyDao(requestAgent);
@@ -649,6 +660,7 @@ public class ClientApp {
     Prompt.close();
 
     notifyOnApplicationEnded();
+    con.close();
   }
 
   public static void main(String[] args) throws Exception {
