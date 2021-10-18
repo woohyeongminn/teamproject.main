@@ -49,21 +49,13 @@ public class StudyBookMarkDetailHandler implements Command {
         return;
       }
 
-      //int count = 0;
-
       for (Study myBookMarkStudy : myBookMarkStudyList) {
         if(myBookMarkStudy.getStudyNo() != inputNo) {
           System.out.println(" >> 내가 북마크한 스터디 번호를 입력하세요. / 종료(엔터)");
           continue LOOP;
         }
-        //count++;
         break;
       }
-
-      //      if (count != 0) {
-      //        return;
-      //      }
-
       break;
     }
 
