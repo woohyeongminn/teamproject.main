@@ -29,7 +29,15 @@ repositories {
 //    등록한 라이브러를 자동으로 다운로드 받는다.
 // => 이렇게 다운로드 받은 라이브러리는 컴파일하거나 실행할 때 사용된다.
 dependencies {
- // Google gson 라이브러리
+    // MariaDB JDBC 드라이버
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
+
+    // Oracle JDBC Driver
+    implementation 'com.oracle.database.jdbc:ojdbc11:21.3.0.0'
+    
+    // MSSQL JDBC Driver
+    implementation 'com.microsoft.sqlserver:mssql-jdbc:9.4.0.jre11'
+    // Google gson 라이브러리
     implementation 'com.google.code.gson:gson:2.8.8'
     // java mail api 라이브러리
     // https://mvnrepository.com/artifact/javax.mail/mail

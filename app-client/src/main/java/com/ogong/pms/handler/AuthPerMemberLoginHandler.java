@@ -2,21 +2,21 @@ package com.ogong.pms.handler;
 
 import java.util.HashMap;
 import com.ogong.menu.Menu;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
-import com.ogong.request.RequestAgent;
 import com.ogong.util.Prompt;
 
 public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements Command {
 
-  RequestAgent requestAgent;
+  MemberDao memberDao;
 
   public static Member loginUser;
   public static Member getLoginUser() {
     return loginUser;
   }
 
-  public AuthPerMemberLoginHandler(RequestAgent requestAgent) {
-    this.requestAgent = requestAgent;
+  public AuthPerMemberLoginHandler(MemberDao memberDao) {
+    this.memberDao = memberDao;
   }
 
   @Override
@@ -30,10 +30,9 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements C
     params.put("email", inputEmail);
     params.put("password", inputPassword);
 
-    requestAgent.request("member.selectOneByEmailPassword", params);
+    Member member = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
 
-    if (requestAgent.getStatus().equals(RequestAgent.SUCCESS)) {
-      Member member = requestAgent.getObject(Member.class);
+    if (member != null) {
 
       if (member.getPerStatus() == Member.OUTUSER) {
         System.out.println(" >> 회원가입을 진행해 주세요.");

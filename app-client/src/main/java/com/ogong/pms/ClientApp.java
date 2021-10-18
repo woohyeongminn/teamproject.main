@@ -208,7 +208,7 @@ public class ClientApp {
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
     RandomPw randomPw = new RandomPw();
-    commandMap.put("/member/login", new AuthPerMemberLoginHandler(requestAgent));
+    commandMap.put("/member/login", new AuthPerMemberLoginHandler(memberDao));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao));
@@ -234,11 +234,11 @@ public class ClientApp {
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberDao));
     commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberDao));
     commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberDao));
-    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(requestAgent));
+    commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberDao));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
     commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(randomPw, ceoMemberDao));
 
-    commandMap.put("/admin/login", new AuthAdminLoginHandler(requestAgent));
+    commandMap.put("/admin/login", new AuthAdminLoginHandler(adminDao));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
 
     commandMap.put("/admin/update", new AdminUpdateHandler(adminDao));
