@@ -158,7 +158,7 @@ CREATE TABLE studycafe_review (
   studycafe_rsv_no INTEGER      NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
   content          VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   grade            INTEGER      NOT NULL COMMENT '평점', -- 평점
-  create_dt        DATETIME     NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
+  create_dt        DATE         NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
 )
 COMMENT '리뷰';
 
@@ -175,7 +175,7 @@ ALTER TABLE studycafe_review
 -- 스터디카페예약상태
 CREATE TABLE studycafe_reservation_status (
   rsv_status_no INTEGER     NOT NULL COMMENT '예약상태번호', -- 예약상태번호
-  rsv_name      VARCHAR(50) NOT NULL DEFAULT 1 COMMENT '예약상태명' -- 예약상태명
+  rsv_name      VARCHAR(50) NOT NULL COMMENT '예약상태명' -- 예약상태명
 )
 COMMENT '스터디카페예약상태';
 
@@ -197,7 +197,7 @@ CREATE TABLE studycafe_reservation (
   studycafe_rsv_no INTEGER  NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
   studyroom_no     INTEGER  NOT NULL COMMENT '스터디룸번호', -- 스터디룸번호
   per_member_no    INTEGER  NOT NULL COMMENT '개인번호', -- 개인번호
-  rsv_dt           DATETIME NOT NULL DEFAULT curdate() COMMENT '예약일', -- 예약일
+  rsv_dt           DATETIME NOT NULL DEFAULT now() COMMENT '예약일', -- 예약일
   using_dt         DATE     NOT NULL COMMENT '이용날짜', -- 이용날짜
   start_time       TIME     NOT NULL COMMENT '시작시간', -- 시작시간
   using_time       TIME     NOT NULL COMMENT '이용시간', -- 이용시간
@@ -299,7 +299,7 @@ ALTER TABLE studycafe_operating_time
 -- 카페운영상태
 CREATE TABLE studycafe_operating_status (
   operating_status_no INTEGER     NOT NULL COMMENT '운영상태번호', -- 운영상태번호
-  name                VARCHAR(50) NOT NULL DEFAULT 1 COMMENT '운영상태명' -- 운영상태명
+  name                VARCHAR(50) NOT NULL COMMENT '운영상태명' -- 운영상태명
 )
 COMMENT '카페운영상태';
 
@@ -341,7 +341,7 @@ CREATE TABLE studycafe (
   info                TEXT         NOT NULL COMMENT '소개글', -- 소개글
   location            VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
   phone               VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
-  bookable            INTEGER      NOT NULL COMMENT '예약가능인원', -- 예약가능인원
+  bookable            INTEGER      NULL     COMMENT '예약가능인원', -- 예약가능인원
   view_cnt            INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
   operating_status_no INTEGER      NOT NULL COMMENT '운영상태번호', -- 운영상태번호
   ceo_member_no       INTEGER      NOT NULL COMMENT '사장번호' -- 사장번호
@@ -367,7 +367,7 @@ ALTER TABLE studycafe
 -- 투두진행상태
 CREATE TABLE study_todolsit_progress (
   progress_no INTEGER     NOT NULL COMMENT '진행상태번호', -- 진행상태번호
-  name        VARCHAR(50) NOT NULL DEFAULT 1 COMMENT '진행상태명' -- 진행상태명
+  name        VARCHAR(50) NOT NULL COMMENT '진행상태명' -- 진행상태명
 )
 COMMENT '투두진행상태';
 
@@ -391,8 +391,7 @@ CREATE TABLE study_todolist (
   per_member_no INTEGER      NOT NULL COMMENT '개인번호', -- 개인번호
   title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  create_dt     DATE         NOT NULL DEFAULT now()
-   COMMENT '등록일', -- 등록일
+  create_dt     DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
   note          VARCHAR(255) NULL     COMMENT '비고', -- 비고
   progress_no   INTEGER      NOT NULL COMMENT '진행상태번호' -- 진행상태번호
 )
@@ -471,7 +470,7 @@ CREATE TABLE study_guilder (
   study_no      INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
   per_member_no INTEGER NOT NULL COMMENT '개인번호', -- 개인번호
   created_dt    DATE    NOT NULL DEFAULT curdate() COMMENT '스터디가입일', -- 스터디가입일
-  status        INTEGER NOT NULL DEFAULT 1 COMMENT '승인여부' -- 승인여부
+  status        INTEGER NULL     DEFAULT 1 COMMENT '승인여부' -- 승인여부
 )
 COMMENT '스터디구성원';
 
@@ -873,8 +872,8 @@ CREATE TABLE member (
   tel        VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo      VARCHAR(255) NULL     COMMENT '사진', -- 사진
   created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '가입일', -- 가입일
-  active     INTEGER      NULL     COMMENT '탈퇴', -- 탈퇴
-  status     INTEGER      NOT NULL COMMENT '상태' -- 상태
+  status     INTEGER      NOT NULL COMMENT '상태', -- 상태
+  active     INTEGER      NULL     DEFAULT 1 COMMENT '탈퇴' -- 탈퇴
 )
 COMMENT '회원';
 
