@@ -22,9 +22,6 @@ DROP TABLE IF EXISTS studycafe_payment_type RESTRICT;
 -- 결제
 DROP TABLE IF EXISTS studycafe_payment RESTRICT;
 
--- 카페요일별운영시간
-DROP TABLE IF EXISTS studycafe_operating_time RESTRICT;
-
 -- 카페운영상태
 DROP TABLE IF EXISTS studycafe_operating_status RESTRICT;
 
@@ -276,26 +273,6 @@ ALTER TABLE studycafe_payment
 ALTER TABLE studycafe_payment
   MODIFY COLUMN payment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '결제번호';
 
--- 카페요일별운영시간
-CREATE TABLE studycafe_operating_time (
-  operating_time_no INTEGER    NOT NULL COMMENT '요일별운영시간번호', -- 요일별운영시간번호
-  cafe_no           INTEGER    NOT NULL COMMENT '스터디카페번호', -- 스터디카페번호
-  day               VARCHAR(3) NOT NULL COMMENT '요일', -- 요일
-  open_time         TIME       NOT NULL COMMENT '오픈시간', -- 오픈시간
-  close_time        TIME       NOT NULL COMMENT '마감시간' -- 마감시간
-)
-COMMENT '카페요일별운영시간';
-
--- 카페요일별운영시간
-ALTER TABLE studycafe_operating_time
-  ADD CONSTRAINT PK_studycafe_operating_time -- 카페요일별운영시간 기본키
-    PRIMARY KEY (
-      operating_time_no -- 요일별운영시간번호
-    );
-
-ALTER TABLE studycafe_operating_time
-  MODIFY COLUMN operating_time_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '요일별운영시간번호';
-
 -- 카페운영상태
 CREATE TABLE studycafe_operating_status (
   operating_status_no INTEGER     NOT NULL COMMENT '운영상태번호', -- 운영상태번호
@@ -341,6 +318,8 @@ CREATE TABLE studycafe (
   info                TEXT         NOT NULL COMMENT '소개글', -- 소개글
   location            VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
   phone               VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
+  open_time           TIME         NOT NULL COMMENT '오픈시간', -- 오픈시간
+  close_time          TIME         NOT NULL COMMENT '마감시간', -- 마감시간
   bookable            INTEGER      NULL     COMMENT '예약가능인원', -- 예약가능인원
   view_cnt            INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
   operating_status_no INTEGER      NOT NULL COMMENT '운영상태번호', -- 운영상태번호
@@ -992,16 +971,6 @@ ALTER TABLE studycafe_payment
     )
     REFERENCES studycafe_reservation ( -- 스터디카페예약
       studycafe_rsv_no -- 스터디카페예약번호
-    );
-
--- 카페요일별운영시간
-ALTER TABLE studycafe_operating_time
-  ADD CONSTRAINT FK_studycafe_TO_studycafe_operating_time -- 스터디카페 -> 카페요일별운영시간
-    FOREIGN KEY (
-      cafe_no -- 스터디카페번호
-    )
-    REFERENCES studycafe ( -- 스터디카페
-      cafe_no -- 스터디카페번호
     );
 
 -- 카페휴무일
