@@ -11,7 +11,9 @@ public interface CeoMemberDao {
   CeoMember findByEmail(String inputEmail) throws Exception;
   CeoMember findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception;
   void insert(CeoMember ceoMember) throws Exception;
-  void update(CeoMember ceoMember) throws Exception;
+  void updateName(CeoMember ceoMember) throws Exception;
+  void updateNickName(CeoMember ceoMember) throws Exception;
+  void updateEmail(CeoMember ceoMember) throws Exception;
   void delete(int no) throws Exception;
 
 }
