@@ -17,11 +17,11 @@ import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.dao.impl.NetAdminDao;
+import com.ogong.pms.dao.impl.MariadbAdminDao;
+import com.ogong.pms.dao.impl.MariadbCafeDao;
+import com.ogong.pms.dao.impl.MariadbCeoMemberDao;
+import com.ogong.pms.dao.impl.MariadbMemberDao;
 import com.ogong.pms.dao.impl.NetAskBoardDao;
-import com.ogong.pms.dao.impl.NetCafeDao;
-import com.ogong.pms.dao.impl.NetCeoMemberDao;
-import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.dao.impl.NetStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
@@ -214,11 +214,11 @@ public class ClientApp {
         "jdbc:mysql://localhost:3306/ogongdb?user=ogong&password=1111");
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
-    AdminDao adminDao = new NetAdminDao(requestAgent);
-    MemberDao memberDao = new NetMemberDao(requestAgent);
-    CeoMemberDao ceoMemberDao = new NetCeoMemberDao(requestAgent);
+    AdminDao adminDao = new MariadbAdminDao(con);
+    MemberDao memberDao = new MariadbMemberDao(con);
+    CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
-    CafeDao cafeDao = new NetCafeDao(requestAgent);
+    CafeDao cafeDao = new MariadbCafeDao(con);
     NetStudyDao studyDao = new NetStudyDao(requestAgent);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
