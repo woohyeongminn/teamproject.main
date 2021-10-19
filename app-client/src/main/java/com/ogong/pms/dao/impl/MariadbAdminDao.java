@@ -211,11 +211,6 @@ public class MariadbAdminDao implements AdminDao {
       return adminNotice;
     }
   }
-
-  @Override
-  public void update(Admin admin) throws Exception {
-
-  }
 }
 
 // 확인용

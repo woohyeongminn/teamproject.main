@@ -18,15 +18,15 @@ public class NetAdminDao implements AdminDao {
 
   // ----------- [ 관리자 ] ------------------------------------------------------
 
-  @Override
-  public void update(Admin admin) throws Exception {
-    requestAgent.request("admin.update", admin);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println("관리자 수정 실패");
-      throw new Exception(requestAgent.getObject(String.class));
-    }
-  }
+  //  @Override
+  //  public void update(Admin admin) throws Exception {
+  //    requestAgent.request("admin.update", admin);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      System.out.println("관리자 수정 실패");
+  //      throw new Exception(requestAgent.getObject(String.class));
+  //    }
+  //  }
 
   @Override
   public Admin findByAdminNo(int no) throws Exception {
