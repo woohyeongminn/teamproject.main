@@ -27,7 +27,6 @@ public class CeoCafeUpdateHandler implements Command {
     Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     String name = Prompt.inputString(String.format(" 상호명(%s) : ", cafe.getName()));
-    String cafeLicenseNo = Prompt.inputString(String.format(" 사업자 등록번호(%s) : ", cafe.getCafeLicenseNo()));
     String mainImg = Prompt.inputString(String.format(" 대표이미지(%s) : ", cafe.getMainImg()));
     String Info = Prompt.inputString(String.format(" 소개글(%s) : ", cafe.getInfo()));
     System.out.printf(" 기존 주소 : %s\n", cafe.getLocation());
@@ -56,7 +55,6 @@ public class CeoCafeUpdateHandler implements Command {
     }
 
     cafe.setName(name);
-    cafe.setCafeLicenseNo(cafeLicenseNo);
     cafe.setMainImg(mainImg);
     cafe.setInfo(Info);
     cafe.setLocation(addressString);
