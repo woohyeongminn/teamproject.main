@@ -33,7 +33,7 @@ public class MemberDetailHandler implements Command {
     try {
       System.out.println();
       System.out.printf(" [%s]\n", member.getPerNickname());
-      System.out.printf(" >> 이름 : %s\n", member.getPerName());
+      System.out.printf(" >> 이  름 : %s\n", member.getPerName());
       System.out.printf(" >> 사  진 : %s\n", member.getPerPhoto());
       System.out.printf(" >> 전화번호 : %s\n", member.getPerTel());
       System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
