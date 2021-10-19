@@ -26,21 +26,38 @@ public class MemberUpdateHandler implements Command {
     List<Member> memberList = memberDao.findAll();
     Member member = memberDao.findByNo(no);
 
-    System.out.println("1. 닉네임");
-    System.out.println("2. 사진");
-    System.out.println("3. 이메일");
-    System.out.println("4. 비밀번호");
+    System.out.println("1. 이름");
+    System.out.println("2. 닉네임");
+    System.out.println("3. 사진");
+    System.out.println("4. 전화번호");
+    System.out.println("5. 이메일");
+    System.out.println("6. 비밀번호");
     System.out.println();
     int selectNo = Prompt.inputInt(" 수정하고 싶은 정보를 선택해 주세요. > ");
 
+    String perName = member.getPerName();
     String perNickName = member.getPerNickname();
     String perPhoto = member.getPerPhoto();
+    String perTel = member.getPerTel();
     String perEmail = member.getPerEmail();
     String perPassword = member.getPerPassword();
 
     switch (selectNo) {
-      case 1: 
-        perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname()  + ") : ");
+      case 1:
+        LOOP: while (true) {
+          perName = Prompt.inputString(" 이  름(" + member.getPerName() + ") : ");
+          for (Member preMemberName : memberList) {
+            if (perName.equals(preMemberName.getPerName())) {
+              System.out.println(" >> 이미 사용중인 이름입니다.");
+              continue LOOP;
+            } else {
+              break LOOP;
+            }
+          }
+        }
+
+      case 2:
+        perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname() + ") : ");
         while (true) {
           for (Member comparisonMember : memberList) {
             if (perNickName.equals(comparisonMember.getPerNickname())) {
@@ -52,15 +69,30 @@ public class MemberUpdateHandler implements Command {
         }
         break;
 
-      case 2: 
+      case 3:
         perPhoto = Prompt.inputString(" 사  진(" + member.getPerPhoto() + ") : ");
         break;
 
-      case 3:
+      case 4:
+        LOOP: while (true) {
+          perTel = Prompt.inputString(" 전화번호(" + member.getPerTel() + ") : ");
+          if (perTel.length() > 10 && perTel.length() < 11) {
+            System.out.println(" >> 올바른 형식의 전화번호를 입력해 주세요.");
+            continue;
+          }
+
+          for (Member perMemberTel : memberList) {
+            if (perTel.equals(perMemberTel.getPerTel())) {
+              System.out.println(" >> 이미 사용중인 전화번호입니다.");
+              continue LOOP;
+            }
+          }
+        }
+
+      case 5:
         while (true) {
           perEmail = Prompt.inputString(" 이메일(" + member.getPerEmail() + ") : ");
-          if (!perEmail.contains("@") ||
-              !perEmail.contains(".com") || perEmail.length() < 6) {
+          if (!perEmail.contains("@") || !perEmail.contains(".com") || perEmail.length() < 6) {
             System.out.println(" >> 정확한 이메일 양식으로 입력해 주세요.");
             continue;
           }
@@ -68,7 +100,7 @@ public class MemberUpdateHandler implements Command {
         }
         break;
 
-      case 4:
+      case 6:
         while (true) {
           perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
           if (perPassword.length() < 8 || (!perPassword.contains("!") && !perPassword.contains("@")
@@ -82,7 +114,7 @@ public class MemberUpdateHandler implements Command {
         }
 
         while (true) {
-          String pw =  Prompt.inputString(" 비밀번호 확인 : ");
+          String pw = Prompt.inputString(" 비밀번호 확인 : ");
           if (!pw.equals(perPassword)) {
             System.out.println("\n >> 확인 실패!\n");
             continue;
@@ -93,7 +125,7 @@ public class MemberUpdateHandler implements Command {
         }
         break;
 
-      default : 
+      default:
         System.out.println(" >> 올바른 번호를 입력해 주세요.");
         return;
     }
@@ -105,12 +137,16 @@ public class MemberUpdateHandler implements Command {
       return;
     }
     if (selectNo == 1) {
-      member.setPerNickname(perNickName);
+      member.setPerName(perName);
     } else if (selectNo == 2) {
-      member.setPerPhoto(perPhoto);
+      member.setPerNickname(perNickName);
     } else if (selectNo == 3) {
-      member.setPerEmail(perEmail);
+      member.setPerPhoto(perPhoto);
     } else if (selectNo == 4) {
+      member.setPerTel(perTel);
+    } else if (selectNo == 5) {
+      member.setPerEmail(perEmail);
+    } else if (selectNo == 6) {
       member.setPerPassword(perPassword);
     }
 
