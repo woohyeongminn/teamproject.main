@@ -21,7 +21,21 @@ insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, per_member_no, score) 
 values(2, '정처기준비', 2, 5, 2, '한 번에 붙자', '2021-2-2', 1, 0);
 
-
 -------------------------------------------------------------------------------------------------
 
-
+select
+s.study_no,
+s.name,
+ss.name,
+s.no_people,
+sfs.name,
+s.introduction,
+s.created_dt,
+m.name,
+s.score
+ from study s
+ left outer join per_member pm on s.per_member_no=pm.per_member_no
+ left outer join study_subject ss on s.subject_no=ss.subject_no
+ left outer join member m on m.member_no=pm.member_no
+ left outer join study_face_status sfs on s.face_no=sfs.face_no
+;
