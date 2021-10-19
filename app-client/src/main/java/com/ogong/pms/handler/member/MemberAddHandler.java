@@ -26,6 +26,8 @@ public class MemberAddHandler implements Command {
     List<Member> memberList = memberDao.findAll();
     Member member = new Member();
 
+    String inputName = Prompt.inputString(" 이름 : ");
+    member.setPerName(inputName);
     String inputNewNick;
     inputNewNick = Prompt.inputString(" 닉네임 : ");
     for (Member comparisonMember : memberList) {
@@ -37,7 +39,8 @@ public class MemberAddHandler implements Command {
 
     member.setPerNickname(inputNewNick);
     member.setPerPhoto(Prompt.inputString(" 사  진 : "));
-
+    String inputTel = Prompt.inputString(" 전화번호 : ");
+    member.setPerTel(inputTel);
     String inputNewEmail;
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
