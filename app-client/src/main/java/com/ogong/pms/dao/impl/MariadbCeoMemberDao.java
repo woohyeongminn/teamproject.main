@@ -146,14 +146,62 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     }
   }
 
+  // 아이디 찾기
   @Override
-  public CeoMember findByNickName(String inputNick) throws Exception {
-    return null;
+  public CeoMember findByName(String inputName) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " cm.ceo_member_no ceo_no,"
+            + "m.name,"
+            + "m.email"
+            + " from member m"
+            + " join ceo_member cm on m.member_no=cm.member_no" 
+            + " where m.name=?")) {
+
+      stmt.setString(1, inputName);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+
+        CeoMember ceoMember = new CeoMember();
+        ceoMember.setCeoNo(rs.getInt("ceo_no"));
+        ceoMember.setCeoName(rs.getString("name"));
+        ceoMember.setCeoEmail(rs.getString("email"));
+
+        return ceoMember;
+      }
+    }
   }
 
+  // 비밀번호 찾기
   @Override
   public CeoMember findByEmail(String inputEmail) throws Exception {
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " cm.ceo_member_no ceo_no,"
+            + "m.email,"
+            + "m.nickname"
+            + " from member m"
+            + " join ceo_member cm on m.member_no=cm.member_no" 
+            + " where m.email=?")) {
+
+      stmt.setString(1, inputEmail);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+
+        CeoMember ceoMember = new CeoMember();
+        ceoMember.setCeoNo(rs.getInt("ceo_no"));
+        ceoMember.setCeoEmail(rs.getString("email"));
+        ceoMember.setCeoNickname(rs.getString("nickname"));
+
+        return ceoMember;
+      }
+    }
   }
 
   @Override
@@ -186,47 +234,8 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
       }
     }
   }
-  //
-  //  // 회원가입할때 입력된 회원의 PK 값 꺼내기
-  //  int ceoMemberNo = 0;
-  //  try (ResultSet pkRS = stmt.getGeneratedKeys()) {
-  //    if (pkRS.next()) {
-  //      ceoMemberNo = pkRS.getInt("member_no");
-  //    }
-  //  }
 
-  //@Override
-  //  public void updateName(CeoMember ceoMember) throws Exception {
-  //
-  //    int memberNo = 0;
-  //    try (PreparedStatement stmt = con.prepareStatement(
-  //        "select"
-  //            + " m.member_no,"
-  //            + "cm.ceo_member_no ceo_no,"
-  //            + " from member m"
-  //            + " join ceo_member cm on m.member_no=cm.member_no"
-  //            + " where cm.ceo_member_no=" + ceoMember.getCeoNo());
-  //        try (ResultSet rs = stmt.executeQuery() {
-  //
-  //
-  //          memberNo = stmt.getInt("member_no");
-  //
-  //
-  //
-  //          try (PreparedStatement stmt = con.prepareStatement(
-  //              "update member set"
-  //                  + " name=?"
-  //                  + " where member_no=?")) {
-  //
-  //            stmt.setString(1, ceoMember.getCeoName());
-  //            stmt.setInt(2, ceoMember.getCeoNo());
-  //
-  //            if (stmt.executeUpdate() == 0) {
-  //              throw new Exception("사장 회원 이름 데이터 변경 실패!");
-  //            }
-  //          }
-  //        }
-
+  // 개인정보 수정 - 이름
   @Override
   public void updateName(CeoMember ceoMember) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
@@ -243,15 +252,16 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     }
   }
 
+  //개인정보 수정 - 닉네임
   @Override
   public void updateNickName(CeoMember ceoMember) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "update member set"
-            + " nickname=?"
-            + " where member_no=?")) {
+            + " nickname = ?"
+            + " where member_no ="
+            + " (select member_no from ceo_member where ceo_member_no=" + ceoMember.getCeoNo() + ")")) {
 
       stmt.setString(1, ceoMember.getCeoNickname());
-      stmt.setInt(2, ceoMember.getCeoNo());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception(" 사장 회원 닉네임 데이터 변경 실패!");
@@ -259,15 +269,16 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     }
   }
 
+  //개인정보 수정 - 사진
   @Override
   public void updatePhoto(CeoMember ceoMember) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "update member set"
-            + " photo=?"
-            + " where member_no=?")) {
+            + " photo = ?"
+            + " where member_no ="
+            + " (select member_no from ceo_member where ceo_member_no=" + ceoMember.getCeoNo() + ")")) {
 
       stmt.setString(1, ceoMember.getCeoPhoto());
-      stmt.setInt(2, ceoMember.getCeoNo());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception(" 사장 회원 사진 데이터 변경 실패!");
@@ -275,15 +286,16 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     }
   }
 
+  //개인정보 수정 - 전화번호
   @Override
   public void updateTel(CeoMember ceoMember) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "update member set"
-            + " tel=?"
-            + " where member_no=?")) {
+            + " tel = ?"
+            + " where member_no ="
+            + " (select member_no from ceo_member where ceo_member_no=" + ceoMember.getCeoNo() + ")")) {
 
       stmt.setString(1, ceoMember.getCeoTel());
-      stmt.setInt(2, ceoMember.getCeoNo());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception(" 사장 회원 전화번호 데이터 변경 실패!");
@@ -291,15 +303,16 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     }
   }
 
+  //개인정보 수정 - 이메일
   @Override
   public void updateEmail(CeoMember ceoMember) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "update member set"
-            + " email=?"
-            + " where member_no=?")) {
+            + " email = ?"
+            + " where member_no ="
+            + " (select member_no from ceo_member where ceo_member_no=" + ceoMember.getCeoNo() + ")")) {
 
       stmt.setString(1, ceoMember.getCeoEmail());
-      stmt.setInt(2, ceoMember.getCeoNo());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception(" 사장 회원 이메일 데이터 변경 실패!");
@@ -307,6 +320,7 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     }
   }
 
+  //개인정보 수정 - 비밀번호
   @Override
   public void updatePassword(CeoMember ceoMember) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
@@ -340,24 +354,6 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
 
   @Override
   public void delete(int no) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "delete from member m join ceo_member cm on m.member_no=cm.member_no where ceo_member_no=?");
-        PreparedStatement stmt2 = con.prepareStatement(
-            "delete from ceo_member where ceo_member_no=?")) {
 
-      // 스터디 카페 먼저 지워야함
-
-      // ceo_member 멤버를 먼제 삭제한다.
-      stmt2.setInt(1, no);
-      stmt2.executeUpdate();
-
-      // member 멤버를 삭제한다.
-      stmt.setInt(1, no);
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("프로젝트 데이터 삭제 실패!");
-      }
-    }
   }
-
-
 }

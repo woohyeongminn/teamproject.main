@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.AskBoardDao;
-import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Member;
@@ -71,6 +70,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
         "select"
             + " ab.ask_board_no,"
             + " ab.title,"
+            + " ab.content,"
             + " m.member_no,"
             + " m.nickname,"
             + " m.status member_status,"
@@ -89,6 +89,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
         AskBoard askBoard = new AskBoard();
         askBoard.setAskNo(rs.getInt("ask_board_no"));
         askBoard.setAskTitle(rs.getString("title"));
+        askBoard.setAskContent(rs.getString("content"));
         askBoard.setAskRegisteredDate(rs.getDate("create_dt"));
         askBoard.setAskVeiwCount(rs.getInt("view_cnt"));
         askBoard.setAskStatus(rs.getInt("ask_status"));
@@ -135,31 +136,50 @@ select
   public AskBoard findByNo(int no) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
-            + " n.notice_no,"
-            + " n.title,"
-            + " n.content,"
-            + " n.create_dt,"
-            + " nf.notice_file_no,"
-            + " nf.filepath"
-            + " from notice n"
-            + " left outer join notice_file nf on n.notice_no=nf.notice_no"
-            + " where n.notice_no=" + no
-            + " order by n.notice_no asc");
+            + " ab.ask_board_no,"
+            + " ab.title,"
+            + " ab.content,"
+            + " m.member_no,"
+            + " m.nickname,"
+            + " m.status member_status,"
+            + " ab.use_secret ask_status,"
+            + " ab.create_dt,"
+            + " ab.view_cnt"
+            + " from"
+            + " ask_board ab"
+            + " left outer join member m on m.member_no=ab.member_no"
+            + " where ab.ask_board_no=" + no
+            + " order by ab.ask_board_no asc");
         ResultSet rs = stmt.executeQuery()) {
 
       if (!rs.next()) {
         return null;
       }
 
-      AdminNotice adminNotice = new AdminNotice();
-      adminNotice.setAdminNotiNo(rs.getInt("notice_no"));
-      adminNotice.setAdminNotiTitle(rs.getString("title"));
-      adminNotice.setAdminNotiContent(rs.getString("content"));
-      adminNotice.setAdminNotiRegisteredDate(rs.getDate("create_dt"));
-      adminNotice.setAdminNotiFileNo(rs.getInt("notice_file_no"));
-      adminNotice.setAdminNotiFile(rs.getString("filepath"));
+      AskBoard askBoard = new AskBoard();
+      askBoard.setAskNo(rs.getInt("ask_board_no"));
+      askBoard.setAskTitle(rs.getString("title"));
+      askBoard.setAskContent(rs.getString("content"));
+      askBoard.setAskRegisteredDate(rs.getDate("create_dt"));
+      askBoard.setAskVeiwCount(rs.getInt("view_cnt"));
+      askBoard.setAskStatus(rs.getInt("ask_status"));
 
-      return adminNotice;
+      Member member = new Member();
+      CeoMember ceoMember = new CeoMember();
+
+      if (rs.getInt("member_status") == 1) {
+        member.setPerNo(rs.getInt("member_no"));
+        member.setPerNickname(rs.getString("nickname"));
+
+        askBoard.setAskMemberWriter(member);
+      }
+      else if (rs.getInt("member_status") == 2) {
+        ceoMember.setCeoNo(rs.getInt("member_no"));
+        ceoMember.setCeoNickname(rs.getString("nickname"));
+
+        askBoard.setAskCeoWriter(ceoMember);
+      }
+      return askBoard;
     }
   }
 
