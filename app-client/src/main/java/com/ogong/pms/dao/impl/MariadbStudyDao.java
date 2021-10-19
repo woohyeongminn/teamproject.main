@@ -20,7 +20,6 @@ public class MariadbStudyDao implements StudyDao {
 
   @Override
   public void insert(Study study) throws Exception {
-
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into study"
             + "(name, subject_no, no_people, face_no, introduction,per_member_no)"
@@ -56,7 +55,6 @@ public class MariadbStudyDao implements StudyDao {
   }
 
   public void insertGuilder(Study study, Member member) throws Exception {
-
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into study_guilder(study_no, per_member_no, status) values(?,?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
@@ -153,12 +151,18 @@ public class MariadbStudyDao implements StudyDao {
             + " s.introduction,"
             + " s.created_dt,"
             + " m.nickname owner_name,"
+            + " sg.per_member_no,"
+            + " sg.status,"
+            + " m2.nickname guilder," 
             + " s.score"
             + " from study s"
-            + " join per_member pm on s.per_member_no=pm.per_member_no"
-            + " join study_subject ss on s.subject_no=ss.subject_no"
-            + " join member m on m.member_no=pm.member_no"
-            + " join study_face_status sfs on s.face_no=sfs.face_no"
+            + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
+            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
+            + " left outer join member m on m.member_no=pm.member_no"
+            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+            + " left outer join per_member pm2 on pm2.per_member_no=sg.per_member_no"
+            + " left outer join member m2 on m2.member_no=pm2.member_no"
             + " where s.study_no=" + studyinputNo);
         ResultSet rs = stmt.executeQuery()) {
 

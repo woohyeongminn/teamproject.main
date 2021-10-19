@@ -232,7 +232,7 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     try (PreparedStatement stmt = con.prepareStatement(
         "update member set"
             + " name = ?"
-            + " where member_no ="
+            + " where member_no ="   
             + " (select member_no from ceo_member where ceo_member_no=" + ceoMember.getCeoNo() + ")")) {
 
       stmt.setString(1, ceoMember.getCeoName());
