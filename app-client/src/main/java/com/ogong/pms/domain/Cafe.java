@@ -19,6 +19,7 @@ public class Cafe {
   private LocalTime openTime; // 오픈시간
   private LocalTime closeTime; // 마감시간
   private String holiday; // 휴무일
+  private int viewCount; // 조회수
   private int bookable; // 예약가능인원(개인좌석)
   private int timePrice; // 시간당금액(개인좌석)
   private int cafeStatus; // 0 : 승인대기 , 1 : 운영중 , 2 : 운영중단 3 : 삭제 -> cafeStatus 관리자, 사장 한테만 보임
@@ -27,8 +28,9 @@ public class Cafe {
   public String toString() {
     return "Cafe [no=" + no + ", ceoMember=" + ceoMember + ", name=" + name + ", mainImg=" + mainImg
         + ", info=" + info + ", location=" + location + ", phone=" + phone + ", openTime="
-        + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday + ", bookable=" + bookable
-        + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus + "]";
+        + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday + ", viewCount="
+        + viewCount + ", bookable=" + bookable + ", timePrice=" + timePrice + ", cafeStatus="
+        + cafeStatus + "]";
   }
 
   public int getNo() {
@@ -135,4 +137,11 @@ public class Cafe {
     this.cafeStatus = cafeStatus;
   }
 
+  public int getViewCount() {
+    return viewCount;
+  }
+
+  public void setViewCount(int viewCount) {
+    this.viewCount = viewCount;
+  }
 }
