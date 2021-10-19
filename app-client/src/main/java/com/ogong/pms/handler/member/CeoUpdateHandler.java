@@ -36,7 +36,7 @@ public class CeoUpdateHandler implements Command {
     int selectNo = Prompt.inputInt(" 수정하고 싶은 정보를 선택해 주세요. > ");
 
     String ceoName = ceoMember.getCeoName();
-    String ceoNickName = ceoMember.getCeoName();
+    String ceoNickName = ceoMember.getCeoNickname();
     String ceophoto = ceoMember.getCeoPhoto();
     String ceoTel = ceoMember.getCeoTel();
     String ceoEmail = ceoMember.getCeoEmail();
@@ -47,7 +47,7 @@ public class CeoUpdateHandler implements Command {
         ceoName = Prompt.inputString(" 이름(" + ceoMember.getCeoName()  + ") : ");
         break;
       case 2:
-        ceoNickName = Prompt.inputString(" 닉네임(" + ceoMember.getCeoBossName()  + ") : ");
+        ceoNickName = Prompt.inputString(" 닉네임(" + ceoMember.getCeoNickname()  + ") : ");
         break;
       case 3:
         ceophoto = Prompt.inputString(" 사  진(" + ceoMember.getCeoPhoto()  + ") : ");
@@ -87,15 +87,19 @@ public class CeoUpdateHandler implements Command {
 
     } else if (selectNo == 3) {
       ceoMember.setCeoPhoto(ceophoto);
+      ceoMemberDao.updatePhoto(ceoMember);
 
     } else if (selectNo == 4) {
       ceoMember.setCeoTel(ceoTel);
+      ceoMemberDao.updateTel(ceoMember);
 
     } else if (selectNo == 5) {
       ceoMember.setCeoEmail(ceoEmail);
+      ceoMemberDao.updateEmail(ceoMember);
 
-    } else if (selectNo == 4) {
+    } else if (selectNo == 6) {
       ceoMember.setCeoPassword(ceoPassword);
+      ceoMemberDao.updatePassword(ceoMember);
     }
     //    ceoMember.setceoStoreName(ceoStoreName);
     //    ceoMember.setceoStoreDetailAddress(ceoStoreDetailAddress);
