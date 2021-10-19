@@ -9,6 +9,7 @@ public class CafeReservation {
   private Member member; // 예약 회원
   private Cafe cafe; // 예약 카페
   private Date reservationDate; // 예약 날짜
+  private Date useDate; // 이용 날짜
   private LocalTime startTime; // 시작시간
   private int useTime; // 사용시간
   private int useMemberNumber; // 사용인원
@@ -16,17 +17,19 @@ public class CafeReservation {
   private boolean wirteReview; // 리뷰작성 여부
   private int roomNo; // 룸 예약시 룸 번호
   private int paymentNo; // 결제시 결제 번호
-  private int reservationStatus; // 0 : 예약완료(현장결제) , 1 : 결제완료 , 
-  //                                2 : 예약취소(개인) , 3 : 결제취소(개인) ,
-  //                                4 : 예약거절(사장) , 5 : 결제거절(사장)
+  private int reservationStatus; // 1 : 예약완료(현장결제) , 2 : 결제완료 , 
+  //                                3 : 예약취소(개인) , 4 : 결제취소(개인) ,
+  //                                5 : 예약거절(사장) , 6 : 결제거절(사장)
+  private String reservationStatusName; // 예약상태이름
 
   @Override
   public String toString() {
     return "CafeReservation [reservationNo=" + reservationNo + ", member=" + member + ", cafe="
-        + cafe + ", reservationDate=" + reservationDate + ", startTime=" + startTime + ", useTime="
-        + useTime + ", useMemberNumber=" + useMemberNumber + ", totalPrice=" + totalPrice
-        + ", wirteReview=" + wirteReview + ", roomNo=" + roomNo + ", paymentNo=" + paymentNo
-        + ", reservationStatus=" + reservationStatus + "]";
+        + cafe + ", reservationDate=" + reservationDate + ", useDate=" + useDate + ", startTime="
+        + startTime + ", useTime=" + useTime + ", useMemberNumber=" + useMemberNumber
+        + ", totalPrice=" + totalPrice + ", wirteReview=" + wirteReview + ", roomNo=" + roomNo
+        + ", paymentNo=" + paymentNo + ", reservationStatus=" + reservationStatus
+        + ", reservationStatusName=" + reservationStatusName + "]";
   }
 
   public int getReservationNo() {
@@ -123,5 +126,21 @@ public class CafeReservation {
 
   public void setReservationStatus(int reservationStatus) {
     this.reservationStatus = reservationStatus;
+  }
+
+  public Date getUseDate() {
+    return useDate;
+  }
+
+  public void setUseDate(Date useDate) {
+    this.useDate = useDate;
+  }
+
+  public String getReservationStatusName() {
+    return reservationStatusName;
+  }
+
+  public void setReservationStatusName(String reservationStatusName) {
+    this.reservationStatusName = reservationStatusName;
   }
 }

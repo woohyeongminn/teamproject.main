@@ -38,12 +38,13 @@ public class CafeMyReservationListHandler implements Command {
       return;
     } else {
       for (CafeReservation myReservationList : reserList) {
-        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n 결제금액 : %d원\n 상태 : %s\n", 
+        System.out.printf(" (%d) | 예약날짜 : %s | 이용날짜 : %s | 예약장소 : %s | 결제금액 : %d원 | 상태 : %s\n", 
             myReservationList.getReservationNo(), 
-            myReservationList.getReservationDate(), 
+            myReservationList.getReservationDate(),
+            myReservationList.getUseDate(),
             myReservationList.getCafe().getName(), 
             myReservationList.getTotalPrice(),
-            CafeHandlerHelper.getReservationStatus(myReservationList.getReservationStatus()));
+            myReservationList.getReservationStatusName());
         System.out.println();
       }
     }

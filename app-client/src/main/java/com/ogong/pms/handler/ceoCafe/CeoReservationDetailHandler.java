@@ -10,7 +10,6 @@ import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.cafe.CafeHandlerHelper;
 import com.ogong.util.Prompt;
 
 public class CeoReservationDetailHandler implements Command {
@@ -62,8 +61,7 @@ public class CeoReservationDetailHandler implements Command {
       myCafeReserList.add(cafeReser);
       Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
       CafeRoom cafeRoom = cafeDao.findByRoomNo(cafeReser.getRoomNo());
-      String reserStatusLable = 
-          CafeHandlerHelper.getReservationStatus(cafeReser.getReservationStatus());
+      String reserStatusLable = cafeReser.getReservationStatusName();
 
       if (cafeReser.getUseMemberNumber() == 0) {
         System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"

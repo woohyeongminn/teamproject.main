@@ -29,8 +29,6 @@ public class CeoCafeRoomAddHandler implements Command {
     cafeRoom.setRoomName(Prompt.inputString(" 스터디룸 이름 : "));
     cafeRoom.setRoomImg(Prompt.inputString(" 스터디룸 사진 : "));
     cafeRoom.setRoomInfo(Prompt.inputString(" 스터디룸 설명 : "));
-    cafeRoom.setStartTime(cafe.getOpenTime());
-    cafeRoom.setEndTime(cafe.getCloseTime());
     cafeRoom.setRoomPrice(Prompt.inputInt(" 스터디룸 시간당금액 : "));
 
     System.out.println();
