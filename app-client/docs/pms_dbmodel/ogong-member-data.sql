@@ -67,3 +67,6 @@ values(4, 10, '조사장', '333-28-15464');
 
 insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
 values(5, 11, '반사장', '632-94-37294');
+
+-- 개인회원 test 값
+update member set name='test' where member_no=14

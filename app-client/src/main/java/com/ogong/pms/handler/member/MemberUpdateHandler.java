@@ -50,11 +50,11 @@ public class MemberUpdateHandler implements Command {
             if (perName.equals(preMemberName.getPerName())) {
               System.out.println(" >> 이미 사용중인 이름입니다.");
               continue LOOP;
-            } else {
-              break LOOP;
             }
           }
+          break;
         }
+        break;
 
       case 2:
         perNickName = Prompt.inputString(" 닉네임(" + member.getPerNickname() + ") : ");
@@ -76,10 +76,11 @@ public class MemberUpdateHandler implements Command {
       case 4:
         LOOP: while (true) {
           perTel = Prompt.inputString(" 전화번호(" + member.getPerTel() + ") : ");
-          if (perTel.length() > 10 && perTel.length() < 11) {
-            System.out.println(" >> 올바른 형식의 전화번호를 입력해 주세요.");
-            continue;
-          }
+          // [삭제] 입력 형식 불명확
+          // if (perTel.length() > 10 && perTel.length() < 11) {
+          // System.out.println(" >> 올바른 형식의 전화번호를 입력해 주세요.");
+          // continue;
+          // }
 
           for (Member perMemberTel : memberList) {
             if (perTel.equals(perMemberTel.getPerTel())) {
@@ -136,21 +137,32 @@ public class MemberUpdateHandler implements Command {
       System.out.println(" >> 회원 변경을 취소하였습니다.");
       return;
     }
+
     if (selectNo == 1) {
       member.setPerName(perName);
+      memberDao.updateName(member);
+
     } else if (selectNo == 2) {
       member.setPerNickname(perNickName);
+      memberDao.updateNickname(member);
+
     } else if (selectNo == 3) {
       member.setPerPhoto(perPhoto);
+      memberDao.updatePhoto(member);
+
     } else if (selectNo == 4) {
       member.setPerTel(perTel);
+      memberDao.updateTel(member);
+
     } else if (selectNo == 5) {
       member.setPerEmail(perEmail);
+      memberDao.updateEmail(member);
+
     } else if (selectNo == 6) {
       member.setPerPassword(perPassword);
+      memberDao.updatePassword(member);
     }
 
-    memberDao.update(member);
     System.out.println(" >> 회원 정보를 변경하였습니다.");
 
   }

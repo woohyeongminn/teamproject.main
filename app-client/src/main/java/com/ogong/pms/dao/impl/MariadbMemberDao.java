@@ -149,8 +149,87 @@ public class MariadbMemberDao implements MemberDao {
   }
 
   @Override
-  public void update(Member member) throws Exception {
+  public void updateName(Member member) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update member set" + " name=?" + " where member_no=?")) {
 
+      stmt.setString(1, member.getPerName());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 이름 데이터 변경 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void updateNickname(Member member) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update member set" + " nickname=?" + " where member_no=?")) {
+
+      stmt.setString(1, member.getPerNickname());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 닉네임 데이터 변경 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void updatePhoto(Member member) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update member set" + " photo=?" + " where member_no=?")) {
+
+      stmt.setString(1, member.getPerPhoto());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 사진 데이터 변경 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void updateTel(Member member) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update member set" + " tel=?" + " where member_no=?")) {
+
+      stmt.setString(1, member.getPerTel());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 전화번호 데이터 변경 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void updateEmail(Member member) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update member set" + " email=?" + " where member_no=?")) {
+
+      stmt.setString(1, member.getPerEmail());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 이메일 데이터 변경 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void updatePassword(Member member) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update member set" + " password=?" + " where member_no=?")) {
+
+      stmt.setString(1, member.getPerPassword());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 비밀번호 데이터 변경 실패!");
+      }
+    }
   }
 
   @Override
