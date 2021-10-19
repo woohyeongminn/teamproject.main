@@ -1,7 +1,6 @@
 package com.ogong.pms.handler.study;
 
 import java.util.ArrayList;
-import java.util.List;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -25,7 +24,7 @@ public class StudyAddHandler implements Command {
 
     Study study = new Study();
 
-    List<Study> arrayStudy = studyDao.findAll();
+    //List<Study> arrayStudy = studyDao.findAll();
 
     // 스터디명
     String studyTitle;
@@ -51,41 +50,42 @@ public class StudyAddHandler implements Command {
     System.out.println(" 6. 기타");
     System.out.println();
 
+
     while (true) {
       try {
         int subjectNo =Prompt.inputInt(" 분야 : ");
         switch (subjectNo) {
-          case 1 : study.setSubject("어학"); break;
-          case 2 : study.setSubject("자격증"); break;
-          case 3 : study.setSubject("취업"); break;
-          case 4 : study.setSubject("IT"); break;
-          case 5 : study.setSubject("예체능"); break;
-          case 6 : break;
+          case 1 : study.setSubjectNo(1); break;
+          case 2 : study.setSubjectNo(2); break;
+          case 3 : study.setSubjectNo(3); break;
+          case 4 : study.setSubjectNo(4); break;
+          case 5 : study.setSubjectNo(5); break;
+          case 6 : study.setSubjectNo(6); break;
           default : System.out.println(" >> 다시 선택하세요.\n"); continue;
         }
 
-        if (subjectNo == 6) {
-          while (true) {
-            System.out.println();
-            String input = Prompt.inputString(" 기타 분야 입력 : ");
-
-            if (input.equals("어학") || input.equals("자격증") || input.equals("취업") ||
-                input.equalsIgnoreCase("IT") || input.equals("예체능")) {
-              System.out.println(" >> 이미 등록된 카테고리입니다.");
-              continue;
-            } else {
-              System.out.println();
-              String s = Prompt.inputString(" 해당 분야로 입력하시겠습니까? (네 / 아니오) ");
-              if (!s.equals("네")) {
-                System.out.println(" >> 다시 입력해주세요.");
-                continue;
-              }
-              System.out.printf(" >> 분야가 '기타(%s)'로 등록되었습니다.\n", input);
-              study.setSubject(input);
-            }
-            break;
-          }
-        }
+        //        if (subjectNo == 6) {
+        //          while (true) {
+        //            System.out.println();
+        //            String input = Prompt.inputString(" 기타 분야 입력 : ");
+        //
+        //            if (input.equals("어학") || input.equals("자격증") || input.equals("취업") ||
+        //                input.equalsIgnoreCase("IT") || input.equals("예체능")) {
+        //              System.out.println(" >> 이미 등록된 카테고리입니다.");
+        //              continue;
+        //            } else {
+        //              System.out.println();
+        //              String s = Prompt.inputString(" 해당 분야로 입력하시겠습니까? (네 / 아니오) ");
+        //              if (!s.equals("네")) {
+        //                System.out.println(" >> 다시 입력해주세요.");
+        //                continue;
+        //              }
+        //              System.out.printf(" >> 분야가 '기타(%s)'로 등록되었습니다.\n", input);
+        //              study.setSubject(input);
+        //            }
+        //            break;
+        //          }
+        //        }
 
       } catch (NumberFormatException e) {
         System.out.println(" >> 숫자만 입력하세요.\n");
@@ -125,20 +125,44 @@ public class StudyAddHandler implements Command {
     }
     study.setNumberOfPeple(nop);
 
-    // 대면,비대면
-    String face;
+
     System.out.println();
+    System.out.println(" [ 대면상태 ]");
+    System.out.println(" 1. 대면");
+    System.out.println(" 2. 비대면");
+    System.out.println(" 3. 대면/비대면");
+
     while (true) {
-      face = Prompt.inputString(" 대면 , 비대면 , 대면/비대면 : ");
-      if ((face.length() == 3 && face.equals("비대면")) ||
-          (face.length() == 2 && face.equals("대면")) ||
-          (face.length() == 6 && face.equals("대면/비대면"))) {
-        break;
+      try {
+        int subjectNo =Prompt.inputInt(" 분야 : ");
+        switch (subjectNo) {
+          case 1 : study.setFaceNo(1); break;
+          case 2 : study.setFaceNo(2); break;
+          case 3 : study.setFaceNo(3); break;
+          default : System.out.println(" >> 다시 선택하세요.\n"); continue;
+        }
+      } catch (NumberFormatException e) {
+        System.out.println(" >> 숫자만 입력하세요.");
+        System.out.println();
+        continue;
       }
-      System.out.println(" >> 대면/비대면 중에 입력하세요.");
-      System.out.println();
+      break;
     }
-    study.setFace(face);
+
+    //        // 대면,비대면
+    //        String face;
+    //        System.out.println();
+    //        while (true) {
+    //          face = Prompt.inputString(" 대면 , 비대면 , 대면/비대면 : ");
+    //          if ((face.length() == 3 && face.equals("비대면")) ||
+    //              (face.length() == 2 && face.equals("대면")) ||
+    //              (face.length() == 6 && face.equals("대면/비대면"))) {
+    //            break;
+    //          }
+    //          System.out.println(" >> 대면/비대면 중에 입력하세요.");
+    //          System.out.println();
+    //        }
+    //        study.setFace(face);
 
     // 소개글
     String introduction;
@@ -153,14 +177,14 @@ public class StudyAddHandler implements Command {
     }
     study.setIntroduction(introduction);
 
-    // 마지막 스터디 번호 찾아서 새 스터디 등록시 +1 되도록 기능 구현
-    Study lastStudy = null;
-    if (!arrayStudy.isEmpty()) {
-      lastStudy = arrayStudy.get(arrayStudy.size() - 1);
-      study.setStudyNo(lastStudy.getStudyNo() + 1);
-    } else {
-      study.setStudyNo(1);
-    }
+    //    // 마지막 스터디 번호 찾아서 새 스터디 등록시 +1 되도록 기능 구현
+    //    Study lastStudy = null;
+    //    if (!arrayStudy.isEmpty()) {
+    //      lastStudy = arrayStudy.get(arrayStudy.size() - 1);
+    //      study.setStudyNo(lastStudy.getStudyNo() + 1);
+    //    } else {
+    //      study.setStudyNo(1);
+    //    }
 
     // 작성자,구성원,캘린더,자유게시판
     study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
@@ -180,5 +204,7 @@ public class StudyAddHandler implements Command {
     // 고유번호
     studyDao.insert(study);
     System.out.println(" >> 스터디가 등록되었습니다.");
+
+
   }
 }

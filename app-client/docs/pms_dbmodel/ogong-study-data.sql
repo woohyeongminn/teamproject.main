@@ -23,6 +23,22 @@ values(2, '정처기준비', 2, 5, 2, '한 번에 붙자', '2021-2-2', 1, 0);
 
 -------------------------------------------------------------------------------------------------
 
+-- 스터디 북마크 test 값
+insert into study_bookmark(per_member_no, study_no) values(3, 1);
+
+-- 스터디 길더 test 값
+insert into study_guilder(study_no, per_member_no, status) values(1, 4, 1);
+
+-------------------------------------------------------------------------------------------------
+-- 캘린더 중요도 값
+insert study_calender_importance(importance_no, importance) values(5, ★☆☆☆☆);
+insert study_calender_importance(importance_no, importance) values(4, ★★☆☆☆);
+insert study_calender_importance(importance_no, importance) values(3, ★★★☆☆);
+insert study_calender_importance(importance_no, importance) values(2, ★★★★☆);
+insert study_calender_importance(importance_no, importance) values(1, ★★★★★);
+
+
+
 select
 s.study_no,
 s.name,
