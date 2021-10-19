@@ -36,7 +36,7 @@ public class CafeMyReviewDeleteHandler implements Command {
       return;
     }
 
-    if (myReviewByNo.getReviewStatus() == 1) {
+    if (myReviewByNo.getReviewStatus() == 2) {
       System.out.println(" >> 이미 삭제한 리뷰입니다.");
       return;
     }
@@ -48,6 +48,7 @@ public class CafeMyReviewDeleteHandler implements Command {
     }
 
     cafeDao.deleteCafeReview(myReviewByNo.getReviewNo());
+    System.out.println(" >> 삭제를 완료하였습니다.");
   }
 
   private CafeReview getMyReviewByNo(Member member, int reviewNo) throws Exception {

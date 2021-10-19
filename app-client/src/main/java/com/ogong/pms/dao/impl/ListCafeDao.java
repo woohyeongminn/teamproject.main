@@ -283,4 +283,10 @@ public class ListCafeDao implements CafeDao {
       }
     }
   }
+
+  @Override
+  public void updateCafeStatusToGENERAL(Cafe cafe) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
 }

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
@@ -169,6 +170,20 @@ public class CafeReservationHandler implements Command {
     Cafe cafe = cafeDao.findByCafeNoMember(cafeNo);
     CafeRoom cafeRoom = cafeDao.findByRoomNo(selectNo);
 
+    System.out.printf("\n [%s]\n", cafeRoom.getRoomName());
+
+    // 스터디룸 이미지 처리
+    String imgNames = "";
+    if (cafeRoom.getRoomImgs().isEmpty()) {
+      imgNames = "없음";
+    } else {
+      Collection<String> values = cafeRoom.getRoomImgs().values();
+      imgNames = values.toString();
+    }
+
+    System.out.printf(" >> 스터디룸 이미지 : %s\n", imgNames);
+    System.out.printf(" >> 소개글 : %s\n", cafeRoom.getRoomInfo());
+
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     Date today = new Date(System.currentTimeMillis());
@@ -200,8 +215,19 @@ public class CafeReservationHandler implements Command {
 
     }
 
-    LocalTime startTime = cafeRoom.getStartTime();
-    LocalTime endTime = cafeRoom.getEndTime();
+    int useMember;
+    while(true) {
+      useMember = Prompt.inputInt("\n 이용할 인원수 : ");
+      if (useMember <= 0 || useMember > cafeRoom.getPeople()) {
+        System.out.println(" >> 인원수가 너무 적거나 많습니다.");
+        System.out.println("    다시 입력해주세요.");
+        continue;
+      }
+      break;
+    }
+
+    LocalTime startTime = cafe.getOpenTime();
+    LocalTime endTime = cafe.getCloseTime();
     LocalTime tempEndTime = LocalTime.parse("00:00");
 
     int availableTime = (int) ChronoUnit.HOURS.between(startTime, endTime);
@@ -267,6 +293,8 @@ public class CafeReservationHandler implements Command {
       System.out.println(" >> 종료");
       return;
     }
+    int totalPrice = cafeRoom.getRoomPrice() * selectStatusOfNumber.size();
+    System.out.println(" 총 금액 : " + totalPrice);
 
     String input = Prompt.inputString("\n 정말 예약하시겠습니까? (네 / 아니오) ");
 
@@ -278,30 +306,21 @@ public class CafeReservationHandler implements Command {
     String[] realReserTime = statusOfNumber.get(selectStatusOfNumber.get(0)).split(",");
     //String[] stringStartTime = realReserTime[0].split(":");
     LocalTime realStartTime = LocalTime.parse(realReserTime[0]);
-    int totalPrice = cafeRoom.getRoomPrice() * selectStatusOfNumber.size();
 
     CafeReservation reservation = new CafeReservation();
 
-    // 고유번호 + 1
-    List<CafeReservation> cafeReservationList = cafeDao.getCafeReservationList();
-    if (!cafeReservationList.isEmpty()) {
-      reservation.setReservationNo(
-          cafeReservationList.get(cafeReservationList.size() - 1).getReservationNo() + 1);
-    } else {
-      reservation.setReservationNo(1);
-    }
-
     reservation.setMember(member);
-    reservation.setCafe(cafe);
-    reservation.setReservationDate(reservationDate);
+    reservation.setUseDate(reservationDate);
     reservation.setStartTime(realStartTime);
     reservation.setUseTime(selectStatusOfNumber.size());
-    reservation.setUseMemberNumber(0);
+    reservation.setUseMemberNumber(useMember);
     reservation.setTotalPrice(totalPrice);
-    reservation.setWirteReview(false);
     reservation.setRoomNo(selectNo);
+    reservation.setReservationStatus(1); // 1 : 예약완료
 
     cafeDao.insertReservation(reservation);
+
+    System.out.println(" *** 예약 되었습니다 ***");
   }
 
   private List<CafeReservation> getCafeReserList(
@@ -312,9 +331,9 @@ public class CafeReservationHandler implements Command {
     List<CafeReservation> todayReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {
 
-      if (reservationDate.toLocalDate().compareTo(cafeReser.getReservationDate().toLocalDate()) == 0 &&
+      if (reservationDate.toLocalDate().compareTo(cafeReser.getUseDate().toLocalDate()) == 0 &&
           cafeReser.getCafe().getNo() == cafeNo && cafeReser.getRoomNo() == roomNo &&
-          cafeReser.getReservationStatus() == 0 || cafeReser.getReservationStatus() == 1) {
+          cafeReser.getReservationStatus() == 1 || cafeReser.getReservationStatus() == 2) {
         todayReserList.add(cafeReser);
       }
     }

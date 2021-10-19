@@ -39,7 +39,7 @@ public class CafeMyReviewListHandler implements Command {
     } 
 
     for (CafeReview cafeReview : reviewList) {
-      if (cafeReview.getReviewStatus() == 1) {
+      if (cafeReview.getReviewStatus() == 2) {
         System.out.printf(" \n (%s)", cafeReview.getReviewNo());
         System.out.println(" >> 삭제한 리뷰입니다.\n");
         continue;

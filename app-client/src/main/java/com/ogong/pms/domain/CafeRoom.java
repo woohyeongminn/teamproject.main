@@ -1,6 +1,7 @@
 package com.ogong.pms.domain;
 
-import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CafeRoom {
 
@@ -8,17 +9,17 @@ public class CafeRoom {
   private Cafe cafe; // 카페번호
   private String roomName; // 룸 이름
   private String roomImg; // 룸 이미지
+  private Map<Integer, String> roomImgs = new HashMap<>(); // 룸 이미지들
   private String roomInfo; // 룸 설명
-  private LocalTime startTime; // 룸 시작시간
-  private LocalTime endTime; // 룸 마감시간
+  private int people; // 인원제한수
   private int roomPrice; // 룸 시간당금액
   private int roomStatus; // 0 : 룸 운영중 1 : 룸 운영중단
 
   @Override
   public String toString() {
     return "CafeRoom [roomNo=" + roomNo + ", cafe=" + cafe + ", roomName=" + roomName + ", roomImg="
-        + roomImg + ", roomInfo=" + roomInfo + ", startTime=" + startTime + ", endTime=" + endTime
-        + ", roomPrice=" + roomPrice + ", roomStatus=" + roomStatus + "]";
+        + roomImg + ", roomInfo=" + roomInfo + ", people=" + people + ", roomPrice=" + roomPrice
+        + ", roomStatus=" + roomStatus + "]";
   }
 
   public int getRoomNo() {
@@ -61,22 +62,6 @@ public class CafeRoom {
     this.roomInfo = roomInfo;
   }
 
-  public LocalTime getStartTime() {
-    return startTime;
-  }
-
-  public void setStartTime(LocalTime startTime) {
-    this.startTime = startTime;
-  }
-
-  public LocalTime getEndTime() {
-    return endTime;
-  }
-
-  public void setEndTime(LocalTime endTime) {
-    this.endTime = endTime;
-  }
-
   public int getRoomPrice() {
     return roomPrice;
   }
@@ -91,5 +76,21 @@ public class CafeRoom {
 
   public void setRoomStatus(int roomStatus) {
     this.roomStatus = roomStatus;
+  }
+
+  public int getPeople() {
+    return people;
+  }
+
+  public void setPeople(int people) {
+    this.people = people;
+  }
+
+  public Map<Integer, String> getRoomImgs() {
+    return roomImgs;
+  }
+
+  public void setRoomImgs(Map<Integer, String> roomImgs) {
+    this.roomImgs = roomImgs;
   }
 }

@@ -35,14 +35,16 @@ public class AdminCafeControlHandler implements Command {
         System.out.println(" 삭제된 장소입니다.");
         continue;
       }
-      System.out.printf(" \n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n", 
+      System.out.printf(" \n (%s) | 이름 : %s | 주소 : %s | 운영시간 : %s ~ %s", 
           cafe.getNo(), 
           cafe.getName(), 
           cafe.getLocation(), 
-          cafe.getBookable());
+          cafe.getOpenTime(),
+          cafe.getCloseTime());
       if (cafe.getCafeStatus() == WAIT) {
-        System.out.println(" * 승인 대기 중인 카페입니다.");
+        System.out.printf(" * 승인 대기 중인 카페입니다. \n");
       }
+      System.out.println();
     }
 
     selectCafeDetailMenu(request);

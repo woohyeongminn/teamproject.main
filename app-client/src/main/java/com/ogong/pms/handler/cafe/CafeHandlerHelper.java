@@ -28,17 +28,17 @@ public abstract class CafeHandlerHelper {
     }
   }
 
-  public static String getReservationStatus(int status) {
-    switch (status) {
-      case 0: return "예약완료(현장결제)";
-      case 1: return "결제완료";
-      case 2: return "예약취소";
-      case 3: return "결제취소";
-      case 4: return "예약거절";
-      case 5: return "결제거절";
-      default: return "오류";
-    }
-  }
+  //  public static String getReservationStatus(int status) {
+  //    switch (status) {
+  //      case 1: return "예약완료(현장결제)";
+  //      case 2: return "결제완료";
+  //      case 3: return "예약취소";
+  //      case 4: return "결제취소";
+  //      case 5: return "예약거절";
+  //      case 6: return "결제거절";
+  //      default: return "오류";
+  //    }
+  //  }
 
   public static String getCafeStatusLabel(int status) {
     switch (status) {

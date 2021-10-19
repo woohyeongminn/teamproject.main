@@ -1,6 +1,5 @@
 package com.ogong.pms.handler.admin;
 
-import static com.ogong.pms.domain.Cafe.DELETE;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
@@ -27,10 +26,15 @@ public class AdminCafeDetailHandler implements Command {
     Cafe cafe = cafeDao.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
     System.out.println();
 
-    if (cafe == null || cafe.getCafeStatus() == DELETE) {
+    if (cafe == null) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
+
+    if (cafe.getHoliday() == null) {
+      cafe.setHoliday("없음");
+    }
+
     System.out.printf(" (%s)\n", cafe.getNo());
     System.out.printf(" [%s]\n", cafe.getName());
     System.out.printf(" >> 대표 이미지 : %s\n", cafe.getMainImg());
@@ -40,8 +44,6 @@ public class AdminCafeDetailHandler implements Command {
     System.out.printf(" >> 오픈 시간 : %s\n", cafe.getOpenTime());
     System.out.printf(" >> 마감 시간 : %s\n", cafe.getCloseTime());
     System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());
-    System.out.printf(" >> 예약 가능 인원 : %d\n", cafe.getBookable());
-    System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
     System.out.printf(" >> 상태 : %s\n", CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus()));
     getStarRatingAverage(cafe); // 리뷰 평점계산
     listReview(cafe); // 리뷰 목록
@@ -70,7 +72,7 @@ public class AdminCafeDetailHandler implements Command {
 
     if (!reviewList.isEmpty()) {
       for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 1) {
+        if (review.getReviewStatus() == 2) {
           continue;
         }
         starRating += review.getGrade();
@@ -92,7 +94,7 @@ public class AdminCafeDetailHandler implements Command {
       System.out.println(" >> 등록된 리뷰가 없습니다.");
     } else {
       for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 1) {
+        if (review.getReviewStatus() == 2) {
           //System.out.printf(" \n (%s)\n", review.getReviewNo());
           System.out.printf(" (%d) | 삭제 된 리뷰입니다. |\n", i++);
           continue;
