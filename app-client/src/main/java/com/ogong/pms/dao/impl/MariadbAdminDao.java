@@ -212,6 +212,10 @@ public class MariadbAdminDao implements AdminDao {
     }
   }
 
+  @Override
+  public void update(Admin admin) throws Exception {
+
+  }
 }
 
 // 확인용

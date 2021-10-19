@@ -117,4 +117,17 @@ public class NetAdminDao implements AdminDao {
     return requestAgent.getObject(AdminNotice.class);
   }
 
+  @Override
+  public void updateNickname(Admin admin) throws Exception {
+
+  }
+  @Override
+  public void updateEmail(Admin admin) throws Exception {
+
+  }
+  @Override
+  public void updatePassword(Admin admin) throws Exception {
+
+  }
+
 }

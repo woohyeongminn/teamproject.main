@@ -12,7 +12,7 @@ public interface AdminDao {
   void updateEmail(Admin admin) throws Exception;
   void updatePassword(Admin admin) throws Exception;
   Admin findByAdminNo(int no) throws Exception;
-
+  void update(Admin admin) throws Exception;
   // ---------- [ 공지사항 ] -----------------------------------------------------
 
   void insert(AdminNotice adminNotice) throws Exception;
