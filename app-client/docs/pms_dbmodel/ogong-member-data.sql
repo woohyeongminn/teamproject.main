@@ -4,7 +4,7 @@ values(1, '김초보', '초보초보쌩초보', 'naver@test.com', password('n1')
 'naver.gif', '2020-01-01', 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status) 
-values(2, '박미술', '미술부장', 'gmail@test.com', password('g1'), '010-2222-2222',
+values(2, '반미술', '미술부장', 'gmail@test.com', password('g1'), '010-2222-2222',
 'gmail.gif', '2021-03-15', 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status) 
@@ -40,6 +40,10 @@ insert into member(member_no, name, nickname, email, password, tel, photo, statu
 values(10, '조사장', '조사장카페', 'cafe4@test.com', password('c4'), '010-4444-0000', 
 'cafe4.gif', 2);
 
+insert into member(member_no, name, nickname, email, password, tel, photo, status) 
+values(11, '반사장', '반사장카페', 'cafe5@test.com', password('c5'), '010-5555-0000', 
+'cafe5.gif', 2);
+
 -- 개인회원 test 값
 insert into per_member(per_member_no, member_no) values(1,1);
 insert into per_member(per_member_no, member_no) values(2,2);
@@ -61,3 +65,5 @@ values(3, 9, '우사장', '546-85-14545');
 insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
 values(4, 10, '조사장', '333-28-15464');
 
+insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
+values(5, 11, '반사장', '632-94-37294');
