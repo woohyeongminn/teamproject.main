@@ -53,8 +53,9 @@ public class StudyJoinHandler implements Command {
       return;
     }
     study.getWatingMember().add(member);
+    study.setStatus(1);
 
-    studyDao.update(study);
+    studyDao.insertGuilder(study,member);
 
     System.out.println();
     System.out.println(" >> 참여 신청이 완료되었습니다.\n   승인이 완료될 때까지 기다려 주세요.");

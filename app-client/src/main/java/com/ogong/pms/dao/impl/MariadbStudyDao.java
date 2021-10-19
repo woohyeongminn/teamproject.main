@@ -55,6 +55,36 @@ public class MariadbStudyDao implements StudyDao {
     }
   }
 
+  public void insertGuilder(Study study, Member member) throws Exception {
+
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into study_guilder(study_no, per_member_no, status) values(?,?,?)",
+        Statement.RETURN_GENERATED_KEYS)) {
+
+      stmt.setInt(1, study.getStudyNo());
+      stmt.setInt(2, member.getPerNo());
+      stmt.setInt(3, study.getStatus());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("구성원 데이터 저장 실패!");
+      }
+    }
+  }
+
+  public void insertBookmark(Study study, Member member) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
+        Statement.RETURN_GENERATED_KEYS)) {
+
+      stmt.setInt(1, study.getStudyNo());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("구성원 데이터 저장 실패!");
+      }
+    }
+  }
+
   // 마이 스터디에서 업데이트
   @Override
   public void update(Study study) throws Exception {
@@ -112,42 +142,47 @@ public class MariadbStudyDao implements StudyDao {
 
   @Override
   public Study findByNo(int studyinputNo) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "select"
-    //            + " s.study_no,"
-    //            + " s.name,"
-    //            + " ss.name subject_name,"
-    //            + " s.no_people,"
-    //            + " sfs.name face_name,"
-    //            + " s.introduction,"
-    //            + " s.created_dt,"
-    //            + " m.name owner_name,"
-    //            + " s.score"
-    //            + " from study s"
-    //            + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
-    //            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
-    //            + " left outer join member m on m.member_no=pm.member_no"
-    //            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
-    //            + " where study_no=" + studyinputNo);
-    //        ResultSet rs = stmt.executeQuery()) {
-    //
-    //      if (!rs.next()) {
-    //        return null;
-    //      }
-    //      Study study = new Study();
-    //      study.setStudyNo(rs.getInt("study_no"));
-    //      study.setStudyTitle(rs.getString("name"));
-    //      study.setSubject(rs.getString("subject_name"));
-    //      study.setNumberOfPeple(rs.getInt("no_people"));
-    //      study.setFace(rs.getString("face_name"));
-    //
-    //      Member member = new Member();
-    //      member.setPerNickname(rs.getString("owner_name"));
-    //      study.setOwner(member);
-    //
-    //      return study;
-    //    }
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select s.study_no,"
+            + " s.name,"
+            + " ss.name subject_name,"
+            + " ss.subject_no subject_no,"
+            + " s.no_people,"
+            + " sfs.name face_name,"
+            + " sfs.face_no face_no,"
+            + " s.introduction,"
+            + " s.created_dt,"
+            + " m.nickname owner_name,"
+            + " s.score"
+            + " from study s"
+            + " join per_member pm on s.per_member_no=pm.per_member_no"
+            + " join study_subject ss on s.subject_no=ss.subject_no"
+            + " join member m on m.member_no=pm.member_no"
+            + " join study_face_status sfs on s.face_no=sfs.face_no"
+            + " where s.study_no=" + studyinputNo);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (!rs.next()) {
+        return null;
+      }
+
+      Study study = new Study();
+      study.setStudyNo(rs.getInt("study_no"));
+      study.setStudyTitle(rs.getString("name"));
+      study.setSubjectName(rs.getString("subject_name"));
+      study.setSubjectNo(rs.getInt("subject_no"));
+      study.setNumberOfPeple(rs.getInt("no_people"));
+      study.setFaceName(rs.getString("face_name"));
+      study.setFaceNo(rs.getInt("face_no"));
+      study.setIntroduction(rs.getString("introduction"));
+      study.setRegisteredDate(rs.getDate("created_dt"));
+
+      Member member = new Member();
+      member.setPerNickname(rs.getString("owner_name"));
+      study.setOwner(member);
+
+      return study;
+    }
   }
 
   @Override
@@ -158,7 +193,46 @@ public class MariadbStudyDao implements StudyDao {
   // 내 스터디에서 찾기 - MyStudyDetail
   @Override
   public Study findMyStudy(int memberNo, int studyNo) throws Exception {
-    return null;
-  }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select s.study_no,"
+            + " s.name,"
+            + " ss.name subject_name,"
+            + " ss.subject_no subject_no,"
+            + " s.no_people,"
+            + " sfs.name face_name,"
+            + " sfs.face_no face_no,"
+            + " s.introduction,"
+            + " s.created_dt,"
+            + " m.nickname owner_name,"
+            + " s.score"
+            + " from study s"
+            + " join per_member pm on s.per_member_no=pm.per_member_no"
+            + " join study_subject ss on s.subject_no=ss.subject_no"
+            + " join member m on m.member_no=pm.member_no"
+            + " join study_face_status sfs on s.face_no=sfs.face_no"
+            + " where s.study_no=" + studyNo);
+        ResultSet rs = stmt.executeQuery()) {
 
+      if (!rs.next()) {
+        return null;
+      }
+
+      Study study = new Study();
+      study.setStudyNo(rs.getInt("study_no"));
+      study.setStudyTitle(rs.getString("name"));
+      study.setSubjectName(rs.getString("subject_name"));
+      study.setSubjectNo(rs.getInt("subject_no"));
+      study.setNumberOfPeple(rs.getInt("no_people"));
+      study.setFaceName(rs.getString("face_name"));
+      study.setFaceNo(rs.getInt("face_no"));
+      study.setIntroduction(rs.getString("introduction"));
+      study.setRegisteredDate(rs.getDate("created_dt"));
+
+      Member member = new Member();
+      member.setPerNickname(rs.getString("owner_name"));
+      study.setOwner(member);
+
+      return study;
+    }
+  }
 }

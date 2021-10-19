@@ -24,7 +24,6 @@ public class StudyAddHandler implements Command {
 
     Study study = new Study();
 
-    //List<Study> arrayStudy = studyDao.findAll();
 
     // 스터디명
     String studyTitle;
@@ -176,15 +175,6 @@ public class StudyAddHandler implements Command {
       break;
     }
     study.setIntroduction(introduction);
-
-    //    // 마지막 스터디 번호 찾아서 새 스터디 등록시 +1 되도록 기능 구현
-    //    Study lastStudy = null;
-    //    if (!arrayStudy.isEmpty()) {
-    //      lastStudy = arrayStudy.get(arrayStudy.size() - 1);
-    //      study.setStudyNo(lastStudy.getStudyNo() + 1);
-    //    } else {
-    //      study.setStudyNo(1);
-    //    }
 
     // 작성자,구성원,캘린더,자유게시판
     study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
