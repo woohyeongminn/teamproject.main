@@ -233,19 +233,31 @@ public class MariadbMemberDao implements MemberDao {
   }
 
   @Override
-  public void delete(int no) throws Exception {
-    try (PreparedStatement stmt1 = con.prepareStatement(
-        "delete from per_member where member_no=?")) {
-      try (PreparedStatement stmt2 = con.prepareStatement(
-          "delete from member where member_no=?")) {
+  public void updateActive(Member member) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update member set" + " active=2" + " where member_no="
+            + " (select member_no from member where member_no=" + member.getPerNo() + ")")) {
 
-        stmt1.setInt(1, no);
-        stmt2.setInt(2, no);
-
-        if (stmt1.executeUpdate() == 0 && stmt2.executeUpdate() == 0) {
-          throw new Exception("회원 데이터 삭제 실패!");
-        }
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("회원 탈퇴 실패!");
       }
     }
   }
 }
+
+// @Override
+// public void delete(int no) throws Exception {
+// try (PreparedStatement stmt1 = con.prepareStatement(
+// "delete from per_member where member_no=?")) {
+// try (PreparedStatement stmt2 = con.prepareStatement(
+// "delete from member where member_no=?")) {
+//
+// stmt1.setInt(1, no);
+// stmt2.setInt(2, no);
+//
+// if (stmt1.executeUpdate() == 0 && stmt2.executeUpdate() == 0) {
+// throw new Exception("회원 데이터 삭제 실패!");
+// }
+// }
+// }
+// }
