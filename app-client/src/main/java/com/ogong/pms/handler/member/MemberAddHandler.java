@@ -44,8 +44,8 @@ public class MemberAddHandler implements Command {
     String inputNewEmail;
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
-      if (!inputNewEmail.contains("@") ||
-          !inputNewEmail.contains(".com") || inputNewEmail.length() < 6) {
+      if (!inputNewEmail.contains("@") || !inputNewEmail.contains(".com")
+          || inputNewEmail.length() < 6) {
         System.out.println(" >> 정확한 이메일 양식으로 입력해 주세요.");
         continue;
       }
@@ -57,9 +57,8 @@ public class MemberAddHandler implements Command {
     while (true) {
       inputNewPW = Prompt.inputString(" 비밀번호 : ");
       if (inputNewPW.length() < 8 || (!inputNewPW.contains("!") && !inputNewPW.contains("@")
-          && !inputNewPW.contains("#") && !inputNewPW.contains("$")
-          && !inputNewPW.contains("^") && !inputNewPW.contains("%")
-          && !inputNewPW.contains("&") && !inputNewPW.contains("*"))) {
+          && !inputNewPW.contains("#") && !inputNewPW.contains("$") && !inputNewPW.contains("^")
+          && !inputNewPW.contains("%") && !inputNewPW.contains("&") && !inputNewPW.contains("*"))) {
         System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
         continue;
       }
@@ -68,7 +67,7 @@ public class MemberAddHandler implements Command {
     member.setPerPassword(inputNewPW);
 
     while (true) {
-      String pw =  Prompt.inputString(" 비밀번호 확인 : ");
+      String pw = Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(member.getPerPassword())) {
         System.out.println("\n >> 확인 실패!\n");
         continue;
@@ -81,24 +80,19 @@ public class MemberAddHandler implements Command {
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
 
     // 마지막 회원번호 찾아서 신규회원 등록시 +1 되도록 기능 구현
-    Member lastMember = null;
-    if (!memberList.isEmpty()) {
-      lastMember = memberList.get(memberList.size() - 1);
-      member.setPerNo(lastMember.getPerNo() +1);
-    } else {
-      member.setPerNo(1);
-    }
-    member.setPerStatus(Member.INUSER);
+    // Member lastMember = null;
+    // if (!memberList.isEmpty()) {
+    // lastMember = memberList.get(memberList.size() - 1);
+    // member.setPerNo(lastMember.getPerNo() +1);
+    // } else {
+    // member.setPerNo(1);
+    // }
+    // member.setPerStatus(Member.INUSER);
 
     memberDao.insert(member);
 
     System.out.println(" >> 회원가입이 완료되었습니다.");
   }
 }
-
-
-
-
-
 
 
