@@ -20,8 +20,8 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.impl.MariadbAdminDao;
 import com.ogong.pms.dao.impl.MariadbCafeDao;
 import com.ogong.pms.dao.impl.MariadbCeoMemberDao;
-import com.ogong.pms.dao.impl.MariadbMemberDao;
 import com.ogong.pms.dao.impl.NetAskBoardDao;
+import com.ogong.pms.dao.impl.NetMemberDao;
 import com.ogong.pms.dao.impl.NetStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
@@ -215,7 +215,7 @@ public class ClientApp {
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     AdminDao adminDao = new MariadbAdminDao(con);
-    MemberDao memberDao = new MariadbMemberDao(con);
+    MemberDao memberDao = new NetMemberDao(requestAgent);
     CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
     CafeDao cafeDao = new MariadbCafeDao(con);
