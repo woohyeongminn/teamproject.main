@@ -25,30 +25,40 @@ public class CeoUpdateHandler implements Command {
 
     CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
-    System.out.println("1. 대표자명");
-    System.out.println("2. 사진");
-    System.out.println("3. 이메일");
-    System.out.println("4. 비밀번호");
+    System.out.println("1. 이름");
+    System.out.println("2. 닉네임");
+    System.out.println("3. 사진");
+    System.out.println("4. 전화번호");
+    System.out.println("5. 이메일");
+    System.out.println("6. 비밀번호");
     System.out.println("0. 이전");
     System.out.println();
     int selectNo = Prompt.inputInt(" 수정하고 싶은 정보를 선택해 주세요. > ");
 
-    String ceoBossName = ceoMember.getCeoBossName();
+    String ceoName = ceoMember.getCeoName();
+    String ceoNickName = ceoMember.getCeoNickname();
     String ceophoto = ceoMember.getCeoPhoto();
+    String ceoTel = ceoMember.getCeoTel();
     String ceoEmail = ceoMember.getCeoEmail();
     String ceoPassword = ceoMember.getCeoPassword();
 
     switch (selectNo) {
       case 1:
-        ceoBossName = Prompt.inputString(" 대표자명(" + ceoMember.getCeoBossName()  + ") : ");
+        ceoName = Prompt.inputString(" 이름(" + ceoMember.getCeoName()  + ") : ");
         break;
       case 2:
-        ceophoto = Prompt.inputString(" 사  진(" + ceoMember.getCeoPhoto()  + ") : ");
+        ceoNickName = Prompt.inputString(" 닉네임(" + ceoMember.getCeoNickname()  + ") : ");
         break;
       case 3:
-        ceoEmail = Prompt.inputString(" 이메일(" + ceoMember.getCeoEmail() + ") : ");
+        ceophoto = Prompt.inputString(" 사  진(" + ceoMember.getCeoPhoto()  + ") : ");
         break;
       case 4:
+        ceoTel = Prompt.inputString(" 전화번호(" + ceoMember.getCeoTel()  + ") : ");
+        break;
+      case 5:
+        ceoEmail = Prompt.inputString(" 이메일(" + ceoMember.getCeoEmail() + ") : ");
+        break;
+      case 6:
         ceoPassword = Prompt.inputString(" 비밀번호(" + ceoMember.getCeoPassword() + ") : ");
         break;
       case 0: return;
@@ -66,19 +76,35 @@ public class CeoUpdateHandler implements Command {
       System.out.println(" >> 회원 변경을 취소하였습니다.");
       return;
     }
+
     if (selectNo == 1) {
-      ceoMember.setCeoBossName(ceoBossName);
+      ceoMember.setCeoName(ceoName);
+      ceoMemberDao.updateName(ceoMember);
+
     } else if (selectNo == 2) {
-      ceoMember.setCeoPhoto(ceophoto);
+      ceoMember.setCeoNickname(ceoNickName);
+      ceoMemberDao.updateNickName(ceoMember);
+
     } else if (selectNo == 3) {
-      ceoMember.setCeoEmail(ceoEmail);
+      ceoMember.setCeoPhoto(ceophoto);
+      ceoMemberDao.updatePhoto(ceoMember);
+
     } else if (selectNo == 4) {
+      ceoMember.setCeoTel(ceoTel);
+      ceoMemberDao.updateTel(ceoMember);
+
+    } else if (selectNo == 5) {
+      ceoMember.setCeoEmail(ceoEmail);
+      ceoMemberDao.updateEmail(ceoMember);
+
+    } else if (selectNo == 6) {
       ceoMember.setCeoPassword(ceoPassword);
+      ceoMemberDao.updatePassword(ceoMember);
     }
     //    ceoMember.setceoStoreName(ceoStoreName);
     //    ceoMember.setceoStoreDetailAddress(ceoStoreDetailAddress);
 
-    ceoMemberDao.update(ceoMember);
+    //ceoMemberDao.update(ceoMember);
     System.out.println(" >> 회원 정보를 변경하였습니다.");
 
   }

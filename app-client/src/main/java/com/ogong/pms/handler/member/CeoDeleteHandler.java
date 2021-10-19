@@ -43,7 +43,10 @@ public class CeoDeleteHandler implements Command {
     System.out.println();
     System.out.println(" << 비밀번호 확인 >>");
     String inputPW = Prompt.inputString(" 비밀번호를 입력하세요 : ");
-    if (!ceoMember.getCeoPassword().equals(inputPW)) {
+
+    CeoMember ceo = ceoMemberDao.findByEmailAndPassword(inputEmail, inputPW);
+
+    if (ceo == null) {
       System.out.println();
       System.out.println(" >> 비밀번호가 일치하지 않습니다.");
       return;
@@ -82,7 +85,7 @@ public class CeoDeleteHandler implements Command {
     //      }
     //    }
 
-    ceoMemberDao.delete(no);
+    ceoMemberDao.updateActive(ceoMember);
 
     AuthCeoMemberLoginHandler.loginCeoMember = null;
     AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
