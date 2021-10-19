@@ -25,19 +25,36 @@ public class MariadbCafeDao implements CafeDao {
 
   @Override
   public List<Cafe> getCafeList() throws Exception {
-    //    requestAgent.request("cafe.selectList", null);
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 장소 목록 조회를 실패하였습니다.");
-    //      return null;
-    //    }
-    //    return new ArrayList<>(requestAgent.getObjects(Cafe.class));
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time, c.operating_status_no"
+            + " from studycafe c"
+            + " order by cafe_no asc");
+
+        ResultSet rs = stmt.executeQuery()) {
+
+      ArrayList<Cafe> list = new ArrayList<>();
+
+      while(rs.next()) {
+        Cafe cafe = new Cafe();
+
+        cafe.setNo(rs.getInt("cafe_no"));
+        cafe.setName(rs.getString("name"));
+        cafe.setLocation(rs.getString("location"));
+        cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
+        cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
+        cafe.setCafeStatus(rs.getInt("operating_status_no"));
+
+        list.add(cafe);
+      }
+
+      return list;
+    }
   }
 
   @Override
   public List<Cafe> getCafeListByMember() throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time"
+        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time, c.operating_status_no"
             + " from studycafe c"
             + " where c.operating_status_no != 1 and c.operating_status_no != 4"
             + " order by cafe_no asc");
@@ -54,6 +71,7 @@ public class MariadbCafeDao implements CafeDao {
         cafe.setLocation(rs.getString("location"));
         cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
         cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
+        cafe.setCafeStatus(rs.getInt("operating_status_no"));
 
         list.add(cafe);
       }
@@ -69,7 +87,7 @@ public class MariadbCafeDao implements CafeDao {
   @Override
   public List<Cafe> findCafeListByLocation(String input) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time"
+        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time, c.operating_status_no"
             + " from studycafe c"
             + " where c.operating_status_no != 1 and c.operating_status_no != 4"
             + " and c.location like (concat('%',?,'%'))"
@@ -89,6 +107,7 @@ public class MariadbCafeDao implements CafeDao {
           cafe.setLocation(rs.getString("location"));
           cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
           cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
+          cafe.setCafeStatus(rs.getInt("operating_status_no"));
 
           list.add(cafe);
         }      
@@ -101,11 +120,11 @@ public class MariadbCafeDao implements CafeDao {
   public Cafe findByCafeNo(int cafeNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name, sh.date"
+            + " c.view_cnt, sp.name, sh.date, c.operating_status_no"
             + " from studycafe c"
             + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
             + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
-            + " and c.cafe_no = ?")) {
+            + " where c.cafe_no = ?")) {
 
       stmt.setInt(1, cafeNo);
 
@@ -126,6 +145,7 @@ public class MariadbCafeDao implements CafeDao {
         cafe.setViewCount(rs.getInt("view_cnt"));
         cafe.setMainImg(rs.getString("sp.name"));
         cafe.setHoliday(rs.getString("date"));
+        cafe.setCafeStatus(rs.getInt("operating_status_no"));
 
         return cafe;
       }
@@ -136,7 +156,7 @@ public class MariadbCafeDao implements CafeDao {
   public Cafe findByCafeNoMember(int cafeNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name, sh.date"
+            + " c.view_cnt, sp.name, sh.date, c.operating_status_no"
             + " from studycafe c"
             + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
             + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
@@ -162,6 +182,7 @@ public class MariadbCafeDao implements CafeDao {
         cafe.setViewCount(rs.getInt("view_cnt"));
         cafe.setMainImg(rs.getString("sp.name"));
         cafe.setHoliday(rs.getString("date"));
+        cafe.setCafeStatus(rs.getInt("operating_status_no"));
 
         return cafe;
       }
@@ -190,48 +211,145 @@ public class MariadbCafeDao implements CafeDao {
     //    }
   }
 
+  public void updateCafeStatusToGENERAL(Cafe cafe) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update studycafe set operating_status_no = 2"
+            + " where cafe_no = ?")) {
+
+      stmt.setInt(1, cafe.getNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("장소 승인 실패!");
+      }
+    }
+  }
+
   @Override
   public void deleteCafe(Cafe cafe) throws Exception {
-    //    requestAgent.request("cafe.update", cafe);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 카페 삭제를 실패하였습니다.");
-    //    } else {
-    //      System.out.println(" >> 카페를 삭제하였습니다.");
-    //    }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update studycafe set operating_status_no = 4"
+            + " where cafe_no = ?")) {
+
+      stmt.setInt(1, cafe.getNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("장소 삭제 실패!");
+      }
+    }
   }
 
   //-----------------------CafeReview--------------------------------------
 
   @Override
   public List<CafeReview> getCafeReviewList() throws Exception {
-    //    requestAgent.request("cafeReview.selectList", null);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 리뷰 목록 조회를 실패하였습니다.");
-    //      return null;
-    //    }
-    //    return new ArrayList<>(requestAgent.getObjects(CafeReview.class));
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no, m.member_no"
+            + " from studycafe_review r"
+            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
+            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
+            + " join per_member pm on rs.per_member_no=pm.per_member_no"
+            + " join member m on pm.member_no=m.member_no");
+
+        ResultSet rs = stmt.executeQuery()) {
+
+      ArrayList<CafeReview> list = new ArrayList<>();
+
+      while(rs.next()) {
+        CafeReview cafeReview = new CafeReview();
+
+        Member member = new Member();
+        member.setPerNo(rs.getInt("member_no"));
+        cafeReview.setMember(member);
+
+        cafeReview.setReviewNo(rs.getInt("review_no"));
+        cafeReview.setContent(rs.getString("content"));
+        cafeReview.setGrade(rs.getInt("grade"));
+        cafeReview.setRegisteredDate(rs.getDate("create_dt"));
+        cafeReview.setReviewStatus(rs.getInt("status"));
+
+        Cafe cafe = new Cafe();
+        cafe.setNo(rs.getInt("cafe_no"));
+        cafeReview.setCafe(cafe);
+
+        list.add(cafeReview);
+      }
+      return list;
+    }
   }
 
   @Override
   public List<CafeReview> findReviewListByCafeNo(int cafeNo) throws Exception {
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select r.grade, r.content, r.create_dt, r.status, sr.cafe_no, m.nickname"
+            + " from studycafe_review r"
+            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
+            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
+            + " join per_member pm on rs.per_member_no=pm.per_member_no"
+            + " join member m on pm.member_no=m.member_no"
+            + " where sr.cafe_no=?")) {
+
+      stmt.setInt(1, cafeNo);
+
+      ArrayList<CafeReview> list = new ArrayList<>();
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        while(rs.next()) {
+          CafeReview cafeReview = new CafeReview();
+
+          Member member = new Member();
+          member.setPerNickname(rs.getString("nickname"));
+          cafeReview.setMember(member);
+
+          cafeReview.setContent(rs.getString("content"));
+          cafeReview.setGrade(rs.getInt("grade"));
+          cafeReview.setRegisteredDate(rs.getDate("create_dt"));
+          cafeReview.setReviewStatus(rs.getInt("status"));
+
+          Cafe cafe = new Cafe();
+          cafe.setNo(rs.getInt("cafe_no"));
+          cafeReview.setCafe(cafe);
+
+          list.add(cafeReview);
+        }
+      }
+      return list;
+    }
   }
 
   @Override
   public List<CafeReview> findReviewListByMember(int memberNo) throws Exception {
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("memberNo", String.valueOf(memberNo));
-    //    requestAgent.request("cafeReview.selectListByMember", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 리뷰 목록 조회를 실패하였습니다.");
-    //      return null;
-    //    }
-    //    return new ArrayList<>(requestAgent.getObjects(CafeReview.class));
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no"
+            + " from studycafe_review r"
+            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
+            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
+            + " join per_member pm on rs.per_member_no=pm.per_member_no"
+            + " join member m on pm.member_no=m.member_no"
+            + " where m.member_no=?")) {
+
+      stmt.setInt(1, memberNo);
+
+      ArrayList<CafeReview> list = new ArrayList<>();
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        while(rs.next()) {
+          CafeReview cafeReview = new CafeReview();
+
+          cafeReview.setReviewNo(rs.getInt("review_no"));
+          cafeReview.setContent(rs.getString("content"));
+          cafeReview.setGrade(rs.getInt("grade"));
+          cafeReview.setRegisteredDate(rs.getDate("create_dt"));
+          cafeReview.setReviewStatus(rs.getInt("status"));
+
+          Cafe cafe = new Cafe();
+          cafe.setNo(rs.getInt("cafe_no"));
+          cafeReview.setCafe(cafe);
+
+          list.add(cafeReview);
+        }
+      }
+      return list;
+    }
   }
 
   @Override
@@ -250,27 +368,41 @@ public class MariadbCafeDao implements CafeDao {
 
   @Override
   public void insertCafeReview(CafeReview cafeReview) throws Exception {
-    //    requestAgent.request("cafeReview.insert", cafeReview);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 리뷰 등록 실패");
-    //    } else {
-    //      System.out.println();
-    //      System.out.println(" >> 리뷰가 등록되었습니다.");
-    //    }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into studycafe_review(studycafe_rsv_no, content, grade, status) values(?,?,?,1)")) {
+
+      stmt.setInt(1, cafeReview.getReservationNo());
+      stmt.setString(2, cafeReview.getContent());
+      stmt.setInt(3, cafeReview.getGrade());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("0.리뷰 등록 실패!");
+      }
+
+      try (PreparedStatement stmt2 = con.prepareStatement(
+          "update studycafe_reservation set review=2 where studycafe_rsv_no=?")) {
+
+        stmt2.setInt(1, cafeReview.getReservationNo());
+
+        if (stmt2.executeUpdate() == 0) {
+          throw new Exception("1.리뷰 등록 실패!");
+        }
+      }
+    }
   }
 
   @Override
   public void deleteCafeReview(int reviewNo) throws Exception {
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("reviewNo", String.valueOf(reviewNo));
-    //    requestAgent.request("cafeReview.updateReviewStatus", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 리뷰 삭제 실패!");
-    //    } else {
-    //      System.out.println(" >> 삭제를 완료하였습니다.");
-    //    }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "update studycafe_review set status = 2"
+            + " where review_no = ?")) {
+
+      stmt.setInt(1, reviewNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("리뷰 삭제 실패!");
+      }
+    }
   }
 
   //-----------------------CafeRoom--------------------------------------
@@ -604,19 +736,9 @@ public class MariadbCafeDao implements CafeDao {
     }
   }
 
+  // mariadb에선 필요 없으나 다른 dao에서는 쓰는거라 일단 남겨둠
   @Override
   public void updateWirteReview(int reservationNo) throws Exception {
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("reservationNo", String.valueOf(reservationNo));
-    //
-    //    requestAgent.request("cafeReservation.updateWirteReview", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 상태 변경 실패");
-    //    } else {
-    //      //        System.out.println();
-    //      //        System.out.println(" >> 상태 변경 성공");
-    //    }
   }
 
   @Override
