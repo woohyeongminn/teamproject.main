@@ -45,6 +45,11 @@ public class AdminNoticeUpdateHandler implements Command {
         if (inputfile.equals("네")) {
           notice.setAdminNotiFile(Prompt.inputString(" 첨부파일 : "));
         } 
+        //        else {
+        //          System.out.println(" >> 파일 등록이 취소되었습니다.");
+        //          request.getRequestDispatcher("/adminNotice/list").forward(request);
+        //          return;
+        //        }
         break;
       case 4:
         if (notice.getAdminNotiFile() == null) {

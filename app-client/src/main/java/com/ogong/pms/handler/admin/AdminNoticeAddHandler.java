@@ -39,7 +39,7 @@ public class AdminNoticeAddHandler implements Command {
     String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equals("네")) {
       System.out.println(" >> 등록이 취소되었습니다.");
-      //      request.getRequestDispatcher("/adminNotice/list").forward(request);
+      request.getRequestDispatcher("/adminNotice/list").forward(request);
       return;
     }
 
@@ -55,7 +55,7 @@ public class AdminNoticeAddHandler implements Command {
     adminDao.insert(adminNotice);
 
     System.out.println(" >> 공지글 등록이 완료되었습니다.");
-    //    request.getRequestDispatcher("/adminNotice/list").forward(request);
+    request.getRequestDispatcher("/adminNotice/list").forward(request);
     return;
   }
 }
