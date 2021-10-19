@@ -28,19 +28,22 @@ public class MemberAddHandler implements Command {
 
     String inputName = Prompt.inputString(" 이름 : ");
     member.setPerName(inputName);
-    String inputNewNick;
-    inputNewNick = Prompt.inputString(" 닉네임 : ");
+
+    // String inputNewNick;
+    String inputNewNick = Prompt.inputString(" 닉네임 : ");
     for (Member comparisonMember : memberList) {
       if (inputNewNick.equals(comparisonMember.getPerNickname())) {
         System.out.println(" >> 이미 사용 중인 닉네임입니다.");
         return;
       }
     }
-
     member.setPerNickname(inputNewNick);
+
     member.setPerPhoto(Prompt.inputString(" 사  진 : "));
+
     String inputTel = Prompt.inputString(" 전화번호 : ");
     member.setPerTel(inputTel);
+
     String inputNewEmail;
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
@@ -79,6 +82,8 @@ public class MemberAddHandler implements Command {
 
     member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
 
+    member.setPerStatus(Member.PER);
+
     // 마지막 회원번호 찾아서 신규회원 등록시 +1 되도록 기능 구현
     // Member lastMember = null;
     // if (!memberList.isEmpty()) {
@@ -87,7 +92,6 @@ public class MemberAddHandler implements Command {
     // } else {
     // member.setPerNo(1);
     // }
-    // member.setPerStatus(Member.INUSER);
 
     memberDao.insert(member);
 

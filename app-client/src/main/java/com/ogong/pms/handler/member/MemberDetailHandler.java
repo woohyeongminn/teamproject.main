@@ -33,8 +33,10 @@ public class MemberDetailHandler implements Command {
     try {
       System.out.println();
       System.out.printf(" [%s]\n", member.getPerNickname());
-      System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
+      System.out.printf(" >> 이름 : %s\n", member.getPerName());
       System.out.printf(" >> 사  진 : %s\n", member.getPerPhoto());
+      System.out.printf(" >> 전화번호 : %s\n", member.getPerTel());
+      System.out.printf(" >> 이메일 : %s\n", member.getPerEmail());
       System.out.printf(" >> 가입일 : %s\n", member.getPerRegisteredDate());
 
     } catch (NullPointerException e) {
@@ -50,15 +52,21 @@ public class MemberDetailHandler implements Command {
 
     System.out.println();
     System.out.println("1. 수정");
-    System.out.println("2. 탈퇴");      
+    System.out.println("2. 탈퇴");
     System.out.println("0. 이전");
     while (true) {
       int selectNo = Prompt.inputInt("선택> ");
       switch (selectNo) {
-        case 1 : request.getRequestDispatcher("/member/update").forward(request); return;
-        case 2 : request.getRequestDispatcher("/member/delete").forward(request); return;
-        case 0 : return;
-        default : System.out.println(" >> 번호를 다시 선택해 주세요.");
+        case 1:
+          request.getRequestDispatcher("/member/update").forward(request);
+          return;
+        case 2:
+          request.getRequestDispatcher("/member/delete").forward(request);
+          return;
+        case 0:
+          return;
+        default:
+          System.out.println(" >> 번호를 다시 선택해 주세요.");
       }
     }
 
