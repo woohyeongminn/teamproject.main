@@ -59,19 +59,28 @@ public class MyStudyUpdateHandler implements Command {
     }
     myStudy.setNumberOfPeple(nop);
 
-    // 대면 비대면
-    String face;
+    System.out.println();
+    System.out.println(" [ 대면상태 ]");
+    System.out.println(" 1. 대면");
+    System.out.println(" 2. 비대면");
+    System.out.println(" 3. 대면/비대면");
+
     while (true) {
-      System.out.println();
-      face = Prompt.inputString(" 대면 , 비대면 , 대면/비대면 : ");
-      if ((face.length() == 3 && face.equals("비대면")) ||
-          (face.length() == 2 && face.equals("대면")) ||
-          (face.length() == 6 && face.equals("대면/비대면"))) {
-        break;
+      try {
+        int subjectNo =Prompt.inputInt(" 대면 : ");
+        switch (subjectNo) {
+          case 1 : myStudy.setFaceNo(1); break;
+          case 2 : myStudy.setFaceNo(2); break;
+          case 3 : myStudy.setFaceNo(3); break;
+          default : System.out.println(" >> 다시 선택하세요.\n"); continue;
+        }
+      } catch (NumberFormatException e) {
+        System.out.println(" >> 숫자만 입력하세요.");
+        System.out.println();
+        continue;
       }
-      System.out.println(" >> 대면/비대면 중에 입력하세요.");
+      break;
     }
-    myStudy.setFace(face);
 
     // 소개글
     String introduction;

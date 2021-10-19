@@ -64,11 +64,11 @@ public class StudyBookMarkDetailHandler implements Command {
     System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
     System.out.printf(" [%s]\n", study.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
-    System.out.printf(" >> 분야 : %s\n", study.getSubject());
+    System.out.printf(" >> 분야 : %s\n", study.getSubjectName());
     System.out.printf(" >> 지역 : %s\n", study.getArea());
     System.out.printf(" >> 인원수 : %s/%s명\n",
         study.getMembers().size() + 1, study.getNumberOfPeple());
-    System.out.printf(" >> 대면 : %s\n", study.getFace());
+    System.out.printf(" >> 대면 : %s\n", study.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
     request.setAttribute("inputNo", study.getStudyNo());

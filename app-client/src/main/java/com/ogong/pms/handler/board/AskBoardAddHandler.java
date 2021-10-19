@@ -1,7 +1,6 @@
 package com.ogong.pms.handler.board;
 
 import java.sql.Date;
-import java.util.List;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
@@ -26,7 +25,7 @@ public class AskBoardAddHandler implements Command {
 
     AskBoard askBoard = new AskBoard();
 
-    List<AskBoard> askBoardList = askBoardDao.findAll();
+    //    List<AskBoard> askBoardList = askBoardDao.findAll();
 
     int statusNo = 0;
 
@@ -34,6 +33,7 @@ public class AskBoardAddHandler implements Command {
 
       askBoard.setAskTitle(Prompt.inputString(" 제목 : "));
       askBoard.setAskContent(Prompt.inputString(" 내용 : "));
+      askBoard.setAskVeiwCount(0);
       askBoard.setAskMemberWriter(AuthPerMemberLoginHandler.getLoginUser());
       askBoard.setAskRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -54,13 +54,13 @@ public class AskBoardAddHandler implements Command {
             }  
 
             // 마지막 고유번호를 찾아서 신규 등록시 +1 되도록 기능 구현
-            AskBoard lastAskBoard = null;
-            if (!askBoardList.isEmpty()) {
-              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
-              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
-            } else {
-              askBoard.setAskNo(1);
-            }
+            //            AskBoard lastAskBoard = null;
+            //            if (!askBoardList.isEmpty()) {
+            //              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
+            //              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
+            //            } else {
+            //              askBoard.setAskNo(1);
+            //            }
             break;
           }
         } catch (NumberFormatException e) {
@@ -77,6 +77,7 @@ public class AskBoardAddHandler implements Command {
 
       askBoard.setAskTitle(Prompt.inputString(" 제목 : "));
       askBoard.setAskContent(Prompt.inputString(" 내용 : "));
+      askBoard.setAskVeiwCount(0);
       askBoard.setAskCeoWriter(AuthCeoMemberLoginHandler.getLoginCeoMember());
       askBoard.setAskRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -95,13 +96,13 @@ public class AskBoardAddHandler implements Command {
               System.out.println(" >> 문의글 등록을 취소하였습니다.");
               return;
             }     
-            AskBoard lastAskBoard = null;
-            if (!askBoardList.isEmpty()) {
-              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
-              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
-            } else {
-              askBoard.setAskNo(1);
-            }
+            //            AskBoard lastAskBoard = null;
+            //            if (!askBoardList.isEmpty()) {
+            //              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
+            //              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
+            //            } else {
+            //              askBoard.setAskNo(1);
+            //            }
             break;
           }
         } catch (NumberFormatException e) {

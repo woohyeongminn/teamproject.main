@@ -23,19 +23,42 @@ values(2, '정처기준비', 2, 5, 2, '한 번에 붙자', '2021-2-2', 1, 0);
 
 -------------------------------------------------------------------------------------------------
 
-select
-s.study_no,
+-- 스터디 북마크 test 값
+insert into study_bookmark(per_member_no, study_no) values(3, 1);
+
+-- 스터디 길더 test 값
+insert into study_guilder(study_no, per_member_no, status) values(1, 4, 1);
+
+-------------------------------------------------------------------------------------------------
+-- 캘린더 중요도 값
+insert study_calender_importance(importance_no, importance) values(5, ★☆☆☆☆);
+insert study_calender_importance(importance_no, importance) values(4, ★★☆☆☆);
+insert study_calender_importance(importance_no, importance) values(3, ★★★☆☆);
+insert study_calender_importance(importance_no, importance) values(2, ★★★★☆);
+insert study_calender_importance(importance_no, importance) values(1, ★★★★★);
+
+select s.study_no,
 s.name,
-ss.name,
+ss.name subject_name,
+ss.subject_no subject_no,
 s.no_people,
-sfs.name,
+sfs.name face_name,
+sfs.face_no face_no,
 s.introduction,
 s.created_dt,
-m.name,
+m.name owner_name,
 s.score
  from study s
- left outer join per_member pm on s.per_member_no=pm.per_member_no
- left outer join study_subject ss on s.subject_no=ss.subject_no
- left outer join member m on m.member_no=pm.member_no
- left outer join study_face_status sfs on s.face_no=sfs.face_no
-;
+ join per_member pm on s.per_member_no=pm.per_member_no
+ join study_subject ss on s.subject_no=ss.subject_no
+ join member m on m.member_no=pm.member_no
+ join study_face_status sfs on s.face_no=sfs.face_no
+ where s.study_no=?;
+
+
+
+
+
+
+
+

@@ -1,12 +1,15 @@
 package com.ogong.pms.dao;
 
 import java.util.List;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 public interface StudyDao {
 
   // --------------- [ 스터디 ] ----------------------------------------
   void insert(Study study) throws Exception;
+  void insertGuilder(Study study, Member member) throws Exception;
+  void insertBookmark(Study study, Member member) throws Exception;
   void update(Study study) throws Exception;
   void delete(int no) throws Exception;
   List<Study> findAll() throws Exception;
