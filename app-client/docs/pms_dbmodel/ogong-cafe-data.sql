@@ -1,5 +1,4 @@
 -- 카페 운영상태
-
 insert into studycafe_operating_status(operating_status_no, name)
 values (1, '승인대기');
 insert into studycafe_operating_status(operating_status_no, name)
@@ -80,6 +79,7 @@ values (5, '예약거절(사장)');
 insert into studycafe_reservation_status(rsv_status_no, rsv_name)
 values (6, '결제거절(사장)');
 
+-- 카페 예약 이용시간 도메인 숫자로 변경
 alter table studycafe_reservation modify using_time integer;
 
 -- 카페 예약 
@@ -93,7 +93,12 @@ values (3, 5, 2, '2021-11-30', '15:00', 2, 5, 30000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
 values (4, 2, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
 
+-- 테스트용
+insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
+values (6, 2, 2, '2021-7-22', '2021-9-1', '10:00', 1, 2, 12000, 1, 1);
 
+-- 카페 리뷰 상태 컬럼 추가
+alter table studycafe_review add column status integer;
 
 
 
@@ -141,4 +146,19 @@ order by rs.studycafe_rsv_no asc;
             
 update studycafe_reservation set rsv_status_no = ? where studycafe_rsv_no = ?
             
+select r.review_no, r.grade, r.content, r.create_dt, sr.cafe_no
+from studycafe_review r
+join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
+join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+join per_member pm on rs.per_member_no=pm.per_member_no
+join member m on pm.member_no=m.member_no
+where m.member_no = 1;
+
+
+select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,
+c.view_cnt, sp.name, sh.date, c.operating_status_no
+from studycafe c
+left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
+left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
+and c.cafe_no = ?
             

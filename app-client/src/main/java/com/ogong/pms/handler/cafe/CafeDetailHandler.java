@@ -48,8 +48,8 @@ public class CafeDetailHandler implements Command {
     System.out.printf(" >> 조회수 : %d\n", cafe.getViewCount());
     //    System.out.printf(" >> 예약가능 인원 : %d\n", cafe.getBookable());
     //    System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
-    //getStarRatingAverage(cafe); // 리뷰 평점계산
-    //listReview(cafe); // 리뷰 목록
+    getStarRatingAverage(cafe); // 리뷰 평점계산
+    listReview(cafe); // 리뷰 목록
     System.out.println();
 
     if (cafe.getCafeStatus() == Cafe.STOP) {
@@ -113,7 +113,7 @@ public class CafeDetailHandler implements Command {
 
     if (!reviewList.isEmpty()) {
       for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 1) {
+        if (review.getReviewStatus() == 2) {
           continue;
         }
         starRating += review.getGrade();
@@ -135,7 +135,7 @@ public class CafeDetailHandler implements Command {
       System.out.println(" >> 등록된 리뷰가 없습니다.");
     } else {
       for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 1) {
+        if (review.getReviewStatus() == 2) {
           //System.out.printf(" \n (%s)\n", review.getReviewNo());
           System.out.printf(" (%d) | 삭제 된 리뷰입니다. |\n", i++);
           continue;

@@ -26,6 +26,9 @@ public class AdminCafeDeleteHandler implements Command {
     if (cafe == null) {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
       return;
+    } else if (cafe.getCafeStatus() == DELETE) {
+      System.out.println(" >> 이미 삭제된 장소입니다.");
+      return;
     }
 
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
@@ -38,5 +41,6 @@ public class AdminCafeDeleteHandler implements Command {
     cafe.setCafeStatus(DELETE);
 
     cafeDao.deleteCafe(cafe);
+    System.out.println(" >> 삭제가 완료되었습니다.");
   }
 }

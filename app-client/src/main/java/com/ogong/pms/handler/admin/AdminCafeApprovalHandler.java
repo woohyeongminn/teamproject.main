@@ -36,11 +36,11 @@ public class AdminCafeApprovalHandler implements Command {
         System.out.println(" >> 번호를 다시 선택하세요.");
         request.getRequestDispatcher("/cafe/control").forward(request);
         return;
-      } else if (cafe.getCafeStatus() != 0) {
+      } else if (cafe.getCafeStatus() != Cafe.WAIT) {
         System.out.println(" >> 승인 대기 중인 카페가 아닙니다.\n    번호를 다시 선택하세요.");
         request.getRequestDispatcher("/cafe/control").forward(request);
         return;
-      } else if (cafe.getCafeStatus() == 0) {
+      } else if (cafe.getCafeStatus() == Cafe.WAIT) {
         String input = Prompt.inputString(" 정말 승인하시겠습니까? (네 / 아니오) ");
         System.out.println();
         if (!input.equalsIgnoreCase("네")) {
@@ -48,7 +48,7 @@ public class AdminCafeApprovalHandler implements Command {
           return;
         }
         cafe.setCafeStatus(GENERAL);
-        cafeDao.updateCafe(cafe);
+        cafeDao.updateCafeStatusToGENERAL(cafe);
         System.out.printf(" >> '%s'를 승인하였습니다.\n", cafe.getName());
         return;
       }
