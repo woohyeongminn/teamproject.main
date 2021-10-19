@@ -75,7 +75,41 @@ public class MariadbStudyDao implements StudyDao {
 
   @Override
   public Study findByNo(int studyinputNo) throws Exception {
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " s.study_no,"
+            + " s.name,"
+            + " ss.name subject_name,"
+            + " s.no_people,"
+            + " sfs.name face_name,"
+            + " s.introduction,"
+            + " s.created_dt,"
+            + " m.name owner_name,"
+            + " s.score"
+            + " from study s"
+            + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
+            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
+            + " left outer join member m on m.member_no=pm.member_no"
+            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+            + " where study_no=" + studyinputNo);
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (!rs.next()) {
+        return null;
+      }
+      Study study = new Study();
+      study.setStudyNo(rs.getInt("study_no"));
+      study.setStudyTitle(rs.getString("name"));
+      study.setSubject(rs.getString("subject_name"));
+      study.setNumberOfPeple(rs.getInt("no_people"));
+      study.setFace(rs.getString("face_name"));
+
+      Member member = new Member();
+      member.setPerNickname(rs.getString("owner_name"));
+      study.setOwner(member);
+
+      return study;
+    }
   }
 
   @Override
