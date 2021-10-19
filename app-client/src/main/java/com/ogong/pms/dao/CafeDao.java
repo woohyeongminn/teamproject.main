@@ -18,6 +18,7 @@ public interface CafeDao {
   Cafe findByCafeNoMember(int cafeNo) throws Exception;
   void insertCafe(Cafe cafe) throws Exception;
   void updateCafe(Cafe cafe) throws Exception;
+  void updateCafeStatusToGENERAL(Cafe cafe) throws Exception;
   void deleteCafe(Cafe cafe) throws Exception;
 
   //-----------------------CafeReview--------------------------------------

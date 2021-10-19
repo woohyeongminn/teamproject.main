@@ -11,7 +11,12 @@ public interface MemberDao {
   Member findByNickName(String inputNick) throws Exception;
   Member findByEmail(String inputEmail) throws Exception;
   Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception;
-  void update(Member member) throws Exception;
+  void updateName(Member member) throws Exception;
+  void updateNickname(Member member) throws Exception;
+  void updatePhoto(Member member) throws Exception;
+  void updateTel(Member member) throws Exception;
+  void updateEmail(Member member) throws Exception;
+  void updatePassword(Member member) throws Exception;
   void delete(int no) throws Exception;
 
 

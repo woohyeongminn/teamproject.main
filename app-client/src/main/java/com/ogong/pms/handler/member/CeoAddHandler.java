@@ -1,8 +1,6 @@
 package com.ogong.pms.handler.member;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
@@ -25,10 +23,48 @@ public class CeoAddHandler implements Command {
     System.out.println("▶ 기업 회원가입");
     System.out.println();
 
-    Collection<CeoMember> ceoMemberList = ceoMemberDao.findAll();
-    List<CeoMember> arrayCeoMember = new ArrayList<>(ceoMemberList);
-
+    List<CeoMember> ceoMemberList = ceoMemberDao.findAll();
     CeoMember ceoMember = new CeoMember();
+
+    // 이름
+    String inputName = Prompt.inputString(" 이름 : ");
+    ceoMember.setCeoName(inputName);
+
+    // 닉네임
+    String inputNewNick;
+    inputNewNick = Prompt.inputString(" 닉네임 : ");
+    for (CeoMember c : ceoMemberList) {
+      if (inputNewNick.equals(c.getCeoNickname())) {
+        System.out.println(" >> 이미 사용 중인 닉네임입니다.");
+        return;
+      }
+    }
+    ceoMember.setCeoNickname(inputNewNick);
+
+    // 사진
+    ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
+
+    // 전화번호
+    String inputTel = Prompt.inputString(" 전화번호 : ");
+    ceoMember.setCeoTel(inputTel);
+
+    // 대표자명
+    ceoMember.setCeoBossName(Prompt.inputString(" 대표자명 : "));
+
+    // 사업자 등록번호
+    String inputLicenseNo;
+    while (true) {
+      System.out.println();
+      inputLicenseNo = Prompt.inputString(" 사업자 등록번호 : ");
+      if (inputLicenseNo.length() != 10) {
+        System.out.println(" >> 10자리 숫자를 입력해주세요.");
+        continue;
+      }
+      break;
+    }
+    ceoMember.setCeoLicenseNo(inputLicenseNo);
+
+    // 이메일
     String inputNewEmail;
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
@@ -42,6 +78,7 @@ public class CeoAddHandler implements Command {
     }
     ceoMember.setCeoEmail(inputNewEmail);
 
+    // 비밀번호
     String inputNewPW;
     while (true) {
       System.out.println();
@@ -69,33 +106,21 @@ public class CeoAddHandler implements Command {
       break;
     }
 
-    String inputLicenseNo;
-    while (true) {
-      System.out.println();
-      inputLicenseNo = Prompt.inputString(" 사업자 등록번호 : ");
-      if (inputLicenseNo.length() != 10) {
-        System.out.println(" >> 10자리 숫자를 입력해주세요.");
-        continue;
-      }
-      break;
-    }
-    ceoMember.setCeoLicenseNo(inputLicenseNo);
-    System.out.println();
-    ceoMember.setCeoBossName(Prompt.inputString(" 대표자명 : "));
-    System.out.println();
-    ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
+    // 가입일
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
 
-    // 고유번호 +1
-    CeoMember lastCeoMember = null;
-    if (!arrayCeoMember.isEmpty()) {
-      lastCeoMember = arrayCeoMember.get(arrayCeoMember.size() - 1);
-      ceoMember.setCeoNo(lastCeoMember.getCeoNo() +1);
-    } else {
-      ceoMember.setCeoNo(1);
-    }
+    // 회원 상태
+    ceoMember.setCeoStatus(CeoMember.CEO);
 
-    ceoMember.setCeoStatus(CeoMember.INUSER);
+    // 고유번호 +1
+    //    CeoMember lastCeoMember = null;
+    //    if (!arrayCeoMember.isEmpty()) {
+    //      lastCeoMember = arrayCeoMember.get(arrayCeoMember.size() - 1);
+    //      ceoMember.setCeoNo(lastCeoMember.getCeoNo() +1);
+    //    } else {
+    //      ceoMember.setCeoNo(1);
+    //    }
+    //    ceoMember.setCeoStatus(CeoMember.INUSER);
 
     ceoMemberDao.insert(ceoMember);
     System.out.println(" >> 회원가입이 완료되었습니다.");

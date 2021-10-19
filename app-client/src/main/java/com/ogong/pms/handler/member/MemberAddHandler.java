@@ -28,6 +28,7 @@ public class MemberAddHandler implements Command {
 
     String inputName = Prompt.inputString(" 이름 : ");
     member.setPerName(inputName);
+    System.out.println(member.getPerName());
 
     // String inputNewNick;
     String inputNewNick = Prompt.inputString(" 닉네임 : ");
@@ -38,36 +39,57 @@ public class MemberAddHandler implements Command {
       }
     }
     member.setPerNickname(inputNewNick);
+    System.out.println(member.getPerNickname());
 
     member.setPerPhoto(Prompt.inputString(" 사  진 : "));
+    System.out.println(member.getPerPhoto());
 
-    String inputTel = Prompt.inputString(" 전화번호 : ");
-    member.setPerTel(inputTel);
+    LOOP: while (true) {
+      String inputTel = Prompt.inputString(" 전화번호 : ");
+      // if (!(inputTel.length() > 10 && inputTel.length() < 11)) {
+      // System.out.println(" >> 올바른 형식의 전화번호를 입력해 주세요.");
+      // continue;
+      // }
 
-    String inputNewEmail;
+      for (Member perMemberTel : memberList) {
+        if (inputTel.equals(perMemberTel.getPerTel())) {
+          System.out.println(" >> 이미 사용중인 전화번호입니다.");
+          continue LOOP;
+        }
+      }
+      member.setPerTel(inputTel);
+      System.out.println(member.getPerTel());
+      break;
+    }
+
+
+    // String inputNewEmail;
     while (true) {
-      inputNewEmail = Prompt.inputString(" 이메일 : ");
+      String inputNewEmail = Prompt.inputString(" 이메일 : ");
       if (!inputNewEmail.contains("@") || !inputNewEmail.contains(".com")
           || inputNewEmail.length() < 6) {
         System.out.println(" >> 정확한 이메일 양식으로 입력해 주세요.");
         continue;
+      } else {
+        member.setPerEmail(inputNewEmail);
+        System.out.println(member.getPerEmail());
+        break;
       }
-      break;
     }
-    member.setPerEmail(inputNewEmail);
 
-    String inputNewPW;
+    // String inputNewPW;
     while (true) {
-      inputNewPW = Prompt.inputString(" 비밀번호 : ");
+      String inputNewPW = Prompt.inputString(" 비밀번호 : ");
       if (inputNewPW.length() < 8 || (!inputNewPW.contains("!") && !inputNewPW.contains("@")
           && !inputNewPW.contains("#") && !inputNewPW.contains("$") && !inputNewPW.contains("^")
           && !inputNewPW.contains("%") && !inputNewPW.contains("&") && !inputNewPW.contains("*"))) {
         System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
         continue;
       }
+      member.setPerPassword(inputNewPW);
+      System.out.println(member.getPerPassword());
       break;
     }
-    member.setPerPassword(inputNewPW);
 
     while (true) {
       String pw = Prompt.inputString(" 비밀번호 확인 : ");

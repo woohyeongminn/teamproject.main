@@ -27,7 +27,7 @@ public class CafeMyReservationDeleteHandler implements Command {
     }
 
     Date today = new Date(System.currentTimeMillis());
-    Date reserDate = myReservation.getReservationDate();
+    Date reserDate = myReservation.getUseDate();
 
     if (reserDate.toLocalDate().compareTo(today.toLocalDate()) > 0) {
 
@@ -40,7 +40,7 @@ public class CafeMyReservationDeleteHandler implements Command {
 
       //      myReservation.setReservationStatus(2);
       //      reserList.remove(myReservation);
-      cafeDao.deleteReservation(myReservation, 2);
+      cafeDao.deleteReservation(myReservation, 3);
 
     } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
       System.out.println(" >> 당일 예약은 취소 불가능합니다.");

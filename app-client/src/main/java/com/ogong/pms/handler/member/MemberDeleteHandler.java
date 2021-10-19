@@ -54,6 +54,9 @@ public class MemberDeleteHandler implements Command {
     System.out.println(" << 비밀번호 확인 >>");
     String inputPassword = Prompt.inputString(" 비밀번호를 입력하세요 : ");
 
+    // 테스트
+    System.out.println(member.getPerPassword());
+
     if (!inputPassword.equals(member.getPerPassword())) {
       System.out.println();
       System.out.println(" >> 비밀번호가 일치하지 않습니다.");
