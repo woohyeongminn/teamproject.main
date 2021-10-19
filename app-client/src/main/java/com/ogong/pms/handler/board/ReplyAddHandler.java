@@ -4,7 +4,6 @@ import java.sql.Date;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Reply;
-import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
@@ -34,7 +33,6 @@ public class ReplyAddHandler implements Command {
     Reply reply = new Reply();
     reply.setReplyTitle(Prompt.inputString(" 제목: "));
     reply.setReplyContent(Prompt.inputString(" 내용: "));
-    reply.setReplyAdminWiter(AuthAdminLoginHandler.getLoginAdmin());
     reply.setReplyRegisteredDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString("\n 정말 등록하시겠습니까? (네 / 아니오) ");
