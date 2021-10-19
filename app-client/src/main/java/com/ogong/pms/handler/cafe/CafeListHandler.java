@@ -27,11 +27,12 @@ public class CafeListHandler implements Command {
     }
 
     for(Cafe cafe : cafeList) {
-      System.out.printf("\n (%s)\n 이름 : %s\n 주소 : %s\n 예약가능인원 : %d\n", 
+      System.out.printf("\n (%s) | 이름 : %s | 주소 : %s | 운영시간 : %s ~ %s\n", 
           cafe.getNo(), 
           cafe.getName(), 
           cafe.getLocation(), 
-          cafe.getBookable());
+          cafe.getOpenTime(),
+          cafe.getCloseTime());
       if (cafe.getCafeStatus() == Cafe.STOP) {
         System.out.println(" * 운영 중단");
       }
