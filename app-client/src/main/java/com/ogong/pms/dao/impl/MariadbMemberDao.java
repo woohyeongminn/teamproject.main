@@ -44,23 +44,22 @@ public class MariadbMemberDao implements MemberDao {
       }
 
       // per_member 테이블에 추가하기
-      try (PreparedStatement stmt2 = con.prepareStatement(
-          "insert into per_member(per_member_no,member_no) values(?,?)")) {
+      try (PreparedStatement stmt2 =
+          con.prepareStatement("insert into per_member(per_member_no,member_no) values(?,?)")) {
 
-        stmt2.setInt(1, member.getPerNo());     // per_member_no : 개인회원 번호
-        stmt2.setInt(2, perMemberNo);           // member_no : 전체 회원에서 번호
-        stmt2.executeUpdate();  
+        stmt2.setInt(1, member.getPerNo()); // per_member_no : 개인회원 번호
+        stmt2.setInt(2, perMemberNo); // member_no : 전체 회원에서 번호
+        stmt2.executeUpdate();
       }
     }
   }
 
   @Override
   public List<Member> findAll() throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select"
+    try (
+        PreparedStatement stmt = con.prepareStatement("select"
             + " m.member_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
-            + " from member m"
-            + " join per_member pm on m.member_no=pm.member_no"
+            + " from member m" + " join per_member pm on m.member_no=pm.member_no"
             + " order by name asc");
 
         ResultSet rs = stmt.executeQuery()) {
@@ -103,9 +102,9 @@ public class MariadbMemberDao implements MemberDao {
 
   @Override
   public Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select m.member_no, m.nickname, m.email from member m"
-            + " join per_member pm on m.member_no=pm.member_no" 
+    try (PreparedStatement stmt =
+        con.prepareStatement("select m.member_no, m.nickname, m.email from member m"
+            + " join per_member pm on m.member_no=pm.member_no"
             + " where email=? and password=password(?)")) {
 
       stmt.setString(1, inputEmail);

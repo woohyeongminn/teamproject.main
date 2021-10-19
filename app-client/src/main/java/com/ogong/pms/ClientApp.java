@@ -17,12 +17,13 @@ import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.impl.MariadbAdminDao;
 import com.ogong.pms.dao.impl.MariadbCafeDao;
 import com.ogong.pms.dao.impl.MariadbCeoMemberDao;
 import com.ogong.pms.dao.impl.MariadbMemberDao;
+import com.ogong.pms.dao.impl.MariadbStudyDao;
 import com.ogong.pms.dao.impl.NetAskBoardDao;
-import com.ogong.pms.dao.impl.NetStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -219,7 +220,7 @@ public class ClientApp {
     CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
     CafeDao cafeDao = new MariadbCafeDao(con);
-    NetStudyDao studyDao = new NetStudyDao(requestAgent);
+    StudyDao studyDao = new MariadbStudyDao(con);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 

@@ -205,8 +205,8 @@ public class MariadbAdminDao implements AdminDao {
       adminNotice.setAdminNotiTitle(rs.getString("title"));
       adminNotice.setAdminNotiContent(rs.getString("content"));
       adminNotice.setAdminNotiRegisteredDate(rs.getDate("create_dt"));
-      //      adminNotice.setAdminNotiFileNo(rs.getInt("notice_file_no"));
-      //      adminNotice.setAdminNotiFile(rs.getString("filepath"));
+      //adminNotice.setAdminNotiFileNo(rs.getInt("notice_file_no"));
+      //adminNotice.setAdminNotiFile(rs.getString("filepath"));
 
       return adminNotice;
     }
