@@ -70,15 +70,15 @@
 //    }
 //  }
 //
-//  @Override
-//  public void update(AdminNotice notice) throws Exception {
-//    requestAgent.request("notice.update", notice);
-//
-//    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-//      System.out.println("공지게시판 수정 실패");
-//      throw new Exception(requestAgent.getObject(String.class));
+//    @Override
+//    public void update(AdminNotice notice) throws Exception {
+//      requestAgent.request("notice.update", notice);
+//  
+//      if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+//        System.out.println("공지게시판 수정 실패");
+//        throw new Exception(requestAgent.getObject(String.class));
+//      }
 //    }
-//  }
 //
 //  @Override
 //  public void delete(int noticeNo) throws Exception {
