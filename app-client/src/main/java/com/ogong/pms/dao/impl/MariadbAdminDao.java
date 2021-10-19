@@ -201,15 +201,29 @@ public class MariadbAdminDao implements AdminDao {
       stmt.setString(2, notice.getAdminNotiFile());
 
       if (stmt.executeUpdate() == 0) {
-        throw new Exception("공지게시판 파일 데이터 저장 실패!");
+        throw new Exception("공지게시판 파일 데이터 첨부 실패!");
       }
     }
   }
 
-
   @Override
   public void delete(int noticeNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from notice where notice_no=?");
+        PreparedStatement stmt2 = con.prepareStatement(
+            "delete from notice_file where notice_no=?")) {
 
+      // 첨부파일 먼저 삭제
+      stmt2.setInt(1, noticeNo);
+      stmt2.executeUpdate();
+
+      // 공지게시판 삭제
+      stmt.setInt(1, noticeNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("공지게시판 데이터 삭제 실패!");
+      }
+    }
   }
 
   @Override
@@ -268,7 +282,6 @@ public class MariadbAdminDao implements AdminDao {
       return adminNotice;
     }
   }
-
 }
 
 // 확인용
