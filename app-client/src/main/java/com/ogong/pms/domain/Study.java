@@ -34,6 +34,7 @@ public class Study {
         + ", myStudyCalender=" + myStudyCalender + ", myStudyFreeBoard=" + myStudyFreeBoard
         + ", myStudyToDo=" + myStudyToDo + "]";
   }
+
   public int getStudyNo() {
     return studyNo;
   }
@@ -135,5 +136,33 @@ public class Study {
   }
   public void setMyStudyToDo(List<ToDo> myStudyToDo) {
     this.myStudyToDo = myStudyToDo;
+  }
+
+  public String getWatingMemberNames() {
+    if (this.members == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (Member member : this.watingMember) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(member.getPerNickname());
+    }
+    return names.toString();
+  }
+
+  public String getMemberNames() {
+    if (this.members == null) {
+      return "";
+    }
+    StringBuilder names = new StringBuilder();
+    for (Member member : this.members) {
+      if (names.length() > 0) {
+        names.append(", ");
+      }
+      names.append(member.getPerNickname());
+    }
+    return names.toString();
   }
 }
