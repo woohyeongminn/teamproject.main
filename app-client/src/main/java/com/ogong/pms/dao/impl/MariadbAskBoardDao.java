@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.AskBoardDao;
+import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Member;
@@ -23,8 +24,9 @@ public class MariadbAskBoardDao implements AskBoardDao {
   @Override
   public void insert(AskBoard askBoard) throws Exception {
     try (PreparedStatement stmt =
-        con.prepareStatement("insert into ask_board(title,content,view_cnt,member_no,use_secret,reply_dt)"
-            + "values(?,?,?,?,?,?)")) {
+        con.prepareStatement(
+            "insert into ask_board(title,content,view_cnt,member_no,use_secret,reply_dt)"
+                + "values(?,?,?,?,?,?)")) {
 
       stmt.setString(1, askBoard.getAskTitle());
       stmt.setString(2, askBoard.getAskContent());
@@ -131,8 +133,36 @@ select
 
   @Override
   public AskBoard findByNo(int no) throws Exception {
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select"
+            + " n.notice_no,"
+            + " n.title,"
+            + " n.content,"
+            + " n.create_dt,"
+            + " nf.notice_file_no,"
+            + " nf.filepath"
+            + " from notice n"
+            + " left outer join notice_file nf on n.notice_no=nf.notice_no"
+            + " where n.notice_no=" + no
+            + " order by n.notice_no asc");
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (!rs.next()) {
+        return null;
+      }
+
+      AdminNotice adminNotice = new AdminNotice();
+      adminNotice.setAdminNotiNo(rs.getInt("notice_no"));
+      adminNotice.setAdminNotiTitle(rs.getString("title"));
+      adminNotice.setAdminNotiContent(rs.getString("content"));
+      adminNotice.setAdminNotiRegisteredDate(rs.getDate("create_dt"));
+      adminNotice.setAdminNotiFileNo(rs.getInt("notice_file_no"));
+      adminNotice.setAdminNotiFile(rs.getString("filepath"));
+
+      return adminNotice;
+    }
   }
+
 
   @Override
   public AskBoard findByPerAskBoard(int askNo, int perMemberNo) throws Exception {
