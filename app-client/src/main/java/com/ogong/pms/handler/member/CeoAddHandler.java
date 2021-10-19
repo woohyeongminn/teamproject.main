@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
@@ -29,6 +30,20 @@ public class CeoAddHandler implements Command {
     List<CeoMember> arrayCeoMember = new ArrayList<>(ceoMemberList);
 
     CeoMember ceoMember = new CeoMember();
+
+    String inputName = Prompt.inputString(" 이름 : ");
+    ceoMember.setCeoName(inputName);
+    String inputNewNick;
+    inputNewNick = Prompt.inputString(" 닉네임 : ");
+    for (Member comparisonMember : ceoMemberList) {
+      if (inputNewNick.equals(comparisonMember.getPerNickname())) {
+        System.out.println(" >> 이미 사용 중인 닉네임입니다.");
+        return;
+      }
+    }
+
+    ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
+
     String inputNewEmail;
     while (true) {
       inputNewEmail = Prompt.inputString(" 이메일 : ");
@@ -83,7 +98,7 @@ public class CeoAddHandler implements Command {
     System.out.println();
     ceoMember.setCeoBossName(Prompt.inputString(" 대표자명 : "));
     System.out.println();
-    ceoMember.setCeoPhoto(Prompt.inputString(" 사진 : "));
+
     ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
 
     // 고유번호 +1
