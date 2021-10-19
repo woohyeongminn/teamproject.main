@@ -87,7 +87,30 @@ public class MariadbMemberDao implements MemberDao {
 
   @Override
   public Member findByNo(int no) throws Exception {
-    return null;
+    try (
+        PreparedStatement stmt = con.prepareStatement("select"
+            + " m.member_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
+            + " from member m" + " where member_no=" + no);
+
+        ResultSet rs = stmt.executeQuery()) {
+
+      if (!rs.next()) {
+        return null;
+      }
+
+      Member member = new Member();
+      member.setPerNo(rs.getInt("member_no"));
+      member.setPerName(rs.getString("name"));
+      member.setPerNickname(rs.getString("nickname"));
+      member.setPerEmail(rs.getString("email"));
+      member.setPerTel(rs.getString("tel"));
+      member.setPerPhoto(rs.getString("photo"));
+      member.setPerRegisteredDate(rs.getDate("created_dt"));
+      member.setActive(rs.getInt("active"));
+      member.setPerStatus(rs.getInt("status"));
+
+      return member;
+    }
   }
 
   @Override
