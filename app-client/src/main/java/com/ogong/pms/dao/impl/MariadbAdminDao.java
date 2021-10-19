@@ -138,8 +138,6 @@ public class MariadbAdminDao implements AdminDao {
         // notice_file 테이블에 추가하기
         try (PreparedStatement stmt2 = con.prepareStatement(
             "insert into notice_file(notice_no,filepath) values(?,?)")) {
-
-          //          stmt2.setInt(1, adminNotice.getAdminNotiFileNo()); // 첨부파일 번호
           stmt2.setInt(1, noticeNo); // 위에서 PK로 꺼낸 공지사항 번호
           stmt2.setString(2, adminNotice.getAdminNotiFile()); // 첨부파일명
           stmt2.executeUpdate();
@@ -191,7 +189,7 @@ public class MariadbAdminDao implements AdminDao {
     }
   }
 
-  // -- 업데이트용 --
+  // -- 첨부파일 업데이트용 --
   @Override
   public void insertFilepath(AdminNotice notice) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(

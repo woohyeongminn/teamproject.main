@@ -9,11 +9,11 @@ public interface AskBoardDao {
   AskBoard findByNo(int no) throws Exception;
   AskBoard findByPerAskBoard(int askNo, int perMemberNo) throws Exception;
   AskBoard findByCeoAskBoard(int askNo, int ceoMemberNo) throws Exception;
-  //AskBoard findByNickName(String inputNick) throws Exception;
-  //AskBoard findByEmail(String inputEmail) throws Exception;
   void update(AskBoard askBoard) throws Exception;
   void delete(int no) throws Exception;
   void insert(AskBoard askBoard) throws Exception;
 
+  //AskBoard findByNickName(String inputNick) throws Exception;
+  //AskBoard findByEmail(String inputEmail) throws Exception;
 
 }
