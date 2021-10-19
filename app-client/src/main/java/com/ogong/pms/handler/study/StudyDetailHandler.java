@@ -26,20 +26,20 @@ public class StudyDetailHandler implements Command {
 
     Study study = studyDao.findByNo(inputNo);
 
-    if (study.getStudyTitle().contains("탈퇴")) {
-      System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
-      System.out.printf(" [%s]\n", study.getStudyTitle());
-      return;
-    }
+    //    if (study.getStudyTitle().contains("탈퇴")) {
+    //      System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
+    //      System.out.printf(" [%s]\n", study.getStudyTitle());
+    //      return;
+    //    }
 
     System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
     System.out.printf(" [%s]\n", study.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
-    System.out.printf(" >> 분야 : %s\n", study.getSubject());
-    System.out.printf(" >> 지역 : %s\n", study.getArea());
-    System.out.printf(" >> 인원수 : %s/%s명\n",
-        study.getMembers().size() + 1, study.getNumberOfPeple());
-    System.out.printf(" >> 대면 : %s\n", study.getFace());
+    System.out.printf(" >> 분야 : %s\n", study.getSubjectName());
+    //System.out.printf(" >> 지역 : %s\n", study.getArea());
+    //    System.out.printf(" >> 인원수 : %s/%s명\n",
+    //        study.getMembers().size() + 1, study.getNumberOfPeple());
+    System.out.printf(" >> 대면 : %s\n", study.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
     request.setAttribute("inputNo", study.getStudyNo());
@@ -65,9 +65,10 @@ public class StudyDetailHandler implements Command {
           }
         }
 
-      } else {
+      } 
+      else {
 
-        // 북마크 멤버 목록이 비어있을때
+        //북마크 멤버 목록이 비어있을때
         if (study.getBookMarkMember().isEmpty()) {
           System.out.println("\n----------------------");
           System.out.println("1. 참여 신청하기");
@@ -86,7 +87,7 @@ public class StudyDetailHandler implements Command {
           }
         }
 
-        // 내가 북마크 했을때랑 안했을때
+        //내가 북마크 했을때랑 안했을때
         for (Member member : study.getBookMarkMember()) {
           if (member.getPerNo() == m1.getPerNo()) {
             System.out.println("\n----------------------");

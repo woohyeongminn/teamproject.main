@@ -56,7 +56,7 @@ public class StudyBookMarkAddHandler implements Command {
     }
 
     study.getBookMarkMember().add(member);
-    studyDao.update(study);
+    studyDao.insertBookmark(study,member);
 
     System.out.println();
     System.out.println(" >> 북마크가 완료되었습니다.");

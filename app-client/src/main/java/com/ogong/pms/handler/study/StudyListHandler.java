@@ -37,11 +37,11 @@ public class StudyListHandler implements Command {
             study.getStudyNo(),
             //study.getBookMarkMember().size(),
             study.getStudyTitle(),
-            study.getSubject(),
+            study.getSubjectName(),
             //study.getMembers().size() + 1,
             study.getNumberOfPeple(),
             study.getOwner().getPerNickname(),
-            study.getFace());
+            study.getFaceName());
         System.out.println();
       }
     }

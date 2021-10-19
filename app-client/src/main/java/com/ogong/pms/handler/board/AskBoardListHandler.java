@@ -36,7 +36,7 @@ public class AskBoardListHandler implements Command {
           System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
               askBoard.getAskNo(), 
               askBoard.getAskTitle(), 
-              askBoard.getAskCeoWriter().getCeoBossName(),
+              askBoard.getAskCeoWriter().getCeoNickname(),
               askBoard.getAskRegisteredDate(),
               askBoard.getAskVeiwCount());
         }
@@ -44,7 +44,7 @@ public class AskBoardListHandler implements Command {
         else if (askBoard.getAskStatus() == 2) {
           System.out.printf("\n (%d)\n 작성자 : %s\n", 
               askBoard.getAskNo(), 
-              askBoard.getAskCeoWriter().getCeoBossName());
+              askBoard.getAskCeoWriter().getCeoNickname());
           System.out.println(" 비밀글입니다.");
         }
 

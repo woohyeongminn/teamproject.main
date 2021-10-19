@@ -14,16 +14,17 @@ import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.impl.MariadbAdminDao;
+import com.ogong.pms.dao.impl.MariadbAskBoardDao;
 import com.ogong.pms.dao.impl.MariadbCafeDao;
 import com.ogong.pms.dao.impl.MariadbCeoMemberDao;
 import com.ogong.pms.dao.impl.MariadbMemberDao;
 import com.ogong.pms.dao.impl.MariadbStudyDao;
-import com.ogong.pms.dao.impl.NetAskBoardDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -217,7 +218,7 @@ public class ClientApp {
     AdminDao adminDao = new MariadbAdminDao(con);
     MemberDao memberDao = new MariadbMemberDao(con);
     CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
-    NetAskBoardDao askBoardDao = new NetAskBoardDao(requestAgent);
+    AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
     CafeDao cafeDao = new MariadbCafeDao(con);
     StudyDao studyDao = new MariadbStudyDao(con);
 

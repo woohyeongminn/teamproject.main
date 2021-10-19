@@ -42,11 +42,11 @@ public class MyStudyDetailHandler implements Command {
 
       System.out.printf(" [%s]\n", myStudy.getStudyTitle());
       System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());
-      System.out.printf(" >> 분야 : %s\n", myStudy.getSubject());
+      System.out.printf(" >> 분야 : %s\n", myStudy.getSubjectName());
       System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
       System.out.printf(" >> 인원수 : %s/%s명\n",
           myStudy.getMembers().size() + 1, myStudy.getNumberOfPeple());
-      System.out.printf(" >> 대면 : %s\n", myStudy.getFace());
+      System.out.printf(" >> 대면 : %s\n", myStudy.getFaceName());
       System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
 
       s = myStudy;
