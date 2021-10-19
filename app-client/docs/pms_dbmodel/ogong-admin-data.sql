@@ -15,9 +15,9 @@ values(2, '오늘의 공부 홈페이지 이용 방법',
 
 -- 공지사항 test 값 >> 첨부파일
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(1, 1, 'null');
+values(1, 1, 'gif');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(2, 2, 'null');
+values(2, 2, 'jpeg');
 
 -- 확인용
 /*
