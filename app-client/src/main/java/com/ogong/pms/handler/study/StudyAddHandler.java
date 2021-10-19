@@ -133,7 +133,7 @@ public class StudyAddHandler implements Command {
 
     while (true) {
       try {
-        int subjectNo =Prompt.inputInt(" 분야 : ");
+        int subjectNo =Prompt.inputInt(" 대면 : ");
         switch (subjectNo) {
           case 1 : study.setFaceNo(1); break;
           case 2 : study.setFaceNo(2); break;
