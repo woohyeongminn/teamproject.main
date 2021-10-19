@@ -31,7 +31,7 @@ public class AuthAdminLoginHandler extends AbstractLoginHandler implements Comma
     Admin admin = adminDao.findByEmailAndPassword(adminEmail, adminPassword);
 
     if (admin != null) {
-      System.out.printf(" >> %s님 환영합니다!\n", admin.getMasterNickname());
+      System.out.printf(" >> '%s'님 환영합니다! 👑\n", admin.getMasterNickname());
       loginAdmin = admin;
       accessLevel = Menu.ADMIN_LOGIN;
 

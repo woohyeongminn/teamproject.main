@@ -59,13 +59,14 @@ public class AdminUpdateHandler implements Command {
 
     if (selectNo == 1) {
       admin.setMasterNickname(adminNickname);
+      adminDao.updateNickname(admin);
     } else if (selectNo == 2) {
       admin.setMasterEmail(adminEmail);
+      adminDao.updateEmail(admin);
     } else if (selectNo == 3) {
       admin.setMasterPassword(adminPassword);
+      adminDao.updatePassword(admin);
     }
-
-    adminDao.update(admin);
 
     System.out.printf("\n >> '%s'님의 정보가 변경되었습니다.", admin.getMasterNickname());
     System.out.println();

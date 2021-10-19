@@ -26,8 +26,13 @@ public class AdminNoticeDetailHandler implements Command {
 
     System.out.printf(" [%s]\n", adminNotice.getAdminNotiTitle());
     System.out.printf(" >> 내용 : %s\n", adminNotice.getAdminNotiContent());
-    System.out.printf(" >> 작성자 : %s\n", adminNotice.getAdminNotiWriter());
+    System.out.printf(" >> 첨부파일 : %s\n", adminNotice.getAdminNotiFile());
     System.out.printf(" >> 등록일 : %s\n", adminNotice.getAdminNotiRegisteredDate());
+    //    else {
+    //      System.out.printf(" [%s]\n", adminNotice.getAdminNotiTitle());
+    //      System.out.printf(" >> 내용 : %s\n", adminNotice.getAdminNotiContent());
+    //      System.out.printf(" >> 등록일 : %s\n", adminNotice.getAdminNotiRegisteredDate());
+    //    }
 
     if (AuthAdminLoginHandler.getLoginAdmin() != null) {
 
