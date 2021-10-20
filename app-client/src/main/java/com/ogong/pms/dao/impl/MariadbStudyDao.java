@@ -214,7 +214,6 @@ public class MariadbStudyDao implements StudyDao {
           study.getMembers().add(guilder);
         }  
       }
-      System.out.println(study);
       return study;
     }
   }

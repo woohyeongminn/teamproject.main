@@ -28,9 +28,11 @@ public class WatingGuilderListHandler implements Command {
 
     Study myStudy = studyDao.findByNo(inputNo);
 
-    if (!myStudy.getWatingMemberNames().isEmpty()) {
+    if (!myStudy.getWatingMember().isEmpty()) {
 
-      System.out.println(" " +myStudy.getWatingMemberNames());
+      for (Member m : myStudy.getWatingMember()) {
+        System.out.println(m.getPerNickname());
+      }
       System.out.println("\n----------------------");
       System.out.println(" [ 승인 / 거절 ] ");
       System.out.println();
@@ -57,18 +59,19 @@ public class WatingGuilderListHandler implements Command {
     List<Member> waitingMembers = myStudy.getWatingMember();
 
     if (myStudy.getMembers().size()+1 >= myStudy.getNumberOfPeple()) {
-      System.out.println("인원수 가득차 승인할 수 없습니다.");
+      System.out.println("인원수가 가득차 승인할 수 없습니다.");
       return;
     }
 
-    if (member != null && myStudy.getOwner().getPerEmail().equals(member.getPerEmail())) {
+    if (member != null && 
+        (myStudy.getOwner().getPerNo() == member.getPerNo())) {
       System.out.println();
-      if (!myStudy.getWatingMemberNames().equals("")) {
+      if (!myStudy.getWatingMember().isEmpty()) {
         String input = Prompt.inputString(" >> 대기 중인 회원 중 승인할 닉네임을 입력하세요 : ");
+
         Member m = null;
 
         for (Member watingMember : waitingMembers) {    
-
           if (watingMember.getPerNickname().equals(input)) {
             myStudy.getMembers().add(watingMember);
             System.out.printf(" >> '%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
