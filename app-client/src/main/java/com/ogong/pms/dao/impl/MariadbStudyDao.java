@@ -44,13 +44,6 @@ public class MariadbStudyDao implements StudyDao {
         }
       }
 
-      try (PreparedStatement stmt2 =
-          con.prepareStatement("insert into study_guilder(study_no,per_member_no) values(?,?)")) {
-
-        stmt2.setInt(1, studyNo); 
-        stmt2.setInt(2, study.getOwner().getPerNo()); 
-        stmt2.executeUpdate();
-      }
     }
   }
 
@@ -150,6 +143,7 @@ public class MariadbStudyDao implements StudyDao {
             + " sfs.face_no face_no,"
             + " s.introduction,"
             + " s.created_dt,"
+            + " pm.per_member_no owner_no,"
             + " m.nickname owner_name,"
             + " sg.per_member_no,"
             + " sg.status status,"
@@ -185,8 +179,8 @@ public class MariadbStudyDao implements StudyDao {
           study.setRegisteredDate(rs.getDate("created_dt"));
 
           Member member = new Member();
+          member.setPerNo(rs.getInt("owner_no"));
           member.setPerNickname(rs.getString("owner_name"));
-          member.setPerNo(studyinputNo);
           study.setOwner(member);
         }
 
