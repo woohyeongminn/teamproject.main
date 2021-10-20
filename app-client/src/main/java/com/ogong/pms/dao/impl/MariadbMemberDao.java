@@ -117,7 +117,7 @@ public class MariadbMemberDao implements MemberDao {
   @Override
   public Member findByNickName(String inputNick) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select m.member_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
+        "select pm.per_member_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
             + " from member m" + " join per_member pm on m.member_no=pm.member_no"
             + " where nickname=?")) {
 
@@ -146,7 +146,7 @@ public class MariadbMemberDao implements MemberDao {
   @Override
   public Member findByEmail(String inputEmail) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select m.member_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
+        "select pm.per_member_no per_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
             + " from member m" + " join per_member pm on m.member_no=pm.member_no"
             + " where email=?")) {
 
@@ -158,7 +158,7 @@ public class MariadbMemberDao implements MemberDao {
         }
 
         Member member = new Member();
-        member.setPerNo(rs.getInt("member_no"));
+        member.setPerNo(rs.getInt("per_no"));
         member.setPerName(rs.getString("name"));
         member.setPerNickname(rs.getString("nickname"));
         member.setPerEmail(rs.getString("email"));
