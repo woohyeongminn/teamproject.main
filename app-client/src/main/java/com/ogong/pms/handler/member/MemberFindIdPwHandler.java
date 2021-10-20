@@ -82,7 +82,7 @@ public class MemberFindIdPwHandler implements Command {
         System.out.println();
         System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", member.getPerNickname());
         System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
-        memberDao.update(member);
+        memberDao.updatePassword(member);
         return;
 
       } else {

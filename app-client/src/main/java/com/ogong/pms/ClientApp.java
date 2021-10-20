@@ -79,7 +79,6 @@ import com.ogong.pms.handler.cafe.CafeSearchHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeAddHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeDeleteHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeDetailHandler;
-import com.ogong.pms.handler.ceoCafe.CeoCafeListHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeRoomAddHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeRoomDeleteHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeRoomDetailHandler;
@@ -87,7 +86,6 @@ import com.ogong.pms.handler.ceoCafe.CeoCafeRoomListHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeRoomUpdateHandler;
 import com.ogong.pms.handler.ceoCafe.CeoCafeUpdateHandler;
 import com.ogong.pms.handler.ceoCafe.CeoReservationDetailHandler;
-import com.ogong.pms.handler.ceoCafe.CeoReservationListHandler;
 import com.ogong.pms.handler.ceoCafe.CeoReservationRejectHandler;
 import com.ogong.pms.handler.member.CeoAddHandler;
 import com.ogong.pms.handler.member.CeoDeleteHandler;
@@ -346,7 +344,7 @@ public class ClientApp {
     commandMap.put("/cafe/myReviewAdd", new CafeMyReviewAddHandler(cafeDao));
     commandMap.put("/cafe/myReviewDelete", new CafeMyReviewDeleteHandler(cafeDao));
 
-    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(cafeDao));
+    //    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(cafeDao));
     commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(cafeDao));
     commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(cafeDao));
     commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(cafeDao));
@@ -358,7 +356,7 @@ public class ClientApp {
     commandMap.put("/ceoMember/cafeRoomUpdate", new CeoCafeRoomUpdateHandler(cafeDao));
     commandMap.put("/ceoMember/cafeRoomDelete", new CeoCafeRoomDeleteHandler(cafeDao));
 
-    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(cafeDao));
+    //    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(cafeDao));
     commandMap.put("/ceoMember/ReservationDetail", new CeoReservationDetailHandler(cafeDao));
     commandMap.put("/ceoMember/ReservationReject", new CeoReservationRejectHandler(cafeDao));
 
@@ -605,9 +603,9 @@ public class ClientApp {
     ceoPageMenu.setMenuFilter(menuFilter);
     ceoPageMenu.add(new MenuItem("🙂 기업 프로필", "/ceoMember/detail"));
     //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
-    ceoPageMenu.add(new MenuItem("🏘 카페 목록", "/ceoMember/myCafeList"));
+    ceoPageMenu.add(new MenuItem("🏘 카페관리", "/ceoMember/myCafeDetail"));
     ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/ceoMyList"));
-    ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
+    //    ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
 
     // 이거 기업프로필에 있음 지우기~~~

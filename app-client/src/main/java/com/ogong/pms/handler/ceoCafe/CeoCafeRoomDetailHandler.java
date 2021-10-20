@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.ceoCafe;
 
+import java.util.Collection;
 import java.util.HashMap;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
@@ -42,12 +43,21 @@ public class CeoCafeRoomDetailHandler implements Command {
       } 
     }
 
+    // 스터디룸 이미지 처리
+    String imgNames = "";
+    if (cafeRoom.getRoomImgs().isEmpty()) {
+      imgNames = "없음";
+    } else {
+      Collection<String> values = cafeRoom.getRoomImgs().values();
+      imgNames = values.toString();
+    }
+
     request.setAttribute("cafeRoom", cafeRoom);
 
     System.out.println();
     System.out.printf(" (%s)\n", cafeRoom.getRoomNo());
-    System.out.printf(" [%s - %s]\n", cafeRoom.getCafe().getName(), cafeRoom.getRoomName());
-    System.out.printf(" >> 대표이미지 : %s\n", cafeRoom.getRoomImg());
+    System.out.printf(" [%s]\n", cafeRoom.getRoomName());
+    System.out.printf(" >> 대표이미지 : %s\n", imgNames);
     System.out.printf(" >> 소개글 : %s\n", cafeRoom.getRoomInfo());
     System.out.printf(" >> 시작시간 : %s\n", cafe.getOpenTime());
     System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
