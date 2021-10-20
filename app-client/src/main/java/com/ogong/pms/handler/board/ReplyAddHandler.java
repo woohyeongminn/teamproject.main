@@ -31,7 +31,7 @@ public class ReplyAddHandler implements Command {
     }
 
     Reply reply = new Reply();
-    reply.setReplyTitle(Prompt.inputString(" 제목: "));
+    reply.setReplyTitle(askBoard.getAskTitle());
     reply.setReplyContent(Prompt.inputString(" 내용: "));
     reply.setReplyRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -41,10 +41,9 @@ public class ReplyAddHandler implements Command {
       return;
     }
 
-    reply.setReplyNo(1);
     askBoard.setReply(reply);
 
-    askBoardDao.update(askBoard);
+    askBoardDao.insertreply(askBoard);
     System.out.println(" >> 답글이 등록되었습니다.");
   }
 }

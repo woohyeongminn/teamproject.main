@@ -1,7 +1,7 @@
 -- 카페 리뷰 상태 컬럼 추가
-alter table studycafe_review add column status integer;
+--alter table studycafe_review add column status integer;
 -- 카페 예약 이용시간 도메인 숫자로 변경
-alter table studycafe_reservation modify using_time integer;
+--alter table studycafe_reservation modify using_time integer;
 
 -- 카페 운영상태
 insert into studycafe_operating_status(operating_status_no, name)
@@ -99,6 +99,15 @@ values (5, 2, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
 
 
 
+
+
+
+
+
+
+--insert into studycafe_holiday(holiday_no, cafe_no, date)
+--values (4, 1, '2021-11-22');
+
 /*
 select c.cafe_no, c.name, c.location, c.open_time, c.close_time
 from studycafe c
@@ -160,4 +169,11 @@ left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
 and c.cafe_no = ?
 
 update member set nickname = '테스트' where member_no = (select member_no from ceo_member where ceo_member_no=2);
-*/            
+            
+
+
+insert into studycafe_photo(photo_no, name, cafe_no)
+values (8, 'xxx.jpg', 1);
+insert into studycafe_photo(photo_no, name, cafe_no)
+values (9, 'zzz.jpg', 1);
+*/

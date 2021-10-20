@@ -125,8 +125,8 @@ public class AskBoardDetailHandler implements Command {
     String writer = "";
     if (askBoard.getAskMemberWriter().getPerNickname() != null) {
       writer = askBoard.getAskMemberWriter().getPerNickname();
-    } else if (askBoard.getAskCeoWriter().getCeoBossName() != null) {
-      writer = askBoard.getAskCeoWriter().getCeoBossName();
+    } else if (askBoard.getAskCeoWriter().getCeoNickname() != null) {
+      writer = askBoard.getAskCeoWriter().getCeoNickname();
     }
     System.out.printf(" >> 작성자 : %s\n", writer);
     System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
@@ -134,10 +134,10 @@ public class AskBoardDetailHandler implements Command {
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
     System.out.println("---------------------");
 
-    askBoardDao.update(askBoard);
+    askBoardDao.updateViewCount(askBoard);
 
     if (askBoard.getReply() == null) {
-      System.out.println("등록된 답변이 없습니다.");
+      System.out.println("\n >> 등록된 답변이 없습니다.");
       return;
     }
     request.setAttribute("askNo", askBoard.getAskNo());

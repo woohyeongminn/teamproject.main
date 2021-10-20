@@ -9,6 +9,7 @@ import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Reply;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 
@@ -24,8 +25,8 @@ public class MariadbAskBoardDao implements AskBoardDao {
   public void insert(AskBoard askBoard) throws Exception {
     try (PreparedStatement stmt =
         con.prepareStatement(
-            "insert into ask_board(title,content,view_cnt,member_no,use_secret,reply_dt)"
-                + "values(?,?,?,?,?,?)")) {
+            "insert into ask_board(title,content,view_cnt,member_no,use_secret)"
+                + " values(?,?,?,?,?)")) {
 
       stmt.setString(1, askBoard.getAskTitle());
       stmt.setString(2, askBoard.getAskContent());
@@ -36,7 +37,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
         stmt.setInt(4, askBoard.getAskCeoWriter().getCeoNo());
       }
       stmt.setInt(5, askBoard.getAskStatus());
-      stmt.setDate(6, null);
+
       if (stmt.executeUpdate() == 0) {
         throw new Exception("문의게시판 데이터 등록 실패!");
       }
@@ -46,10 +47,12 @@ public class MariadbAskBoardDao implements AskBoardDao {
   @Override
   public void insertreply(AskBoard askBoard) throws Exception {
     try (PreparedStatement stmt =
-        con.prepareStatement("insert into ask_board(reply_title, reply_content)"
-            + "values(?,?)")) {
+        con.prepareStatement("insert into ask_board_reply(reply_title, reply_content, ask_board_no)"
+            + " values(?,?,?)")) {
       stmt.setString(1, askBoard.getReply().getReplyTitle());
       stmt.setString(2, askBoard.getReply().getReplyContent());
+      stmt.setInt(3, askBoard.getAskNo());
+
       if (stmt.executeUpdate() == 0) {
         throw new Exception("문의게시판 답변 데이터 등록 실패!");
       }
@@ -58,11 +61,58 @@ public class MariadbAskBoardDao implements AskBoardDao {
 
   @Override
   public void update(AskBoard askBoard) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update ask_board set"
+            + " title=?,"
+            + " content=?"
+            + " where ask_board_no=?")) {
+
+      stmt.setString(1, askBoard.getAskTitle());
+      stmt.setString(2, askBoard.getAskContent());
+      stmt.setInt(3, askBoard.getAskNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("문의게시판 데이터 수정 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void updateViewCount(AskBoard askBoard) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update ask_board set"
+            + " view_cnt=?"
+            + " where ask_board_no=?")) {
+
+      stmt.setInt(1, askBoard.getAskVeiwCount());
+      stmt.setInt(2, askBoard.getAskNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("문의게시판 조회수 데이터 수정 실패!");
+      }
+    }
   }
 
   @Override
   public void delete(int no) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "delete from ask_board where ask_board_no=?");
+        PreparedStatement stmt2 = con.prepareStatement(
+            "delete from ask_board_reply where ask_board_no=?")) {
+
+      // 문의게시판 답변 먼저 삭제
+      stmt2.setInt(1, no);
+      stmt2.executeUpdate();
+
+      // 문의게시판 삭제
+      stmt.setInt(1, no);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("공지게시판 데이터 삭제 실패!");
+      }
+    }
   }
+
 
   @Override
   public List<AskBoard> findAll() throws Exception {
@@ -76,10 +126,14 @@ public class MariadbAskBoardDao implements AskBoardDao {
             + " m.status member_status,"
             + " ab.use_secret ask_status,"
             + " ab.create_dt,"
-            + " ab.view_cnt"
+            + " ab.view_cnt,"
+            + " abr.reply_title r_title,"
+            + " abr.reply_content r_content,"
+            + " abr.reply_dt r_dt"
             + " from"
             + " ask_board ab"
             + " left outer join member m on m.member_no=ab.member_no"
+            + " left outer join ask_board_reply abr on abr.ask_board_no=ab.ask_board_no"
             + " order by ab.ask_board_no asc");
         ResultSet rs = stmt.executeQuery()) {
 
@@ -93,6 +147,14 @@ public class MariadbAskBoardDao implements AskBoardDao {
         askBoard.setAskRegisteredDate(rs.getDate("create_dt"));
         askBoard.setAskVeiwCount(rs.getInt("view_cnt"));
         askBoard.setAskStatus(rs.getInt("ask_status"));
+
+        if (rs.getString("r_title") != null) {
+          Reply reply = new Reply();
+          reply.setReplyTitle(rs.getString("r_title"));
+          reply.setReplyContent(rs.getString("r_content"));
+          reply.setReplyRegisteredDate(rs.getDate("r_dt"));
+          askBoard.setReply(reply);
+        }
 
         Member member = new Member();
         CeoMember ceoMember = new CeoMember();
@@ -116,22 +178,6 @@ public class MariadbAskBoardDao implements AskBoardDao {
     }
   }
 
-  /*
-select
- ab.ask_board_no,
- ab.title,
- m.member_no,
- m.nickname,
- m.status,
- ab.create_dt,
- ab.view_cnt
- from
- ask_board ab
- left outer join member m on m.member_no=ab.member_no
- order by ab.ask_board_no desc
-   */
-
-
   @Override
   public AskBoard findByNo(int no) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
@@ -144,10 +190,14 @@ select
             + " m.status member_status,"
             + " ab.use_secret ask_status,"
             + " ab.create_dt,"
-            + " ab.view_cnt"
+            + " ab.view_cnt,"
+            + " abr.reply_title r_title,"
+            + " abr.reply_content r_content,"
+            + " abr.reply_dt r_dt"
             + " from"
             + " ask_board ab"
             + " left outer join member m on m.member_no=ab.member_no"
+            + " left outer join ask_board_reply abr on abr.ask_board_no=ab.ask_board_no"
             + " where ab.ask_board_no=" + no
             + " order by ab.ask_board_no asc");
         ResultSet rs = stmt.executeQuery()) {
@@ -163,6 +213,14 @@ select
       askBoard.setAskRegisteredDate(rs.getDate("create_dt"));
       askBoard.setAskVeiwCount(rs.getInt("view_cnt"));
       askBoard.setAskStatus(rs.getInt("ask_status"));
+
+      if (rs.getString("r_title") != null) {
+        Reply reply = new Reply();
+        reply.setReplyTitle(rs.getString("r_title"));
+        reply.setReplyContent(rs.getString("r_content"));
+        reply.setReplyRegisteredDate(rs.getDate("r_dt"));
+        askBoard.setReply(reply);
+      }
 
       Member member = new Member();
       CeoMember ceoMember = new CeoMember();

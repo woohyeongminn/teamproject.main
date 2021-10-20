@@ -119,7 +119,7 @@ public class MariadbCafeDao implements CafeDao {
   public Cafe findByCafeNo(int cafeNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name, sh.date, c.operating_status_no, c.ceo_member_no,"
+            + " c.view_cnt, sp.name photo_name, sh.date, c.operating_status_no, c.ceo_member_no,"
             + " cm.bossname, cm.license_no"
             + " from studycafe c"
             + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
@@ -163,7 +163,7 @@ public class MariadbCafeDao implements CafeDao {
   public Cafe findByCafeNoMember(int cafeNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name, sh.date, c.operating_status_no"
+            + " c.view_cnt, sp.name photo_name, sh.date, c.operating_status_no"
             + " from studycafe c"
             + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
             + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
@@ -200,7 +200,7 @@ public class MariadbCafeDao implements CafeDao {
   public Cafe findByCeoMember(int ceoNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name, sh.date, c.operating_status_no, c.ceo_member_no,"
+            + " c.view_cnt, sp.name photo_name, sh.date, c.operating_status_no, c.ceo_member_no,"
             + " cm.bossname, cm.license_no"
             + " from studycafe c"
             + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"

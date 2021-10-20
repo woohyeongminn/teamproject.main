@@ -6,7 +6,6 @@ import com.ogong.pms.domain.AskBoard;
 public interface AskBoardDao {
 
   void insert(AskBoard askBoard) throws Exception;
-  void insertreply(AskBoard askBoard) throws Exception;
   void update(AskBoard askBoard) throws Exception;
   void delete(int no) throws Exception;
   List<AskBoard> findAll() throws Exception;
@@ -14,6 +13,9 @@ public interface AskBoardDao {
   AskBoard findByPerAskBoard(int askNo, int perMemberNo) throws Exception;
   AskBoard findByCeoAskBoard(int askNo, int ceoMemberNo) throws Exception;
 
+
+  void insertreply(AskBoard askBoard) throws Exception;
+  void updateViewCount(AskBoard askBoard) throws Exception;
 
   //AskBoard findByNickName(String inputNick) throws Exception;
   //AskBoard findByEmail(String inputEmail) throws Exception;

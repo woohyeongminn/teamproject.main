@@ -155,7 +155,8 @@ CREATE TABLE studycafe_review (
   studycafe_rsv_no INTEGER      NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
   content          VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   grade            INTEGER      NOT NULL COMMENT '평점', -- 평점
-  create_dt        DATE         NOT NULL DEFAULT curdate() COMMENT '등록일' -- 등록일
+  create_dt        DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
+  status           INTEGER      NOT NULL DEFAULT 1 COMMENT '상태' -- 상태
 )
 COMMENT '리뷰';
 
@@ -197,7 +198,7 @@ CREATE TABLE studycafe_reservation (
   rsv_dt           DATETIME NOT NULL DEFAULT now() COMMENT '예약일', -- 예약일
   using_dt         DATE     NOT NULL COMMENT '이용날짜', -- 이용날짜
   start_time       TIME     NOT NULL COMMENT '시작시간', -- 시작시간
-  using_time       TIME     NOT NULL COMMENT '이용시간', -- 이용시간
+  using_time       INTEGER  NOT NULL COMMENT '이용시간', -- 이용시간
   people           INTEGER  NOT NULL DEFAULT 1 COMMENT '사용인원수', -- 사용인원수
   total_price      INTEGER  NOT NULL COMMENT '총금액', -- 총금액
   rsv_status_no    INTEGER  NOT NULL COMMENT '예약상태번호', -- 예약상태번호
@@ -394,8 +395,8 @@ ALTER TABLE study_todolist
 
 -- 스터디분야
 CREATE TABLE study_subject (
-  subject_no INTEGER     NOT NULL COMMENT '스터디카테고리번호', -- 스터디카테고리번호
-  name       VARCHAR(50) NOT NULL COMMENT '카테고리명' -- 카테고리명
+  subject_no INTEGER     NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
+  name       VARCHAR(50) NOT NULL COMMENT '스터디과목명' -- 스터디과목명
 )
 COMMENT '스터디분야';
 
@@ -403,13 +404,13 @@ COMMENT '스터디분야';
 ALTER TABLE study_subject
   ADD CONSTRAINT PK_study_subject -- 스터디분야 기본키
     PRIMARY KEY (
-      subject_no -- 스터디카테고리번호
+      subject_no -- 스터디과목번호
     );
 
 -- 스터디분야 유니크 인덱스
 CREATE UNIQUE INDEX UIX_study_subject
   ON study_subject ( -- 스터디분야
-    name ASC -- 카테고리명
+    name ASC -- 스터디과목명
   );
 
 -- 한스터디여러지역
@@ -596,7 +597,7 @@ ALTER TABLE study_board
 CREATE TABLE study (
   study_no      INTEGER     NOT NULL COMMENT '스터디번호', -- 스터디번호
   name          VARCHAR(50) NOT NULL COMMENT '스터디명', -- 스터디명
-  subject_no    INTEGER     NOT NULL COMMENT '스터디카테고리번호', -- 스터디카테고리번호
+  subject_no    INTEGER     NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
   no_people     INTEGER     NOT NULL COMMENT '인원수', -- 인원수
   face_no       INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
   introduction  TEXT        NOT NULL COMMENT '소개글', -- 소개글
@@ -769,9 +770,11 @@ ALTER TABLE study_board_like
 
 -- 답변
 CREATE TABLE ask_board_reply (
-  reply_no     INTEGER     NOT NULL COMMENT '답변번호', -- 답변번호
-  admin_no     VARCHAR(50) NOT NULL COMMENT '관리자번호', -- 관리자번호
-  ask_board_no INTEGER     NOT NULL COMMENT '문의게시판번호' -- 문의게시판번호
+  reply_no      INTEGER      NOT NULL COMMENT '답변번호', -- 답변번호
+  ask_board_no  INTEGER      NOT NULL COMMENT '문의게시판번호', -- 문의게시판번호
+  reply_title   VARCHAR(255) NULL     COMMENT '답변제목', -- 답변제목
+  reply_content VARCHAR(255) NULL     COMMENT '답변내용', -- 답변내용
+  reply_dt      DATETIME     NULL     DEFAULT now() COMMENT '답변일' -- 답변일
 )
 COMMENT '답변';
 
@@ -787,16 +790,13 @@ ALTER TABLE ask_board_reply
 
 -- 문의게시판
 CREATE TABLE ask_board (
-  ask_board_no  INTEGER      NOT NULL COMMENT '문의게시판번호', -- 문의게시판번호
-  member_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  view_cnt      INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  create_dt     DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
-  use_secret    INTEGER      NOT NULL COMMENT '비밀글', -- 비밀글
-  reply_title   VARCHAR(255) NULL     COMMENT '답변제목', -- 답변제목
-  reply_content VARCHAR(255) NULL     COMMENT '답변내용', -- 답변내용
-  reply_dt      DATETIME     NULL     DEFAULT now() COMMENT '답변일' -- 답변일
+  ask_board_no INTEGER      NOT NULL COMMENT '문의게시판번호', -- 문의게시판번호
+  member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  title        VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content      VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  view_cnt     INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+  create_dt    DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
+  use_secret   INTEGER      NOT NULL COMMENT '비밀글' -- 비밀글
 )
 COMMENT '문의게시판';
 
@@ -850,7 +850,7 @@ CREATE TABLE member (
   password   VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호
   tel        VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo      VARCHAR(255) NULL     COMMENT '사진', -- 사진
-  created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '가입일', -- 가입일
+  created_dt DATE         NULL     DEFAULT curdate() COMMENT '가입일', -- 가입일
   status     INTEGER      NOT NULL COMMENT '상태', -- 상태
   active     INTEGER      NULL     DEFAULT 1 COMMENT '탈퇴' -- 탈퇴
 )
@@ -1144,10 +1144,10 @@ ALTER TABLE study_board
 ALTER TABLE study
   ADD CONSTRAINT FK_study_subject_TO_study -- 스터디분야 -> 스터디
     FOREIGN KEY (
-      subject_no -- 스터디카테고리번호
+      subject_no -- 스터디과목번호
     )
     REFERENCES study_subject ( -- 스터디분야
-      subject_no -- 스터디카테고리번호
+      subject_no -- 스터디과목번호
     );
 
 -- 스터디
@@ -1250,16 +1250,6 @@ ALTER TABLE ask_board_reply
     )
     REFERENCES ask_board ( -- 문의게시판
       ask_board_no -- 문의게시판번호
-    );
-
--- 답변
-ALTER TABLE ask_board_reply
-  ADD CONSTRAINT FK_admin_TO_ask_board_reply -- 관리자 -> 답변
-    FOREIGN KEY (
-      admin_no -- 관리자번호
-    )
-    REFERENCES admin ( -- 관리자
-      admin_no -- 관리자번호
     );
 
 -- 문의게시판
