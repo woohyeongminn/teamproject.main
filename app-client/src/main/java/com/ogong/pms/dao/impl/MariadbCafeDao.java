@@ -1,8 +1,10 @@
 package com.ogong.pms.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Member;
 
 public class MariadbCafeDao implements CafeDao {
@@ -80,10 +83,6 @@ public class MariadbCafeDao implements CafeDao {
     }
   }
 
-  public List<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception {
-    return null;
-  }
-
   @Override
   public List<Cafe> findCafeListByLocation(String input) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
@@ -120,10 +119,12 @@ public class MariadbCafeDao implements CafeDao {
   public Cafe findByCafeNo(int cafeNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name, sh.date, c.operating_status_no"
+            + " c.view_cnt, sp.name, sh.date, c.operating_status_no, c.ceo_member_no,"
+            + " cm.bossname, cm.license_no"
             + " from studycafe c"
             + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
             + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
+            + " join ceo_member cm on c.ceo_member_no=cm.ceo_member_no"
             + " where c.cafe_no = ?")) {
 
       stmt.setInt(1, cafeNo);
@@ -146,6 +147,12 @@ public class MariadbCafeDao implements CafeDao {
         cafe.setMainImg(rs.getString("sp.name"));
         cafe.setHoliday(rs.getString("date"));
         cafe.setCafeStatus(rs.getInt("operating_status_no"));
+
+        CeoMember ceoMember = new CeoMember();
+        ceoMember.setCeoNo(rs.getInt("ceo_member_no"));
+        ceoMember.setCeoBossName(rs.getString("bossname"));
+        ceoMember.setCeoLicenseNo(rs.getString("license_no"));
+        cafe.setCeoMember(ceoMember);
 
         return cafe;
       }
@@ -190,14 +197,100 @@ public class MariadbCafeDao implements CafeDao {
   }
 
   @Override
-  public void insertCafe(Cafe cafe) throws Exception {
-    //    requestAgent.request("cafe.insert", cafe);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 장소 등록 실패하였습니다.");
-    //    } else {
-    //      System.out.println(" >> 등록되었습니다.");
-    //    }
+  public Cafe findByCeoMember(int ceoNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
+            + " c.view_cnt, sp.name, sh.date, c.operating_status_no, c.ceo_member_no,"
+            + " cm.bossname, cm.license_no"
+            + " from studycafe c"
+            + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
+            + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
+            + " join ceo_member cm on c.ceo_member_no=cm.ceo_member_no"
+            + " where c.ceo_member_no = ? and c.operating_status_no !=4")) {
+
+      stmt.setInt(1, ceoNo);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+
+        Cafe cafe = new Cafe();
+
+        cafe.setNo(rs.getInt("cafe_no"));
+        cafe.setName(rs.getString("name"));
+        cafe.setInfo(rs.getString("info"));
+        cafe.setLocation(rs.getString("location"));
+        cafe.setPhone(rs.getString("phone"));
+        cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
+        cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
+        cafe.setViewCount(rs.getInt("view_cnt"));
+        cafe.setMainImg(rs.getString("sp.name"));
+        cafe.setHoliday(rs.getString("date"));
+        cafe.setCafeStatus(rs.getInt("operating_status_no"));
+
+        CeoMember ceoMember = new CeoMember();
+        ceoMember.setCeoNo(rs.getInt("ceo_member_no"));
+        ceoMember.setCeoBossName(rs.getString("bossname"));
+        ceoMember.setCeoLicenseNo(rs.getString("license_no"));
+        cafe.setCeoMember(ceoMember);
+
+        return cafe;
+      }
+    }
+  }
+
+  @Override
+  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into studycafe("
+            + " name,info,location,phone,open_time,close_time,ceo_member_no,operating_status_no)"
+            + " values(?,?,?,?,?,?,?,1)",
+            Statement.RETURN_GENERATED_KEYS)) {
+
+      stmt.setString(1, cafe.getName());
+      stmt.setString(2, cafe.getInfo());
+      stmt.setString(3, cafe.getLocation());
+      stmt.setString(4, cafe.getPhone());
+      stmt.setTime(5, Time.valueOf(cafe.getOpenTime()));
+      stmt.setTime(6, Time.valueOf(cafe.getCloseTime()));
+      stmt.setInt(7, cafe.getCeoMember().getCeoNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("카페 등록 실패!");
+      }
+
+      int cafeNo = 0;
+      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
+        if (pkRS.next()) {
+          cafeNo = pkRS.getInt("cafe_no");
+        }
+      }
+
+      if (!fileNames.isEmpty()) {
+        try (PreparedStatement stmt2 = con.prepareStatement(
+            "insert into studycafe_photo(name, cafe_no) values(?,?)")) {
+          for (String fileName : fileNames) {
+            stmt2.setString(1, fileName);
+            stmt2.setInt(2, cafeNo);
+            stmt2.executeUpdate();
+          }
+        }
+      }
+
+      if (!holidays.isEmpty()) {
+        try (PreparedStatement stmt3 = con.prepareStatement(
+            "insert into studycafe_holiday(cafe_no, date) values(?,?)")) {
+          for (Date date : holidays) {
+            stmt3.setInt(1, cafeNo);
+            stmt3.setDate(2, date);
+            stmt3.executeUpdate();
+          }
+        }
+      }
+
+      System.out.println(" >> 카페 등록 완료!");
+    }
   }
 
   @Override
@@ -243,12 +336,10 @@ public class MariadbCafeDao implements CafeDao {
   @Override
   public List<CafeReview> getCafeReviewList() throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no, m.member_no"
+        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no, rs.per_member_no"
             + " from studycafe_review r"
             + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
-            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
-            + " join per_member pm on rs.per_member_no=pm.per_member_no"
-            + " join member m on pm.member_no=m.member_no");
+            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no");
 
         ResultSet rs = stmt.executeQuery()) {
 
@@ -258,7 +349,7 @@ public class MariadbCafeDao implements CafeDao {
         CafeReview cafeReview = new CafeReview();
 
         Member member = new Member();
-        member.setPerNo(rs.getInt("member_no"));
+        member.setPerNo(rs.getInt("per_member_no"));
         cafeReview.setMember(member);
 
         cafeReview.setReviewNo(rs.getInt("review_no"));
@@ -323,9 +414,7 @@ public class MariadbCafeDao implements CafeDao {
             + " from studycafe_review r"
             + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
             + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
-            + " join per_member pm on rs.per_member_no=pm.per_member_no"
-            + " join member m on pm.member_no=m.member_no"
-            + " where m.member_no=?")) {
+            + " where rs.per_member_no=?")) {
 
       stmt.setInt(1, memberNo);
 
@@ -354,16 +443,37 @@ public class MariadbCafeDao implements CafeDao {
 
   @Override
   public CafeReview findByReviewNo(int reviewNo) throws Exception {
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("reviewNo", String.valueOf(reviewNo));
-    //    requestAgent.request("cafeReview.selectOne", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 해당 번호의 리뷰가 존재하지 않습니다.");
-    //    } else {
-    //    }
-    //    return requestAgent.getObject(CafeReview.class);
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no, rs.per_member_no"
+            + " from studycafe_review r"
+            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
+            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
+            + " where r.review_no=" + reviewNo);
+
+        ResultSet rs = stmt.executeQuery()) {
+
+      while(!rs.next()) {
+        return null;
+      }
+
+      CafeReview cafeReview = new CafeReview();
+
+      Member member = new Member();
+      member.setPerNo(rs.getInt("per_member_no"));
+      cafeReview.setMember(member);
+
+      cafeReview.setReviewNo(rs.getInt("review_no"));
+      cafeReview.setContent(rs.getString("content"));
+      cafeReview.setGrade(rs.getInt("grade"));
+      cafeReview.setRegisteredDate(rs.getDate("create_dt"));
+      cafeReview.setReviewStatus(rs.getInt("status"));
+
+      Cafe cafe = new Cafe();
+      cafe.setNo(rs.getInt("cafe_no"));
+      cafeReview.setCafe(cafe);
+
+      return cafeReview;
+    }
   }
 
   @Override
@@ -486,8 +596,10 @@ public class MariadbCafeDao implements CafeDao {
             cafeRoom.setRoomPrice(rs.getInt("hourly_amount"));
           }
 
-          if (rs.getString("photo_name") != null) {
-            cafeRoom.getRoomImgs().put(rs.getInt("photo_no"), rs.getString("photo_name"));
+          String photoName = rs.getString("photo_name");
+
+          if (photoName != null) {
+            cafeRoom.getRoomImgs().put(rs.getInt("photo_no"), photoName);
           }
         }
         return cafeRoom;
@@ -596,8 +708,7 @@ public class MariadbCafeDao implements CafeDao {
             + " join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no"
             + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
             + " join studycafe c on sr.cafe_no=c.cafe_no"
-            + " join per_member pm on rs.per_member_no=pm.per_member_no"
-            + " where pm.member_no=" + memberNo
+            + " where rs.per_member_no=" + memberNo
             + " order by rs.studycafe_rsv_no asc");
 
         ResultSet rs = stmt.executeQuery()) {
@@ -643,18 +754,58 @@ public class MariadbCafeDao implements CafeDao {
   }
 
   @Override
-  public List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo) throws Exception {
-    //    HashMap<String, String> params = new HashMap<>();
-    //    params.put("ceoNo", String.valueOf(ceoNo));
-    //    params.put("cafeNo", String.valueOf(cafeNo));
-    //    requestAgent.request("cafeReservation.selectListByCeoMember", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 예약 목록 조회를 실패하였습니다.");
-    //      return null;
-    //    }
-    //    return new ArrayList<>(requestAgent.getObjects(CafeReservation.class));
-    return null;
+  public List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select rs.studycafe_rsv_no, rs.studyroom_no, rs.per_member_no, rs.rsv_dt, rs.using_dt,"
+            + " rs.start_time, rs.using_time, rs.people, rs.total_price, rs.review, rst.rsv_status_no,"
+            + " rst.rsv_name, c.cafe_no, c.name cafe_name"
+            + " from studycafe_reservation rs"
+            + " join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no"
+            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
+            + " join studycafe c on sr.cafe_no=c.cafe_no"
+            + " where c.ceo_member_no=" + ceoNo
+            + " order by rs.studycafe_rsv_no asc");
+
+        ResultSet rs = stmt.executeQuery()) {
+
+      ArrayList<CafeReservation> list = new ArrayList<>();
+
+      while(rs.next()) {
+        CafeReservation cafeReservation = new CafeReservation();
+
+        cafeReservation.setReservationNo(rs.getInt("studycafe_rsv_no"));
+        cafeReservation.setRoomNo(rs.getInt("studyroom_no"));
+
+        Member member = new Member();
+        member.setPerNo(rs.getInt("per_member_no"));
+        cafeReservation.setMember(member);
+
+        cafeReservation.setReservationDate(rs.getDate("rsv_dt"));
+        cafeReservation.setUseDate(rs.getDate("using_dt"));
+        cafeReservation.setStartTime(rs.getTime("start_time").toLocalTime());
+        cafeReservation.setUseTime(rs.getInt("using_time"));
+        cafeReservation.setUseMemberNumber(rs.getInt("people"));
+        cafeReservation.setTotalPrice(rs.getInt("total_price"));
+
+        int review = rs.getInt("review");
+        boolean isReview = false;
+        if (review == 2) {
+          isReview = true;
+        }
+        cafeReservation.setWirteReview(isReview);
+        cafeReservation.setReservationStatus(rs.getInt("rsv_status_no"));
+        cafeReservation.setReservationStatusName(rs.getString("rsv_name"));
+
+        Cafe cafe = new Cafe();
+        cafe.setNo(rs.getInt("cafe_no"));
+        cafe.setName(rs.getString("cafe_name"));
+        cafeReservation.setCafe(cafe);
+
+        list.add(cafeReservation);
+      }
+
+      return list;
+    }
   }
 
   @Override
@@ -667,8 +818,7 @@ public class MariadbCafeDao implements CafeDao {
             + " join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no"
             + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
             + " join studycafe c on sr.cafe_no=c.cafe_no"
-            + " join per_member pm on rs.per_member_no=pm.per_member_no"
-            + " where pm.member_no=? and rs.studycafe_rsv_no=?"
+            + " where rs.per_member_no=? and rs.studycafe_rsv_no=?"
             + " order by rs.studycafe_rsv_no asc");) {
 
       stmt.setInt(1, memberNo);
@@ -761,4 +911,6 @@ public class MariadbCafeDao implements CafeDao {
       }
     }
   }
+
+
 }

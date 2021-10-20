@@ -59,7 +59,7 @@ public class CeoUpdateHandler implements Command {
         ceoEmail = Prompt.inputString(" 이메일(" + ceoMember.getCeoEmail() + ") : ");
         break;
       case 6:
-        ceoPassword = Prompt.inputString(" 비밀번호(" + ceoMember.getCeoPassword() + ") : ");
+        ceoPassword = Prompt.inputString(" 비밀번호 : ");
         break;
       case 0: return;
       default : 

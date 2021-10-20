@@ -1,5 +1,7 @@
 package com.ogong.pms.dao;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
@@ -12,11 +14,12 @@ public interface CafeDao {
 
   List<Cafe> getCafeList() throws Exception;
   List<Cafe> getCafeListByMember() throws Exception;
-  List<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception;
+  //  List<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception;
   List<Cafe> findCafeListByLocation(String input) throws Exception;
   Cafe findByCafeNo(int cafeNo) throws Exception;
   Cafe findByCafeNoMember(int cafeNo) throws Exception;
-  void insertCafe(Cafe cafe) throws Exception;
+  Cafe findByCeoMember(int ceoNo) throws Exception;
+  void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays) throws Exception;
   void updateCafe(Cafe cafe) throws Exception;
   void updateCafeStatusToGENERAL(Cafe cafe) throws Exception;
   void deleteCafe(Cafe cafe) throws Exception;
@@ -43,7 +46,7 @@ public interface CafeDao {
 
   List<CafeReservation> getCafeReservationList() throws Exception;
   List<CafeReservation> findReservationListByMember(int memberNo) throws Exception;
-  List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo) throws Exception;
+  List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception;
   CafeReservation findReservationByMember(int memberNo, int reserNo) throws Exception;
   void insertReservation(CafeReservation cafeReservation) throws Exception;
   void updateWirteReview(int reservationNo) throws Exception;

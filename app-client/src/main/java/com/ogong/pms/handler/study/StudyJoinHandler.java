@@ -53,7 +53,7 @@ public class StudyJoinHandler implements Command {
       return;
     }
     study.getWatingMember().add(member);
-    study.setStatus(1);
+    //study.setStatus(1);
 
     studyDao.insertGuilder(study,member);
 

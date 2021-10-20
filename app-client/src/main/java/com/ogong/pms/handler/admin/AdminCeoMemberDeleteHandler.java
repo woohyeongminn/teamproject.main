@@ -42,7 +42,7 @@ public class AdminCeoMemberDeleteHandler implements Command {
     }
 
     // 회원 삭제
-    ceoMemberDao.update(ceoMember);
+    ceoMemberDao.updateActive(ceoMember);
 
     // 카페삭제
     //    requestAgent.request("cafe.selectList", null);

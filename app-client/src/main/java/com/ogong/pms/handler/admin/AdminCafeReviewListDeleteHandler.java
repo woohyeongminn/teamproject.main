@@ -28,7 +28,7 @@ public class AdminCafeReviewListDeleteHandler implements Command{
       return;
     }
 
-    if (cafeReview.getReviewStatus() == 1) {
+    if (cafeReview.getReviewStatus() == 2) {
       System.out.println(" >> 이미 삭제된 리뷰입니다.");
       return;
     }
@@ -41,5 +41,6 @@ public class AdminCafeReviewListDeleteHandler implements Command{
     }
 
     cafeDao.deleteCafeReview(userReviewNo);
+    System.out.println(" >> 리뷰 삭제를 완료하였습니다.");
   }
 }

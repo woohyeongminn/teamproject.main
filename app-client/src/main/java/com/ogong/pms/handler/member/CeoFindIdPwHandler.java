@@ -37,13 +37,13 @@ public class CeoFindIdPwHandler implements Command {
     System.out.println("▶ 이메일 찾기");
 
     System.out.println();
-    String inputNick =  Prompt.inputString(" 이름 : ");
+    String inputName =  Prompt.inputString(" 이름 : ");
 
-    CeoMember ceoMember = ceoMemberDao.findByNickName(inputNick);
+    CeoMember ceoMember = ceoMemberDao.findByName(inputName);
 
     if (ceoMember != null) {
       System.out.println();
-      System.out.printf(" '%s님'의 이메일 >> ", ceoMember.getCeoBossName());
+      System.out.printf(" '%s님'의 이메일 >> ", ceoMember.getCeoName());
       System.out.println(ceoMember.getCeoEmail());
 
     } else {
@@ -78,9 +78,9 @@ public class CeoFindIdPwHandler implements Command {
         System.out.println(" >> 처리 중입니다. 잠시만 기다려 주세요.");
         sendMail.sendMail(inputEmail, pw);
         System.out.println();
-        System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", ceoMember.getCeoPassword());
+        System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", ceoMember.getCeoNickname());
         System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
-        ceoMemberDao.update(ceoMember);
+        ceoMemberDao.updatePassword(ceoMember);
         return;
 
       } else {

@@ -1,5 +1,6 @@
 package com.ogong.pms.dao.impl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,16 +90,16 @@ public class NetCafeDao implements CafeDao {
     return requestAgent.getObject(Cafe.class);
   }
 
-  @Override
-  public void insertCafe(Cafe cafe) throws Exception {
-    requestAgent.request("cafe.insert", cafe);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 장소 등록 실패하였습니다.");
-    } else {
-      System.out.println(" >> 등록되었습니다.");
-    }
-  }
+  //  @Override
+  //  public void insertCafe(Cafe cafe) throws Exception {
+  //    requestAgent.request("cafe.insert", cafe);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      System.out.println(" >> 장소 등록 실패하였습니다.");
+  //    } else {
+  //      System.out.println(" >> 등록되었습니다.");
+  //    }
+  //  }
 
   @Override
   public void updateCafe(Cafe cafe) throws Exception {
@@ -300,19 +301,19 @@ public class NetCafeDao implements CafeDao {
     return new ArrayList<>(requestAgent.getObjects(CafeReservation.class));
   }
 
-  @Override
-  public List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("ceoNo", String.valueOf(ceoNo));
-    params.put("cafeNo", String.valueOf(cafeNo));
-    requestAgent.request("cafeReservation.selectListByCeoMember", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 예약 목록 조회를 실패하였습니다.");
-      return null;
-    }
-    return new ArrayList<>(requestAgent.getObjects(CafeReservation.class));
-  }
+  //  @Override
+  //  public List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo) throws Exception {
+  //    HashMap<String, String> params = new HashMap<>();
+  //    params.put("ceoNo", String.valueOf(ceoNo));
+  //    params.put("cafeNo", String.valueOf(cafeNo));
+  //    requestAgent.request("cafeReservation.selectListByCeoMember", params);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      System.out.println(" >> 예약 목록 조회를 실패하였습니다.");
+  //      return null;
+  //    }
+  //    return new ArrayList<>(requestAgent.getObjects(CafeReservation.class));
+  //  }
 
   @Override
   public CafeReservation findReservationByMember(int memberNo, int reserNo) throws Exception {
@@ -378,5 +379,24 @@ public class NetCafeDao implements CafeDao {
   public void updateCafeStatusToGENERAL(Cafe cafe) throws Exception {
     // TODO Auto-generated method stub
 
+  }
+
+  @Override
+  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays)
+      throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public Cafe findByCeoMember(int ceoNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

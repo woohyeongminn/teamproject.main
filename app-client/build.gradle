@@ -29,6 +29,9 @@ repositories {
 //    등록한 라이브러를 자동으로 다운로드 받는다.
 // => 이렇게 다운로드 받은 라이브러리는 컴파일하거나 실행할 때 사용된다.
 dependencies {
+    
+    // Mybatis
+    implementation 'org.mybatis:mybatis:3.5.7'
     // MariaDB JDBC 드라이버
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.4'
 

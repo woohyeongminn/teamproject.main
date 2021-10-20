@@ -1,5 +1,6 @@
 package com.ogong.pms.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,14 +17,14 @@ public class Study {
   private String faceName;              // 대면/비대면
   private String introduction;       // 소개글
   private Date registeredDate;       // 스터디 가입일
-  private List<Member> members;     //  참여중인 구성원
-  private List<Member> watingMember; // 참여승인을 기다리는 회원
+  private List<Member> members = new ArrayList<>();     //  참여중인 구성원
+  private List<Member> watingMember = new ArrayList<>(); // 참여승인을 기다리는 회원
   private int status; // 구성원 상태
-  private List<Member> bookMarkMember; // 북마크한 회원
+  private List<Member> bookMarkMember = new ArrayList<>(); // 북마크한 회원
 
-  private List<Calender> myStudyCalender;  // 내 스터디 캘린더
-  private List<FreeBoard> myStudyFreeBoard; // 내 스터디 자유 게시판
-  private List<ToDo> myStudyToDo; // 내 스터디 투두리스트
+  private List<Calender> myStudyCalender = new ArrayList<>();  // 내 스터디 캘린더
+  private List<FreeBoard> myStudyFreeBoard = new ArrayList<>(); // 내 스터디 자유 게시판
+  private List<ToDo> myStudyToDo = new ArrayList<>(); // 내 스터디 투두리스트
 
 
   @Override

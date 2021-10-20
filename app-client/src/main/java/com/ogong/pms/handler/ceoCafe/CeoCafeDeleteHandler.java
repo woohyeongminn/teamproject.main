@@ -43,6 +43,8 @@ public class CeoCafeDeleteHandler implements Command {
     cafe.setCafeStatus(DELETE);
 
     cafeDao.deleteCafe(cafe);
+
+    System.out.println(" >> 삭제가 완료되었습니다.");
   }
 
 

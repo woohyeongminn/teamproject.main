@@ -1,6 +1,9 @@
 package com.ogong.pms.domain;
 
+import java.sql.Date;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cafe {
 
@@ -13,12 +16,14 @@ public class Cafe {
   private CeoMember ceoMember; // 사장
   private String name; // 상호명
   private String mainImg; //카페 썸네일 이미지
+  private Map<Integer, String> cafeImgs = new HashMap<>(); // 카페 이미지들
   private String info; // 소개글
   private String location; // 주소
   private String phone; // 전화번호
   private LocalTime openTime; // 오픈시간
   private LocalTime closeTime; // 마감시간
   private String holiday; // 휴무일
+  private Map<Integer, Date> cafeHolidays = new HashMap<>(); // 카페 휴무일들
   private int viewCount; // 조회수
   private int bookable; // 예약가능인원(개인좌석)
   private int timePrice; // 시간당금액(개인좌석)
@@ -27,10 +32,10 @@ public class Cafe {
   @Override
   public String toString() {
     return "Cafe [no=" + no + ", ceoMember=" + ceoMember + ", name=" + name + ", mainImg=" + mainImg
-        + ", info=" + info + ", location=" + location + ", phone=" + phone + ", openTime="
-        + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday + ", viewCount="
-        + viewCount + ", bookable=" + bookable + ", timePrice=" + timePrice + ", cafeStatus="
-        + cafeStatus + "]";
+        + ", cafeImgs=" + cafeImgs + ", info=" + info + ", location=" + location + ", phone="
+        + phone + ", openTime=" + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday
+        + ", cafeHolidays=" + cafeHolidays + ", viewCount=" + viewCount + ", bookable=" + bookable
+        + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus + "]";
   }
 
   public int getNo() {
@@ -143,5 +148,21 @@ public class Cafe {
 
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
+  }
+
+  public Map<Integer, String> getCafeImgs() {
+    return cafeImgs;
+  }
+
+  public void setCafeImgs(Map<Integer, String> cafeImgs) {
+    this.cafeImgs = cafeImgs;
+  }
+
+  public Map<Integer, Date> getCafeHolidays() {
+    return cafeHolidays;
+  }
+
+  public void setCafeHolidays(Map<Integer, Date> cafeHolidays) {
+    this.cafeHolidays = cafeHolidays;
   }
 }
