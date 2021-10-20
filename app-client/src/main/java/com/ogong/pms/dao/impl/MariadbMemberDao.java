@@ -116,12 +116,60 @@ public class MariadbMemberDao implements MemberDao {
 
   @Override
   public Member findByNickName(String inputNick) throws Exception {
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select pm.per_member_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
+            + " from member m" + " join per_member pm on m.member_no=pm.member_no"
+            + " where nickname=?")) {
+
+      stmt.setString(1, inputNick);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+
+        Member member = new Member();
+        member.setPerNo(rs.getInt("member_no"));
+        member.setPerName(rs.getString("name"));
+        member.setPerNickname(rs.getString("nickname"));
+        member.setPerEmail(rs.getString("email"));
+        member.setPerTel(rs.getString("tel"));
+        member.setPerPhoto(rs.getString("photo"));
+        member.setPerRegisteredDate(rs.getDate("created_dt"));
+        member.setActive(rs.getInt("active"));
+        member.setPerStatus(rs.getInt("status"));
+        return member;
+      }
+    }
   }
 
   @Override
   public Member findByEmail(String inputEmail) throws Exception {
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select pm.per_member_no per_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
+            + " from member m" + " join per_member pm on m.member_no=pm.member_no"
+            + " where email=?")) {
+
+      stmt.setString(1, inputEmail);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next()) {
+          return null;
+        }
+
+        Member member = new Member();
+        member.setPerNo(rs.getInt("per_no"));
+        member.setPerName(rs.getString("name"));
+        member.setPerNickname(rs.getString("nickname"));
+        member.setPerEmail(rs.getString("email"));
+        member.setPerTel(rs.getString("tel"));
+        member.setPerPhoto(rs.getString("photo"));
+        member.setPerRegisteredDate(rs.getDate("created_dt"));
+        member.setActive(rs.getInt("active"));
+        member.setPerStatus(rs.getInt("status"));
+        return member;
+      }
+    }
   }
 
   @Override
@@ -227,8 +275,10 @@ public class MariadbMemberDao implements MemberDao {
   @Override
   public void updatePassword(Member member) throws Exception {
     try (PreparedStatement stmt =
-        con.prepareStatement("update member set" + " password=?" + " where member_no="
-            + "(select member_no from per_member where per_member_no=?)")) {
+        con.prepareStatement("update member set" 
+            + " password=password(?)" 
+            + " where member_no="
+            + " (select member_no from per_member where per_member_no=?)")) {
 
       stmt.setString(1, member.getPerPassword());
       stmt.setInt(2, member.getPerNo());

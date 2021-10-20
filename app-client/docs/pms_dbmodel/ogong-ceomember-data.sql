@@ -1,5 +1,4 @@
 -- 회원 test 값
--------------------------------------------------------------------------------------------------
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status) 
 values(7, '김사장', '김사장카페', 'cafe1@test.com', password('c1'), '010-1111-0000',
 'cafe1.gif', '2020-02-02', 2);
@@ -19,6 +18,8 @@ values(10, '조사장', '조사장카페', 'cafe4@test.com', password('c4'), '01
 insert into member(member_no, name, nickname, email, password, tel, photo, status) 
 values(11, '반사장', '반사장카페', 'cafe5@test.com', password('c5'), '010-5555-0000', 
 'cafe5.gif', 2);
+
+-------------------------------------------------------------------------------------------------
 
 -- 사장회원 test 값
 insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
