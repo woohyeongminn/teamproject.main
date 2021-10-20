@@ -28,12 +28,12 @@ public class CeoReservationRejectHandler implements Command {
     for (CafeReservation cafeReservation : cafeReservationList) {
       if (cafeReservation.getReservationNo() == reservationNo) {
         Date today = new Date(System.currentTimeMillis());
-        Date reserDate = cafeReservation.getReservationDate();
+        Date reserDate = cafeReservation.getUseDate();
 
-        if (cafeReservation.getReservationStatus() == 2) {
+        if (cafeReservation.getReservationStatus() == 3) {
           System.out.println(" >> 이미 취소 된 예약입니다.");
           return;
-        } else if (cafeReservation.getReservationStatus() == 4) {
+        } else if (cafeReservation.getReservationStatus() == 5) {
           System.out.println(" >> 이미 거절 한 예약입니다.");
           return;
         }
@@ -46,9 +46,9 @@ public class CeoReservationRejectHandler implements Command {
             System.out.println(" >> 예약 거절을 취소합니다.");
             return;
           }
-          //          cafeReservation.setReservationStatus(4);
+          //          cafeReservation.setReservationStatus(5);
           //      reserList.remove(myReservation);
-          cafeDao.deleteReservation(cafeReservation, 4);
+          cafeDao.deleteReservation(cafeReservation, 5);
           return;
 
         } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {

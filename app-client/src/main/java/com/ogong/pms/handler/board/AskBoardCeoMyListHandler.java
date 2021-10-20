@@ -16,7 +16,7 @@ public class AskBoardCeoMyListHandler implements Command {
     this.askBoardDao = askBoardDao;
   }
 
-  // 마이페이지 - 내가 쓴 문의내역(개인)
+  // 마이페이지 - 내가 쓴 문의내역(사장)
   @Override
   public void execute(CommandRequest request) throws Exception {
 
@@ -24,11 +24,11 @@ public class AskBoardCeoMyListHandler implements Command {
 
     if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
 
-      // 개인이 쓴 문의글
+      // 사장이 쓴 문의글
       int count = 0;
       for (AskBoard askBoard : askBoardList) {
-        int memberNo = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
-        if(askBoard.getAskCeoWriter().getCeoNo() == memberNo) {
+        int ceoMemberNo = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
+        if(askBoard.getAskCeoWriter().getCeoNo() == ceoMemberNo) {
           System.out.println();
           String reply = "";
           if (askBoard.getReply() != null) {
