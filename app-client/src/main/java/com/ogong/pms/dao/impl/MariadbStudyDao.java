@@ -22,7 +22,7 @@ public class MariadbStudyDao implements StudyDao {
   public void insert(Study study) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into study"
-            + "(name, subject_no, no_people, face_no, introduction,per_member_no)"
+            + "(name, subject_no, no_people, face_no, introduction, per_member_no)"
             + " values(?, ?, ?, ?, ?, ?)",
             Statement.RETURN_GENERATED_KEYS)) {
 
@@ -37,24 +37,16 @@ public class MariadbStudyDao implements StudyDao {
         throw new Exception("스터디 데이터 저장 실패!");
       }
 
-      int studyNo = 0;
-      try (ResultSet pkS = stmt.getGeneratedKeys()) {
-        if (pkS.next()) {
-          studyNo = pkS.getInt("study_no");
-        }
-      }
-
     }
   }
 
   public void insertGuilder(Study study, Member member) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "insert into study_guilder(study_no, per_member_no, status) values(?,?,?)",
+        "insert into study_guilder(study_no, per_member_no) values(?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
 
       stmt.setInt(1, study.getStudyNo());
       stmt.setInt(2, member.getPerNo());
-      stmt.setInt(3, study.getStatus());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("구성원 데이터 저장 실패!");
@@ -63,17 +55,17 @@ public class MariadbStudyDao implements StudyDao {
   }
 
   public void insertBookmark(Study study, Member member) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
-        Statement.RETURN_GENERATED_KEYS)) {
-
-      stmt.setInt(1, study.getStudyNo());
-      stmt.setInt(2, member.getPerNo());
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 저장 실패!");
-      }
-    }
+    //    try (PreparedStatement stmt = con.prepareStatement(
+    //        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
+    //        Statement.RETURN_GENERATED_KEYS)) {
+    //
+    //      stmt.setInt(1, study.getStudyNo());
+    //      stmt.setInt(2, member.getPerNo());
+    //
+    //      if (stmt.executeUpdate() == 0) {
+    //        throw new Exception("구성원 데이터 저장 실패!");
+    //      }
+    //    }
   }
 
   // 마이 스터디에서 업데이트
@@ -90,8 +82,7 @@ public class MariadbStudyDao implements StudyDao {
   @Override
   public List<Study> findAll() throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select"
-            + " s.study_no,"
+        "select s.study_no,"
             + " s.name,"
             + " ss.name subject_name,"
             + " ss.subject_no subject_no,"
@@ -100,7 +91,8 @@ public class MariadbStudyDao implements StudyDao {
             + " sfs.face_no face_no,"
             + " s.introduction,"
             + " s.created_dt,"
-            + " m.name owner_name,"
+            + " pm.per_member_no owner_no,"
+            + " m.nickname owner_name,"
             + " s.score"
             + " from study s"
             + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
@@ -120,8 +112,11 @@ public class MariadbStudyDao implements StudyDao {
         study.setNumberOfPeple(rs.getInt("no_people"));
         study.setFaceName(rs.getString("face_name"));
         study.setFaceNo(rs.getInt("face_no"));
+        study.setIntroduction(rs.getString("introduction"));
+        study.setRegisteredDate(rs.getDate("created_dt"));
 
         Member member = new Member();
+        member.setPerNo(rs.getInt("owner_no"));
         member.setPerNickname(rs.getString("owner_name"));
         study.setOwner(member);
         list.add(study);
@@ -234,7 +229,6 @@ public class MariadbStudyDao implements StudyDao {
       if (!rs.next()) {
         return null;
       }
-
 
       Study study = new Study();
       study.setStudyNo(rs.getInt("study_no"));

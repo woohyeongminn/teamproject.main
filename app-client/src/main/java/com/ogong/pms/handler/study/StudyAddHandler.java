@@ -63,29 +63,6 @@ public class StudyAddHandler implements Command {
           default : System.out.println(" >> 다시 선택하세요.\n"); continue;
         }
 
-        //        if (subjectNo == 6) {
-        //          while (true) {
-        //            System.out.println();
-        //            String input = Prompt.inputString(" 기타 분야 입력 : ");
-        //
-        //            if (input.equals("어학") || input.equals("자격증") || input.equals("취업") ||
-        //                input.equalsIgnoreCase("IT") || input.equals("예체능")) {
-        //              System.out.println(" >> 이미 등록된 카테고리입니다.");
-        //              continue;
-        //            } else {
-        //              System.out.println();
-        //              String s = Prompt.inputString(" 해당 분야로 입력하시겠습니까? (네 / 아니오) ");
-        //              if (!s.equals("네")) {
-        //                System.out.println(" >> 다시 입력해주세요.");
-        //                continue;
-        //              }
-        //              System.out.printf(" >> 분야가 '기타(%s)'로 등록되었습니다.\n", input);
-        //              study.setSubject(input);
-        //            }
-        //            break;
-        //          }
-        //        }
-
       } catch (NumberFormatException e) {
         System.out.println(" >> 숫자만 입력하세요.\n");
         continue;
@@ -148,21 +125,6 @@ public class StudyAddHandler implements Command {
       break;
     }
 
-    //        // 대면,비대면
-    //        String face;
-    //        System.out.println();
-    //        while (true) {
-    //          face = Prompt.inputString(" 대면 , 비대면 , 대면/비대면 : ");
-    //          if ((face.length() == 3 && face.equals("비대면")) ||
-    //              (face.length() == 2 && face.equals("대면")) ||
-    //              (face.length() == 6 && face.equals("대면/비대면"))) {
-    //            break;
-    //          }
-    //          System.out.println(" >> 대면/비대면 중에 입력하세요.");
-    //          System.out.println();
-    //        }
-    //        study.setFace(face);
-
     // 소개글
     String introduction;
     while (true) {
@@ -175,6 +137,7 @@ public class StudyAddHandler implements Command {
       break;
     }
     study.setIntroduction(introduction);
+    study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
 
     // 작성자,구성원,캘린더,자유게시판
     study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
