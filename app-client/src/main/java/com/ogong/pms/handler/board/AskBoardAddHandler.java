@@ -25,7 +25,7 @@ public class AskBoardAddHandler implements Command {
 
     AskBoard askBoard = new AskBoard();
 
-    //    List<AskBoard> askBoardList = askBoardDao.findAll();
+    // List<AskBoard> askBoardList = askBoardDao.findAll();
 
     int statusNo = 0;
 
@@ -45,22 +45,36 @@ public class AskBoardAddHandler implements Command {
           if (statusNo >= 3) {
             System.out.println(" >> 번호를 다시 입력하세요.\n");
             continue;
-          }
-          else if ((statusNo > 0) && (statusNo < 3)) {
+          } else if ((statusNo > 0) && (statusNo < 3)) {
+            if (statusNo == 2) {
+              while (true) {
+                int tempPW = Prompt.inputInt("문의글 비밀번호(4자리) : ");
+
+                if ((tempPW > 999) && (tempPW < 9999)) {
+                  askBoard.setAskTempPW(tempPW);
+                  break;
+
+                } else {
+                  System.out.println(" >> 4자리 숫자만 입력가능합니다.");
+                  continue;
+                }
+              }
+            }
+
             String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
             if (!input.equalsIgnoreCase("네")) {
               System.out.println(" >> 문의글 등록을 취소하였습니다.");
               return;
-            }  
+            }
 
             // 마지막 고유번호를 찾아서 신규 등록시 +1 되도록 기능 구현
-            //            AskBoard lastAskBoard = null;
-            //            if (!askBoardList.isEmpty()) {
-            //              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
-            //              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
-            //            } else {
-            //              askBoard.setAskNo(1);
-            //            }
+            // AskBoard lastAskBoard = null;
+            // if (!askBoardList.isEmpty()) {
+            // lastAskBoard = askBoardList.get(askBoardList.size() - 1);
+            // askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
+            // } else {
+            // askBoard.setAskNo(1);
+            // }
             break;
           }
         } catch (NumberFormatException e) {
@@ -68,7 +82,7 @@ public class AskBoardAddHandler implements Command {
           continue;
         }
         break;
-      } 
+      }
 
       askBoard.setAskStatus(statusNo);
     }
@@ -94,7 +108,7 @@ public class AskBoardAddHandler implements Command {
           } else if ((statusNo > 0) && (statusNo < 3)) {
 
             if (statusNo == 2) {
-              while(true) {
+              while (true) {
                 int tempPW = Prompt.inputInt("문의글 비밀번호(4자리) : ");
 
                 if ((tempPW < 999) && (tempPW > 9999)) {
@@ -110,14 +124,14 @@ public class AskBoardAddHandler implements Command {
             if (!input.equalsIgnoreCase("네")) {
               System.out.println(" >> 문의글 등록을 취소하였습니다.");
               return;
-            }     
-            //            AskBoard lastAskBoard = null;
-            //            if (!askBoardList.isEmpty()) {
-            //              lastAskBoard = askBoardList.get(askBoardList.size() - 1);
-            //              askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
-            //            } else {
-            //              askBoard.setAskNo(1);
-            //            }
+            }
+            // AskBoard lastAskBoard = null;
+            // if (!askBoardList.isEmpty()) {
+            // lastAskBoard = askBoardList.get(askBoardList.size() - 1);
+            // askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
+            // } else {
+            // askBoard.setAskNo(1);
+            // }
             break;
           }
         } catch (NumberFormatException e) {
@@ -125,7 +139,7 @@ public class AskBoardAddHandler implements Command {
           continue;
         }
         break;
-      } 
+      }
 
       askBoard.setAskStatus(statusNo);
     }
@@ -133,7 +147,7 @@ public class AskBoardAddHandler implements Command {
     if (statusNo == 0) {
       System.out.println(" >> 이전 화면으로 돌아갑니다.");
       return;
-    } 
+    }
 
     else if ((statusNo > 0) && (statusNo < 3)) {
       askBoardDao.insert(askBoard);
