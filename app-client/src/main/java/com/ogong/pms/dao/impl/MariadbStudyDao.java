@@ -93,12 +93,18 @@ public class MariadbStudyDao implements StudyDao {
             + " s.created_dt,"
             + " pm.per_member_no owner_no,"
             + " m.nickname owner_name,"
+            + " sg.status status,"
+            + " sg.per_member_no guilder_no,"
+            + " m2.nickname guilder_nickname,"
             + " s.score"
             + " from study s"
             + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
             + " left outer join member m on m.member_no=pm.member_no"
-            + " left outer join study_face_status sfs on s.face_no=sfs.face_no");
+            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+            + " left outer join per_member pm2 on pm2.per_member_no=sg.per_member_no"
+            + " left outer join member m2 on m2.member_no=pm2.member_no");
         ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<Study> list = new ArrayList<>();
@@ -119,6 +125,21 @@ public class MariadbStudyDao implements StudyDao {
         member.setPerNo(rs.getInt("owner_no"));
         member.setPerNickname(rs.getString("owner_name"));
         study.setOwner(member);
+
+        int statusNo = rs.getInt("status");
+        if (statusNo == 1) {
+          Member waitingMember = new Member();
+          waitingMember.setPerNo(rs.getInt("guilder_no"));
+          waitingMember.setPerNickname("guilder_nickname");
+          study.getWatingMember().add(waitingMember);
+
+        } else if (statusNo == 2) {
+          Member guilder = new Member();
+          guilder.setPerNo(rs.getInt("guilder_no"));
+          guilder.setPerNickname("guilder_nickname");
+          study.getMembers().add(guilder);
+        }
+
         list.add(study);
       }
 
