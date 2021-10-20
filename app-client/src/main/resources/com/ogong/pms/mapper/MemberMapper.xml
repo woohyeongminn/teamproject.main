@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberMapper">
+  
+  <resultMap type="Member" id="MemberMap">
+    <id column="member_no" property="perNo"/> 
+    <result column="name" property="perName"/>
+    <result column="nickname" property="perNickname"/>
+    <result column="email" property="perEmail"/>
+    <result column="password" property="perPassword"/>
+    <result column="photo" property="perPhoto"/>
+    <result column="tel" property="perTel"/>
+    <result column="created_dt" property="perRegisteredDate"/>
+    <result column="status" property="perStatus"/>
+    <result column="active" property="active"/>
+  </resultMap>
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="hashmap">
+    select
+      pm.per_member_no member_no,
+      m.nickname,
+      m.email
+    from 
+      member m
+    join
+      per_member pm on m.member_no=pm.member_no
+    where
+      email=#{email} and password=password(#{password})
+  </select>
+</mapper>
+
+
+
+
+
+
+
