@@ -9,9 +9,9 @@ values(3, 3, '관리자님', '이메일로 문의 드리고 싶어요!', 0, '202
 -------------------------------------------------------------------------------------------------
 -- 문의게시판 댓글 test 값
 insert into ask_board_reply(ask_board_no, reply_no, reply_title, reply_content, reply_dt)
-values(1, 1, 'RE : 문의합니다', '공지게시판을 참조해 주세요.', '2020-02-01');
+values(1, 1, '문의합니다', '공지게시판을 참조해 주세요.', '2020-02-01');
 insert into ask_board_reply(ask_board_no, reply_no, reply_title, reply_content, reply_dt)
-values(3, 3, 'RE : 관리자님', 'ogong@test.com 여기로 이메일 보내 주세요~!', '2021-04-19');
+values(3, 3, '관리자님', 'ogong@test.com 여기로 이메일 보내 주세요~!', '2021-04-19');
 
 
 -- 목록
