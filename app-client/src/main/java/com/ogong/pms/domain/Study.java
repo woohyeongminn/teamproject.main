@@ -1,5 +1,6 @@
 package com.ogong.pms.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Study {
   private String introduction;       // 소개글
   private Date registeredDate;       // 스터디 가입일
   private List<Member> members;     //  참여중인 구성원
-  private List<Member> watingMember; // 참여승인을 기다리는 회원
+  private List<Member> watingMember = new ArrayList<>(); // 참여승인을 기다리는 회원
   private int status; // 구성원 상태
   private List<Member> bookMarkMember; // 북마크한 회원
 

@@ -152,7 +152,7 @@ public class MariadbStudyDao implements StudyDao {
             + " s.created_dt,"
             + " m.nickname owner_name,"
             + " sg.per_member_no,"
-            + " sg.status,"
+            + " sg.status status,"
             + " m2.nickname guilder," 
             + " s.score"
             + " from study s"
@@ -166,25 +166,45 @@ public class MariadbStudyDao implements StudyDao {
             + " where s.study_no=" + studyinputNo);
         ResultSet rs = stmt.executeQuery()) {
 
-      if (!rs.next()) {
-        return null;
+      //      if (!rs.next()) {
+      //        return null;
+      //      }
+
+      Study study = null;
+      while (rs.next()) {
+        if (study == null) {
+          study = new Study();
+          study.setStudyNo(rs.getInt("study_no"));
+          study.setStudyTitle(rs.getString("name"));
+          study.setSubjectName(rs.getString("subject_name"));
+          study.setSubjectNo(rs.getInt("subject_no"));
+          study.setNumberOfPeple(rs.getInt("no_people"));
+          study.setFaceName(rs.getString("face_name"));
+          study.setFaceNo(rs.getInt("face_no"));
+          study.setIntroduction(rs.getString("introduction"));
+          study.setRegisteredDate(rs.getDate("created_dt"));
+
+          Member member = new Member();
+          member.setPerNickname(rs.getString("owner_name"));
+          member.setPerNo(studyinputNo);
+          study.setOwner(member);
+        }
+
+        int no = rs.getInt("status");
+        if (no == 1) {
+          Member waitingMember = new Member();
+          waitingMember.setPerNickname(rs.getString("guilder"));
+
+          study.getWatingMember().add(waitingMember);
+
+        } else if (no == 2) {
+          Member guilder = new Member();
+          guilder.setPerNickname(rs.getString("guilder"));
+
+          study.getMembers().add(guilder);
+        }  
       }
-
-      Study study = new Study();
-      study.setStudyNo(rs.getInt("study_no"));
-      study.setStudyTitle(rs.getString("name"));
-      study.setSubjectName(rs.getString("subject_name"));
-      study.setSubjectNo(rs.getInt("subject_no"));
-      study.setNumberOfPeple(rs.getInt("no_people"));
-      study.setFaceName(rs.getString("face_name"));
-      study.setFaceNo(rs.getInt("face_no"));
-      study.setIntroduction(rs.getString("introduction"));
-      study.setRegisteredDate(rs.getDate("created_dt"));
-
-      Member member = new Member();
-      member.setPerNickname(rs.getString("owner_name"));
-      study.setOwner(member);
-
+      System.out.println(study);
       return study;
     }
   }
@@ -220,6 +240,7 @@ public class MariadbStudyDao implements StudyDao {
       if (!rs.next()) {
         return null;
       }
+
 
       Study study = new Study();
       study.setStudyNo(rs.getInt("study_no"));
