@@ -36,6 +36,7 @@ public class CeoCafeDetailHandler implements Command {
 
     System.out.printf(" (%s)\n", cafe.getNo());
     System.out.printf(" [%s]\n", cafe.getName());
+    System.out.printf(" >> 대표자 : %s\n", cafe.getCeoMember().getCeoBossName());
     System.out.printf(" >> 사업자 등록번호 : %s\n", cafe.getCeoMember().getCeoLicenseNo());
     System.out.printf(" >> 대표이미지 : %s\n", cafe.getMainImg());
     System.out.printf(" >> 소개글 : %s\n", cafe.getInfo());

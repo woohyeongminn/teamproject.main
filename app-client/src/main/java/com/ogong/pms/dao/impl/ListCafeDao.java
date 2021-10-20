@@ -1,5 +1,6 @@
 package com.ogong.pms.dao.impl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
@@ -79,10 +80,10 @@ public class ListCafeDao implements CafeDao {
     return null;
   }
 
-  @Override
-  public void insertCafe(Cafe cafe) throws Exception {
-    cafeList.add(cafe);
-  }
+  //  @Override
+  //  public void insertCafe(Cafe cafe) throws Exception {
+  //    cafeList.add(cafe);
+  //  }
 
   @Override
   public void updateCafe(Cafe cafe) throws Exception {
@@ -286,6 +287,13 @@ public class ListCafeDao implements CafeDao {
 
   @Override
   public void updateCafeStatusToGENERAL(Cafe cafe) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays)
+      throws Exception {
     // TODO Auto-generated method stub
 
   }

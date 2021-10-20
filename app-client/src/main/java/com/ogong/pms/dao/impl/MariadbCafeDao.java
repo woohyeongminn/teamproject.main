@@ -1,8 +1,10 @@
 package com.ogong.pms.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
+import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Member;
 
 public class MariadbCafeDao implements CafeDao {
@@ -81,7 +84,29 @@ public class MariadbCafeDao implements CafeDao {
   }
 
   public List<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception {
-    return null;
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select c.cafe_no, c.name, c.location, c.operating_status_no"
+            + " from studycafe c"
+            + " where c.operating_status_no != 4 and c.ceo_member_no=" + ceoNo
+            + " order by cafe_no asc");
+
+        ResultSet rs = stmt.executeQuery()) {
+
+      ArrayList<Cafe> list = new ArrayList<>();
+
+      while(rs.next()) {
+        Cafe cafe = new Cafe();
+
+        cafe.setNo(rs.getInt("cafe_no"));
+        cafe.setName(rs.getString("name"));
+        cafe.setLocation(rs.getString("location"));
+        cafe.setCafeStatus(rs.getInt("operating_status_no"));
+
+        list.add(cafe);
+      }
+
+      return list;
+    }
   }
 
   @Override
@@ -120,10 +145,12 @@ public class MariadbCafeDao implements CafeDao {
   public Cafe findByCafeNo(int cafeNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name, sh.date, c.operating_status_no"
+            + " c.view_cnt, sp.name, sh.date, c.operating_status_no, c.ceo_member_no,"
+            + " cm.bossname, cm.license_no"
             + " from studycafe c"
             + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
             + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
+            + " join ceo_member cm on c.ceo_member_no=cm.ceo_member_no"
             + " where c.cafe_no = ?")) {
 
       stmt.setInt(1, cafeNo);
@@ -146,6 +173,12 @@ public class MariadbCafeDao implements CafeDao {
         cafe.setMainImg(rs.getString("sp.name"));
         cafe.setHoliday(rs.getString("date"));
         cafe.setCafeStatus(rs.getInt("operating_status_no"));
+
+        CeoMember ceoMember = new CeoMember();
+        ceoMember.setCeoNo(rs.getInt("ceo_member_no"));
+        ceoMember.setCeoBossName(rs.getString("bossname"));
+        ceoMember.setCeoLicenseNo(rs.getString("license_no"));
+        cafe.setCeoMember(ceoMember);
 
         return cafe;
       }
@@ -190,14 +223,56 @@ public class MariadbCafeDao implements CafeDao {
   }
 
   @Override
-  public void insertCafe(Cafe cafe) throws Exception {
-    //    requestAgent.request("cafe.insert", cafe);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 장소 등록 실패하였습니다.");
-    //    } else {
-    //      System.out.println(" >> 등록되었습니다.");
-    //    }
+  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into studycafe("
+            + " name,info,location,phone,open_time,close_time,ceo_member_no,operating_status_no)"
+            + " values(?,?,?,?,?,?,?,1)",
+            Statement.RETURN_GENERATED_KEYS)) {
+
+      stmt.setString(1, cafe.getName());
+      stmt.setString(2, cafe.getInfo());
+      stmt.setString(3, cafe.getLocation());
+      stmt.setString(4, cafe.getPhone());
+      stmt.setTime(5, Time.valueOf(cafe.getOpenTime()));
+      stmt.setTime(6, Time.valueOf(cafe.getCloseTime()));
+      stmt.setInt(7, cafe.getCeoMember().getCeoNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("카페 등록 실패!");
+      }
+
+      int cafeNo = 0;
+      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
+        if (pkRS.next()) {
+          cafeNo = pkRS.getInt("cafe_no");
+        }
+      }
+
+      if (!fileNames.isEmpty()) {
+        try (PreparedStatement stmt2 = con.prepareStatement(
+            "insert into studycafe_photo(name, cafe_no) values(?,?)")) {
+          for (String fileName : fileNames) {
+            stmt2.setString(1, fileName);
+            stmt2.setInt(2, cafeNo);
+            stmt2.executeUpdate();
+          }
+        }
+      }
+
+      if (!holidays.isEmpty()) {
+        try (PreparedStatement stmt3 = con.prepareStatement(
+            "insert into studycafe_holiday(cafe_no, date) values(?,?)")) {
+          for (Date date : holidays) {
+            stmt3.setInt(1, cafeNo);
+            stmt3.setDate(2, date);
+            stmt3.executeUpdate();
+          }
+        }
+      }
+
+      System.out.println(" >> 카페 등록 완료!");
+    }
   }
 
   @Override
@@ -761,4 +836,6 @@ public class MariadbCafeDao implements CafeDao {
       }
     }
   }
+
+
 }

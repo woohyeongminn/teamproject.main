@@ -1,5 +1,7 @@
 package com.ogong.pms.dao;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
@@ -16,7 +18,7 @@ public interface CafeDao {
   List<Cafe> findCafeListByLocation(String input) throws Exception;
   Cafe findByCafeNo(int cafeNo) throws Exception;
   Cafe findByCafeNoMember(int cafeNo) throws Exception;
-  void insertCafe(Cafe cafe) throws Exception;
+  void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays) throws Exception;
   void updateCafe(Cafe cafe) throws Exception;
   void updateCafeStatusToGENERAL(Cafe cafe) throws Exception;
   void deleteCafe(Cafe cafe) throws Exception;

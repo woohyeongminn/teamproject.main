@@ -1,5 +1,6 @@
 package com.ogong.pms.dao.impl;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,16 +90,16 @@ public class NetCafeDao implements CafeDao {
     return requestAgent.getObject(Cafe.class);
   }
 
-  @Override
-  public void insertCafe(Cafe cafe) throws Exception {
-    requestAgent.request("cafe.insert", cafe);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 장소 등록 실패하였습니다.");
-    } else {
-      System.out.println(" >> 등록되었습니다.");
-    }
-  }
+  //  @Override
+  //  public void insertCafe(Cafe cafe) throws Exception {
+  //    requestAgent.request("cafe.insert", cafe);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      System.out.println(" >> 장소 등록 실패하였습니다.");
+  //    } else {
+  //      System.out.println(" >> 등록되었습니다.");
+  //    }
+  //  }
 
   @Override
   public void updateCafe(Cafe cafe) throws Exception {
@@ -376,6 +377,13 @@ public class NetCafeDao implements CafeDao {
 
   @Override
   public void updateCafeStatusToGENERAL(Cafe cafe) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays)
+      throws Exception {
     // TODO Auto-generated method stub
 
   }

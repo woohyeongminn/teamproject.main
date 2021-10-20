@@ -1,8 +1,9 @@
 package com.ogong.pms.handler.ceoCafe;
 
 import static com.ogong.pms.domain.Cafe.WAIT;
+import java.sql.Date;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.ArrayList;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
@@ -33,7 +34,17 @@ public class CeoCafeAddHandler implements Command {
 
     cafe.setCeoMember(ceoMember);
     cafe.setName(Prompt.inputString(" 상호명 : "));
-    cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
+    //    cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
+
+    ArrayList<String> fileNames = new ArrayList<>();
+    while(true) {
+      String fileName = Prompt.inputString(" 사진 (완료:빈 문자열) : ");
+      if (fileName.length() == 0) {
+        break;
+      }
+      fileNames.add(fileName);
+    }
+
     cafe.setInfo(Prompt.inputString(" 소개글 : "));
 
     AddressSearchApi api = new AddressSearchApi();
@@ -45,10 +56,23 @@ public class CeoCafeAddHandler implements Command {
     cafe.setPhone(Prompt.inputString(" 전화번호 : "));
     cafe.setOpenTime(LocalTime.parse(Prompt.inputString(" 오픈시간 (예시 > 09:00) : ")));
     cafe.setCloseTime(LocalTime.parse(Prompt.inputString(" 마감시간 (예시 > 21:00) : ")));
-    cafe.setHoliday(Prompt.inputString(" 휴무일 : "));
-    cafe.setBookable(Prompt.inputInt(" 예약가능인원 : "));
-    cafe.setTimePrice(Prompt.inputInt(" 시간당금액 : "));
-    cafe.setCafeStatus(WAIT); // 0 : 승인대기
+    //    cafe.setHoliday(Prompt.inputString(" 휴무일 : "));
+
+    ArrayList<Date> holidays = new ArrayList<>();
+    if (Prompt.inputString(" 휴무일을 입력하시겠습니까? (네 / 아니오) ").equals("네")) {
+      while(true) {
+        try {
+          Date holiday = Prompt.inputDate(" 휴무일 (예시 > 2021-12-1, 완료: 빈 문자열) : ");
+          holidays.add(holiday);
+        } catch (IllegalArgumentException e) {
+          break;
+        }
+      }
+    }
+
+    //    cafe.setBookable(Prompt.inputInt(" 예약가능인원 : "));
+    //    cafe.setTimePrice(Prompt.inputInt(" 시간당금액 : "));
+    cafe.setCafeStatus(WAIT); // 1 : 승인대기
 
     System.out.println();
     String input = Prompt.inputString(" 등록하시겠습니까? (네 / 아니오) ");
@@ -57,15 +81,7 @@ public class CeoCafeAddHandler implements Command {
       return;
     }
 
-    // 고유번호 + 1
-    List<Cafe> cafeList = cafeDao.getCafeList();
-    if (!cafeList.isEmpty()) {
-      cafe.setNo(cafeList.get(cafeList.size() -1).getNo() + 1);
-    } else {
-      cafe.setNo(1);
-    }
-
-    cafeDao.insertCafe(cafe);
+    cafeDao.insertCafe(cafe, fileNames, holidays);
   }
 
 }

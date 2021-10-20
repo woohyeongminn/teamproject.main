@@ -86,16 +86,14 @@ alter table studycafe_reservation modify using_time integer;
 -- review : 1 => 리뷰 작성 아직 안함,, 2 => 리뷰 작성 완료
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
 values (1, 1, 1, '2021-7-22', '2021-8-1', '10:00', 1, 2, 12000, 1, 1);
-insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (2, 5, 1, '2021-11-30', '10:00', 3, 5, 45000, 1, 1);
-insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (3, 5, 2, '2021-11-30', '15:00', 2, 5, 30000, 1, 1);
-insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (4, 2, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
-
--- 테스트용
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (6, 2, 2, '2021-7-22', '2021-9-1', '10:00', 1, 2, 12000, 1, 1);
+values (2, 2, 2, '2021-7-22', '2021-9-1', '10:00', 1, 2, 12000, 1, 1);
+insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
+values (3, 5, 1, '2021-11-30', '10:00', 3, 5, 45000, 1, 1);
+insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
+values (4, 5, 2, '2021-11-30', '15:00', 2, 5, 30000, 1, 1);
+insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, per_member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
+values (5, 2, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
 
 -- 카페 리뷰 상태 컬럼 추가
 alter table studycafe_review add column status integer;
@@ -161,4 +159,6 @@ from studycafe c
 left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
 left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
 and c.cafe_no = ?
+
+update member set nickname = '테스트' where member_no = (select member_no from ceo_member where ceo_member_no=2);
             
