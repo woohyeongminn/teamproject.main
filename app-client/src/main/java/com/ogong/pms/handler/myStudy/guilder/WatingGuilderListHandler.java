@@ -85,8 +85,8 @@ public class WatingGuilderListHandler implements Command {
         else {
           myStudy.getWatingMember().remove(m);
         }
-
-        studyDao.update(myStudy);
+        myStudy.setStatus(2);
+        studyDao.updateGuilder(myStudy);
         return;
       }
     }
@@ -99,9 +99,9 @@ public class WatingGuilderListHandler implements Command {
 
     List<Member> waitingMembers = myStudy.getWatingMember();
 
-    if (member != null && myStudy.getOwner().getPerEmail().equals(member.getPerEmail())) {
+    if (member != null && (myStudy.getOwner().getPerNo() == member.getPerNo())) {
       System.out.println();
-      if (!myStudy.getWatingMemberNames().equals("")) {
+      if (!myStudy.getWatingMember().isEmpty()) {
         String input = Prompt.inputString(" >> 대기 중인 회원 중 거절할 닉네임을 입력하세요 : ");
         Member m = new Member();
 
@@ -119,7 +119,7 @@ public class WatingGuilderListHandler implements Command {
         }
         if (m != null) {
           myStudy.getWatingMember().remove(m);
-
+          myStudy.setStatus(3);
           studyDao.update(myStudy);
         }
         return;

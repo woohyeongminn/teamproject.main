@@ -71,7 +71,37 @@ public class MariadbStudyDao implements StudyDao {
   // 마이 스터디에서 업데이트
   @Override
   public void update(Study study) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update study set"
+            + " name=?,no_people=?,face_no=?,introduction=?"
+            + " where study_no=?")) {
 
+      stmt.setString(1, study.getStudyTitle());
+      stmt.setInt(2, study.getNumberOfPeple());
+      stmt.setInt(3, study.getFaceNo());
+      stmt.setString(4, study.getIntroduction());
+      stmt.setInt(5, study.getStudyNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("스터디 데이터 변경 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void updateGuilder(Study study) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update study_guilder set"
+            + " status=?"
+            + " where study_no=?")) {
+
+      stmt.setInt(1, study.getStatus());
+      stmt.setInt(2, study.getStudyNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("스터디 데이터 변경 실패!");
+      }
+    }
   }
 
   @Override
