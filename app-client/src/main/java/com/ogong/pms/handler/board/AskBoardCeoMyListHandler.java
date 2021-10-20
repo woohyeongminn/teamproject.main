@@ -29,19 +29,21 @@ public class AskBoardCeoMyListHandler implements Command {
       for (AskBoard askBoard : askBoardList) {
         int ceoMemberNo = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
         if(askBoard.getAskCeoWriter().getCeoNo() == ceoMemberNo) {
+
           System.out.println();
           String reply = "";
           if (askBoard.getReply() != null) {
-            reply = "📨";
+            reply = "📖 > 등록된 답변이 있습니다.";
           } else {
-            reply = "X";
+            reply = "📕 > 등록된 답변이 없습니다.";
           }
-          System.out.printf("(%d) 답변%s\n 제목 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+
+          System.out.printf(" (%d)\n 제목 : %s\n 작성일 : %s\n 조회수 : %d\n %s\n", 
               askBoard.getAskNo(), 
-              reply,
               askBoard.getAskTitle(), 
               askBoard.getAskRegisteredDate(),
-              askBoard.getAskVeiwCount());
+              askBoard.getAskVeiwCount(),
+              reply);
           count++;
         } 
 
@@ -59,11 +61,11 @@ public class AskBoardCeoMyListHandler implements Command {
     System.out.println();
     System.out.println("---------------------");
     System.out.println("1. 상세");
-    System.out.println("2. 이전");
+    System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
-      case 1: request.getRequestDispatcher("/askBoard/PerMydetail").forward(request); return;
+      case 1: request.getRequestDispatcher("/askBoard/CeoMydetail").forward(request); return;
       case 2: return;
       default : System.out.println(" >> 번호를 다시 선택해 주세요.");
     }

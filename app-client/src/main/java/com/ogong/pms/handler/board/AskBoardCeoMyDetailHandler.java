@@ -26,13 +26,23 @@ public class AskBoardCeoMyDetailHandler implements Command {
 
     CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
 
-    AskBoard askBoard = askBoardDao.findByCeoAskBoard(askNo, ceoMember.getCeoNo());
+    AskBoard askBoard = askBoardDao.findByNo(askNo);
+
+    if (askBoard == null) {
+      System.out.println(" >> 해당 번호의 문의글이 없습니다. ");
+      return;
+    }
+
+    if (askBoard.getAskCeoWriter().getCeoNo() != ceoMember.getCeoNo()) {
+      System.out.println(" >> 열람 권한이 없습니다.");
+      return;
+    }
 
     System.out.println();
     System.out.printf(" (%d)\n", askBoard.getAskNo());
     System.out.printf(" [%s]\n", askBoard.getAskTitle());
     System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
-    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskMemberWriter().getPerNickname());
+    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskCeoWriter().getCeoNickname());
     System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
     askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());

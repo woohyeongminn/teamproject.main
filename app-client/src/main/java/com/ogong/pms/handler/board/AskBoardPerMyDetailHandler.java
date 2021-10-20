@@ -16,7 +16,6 @@ public class AskBoardPerMyDetailHandler implements Command {
     this.askBoardDao = askBoardDao;
   }
 
-  @SuppressWarnings("unlikely-arg-type")
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -27,10 +26,15 @@ public class AskBoardPerMyDetailHandler implements Command {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    AskBoard  askBoard = askBoardDao.findByPerAskBoard(askNo, member.getPerNo());
+    AskBoard  askBoard = askBoardDao.findByNo(askNo);
 
     if (askBoard == null) {
       System.out.println(" >> 해당 번호의 문의글이 없습니다. ");
+      return;
+    }
+
+    if (askBoard.getAskMemberWriter().getPerNo() != member.getPerNo()) {
+      System.out.println(" >> 열람 권한이 없습니다.");
       return;
     }
 
@@ -43,6 +47,7 @@ public class AskBoardPerMyDetailHandler implements Command {
     askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
     System.out.println("---------------------");
+
     if (askBoard.getReply() != null) {
       request.setAttribute("askNo", askNo);
       request.getRequestDispatcher("/reply/detail").forward(request); 

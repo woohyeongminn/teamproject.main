@@ -10,9 +10,6 @@ public interface AskBoardDao {
   void delete(int no) throws Exception;
   List<AskBoard> findAll() throws Exception;
   AskBoard findByNo(int no) throws Exception;
-  AskBoard findByPerAskBoard(int askNo, int perMemberNo) throws Exception;
-  AskBoard findByCeoAskBoard(int askNo, int ceoMemberNo) throws Exception;
-
 
   void insertreply(AskBoard askBoard) throws Exception;
   void updateViewCount(AskBoard askBoard) throws Exception;

@@ -86,11 +86,26 @@ public class AskBoardAddHandler implements Command {
         try {
           statusNo = Prompt.inputInt("\n 1: 공개 / 2: 비공개 > ");
           System.out.println();
+
           if (statusNo >= 3) {
             System.out.println(" >> 번호를 다시 입력하세요.\n");
             continue;
-          }
-          else if ((statusNo > 0) && (statusNo < 3)) {
+
+          } else if ((statusNo > 0) && (statusNo < 3)) {
+
+            if (statusNo == 2) {
+              while(true) {
+                int tempPW = Prompt.inputInt("문의글 비밀번호(4자리) : ");
+
+                if ((tempPW < 999) && (tempPW > 9999)) {
+                  System.out.println(" >> 4자리 숫자만 입력가능합니다.");
+                  continue;
+                }
+                askBoard.setAskTempPW(tempPW);
+                break;
+              }
+            }
+
             String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
             if (!input.equalsIgnoreCase("네")) {
               System.out.println(" >> 문의글 등록을 취소하였습니다.");

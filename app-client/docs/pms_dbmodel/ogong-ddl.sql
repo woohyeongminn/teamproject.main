@@ -796,7 +796,8 @@ CREATE TABLE ask_board (
   content      VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   view_cnt     INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
   create_dt    DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
-  use_secret   INTEGER      NOT NULL COMMENT '비밀글' -- 비밀글
+  use_secret   INTEGER      NOT NULL COMMENT '비밀글', -- 비밀글
+  temppw       INTEGER      NULL     COMMENT '임시비밀번호' -- 임시비밀번호
 )
 COMMENT '문의게시판';
 
