@@ -103,9 +103,6 @@ DROP TABLE IF EXISTS admin RESTRICT;
 -- 회원
 DROP TABLE IF EXISTS member RESTRICT;
 
--- 새 테이블
-DROP TABLE IF EXISTS TABLE RESTRICT;
-
 -- 스터디카페룸사진
 CREATE TABLE studycafe_room_photo (
   photo_no     INTEGER      NOT NULL COMMENT '사진번호', -- 사진번호
@@ -875,11 +872,6 @@ CREATE UNIQUE INDEX UIX_member
 
 ALTER TABLE member
   MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
-
--- 새 테이블
-CREATE TABLE TABLE (
-)
-COMMENT '새 테이블';
 
 -- 스터디카페룸사진
 ALTER TABLE studycafe_room_photo
