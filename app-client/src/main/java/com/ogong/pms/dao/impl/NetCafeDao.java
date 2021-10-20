@@ -301,19 +301,19 @@ public class NetCafeDao implements CafeDao {
     return new ArrayList<>(requestAgent.getObjects(CafeReservation.class));
   }
 
-  @Override
-  public List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo) throws Exception {
-    HashMap<String, String> params = new HashMap<>();
-    params.put("ceoNo", String.valueOf(ceoNo));
-    params.put("cafeNo", String.valueOf(cafeNo));
-    requestAgent.request("cafeReservation.selectListByCeoMember", params);
-
-    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      System.out.println(" >> 예약 목록 조회를 실패하였습니다.");
-      return null;
-    }
-    return new ArrayList<>(requestAgent.getObjects(CafeReservation.class));
-  }
+  //  @Override
+  //  public List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo) throws Exception {
+  //    HashMap<String, String> params = new HashMap<>();
+  //    params.put("ceoNo", String.valueOf(ceoNo));
+  //    params.put("cafeNo", String.valueOf(cafeNo));
+  //    requestAgent.request("cafeReservation.selectListByCeoMember", params);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      System.out.println(" >> 예약 목록 조회를 실패하였습니다.");
+  //      return null;
+  //    }
+  //    return new ArrayList<>(requestAgent.getObjects(CafeReservation.class));
+  //  }
 
   @Override
   public CafeReservation findReservationByMember(int memberNo, int reserNo) throws Exception {
@@ -386,5 +386,17 @@ public class NetCafeDao implements CafeDao {
       throws Exception {
     // TODO Auto-generated method stub
 
+  }
+
+  @Override
+  public Cafe findByCeoMember(int ceoNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

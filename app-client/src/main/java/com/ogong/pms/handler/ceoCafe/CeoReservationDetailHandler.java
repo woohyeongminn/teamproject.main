@@ -27,8 +27,7 @@ public class CeoReservationDetailHandler implements Command {
     System.out.println();
 
     CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
-    int cafeNo = (int) request.getAttribute("cafeNo");
-    List<CafeReservation> cafeReservationList = printMyCafeReserDetail(ceoMember, cafeNo);
+    List<CafeReservation> cafeReservationList = printMyCafeReserDetail(ceoMember);
     if (cafeReservationList.size() == 0) {
       System.out.println(" >> 예약 내역이 없습니다.");
       return;
@@ -52,10 +51,10 @@ public class CeoReservationDetailHandler implements Command {
     }
   }
 
-  private List<CafeReservation> printMyCafeReserDetail(CeoMember ceoMember, int input) throws Exception {
+  private List<CafeReservation> printMyCafeReserDetail(CeoMember ceoMember) throws Exception {
     List<CafeReservation> myCafeReserList = new ArrayList<>();
     List<CafeReservation> reserList = 
-        cafeDao.findReservationListByCeoMember(ceoMember.getCeoNo(), input);
+        cafeDao.findReservationListByCeoMember(ceoMember.getCeoNo());
 
     for (CafeReservation cafeReser : reserList) {
       myCafeReserList.add(cafeReser);
@@ -63,23 +62,16 @@ public class CeoReservationDetailHandler implements Command {
       CafeRoom cafeRoom = cafeDao.findByRoomNo(cafeReser.getRoomNo());
       String reserStatusLable = cafeReser.getReservationStatusName();
 
-      if (cafeReser.getUseMemberNumber() == 0) {
-        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
-            + " 시작시간 : %s\n 이용시간 : %s시간\n 스터디룸 : %s\n"
-            + " 결제금액 : %d원\n 상태 : %s\n"
-            , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
-            , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeRoom.getRoomName()  
-            , cafeReser.getTotalPrice(), reserStatusLable);
-        System.out.println();  
-      } else {
-        System.out.printf(" (%d)\n 예약날짜 : %s\n 예약장소 : %s\n"
-            + " 시작시간 : %s\n 이용시간 : %s시간\n 사용인원 : %d명\n"
-            + " 결제금액 : %d원\n 상태 : %s\n"
-            , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReserCafe.getName()
-            , cafeReser.getStartTime(), cafeReser.getUseTime(), cafeReser.getUseMemberNumber()   
-            , cafeReser.getTotalPrice(), reserStatusLable);
-        System.out.println();
-      }
+      System.out.printf(" (%d)\n 예약날짜 : %s\n 이용날짜 : %s\n 예약장소 : %s\n"
+          + " 이용시간 : %s ~ %s (%s시간)\n 스터디룸 : %s\n"
+          + " 결제금액 : %d원\n 상태 : %s\n"
+          , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReser.getUseDate()
+          , cafeReserCafe.getName(), cafeReser.getStartTime()
+          , cafeReser.getStartTime().plusHours(cafeReser.getUseTime())
+          , cafeReser.getUseTime(), cafeRoom.getRoomName(), cafeReser.getTotalPrice()
+          , reserStatusLable);
+      System.out.println();  
+
     }
     return myCafeReserList;
   }

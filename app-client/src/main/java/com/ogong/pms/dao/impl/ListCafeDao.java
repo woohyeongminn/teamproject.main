@@ -34,16 +34,16 @@ public class ListCafeDao implements CafeDao {
     return listByMember;
   }
 
-  @Override
-  public List<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception {
-    ArrayList<Cafe> listByCeoMember = new ArrayList<>();
-    for(Cafe cafe : cafeList) {
-      if (cafe.getCeoMember().getCeoNo() == ceoNo && cafe.getCafeStatus() != Cafe.DELETE) {
-        listByCeoMember.add(cafe);
-      }
-    }
-    return listByCeoMember;
-  }
+  //  @Override
+  //  public List<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception {
+  //    ArrayList<Cafe> listByCeoMember = new ArrayList<>();
+  //    for(Cafe cafe : cafeList) {
+  //      if (cafe.getCeoMember().getCeoNo() == ceoNo && cafe.getCafeStatus() != Cafe.DELETE) {
+  //        listByCeoMember.add(cafe);
+  //      }
+  //    }
+  //    return listByCeoMember;
+  //  }
 
   @Override
   public List<Cafe> findCafeListByLocation(String input) throws Exception {
@@ -232,18 +232,18 @@ public class ListCafeDao implements CafeDao {
     return listByMember;
   }
 
-  @Override
-  public List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo)
-      throws Exception {
-    ArrayList<CafeReservation> listByCeoMember = new ArrayList<>();
-    for(CafeReservation cafeReservation : cafeReservationList) {
-      if (cafeReservation.getCafe().getCeoMember().getCeoNo() == ceoNo &&
-          cafeReservation.getCafe().getNo() == cafeNo) {
-        listByCeoMember.add(cafeReservation);
-      }
-    }
-    return listByCeoMember;
-  }
+  //  @Override
+  //  public List<CafeReservation> findReservationListByCeoMember(int ceoNo, int cafeNo)
+  //      throws Exception {
+  //    ArrayList<CafeReservation> listByCeoMember = new ArrayList<>();
+  //    for(CafeReservation cafeReservation : cafeReservationList) {
+  //      if (cafeReservation.getCafe().getCeoMember().getCeoNo() == ceoNo &&
+  //          cafeReservation.getCafe().getNo() == cafeNo) {
+  //        listByCeoMember.add(cafeReservation);
+  //      }
+  //    }
+  //    return listByCeoMember;
+  //  }
 
   @Override
   public CafeReservation findReservationByMember(int memberNo, int reserNo) throws Exception {
@@ -296,5 +296,17 @@ public class ListCafeDao implements CafeDao {
       throws Exception {
     // TODO Auto-generated method stub
 
+  }
+
+  @Override
+  public Cafe findByCeoMember(int ceoNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

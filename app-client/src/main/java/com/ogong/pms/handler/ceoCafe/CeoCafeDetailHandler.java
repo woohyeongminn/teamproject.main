@@ -22,19 +22,24 @@ public class CeoCafeDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("▶ 장소 상세보기");
+    System.out.println("▶ 내 카페 관리");
     System.out.println();
 
     CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
-    Cafe cafe = cafeDao.findByCafeNo(Prompt.inputInt(" 번호 : "));
-    System.out.println();
-    if (cafe == null || ceoMember.getCeoNo() != cafe.getCeoMember().getCeoNo() ||
-        cafe.getCafeStatus() == Cafe.DELETE) {
-      System.out.println(" >> 번호를 다시 선택하세요.");
-      return;
+    Cafe cafe = cafeDao.findByCeoMember(ceoMember.getCeoNo());
+
+    if (cafe == null) {
+      System.out.println(" >> 등록된 카페가 없습니다.");
+      System.out.println("\n----------------------");
+      System.out.println("1. 등록");
+      System.out.println("0. 이전");
+      int selectNo = Prompt.inputInt("선택> ");
+      switch (selectNo) {
+        case 1 : request.getRequestDispatcher("/ceoMember/cafeAdd").forward(request); break;
+        default : return;
+      }
     }
 
-    System.out.printf(" (%s)\n", cafe.getNo());
     System.out.printf(" [%s]\n", cafe.getName());
     System.out.printf(" >> 대표자 : %s\n", cafe.getCeoMember().getCeoBossName());
     System.out.printf(" >> 사업자 등록번호 : %s\n", cafe.getCeoMember().getCeoLicenseNo());
@@ -45,8 +50,6 @@ public class CeoCafeDetailHandler implements Command {
     System.out.printf(" >> 오픈시간 : %s\n", cafe.getOpenTime());
     System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
     System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());
-    System.out.printf(" >> 예약가능 인원 : %d\n", cafe.getBookable());
-    System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
     System.out.printf(" >> 상태 : %s\n", CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus()));
     getStarRatingAverage(cafe); // 리뷰 평점계산
     listReview(cafe); // 리뷰 목록
@@ -58,12 +61,14 @@ public class CeoCafeDetailHandler implements Command {
     System.out.println("1. 수정");
     System.out.println("2. 삭제");
     System.out.println("3. 스터디룸 관리");
+    System.out.println("4. 예약관리");
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt(" 선택> ");
     switch (selectNo) {
       case 1: request.getRequestDispatcher("/ceoMember/cafeUpdate").forward(request); return;
       case 2: request.getRequestDispatcher("/ceoMember/cafeDelete").forward(request); return;
       case 3: request.getRequestDispatcher("/ceoMember/cafeRoomList").forward(request); return;
+      case 4: request.getRequestDispatcher("/ceoMember/ReservationDetail").forward(request); return;
       case 0: return;
       default : 
         System.out.println(" >> 번호를 다시 선택해 주세요.");
@@ -79,7 +84,7 @@ public class CeoCafeDetailHandler implements Command {
 
     if (!reviewList.isEmpty()) {
       for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 1) {
+        if (review.getReviewStatus() == 2) {
           continue;
         }
         starRating += review.getGrade();
@@ -101,7 +106,7 @@ public class CeoCafeDetailHandler implements Command {
       System.out.println(" >> 등록된 리뷰가 없습니다.");
     } else {
       for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 1) {
+        if (review.getReviewStatus() == 2) {
           //System.out.printf(" \n (%s)\n", review.getReviewNo());
           System.out.printf(" (%d) | 삭제 된 리뷰입니다. |\n", i++);
           continue;
