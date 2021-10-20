@@ -275,8 +275,10 @@ public class MariadbMemberDao implements MemberDao {
   @Override
   public void updatePassword(Member member) throws Exception {
     try (PreparedStatement stmt =
-        con.prepareStatement("update member set" + " password=password(?)" + " where member_no="
-            + "(select member_no from per_member where per_member_no=?)")) {
+        con.prepareStatement("update member set" 
+            + " password=password(?)" 
+            + " where member_no="
+            + " (select member_no from per_member where per_member_no=?)")) {
 
       stmt.setString(1, member.getPerPassword());
       stmt.setInt(2, member.getPerNo());
