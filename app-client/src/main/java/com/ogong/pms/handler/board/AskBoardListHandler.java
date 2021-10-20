@@ -45,6 +45,7 @@ public class AskBoardListHandler implements Command {
           System.out.printf("\n (%d)\n 작성자 : %s", 
               askBoard.getAskNo(), 
               askBoard.getAskCeoWriter().getCeoNickname());
+          System.out.println();
           System.out.println(" 🔒 비밀글입니다.");
         }
 

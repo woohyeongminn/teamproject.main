@@ -26,7 +26,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
     if (AuthPerMemberLoginHandler.getLoginUser() != null) {
       try (PreparedStatement stmt =
           con.prepareStatement(
-              "insert into ask_board(title,content,view_cnt,member_no,use_secret)"
+              "insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)"
                   + " values("
                   + "?,"
                   + "?,"
@@ -37,6 +37,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
                   + " per_member pm"
                   + " where"
                   + " pm.per_member_no = ?),"
+                  + "?,"
                   + "?)")) {
 
         stmt.setString(1, askBoard.getAskTitle());
@@ -44,6 +45,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
         stmt.setInt(3, askBoard.getAskVeiwCount());
         stmt.setInt(4, askBoard.getAskMemberWriter().getPerNo());
         stmt.setInt(5, askBoard.getAskStatus());
+        stmt.setInt(6, askBoard.getAskTempPW());
 
         if (stmt.executeUpdate() == 0) {
           throw new Exception("문의게시판 데이터 등록 실패!");
@@ -53,7 +55,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
     } else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
       try (PreparedStatement stmt2 =
           con.prepareStatement(
-              "insert into ask_board(title,content,view_cnt,member_no,use_secret)"
+              "insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)"
                   + " values("
                   + "?,"
                   + "?,"
@@ -64,6 +66,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
                   + " ceo_member cm"
                   + " where"
                   + " cm.ceo_member_no = ?),"
+                  + "?,"
                   + "?)")) {
 
         stmt2.setString(1, askBoard.getAskTitle());
@@ -71,6 +74,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
         stmt2.setInt(3, askBoard.getAskVeiwCount());
         stmt2.setInt(4, askBoard.getAskCeoWriter().getCeoNo());
         stmt2.setInt(5, askBoard.getAskStatus());
+        stmt2.setInt(6, askBoard.getAskTempPW());
 
         if (stmt2.executeUpdate() == 0) {
           throw new Exception("문의게시판 데이터 등록 실패!");
@@ -148,7 +152,6 @@ public class MariadbAskBoardDao implements AskBoardDao {
     }
   }
 
-
   @Override
   public List<AskBoard> findAll() throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
@@ -162,6 +165,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
             + " m.nickname,"
             + " m.status member_status,"
             + " ab.use_secret ask_status,"
+            + " ab.temppw,"
             + " ab.create_dt,"
             + " ab.view_cnt,"
             + " abr.reply_title r_title,"
@@ -186,6 +190,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
         askBoard.setAskRegisteredDate(rs.getDate("create_dt"));
         askBoard.setAskVeiwCount(rs.getInt("view_cnt"));
         askBoard.setAskStatus(rs.getInt("ask_status"));
+        askBoard.setAskTempPW(rs.getInt("temppw"));
 
         if (rs.getString("r_title") != null) {
           Reply reply = new Reply();
@@ -225,11 +230,13 @@ public class MariadbAskBoardDao implements AskBoardDao {
             + " ab.title,"
             + " ab.content,"
             + " m.member_no,"
+            + " m.password writer_pw,"
             + " pm.per_member_no per_no,"
             + " cm.ceo_member_no ceo_no,"
             + " m.nickname,"
             + " m.status member_status,"
             + " ab.use_secret ask_status,"
+            + " ab.temppw,"
             + " ab.create_dt,"
             + " ab.view_cnt,"
             + " abr.reply_title r_title,"
@@ -256,6 +263,7 @@ public class MariadbAskBoardDao implements AskBoardDao {
       askBoard.setAskRegisteredDate(rs.getDate("create_dt"));
       askBoard.setAskVeiwCount(rs.getInt("view_cnt"));
       askBoard.setAskStatus(rs.getInt("ask_status"));
+      askBoard.setAskTempPW(rs.getInt("temppw"));
 
       if (rs.getString("r_title") != null) {
         Reply reply = new Reply();
@@ -268,92 +276,21 @@ public class MariadbAskBoardDao implements AskBoardDao {
       Member member = new Member();
       CeoMember ceoMember = new CeoMember();
 
-      if (rs.getInt("member_status") == 1) {
+      if (rs.getInt("member_status") == Member.PER) {
         member.setPerNo(rs.getInt("per_no"));
         member.setPerNickname(rs.getString("nickname"));
+        member.setPerPassword(rs.getString("writer_pw"));
 
         askBoard.setAskMemberWriter(member);
       }
-      else if (rs.getInt("member_status") == 2) {
+      else if (rs.getInt("member_status") == Member.CEO) {
         ceoMember.setCeoNo(rs.getInt("ceo_no"));
         ceoMember.setCeoNickname(rs.getString("nickname"));
+        ceoMember.setCeoPassword(rs.getString("writer_pw"));
 
         askBoard.setAskCeoWriter(ceoMember);
       }
       return askBoard;
     }
   }
-
-
-  @Override
-  public AskBoard findByPerAskBoard(int askNo, int perMemberNo) throws Exception {
-    return null;
-  }
-
-  @Override
-  public AskBoard findByCeoAskBoard(int askNo, int ceoMemberNo) throws Exception {
-
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select"
-            + " ab.ask_board_no,"
-            + " ab.title,"
-            + " ab.content,"
-            + " cm.ceo_member_no ceo_no,"
-            + " m.nickname,"
-            + " m.status member_status,"
-            + " ab.use_secret ask_status,"
-            + " ab.create_dt,"
-            + " ab.view_cnt,"
-            + " abr.reply_title r_title,"
-            + " abr.reply_content r_content,"
-            + " abr.reply_dt r_dt"
-            + " from"
-            + " ask_board ab"
-            + " left outer join member m on m.member_no=ab.member_no"
-            + " left outer join ceo_member cm on cm.member_no=m.member_no"
-            + " left outer join ask_board_reply abr on abr.ask_board_no=ab.ask_board_no"
-            + " where ab.ask_board_no=" + askNo
-            + " order by ab.ask_board_no asc");
-        ResultSet rs = stmt.executeQuery()) {
-
-      if (!rs.next()) {
-        return null;
-      }
-
-      AskBoard askBoard = new AskBoard();
-      askBoard.setAskNo(rs.getInt("ask_board_no"));
-      askBoard.setAskTitle(rs.getString("title"));
-      askBoard.setAskContent(rs.getString("content"));
-      askBoard.setAskRegisteredDate(rs.getDate("create_dt"));
-      askBoard.setAskVeiwCount(rs.getInt("view_cnt"));
-      askBoard.setAskStatus(rs.getInt("ask_status"));
-
-      if (rs.getString("r_title") != null) {
-        Reply reply = new Reply();
-        reply.setReplyTitle(rs.getString("r_title"));
-        reply.setReplyContent(rs.getString("r_content"));
-        reply.setReplyRegisteredDate(rs.getDate("r_dt"));
-        askBoard.setReply(reply);
-      }
-
-      Member member = new Member();
-      CeoMember ceoMember = new CeoMember();
-
-      if (rs.getInt("member_status") == 1) {
-        member.setPerNo(rs.getInt("per_no"));
-        member.setPerNickname(rs.getString("nickname"));
-
-        askBoard.setAskMemberWriter(member);
-      }
-      else if (rs.getInt("member_status") == 2) {
-        ceoMember.setCeoNo(rs.getInt("ceo_no"));
-        ceoMember.setCeoNickname(rs.getString("nickname"));
-
-        askBoard.setAskCeoWriter(ceoMember);
-      }
-      return askBoard;
-    }
-
-  }
-
 }

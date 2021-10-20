@@ -12,6 +12,7 @@ import com.ogong.util.Prompt;
 public class AskBoardDetailHandler implements Command {
 
   AskBoardDao askBoardDao; 
+  //CeoMemberDao ceoMemberDao;
 
   public AskBoardDetailHandler(AskBoardDao askBoardDao) {
     this.askBoardDao = askBoardDao;
@@ -27,12 +28,20 @@ public class AskBoardDetailHandler implements Command {
 
     AskBoard askBoard = askBoardDao.findByNo(askNo);
 
+    if (askBoard == null) {
+      System.out.println(" >> 해당 번호의 문의글이 없습니다.");
+      return;
+    }
+
+    // 공개 - 문의글 상태
     if (askBoard.getAskStatus() == 1) {
       detailList(askBoard, request);
     }
 
+    // 비공개 - 문의글 상태
     else if (askBoard.getAskStatus() == 2) {
 
+      // 로그인 안했을 때 (비회원)
       if (AuthPerMemberLoginHandler.getLoginUser() == null &&
           AuthCeoMemberLoginHandler.getLoginCeoMember() == null &&
           AuthAdminLoginHandler.getLoginAdmin() == null) {
@@ -40,36 +49,42 @@ public class AskBoardDetailHandler implements Command {
         return;
       }
 
+      // 로그인 했을 때 (개인 로그인)
       if (AuthPerMemberLoginHandler.getLoginUser() != null) {
 
+        // 비공개 - 개인 본인이 작성한 문의글이 아닐 때
         if (AuthPerMemberLoginHandler.getLoginUser().getPerNo() !=
             askBoard.getAskMemberWriter().getPerNo()) {
           System.out.println(" >> 열람 권한이 없습니다.");
           return;
         }
 
+        // 비공개 - 개인 본인이 작성한 문의글일 때
         System.out.println();
-        String secretPassword = Prompt.inputString(" 비밀번호 : ");
+        int secretPassword = Prompt.inputInt(" 문의게시글 비밀번호(4자리) : ");
 
-        if (!AuthPerMemberLoginHandler.loginUser.getPerPassword().equals(secretPassword)) {
+        if (askBoard.getAskTempPW() != secretPassword) {
           System.out.println();
           System.out.println(" >> 비밀번호를 다시 입력하세요.");
           return;
         } 
       }
 
+      // 로그인 했을 때 (사장 로그인)
       if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
 
+        // 비공개 - 사장 본인이 작성한 문의글이 아닐 때
         if (AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo() !=
             askBoard.getAskCeoWriter().getCeoNo()) {
           System.out.println(" >> 열람 권한이 없습니다.");
           return;
         }
 
+        // 비공개 - 사장 본인이 작성한 문의글일 때
         System.out.println();
-        String secretPassword = Prompt.inputString(" 비밀번호 : ");
+        int secretPassword = Prompt.inputInt(" 문의게시글 비밀번호(4자리) : ");
 
-        if (!AuthCeoMemberLoginHandler.loginCeoMember.getCeoPassword().equals(secretPassword)) {
+        if (askBoard.getAskTempPW() != secretPassword) {
           System.out.println();
           System.out.println(" >> 비밀번호를 다시 입력하세요.");
           return;
@@ -80,6 +95,7 @@ public class AskBoardDetailHandler implements Command {
 
     request.setAttribute("askNo", askNo);
 
+    // 관리자가 로그인 했을 때
     if (AuthAdminLoginHandler.getLoginAdmin() != null) {
       System.out.println("\n---------------------");
       System.out.println("1. 문의글 삭제");
@@ -91,9 +107,9 @@ public class AskBoardDetailHandler implements Command {
         case 2 : request.getRequestDispatcher("/reply/add").forward(request); return;
         default : return;
       }
-    }
 
-    else if ((AuthPerMemberLoginHandler.getLoginUser() != null && 
+      // 개인, 사장 회원이 로그인 했을 때
+    } else if ((AuthPerMemberLoginHandler.getLoginUser() != null && 
         askBoard.getAskMemberWriter().getPerNo() == 
         AuthPerMemberLoginHandler.getLoginUser().getPerNo()) ||
 
@@ -114,9 +130,8 @@ public class AskBoardDetailHandler implements Command {
     }
   }
 
-
+  // 문의게시글 상세 보기
   private void detailList(AskBoard askBoard, CommandRequest request) throws Exception {
-
     System.out.println();
     System.out.printf(" (%d)\n", askBoard.getAskNo());
     System.out.printf(" [%s]\n", askBoard.getAskTitle());
@@ -140,6 +155,8 @@ public class AskBoardDetailHandler implements Command {
       System.out.println("\n >> 등록된 답변이 없습니다.");
       return;
     }
+
+    // 답변 상세보기 출력 (답변이 등록되어 있을 때)
     request.setAttribute("askNo", askBoard.getAskNo());
     request.getRequestDispatcher("/reply/detail").forward(request);
   }
