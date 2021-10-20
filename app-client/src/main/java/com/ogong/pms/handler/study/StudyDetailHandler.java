@@ -106,20 +106,21 @@ public class StudyDetailHandler implements Command {
       //                  System.out.println(" >> 번호를 다시 선택해 주세요.\n");
       //              }
       //            }
-    } else {
-      System.out.println("\n----------------------");
-      System.out.println("1. 참여 신청하기");
-      System.out.println("2. 북마크 추가하기");
-      System.out.println("0. 이전");
+      else {
+        System.out.println("\n----------------------");
+        System.out.println("1. 참여 신청하기");
+        System.out.println("2. 북마크 추가하기");
+        System.out.println("0. 이전");
 
-      while (true) {
-        int selectNo = Prompt.inputInt("선택> ");
-        switch (selectNo) {
-          case 1: request.getRequestDispatcher("/study/join").forward(request); return;
-          case 2: request.getRequestDispatcher("/study/bookMarkAdd").forward(request); return;
-          case 0: return;
-          default : 
-            System.out.println(" >> 번호를 다시 선택해 주세요.");
+        while (true) {
+          int selectNo = Prompt.inputInt("선택> ");
+          switch (selectNo) {
+            case 1: request.getRequestDispatcher("/study/join").forward(request); return;
+            case 2: request.getRequestDispatcher("/study/bookMarkAdd").forward(request); return;
+            case 0: return;
+            default : 
+              System.out.println(" >> 번호를 다시 선택해 주세요.");
+          }
         }
       }
     }
