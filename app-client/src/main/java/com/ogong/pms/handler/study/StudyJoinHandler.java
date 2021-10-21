@@ -28,8 +28,8 @@ public class StudyJoinHandler implements Command {
 
     Study study = studyDao.findByNo(inputNo);
 
-    for (Member pM : study.getMembers()) {
-      if (pM.getPerNo() == member.getPerNo()) {
+    for (Member guilder : study.getMembers()) {
+      if (guilder.getPerNo() == member.getPerNo()) {
         System.out.println(" >> 이미 참여 중인 스터디입니다.");
         return;
       }
