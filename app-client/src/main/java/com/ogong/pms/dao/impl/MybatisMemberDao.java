@@ -63,7 +63,6 @@ public class MybatisMemberDao implements MemberDao {
   @Override
   public Member findByNo(int no) throws Exception {
     return sqlSession.selectOne("MemberMapper.findByNo", no);
-<<<<<<< HEAD
     // try (
     // PreparedStatement stmt = con.prepareStatement("select"
     // + " pm.per_member_no
@@ -90,8 +89,6 @@ public class MybatisMemberDao implements MemberDao {
     //
     // return member;
     // }
-=======
->>>>>>> 21c074302020647e0393cef8d82c6a20995976d0
   }
 
   @Override
