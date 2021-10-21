@@ -89,7 +89,7 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
         ceoMember.setCeoEmail(rs.getString("email"));
         ceoMember.setCeoTel(rs.getString("tel"));
         ceoMember.setCeoPhoto(rs.getString("photo"));
-        ceoMember.setCeoregisteredDate(rs.getDate("created_dt"));
+        ceoMember.setCeoRegisteredDate(rs.getDate("created_dt"));
         ceoMember.setActive(rs.getInt("active"));
         ceoMember.setCeoStatus(rs.getInt("status"));
         ceoMember.setCeoBossName(rs.getString("ceo_bossname"));
@@ -136,7 +136,7 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
       ceoMember.setCeoPassword(rs.getString("password"));
       ceoMember.setCeoTel(rs.getString("tel"));
       ceoMember.setCeoPhoto(rs.getString("photo"));
-      ceoMember.setCeoregisteredDate(rs.getDate("created_dt"));
+      ceoMember.setCeoRegisteredDate(rs.getDate("created_dt"));
       ceoMember.setActive(rs.getInt("active"));
       ceoMember.setCeoStatus(rs.getInt("status"));
       ceoMember.setCeoBossName(rs.getString("ceo_bossname"));
