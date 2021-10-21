@@ -23,11 +23,11 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.impl.MariadbAskBoardDao;
-import com.ogong.pms.dao.impl.MariadbMemberDao;
 import com.ogong.pms.dao.impl.MariadbStudyDao;
 import com.ogong.pms.dao.impl.MybatisAdminDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
+import com.ogong.pms.dao.impl.MybatisMemberDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -220,7 +220,7 @@ public class ClientApp {
 
     // 마이바티스
     AdminDao adminDao = new MybatisAdminDao(sqlSession);
-    //MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    MemberDao memberDao = new MybatisMemberDao(sqlSession);
     CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
@@ -228,7 +228,7 @@ public class ClientApp {
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     // AdminDao adminDao = new MariadbAdminDao(con);
-    MemberDao memberDao = new MariadbMemberDao(con);
+    //MemberDao memberDao = new MariadbMemberDao(con);
     //CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
     //    CafeDao cafeDao = new MariadbCafeDao(con);
