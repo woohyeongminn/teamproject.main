@@ -32,9 +32,6 @@ public class MyStudyListHandler implements Command {
 
     List<Study> studyList = studyDao.findAll();
 
-    // 참여중-----------------------------------------------------------------------
-    // test용으로 setPerMyStudy에 new로 생성해서 값은 안 넣었지만
-    // null값이 있으므로 사이즈로 비교해야 한다.
     System.out.println(" ************** 내 스터디 ************** \n");
 
     //조장일때
@@ -53,17 +50,16 @@ public class MyStudyListHandler implements Command {
       System.out.println();
     }
 
-    System.out.println();
-
     // 구성원일때
     int joinCount = 0;
     System.out.println(" | 👥 구성원 | ");
     for (int i = 0; i < studyList.size(); i++) {
       for (Member mem : studyList.get(i).getMembers()) {
-        if (mem.getPerNo() == member.getPerNo())
+        if (mem.getPerNo() == member.getPerNo()) {
           System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
-        System.out.println();
-        joinCount++;
+          System.out.println();
+          joinCount++;
+        }
       }
     }
 

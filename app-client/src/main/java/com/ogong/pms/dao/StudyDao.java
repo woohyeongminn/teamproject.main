@@ -11,8 +11,8 @@ public interface StudyDao {
   void insertGuilder(Study study, Member member) throws Exception;
   void insertBookmark(Study study, Member member) throws Exception;
   void update(Study study) throws Exception;
-  void updateGuilder(Study study) throws Exception;
-  void delete(int no) throws Exception;
+  void updateGuilder(int studyNo, int memberNo) throws Exception;
+  void deleteGuilder(int studyNo, int memberNo) throws Exception;
   List<Study> findAll() throws Exception;
   Study findByNo(int studyinputNo) throws Exception;
   List<Study> findByKeyword(String keyword) throws Exception;

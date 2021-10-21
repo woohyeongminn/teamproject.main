@@ -66,28 +66,20 @@ public class WatingGuilderListHandler implements Command {
     if (member != null && 
         (myStudy.getOwner().getPerNo() == member.getPerNo())) {
       System.out.println();
-      if (!myStudy.getWatingMember().isEmpty()) {
-        String input = Prompt.inputString(" >> 대기 중인 회원 중 승인할 닉네임을 입력하세요 : ");
 
-        Member m = null;
+      if (!myStudy.getWatingMember().isEmpty()) {
+
+        String input = Prompt.inputString(" >> 대기 중인 회원 중 승인할 닉네임을 입력하세요 : ");
 
         for (Member watingMember : waitingMembers) {    
           if (watingMember.getPerNickname().equals(input)) {
-            myStudy.getMembers().add(watingMember);
-            System.out.printf(" >> '%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
-            m = watingMember;
-            break;
+            studyDao.updateGuilder(myStudy.getStudyNo(), watingMember.getPerNo());
+            System.out.printf(
+                " >> '%s님'이 구성원으로 승인되었습니다.\n", watingMember.getPerNickname());
+            return;
           }
-        }
-        if (m == null) {
-          System.out.println(" >> 닉네임을 다시 입력하세요.");
-        }
-        else {
-          myStudy.getWatingMember().remove(m);
-        }
-        myStudy.setStatus(2);
-        studyDao.updateGuilder(myStudy);
-        return;
+        } 
+        System.out.println(" >> 닉네임을 다시 입력하세요.");
       }
     }
   }
@@ -103,7 +95,6 @@ public class WatingGuilderListHandler implements Command {
       System.out.println();
       if (!myStudy.getWatingMember().isEmpty()) {
         String input = Prompt.inputString(" >> 대기 중인 회원 중 거절할 닉네임을 입력하세요 : ");
-        Member m = new Member();
 
         for (Member watingMember : waitingMembers) {  
 
@@ -112,19 +103,13 @@ public class WatingGuilderListHandler implements Command {
           }
 
           if (watingMember.getPerNickname().equals(input)) {
+            studyDao.deleteGuilder(myStudy.getStudyNo(), watingMember.getPerNo());
             System.out.printf(" >> '%s님'의 구성원 신청이 거절되었습니다.\n", watingMember.getPerNickname());
-            m = watingMember;
             break;
           }
-        }
-        if (m != null) {
-          myStudy.getWatingMember().remove(m);
-          myStudy.setStatus(3);
-          studyDao.update(myStudy);
         }
         return;
       }
     }
   }
-
 }
