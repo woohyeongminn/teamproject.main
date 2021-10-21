@@ -51,7 +51,7 @@
 
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
   select
-    pm.per_member_no per_no,
+    pm.per_member_no member_no,
     m.name,
     m.nickname,
     m.email,
@@ -94,8 +94,7 @@
   
   <select id="findByEmail" resultMap="MemberMap" parameterType="string">
 	  select
-	    pm.per_member_no,
-	    per_no,
+	    pm.per_member_no member_no,
 	    m.name,
 	    m.nickname,
 	    m.email,
