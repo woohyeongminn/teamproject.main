@@ -9,6 +9,9 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
@@ -19,12 +22,12 @@ import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.impl.MariadbAdminDao;
 import com.ogong.pms.dao.impl.MariadbAskBoardDao;
 import com.ogong.pms.dao.impl.MariadbCafeDao;
 import com.ogong.pms.dao.impl.MariadbCeoMemberDao;
-import com.ogong.pms.dao.impl.MariadbMemberDao;
 import com.ogong.pms.dao.impl.MariadbStudyDao;
+import com.ogong.pms.dao.impl.MybatisAdminDao;
+import com.ogong.pms.dao.impl.MybatisMemberDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -212,15 +215,20 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/ogongdb?user=ogong&password=1111");
 
-    //    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-    //        "com/ogong/pms/conf/mybatis-config.xml")).openSession();
+    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
-    // 마이바티스 테스트용 - 개인로그인
-    //    MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    // 마이바티스
+    AdminDao adminDao = new MybatisAdminDao(sqlSession);
+    MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    //    CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
+    //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
+    //    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
+    //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
-    AdminDao adminDao = new MariadbAdminDao(con);
-    MemberDao memberDao = new MariadbMemberDao(con);
+    // AdminDao adminDao = new MariadbAdminDao(con);
+    // MemberDao memberDao = new MariadbMemberDao(con);
     CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
     CafeDao cafeDao = new MariadbCafeDao(con);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminMapper">
+  
+  <resultMap type="Admin" id="AdminMap">
+    <id column="admin_no" property="masterNo"/> 
+    <result column="nickname" property="masterNickname"/>
+    <result column="email" property="masterEmail"/>
+    <result column="password" property="masterPassword"/>
+  </resultMap>
+  
+  <select id="findByEmailAndPassword" resultMap="AdminMap" parameterType="map">
+    select
+      admin_no,
+      nickname,
+      email,
+      password
+    from admin
+    where email=#{email} and password=password(#{password})
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+

@@ -24,6 +24,7 @@
   
   <mappers>
     <mapper resource="com/ogong/pms/mapper/MemberMapper.xml"/>
+    <mapper resource="com/ogong/pms/mapper/AdminMapper.xml"/>
   </mappers>
 </configuration>
 

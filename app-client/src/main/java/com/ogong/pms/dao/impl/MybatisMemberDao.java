@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -59,33 +58,7 @@ public class MybatisMemberDao implements MemberDao {
 
   @Override
   public List<Member> findAll() throws Exception {
-    try (
-        PreparedStatement stmt = con.prepareStatement("select"
-            + " pm.per_member_no per_no,m.name,m.nickname,m.email,m.tel,m.photo,m.created_dt,m.active,m.status"
-            + " from member m" + " join per_member pm on m.member_no=pm.member_no"
-            + " order by name asc");
-
-        ResultSet rs = stmt.executeQuery()) {
-
-      ArrayList<Member> list = new ArrayList<>();
-
-      while (rs.next()) {
-        Member member = new Member();
-        member.setPerNo(rs.getInt("per_no"));
-        member.setPerName(rs.getString("name"));
-        member.setPerNickname(rs.getString("nickname"));
-        member.setPerEmail(rs.getString("email"));
-        member.setPerTel(rs.getString("tel"));
-        member.setPerPhoto(rs.getString("photo"));
-        member.setPerRegisteredDate(rs.getDate("created_dt"));
-        member.setActive(rs.getInt("active"));
-        member.setPerStatus(rs.getInt("status"));
-
-        list.add(member);
-      }
-
-      return list;
-    }
+    return sqlSession.selectList("MemberMapper.findAll");
   }
 
   @Override
