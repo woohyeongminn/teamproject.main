@@ -52,7 +52,6 @@ import com.ogong.pms.handler.admin.AdminDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.admin.AdminMemberDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberListHandler;
-import com.ogong.pms.handler.admin.AdminMemberUpdateHandler;
 import com.ogong.pms.handler.admin.AdminNoticeAddHandler;
 import com.ogong.pms.handler.admin.AdminNoticeDeleteHandler;
 import com.ogong.pms.handler.admin.AdminNoticeDetailHandler;
@@ -282,7 +281,7 @@ public class ClientApp {
     commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberDao));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
-    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));
+    //    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao));
 

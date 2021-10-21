@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
@@ -240,58 +240,58 @@ public class MariadbCafeDao implements CafeDao {
     }
   }
 
-  @Override
-  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into studycafe("
-            + " name,info,location,phone,open_time,close_time,ceo_member_no,operating_status_no)"
-            + " values(?,?,?,?,?,?,?,1)",
-            Statement.RETURN_GENERATED_KEYS)) {
-
-      stmt.setString(1, cafe.getName());
-      stmt.setString(2, cafe.getInfo());
-      stmt.setString(3, cafe.getLocation());
-      stmt.setString(4, cafe.getPhone());
-      stmt.setTime(5, Time.valueOf(cafe.getOpenTime()));
-      stmt.setTime(6, Time.valueOf(cafe.getCloseTime()));
-      stmt.setInt(7, cafe.getCeoMember().getCeoNo());
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("카페 등록 실패!");
-      }
-
-      int cafeNo = 0;
-      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
-        if (pkRS.next()) {
-          cafeNo = pkRS.getInt("cafe_no");
-        }
-      }
-
-      if (!fileNames.isEmpty()) {
-        try (PreparedStatement stmt2 = con.prepareStatement(
-            "insert into studycafe_photo(name, cafe_no) values(?,?)")) {
-          for (String fileName : fileNames) {
-            stmt2.setString(1, fileName);
-            stmt2.setInt(2, cafeNo);
-            stmt2.executeUpdate();
-          }
-        }
-      }
-
-      if (!holidays.isEmpty()) {
-        try (PreparedStatement stmt3 = con.prepareStatement(
-            "insert into studycafe_holiday(cafe_no, date) values(?,?)")) {
-          for (Date date : holidays) {
-            stmt3.setInt(1, cafeNo);
-            stmt3.setDate(2, date);
-            stmt3.executeUpdate();
-          }
-        }
-      }
-
-      System.out.println(" >> 카페 등록 완료!");
-    }
-  }
+  //  @Override
+  //  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays) throws Exception {
+  //    try (PreparedStatement stmt = con.prepareStatement(
+  //        "insert into studycafe("
+  //            + " name,info,location,phone,open_time,close_time,ceo_member_no,operating_status_no)"
+  //            + " values(?,?,?,?,?,?,?,1)",
+  //            Statement.RETURN_GENERATED_KEYS)) {
+  //
+  //      stmt.setString(1, cafe.getName());
+  //      stmt.setString(2, cafe.getInfo());
+  //      stmt.setString(3, cafe.getLocation());
+  //      stmt.setString(4, cafe.getPhone());
+  //      stmt.setTime(5, Time.valueOf(cafe.getOpenTime()));
+  //      stmt.setTime(6, Time.valueOf(cafe.getCloseTime()));
+  //      stmt.setInt(7, cafe.getCeoMember().getCeoNo());
+  //
+  //      if (stmt.executeUpdate() == 0) {
+  //        throw new Exception("카페 등록 실패!");
+  //      }
+  //
+  //      int cafeNo = 0;
+  //      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
+  //        if (pkRS.next()) {
+  //          cafeNo = pkRS.getInt("cafe_no");
+  //        }
+  //      }
+  //
+  //      if (!fileNames.isEmpty()) {
+  //        try (PreparedStatement stmt2 = con.prepareStatement(
+  //            "insert into studycafe_photo(name, cafe_no) values(?,?)")) {
+  //          for (String fileName : fileNames) {
+  //            stmt2.setString(1, fileName);
+  //            stmt2.setInt(2, cafeNo);
+  //            stmt2.executeUpdate();
+  //          }
+  //        }
+  //      }
+  //
+  //      if (!holidays.isEmpty()) {
+  //        try (PreparedStatement stmt3 = con.prepareStatement(
+  //            "insert into studycafe_holiday(cafe_no, date) values(?,?)")) {
+  //          for (Date date : holidays) {
+  //            stmt3.setInt(1, cafeNo);
+  //            stmt3.setDate(2, date);
+  //            stmt3.executeUpdate();
+  //          }
+  //        }
+  //      }
+  //
+  //      System.out.println(" >> 카페 등록 완료!");
+  //    }
+  //  }
 
   @Override
   public void updateCafe(Cafe cafe) throws Exception {
@@ -910,6 +910,13 @@ public class MariadbCafeDao implements CafeDao {
         System.out.println(" >> 예약을 거절하였습니다.");
       }
     }
+  }
+
+  @Override
+  public void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays)
+      throws Exception {
+    // TODO Auto-generated method stub
+
   }
 
 
