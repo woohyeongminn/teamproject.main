@@ -169,10 +169,11 @@ public class MybatisMemberDao implements MemberDao {
   }
 
   @Override
-  public Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
+  public Member findByEmailAndPassword(String inputEmail, String inputPassword, int inputActive) throws Exception {
     HashMap<String,Object> params = new HashMap<>();
     params.put("email", inputEmail);
     params.put("password", inputPassword);
+    params.put("active", inputActive);
 
     return sqlSession.selectOne("MemberMapper.findByEmailAndPassword", params);
   }
