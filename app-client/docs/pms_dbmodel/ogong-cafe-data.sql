@@ -39,7 +39,11 @@ values (4, 'ddd.jpg', 4);
 
 -- 카페 휴무일
 insert into studycafe_holiday(holiday_no, cafe_no, date)
-values (1, 1, '2021-11-20');
+values (1, 1, '2021-10-30');
+insert into studycafe_holiday(holiday_no, cafe_no, date)
+values (2, 1, '2021-11-20');
+insert into studycafe_holiday(holiday_no, cafe_no, date)
+values (3, 1, '2021-11-21');
 
 -- 카페 스터디룸
 insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)

@@ -8,10 +8,11 @@ public interface StudyDao {
 
   // --------------- [ 스터디 ] ----------------------------------------
   void insert(Study study) throws Exception;
-  void insertGuilder(Study study, Member member) throws Exception;
+  void insertGuilder(int studyNo, int memberNo) throws Exception;
   void insertBookmark(Study study, Member member) throws Exception;
   void update(Study study) throws Exception;
   void updateGuilder(int studyNo, int memberNo) throws Exception;
+  void delete(int studyNo, int memberNo) throws Exception;
   void deleteGuilder(int studyNo, int memberNo) throws Exception;
   List<Study> findAll() throws Exception;
   Study findByNo(int studyinputNo) throws Exception;

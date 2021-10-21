@@ -40,13 +40,13 @@ public class MariadbStudyDao implements StudyDao {
     }
   }
 
-  public void insertGuilder(Study study, Member member) throws Exception {
+  public void insertGuilder(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into study_guilder(study_no, per_member_no) values(?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
 
-      stmt.setInt(1, study.getStudyNo());
-      stmt.setInt(2, member.getPerNo());
+      stmt.setInt(1, studyNo);
+      stmt.setInt(2, memberNo);
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("구성원 데이터 저장 실패!");
@@ -100,6 +100,21 @@ public class MariadbStudyDao implements StudyDao {
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("스터디 데이터 변경 실패!");
+      }
+    }
+  }
+
+  @Override
+  public void delete(int studyNo, int memberNo) throws Exception {
+    try (PreparedStatement stmt = 
+        con.prepareStatement("delete from study"
+            + " where study_no=? and per_member_no=?")) {
+
+      stmt.setInt(1, studyNo);
+      stmt.setInt(2, memberNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("스터디 데이터 삭제 실패!");
       }
     }
   }

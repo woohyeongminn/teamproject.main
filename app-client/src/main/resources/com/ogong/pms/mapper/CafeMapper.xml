@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CafeMapper">
+  
+  <resultMap type="Cafe" id="CafeMap">
+    <id column="member_no" property="ceoNo"/> 
+    <result column="name" property="ceoName"/>
+    <result column="nickname" property="ceoNickname"/>
+    <result column="email" property="ceoEmail"/>
+    <result column="password" property="ceoPassword"/>
+    <result column="tel" property="ceoTel"/>
+    <result column="photo" property="ceoPhoto"/>
+    <result column="created_dt" property="ceoRegisteredDate"/>
+    <result column="status" property="ceoStatus"/>
+    <result column="active" property="active"/>
+    <result column="bossName" property="ceoBossName"/>
+    <result column="license_no" property="ceoLicenseNo"/>
+  </resultMap>
+  
+
+</mapper>
+
+
+
+
+
+
+

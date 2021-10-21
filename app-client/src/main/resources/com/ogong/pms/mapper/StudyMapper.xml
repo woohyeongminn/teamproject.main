@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="MemberMapper">
+<mapper namespace="StudyMapper">
   
   <resultMap type="Member" id="MemberMap">
     <id column="member_no" property="perNo"/> 
@@ -17,7 +17,9 @@
     <result column="status" property="perStatus"/>
     <result column="active" property="active"/>
   </resultMap>
-
+  
+  <!-- per_no 말고 member_no 로 쓰기 -->
+  
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select
       pm.per_member_no member_no,
@@ -34,41 +36,23 @@
   <select id="findAll" resultMap="MemberMap">
   select
     pm.per_member_no member_no,
-     m.name,
-     m.nickname,
-     m.email,
-     m.tel,
-     m.photo,
-     m.created_dt,
-     m.active,
-     m.status
+	  m.name,
+	  m.nickname,
+	  m.email,
+	  m.tel,
+	  m.photo,
+	  m.created_dt,
+	  m.active,
+	  m.status
   from
     member m
   join
     per_member pm on m.member_no=pm.member_no
   order by name asc
   </select>
-
-  <select id="findByNo" resultMap="MemberMap" parameterType="int">
-  select
-    pm.per_member_no per_no,
-    m.name,
-    m.nickname,
-    m.email,
-    m.tel,
-    m.photo,
-    m.created_dt,
-    m.active,
-    m.status
-  from
-    member m
-  join
-    per_member pm on pm.member_no=m.member_no
-  where
-    pm.per_member_no=#{no}
-  </select>
-
+  
 </mapper>
+
 
 
 
