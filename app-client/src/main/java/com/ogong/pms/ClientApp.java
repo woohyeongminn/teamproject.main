@@ -9,9 +9,6 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
@@ -215,8 +212,8 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/ogongdb?user=ogong&password=1111");
 
-    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-        "com/ogong/pms/conf/mybatis-config.xml")).openSession();
+    //    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+    //        "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
     // 마이바티스
     MemberDao memberDao = new MybatisMemberDao(sqlSession);

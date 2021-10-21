@@ -1,6 +1,6 @@
 package com.ogong.pms.handler.myStudy;
 
-import java.util.Collection;
+import java.util.List;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -30,7 +30,7 @@ public class MyStudyListHandler implements Command {
       return;
     }
 
-    Collection<Study> studyList = studyDao.findAll();
+    List<Study> studyList = studyDao.findAll();
 
     // 참여중-----------------------------------------------------------------------
     // test용으로 setPerMyStudy에 new로 생성해서 값은 안 넣었지만
@@ -41,7 +41,7 @@ public class MyStudyListHandler implements Command {
     int ownerCount = 0;
     System.out.println(" | 👤 조장 | ");
     for (Study study : studyList) {
-      if (study.getOwner().getPerNickname().equals(member.getPerNickname())) {
+      if (study.getOwner().getPerNo() == member.getPerNo()) {
         System.out.printf(" (%s) [%s]\n", study.getStudyNo(), study.getStudyTitle());
         System.out.println();
         ownerCount++;
@@ -58,9 +58,10 @@ public class MyStudyListHandler implements Command {
     // 구성원일때
     int joinCount = 0;
     System.out.println(" | 👥 구성원 | ");
-    for (Study study : studyList) {
-      if (study.getMemberNames().contains(member.getPerNickname())) {
-        System.out.printf(" (%s) [%s]\n", study.getStudyNo(), study.getStudyTitle());
+    for (int i = 0; i < studyList.size(); i++) {
+      for (Member mem : studyList.get(i).getMembers()) {
+        if (mem.getPerNo() == member.getPerNo())
+          System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
         System.out.println();
         joinCount++;
       }
@@ -75,12 +76,14 @@ public class MyStudyListHandler implements Command {
     System.out.println(" ************** 승인 대기 중 ************** \n");
 
     int waitCount = 0;
-    for (Study study : studyList) {
-      if (study.getWatingMemberNames().contains(member.getPerNickname())) {
-        System.out.printf(" (%s) [%s]\n", study.getStudyNo(),
-            study.getStudyTitle());
-        System.out.println();
-        waitCount++;
+    for (int i = 0; i < studyList.size(); i++) {
+      for (Member mem : studyList.get(i).getWatingMember()) {
+        if (mem.getPerNo() == member.getPerNo()) {
+          System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(),
+              studyList.get(i).getStudyTitle());
+          System.out.println();
+          waitCount++;
+        }
       }
     }
 

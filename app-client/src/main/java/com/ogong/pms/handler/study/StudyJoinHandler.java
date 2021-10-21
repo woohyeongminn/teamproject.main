@@ -29,14 +29,14 @@ public class StudyJoinHandler implements Command {
     Study study = studyDao.findByNo(inputNo);
 
     for (Member pM : study.getMembers()) {
-      if (pM.getPerNickname().equals(member.getPerNickname())) {
+      if (pM.getPerNo() == member.getPerNo()) {
         System.out.println(" >> 이미 참여 중인 스터디입니다.");
         return;
       }
     }
 
     for (Member memberWating : study.getWatingMember()) {
-      if (member.getPerNickname().equals(memberWating.getPerNickname())) {
+      if (memberWating.getPerNo() == member.getPerNo()) {
         System.out.println(" >> 이미 승인 대기 중인 스터디입니다.");
         return;
       }
@@ -53,7 +53,6 @@ public class StudyJoinHandler implements Command {
       return;
     }
     study.getWatingMember().add(member);
-    //study.setStatus(1);
 
     studyDao.insertGuilder(study,member);
 

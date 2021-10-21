@@ -32,18 +32,15 @@ public class GuilderListHandler implements Command {
     System.out.println(" 👥 구성원 : " + myStudy.getMemberNames());
 
     // 조장만 보임
-    if (!AuthPerMemberLoginHandler.getLoginUser().getPerNickname().equals(
-        myStudy.getOwner().getPerNickname())) {
+    if (AuthPerMemberLoginHandler.getLoginUser().getPerNo() !=
+        myStudy.getOwner().getPerNo()) {
       return;
     }
 
-    if(AuthPerMemberLoginHandler.getLoginUser().getPerNickname().equals(
-        myStudy.getOwner().getPerNickname()) && !myStudy.getWatingMemberNames().isEmpty()) {
+    if(!myStudy.getWatingMemberNames().isEmpty()) {
       System.out.printf("\n ★ > 승인 대기 중인 회원이 %d명 있습니다.", myStudy.getWatingMember().size());
-    } 
 
-    else if(AuthPerMemberLoginHandler.getLoginUser().getPerNickname().equals(
-        myStudy.getOwner().getPerNickname()) && myStudy.getWatingMemberNames().isEmpty()) {
+    } else if(myStudy.getWatingMemberNames().isEmpty()) {
       System.out.println("\n ☆ > 승인 대기 중인 회원이 없습니다.");
     }
 
