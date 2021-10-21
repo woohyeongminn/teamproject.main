@@ -67,6 +67,66 @@
   where
     pm.per_member_no=#{no}
   </select>
+  
+  <insert id="insert" parameterType="member">
+		insert into member(name,nickname,email,password,tel,photo,status)
+		values(#{name},#{nickname},#{email},password(#{password}),#{tel},#{photo},#{status})
+  </insert>
+  
+  <select id="findByNickName" resultMap="MemberMap" parameterType="string">
+	  select
+	    pm.per_member_no,
+	    m.name,
+	    m.nickname,
+	    m.email,
+	    m.tel,
+	    m.photo,
+	    m.created_dt,
+	    m.active,
+	    m.status
+	  from
+	    member m
+	  join
+	    per_member pm on m.member_no=pm.member_no
+	  where
+	    nickname=#{nickname}
+  </select>
+  
+  <select id="findByEmail" resultMap="MemberMap" parameterType="string">
+	  select
+	    pm.per_member_no,
+	    per_no,
+	    m.name,
+	    m.nickname,
+	    m.email,
+	    m.tel,
+	    m.photo,
+	    m.created_dt,
+	    m.active,
+	    m.status
+	  from
+	    member m
+	  join
+	    per_member pm on m.member_no=pm.member_no
+	  where
+	    email=#{email}
+  </select>
+  
+  <update id="updateName" parameterType="member">
+  update member set
+    name=#{name}
+  where
+    member_no=#{no}
+  (select member_no from per_member where per_member_no=#{no})
+  </update>
+  
+  <update id="updateNickname" parameterType="member">
+  update member set
+    nickname=#{nickname}
+  where
+    member_no=#{no}
+  (select member_no from per_member where per_member_no=#{no})
+  </update>
 
 </mapper>
 
