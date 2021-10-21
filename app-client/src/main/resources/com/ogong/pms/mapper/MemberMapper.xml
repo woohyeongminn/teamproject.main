@@ -151,6 +151,14 @@
     member_no=#{no}
   (select member_no from per_member where per_member_no=#{no})
   </update>
+  
+  <update id="updatePassword" parameterType="member">
+  update member set
+    password=password(#{password})
+  where
+    member_no=#{no}
+  (select member_no from per_member where per_member_no=#{no})
+  </update>
 
 </mapper>
 
