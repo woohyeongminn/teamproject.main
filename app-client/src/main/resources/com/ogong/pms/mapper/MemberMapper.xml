@@ -117,7 +117,12 @@
     name=#{name}
   where
     member_no=#{no}
-  (select member_no from per_member where per_member_no=#{no})
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
   </update>
   
   <update id="updateNickname" parameterType="member">
@@ -125,7 +130,12 @@
     nickname=#{nickname}
   where
     member_no=#{no}
-  (select member_no from per_member where per_member_no=#{no})
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
   </update>
   
   <update id="updatePhoto" parameterType="member">
@@ -133,7 +143,12 @@
     photo=#{photo}
   where
     member_no=#{no}
-  (select member_no from per_member where per_member_no=#{no})
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
   </update>
   
   <update id="updateTel" parameterType="member">
@@ -141,7 +156,12 @@
     tel=#{tel}
   where
     member_no=#{no}
-  (select member_no from per_member where per_member_no=#{no})
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
   </update>
   
   <update id="updateEmail" parameterType="member">
@@ -149,7 +169,12 @@
     email=#{email}
   where
     member_no=#{no}
-  (select member_no from per_member where per_member_no=#{no})
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
   </update>
   
   <update id="updatePassword" parameterType="member">
@@ -157,7 +182,25 @@
     password=password(#{password})
   where
     member_no=#{no}
-  (select member_no from per_member where per_member_no=#{no})
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
+  
+   <update id="updateActive" parameterType="member">
+  update member set
+    active=2 
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
   </update>
 
 </mapper>
