@@ -36,14 +36,14 @@
   <select id="findAll" resultMap="MemberMap">
   select
     pm.per_member_no member_no,
-	  m.name,
-	  m.nickname,
-	  m.email,
-	  m.tel,
-	  m.photo,
-	  m.created_dt,
-	  m.active,
-	  m.status
+     m.name,
+     m.nickname,
+     m.email,
+     m.tel,
+     m.photo,
+     m.created_dt,
+     m.active,
+     m.status
   from
     member m
   join
@@ -51,8 +51,27 @@
   order by name asc
   </select>
   
+  <!--
+  <select id="findByNo" resultMap="MemberMap" parameterType="int">
+  select
+    pm.per_member_no per_no,
+    m.name,
+    m.nickname,
+    m.email,
+    m.tel,
+    m.photo,
+    m.created_dt,
+    m.active,
+    m.status
+  from
+    member m
+  join
+    per_member pm on pm.member_no=m.member_no
+  where
+    pm.per_member_no=#{no}
+  </select>
+  -->
 </mapper>
-
 
 
 
