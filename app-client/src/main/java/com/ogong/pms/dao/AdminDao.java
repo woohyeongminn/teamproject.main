@@ -1,8 +1,6 @@
 package com.ogong.pms.dao;
 
-import java.util.List;
 import com.ogong.pms.domain.Admin;
-import com.ogong.pms.domain.AdminNotice;
 
 public interface AdminDao {
 
@@ -12,17 +10,7 @@ public interface AdminDao {
   void updateEmail(Admin admin) throws Exception;
   void updatePassword(Admin admin) throws Exception;
   Admin findByAdminNo(int no) throws Exception;
-  // ---------- [ 공지사항 ] -----------------------------------------------------
-
-  void insert(AdminNotice adminNotice) throws Exception;
-  void insertFilepath(AdminNotice adminNotice) throws Exception;
-  void updateTitle(AdminNotice notice) throws Exception;
-  void updateContent(AdminNotice notice) throws Exception;
-  void updateFilepath(AdminNotice notice) throws Exception;
-  void delete(int noticeNo) throws Exception;
-  List<AdminNotice> findAll() throws Exception;
   Admin findByEmailAndPassword(String email, String password) throws Exception;
-  AdminNotice findByNoticeNo(int noticeNo) throws Exception;
 
 }
 
