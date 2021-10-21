@@ -15,8 +15,8 @@
     <result column="filepath" property="adminNotiFile"/>
     
   </resultMap>
-    
-  <select id="findAll" resultMap="NoticeMap" parameterType="map">
+  
+  <sql id="select1">
     select
       n.notice_no,
       n.title,
@@ -27,34 +27,65 @@
     from
       notice n
       left outer join notice_file nf on n.notice_no=nf.notice_no
+    </sql>
+    
+  <insert id="insert" parameterType="AdminNotice" 
+          useGeneratedKeys="true" keyColumn="notice_no" keyProperty="adminNotiNo">
+    insert into notice(title,content,create_dt)
+    values(#{adminNotiTitle},#{adminNotiContent},#{adminNotiRegisteredDate})
+  </insert>
+  
+  <insert id="insertnoitcefile" parameterType="map">
+    insert into notice_file(notice_no,filepath)
+    values(#{adminNotiNo},#{adminNotiFile})
+  </insert>
+    
+  <select id="findAll" resultMap="NoticeMap" parameterType="map">
+    <include refid="select1"/>
     order by
       n.notice_no asc
   </select>
     
   <select id="findByNoticeNo" resultMap="NoticeMap" parameterType="int">
+    <include refid="select1"/>
     where
-      admin_no=#{no}
+      n.notice_no=#{no}
   </select>
     
-    <!-- 
-  <update id="updateNickname" parameterType="admin">
-    update admin set
-      nickname=#{masterNickname}
-    where admin_no=#{masterNo}
-  </update>
-  
-  <update id="updateEmail" parameterType="admin">
-    update admin set
-      email=#{masterEmail}
-    where admin_no=#{masterNo}
-  </update>
-  
-  <update id="updatePassword" parameterType="admin">
-    update admin set
-      password=password(#{masterPassword})
-    where admin_no=#{masterNo}
+  <update id="updateTitle" parameterType="AdminNotice">
+    update notice set
+      title=#{adminNotiTitle}
+    where notice_no=#{adminNotiNo}
   </update>
     
+  <update id="updateContent" parameterType="AdminNotice">
+    update notice set
+      content=#{adminNotiContent}
+    where notice_no=#{adminNotiNo}
+  </update>
+  
+  <insert id="insertFilepath" parameterType="map">
+    insert into notice_file(notice_no,filepath)
+    values(#{adminNotiNo},#{adminNotiFile})
+  </insert>
+  
+  <delete id="deletenoticefile" parameterType="int">
+    delete from notice_file
+    where notice_no=#{fileNo}
+  </delete>
+  
+  <delete id="delete" parameterType="int">
+    delete from notice
+    where notice_no=#{noticeNo}
+  </delete>
+    
+  <!-- 
+    
+  <update id="updateFilepath" parameterType="AdminNotice">
+    update notice set
+      filepath=#{adminNotiFile}
+    where notice_file_no=#{adminNotiFileNo}
+  </update>
 
    -->
 
