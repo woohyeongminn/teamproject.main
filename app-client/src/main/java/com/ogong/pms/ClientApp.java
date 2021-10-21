@@ -9,6 +9,9 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.ogong.context.ApplicationContextListener;
 import com.ogong.menu.Menu;
 import com.ogong.menu.MenuFilter;
@@ -212,12 +215,16 @@ public class ClientApp {
     con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/ogongdb?user=ogong&password=1111");
 
-    //    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-    //        "com/ogong/pms/conf/mybatis-config.xml")).openSession();
+    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
+        "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
     // 마이바티스
-    MemberDao memberDao = new MybatisMemberDao(sqlSession);
     AdminDao adminDao = new MybatisAdminDao(sqlSession);
+    MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    //    CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
+    //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
+    //    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
+    //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     // AdminDao adminDao = new MariadbAdminDao(con);
