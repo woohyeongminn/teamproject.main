@@ -1,6 +1,6 @@
 package com.ogong.pms.handler.admin;
 
-import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -8,12 +8,11 @@ import com.ogong.util.Prompt;
 
 public class AdminNoticeUpdateHandler implements Command {
 
-  AdminDao adminDao;
+  NoticeDao noticeDao;
 
-  public AdminNoticeUpdateHandler(AdminDao adminDao) {
-    this.adminDao = adminDao;
+  public AdminNoticeUpdateHandler(NoticeDao noticeDao) {
+    this.noticeDao = noticeDao;
   }
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -21,7 +20,7 @@ public class AdminNoticeUpdateHandler implements Command {
     System.out.println();
     int noticeNo = (int) request.getAttribute("noticeNo");
 
-    AdminNotice notice = adminDao.findByNoticeNo(noticeNo);
+    AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
     System.out.println("1. 제목");
     System.out.println("2. 내용");
@@ -73,15 +72,15 @@ public class AdminNoticeUpdateHandler implements Command {
 
     if (selectNo == 1) {
       notice.setAdminNotiTitle(adminNoticeTitle);
-      adminDao.updateTitle(notice);
+      noticeDao.updateTitle(notice);
     } else if (selectNo == 2) {
       notice.setAdminNotiContent(adminNoticeContent);
-      adminDao.updateContent(notice);
+      noticeDao.updateContent(notice);
     } else if (selectNo == 3) {
-      adminDao.insertFilepath(notice);
+      noticeDao.insertFilepath(notice);
     } else if (selectNo == 4) {
       notice.setAdminNotiFile(adminNoticeFile);
-      adminDao.updateFilepath(notice);
+      noticeDao.updateFilepath(notice);
     }
 
     System.out.println(" >> 공지가 변경되었습니다.");

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NoticeMapper">
+  
+  <resultMap type="AdminNotice" id="NoticeMap">
+    <id column="notice_no" property="adminNotiNo"/> 
+    <result column="title" property="adminNotiTitle"/>
+    <result column="content" property="adminNotiContent"/>
+    <result column="create_dt" property="adminNotiRegisteredDate"/>
+    
+    <result column="notice_file_no" property="adminNotiFileNo"/>
+    <result column="filepath" property="adminNotiFile"/>
+    
+  </resultMap>
+    
+  <select id="findAll" resultMap="NoticeMap" parameterType="map">
+    select
+      n.notice_no,
+      n.title,
+      n.content,
+      n.create_dt,
+      nf.notice_file_no,
+      nf.filepath
+    from
+      notice n
+      left outer join notice_file nf on n.notice_no=nf.notice_no
+    order by
+      n.notice_no asc
+  </select>
+    
+  <select id="findByNoticeNo" resultMap="NoticeMap" parameterType="int">
+    where
+      admin_no=#{no}
+  </select>
+    
+    <!-- 
+  <update id="updateNickname" parameterType="admin">
+    update admin set
+      nickname=#{masterNickname}
+    where admin_no=#{masterNo}
+  </update>
+  
+  <update id="updateEmail" parameterType="admin">
+    update admin set
+      email=#{masterEmail}
+    where admin_no=#{masterNo}
+  </update>
+  
+  <update id="updatePassword" parameterType="admin">
+    update admin set
+      password=password(#{masterPassword})
+    where admin_no=#{masterNo}
+  </update>
+    
+
+   -->
+
+</mapper>
+
+
+
+
+
+
+
