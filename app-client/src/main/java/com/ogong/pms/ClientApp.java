@@ -231,7 +231,7 @@ public class ClientApp {
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     // AdminDao adminDao = new MariadbAdminDao(con);
-    // MemberDao memberDao = new MariadbMemberDao(con);
+    //MemberDao memberDao = new MariadbMemberDao(con);
     //CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
     //    CafeDao cafeDao = new MariadbCafeDao(con);
