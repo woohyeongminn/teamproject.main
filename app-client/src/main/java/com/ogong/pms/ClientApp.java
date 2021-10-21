@@ -23,9 +23,9 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.impl.MariadbAskBoardDao;
-import com.ogong.pms.dao.impl.MariadbCafeDao;
 import com.ogong.pms.dao.impl.MariadbStudyDao;
 import com.ogong.pms.dao.impl.MybatisAdminDao;
+import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
 import com.ogong.pms.dao.impl.MybatisMemberDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
@@ -223,7 +223,7 @@ public class ClientApp {
     MemberDao memberDao = new MybatisMemberDao(sqlSession);
     CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
-    //    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
+    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
     //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
@@ -231,7 +231,7 @@ public class ClientApp {
     // MemberDao memberDao = new MariadbMemberDao(con);
     //CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
     AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
-    CafeDao cafeDao = new MariadbCafeDao(con);
+    //    CafeDao cafeDao = new MariadbCafeDao(con);
     StudyDao studyDao = new MariadbStudyDao(con);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
