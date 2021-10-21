@@ -123,15 +123,10 @@ where
 
 -- updateName
 update member set
-  name=#{name}
+  name='반반미술'
 where
-  member_no=#{no}
-(select
-  member_no
-from
-  per_member
-where
-  per_member_no=#{no})
+  member_no=2
+(select member_no from per_member where per_member_no=2);
 
 -- updateNickname
 update member set

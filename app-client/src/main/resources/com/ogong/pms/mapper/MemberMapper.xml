@@ -18,6 +18,23 @@
     <result column="active" property="active"/>
   </resultMap>
 
+	<sql id="select1">
+	select
+    pm.per_member_no member_no,
+    m.name,
+    m.nickname,
+    m.email,
+    m.tel,
+    m.photo,
+    m.created_dt,
+    m.active,
+    m.status
+  from
+    member m
+  join
+    per_member pm on m.member_no=pm.member_no
+	</sql>
+
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select
       pm.per_member_no member_no,
@@ -32,38 +49,12 @@
   </select>
   
   <select id="findAll" resultMap="MemberMap">
-  select
-    pm.per_member_no member_no,
-     m.name,
-     m.nickname,
-     m.email,
-     m.tel,
-     m.photo,
-     m.created_dt,
-     m.active,
-     m.status
-  from
-    member m
-  join
-    per_member pm on m.member_no=pm.member_no
+    <include refid="select1"/>
   order by name asc
   </select>
 
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
-  select
-    pm.per_member_no member_no,
-    m.name,
-    m.nickname,
-    m.email,
-    m.tel,
-    m.photo,
-    m.created_dt,
-    m.active,
-    m.status
-  from
-    member m
-  join
-    per_member pm on pm.member_no=m.member_no
+    <include refid="select1"/>
   where
     pm.per_member_no=#{no}
   </select>
@@ -74,41 +65,15 @@
   </insert>
   
   <select id="findByNickName" resultMap="MemberMap" parameterType="string">
-	  select
-	    pm.per_member_no,
-	    m.name,
-	    m.nickname,
-	    m.email,
-	    m.tel,
-	    m.photo,
-	    m.created_dt,
-	    m.active,
-	    m.status
-	  from
-	    member m
-	  join
-	    per_member pm on m.member_no=pm.member_no
-	  where
-	    nickname=#{nickname}
+    <include refid="select1"/>
+  where
+    nickname=#{nickname}
   </select>
   
   <select id="findByEmail" resultMap="MemberMap" parameterType="string">
-	  select
-	    pm.per_member_no member_no,
-	    m.name,
-	    m.nickname,
-	    m.email,
-	    m.tel,
-	    m.photo,
-	    m.created_dt,
-	    m.active,
-	    m.status
-	  from
-	    member m
-	  join
-	    per_member pm on m.member_no=pm.member_no
-	  where
-	    email=#{email}
+    <include refid="select1"/>
+  where
+    email=#{email}
   </select>
   
   <update id="updateName" parameterType="member">
@@ -189,7 +154,7 @@
     per_member_no=#{no})
   </update>
   
-   <update id="updateActive" parameterType="member">
+  <update id="updateActive" parameterType="member">
   update member set
     active=2 
   where
