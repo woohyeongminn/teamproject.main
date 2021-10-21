@@ -1,7 +1,9 @@
 package com.ogong.pms.handler.member;
 
+import com.ogong.menu.Menu;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
@@ -100,7 +102,13 @@ public class CeoUpdateHandler implements Command {
     } else if (selectNo == 6) {
       ceoMember.setCeoPassword(ceoPassword);
       ceoMemberDao.updatePassword(ceoMember);
+
+      AuthCeoMemberLoginHandler.loginCeoMember = null;
+      AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
+      System.out.println(" >> 로그아웃되었습니다.\n");
+      return;
     }
+
     //    ceoMember.setceoStoreName(ceoStoreName);
     //    ceoMember.setceoStoreDetailAddress(ceoStoreDetailAddress);
 

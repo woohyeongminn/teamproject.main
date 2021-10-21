@@ -27,7 +27,12 @@ public class CeoDeleteHandler implements Command {
       return;
     }
 
-    int no = (int) request.getAttribute("inputCeoNo");
+    int no;
+    try {
+      no = (int) request.getAttribute("inputCeoNo");
+    } catch (NullPointerException e) {
+      no = AuthCeoMemberLoginHandler.getLoginCeoMember().getCeoNo();
+    }
 
     CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
@@ -43,8 +48,9 @@ public class CeoDeleteHandler implements Command {
     System.out.println();
     System.out.println(" << 비밀번호 확인 >>");
     String inputPW = Prompt.inputString(" 비밀번호를 입력하세요 : ");
+    int active = CeoMember.INUSER;
 
-    CeoMember ceo = ceoMemberDao.findByEmailAndPassword(inputEmail, inputPW);
+    CeoMember ceo = ceoMemberDao.findByEmailAndPassword(inputEmail, inputPW, active);
 
     if (ceo == null) {
       System.out.println();
@@ -57,6 +63,16 @@ public class CeoDeleteHandler implements Command {
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 회원 탈퇴를 취소하였습니다.");
       return;
+    }
+
+    if (input.equals("네")) {
+      ceoMember.setCeoBossName("탈퇴한 회원: (" + ceoMember.getCeoBossName() + ")");
+      ceoMember.setCeoEmail("Deleted Email");
+      ceoMember.setCeoPassword("Deleted Password");
+      ceoMember.setCeoPhoto("Deleted Photo");
+      ceoMember.setCeoLicenseNo("Deleted LicenseNo");
+      ceoMember.setCeoStatus(CeoMember.CEO);
+      ceoMember.setActive(CeoMember.OUTUSER);
     }
 
     // 카페삭제
