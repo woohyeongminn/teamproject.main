@@ -29,7 +29,7 @@ public class MyStudyDetailHandler implements Command {
 
     Study s = new Study();
 
-    Study myStudy = studyDao.findMyStudy(member.getPerNo(), studyNo);
+    Study myStudy = studyDao.findByNo(studyNo);
 
     if (myStudy != null) {
       System.out.printf("\n (%s)", myStudy.getStudyNo());
@@ -55,6 +55,14 @@ public class MyStudyDetailHandler implements Command {
       System.out.println();
       System.out.println(" >> 스터디 번호가 일치하지 않습니다.");
       return;
+    }
+
+    for (Member m : myStudy.getWatingMember()) {
+      if (m.getPerNo() == member.getPerNo()) {
+        System.out.println("\n----------------------");
+        System.out.println("[승인 대기중인 스터디입니다.]");
+        return;
+      }
     }
 
     System.out.println("\n----------------------");

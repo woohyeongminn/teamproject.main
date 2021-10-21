@@ -48,7 +48,7 @@ public class StudyDetailHandler implements Command {
 
       Member m1 = AuthPerMemberLoginHandler.loginUser;
 
-      if (study.getOwner().getPerNo() == AuthPerMemberLoginHandler.loginUser.getPerNo()) {
+      if (study.getOwner().getPerNo() == m1.getPerNo()) {
         System.out.println();
         System.out.println("1. 수정");
         System.out.println("2. 삭제");
@@ -107,6 +107,7 @@ public class StudyDetailHandler implements Command {
       //              }
       //            }
       else {
+
         System.out.println("\n----------------------");
         System.out.println("1. 참여 신청하기");
         System.out.println("2. 북마크 추가하기");
