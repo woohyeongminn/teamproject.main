@@ -17,9 +17,24 @@
     <result column="status" property="perStatus"/>
     <result column="active" property="active"/>
   </resultMap>
-  
-  <!-- per_no 말고 member_no 로 쓰기 -->
-  
+
+	<sql id="select1">
+	select
+    pm.per_member_no member_no,
+    m.name,
+    m.nickname,
+    m.email,
+    m.tel,
+    m.photo,
+    m.created_dt,
+    m.active,
+    m.status
+  from
+    member m
+  join
+    per_member pm on m.member_no=pm.member_no
+	</sql>
+
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select
       pm.per_member_no member_no,
@@ -34,44 +49,125 @@
   </select>
   
   <select id="findAll" resultMap="MemberMap">
-  select
-    pm.per_member_no member_no,
-	  m.name,
-	  m.nickname,
-	  m.email,
-	  m.tel,
-	  m.photo,
-	  m.created_dt,
-	  m.active,
-	  m.status
-  from
-    member m
-  join
-    per_member pm on m.member_no=pm.member_no
+    <include refid="select1"/>
   order by name asc
   </select>
-  
+
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
-  select
-    pm.per_member_no per_no,
-    m.name,
-    m.nickname,
-    m.email,
-    m.tel,
-    m.photo,
-    m.created_dt,
-    m.active,
-    m.status
-  from
-    member m
-  join
-    per_member pm on pm.member_no=m.member_no
+    <include refid="select1"/>
   where
     pm.per_member_no=#{no}
   </select>
   
-</mapper>
+  <insert id="insert" parameterType="member">
+		insert into member(name,nickname,email,password,tel,photo,status)
+		values(#{name},#{nickname},#{email},password(#{password}),#{tel},#{photo},#{status})
+  </insert>
+  
+  <select id="findByNickName" resultMap="MemberMap" parameterType="string">
+    <include refid="select1"/>
+  where
+    nickname=#{nickname}
+  </select>
+  
+  <select id="findByEmail" resultMap="MemberMap" parameterType="string">
+    <include refid="select1"/>
+  where
+    email=#{email}
+  </select>
+  
+  <update id="updateName" parameterType="member">
+  update member set
+    name=#{name}
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
+  
+  <update id="updateNickname" parameterType="member">
+  update member set
+    nickname=#{nickname}
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
+  
+  <update id="updatePhoto" parameterType="member">
+  update member set
+    photo=#{photo}
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
+  
+  <update id="updateTel" parameterType="member">
+  update member set
+    tel=#{tel}
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
+  
+  <update id="updateEmail" parameterType="member">
+  update member set
+    email=#{email}
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
+  
+  <update id="updatePassword" parameterType="member">
+  update member set
+    password=password(#{password})
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
+  
+  <update id="updateActive" parameterType="member">
+  update member set
+    active=2 
+  where
+    member_no=#{no}
+  (select
+    member_no
+  from
+    per_member
+  where
+    per_member_no=#{no})
+  </update>
 
+</mapper>
 
 
 

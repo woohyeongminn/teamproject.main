@@ -33,3 +33,169 @@ insert into per_member(per_member_no, member_no) values(4,4);
 insert into per_member(per_member_no, member_no) values(5,5);
 insert into per_member(per_member_no, member_no) values(6,6);
 
+-- findByEmailAndPassword
+select
+  pm.per_member_no member_no,
+  m.nickname,
+  m.email
+from 
+  member m
+join
+  per_member pm on m.member_no=pm.member_no
+where
+  email='gmail@test.com' and password=password('g1');
+
+-- findAll
+select
+  pm.per_member_no member_no,
+  m.name,
+  m.nickname,
+  m.email,
+  m.tel,
+  m.photo,
+  m.created_dt,
+  m.active,
+  m.status
+from
+  member m
+join
+  per_member pm on m.member_no=pm.member_no
+order by
+  name asc;
+
+-- findByNo
+select
+  pm.per_member_no member_no,
+  m.name,
+  m.nickname,
+  m.email,
+  m.tel,
+  m.photo,
+  m.created_dt,
+  m.active,
+  m.status
+from
+  member m
+join
+  per_member pm on pm.member_no=m.member_no
+where
+  pm.per_member_no=2;
+
+-- insert
+insert into member(name,nickname,email,password,tel,photo,status)
+values('이런','이런','haha@test.com',password('h1'),'01004270427','haha.jpg',1);
+
+-- findByNickName
+select
+  pm.per_member_no,
+  m.name,
+  m.nickname,
+  m.email,
+  m.tel,
+  m.photo,
+  m.created_dt,
+  m.active,
+  m.status
+from
+  member m
+join
+  per_member pm on m.member_no=pm.member_no
+where
+  nickname='미술부장';
+
+-- findByEmail
+select
+  pm.per_member_no member_no,
+  m.name,
+  m.nickname,
+  m.email,
+  m.tel,
+  m.photo,
+  m.created_dt,
+  m.active,
+  m.status
+from
+  member m
+join
+  per_member pm on m.member_no=pm.member_no
+where
+  email='gmail@test.com';
+
+-- updateName
+update member set
+  name='반반미술'
+where
+  member_no=2
+(select member_no from per_member where per_member_no=2);
+
+-- updateNickname
+update member set
+  nickname=#{nickname}
+where
+  member_no=#{no}
+(select
+  member_no
+from
+  per_member
+where
+  per_member_no=#{no})
+
+-- updatePhoto
+update member set
+  photo=#{photo}
+where
+  member_no=#{no}
+(select
+  member_no
+from
+  per_member
+where
+  per_member_no=#{no})
+
+-- updateTel
+update member set
+  tel=#{tel}
+where
+  member_no=#{no}
+(select
+  member_no
+from
+  per_member
+where
+  per_member_no=#{no})
+
+-- updateEmail
+update member set
+  email=#{email}
+where
+  member_no=#{no}
+(select
+  member_no
+from
+  per_member
+where
+  per_member_no=#{no})
+
+-- updatePassword
+update member set
+  password=password(#{password})
+where
+  member_no=#{no}
+(select
+  member_no
+from
+  per_member
+where
+  per_member_no=#{no})
+
+-- updateActive
+update member set
+  active=2 
+where
+  member_no=#{no}
+(select
+  member_no
+from
+  per_member
+where
+  per_member_no=#{no})
