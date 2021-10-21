@@ -18,7 +18,9 @@
     <result column="active" property="active"/>
   </resultMap>
   
-  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="hashmap">
+  <!-- per_no 말고 member_no 로 쓰기 -->
+  
+  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select
       pm.per_member_no member_no,
       m.nickname,
@@ -30,6 +32,25 @@
     where
       email=#{email} and password=password(#{password})
   </select>
+  
+  <select id="findAll" resultMap="MemberMap">
+  select
+    pm.per_member_no member_no,
+	  m.name,
+	  m.nickname,
+	  m.email,
+	  m.tel,
+	  m.photo,
+	  m.created_dt,
+	  m.active,
+	  m.status
+  from
+    member m
+  join
+    per_member pm on m.member_no=pm.member_no
+  order by name asc
+  </select>
+  
 </mapper>
 
 
