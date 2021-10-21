@@ -80,7 +80,7 @@
   update member set
     name=#{name}
   where
-    member_no=#{no}
+    member_no=
   (select
     member_no
   from
@@ -93,7 +93,7 @@
   update member set
     nickname=#{nickname}
   where
-    member_no=#{no}
+    member_no=
   (select
     member_no
   from
@@ -106,7 +106,7 @@
   update member set
     photo=#{photo}
   where
-    member_no=#{no}
+    member_no=
   (select
     member_no
   from
@@ -119,7 +119,7 @@
   update member set
     tel=#{tel}
   where
-    member_no=#{no}
+    member_no=
   (select
     member_no
   from
@@ -132,7 +132,7 @@
   update member set
     email=#{email}
   where
-    member_no=#{no}
+    member_no=
   (select
     member_no
   from
@@ -145,7 +145,7 @@
   update member set
     password=password(#{password})
   where
-    member_no=#{no}
+    member_no=
   (select
     member_no
   from
@@ -158,7 +158,7 @@
   update member set
     active=2 
   where
-    member_no=#{no}
+    member_no=
   (select
     member_no
   from

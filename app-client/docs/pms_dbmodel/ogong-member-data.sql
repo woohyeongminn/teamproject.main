@@ -123,16 +123,21 @@ where
 
 -- updateName
 update member set
-  name='반반미술'
+  name='반미술'
 where
-  member_no=2
-(select member_no from per_member where per_member_no=2);
+  member_no=
+(select
+  member_no
+from
+  per_member
+where
+  per_member_no=2);
 
 -- updateNickname
 update member set
   nickname=#{nickname}
 where
-  member_no=#{no}
+  member_no=
 (select
   member_no
 from
@@ -144,7 +149,7 @@ where
 update member set
   photo=#{photo}
 where
-  member_no=#{no}
+  member_no=
 (select
   member_no
 from
@@ -156,7 +161,7 @@ where
 update member set
   tel=#{tel}
 where
-  member_no=#{no}
+  member_no=
 (select
   member_no
 from
@@ -168,7 +173,7 @@ where
 update member set
   email=#{email}
 where
-  member_no=#{no}
+  member_no=
 (select
   member_no
 from
@@ -180,7 +185,7 @@ where
 update member set
   password=password(#{password})
 where
-  member_no=#{no}
+  member_no=
 (select
   member_no
 from
@@ -192,7 +197,7 @@ where
 update member set
   active=2 
 where
-  member_no=#{no}
+  member_no=
 (select
   member_no
 from
