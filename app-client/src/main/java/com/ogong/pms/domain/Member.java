@@ -18,8 +18,8 @@ public class Member {
   private String perTel;
   private String perPhoto;
   private Date perRegisteredDate;
-  private int active;   //  1: 일반, 2: 탈퇴
   private int perStatus; // 1: 개인, 2: 사장
+  private int active;   //  1: 일반, 2: 탈퇴
 
   @Override
   public String toString() {

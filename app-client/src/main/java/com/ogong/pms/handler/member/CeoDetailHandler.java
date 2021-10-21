@@ -39,7 +39,7 @@ public class CeoDetailHandler implements Command {
     System.out.printf(" >> 전화번호 : %s\n", ceoMember.getCeoTel());
     System.out.printf(" >> 대표자명 : %s\n", ceoMember.getCeoBossName());
     System.out.printf(" >> 사업자 번호 : %s\n", ceoMember.getCeoLicenseNo());
-    System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
+    System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoRegisteredDate());
 
     //    } catch (NullPointerException e) {
     //      System.out.println();

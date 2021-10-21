@@ -39,7 +39,7 @@ public class AdminCeoMemberDetailHandler implements Command {
     System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
     System.out.printf(" >> 사업자등록번호 : %s\n", ceoMember.getCeoLicenseNo());
     System.out.printf(" >> 사진 : %s\n", ceoMember.getCeoPhoto());
-    System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoregisteredDate());
+    System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoRegisteredDate());
 
     request.setAttribute("inputCeoNo", inputCeoNo);
 

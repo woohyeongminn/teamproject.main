@@ -11,8 +11,8 @@
     <result column="nickname" property="perNickname"/>
     <result column="email" property="perEmail"/>
     <result column="password" property="perPassword"/>
-    <result column="photo" property="perPhoto"/>
     <result column="tel" property="perTel"/>
+    <result column="photo" property="perPhoto"/>
     <result column="created_dt" property="perRegisteredDate"/>
     <result column="status" property="perStatus"/>
     <result column="active" property="active"/>

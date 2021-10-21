@@ -107,7 +107,7 @@ public class CeoAddHandler implements Command {
     }
 
     // 가입일
-    ceoMember.setCeoregisteredDate(new Date(System.currentTimeMillis()));
+    ceoMember.setCeoRegisteredDate(new Date(System.currentTimeMillis()));
 
     // 회원 상태
     ceoMember.setCeoStatus(CeoMember.CEO);

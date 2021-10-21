@@ -36,10 +36,11 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements C
         return;
       }
 
-      System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoName());
+      System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoNickname());
       loginCeoMember = ceoMember;
       accessLevel = Menu.CEO_LOGIN;
       return;
+
     } else {
       System.out.println("\n >> 이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
       return;

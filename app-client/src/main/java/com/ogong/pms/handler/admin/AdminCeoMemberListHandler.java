@@ -28,7 +28,7 @@ public class AdminCeoMemberListHandler implements Command  {
           ceoMember.getCeoNo(),
           ceoMember.getCeoBossName(),
           ceoMember.getCeoEmail(),
-          ceoMember.getCeoregisteredDate());
+          ceoMember.getCeoRegisteredDate());
       System.out.println();
     }
   }
