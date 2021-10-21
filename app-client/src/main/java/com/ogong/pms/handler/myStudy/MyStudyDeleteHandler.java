@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy;
 
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -21,10 +22,10 @@ public class MyStudyDeleteHandler implements Command {
     System.out.println("▶ 스터디 삭제");
 
     int no = (int) request.getAttribute("inputNo");
-
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
     Study myStudy = studyDao.findByNo(no);
 
-    if (myStudy.getOwner().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
+    if (myStudy.getOwner().getPerNo() != member.getPerNo()) {
       System.out.println(" >> 삭제 권한이 없습니다.");
       return;
     }
@@ -35,7 +36,7 @@ public class MyStudyDeleteHandler implements Command {
       return;
     }
 
-    studyDao.delete(no);
+    studyDao.delete(myStudy.getStudyNo(), member.getPerNo());
     System.out.println(" >> 스터디가 삭제 되었습니다.");
   }
 }
