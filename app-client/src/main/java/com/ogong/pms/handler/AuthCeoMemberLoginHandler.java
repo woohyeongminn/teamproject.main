@@ -26,12 +26,14 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements C
     System.out.println();
     String inputEmail = Prompt.inputString(" 이메일 : ");
     String inputPassword = Prompt.inputString(" 비밀번호 : ");
+    int active = CeoMember.INUSER;
 
-    CeoMember ceoMember = ceoMemberDao.findByEmailAndPassword(inputEmail, inputPassword);
+    CeoMember ceoMember = ceoMemberDao.findByEmailAndPassword(inputEmail, inputPassword, active);
 
     if (ceoMember != null) {
 
       if (ceoMember.getActive() == CeoMember.OUTUSER) {
+        System.out.println();
         System.out.println(" >> 회원가입을 진행해 주세요.");
         return;
       }

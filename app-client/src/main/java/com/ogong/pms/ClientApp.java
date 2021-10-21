@@ -616,14 +616,13 @@ public class ClientApp {
     MenuGroup ceoPageMenu = new MenuGroup("🔒 마이 페이지", CEO_LOGIN); 
     ceoPageMenu.setMenuFilter(menuFilter);
     ceoPageMenu.add(new MenuItem("🙂 기업 프로필", "/ceoMember/detail"));
-    //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     ceoPageMenu.add(new MenuItem("🏘 카페관리", "/ceoMember/myCafeDetail"));
     ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/ceoMyList"));
+    ceoPageMenu.add(new MenuItem("😢 탈퇴하기", "/ceoMember/delete"));
+
+    //    ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     //    ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
-
-    // 이거 기업프로필에 있음 지우기~~~
-    //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
 
     return ceoPageMenu;
   }

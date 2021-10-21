@@ -10,7 +10,7 @@ public interface CeoMemberDao {
   CeoMember findByNo(int no) throws Exception;
   CeoMember findByName(String inputNick) throws Exception;
   CeoMember findByEmail(String inputEmail) throws Exception;
-  CeoMember findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception;
+  CeoMember findByEmailAndPassword(String inputEmail, String inputPassword, int active) throws Exception;
 
   void insert(CeoMember ceoMember) throws Exception;
 

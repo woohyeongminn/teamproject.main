@@ -33,12 +33,13 @@ public class AdminCeoMemberDeleteHandler implements Command {
     }
 
     if (input.equals("네")) {
-      ceoMember.setCeoStatus(CeoMember.OUTUSER);
       ceoMember.setCeoBossName("탈퇴된 회원: (" + ceoMember.getCeoBossName() + ")");
       ceoMember.setCeoEmail("Deleted Email");
       ceoMember.setCeoPassword("Deleted Password");
       ceoMember.setCeoPhoto("Deleted Photo");
       ceoMember.setCeoLicenseNo("Deleted LicenseNo");
+      ceoMember.setCeoStatus(CeoMember.CEO);
+      ceoMember.setActive(CeoMember.OUTUSER);
     }
 
     // 회원 삭제
