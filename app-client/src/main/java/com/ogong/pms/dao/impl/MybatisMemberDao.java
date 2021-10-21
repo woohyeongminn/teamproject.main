@@ -303,6 +303,7 @@ public class MybatisMemberDao implements MemberDao {
   }
 }
 
+// [삭제] 회원 데이터 삭제 X -> 상태 탈퇴로 변경
 // @Override
 // public void delete(int no) throws Exception {
 // try (PreparedStatement stmt1 = con.prepareStatement(
