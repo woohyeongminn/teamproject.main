@@ -5,11 +5,11 @@
 
 <mapper namespace="StudyMapper">
   
-  <resultMap type="Member" id="MemberMap">
-    <id column="member_no" property="perNo"/> 
-    <result column="name" property="perName"/>
-    <result column="nickname" property="perNickname"/>
-    <result column="email" property="perEmail"/>
+  <resultMap type="Study" id="StudyMap">
+    <id column="study_no" property="studyNo"/> 
+    <result column="name" property="studyTitle"/>
+    <result column="subject_no" property="subjectNo"/>
+    <result column="no_people" property="numberOfPeple"/>
     <result column="password" property="perPassword"/>
     <result column="tel" property="perTel"/>
     <result column="photo" property="perPhoto"/>
