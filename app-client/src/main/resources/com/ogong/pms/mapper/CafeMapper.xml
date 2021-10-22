@@ -209,6 +209,22 @@
 	     cafe_no = #{cafeNo}
   </delete>
   
+  <!-- 금주의 휴무일 가져오기 -->
+  <select id="getCafeHoliday" parameterType="int" resultType="string">
+    select 
+      group_concat(date separator ',') holiday
+    from 
+      studycafe_holiday
+    where 
+      weekofyear(curdate())=weekofyear(date)
+      <if test="cafeNo != null">
+        and cafe_no=#{cafeNo}
+      </if>
+      <if test="ceoNo != null">
+        and cafe_no = (select cafe_no from studycafe where member_no=#{ceoNo})
+      </if>
+  </select>
+  
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페리뷰ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
   <sql id="reviewListSelect">
   select 
@@ -346,8 +362,8 @@
     where studyroom_no=#{roomNo}
   </update>
   
-  <delete id="" parameterType="int">
-    
+  <delete id="deleteCafeRoom" parameterType="int">
+    delete from studycafe_room where studyroom_no = #{roomNo}
   </delete>
   
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페예약ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->

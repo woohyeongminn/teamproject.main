@@ -34,22 +34,12 @@ public class AdminAskBoardListHandler implements Command {
       // 기업
       if (askBoard.getAskCeoWriter().getCeoStatus() == CeoMember.CEO) {
 
-        if (askBoard.getAskStatus() == 1) {
-          System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
-              askBoard.getAskNo(), 
-              askBoard.getAskTitle(), 
-              askBoard.getAskCeoWriter().getCeoNickname(),
-              askBoard.getAskRegisteredDate(),
-              askBoard.getAskVeiwCount());
-        }
-
-        else if (askBoard.getAskStatus() == 2) {
-          System.out.printf("\n (%d)\n 작성자 : %s", 
-              askBoard.getAskNo(), 
-              askBoard.getAskCeoWriter().getCeoNickname());
-          System.out.println();
-          System.out.println(" 🔒 비밀글입니다.");
-        }
+        System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+            askBoard.getAskNo(), 
+            askBoard.getAskTitle(), 
+            askBoard.getAskCeoWriter().getCeoNickname(),
+            askBoard.getAskRegisteredDate(),
+            askBoard.getAskVeiwCount());
 
         if (askBoard.getReply() == null) {
           System.out.println("\n 📕 > 등록된 답변이 없습니다.");
@@ -61,22 +51,12 @@ public class AdminAskBoardListHandler implements Command {
       // 개인
       else if (askBoard.getAskMemberWriter().getPerStatus() == Member.PER) {
 
-        if (askBoard.getAskStatus() == 1) {
-          System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
-              askBoard.getAskNo(), 
-              askBoard.getAskTitle(), 
-              askBoard.getAskMemberWriter().getPerNickname(),
-              askBoard.getAskRegisteredDate(),
-              askBoard.getAskVeiwCount());
-        }
-
-        else if (askBoard.getAskStatus() == 2) {
-          System.out.printf("\n (%d)\n 작성자 : %s", 
-              askBoard.getAskNo(), 
-              askBoard.getAskMemberWriter().getPerNickname());
-          System.out.println();
-          System.out.println(" 🔒 비밀글입니다.");
-        }
+        System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+            askBoard.getAskNo(), 
+            askBoard.getAskTitle(), 
+            askBoard.getAskMemberWriter().getPerNickname(),
+            askBoard.getAskRegisteredDate(),
+            askBoard.getAskVeiwCount());
 
         if (askBoard.getReply() == null) {
           System.out.println("\n 📕 > 등록된 답변이 없습니다.");

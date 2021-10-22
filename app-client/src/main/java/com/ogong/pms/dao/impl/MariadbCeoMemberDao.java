@@ -17,6 +17,8 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
     this.con = con;
   }
 
+
+
   @Override
   public void insert(CeoMember ceoMember) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
@@ -205,7 +207,7 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
   }
 
   @Override
-  public CeoMember findByEmailAndPassword(String inputEmail, String inputPassword, int active) throws Exception {
+  public CeoMember findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
             + " cm.ceo_member_no ceo_no,"

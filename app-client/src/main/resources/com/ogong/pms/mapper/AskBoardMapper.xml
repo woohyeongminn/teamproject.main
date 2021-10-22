@@ -15,14 +15,14 @@
     <result column="temppw" property="askTempPW"/>
     
     <association property="askMemberWriter" javaType="Member">
-    <id column="member_no" property="perNo"/> 
+    <id column="per_no" property="perNo"/> 
     <result column="nickname" property="perNickname"/>
     <result column="member_status" property="perStatus"/>
     
     </association>
     
     <association property="askCeoWriter" javaType="CeoMember">
-    <id column="member_no" property="ceoNo"/> 
+    <id column="ceo_no" property="ceoNo"/> 
     <result column="nickname" property="ceoNickname"/>
     <result column="member_status" property="ceoStatus"/>
     </association>
@@ -89,69 +89,34 @@
       #{askTitle},#{askContent},#{askVeiwCount},#{askCeoWriter.ceoNo},#{askStatus},#{askTempPW})
   </insert>
 
-  
-    
-   <!--  
-  <insert id="insert" parameterType="AskBoard" >
-    insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)
-    values(#{askTitle},#{askContent},#{askVeiwCount},#{askStatus},#{askTempPW},
-    (select member_no from 
-    <if test= "askMemberWriter.perNo != null">
-    per_member pm where pm.per_member_no = #{askMemberWriter.perNo}))
-      </if>
-      <if test="askCeoWriter.ceoNo != null">
-    ceo_member cm where cm.ceo_member_no = #{askCeoWriter.ceoNo}))
-      </if>
-  </insert>
-
-  <insert id="insert" parameterType="AskBoard" >
-    insert into ask_board(title,content,view_cnt,use_secret,temppw,member_no)
-    values(#{askTitle},#{askContent},#{askVeiwCount},#{askStatus},#{askTempPW},
-    (select if (pm.per_member_no is null, `askCeoWriter.ceoNo`, `askMemberWriter.perNo`) from member_no)
+  <insert id="insertreply" parameterType="AskBoard">
+    insert into ask_board_reply(reply_title, reply_content, ask_board_no)
+    values(#{reply.replyTitle},#{reply.replyContent},#{askNo})
   </insert>
   
-          useGeneratedKeys="true" keyColumn="notice_no" keyProperty="adminNotiNo">
-      
-  
-  <insert id="insertnoitcefile" parameterType="map">
-    insert into notice_file(notice_no,filepath)
-    values(#{adminNotiNo},#{adminNotiFile})
-  </insert>
-    
-  <update id="updateTitle" parameterType="AdminNotice">
-    update notice set
-      title=#{adminNotiTitle}
-    where notice_no=#{adminNotiNo}
+  <update id="update" parameterType="AskBoard">
+    update ask_board set
+	    title=#{askTitle},
+	    content=#{askContent}
+    where ask_board_no=#{askNo}
   </update>
     
-  <update id="updateContent" parameterType="AdminNotice">
-    update notice set
-      content=#{adminNotiContent}
-    where notice_no=#{adminNotiNo}
+  <update id="updateViewCount" parameterType="AskBoard">
+    update ask_board set
+      view_cnt=#{askVeiwCount}
+    where ask_board_no=#{askNo}
   </update>
-  
-  <insert id="insertFilepath" parameterType="map">
-    insert into notice_file(notice_no,filepath)
-    values(#{adminNotiNo},#{adminNotiFile})
-  </insert>
-  
-  <delete id="deletenoticefile" parameterType="int">
-    delete from notice_file
-    where notice_no=#{fileNo}
-  </delete>
   
   <delete id="delete" parameterType="int">
-    delete from notice
-    where notice_no=#{noticeNo}
+    delete from ask_board
+    where ask_board_no=#{no}
   </delete>
   
-  <update id="updateFilepath" parameterType="AdminNotice">
-    update notice set
-      filepath=#{adminNotiFile}
-    where notice_file_no=#{adminNotiFileNo}
-  </update>
-
-   -->
+  <delete id="deletereply" parameterType="int">
+    delete from ask_board_reply
+    where ask_board_no=#{no}
+  </delete>
+  
 
 </mapper>
 

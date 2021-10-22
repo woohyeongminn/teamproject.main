@@ -24,8 +24,6 @@ public class AskBoardPerMyDetailHandler implements Command {
 
     int askNo = Prompt.inputInt(" 번호 : ");
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
     AskBoard  askBoard = askBoardDao.findByNo(askNo);
 
     if (askBoard == null) {
@@ -33,20 +31,26 @@ public class AskBoardPerMyDetailHandler implements Command {
       return;
     }
 
-    if (askBoard.getAskMemberWriter().getPerNo() != member.getPerNo()) {
-      System.out.println(" >> 열람 권한이 없습니다.");
-      return;
+    // 공개 - 문의글 상태
+    if (askBoard.getAskStatus() == 1) {
+      detailList(askBoard, request);
     }
 
-    System.out.println();
-    System.out.printf(" (%d)\n", askBoard.getAskNo());
-    System.out.printf(" [%s]\n", askBoard.getAskTitle());
-    System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
-    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskMemberWriter().getPerNickname());
-    System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
-    askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
-    System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
-    System.out.println("---------------------");
+    // 비공개 - 문의글 상태
+    else if (askBoard.getAskStatus() == 2) {
+
+      // 비공개 - 개인 본인이 작성한 문의글일 때
+      System.out.println();
+      int secretPassword = Prompt.inputInt(" 🔑 문의글 비밀번호(4자리) : ");
+
+      if (askBoard.getAskTempPW() != secretPassword) {
+        System.out.println();
+        System.out.println(" >> 비밀번호를 다시 입력하세요.");
+        return;
+      } 
+
+      detailList(askBoard, request);
+    }
 
     if (askBoard.getReply() != null) {
       request.setAttribute("askNo", askNo);
@@ -67,5 +71,28 @@ public class AskBoardPerMyDetailHandler implements Command {
       case 2 : request.getRequestDispatcher("/askBoard/delete").forward(request); return;
       default : return;
     }
+  }
+
+
+  private void detailList(AskBoard askBoard, CommandRequest request) throws Exception {
+
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
+
+    if (askBoard.getAskMemberWriter().getPerNo() != member.getPerNo()) {
+      System.out.println(" >> 열람 권한이 없습니다.");
+      return;
+    }
+
+    System.out.println();
+    System.out.printf(" (%d)\n", askBoard.getAskNo());
+    System.out.printf(" [%s]\n", askBoard.getAskTitle());
+    System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
+    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskMemberWriter().getPerNickname());
+    System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
+    askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
+    System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());
+    System.out.println("---------------------");
+
+    askBoardDao.updateViewCount(askBoard);
   }
 }

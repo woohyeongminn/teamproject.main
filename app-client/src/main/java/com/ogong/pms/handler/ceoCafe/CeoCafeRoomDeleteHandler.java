@@ -29,6 +29,7 @@ public class CeoCafeRoomDeleteHandler implements Command {
     }
 
     cafeDao.deleteCafeRoom(cafeRoom.getRoomNo());
+    System.out.println(" >> 삭제 완료.");
   }
 
 }
