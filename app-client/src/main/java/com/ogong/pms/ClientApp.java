@@ -224,9 +224,9 @@ public class ClientApp {
     MemberDao memberDao = new MybatisMemberDao(sqlSession);
     CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
-    //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
+    //AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
-    //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    //StudyDao studyDao = new MybatisStudyDao(sqlSession);
 
     // 데이터 관리를 담당할 DAO 객체를 준비한다.
     // AdminDao adminDao = new MariadbAdminDao(con);
