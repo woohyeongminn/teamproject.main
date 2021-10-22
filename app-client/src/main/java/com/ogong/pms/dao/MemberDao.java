@@ -8,9 +8,9 @@ public interface MemberDao {
   void insert(Member member) throws Exception;
   List<Member> findAll() throws Exception;
   Member findByNo(int no) throws Exception;
-  Member findByNickName(String inputNick) throws Exception;
+  Member findByName(String inputName) throws Exception;
   Member findByEmail(String inputEmail) throws Exception;
-  Member findByEmailAndPassword(String inputEmail, String inputPassword, int inputActive) throws Exception;
+  Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception;
   void updateName(Member member) throws Exception;
   void updateNickname(Member member) throws Exception;
   void updatePhoto(Member member) throws Exception;

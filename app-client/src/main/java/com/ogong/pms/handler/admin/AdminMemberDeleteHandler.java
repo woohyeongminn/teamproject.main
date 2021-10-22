@@ -36,11 +36,11 @@ public class AdminMemberDeleteHandler implements Command {
       }
 
       if (input.equals("네")) {
-        user.setPerStatus(Member.PER);
-        user.setPerNickname("탈퇴된 회원: ( " + user.getPerNickname() + " )");
+        user.setPerNickname("탈퇴된 회원 ( " + user.getPerNickname() + " )");
         user.setPerEmail("Deleted Email");
         user.setPerPassword("Deleted Password");
         user.setPerPhoto("Deleted Photo");
+        user.setPerStatus(Member.PER);
         user.setActive(Member.OUTUSER);
       }
 

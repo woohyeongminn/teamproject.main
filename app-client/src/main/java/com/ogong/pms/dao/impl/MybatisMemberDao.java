@@ -103,8 +103,8 @@ public class MybatisMemberDao implements MemberDao {
   }
 
   @Override
-  public Member findByNickName(String inputNick) throws Exception {
-    List<Member> list = sqlSession.selectList("MemberMapper.findByNickName", inputNick);
+  public Member findByName(String inputName) throws Exception {
+    List<Member> list = sqlSession.selectList("MemberMapper.findByName", inputName);
     if (list.size() > 0) {
       return list.get(0);
     } else {
@@ -177,11 +177,11 @@ public class MybatisMemberDao implements MemberDao {
   }
 
   @Override
-  public Member findByEmailAndPassword(String inputEmail, String inputPassword, int inputActive) throws Exception {
+  public Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
     HashMap<String,Object> params = new HashMap<>();
     params.put("email", inputEmail);
     params.put("password", inputPassword);
-    params.put("active", inputActive);
+    // params.put("active", inputActive);
 
     return sqlSession.selectOne("MemberMapper.findByEmailAndPassword", params);
   }

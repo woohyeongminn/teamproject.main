@@ -38,11 +38,12 @@
       m.member_no member_no,
       m.nickname,
       m.email,
+      m.status,
       m.active
     from 
       member m
     where
-      email=#{email} and password=password(#{password})
+      email=#{email} and password=password(#{password}) and status=1
   </select>
   
   <select id="findAll" resultMap="MemberMap">
@@ -66,10 +67,10 @@
   insert into member(member_no) values(#{no})
   </insert>
   
-  <select id="findByNickName" resultMap="MemberMap" parameterType="string">
+  <select id="findByName" resultMap="MemberMap" parameterType="string">
     <include refid="select1"/>
   where
-    nickname=#{nickname}
+    name=#{name}
   </select>
   
   <select id="findByEmail" resultMap="MemberMap" parameterType="string">
@@ -82,91 +83,49 @@
   update member set
     name=#{perName}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateNickname" parameterType="member">
   update member set
     nickname=#{perNickname}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updatePhoto" parameterType="member">
   update member set
     photo=#{perPhoto}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateTel" parameterType="member">
   update member set
     tel=#{perTel}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateEmail" parameterType="member">
   update member set
     email=#{perEmail}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updatePassword" parameterType="member">
   update member set
     password=password(#{perPassword})
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateActive" parameterType="member">
   update member set
     active=2 
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
 
 </mapper>

@@ -24,11 +24,11 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements C
     System.out.println();
     String inputEmail = Prompt.inputString(" 이메일 : ");
     String inputPassword = Prompt.inputString(" 비밀번호 : ");
-    int inputActive = Member.INUSER;
+    // int inputActive = Member.INUSER;
 
-    Member member = memberDao.findByEmailAndPassword(inputEmail, inputPassword, inputActive);
+    Member member = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
 
-    if (member != null) {
+    if (member != null && member.getPerStatus() == Member.PER) {
 
       if (member.getActive() == Member.OUTUSER) {
         System.out.println(" >> 회원가입을 진행해 주세요.");
