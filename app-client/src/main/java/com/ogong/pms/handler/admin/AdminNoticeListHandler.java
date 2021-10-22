@@ -1,17 +1,17 @@
 package com.ogong.pms.handler.admin;
 
 import java.util.Collection;
-import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 
 public class AdminNoticeListHandler implements Command {
 
-  AdminDao adminDao;
+  NoticeDao noticeDao;
 
-  public AdminNoticeListHandler(AdminDao adminDao) {
-    this.adminDao = adminDao;
+  public AdminNoticeListHandler(NoticeDao noticeDao) {
+    this.noticeDao = noticeDao;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -19,7 +19,7 @@ public class AdminNoticeListHandler implements Command {
     System.out.println("▶ 공지 목록");
     System.out.println();
 
-    Collection<AdminNotice> adminNoticeList = adminDao.findAll();
+    Collection<AdminNotice> adminNoticeList = noticeDao.findAll();
 
     for (AdminNotice noticeList : adminNoticeList) {
       if (noticeList.getAdminNotiFile() != null) {

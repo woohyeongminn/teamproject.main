@@ -2,6 +2,7 @@ package com.ogong.pms.domain;
 
 import java.sql.Date;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class Cafe {
   private CeoMember ceoMember; // 사장
   private String name; // 상호명
   private String mainImg; //카페 썸네일 이미지
-  private Map<Integer, String> cafeImgs = new HashMap<>(); // 카페 이미지들
+  private ArrayList<CafeImage> cafeImgs = new ArrayList<>(); // 카페 이미지들
   private String info; // 소개글
   private String location; // 주소
   private String phone; // 전화번호
@@ -111,6 +112,9 @@ public class Cafe {
   }
 
   public String getHoliday() {
+    if (holiday == null) {
+      return "없음";
+    }
     return holiday;
   }
 
@@ -150,19 +154,34 @@ public class Cafe {
     this.viewCount = viewCount;
   }
 
-  public Map<Integer, String> getCafeImgs() {
-    return cafeImgs;
-  }
-
-  public void setCafeImgs(Map<Integer, String> cafeImgs) {
-    this.cafeImgs = cafeImgs;
-  }
-
   public Map<Integer, Date> getCafeHolidays() {
     return cafeHolidays;
   }
 
   public void setCafeHolidays(Map<Integer, Date> cafeHolidays) {
     this.cafeHolidays = cafeHolidays;
+  }
+
+  public ArrayList<CafeImage> getCafeImgs() {
+    return cafeImgs;
+  }
+
+  public void setCafeImgs(ArrayList<CafeImage> cafeImgs) {
+    this.cafeImgs = cafeImgs;
+  }
+
+  public String getCafeImageNames() {
+    if (cafeImgs.isEmpty()) {
+      return "";
+    }
+
+    StringBuilder names = new StringBuilder();
+    for (CafeImage cafeImage : cafeImgs) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(cafeImage.getName());
+    }
+    return names.toString();
   }
 }

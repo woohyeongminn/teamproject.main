@@ -54,10 +54,9 @@ public class CeoAddHandler implements Command {
     // 사업자 등록번호
     String inputLicenseNo;
     while (true) {
-      System.out.println();
       inputLicenseNo = Prompt.inputString(" 사업자 등록번호 : ");
       if (inputLicenseNo.length() != 10) {
-        System.out.println(" >> 10자리 숫자를 입력해주세요.");
+        System.out.println(" >> 10자리 숫자를 입력해주세요.\n");
         continue;
       }
       break;
@@ -81,13 +80,12 @@ public class CeoAddHandler implements Command {
     // 비밀번호
     String inputNewPW;
     while (true) {
-      System.out.println();
       inputNewPW = Prompt.inputString(" 비밀번호 : ");
       if (inputNewPW.length() < 8 || (!inputNewPW.contains("!") && !inputNewPW.contains("@")
           && !inputNewPW.contains("#") && !inputNewPW.contains("$")
           && !inputNewPW.contains("^") && !inputNewPW.contains("%")
           && !inputNewPW.contains("&") && !inputNewPW.contains("*"))) {
-        System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
+        System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.\n");
         continue;
       }
       break;
@@ -95,13 +93,12 @@ public class CeoAddHandler implements Command {
     ceoMember.setCeoPassword(inputNewPW);
 
     while (true) {
-      System.out.println();
       String pw =  Prompt.inputString(" 비밀번호 확인 : ");
       if (!pw.equals(ceoMember.getCeoPassword())) {
-        System.out.println(" >> 확인 실패!");
+        System.out.println(" >> 확인 실패!\n");
         continue;
       } else {
-        System.out.println(" >> 확인 완료!");
+        System.out.println(" >> 확인 완료!\n");
       }
       break;
     }

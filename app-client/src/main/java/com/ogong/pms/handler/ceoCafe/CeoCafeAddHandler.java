@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -36,13 +37,13 @@ public class CeoCafeAddHandler implements Command {
     cafe.setName(Prompt.inputString(" 상호명 : "));
     //    cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
 
-    ArrayList<String> fileNames = new ArrayList<>();
+    ArrayList<CafeImage> fileNames = new ArrayList<>();
     while(true) {
       String fileName = Prompt.inputString(" 사진 (완료:빈 문자열) : ");
       if (fileName.length() == 0) {
         break;
       }
-      fileNames.add(fileName);
+      fileNames.add(new CafeImage(fileName));
     }
 
     cafe.setInfo(Prompt.inputString(" 소개글 : "));

@@ -90,8 +90,8 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
         ceoMember.setCeoTel(rs.getString("tel"));
         ceoMember.setCeoPhoto(rs.getString("photo"));
         ceoMember.setCeoRegisteredDate(rs.getDate("created_dt"));
-        ceoMember.setActive(rs.getInt("active"));
         ceoMember.setCeoStatus(rs.getInt("status"));
+        ceoMember.setActive(rs.getInt("active"));
         ceoMember.setCeoBossName(rs.getString("ceo_bossname"));
         ceoMember.setCeoLicenseNo(rs.getString("ceo_license_no"));
 

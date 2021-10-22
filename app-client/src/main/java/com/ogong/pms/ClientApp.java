@@ -21,6 +21,7 @@ import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.impl.MariadbAskBoardDao;
 import com.ogong.pms.dao.impl.MariadbStudyDao;
@@ -28,6 +29,7 @@ import com.ogong.pms.dao.impl.MybatisAdminDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
 import com.ogong.pms.dao.impl.MybatisMemberDao;
+import com.ogong.pms.dao.impl.MybatisNoticeDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -50,7 +52,6 @@ import com.ogong.pms.handler.admin.AdminDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberDeleteHandler;
 import com.ogong.pms.handler.admin.AdminMemberDetailHandler;
 import com.ogong.pms.handler.admin.AdminMemberListHandler;
-import com.ogong.pms.handler.admin.AdminMemberUpdateHandler;
 import com.ogong.pms.handler.admin.AdminNoticeAddHandler;
 import com.ogong.pms.handler.admin.AdminNoticeDeleteHandler;
 import com.ogong.pms.handler.admin.AdminNoticeDetailHandler;
@@ -222,6 +223,7 @@ public class ClientApp {
     AdminDao adminDao = new MybatisAdminDao(sqlSession);
     MemberDao memberDao = new MybatisMemberDao(sqlSession);
     CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
+    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
     //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
@@ -279,15 +281,15 @@ public class ClientApp {
     commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberDao));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
-    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));
+    //    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao));
 
-    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(adminDao));
-    commandMap.put("/adminNotice/list", new AdminNoticeListHandler(adminDao));
-    commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(adminDao));
-    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(adminDao));
-    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(adminDao));
+    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao));
+    commandMap.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
+    commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDao));
+    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao));
+    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao));
 
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao));
 
@@ -616,14 +618,13 @@ public class ClientApp {
     MenuGroup ceoPageMenu = new MenuGroup("🔒 마이 페이지", CEO_LOGIN); 
     ceoPageMenu.setMenuFilter(menuFilter);
     ceoPageMenu.add(new MenuItem("🙂 기업 프로필", "/ceoMember/detail"));
-    //ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     ceoPageMenu.add(new MenuItem("🏘 카페관리", "/ceoMember/myCafeDetail"));
     ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/ceoMyList"));
+    ceoPageMenu.add(new MenuItem("😢 탈퇴하기", "/ceoMember/delete"));
+
+    //    ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
     //    ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
     //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
-
-    // 이거 기업프로필에 있음 지우기~~~
-    //    ceoPageMenu.add(new MenuItem("탈퇴하기", "/member/delete"));
 
     return ceoPageMenu;
   }

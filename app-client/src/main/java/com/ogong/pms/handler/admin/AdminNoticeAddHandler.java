@@ -2,7 +2,7 @@ package com.ogong.pms.handler.admin;
 
 import java.sql.Date;
 import java.util.List;
-import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class AdminNoticeAddHandler implements Command {
 
-  AdminDao adminDao;
+  NoticeDao noticeDao;
 
-  public AdminNoticeAddHandler(AdminDao adminDao) {
-    this.adminDao = adminDao;
+  public AdminNoticeAddHandler(NoticeDao noticeDao) {
+    this.noticeDao = noticeDao;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class AdminNoticeAddHandler implements Command {
     System.out.println("▶ 공지 등록");
     System.out.println();
 
-    List<AdminNotice> adminNoticeList = adminDao.findAll();
+    List<AdminNotice> adminNoticeList = noticeDao.findAll();
     AdminNotice adminNotice = new AdminNotice();
 
     adminNotice.setAdminNotiTitle(Prompt.inputString(" 제목 : "));
@@ -52,7 +52,7 @@ public class AdminNoticeAddHandler implements Command {
     //      adminNotice.setAdminNotiNo(1);
     //    }
 
-    adminDao.insert(adminNotice);
+    noticeDao.insert(adminNotice);
 
     System.out.println(" >> 공지글 등록이 완료되었습니다.");
     request.getRequestDispatcher("/adminNotice/list").forward(request);

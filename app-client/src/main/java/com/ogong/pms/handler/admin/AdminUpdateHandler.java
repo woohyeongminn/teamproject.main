@@ -37,13 +37,13 @@ public class AdminUpdateHandler implements Command {
 
     switch (selectNo) {
       case 1:
-        adminNickname = Prompt.inputString(" 닉네임(" + admin.getMasterNickname() + ") : ");
+        adminNickname = Prompt.inputString(" 닉네임 : ");
         break;
       case 2:
-        adminEmail = Prompt.inputString(" 이메일(" + admin.getMasterEmail() + ") : ");
+        adminEmail = Prompt.inputString(" 이메일 : ");
         break;
       case 3:
-        adminPassword =  Prompt.inputString(" 비밀번호(" + admin.getMasterPassword() + ") : ");
+        adminPassword =  Prompt.inputString(" 비밀번호 : ");
         break;
       default:
         System.out.println(" >> 올바른 번호를 입력해 주세요.");

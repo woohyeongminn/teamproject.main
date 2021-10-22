@@ -173,7 +173,7 @@ public class MariadbMemberDao implements MemberDao {
   }
 
   @Override
-  public Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
+  public Member findByEmailAndPassword(String inputEmail, String inputPassword, int inputActive) throws Exception {
     try (PreparedStatement stmt =
         con.prepareStatement("select pm.per_member_no per_no, m.nickname, m.email from member m"
             + " join per_member pm on m.member_no=pm.member_no"

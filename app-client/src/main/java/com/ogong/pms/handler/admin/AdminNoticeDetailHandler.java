@@ -1,6 +1,6 @@
 package com.ogong.pms.handler.admin;
 
-import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -9,10 +9,10 @@ import com.ogong.util.Prompt;
 
 public class AdminNoticeDetailHandler implements Command {
 
-  AdminDao adminDao;
+  NoticeDao noticeDao;
 
-  public AdminNoticeDetailHandler(AdminDao adminDao) {
-    this.adminDao = adminDao;
+  public AdminNoticeDetailHandler(NoticeDao noticeDao) {
+    this.noticeDao = noticeDao;
   }
 
   @Override
@@ -22,7 +22,7 @@ public class AdminNoticeDetailHandler implements Command {
     int adminnotiNo = Prompt.inputInt(" 번호 : ");
     System.out.println();
 
-    AdminNotice adminNotice = adminDao.findByNoticeNo(adminnotiNo);
+    AdminNotice adminNotice = noticeDao.findByNoticeNo(adminnotiNo);
 
     if (adminNotice.getAdminNotiFile() != null) {    
       System.out.printf(" [%s]\n", adminNotice.getAdminNotiTitle());

@@ -54,10 +54,12 @@ public class MemberDeleteHandler implements Command {
     System.out.println(" << 비밀번호 확인 >>");
     String inputPassword = Prompt.inputString(" 비밀번호를 입력하세요 : ");
 
+    int inputActive = Member.INUSER;
+
     // 테스트
     // System.out.println(member.getPerPassword());
 
-    Member perMember = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
+    Member perMember = memberDao.findByEmailAndPassword(inputEmail, inputPassword, inputActive);
 
     if (perMember == null) {
       System.out.println();
@@ -76,6 +78,15 @@ public class MemberDeleteHandler implements Command {
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 회원 탈퇴를 취소하였습니다.");
       return;
+    }
+
+    if (input.equals("네")) {
+      member.setPerStatus(Member.PER);
+      member.setPerNickname("탈퇴된 회원: ( " + member.getPerNickname() + " )");
+      member.setPerEmail("Deleted Email");
+      member.setPerPassword("Deleted Password");
+      member.setPerPhoto("Deleted Photo");
+      member.setActive(Member.OUTUSER);
     }
 
     // requestAgent.request("study.selectList", null);

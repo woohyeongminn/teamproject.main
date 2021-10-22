@@ -31,17 +31,13 @@ public class CafeDetailHandler implements Command {
       return;
     }
 
-    if (cafe.getHoliday() == null) {
-      cafe.setHoliday("없음");
-    }
-
     System.out.println();
     System.out.printf(" (%s)\n", cafe.getNo());
     System.out.printf(" [%s]\n", cafe.getName());
-    System.out.printf(" >> 대표이미지 : %s\n", cafe.getMainImg());
+    System.out.printf(" >> 대표이미지 : %s\n", cafe.getCafeImageNames());
     System.out.printf(" >> 소개글 : %s\n", cafe.getInfo());
     System.out.printf(" >> 주소 : %s\n", cafe.getLocation());
-    System.out.printf(" >> 번호 : %s\n", cafe.getPhone());
+    System.out.printf(" >> 전화번호 : %s\n", cafe.getPhone());
     System.out.printf(" >> 오픈시간 : %s\n", cafe.getOpenTime());
     System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
     System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());

@@ -4,17 +4,17 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
-import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Member;
 
 public class MybatisCafeDao implements CafeDao {
@@ -30,269 +30,53 @@ public class MybatisCafeDao implements CafeDao {
 
   @Override
   public List<Cafe> getCafeList() throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time, c.operating_status_no"
-            + " from studycafe c"
-            + " order by cafe_no asc");
-
-        ResultSet rs = stmt.executeQuery()) {
-
-      ArrayList<Cafe> list = new ArrayList<>();
-
-      while(rs.next()) {
-        Cafe cafe = new Cafe();
-
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafe.setName(rs.getString("name"));
-        cafe.setLocation(rs.getString("location"));
-        cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
-        cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
-        cafe.setCafeStatus(rs.getInt("operating_status_no"));
-
-        list.add(cafe);
-      }
-
-      return list;
-    }
+    return sqlSession.selectList("CafeMapper.getCafeList");
   }
 
   @Override
   public List<Cafe> getCafeListByMember() throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time, c.operating_status_no"
-            + " from studycafe c"
-            + " where c.operating_status_no != 1 and c.operating_status_no != 4"
-            + " order by cafe_no asc");
-
-        ResultSet rs = stmt.executeQuery()) {
-
-      ArrayList<Cafe> list = new ArrayList<>();
-
-      while(rs.next()) {
-        Cafe cafe = new Cafe();
-
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafe.setName(rs.getString("name"));
-        cafe.setLocation(rs.getString("location"));
-        cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
-        cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
-        cafe.setCafeStatus(rs.getInt("operating_status_no"));
-
-        list.add(cafe);
-      }
-
-      return list;
-    }
+    return sqlSession.selectList("CafeMapper.getCafeListByMember");
   }
 
   @Override
   public List<Cafe> findCafeListByLocation(String input) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.location, c.open_time, c.close_time, c.operating_status_no"
-            + " from studycafe c"
-            + " where c.operating_status_no != 1 and c.operating_status_no != 4"
-            + " and c.location like (concat('%',?,'%'))"
-            + " order by cafe_no asc")) {
-
-      stmt.setString(1, input);
-
-      ArrayList<Cafe> list = new ArrayList<>();
-
-      try (ResultSet rs = stmt.executeQuery()){
-
-        while(rs.next()) {
-          Cafe cafe = new Cafe();
-
-          cafe.setNo(rs.getInt("cafe_no"));
-          cafe.setName(rs.getString("name"));
-          cafe.setLocation(rs.getString("location"));
-          cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
-          cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
-          cafe.setCafeStatus(rs.getInt("operating_status_no"));
-
-          list.add(cafe);
-        }      
-      }
-      return list;
-    }
+    return sqlSession.selectList("CafeMapper.findCafeListByLocation", input);
   }
 
   @Override
   public Cafe findByCafeNo(int cafeNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name photo_name, sh.date, c.operating_status_no, c.ceo_member_no,"
-            + " cm.bossname, cm.license_no"
-            + " from studycafe c"
-            + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
-            + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
-            + " join ceo_member cm on c.ceo_member_no=cm.ceo_member_no"
-            + " where c.cafe_no = ?")) {
-
-      stmt.setInt(1, cafeNo);
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        if (!rs.next()) {
-          return null;
-        }
-
-        Cafe cafe = new Cafe();
-
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafe.setName(rs.getString("name"));
-        cafe.setInfo(rs.getString("info"));
-        cafe.setLocation(rs.getString("location"));
-        cafe.setPhone(rs.getString("phone"));
-        cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
-        cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
-        cafe.setViewCount(rs.getInt("view_cnt"));
-        cafe.setMainImg(rs.getString("sp.name"));
-        cafe.setHoliday(rs.getString("date"));
-        cafe.setCafeStatus(rs.getInt("operating_status_no"));
-
-        CeoMember ceoMember = new CeoMember();
-        ceoMember.setCeoNo(rs.getInt("ceo_member_no"));
-        ceoMember.setCeoBossName(rs.getString("bossname"));
-        ceoMember.setCeoLicenseNo(rs.getString("license_no"));
-        cafe.setCeoMember(ceoMember);
-
-        return cafe;
-      }
-    }
+    return sqlSession.selectOne("CafeMapper.findByCafeNo", cafeNo);
   }
 
   @Override
   public Cafe findByCafeNoMember(int cafeNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name photo_name, sh.date, c.operating_status_no"
-            + " from studycafe c"
-            + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
-            + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
-            + " where c.operating_status_no != 1 and c.operating_status_no !=4"
-            + " and c.cafe_no = ?")) {
-
-      stmt.setInt(1, cafeNo);
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        if (!rs.next()) {
-          return null;
-        }
-
-        Cafe cafe = new Cafe();
-
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafe.setName(rs.getString("name"));
-        cafe.setInfo(rs.getString("info"));
-        cafe.setLocation(rs.getString("location"));
-        cafe.setPhone(rs.getString("phone"));
-        cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
-        cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
-        cafe.setViewCount(rs.getInt("view_cnt"));
-        cafe.setMainImg(rs.getString("sp.name"));
-        cafe.setHoliday(rs.getString("date"));
-        cafe.setCafeStatus(rs.getInt("operating_status_no"));
-
-        return cafe;
-      }
-    }
+    return sqlSession.selectOne("CafeMapper.findByCafeNoMember", cafeNo);
   }
 
   @Override
   public Cafe findByCeoMember(int ceoNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,"
-            + " c.view_cnt, sp.name photo_name, sh.date, c.operating_status_no, c.ceo_member_no,"
-            + " cm.bossname, cm.license_no"
-            + " from studycafe c"
-            + " left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no"
-            + " left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no"
-            + " join ceo_member cm on c.ceo_member_no=cm.ceo_member_no"
-            + " where c.ceo_member_no = ? and c.operating_status_no !=4")) {
-
-      stmt.setInt(1, ceoNo);
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        if (!rs.next()) {
-          return null;
-        }
-
-        Cafe cafe = new Cafe();
-
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafe.setName(rs.getString("name"));
-        cafe.setInfo(rs.getString("info"));
-        cafe.setLocation(rs.getString("location"));
-        cafe.setPhone(rs.getString("phone"));
-        cafe.setOpenTime(rs.getTime("open_time").toLocalTime());
-        cafe.setCloseTime(rs.getTime("close_time").toLocalTime());
-        cafe.setViewCount(rs.getInt("view_cnt"));
-        cafe.setMainImg(rs.getString("sp.name"));
-        cafe.setHoliday(rs.getString("date"));
-        cafe.setCafeStatus(rs.getInt("operating_status_no"));
-
-        CeoMember ceoMember = new CeoMember();
-        ceoMember.setCeoNo(rs.getInt("ceo_member_no"));
-        ceoMember.setCeoBossName(rs.getString("bossname"));
-        ceoMember.setCeoLicenseNo(rs.getString("license_no"));
-        cafe.setCeoMember(ceoMember);
-
-        return cafe;
-      }
-    }
+    return sqlSession.selectOne("CafeMapper.findByCeoMember", ceoNo);
   }
 
   @Override
-  public void insertCafe(Cafe cafe, ArrayList<String> fileNames, ArrayList<Date> holidays) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into studycafe("
-            + " name,info,location,phone,open_time,close_time,ceo_member_no,operating_status_no)"
-            + " values(?,?,?,?,?,?,?,1)",
-            Statement.RETURN_GENERATED_KEYS)) {
+  public void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays) throws Exception {
+    sqlSession.insert("CafeMapper.insertCafe", cafe);
 
-      stmt.setString(1, cafe.getName());
-      stmt.setString(2, cafe.getInfo());
-      stmt.setString(3, cafe.getLocation());
-      stmt.setString(4, cafe.getPhone());
-      stmt.setTime(5, Time.valueOf(cafe.getOpenTime()));
-      stmt.setTime(6, Time.valueOf(cafe.getCloseTime()));
-      stmt.setInt(7, cafe.getCeoMember().getCeoNo());
+    if (!fileNames.isEmpty()) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("fileNames", fileNames);
+      params.put("cafeNo", cafe.getNo());
 
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("카페 등록 실패!");
-      }
-
-      int cafeNo = 0;
-      try (ResultSet pkRS = stmt.getGeneratedKeys()) {
-        if (pkRS.next()) {
-          cafeNo = pkRS.getInt("cafe_no");
-        }
-      }
-
-      if (!fileNames.isEmpty()) {
-        try (PreparedStatement stmt2 = con.prepareStatement(
-            "insert into studycafe_photo(name, cafe_no) values(?,?)")) {
-          for (String fileName : fileNames) {
-            stmt2.setString(1, fileName);
-            stmt2.setInt(2, cafeNo);
-            stmt2.executeUpdate();
-          }
-        }
-      }
-
-      if (!holidays.isEmpty()) {
-        try (PreparedStatement stmt3 = con.prepareStatement(
-            "insert into studycafe_holiday(cafe_no, date) values(?,?)")) {
-          for (Date date : holidays) {
-            stmt3.setInt(1, cafeNo);
-            stmt3.setDate(2, date);
-            stmt3.executeUpdate();
-          }
-        }
-      }
-
-      System.out.println(" >> 카페 등록 완료!");
+      sqlSession.insert("CafeMapper.insertCafeImage", params);
     }
+
+    if (!holidays.isEmpty()) {
+      // 해야됨 고민중
+    }
+
+    sqlSession.commit();
+    System.out.println(" >> 카페 등록 완료!");
+
   }
 
   @Override
@@ -307,214 +91,49 @@ public class MybatisCafeDao implements CafeDao {
   }
 
   public void updateCafeStatusToGENERAL(Cafe cafe) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "update studycafe set operating_status_no = 2"
-            + " where cafe_no = ?")) {
-
-      stmt.setInt(1, cafe.getNo());
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("장소 승인 실패!");
-      }
-    }
+    sqlSession.update("CafeMapper.updateCafeStatusToGENERAL", cafe.getNo());
+    sqlSession.commit();
   }
 
   @Override
   public void deleteCafe(Cafe cafe) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "update studycafe set operating_status_no = 4"
-            + " where cafe_no = ?")) {
-
-      stmt.setInt(1, cafe.getNo());
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("장소 삭제 실패!");
-      }
-    }
+    sqlSession.update("CafeMapper.deleteCafe", cafe.getNo());
+    sqlSession.commit();
   }
 
   //-----------------------CafeReview--------------------------------------
 
   @Override
   public List<CafeReview> getCafeReviewList() throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no, rs.per_member_no"
-            + " from studycafe_review r"
-            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
-            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no");
-
-        ResultSet rs = stmt.executeQuery()) {
-
-      ArrayList<CafeReview> list = new ArrayList<>();
-
-      while(rs.next()) {
-        CafeReview cafeReview = new CafeReview();
-
-        Member member = new Member();
-        member.setPerNo(rs.getInt("per_member_no"));
-        cafeReview.setMember(member);
-
-        cafeReview.setReviewNo(rs.getInt("review_no"));
-        cafeReview.setContent(rs.getString("content"));
-        cafeReview.setGrade(rs.getInt("grade"));
-        cafeReview.setRegisteredDate(rs.getDate("create_dt"));
-        cafeReview.setReviewStatus(rs.getInt("status"));
-
-        Cafe cafe = new Cafe();
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafeReview.setCafe(cafe);
-
-        list.add(cafeReview);
-      }
-      return list;
-    }
+    return sqlSession.selectList("CafeMapper.getCafeReviewList");
   }
 
   @Override
   public List<CafeReview> findReviewListByCafeNo(int cafeNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select r.grade, r.content, r.create_dt, r.status, sr.cafe_no, m.nickname"
-            + " from studycafe_review r"
-            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
-            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
-            + " join per_member pm on rs.per_member_no=pm.per_member_no"
-            + " join member m on pm.member_no=m.member_no"
-            + " where sr.cafe_no=?")) {
-
-      stmt.setInt(1, cafeNo);
-
-      ArrayList<CafeReview> list = new ArrayList<>();
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        while(rs.next()) {
-          CafeReview cafeReview = new CafeReview();
-
-          Member member = new Member();
-          member.setPerNickname(rs.getString("nickname"));
-          cafeReview.setMember(member);
-
-          cafeReview.setContent(rs.getString("content"));
-          cafeReview.setGrade(rs.getInt("grade"));
-          cafeReview.setRegisteredDate(rs.getDate("create_dt"));
-          cafeReview.setReviewStatus(rs.getInt("status"));
-
-          Cafe cafe = new Cafe();
-          cafe.setNo(rs.getInt("cafe_no"));
-          cafeReview.setCafe(cafe);
-
-          list.add(cafeReview);
-        }
-      }
-      return list;
-    }
+    return sqlSession.selectList("CafeMapper.findReviewListByCafeNo", cafeNo);
   }
 
   @Override
   public List<CafeReview> findReviewListByMember(int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no"
-            + " from studycafe_review r"
-            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
-            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
-            + " where rs.per_member_no=?")) {
-
-      stmt.setInt(1, memberNo);
-
-      ArrayList<CafeReview> list = new ArrayList<>();
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        while(rs.next()) {
-          CafeReview cafeReview = new CafeReview();
-
-          cafeReview.setReviewNo(rs.getInt("review_no"));
-          cafeReview.setContent(rs.getString("content"));
-          cafeReview.setGrade(rs.getInt("grade"));
-          cafeReview.setRegisteredDate(rs.getDate("create_dt"));
-          cafeReview.setReviewStatus(rs.getInt("status"));
-
-          Cafe cafe = new Cafe();
-          cafe.setNo(rs.getInt("cafe_no"));
-          cafeReview.setCafe(cafe);
-
-          list.add(cafeReview);
-        }
-      }
-      return list;
-    }
+    return sqlSession.selectList("CafeMapper.findReviewListByMember", memberNo);
   }
 
   @Override
   public CafeReview findByReviewNo(int reviewNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select r.review_no, r.grade, r.content, r.create_dt, r.status, sr.cafe_no, rs.per_member_no"
-            + " from studycafe_review r"
-            + " join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no"
-            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
-            + " where r.review_no=" + reviewNo);
-
-        ResultSet rs = stmt.executeQuery()) {
-
-      while(!rs.next()) {
-        return null;
-      }
-
-      CafeReview cafeReview = new CafeReview();
-
-      Member member = new Member();
-      member.setPerNo(rs.getInt("per_member_no"));
-      cafeReview.setMember(member);
-
-      cafeReview.setReviewNo(rs.getInt("review_no"));
-      cafeReview.setContent(rs.getString("content"));
-      cafeReview.setGrade(rs.getInt("grade"));
-      cafeReview.setRegisteredDate(rs.getDate("create_dt"));
-      cafeReview.setReviewStatus(rs.getInt("status"));
-
-      Cafe cafe = new Cafe();
-      cafe.setNo(rs.getInt("cafe_no"));
-      cafeReview.setCafe(cafe);
-
-      return cafeReview;
-    }
+    return sqlSession.selectOne("CafeMapper.findByReviewNo", reviewNo);
   }
 
   @Override
   public void insertCafeReview(CafeReview cafeReview) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into studycafe_review(studycafe_rsv_no, content, grade, status) values(?,?,?,1)")) {
-
-      stmt.setInt(1, cafeReview.getReservationNo());
-      stmt.setString(2, cafeReview.getContent());
-      stmt.setInt(3, cafeReview.getGrade());
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("0.리뷰 등록 실패!");
-      }
-
-      try (PreparedStatement stmt2 = con.prepareStatement(
-          "update studycafe_reservation set review=2 where studycafe_rsv_no=?")) {
-
-        stmt2.setInt(1, cafeReview.getReservationNo());
-
-        if (stmt2.executeUpdate() == 0) {
-          throw new Exception("1.리뷰 등록 실패!");
-        }
-      }
-    }
+    sqlSession.insert("CafeMapper.insertCafeReview", cafeReview);
+    sqlSession.update("CafeMapper.updateCafeReservationReviewStatus", cafeReview.getReservationNo());
+    sqlSession.commit();
   }
 
   @Override
   public void deleteCafeReview(int reviewNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "update studycafe_review set status = 2"
-            + " where review_no = ?")) {
-
-      stmt.setInt(1, reviewNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("리뷰 삭제 실패!");
-      }
-    }
+    sqlSession.delete("CafeMapper.deleteCafeReview", reviewNo);
+    sqlSession.commit();
   }
 
   //-----------------------CafeRoom--------------------------------------
@@ -702,57 +321,7 @@ public class MybatisCafeDao implements CafeDao {
 
   @Override
   public List<CafeReservation> findReservationListByMember(int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select rs.studycafe_rsv_no, rs.studyroom_no, rs.per_member_no, rs.rsv_dt, rs.using_dt,"
-            + " rs.start_time, rs.using_time, rs.people, rs.total_price, rs.review, rst.rsv_status_no,"
-            + " rst.rsv_name, c.cafe_no, c.name cafe_name"
-            + " from studycafe_reservation rs"
-            + " join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no"
-            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
-            + " join studycafe c on sr.cafe_no=c.cafe_no"
-            + " where rs.per_member_no=" + memberNo
-            + " order by rs.studycafe_rsv_no asc");
-
-        ResultSet rs = stmt.executeQuery()) {
-
-      ArrayList<CafeReservation> list = new ArrayList<>();
-
-      while(rs.next()) {
-        CafeReservation cafeReservation = new CafeReservation();
-
-        cafeReservation.setReservationNo(rs.getInt("studycafe_rsv_no"));
-        cafeReservation.setRoomNo(rs.getInt("studyroom_no"));
-
-        Member member = new Member();
-        member.setPerNo(rs.getInt("per_member_no"));
-        cafeReservation.setMember(member);
-
-        cafeReservation.setReservationDate(rs.getDate("rsv_dt"));
-        cafeReservation.setUseDate(rs.getDate("using_dt"));
-        cafeReservation.setStartTime(rs.getTime("start_time").toLocalTime());
-        cafeReservation.setUseTime(rs.getInt("using_time"));
-        cafeReservation.setUseMemberNumber(rs.getInt("people"));
-        cafeReservation.setTotalPrice(rs.getInt("total_price"));
-
-        int review = rs.getInt("review");
-        boolean isReview = false;
-        if (review == 2) {
-          isReview = true;
-        }
-        cafeReservation.setWirteReview(isReview);
-        cafeReservation.setReservationStatus(rs.getInt("rsv_status_no"));
-        cafeReservation.setReservationStatusName(rs.getString("rsv_name"));
-
-        Cafe cafe = new Cafe();
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafe.setName(rs.getString("cafe_name"));
-        cafeReservation.setCafe(cafe);
-
-        list.add(cafeReservation);
-      }
-
-      return list;
-    }
+    return sqlSession.selectList("CafeMapper.findReservationListByMember", memberNo);
   }
 
   @Override
@@ -812,58 +381,10 @@ public class MybatisCafeDao implements CafeDao {
 
   @Override
   public CafeReservation findReservationByMember(int memberNo, int reserNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select rs.studycafe_rsv_no, rs.studyroom_no, rs.per_member_no, rs.rsv_dt, rs.using_dt,"
-            + " rs.start_time, rs.using_time, rs.people, rs.total_price, rs.review, rst.rsv_status_no,"
-            + " rst.rsv_name, c.cafe_no, c.name cafe_name"
-            + " from studycafe_reservation rs"
-            + " join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no"
-            + " join studycafe_room sr on rs.studyroom_no=sr.studyroom_no"
-            + " join studycafe c on sr.cafe_no=c.cafe_no"
-            + " where rs.per_member_no=? and rs.studycafe_rsv_no=?"
-            + " order by rs.studycafe_rsv_no asc");) {
-
-      stmt.setInt(1, memberNo);
-      stmt.setInt(2, reserNo);
-
-      try (ResultSet rs = stmt.executeQuery()) {
-        if (!rs.next()) {
-          return null;
-        }
-
-        CafeReservation cafeReservation = new CafeReservation();
-
-        cafeReservation.setReservationNo(rs.getInt("studycafe_rsv_no"));
-        cafeReservation.setRoomNo(rs.getInt("studyroom_no"));
-
-        Member member = new Member();
-        member.setPerNo(rs.getInt("per_member_no"));
-        cafeReservation.setMember(member);
-
-        cafeReservation.setReservationDate(rs.getDate("rsv_dt"));
-        cafeReservation.setUseDate(rs.getDate("using_dt"));
-        cafeReservation.setStartTime(rs.getTime("start_time").toLocalTime());
-        cafeReservation.setUseTime(rs.getInt("using_time"));
-        cafeReservation.setUseMemberNumber(rs.getInt("people"));
-        cafeReservation.setTotalPrice(rs.getInt("total_price"));
-
-        int review = rs.getInt("review");
-        boolean isReview = false;
-        if (review == 2) {
-          isReview = true;
-        }
-        cafeReservation.setWirteReview(isReview);
-        cafeReservation.setReservationStatus(rs.getInt("rsv_status_no"));
-        cafeReservation.setReservationStatusName(rs.getString("rsv_name"));
-
-        Cafe cafe = new Cafe();
-        cafe.setNo(rs.getInt("cafe_no"));
-        cafe.setName(rs.getString("cafe_name"));
-        cafeReservation.setCafe(cafe);
-
-        return cafeReservation;
-      }
-    }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("memberNo", memberNo);
+    params.put("reserNo", reserNo);
+    return sqlSession.selectOne("CafeMapper.findReservationByMember", params);
   }
 
   @Override
