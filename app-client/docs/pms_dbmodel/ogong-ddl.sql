@@ -46,9 +46,6 @@ DROP TABLE IF EXISTS study_multiple_location RESTRICT;
 -- 스터디지역
 DROP TABLE IF EXISTS study_location RESTRICT;
 
--- 스터디구성원
-DROP TABLE IF EXISTS study_guilder RESTRICT;
-
 -- 스터디대면상태
 DROP TABLE IF EXISTS study_face_status RESTRICT;
 
@@ -69,9 +66,6 @@ DROP TABLE IF EXISTS study_board RESTRICT;
 
 -- 스터디
 DROP TABLE IF EXISTS study RESTRICT;
-
--- 개인
-DROP TABLE IF EXISTS per_member RESTRICT;
 
 -- 결제현황
 DROP TABLE IF EXISTS studycafe_payment_status RESTRICT;
@@ -102,6 +96,9 @@ DROP TABLE IF EXISTS admin RESTRICT;
 
 -- 회원
 DROP TABLE IF EXISTS member RESTRICT;
+
+-- 스터디구성원
+DROP TABLE IF EXISTS study_guilder RESTRICT;
 
 -- 스터디카페룸사진
 CREATE TABLE studycafe_room_photo (
@@ -194,7 +191,7 @@ CREATE UNIQUE INDEX UIX_studycafe_reservation_status
 CREATE TABLE studycafe_reservation (
   studycafe_rsv_no INTEGER  NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
   studyroom_no     INTEGER  NOT NULL COMMENT '스터디룸번호', -- 스터디룸번호
-  per_member_no    INTEGER  NOT NULL COMMENT '개인번호', -- 개인번호
+  member_no        INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
   rsv_dt           DATETIME NOT NULL DEFAULT now() COMMENT '예약일', -- 예약일
   using_dt         DATE     NOT NULL COMMENT '이용날짜', -- 이용날짜
   start_time       TIME     NOT NULL COMMENT '시작시간', -- 시작시간
@@ -257,7 +254,7 @@ CREATE UNIQUE INDEX UIX_studycafe_payment_type
 -- 결제
 CREATE TABLE studycafe_payment (
   payment_no        INTEGER  NOT NULL COMMENT '결제번호', -- 결제번호
-  studycafe_rsv_no  INTEGER  NULL     COMMENT '스터디카페예약번호', -- 스터디카페예약번호
+  studycafe_rsv_no  INTEGER  NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
   payment_type_no   INTEGER  NOT NULL COMMENT '결제유형번호', -- 결제유형번호
   payment_status_no INTEGER  NOT NULL COMMENT '결제현황', -- 결제현황
   payment_dt        DATETIME NOT NULL DEFAULT now() COMMENT '결제일' -- 결제일
@@ -324,7 +321,7 @@ CREATE TABLE studycafe (
   bookable            INTEGER      NULL     COMMENT '예약가능인원', -- 예약가능인원
   view_cnt            INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
   operating_status_no INTEGER      NOT NULL COMMENT '운영상태번호', -- 운영상태번호
-  ceo_member_no       INTEGER      NOT NULL COMMENT '사장번호' -- 사장번호
+  member_no           INTEGER      NOT NULL COMMENT '회원번호' -- 회원번호
 )
 COMMENT '스터디카페';
 
@@ -366,14 +363,14 @@ CREATE UNIQUE INDEX UIX_study_todolsit_progress
 
 -- 투두리스트
 CREATE TABLE study_todolist (
-  todolist_no   INTEGER      NOT NULL COMMENT '투두리스트번호', -- 투두리스트번호
-  study_no      INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
-  per_member_no INTEGER      NOT NULL COMMENT '개인번호', -- 개인번호
-  title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  create_dt     DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
-  note          VARCHAR(255) NULL     COMMENT '비고', -- 비고
-  progress_no   INTEGER      NOT NULL COMMENT '진행상태번호' -- 진행상태번호
+  todolist_no INTEGER      NOT NULL COMMENT '투두리스트번호', -- 투두리스트번호
+  title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content     VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  create_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
+  note        VARCHAR(255) NULL     COMMENT '비고', -- 비고
+  progress_no INTEGER      NOT NULL COMMENT '진행상태번호', -- 진행상태번호
+  member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no    INTEGER      NOT NULL COMMENT '스터디번호' -- 스터디번호
 )
 COMMENT '투두리스트';
 
@@ -445,23 +442,6 @@ ALTER TABLE study_location
 ALTER TABLE study_location
   MODIFY COLUMN location_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '지역번호';
 
--- 스터디구성원
-CREATE TABLE study_guilder (
-  study_no      INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
-  per_member_no INTEGER NOT NULL COMMENT '개인번호', -- 개인번호
-  created_dt    DATE    NOT NULL DEFAULT curdate() COMMENT '스터디가입일', -- 스터디가입일
-  status        INTEGER NULL     DEFAULT 1 COMMENT '승인여부' -- 승인여부
-)
-COMMENT '스터디구성원';
-
--- 스터디구성원
-ALTER TABLE study_guilder
-  ADD CONSTRAINT PK_study_guilder -- 스터디구성원 기본키
-    PRIMARY KEY (
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
-    );
-
 -- 스터디대면상태
 CREATE TABLE study_face_status (
   face_no INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
@@ -508,13 +488,13 @@ ALTER TABLE study_calender_importance
 -- 캘린더
 CREATE TABLE study_calender (
   calender_no   VARCHAR(50)  NOT NULL COMMENT '캘린더번호', -- 캘린더번호
-  study_no      INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
-  per_member_no INTEGER      NOT NULL COMMENT '개인번호', -- 개인번호
   calender_dt   DATE         NOT NULL COMMENT '날짜', -- 날짜
   day_week      VARCHAR(3)   NOT NULL COMMENT '요일', -- 요일
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   end_dt        DATE         NOT NULL COMMENT '종료일', -- 종료일
-  importance_no INTEGER      NOT NULL COMMENT '중요도상태번호' -- 중요도상태번호
+  importance_no INTEGER      NOT NULL COMMENT '중요도상태번호', -- 중요도상태번호
+  member_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no      INTEGER      NOT NULL COMMENT '스터디번호' -- 스터디번호
 )
 COMMENT '캘린더';
 
@@ -545,12 +525,12 @@ ALTER TABLE study_board_file
 
 -- 댓글
 CREATE TABLE study_board_comment (
-  comment_no    INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
-  study_no      INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
-  st_board_no   INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
-  content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  per_member_no INTEGER      NOT NULL COMMENT '개인번호', -- 개인번호
-  created_dt    DATETIME     NOT NULL DEFAULT now() COMMENT '작성일' -- 작성일
+  comment_no  INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
+  st_board_no INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
+  content     VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  created_dt  DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no    INTEGER      NOT NULL COMMENT '스터디번호' -- 스터디번호
 )
 COMMENT '댓글';
 
@@ -566,14 +546,14 @@ ALTER TABLE study_board_comment
 
 -- 스터디게시판
 CREATE TABLE study_board (
-  st_board_no   INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
-  study_no      INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
-  per_member_no INTEGER      NOT NULL COMMENT '개인번호', -- 개인번호
-  title         VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  view_ct       INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  created_dt    DATETIME     NOT NULL DEFAULT now()
-   COMMENT '작성일' -- 작성일
+  st_board_no INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
+  title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content     VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  view_ct     INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+  created_dt  DATETIME     NOT NULL DEFAULT now()
+   COMMENT '작성일', -- 작성일
+  member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no    INTEGER      NOT NULL COMMENT '스터디번호' -- 스터디번호
 )
 COMMENT '스터디게시판';
 
@@ -595,15 +575,15 @@ ALTER TABLE study_board
 
 -- 스터디
 CREATE TABLE study (
-  study_no      INTEGER     NOT NULL COMMENT '스터디번호', -- 스터디번호
-  name          VARCHAR(50) NOT NULL COMMENT '스터디명', -- 스터디명
-  subject_no    INTEGER     NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
-  no_people     INTEGER     NOT NULL COMMENT '인원수', -- 인원수
-  face_no       INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
-  introduction  TEXT        NOT NULL COMMENT '소개글', -- 소개글
-  created_dt    DATE        NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
-  per_member_no INTEGER     NOT NULL COMMENT '개인번호', -- 개인번호
-  score         INTEGER     NOT NULL DEFAULT 0 COMMENT '스터디활동점수' -- 스터디활동점수
+  study_no     INTEGER     NOT NULL COMMENT '스터디번호', -- 스터디번호
+  name         VARCHAR(50) NOT NULL COMMENT '스터디명', -- 스터디명
+  subject_no   INTEGER     NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
+  no_people    INTEGER     NOT NULL COMMENT '인원수', -- 인원수
+  face_no      INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
+  introduction TEXT        NOT NULL COMMENT '소개글', -- 소개글
+  created_dt   DATE        NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
+  member_no    INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  score        INTEGER     NOT NULL DEFAULT 0 COMMENT '스터디활동점수' -- 스터디활동점수
 )
 COMMENT '스터디';
 
@@ -622,29 +602,6 @@ CREATE INDEX IX_study
 
 ALTER TABLE study
   MODIFY COLUMN study_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '스터디번호';
-
--- 개인
-CREATE TABLE per_member (
-  per_member_no INTEGER NOT NULL COMMENT '개인번호', -- 개인번호
-  member_no     INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
-)
-COMMENT '개인';
-
--- 개인
-ALTER TABLE per_member
-  ADD CONSTRAINT PK_per_member -- 개인 기본키
-    PRIMARY KEY (
-      per_member_no -- 개인번호
-    );
-
--- 개인 유니크 인덱스
-CREATE UNIQUE INDEX UIX_per_member
-  ON per_member ( -- 개인
-    member_no ASC -- 회원번호
-  );
-
-ALTER TABLE per_member
-  MODIFY COLUMN per_member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '개인번호';
 
 -- 결제현황
 CREATE TABLE studycafe_payment_status (
@@ -686,10 +643,10 @@ ALTER TABLE notice_file
 
 -- 공지사항
 CREATE TABLE notice (
-  notice_no INTEGER      NOT NULL COMMENT '공지사항번호', -- 공지사항번호
-  title     VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content   VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  create_dt DATETIME     NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
+  notice_no  INTEGER      NOT NULL COMMENT '공지사항번호', -- 공지사항번호
+  title      VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content    VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  created_dt DATETIME     NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
 )
 COMMENT '공지사항';
 
@@ -711,10 +668,9 @@ ALTER TABLE notice
 
 -- 사장
 CREATE TABLE ceo_member (
-  ceo_member_no INTEGER     NOT NULL COMMENT '사장번호', -- 사장번호
-  member_no     INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-  bossname      VARCHAR(50) NOT NULL COMMENT '대표자명', -- 대표자명
-  license_no    VARCHAR(13) NOT NULL COMMENT '사업자등록번호' -- 사업자등록번호
+  member_no  INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  bossname   VARCHAR(50) NOT NULL COMMENT '대표자명', -- 대표자명
+  license_no VARCHAR(13) NOT NULL COMMENT '사업자등록번호' -- 사업자등록번호
 )
 COMMENT '사장';
 
@@ -722,7 +678,7 @@ COMMENT '사장';
 ALTER TABLE ceo_member
   ADD CONSTRAINT PK_ceo_member -- 사장 기본키
     PRIMARY KEY (
-      ceo_member_no -- 사장번호
+      member_no -- 회원번호
     );
 
 -- 사장 유니크 인덱스
@@ -731,13 +687,10 @@ CREATE UNIQUE INDEX UIX_ceo_member
     member_no ASC -- 회원번호
   );
 
-ALTER TABLE ceo_member
-  MODIFY COLUMN ceo_member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '사장번호';
-
 -- 스터디북마크
 CREATE TABLE study_bookmark (
-  per_member_no INTEGER NOT NULL COMMENT '개인번호', -- 개인번호
-  study_no      INTEGER NOT NULL COMMENT '스터디번호' -- 스터디번호
+  study_no  INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+  member_no INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
 )
 COMMENT '스터디북마크';
 
@@ -745,16 +698,16 @@ COMMENT '스터디북마크';
 ALTER TABLE study_bookmark
   ADD CONSTRAINT PK_study_bookmark -- 스터디북마크 기본키
     PRIMARY KEY (
-      per_member_no, -- 개인번호
-      study_no       -- 스터디번호
+      study_no,  -- 스터디번호
+      member_no  -- 회원번호
     );
 
 -- 좋아요
 CREATE TABLE study_board_like (
-  study_no      INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
-  per_member_no INTEGER NOT NULL COMMENT '개인번호', -- 개인번호
-  st_board_no   INTEGER NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
-  create_dt     DATE    NOT NULL DEFAULT curdate()
+  st_board_no INTEGER NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
+  member_no   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no    INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+  create_dt   DATE    NOT NULL DEFAULT curdate()
    COMMENT '등록일' -- 등록일
 )
 COMMENT '좋아요';
@@ -763,9 +716,9 @@ COMMENT '좋아요';
 ALTER TABLE study_board_like
   ADD CONSTRAINT PK_study_board_like -- 좋아요 기본키
     PRIMARY KEY (
-      study_no,      -- 스터디번호
-      per_member_no, -- 개인번호
-      st_board_no    -- 스터디자유게시판번호
+      st_board_no, -- 스터디자유게시판번호
+      member_no,   -- 회원번호
+      study_no     -- 스터디번호
     );
 
 -- 답변
@@ -795,7 +748,7 @@ CREATE TABLE ask_board (
   title        VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content      VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   view_cnt     INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  create_dt    DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
+  created_dt   DATETIME     NOT NULL DEFAULT now() COMMENT '등록일', -- 등록일
   use_secret   INTEGER      NOT NULL COMMENT '비밀글', -- 비밀글
   temppw       INTEGER      NULL     COMMENT '임시비밀번호' -- 임시비밀번호
 )
@@ -874,6 +827,23 @@ CREATE UNIQUE INDEX UIX_member
 ALTER TABLE member
   MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 
+-- 스터디구성원
+CREATE TABLE study_guilder (
+  member_no  INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no   INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+  created_dt DATE    NOT NULL DEFAULT curdate() COMMENT '스터디가입일', -- 스터디가입일
+  status     INTEGER NULL     DEFAULT 1 COMMENT '승인여부' -- 승인여부
+)
+COMMENT '스터디구성원';
+
+-- 스터디구성원
+ALTER TABLE study_guilder
+  ADD CONSTRAINT PK_study_guilder -- 스터디구성원 기본키
+    PRIMARY KEY (
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
+    );
+
 -- 스터디카페룸사진
 ALTER TABLE studycafe_room_photo
   ADD CONSTRAINT FK_studycafe_room_TO_studycafe_room_photo -- 스터디카페룸 -> 스터디카페룸사진
@@ -926,12 +896,12 @@ ALTER TABLE studycafe_reservation
 
 -- 스터디카페예약
 ALTER TABLE studycafe_reservation
-  ADD CONSTRAINT FK_per_member_TO_studycafe_reservation -- 개인 -> 스터디카페예약
+  ADD CONSTRAINT FK_member_TO_studycafe_reservation -- 회원 -> 스터디카페예약
     FOREIGN KEY (
-      per_member_no -- 개인번호
+      member_no -- 회원번호
     )
-    REFERENCES per_member ( -- 개인
-      per_member_no -- 개인번호
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
     );
 
 -- 스터디카페사진
@@ -998,10 +968,10 @@ ALTER TABLE studycafe
 ALTER TABLE studycafe
   ADD CONSTRAINT FK_ceo_member_TO_studycafe -- 사장 -> 스터디카페
     FOREIGN KEY (
-      ceo_member_no -- 사장번호
+      member_no -- 회원번호
     )
     REFERENCES ceo_member ( -- 사장
-      ceo_member_no -- 사장번호
+      member_no -- 회원번호
     );
 
 -- 투두리스트
@@ -1018,12 +988,12 @@ ALTER TABLE study_todolist
 ALTER TABLE study_todolist
   ADD CONSTRAINT FK_study_guilder_TO_study_todolist -- 스터디구성원 -> 투두리스트
     FOREIGN KEY (
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     )
     REFERENCES study_guilder ( -- 스터디구성원
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     );
 
 -- 한스터디여러지역
@@ -1046,35 +1016,6 @@ ALTER TABLE study_multiple_location
       study_no -- 스터디번호
     );
 
--- 스터디구성원
-ALTER TABLE study_guilder
-  ADD CONSTRAINT FK_TABLE4_TO_TABLE10 -- 스터디 -> 스터디멤버
-    FOREIGN KEY (
-    )
-    REFERENCES study ( -- 스터디
-      study_no -- 스터디번호
-    );
-
--- 스터디구성원
-ALTER TABLE study_guilder
-  ADD CONSTRAINT FK_per_member_TO_study_guilder -- 개인 -> 스터디구성원
-    FOREIGN KEY (
-      per_member_no -- 개인번호
-    )
-    REFERENCES per_member ( -- 개인
-      per_member_no -- 개인번호
-    );
-
--- 스터디구성원
-ALTER TABLE study_guilder
-  ADD CONSTRAINT FK_study_TO_study_guilder -- 스터디 -> 스터디구성원
-    FOREIGN KEY (
-      study_no -- 스터디번호
-    )
-    REFERENCES study ( -- 스터디
-      study_no -- 스터디번호
-    );
-
 -- 캘린더
 ALTER TABLE study_calender
   ADD CONSTRAINT FK_study_calender_importance_TO_study_calender -- 캘린더중요도 -> 캘린더
@@ -1089,12 +1030,12 @@ ALTER TABLE study_calender
 ALTER TABLE study_calender
   ADD CONSTRAINT FK_study_guilder_TO_study_calender -- 스터디구성원 -> 캘린더
     FOREIGN KEY (
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     )
     REFERENCES study_guilder ( -- 스터디구성원
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     );
 
 -- 스터디게시판첨부파일
@@ -1121,24 +1062,24 @@ ALTER TABLE study_board_comment
 ALTER TABLE study_board_comment
   ADD CONSTRAINT FK_study_guilder_TO_study_board_comment -- 스터디구성원 -> 댓글
     FOREIGN KEY (
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     )
     REFERENCES study_guilder ( -- 스터디구성원
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     );
 
 -- 스터디게시판
 ALTER TABLE study_board
   ADD CONSTRAINT FK_study_guilder_TO_study_board -- 스터디구성원 -> 스터디게시판
     FOREIGN KEY (
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     )
     REFERENCES study_guilder ( -- 스터디구성원
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     );
 
 -- 스터디
@@ -1163,17 +1104,7 @@ ALTER TABLE study
 
 -- 스터디
 ALTER TABLE study
-  ADD CONSTRAINT FK_per_member_TO_study -- 개인 -> 스터디
-    FOREIGN KEY (
-      per_member_no -- 개인번호
-    )
-    REFERENCES per_member ( -- 개인
-      per_member_no -- 개인번호
-    );
-
--- 개인
-ALTER TABLE per_member
-  ADD CONSTRAINT FK_member_TO_per_member -- 회원 -> 개인
+  ADD CONSTRAINT FK_member_TO_study -- 회원 -> 스터디
     FOREIGN KEY (
       member_no -- 회원번호
     )
@@ -1213,24 +1144,12 @@ ALTER TABLE study_bookmark
 
 -- 스터디북마크
 ALTER TABLE study_bookmark
-  ADD CONSTRAINT FK_per_member_TO_study_bookmark -- 개인 -> 스터디북마크
+  ADD CONSTRAINT FK_member_TO_study_bookmark -- 회원 -> 스터디북마크
     FOREIGN KEY (
-      per_member_no -- 개인번호
+      member_no -- 회원번호
     )
-    REFERENCES per_member ( -- 개인
-      per_member_no -- 개인번호
-    );
-
--- 좋아요
-ALTER TABLE study_board_like
-  ADD CONSTRAINT FK_study_guilder_TO_study_board_like -- 스터디구성원 -> 좋아요
-    FOREIGN KEY (
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
-    )
-    REFERENCES study_guilder ( -- 스터디구성원
-      study_no,      -- 스터디번호
-      per_member_no  -- 개인번호
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
     );
 
 -- 좋아요
@@ -1241,6 +1160,18 @@ ALTER TABLE study_board_like
     )
     REFERENCES study_board ( -- 스터디게시판
       st_board_no -- 스터디자유게시판번호
+    );
+
+-- 좋아요
+ALTER TABLE study_board_like
+  ADD CONSTRAINT FK_study_guilder_TO_study_board_like -- 스터디구성원 -> 좋아요
+    FOREIGN KEY (
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
+    )
+    REFERENCES study_guilder ( -- 스터디구성원
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     );
 
 -- 답변
@@ -1261,4 +1192,24 @@ ALTER TABLE ask_board
     )
     REFERENCES member ( -- 회원
       member_no -- 회원번호
+    );
+
+-- 스터디구성원
+ALTER TABLE study_guilder
+  ADD CONSTRAINT FK_member_TO_study_guilder -- 회원 -> 스터디구성원
+    FOREIGN KEY (
+      member_no -- 회원번호
+    )
+    REFERENCES member ( -- 회원
+      member_no -- 회원번호
+    );
+
+-- 스터디구성원
+ALTER TABLE study_guilder
+  ADD CONSTRAINT FK_study_TO_study_guilder -- 스터디 -> 스터디구성원
+    FOREIGN KEY (
+      study_no -- 스터디번호
+    )
+    REFERENCES study ( -- 스터디
+      study_no -- 스터디번호
     );

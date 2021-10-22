@@ -3,6 +3,8 @@ package com.ogong.pms.handler.board;
 import java.util.List;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 
@@ -22,7 +24,7 @@ public class AskBoardListHandler implements Command {
 
     List<AskBoard> askBoardList = askBoardDao.findAll();
 
-    if (askBoardList == null) {
+    if (askBoardList.isEmpty()) {
       System.out.println(" >> 등록된 글이 없습니다.");
       return;
     }
@@ -30,7 +32,7 @@ public class AskBoardListHandler implements Command {
     for (AskBoard askBoard : askBoardList) {
 
       // 기업
-      if (askBoard.getAskMemberWriter().getPerNickname() == null) {
+      if (askBoard.getAskCeoWriter().getCeoStatus() == CeoMember.CEO) {
 
         if (askBoard.getAskStatus() == 1) {
           System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
@@ -57,7 +59,7 @@ public class AskBoardListHandler implements Command {
       }
 
       // 개인
-      else if (askBoard.getAskCeoWriter().getCeoNickname() == null) {
+      else if (askBoard.getAskMemberWriter().getPerStatus() == Member.PER) {
 
         if (askBoard.getAskStatus() == 1) {
           System.out.printf("\n (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
