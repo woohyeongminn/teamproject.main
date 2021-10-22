@@ -1,26 +1,25 @@
 package com.ogong.pms.dao;
 
 import java.util.List;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 public interface StudyDao {
 
   // --------------- [ 스터디 ] ----------------------------------------
   void insert(Study study) throws Exception;
-  void insertGuilder(int studyNo, int memberNo) throws Exception;
-  void insertBookmark(Study study, Member member) throws Exception;
+  // void insertGuilder(int studyNo, int memberNo) throws Exception;
+  //void insertBookmark(Study study, Member member) throws Exception;
   void update(Study study) throws Exception;
-  void updateOwner(int studyNo, int memberNo) throws Exception;
-  void updateGuilder(int studyNo, int memberNo) throws Exception;
+  //void updateOwner(int studyNo, int memberNo) throws Exception;
+  //void updateGuilder(int studyNo, int memberNo) throws Exception;
   void delete(int studyNo, int memberNo) throws Exception;
-  void deleteGuilder(int studyNo, int memberNo) throws Exception;
+  //void deleteGuilder(int studyNo, int memberNo) throws Exception;
   void deleteMultipleLocation(int studyNo)throws Exception;
-  Study findWaitingGuilder(Study study) throws Exception;
-  Study findGuilder(Study study) throws Exception;
   List<Study> findAll() throws Exception;
   Study findByNo(int studyinputNo) throws Exception;
   List<Study> findByKeyword(String keyword) throws Exception;
   Study findMyStudy(int memberNo, int studyNo) throws Exception;
+  //Study findWaitingGuilder(Study study) throws Exception;
+  //Study findGuilder(Study study) throws Exception;
 
 }
