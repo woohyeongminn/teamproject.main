@@ -103,7 +103,6 @@ import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
-import com.ogong.pms.handler.myStudy.MyStudyExitHandler;
 import com.ogong.pms.handler.myStudy.MyStudyListHandler;
 import com.ogong.pms.handler.myStudy.MyStudyUpdateHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderAddHandler;
@@ -122,9 +121,7 @@ import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardListHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardUpdateHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.PromptFreeBoard;
 import com.ogong.pms.handler.myStudy.guilder.GuilderDeleteHandler;
-import com.ogong.pms.handler.myStudy.guilder.GuilderEntrustHandler;
 import com.ogong.pms.handler.myStudy.guilder.GuilderListHandler;
-import com.ogong.pms.handler.myStudy.guilder.WatingGuilderListHandler;
 import com.ogong.pms.handler.myStudy.todo.ToDoAdd;
 import com.ogong.pms.handler.myStudy.todo.ToDoDelete;
 import com.ogong.pms.handler.myStudy.todo.ToDoDetail;
@@ -132,10 +129,8 @@ import com.ogong.pms.handler.myStudy.todo.ToDoList;
 import com.ogong.pms.handler.myStudy.todo.ToDoUpdate;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
-import com.ogong.pms.handler.study.StudyJoinHandler;
 import com.ogong.pms.handler.study.StudyListHandler;
 import com.ogong.pms.handler.study.StudySearchHandler;
-import com.ogong.pms.handler.study.bookMark.StudyBookMarkAddHandler;
 import com.ogong.pms.handler.study.bookMark.StudyBookMarkDeleteHandler;
 import com.ogong.pms.handler.study.bookMark.StudyBookMarkDetailHandler;
 import com.ogong.pms.handler.study.bookMark.StudyBookMarkListHandler;
@@ -299,10 +294,10 @@ public class ClientApp {
     commandMap.put("/study/list", new StudyListHandler(studyDao));
     commandMap.put("/study/detail", new StudyDetailHandler(studyDao));
     commandMap.put("/study/search", new StudySearchHandler(studyDao));
-    commandMap.put("/study/join", new StudyJoinHandler(studyDao));
+    //commandMap.put("/study/join", new StudyJoinHandler(studyDao));
 
     // 1018 북마크 추가(eun)
-    commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao));
+    //commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao));
     commandMap.put("/study/bookMarkList", new StudyBookMarkListHandler(studyDao));
     commandMap.put("/study/bookMarkDetail", new StudyBookMarkDetailHandler(studyDao));
     commandMap.put("/study/bookMarkDelete", new StudyBookMarkDeleteHandler(studyDao));
@@ -312,11 +307,11 @@ public class ClientApp {
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyDao));
     commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao));
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao));
-    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
+    //commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
     commandMap.put("/myStudy/guilder", new GuilderListHandler(studyDao));
 
-    commandMap.put("/myStudy/listGuilder", new WatingGuilderListHandler(studyDao));
-    commandMap.put("/myStudy/entrustGuilder", new GuilderEntrustHandler(studyDao));
+    //commandMap.put("/myStudy/listGuilder", new WatingGuilderListHandler(studyDao));
+    //commandMap.put("/myStudy/entrustGuilder", new GuilderEntrustHandler(studyDao));
     commandMap.put("/myStudy/deleteGuilder", new GuilderDeleteHandler(studyDao));
 
     commandMap.put("/myStudy/calenderAdd", new CalenderAddHandler(studyDao));
