@@ -36,6 +36,8 @@ public class MyStudyDeleteHandler implements Command {
       return;
     }
 
+    studyDao.deleteMultipleLocation(myStudy.getStudyNo());
+    //studyDao.deleteLocation();
     studyDao.delete(myStudy.getStudyNo(), member.getPerNo());
     System.out.println(" >> 스터디가 삭제 되었습니다.");
   }

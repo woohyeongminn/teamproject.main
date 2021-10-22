@@ -22,7 +22,7 @@ public class MariadbStudyDao implements StudyDao {
   public void insert(Study study) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into study"
-            + "(name, subject_no, no_people, face_no, introduction, per_member_no)"
+            + "(name, subject_no, no_people, face_no, introduction, member_no)"
             + " values(?, ?, ?, ?, ?, ?)",
             Statement.RETURN_GENERATED_KEYS)) {
 
@@ -79,7 +79,7 @@ public class MariadbStudyDao implements StudyDao {
   @Override
   public void insertGuilder(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "insert into study_guilder(study_no, per_member_no) values(?,?)",
+        "insert into study_guilder(study_no, member_no) values(?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
 
       stmt.setInt(1, studyNo);
@@ -94,7 +94,7 @@ public class MariadbStudyDao implements StudyDao {
   @Override
   public void insertBookmark(Study study, Member member) throws Exception {
     //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
+    //        "insert into study_bookmark(study_no, member_no) values(?,?)",
     //        Statement.RETURN_GENERATED_KEYS)) {
     //
     //      stmt.setInt(1, study.getStudyNo());
@@ -131,7 +131,7 @@ public class MariadbStudyDao implements StudyDao {
   public void updateOwner(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt =
         con.prepareStatement("update study set"
-            + " per_member_no=?"
+            + " member_no=?"
             + " where study_no=?")) {
 
       stmt.setInt(1, memberNo);
@@ -148,7 +148,7 @@ public class MariadbStudyDao implements StudyDao {
     try (PreparedStatement stmt =
         con.prepareStatement("update study_guilder set"
             + " status=2"
-            + " where study_no=? and per_member_no=?")) {
+            + " where study_no=? and member_no=?")) {
 
       stmt.setInt(1, studyNo);
       stmt.setInt(2, memberNo);
@@ -163,7 +163,7 @@ public class MariadbStudyDao implements StudyDao {
   public void delete(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = 
         con.prepareStatement("delete from study"
-            + " where study_no=? and per_member_no=?")) {
+            + " where study_no=? and member_no=?")) {
 
       stmt.setInt(1, studyNo);
       stmt.setInt(2, memberNo);
@@ -178,7 +178,7 @@ public class MariadbStudyDao implements StudyDao {
   public void deleteGuilder(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = 
         con.prepareStatement("delete from study_guilder"
-            + " where study_no=? and per_member_no=?")) {
+            + " where study_no=? and member_no=?")) {
 
       stmt.setInt(1, studyNo);
       stmt.setInt(2, memberNo);
@@ -187,6 +187,66 @@ public class MariadbStudyDao implements StudyDao {
         throw new Exception("구성원 데이터 삭제 실패!");
       }
     }
+  }
+
+  // 스터디 삭제-(한스터디여러지역 테이블 삭제)
+  @Override
+  public void deleteMultipleLocation(int studyNo) throws Exception {
+    try (PreparedStatement stmt = 
+        con.prepareStatement("delete from study_multiple_location"
+            + " where study_no=studyNo")) {
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("구성원 데이터 삭제 실패!");
+      }
+    }
+  }
+
+
+
+  // 승인 대기 중인 회원목록 보기
+  @Override 
+  public Study findWaitingGuilder(Study study) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select s.study_no,"
+            + " sg.status,"
+            + " sg.member_no guilder_no"
+            + " m.nickname guilder_nickname"
+            + " from study s"
+            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+            + " left outer join member m on sg.member_no=m.member_no"
+            + " where sg.stauts=1");
+        ResultSet rs = stmt.executeQuery()) {
+
+      Member waitingMember = new Member();
+      waitingMember.setPerNo(rs.getInt("guilder_no"));
+      waitingMember.setPerNickname(rs.getString("guilder_nickname"));
+
+      study.getWatingMember().add(waitingMember);
+    }
+    return study;
+  }
+
+  //구성원 목록 보기
+  @Override 
+  public Study findGuilder(Study study) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "select s.study_no,"
+            + " sg.status,"
+            + " sg.member_no guilder_no"
+            + " m.nickname guilder_nickname"
+            + " from study s"
+            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+            + " left outer join member m on sg.member_no=m.member_no"
+            + " where sg.stauts=2");
+        ResultSet rs = stmt.executeQuery()) {
+
+      Member guilder = new Member();
+      guilder.setPerNo(rs.getInt("guilder_no"));
+      guilder.setPerNickname(rs.getString("guilder_nickname"));
+
+      study.getMembers().add(guilder);
+    }
+    return study;
   }
 
   @Override
@@ -200,30 +260,26 @@ public class MariadbStudyDao implements StudyDao {
             + " sfs.name face_name,"
             + " sfs.face_no face_no,"
             + " sl.name area_name,"
+            + " sl.location_no area_no,"
             + " s.introduction,"
             + " s.created_dt,"
-            + " pm.per_member_no owner_no,"
+            + " s.member_no owner_no,"
             + " m.nickname owner_name,"
             + " sg.status status,"
-            + " sg.per_member_no guilder_no,"
+            + " sg.member_no guilder_no,"
             + " m2.nickname guilder_nickname,"
             + " s.score study_score,"
-            + " sb.per_member_no book_member_no,"
-            // + " m3.nickname book_nickname,"
+            + " sb.member_no book_member_no,"
             + " s.score"
             + " from study s"
-            + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
-            + " left outer join member m on m.member_no=pm.member_no"
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+            + " left outer join member m on s.member_no=m.member_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
-            + " left outer join per_member pm2 on pm2.per_member_no=sg.per_member_no"
-            + " left outer join member m2 on m2.member_no=pm2.member_no"
+            + " left outer join member m2 on sg.member_no=m2.member_no"
             + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
             + " left outer join study_location sl on sml.location_no=sl.location_no"
-            + " left outer join study_bookmark sb on sb.study_no=s.study_no"
-            + " left outer join per_member pm3 on pm3.per_member_no=sb.per_member_no"
-        /* + " left outer join member m3 on m3.member_no=pm3.member_no" */);
+            + " left outer join study_bookmark sb on sb.study_no=s.study_no");
         ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<Study> list = new ArrayList<>();
@@ -289,22 +345,23 @@ public class MariadbStudyDao implements StudyDao {
             + " sl.name area_name,"
             + " s.introduction,"
             + " s.created_dt,"
-            + " pm.per_member_no owner_no,"
+            + " s.member_no owner_no,"
             + " m.nickname owner_name,"
-            + " sg.per_member_no guilder_no,"
             + " sg.status status,"
-            + " m2.nickname guilder_nickname," 
+            + " sg.member_no guilder_no,"
+            + " m2.nickname guilder_nickname,"
+            + " s.score study_score,"
+            + " sb.member_no book_member_no,"
             + " s.score"
             + " from study s"
-            + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
-            + " left outer join member m on m.member_no=pm.member_no"
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+            + " left outer join member m on s.member_no=m.member_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
-            + " left outer join per_member pm2 on pm2.per_member_no=sg.per_member_no"
-            + " left outer join member m2 on m2.member_no=pm2.member_no"
+            + " left outer join member m2 on sg.member_no=m2.member_no"
             + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
             + " left outer join study_location sl on sml.location_no=sl.location_no"
+            + " left outer join study_bookmark sb on sb.study_no=s.study_no"
             + " where s.study_no=" + studyinputNo);
         ResultSet rs = stmt.executeQuery()) {
 
@@ -329,23 +386,23 @@ public class MariadbStudyDao implements StudyDao {
           study.setOwner(member);
         }
 
-        int no = rs.getInt("status");
-        if (no == 1) {
-          Member waitingMember = new Member();
-          waitingMember.setPerNo(rs.getInt("guilder_no"));
-          waitingMember.setPerNickname(rs.getString("guilder_nickname"));
-
-          study.getWatingMember().add(waitingMember);
-
-        } else if (no == 2) {
-          Member guilder = new Member();
-          guilder.setPerNo(rs.getInt("guilder_no"));
-          guilder.setPerNickname(rs.getString("guilder_nickname"));
-
-          study.getMembers().add(guilder);
-        } else {
-
-        }
+        //        int no = rs.getInt("status");
+        //        if (no == 1) {
+        //          Member waitingMember = new Member();
+        //          waitingMember.setPerNo(rs.getInt("guilder_no"));
+        //          waitingMember.setPerNickname(rs.getString("guilder_nickname"));
+        //
+        //          study.getWatingMember().add(waitingMember);
+        //
+        //        } else if (no == 2) {
+        //          Member guilder = new Member();
+        //          guilder.setPerNo(rs.getInt("guilder_no"));
+        //          guilder.setPerNickname(rs.getString("guilder_nickname"));
+        //
+        //          study.getMembers().add(guilder);
+        //        } else {
+        //
+        //        }
       }
       return study;
     }
@@ -373,7 +430,6 @@ public class MariadbStudyDao implements StudyDao {
             + " m.nickname owner_name,"
             + " s.score"
             + " from study s"
-            + " join per_member pm on s.per_member_no=pm.per_member_no"
             + " join study_subject ss on s.subject_no=ss.subject_no"
             + " join member m on m.member_no=pm.member_no"
             + " join study_face_status sfs on s.face_no=sfs.face_no"

@@ -24,27 +24,31 @@ public class GuilderListHandler implements Command {
 
     int inputNo = (int) request.getAttribute("inputNo");
 
-    Study myStudy = studyDao.findByNo(inputNo);
+    Study ownerStudy = studyDao.findByNo(inputNo);
+    Study guilderStudy = studyDao.findGuilder(ownerStudy);
 
-    System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , myStudy.getMembers().size() + 1,
-        myStudy.getNumberOfPeple());
-    System.out.println(" 👤 조  장 : " + myStudy.getOwner().getPerNickname());
-    System.out.println(" 👥 구성원 : " + myStudy.getMemberNames());
+    System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , guilderStudy.getMembers().size() + 1,
+        guilderStudy.getNumberOfPeple());
+    System.out.println(" 👤 조  장 : " + ownerStudy.getOwner().getPerNickname());
+    System.out.print(" 👥 구성원 : "); 
+    for (int i = 0; i < guilderStudy.getMembers().size(); i++) {
+      System.out.print(guilderStudy.getMembers().get(i).getPerNickname());
+    }
 
     // 조장만 보임
     if (AuthPerMemberLoginHandler.getLoginUser().getPerNo() !=
-        myStudy.getOwner().getPerNo()) {
+        ownerStudy.getOwner().getPerNo()) {
       return;
     }
 
-    if(!myStudy.getWatingMemberNames().isEmpty()) {
-      System.out.printf("\n ★ > 승인 대기 중인 회원이 %d명 있습니다.", myStudy.getWatingMember().size());
+    if(!guilderStudy.getWatingMember().isEmpty()) {
+      System.out.printf("\n ★ > 승인 대기 중인 회원이 %d명 있습니다.", guilderStudy.getWatingMember().size());
 
-    } else if(myStudy.getWatingMemberNames().isEmpty()) {
+    } else if(guilderStudy.getWatingMemberNames().isEmpty()) {
       System.out.println("\n ☆ > 승인 대기 중인 회원이 없습니다.");
     }
 
-    request.setAttribute("inputNo", myStudy.getStudyNo());
+    request.setAttribute("inputNo", guilderStudy.getStudyNo());
 
     System.out.println("\n----------------------");
     System.out.println();
