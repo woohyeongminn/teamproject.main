@@ -37,6 +37,7 @@ insert study_calender_importance(importance_no, importance) values(3, ★★★�
 insert study_calender_importance(importance_no, importance) values(2, ★★★★☆);
 insert study_calender_importance(importance_no, importance) values(1, ★★★★★);
 
+/*
 select s.study_no,
 s.name,
 ss.name subject_name,
@@ -54,6 +55,7 @@ s.score
  join member m on m.member_no=pm.member_no
  join study_face_status sfs on s.face_no=sfs.face_no
  where s.study_no=?;
+*/
 
 
 
