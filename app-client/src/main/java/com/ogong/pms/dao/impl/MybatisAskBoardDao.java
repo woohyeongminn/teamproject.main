@@ -15,7 +15,7 @@ public class MybatisAskBoardDao implements AskBoardDao {
 
   @Override
   public void insert(AskBoard askBoard) throws Exception {
-    sqlSession.insert("AskBoardMapper.insert", askBoard);
+    //      sqlSession.insert("AskBoardMapper.insert", askBoard);
   }
 
   @Override

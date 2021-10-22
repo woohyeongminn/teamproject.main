@@ -1,18 +1,18 @@
-package com.ogong.pms.handler.board;
+package com.ogong.pms.handler.Askboard;
 
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
+import com.ogong.pms.domain.Member;
+import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
 
-public class AskBoardCeoMyDetailHandler implements Command {
+public class AskBoardPerMyDetailHandler implements Command {
 
   AskBoardDao askBoardDao; 
 
-  public AskBoardCeoMyDetailHandler(AskBoardDao askBoardDao) {
+  public AskBoardPerMyDetailHandler(AskBoardDao askBoardDao) {
     this.askBoardDao = askBoardDao;
   }
 
@@ -24,16 +24,16 @@ public class AskBoardCeoMyDetailHandler implements Command {
 
     int askNo = Prompt.inputInt(" 번호 : ");
 
-    CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    AskBoard askBoard = askBoardDao.findByNo(askNo);
+    AskBoard  askBoard = askBoardDao.findByNo(askNo);
 
     if (askBoard == null) {
       System.out.println(" >> 해당 번호의 문의글이 없습니다. ");
       return;
     }
 
-    if (askBoard.getAskCeoWriter().getCeoNo() != ceoMember.getCeoNo()) {
+    if (askBoard.getAskMemberWriter().getPerNo() != member.getPerNo()) {
       System.out.println(" >> 열람 권한이 없습니다.");
       return;
     }
@@ -42,7 +42,7 @@ public class AskBoardCeoMyDetailHandler implements Command {
     System.out.printf(" (%d)\n", askBoard.getAskNo());
     System.out.printf(" [%s]\n", askBoard.getAskTitle());
     System.out.printf(" >> 내용 : %s\n", askBoard.getAskContent());
-    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskCeoWriter().getCeoNickname());
+    System.out.printf(" >> 작성자 : %s\n", askBoard.getAskMemberWriter().getPerNickname());
     System.out.printf(" >> 작성일 : %s\n", askBoard.getAskRegisteredDate());
     askBoard.setAskVeiwCount(askBoard.getAskVeiwCount() + 1);
     System.out.printf(" >> 조회수 : %d\n", askBoard.getAskVeiwCount());

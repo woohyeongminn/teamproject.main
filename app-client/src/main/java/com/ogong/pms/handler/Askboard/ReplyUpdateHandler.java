@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.board;
+package com.ogong.pms.handler.Askboard;
 
 public class ReplyUpdateHandler {
   // 필요없음

@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.board;
+package com.ogong.pms.handler.Askboard;
 
 import java.sql.Date;
 import com.ogong.pms.dao.AskBoardDao;

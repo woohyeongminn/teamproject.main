@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.board;
+package com.ogong.pms.handler.Askboard;
 
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;

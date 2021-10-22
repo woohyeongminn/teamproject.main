@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.board;
+package com.ogong.pms.handler.admin;
 
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
@@ -9,12 +9,12 @@ import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
 
-public class AskBoardDetailHandler implements Command {
+public class AdminAskBoardDetailHandler implements Command {
 
   AskBoardDao askBoardDao; 
   //CeoMemberDao ceoMemberDao;
 
-  public AskBoardDetailHandler(AskBoardDao askBoardDao) {
+  public AdminAskBoardDetailHandler(AskBoardDao askBoardDao) {
     this.askBoardDao = askBoardDao;
   }
 

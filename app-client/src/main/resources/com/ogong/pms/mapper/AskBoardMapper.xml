@@ -10,19 +10,19 @@
     <result column="title" property="askTitle"/>
     <result column="content" property="askContent"/>
     <result column="view_cnt" property="askVeiwCount"/>
-    <result column="create_dt" property="askRegisteredDate"/>
+    <result column="created_dt" property="askRegisteredDate"/>
     <result column="ask_status" property="askStatus"/>
     <result column="temppw" property="askTempPW"/>
     
     <association property="askMemberWriter" javaType="Member">
-    <id column="per_no" property="perNo"/> 
+    <id column="member_no" property="perNo"/> 
     <result column="nickname" property="perNickname"/>
     <result column="member_status" property="perStatus"/>
     
     </association>
     
     <association property="askCeoWriter" javaType="CeoMember">
-    <id column="ceo_no" property="ceoNo"/> 
+    <id column="member_no" property="ceoNo"/> 
     <result column="nickname" property="ceoNickname"/>
     <result column="member_status" property="ceoStatus"/>
     </association>
@@ -40,13 +40,13 @@
       ab.ask_board_no,
       ab.title,
       ab.content,
-      pm.per_member_no per_no,
-      cm.ceo_member_no ceo_no,
       m.nickname,
       m.status member_status,
+  if (m.status=1, m.member_no, null) per_no,
+  if (m.status=2, m.member_no, null) ceo_no,
       ab.use_secret ask_status,
       ab.temppw,
-      ab.create_dt,
+      ab.created_dt,
       ab.view_cnt,
       abr.reply_title r_title,
       abr.reply_content r_content,
@@ -56,8 +56,6 @@
     from
       ask_board ab
       left outer join member m on m.member_no=ab.member_no
-      left outer join per_member pm on pm.member_no=m.member_no
-      left outer join ceo_member cm on cm.member_no=m.member_no
       left outer join ask_board_reply abr on abr.ask_board_no=ab.ask_board_no
     </sql>
     
@@ -81,16 +79,14 @@
 
   <insert id="insertPer" parameterType="AskBoard" >
     insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)
-    values(#{askTitle},#{askContent},#{askVeiwCount},
-    (select member_no from per_member pm where pm.per_member_no = #{askMemberWriter.perNo}),
-    #{askStatus},#{askTempPW})
+    values(
+      #{askTitle},#{askContent},#{askVeiwCount},#{askMemberWriter.perNo},#{askStatus},#{askTempPW})
   </insert>
 
   <insert id="insertCeo" parameterType="AskBoard" >
     insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)
-    values(#{askTitle},#{askContent},#{askVeiwCount},
-    (select member_no from ceo_member cm where cm.ceo_member_no = #{askCeoWriter.ceoNo}),
-    #{askStatus},#{askTempPW})
+    values(
+      #{askTitle},#{askContent},#{askVeiwCount},#{askCeoWriter.ceoNo},#{askStatus},#{askTempPW})
   </insert>
 
   
