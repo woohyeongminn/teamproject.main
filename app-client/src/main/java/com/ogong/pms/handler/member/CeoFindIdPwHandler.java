@@ -40,6 +40,13 @@ public class CeoFindIdPwHandler implements Command {
           CeoMember ceoMember = ceoMemberDao.findByName(inputName);
 
           if (ceoMember != null) {
+            String inputTel =  Prompt.inputString(" 전화번호 : ");
+
+            if (!ceoMember.getCeoTel().equals(inputTel)) {
+              System.out.println(" >> 회원 이름과 전화번호가 일치하지 않습니다. (종료:엔터)\n");
+              continue;
+            }
+
             wantCeoPw(ceoMember.getCeoName());
             break;
           }
@@ -66,6 +73,13 @@ public class CeoFindIdPwHandler implements Command {
       CeoMember ceoMember = ceoMemberDao.findByName(inputName);
 
       if (ceoMember != null) {
+        String inputTel =  Prompt.inputString(" 전화번호 : ");
+
+        if (!ceoMember.getCeoTel().equals(inputTel)) {
+          System.out.println(" >> 회원 이름과 전화번호가 일치하지 않습니다. (종료:엔터)\n");
+          continue;
+        }
+
         System.out.println();
         System.out.printf(" '%s님'의 이메일 >> ", ceoMember.getCeoName());
         System.out.println(ceoMember.getCeoEmail());
@@ -90,20 +104,16 @@ public class CeoFindIdPwHandler implements Command {
     System.out.println("▶ 임시 비밀번호 발급\n");
 
     while (true) {
-      String inputEmail =  Prompt.inputString(" 이메일 : ");
-
-      CeoMember ceoMember = ceoMemberDao.findByEmail(inputEmail);
-
-      if (inputEmail.equals("")) {
-        return;
-      }
+      CeoMember ceoMember = ceoMemberDao.findByName(ceoName);
 
       if (ceoMember != null) {
-        if (!ceoMember.getCeoName().equals(ceoName)) {
+        String inputEmail =  Prompt.inputString(" 이메일 : ");
+
+        // 여기가 안먹힘
+        if (!ceoMember.getCeoEmail().equals(inputEmail)) {
           System.out.println(" >> 본인의 이메일을 입력하세요. (종료:엔터)\n");
           continue;
         }
-
         SendMail sendMail = new SendMail();
 
         String pw = randomPw.randomPw();
@@ -117,9 +127,10 @@ public class CeoFindIdPwHandler implements Command {
         return;
 
       } else {
-        System.out.println(" >> 해당 이메일이 존재하지 않습니다. (종료:엔터)\n");
+        System.out.println(" >> 해당 이름이 존재하지 않습니다. (종료:엔터)\n");
         continue;
       }
     }
+    //}
   }
 }

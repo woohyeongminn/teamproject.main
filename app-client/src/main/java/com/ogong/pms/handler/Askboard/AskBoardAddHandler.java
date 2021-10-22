@@ -25,8 +25,6 @@ public class AskBoardAddHandler implements Command {
 
     AskBoard askBoard = new AskBoard();
 
-    // List<AskBoard> askBoardList = askBoardDao.findAll();
-
     int statusNo = 0;
 
     if (AuthPerMemberLoginHandler.getLoginUser() != null) {
@@ -48,14 +46,14 @@ public class AskBoardAddHandler implements Command {
           } else if ((statusNo > 0) && (statusNo < 3)) {
             if (statusNo == 2) {
               while (true) {
-                int tempPW = Prompt.inputInt("문의글 비밀번호(4자리) : ");
-
+                int tempPW = Prompt.inputInt(" 🔑 문의글 비밀번호(4자리) : ");
+                System.out.println();
                 if ((tempPW > 999) && (tempPW < 9999)) {
                   askBoard.setAskTempPW(tempPW);
                   break;
 
                 } else {
-                  System.out.println(" >> 4자리 숫자만 입력가능합니다.");
+                  System.out.println(" >> 4자리 숫자만 입력 가능합니다.");
                   continue;
                 }
               }
@@ -67,14 +65,6 @@ public class AskBoardAddHandler implements Command {
               return;
             }
 
-            // 마지막 고유번호를 찾아서 신규 등록시 +1 되도록 기능 구현
-            // AskBoard lastAskBoard = null;
-            // if (!askBoardList.isEmpty()) {
-            // lastAskBoard = askBoardList.get(askBoardList.size() - 1);
-            // askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
-            // } else {
-            // askBoard.setAskNo(1);
-            // }
             break;
           }
         } catch (NumberFormatException e) {
@@ -85,6 +75,13 @@ public class AskBoardAddHandler implements Command {
       }
 
       askBoard.setAskStatus(statusNo);
+
+      if ((statusNo > 0) && (statusNo < 3)) {
+        askBoardDao.insertPer(askBoard);
+        System.out.println(" >> 문의글이 등록되었습니다.");
+        request.getRequestDispatcher("/askBoard/perMyList").forward(request);
+        return;
+      }
     }
 
     else if (AuthCeoMemberLoginHandler.getLoginCeoMember() != null) {
@@ -109,8 +106,8 @@ public class AskBoardAddHandler implements Command {
 
             if (statusNo == 2) {
               while (true) {
-                int tempPW = Prompt.inputInt(" 문의글 비밀번호(4자리) : ");
-
+                int tempPW = Prompt.inputInt(" 🔑 문의글 비밀번호(4자리) : ");
+                System.out.println();
                 if ((tempPW < 999) && (tempPW > 9999)) {
                   System.out.println(" >> 4자리 숫자만 입력가능합니다.");
                   continue;
@@ -125,13 +122,6 @@ public class AskBoardAddHandler implements Command {
               System.out.println(" >> 문의글 등록을 취소하였습니다.");
               return;
             }
-            // AskBoard lastAskBoard = null;
-            // if (!askBoardList.isEmpty()) {
-            // lastAskBoard = askBoardList.get(askBoardList.size() - 1);
-            // askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
-            // } else {
-            // askBoard.setAskNo(1);
-            // }
             break;
           }
         } catch (NumberFormatException e) {
@@ -142,16 +132,27 @@ public class AskBoardAddHandler implements Command {
       }
 
       askBoard.setAskStatus(statusNo);
+
+      if ((statusNo > 0) && (statusNo < 3)) {
+        askBoardDao.insertCeo(askBoard);
+        System.out.println(" >> 문의글이 등록되었습니다.");
+        request.getRequestDispatcher("/askBoard/ceoMyList").forward(request);
+        return;
+      }
     }
 
     if (statusNo == 0) {
       System.out.println(" >> 이전 화면으로 돌아갑니다.");
       return;
     }
-
-    else if ((statusNo > 0) && (statusNo < 3)) {
-      askBoardDao.insert(askBoard);
-      System.out.println(" >> 문의글이 등록되었습니다.");
-    }
   }
 }
+
+// 마지막 고유번호를 찾아서 신규 등록시 +1 되도록 기능 구현
+// AskBoard lastAskBoard = null;
+// if (!askBoardList.isEmpty()) {
+// lastAskBoard = askBoardList.get(askBoardList.size() - 1);
+// askBoard.setAskNo(lastAskBoard.getAskNo() + 1);
+// } else {
+// askBoard.setAskNo(1);
+// }

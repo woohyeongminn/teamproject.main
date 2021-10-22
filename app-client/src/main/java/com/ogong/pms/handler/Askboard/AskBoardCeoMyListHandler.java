@@ -38,13 +38,25 @@ public class AskBoardCeoMyListHandler implements Command {
             reply = "📕 > 등록된 답변이 없습니다.";
           }
 
-          System.out.printf(" (%d)\n 제목 : %s\n 작성일 : %s\n 조회수 : %d\n %s\n", 
-              askBoard.getAskNo(), 
-              askBoard.getAskTitle(), 
-              askBoard.getAskRegisteredDate(),
-              askBoard.getAskVeiwCount(),
-              reply);
-          count++;
+          if (askBoard.getAskStatus() == 1) {
+            System.out.printf(" (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
+                askBoard.getAskNo(), 
+                askBoard.getAskTitle(), 
+                askBoard.getAskCeoWriter().getCeoNickname(),
+                askBoard.getAskRegisteredDate(),
+                askBoard.getAskVeiwCount());
+            count++;
+          }
+
+          else if (askBoard.getAskStatus() == 2) {
+            System.out.printf(" (%d)\n 작성자 : %s", 
+                askBoard.getAskNo(), 
+                askBoard.getAskCeoWriter().getCeoNickname());
+            System.out.println();
+            System.out.println("\n 🔒 비밀글입니다.");
+            count++;
+          }
+
         } 
 
       }
@@ -65,8 +77,8 @@ public class AskBoardCeoMyListHandler implements Command {
     int selectNo = Prompt.inputInt("선택> ");
 
     switch (selectNo) {
-      case 1: request.getRequestDispatcher("/askBoard/CeoMydetail").forward(request); return;
-      case 2: return;
+      case 1: request.getRequestDispatcher("/askBoard/ceoMydetail").forward(request); return;
+      case 0: return;
       default : System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
   }

@@ -36,7 +36,6 @@ insert study_calender_importance(importance_no, importance) values(4, '★★☆
 insert study_calender_importance(importance_no, importance) values(3, '★★★☆☆');
 insert study_calender_importance(importance_no, importance) values(2, '★★★★☆');
 insert study_calender_importance(importance_no, importance) values(1, '★★★★★');
-
 /*
 select s.study_no,
 s.name,

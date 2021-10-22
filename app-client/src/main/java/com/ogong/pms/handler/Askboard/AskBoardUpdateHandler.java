@@ -43,6 +43,7 @@ public class AskBoardUpdateHandler implements Command {
       String askTitle = Prompt.inputString(String.format(" 제목(%s) : ", askBoard.getAskTitle()));
       String askContent = Prompt.inputString(String.format(" 내용(%s) : ", askBoard.getAskContent()));
 
+      System.out.println();
       String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 문의글 변경을 취소하였습니다.");
@@ -70,6 +71,7 @@ public class AskBoardUpdateHandler implements Command {
       String askTitle = Prompt.inputString(String.format(" 제목(%s) : ", askBoard.getAskTitle()));
       String askContent = Prompt.inputString(String.format(" 내용(%s) : ", askBoard.getAskContent()));
 
+      System.out.println();
       String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 문의글 변경을 취소하였습니다.");
