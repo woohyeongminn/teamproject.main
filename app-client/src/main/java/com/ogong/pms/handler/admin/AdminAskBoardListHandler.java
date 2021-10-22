@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.board;
+package com.ogong.pms.handler.admin;
 
 import java.util.List;
 import com.ogong.pms.dao.AskBoardDao;
@@ -8,11 +8,11 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 
-public class AskBoardListHandler implements Command {
+public class AdminAskBoardListHandler implements Command {
 
   AskBoardDao askBoardDao;
 
-  public AskBoardListHandler(AskBoardDao askBoardDao) {
+  public AdminAskBoardListHandler(AskBoardDao askBoardDao) {
     this.askBoardDao = askBoardDao;
   }
 

@@ -39,6 +39,17 @@ import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.AuthPerMemberLogoutHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.pms.handler.Askboard.AskBoardAddHandler;
+import com.ogong.pms.handler.Askboard.AskBoardCeoMyDetailHandler;
+import com.ogong.pms.handler.Askboard.AskBoardCeoMyListHandler;
+import com.ogong.pms.handler.Askboard.AskBoardDeleteHandler;
+import com.ogong.pms.handler.Askboard.AskBoardPerMyDetailHandler;
+import com.ogong.pms.handler.Askboard.AskBoardPerMyListHandler;
+import com.ogong.pms.handler.Askboard.AskBoardUpdateHandler;
+import com.ogong.pms.handler.Askboard.ReplyAddHandler;
+import com.ogong.pms.handler.Askboard.ReplyDetailHandler;
+import com.ogong.pms.handler.admin.AdminAskBoardDetailHandler;
+import com.ogong.pms.handler.admin.AdminAskBoardListHandler;
 import com.ogong.pms.handler.admin.AdminCafeApprovalHandler;
 import com.ogong.pms.handler.admin.AdminCafeControlHandler;
 import com.ogong.pms.handler.admin.AdminCafeDeleteHandler;
@@ -59,17 +70,6 @@ import com.ogong.pms.handler.admin.AdminNoticeListHandler;
 import com.ogong.pms.handler.admin.AdminNoticeUpdateHandler;
 import com.ogong.pms.handler.admin.AdminStudyDeleteHandler;
 import com.ogong.pms.handler.admin.AdminUpdateHandler;
-import com.ogong.pms.handler.board.AskBoardAddHandler;
-import com.ogong.pms.handler.board.AskBoardCeoMyDetailHandler;
-import com.ogong.pms.handler.board.AskBoardCeoMyListHandler;
-import com.ogong.pms.handler.board.AskBoardDeleteHandler;
-import com.ogong.pms.handler.board.AskBoardDetailHandler;
-import com.ogong.pms.handler.board.AskBoardListHandler;
-import com.ogong.pms.handler.board.AskBoardPerMyDetailHandler;
-import com.ogong.pms.handler.board.AskBoardPerMyListHandler;
-import com.ogong.pms.handler.board.AskBoardUpdateHandler;
-import com.ogong.pms.handler.board.ReplyAddHandler;
-import com.ogong.pms.handler.board.ReplyDetailHandler;
 import com.ogong.pms.handler.cafe.CafeDetailHandler;
 import com.ogong.pms.handler.cafe.CafeListHandler;
 import com.ogong.pms.handler.cafe.CafeMyReservationDeleteHandler;
@@ -250,14 +250,15 @@ public class ClientApp {
     commandMap.put("/member/delete", new MemberDeleteHandler(memberDao));
 
     commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao));
-    commandMap.put("/askBoard/list", new AskBoardListHandler(askBoardDao));
-    commandMap.put("/askBoard/detail", new AskBoardDetailHandler(askBoardDao));
     commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao));
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardDao));
     commandMap.put("/askBoard/perMyList", new AskBoardPerMyListHandler(askBoardDao));
     commandMap.put("/askBoard/ceoMyList", new AskBoardCeoMyListHandler(askBoardDao));
     commandMap.put("/askBoard/PerMydetail", new AskBoardPerMyDetailHandler(askBoardDao));
     commandMap.put("/askBoard/CeoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao));
+
+    commandMap.put("/askBoard/list", new AdminAskBoardListHandler(askBoardDao));
+    commandMap.put("/askBoard/detail", new AdminAskBoardDetailHandler(askBoardDao));
 
     commandMap.put("/reply/add", new ReplyAddHandler(askBoardDao));
     commandMap.put("/reply/detail", new ReplyDetailHandler(askBoardDao));
@@ -590,8 +591,8 @@ public class ClientApp {
     MenuGroup askBoardMenu = new MenuGroup("💬 문의사항");
     askBoardMenu.setMenuFilter(menuFilter);
     askBoardMenu.add(new MenuItem("등록", PER_LOGIN, "/askBoard/add"));
-    askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
-    askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
+    askBoardMenu.add(new MenuItem("목록", "/askBoard/perMyList"));
+    askBoardMenu.add(new MenuItem("상세", "/askBoard/perMydetail"));
 
     return askBoardMenu;
   }
@@ -657,8 +658,8 @@ public class ClientApp {
     MenuGroup askBoardMenu = new MenuGroup("💬 문의사항");
     askBoardMenu.setMenuFilter(menuFilter);
     askBoardMenu.add(new MenuItem("등록", CEO_LOGIN, "/askBoard/add"));
-    askBoardMenu.add(new MenuItem("목록", "/askBoard/list"));
-    askBoardMenu.add(new MenuItem("상세", "/askBoard/detail"));
+    askBoardMenu.add(new MenuItem("목록", "/askBoard/ceoMyList"));
+    askBoardMenu.add(new MenuItem("상세", "/askBoard/ceoMydetail"));
 
     return askBoardMenu;
   }
