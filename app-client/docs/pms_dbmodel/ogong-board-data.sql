@@ -20,7 +20,7 @@ values(3, 'ID 및 PW 찾기에 관하여',
 insert into notice_file(notice_file_no, notice_no, filepath)
 values(1, 1, 'gif');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(2, 2, 'jpeg');
+values(3, 3, 'jpeg');
 
 -- 확인용
 /*
