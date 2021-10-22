@@ -610,16 +610,16 @@ public class MariadbCafeDao implements CafeDao {
     }
   }
 
-  @Override
-  public void insertCafeRoom(CafeRoom cafeRoom) throws Exception {
-    //    requestAgent.request("cafeRoom.insert", cafeRoom);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 스터디룸 등록을 실패하였습니다.");
-    //    } else {
-    //      System.out.println(" >> 등록되었습니다.");
-    //    }
-  }
+  //  @Override
+  //  public void insertCafeRoom(CafeRoom cafeRoom) throws Exception {
+  //    requestAgent.request("cafeRoom.insert", cafeRoom);
+  //
+  //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+  //      System.out.println(" >> 스터디룸 등록을 실패하였습니다.");
+  //    } else {
+  //      System.out.println(" >> 등록되었습니다.");
+  //    }
+  //  }
 
   @Override
   public void updateCafeRoom(CafeRoom cafeRoom) throws Exception {
@@ -918,6 +918,12 @@ public class MariadbCafeDao implements CafeDao {
   @Override
   public void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays)
       throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void insertCafeRoom(CafeRoom cafeRoom, ArrayList<CafeImage> fileNames) throws Exception {
     // TODO Auto-generated method stub
 
   }

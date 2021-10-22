@@ -64,7 +64,7 @@ public class CafeDetailHandler implements Command {
     request.setAttribute("cafeNo", cafe.getNo());
     if (roomCount != 0) {
       System.out.println("----------------------");
-      System.out.println("1. 일반 예약");
+      System.out.println("1. 일반 예약(안됨)");
       System.out.println("2. 스터디룸 예약");
       System.out.println("0. 이전");
 

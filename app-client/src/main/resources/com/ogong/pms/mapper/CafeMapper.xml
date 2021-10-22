@@ -17,7 +17,7 @@
     <result column="operating_status_no" property="cafeStatus"/>
     
     <association property="ceoMember" javaType="CeoMember">
-      <id column="ceo_member_no" property="ceoNo"/>
+      <id column="member_no" property="ceoNo"/>
       <result column="bossname" property="ceoBossName" />
       <result column="license_no" property="ceoLicenseNo" />
     </association>
@@ -37,7 +37,7 @@
     <result column="status" property="reviewStatus"/>
     
     <association property="member" javaType="member">
-      <id column="per_member_no" property="perNo"/>
+      <id column="member_no" property="perNo"/>
       <result column="nickname" property="perNickname"/>
     </association>
     
@@ -60,7 +60,7 @@
     <result column="review" property="wirteReview"/>
     
     <association property="member" javaType="member">
-      <id column="per_member_no" property="perNo"/>
+      <id column="member_no" property="perNo"/>
     </association>
     
     <association property="cafe" javaType="cafe">
@@ -112,14 +112,14 @@
       sp.name photo_name, 
       sh.date, 
       c.operating_status_no, 
-      c.ceo_member_no,
+      c.member_no,
       cm.bossname, 
       cm.license_no
     from 
       studycafe c
       left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
       left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
-      join ceo_member cm on c.ceo_member_no=cm.ceo_member_no
+      join ceo_member cm on c.member_no=cm.member_no
   </sql>
   
   <sql id="memberWhere">
@@ -175,13 +175,13 @@
     <include refid="detailSelect1"/>
     where
       c.operating_status_no != 4
-      and c.ceo_member_no = #{ceoNo}
+      and c.member_no = #{ceoNo}
   </select>
   
   <insert id="insertCafe" parameterType="cafe" 
           useGeneratedKeys="true" keyColumn="cafe_no" keyProperty="no">
 	  insert into studycafe
-	    (name,info,location,phone,open_time,close_time,ceo_member_no,operating_status_no)
+	    (name,info,location,phone,open_time,close_time,member_no,operating_status_no)
 	  values
 	    (#{name},#{info},#{location},#{phone},#{openTime,jdbcType=TIME},#{closeTime,jdbcType=TIME},#{ceoMember.ceoNo},1)
   </insert>
@@ -218,14 +218,13 @@
       r.create_dt, 
       r.status, 
       sr.cafe_no,
-      pm.per_member_no,
+      rs.member_no,
       m.nickname
     from 
       studycafe_review r
       join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
       join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
-      join per_member pm on rs.per_member_no=pm.per_member_no
-      join member m on pm.member_no=m.member_no
+      join member m on rs.member_no=m.member_no
   </sql>
   
   <select id="getCafeReviewList" resultMap="reviewMap">
@@ -243,7 +242,7 @@
   <select id="findReviewListByMember" resultMap="reviewMap" parameterType="int">
     <include refid="reviewListSelect"/>
     where 
-      rs.per_member_no=#{memberNo}
+      rs.member_no=#{memberNo}
   </select>
   
   <select id="findByReviewNo" resultMap="reviewMap" parameterType="int">
@@ -314,13 +313,49 @@
     r.studyroom_no = #{roomNo}
   </select>
   
+  <insert id="insertCafeRoom" parameterType="CafeRoom"
+        useGeneratedKeys="true" keyColumn="studyroom_no" keyProperty="roomNo">
+    insert into studycafe_room(name, cafe_no, introduction, people, hourly_amount)
+    values (#{roomName},#{cafe.no},#{roomInfo},#{people},#{roomPrice})
+  </insert>
+  
+  <insert id="insertCafeRoomImage" parameterType="map">
+    insert into studycafe_room_photo(name, studyroom_no) 
+    values
+    <foreach collection="fileNames" item="roomImage" separator="," >
+    (#{roomImage.name},#{cafeRoomNo})
+    </foreach>
+  </insert>
+  
+  <update id="updateCafeRoom" parameterType="CafeRoom">
+    update studycafe_room
+    <set>
+      <if test="roomName != null">
+        name=#{roomName},
+      </if>
+      <if test="roomInfo != null">
+        introduction=#{roomInfo},
+      </if>
+      <if test="people != null">
+        people=#{people},
+      </if>
+      <if test="roomPrice != null">
+        hourly_amount=#{roomPrice},
+      </if>
+    </set>
+    where studyroom_no=#{roomNo}
+  </update>
+  
+  <delete id="" parameterType="int">
+    
+  </delete>
   
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페예약ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
   <sql id="reservationListSelect">
 	  select 
 	      rs.studycafe_rsv_no, 
 	      rs.studyroom_no, 
-	      rs.per_member_no, 
+	      rs.member_no, 
 	      rs.rsv_dt, 
 	      rs.using_dt,
 	      rs.start_time, 
@@ -349,7 +384,7 @@
   <select id="findReservationListByMember" resultMap="reservationMap" parameterType="int">
   <include refid="reservationListSelect"/>
 	  where 
-	    rs.per_member_no=#{memberNo}
+	    rs.member_no=#{memberNo}
 	  order by
 	    rs.studycafe_rsv_no asc
   </select>
@@ -358,7 +393,7 @@
   <select id="findReservationListByCeoMember" resultMap="reservationMap" parameterType="int">
   <include refid="reservationListSelect"/>
     where 
-      c.ceo_member_no=#{ceoNo}
+      c.member_no=#{ceoNo}
     order by 
       rs.studycafe_rsv_no asc
   </select>
@@ -367,7 +402,7 @@
   <select id="findReservationByMember" resultMap="reservationMap" parameterType="map">
   <include refid="reservationListSelect"/>
     where 
-      rs.per_member_no=#{memberNo}
+      rs.member_no=#{memberNo}
       and rs.studycafe_rsv_no=#{reserNo}
     order by
       rs.studycafe_rsv_no asc
@@ -375,7 +410,7 @@
   
   <insert id="insertReservation" parameterType="CafeReservation">
   insert into studycafe_reservation
-    (studyroom_no, per_member_no, using_dt, start_time,using_time, people, 
+    (studyroom_no, member_no, using_dt, start_time,using_time, people, 
     total_price, rsv_status_no, review) 
   values(#{roomNo},#{member.perNo},#{useDate},#{startTime},#{useTime},#{useMemberNumber},#{totalPrice},#{reservationStatus},1)
   </insert>

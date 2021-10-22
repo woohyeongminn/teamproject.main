@@ -150,25 +150,21 @@ public class MybatisCafeDao implements CafeDao {
   }
 
   @Override
-  public void insertCafeRoom(CafeRoom cafeRoom) throws Exception {
-    //    requestAgent.request("cafeRoom.insert", cafeRoom);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 스터디룸 등록을 실패하였습니다.");
-    //    } else {
-    //      System.out.println(" >> 등록되었습니다.");
-    //    }
+  public void insertCafeRoom(CafeRoom cafeRoom, ArrayList<CafeImage> fileNames) throws Exception {
+    sqlSession.insert("CafeMapper.insertCafeRoom", cafeRoom);
+
+    if (!fileNames.isEmpty()) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("fileNames", fileNames);
+      params.put("cafeRoomNo", cafeRoom.getRoomNo());
+
+      sqlSession.insert("CafeMapper.insertCafeRoomImage", params);
+    }
   }
 
   @Override
   public void updateCafeRoom(CafeRoom cafeRoom) throws Exception {
-    //    requestAgent.request("cafeRoom.update", cafeRoom);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 스터디룸 수정을 실패하였습니다.");
-    //    } else {
-    //      System.out.println(" >> 수정이 완료 되었습니다.");
-    //    }
+    sqlSession.update("CafeMapper.updateCafeRoom", cafeRoom);
   }
 
   @Override

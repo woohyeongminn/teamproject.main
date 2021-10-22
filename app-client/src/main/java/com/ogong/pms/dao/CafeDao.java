@@ -39,7 +39,7 @@ public interface CafeDao {
   List<CafeRoom> getCafeRoomList() throws Exception;
   List<CafeRoom> findCafeRoomListByCafe(int cafeNo) throws Exception;
   CafeRoom findByRoomNo(int roomNo) throws Exception;
-  void insertCafeRoom(CafeRoom cafeRoom) throws Exception;
+  void insertCafeRoom(CafeRoom cafeRoom, ArrayList<CafeImage> fileNames) throws Exception;
   void updateCafeRoom(CafeRoom cafeRoom) throws Exception;
   void deleteCafeRoom(int roomNo) throws Exception;
 
