@@ -1,10 +1,3 @@
--- 관리자 test 값 
-insert into admin(admin_no, email, password, nickname) 
-values(1, 'ogong@test.com', password('1234'), '오늘의공부');
-insert into admin(admin_no, email, password, nickname) 
-values(2, 'admin@test.com', password('1234'), '관리자테스트');
-
--------------------------------------------------------------------------------------------------
 -- 공지사항 test 값
 insert into notice(notice_no, title, content, create_dt)
 values(1, '오늘의 공부 회원 가입을 환영합니다!',
