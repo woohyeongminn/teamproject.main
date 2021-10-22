@@ -40,7 +40,7 @@ public class CafeDetailHandler implements Command {
     System.out.printf(" >> 전화번호 : %s\n", cafe.getPhone());
     System.out.printf(" >> 오픈시간 : %s\n", cafe.getOpenTime());
     System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
-    System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());
+    System.out.printf(" >> 이번주 휴무일 : %s\n", cafe.getHoliday());
     System.out.printf(" >> 조회수 : %d\n", cafe.getViewCount());
     //    System.out.printf(" >> 예약가능 인원 : %d\n", cafe.getBookable());
     //    System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());

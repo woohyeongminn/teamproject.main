@@ -49,7 +49,7 @@ public class CeoCafeDetailHandler implements Command {
     System.out.printf(" >> 전화번호 : %s\n", cafe.getPhone());
     System.out.printf(" >> 오픈시간 : %s\n", cafe.getOpenTime());
     System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
-    System.out.printf(" >> 휴무일 : %s\n", cafe.getHoliday());
+    System.out.printf(" >> 이번주 휴무일 : %s\n", cafe.getHoliday());
     System.out.printf(" >> 상태 : %s\n", CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus()));
     getStarRatingAverage(cafe); // 리뷰 평점계산
     listReview(cafe); // 리뷰 목록

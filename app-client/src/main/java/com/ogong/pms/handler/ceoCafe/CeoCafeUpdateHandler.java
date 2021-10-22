@@ -41,8 +41,6 @@ public class CeoCafeUpdateHandler implements Command {
     String openTime = Prompt.inputString(String.format(" 오픈시간(%s) : ", cafe.getOpenTime()));
     String closeTime = Prompt.inputString(String.format(" 마감시간(%s) : ", cafe.getCloseTime()));
     String holiday = Prompt.inputString(String.format(" 휴무일(%s) : ", cafe.getHoliday()));
-    int bookable = Prompt.inputInt(String.format(" 예약가능인원(%d) : ", cafe.getBookable()));
-    int timePrice = Prompt.inputInt(String.format(" 시간당금액(%d) : ", cafe.getTimePrice()));
     int cafeStatus = 0;
     if (cafe.getCafeStatus() != 0) {
       cafeStatus = CafeHandlerHelper.promptCafeStatus(cafe.getCafeStatus());
@@ -62,8 +60,6 @@ public class CeoCafeUpdateHandler implements Command {
     cafe.setOpenTime(LocalTime.parse(openTime));
     cafe.setCloseTime(LocalTime.parse(closeTime));
     cafe.setHoliday(holiday);
-    cafe.setBookable(bookable);
-    cafe.setTimePrice(timePrice);
     cafe.setCafeStatus(cafeStatus);
 
     cafeDao.updateCafe(cafe);
