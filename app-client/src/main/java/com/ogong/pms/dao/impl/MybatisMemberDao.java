@@ -20,11 +20,12 @@ public class MybatisMemberDao implements MemberDao {
   public void insert(Member member) throws Exception {
     sqlSession.insert("MemberMapper.insert", member);
 
-    HashMap<String, Object> params = new HashMap<>();
-    params.put("member_no", params);
-    params.put("per_member_no", params);
+    // HashMap<String, Object> params = new HashMap<>();
+    // params.put("member_no", member.getPerNo());
 
-    sqlSession.insert("MemberMapper.insertPer", params);
+    int temp = member.getPerNo();
+
+    sqlSession.insert("MemberMapper.insertPer", temp);
 
     sqlSession.commit();
 
