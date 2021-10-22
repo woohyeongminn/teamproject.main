@@ -254,8 +254,8 @@ public class ClientApp {
     commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardDao));
     commandMap.put("/askBoard/perMyList", new AskBoardPerMyListHandler(askBoardDao));
     commandMap.put("/askBoard/ceoMyList", new AskBoardCeoMyListHandler(askBoardDao));
-    commandMap.put("/askBoard/PerMydetail", new AskBoardPerMyDetailHandler(askBoardDao));
-    commandMap.put("/askBoard/CeoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/perMydetail", new AskBoardPerMyDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/ceoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao));
 
     commandMap.put("/askBoard/list", new AdminAskBoardListHandler(askBoardDao));
     commandMap.put("/askBoard/detail", new AdminAskBoardDetailHandler(askBoardDao));
@@ -590,7 +590,7 @@ public class ClientApp {
   private Menu createMemberAskBoardMenu() {
     MenuGroup askBoardMenu = new MenuGroup("💬 문의사항");
     askBoardMenu.setMenuFilter(menuFilter);
-    askBoardMenu.add(new MenuItem("등록", PER_LOGIN, "/askBoard/add"));
+    askBoardMenu.add(new MenuItem("등록", "/askBoard/add"));
     askBoardMenu.add(new MenuItem("목록", "/askBoard/perMyList"));
     askBoardMenu.add(new MenuItem("상세", "/askBoard/perMydetail"));
 

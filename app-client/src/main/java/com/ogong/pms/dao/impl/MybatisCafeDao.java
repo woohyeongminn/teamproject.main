@@ -41,17 +41,35 @@ public class MybatisCafeDao implements CafeDao {
 
   @Override
   public Cafe findByCafeNo(int cafeNo) throws Exception {
-    return sqlSession.selectOne("CafeMapper.findByCafeNo", cafeNo);
+    Cafe cafe = sqlSession.selectOne("CafeMapper.findByCafeNo", cafeNo);
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("cafeNo", cafeNo);
+    cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+
+    return cafe;
   }
 
   @Override
   public Cafe findByCafeNoMember(int cafeNo) throws Exception {
-    return sqlSession.selectOne("CafeMapper.findByCafeNoMember", cafeNo);
+    Cafe cafe = sqlSession.selectOne("CafeMapper.findByCafeNoMember", cafeNo);
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("cafeNo", cafeNo);
+    cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+
+    return cafe;
   }
 
   @Override
   public Cafe findByCeoMember(int ceoNo) throws Exception {
-    return sqlSession.selectOne("CafeMapper.findByCeoMember", ceoNo);
+    Cafe cafe = sqlSession.selectOne("CafeMapper.findByCeoMember", ceoNo);
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("ceoNo", ceoNo);
+    cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+
+    return cafe;
   }
 
   @Override
@@ -169,15 +187,7 @@ public class MybatisCafeDao implements CafeDao {
 
   @Override
   public void deleteCafeRoom(int roomNo) throws Exception {
-    //    HashMap<String,String> params = new HashMap<>();
-    //    params.put("roomNo", String.valueOf(roomNo));
-    //    requestAgent.request("cafeRoom.delete", params);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 스터디룸 삭제 실패하였습니다.");
-    //    } else {
-    //      System.out.println(" >> 스터디룸을 삭제하였습니다.");
-    //    }
+    sqlSession.delete("CafeMapper.deleteCafeRoom", roomNo);
   }
 
   //-----------------------CafeReservation--------------------------------------
