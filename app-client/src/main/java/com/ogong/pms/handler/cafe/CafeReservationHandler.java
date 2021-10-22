@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
@@ -171,17 +170,7 @@ public class CafeReservationHandler implements Command {
     CafeRoom cafeRoom = cafeDao.findByRoomNo(selectNo);
 
     System.out.printf("\n [%s]\n", cafeRoom.getRoomName());
-
-    // 스터디룸 이미지 처리
-    String imgNames = "";
-    if (cafeRoom.getRoomImgs().isEmpty()) {
-      imgNames = "없음";
-    } else {
-      Collection<String> values = cafeRoom.getRoomImgs().values();
-      imgNames = values.toString();
-    }
-
-    System.out.printf(" >> 스터디룸 이미지 : %s\n", imgNames);
+    System.out.printf(" >> 스터디룸 이미지 : %s\n", cafeRoom.getCafeRoomImageNames());
     System.out.printf(" >> 소개글 : %s\n", cafeRoom.getRoomInfo());
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
