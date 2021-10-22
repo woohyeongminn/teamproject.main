@@ -60,11 +60,10 @@ public class MybatisCeoMemberDao implements CeoMemberDao {
 
   // 로그인
   @Override
-  public CeoMember findByEmailAndPassword(String inputEmail, String inputPassword, int active) throws Exception {
+  public CeoMember findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
     HashMap<String,Object> params = new HashMap<>();
     params.put("email", inputEmail);
     params.put("password", inputPassword);
-    params.put("active", active);
 
     return sqlSession.selectOne("CeoMemberMapper.findByEmailAndPassword", params);
   }

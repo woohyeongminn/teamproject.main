@@ -6,7 +6,7 @@
 <mapper namespace="CeoMemberMapper">
   
   <resultMap type="ceoMember" id="CeoMemberMap">
-    <id column="ceo_no" property="ceoNo"/>
+    <id column="member_no" property="ceoNo"/>
     <result column="name" property="ceoName"/>
     <result column="nickname" property="ceoNickname"/>
     <result column="email" property="ceoEmail"/>
@@ -32,7 +32,6 @@
       m.created_dt,
       m.active,
       m.status,
-      cm.ceo_member_no ceo_no,
       cm.bossname bossname,
       cm.license_no license_no
     from
@@ -43,16 +42,17 @@
   
   <select id="findByEmailAndPassword" resultMap="CeoMemberMap" parameterType="map">
     select
-      cm.ceo_member_no ceo_no,
+      m.member_no,
       m.nickname,
       m.email,
+      m.status,
       m.active
     from 
       member m
     join
       ceo_member cm on m.member_no=cm.member_no
     where
-      email=#{email} and password=password(#{password})
+      email=#{email} and password=password(#{password}) and status=2
   </select>
 
   <select id="findAll" resultMap="CeoMemberMap">
@@ -63,7 +63,7 @@
   <select id="findByNo" resultMap="CeoMemberMap" parameterType="int">
     <include refid = "select1"/>
 	  where
-	    cm.ceo_member_no=#{no}
+	    cm.member_no=#{no}
   </select>
   
   <insert id="insert" parameterType="CeoMember"
@@ -79,7 +79,7 @@
   
   <select id="findByName" resultMap="CeoMemberMap" parameterType="string">
 	  select
-		  cm.ceo_member_no ceo_no,
+		  m.member_no,
 		  m.name,
 		  m.email
 	  from
@@ -92,7 +92,7 @@
   
   <select id="findByEmail" resultMap="CeoMemberMap" parameterType="string">
 	  select
-		  cm.ceo_member_no ceo_no,
+		  m.member_no,
 		  m.email,
 		  m.nickname,
 		  m.name
@@ -107,85 +107,50 @@
   <update id="updateName" parameterType="CeoMember">
 	  update member set
 	   name = #{ceoName}
-	  where member_no =
-		  (select
-		    member_no
-		  from
-		    ceo_member
-		  where
-		    ceo_member_no=#{ceoNo})
+	  where
+	   member_no=#{ceoNo}
   </update>
   
   <update id="updateNickName" parameterType="CeoMember">
     update member set
      nickname = #{ceoNickname}
-    where member_no =
-      (select
-        member_no
-      from
-        ceo_member
-      where
-        ceo_member_no=#{ceoNo})
+    where
+     member_no=#{ceoNo}
   </update>
   
   <update id="updatePhoto" parameterType="CeoMember">
     update member set
      photo = #{ceoPhoto}
-    where member_no =
-      (select
-        member_no
-      from
-        ceo_member
-      where
-        ceo_member_no=#{ceoNo})
+    where
+     member_no=#{ceoNo}
   </update>
   
   <update id="updateTel" parameterType="CeoMember">
     update member set
      tel = #{ceoTel}
-    where member_no =
-      (select
-        member_no
-      from
-        ceo_member
-      where
-        ceo_member_no=#{ceoNo})
+    where
+     member_no=#{ceoNo}
   </update>
   
   <update id="updateEmail" parameterType="CeoMember">
     update member set
      email = #{ceoEmail}
-    where member_no =
-      (select
-        member_no
-      from
-        ceo_member
-      where
-        ceo_member_no=#{ceoNo})
+    where
+     member_no=#{ceoNo}
   </update>
   
    <update id="updatePassword" parameterType="CeoMember">
     update member set
      password = password(#{ceoPassword})
-    where member_no =
-      (select
-        member_no
-      from
-        ceo_member
-      where
-        ceo_member_no=#{ceoNo})
+    where
+     member_no=#{ceoNo}
   </update>
   
   <update id="updateActive" parameterType="CeoMember">
     update member set
      active = #{active}
-    where member_no =
-      (select
-        member_no
-      from
-        ceo_member
-      where
-        ceo_member_no=#{ceoNo})
+    where
+     member_no=#{ceoNo}
   </update>
   
 </mapper>
