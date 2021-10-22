@@ -25,17 +25,11 @@ public class GuilderListHandler implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
-    // 실행오류
-    //    Study waitingGuilder = studyDao.findWaitingGuilder(ownerStudy);
-    //    Study guilderStudy = studyDao.findGuilder(ownerStudy);
 
     System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , myStudy.getMembers().size() + 1,
         myStudy.getNumberOfPeple());
     System.out.println(" 👤 조  장 : " + myStudy.getOwner().getPerNickname());
-    System.out.println(" 👥 구성원 : " +  myStudy.getMemberNames());
-    //    for (int i = 0; i < myStudy.getMembers().size(); i++) {
-    //      System.out.print(myStudy.getMembers().get(i).getPerNickname());
-    //    }
+    System.out.println(" 👥 구성원 : " + myStudy.getMemberNames());
 
     // 조장만 보임
     if (AuthPerMemberLoginHandler.getLoginUser().getPerNo() !=
@@ -43,7 +37,7 @@ public class GuilderListHandler implements Command {
       return;
     }
 
-    if(!myStudy.getWatingMember().isEmpty()) {
+    if(!myStudy.getWatingMemberNames().isEmpty()) {
       System.out.printf("\n ★ > 승인 대기 중인 회원이 %d명 있습니다.", myStudy.getWatingMember().size());
 
     } else if(myStudy.getWatingMemberNames().isEmpty()) {

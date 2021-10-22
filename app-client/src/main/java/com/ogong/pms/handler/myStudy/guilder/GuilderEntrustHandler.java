@@ -2,7 +2,6 @@ package com.ogong.pms.handler.myStudy.guilder;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.StudyGuilderDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -13,12 +12,9 @@ import com.ogong.util.Prompt;
 public class GuilderEntrustHandler implements Command { 
 
   StudyDao studyDao;
-  StudyGuilderDao studyGuilderDao;
 
-
-  public GuilderEntrustHandler(StudyDao studyDao, StudyGuilderDao studyGuilderDao) {
+  public GuilderEntrustHandler(StudyDao studyDao) {
     this.studyDao = studyDao;
-    this.studyGuilderDao = studyGuilderDao;
   }
 
 
@@ -82,16 +78,14 @@ public class GuilderEntrustHandler implements Command {
               " >> 구성원으로 다시 돌아가시겠습니까? (네 / 아니오) ");
 
           if (!inputGuilder.equalsIgnoreCase("네")) {
-            studyGuilderDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+            studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
             System.out.println();
             System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
             return;
           }
-          // 구성원에서 조장이 됐기 때문에
-          studyGuilderDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
-          //studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
-          studyGuilderDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());
-          studyGuilderDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());
+          studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+          studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());
+          studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());
           System.out.println();
           System.out.println(" >> 구성원이 되셨습니다.");
         }
