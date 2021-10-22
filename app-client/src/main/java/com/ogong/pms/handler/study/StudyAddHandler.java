@@ -152,9 +152,9 @@ public class StudyAddHandler implements Command {
     String input = Prompt.inputString(" 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 등록이 취소되었습니다.");
+
       return;
     }
-    // 고유번호
     studyDao.insert(study);
     System.out.println(" >> 스터디가 등록되었습니다.");
 

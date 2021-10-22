@@ -37,9 +37,46 @@ public class MariadbStudyDao implements StudyDao {
         throw new Exception("스터디 데이터 저장 실패!");
       }
 
+      // 스터디 테이블의 PK 값 꺼내기
+      int studyNo = 0;
+      try (ResultSet pk = stmt.getGeneratedKeys()) {
+        if (pk.next()) {
+          studyNo = pk.getInt("study_no");
+        }
+      }
+
+      try (PreparedStatement stmt2 = con.prepareStatement(
+          "insert into study_location(name) values(?)",
+          Statement.RETURN_GENERATED_KEYS)) {
+
+        stmt2.setString(1, study.getArea());
+
+        if (stmt2.executeUpdate() == 0) {
+          throw new Exception("스터디 지역 데이터 저장 실패!");
+        }
+
+        // 지역테이블의 PK 값 꺼내기
+        int areaNo = 0;
+        try (ResultSet pk = stmt2.getGeneratedKeys()) {
+          if (pk.next()) {
+            areaNo = pk.getInt("location_no");
+          }
+        }
+
+        // study_multiple_location 테이블에 추가하기
+        try (PreparedStatement stmt3 =
+            con.prepareStatement(
+                "insert into study_multiple_location(study_no, location_no) values(?,?)")) {
+
+          stmt3.setInt(1, studyNo);
+          stmt3.setInt(2, areaNo);
+          stmt3.executeUpdate();
+        }
+      }
     }
   }
 
+  @Override
   public void insertGuilder(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into study_guilder(study_no, per_member_no) values(?,?)",
@@ -54,6 +91,7 @@ public class MariadbStudyDao implements StudyDao {
     }
   }
 
+  @Override
   public void insertBookmark(Study study, Member member) throws Exception {
     //    try (PreparedStatement stmt = con.prepareStatement(
     //        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
@@ -161,6 +199,7 @@ public class MariadbStudyDao implements StudyDao {
             + " s.no_people,"
             + " sfs.name face_name,"
             + " sfs.face_no face_no,"
+            + " sl.name area_name,"
             + " s.introduction,"
             + " s.created_dt,"
             + " pm.per_member_no owner_no,"
@@ -168,6 +207,9 @@ public class MariadbStudyDao implements StudyDao {
             + " sg.status status,"
             + " sg.per_member_no guilder_no,"
             + " m2.nickname guilder_nickname,"
+            + " s.score study_score,"
+            + " sb.per_member_no book_member_no"
+            + " m3.nickname book_nickname"
             + " s.score"
             + " from study s"
             + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
@@ -176,7 +218,12 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join per_member pm2 on pm2.per_member_no=sg.per_member_no"
-            + " left outer join member m2 on m2.member_no=pm2.member_no");
+            + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
+            + " left outer join study_location sl on sml.location_no=sl.location_no"
+            + " left outer join member m2 on m2.member_no=pm2.member_no"
+            + " left outer join study_bookmark sb on sb.study_no=s.study_no"
+            + " left outer join per_member pm3 on pm3.per_member_no=sb.per_member_no"
+            + " left outer join member m3 on m3.member_no=pm3.member_no");
         ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<Study> list = new ArrayList<>();
@@ -189,12 +236,14 @@ public class MariadbStudyDao implements StudyDao {
           study.setStudyNo(rs.getInt("study_no"));
           study.setStudyTitle(rs.getString("name"));
           study.setSubjectName(rs.getString("subject_name"));
+          study.setArea(rs.getString("area_name"));
           study.setSubjectNo(rs.getInt("subject_no"));
           study.setNumberOfPeple(rs.getInt("no_people"));
           study.setFaceName(rs.getString("face_name"));
           study.setFaceNo(rs.getInt("face_no"));
           study.setIntroduction(rs.getString("introduction"));
           study.setRegisteredDate(rs.getDate("created_dt"));
+          study.setScore(rs.getInt("study_score"));
 
           Member member = new Member();
           member.setPerNo(rs.getInt("owner_no"));
@@ -203,6 +252,11 @@ public class MariadbStudyDao implements StudyDao {
           studyNo = study.getStudyNo();
           list.add(study);
         }
+
+        Member member = new Member();
+        member.setPerNo(rs.getInt("book_member_no"));
+        member.setPerNickname(rs.getString("book_nikename"));
+        study.getBookMarkMember().add(member);
 
         int statusNo = rs.getInt("status");
         if (statusNo == 1) {

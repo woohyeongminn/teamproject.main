@@ -205,7 +205,7 @@ public class MariadbCeoMemberDao implements CeoMemberDao {
   }
 
   @Override
-  public CeoMember findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
+  public CeoMember findByEmailAndPassword(String inputEmail, String inputPassword, int active) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
             + " cm.ceo_member_no ceo_no,"
