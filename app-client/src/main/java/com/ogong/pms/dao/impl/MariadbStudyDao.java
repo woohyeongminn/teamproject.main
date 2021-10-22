@@ -208,8 +208,8 @@ public class MariadbStudyDao implements StudyDao {
             + " sg.per_member_no guilder_no,"
             + " m2.nickname guilder_nickname,"
             + " s.score study_score,"
-            + " sb.per_member_no book_member_no"
-            + " m3.nickname book_nickname"
+            + " sb.per_member_no book_member_no,"
+            + " m3.nickname book_nickname,"
             + " s.score"
             + " from study s"
             + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
@@ -218,9 +218,9 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join per_member pm2 on pm2.per_member_no=sg.per_member_no"
+            + " left outer join member m2 on m2.member_no=pm2.member_no"
             + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
             + " left outer join study_location sl on sml.location_no=sl.location_no"
-            + " left outer join member m2 on m2.member_no=pm2.member_no"
             + " left outer join study_bookmark sb on sb.study_no=s.study_no"
             + " left outer join per_member pm3 on pm3.per_member_no=sb.per_member_no"
             + " left outer join member m3 on m3.member_no=pm3.member_no");
@@ -287,6 +287,7 @@ public class MariadbStudyDao implements StudyDao {
             + " s.no_people,"
             + " sfs.name face_name,"
             + " sfs.face_no face_no,"
+            + " sl.name area_name,"
             + " s.introduction,"
             + " s.created_dt,"
             + " pm.per_member_no owner_no,"
@@ -303,6 +304,8 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join per_member pm2 on pm2.per_member_no=sg.per_member_no"
             + " left outer join member m2 on m2.member_no=pm2.member_no"
+            + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
+            + " left outer join study_location sl on sml.location_no=sl.location_no"
             + " where s.study_no=" + studyinputNo);
         ResultSet rs = stmt.executeQuery()) {
 
@@ -313,6 +316,7 @@ public class MariadbStudyDao implements StudyDao {
           study.setStudyNo(rs.getInt("study_no"));
           study.setStudyTitle(rs.getString("name"));
           study.setSubjectName(rs.getString("subject_name"));
+          study.setArea(rs.getString("area_name"));
           study.setSubjectNo(rs.getInt("subject_no"));
           study.setNumberOfPeple(rs.getInt("no_people"));
           study.setFaceName(rs.getString("face_name"));
@@ -364,6 +368,7 @@ public class MariadbStudyDao implements StudyDao {
             + " s.no_people,"
             + " sfs.name face_name,"
             + " sfs.face_no face_no,"
+            + " sl.name area_name,"
             + " s.introduction,"
             + " s.created_dt,"
             + " m.nickname owner_name,"
@@ -373,6 +378,8 @@ public class MariadbStudyDao implements StudyDao {
             + " join study_subject ss on s.subject_no=ss.subject_no"
             + " join member m on m.member_no=pm.member_no"
             + " join study_face_status sfs on s.face_no=sfs.face_no"
+            + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
+            + " left outer join study_location sl on sml.location_no=sl.location_no"
             + " where s.study_no=" + studyNo);
         ResultSet rs = stmt.executeQuery()) {
 
@@ -384,6 +391,7 @@ public class MariadbStudyDao implements StudyDao {
       study.setStudyNo(rs.getInt("study_no"));
       study.setStudyTitle(rs.getString("name"));
       study.setSubjectName(rs.getString("subject_name"));
+      study.setArea(rs.getString("area_name"));
       study.setSubjectNo(rs.getInt("subject_no"));
       study.setNumberOfPeple(rs.getInt("no_people"));
       study.setFaceName(rs.getString("face_name"));
