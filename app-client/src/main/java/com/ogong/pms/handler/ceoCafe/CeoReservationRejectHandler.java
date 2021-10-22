@@ -49,6 +49,7 @@ public class CeoReservationRejectHandler implements Command {
           //          cafeReservation.setReservationStatus(5);
           //      reserList.remove(myReservation);
           cafeDao.deleteReservation(cafeReservation, 5);
+          System.out.println(" >> 예약을 거절하였습니다.");
           return;
 
         } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {

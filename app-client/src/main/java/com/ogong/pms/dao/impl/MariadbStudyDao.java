@@ -209,7 +209,7 @@ public class MariadbStudyDao implements StudyDao {
             + " m2.nickname guilder_nickname,"
             + " s.score study_score,"
             + " sb.per_member_no book_member_no,"
-            + " m3.nickname book_nickname,"
+            // + " m3.nickname book_nickname,"
             + " s.score"
             + " from study s"
             + " left outer join per_member pm on s.per_member_no=pm.per_member_no"
@@ -223,7 +223,7 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join study_location sl on sml.location_no=sl.location_no"
             + " left outer join study_bookmark sb on sb.study_no=s.study_no"
             + " left outer join per_member pm3 on pm3.per_member_no=sb.per_member_no"
-            + " left outer join member m3 on m3.member_no=pm3.member_no");
+        /* + " left outer join member m3 on m3.member_no=pm3.member_no" */);
         ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<Study> list = new ArrayList<>();
@@ -253,10 +253,9 @@ public class MariadbStudyDao implements StudyDao {
           list.add(study);
         }
 
-        Member member = new Member();
-        member.setPerNo(rs.getInt("book_member_no"));
-        member.setPerNickname(rs.getString("book_nikename"));
-        study.getBookMarkMember().add(member);
+        Member bookMember = new Member();
+        bookMember.setPerNo(rs.getInt("book_member_no"));
+        study.getBookMarkMember().add(bookMember);
 
         int statusNo = rs.getInt("status");
         if (statusNo == 1) {

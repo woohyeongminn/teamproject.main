@@ -13,6 +13,7 @@ import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
+import com.ogong.pms.domain.CafeRoomImage;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.domain.Member;
 
@@ -599,7 +600,9 @@ public class MariadbCafeDao implements CafeDao {
           String photoName = rs.getString("photo_name");
 
           if (photoName != null) {
-            cafeRoom.getRoomImgs().put(rs.getInt("photo_no"), photoName);
+            CafeRoomImage roomImg = new CafeRoomImage();
+            roomImg.setNo(rs.getInt("photo_no"));
+            roomImg.setName(photoName);
           }
         }
         return cafeRoom;
