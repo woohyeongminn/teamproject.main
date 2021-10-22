@@ -243,7 +243,7 @@ public class MariadbStudyDao implements StudyDao {
           study.setFaceNo(rs.getInt("face_no"));
           study.setIntroduction(rs.getString("introduction"));
           study.setRegisteredDate(rs.getDate("created_dt"));
-          //study.setScore(rs.getInt("study_score"));
+          study.setScore(rs.getInt("study_score"));
 
           Member member = new Member();
           member.setPerNo(rs.getInt("owner_no"));
