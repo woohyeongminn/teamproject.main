@@ -25,24 +25,18 @@ public class StudyListHandler implements Command {
     for (Study study : studyList) {
 
       if (study.getStudyTitle().contains("탈퇴")) {
-        System.out.printf(" (%d)\n 스터디명 : %s\n",
-            study.getStudyNo(),
-            study.getStudyTitle());
+        System.out.printf(" (%d)\n 스터디명 : %s\n", study.getStudyNo(), study.getStudyTitle());
         System.out.println();
       }
 
       else {
-        //System.out.printf(" (%d) 🌟%d \n [%s] | 분류 : %s | 지역 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
-        System.out.printf(" (%d)\n [%s] | 분류 : %s | 지역 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
-            study.getStudyNo(),
-            //study.getBookMarkMember().size(),
-            study.getStudyTitle(),
-            study.getSubjectName(),
-            study.getArea(),
-            study.getMembers().size() + 1,
-            study.getNumberOfPeple(),
-            study.getOwner().getPerNickname(),
-            study.getFaceName());
+        System.out.printf(
+            " (%d) 🌟%d \n [%s] | 분류 : %s | 지역 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
+            // System.out.printf(" (%d)\n [%s] | 분류 : %s | 지역 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면
+            // : %s\n",
+            study.getStudyNo(), study.getBookMarkMember().size(), study.getStudyTitle(),
+            study.getSubjectName(), study.getArea(), study.getMembers().size() + 1,
+            study.getNumberOfPeple(), study.getOwner().getPerNickname(), study.getFaceName());
         System.out.println();
       }
     }
