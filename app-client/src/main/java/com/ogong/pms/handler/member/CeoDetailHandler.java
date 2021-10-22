@@ -30,21 +30,21 @@ public class CeoDetailHandler implements Command {
 
     CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
-    //    try {
-    System.out.println();
-    System.out.printf(" [%s]\n", ceoMember.getCeoNickname());
-    System.out.printf(" >> 이름 : %s\n", ceoMember.getCeoName());
-    System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
-    System.out.printf(" >> 사  진 : %s\n", ceoMember.getCeoPhoto());
-    System.out.printf(" >> 전화번호 : %s\n", ceoMember.getCeoTel());
-    System.out.printf(" >> 대표자명 : %s\n", ceoMember.getCeoBossName());
-    System.out.printf(" >> 사업자 번호 : %s\n", ceoMember.getCeoLicenseNo());
-    System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoRegisteredDate());
+    try {
+      System.out.println();
+      System.out.printf(" [%s]\n", ceoMember.getCeoNickname());
+      System.out.printf(" >> 이름 : %s\n", ceoMember.getCeoName());
+      System.out.printf(" >> 이메일 : %s\n", ceoMember.getCeoEmail());
+      System.out.printf(" >> 사  진 : %s\n", ceoMember.getCeoPhoto());
+      System.out.printf(" >> 전화번호 : %s\n", ceoMember.getCeoTel());
+      System.out.printf(" >> 대표자명 : %s\n", ceoMember.getCeoBossName());
+      System.out.printf(" >> 사업자 번호 : %s\n", ceoMember.getCeoLicenseNo());
+      System.out.printf(" >> 가입일 : %s\n", ceoMember.getCeoRegisteredDate());
 
-    //    } catch (NullPointerException e) {
-    //      System.out.println();
-    //      System.out.println(" >> 프로필 실행 오류");
-    //    }
+    } catch (NullPointerException e) {
+      System.out.println();
+      System.out.println(" >> 프로필 실행 오류");
+    }
 
     if (ceoMember == null) {
       return;

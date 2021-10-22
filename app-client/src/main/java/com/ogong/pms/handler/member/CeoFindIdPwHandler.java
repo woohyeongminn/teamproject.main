@@ -27,34 +27,7 @@ public class CeoFindIdPwHandler implements Command {
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
       case 1 : wantCeoEmail(); break;
-
-      case 2 : 
-        System.out.println();
-        while (true) {
-          String inputName =  Prompt.inputString(" 이름 : ");
-
-          if (inputName.equals("")) {
-            return;
-          }
-
-          CeoMember ceoMember = ceoMemberDao.findByName(inputName);
-
-          if (ceoMember != null) {
-            String inputTel =  Prompt.inputString(" 전화번호 : ");
-
-            if (!ceoMember.getCeoTel().equals(inputTel)) {
-              System.out.println(" >> 회원 이름과 전화번호가 일치하지 않습니다. (종료:엔터)\n");
-              continue;
-            }
-
-            wantCeoPw(ceoMember.getCeoName());
-            break;
-          }
-
-          System.out.println(" >> 해당 이름이 존재하지 않습니다. (종료:엔터)\n");
-          continue;
-        }
-
+      case 2 : wantCeoPw(); break;
       default : return;
     }
   }
@@ -76,7 +49,7 @@ public class CeoFindIdPwHandler implements Command {
         String inputTel =  Prompt.inputString(" 전화번호 : ");
 
         if (!ceoMember.getCeoTel().equals(inputTel)) {
-          System.out.println(" >> 회원 이름과 전화번호가 일치하지 않습니다. (종료:엔터)\n");
+          System.out.println(" >> 회원 이름과 전화번호가 일치하지 않습니다. (종료 : Enter)\n");
           continue;
         }
 
@@ -85,7 +58,7 @@ public class CeoFindIdPwHandler implements Command {
         System.out.println(ceoMember.getCeoEmail());
 
       } else {
-        System.out.println(" >> 해당 이름이 존재하지 않습니다. (종료:엔터)\n");
+        System.out.println(" >> 해당 이름이 존재하지 않습니다. (종료 : Enter)\n");
         continue;
       }
 
@@ -94,24 +67,25 @@ public class CeoFindIdPwHandler implements Command {
         System.out.println(" >> 찾기를 종료합니다.");
         return;
       } 
-      wantCeoPw(ceoMember.getCeoName());
+      wantCeoPw();
       return;
     }
   }
 
-  public void wantCeoPw(String ceoName) throws Exception {
+  public void wantCeoPw() throws Exception {
     System.out.println();
     System.out.println("▶ 임시 비밀번호 발급\n");
 
+    // 여기가 안먹힘
     while (true) {
+      String ceoName =  Prompt.inputString(" 이름 : ");
       CeoMember ceoMember = ceoMemberDao.findByName(ceoName);
 
       if (ceoMember != null) {
         String inputEmail =  Prompt.inputString(" 이메일 : ");
 
-        // 여기가 안먹힘
         if (!ceoMember.getCeoEmail().equals(inputEmail)) {
-          System.out.println(" >> 본인의 이메일을 입력하세요. (종료:엔터)\n");
+          System.out.println(" >> 본인의 이메일을 입력하세요. (종료 : Enter)\n");
           continue;
         }
         SendMail sendMail = new SendMail();
@@ -127,7 +101,7 @@ public class CeoFindIdPwHandler implements Command {
         return;
 
       } else {
-        System.out.println(" >> 해당 이름이 존재하지 않습니다. (종료:엔터)\n");
+        System.out.println(" >> 해당 이름이 존재하지 않습니다. (종료 : Enter)\n");
         continue;
       }
     }

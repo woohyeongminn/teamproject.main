@@ -48,7 +48,6 @@ public class CeoDeleteHandler implements Command {
     System.out.println();
     System.out.println(" << 비밀번호 확인 >>");
     String inputPW = Prompt.inputString(" 비밀번호를 입력하세요 : ");
-    int active = CeoMember.INUSER;
 
     CeoMember ceo = ceoMemberDao.findByEmailAndPassword(inputEmail, inputPW);
 

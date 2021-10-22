@@ -26,7 +26,6 @@
       m.name,
       m.nickname,
       m.email,
-      m.password,
       m.tel,
       m.photo,
       m.created_dt,
@@ -78,30 +77,13 @@
   </insert>
   
   <select id="findByName" resultMap="CeoMemberMap" parameterType="string">
-	  select
-		  m.member_no,
-		  m.name,
-		  m.nickname,
-		  m.email,
-		  m.tel
-	  from
-	    member m
-	  join
-	    ceo_member cm on m.member_no=cm.member_no
+	  <include refid = "select1"/>
 	  where
 	    m.name=#{value}
   </select>
   
   <select id="findByEmail" resultMap="CeoMemberMap" parameterType="string">
-	  select
-		  m.member_no,
-		  m.email,
-		  m.nickname,
-		  m.name
-	  from
-	    member m
-	  join
-	    ceo_member cm on m.member_no=cm.member_no
+	  <include refid = "select1"/>
 	  where
 	    m.email=#{value}
   </select>
