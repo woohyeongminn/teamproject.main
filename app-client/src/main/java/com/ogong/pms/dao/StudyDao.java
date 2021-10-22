@@ -11,6 +11,7 @@ public interface StudyDao {
   void insertGuilder(int studyNo, int memberNo) throws Exception;
   void insertBookmark(Study study, Member member) throws Exception;
   void update(Study study) throws Exception;
+  void updateOwner(int studyNo, int memberNo) throws Exception;
   void updateGuilder(int studyNo, int memberNo) throws Exception;
   void delete(int studyNo, int memberNo) throws Exception;
   void deleteGuilder(int studyNo, int memberNo) throws Exception;

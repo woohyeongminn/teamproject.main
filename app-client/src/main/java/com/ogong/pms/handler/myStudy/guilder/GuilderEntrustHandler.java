@@ -68,36 +68,28 @@ public class GuilderEntrustHandler implements Command {
           System.out.printf(" >> '%s'님이 조장이 되셨습니다.", inputGuilderNick);
           System.out.println();
 
-          if (entrustGuilder != null) {
-            myStudy.getMembers().remove(entrustGuilder);
-          }
-          myStudy.getMembers().remove(entrustGuilder); // 추가
+          //          if (entrustGuilder != null) {
+          //            myStudy.getMembers().remove(entrustGuilder);
+          //          }
+          //          myStudy.getMembers().remove(entrustGuilder); // 추가
 
           System.out.println();
           String inputGuilder = Prompt.inputString(
               " >> 구성원으로 다시 돌아가시겠습니까? (네 / 아니오) ");
 
           if (!inputGuilder.equalsIgnoreCase("네")) {
-            myStudy.setOwner(null);
-            myStudy.setOwner(entrustGuilder);
+            studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
             System.out.println();
             System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
-            studyDao.update(myStudy);
-            studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());
-            studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
             return;
           }
-          myStudy.getMembers().add(member);
-          myStudy.setOwner(null);
-          myStudy.setOwner(entrustGuilder);
-          System.out.println();
-          studyDao.update(myStudy);
+          studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
           studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());
+          studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());
+          System.out.println();
           System.out.println(" >> 구성원이 되셨습니다.");
         }
       }
-
-      studyDao.update(myStudy);
 
       return;
     }

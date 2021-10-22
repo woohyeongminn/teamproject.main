@@ -88,6 +88,23 @@ public class MariadbStudyDao implements StudyDao {
     }
   }
 
+  // 조장권한
+  @Override
+  public void updateOwner(int studyNo, int memberNo) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update study set"
+            + " per_member_no=?"
+            + " where study_no=?")) {
+
+      stmt.setInt(1, memberNo);
+      stmt.setInt(2, studyNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("스터디 조장 데이터 변경 실패!");
+      }
+    }
+  }
+
   @Override
   public void updateGuilder(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt =
