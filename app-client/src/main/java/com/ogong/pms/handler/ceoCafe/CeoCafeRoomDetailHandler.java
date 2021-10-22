@@ -49,8 +49,7 @@ public class CeoCafeRoomDetailHandler implements Command {
     System.out.printf(" [%s]\n", cafeRoom.getRoomName());
     System.out.printf(" >> 대표이미지 : %s\n", cafeRoom.getCafeRoomImageNames());
     System.out.printf(" >> 소개글 : %s\n", cafeRoom.getRoomInfo());
-    System.out.printf(" >> 시작시간 : %s\n", cafe.getOpenTime());
-    System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
+    System.out.printf(" >> 인원 : %s\n", cafeRoom.getPeople());
     System.out.printf(" >> 시간당 금액 : %d원\n", cafeRoom.getRoomPrice());
 
     System.out.println("\n----------------------");
