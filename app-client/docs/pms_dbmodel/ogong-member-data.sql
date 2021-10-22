@@ -24,7 +24,7 @@ values(6, '송중수', '중수중수중중수', 'todaystudymail@gmail.com', pass
 'gmail.jpg', '2021-04-14', 1, 1);
 
 ----------------------------------------------------------------------------------------------------
-
+/*
 -- findByEmailAndPassword
 select
   m.member_no,
@@ -192,3 +192,4 @@ from
   per_member
 where
   per_member_no=#{no})
+*/
