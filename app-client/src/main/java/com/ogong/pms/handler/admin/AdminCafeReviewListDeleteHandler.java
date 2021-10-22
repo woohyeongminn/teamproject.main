@@ -25,6 +25,7 @@ public class AdminCafeReviewListDeleteHandler implements Command{
     CafeReview cafeReview = cafeDao.findByReviewNo(userReviewNo);
 
     if (cafeReview == null) {
+      System.out.println(" >> 리뷰가 존재하지 않습니다.");
       return;
     }
 

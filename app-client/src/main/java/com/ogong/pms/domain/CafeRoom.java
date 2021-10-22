@@ -1,7 +1,6 @@
 package com.ogong.pms.domain;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class CafeRoom {
 
@@ -9,7 +8,7 @@ public class CafeRoom {
   private Cafe cafe; // 카페번호
   private String roomName; // 룸 이름
   private String roomImg; // 룸 이미지
-  private Map<Integer, String> roomImgs = new HashMap<>(); // 룸 이미지들
+  private ArrayList<CafeRoomImage> roomImgs = new ArrayList<>(); // 룸 이미지들
   private String roomInfo; // 룸 설명
   private int people; // 인원제한수
   private int roomPrice; // 룸 시간당금액
@@ -86,11 +85,26 @@ public class CafeRoom {
     this.people = people;
   }
 
-  public Map<Integer, String> getRoomImgs() {
+  public ArrayList<CafeRoomImage> getRoomImgs() {
     return roomImgs;
   }
 
-  public void setRoomImgs(Map<Integer, String> roomImgs) {
+  public void setRoomImgs(ArrayList<CafeRoomImage> roomImgs) {
     this.roomImgs = roomImgs;
+  }
+
+  public String getCafeRoomImageNames() {
+    if (roomImgs.isEmpty()) {
+      return "";
+    }
+
+    StringBuilder names = new StringBuilder();
+    for (CafeRoomImage cafeRoomImage : roomImgs) {
+      if (names.length() > 0) {
+        names.append(",");
+      }
+      names.append(cafeRoomImage.getName());
+    }
+    return names.toString();
   }
 }

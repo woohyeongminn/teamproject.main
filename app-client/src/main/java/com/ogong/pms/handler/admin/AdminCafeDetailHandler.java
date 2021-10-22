@@ -37,7 +37,7 @@ public class AdminCafeDetailHandler implements Command {
 
     System.out.printf(" (%s)\n", cafe.getNo());
     System.out.printf(" [%s]\n", cafe.getName());
-    System.out.printf(" >> 대표 이미지 : %s\n", cafe.getMainImg());
+    System.out.printf(" >> 대표 이미지 : %s\n", cafe.getCafeImageNames());
     System.out.printf(" >> 소개글 : %s\n", cafe.getInfo());
     System.out.printf(" >> 주소 : %s\n", cafe.getLocation());
     System.out.printf(" >> 번호 : %s\n", cafe.getPhone());
