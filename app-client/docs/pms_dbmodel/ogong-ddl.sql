@@ -487,7 +487,7 @@ ALTER TABLE study_calender_importance
 
 -- 캘린더
 CREATE TABLE study_calender (
-  calender_no   VARCHAR(50)  NOT NULL COMMENT '캘린더번호', -- 캘린더번호
+  calender_no   INTEGER      NOT NULL COMMENT '캘린더번호', -- 캘린더번호
   calender_dt   DATE         NOT NULL COMMENT '날짜', -- 날짜
   day_week      VARCHAR(3)   NOT NULL COMMENT '요일', -- 요일
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
@@ -506,7 +506,7 @@ ALTER TABLE study_calender
     );
 
 ALTER TABLE study_calender
-  MODIFY COLUMN calender_no VARCHAR(50) NOT NULL AUTO_INCREMENT COMMENT '캘린더번호';
+  MODIFY COLUMN calender_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '캘린더번호';
 
 -- 스터디게시판첨부파일
 CREATE TABLE study_board_file (
@@ -580,7 +580,7 @@ CREATE TABLE study (
   subject_no   INTEGER     NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
   no_people    INTEGER     NOT NULL COMMENT '인원수', -- 인원수
   face_no      INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
-  introduction TEXT        NOT NULL COMMENT '소개글', -- 소개글
+  introduction TEXT        NULL     COMMENT '소개글', -- 소개글
   created_dt   DATE        NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
   member_no    INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
   score        INTEGER     NOT NULL DEFAULT 0 COMMENT '스터디활동점수' -- 스터디활동점수
@@ -772,7 +772,7 @@ ALTER TABLE ask_board
 
 -- 관리자
 CREATE TABLE admin (
-  admin_no VARCHAR(50)  NOT NULL COMMENT '관리자번호', -- 관리자번호
+  admin_no INTEGER      NOT NULL COMMENT '관리자번호', -- 관리자번호
   email    VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
   password VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호
   nickname VARCHAR(50)  NOT NULL COMMENT '닉네임' -- 닉네임
@@ -793,7 +793,7 @@ CREATE UNIQUE INDEX UIX_admin
   );
 
 ALTER TABLE admin
-  MODIFY COLUMN admin_no VARCHAR(50) NOT NULL AUTO_INCREMENT COMMENT '관리자번호';
+  MODIFY COLUMN admin_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '관리자번호';
 
 -- 회원
 CREATE TABLE member (
@@ -804,9 +804,9 @@ CREATE TABLE member (
   password   VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호
   tel        VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
   photo      VARCHAR(255) NULL     COMMENT '사진', -- 사진
-  created_dt DATE         NULL     DEFAULT curdate() COMMENT '가입일', -- 가입일
+  created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '가입일', -- 가입일
   status     INTEGER      NOT NULL COMMENT '상태', -- 상태
-  active     INTEGER      NULL     DEFAULT 1 COMMENT '탈퇴' -- 탈퇴
+  active     INTEGER      NOT NULL DEFAULT 1 COMMENT '탈퇴' -- 탈퇴
 )
 COMMENT '회원';
 
