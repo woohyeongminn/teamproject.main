@@ -20,7 +20,7 @@
 
 	<sql id="select1">
 	select
-    pm.per_member_no member_no,
+    m.member_no member_no,
     m.name,
     m.nickname,
     m.email,
@@ -31,20 +31,16 @@
     m.status
   from
     member m
-  join
-    per_member pm on m.member_no=pm.member_no
 	</sql>
 
   <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
     select
-      pm.per_member_no member_no,
+      m.member_no member_no,
       m.nickname,
       m.email,
       m.active
     from 
       member m
-    join
-      per_member pm on m.member_no=pm.member_no
     where
       email=#{email} and password=password(#{password})
   </select>
@@ -57,7 +53,7 @@
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
     <include refid="select1"/>
   where
-    pm.per_member_no=#{no}
+    m.member_no=#{no}
   </select>
   
   <insert id="insert" parameterType="member"
@@ -67,7 +63,7 @@
   </insert>
   
   <insert id="insertPer" parameterType="int">
-  insert into per_member(member_no) values(#{no})
+  insert into member(member_no) values(#{no})
   </insert>
   
   <select id="findByNickName" resultMap="MemberMap" parameterType="string">
@@ -90,9 +86,9 @@
   (select
     member_no
   from
-    per_member
+    member
   where
-    per_member_no=#{perNo})
+    member_no=#{perNo})
   </update>
   
   <update id="updateNickname" parameterType="member">
@@ -103,9 +99,9 @@
   (select
     member_no
   from
-    per_member
+    member
   where
-    per_member_no=#{perNo})
+    member_no=#{perNo})
   </update>
   
   <update id="updatePhoto" parameterType="member">
@@ -116,9 +112,9 @@
   (select
     member_no
   from
-    per_member
+    member
   where
-    per_member_no=#{perNo})
+    member_no=#{perNo})
   </update>
   
   <update id="updateTel" parameterType="member">
@@ -129,9 +125,9 @@
   (select
     member_no
   from
-    per_member
+    member
   where
-    per_member_no=#{perNo})
+    member_no=#{perNo})
   </update>
   
   <update id="updateEmail" parameterType="member">
@@ -142,9 +138,9 @@
   (select
     member_no
   from
-    per_member
+    member
   where
-    per_member_no=#{perNo})
+    member_no=#{perNo})
   </update>
   
   <update id="updatePassword" parameterType="member">
@@ -155,9 +151,9 @@
   (select
     member_no
   from
-    per_member
+    member
   where
-    per_member_no=#{perNo})
+    member_no=#{perNo})
   </update>
   
   <update id="updateActive" parameterType="member">
@@ -168,9 +164,9 @@
   (select
     member_no
   from
-    per_member
+    member
   where
-    per_member_no=#{perNo})
+    member_no=#{perNo})
   </update>
 
 </mapper>
