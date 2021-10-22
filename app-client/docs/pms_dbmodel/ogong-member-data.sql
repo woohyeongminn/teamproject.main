@@ -23,31 +23,21 @@ insert into member(member_no, name, nickname, email, password, tel, photo, creat
 values(6, '송중수', '중수중수중중수', 'todaystudymail@gmail.com', password('t1'), '010-6666-6666',
 'gmail.jpg', '2021-04-14', 1, 1);
 
--------------------------------------------------------------------------------------------------
-
--- 개인회원 test 값
-insert into per_member(per_member_no, member_no) values(1,1);
-insert into per_member(per_member_no, member_no) values(2,2);
-insert into per_member(per_member_no, member_no) values(3,3);
-insert into per_member(per_member_no, member_no) values(4,4);
-insert into per_member(per_member_no, member_no) values(5,5);
-insert into per_member(per_member_no, member_no) values(6,6);
+----------------------------------------------------------------------------------------------------
 
 -- findByEmailAndPassword
 select
-  pm.per_member_no member_no,
+  m.member_no,
   m.nickname,
   m.email
 from 
   member m
-join
-  per_member pm on m.member_no=pm.member_no
 where
   email='gmail@test.com' and password=password('g1');
 
 -- findAll
 select
-  pm.per_member_no member_no,
+  m.member_no,
   m.name,
   m.nickname,
   m.email,
@@ -58,14 +48,12 @@ select
   m.status
 from
   member m
-join
-  per_member pm on m.member_no=pm.member_no
 order by
   name asc;
 
 -- findByNo
 select
-  pm.per_member_no member_no,
+  m.member_no,
   m.name,
   m.nickname,
   m.email,
@@ -76,10 +64,10 @@ select
   m.status
 from
   member m
-join
-  per_member pm on pm.member_no=m.member_no
 where
-  pm.per_member_no=2;
+  m.member_no=2;
+
+----------------------------------------------------------------------------------------------------
 
 -- insert
 insert into member(name,nickname,email,password,tel,photo,status)
