@@ -31,11 +31,11 @@ insert into study_guilder(study_no, member_no, status) values(1, 4, 1);
 
 -------------------------------------------------------------------------------------------------
 -- 캘린더 중요도 값
-insert study_calender_importance(importance_no, importance) values(5, ★☆☆☆☆);
-insert study_calender_importance(importance_no, importance) values(4, ★★☆☆☆);
-insert study_calender_importance(importance_no, importance) values(3, ★★★☆☆);
-insert study_calender_importance(importance_no, importance) values(2, ★★★★☆);
-insert study_calender_importance(importance_no, importance) values(1, ★★★★★);
+insert study_calender_importance(importance_no, importance) values(5, '★☆☆☆☆');
+insert study_calender_importance(importance_no, importance) values(4, '★★☆☆☆');
+insert study_calender_importance(importance_no, importance) values(3, '★★★☆☆');
+insert study_calender_importance(importance_no, importance) values(2, '★★★★☆');
+insert study_calender_importance(importance_no, importance) values(1, '★★★★★');
 
 select s.study_no,
 s.name,

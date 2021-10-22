@@ -464,8 +464,8 @@ CREATE UNIQUE INDEX UIX_study_face_status
 
 -- 캘린더중요도
 CREATE TABLE study_calender_importance (
-  importance_no INTEGER NOT NULL COMMENT '중요도상태번호', -- 중요도상태번호
-  importance    INTEGER NOT NULL COMMENT '중요도' -- 중요도
+  importance_no INTEGER      NOT NULL COMMENT '중요도상태번호', -- 중요도상태번호
+  importance    VARCHAR(255) NOT NULL COMMENT '중요도' -- 중요도
 )
 COMMENT '캘린더중요도';
 
