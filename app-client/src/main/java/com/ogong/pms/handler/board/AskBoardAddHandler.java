@@ -109,7 +109,7 @@ public class AskBoardAddHandler implements Command {
 
             if (statusNo == 2) {
               while (true) {
-                int tempPW = Prompt.inputInt("문의글 비밀번호(4자리) : ");
+                int tempPW = Prompt.inputInt(" 문의글 비밀번호(4자리) : ");
 
                 if ((tempPW < 999) && (tempPW > 9999)) {
                   System.out.println(" >> 4자리 숫자만 입력가능합니다.");

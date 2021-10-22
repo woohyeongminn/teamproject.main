@@ -22,17 +22,17 @@ values(11, '반사장', '반사장카페', 'cafe5@test.com', password('c5'), '01
 -------------------------------------------------------------------------------------------------
 
 -- 사장회원 test 값
-insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
-values(1, 7, '김사장', '123-45-12345');
+insert into ceo_member(member_no, bossname, license_no) 
+values(7, '김사장', '123-45-12345');
 
-insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
-values(2, 8, '송사장', '321-45-98745');
+insert into ceo_member(member_no, bossname, license_no) 
+values(8, '송사장', '321-45-98745');
 
-insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
-values(3, 9, '우사장', '546-85-14545');
+insert into ceo_member(member_no, bossname, license_no) 
+values(9, '우사장', '546-85-14545');
 
-insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
-values(4, 10, '조사장', '333-28-15464');
+insert into ceo_member(member_no, bossname, license_no) 
+values(10, '조사장', '333-28-15464');
 
-insert into ceo_member(ceo_member_no, member_no, bossname, license_no) 
-values(5, 11, '반사장', '632-94-37294');
+insert into ceo_member(member_no, bossname, license_no) 
+values(11, '반사장', '632-94-37294');

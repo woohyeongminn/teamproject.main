@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AskBoardMapper">
+  
+  <resultMap type="AskBoard" id="AskBoardMap">
+    <id column="ask_board_no" property="askNo"/> 
+    <result column="title" property="askTitle"/>
+    <result column="content" property="askContent"/>
+    <result column="view_cnt" property="askVeiwCount"/>
+    <result column="create_dt" property="askRegisteredDate"/>
+    <result column="ask_status" property="askStatus"/>
+    <result column="temppw" property="askTempPW"/>
+    
+    <association property="askMemberWriter" javaType="Member">
+    <id column="per_no" property="perNo"/> 
+    <result column="nickname" property="perNickname"/>
+    <result column="member_status" property="perStatus"/>
+    
+    </association>
+    
+    <association property="askCeoWriter" javaType="CeoMember">
+    <id column="ceo_no" property="ceoNo"/> 
+    <result column="nickname" property="ceoNickname"/>
+    <result column="member_status" property="ceoStatus"/>
+    </association>
+    
+    <association property="reply" javaType="Reply">
+    <result column="r_title" property="replyTitle"/>
+    <result column="r_content" property="replyContent"/>
+    <result column="r_dt" property="replyRegisteredDate"/>
+    </association>
+    
+  </resultMap>
+  
+  <sql id="select1">
+    select
+      ab.ask_board_no,
+      ab.title,
+      ab.content,
+      pm.per_member_no per_no,
+      cm.ceo_member_no ceo_no,
+      m.nickname,
+      m.status member_status,
+      ab.use_secret ask_status,
+      ab.temppw,
+      ab.create_dt,
+      ab.view_cnt,
+      abr.reply_title r_title,
+      abr.reply_content r_content,
+    </sql>
+    
+  <sql id="from1">
+    from
+      ask_board ab
+      left outer join member m on m.member_no=ab.member_no
+      left outer join per_member pm on pm.member_no=m.member_no
+      left outer join ceo_member cm on cm.member_no=m.member_no
+      left outer join ask_board_reply abr on abr.ask_board_no=ab.ask_board_no
+    </sql>
+    
+  <select id="findAll" resultMap="AskBoardMap">
+  <include refid="select1"/>
+      abr.reply_dt r_dt
+  <include refid="from1"/>
+     order by
+      ab.ask_board_no asc
+  </select>
+  
+  <select id="findByNo" resultMap="AskBoardMap" parameterType="int">
+  <include refid="select1"/>
+      abr.reply_dt r_dt,
+      m.member_no,
+      m.password writer_pw
+  <include refid="from1"/>
+    where
+      ab.ask_board_no=#{no}
+  </select>
+
+  <insert id="insertPer" parameterType="AskBoard" >
+    insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)
+    values(#{askTitle},#{askContent},#{askVeiwCount},
+    (select member_no from per_member pm where pm.per_member_no = #{askMemberWriter.perNo}),
+    #{askStatus},#{askTempPW})
+  </insert>
+
+  <insert id="insertCeo" parameterType="AskBoard" >
+    insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)
+    values(#{askTitle},#{askContent},#{askVeiwCount},
+    (select member_no from ceo_member cm where cm.ceo_member_no = #{askCeoWriter.ceoNo}),
+    #{askStatus},#{askTempPW})
+  </insert>
+
+  
+    
+   <!--  
+  <insert id="insert" parameterType="AskBoard" >
+    insert into ask_board(title,content,view_cnt,member_no,use_secret,temppw)
+    values(#{askTitle},#{askContent},#{askVeiwCount},#{askStatus},#{askTempPW},
+    (select member_no from 
+    <if test= "askMemberWriter.perNo != null">
+    per_member pm where pm.per_member_no = #{askMemberWriter.perNo}))
+      </if>
+      <if test="askCeoWriter.ceoNo != null">
+    ceo_member cm where cm.ceo_member_no = #{askCeoWriter.ceoNo}))
+      </if>
+  </insert>
+
+  <insert id="insert" parameterType="AskBoard" >
+    insert into ask_board(title,content,view_cnt,use_secret,temppw,member_no)
+    values(#{askTitle},#{askContent},#{askVeiwCount},#{askStatus},#{askTempPW},
+    (select if (pm.per_member_no is null, `askCeoWriter.ceoNo`, `askMemberWriter.perNo`) from member_no)
+  </insert>
+  
+          useGeneratedKeys="true" keyColumn="notice_no" keyProperty="adminNotiNo">
+      
+  
+  <insert id="insertnoitcefile" parameterType="map">
+    insert into notice_file(notice_no,filepath)
+    values(#{adminNotiNo},#{adminNotiFile})
+  </insert>
+    
+  <update id="updateTitle" parameterType="AdminNotice">
+    update notice set
+      title=#{adminNotiTitle}
+    where notice_no=#{adminNotiNo}
+  </update>
+    
+  <update id="updateContent" parameterType="AdminNotice">
+    update notice set
+      content=#{adminNotiContent}
+    where notice_no=#{adminNotiNo}
+  </update>
+  
+  <insert id="insertFilepath" parameterType="map">
+    insert into notice_file(notice_no,filepath)
+    values(#{adminNotiNo},#{adminNotiFile})
+  </insert>
+  
+  <delete id="deletenoticefile" parameterType="int">
+    delete from notice_file
+    where notice_no=#{fileNo}
+  </delete>
+  
+  <delete id="delete" parameterType="int">
+    delete from notice
+    where notice_no=#{noticeNo}
+  </delete>
+  
+  <update id="updateFilepath" parameterType="AdminNotice">
+    update notice set
+      filepath=#{adminNotiFile}
+    where notice_file_no=#{adminNotiFileNo}
+  </update>
+
+   -->
+
+</mapper>
+
+
+
+
+
+
+

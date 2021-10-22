@@ -1,8 +1,9 @@
 package com.ogong.pms.handler.ceoCafe;
 
-import java.util.List;
+import java.util.ArrayList;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -27,7 +28,16 @@ public class CeoCafeRoomAddHandler implements Command {
     CafeRoom cafeRoom = new CafeRoom();
     cafeRoom.setCafe(cafe);
     cafeRoom.setRoomName(Prompt.inputString(" 스터디룸 이름 : "));
-    cafeRoom.setRoomImg(Prompt.inputString(" 스터디룸 사진 : "));
+
+    ArrayList<CafeImage> fileNames = new ArrayList<>();
+    while(true) {
+      String fileName = Prompt.inputString(" 사진 (완료:빈 문자열) : ");
+      if (fileName.length() == 0) {
+        break;
+      }
+      fileNames.add(new CafeImage(fileName));
+    }
+
     cafeRoom.setRoomInfo(Prompt.inputString(" 스터디룸 설명 : "));
     cafeRoom.setRoomPrice(Prompt.inputInt(" 스터디룸 시간당금액 : "));
 
@@ -36,14 +46,6 @@ public class CeoCafeRoomAddHandler implements Command {
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 등록이 취소되었습니다.");
       return;
-    }
-
-    // 고유번호 + 1
-    List<CafeRoom> cafeRoomList = cafeDao.getCafeRoomList();
-    if (!cafeRoomList.isEmpty()) {
-      cafeRoom.setRoomNo(cafeRoomList.get(cafeRoomList.size() - 1).getRoomNo() + 1);
-    } else {
-      cafeRoom.setRoomNo(1);
     }
 
     cafeDao.insertCafeRoom(cafeRoom);
