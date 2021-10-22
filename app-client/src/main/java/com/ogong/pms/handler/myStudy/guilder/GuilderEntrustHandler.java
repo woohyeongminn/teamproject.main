@@ -83,7 +83,9 @@ public class GuilderEntrustHandler implements Command {
             System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
             return;
           }
+          // 구성원에서 조장이 됐기 때문에
           studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+          studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
           studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());
           studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());
           System.out.println();
