@@ -18,17 +18,6 @@
     <result column="active" property="active"/>
   </resultMap>
 
-  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
-    select
-      m.member_no member_no,
-      m.nickname,
-      m.email
-    from 
-      member m
-    where
-      email=#{email} and password=password(#{password})
-  </select>
-
   <select id="findAll" resultMap="MemberMap">
     select
       m.member_no member_no,
