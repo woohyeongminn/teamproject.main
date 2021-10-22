@@ -83,91 +83,49 @@
   update member set
     name=#{perName}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateNickname" parameterType="member">
   update member set
     nickname=#{perNickname}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updatePhoto" parameterType="member">
   update member set
     photo=#{perPhoto}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateTel" parameterType="member">
   update member set
     tel=#{perTel}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateEmail" parameterType="member">
   update member set
     email=#{perEmail}
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updatePassword" parameterType="member">
   update member set
     password=password(#{perPassword})
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
   
   <update id="updateActive" parameterType="member">
   update member set
     active=2 
   where
-    member_no=
-  (select
-    member_no
-  from
-    member
-  where
-    member_no=#{perNo})
+    member_no=#{perNo}
   </update>
 
 </mapper>
