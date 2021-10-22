@@ -1,8 +1,10 @@
 package com.ogong.pms.handler.member;
 
 import java.util.List;
+import com.ogong.menu.Menu;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
@@ -32,6 +34,7 @@ public class MemberUpdateHandler implements Command {
     System.out.println("4. 전화번호");
     System.out.println("5. 이메일");
     System.out.println("6. 비밀번호");
+    System.out.println("0. 이전");
     System.out.println();
     int selectNo = Prompt.inputInt(" 수정하고 싶은 정보를 선택해 주세요. > ");
 
@@ -126,6 +129,8 @@ public class MemberUpdateHandler implements Command {
         }
         break;
 
+      case 0: return;
+
       default:
         System.out.println(" >> 올바른 번호를 입력해 주세요.");
         return;
@@ -161,6 +166,10 @@ public class MemberUpdateHandler implements Command {
     } else if (selectNo == 6) {
       member.setPerPassword(perPassword);
       memberDao.updatePassword(member);
+      AuthPerMemberLoginHandler.loginUser = null;
+      AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
+      System.out.println(" >> 로그아웃 되었습니다.\n");
+      return;
     }
 
     System.out.println(" >> 회원 정보를 변경하였습니다.");

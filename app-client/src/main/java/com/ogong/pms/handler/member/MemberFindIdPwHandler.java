@@ -34,22 +34,31 @@ public class MemberFindIdPwHandler implements Command {
 
   public void wantPerEmail() throws Exception {
     System.out.println();
-    System.out.println("▶ 이메일 찾기");
+    System.out.println("▶ 이메일 찾기\n");
 
     while (true) {
-      System.out.println();
-      String inputNick =  Prompt.inputString(" 닉네임 : ");
+      String inputName =  Prompt.inputString(" 이름 : ");
 
-      Member member = memberDao.findByNickName(inputNick);
+      if (inputName.equals("")) {
+        return;
+      }
+
+      Member member = memberDao.findByName(inputName);
 
       if (member != null) {
-        System.out.println();
-        System.out.printf(" '%s님'의 이메일 >> ", member.getPerNickname());
-        System.out.println(member.getPerEmail());
+        String inputTel =  Prompt.inputString(" 전화번호 : ");
+        if (member.getPerTel().equals(inputTel)) {
+          System.out.println();
+          System.out.printf(" '%s님'의 이메일 >> ", member.getPerName());
+          System.out.println(member.getPerEmail());
+        } else {
+          System.out.println(" >> 회원 이름과 전화번호가 일치하지 않습니다. (종료: Enter)\n");
+          continue;
+        }
 
       } else {
-        System.out.println(" >> 해당 닉네임이 존재하지 않습니다.");
-        return;
+        System.out.println(" >> 해당 이름이 존재하지 않습니다. (종료: Enter)\n");
+        continue;
       }
 
       String input = Prompt.inputString(" 비밀번호 찾기로 넘어가시겠습니까? (네 / 아니오) ");
@@ -64,22 +73,23 @@ public class MemberFindIdPwHandler implements Command {
   //--------------------------------------------------------------------------------------------
   public void wantByPerPw() throws Exception {
     System.out.println();
-    System.out.println("▶ 임시 비밀번호 발급");
+    System.out.println("▶ 임시 비밀번호 발급\n");
 
     SendMail sendMail = new SendMail();
 
     while (true) {
-      System.out.println();
+      String inputName =  Prompt.inputString(" 이름 : ");
       String inputEmail =  Prompt.inputString(" 이메일 : ");
 
-      Member member = memberDao.findByEmail(inputEmail);
+      Member member = memberDao.findByName(inputName);
+      member = memberDao.findByEmail(inputEmail);
 
       if (member != null) {
         String pw = randomPw.randomPw();
         member.setPerPassword(pw);
         System.out.println(" >> 처리 중입니다. 잠시만 기다려 주세요.");
-        sendMail.sendMail(inputEmail, pw);
         System.out.println();
+        sendMail.sendMail(inputEmail, pw);
         System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", member.getPerNickname());
         System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
         memberDao.updatePassword(member);

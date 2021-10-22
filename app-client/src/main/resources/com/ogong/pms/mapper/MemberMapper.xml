@@ -38,11 +38,12 @@
       m.member_no member_no,
       m.nickname,
       m.email,
+      m.status,
       m.active
     from 
       member m
     where
-      email=#{email} and password=password(#{password})
+      email=#{email} and password=password(#{password}) and status=1
   </select>
   
   <select id="findAll" resultMap="MemberMap">
@@ -66,10 +67,10 @@
   insert into member(member_no) values(#{no})
   </insert>
   
-  <select id="findByNickName" resultMap="MemberMap" parameterType="string">
+  <select id="findByName" resultMap="MemberMap" parameterType="string">
     <include refid="select1"/>
   where
-    nickname=#{nickname}
+    name=#{name}
   </select>
   
   <select id="findByEmail" resultMap="MemberMap" parameterType="string">
