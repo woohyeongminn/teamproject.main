@@ -39,6 +39,7 @@ public class CeoCafeRoomAddHandler implements Command {
     }
 
     cafeRoom.setRoomInfo(Prompt.inputString(" 스터디룸 설명 : "));
+    cafeRoom.setPeople(Prompt.inputInt(" 스터디룸 최대인원 : "));
     cafeRoom.setRoomPrice(Prompt.inputInt(" 스터디룸 시간당금액 : "));
 
     System.out.println();
@@ -48,6 +49,7 @@ public class CeoCafeRoomAddHandler implements Command {
       return;
     }
 
-    cafeDao.insertCafeRoom(cafeRoom);
+    cafeDao.insertCafeRoom(cafeRoom, fileNames);
+    System.out.println(" >> 스터디룸 등록이 완료되었습니다.");
   }
 }
