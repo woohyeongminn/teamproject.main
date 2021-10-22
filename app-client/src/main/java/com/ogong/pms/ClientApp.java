@@ -23,9 +23,9 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.impl.MariadbAskBoardDao;
 import com.ogong.pms.dao.impl.MariadbStudyDao;
 import com.ogong.pms.dao.impl.MybatisAdminDao;
+import com.ogong.pms.dao.impl.MybatisAskBoardDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
 import com.ogong.pms.dao.impl.MybatisMemberDao;
@@ -225,6 +225,7 @@ public class ClientApp {
     CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
+    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
     //StudyDao studyDao = new MybatisStudyDao(sqlSession);
 
@@ -232,7 +233,7 @@ public class ClientApp {
     // AdminDao adminDao = new MariadbAdminDao(con);
     //MemberDao memberDao = new MariadbMemberDao(con);
     //CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
-    AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
+    //    AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
     //    CafeDao cafeDao = new MariadbCafeDao(con);
     StudyDao studyDao = new MariadbStudyDao(con);
 
