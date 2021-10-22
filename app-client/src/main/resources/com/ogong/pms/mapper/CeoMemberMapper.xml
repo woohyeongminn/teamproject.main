@@ -81,7 +81,9 @@
 	  select
 		  m.member_no,
 		  m.name,
-		  m.email
+		  m.nickname,
+		  m.email,
+		  m.tel
 	  from
 	    member m
 	  join
@@ -103,7 +105,7 @@
 	  where
 	    m.email=#{value}
   </select>
-  
+    
   <update id="updateName" parameterType="CeoMember">
 	  update member set
 	   name = #{ceoName}
