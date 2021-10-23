@@ -113,6 +113,7 @@ public class MariadbStudyDao implements StudyDao {
 
       int studyNo=0;
       Study study = null;
+      int guilderNo = 0;
 
       while (rs.next()) {
         if (studyNo != rs.getInt("study_no")) {
@@ -138,20 +139,23 @@ public class MariadbStudyDao implements StudyDao {
         }
 
         // 구성원
-        int statusNo = rs.getInt("guilder_status");
-        if (statusNo == 1) {        /*승인대기중*/
-          Member waitingMember = new Member();
-          waitingMember.setPerNo(rs.getInt("guilder_no"));
-          waitingMember.setPerNickname("guilder_nickname");
+        if (guilderNo != rs.getInt("guilder_no")) {
+          int statusNo = rs.getInt("guilder_status");
+          if (statusNo == 1) {        /*승인대기중*/
+            Member waitingMember = new Member();
+            waitingMember.setPerNo(rs.getInt("guilder_no"));
+            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
 
-          study.getWatingMember().add(waitingMember);
+            study.getWatingMember().add(waitingMember);
+            guilderNo = waitingMember.getPerNo();
+          } else if (statusNo == 2) {     /*참여중*/
+            Member guilder = new Member();
+            guilder.setPerNo(rs.getInt("guilder_no"));
+            guilder.setPerNickname(rs.getString("guilder_nickname"));
 
-        } else if (statusNo == 2) {     /*참여중*/
-          Member guilder = new Member();
-          guilder.setPerNo(rs.getInt("guilder_no"));
-          guilder.setPerNickname("guilder_nickname");
-
-          study.getMembers().add(guilder);
+            study.getMembers().add(guilder);
+            guilderNo = guilder.getPerNo();
+          }
         }
 
         // 북마크
@@ -200,6 +204,8 @@ public class MariadbStudyDao implements StudyDao {
         ResultSet rs = stmt.executeQuery()) {
 
       Study study = null;
+      int guilderNo = 0;
+
       while (rs.next()) {
         if (study == null) {
           study = new Study();
@@ -222,20 +228,23 @@ public class MariadbStudyDao implements StudyDao {
         }
 
         // 구성원
-        int no = rs.getInt("guilder_status");
-        if (no == 1) {      /*승인대기중*/
-          Member waitingMember = new Member();
-          waitingMember.setPerNo(rs.getInt("guilder_no"));
-          waitingMember.setPerNickname(rs.getString("guilder_nickname"));
+        if (guilderNo != rs.getInt("guilder_no")) {
+          int statusNo = rs.getInt("guilder_status");
+          if (statusNo == 1) {        /*승인대기중*/
+            Member waitingMember = new Member();
+            waitingMember.setPerNo(rs.getInt("guilder_no"));
+            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
 
-          study.getWatingMember().add(waitingMember);
+            study.getWatingMember().add(waitingMember);
+            guilderNo = waitingMember.getPerNo();
+          } else if (statusNo == 2) {     /*참여중*/
+            Member guilder = new Member();
+            guilder.setPerNo(rs.getInt("guilder_no"));
+            guilder.setPerNickname(rs.getString("guilder_nickname"));
 
-        } else if (no == 2) {      /*참여중*/
-          Member guilder = new Member();
-          guilder.setPerNo(rs.getInt("guilder_no"));
-          guilder.setPerNickname(rs.getString("guilder_nickname"));
-
-          study.getMembers().add(guilder);
+            study.getMembers().add(guilder);
+            guilderNo = guilder.getPerNo();
+          }
         }
 
         // 북마크
@@ -291,6 +300,8 @@ public class MariadbStudyDao implements StudyDao {
         ResultSet rs = stmt.executeQuery()) {
 
       Study study = null;
+      int guilderNo = 0;
+
       while (rs.next()) {
         if (study == null) {
           study = new Study();
@@ -313,20 +324,23 @@ public class MariadbStudyDao implements StudyDao {
         }
 
         // 구성원
-        int no = rs.getInt("guilder_status");
-        if (no == 1) {      /*승인대기중*/
-          Member waitingMember = new Member();
-          waitingMember.setPerNo(rs.getInt("guilder_no"));
-          waitingMember.setPerNickname(rs.getString("guilder_nickname"));
+        if (guilderNo != rs.getInt("guilder_no")) {
+          int statusNo = rs.getInt("guilder_status");
+          if (statusNo == 1) {        /*승인대기중*/
+            Member waitingMember = new Member();
+            waitingMember.setPerNo(rs.getInt("guilder_no"));
+            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
 
-          study.getWatingMember().add(waitingMember);
+            study.getWatingMember().add(waitingMember);
+            guilderNo = waitingMember.getPerNo();
+          } else if (statusNo == 2) {     /*참여중*/
+            Member guilder = new Member();
+            guilder.setPerNo(rs.getInt("guilder_no"));
+            guilder.setPerNickname(rs.getString("guilder_nickname"));
 
-        } else if (no == 2) {      /*참여중*/
-          Member guilder = new Member();
-          guilder.setPerNo(rs.getInt("guilder_no"));
-          guilder.setPerNickname(rs.getString("guilder_nickname"));
-
-          study.getMembers().add(guilder);
+            study.getMembers().add(guilder);
+            guilderNo = guilder.getPerNo();
+          }
         }
 
         // 북마크
