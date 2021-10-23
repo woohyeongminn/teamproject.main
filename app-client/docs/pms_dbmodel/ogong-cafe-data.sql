@@ -1,8 +1,3 @@
--- 카페 리뷰 상태 컬럼 추가
---alter table studycafe_review add column status integer;
--- 카페 예약 이용시간 도메인 숫자로 변경
---alter table studycafe_reservation modify using_time integer;
-
 -- 카페 운영상태
 insert into studycafe_operating_status(operating_status_no, name)
 values (1, '승인대기');
@@ -112,6 +107,10 @@ values (5, 2, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
 
 
 
+-- 카페 리뷰 상태 컬럼 추가
+--alter table studycafe_review add column status integer;
+-- 카페 예약 이용시간 도메인 숫자로 변경
+--alter table studycafe_reservation modify using_time integer;
 
 --insert into studycafe_holiday(holiday_no, cafe_no, date)
 --values (4, 1, '2021-11-22');

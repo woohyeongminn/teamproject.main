@@ -67,7 +67,10 @@ public class MybatisCafeDao implements CafeDao {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("ceoNo", ceoNo);
-    cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+
+    if (cafe != null) {
+      cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+    }
 
     return cafe;
   }
