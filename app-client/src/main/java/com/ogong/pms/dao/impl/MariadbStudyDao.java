@@ -18,6 +18,7 @@ public class MariadbStudyDao implements StudyDao {
     this.con = con;
   }
 
+  // ------------------------- [ 스터디 ] -----------------------------------
   @Override
   public void insert(Study study) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
@@ -40,38 +41,7 @@ public class MariadbStudyDao implements StudyDao {
     }
   }
 
-  @Override
-  public void insertGuilder(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into study_guilder(study_no, per_member_no) values(?,?)",
-        Statement.RETURN_GENERATED_KEYS)) {
-
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 저장 실패!");
-      }
-    }
-  }
-
-  @Override
-  public void insertBookmark(Study study, Member member) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
-    //        Statement.RETURN_GENERATED_KEYS)) {
-    //
-    //      stmt.setInt(1, study.getStudyNo());
-    //      stmt.setInt(2, member.getPerNo());
-    //
-    //      if (stmt.executeUpdate() == 0) {
-    //        throw new Exception("구성원 데이터 저장 실패!");
-    //      }
-    //    }
-  }
-
   // 마이 스터디에서 업데이트
-  //마이 스터디에서 업데이트
   @Override
   public void update(Study study) throws Exception {
     try (PreparedStatement stmt =
@@ -84,39 +54,6 @@ public class MariadbStudyDao implements StudyDao {
       stmt.setInt(3, study.getFaceNo());
       stmt.setString(4, study.getIntroduction());
       stmt.setInt(5, study.getStudyNo());
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("스터디 데이터 변경 실패!");
-      }
-    }
-  }
-
-  // 조장권한
-  @Override
-  public void updateOwner(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt =
-        con.prepareStatement("update study set"
-            + " per_member_no=?"
-            + " where study_no=?")) {
-
-      stmt.setInt(1, memberNo);
-      stmt.setInt(2, studyNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("스터디 조장 데이터 변경 실패!");
-      }
-    }
-  }
-
-  @Override
-  public void updateGuilder(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt =
-        con.prepareStatement("update study_guilder set"
-            + " status=2"
-            + " where study_no=? and per_member_no=?")) {
-
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("스터디 데이터 변경 실패!");
@@ -140,65 +77,54 @@ public class MariadbStudyDao implements StudyDao {
   }
 
   @Override
-  public void deleteGuilder(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = 
-        con.prepareStatement("delete from study_guilder"
-            + " where study_no=? and per_member_no=?")) {
-
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 삭제 실패!");
-      }
-    }
-  }
-
-  @Override
   public List<Study> findAll() throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select s.study_no,"
-            + " s.name,"
-            + " ss.name subject_name,"
+        "select"
+            + " s.study_no,"
+            + " s.name study_title,"
             + " ss.subject_no subject_no,"
+            + " ss.name subject_name,"
+            + " s.area,"
             + " s.no_people,"
-            + " sfs.name face_name,"
             + " sfs.face_no face_no,"
-            + " s.area area,"
+            + " sfs.name face_name,"
             + " s.introduction,"
             + " s.created_dt,"
+            + " s.score study_score,"
+            // 작성자(조장)
             + " s.member_no owner_no,"
             + " m.nickname owner_name,"
-            + " sg.status status,"
+            // 구성원
+            + " sg.status guilder_status,"
             + " sg.member_no guilder_no,"
             + " m2.nickname guilder_nickname,"
-            + " s.score study_score,"
-            + " sb.member_no book_member_no,"
-            + " s.score"
+            // 북마크
+            + " sb.member_no book_member_no"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
             + " left outer join member m on s.member_no=m.member_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
-            + " left outer join study_bookmark sb on sb.study_no=s.study_no");
+            + " left outer join study_bookmark sb on s.study_no=sb.study_no");
         ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<Study> list = new ArrayList<>();
 
       int studyNo=0;
       Study study = null;
+
       while (rs.next()) {
         if (studyNo != rs.getInt("study_no")) {
           study = new Study();
           study.setStudyNo(rs.getInt("study_no"));
-          study.setStudyTitle(rs.getString("name"));
+          study.setStudyTitle(rs.getString("study_title"));
+          study.setSubjectNo(rs.getInt("subject_no"));
           study.setSubjectName(rs.getString("subject_name"));
           study.setArea(rs.getString("area"));
-          study.setSubjectNo(rs.getInt("subject_no"));
           study.setNumberOfPeple(rs.getInt("no_people"));
-          study.setFaceName(rs.getString("face_name"));
           study.setFaceNo(rs.getInt("face_no"));
+          study.setFaceName(rs.getString("face_name"));
           study.setIntroduction(rs.getString("introduction"));
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
@@ -215,21 +141,22 @@ public class MariadbStudyDao implements StudyDao {
         bookMember.setPerNo(rs.getInt("book_member_no"));
         study.getBookMarkMember().add(bookMember);
 
-        int statusNo = rs.getInt("status");
-        if (statusNo == 1) {
+        int statusNo = rs.getInt("guilder_status");
+        if (statusNo == 1) {        /*승인대기중*/
           Member waitingMember = new Member();
           waitingMember.setPerNo(rs.getInt("guilder_no"));
           waitingMember.setPerNickname("guilder_nickname");
+
           study.getWatingMember().add(waitingMember);
 
-        } else if (statusNo == 2) {
+        } else if (statusNo == 2) {     /*참여중*/
           Member guilder = new Member();
           guilder.setPerNo(rs.getInt("guilder_no"));
           guilder.setPerNickname("guilder_nickname");
+
           study.getMembers().add(guilder);
         }
       }
-
       return list;
     }
   }
@@ -237,31 +164,34 @@ public class MariadbStudyDao implements StudyDao {
   @Override
   public Study findByNo(int studyinputNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select s.study_no,"
-            + " s.name,"
-            + " ss.name subject_name,"
+        "select"
+            + " s.study_no,"
+            + " s.name study_title,"
             + " ss.subject_no subject_no,"
+            + " ss.name subject_name,"
+            + " s.area,"
             + " s.no_people,"
-            + " sfs.name face_name,"
             + " sfs.face_no face_no,"
-            + " s.area area,"
+            + " sfs.name face_name,"
             + " s.introduction,"
             + " s.created_dt,"
+            + " s.score study_score,"
+            // 작성자(조장)
             + " s.member_no owner_no,"
             + " m.nickname owner_name,"
-            + " sg.status status,"
+            // 구성원
+            + " sg.status guilder_status,"
             + " sg.member_no guilder_no,"
             + " m2.nickname guilder_nickname,"
-            + " s.score study_score,"
-            + " sb.member_no book_member_no,"
-            + " s.score"
+            // 북마크
+            + " sb.member_no book_member_no"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
             + " left outer join member m on s.member_no=m.member_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
-            + " left outer join study_bookmark sb on sb.study_no=s.study_no"
+            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
             + " where s.study_no=" + studyinputNo);
         ResultSet rs = stmt.executeQuery()) {
 
@@ -270,15 +200,16 @@ public class MariadbStudyDao implements StudyDao {
         if (study == null) {
           study = new Study();
           study.setStudyNo(rs.getInt("study_no"));
-          study.setStudyTitle(rs.getString("name"));
+          study.setStudyTitle(rs.getString("study_title"));
+          study.setSubjectNo(rs.getInt("subject_no"));
           study.setSubjectName(rs.getString("subject_name"));
           study.setArea(rs.getString("area"));
-          study.setSubjectNo(rs.getInt("subject_no"));
           study.setNumberOfPeple(rs.getInt("no_people"));
-          study.setFaceName(rs.getString("face_name"));
           study.setFaceNo(rs.getInt("face_no"));
+          study.setFaceName(rs.getString("face_name"));
           study.setIntroduction(rs.getString("introduction"));
           study.setRegisteredDate(rs.getDate("created_dt"));
+          study.setScore(rs.getInt("study_score"));
 
           Member member = new Member();
           member.setPerNo(rs.getInt("owner_no"));
@@ -286,56 +217,64 @@ public class MariadbStudyDao implements StudyDao {
           study.setOwner(member);
         }
 
-        int no = rs.getInt("status");
-        if (no == 1) {
+        int no = rs.getInt("guilder_status");
+        if (no == 1) {      /*승인대기중*/
           Member waitingMember = new Member();
           waitingMember.setPerNo(rs.getInt("guilder_no"));
           waitingMember.setPerNickname(rs.getString("guilder_nickname"));
 
           study.getWatingMember().add(waitingMember);
 
-        } else if (no == 2) {
+        } else if (no == 2) {      /*참여중*/
           Member guilder = new Member();
           guilder.setPerNo(rs.getInt("guilder_no"));
           guilder.setPerNickname(rs.getString("guilder_nickname"));
 
           study.getMembers().add(guilder);
-        } else {
-
         }
       }
       return study;
     }
   }
 
+  // 스터디 검색
   @Override
   public List<Study> findByKeyword(String keyword) throws Exception {
     return null;
   }
 
-  // 내 스터디에서 찾기 - MyStudyDetail
+  // 내 스터디 상세 MyStudyDetail
   @Override
   public Study findMyStudy(int memberNo, int studyNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "select s.study_no,"
-            + " s.name,"
-            + " ss.name subject_name,"
+        "select"
+            + " s.study_no,"
+            + " s.name study_title,"
             + " ss.subject_no subject_no,"
+            + " ss.name subject_name,"
+            + " s.area,"
             + " s.no_people,"
-            + " sfs.name face_name,"
             + " sfs.face_no face_no,"
-            + " sl.name area_name,"
+            + " sfs.name face_name,"
             + " s.introduction,"
             + " s.created_dt,"
+            + " s.score study_score,"
+            // 작성자(조장)
+            + " s.member_no owner_no,"
             + " m.nickname owner_name,"
-            + " s.score"
+            // 구성원
+            + " sg.status guilder_status,"
+            + " sg.member_no guilder_no,"
+            + " m2.nickname guilder_nickname,"
+            // 북마크
+            + " sb.member_no book_member_no"
             + " from study s"
-            + " join per_member pm on s.per_member_no=pm.per_member_no"
-            + " join study_subject ss on s.subject_no=ss.subject_no"
-            + " join member m on m.member_no=pm.member_no"
-            + " join study_face_status sfs on s.face_no=sfs.face_no"
-            + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
-            + " left outer join study_location sl on sml.location_no=sl.location_no"
+            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
+            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+            + " left outer join member m on s.member_no=m.member_no"
+            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+            + " left outer join member m2 on sg.member_no=m2.member_no"
+            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
             + " where s.study_no=" + studyNo);
         ResultSet rs = stmt.executeQuery()) {
 
@@ -345,21 +284,108 @@ public class MariadbStudyDao implements StudyDao {
 
       Study study = new Study();
       study.setStudyNo(rs.getInt("study_no"));
-      study.setStudyTitle(rs.getString("name"));
-      study.setSubjectName(rs.getString("subject_name"));
-      study.setArea(rs.getString("area_name"));
+      study.setStudyTitle(rs.getString("study_title"));
       study.setSubjectNo(rs.getInt("subject_no"));
+      study.setSubjectName(rs.getString("subject_name"));
+      study.setArea(rs.getString("area"));
       study.setNumberOfPeple(rs.getInt("no_people"));
-      study.setFaceName(rs.getString("face_name"));
       study.setFaceNo(rs.getInt("face_no"));
+      study.setFaceName(rs.getString("face_name"));
       study.setIntroduction(rs.getString("introduction"));
       study.setRegisteredDate(rs.getDate("created_dt"));
+      study.setScore(rs.getInt("study_score"));
 
       Member member = new Member();
+      member.setPerNo(rs.getInt("owner_no"));
       member.setPerNickname(rs.getString("owner_name"));
       study.setOwner(member);
 
       return study;
     }
+  }
+
+  // ------------------------- [ 구성원 ] -----------------------------------
+
+  // 신청하기(joinHandler)
+  @Override
+  public void insertGuilder(int studyNo, int memberNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into study_guilder(study_no, per_member_no) values(?,?)",
+        Statement.RETURN_GENERATED_KEYS)) {
+
+      stmt.setInt(1, studyNo);
+      stmt.setInt(2, memberNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("구성원 데이터 저장 실패!");
+      }
+    }
+  }
+
+  //조장권한 위임
+  @Override
+  public void updateOwner(int studyNo, int memberNo) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update study set"
+            + " per_member_no=?"
+            + " where study_no=?")) {
+
+      stmt.setInt(1, memberNo);
+      stmt.setInt(2, studyNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("스터디 조장 데이터 변경 실패!");
+      }
+    }
+  }
+
+  // 승인대기중인 구성원 승인하기
+  @Override
+  public void updateGuilder(int studyNo, int memberNo) throws Exception {
+    try (PreparedStatement stmt =
+        con.prepareStatement("update study_guilder set"
+            + " status=2"
+            + " where study_no=? and per_member_no=?")) {
+
+      stmt.setInt(1, studyNo);
+      stmt.setInt(2, memberNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("스터디 데이터 변경 실패!");
+      }
+    }
+  }
+
+  // 구성원에서 삭제하기
+  @Override
+  public void deleteGuilder(int studyNo, int memberNo) throws Exception {
+    try (PreparedStatement stmt = 
+        con.prepareStatement("delete from study_guilder"
+            + " where study_no=? and per_member_no=?")) {
+
+      stmt.setInt(1, studyNo);
+      stmt.setInt(2, memberNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("구성원 데이터 삭제 실패!");
+      }
+    }
+  }
+
+
+  //------------------------- [ 북마크 ] -----------------------------------
+  @Override
+  public void insertBookmark(Study study, Member member) throws Exception {
+    //    try (PreparedStatement stmt = con.prepareStatement(
+    //        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
+    //        Statement.RETURN_GENERATED_KEYS)) {
+    //
+    //      stmt.setInt(1, study.getStudyNo());
+    //      stmt.setInt(2, member.getPerNo());
+    //
+    //      if (stmt.executeUpdate() == 0) {
+    //        throw new Exception("구성원 데이터 저장 실패!");
+    //      }
+    //    }
   }
 }

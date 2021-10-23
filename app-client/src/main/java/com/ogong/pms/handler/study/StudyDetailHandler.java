@@ -44,7 +44,7 @@ public class StudyDetailHandler implements Command {
     System.out.printf(" >> 지역 : %s\n", study.getArea());
     System.out.printf(" >> 인원수 : %s/%s명\n", study.getMembers().size() + 1,
         study.getNumberOfPeple());
-    System.out.printf(" >> 대면 : %s\n", study.getFaceName());
+    System.out.printf(" >> 대면/비대면 : %s\n", study.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
     request.setAttribute("inputNo", study.getStudyNo());

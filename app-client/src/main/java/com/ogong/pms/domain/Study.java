@@ -6,22 +6,23 @@ import java.util.List;
 
 public class Study {
 
-  private int studyNo; // 스터디 번호
-  private String studyTitle; // 스터디명
-  private int subjectNo; // 분야
-  private String subjectName; // 분야
-  private String area; // 지역
-  private int numberOfPeple; // 인원수
-  private int faceNo; // 대면/비대면
-  private String faceName; // 대면/비대면
-  private String introduction; // 소개글
-  private Date registeredDate; // 스터디 가입일
-  private int score; // 스터디 점수
-  private Member owner; // 작성자(조장)
-  private List<Member> members = new ArrayList<>(); // 참여중인 구성원
-  private List<Member> watingMember = new ArrayList<>(); // 참여승인을 기다리는 회원
-  private int status; // 구성원 상태
-  private List<Member> bookMarkMember = new ArrayList<>(); // 북마크한 회원
+  private int studyNo;          // 스터디 번호
+  private String studyTitle;    // 스터디명
+  private int subjectNo;        // 분야
+  private String subjectName;   // 분야
+  private String area;          // 지역
+  private int numberOfPeple;    // 인원수
+  private int faceNo;           // 대면/비대면
+  private String faceName;      // 대면/비대면
+  private String introduction;  // 소개글
+  private Date registeredDate;  // 스터디 가입일
+  private int score;            // 스터디 점수
+  private Member owner;         // 작성자(조장)
+
+  private int status;           // 구성원 상태
+  private List<Member> watingMember = new ArrayList<>();    // 승인대기중
+  private List<Member> members = new ArrayList<>();         // 참여중
+  private List<Member> bookMarkMember = new ArrayList<>();  // 북마크한 회원
 
   private List<Calender> myStudyCalender = new ArrayList<>(); // 내 스터디 캘린더
   private List<FreeBoard> myStudyFreeBoard = new ArrayList<>(); // 내 스터디 자유 게시판
