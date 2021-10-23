@@ -63,10 +63,6 @@
 		values(#{perName},#{perNickname},#{perEmail},password(#{perPassword}),#{perTel},#{perPhoto},#{perStatus})
   </insert>
   
-  <insert id="insertPer" parameterType="int">
-  insert into member(member_no) values(#{no})
-  </insert>
-  
   <select id="findByName" resultMap="MemberMap" parameterType="string">
     <include refid="select1"/>
   where
