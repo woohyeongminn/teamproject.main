@@ -79,19 +79,22 @@ public class MemberFindIdPwHandler implements Command {
 
     while (true) {
       String inputName =  Prompt.inputString(" 이름 : ");
-      String inputEmail =  Prompt.inputString(" 이메일 : ");
-
       Member member = memberDao.findByName(inputName);
+
+      String inputEmail =  Prompt.inputString(" 이메일 : ");
       member = memberDao.findByEmail(inputEmail);
 
       if (member != null) {
         String pw = randomPw.randomPw();
+
         member.setPerPassword(pw);
         System.out.println(" >> 처리 중입니다. 잠시만 기다려 주세요.");
         System.out.println();
+
         sendMail.sendMail(inputEmail, pw);
         System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", member.getPerNickname());
         System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
+
         memberDao.updatePassword(member);
         return;
 
