@@ -285,7 +285,7 @@ public class ClientApp {
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
     //    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));   // 아예 사용한함
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
-    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao));
+    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao));
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));

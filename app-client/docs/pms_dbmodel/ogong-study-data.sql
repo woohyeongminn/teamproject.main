@@ -19,7 +19,19 @@ values(1, '삼성뿌셔', 3, 5, 3, '취업 뿌셔뿌셔', '2021-1-1', 1, 0);
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, score) 
-values(2, '정처기준비', 2, 5, 2, '한 번에 붙자', '2021-2-2', 2, 0);
+values(2, '정처기준비', 2, 10, 2, '한 번에 붙자', '2021-2-2', 1, 0,);
+
+insert into study(
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, score, area) 
+values(3, '하반기 삼성 공모전', 3, 6, 3, '공모전 아자', '2021-3-3', 2, 0, '경기도');
+
+insert into study(
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, score, area) 
+values(4, '중앙대 컴공 기말고사', 6, 3, 1, '시험 아자', '2021-3-3', 3, 0, '서울시');
+
+insert into study(
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, score) 
+values(5, '알고리즘 스터디', 4, 20, 2, '지옥같은 SI 탈출', '2021-3-3', 3, 0);
 
 -------------------------------------------------------------------------------------------------
 

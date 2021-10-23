@@ -1,6 +1,5 @@
 package com.ogong.pms.handler.member;
 
-import java.sql.Date;
 import java.util.List;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
@@ -102,7 +101,7 @@ public class MemberAddHandler implements Command {
       break;
     }
 
-    member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
+    //member.setPerRegisteredDate(new Date(System.currentTimeMillis()));
 
     member.setPerStatus(Member.PER);
 
