@@ -326,7 +326,7 @@ public class MariadbStudyDao implements StudyDao {
   public void updateOwner(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt =
         con.prepareStatement("update study set"
-            + " per_member_no=?"
+            + " member_no=?"
             + " where study_no=?")) {
 
       stmt.setInt(1, memberNo);
