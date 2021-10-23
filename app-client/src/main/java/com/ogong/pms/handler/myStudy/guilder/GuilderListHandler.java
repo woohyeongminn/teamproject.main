@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.guilder;
 
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -25,6 +26,9 @@ public class GuilderListHandler implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
+
+    Guilder guilder = new Guilder();
+    //studyDao.findByGuilderNo();
 
     System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , myStudy.getMembers().size() + 1,
         myStudy.getNumberOfPeple());

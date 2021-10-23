@@ -10,8 +10,6 @@ import com.ogong.pms.handler.CommandRequest;
 
 public class MyStudyListHandler implements Command {
 
-  private static final String Collection = null;
-
   StudyDao studyDao;
 
   public MyStudyListHandler(StudyDao studyDao) {

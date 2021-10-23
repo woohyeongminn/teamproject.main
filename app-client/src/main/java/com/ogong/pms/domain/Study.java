@@ -18,10 +18,13 @@ public class Study {
   private Date registeredDate;  // 스터디 가입일
   private int score;            // 스터디 점수
   private Member owner;         // 작성자(조장)
-
   private int status;           // 구성원 상태
+
+  private int CountMember;      // 참여중인 구성원 수
   private List<Member> watingMember = new ArrayList<>();    // 승인대기중
   private List<Member> members = new ArrayList<>();         // 참여중
+
+  private int CountBookMember;  // 북마크 수
   private List<Member> bookMarkMember = new ArrayList<>();  // 북마크한 회원
 
   private List<Calender> myStudyCalender = new ArrayList<>(); // 내 스터디 캘린더
@@ -29,13 +32,15 @@ public class Study {
   private List<ToDo> myStudyToDo = new ArrayList<>(); // 내 스터디 투두리스트
 
 
+
   @Override
   public String toString() {
-    return "Study [studyNo=" + studyNo + ", studyTitle=" + studyTitle + ", owner=" + owner
-        + ", subjectNo=" + subjectNo + ", subjectName=" + subjectName + ", area=" + area
-        + ", numberOfPeple=" + numberOfPeple + ", faceNo=" + faceNo + ", faceName=" + faceName
-        + ", introduction=" + introduction + ", registeredDate=" + registeredDate + ", members="
-        + members + ", watingMember=" + watingMember + ", status=" + status + ", bookMarkMember="
+    return "Study [studyNo=" + studyNo + ", studyTitle=" + studyTitle + ", subjectNo=" + subjectNo
+        + ", subjectName=" + subjectName + ", area=" + area + ", numberOfPeple=" + numberOfPeple
+        + ", faceNo=" + faceNo + ", faceName=" + faceName + ", introduction=" + introduction
+        + ", registeredDate=" + registeredDate + ", score=" + score + ", owner=" + owner
+        + ", status=" + status + ", CountMember=" + CountMember + ", watingMember=" + watingMember
+        + ", members=" + members + ", CountBookMember=" + CountBookMember + ", bookMarkMember="
         + bookMarkMember + ", myStudyCalender=" + myStudyCalender + ", myStudyFreeBoard="
         + myStudyFreeBoard + ", myStudyToDo=" + myStudyToDo + "]";
   }
@@ -218,5 +223,21 @@ public class Study {
       names.append(member.getPerNickname());
     }
     return names.toString();
+  }
+
+  public int getCountMember() {
+    return CountMember;
+  }
+
+  public void setCountMember(int countMember) {
+    CountMember = countMember;
+  }
+
+  public int getCountBookMember() {
+    return CountBookMember;
+  }
+
+  public void setCountBookMember(int countBookMember) {
+    CountBookMember = countBookMember;
   }
 }

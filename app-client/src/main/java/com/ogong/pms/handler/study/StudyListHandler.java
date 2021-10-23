@@ -38,13 +38,13 @@ public class StudyListHandler implements Command {
         System.out.printf(
             " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
             study.getStudyNo(),
-            study.getBookMarkMember().size(),
+            study.getCountBookMember(),
             study.getStudyTitle(),
             study.getFaceName(),
             study.getOwner().getPerNickname(),
             study.getSubjectName(),
             study.getArea(),
-            study.getMembers().size() + 1,
+            study.getCountMember() +1,
             study.getNumberOfPeple()
             );
         System.out.println();

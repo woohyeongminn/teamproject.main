@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
@@ -90,25 +91,20 @@ public class MariadbStudyDao implements StudyDao {
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
             + " s.study_no,"
-            + " s.name study_title,"
-            + " ss.subject_no subject_no,"
-            + " ss.name subject_name,"
-            + " s.area,"
-            + " s.no_people,"
-            + " sfs.face_no face_no,"
-            + " sfs.name face_name,"
-            + " s.introduction,"
-            + " s.created_dt,"
-            + " s.score study_score,"
-            // 작성자(조장)
-            + " s.member_no owner_no,"
-            + " m.nickname owner_name,"
-            // 구성원
-            + " sg.status guilder_status,"
-            + " sg.member_no guilder_no,"
-            + " m2.nickname guilder_nickname,"
-            // 북마크
-            + " sb.member_no book_member_no"
+            + "s.name study_title,"
+            + "ss.subject_no subject_no,"
+            + "ss.name subject_name,"
+            + "s.area,"
+            + "s.no_people,"
+            + "sfs.face_no face_no,"
+            + "sfs.name face_name,"
+            + "s.introduction,"
+            + "s.created_dt,"
+            + "s.score study_score,"
+            + "s.member_no owner_no,"
+            + "m.nickname owner_name,"
+            + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
+            + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
@@ -116,6 +112,7 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
             + " left outer join study_bookmark sb on s.study_no=sb.study_no"
+            + " group by s.study_no"
             + " order by s.study_no");
         ResultSet rs = stmt.executeQuery()) {
 
@@ -123,8 +120,6 @@ public class MariadbStudyDao implements StudyDao {
 
       int studyNo=0;
       Study study = null;
-      int guilderNo = 0;
-      int bookmark = 0;
 
       while (rs.next()) {
         if (studyNo != rs.getInt("study_no")) {
@@ -140,6 +135,8 @@ public class MariadbStudyDao implements StudyDao {
           study.setIntroduction(rs.getString("introduction"));
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
+          study.setCountMember(rs.getInt("count_guilder"));
+          study.setCountBookMember(rs.getInt("count_bookmark"));
 
           Member member = new Member();
           member.setPerNo(rs.getInt("owner_no"));
@@ -147,68 +144,132 @@ public class MariadbStudyDao implements StudyDao {
           study.setOwner(member);
           studyNo = study.getStudyNo();
           list.add(study);
-          guilderNo = 0;
-          bookmark = 0;
-        }
-
-        // 구성원
-        if (guilderNo != rs.getInt("guilder_no")) {
-          int statusNo = rs.getInt("guilder_status");
-          if (statusNo == 1) {        /*승인대기중*/
-            Member waitingMember = new Member();
-            waitingMember.setPerNo(rs.getInt("guilder_no"));
-            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
-
-            study.getWatingMember().add(waitingMember);
-            guilderNo = waitingMember.getPerNo();
-          } else if (statusNo == 2) {     /*참여중*/
-            Member guilder = new Member();
-            guilder.setPerNo(rs.getInt("guilder_no"));
-            guilder.setPerNickname(rs.getString("guilder_nickname"));
-
-            study.getMembers().add(guilder);
-            guilderNo = guilder.getPerNo();
-          }
-          bookmark++;
-        }
-
-        // 북마크
-        if (bookmark == 0 || bookmark == 1) {
-          if (rs.getInt("book_member_no") != 0) {
-            Member bookMember = new Member();
-            bookMember.setPerNo(rs.getInt("book_member_no"));
-            study.getBookMarkMember().add(bookMember);
-          }
         }
       }
       return list;
     }
   }
 
+  //  @Override
+  //  public List<Study> findAll() throws Exception {
+  //    try (PreparedStatement stmt = con.prepareStatement(
+  //        "select"
+  //            + " s.study_no,"
+  //            + " s.name study_title,"
+  //            + " ss.subject_no subject_no,"
+  //            + " ss.name subject_name,"
+  //            + " s.area,"
+  //            + " s.no_people,"
+  //            + " sfs.face_no face_no,"
+  //            + " sfs.name face_name,"
+  //            + " s.introduction,"
+  //            + " s.created_dt,"
+  //            + " s.score study_score,"
+  //            // 작성자(조장)
+  //            + " s.member_no owner_no,"
+  //            + " m.nickname owner_name,"
+  //            // 구성원
+  //            + " sg.status guilder_status,"
+  //            + " sg.member_no guilder_no,"
+  //            + " m2.nickname guilder_nickname,"
+  //            // 북마크
+  //            + " sb.member_no book_member_no"
+  //            + " from study s"
+  //            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
+  //            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+  //            + " left outer join member m on s.member_no=m.member_no"
+  //            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+  //            + " left outer join member m2 on sg.member_no=m2.member_no"
+  //            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
+  //            + " order by s.study_no");
+  //        ResultSet rs = stmt.executeQuery()) {
+  //
+  //      ArrayList<Study> list = new ArrayList<>();
+  //
+  //      int studyNo=0;
+  //      Study study = null;
+  //      int guilderNo = 0;
+  //      int bookmark = 0;
+  //
+  //      while (rs.next()) {
+  //        if (studyNo != rs.getInt("study_no")) {
+  //          study = new Study();
+  //          study.setStudyNo(rs.getInt("study_no"));
+  //          study.setStudyTitle(rs.getString("study_title"));
+  //          study.setSubjectNo(rs.getInt("subject_no"));
+  //          study.setSubjectName(rs.getString("subject_name"));
+  //          study.setArea(rs.getString("area"));
+  //          study.setNumberOfPeple(rs.getInt("no_people"));
+  //          study.setFaceNo(rs.getInt("face_no"));
+  //          study.setFaceName(rs.getString("face_name"));
+  //          study.setIntroduction(rs.getString("introduction"));
+  //          study.setRegisteredDate(rs.getDate("created_dt"));
+  //          study.setScore(rs.getInt("study_score"));
+  //
+  //          Member member = new Member();
+  //          member.setPerNo(rs.getInt("owner_no"));
+  //          member.setPerNickname(rs.getString("owner_name"));
+  //          study.setOwner(member);
+  //          studyNo = study.getStudyNo();
+  //          list.add(study);
+  //          guilderNo = 0;
+  //          bookmark = 0;
+  //        }
+  //
+  //        // 구성원
+  //        if (guilderNo != rs.getInt("guilder_no")) {
+  //          int statusNo = rs.getInt("guilder_status");
+  //          if (statusNo == 1) {        /*승인대기중*/
+  //            Member waitingMember = new Member();
+  //            waitingMember.setPerNo(rs.getInt("guilder_no"));
+  //            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
+  //
+  //            study.getWatingMember().add(waitingMember);
+  //            guilderNo = waitingMember.getPerNo();
+  //          } else if (statusNo == 2) {     /*참여중*/
+  //            Member guilder = new Member();
+  //            guilder.setPerNo(rs.getInt("guilder_no"));
+  //            guilder.setPerNickname(rs.getString("guilder_nickname"));
+  //
+  //            study.getMembers().add(guilder);
+  //            guilderNo = guilder.getPerNo();
+  //          }
+  //          bookmark++;
+  //        }
+  //
+  //        // 북마크
+  //        if (bookmark == 0 || bookmark == 1) {
+  //          if (rs.getInt("book_member_no") != 0) {
+  //            Member bookMember = new Member();
+  //            bookMember.setPerNo(rs.getInt("book_member_no"));
+  //            study.getBookMarkMember().add(bookMember);
+  //          }
+  //        }
+  //      }
+  //      return list;
+  //    }
+  //  }
+
+
   @Override
   public Study findByNo(int studyinputNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
             + " s.study_no,"
-            + " s.name study_title,"
-            + " ss.subject_no subject_no,"
-            + " ss.name subject_name,"
-            + " s.area,"
-            + " s.no_people,"
-            + " sfs.face_no face_no,"
-            + " sfs.name face_name,"
-            + " s.introduction,"
-            + " s.created_dt,"
-            + " s.score study_score,"
-            // 작성자(조장)
-            + " s.member_no owner_no,"
-            + " m.nickname owner_name,"
-            // 구성원
-            + " sg.status guilder_status,"
-            + " sg.member_no guilder_no,"
-            + " m2.nickname guilder_nickname,"
-            // 북마크
-            + " sb.member_no book_member_no"
+            + "s.name study_title,"
+            + "ss.subject_no subject_no,"
+            + "ss.name subject_name,"
+            + "s.area,"
+            + "s.no_people,"
+            + "sfs.face_no face_no,"
+            + "sfs.name face_name,"
+            + "s.introduction,"
+            + "s.created_dt,"
+            + "s.score study_score,"
+            + "s.member_no owner_no,"
+            + "m.nickname owner_name,"
+            + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
+            + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
@@ -216,12 +277,13 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
             + " left outer join study_bookmark sb on s.study_no=sb.study_no"
-            + " where s.study_no=" + studyinputNo);
-        ResultSet rs = stmt.executeQuery()) {
+            + " where s.study_no=?"
+            + " order by s.study_no")) {
+
+      stmt.setInt(1, studyinputNo);  
+      ResultSet rs = stmt.executeQuery();
 
       Study study = null;
-      int guilderNo = 0;
-      int bookmark = 0;
 
       while (rs.next()) {
         if (study == null) {
@@ -237,48 +299,113 @@ public class MariadbStudyDao implements StudyDao {
           study.setIntroduction(rs.getString("introduction"));
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
+          study.setCountMember(rs.getInt("count_guilder"));
+          study.setCountBookMember(rs.getInt("count_bookmark"));
 
           Member member = new Member();
           member.setPerNo(rs.getInt("owner_no"));
           member.setPerNickname(rs.getString("owner_name"));
           study.setOwner(member);
-          guilderNo = 0;
-          bookmark = 0;
-        }
-
-        // 구성원
-        if (guilderNo != rs.getInt("guilder_no")) {
-          int statusNo = rs.getInt("guilder_status");
-          if (statusNo == 1) {        /*승인대기중*/
-            Member waitingMember = new Member();
-            waitingMember.setPerNo(rs.getInt("guilder_no"));
-            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
-
-            study.getWatingMember().add(waitingMember);
-            guilderNo = waitingMember.getPerNo();
-          } else if (statusNo == 2) {     /*참여중*/
-            Member guilder = new Member();
-            guilder.setPerNo(rs.getInt("guilder_no"));
-            guilder.setPerNickname(rs.getString("guilder_nickname"));
-
-            study.getMembers().add(guilder);
-            guilderNo = guilder.getPerNo();
-          }
-          bookmark++;
-        }
-
-        // 북마크
-        if (bookmark == 0 || bookmark == 1) {
-          if (rs.getInt("book_member_no") != 0) {
-            Member bookMember = new Member();
-            bookMember.setPerNo(rs.getInt("book_member_no"));
-            study.getBookMarkMember().add(bookMember);
-          }
         }
       }
       return study;
     }
   }
+
+  //  @Override
+  //  public Study findByNo(int studyinputNo) throws Exception {
+  //    try (PreparedStatement stmt = con.prepareStatement(
+  //        "select"
+  //            + " s.study_no,"
+  //            + " s.name study_title,"
+  //            + " ss.subject_no subject_no,"
+  //            + " ss.name subject_name,"
+  //            + " s.area,"
+  //            + " s.no_people,"
+  //            + " sfs.face_no face_no,"
+  //            + " sfs.name face_name,"
+  //            + " s.introduction,"
+  //            + " s.created_dt,"
+  //            + " s.score study_score,"
+  //            // 작성자(조장)
+  //            + " s.member_no owner_no,"
+  //            + " m.nickname owner_name,"
+  //            // 구성원
+  //            + " sg.status guilder_status,"
+  //            + " sg.member_no guilder_no,"
+  //            + " m2.nickname guilder_nickname,"
+  //            // 북마크
+  //            + " sb.member_no book_member_no"
+  //            + " from study s"
+  //            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
+  //            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+  //            + " left outer join member m on s.member_no=m.member_no"
+  //            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+  //            + " left outer join member m2 on sg.member_no=m2.member_no"
+  //            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
+  //            + " where s.study_no=" + studyinputNo);
+  //        ResultSet rs = stmt.executeQuery()) {
+  //
+  //      Study study = null;
+  //      int guilderNo = 0;
+  //      int bookmark = 0;
+  //
+  //      while (rs.next()) {
+  //        if (study == null) {
+  //          study = new Study();
+  //          study.setStudyNo(rs.getInt("study_no"));
+  //          study.setStudyTitle(rs.getString("study_title"));
+  //          study.setSubjectNo(rs.getInt("subject_no"));
+  //          study.setSubjectName(rs.getString("subject_name"));
+  //          study.setArea(rs.getString("area"));
+  //          study.setNumberOfPeple(rs.getInt("no_people"));
+  //          study.setFaceNo(rs.getInt("face_no"));
+  //          study.setFaceName(rs.getString("face_name"));
+  //          study.setIntroduction(rs.getString("introduction"));
+  //          study.setRegisteredDate(rs.getDate("created_dt"));
+  //          study.setScore(rs.getInt("study_score"));
+  //
+  //          Member member = new Member();
+  //          member.setPerNo(rs.getInt("owner_no"));
+  //          member.setPerNickname(rs.getString("owner_name"));
+  //          study.setOwner(member);
+  //          guilderNo = 0;
+  //          bookmark = 0;
+  //        }
+  //
+  //        // 구성원
+  //        if (guilderNo != rs.getInt("guilder_no")) {
+  //          int statusNo = rs.getInt("guilder_status");
+  //          if (statusNo == 1) {        /*승인대기중*/
+  //            Member waitingMember = new Member();
+  //            waitingMember.setPerNo(rs.getInt("guilder_no"));
+  //            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
+  //
+  //            study.getWatingMember().add(waitingMember);
+  //            guilderNo = waitingMember.getPerNo();
+  //          } else if (statusNo == 2) {     /*참여중*/
+  //            Member guilder = new Member();
+  //            guilder.setPerNo(rs.getInt("guilder_no"));
+  //            guilder.setPerNickname(rs.getString("guilder_nickname"));
+  //
+  //            study.getMembers().add(guilder);
+  //            guilderNo = guilder.getPerNo();
+  //          }
+  //          bookmark++;
+  //        }
+  //
+  //        // 북마크
+  //        if (bookmark == 0 || bookmark == 1) {
+  //          if (rs.getInt("book_member_no") != 0) {
+  //            Member bookMember = new Member();
+  //            bookMember.setPerNo(rs.getInt("book_member_no"));
+  //            study.getBookMarkMember().add(bookMember);
+  //          }
+  //        }
+  //      }
+  //      return study;
+  //    }
+  //  }
 
   // 스터디 검색
   @Override
@@ -286,31 +413,33 @@ public class MariadbStudyDao implements StudyDao {
     return null;
   }
 
-  // 내 스터디 상세 MyStudyDetail
+  // 내 스터디 전체
   @Override
-  public Study findMyStudy(int studyNo, int memberNo) throws Exception {
+  public Study findByMyAll() throws Exception {
+    return null;
+  }
+
+
+  // 내 스터디 상세
+  @Override
+  public Study findByMyNo(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "select"
             + " s.study_no,"
-            + " s.name study_title,"
-            + " ss.subject_no subject_no,"
-            + " ss.name subject_name,"
-            + " s.area,"
-            + " s.no_people,"
-            + " sfs.face_no face_no,"
-            + " sfs.name face_name,"
-            + " s.introduction,"
-            + " s.created_dt,"
-            + " s.score study_score,"
-            // 작성자(조장)
-            + " s.member_no owner_no,"
-            + " m.nickname owner_name,"
-            // 구성원
-            + " sg.status guilder_status,"
-            + " sg.member_no guilder_no,"
-            + " m2.nickname guilder_nickname,"
-            // 북마크
-            + " sb.member_no book_member_no"
+            + "s.name study_title,"
+            + "ss.subject_no subject_no,"
+            + "ss.name subject_name,"
+            + "s.area,"
+            + "s.no_people,"
+            + "sfs.face_no face_no,"
+            + "sfs.name face_name,"
+            + "s.introduction,"
+            + "s.created_dt,"
+            + "s.score study_score,"
+            + "s.member_no owner_no,"
+            + "m.nickname owner_name,"
+            + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
+            + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
             + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
@@ -318,12 +447,16 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
             + " left outer join study_bookmark sb on s.study_no=sb.study_no"
-            + " where s.study_no=" + studyNo + " and (s.member_no=" + memberNo + " or sg.member_no=" + memberNo + ")");
-        ResultSet rs = stmt.executeQuery()) {
+            + " where s.study_no=? and (s.member_no=? or sg.member_no=?)"
+            + " order by s.study_no")) {
+
+      stmt.setInt(1, studyNo);  
+      stmt.setInt(2, memberNo);  
+      stmt.setInt(3, memberNo);  
+
+      ResultSet rs = stmt.executeQuery();
 
       Study study = null;
-      int guilderNo = 0;
-      int bookmark = 0;
 
       while (rs.next()) {
         if (study == null) {
@@ -339,43 +472,13 @@ public class MariadbStudyDao implements StudyDao {
           study.setIntroduction(rs.getString("introduction"));
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
+          study.setCountMember(rs.getInt("count_guilder"));
+          study.setCountBookMember(rs.getInt("count_bookmark"));
 
           Member member = new Member();
           member.setPerNo(rs.getInt("owner_no"));
           member.setPerNickname(rs.getString("owner_name"));
           study.setOwner(member);
-          guilderNo = 0;
-          bookmark = 0;
-        }
-
-        // 구성원
-        if (guilderNo != rs.getInt("guilder_no")) {
-          int statusNo = rs.getInt("guilder_status");
-          if (statusNo == 1) {        /*승인대기중*/
-            Member waitingMember = new Member();
-            waitingMember.setPerNo(rs.getInt("guilder_no"));
-            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
-
-            study.getWatingMember().add(waitingMember);
-            guilderNo = waitingMember.getPerNo();
-          } else if (statusNo == 2) {     /*참여중*/
-            Member guilder = new Member();
-            guilder.setPerNo(rs.getInt("guilder_no"));
-            guilder.setPerNickname(rs.getString("guilder_nickname"));
-
-            study.getMembers().add(guilder);
-            guilderNo = guilder.getPerNo();
-          }
-          bookmark++;
-        }
-
-        // 북마크
-        if (bookmark == 0 || bookmark == 1) {
-          if (rs.getInt("book_member_no") != 0) {
-            Member bookMember = new Member();
-            bookMember.setPerNo(rs.getInt("book_member_no"));
-            study.getBookMarkMember().add(bookMember);
-          }
         }
       }
       return study;
@@ -383,7 +486,143 @@ public class MariadbStudyDao implements StudyDao {
   }
 
 
+
+  //  @Override
+  //  public Study findByMyNo(int studyNo, int memberNo) throws Exception {
+  //    try (PreparedStatement stmt = con.prepareStatement(
+  //        "select"
+  //            + " s.study_no,"
+  //            + " s.name study_title,"
+  //            + " ss.subject_no subject_no,"
+  //            + " ss.name subject_name,"
+  //            + " s.area,"
+  //            + " s.no_people,"
+  //            + " sfs.face_no face_no,"
+  //            + " sfs.name face_name,"
+  //            + " s.introduction,"
+  //            + " s.created_dt,"
+  //            + " s.score study_score,"
+  //            // 작성자(조장)
+  //            + " s.member_no owner_no,"
+  //            + " m.nickname owner_name,"
+  //            // 구성원
+  //            + " sg.status guilder_status,"
+  //            + " sg.member_no guilder_no,"
+  //            + " m2.nickname guilder_nickname,"
+  //            // 북마크
+  //            + " sb.member_no book_member_no"
+  //            + " from study s"
+  //            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
+  //            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
+  //            + " left outer join member m on s.member_no=m.member_no"
+  //            + " left outer join study_guilder sg on s.study_no=sg.study_no"
+  //            + " left outer join member m2 on sg.member_no=m2.member_no"
+  //            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
+  //            + " where s.study_no=" + studyNo + " and (s.member_no=" + memberNo + " or sg.member_no=" + memberNo + ")");
+  //        ResultSet rs = stmt.executeQuery()) {
+  //
+  //      Study study = null;
+  //      int guilderNo = 0;
+  //      int bookmark = 0;
+  //
+  //      while (rs.next()) {
+  //        if (study == null) {
+  //          study = new Study();
+  //          study.setStudyNo(rs.getInt("study_no"));
+  //          study.setStudyTitle(rs.getString("study_title"));
+  //          study.setSubjectNo(rs.getInt("subject_no"));
+  //          study.setSubjectName(rs.getString("subject_name"));
+  //          study.setArea(rs.getString("area"));
+  //          study.setNumberOfPeple(rs.getInt("no_people"));
+  //          study.setFaceNo(rs.getInt("face_no"));
+  //          study.setFaceName(rs.getString("face_name"));
+  //          study.setIntroduction(rs.getString("introduction"));
+  //          study.setRegisteredDate(rs.getDate("created_dt"));
+  //          study.setScore(rs.getInt("study_score"));
+  //
+  //          Member member = new Member();
+  //          member.setPerNo(rs.getInt("owner_no"));
+  //          member.setPerNickname(rs.getString("owner_name"));
+  //          study.setOwner(member);
+  //          guilderNo = 0;
+  //          bookmark = 0;
+  //        }
+  //
+  //        // 구성원
+  //        if (guilderNo != rs.getInt("guilder_no")) {
+  //          int statusNo = rs.getInt("guilder_status");
+  //          if (statusNo == 1) {        /*승인대기중*/
+  //            Member waitingMember = new Member();
+  //            waitingMember.setPerNo(rs.getInt("guilder_no"));
+  //            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
+  //
+  //            study.getWatingMember().add(waitingMember);
+  //            guilderNo = waitingMember.getPerNo();
+  //          } else if (statusNo == 2) {     /*참여중*/
+  //            Member guilder = new Member();
+  //            guilder.setPerNo(rs.getInt("guilder_no"));
+  //            guilder.setPerNickname(rs.getString("guilder_nickname"));
+  //
+  //            study.getMembers().add(guilder);
+  //            guilderNo = guilder.getPerNo();
+  //          }
+  //          bookmark++;
+  //        }
+  //
+  //        // 북마크
+  //        if (bookmark == 0 || bookmark == 1) {
+  //          if (rs.getInt("book_member_no") != 0) {
+  //            Member bookMember = new Member();
+  //            bookMember.setPerNo(rs.getInt("book_member_no"));
+  //            study.getBookMarkMember().add(bookMember);
+  //          }
+  //        }
+  //      }
+  //      return study;
+  //    }
+  //  }
+
+
   // ------------------------- [ 구성원 ] -----------------------------------
+
+  // 구성원 조회
+  @Override
+  public List<Guilder> findByGuilderNo(int memberNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement
+        ("select"
+            + " sg.study_no,"
+            + " sg.status guilder_status"
+            + " sg.member_no,"
+            + " m.name,"
+            + " m.nickname,"
+            + " from"
+            + " study_guiler sg" 
+            + " join"
+            + " member m on m.member_no=sg.member_no"
+            + " where sg.member_no=" + memberNo);
+        ResultSet rs = stmt.executeQuery()) {
+
+      List<Guilder> guilderList = new ArrayList<>();
+
+      while (rs.next()) {
+        Guilder guilder = new Guilder();
+        guilder.setStudyNo(rs.getInt("study_no"));
+        guilder.setGuilderStatus(rs.getInt("guilder_status"));
+
+        Member member = new Member();
+        member.setPerNo(rs.getInt("member_no"));
+        member.setPerName(rs.getString("name"));
+        member.setPerNickname(rs.getString("nickname"));
+
+        guilder.setMember(member);
+
+        guilderList.add(guilder);
+
+      }
+      return guilderList;
+    }
+  }
+
   // 신청하기(joinHandler)
   @Override
   public void insertGuilder(int studyNo, int memberNo) throws Exception {

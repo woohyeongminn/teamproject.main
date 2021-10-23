@@ -1,6 +1,7 @@
 package com.ogong.pms.dao;
 
 import java.util.List;
+import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Study;
 
 public interface StudyDao {
@@ -14,9 +15,11 @@ public interface StudyDao {
   Study findByNo(int studyinputNo) throws Exception;
 
   //--------------- [ 내 스터디 ] ----------------------------------------
-  Study findMyStudy(int studyNo, int memberNo) throws Exception;
+  Study findByMyAll() throws Exception;
+  Study findByMyNo(int studyNo, int memberNo) throws Exception;
 
   //--------------- [ 구성원 ] ----------------------------------------
+  List<Guilder> findByGuilderNo(int memberNo) throws Exception;
   void insertGuilder(int studyNo, int memberNo) throws Exception;
   void updateOwner(int studyNo, int memberNo) throws Exception;
   void updateGuilder(int studyNo, int memberNo) throws Exception;
