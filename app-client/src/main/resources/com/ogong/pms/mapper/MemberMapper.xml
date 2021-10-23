@@ -79,6 +79,12 @@
     email=#{email}
   </select>
   
+  <select id="findByTel" resultMap="MemberMap" parameterType="string">
+    <include refid="select1"/>
+  where
+    tel=#{tel}
+  </select>
+  
   <update id="updateName" parameterType="member">
   update member set
     name=#{perName}

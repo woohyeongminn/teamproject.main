@@ -177,6 +177,16 @@ public class MybatisMemberDao implements MemberDao {
   }
 
   @Override
+  public Member findByTel(String inputTel) throws Exception {
+    List<Member> list = sqlSession.selectList("MemberMapper.findByTel", inputTel);
+    if (list.size() > 0) {
+      return list.get(0);
+    } else {
+      return null;
+    }
+  }
+
+  @Override
   public Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception {
     HashMap<String,Object> params = new HashMap<>();
     params.put("email", inputEmail);
