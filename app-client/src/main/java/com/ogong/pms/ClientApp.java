@@ -315,9 +315,9 @@ public class ClientApp {
     commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
     commandMap.put("/myStudy/guilder", new GuilderListHandler(studyDao));
 
-    commandMap.put("/myStudy/listGuilder", new WatingGuilderListHandler(studyDao));
-    commandMap.put("/myStudy/entrustGuilder", new GuilderEntrustHandler(studyDao));
-    commandMap.put("/myStudy/deleteGuilder", new GuilderDeleteHandler(studyDao));
+    commandMap.put("/myStudy/watingGuilderList", new WatingGuilderListHandler(studyDao));
+    commandMap.put("/myStudy/guilderEntrust", new GuilderEntrustHandler(studyDao));
+    commandMap.put("/myStudy/guilderDelete", new GuilderDeleteHandler(studyDao));
 
     commandMap.put("/myStudy/calenderAdd", new CalenderAddHandler(studyDao));
     commandMap.put("/myStudy/calenderList", new CalenderListHandler(studyDao));
