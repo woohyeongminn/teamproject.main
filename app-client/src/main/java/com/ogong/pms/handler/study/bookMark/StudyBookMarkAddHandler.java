@@ -55,7 +55,7 @@ public class StudyBookMarkAddHandler implements Command {
       return;
     }
 
-    //study.getBookMarkMember().add(member);
+    study.getBookMarkMember().add(member);
     studyDao.insertBookmark(study,member);
 
     System.out.println();
