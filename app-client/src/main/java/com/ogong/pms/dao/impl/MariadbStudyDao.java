@@ -305,12 +305,11 @@ public class MariadbStudyDao implements StudyDao {
   }
 
   // ------------------------- [ 구성원 ] -----------------------------------
-
   // 신청하기(joinHandler)
   @Override
   public void insertGuilder(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
-        "insert into study_guilder(study_no, per_member_no) values(?,?)",
+        "insert into study_guilder(study_no, member_no) values(?,?)",
         Statement.RETURN_GENERATED_KEYS)) {
 
       stmt.setInt(1, studyNo);
@@ -345,7 +344,7 @@ public class MariadbStudyDao implements StudyDao {
     try (PreparedStatement stmt =
         con.prepareStatement("update study_guilder set"
             + " status=2"
-            + " where study_no=? and per_member_no=?")) {
+            + " where study_no=? and member_no=?")) {
 
       stmt.setInt(1, studyNo);
       stmt.setInt(2, memberNo);
@@ -361,7 +360,7 @@ public class MariadbStudyDao implements StudyDao {
   public void deleteGuilder(int studyNo, int memberNo) throws Exception {
     try (PreparedStatement stmt = 
         con.prepareStatement("delete from study_guilder"
-            + " where study_no=? and per_member_no=?")) {
+            + " where study_no=? and member_no=?")) {
 
       stmt.setInt(1, studyNo);
       stmt.setInt(2, memberNo);
@@ -372,20 +371,19 @@ public class MariadbStudyDao implements StudyDao {
     }
   }
 
-
   //------------------------- [ 북마크 ] -----------------------------------
+  // 북마크 하기
   @Override
   public void insertBookmark(Study study, Member member) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "insert into study_bookmark(study_no, per_member_no) values(?,?)",
-    //        Statement.RETURN_GENERATED_KEYS)) {
-    //
-    //      stmt.setInt(1, study.getStudyNo());
-    //      stmt.setInt(2, member.getPerNo());
-    //
-    //      if (stmt.executeUpdate() == 0) {
-    //        throw new Exception("구성원 데이터 저장 실패!");
-    //      }
-    //    }
+    try (PreparedStatement stmt = con.prepareStatement(
+        "insert into study_bookmark(study_no, member_no) values(?,?)")) {
+
+      stmt.setInt(1, study.getStudyNo());
+      stmt.setInt(2, member.getPerNo());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("구성원 데이터 저장 실패!");
+      }
+    }
   }
 }

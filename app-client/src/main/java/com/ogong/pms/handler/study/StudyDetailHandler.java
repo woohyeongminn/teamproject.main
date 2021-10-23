@@ -42,8 +42,7 @@ public class StudyDetailHandler implements Command {
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", study.getSubjectName());
     System.out.printf(" >> 지역 : %s\n", study.getArea());
-    System.out.printf(" >> 인원수 : %s/%s명\n", study.getMembers().size() + 1,
-        study.getNumberOfPeple());
+    System.out.printf(" >> 인원수 : %s/%s명\n", study.getMembers().size() + 1, study.getNumberOfPeple());
     System.out.printf(" >> 대면/비대면 : %s\n", study.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", study.getIntroduction());
 
@@ -53,6 +52,7 @@ public class StudyDetailHandler implements Command {
 
       Member m1 = AuthPerMemberLoginHandler.loginUser;
 
+      // 조장일때
       if (study.getOwner().getPerNo() == m1.getPerNo()) {
         System.out.println();
         System.out.println("1. 수정");
@@ -62,88 +62,69 @@ public class StudyDetailHandler implements Command {
         while (true) {
           int selectNo = Prompt.inputInt("선택> ");
           switch (selectNo) {
-            case 1:
-              request.getRequestDispatcher("/myStudy/update").forward(request);
-              return;
-            case 2:
-              request.getRequestDispatcher("/myStudy/delete").forward(request);
-              return;
-            case 0:
-              return;
-            default:
-              System.out.println(" >> 번호를 다시 선택해 주세요.");
+            case 1 : request.getRequestDispatcher("/myStudy/update").forward(request); return;
+            case 2 : request.getRequestDispatcher("/myStudy/delete").forward(request); return;
+            case 0: return;
+            default: System.out.println(" >> 번호를 다시 선택해 주세요.");
           }
         }
 
-      }
-      // else {
-      //
-      //
-      // //북마크 멤버 목록이 비어있을때
-      // if (study.getBookMarkMember().isEmpty()) {
-      // System.out.println("\n----------------------");
-      // System.out.println("1. 참여 신청하기");
-      // System.out.println("2. 북마크 추가하기");
-      // System.out.println("0. 이전");
-      //
-      // while (true) {
-      // int selectNo = Prompt.inputInt("선택> ");
-      // switch (selectNo) {
-      // case 1: request.getRequestDispatcher("/study/join").forward(request); return;
-      // case 2: request.getRequestDispatcher("/study/bookMarkAdd").forward(request); return;
-      // case 0: return;
-      // default :
-      // System.out.println(" >> 번호를 다시 선택해 주세요.");
-      // }
-      // }
-      // }
-      //
-      // //내가 북마크 했을때랑 안했을때
-      // for (Member member : study.getBookMarkMember()) {
-      // if (member.getPerNo() == m1.getPerNo()) {
-      // System.out.println("\n----------------------");
-      // System.out.println("1. 참여 신청하기");
-      // System.out.println("2. 북마크 삭제하기");
-      // System.out.println("0. 이전");
-      //
-      // while (true) {
-      // int selectNo = Prompt.inputInt("선택> ");
-      // switch (selectNo) {
-      // case 1: request.getRequestDispatcher("/study/join").forward(request); return;
-      // case 2: request.getRequestDispatcher("/study/bookMarkDelete").forward(request); return;
-      // case 0: return;
-      // default :
-      // System.out.println(" >> 번호를 다시 선택해 주세요.\n");
-      // }
-      // }
-      else {
+        // 조장아닐때
+      } else {
+        //북마크 멤버 목록이 비어 있을 때
+        if (study.getBookMarkMember().isEmpty()) {
+          System.out.println("\n----------------------");
+          System.out.println("1. 참여 신청하기");
+          System.out.println("2. 북마크 추가하기");
+          System.out.println("0. 이전");
 
-        System.out.println("\n----------------------");
-        System.out.println("1. 참여 신청하기");
-        System.out.println("2. 북마크 추가하기");
-        System.out.println("0. 이전");
+          while (true) {
+            int selectNo = Prompt.inputInt("선택> ");
+            switch (selectNo) {
+              case 1: request.getRequestDispatcher("/study/join").forward(request); return;
+              case 2: request.getRequestDispatcher("/study/bookMarkAdd").forward(request); return;
+              case 0: return;
+              default :
+                System.out.println(" >> 번호를 다시 선택해 주세요.");
+            }
+          }
+        }
+        // 북마크 멤버 목록이 있을 때
+        for (Member member : study.getBookMarkMember()) {
+          if (member.getPerNo() == m1.getPerNo()) {     /*북마크한 스터디*/
+            System.out.println("\n----------------------");
+            System.out.println("1. 참여 신청하기");
+            System.out.println("2. 북마크 삭제하기");
+            System.out.println("0. 이전");
 
-        while (true) {
-          int selectNo = Prompt.inputInt("선택> ");
-          switch (selectNo) {
-            case 1:
-              request.getRequestDispatcher("/study/join").forward(request);
-              return;
-            case 2:
-              request.getRequestDispatcher("/study/bookMarkAdd").forward(request);
-              return;
-            case 0:
-              return;
-            default:
-              System.out.println(" >> 번호를 다시 선택해 주세요.");
+            while (true) {
+              int selectNo = Prompt.inputInt("선택> ");
+              switch (selectNo) {
+                case 1: request.getRequestDispatcher("/study/join").forward(request); return;
+                case 2: request.getRequestDispatcher("/study/bookMarkDelete").forward(request); return;
+                case 0: return;
+                default :
+                  System.out.println(" >> 번호를 다시 선택해 주세요.\n");
+              }
+            }
+          } else {      /*북마크 안한 스터디*/
+            System.out.println("\n----------------------");
+            System.out.println("1. 참여 신청하기");
+            System.out.println("2. 북마크 추가하기");
+            System.out.println("0. 이전");
+
+            while (true) {
+              int selectNo = Prompt.inputInt("선택> ");
+              switch (selectNo) {
+                case 1: request.getRequestDispatcher("/study/join").forward(request); return;
+                case 2: request.getRequestDispatcher("/study/bookMarkAdd").forward(request); return;
+                case 0: return;
+                default: System.out.println(" >> 번호를 다시 선택해 주세요.");
+              }
+            }
           }
         }
       }
     }
   }
 }
-// }
-// }
-// }
-
-
