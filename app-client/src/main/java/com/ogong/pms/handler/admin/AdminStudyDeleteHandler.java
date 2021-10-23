@@ -27,6 +27,7 @@ public class AdminStudyDeleteHandler implements Command {
     if (study.getOwner().getPerNickname() 
         != AuthAdminLoginHandler.getLoginAdmin().getMasterNickname()) {
 
+      // 나중에 조건 추가 (신고 여러번 받은 스터디만 관리자가 삭제할 수 있도록?)
       System.out.println();
       String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
       if (!input.equalsIgnoreCase("네")) {
@@ -36,7 +37,7 @@ public class AdminStudyDeleteHandler implements Command {
       }
     }
 
-    studyDao.delete(inputNo);
+    studyDao.delete(inputNo, study.getOwner().getPerNo());
 
     System.out.println(" >> 스터디를 삭제하였습니다.");
     request.getRequestDispatcher("/study/list").forward(request);

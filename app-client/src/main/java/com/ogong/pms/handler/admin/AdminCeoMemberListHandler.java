@@ -24,8 +24,9 @@ public class AdminCeoMemberListHandler implements Command  {
     Collection<CeoMember> ceoMemberList = ceoMemberDao.findAll();
 
     for (CeoMember ceoMember : ceoMemberList) {
-      System.out.printf(" (%d)\n 닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
+      System.out.printf(" (%d) 이름:%s | 닉네임 : %s | 이메일 : %s | 가입일 : %s\n",
           ceoMember.getCeoNo(),
+          ceoMember.getCeoName(),
           ceoMember.getCeoNickname(),
           ceoMember.getCeoEmail(),
           ceoMember.getCeoRegisteredDate());

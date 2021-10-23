@@ -63,14 +63,23 @@ public class MariadbStudyDao implements StudyDao {
 
   @Override
   public void delete(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = 
+
+    try (PreparedStatement stmt1 = 
+        con.prepareStatement("delete from study_bookmark"
+            + " where study_no=" + studyNo)) {
+      if (stmt1.executeUpdate() == -1) {
+        throw new Exception("스터디 북마크 데이터 삭제 실패!");
+      }
+    }
+
+    try (PreparedStatement stmt3 = 
         con.prepareStatement("delete from study"
             + " where study_no=? and member_no=?")) {
 
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
+      stmt3.setInt(1, studyNo);
+      stmt3.setInt(2, memberNo);
 
-      if (stmt.executeUpdate() == 0) {
+      if (stmt3.executeUpdate() == 0) {
         throw new Exception("스터디 데이터 삭제 실패!");
       }
     }
@@ -374,7 +383,7 @@ public class MariadbStudyDao implements StudyDao {
   }
 
 
-  // ------------------------- [ 구성원 ] 구현 완료 -----------------------------------
+  // ------------------------- [ 구성원 ] -----------------------------------
   // 신청하기(joinHandler)
   @Override
   public void insertGuilder(int studyNo, int memberNo) throws Exception {
@@ -434,6 +443,21 @@ public class MariadbStudyDao implements StudyDao {
 
       stmt.setInt(1, studyNo);
       stmt.setInt(2, memberNo);
+
+      if (stmt.executeUpdate() == 0) {
+        throw new Exception("구성원 데이터 삭제 실패!");
+      }
+    }
+  }
+
+  // 구성원 전체 삭제하기
+  @Override
+  public void deleteAllGuilder(int studyNo) throws Exception {
+    try (PreparedStatement stmt = 
+        con.prepareStatement("delete from study_guilder"
+            + " where study_no=?")) {
+
+      stmt.setInt(1, studyNo);
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("구성원 데이터 삭제 실패!");

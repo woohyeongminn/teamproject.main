@@ -60,7 +60,7 @@ public class AdminMemberDeleteHandler implements Command {
           }
         }
 
-        member.setPerNickname("탈퇴된 회원: ( " + member.getPerNickname() + " )");
+        member.setPerNickname("Deleted Member("+ member.getPerNickname() +")");
         member.setPerName("Deleted Name");
         member.setPerPhoto("Deleted Photo");
         member.setPerTel("Deleted Tel");

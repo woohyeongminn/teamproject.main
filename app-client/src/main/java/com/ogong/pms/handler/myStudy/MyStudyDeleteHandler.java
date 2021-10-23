@@ -19,11 +19,16 @@ public class MyStudyDeleteHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("▶ 스터디 삭제");
+    System.out.println("▶ 스터디 삭제\n");
 
     int no = (int) request.getAttribute("inputNo");
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     Study myStudy = studyDao.findByNo(no);
+
+    if (myStudy.getOwner().getPerNo() != member.getPerNo()) {
+      System.out.println(" >> 삭제 권한이 없습니다.");
+      return;
+    }
 
     if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
         myStudy.getMembers().size() > 0) {
@@ -31,12 +36,23 @@ public class MyStudyDeleteHandler implements Command {
       return;
     }
 
-    if (myStudy.getOwner().getPerNo() != member.getPerNo()) {
-      System.out.println(" >> 삭제 권한이 없습니다.");
-      return;
+    // 승인 대기중인 구성원이 있을때
+    if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
+        myStudy.getWatingMember().size() > 0) {
+
+      System.out.println(" >> 승인 대기 중인 구성원이 없어야 스터디 삭제가 가능합니다.");
+      String input = Prompt.inputString(" 승인 대기 중인 구성원을 모두 거절하시겠습니까? (네 / 아니오) ");
+
+      if (!input.equalsIgnoreCase("네")) {
+        System.out.println(" >> 스터디 삭제를 취소하였습니다.");
+        return;
+      }
+
+      studyDao.deleteAllGuilder(myStudy.getStudyNo());
+      System.out.println(" >> 구성원을 모두 삭제하였습니다.\n");
     }
 
-    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString(" 정말 스터디를 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 스터디 삭제를 취소하였습니다.");
       return;

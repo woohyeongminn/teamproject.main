@@ -132,10 +132,18 @@
   
   <update id="updateActive" parameterType="CeoMember">
     update member set
-     active = #{active}
+      nickname=#{ceoNickname},
+	    name=#{ceoName},
+	    photo=#{ceoPhoto},
+	    tel=#{ceoTel}, 
+	    email=#{ceoEmail}, 
+	    password=password(#{ceoPassword}),
+	    active=2 
     where
      member_no=#{ceoNo}
   </update>
+  
+  
   
 </mapper>
 
