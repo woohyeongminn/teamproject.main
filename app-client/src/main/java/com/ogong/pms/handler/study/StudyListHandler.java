@@ -22,6 +22,11 @@ public class StudyListHandler implements Command {
 
     List<Study> studyList = studyDao.findAll();
 
+    if (studyList.isEmpty()) {
+      System.out.println(" >> 스터디 목록이 없습니다.");  
+      return;
+    }
+
     for (Study study : studyList) {
 
       if (study.getStudyTitle().contains("탈퇴")) {
@@ -31,12 +36,17 @@ public class StudyListHandler implements Command {
 
       else {
         System.out.printf(
-            " (%d) 🌟%d \n [%s] | 분류 : %s | 지역 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
-            // System.out.printf(" (%d)\n [%s] | 분류 : %s | 지역 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면
-            // : %s\n",
-            study.getStudyNo(), study.getBookMarkMember().size(), study.getStudyTitle(),
-            study.getSubjectName(), study.getArea(), study.getMembers().size() + 1,
-            study.getNumberOfPeple(), study.getOwner().getPerNickname(), study.getFaceName());
+            " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명 ",
+            study.getStudyNo(),
+            study.getBookMarkMember().size(),
+            study.getStudyTitle(),
+            study.getFaceName(),
+            study.getOwner().getPerNickname(),
+            study.getSubjectName(),
+            study.getArea(),
+            study.getMembers().size() + 1,
+            study.getNumberOfPeple()
+            );
         System.out.println();
       }
     }

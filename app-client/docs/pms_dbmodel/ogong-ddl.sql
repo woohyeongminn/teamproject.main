@@ -40,12 +40,6 @@ DROP TABLE IF EXISTS study_todolist RESTRICT;
 -- 스터디분야
 DROP TABLE IF EXISTS study_subject RESTRICT;
 
--- 한스터디여러지역
-DROP TABLE IF EXISTS study_multiple_location RESTRICT;
-
--- 스터디지역
-DROP TABLE IF EXISTS study_location RESTRICT;
-
 -- 스터디대면상태
 DROP TABLE IF EXISTS study_face_status RESTRICT;
 
@@ -410,38 +404,6 @@ CREATE UNIQUE INDEX UIX_study_subject
     name ASC -- 스터디과목명
   );
 
--- 한스터디여러지역
-CREATE TABLE study_multiple_location (
-  study_no    INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
-  location_no INTEGER NOT NULL COMMENT '지역번호' -- 지역번호
-)
-COMMENT '한스터디여러지역';
-
--- 한스터디여러지역
-ALTER TABLE study_multiple_location
-  ADD CONSTRAINT PK_study_multiple_location -- 한스터디여러지역 기본키
-    PRIMARY KEY (
-      study_no,    -- 스터디번호
-      location_no  -- 지역번호
-    );
-
--- 스터디지역
-CREATE TABLE study_location (
-  location_no INTEGER     NOT NULL COMMENT '지역번호', -- 지역번호
-  name        VARCHAR(50) NOT NULL COMMENT '지역명' -- 지역명
-)
-COMMENT '스터디지역';
-
--- 스터디지역
-ALTER TABLE study_location
-  ADD CONSTRAINT PK_study_location -- 스터디지역 기본키
-    PRIMARY KEY (
-      location_no -- 지역번호
-    );
-
-ALTER TABLE study_location
-  MODIFY COLUMN location_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '지역번호';
-
 -- 스터디대면상태
 CREATE TABLE study_face_status (
   face_no INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
@@ -575,15 +537,16 @@ ALTER TABLE study_board
 
 -- 스터디
 CREATE TABLE study (
-  study_no     INTEGER     NOT NULL COMMENT '스터디번호', -- 스터디번호
-  name         VARCHAR(50) NOT NULL COMMENT '스터디명', -- 스터디명
-  subject_no   INTEGER     NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
-  no_people    INTEGER     NOT NULL COMMENT '인원수', -- 인원수
-  face_no      INTEGER     NOT NULL COMMENT '대면상태번호', -- 대면상태번호
-  introduction TEXT        NULL     COMMENT '소개글', -- 소개글
-  created_dt   DATE        NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
-  member_no    INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-  score        INTEGER     NOT NULL DEFAULT 0 COMMENT '스터디활동점수' -- 스터디활동점수
+  study_no     INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
+  name         VARCHAR(50)  NOT NULL COMMENT '스터디명', -- 스터디명
+  subject_no   INTEGER      NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
+  no_people    INTEGER      NOT NULL COMMENT '인원수', -- 인원수
+  face_no      INTEGER      NOT NULL COMMENT '대면상태번호', -- 대면상태번호
+  introduction TEXT         NULL     COMMENT '소개글', -- 소개글
+  created_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
+  member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  score        INTEGER      NOT NULL DEFAULT 0 COMMENT '스터디활동점수', -- 스터디활동점수
+  area         VARCHAR(255) NULL     COMMENT '스터디지역' -- 스터디지역
 )
 COMMENT '스터디';
 
@@ -994,26 +957,6 @@ ALTER TABLE study_todolist
     REFERENCES study_guilder ( -- 스터디구성원
       member_no, -- 회원번호
       study_no   -- 스터디번호
-    );
-
--- 한스터디여러지역
-ALTER TABLE study_multiple_location
-  ADD CONSTRAINT FK_study_location_TO_study_multiple_location -- 스터디지역 -> 한스터디여러지역
-    FOREIGN KEY (
-      location_no -- 지역번호
-    )
-    REFERENCES study_location ( -- 스터디지역
-      location_no -- 지역번호
-    );
-
--- 한스터디여러지역
-ALTER TABLE study_multiple_location
-  ADD CONSTRAINT FK_study_TO_study_multiple_location -- 스터디 -> 한스터디여러지역
-    FOREIGN KEY (
-      study_no -- 스터디번호
-    )
-    REFERENCES study ( -- 스터디
-      study_no -- 스터디번호
     );
 
 -- 캘린더

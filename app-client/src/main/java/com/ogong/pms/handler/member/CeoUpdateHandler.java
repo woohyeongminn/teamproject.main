@@ -20,7 +20,7 @@ public class CeoUpdateHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("▶ 기업 정보 변경"); 
+    System.out.println("▶ 기업 프로필 수정"); 
     System.out.println();
 
     int no = (int) request.getAttribute("inputCeoNo");
@@ -109,10 +109,6 @@ public class CeoUpdateHandler implements Command {
       return;
     }
 
-    //    ceoMember.setceoStoreName(ceoStoreName);
-    //    ceoMember.setceoStoreDetailAddress(ceoStoreDetailAddress);
-
-    //ceoMemberDao.update(ceoMember);
     System.out.println(" >> 회원 정보를 변경하였습니다.");
 
   }
