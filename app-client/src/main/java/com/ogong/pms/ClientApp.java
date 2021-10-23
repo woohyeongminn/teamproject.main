@@ -247,7 +247,7 @@ public class ClientApp {
     commandMap.put("/member/detail", new MemberDetailHandler(memberDao));
     commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, memberDao));
     commandMap.put("/member/update", new MemberUpdateHandler(memberDao));
-    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao));
+    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, studyDao));
 
     commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao));
     commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao));

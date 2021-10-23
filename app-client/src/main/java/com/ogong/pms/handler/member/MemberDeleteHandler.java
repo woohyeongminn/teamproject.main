@@ -1,8 +1,11 @@
 package com.ogong.pms.handler.member;
 
+import java.util.List;
 import com.ogong.menu.Menu;
 import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -11,9 +14,11 @@ import com.ogong.util.Prompt;
 public class MemberDeleteHandler implements Command {
 
   MemberDao memberDao;
+  StudyDao studyDao;
 
-  public MemberDeleteHandler(MemberDao memberDao) {
+  public MemberDeleteHandler(MemberDao memberDao, StudyDao studyDao) {
     this.memberDao = memberDao;
+    this.studyDao = studyDao;
   }
 
   // 개인
@@ -78,6 +83,27 @@ public class MemberDeleteHandler implements Command {
       member.setActive(Member.OUTUSER);
     }
 
+    List<Study> studyList = studyDao.findAll();
+    // 조장일때
+    for (Study study : studyList) {
+      if (study.getOwner().getPerNo() == member.getPerNo()) {
+        System.out.println(" >> 스터디 삭제 후 탈퇴 가능합니다.");
+        return;
+      }
+    }
+
+    // 구성원일때 자동으로 탈퇴되도록
+    for (int i = 0; i < studyList.size(); i++) {
+      System.out.println("test11111111111");
+      for (Member mem : studyList.get(i).getMembers()) {
+        System.out.println("test2222222222");
+        if (mem.getPerNo() == member.getPerNo()) {
+          System.out.println(studyList.get(i).getStudyNo());
+          System.out.println(mem.getPerNo());
+          studyDao.deleteGuilder(studyList.get(i).getStudyNo(), mem.getPerNo());
+        }
+      }
+    }
     // requestAgent.request("study.selectList", null);
     //
     // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
@@ -117,9 +143,9 @@ public class MemberDeleteHandler implements Command {
     // }
 
     memberDao.updateActive(member);
-    // memberDao.delete(no);
     AuthPerMemberLoginHandler.loginUser = null;
     AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
+
     System.out.println();
     System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
     return;

@@ -9,7 +9,7 @@
     <id column="notice_no" property="adminNotiNo"/> 
     <result column="title" property="adminNotiTitle"/>
     <result column="content" property="adminNotiContent"/>
-    <result column="create_dt" property="adminNotiRegisteredDate"/>
+    <result column="created_dt" property="adminNotiRegisteredDate"/>
     
     <result column="notice_file_no" property="adminNotiFileNo"/>
     <result column="filepath" property="adminNotiFile"/>
@@ -21,7 +21,7 @@
       n.notice_no,
       n.title,
       n.content,
-      n.create_dt,
+      n.created_dt,
       nf.notice_file_no,
       nf.filepath
     from
@@ -31,7 +31,7 @@
     
   <insert id="insert" parameterType="AdminNotice" 
           useGeneratedKeys="true" keyColumn="notice_no" keyProperty="adminNotiNo">
-    insert into notice(title,content,create_dt)
+    insert into notice(title,content,created_dt)
     values(#{adminNotiTitle},#{adminNotiContent},#{adminNotiRegisteredDate})
   </insert>
   
