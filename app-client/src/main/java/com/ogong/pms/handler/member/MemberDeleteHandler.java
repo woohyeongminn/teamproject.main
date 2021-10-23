@@ -36,9 +36,6 @@ public class MemberDeleteHandler implements Command {
       no = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
     }
 
-    // HashMap<String,String> params = new HashMap<>();
-    // params.put("memberNo", String.valueOf(no));
-
     Member member = memberDao.findByNo(no);
 
     System.out.println(" << 이메일 확인 >>");
@@ -54,24 +51,16 @@ public class MemberDeleteHandler implements Command {
     System.out.println(" << 비밀번호 확인 >>");
     String inputPassword = Prompt.inputString(" 비밀번호를 입력하세요 : ");
 
-    int inputActive = Member.INUSER;
-
     // 테스트
     // System.out.println(member.getPerPassword());
 
-    Member perMember = memberDao.findByEmailAndPassword(inputEmail, inputPassword, inputActive);
+    Member perMember = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
 
     if (perMember == null) {
       System.out.println();
       System.out.println(" >> 비밀번호가 일치하지 않습니다.");
       return;
     }
-
-    // if (!inputPassword.equals(member.getPerPassword())) {
-    // System.out.println();
-    // System.out.println(" >> 비밀번호가 일치하지 않습니다.");
-    // return;
-    // }
 
     System.out.println();
     String input = Prompt.inputString(" 정말 탈퇴하시겠습니까? (네 /아니오) ");
@@ -81,11 +70,11 @@ public class MemberDeleteHandler implements Command {
     }
 
     if (input.equals("네")) {
-      member.setPerStatus(Member.PER);
       member.setPerNickname("탈퇴된 회원: ( " + member.getPerNickname() + " )");
       member.setPerEmail("Deleted Email");
       member.setPerPassword("Deleted Password");
       member.setPerPhoto("Deleted Photo");
+      member.setPerStatus(Member.PER);
       member.setActive(Member.OUTUSER);
     }
 

@@ -41,15 +41,15 @@ public class AdminMemberDetailHandler implements Command {
     request.setAttribute("memberNo", member.getPerNo());
 
     System.out.println();
-    System.out.println("1. 수정");
-    System.out.println("2. 탈퇴");
+    // System.out.println("1. 수정");
+    System.out.println("1. 탈퇴");
     System.out.println("0. 이전");
 
     while (true) {
       int selcetNo = Prompt.inputInt("선택> ");
       switch (selcetNo) {
-        case 1: request.getRequestDispatcher("/adminMember/update").forward(request); return;
-        case 2: request.getRequestDispatcher("/adminMember/delete").forward(request); return;
+        // case 1: request.getRequestDispatcher("/adminMember/update").forward(request); return;
+        case 1: request.getRequestDispatcher("/adminMember/delete").forward(request); return;
         case 0: return;
         default :
           System.out.println(" >> 번호를 다시 선택해 주세요.");
