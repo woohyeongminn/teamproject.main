@@ -25,6 +25,12 @@ public class MyStudyDeleteHandler implements Command {
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     Study myStudy = studyDao.findByNo(no);
 
+    if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
+        myStudy.getMembers().size() > 0) {
+      System.out.println(" >> 구성원이 있는 스터디는 삭제할 수 없습니다.");
+      return;
+    }
+
     if (myStudy.getOwner().getPerNo() != member.getPerNo()) {
       System.out.println(" >> 삭제 권한이 없습니다.");
       return;

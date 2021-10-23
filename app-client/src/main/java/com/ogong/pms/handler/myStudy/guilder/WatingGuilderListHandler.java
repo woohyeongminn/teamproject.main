@@ -29,7 +29,6 @@ public class WatingGuilderListHandler implements Command {
     Study myStudy = studyDao.findByNo(inputNo);
 
     if (!myStudy.getWatingMember().isEmpty()) {
-
       for (Member m : myStudy.getWatingMember()) {
         System.out.println(m.getPerNickname());
       }
@@ -49,6 +48,7 @@ public class WatingGuilderListHandler implements Command {
         default: return;
       }
     }
+    System.out.println(" >> 승인 대기 중인 회원이 없습니다.");
   }
 
   // 승인

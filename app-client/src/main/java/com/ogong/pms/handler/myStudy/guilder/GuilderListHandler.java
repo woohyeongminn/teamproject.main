@@ -56,9 +56,9 @@ public class GuilderListHandler implements Command {
 
     int inputGuilerNo = Prompt.inputInt("선택> ");
     switch (inputGuilerNo) {
-      case 1: request.getRequestDispatcher("/myStudy/listGuilder").forward(request); return;
-      case 2: request.getRequestDispatcher("/myStudy/entrustGuilder").forward(request); return;
-      case 3: request.getRequestDispatcher("/myStudy/deleteGuilder").forward(request); return;
+      case 1: request.getRequestDispatcher("/myStudy/watingGuilderList").forward(request); return;
+      case 2: request.getRequestDispatcher("/myStudy/guilderEntrust").forward(request); return;
+      case 3: request.getRequestDispatcher("/myStudy/guilderDelete").forward(request); return;
       default: return;
     }
   }
