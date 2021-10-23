@@ -8,7 +8,6 @@ public class Study {
 
   private int studyNo; // 스터디 번호
   private String studyTitle; // 스터디명
-  private Member owner; // 작성자(조장)
   private int subjectNo; // 분야
   private String subjectName; // 분야
   private String area; // 지역
@@ -18,6 +17,7 @@ public class Study {
   private String introduction; // 소개글
   private Date registeredDate; // 스터디 가입일
   private int score; // 스터디 점수
+  private Member owner; // 작성자(조장)
   private List<Member> members = new ArrayList<>(); // 참여중인 구성원
   private List<Member> watingMember = new ArrayList<>(); // 참여승인을 기다리는 회원
   private int status; // 구성원 상태

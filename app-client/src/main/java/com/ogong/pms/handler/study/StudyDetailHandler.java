@@ -26,11 +26,16 @@ public class StudyDetailHandler implements Command {
 
     Study study = studyDao.findByNo(inputNo);
 
-    // if (study.getStudyTitle().contains("탈퇴")) {
-    // System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
-    // System.out.printf(" [%s]\n", study.getStudyTitle());
-    // return;
-    // }
+    try {
+      if (study.getStudyTitle().contains("탈퇴")) {
+        System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
+        System.out.printf(" [%s]\n", study.getStudyTitle());
+        return;
+      }
+    } catch (NullPointerException e) {
+      System.out.println(" >> 해당번호의 스터디가 없습니다.");
+      return;
+    }
 
     System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
     System.out.printf(" [%s]\n", study.getStudyTitle());

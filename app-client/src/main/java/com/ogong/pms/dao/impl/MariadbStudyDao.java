@@ -22,8 +22,8 @@ public class MariadbStudyDao implements StudyDao {
   public void insert(Study study) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement(
         "insert into study"
-            + "(name, subject_no, no_people, face_no, introduction, member_no)"
-            + " values(?, ?, ?, ?, ?, ?)",
+            + "(name, subject_no, no_people, face_no, introduction, area, member_no)"
+            + " values(?, ?, ?, ?, ?, ?, ?)",
             Statement.RETURN_GENERATED_KEYS)) {
 
       stmt.setString(1, study.getStudyTitle());
@@ -31,47 +31,11 @@ public class MariadbStudyDao implements StudyDao {
       stmt.setInt(3, study.getNumberOfPeple());
       stmt.setInt(4, study.getFaceNo());
       stmt.setString(5, study.getIntroduction());
-      stmt.setInt(6, study.getOwner().getPerNo());
+      stmt.setString(6, study.getArea());
+      stmt.setInt(7, study.getOwner().getPerNo());
 
       if (stmt.executeUpdate() == 0) {
         throw new Exception("스터디 데이터 저장 실패!");
-      }
-
-      // 스터디 테이블의 PK 값 꺼내기
-      int studyNo = 0;
-      try (ResultSet pk = stmt.getGeneratedKeys()) {
-        if (pk.next()) {
-          studyNo = pk.getInt("study_no");
-        }
-      }
-
-      try (PreparedStatement stmt2 = con.prepareStatement(
-          "insert into study_location(name) values(?)",
-          Statement.RETURN_GENERATED_KEYS)) {
-
-        stmt2.setString(1, study.getArea());
-
-        if (stmt2.executeUpdate() == 0) {
-          throw new Exception("스터디 지역 데이터 저장 실패!");
-        }
-
-        // 지역테이블의 PK 값 꺼내기
-        int areaNo = 0;
-        try (ResultSet pk = stmt2.getGeneratedKeys()) {
-          if (pk.next()) {
-            areaNo = pk.getInt("location_no");
-          }
-        }
-
-        // study_multiple_location 테이블에 추가하기
-        try (PreparedStatement stmt3 =
-            con.prepareStatement(
-                "insert into study_multiple_location(study_no, location_no) values(?,?)")) {
-
-          stmt3.setInt(1, studyNo);
-          stmt3.setInt(2, areaNo);
-          stmt3.executeUpdate();
-        }
       }
     }
   }
@@ -200,8 +164,7 @@ public class MariadbStudyDao implements StudyDao {
             + " s.no_people,"
             + " sfs.name face_name,"
             + " sfs.face_no face_no,"
-            + " sl.name area_name,"
-            + " sl.location_no area_no,"
+            + " s.area area,"
             + " s.introduction,"
             + " s.created_dt,"
             + " s.member_no owner_no,"
@@ -218,8 +181,6 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join member m on s.member_no=m.member_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
-            + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
-            + " left outer join study_location sl on sml.location_no=sl.location_no"
             + " left outer join study_bookmark sb on sb.study_no=s.study_no");
         ResultSet rs = stmt.executeQuery()) {
 
@@ -233,7 +194,7 @@ public class MariadbStudyDao implements StudyDao {
           study.setStudyNo(rs.getInt("study_no"));
           study.setStudyTitle(rs.getString("name"));
           study.setSubjectName(rs.getString("subject_name"));
-          study.setArea(rs.getString("area_name"));
+          study.setArea(rs.getString("area"));
           study.setSubjectNo(rs.getInt("subject_no"));
           study.setNumberOfPeple(rs.getInt("no_people"));
           study.setFaceName(rs.getString("face_name"));
@@ -283,7 +244,7 @@ public class MariadbStudyDao implements StudyDao {
             + " s.no_people,"
             + " sfs.name face_name,"
             + " sfs.face_no face_no,"
-            + " sl.name area_name,"
+            + " s.area area,"
             + " s.introduction,"
             + " s.created_dt,"
             + " s.member_no owner_no,"
@@ -300,8 +261,6 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join member m on s.member_no=m.member_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
-            + " left outer join study_multiple_location sml on sml.study_no=s.study_no"
-            + " left outer join study_location sl on sml.location_no=sl.location_no"
             + " left outer join study_bookmark sb on sb.study_no=s.study_no"
             + " where s.study_no=" + studyinputNo);
         ResultSet rs = stmt.executeQuery()) {
@@ -313,7 +272,7 @@ public class MariadbStudyDao implements StudyDao {
           study.setStudyNo(rs.getInt("study_no"));
           study.setStudyTitle(rs.getString("name"));
           study.setSubjectName(rs.getString("subject_name"));
-          study.setArea(rs.getString("area_name"));
+          study.setArea(rs.getString("area"));
           study.setSubjectNo(rs.getInt("subject_no"));
           study.setNumberOfPeple(rs.getInt("no_people"));
           study.setFaceName(rs.getString("face_name"));
