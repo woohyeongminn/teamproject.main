@@ -24,20 +24,27 @@ public class MemberFindIdPwHandler implements Command {
     System.out.println("1. 이메일 찾기");
     System.out.println("2. 비밀번호 찾기");
     int selectNo = Prompt.inputInt("선택> ");
+
     switch (selectNo) {
-      case 1 : wantPerEmail(); break;
-      case 2 : wantByPerPw(); break;
-      default : return;
+      case 1:
+        wantPerEmail();
+        break;
+
+      case 2:
+        wantByPerPw();
+        break;
+
+      default:
+        return;
     }
   }
-
 
   public void wantPerEmail() throws Exception {
     System.out.println();
     System.out.println("▶ 이메일 찾기\n");
 
     while (true) {
-      String inputName =  Prompt.inputString(" 이름 : ");
+      String inputName = Prompt.inputString(" 이름 : ");
 
       if (inputName.equals("")) {
         return;
@@ -46,7 +53,7 @@ public class MemberFindIdPwHandler implements Command {
       Member member = memberDao.findByName(inputName);
 
       if (member != null) {
-        String inputTel =  Prompt.inputString(" 전화번호 : ");
+        String inputTel = Prompt.inputString(" 전화번호 : ");
         if (member.getPerTel().equals(inputTel)) {
           System.out.println();
           System.out.printf(" '%s님'의 이메일 >> ", member.getPerName());
@@ -65,43 +72,92 @@ public class MemberFindIdPwHandler implements Command {
       if (!input.equalsIgnoreCase("네")) {
         System.out.println(" >> 찾기를 종료합니다.");
         return;
-      } 
+      }
       wantByPerPw();
       break;
     }
   }
-  //--------------------------------------------------------------------------------------------
+
+  // --------------------------------------------------------------------------------------------
+
   public void wantByPerPw() throws Exception {
     System.out.println();
-    System.out.println("▶ 임시 비밀번호 발급\n");
+    System.out.println("▶ 임시 비밀번호 발급");
 
     SendMail sendMail = new SendMail();
 
     while (true) {
-      String inputName =  Prompt.inputString(" 이름 : ");
-      Member member = memberDao.findByName(inputName);
+      System.out.println();
+      System.out.println("1. 이메일");
+      System.out.println("2. 전화번호");
+      System.out.println("0. 이전");
+      int selectNo = Prompt.inputInt("선택> ");
 
-      String inputEmail =  Prompt.inputString(" 이메일 : ");
-      member = memberDao.findByEmail(inputEmail);
+      switch (selectNo) {
+        case 1:
+          System.out.println();
+          String inputName = Prompt.inputString(" 이름 : ");
+          Member memberName = memberDao.findByName(inputName);
+          String inputEmail = Prompt.inputString(" 이메일 : ");
+          Member memberEmail = memberDao.findByEmail(inputEmail);
 
-      if (member != null) {
-        String pw = randomPw.randomPw();
+          if (memberName != null && memberEmail != null) {
+            String pw = randomPw.randomPw();
 
-        member.setPerPassword(pw);
-        System.out.println(" >> 처리 중입니다. 잠시만 기다려 주세요.");
-        System.out.println();
+            memberEmail.setPerPassword(pw);
+            System.out.println(" >> 처리 중입니다. 잠시만 기다려 주세요.\n");
 
-        sendMail.sendMail(inputEmail, pw);
-        System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", member.getPerNickname());
-        System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
+            sendMail.sendMail(inputEmail, pw);
+            System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", memberEmail.getPerNickname());
+            System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
 
-        memberDao.updatePassword(member);
-        return;
+            memberDao.updatePassword(memberEmail);
+            return;
 
-      } else {
-        System.out.println(" >> 해당 이메일이 존재하지 않습니다.");
-        continue;
+          } else {
+            System.out.println(" >> 해당 이메일이 존재하지 않습니다.");
+            continue;
+          }
+
+        case 2:
+          System.out.println();
+          inputName = Prompt.inputString(" 이름 : ");
+          memberName = memberDao.findByName(inputName);
+          String inputTel = Prompt.inputString(" 전화번호 : ");
+          Member memberTel = memberDao.findByTel(inputTel);
+          // SMS API 적용 후 삭제
+          inputEmail = Prompt.inputString(" 이메일 : ");
+          memberEmail = memberDao.findByEmail(inputEmail);
+
+          if (memberName != null && memberTel != null && memberEmail != null) {
+            String pw = randomPw.randomPw();
+
+            memberTel.setPerPassword(pw);
+            System.out.println(" >> 처리 중입니다. 잠시만 기다려 주세요.");
+            System.out.println();
+
+            // SMS API 적용 후 변경
+            sendMail.sendMail(inputEmail, pw);
+            System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", memberTel.getPerNickname());
+            System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
+
+            memberDao.updatePassword(memberTel);
+            return;
+
+          } else {
+            System.out.println(" >> 해당 전화번호가 존재하지 않습니다.");
+            continue;
+          }
+
+        case 0:
+          return;
+
+        default:
+          System.out.println(" >> 번호를 다시 선택해 주세요.");
+          continue;
       }
     }
   }
+
+  // public void sendPerPw(String input) throws Exception {}
 }
