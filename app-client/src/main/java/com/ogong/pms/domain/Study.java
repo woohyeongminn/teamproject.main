@@ -20,18 +20,18 @@ public class Study {
   private Member owner;         // 작성자(조장)
   private int status;           // 구성원 상태
 
-  private int CountMember;      // 참여중인 구성원 수
+  private int watingCountMember;                            // 승인대기중인 구성원 수
   private List<Member> watingMember = new ArrayList<>();    // 승인대기중
+
+  private int CountMember;                                  // 참여중인 구성원 수
   private List<Member> members = new ArrayList<>();         // 참여중
 
-  private int CountBookMember;  // 북마크 수
+  private int CountBookMember;                              // 북마크 수
   private List<Member> bookMarkMember = new ArrayList<>();  // 북마크한 회원
 
   private List<Calender> myStudyCalender = new ArrayList<>(); // 내 스터디 캘린더
   private List<FreeBoard> myStudyFreeBoard = new ArrayList<>(); // 내 스터디 자유 게시판
   private List<ToDo> myStudyToDo = new ArrayList<>(); // 내 스터디 투두리스트
-
-
 
   @Override
   public String toString() {
@@ -39,10 +39,11 @@ public class Study {
         + ", subjectName=" + subjectName + ", area=" + area + ", numberOfPeple=" + numberOfPeple
         + ", faceNo=" + faceNo + ", faceName=" + faceName + ", introduction=" + introduction
         + ", registeredDate=" + registeredDate + ", score=" + score + ", owner=" + owner
-        + ", status=" + status + ", CountMember=" + CountMember + ", watingMember=" + watingMember
-        + ", members=" + members + ", CountBookMember=" + CountBookMember + ", bookMarkMember="
-        + bookMarkMember + ", myStudyCalender=" + myStudyCalender + ", myStudyFreeBoard="
-        + myStudyFreeBoard + ", myStudyToDo=" + myStudyToDo + "]";
+        + ", status=" + status + ", watingCountMember=" + watingCountMember + ", watingMember="
+        + watingMember + ", CountMember=" + CountMember + ", members=" + members
+        + ", CountBookMember=" + CountBookMember + ", bookMarkMember=" + bookMarkMember
+        + ", myStudyCalender=" + myStudyCalender + ", myStudyFreeBoard=" + myStudyFreeBoard
+        + ", myStudyToDo=" + myStudyToDo + "]";
   }
 
   public int getStatus() {
@@ -239,5 +240,13 @@ public class Study {
 
   public void setCountBookMember(int countBookMember) {
     CountBookMember = countBookMember;
+  }
+
+  public int getWatingCountMember() {
+    return watingCountMember;
+  }
+
+  public void setWatingCountMember(int watingCountMember) {
+    this.watingCountMember = watingCountMember;
   }
 }

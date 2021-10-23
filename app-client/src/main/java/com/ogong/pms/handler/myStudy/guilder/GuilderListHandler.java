@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.myStudy.guilder;
 
+import java.util.List;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Study;
@@ -27,8 +28,16 @@ public class GuilderListHandler implements Command {
 
     Study myStudy = studyDao.findByNo(inputNo);
 
-    Guilder guilder = new Guilder();
-    //studyDao.findByGuilderNo();
+    // 해당 스터디에 구성원 목록 가져오기
+    List<Guilder> guilderList = studyDao.findByGuilderAll(myStudy.getStudyNo());
+    for (Guilder guilder : guilderList) {
+      if (guilder.getGuilderStatus() == 2) {
+        myStudy.getMembers().add(guilder.getMember());
+
+      } else if (guilder.getGuilderStatus() == 1) {
+        myStudy.getWatingMember().add(guilder.getMember());
+      }
+    }
 
     System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , myStudy.getMembers().size() + 1,
         myStudy.getNumberOfPeple());

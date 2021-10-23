@@ -104,6 +104,7 @@ public class MariadbStudyDao implements StudyDao {
             + "s.member_no owner_no,"
             + "m.nickname owner_name,"
             + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
+            + "(select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,"
             + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
@@ -136,6 +137,7 @@ public class MariadbStudyDao implements StudyDao {
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
           study.setCountMember(rs.getInt("count_guilder"));
+          study.setWatingCountMember(rs.getInt("count_wating_guilder"));
           study.setCountBookMember(rs.getInt("count_bookmark"));
 
           Member member = new Member();
@@ -269,6 +271,7 @@ public class MariadbStudyDao implements StudyDao {
             + "s.member_no owner_no,"
             + "m.nickname owner_name,"
             + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
+            + "(select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,"
             + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
@@ -300,6 +303,7 @@ public class MariadbStudyDao implements StudyDao {
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
           study.setCountMember(rs.getInt("count_guilder"));
+          study.setWatingCountMember(rs.getInt("count_wating_guilder"));
           study.setCountBookMember(rs.getInt("count_bookmark"));
 
           Member member = new Member();
@@ -439,6 +443,7 @@ public class MariadbStudyDao implements StudyDao {
             + "s.member_no owner_no,"
             + "m.nickname owner_name,"
             + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
+            + "(select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,"
             + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
             + " from study s"
             + " left outer join study_subject ss on s.subject_no=ss.subject_no"
@@ -473,6 +478,7 @@ public class MariadbStudyDao implements StudyDao {
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
           study.setCountMember(rs.getInt("count_guilder"));
+          study.setWatingCountMember(rs.getInt("count_wating_guilder"));
           study.setCountBookMember(rs.getInt("count_bookmark"));
 
           Member member = new Member();
@@ -585,18 +591,57 @@ public class MariadbStudyDao implements StudyDao {
 
   // ------------------------- [ 구성원 ] -----------------------------------
 
-  // 구성원 조회
+
+  //해당 스터디의 구성원 목록
   @Override
-  public List<Guilder> findByGuilderNo(int memberNo) throws Exception {
+  public List<Guilder> findByGuilderAll(int studyNo) throws Exception {
     try (PreparedStatement stmt = con.prepareStatement
         ("select"
             + " sg.study_no,"
-            + " sg.status guilder_status"
+            + " sg.status guilder_status,"
             + " sg.member_no,"
             + " m.name,"
-            + " m.nickname,"
+            + " m.nickname"
             + " from"
-            + " study_guiler sg" 
+            + " study_guilder sg" 
+            + " join"
+            + " member m on m.member_no=sg.member_no"
+            + " where sg.study_no=" + studyNo);
+        ResultSet rs = stmt.executeQuery()) {
+
+      List<Guilder> guilderList = new ArrayList<>();
+
+      while (rs.next()) {
+        Guilder guilder = new Guilder();
+        guilder.setStudyNo(rs.getInt("study_no"));
+        guilder.setGuilderStatus(rs.getInt("guilder_status"));
+
+        Member member = new Member();
+        member.setPerNo(rs.getInt("member_no"));
+        member.setPerName(rs.getString("name"));
+        member.setPerNickname(rs.getString("nickname"));
+
+        guilder.setMember(member);
+
+        guilderList.add(guilder);
+
+      }
+      return guilderList;
+    }
+  }
+
+  // 내가 들어가있는 스터디 목록
+  @Override
+  public List<Guilder> findByGuilderMyAll(int memberNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement
+        ("select"
+            + " sg.study_no,"
+            + " sg.status guilder_status,"
+            + " sg.member_no,"
+            + " m.name,"
+            + " m.nickname"
+            + " from"
+            + " study_guilder sg" 
             + " join"
             + " member m on m.member_no=sg.member_no"
             + " where sg.member_no=" + memberNo);
@@ -620,6 +665,45 @@ public class MariadbStudyDao implements StudyDao {
 
       }
       return guilderList;
+    }
+  }
+
+  // 내가 어떤 스터디에 들어가 있는지 상세
+  @Override
+  public Guilder findByGuilderMyNo(int studyNo, int memberNo) throws Exception {
+    try (PreparedStatement stmt = con.prepareStatement
+        ("select"
+            + " sg.study_no,"
+            + " sg.status guilder_status,"
+            + " sg.member_no,"
+            + " m.name,"
+            + " m.nickname"
+            + " from"
+            + " study_guilder sg" 
+            + " join"
+            + " member m on m.member_no=sg.member_no"
+            + " where sg.member_no=? and sg.study_no=?")) {
+
+      stmt.setInt(1, memberNo);
+      stmt.setInt(2, studyNo);
+      ResultSet rs = stmt.executeQuery();
+
+      if (!rs.next()) {
+        return null;
+      }
+
+      Guilder guilder = new Guilder();
+      guilder.setStudyNo(rs.getInt("study_no"));
+      guilder.setGuilderStatus(rs.getInt("guilder_status"));
+
+      Member member = new Member();
+      member.setPerNo(rs.getInt("member_no"));
+      member.setPerName(rs.getString("name"));
+      member.setPerNickname(rs.getString("nickname"));
+
+      guilder.setMember(member);
+
+      return guilder;
     }
   }
 

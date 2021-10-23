@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy;
 
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -50,43 +51,44 @@ public class MyStudyDetailHandler implements Command {
       return;
     }
 
-    for (Member m : myStudy.getWatingMember()) {
-      if (m.getPerNo() == member.getPerNo()) {
-        System.out.println("\n----------------------");
-        System.out.println("[승인 대기중인 스터디입니다.]");
-        return;
+    Guilder guilder = studyDao.findByGuilderMyNo(studyNo, member.getPerNo());
+
+    if (guilder != null && (guilder.getGuilderStatus() == 1)) {
+      System.out.println("\n---------------------------");
+      System.out.println("[승인 대기중인 스터디입니다.]");
+      return;
+    }
+
+    if (myStudy.getOwner().getPerNo() == member.getPerNo() || (guilder != null && guilder.getGuilderStatus() == 2)) {
+      System.out.println("\n----------------------");
+      System.out.println("1. 구성원");
+      System.out.println("2. 캘린더");
+      System.out.println("3. To-do");
+      System.out.println("4. 자유게시판");
+      System.out.println("5. 화상미팅");
+      System.out.println("6. 탈퇴하기");  
+
+      if (s.getOwner().getPerNickname().equals(
+          AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
+        System.out.println("7. 스터디 수정");
+        System.out.println("8. 스터디 삭제");
       }
-    }
+      System.out.println("0. 뒤로 가기");
 
-    System.out.println("\n----------------------");
-    System.out.println("1. 구성원");
-    System.out.println("2. 캘린더");
-    System.out.println("3. To-do");
-    System.out.println("4. 자유게시판");
-    System.out.println("5. 화상미팅");
-    System.out.println("6. 탈퇴하기");  
+      request.setAttribute("inputNo", s.getStudyNo());
 
-
-    if (s.getOwner().getPerNickname().equals(
-        AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
-      System.out.println("7. 스터디 수정");
-      System.out.println("8. 스터디 삭제");
-    }
-    System.out.println("0. 뒤로 가기");
-
-    request.setAttribute("inputNo", s.getStudyNo());
-
-    int selectNo = Prompt.inputInt("선택> "); 
-    switch (selectNo) {
-      case 1: request.getRequestDispatcher("/myStudy/guilder").forward(request); return;
-      case 2: request.getRequestDispatcher("/myStudy/calenderList").forward(request); return;
-      case 3: request.getRequestDispatcher("/myStudy/todoList").forward(request); break;
-      case 4: request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
-      case 5: request.getRequestDispatcher("/myStudy/chat").forward(request); return;
-      case 6: request.getRequestDispatcher("/myStudy/exit").forward(request); return;  
-      case 7: request.getRequestDispatcher("/myStudy/update").forward(request); return;
-      case 8: request.getRequestDispatcher("/myStudy/delete").forward(request); return;
-      default : return;
+      int selectNo = Prompt.inputInt("선택> "); 
+      switch (selectNo) {
+        case 1: request.getRequestDispatcher("/myStudy/guilder").forward(request); return;
+        case 2: request.getRequestDispatcher("/myStudy/calenderList").forward(request); return;
+        case 3: request.getRequestDispatcher("/myStudy/todoList").forward(request); break;
+        case 4: request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
+        case 5: request.getRequestDispatcher("/myStudy/chat").forward(request); return;
+        case 6: request.getRequestDispatcher("/myStudy/exit").forward(request); return;  
+        case 7: request.getRequestDispatcher("/myStudy/update").forward(request); return;
+        case 8: request.getRequestDispatcher("/myStudy/delete").forward(request); return;
+        default : return;
+      }
     }
   }
 }

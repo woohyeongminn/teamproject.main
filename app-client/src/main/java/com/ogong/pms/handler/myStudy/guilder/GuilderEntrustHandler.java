@@ -2,6 +2,7 @@ package com.ogong.pms.handler.myStudy.guilder;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -30,16 +31,28 @@ public class GuilderEntrustHandler implements Command {
 
     Study myStudy = studyDao.findByNo(inputNo);
 
+    // 해당 스터디에 구성원 목록 가져오기
+    List<Guilder> guilderList = studyDao.findByGuilderAll(myStudy.getStudyNo());
+    for (Guilder guilder : guilderList) {
+      if (guilder.getGuilderStatus() == 2) {
+        myStudy.getMembers().add(guilder.getMember());
+
+      } else if (guilder.getGuilderStatus() == 1) {
+        myStudy.getWatingMember().add(guilder.getMember());
+      }
+    }
+
     List<Member> guilders = myStudy.getMembers();
 
-    if (myStudy.getMembers().isEmpty()) {
+    if (guilders.isEmpty()) {
       System.out.println(" >> 해당 스터디 구성원이 없습니다.");
       return;
     }
 
-    for (int i = 0; i < myStudy.getMembers().size(); i++) {
-      System.out.println(" 구성원 : " + myStudy.getMembers().get(i).getPerNickname());
+    for (int i = 0; i < guilders.size(); i++) {
+      System.out.println(" 구성원 : " + guilders.get(i).getPerNickname());
     }
+
     System.out.println("----------------------");
     System.out.println();
 
@@ -80,12 +93,11 @@ public class GuilderEntrustHandler implements Command {
           System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
           return;
         }
-        // 조장 위임 후 기존 길더는 길더에서 삭제되고 조장자리로 들어간다. 
-        // 조장은 길더에 추가되고 바로 승인이 된다.
-        studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
-        studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
-        studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());
-        studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());
+
+        studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());    // 구성원에서 삭제
+        studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());      // 조장 바꿔주고
+        studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());            // 기존 조장을 구성원에 넣고
+        studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());            // 승인여부를 승인으로 바로 바꿔준다
         System.out.println();
         System.out.println(" >> 구성원이 되었습니다.");
       }

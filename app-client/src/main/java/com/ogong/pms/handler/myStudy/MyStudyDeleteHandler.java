@@ -30,15 +30,16 @@ public class MyStudyDeleteHandler implements Command {
       return;
     }
 
+    // 참여중인 구성원이 있을 때
     if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
-        myStudy.getMembers().size() > 0) {
+        myStudy.getCountMember() > 0) {
       System.out.println(" >> 구성원이 있는 스터디는 삭제할 수 없습니다.");
       return;
     }
 
     // 승인 대기중인 구성원이 있을때
     if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
-        myStudy.getWatingMember().size() > 0) {
+        myStudy.getWatingCountMember() > 0) {
 
       System.out.println(" >> 승인 대기 중인 구성원이 없어야 스터디 삭제가 가능합니다.");
       String input = Prompt.inputString(" 승인 대기 중인 구성원을 모두 거절하시겠습니까? (네 / 아니오) ");

@@ -26,42 +26,72 @@ public class MyStudyExitHandler implements Command {
     Member member = AuthPerMemberLoginHandler.getLoginUser();
     Study myStudy = studyDao.findByNo(inputNo);
 
+    // 내가 조장일 때
     if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
-        myStudy.getMembers().size() > 0) {
+        myStudy.getCountMember() > 0) {
       System.out.println(" >> 구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.");
       return;
-    }
 
-    int count = 0;
-    for (Member m : myStudy.getMembers()) {
-      if (m.getPerNo() == 
-          AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
-        count++;
-      }
-    }
+      // 승인 대기중인 구성원이 있을때 (필요한가,,,,,,,,,,?)
+    } else if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
+        myStudy.getWatingCountMember() > 0) {
+      System.out.println(" >> 승인 대기 중인 구성원이 없어야 스터디 탈퇴가 가능합니다.");
+      return;
 
-    if (count != 0) {
-      String input = Prompt.inputString(" 정말 탈퇴하시겠습니까?(네 / 아니오)");
-      if (!input.equals("네")) {
-        System.out.println(" >> 탈퇴를 취소하였습니다.");
-        return;
-      }
-      studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
-      System.out.println(" >> 탈퇴되었습니다.");
-    }
-    else if (myStudy.getOwner().getPerNo() == member.getPerNo() && 
-        myStudy.getMembers().size() == 0) {
+    } else if (myStudy.getOwner().getPerNo() == member.getPerNo() && 
+        myStudy.getCountMember() == 0) {
 
-      String input = Prompt.inputString(" 정말 탈퇴하시겠습니까?(네 / 아니오)");
+      String input = Prompt.inputString(" 정말 탈퇴하시겠습니까?(네 / 아니오) ");
       if (!input.equals("네")) {
         System.out.println(" >> 탈퇴를 취소하였습니다.");
         return;
       }
 
       studyDao.delete(myStudy.getStudyNo(), member.getPerNo());
-
       System.out.println(" >> 스터디가 삭제 되었습니다.");
+      return;
     }
-  }
 
+    // 구성원일 때
+    String input = Prompt.inputString(" 정말 탈퇴하시겠습니까?(네 / 아니오) ");
+    if (!input.equals("네")) {
+      System.out.println(" >> 탈퇴를 취소하였습니다.");
+      return;
+    }
+    studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
+    System.out.println(" >> 탈퇴되었습니다.");
+  }
 }
+
+
+//int count = 0;
+//for (Member m : myStudy.getMembers()) {
+//  if (m.getPerNo() == 
+//      AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
+//    count++;
+//  }
+//}
+//
+//if (count != 0) {
+//  String input = Prompt.inputString(" 정말 탈퇴하시겠습니까?(네 / 아니오)");
+//  if (!input.equals("네")) {
+//    System.out.println(" >> 탈퇴를 취소하였습니다.");
+//    return;
+//  }
+//  studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
+//  System.out.println(" >> 탈퇴되었습니다.");
+//}
+//else if (myStudy.getOwner().getPerNo() == member.getPerNo() && 
+//    myStudy.getMembers().size() == 0) {
+//
+//  String input = Prompt.inputString(" 정말 탈퇴하시겠습니까?(네 / 아니오)");
+//  if (!input.equals("네")) {
+//    System.out.println(" >> 탈퇴를 취소하였습니다.");
+//    return;
+//  }
+//
+//  studyDao.delete(myStudy.getStudyNo(), member.getPerNo());
+//
+//  System.out.println(" >> 스터디가 삭제 되었습니다.");
+//}
+//}

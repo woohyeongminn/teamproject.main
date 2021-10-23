@@ -19,7 +19,11 @@ public interface StudyDao {
   Study findByMyNo(int studyNo, int memberNo) throws Exception;
 
   //--------------- [ 구성원 ] ----------------------------------------
-  List<Guilder> findByGuilderNo(int memberNo) throws Exception;
+  List<Guilder> findByGuilderAll(int studyNo) throws Exception;
+
+  List<Guilder> findByGuilderMyAll(int memberNo) throws Exception;
+  Guilder findByGuilderMyNo(int studyNo, int memberNo) throws Exception;
+
   void insertGuilder(int studyNo, int memberNo) throws Exception;
   void updateOwner(int studyNo, int memberNo) throws Exception;
   void updateGuilder(int studyNo, int memberNo) throws Exception;

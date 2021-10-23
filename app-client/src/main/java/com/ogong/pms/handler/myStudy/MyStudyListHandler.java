@@ -2,6 +2,7 @@ package com.ogong.pms.handler.myStudy;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -29,6 +30,7 @@ public class MyStudyListHandler implements Command {
     }
 
     List<Study> studyList = studyDao.findAll();
+    List<Guilder> guilderList = studyDao.findByGuilderMyAll(member.getPerNo());
 
     System.out.println(" ************** 내 스터디 ************** \n");
 
@@ -48,15 +50,32 @@ public class MyStudyListHandler implements Command {
       System.out.println();
     }
 
+    // 구성원일때 / 수정 전
+    //    int joinCount = 0;
+    //    System.out.println(" | 👥 구성원 | ");
+    //    for (int i = 0; i < studyList.size(); i++) {
+    //      for (Member mem : studyList.get(i).getMembers()) {
+    //        if (mem.getPerNo() == member.getPerNo()) {
+    //          System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
+    //          System.out.println();
+    //          joinCount++;
+    //        }
+    //      }
+    //    }
+
+
     // 구성원일때
     int joinCount = 0;
     System.out.println(" | 👥 구성원 | ");
     for (int i = 0; i < studyList.size(); i++) {
-      for (Member mem : studyList.get(i).getMembers()) {
-        if (mem.getPerNo() == member.getPerNo()) {
-          System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
-          System.out.println();
-          joinCount++;
+      for (int j = 0; j < guilderList.size(); j++) {
+        if (studyList.get(i).getStudyNo() == guilderList.get(j).getStudyNo()) {
+          if (guilderList.get(j).getGuilderStatus() == 2) {
+            studyList.get(i).getMembers().add(guilderList.get(j).getMember());
+            System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
+            System.out.println();
+            joinCount++;
+          }
         }
       }
     }
@@ -69,14 +88,29 @@ public class MyStudyListHandler implements Command {
     // 승인 대기 중----------------------------------------------------------------------- 
     System.out.println(" ************** 승인 대기 중 ************** \n");
 
+    // 수정 전
+    //    int waitCount = 0;
+    //    for (int i = 0; i < studyList.size(); i++) {
+    //      for (Member mem : studyList.get(i).getWatingMember()) {
+    //        if (mem.getPerNo() == member.getPerNo()) {
+    //          System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(),
+    //              studyList.get(i).getStudyTitle());
+    //          System.out.println();
+    //          waitCount++;
+    //        }
+    //      }
+    //    }
+
     int waitCount = 0;
     for (int i = 0; i < studyList.size(); i++) {
-      for (Member mem : studyList.get(i).getWatingMember()) {
-        if (mem.getPerNo() == member.getPerNo()) {
-          System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(),
-              studyList.get(i).getStudyTitle());
-          System.out.println();
-          waitCount++;
+      for (int j = 0; j < guilderList.size(); j++) {
+        if (studyList.get(i).getStudyNo() == guilderList.get(j).getStudyNo()) {
+          if (guilderList.get(j).getGuilderStatus() == 1) {
+            studyList.get(i).getWatingMember().add(guilderList.get(j).getMember());
+            System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
+            System.out.println();
+            waitCount++;
+          }
         }
       }
     }
