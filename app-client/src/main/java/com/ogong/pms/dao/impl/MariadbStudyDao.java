@@ -106,7 +106,8 @@ public class MariadbStudyDao implements StudyDao {
             + " left outer join member m on s.member_no=m.member_no"
             + " left outer join study_guilder sg on s.study_no=sg.study_no"
             + " left outer join member m2 on sg.member_no=m2.member_no"
-            + " left outer join study_bookmark sb on s.study_no=sb.study_no");
+            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
+            + " order by s.study_no");
         ResultSet rs = stmt.executeQuery()) {
 
       ArrayList<Study> list = new ArrayList<>();
@@ -114,6 +115,7 @@ public class MariadbStudyDao implements StudyDao {
       int studyNo=0;
       Study study = null;
       int guilderNo = 0;
+      int bookmark = 0;
 
       while (rs.next()) {
         if (studyNo != rs.getInt("study_no")) {
@@ -136,6 +138,8 @@ public class MariadbStudyDao implements StudyDao {
           study.setOwner(member);
           studyNo = study.getStudyNo();
           list.add(study);
+          guilderNo = 0;
+          bookmark = 0;
         }
 
         // 구성원
@@ -156,13 +160,16 @@ public class MariadbStudyDao implements StudyDao {
             study.getMembers().add(guilder);
             guilderNo = guilder.getPerNo();
           }
+          bookmark++;
         }
 
         // 북마크
-        if (rs.getInt("book_member_no") != 0) {
-          Member bookMember = new Member();
-          bookMember.setPerNo(rs.getInt("book_member_no"));
-          study.getBookMarkMember().add(bookMember);
+        if (bookmark == 0 || bookmark == 1) {
+          if (rs.getInt("book_member_no") != 0) {
+            Member bookMember = new Member();
+            bookMember.setPerNo(rs.getInt("book_member_no"));
+            study.getBookMarkMember().add(bookMember);
+          }
         }
       }
       return list;
@@ -205,6 +212,7 @@ public class MariadbStudyDao implements StudyDao {
 
       Study study = null;
       int guilderNo = 0;
+      int bookmark = 0;
 
       while (rs.next()) {
         if (study == null) {
@@ -225,6 +233,8 @@ public class MariadbStudyDao implements StudyDao {
           member.setPerNo(rs.getInt("owner_no"));
           member.setPerNickname(rs.getString("owner_name"));
           study.setOwner(member);
+          guilderNo = 0;
+          bookmark = 0;
         }
 
         // 구성원
@@ -245,13 +255,16 @@ public class MariadbStudyDao implements StudyDao {
             study.getMembers().add(guilder);
             guilderNo = guilder.getPerNo();
           }
+          bookmark++;
         }
 
         // 북마크
-        if (rs.getInt("book_member_no") != 0) {
-          Member bookMember = new Member();
-          bookMember.setPerNo(rs.getInt("book_member_no"));
-          study.getBookMarkMember().add(bookMember);
+        if (bookmark == 0 || bookmark == 1) {
+          if (rs.getInt("book_member_no") != 0) {
+            Member bookMember = new Member();
+            bookMember.setPerNo(rs.getInt("book_member_no"));
+            study.getBookMarkMember().add(bookMember);
+          }
         }
       }
       return study;
@@ -301,6 +314,7 @@ public class MariadbStudyDao implements StudyDao {
 
       Study study = null;
       int guilderNo = 0;
+      int bookmark = 0;
 
       while (rs.next()) {
         if (study == null) {
@@ -321,6 +335,8 @@ public class MariadbStudyDao implements StudyDao {
           member.setPerNo(rs.getInt("owner_no"));
           member.setPerNickname(rs.getString("owner_name"));
           study.setOwner(member);
+          guilderNo = 0;
+          bookmark = 0;
         }
 
         // 구성원
@@ -341,13 +357,16 @@ public class MariadbStudyDao implements StudyDao {
             study.getMembers().add(guilder);
             guilderNo = guilder.getPerNo();
           }
+          bookmark++;
         }
 
         // 북마크
-        if (rs.getInt("book_member_no") != 0) {
-          Member bookMember = new Member();
-          bookMember.setPerNo(rs.getInt("book_member_no"));
-          study.getBookMarkMember().add(bookMember);
+        if (bookmark == 0 || bookmark == 1) {
+          if (rs.getInt("book_member_no") != 0) {
+            Member bookMember = new Member();
+            bookMember.setPerNo(rs.getInt("book_member_no"));
+            study.getBookMarkMember().add(bookMember);
+          }
         }
       }
       return study;
