@@ -21,9 +21,7 @@ public class StudyBookMarkDetailHandler implements Command {
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
-    System.out.println("▶ 내 북마크 - 스터디 상세");
-    System.out.println();
-
+    System.out.println("▶ 내 북마크 - 스터디 상세\n");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
@@ -36,25 +34,28 @@ public class StudyBookMarkDetailHandler implements Command {
         if (member.getPerNo() == bookMarkMember.getPerNo()) {
           myBookMarkStudyList.add(study);
         }
-        break;
       }
     }
 
     int inputNo;
+    int count = 0;
     LOOP : while (true) {
       try {
-        System.out.println();
         inputNo = Prompt.inputInt(" 번호 : ");
       } catch(NumberFormatException e) {
         return;
       }
 
-      for (Study myBookMarkStudy : myBookMarkStudyList) {
-        if(myBookMarkStudy.getStudyNo() != inputNo) {
-          System.out.println(" >> 내가 북마크한 스터디 번호를 입력하세요. / 종료(엔터)");
-          continue LOOP;
-        }
-        break;
+      for (Study studyNo : myBookMarkStudyList) {
+        if(studyNo.getStudyNo() == inputNo) {
+          count++;
+          break;
+        } 
+      }
+
+      if (count == 0) {
+        System.out.println(" >> 내가 북마크한 스터디 번호를 입력하세요. / 종료(엔터)\n");
+        continue LOOP;
       }
       break;
     }

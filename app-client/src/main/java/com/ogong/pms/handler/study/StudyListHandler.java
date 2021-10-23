@@ -36,7 +36,7 @@ public class StudyListHandler implements Command {
 
       else {
         System.out.printf(
-            " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명 ",
+            " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
             study.getStudyNo(),
             study.getBookMarkMember().size(),
             study.getStudyTitle(),

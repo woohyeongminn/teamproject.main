@@ -41,7 +41,7 @@ public class StudyBookMarkDeleteHandler implements Command {
       }
     }
 
-    studyDao.update(myStudy);
+    studyDao.deleteBookmark(myStudy.getStudyNo(), member.getPerNo());
     System.out.println(" >> 스터디가 북마크 목록에서 삭제 되었습니다.");
   }
 }

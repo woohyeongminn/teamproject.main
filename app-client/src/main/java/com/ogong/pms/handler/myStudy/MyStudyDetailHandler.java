@@ -29,17 +29,10 @@ public class MyStudyDetailHandler implements Command {
 
     Study s = new Study();
 
-    Study myStudy = studyDao.findByNo(studyNo);
+    Study myStudy = studyDao.findMyStudy(studyNo, member.getPerNo());
 
     if (myStudy != null) {
-      System.out.printf("\n (%s)", myStudy.getStudyNo());
-
-      if (myStudy.getOwner().getPerNickname().equals(member.getPerNickname())) {
-        System.out.println(" 👤");
-      } else if (myStudy.getMemberNames().contains(member.getPerNickname())) {
-        System.out.println(" 👥");
-      }
-
+      System.out.printf(" \n (%s) 🌟%d\n", myStudy.getStudyNo(), myStudy.getBookMarkMember().size());
       System.out.printf(" [%s]\n", myStudy.getStudyTitle());
       System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());
       System.out.printf(" >> 분야 : %s\n", myStudy.getSubjectName());
