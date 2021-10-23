@@ -129,17 +129,19 @@ public class MariadbStudyDao implements StudyDao {
           study.setRegisteredDate(rs.getDate("created_dt"));
           study.setScore(rs.getInt("study_score"));
 
+          Member bookMember = new Member();
+          bookMember.setPerNo(rs.getInt("book_member_no"));
+          study.getBookMarkMember().add(bookMember);
+
           Member member = new Member();
           member.setPerNo(rs.getInt("owner_no"));
           member.setPerNickname(rs.getString("owner_name"));
           study.setOwner(member);
           studyNo = study.getStudyNo();
           list.add(study);
+
         }
 
-        Member bookMember = new Member();
-        bookMember.setPerNo(rs.getInt("book_member_no"));
-        study.getBookMarkMember().add(bookMember);
 
         int statusNo = rs.getInt("guilder_status");
         if (statusNo == 1) {        /*승인대기중*/
