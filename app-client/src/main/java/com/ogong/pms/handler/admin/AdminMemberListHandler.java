@@ -24,8 +24,9 @@ public class AdminMemberListHandler implements Command {
     Collection<Member> memberList = memberDao.findAll();
 
     for (Member member : memberList) {
-      System.out.printf(" (%d)\n 닉네임 : %s\n 이메일 : %s\n 가입일 : %s\n",
+      System.out.printf(" (%d) 이름 : %s | 닉네임 : %s | 이메일 : %s | 가입일 : %s\n",
           member.getPerNo(),
+          member.getPerName(),
           member.getPerNickname(), 
           member.getPerEmail(),
           member.getPerRegisteredDate());

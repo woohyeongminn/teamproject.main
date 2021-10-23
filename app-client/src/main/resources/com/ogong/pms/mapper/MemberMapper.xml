@@ -17,7 +17,7 @@
     <result column="status" property="perStatus"/>
     <result column="active" property="active"/>
   </resultMap>
-
+  
 	<sql id="select1">
 	select
     m.member_no member_no,
@@ -48,7 +48,8 @@
   
   <select id="findAll" resultMap="MemberMap">
     <include refid="select1"/>
-  order by name asc
+    where
+      m.status=1
   </select>
 
   <select id="findByNo" resultMap="MemberMap" parameterType="int">
@@ -66,19 +67,19 @@
   <select id="findByName" resultMap="MemberMap" parameterType="string">
     <include refid="select1"/>
   where
-    name=#{name}
+    name=#{name} and m.status=1
   </select>
   
   <select id="findByEmail" resultMap="MemberMap" parameterType="string">
     <include refid="select1"/>
   where
-    email=#{email}
+    email=#{email} and m.status=1
   </select>
   
   <select id="findByTel" resultMap="MemberMap" parameterType="string">
     <include refid="select1"/>
   where
-    tel=#{tel}
+    tel=#{tel} and m.status=1
   </select>
   
   <update id="updateName" parameterType="member">
@@ -125,6 +126,12 @@
   
   <update id="updateActive" parameterType="member">
   update member set
+    nickname=#{perNickname},
+    name=#{perName},
+    photo=#{perPhoto},
+    tel=#{perTel}, 
+    email=#{perEmail}, 
+    password=password(#{perPassword}),
     active=2 
   where
     member_no=#{perNo}

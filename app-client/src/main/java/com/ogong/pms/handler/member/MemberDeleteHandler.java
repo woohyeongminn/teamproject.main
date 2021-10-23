@@ -77,7 +77,7 @@ public class MemberDeleteHandler implements Command {
       // 조장일때
       for (Study study : studyList) {
         if (study.getOwner().getPerNo() == member.getPerNo()) {
-          System.out.println(" >> 스터디 삭제 후 탈퇴 가능합니다.");
+          System.out.println("\n >> 스터디 삭제 후 탈퇴 가능합니다.");
           return;
         }
       }
@@ -91,7 +91,7 @@ public class MemberDeleteHandler implements Command {
         }
       }
 
-      member.setPerNickname("탈퇴된 회원: ( " + member.getPerNickname() + " )");
+      member.setPerNickname("Deleted Member("+ member.getPerNickname() +")");
       member.setPerName("Deleted Name");
       member.setPerPhoto("Deleted Photo");
       member.setPerTel("Deleted Tel");

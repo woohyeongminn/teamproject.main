@@ -36,48 +36,49 @@ public class AdminCeoMemberDeleteHandler implements Command {
       }
 
       if (input.equals("네")) {
-        ceoMember.setCeoBossName("탈퇴 회원 (" + ceoMember.getCeoNickname() + ")");
+
+        // 카페삭제
+        //    requestAgent.request("cafe.selectList", null);
+        //
+        //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        //      System.out.println(" >> 스터디카페가 없습니다.");
+        //      return;
+        //    }
+        //
+        //    Collection<Cafe> cafeCollection = requestAgent.getObjects(Cafe.class);
+        //    List<Cafe> cafeList = new ArrayList<>(cafeCollection);
+        //
+        //    for (int i = cafeList.size() -1; i >= 0; i--) {
+        //      if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
+        //
+        //        if (ceoMember.getCeoBossName().contains("탈퇴")) {
+        //          cafeList.get(i).setCafeStatus(Cafe.DELETE);
+        //        }
+        //
+        //        requestAgent.request("cafe.update", cafeList.get(i));
+        //
+        //        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+        //          System.out.println(" >> 스터디카페 삭제가 실패되었습니다.");
+        //          return;
+        //        }
+        //      }
+        //    }
+
+        ceoMember.setCeoBossName("Deleted Member("+ ceoMember.getCeoNickname() +")");
         ceoMember.setCeoEmail("Deleted Email");
         ceoMember.setCeoPassword("Deleted Password");
         ceoMember.setCeoPhoto("Deleted Photo");
         ceoMember.setCeoLicenseNo("Deleted LicenseNo");
         ceoMember.setCeoStatus(CeoMember.CEO);
         ceoMember.setActive(CeoMember.OUTUSER);
+
+        // 회원 삭제
+        ceoMemberDao.updateActive(ceoMember);
+
+        System.out.println(" >> 기업 회원이 삭제되었습니다.");
+        request.getRequestDispatcher("/adminCeoMember/list").forward(request);
+        return;
       }
-
-      // 회원 삭제
-      ceoMemberDao.updateActive(ceoMember);
-
-      // 카페삭제
-      //    requestAgent.request("cafe.selectList", null);
-      //
-      //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      //      System.out.println(" >> 스터디카페가 없습니다.");
-      //      return;
-      //    }
-      //
-      //    Collection<Cafe> cafeCollection = requestAgent.getObjects(Cafe.class);
-      //    List<Cafe> cafeList = new ArrayList<>(cafeCollection);
-      //
-      //    for (int i = cafeList.size() -1; i >= 0; i--) {
-      //      if (cafeList.get(i).getCeoMember().getCeoNo() == ceoMember.getCeoNo()) {
-      //
-      //        if (ceoMember.getCeoBossName().contains("탈퇴")) {
-      //          cafeList.get(i).setCafeStatus(Cafe.DELETE);
-      //        }
-      //
-      //        requestAgent.request("cafe.update", cafeList.get(i));
-      //
-      //        if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-      //          System.out.println(" >> 스터디카페 삭제가 실패되었습니다.");
-      //          return;
-      //        }
-      //      }
-      //    }
-
-      System.out.println(" >> 기업 회원이 삭제되었습니다.");
-      request.getRequestDispatcher("/adminCeoMember/list").forward(request);
-      return;
     }
   }
 }
