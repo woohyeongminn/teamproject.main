@@ -56,9 +56,6 @@ public class MemberDeleteHandler implements Command {
     System.out.println(" << 비밀번호 확인 >>");
     String inputPassword = Prompt.inputString(" 비밀번호를 입력하세요 : ");
 
-    // 테스트
-    // System.out.println(member.getPerPassword());
-
     Member perMember = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
 
     if (perMember == null) {
@@ -75,79 +72,82 @@ public class MemberDeleteHandler implements Command {
     }
 
     if (input.equals("네")) {
-      member.setPerNickname("탈퇴된 회원: ( " + member.getPerNickname() + " )");
-      member.setPerEmail("Deleted Email");
-      member.setPerPassword("Deleted Password");
-      member.setPerPhoto("Deleted Photo");
-      member.setPerStatus(Member.PER);
-      member.setActive(Member.OUTUSER);
-    }
+      List<Study> studyList = studyDao.findAll();
 
-    List<Study> studyList = studyDao.findAll();
-    // 조장일때
-    for (Study study : studyList) {
-      if (study.getOwner().getPerNo() == member.getPerNo()) {
-        System.out.println(" >> 스터디 삭제 후 탈퇴 가능합니다.");
-        return;
-      }
-    }
-
-    // 구성원일때 자동으로 탈퇴되도록
-    for (int i = 0; i < studyList.size(); i++) {
-      System.out.println("test11111111111");
-      for (Member mem : studyList.get(i).getMembers()) {
-        System.out.println("test2222222222");
-        if (mem.getPerNo() == member.getPerNo()) {
-          System.out.println(studyList.get(i).getStudyNo());
-          System.out.println(mem.getPerNo());
-          studyDao.deleteGuilder(studyList.get(i).getStudyNo(), mem.getPerNo());
+      // 조장일때
+      for (Study study : studyList) {
+        if (study.getOwner().getPerNo() == member.getPerNo()) {
+          System.out.println(" >> 스터디 삭제 후 탈퇴 가능합니다.");
+          return;
         }
       }
+
+      // 구성원일때 스터디에서 자동으로 탈퇴
+      for (int i = 0; i < studyList.size(); i++) {
+        for (Member mem : studyList.get(i).getMembers()) {
+          if (mem.getPerNo() == member.getPerNo()) {
+            studyDao.deleteGuilder(studyList.get(i).getStudyNo(), mem.getPerNo());
+          }
+        }
+      }
+
+      member.setPerNickname("탈퇴된 회원: ( " + member.getPerNickname() + " )");
+      member.setPerName("Deleted Name");
+      member.setPerPhoto("Deleted Photo");
+      member.setPerTel("Deleted Tel");
+      member.setPerEmail("Deleted Email");
+      member.setPerPassword("Deleted Password");
+      member.setPerStatus(Member.PER);
+      member.setActive(Member.OUTUSER);
+
+      memberDao.updateActive(member);
+      AuthPerMemberLoginHandler.loginUser = null;
+      AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
+
+      System.out.println();
+      System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
+      return;
     }
-    // requestAgent.request("study.selectList", null);
-    //
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println(" >> 해당 스터디가 없습니다.");
-    // return;
-    // }
-    //
-    // Collection<Study> studyList = requestAgent.getObjects(Study.class);
-    // List<Study> s = new ArrayList<>(studyList);
-
-    // for (int i = s.size() -1; i >= 0; i--) {
-    // if (s.get(i).getOwner().getPerNo() == member.getPerNo()) {
-    // HashMap<String,String> studyParams = new HashMap<>();
-    // studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
-    //
-    // requestAgent.request("study.delete", studyParams);
-    //
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println(" >> 스터디 삭제가 실패되었습니다.");
-    // return;
-    // }
-    // } else {
-    // for (Member m : s.get(i).getMembers()) {
-    // if(m.getPerNo() == member.getPerNo()) {
-    // s.get(i).getMembers().remove(m);
-    //
-    // requestAgent.request("study.update", s.get(i));
-    //
-    // if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    // System.out.println(" >> 구성원 탈퇴 실패!");
-    // return;
-    // }
-    // break;
-    // }
-    // }
-    // }
-    // }
-
-    memberDao.updateActive(member);
-    AuthPerMemberLoginHandler.loginUser = null;
-    AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
-
-    System.out.println();
-    System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
-    return;
   }
 }
+
+
+
+//------------------- 스터디에 반영 --------------------
+//requestAgent.request("study.selectList", null);
+//
+// if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+// System.out.println(" >> 해당 스터디가 없습니다.");
+// return;
+// }
+//
+// Collection<Study> studyList = requestAgent.getObjects(Study.class);
+// List<Study> s = new ArrayList<>(studyList);
+
+// for (int i = s.size() -1; i >= 0; i--) {
+// if (s.get(i).getOwner().getPerNo() == member.getPerNo()) {
+// HashMap<String,String> studyParams = new HashMap<>();
+// studyParams.put("studyNo", String.valueOf(s.get(i).getStudyNo()));
+//
+// requestAgent.request("study.delete", studyParams);
+//
+// if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+// System.out.println(" >> 스터디 삭제가 실패되었습니다.");
+// return;
+// }
+// } else {
+// for (Member m : s.get(i).getMembers()) {
+// if(m.getPerNo() == member.getPerNo()) {
+// s.get(i).getMembers().remove(m);
+//
+// requestAgent.request("study.update", s.get(i));
+//
+// if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
+// System.out.println(" >> 구성원 탈퇴 실패!");
+// return;
+// }
+// break;
+// }
+// }
+// }
+// }
