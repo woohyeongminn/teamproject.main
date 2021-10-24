@@ -29,7 +29,11 @@
     <mapper resource="com/ogong/pms/mapper/AskBoardMapper.xml"/>
     <mapper resource="com/ogong/pms/mapper/CafeMapper.xml"/>
     <mapper resource="com/ogong/pms/mapper/StudyMapper.xml"/>
-    <mapper resource="com/ogong/pms/mapper/NoticeMapper.xml"/>
+    <mapper resource="com/ogong/pms/mapper/NoticeMapper.xml"/> 
+  
+  <!--  
+  <package name="com.ogong.pms.dao"/>
+   -->
   </mappers>
 </configuration>
 

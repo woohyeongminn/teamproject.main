@@ -1,6 +1,6 @@
 package com.ogong.pms.handler.study;
 
-import java.util.Collection;
+import java.util.List;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
@@ -27,7 +27,7 @@ public class StudySearchHandler implements Command {
 
     int count = 0;
 
-    Collection<Study> studyList = studyDao.findByKeyword(input);
+    List<Study> studyList = studyDao.findByKeyword(input);
 
     for (Study searchStudy : studyList) {
 

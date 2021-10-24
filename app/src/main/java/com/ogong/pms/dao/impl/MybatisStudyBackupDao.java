@@ -11,11 +11,11 @@ import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-public class MariadbStudyDao implements StudyDao {
+public class MybatisStudyBackupDao implements StudyDao {
 
   Connection con;
 
-  public MariadbStudyDao(Connection con) {
+  public MybatisStudyBackupDao(Connection con) {
     this.con = con;
   }
 

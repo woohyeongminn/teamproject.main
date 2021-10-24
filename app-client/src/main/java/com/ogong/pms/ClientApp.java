@@ -23,13 +23,13 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.impl.MariadbStudyDao;
 import com.ogong.pms.dao.impl.MybatisAdminDao;
 import com.ogong.pms.dao.impl.MybatisAskBoardDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
 import com.ogong.pms.dao.impl.MybatisMemberDao;
 import com.ogong.pms.dao.impl.MybatisNoticeDao;
+import com.ogong.pms.dao.impl.MybatisStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -202,15 +202,13 @@ public class ClientApp {
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
-    }
+    }  
   }       
 
   public ClientApp() throws Exception {
-    // 로컬
-    // null로 바꿔야함!
-    requestAgent = new RequestAgent("127.0.0.1", 5050);
-    //requestAgent = new RequestAgent("192.168.0.92", 5050);
-    //requestAgent = new RequestAgent("192.168.0.68", 5050);
+
+    // 서버와 접속을 하지 않음.
+    requestAgent = null;
 
     // DBMS와 연결한다.
     con = DriverManager.getConnection(
@@ -219,23 +217,25 @@ public class ClientApp {
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
+    //    마이바티스 자동생성 
+    //      (insert,update,delete 사용하는 Handler에 sqlSession 생성자 추가해야 함)
+    //    AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
+    //    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+    //    CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
+    //    NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+    //    AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
+    //    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
+    //    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
+
     // 마이바티스
     AdminDao adminDao = new MybatisAdminDao(sqlSession);
     MemberDao memberDao = new MybatisMemberDao(sqlSession);
     CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
-    //AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
-    //StudyDao studyDao = new MybatisStudyDao(sqlSession);
-
-    // 데이터 관리를 담당할 DAO 객체를 준비한다.
-    // AdminDao adminDao = new MariadbAdminDao(con);
-    //MemberDao memberDao = new MariadbMemberDao(con);
-    //CeoMemberDao ceoMemberDao = new MariadbCeoMemberDao(con);
-    //    AskBoardDao askBoardDao = new MariadbAskBoardDao(con);
-    //    CafeDao cafeDao = new MariadbCafeDao(con);
-    StudyDao studyDao = new MariadbStudyDao(con);
+    StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    //StudyDao studyDao = new MariadbStudyDao(con);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
