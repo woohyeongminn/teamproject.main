@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.member;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.menu.Menu;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class CeoDeleteHandler implements Command {
 
   CeoMemberDao ceoMemberDao;
+  SqlSession sqlSession;
 
-  public CeoDeleteHandler(CeoMemberDao ceoMemberDao) {
+  public CeoDeleteHandler(CeoMemberDao ceoMemberDao, SqlSession sqlSession) {
     this.ceoMemberDao = ceoMemberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -100,6 +103,7 @@ public class CeoDeleteHandler implements Command {
       ceoMember.setActive(CeoMember.OUTUSER);
 
       ceoMemberDao.updateActive(ceoMember);
+      sqlSession.commit();
       AuthCeoMemberLoginHandler.loginCeoMember = null;
       AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
 

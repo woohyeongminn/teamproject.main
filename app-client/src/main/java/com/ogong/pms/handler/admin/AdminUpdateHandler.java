@@ -1,8 +1,10 @@
 package com.ogong.pms.handler.admin;
 
 import org.apache.ibatis.session.SqlSession;
+import com.ogong.menu.Menu;
 import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.domain.Admin;
+import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
@@ -72,6 +74,13 @@ public class AdminUpdateHandler implements Command {
       admin.setMasterPassword(adminPassword);
       adminDao.updatePassword(admin);
       sqlSession.commit();
+
+      AuthAdminLoginHandler.loginAdmin = null;
+      AuthAdminLoginHandler.accessLevel = Menu.LOGOUT;
+      System.out.printf("\n >> '%s'님의 정보가 변경되었습니다.\n", admin.getMasterNickname());
+      System.out.println(" >> 다시 로그인 해 주세요.");
+      return;
+
     }
 
     System.out.printf("\n >> '%s'님의 정보가 변경되었습니다.", admin.getMasterNickname());

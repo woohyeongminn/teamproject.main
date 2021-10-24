@@ -1,6 +1,7 @@
 package com.ogong.pms.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.ogong.pms.domain.CeoMember;
 
 public interface CeoMemberDao {
@@ -10,7 +11,7 @@ public interface CeoMemberDao {
   CeoMember findByNo(int no) throws Exception;
   CeoMember findByName(String inputNick) throws Exception;
   CeoMember findByEmail(String inputEmail) throws Exception;
-  CeoMember findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception;
+  CeoMember findByEmailAndPassword(@Param("email") String inputEmail,@Param("password") String inputPassword) throws Exception;
 
   void insert(CeoMember ceoMember) throws Exception;
 

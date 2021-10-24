@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.member;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.menu.Menu;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class CeoUpdateHandler implements Command {
 
   CeoMemberDao ceoMemberDao;
+  SqlSession sqlSession;
 
-  public CeoUpdateHandler(CeoMemberDao ceoMemberDao) {
+  public CeoUpdateHandler(CeoMemberDao ceoMemberDao, SqlSession sqlSession) {
     this.ceoMemberDao = ceoMemberDao;
+    this.sqlSession = sqlSession;
   }
 
   // 기업회원 개인정보 수정은 이름,이메일,비밀번호만 가능
@@ -82,26 +85,32 @@ public class CeoUpdateHandler implements Command {
     if (selectNo == 1) {
       ceoMember.setCeoName(ceoName);
       ceoMemberDao.updateName(ceoMember);
+      sqlSession.commit();
 
     } else if (selectNo == 2) {
       ceoMember.setCeoNickname(ceoNickName);
       ceoMemberDao.updateNickName(ceoMember);
+      sqlSession.commit();
 
     } else if (selectNo == 3) {
       ceoMember.setCeoPhoto(ceophoto);
       ceoMemberDao.updatePhoto(ceoMember);
+      sqlSession.commit();
 
     } else if (selectNo == 4) {
       ceoMember.setCeoTel(ceoTel);
       ceoMemberDao.updateTel(ceoMember);
+      sqlSession.commit();
 
     } else if (selectNo == 5) {
       ceoMember.setCeoEmail(ceoEmail);
       ceoMemberDao.updateEmail(ceoMember);
+      sqlSession.commit();
 
     } else if (selectNo == 6) {
       ceoMember.setCeoPassword(ceoPassword);
       ceoMemberDao.updatePassword(ceoMember);
+      sqlSession.commit();
 
       AuthCeoMemberLoginHandler.loginCeoMember = null;
       AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;

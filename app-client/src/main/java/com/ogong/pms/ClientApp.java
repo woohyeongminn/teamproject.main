@@ -243,7 +243,7 @@ public class ClientApp {
 
     commandMap.put("/member/add", new MemberAddHandler(memberDao, sqlSession));
     commandMap.put("/member/detail", new MemberDetailHandler(memberDao));
-    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, memberDao));
+    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, memberDao, sqlSession));
     commandMap.put("/member/update", new MemberUpdateHandler(memberDao, sqlSession));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, studyDao, sqlSession));
 
@@ -261,18 +261,18 @@ public class ClientApp {
     commandMap.put("/reply/add", new ReplyAddHandler(askBoardDao));
     commandMap.put("/reply/detail", new ReplyDetailHandler(askBoardDao));
 
-    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberDao, sqlSession));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberDao));
-    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberDao));
-    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberDao, sqlSession));
+    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberDao, sqlSession));
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberDao));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
-    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(randomPw, ceoMemberDao));
+    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(randomPw, ceoMemberDao, sqlSession));
 
     commandMap.put("/admin/login", new AuthAdminLoginHandler(adminDao));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
 
-    commandMap.put("/admin/update", new AdminUpdateHandler(adminDao));
+    commandMap.put("/admin/update", new AdminUpdateHandler(adminDao, sqlSession));
     commandMap.put("/admin/detail", new AdminDetailHandler(adminDao));
 
     commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberDao));
@@ -283,7 +283,7 @@ public class ClientApp {
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
     //    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));   // 아예 사용한함
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
-    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao));
+    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao, sqlSession));
 
     commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
