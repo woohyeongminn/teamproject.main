@@ -1,1 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ogong.pms.dao.FreeBoardDao">
+  
+  <resultMap type="FreeBoard" id="FreeBoardMap">
+    <id column="st_board_no" property="freeBoardNo"/> 
+    <result column="study_no" property="studyNo"/>
+    <result column="title" property="freeBoardTitle"/>
+    <result column="content" property="freeBoardContent"/>
+    <result column="view_cnt" property="freeBoardViewcount"/>
+    <result column="created_dt" property="freeBoardRegisteredDate"/>
+    <result column="count_file" property="countFile"/>
+    <result column="count_comment" property="countComment"/>
+    <result column="count_like" property="countLike"/>
+    
+    <association property="freeBoardWriter" javaType="Member">
+    <id column="member_no" property="perNo"/> 
+    <result column="member_nickname" property="perNickname"/>
+    <result column="member_status" property="perStatus"/>
+    </association>
+    
+    <collection property="freeBoardFile" ofType="FreeBoardFile">
+      <id column="file_no" property="atcFileNo" />
+      <result column="st_board_no" property="boardNo" />
+      <result column="atcFileName" property="atcFileName" />
+    </collection>
+  </resultMap>
+  
+   <sql id="select1">
+      select
+       s.study_no study_no,
+       sb.st_board_no,
+       sb.title,
+       sb.content,
+       sb.view_ct,
+       sb.created_dt,
+       m.member_no member_no,
+       m.nickname member_nickname,
+       m.status member_status,
+       sbf.file_no file_no,
+       sbf.name atcFileName,
+       (select count(*) from study_board_file sbf where sb.st_board_no=sbf.st_board_no) count_file,
+       (select count(*) from study_board_comment sbc where sb.st_board_no=sbc.st_board_no) count_comment,
+       (select count(*) from study_board_like sbl where sb.st_board_no=sbl.st_board_no) count_like
+     from study_board sb
+       left outer join study s on sb.study_no=s.study_no
+       left outer join member m on sb.member_no=m.member_no
+       left outer join study_board_file sbf on sb.st_board_no=sbf.st_board_no
+  </sql>
+  
+  <select id="findAll" resultMap="FreeBoardMap" parameterType="int">
+   <include refid="select1"/>
+   where
+      sb.study_no=#{studyNo}
+  </select>
+   
+  <insert id="insert" parameterType="FreeBoard"
+    useGeneratedKeys="true" keyColumn="st_board_no" keyProperty="freeBoardNo">
+     insert into study_board
+      (title, content, view_ct, created_dt, member_no, study_no)
+     values
+      (#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount},
+       #{freeBoardRegisteredDate}, #{freeBoardWriter.perNo}, #{studyNo})
+  </insert>
+  
+  <insert id="insertFile" parameterType="map"
+   useGeneratedKeys="true" keyColumn="file_no" keyProperty="atcFileNo">
+      insert into study_board_file (name, st_board_no)
+      values(#{atcFileName}, #{boardNo})
+  </insert>
+  
+  <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      s.study_no=#{studyNo}
+    order by s.study_no
+  </select>
+   
+  </mapper>
+  

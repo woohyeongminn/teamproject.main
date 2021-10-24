@@ -6,14 +6,15 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.ToDo;
 
-public class MybatisToDoDao implements ToDoDao {
+public class MybatisTodoDao implements ToDoDao {
 
   Connection con;
   SqlSession sqlSession;
 
-  public MybatisToDoDao(SqlSession sqlSession) {
+  public MybatisTodoDao(SqlSession sqlSession) {
     this.sqlSession = sqlSession;
   }
+
 
   @Override
   public void insert(ToDo todo) throws Exception {
@@ -35,11 +36,15 @@ public class MybatisToDoDao implements ToDoDao {
   public void update(ToDo todo) throws Exception {
     sqlSession.update("ToDoMapper.update", todo);
     sqlSession.commit();
+
   }
 
   @Override
   public void delete(int todoNo) throws Exception {
     sqlSession.delete("ToDoMapper.delete", todoNo);
     sqlSession.commit();
+
   }
+
 }
+
