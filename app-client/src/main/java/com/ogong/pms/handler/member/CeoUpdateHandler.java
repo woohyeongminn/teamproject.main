@@ -64,8 +64,17 @@ public class CeoUpdateHandler implements Command {
         ceoEmail = Prompt.inputString(" 이메일(" + ceoMember.getCeoEmail() + ") : ");
         break;
       case 6:
-        ceoPassword = Prompt.inputString(" 비밀번호 : ");
-        break;
+        while (true) {
+          ceoPassword = Prompt.inputString(" 변경할 비밀번호 : ");
+          if (ceoPassword.length() < 8 || (!ceoPassword.contains("!") && !ceoPassword.contains("@")
+              && !ceoPassword.contains("#") && !ceoPassword.contains("$")
+              && !ceoPassword.contains("^") && !ceoPassword.contains("%")
+              && !ceoPassword.contains("&") && !ceoPassword.contains("*"))) {
+            System.out.println(" >> 8자 이상 특수문자를 포함시켜 주세요.");
+            continue;
+          }
+          break;
+        }
       case 0: return;
       default : 
         System.out.println(" >> 올바른 번호를 입력해 주세요.");
@@ -114,7 +123,8 @@ public class CeoUpdateHandler implements Command {
 
       AuthCeoMemberLoginHandler.loginCeoMember = null;
       AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
-      System.out.println(" >> 로그아웃되었습니다.\n");
+      System.out.println("\n >> 회원 정보를 변경하였습니다.\n");
+      System.out.println(" >> 다시 로그인 해 주세요.");
       return;
     }
 

@@ -28,6 +28,7 @@
       m.email,
       m.tel,
       m.photo,
+      m.password,
       m.created_dt,
       m.active,
       m.status,
@@ -39,7 +40,7 @@
       ceo_member cm on m.member_no=cm.member_no
   </sql>
   
-  <select id="findByEmailAndPassword" resultMap="CeoMemberMap" parameterType="map">
+  <select id="findByEmailAndPassword" resultMap="CeoMemberMap">
     select
       m.member_no,
       m.nickname,
@@ -73,7 +74,7 @@
   
   <insert id="insertCeo" parameterType="map">
 	  insert into ceo_member(member_no,bossname,license_no)
-	  values(#{ceoNo},#{ceoBossname},#{ceoLicenseNo})
+	  values(#{ceoNo},#{ceoBossName},#{ceoLicenseNo})
   </insert>
   
   <select id="findByName" resultMap="CeoMemberMap" parameterType="string">

@@ -123,7 +123,9 @@ public class CeoAddHandler implements Command {
     //    ceoMember.setCeoStatus(CeoMember.INUSER);
 
     ceoMemberDao.insert(ceoMember);
+    ceoMemberDao.insertCeo(ceoMember);
     sqlSession.commit();
+
     System.out.println(" >> 회원가입이 완료되었습니다.");
   }
 }

@@ -11,9 +11,10 @@ public interface CeoMemberDao {
   CeoMember findByNo(int no) throws Exception;
   CeoMember findByName(String inputNick) throws Exception;
   CeoMember findByEmail(String inputEmail) throws Exception;
-  CeoMember findByEmailAndPassword(@Param("email") String inputEmail,@Param("password") String inputPassword) throws Exception;
+  CeoMember findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
 
   void insert(CeoMember ceoMember) throws Exception;
+  void insertCeo(CeoMember ceoMember) throws Exception;
 
   void updateName(CeoMember ceoMember) throws Exception;
   void updateNickName(CeoMember ceoMember) throws Exception;
