@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Guilder;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 public class MybatisStudyDao implements StudyDao {
@@ -144,25 +145,21 @@ public class MybatisStudyDao implements StudyDao {
   }
 
   // ------------------------- [ 구성원 ] -----------------------------------
-  //해당 스터디의 구성원 목록
+
   @Override
-  public List<Guilder> findByGuilderAll(int studyNo) throws Exception {
-    return sqlSession.selectList("StudyMapper.findByGuilderAll", studyNo);
+  public List<Member> findByWaitingGuilderAll(int studyNo) throws Exception {
+    return sqlSession.selectList("GuilderMapper.waiting", studyNo);
+  }
+
+  @Override
+  public List<Member> findByGuildersAll(int studyNo) throws Exception {
+    return sqlSession.selectList("GuilderMapper.guilder", studyNo);
   }
 
   // 내가 들어가있는 스터디 목록
   @Override
   public List<Guilder> findByGuilderMyAll(int memberNo) throws Exception {
     return sqlSession.selectList("StudyMapper.findByGuilderMyAll", memberNo);
-  }
-
-  // 내가 어떤 스터디에 들어가 있는지 상세
-  @Override
-  public Guilder findByGuilderMyNo(int studyNo, int memberNo) throws Exception {
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("studyNo", studyNo);
-    params.put("memberNo", memberNo);
-    return sqlSession.selectOne("StudyMapper.findByGuilderMyNo", params);
   }
 
   // 신청하기(joinHandler)
