@@ -79,7 +79,7 @@ public class MyStudyDetailHandler implements Command {
     }
     System.out.println("0. 뒤로 가기");
 
-    request.setAttribute("inputNo", s.getStudyNo());
+    request.setAttribute("inputNo", myStudy.getStudyNo());
 
     int selectNo = Prompt.inputInt("선택> "); 
     switch (selectNo) {
