@@ -358,7 +358,6 @@ CREATE UNIQUE INDEX UIX_study_todolist_progress
 -- 투두리스트
 CREATE TABLE study_todolist (
   todolist_no INTEGER      NOT NULL COMMENT '투두리스트번호', -- 투두리스트번호
-  title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
   content     VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
   create_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '등록일', -- 등록일
   note        VARCHAR(255) NULL     COMMENT '비고', -- 비고
@@ -378,7 +377,6 @@ ALTER TABLE study_todolist
 -- 투두리스트 인덱스
 CREATE INDEX IX_study_todolist
   ON study_todolist( -- 투두리스트
-    title ASC -- 제목
   );
 
 ALTER TABLE study_todolist
