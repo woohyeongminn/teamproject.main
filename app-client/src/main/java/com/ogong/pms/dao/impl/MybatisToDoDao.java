@@ -6,12 +6,12 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.ToDo;
 
-public class MybatisTodoDao implements ToDoDao {
+public class MybatisToDoDao implements ToDoDao {
 
   Connection con;
   SqlSession sqlSession;
 
-  public MybatisTodoDao(SqlSession sqlSession) {
+  public MybatisToDoDao(SqlSession sqlSession) {
     this.sqlSession = sqlSession;
   }
 
