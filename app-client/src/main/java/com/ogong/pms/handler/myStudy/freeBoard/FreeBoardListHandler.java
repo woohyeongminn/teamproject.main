@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.List;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class FreeBoardListHandler implements Command {
 
   StudyDao studyDao;
+  FreeBoardDao freeBoardDao;
 
-  public FreeBoardListHandler(StudyDao studyDao) {
+  public FreeBoardListHandler(StudyDao studyDao,FreeBoardDao freeBoardDao) {
     this.studyDao = studyDao;
+    this.freeBoardDao = freeBoardDao;
   }
 
   @Override
@@ -26,20 +29,22 @@ public class FreeBoardListHandler implements Command {
 
     Study myStudy = studyDao.findByNo(inputNo);
 
-    List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
 
     for (FreeBoard freeBoard : freeBoardList) {
       System.out.printf(
-          " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일 : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n"
-              + " 댓글수 : %d\n",
+          " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일(%d) : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n"
+              + " 댓글수 : %d\n 좋아요 : %d",
               freeBoard.getFreeBoardNo(), 
               freeBoard.getFreeBoardTitle(),
               freeBoard.getFreeBoardContent(),
-              freeBoard.getFreeBoardAtcFile(),
+              freeBoard.getFileNames(),
+              freeBoard.getCountFile(),
               freeBoard.getFreeBoardWriter().getPerNickname(),
               freeBoard.getFreeBoardViewcount(),
               freeBoard.getFreeBoardRegisteredDate(),
-              freeBoard.getComment().size());
+              freeBoard.getCountComment(),
+              freeBoard.getCountLike());
       System.out.println();
     }
 
