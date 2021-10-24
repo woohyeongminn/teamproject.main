@@ -51,27 +51,34 @@
 	     left outer join study_board_file sbf on sb.st_board_no=sbf.st_board_no
   </sql>
   
-  <select id="findAll" resultMap="FreeBoardMap">
+  <select id="findAll" resultMap="FreeBoardMap" parameterType="int">
 	 <include refid="select1"/>
+	  where sb.study_no=#{studyNo}
 	   group by s.study_no
 	   order by s.study_no
-   </select>
+  </select>
    
-   
-   <insert id="insert" parameterType="FreeBoard"
+  <insert id="insert" parameterType="FreeBoard"
     useGeneratedKeys="true" keyColumn="st_board_no" keyProperty="freeBoardNo">
-	    insert into study_board
-	     (title, content, view_ct, created_dt, member_no, study_no)
-	     values
-	     (#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount},
-	      #{freeBoardRegisteredDate}, #{freeBoardWriter.perNo}, #{studyNo})
-    </insert>
+	   insert into study_board
+	    (title, content, view_ct, created_dt, member_no, study_no)
+	   values
+	    (#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount},
+	     #{freeBoardRegisteredDate}, #{freeBoardWriter.perNo}, #{studyNo})
+  </insert>
   
   <insert id="insertFile" parameterType="map"
    useGeneratedKeys="true" keyColumn="file_no" keyProperty="atcFileNo">
 	    insert into study_board_file (name, st_board_no)
-	    values (#{atcFileName}, #{boardNo})
+	    values(#{atcFileName}, #{boardNo})
   </insert>
+  
+  <select id="findByNo" resultMap="StudyMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      s.study_no=#{studyNo}
+    order by s.study_no
+  </select>
    
   </mapper>
   

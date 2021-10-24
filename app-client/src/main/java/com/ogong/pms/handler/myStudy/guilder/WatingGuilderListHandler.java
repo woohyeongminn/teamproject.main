@@ -31,6 +31,9 @@ public class WatingGuilderListHandler implements Command {
 
     // 해당 스터디에 구성원 목록 가져오기
     List<Guilder> guilderList = studyDao.findByGuilderAll(myStudy.getStudyNo());
+
+    System.out.println(guilderList);
+
     for (Guilder guilder : guilderList) {
       if (guilder.getGuilderStatus() == 2) {
         myStudy.getMembers().add(guilder.getMember());

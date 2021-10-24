@@ -3,6 +3,7 @@ package com.ogong.pms.handler.myStudy.freeBoard;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.FreeBoardFile;
@@ -16,9 +17,11 @@ import com.ogong.util.Prompt;
 public class FreeBoardAddHandler implements Command {
 
   StudyDao studyDao;
+  FreeBoardDao freeboardDao;
 
-  public FreeBoardAddHandler(StudyDao studyDao) {
+  public FreeBoardAddHandler(StudyDao studyDao, FreeBoardDao freeboardDao) {
     this.studyDao = studyDao;
+    this.freeboardDao = freeboardDao;
   }
 
   @Override
@@ -67,18 +70,24 @@ public class FreeBoardAddHandler implements Command {
     }
 
     // 마지막 자유게시판 번호 찾아서 새 게시글 등록시 +1 되도록 기능 구현
-    FreeBoard lastFreeBoard = null;
-    if (!freeBoardList.isEmpty()) {
-      lastFreeBoard = freeBoardList.get(freeBoardList.size() - 1);
-      freeBoard.setFreeBoardNo(lastFreeBoard.getFreeBoardNo() + 1);
-    } else {
-      freeBoard.setFreeBoardNo(1);
-    }
+    //    FreeBoard lastFreeBoard = null;
+    //    if (!freeBoardList.isEmpty()) {
+    //      lastFreeBoard = freeBoardList.get(freeBoardList.size() - 1);
+    //      freeBoard.setFreeBoardNo(lastFreeBoard.getFreeBoardNo() + 1);
+    //    } else {
+    //      freeBoard.setFreeBoardNo(1);
+    //    }
 
     freeBoardList.add(freeBoard);
     myStudy.setMyStudyFreeBoard(freeBoardList);
 
-    studyDao.update(myStudy);
+    //studyDao.update(myStudy);
+
+
+    freeboardDao.insert(freeBoard);
+    for (FreeBoardFile file2 : freeBoard.getFreeBoardFile()) {
+      freeboardDao.insertFile(file2);
+    }
 
     System.out.println(" >> 게시글이 등록되었습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
