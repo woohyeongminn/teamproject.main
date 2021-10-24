@@ -35,11 +35,6 @@
     values(#{adminNotiTitle},#{adminNotiContent},#{adminNotiRegisteredDate})
   </insert>
   
-  <insert id="insertnoitcefile" parameterType="map">
-    insert into notice_file(notice_no,filepath)
-    values(#{adminNotiNo},#{adminNotiFile})
-  </insert>
-    
   <select id="findAll" resultMap="NoticeMap" parameterType="map">
     <include refid="select1"/>
     order by
@@ -80,12 +75,11 @@
   </delete>
     
   <!-- 
-    
-  <update id="updateFilepath" parameterType="AdminNotice">
-    update notice set
-      filepath=#{adminNotiFile}
-    where notice_file_no=#{adminNotiFileNo}
-  </update>
+  
+  <insert id="insertnoitcefile" parameterType="map">
+    insert into notice_file(notice_no,filepath)
+    values(#{adminNotiNo},#{adminNotiFile})
+  </insert>
 
    -->
 
