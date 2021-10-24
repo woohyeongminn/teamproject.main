@@ -25,7 +25,6 @@ import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.impl.MybatisAskBoardDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
-import com.ogong.pms.dao.impl.MybatisNoticeDao;
 import com.ogong.pms.dao.impl.MybatisStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
@@ -219,7 +218,7 @@ public class ClientApp {
     AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
     MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
-    //    NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+    NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
     //    AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
     //    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
     //    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
@@ -229,7 +228,7 @@ public class ClientApp {
     //    AdminDao adminDao = new MybatisAdminDao(sqlSession);
     //    MemberDao memberDao = new MybatisMemberDao(sqlSession);
     //    CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
-    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
+    //    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
     StudyDao studyDao = new MybatisStudyDao(sqlSession);
@@ -285,11 +284,11 @@ public class ClientApp {
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao, sqlSession));
 
-    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao));
+    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao, sqlSession));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
     commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDao));
-    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao));
-    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao));
+    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao, sqlSession));
+    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao, sqlSession));
 
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao));
 

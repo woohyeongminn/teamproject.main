@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.admin;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.Command;
@@ -9,9 +10,11 @@ import com.ogong.util.Prompt;
 public class AdminNoticeUpdateHandler implements Command {
 
   NoticeDao noticeDao;
+  SqlSession sqlSession;
 
-  public AdminNoticeUpdateHandler(NoticeDao noticeDao) {
+  public AdminNoticeUpdateHandler(NoticeDao noticeDao, SqlSession sqlSession) {
     this.noticeDao = noticeDao;
+    this.sqlSession = sqlSession;
   }
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -71,14 +74,18 @@ public class AdminNoticeUpdateHandler implements Command {
     if (selectNo == 1) {
       notice.setAdminNotiTitle(adminNoticeTitle);
       noticeDao.updateTitle(notice);
+      sqlSession.commit();
     } else if (selectNo == 2) {
       notice.setAdminNotiContent(adminNoticeContent);
       noticeDao.updateContent(notice);
+      sqlSession.commit();
     } else if (selectNo == 3) {
       noticeDao.insertFilepath(notice);
+      sqlSession.commit();
     } else if (selectNo == 4) {
       notice.setAdminNotiFile(adminNoticeFile);
-      noticeDao.deletefile(noticeNo);
+      noticeDao.deletenoticefile(noticeNo);
+      sqlSession.commit();
     }
 
     System.out.println(" >> 공지가 변경되었습니다.");
