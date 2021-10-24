@@ -10,7 +10,7 @@
 		<result column="study_no" property="studyNo" />
 		<result column="title" property="todoTitle" />
 		<result column="content" property="todoContent" />
-		<result column="member_no" property="todoWriter" />
+		<!-- <result column="member_no" property="todoWriter" /> -->
 		<result column="note" property="todoRemark" />
 		<result column="create_dt" property="todoDate" />
 		<result column="progress_no" property="todoStatus" />
@@ -25,24 +25,35 @@
 		select
 		todo.todolist_no,
 		todo.study_no,
+		todo.title,
 		todo.content,
-		todo.deadline,
-		m.member_no owner_no,
+		todo.note,
+		todo.create_dt,
+		
+		todo.progress_no,
+		tp.progress_no progress_no
+		
+		m.member_no,
+		m.member_nickname,
 		m.name owner_name,
-		m.email owner_email,
-		ts.task_status_no status_no,
-		ts.title status_title
+		status_no,
 		from
 		study_todolist todo
-		inner join pms_member m on todo.member_no=m.member_no
+		
 		inner join
-		study_todolist_status ts on todo.task_status_no=ts.task_status_no
+		study_guilder sg on todo.study_no=sg.study_no
+		<!-- inner join
+    study_guilder sg on todo.member_no=sg.member_no -->
+		inner join
+    member m on todo.member_no=m.member_no
+		inner join
+		study_todolist_progress tp on todo.progress_no=tp.progress_no
 	</sql>
 
 	<select id="findAll" resultMap="ToDoMap" parameterType="int">
 		<include refid="select1" />
 		where
-		todo.study_no=#{projectNo}
+		todo.study_no=#{studyNo}
 		order by
 		todo.todolist_no asc
 	</select>
