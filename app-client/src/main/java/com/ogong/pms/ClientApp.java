@@ -351,8 +351,8 @@ public class ClientApp {
     commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, toDoDao));
     commandMap.put("/myStudy/todoList", new ToDoList(studyDao, toDoDao));
     commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao));
-    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao));
+    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, toDoDao));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));

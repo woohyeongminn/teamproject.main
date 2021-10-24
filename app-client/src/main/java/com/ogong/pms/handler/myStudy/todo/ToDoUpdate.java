@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.todo;
 
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.Command;
@@ -10,12 +11,14 @@ import com.ogong.util.Prompt;
 public class ToDoUpdate implements Command {
 
   StudyDao studyDao;
+  ToDoDao toDoDao;
 
-  public ToDoUpdate(StudyDao studyDao) {
+  public ToDoUpdate(StudyDao studyDao, ToDoDao toDoDao) {
     this.studyDao = studyDao;
+    this.toDoDao = toDoDao;
   }
 
-  //삭제
+  // 삭제
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 변경");
@@ -42,13 +45,14 @@ public class ToDoUpdate implements Command {
     todo.setTodoStatus(todoStatus);
     todo.setTodoRemark(todoRemark);
 
-    studyDao.update(myStudy);
+    toDoDao.update(todo);
+    // studyDao.update(myStudy);
 
     System.out.println(" >> 할 일이 변경되었습니다.");
     request.getRequestDispatcher("/myStudy/todoList").forward(request);
   }
 
-  //상태 선택
+  // 상태 선택
   private int promptStatus() {
     return promptStatus(-1);
   }
@@ -60,18 +64,15 @@ public class ToDoUpdate implements Command {
       System.out.println(" 1: 진행 중");
       System.out.println();
 
-      try{
+      try {
         return Prompt.inputInt("선택> ");
-      } catch(Exception e) {
+      } catch (Exception e) {
         System.out.println(" >> 잘못 입력하셨습니다.");
       }
 
     } else {
-      System.out.printf(" 진행 상황(%s) : " , todoStatus);
+      System.out.printf(" 진행 상황(%s) : ", todoStatus);
     }
     return Prompt.inputInt("1. 진행 중 / 2. 완료 > ");
   }
 }
-
-
-
