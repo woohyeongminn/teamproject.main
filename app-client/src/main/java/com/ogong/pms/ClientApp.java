@@ -165,7 +165,7 @@ public class ClientApp {
     public MenuItem(String title, int accessScope, String menuId) {
       super(title, accessScope);
       this.menuId = menuId;
-    }
+    }  
 
     @Override
     public void execute() {
@@ -176,7 +176,7 @@ public class ClientApp {
         System.out.printf("%s 명령을 실행하는 중 오류 발생!\n", menuId);
         e.printStackTrace();
       }
-    }
+    }   
   }
 
   private void notifyOnApplicationStarted() {
@@ -192,7 +192,7 @@ public class ClientApp {
 
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
-    }  
+    }    
   }        
 
   public ClientApp() throws Exception {

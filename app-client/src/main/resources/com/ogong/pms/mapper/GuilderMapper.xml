@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GuilderMapper">
+
+<resultMap type="Member" id="MemberMap">
+<id column="member_no" property="perNo"/>
+    <result column="member_name" property="perName"/>
+    <result column="member_nickname" property="perNickname"/>
+ </resultMap>
+ 
+ <!--  ===[구성원 출력 중복]=== -->
+  <sql id="select1">
+   select
+      sg.member_no,
+      m.name member_name,
+      m.nickname member_nickname
+    from
+      study_guilder sg
+    join
+      member m on m.member_no=sg.member_no
+  </sql>
+ 
+
+	<!--  ===========================[구성원]=========================== -->
+	
+	<!--  ===[해당 스터디의 구성원 목록]=== -->
+	<select id="waiting" resultMap="MemberMap" parameterType="int">
+    <include refid="select1"/>
+		where 
+		  sg.study_no=#{studyNo} and sg.status=1
+	</select>
+	
+	 <select id="guilder" resultMap="MemberMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      sg.study_no=#{studyNo} and sg.status=2
+  </select>
+  
+  <!--  ===[해당 스터디의 구성원 목록]=== -->
+  <!-- 
+  <select id="findByGuilderAll" resultMap="GuilderMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      sg.study_no=#{studyNo}
+  </select>
+  -->
+   
+  <!--  ===[내가 들어가있는 스터디 목록]=== -->
+  <select id="findByGuilderMyAll" resultMap="MemberMap" parameterType="int">
+    <include refid="select1"/>
+    where 
+      sg.member_no=#{memberNo}
+  </select>
+  
+  
+  <!--  ===[내가 어떤 스터디에 들어가 있는지 상세]=== -->
+  <select id="findByGuilderMyNo" resultMap="MemberMap" parameterType="map">
+    <include refid="select1"/>
+    where
+     sg.member_no=#{memberNo} and sg.study_no=#{studyNo}
+  </select>
+  
+  <!--  ===[신청하기(joinHandler)]=== -->
+  <insert id="insertGuilder" parameterType="map">
+    insert into study_guilder(study_no, member_no) 
+    values(#{studyNo},#{memberNo})
+  </insert>
+
+ <!--  ===[조장권한 위임]=== -->
+  <update id="updateOwner" parameterType="map">
+  update study set
+   member_no=#{memberNo}
+  where
+   study_no=#{studyNo}
+  </update>
+
+<!--  ===[승인대기중인 구성원 승인하기]=== -->
+  <update id="updateGuilder" parameterType="map">
+  update study_guilder set 
+   status=2
+  where
+   study_no=#{studyNo} and member_no=#{memberNo}
+  </update>
+  
+<!--  ===[구성원에서 삭제하기]=== -->
+  <delete id="deleteGuilder" parameterType="map"> 
+  delete from study_guilder
+  where 
+   study_no=#{studyNo} and member_no=#{memberNo}
+  </delete>
+
+<!--  ===[구성원 전체 삭제하기]=== -->
+  <delete id="deleteAllGuilder" parameterType="int"> 
+  delete from study_guilder 
+  where
+   study_no=#{studyNo}
+  </delete>
+
+</mapper>
+
+
+
+
+
+
+
