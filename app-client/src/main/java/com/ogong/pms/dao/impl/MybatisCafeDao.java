@@ -45,7 +45,10 @@ public class MybatisCafeDao implements CafeDao {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("cafeNo", cafeNo);
-    cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+
+    if (cafe != null) {
+      cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+    }
 
     return cafe;
   }
@@ -56,7 +59,10 @@ public class MybatisCafeDao implements CafeDao {
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("cafeNo", cafeNo);
-    cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+
+    if (cafe != null) {
+      cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
+    }
 
     return cafe;
   }
@@ -79,13 +85,7 @@ public class MybatisCafeDao implements CafeDao {
   public void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays) throws Exception {
     sqlSession.insert("CafeMapper.insertCafe", cafe);
 
-    if (!fileNames.isEmpty()) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("fileNames", fileNames);
-      params.put("cafeNo", cafe.getNo());
-
-      sqlSession.insert("CafeMapper.insertCafeImage", params);
-    }
+    insertCafeImage(cafe, fileNames);
 
     if (!holidays.isEmpty()) {
       // 해야됨 고민중
@@ -97,14 +97,40 @@ public class MybatisCafeDao implements CafeDao {
   }
 
   @Override
+  public void insertCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception {
+
+    if (!fileNames.isEmpty()) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("fileNames", fileNames);
+      params.put("cafeNo", cafe.getNo());
+
+      sqlSession.insert("CafeMapper.insertCafeImage", params);
+    }
+
+    sqlSession.commit();
+    System.out.println(" >> 카페 사진 등록 완료!");
+
+  }
+
+  @Override
+  public void deleteCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception {
+
+    if (!fileNames.isEmpty()) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("fileNames", fileNames);
+
+      sqlSession.insert("CafeMapper.deleteCafeImage", params);
+    }
+
+    sqlSession.commit();
+    System.out.println(" >> 카페 사진 삭제 완료!");
+
+  }
+
+  @Override
   public void updateCafe(Cafe cafe) throws Exception {
-    //    requestAgent.request("cafe.update", cafe);
-    //
-    //    if (requestAgent.getStatus().equals(RequestAgent.FAIL)) {
-    //      System.out.println(" >> 카페 수정을 실패하였습니다.");
-    //    } else {
-    //      //      System.out.println(" >> 수정이 완료 되었습니다.");
-    //    }
+    sqlSession.update("CafeMapper.updateCafe", cafe);
+    sqlSession.commit();
   }
 
   public void updateCafeStatusToGENERAL(Cafe cafe) throws Exception {

@@ -20,10 +20,14 @@ public interface CafeDao {
   Cafe findByCafeNo(int cafeNo) throws Exception;
   Cafe findByCafeNoMember(int cafeNo) throws Exception;
   Cafe findByCeoMember(int ceoNo) throws Exception;
-  void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays) throws Exception;
+  void insertCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception;
   void updateCafe(Cafe cafe) throws Exception;
   void updateCafeStatusToGENERAL(Cafe cafe) throws Exception;
   void deleteCafe(Cafe cafe) throws Exception;
+
+  // 카페 이미지
+  void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays) throws Exception;
+  void deleteCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception;
 
   //-----------------------CafeReview--------------------------------------
 
