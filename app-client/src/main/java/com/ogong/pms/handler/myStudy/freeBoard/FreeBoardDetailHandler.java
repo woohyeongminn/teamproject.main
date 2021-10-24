@@ -1,7 +1,7 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
-import java.util.HashMap;
 import java.util.List;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
@@ -12,11 +12,13 @@ import com.ogong.util.Prompt;
 public class FreeBoardDetailHandler implements Command {
 
   StudyDao studyDao;
+  FreeBoardDao freeBoardDao;
   PromptFreeBoard promptFreeBoard;
 
-  public FreeBoardDetailHandler(StudyDao studyDao, PromptFreeBoard promptFreeBoard) {
+  public FreeBoardDetailHandler(StudyDao studyDao, PromptFreeBoard promptFreeBoard, FreeBoardDao freeBoardDao) {
     this.studyDao = studyDao;
     this.promptFreeBoard = promptFreeBoard;
+    this.freeBoardDao = freeBoardDao;
   }
 
   @Override
@@ -29,7 +31,7 @@ public class FreeBoardDetailHandler implements Command {
 
     Study myStudy = studyDao.findByNo(freeBoadNo);
 
-    List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
 
     if (freeBoardList.isEmpty()) {
       System.out.println("자유게시판 게시글 목록이 없습니다!");
@@ -38,50 +40,33 @@ public class FreeBoardDetailHandler implements Command {
 
     int inputNo = Prompt.inputInt(" 번호 : ");
 
-    HashMap<String,String> paramsComment = new HashMap<>();
-    paramsComment.put("freeinputNo", String.valueOf(inputNo));
+    FreeBoard freeBoard = freeBoardDao.findByNo(inputNo);
 
-    System.out.println();
-
-    int[] arry = new int[2];
-    arry[0] = (int) request.getAttribute("inputNo");
-
-    for (int i = 0; i < freeBoardList.size(); i++) {
-      if (freeBoardList.get(i).getFreeBoardNo() == inputNo) {
-        System.out.printf(" [%s]\n", freeBoardList.get(i).getFreeBoardTitle());
-        System.out.printf(" >> 내용 : %s\n", freeBoardList.get(i).getFreeBoardContent());
-        System.out.printf(" >> 첨부파일 : %s\n", freeBoardList.get(i).getFreeBoardAtcFile());
-        System.out.printf(" >> 작성자 : %s\n", freeBoardList.get(i).getFreeBoardWriter().getPerNickname());
-        System.out.printf(" >> 등록일 : %s\n", freeBoardList.get(i).getFreeBoardRegisteredDate());
-        freeBoardList.get(i).setFreeBoardViewcount(freeBoardList.get(i).getFreeBoardViewcount() + 1);
-        System.out.printf(" >> 조회수 : %d\n", freeBoardList.get(i).getFreeBoardViewcount());
-        promptFreeBoard.printComments(freeBoardList.get(i)); // 댓글호출
-
-        arry[1] = i;
-        inputNo = -1;
-      }
-    }
-    if (inputNo != -1) {
+    if (freeBoard == null) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
       request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
       return;
     }
 
-    request.setAttribute("studyNoFreeNo", arry);
-
-    freeBoardList.set(arry[1], freeBoardList.get(arry[1]));
-    myStudy.setMyStudyFreeBoard(freeBoardList);
-
-    studyDao.update(myStudy);
+    if (freeBoard.getFreeBoardNo() == inputNo) {
+      System.out.printf(" [%s]\n", freeBoard.getFreeBoardTitle());
+      System.out.printf(" >> 내용 : %s\n", freeBoard.getFreeBoardContent());
+      System.out.printf(" >> 첨부파일 : %s\n", freeBoard.getFileNames());
+      System.out.printf(" >> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
+      System.out.printf(" >> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
+      freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
+      System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
+      //promptFreeBoard.printComments(freeBoard); // 댓글호출
+    }
 
     System.out.println("\n----------------------");
     System.out.println("1. 수정");
     System.out.println("2. 삭제");
     System.out.println("3. 댓글 등록");
-    if (!freeBoardList.get(arry[1]).getComment().isEmpty()) {
-      System.out.println("4. 댓글 수정");
-      System.out.println("5. 댓글 삭제");
-    }
+    //if (!freeBoardList.get(arry[1]).getComment().isEmpty()) {
+    System.out.println("4. 댓글 수정");
+    System.out.println("5. 댓글 삭제");
+    //}
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
