@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.Askboard;
 
 import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Reply;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class ReplyAddHandler implements Command {
 
   AskBoardDao askBoardDao;
+  SqlSession sqlSession;
 
-  public ReplyAddHandler(AskBoardDao askBoardDao) {
+  public ReplyAddHandler(AskBoardDao askBoardDao, SqlSession sqlSession) {
     this.askBoardDao = askBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -44,6 +47,7 @@ public class ReplyAddHandler implements Command {
     askBoard.setReply(reply);
 
     askBoardDao.insertreply(askBoard);
+    sqlSession.commit();
     System.out.println(" >> 답글이 등록되었습니다.");
   }
 }

@@ -23,7 +23,6 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.impl.MybatisAskBoardDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
@@ -219,7 +218,7 @@ public class ClientApp {
     MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
     NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-    //    AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
+    AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
     //    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
     //    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
     //    ToDoDao todoDao = sqlSession.getMapper(ToDoDao.class);
@@ -229,7 +228,7 @@ public class ClientApp {
     //    MemberDao memberDao = new MybatisMemberDao(sqlSession);
     //    CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     //    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
-    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
+    //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
     StudyDao studyDao = new MybatisStudyDao(sqlSession);
     //StudyDao studyDao = new MariadbStudyDao(con);
@@ -246,18 +245,18 @@ public class ClientApp {
     commandMap.put("/member/update", new MemberUpdateHandler(memberDao, sqlSession));
     commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, studyDao, sqlSession));
 
-    commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao));
-    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao));
-    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardDao));
+    commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao, sqlSession));
+    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao, sqlSession));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardDao, sqlSession));
     commandMap.put("/askBoard/perMyList", new AskBoardPerMyListHandler(askBoardDao));
     commandMap.put("/askBoard/ceoMyList", new AskBoardCeoMyListHandler(askBoardDao));
-    commandMap.put("/askBoard/perMydetail", new AskBoardPerMyDetailHandler(askBoardDao));
-    commandMap.put("/askBoard/ceoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/perMydetail", new AskBoardPerMyDetailHandler(askBoardDao, sqlSession));
+    commandMap.put("/askBoard/ceoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao, sqlSession));
 
     commandMap.put("/askBoard/list", new AdminAskBoardListHandler(askBoardDao));
-    commandMap.put("/askBoard/detail", new AdminAskBoardDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/detail", new AdminAskBoardDetailHandler(askBoardDao, sqlSession));
 
-    commandMap.put("/reply/add", new ReplyAddHandler(askBoardDao));
+    commandMap.put("/reply/add", new ReplyAddHandler(askBoardDao, sqlSession));
     commandMap.put("/reply/detail", new ReplyDetailHandler(askBoardDao));
 
     commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberDao, sqlSession));

@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.admin;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
@@ -12,10 +13,12 @@ import com.ogong.util.Prompt;
 public class AdminAskBoardDetailHandler implements Command {
 
   AskBoardDao askBoardDao; 
+  SqlSession sqlSession;
   //CeoMemberDao ceoMemberDao;
 
-  public AdminAskBoardDetailHandler(AskBoardDao askBoardDao) {
+  public AdminAskBoardDetailHandler(AskBoardDao askBoardDao, SqlSession sqlSession) {
     this.askBoardDao = askBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -150,6 +153,7 @@ public class AdminAskBoardDetailHandler implements Command {
     System.out.println("---------------------");
 
     askBoardDao.updateViewCount(askBoard);
+    sqlSession.commit();
 
     if (askBoard.getReply() == null) {
       System.out.println("\n >> 등록된 답변이 없습니다.");

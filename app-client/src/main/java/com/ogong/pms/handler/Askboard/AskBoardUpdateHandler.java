@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.Askboard;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class AskBoardUpdateHandler implements Command {
 
   AskBoardDao askBoardDao;
+  SqlSession sqlSession;
 
-  public AskBoardUpdateHandler(AskBoardDao askBoardDao) {
+  public AskBoardUpdateHandler(AskBoardDao askBoardDao, SqlSession sqlSession) {
     this.askBoardDao = askBoardDao;
+    this.sqlSession = sqlSession;
   }
 
 
@@ -83,6 +86,7 @@ public class AskBoardUpdateHandler implements Command {
     }
 
     askBoardDao.update(askBoard);
+    sqlSession.commit();
     System.out.println(" >> 문의글을 변경하였습니다.");
 
   }

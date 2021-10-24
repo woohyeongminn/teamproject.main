@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.Askboard;
 
 import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
@@ -12,9 +13,11 @@ import com.ogong.util.Prompt;
 public class AskBoardAddHandler implements Command {
 
   AskBoardDao askBoardDao;
+  SqlSession sqlSession;
 
-  public AskBoardAddHandler(AskBoardDao askBoardDao) {
+  public AskBoardAddHandler(AskBoardDao askBoardDao, SqlSession sqlSession) {
     this.askBoardDao = askBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -78,6 +81,7 @@ public class AskBoardAddHandler implements Command {
 
       if ((statusNo > 0) && (statusNo < 3)) {
         askBoardDao.insertPer(askBoard);
+        sqlSession.commit();
         System.out.println(" >> 문의글이 등록되었습니다.");
         request.getRequestDispatcher("/askBoard/perMyList").forward(request);
         return;
@@ -135,6 +139,7 @@ public class AskBoardAddHandler implements Command {
 
       if ((statusNo > 0) && (statusNo < 3)) {
         askBoardDao.insertCeo(askBoard);
+        sqlSession.commit();
         System.out.println(" >> 문의글이 등록되었습니다.");
         request.getRequestDispatcher("/askBoard/ceoMyList").forward(request);
         return;

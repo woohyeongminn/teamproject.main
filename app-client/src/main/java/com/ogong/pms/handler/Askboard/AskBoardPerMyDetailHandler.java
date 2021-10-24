@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.Askboard;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
@@ -10,10 +11,12 @@ import com.ogong.util.Prompt;
 
 public class AskBoardPerMyDetailHandler implements Command {
 
-  AskBoardDao askBoardDao; 
+  AskBoardDao askBoardDao;
+  SqlSession sqlSession;
 
-  public AskBoardPerMyDetailHandler(AskBoardDao askBoardDao) {
+  public AskBoardPerMyDetailHandler(AskBoardDao askBoardDao, SqlSession sqlSession) {
     this.askBoardDao = askBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -94,5 +97,6 @@ public class AskBoardPerMyDetailHandler implements Command {
     System.out.println("---------------------");
 
     askBoardDao.updateViewCount(askBoard);
+    sqlSession.commit();
   }
 }

@@ -15,5 +15,6 @@ public interface AskBoardDao {
   // 답변 전용
   void insertreply(AskBoard askBoard) throws Exception;
   void updateViewCount(AskBoard askBoard) throws Exception;
+  void deletereply(int no) throws Exception;
 
 }
