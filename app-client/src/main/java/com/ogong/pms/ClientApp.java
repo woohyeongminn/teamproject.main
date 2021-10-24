@@ -201,7 +201,7 @@ public class ClientApp {
     for (ApplicationContextListener listener : listeners) {
       listener.contextDestroyed(params);
     }  
-  }       
+  }        
 
   public ClientApp() throws Exception {
 
@@ -281,7 +281,7 @@ public class ClientApp {
     commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberDao));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
-    //    commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));   // 아예 사용한함
+    //commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));   // 아예 사용한함
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao, sqlSession));
 
@@ -471,7 +471,7 @@ public class ClientApp {
     csMenu.add(createAdminAskMenu());
 
     return csMenu;
-  }
+  }   
 
   // 5-1
   private Menu createAdminNoticeMenu() {

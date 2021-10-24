@@ -15,7 +15,6 @@ public interface StudyDao {
   Study findByNo(int studyinputNo) throws Exception;
 
   //--------------- [ 내 스터디 ] ----------------------------------------
-  Study findByMyAll() throws Exception;
   Study findByMyNo(int studyNo, int memberNo) throws Exception;
 
   //--------------- [ 구성원 ] ----------------------------------------

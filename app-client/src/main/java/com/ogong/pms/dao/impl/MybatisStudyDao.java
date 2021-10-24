@@ -1,16 +1,11 @@
 package com.ogong.pms.dao.impl;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Guilder;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 public class MybatisStudyDao implements StudyDao {
@@ -26,23 +21,26 @@ public class MybatisStudyDao implements StudyDao {
   @Override
   public void insert(Study study) throws Exception {
     sqlSession.insert("StudyMapper.insert", study);
+    sqlSession.commit();
   }
 
   // 마이 스터디에서 업데이트
   @Override
   public void update(Study study) throws Exception {
     sqlSession.update("StudyMapper.update", study);
+    sqlSession.commit();
   }
 
   @Override
   public void delete(int studyNo, int memberNo) throws Exception {
-    sqlSession.delete("StudyMapper.deleteBookmark", studyNo);
+    sqlSession.delete("StudyMapper.deleteAllBookmark", studyNo);
 
     HashMap<String,Object> params = new HashMap<>();
     params.put("studyNo", studyNo);
     params.put("memberNo", memberNo);
 
     sqlSession.delete("StudyMapper.deleteStudy", params);
+    sqlSession.commit();
   }
 
   @Override
@@ -54,101 +52,6 @@ public class MybatisStudyDao implements StudyDao {
   public Study findByNo(int studyinputNo) throws Exception {
     return sqlSession.selectOne("StudyMapper.findByNo", studyinputNo);
   }
-
-  //  @Override
-  //  public Study findByNo(int studyinputNo) throws Exception {
-  //    try (PreparedStatement stmt = con.prepareStatement(
-  //        "select"
-  //            + " s.study_no,"
-  //            + " s.name study_title,"
-  //            + " ss.subject_no subject_no,"
-  //            + " ss.name subject_name,"
-  //            + " s.area,"
-  //            + " s.no_people,"
-  //            + " sfs.face_no face_no,"
-  //            + " sfs.name face_name,"
-  //            + " s.introduction,"
-  //            + " s.created_dt,"
-  //            + " s.score study_score,"
-  //            // 작성자(조장)
-  //            + " s.member_no owner_no,"
-  //            + " m.nickname owner_name,"
-  //            // 구성원
-  //            + " sg.status guilder_status,"
-  //            + " sg.member_no guilder_no,"
-  //            + " m2.nickname guilder_nickname,"
-  //            // 북마크
-  //            + " sb.member_no book_member_no"
-  //            + " from study s"
-  //            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
-  //            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
-  //            + " left outer join member m on s.member_no=m.member_no"
-  //            + " left outer join study_guilder sg on s.study_no=sg.study_no"
-  //            + " left outer join member m2 on sg.member_no=m2.member_no"
-  //            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
-  //            + " where s.study_no=" + studyinputNo);
-  //        ResultSet rs = stmt.executeQuery()) {
-  //
-  //      Study study = null;
-  //      int guilderNo = 0;
-  //      int bookmark = 0;
-  //
-  //      while (rs.next()) {
-  //        if (study == null) {
-  //          study = new Study();
-  //          study.setStudyNo(rs.getInt("study_no"));
-  //          study.setStudyTitle(rs.getString("study_title"));
-  //          study.setSubjectNo(rs.getInt("subject_no"));
-  //          study.setSubjectName(rs.getString("subject_name"));
-  //          study.setArea(rs.getString("area"));
-  //          study.setNumberOfPeple(rs.getInt("no_people"));
-  //          study.setFaceNo(rs.getInt("face_no"));
-  //          study.setFaceName(rs.getString("face_name"));
-  //          study.setIntroduction(rs.getString("introduction"));
-  //          study.setRegisteredDate(rs.getDate("created_dt"));
-  //          study.setScore(rs.getInt("study_score"));
-  //
-  //          Member member = new Member();
-  //          member.setPerNo(rs.getInt("owner_no"));
-  //          member.setPerNickname(rs.getString("owner_name"));
-  //          study.setOwner(member);
-  //          guilderNo = 0;
-  //          bookmark = 0;
-  //        }
-  //
-  //        // 구성원
-  //        if (guilderNo != rs.getInt("guilder_no")) {
-  //          int statusNo = rs.getInt("guilder_status");
-  //          if (statusNo == 1) {        /*승인대기중*/
-  //            Member waitingMember = new Member();
-  //            waitingMember.setPerNo(rs.getInt("guilder_no"));
-  //            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
-  //
-  //            study.getWatingMember().add(waitingMember);
-  //            guilderNo = waitingMember.getPerNo();
-  //          } else if (statusNo == 2) {     /*참여중*/
-  //            Member guilder = new Member();
-  //            guilder.setPerNo(rs.getInt("guilder_no"));
-  //            guilder.setPerNickname(rs.getString("guilder_nickname"));
-  //
-  //            study.getMembers().add(guilder);
-  //            guilderNo = guilder.getPerNo();
-  //          }
-  //          bookmark++;
-  //        }
-  //
-  //        // 북마크
-  //        if (bookmark == 0 || bookmark == 1) {
-  //          if (rs.getInt("book_member_no") != 0) {
-  //            Member bookMember = new Member();
-  //            bookMember.setPerNo(rs.getInt("book_member_no"));
-  //            study.getBookMarkMember().add(bookMember);
-  //          }
-  //        }
-  //      }
-  //      return study;
-  //    }
-  //  }
 
   // 스터디 검색
   @Override
@@ -227,405 +130,108 @@ public class MybatisStudyDao implements StudyDao {
     //    }
     return null;
   }
-  // 내 스터디 전체
-  @Override
-  public Study findByMyAll() throws Exception {
-    return null;
-  }
+
 
 
   // 내 스터디 상세
   @Override
   public Study findByMyNo(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "select"
-            + " s.study_no,"
-            + "s.name study_title,"
-            + "ss.subject_no subject_no,"
-            + "ss.name subject_name,"
-            + "s.area,"
-            + "s.no_people,"
-            + "sfs.face_no face_no,"
-            + "sfs.name face_name,"
-            + "s.introduction,"
-            + "s.created_dt,"
-            + "s.score study_score,"
-            + "s.member_no owner_no,"
-            + "m.nickname owner_name,"
-            + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
-            + "(select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,"
-            + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
-            + " from study s"
-            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
-            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
-            + " left outer join member m on s.member_no=m.member_no"
-            + " left outer join study_guilder sg on s.study_no=sg.study_no"
-            + " left outer join member m2 on sg.member_no=m2.member_no"
-            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
-            + " where s.study_no=? and (s.member_no=? or sg.member_no=?)"
-            + " order by s.study_no")) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("studyNo", studyNo);
+    params.put("memberNo", memberNo);
 
-      stmt.setInt(1, studyNo);  
-      stmt.setInt(2, memberNo);  
-      stmt.setInt(3, memberNo);  
-
-      ResultSet rs = stmt.executeQuery();
-
-      Study study = null;
-
-      while (rs.next()) {
-        if (study == null) {
-          study = new Study();
-          study.setStudyNo(rs.getInt("study_no"));
-          study.setStudyTitle(rs.getString("study_title"));
-          study.setSubjectNo(rs.getInt("subject_no"));
-          study.setSubjectName(rs.getString("subject_name"));
-          study.setArea(rs.getString("area"));
-          study.setNumberOfPeple(rs.getInt("no_people"));
-          study.setFaceNo(rs.getInt("face_no"));
-          study.setFaceName(rs.getString("face_name"));
-          study.setIntroduction(rs.getString("introduction"));
-          study.setRegisteredDate(rs.getDate("created_dt"));
-          study.setScore(rs.getInt("study_score"));
-          study.setCountMember(rs.getInt("count_guilder"));
-          study.setWatingCountMember(rs.getInt("count_wating_guilder"));
-          study.setCountBookMember(rs.getInt("count_bookmark"));
-
-          Member member = new Member();
-          member.setPerNo(rs.getInt("owner_no"));
-          member.setPerNickname(rs.getString("owner_name"));
-          study.setOwner(member);
-        }
-      }
-      return study;
-    }
+    return sqlSession.selectOne("StudyMapper.findByMyNo", params);
   }
 
-
-
-  //  @Override
-  //  public Study findByMyNo(int studyNo, int memberNo) throws Exception {
-  //    try (PreparedStatement stmt = con.prepareStatement(
-  //        "select"
-  //            + " s.study_no,"
-  //            + " s.name study_title,"
-  //            + " ss.subject_no subject_no,"
-  //            + " ss.name subject_name,"
-  //            + " s.area,"
-  //            + " s.no_people,"
-  //            + " sfs.face_no face_no,"
-  //            + " sfs.name face_name,"
-  //            + " s.introduction,"
-  //            + " s.created_dt,"
-  //            + " s.score study_score,"
-  //            // 작성자(조장)
-  //            + " s.member_no owner_no,"
-  //            + " m.nickname owner_name,"
-  //            // 구성원
-  //            + " sg.status guilder_status,"
-  //            + " sg.member_no guilder_no,"
-  //            + " m2.nickname guilder_nickname,"
-  //            // 북마크
-  //            + " sb.member_no book_member_no"
-  //            + " from study s"
-  //            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
-  //            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
-  //            + " left outer join member m on s.member_no=m.member_no"
-  //            + " left outer join study_guilder sg on s.study_no=sg.study_no"
-  //            + " left outer join member m2 on sg.member_no=m2.member_no"
-  //            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
-  //            + " where s.study_no=" + studyNo + " and (s.member_no=" + memberNo + " or sg.member_no=" + memberNo + ")");
-  //        ResultSet rs = stmt.executeQuery()) {
-  //
-  //      Study study = null;
-  //      int guilderNo = 0;
-  //      int bookmark = 0;
-  //
-  //      while (rs.next()) {
-  //        if (study == null) {
-  //          study = new Study();
-  //          study.setStudyNo(rs.getInt("study_no"));
-  //          study.setStudyTitle(rs.getString("study_title"));
-  //          study.setSubjectNo(rs.getInt("subject_no"));
-  //          study.setSubjectName(rs.getString("subject_name"));
-  //          study.setArea(rs.getString("area"));
-  //          study.setNumberOfPeple(rs.getInt("no_people"));
-  //          study.setFaceNo(rs.getInt("face_no"));
-  //          study.setFaceName(rs.getString("face_name"));
-  //          study.setIntroduction(rs.getString("introduction"));
-  //          study.setRegisteredDate(rs.getDate("created_dt"));
-  //          study.setScore(rs.getInt("study_score"));
-  //
-  //          Member member = new Member();
-  //          member.setPerNo(rs.getInt("owner_no"));
-  //          member.setPerNickname(rs.getString("owner_name"));
-  //          study.setOwner(member);
-  //          guilderNo = 0;
-  //          bookmark = 0;
-  //        }
-  //
-  //        // 구성원
-  //        if (guilderNo != rs.getInt("guilder_no")) {
-  //          int statusNo = rs.getInt("guilder_status");
-  //          if (statusNo == 1) {        /*승인대기중*/
-  //            Member waitingMember = new Member();
-  //            waitingMember.setPerNo(rs.getInt("guilder_no"));
-  //            waitingMember.setPerNickname(rs.getString("guilder_nickname"));
-  //
-  //            study.getWatingMember().add(waitingMember);
-  //            guilderNo = waitingMember.getPerNo();
-  //          } else if (statusNo == 2) {     /*참여중*/
-  //            Member guilder = new Member();
-  //            guilder.setPerNo(rs.getInt("guilder_no"));
-  //            guilder.setPerNickname(rs.getString("guilder_nickname"));
-  //
-  //            study.getMembers().add(guilder);
-  //            guilderNo = guilder.getPerNo();
-  //          }
-  //          bookmark++;
-  //        }
-  //
-  //        // 북마크
-  //        if (bookmark == 0 || bookmark == 1) {
-  //          if (rs.getInt("book_member_no") != 0) {
-  //            Member bookMember = new Member();
-  //            bookMember.setPerNo(rs.getInt("book_member_no"));
-  //            study.getBookMarkMember().add(bookMember);
-  //          }
-  //        }
-  //      }
-  //      return study;
-  //    }
-  //  }
-
-
   // ------------------------- [ 구성원 ] -----------------------------------
-
 
   //해당 스터디의 구성원 목록
   @Override
   public List<Guilder> findByGuilderAll(int studyNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement
-        ("select"
-            + " sg.study_no,"
-            + " sg.status guilder_status,"
-            + " sg.member_no,"
-            + " m.name,"
-            + " m.nickname"
-            + " from"
-            + " study_guilder sg" 
-            + " join"
-            + " member m on m.member_no=sg.member_no"
-            + " where sg.study_no=" + studyNo);
-        ResultSet rs = stmt.executeQuery()) {
-
-      List<Guilder> guilderList = new ArrayList<>();
-
-      while (rs.next()) {
-        Guilder guilder = new Guilder();
-        guilder.setStudyNo(rs.getInt("study_no"));
-        guilder.setGuilderStatus(rs.getInt("guilder_status"));
-
-        Member member = new Member();
-        member.setPerNo(rs.getInt("member_no"));
-        member.setPerName(rs.getString("name"));
-        member.setPerNickname(rs.getString("nickname"));
-
-        guilder.setMember(member);
-
-        guilderList.add(guilder);
-
-      }
-      return guilderList;
-    }
+    return sqlSession.selectList("StudyMapper.findByGuilderAll", studyNo);
   }
 
   // 내가 들어가있는 스터디 목록
   @Override
   public List<Guilder> findByGuilderMyAll(int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement
-        ("select"
-            + " sg.study_no,"
-            + " sg.status guilder_status,"
-            + " sg.member_no,"
-            + " m.name,"
-            + " m.nickname"
-            + " from"
-            + " study_guilder sg" 
-            + " join"
-            + " member m on m.member_no=sg.member_no"
-            + " where sg.member_no=" + memberNo);
-        ResultSet rs = stmt.executeQuery()) {
-
-      List<Guilder> guilderList = new ArrayList<>();
-
-      while (rs.next()) {
-        Guilder guilder = new Guilder();
-        guilder.setStudyNo(rs.getInt("study_no"));
-        guilder.setGuilderStatus(rs.getInt("guilder_status"));
-
-        Member member = new Member();
-        member.setPerNo(rs.getInt("member_no"));
-        member.setPerName(rs.getString("name"));
-        member.setPerNickname(rs.getString("nickname"));
-
-        guilder.setMember(member);
-
-        guilderList.add(guilder);
-
-      }
-      return guilderList;
-    }
+    return sqlSession.selectList("StudyMapper.findByGuilderMyAll", memberNo);
   }
 
   // 내가 어떤 스터디에 들어가 있는지 상세
   @Override
   public Guilder findByGuilderMyNo(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement
-        ("select"
-            + " sg.study_no,"
-            + " sg.status guilder_status,"
-            + " sg.member_no,"
-            + " m.name,"
-            + " m.nickname"
-            + " from"
-            + " study_guilder sg" 
-            + " join"
-            + " member m on m.member_no=sg.member_no"
-            + " where sg.member_no=? and sg.study_no=?")) {
-
-      stmt.setInt(1, memberNo);
-      stmt.setInt(2, studyNo);
-      ResultSet rs = stmt.executeQuery();
-
-      if (!rs.next()) {
-        return null;
-      }
-
-      Guilder guilder = new Guilder();
-      guilder.setStudyNo(rs.getInt("study_no"));
-      guilder.setGuilderStatus(rs.getInt("guilder_status"));
-
-      Member member = new Member();
-      member.setPerNo(rs.getInt("member_no"));
-      member.setPerName(rs.getString("name"));
-      member.setPerNickname(rs.getString("nickname"));
-
-      guilder.setMember(member);
-
-      return guilder;
-    }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("studyNo", studyNo);
+    params.put("memberNo", memberNo);
+    return sqlSession.selectOne("StudyMapper.findByGuilderMyNo", params);
   }
 
   // 신청하기(joinHandler)
   @Override
   public void insertGuilder(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into study_guilder(study_no, member_no) values(?,?)",
-        Statement.RETURN_GENERATED_KEYS)) {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("studyNo", studyNo);
+    params.put("memberNo", memberNo);
 
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
+    sqlSession.insert("StudyMapper.insertGuilder", params);
+    sqlSession.commit();
 
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 저장 실패!");
-      }
-    }
   }
 
   //조장권한 위임
   @Override
   public void updateOwner(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt =
-        con.prepareStatement("update study set"
-            + " member_no=?"
-            + " where study_no=?")) {
-
-      stmt.setInt(1, memberNo);
-      stmt.setInt(2, studyNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("스터디 조장 데이터 변경 실패!");
-      }
-    }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("memberNo", memberNo);
+    params.put("studyNo", studyNo);
+    sqlSession.update("StudyMapper.updateOwner", params);
+    sqlSession.commit();
   }
 
   // 승인대기중인 구성원 승인하기
   @Override
   public void updateGuilder(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt =
-        con.prepareStatement("update study_guilder set"
-            + " status=2"
-            + " where study_no=? and member_no=?")) {
-
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("스터디 데이터 변경 실패!");
-      }
-    }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("memberNo", memberNo);
+    params.put("studyNo", studyNo);
+    sqlSession.update("StudyMapper.updateGuilder", params);
+    sqlSession.commit();
   }
 
   // 구성원에서 삭제하기
   @Override
   public void deleteGuilder(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = 
-        con.prepareStatement("delete from study_guilder"
-            + " where study_no=? and member_no=?")) {
-
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 삭제 실패!");
-      }
-    }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("memberNo", memberNo);
+    params.put("studyNo", studyNo);
+    sqlSession.update("StudyMapper.deleteGuilder", params);
+    sqlSession.commit();
   }
 
   // 구성원 전체 삭제하기
   @Override
   public void deleteAllGuilder(int studyNo) throws Exception {
-    try (PreparedStatement stmt = 
-        con.prepareStatement("delete from study_guilder"
-            + " where study_no=?")) {
-
-      stmt.setInt(1, studyNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 삭제 실패!");
-      }
-    }
+    sqlSession.delete("StudyMapper.deleteAllGuilder", studyNo);
+    sqlSession.commit();
   }
 
   //------------------------- [ 북마크 ] 구현 완료 -----------------------------------
   // 북마크 하기
   @Override
   public void insertBookmark(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "insert into study_bookmark(study_no, member_no) values(?,?)")) {
-
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 저장 실패!");
-      }
-    }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("studyNo", studyNo);
+    params.put("memberNo", memberNo);
+    sqlSession.insert("StudyMapper.insertBookmark", params);
+    sqlSession.commit();
   }
 
   @Override
   public void deleteBookmark(int studyNo, int memberNo) throws Exception {
-    try (PreparedStatement stmt = con.prepareStatement(
-        "delete from study_bookmark"
-            + " where study_no=? and member_no=?")) {
-
-      stmt.setInt(1, studyNo);
-      stmt.setInt(2, memberNo);
-
-      if (stmt.executeUpdate() == 0) {
-        throw new Exception("구성원 데이터 삭제 실패!");
-      }
-    }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("memberNo", memberNo);
+    params.put("studyNo", studyNo);
+    sqlSession.insert("StudyMapper.deleteBookmark", params);
+    sqlSession.commit();
   }
 }

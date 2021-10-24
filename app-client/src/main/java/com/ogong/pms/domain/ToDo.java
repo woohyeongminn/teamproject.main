@@ -8,28 +8,21 @@ public class ToDo {
   public static final int COMPLETE = 2;         // 완료
 
   private int todoNo;             // 투두리스트 번호
+  private int studyNo;            // 스터디 번호
   private String todoTitle;       // 투두리스트 제목
   private String todoContent;     // 투두리스트 내용
+  private Member todoWriter;      // 투두리스트 작성자
   private String todoRemark;      // 투두리스트 비고
   private Date todoDate;          // 투두리스트 등록일
   private int todoStatus;         // 투두리스트 상태
-  private Member writer;          // 투두리스트 작성자
-  private int studyNo;            // 스터디 번호
   // private String todocomplete; // [필요 X] 완료된 투두리스트
 
   @Override
   public String toString() {
-    return "ToDo [todoNo=" + todoNo + ", todoTitle=" + todoTitle + ", todoContent=" + todoContent
-        + ", todoRemark=" + todoRemark + ", todoDate=" + todoDate + ", todoStatus=" + todoStatus
-        + "]";
+    return "ToDo [todoNo=" + todoNo + ", studyNo=" + studyNo + ", todoTitle=" + todoTitle
+        + ", todoContent=" + todoContent + ", todoWriter=" + todoWriter + ", todoRemark="
+        + todoRemark + ", todoDate=" + todoDate + ", todoStatus=" + todoStatus + "]";
   }
-
-  //  public String getTodocomplete() {
-  //    return todocomplete;
-  //  }
-  //  public void setTodocomplete(String todocomplete) {
-  //    this.todocomplete = todocomplete;
-  //  }
 
   public int getTodoNo() {
     return todoNo;
@@ -37,6 +30,14 @@ public class ToDo {
 
   public void setTodoNo(int todoNo) {
     this.todoNo = todoNo;
+  }
+
+  public int getStudyNo() {
+    return studyNo;
+  }
+
+  public void setStudyNo(int studyNo) {
+    this.studyNo = studyNo;
   }
 
   public String getTodoTitle() {
@@ -53,6 +54,14 @@ public class ToDo {
 
   public void setTodoContent(String todoContent) {
     this.todoContent = todoContent;
+  }
+
+  public Member getTodoWriter() {
+    return todoWriter;
+  }
+
+  public void setTodoWriter(Member todoWriter) {
+    this.todoWriter = todoWriter;
   }
 
   public String getTodoRemark() {
@@ -78,4 +87,11 @@ public class ToDo {
   public void setTodoStatus(int todoStatus) {
     this.todoStatus = todoStatus;
   }
+
+  //  public String getTodocomplete() {
+  //    return todocomplete;
+  //  }
+  //  public void setTodocomplete(String todocomplete) {
+  //    this.todocomplete = todocomplete;
+  //  }
 }
