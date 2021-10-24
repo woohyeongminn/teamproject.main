@@ -29,25 +29,20 @@
 		todo.content,
 		todo.note,
 		todo.create_dt,
-		
-		todo.progress_no,
-		tp.progress_no progress_no
-		
 		m.member_no,
-		m.member_nickname,
-		m.name owner_name,
-		status_no,
+		m.nickname,
+		tp.progress_no progress_no
 		from
 		study_todolist todo
-		
 		inner join
-		study_guilder sg on todo.study_no=sg.study_no
-		<!-- inner join
-    study_guilder sg on todo.member_no=sg.member_no -->
+		study s on todo.study_no=s.study_no
 		inner join
     member m on todo.member_no=m.member_no
 		inner join
 		study_todolist_progress tp on todo.progress_no=tp.progress_no
+		<!-- s.study_no, -->
+		<!-- inner join
+    study_guilder sg on todo.member_no=sg.member_no -->
 	</sql>
 
 	<select id="findAll" resultMap="ToDoMap" parameterType="int">
@@ -61,26 +56,26 @@
 	<select id="findByNo" resultMap="ToDoMap" parameterType="int">
 		<include refid="select1" />
 		where
-		todo.todolist_no=#{taskNo}
+		todo.todolist_no=#{todoNo}
 	</select>
 
 	<insert id="insert" parameterType="ToDo">
 		insert into
-		study_todolist(study_no,member_no,content,deadline,task_status_no)
-		values(#{projectNo},#{owner.no},#{content},#{deadline},#{status.no})
+		study_todolist(study_no,member_no,content,note,progress_no)
+		values(#{studyNo},#{perNo},#{todoContent},#{todoRemark},#{todoStatus})
 	</insert>
 
-	<update id="update" parameterType="task">
+	<update id="update" parameterType="ToDo">
 		update study_todolist set
-		content=#{content},
-		deadline=#{deadline},
-		task_status_no=#{status.no},
-		member_no=#{owner.no}
-		where todolist_no=#{no}
+		content=#{todoContent},
+		note=#{todoRemark},
+		progress_no=#{todoStatus},
+		<!-- member_no=#{member_no} -->
+		where todolist_no=#{todoNo}
 	</update>
 
 	<delete id="delete" parameterType="int">
 		delete from study_todolist
-		where todolist_no=#{taskNo}
+		where todolist_no=#{todoNo}
 	</delete>
 </mapper>
