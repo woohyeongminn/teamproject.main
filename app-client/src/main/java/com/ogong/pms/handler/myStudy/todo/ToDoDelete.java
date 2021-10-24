@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.todo;
 
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.Command;
@@ -10,12 +11,14 @@ import com.ogong.util.Prompt;
 public class ToDoDelete implements Command {
 
   StudyDao studyDao;
+  ToDoDao toDoDao;
 
-  public ToDoDelete(StudyDao studyDao) {
+  public ToDoDelete(StudyDao studyDao, ToDoDao toDoDao) {
     this.studyDao = studyDao;
+    this.toDoDao = toDoDao;
   }
 
-  //삭제
+  // 삭제
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -34,14 +37,12 @@ public class ToDoDelete implements Command {
       return;
     }
 
-    myStudy.getMyStudyToDo().remove(todo);
+    // myStudy.getMyStudyToDo().remove(todo);
 
-    studyDao.update(myStudy);
+    toDoDao.delete(todo.getTodoNo());
+    // studyDao.update(myStudy);
 
     System.out.println(" >> To-Do를 삭제하였습니다.");
     request.getRequestDispatcher("/myStudy/todoList").forward(request);
   }
 }
-
-
-
