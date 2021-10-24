@@ -29,23 +29,31 @@ public class FreeBoardListHandler implements Command {
 
     Study myStudy = studyDao.findByNo(inputNo);
 
+    System.out.println("되는지 안되는지");
+    System.out.println(myStudy);
+
     List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
 
+    System.out.println(freeBoardList);
+
     for (FreeBoard freeBoard : freeBoardList) {
-      System.out.printf(
-          " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일(%d) : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n"
-              + " 댓글수 : %d\n 좋아요 : %d",
-              freeBoard.getFreeBoardNo(), 
-              freeBoard.getFreeBoardTitle(),
-              freeBoard.getFreeBoardContent(),
-              freeBoard.getFileNames(),
-              freeBoard.getCountFile(),
-              freeBoard.getFreeBoardWriter().getPerNickname(),
-              freeBoard.getFreeBoardViewcount(),
-              freeBoard.getFreeBoardRegisteredDate(),
-              freeBoard.getCountComment(),
-              freeBoard.getCountLike());
-      System.out.println();
+
+      System.out.println("출력되라~~");
+
+      //      System.out.printf(
+      //          " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일(%d) : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n"
+      //              + " 댓글수 : %d\n 좋아요 : %d",
+      //              freeBoard.getFreeBoardNo(), 
+      //              freeBoard.getFreeBoardTitle(),
+      //              freeBoard.getFreeBoardContent(),
+      //              freeBoard.getFileNames(),
+      //              freeBoard.getCountFile(),
+      //              freeBoard.getFreeBoardWriter().getPerNickname(),
+      //              freeBoard.getFreeBoardViewcount(),
+      //              freeBoard.getFreeBoardRegisteredDate(),
+      //              freeBoard.getCountComment(),
+      //              freeBoard.getCountLike());
+      //      System.out.println();
     }
 
     if (!freeBoardList.isEmpty()) {

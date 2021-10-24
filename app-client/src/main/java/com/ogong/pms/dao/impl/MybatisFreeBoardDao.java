@@ -30,10 +30,10 @@ public class MybatisFreeBoardDao implements FreeBoardDao {
     sqlSession.commit();
   }
 
-  @Override
-  public void insertFile(FreeBoardFile file) throws Exception {
-
-  }
+  //  @Override
+  //  public void insertFile(FreeBoardFile file) throws Exception {
+  //
+  //  }
 
   @Override
   public List<FreeBoard> findAll(int studyNo) throws Exception {
