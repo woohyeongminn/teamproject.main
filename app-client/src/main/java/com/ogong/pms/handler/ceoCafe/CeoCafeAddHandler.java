@@ -35,7 +35,6 @@ public class CeoCafeAddHandler implements Command {
 
     cafe.setCeoMember(ceoMember);
     cafe.setName(Prompt.inputString(" 상호명 : "));
-    //    cafe.setMainImg(Prompt.inputString(" 대표사진 : "));
 
     ArrayList<CafeImage> fileNames = new ArrayList<>();
     while(true) {
