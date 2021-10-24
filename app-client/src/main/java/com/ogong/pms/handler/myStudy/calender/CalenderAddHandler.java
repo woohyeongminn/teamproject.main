@@ -61,6 +61,8 @@ public class CalenderAddHandler implements Command {
     }
     calender.setDay(day);
 
+
+
     String inputDay;
     while (true) {
       inputDay = Prompt.inputString(" 요일(예시> 월) : ");
@@ -94,7 +96,7 @@ public class CalenderAddHandler implements Command {
       }
       break;
     }
-    calender.setEndDay(inputEndDate);
+    calender.setEndDate(inputEndDate);
 
     String input = Prompt.inputString("\n 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equals("네")) {
