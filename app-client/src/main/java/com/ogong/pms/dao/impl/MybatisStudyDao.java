@@ -56,82 +56,9 @@ public class MybatisStudyDao implements StudyDao {
   // 스터디 검색
   @Override
   public List<Study> findByKeyword(String keyword) throws Exception {
-    //    try (PreparedStatement stmt = con.prepareStatement(
-    //        "select"
-    //            + " s.study_no,"
-    //            + "s.name study_title,"
-    //            + "ss.subject_no subject_no,"
-    //            + "ss.name subject_name,"
-    //            + "s.area area,"
-    //            + "s.no_people,"
-    //            + "sfs.face_no face_no,"
-    //            + "sfs.name face_name,"
-    //            + "s.introduction,"
-    //            + "s.created_dt,"
-    //            + "s.score study_score,"
-    //            + "s.member_no owner_no,"
-    //            + "m.nickname owner_name,"
-    //            + "(select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,"
-    //            + "(select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,"
-    //            + "(select count(*) from study_bookmark where study_no=s.study_no) count_bookmark"
-    //            + " from study s"
-    //            + " left outer join study_subject ss on s.subject_no=ss.subject_no"
-    //            + " left outer join study_face_status sfs on s.face_no=sfs.face_no"
-    //            + " left outer join member m on s.member_no=m.member_no"
-    //            + " left outer join study_guilder sg on s.study_no=sg.study_no"
-    //            + " left outer join member m2 on sg.member_no=m2.member_no"
-    //            + " left outer join study_bookmark sb on s.study_no=sb.study_no"
-    //            + " group by s.study_no"
-    //            + " order by s.study_no"
-    //            + " where study_title like(concat('%',?,'%'))"
-    //            + " or subject_name like (concat('%',?,'%'))"
-    //            + " or area like (concat('%',?,'%'))"
-    //            + " order by b.board_no desc")) {
-    //
-    //      stmt.setString(1, keyword);
-    //      stmt.setString(2, keyword);
-    //      stmt.setString(3, keyword);
-    //
-    //      try (ResultSet rs = stmt.executeQuery()) {
-    //
-    //        ArrayList<Study> list = new ArrayList<>();
-    //
-    //        int studyNo=0;
-    //        Study study = null;
-    //
-    //        while (rs.next()) {
-    //          if (studyNo != rs.getInt("study_no")) {
-    //            study = new Study();
-    //            study.setStudyNo(rs.getInt("study_no"));
-    //            study.setStudyTitle(rs.getString("study_title"));
-    //            study.setSubjectNo(rs.getInt("subject_no"));
-    //            study.setSubjectName(rs.getString("subject_name"));
-    //            study.setArea(rs.getString("area"));
-    //            study.setNumberOfPeple(rs.getInt("no_people"));
-    //            study.setFaceNo(rs.getInt("face_no"));
-    //            study.setFaceName(rs.getString("face_name"));
-    //            study.setIntroduction(rs.getString("introduction"));
-    //            study.setRegisteredDate(rs.getDate("created_dt"));
-    //            study.setScore(rs.getInt("study_score"));
-    //            study.setCountMember(rs.getInt("count_guilder"));
-    //            study.setWatingCountMember(rs.getInt("count_wating_guilder"));
-    //            study.setCountBookMember(rs.getInt("count_bookmark"));
-    //
-    //            Member member = new Member();
-    //            member.setPerNo(rs.getInt("owner_no"));
-    //            member.setPerNickname(rs.getString("owner_name"));
-    //            study.setOwner(member);
-    //            studyNo = study.getStudyNo();
-    //            list.add(study);
-    //          }
-    //        }
-    //        return list;
-    //      }
-    //    }
-    return null;
+    return sqlSession.selectList("StudyMapper.findByKeyword", keyword);
+
   }
-
-
 
   // 내 스터디 상세
   @Override
