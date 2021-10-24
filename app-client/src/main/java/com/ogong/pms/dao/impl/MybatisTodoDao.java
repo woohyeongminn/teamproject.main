@@ -15,7 +15,6 @@ public class MybatisTodoDao implements ToDoDao {
     this.sqlSession = sqlSession;
   }
 
-
   @Override
   public void insert(ToDo todo) throws Exception {
     sqlSession.insert("ToDoMapper.insert", todo);
@@ -36,15 +35,11 @@ public class MybatisTodoDao implements ToDoDao {
   public void update(ToDo todo) throws Exception {
     sqlSession.update("ToDoMapper.update", todo);
     sqlSession.commit();
-
   }
 
   @Override
   public void delete(int todoNo) throws Exception {
     sqlSession.delete("ToDoMapper.delete", todoNo);
     sqlSession.commit();
-
   }
-
 }
-
