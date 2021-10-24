@@ -31,7 +31,6 @@
     <mapper resource="com/ogong/pms/mapper/StudyMapper.xml"/>
     <mapper resource="com/ogong/pms/mapper/NoticeMapper.xml"/> 
     <mapper resource="com/ogong/pms/mapper/TodoMapper.xml"/> 
-    <mapper resource="com/ogong/pms/mapper/GuilderMapper.xml"/> 
     <mapper resource="com/ogong/pms/mapper/TodoMapper.xml"/>
     <mapper resource="com/ogong/pms/mapper/FreeBoardMapper.xml"/>
   
