@@ -2,7 +2,6 @@ package com.ogong.pms.handler.myStudy;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -31,9 +30,7 @@ public class MyStudyDetailHandler implements Command {
 
     Study s = new Study();
 
-    //Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
-    Study myStudy = studyDao.findByNo(studyNo);
-    List<Guilder> guilderList = studyDao.findByGuilderMyAll(member.getPerNo());
+    Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
 
     if (myStudy == null) {
       System.out.println();
@@ -41,9 +38,11 @@ public class MyStudyDetailHandler implements Command {
       return;
     } 
 
-    for (int i = 0; i < guilderList.size(); i++) {
-      System.out.println(guilderList.get(i));
-    }
+    List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());
+    myStudy.setWatingMember(waitingGuilder);
+
+    List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
+    myStudy.setMembers(guilders);
 
     System.out.printf(" \n (%s) 🌟%d\n", myStudy.getStudyNo(), myStudy.getCountBookMember());
     System.out.printf(" [%s]\n", myStudy.getStudyTitle());
@@ -51,20 +50,20 @@ public class MyStudyDetailHandler implements Command {
     System.out.printf(" >> 분야 : %s\n", myStudy.getSubjectName());
     System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
     System.out.printf(" >> 인원수 : %s/%s명\n",
-        myStudy.getCountMember() + 1, myStudy.getNumberOfPeple());
+        myStudy.getMembers().size()+ 1, myStudy.getNumberOfPeple());
     System.out.printf(" >> 대면 : %s\n", myStudy.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
     s = myStudy;
 
-    //    
-    //    
-    //    if (guilder != null && (guilder.getGuilderStatus() == 1)) {
-    //      System.out.println("\n---------------------------");
-    //      System.out.println("[승인 대기중인 스터디입니다.]");
-    //      return;
-    //    }
 
-    //if (myStudy.getOwner().getPerNo() == member.getPerNo() || (guilder != null && guilder.getGuilderStatus() == 2)) {
+    for (Member m : myStudy.getWatingMember()) {
+      if (m.getPerNo() == member.getPerNo()) {
+        System.out.println("\n----------------------");
+        System.out.println("[승인 대기중인 스터디입니다.]");
+        return;
+      }
+    }
+
     System.out.println("\n----------------------");
     System.out.println("1. 구성원");
     System.out.println("2. 캘린더");
@@ -95,5 +94,4 @@ public class MyStudyDetailHandler implements Command {
       default : return;
     }
   }
-  //}
 }
