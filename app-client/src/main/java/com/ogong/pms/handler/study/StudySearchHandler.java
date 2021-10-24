@@ -29,21 +29,25 @@ public class StudySearchHandler implements Command {
 
     List<Study> studyList = studyDao.findByKeyword(input);
 
+    if (studyList.isEmpty()) {
+      System.out.println("해당 검색어의 스터디가 존재하지 않습니다.");
+      return;
+    }
     for (Study searchStudy : studyList) {
 
-      if (searchStudy.getStudyTitle().contains(input) ||
-          searchStudy.getSubjectName().contains(input) ||
-          searchStudy.getArea().contains(input)) {
-        System.out.printf(" \n (%s)\n", searchStudy.getStudyNo());
-        System.out.printf(" [%s]\n", searchStudy.getStudyTitle());
-        System.out.printf(" >> 조장 : %s\n", searchStudy.getOwner().getPerNickname());
-        System.out.printf(" >> 분야 : %s\n", searchStudy.getSubjectName());
-        System.out.printf(" >> 지역 : %s\n", searchStudy.getArea());
-        System.out.printf(" >> 인원수 : %s/%s명\n", searchStudy.getMembers().size() + 1, searchStudy.getNumberOfPeple());
-        System.out.printf(" >> 대면 : %s\n", searchStudy.getFaceName());
-        System.out.printf(" >> 소개글 : %s\n", searchStudy.getIntroduction());
-        count++;
-      }
+      //      if (searchStudy.getStudyTitle().contains(input) ||
+      //          searchStudy.getSubjectName().contains(input) ||
+      //          searchStudy.getArea().contains(input)) {
+      System.out.printf(" \n (%s)\n", searchStudy.getStudyNo());
+      System.out.printf(" [%s]\n", searchStudy.getStudyTitle());
+      System.out.printf(" >> 조장 : %s\n", searchStudy.getOwner().getPerNickname());
+      System.out.printf(" >> 분야 : %s\n", searchStudy.getSubjectName());
+      System.out.printf(" >> 지역 : %s\n", searchStudy.getArea());
+      System.out.printf(" >> 인원수 : %s/%s명\n", searchStudy.getMembers().size() + 1, searchStudy.getNumberOfPeple());
+      System.out.printf(" >> 대면 : %s\n", searchStudy.getFaceName());
+      System.out.printf(" >> 소개글 : %s\n", searchStudy.getIntroduction());
+      count++;
+      //      }
     }
 
     if (count == 0) {

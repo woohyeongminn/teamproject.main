@@ -2,7 +2,6 @@ package com.ogong.pms.handler.myStudy.guilder;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -33,17 +32,21 @@ public class WatingGuilderListHandler implements Command {
     System.out.println(myStudy);
 
     // 해당 스터디에 구성원 목록 가져오기
-    List<Guilder> guilderList = studyDao.findByGuilderAll(myStudy.getStudyNo());
-    System.out.println(guilderList);
+    //    List<Guilder> guilderList = studyDao.findByGuilderAll(myStudy.getStudyNo());
+    //    System.out.println(guilderList);
+    //
+    //    for (Guilder guilder : guilderList) {
+    //      if (guilder.getGuilderStatus() == 2) { 
+    //        myStudy.getMembers().add(guilder.getMember());
+    //
+    //      } else if (guilder.getGuilderStatus() == 1) { 
+    //        myStudy.getWatingMember().add(guilder.getMember());
+    //      }
+    //    }
 
-    for (Guilder guilder : guilderList) {
-      if (guilder.getGuilderStatus() == 2) { 
-        myStudy.getMembers().add(guilder.getMember());
+    List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());
+    myStudy.setWatingMember(waitingGuilder);
 
-      } else if (guilder.getGuilderStatus() == 1) { 
-        myStudy.getWatingMember().add(guilder.getMember());
-      }
-    }
 
     if (!myStudy.getWatingMember().isEmpty()) {
       for (Member m : myStudy.getWatingMember()) {
