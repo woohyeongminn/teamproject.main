@@ -1,3 +1,4 @@
+
 package com.ogong.pms.domain;
 
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ public class Study {
   private int watingCountMember;                            // 승인대기중인 구성원 수
   private List<Member> watingMember = new ArrayList<>();    // 승인대기중
 
-  private int CountMember;                                  // 참여중인 구성원 수
+  private int countMember;                                  // 참여중인 구성원 수
   private List<Member> members = new ArrayList<>();         // 참여중
 
-  private int CountBookMember;                              // 북마크 수
+  private int countBookMember;                              // 북마크 수
   private List<Member> bookMarkMember = new ArrayList<>();  // 북마크한 회원
 
   private List<Calender> myStudyCalender = new ArrayList<>();       // 내 스터디 캘린더
@@ -39,8 +40,8 @@ public class Study {
         + ", faceNo=" + faceNo + ", faceName=" + faceName + ", introduction=" + introduction
         + ", registeredDate=" + registeredDate + ", score=" + score + ", owner=" + owner
         + ", status=" + status + ", watingCountMember=" + watingCountMember + ", watingMember="
-        + watingMember + ", CountMember=" + CountMember + ", members=" + members
-        + ", CountBookMember=" + CountBookMember + ", bookMarkMember=" + bookMarkMember
+        + watingMember + ", CountMember=" + countMember + ", members=" + members
+        + ", CountBookMember=" + countBookMember + ", bookMarkMember=" + bookMarkMember
         + ", myStudyCalender=" + myStudyCalender + ", myStudyFreeBoard=" + myStudyFreeBoard
         + ", myStudyToDo=" + myStudyToDo + "]";
   }
@@ -226,19 +227,19 @@ public class Study {
   }
 
   public int getCountMember() {
-    return CountMember;
+    return countMember;
   }
 
   public void setCountMember(int countMember) {
-    CountMember = countMember;
+    countMember = countMember;
   }
 
   public int getCountBookMember() {
-    return CountBookMember;
+    return countBookMember;
   }
 
   public void setCountBookMember(int countBookMember) {
-    CountBookMember = countBookMember;
+    countBookMember = countBookMember;
   }
 
   public int getWatingCountMember() {
