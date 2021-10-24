@@ -1,1 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ogong.pms.dao.ToDoDao">
+
+	<resultMap type="ToDo" id="ToDoMap">
+		<id column="todolist_no" property="todoNo" />
+		<result column="study_no" property="studyNo" />
+		<result column="title" property="todoTitle" />
+		<result column="content" property="todoContent" />
+		<!-- <result column="member_no" property="todoWriter" /> -->
+		<result column="note" property="todoRemark" />
+		<result column="create_dt" property="todoDate" />
+		<result column="progress_no" property="todoStatus" />
+
+		<association property="todoWriter" javaType="Member">
+			<id column="member_no" property="perNo" />
+			<result column="member_nickname" property="perNickname" />
+		</association>
+	</resultMap>
+
+	<sql id="select1">
+		select
+		todo.todolist_no,
+		todo.study_no,
+		todo.title,
+		todo.content,
+		todo.note,
+		todo.create_dt,
+		
+		todo.progress_no,
+		tp.progress_no progress_no
+		
+		m.member_no,
+		m.member_nickname,
+		m.name owner_name,
+		status_no,
+		from
+		study_todolist todo
+		
+		inner join
+		study_guilder sg on todo.study_no=sg.study_no
+		<!-- inner join
+    study_guilder sg on todo.member_no=sg.member_no -->
+		inner join
+    member m on todo.member_no=m.member_no
+		inner join
+		study_todolist_progress tp on todo.progress_no=tp.progress_no
+	</sql>
+
+	<select id="findAll" resultMap="ToDoMap" parameterType="int">
+		<include refid="select1" />
+		where
+		todo.study_no=#{studyNo}
+		order by
+		todo.todolist_no asc
+	</select>
+
+	<select id="findByNo" resultMap="ToDoMap" parameterType="int">
+		<include refid="select1" />
+		where
+		todo.todolist_no=#{taskNo}
+	</select>
+
+	<insert id="insert" parameterType="ToDo">
+		insert into
+		study_todolist(study_no,member_no,content,deadline,task_status_no)
+		values(#{projectNo},#{owner.no},#{content},#{deadline},#{status.no})
+	</insert>
+
+	<update id="update" parameterType="task">
+		update study_todolist set
+		content=#{content},
+		deadline=#{deadline},
+		task_status_no=#{status.no},
+		member_no=#{owner.no}
+		where todolist_no=#{no}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from study_todolist
+		where todolist_no=#{taskNo}
+	</delete>
+</mapper>

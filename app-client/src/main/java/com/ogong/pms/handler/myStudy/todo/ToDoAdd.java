@@ -43,9 +43,11 @@ public class ToDoAdd implements Command {
     List <ToDo> todoList = myStudy.getMyStudyToDo();
     ToDo todo = new ToDo();
 
+    todo.setStudyNo(myStudy.getStudyNo());
     todo.setTodoContent(Prompt.inputString(" 내용: "));
     todo.setTodoRemark(Prompt.inputString(" 비고: "));
     todo.setTodoStatus(1);
+    todo.setTodoWriter(member);
     todo.setTodoDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");

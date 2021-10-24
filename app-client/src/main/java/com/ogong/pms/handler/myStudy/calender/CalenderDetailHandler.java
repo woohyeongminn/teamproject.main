@@ -42,7 +42,7 @@ public class CalenderDetailHandler implements Command {
               calenderList.get(i).getMonth(),
               calenderList.get(i).getDay(),
               calenderList.get(i).getDayOftheWeek());
-          System.out.printf(" >> 종료일 : %s\n", calenderList.get(i).getEndDay());
+          System.out.printf(" >> 종료일 : %s\n", calenderList.get(i).getEndDate());
           System.out.printf(" >> 내  용 : %s\n", calenderList.get(i).getCalenderContent());
           System.out.printf(" >> 중요도 : %s\n", 
               calenderList.get(i).getImportanceCalender());

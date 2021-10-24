@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS studycafe_holiday RESTRICT;
 DROP TABLE IF EXISTS studycafe RESTRICT;
 
 -- 투두진행상태
-DROP TABLE IF EXISTS study_todolsit_progress RESTRICT;
+DROP TABLE IF EXISTS study_todolist_progress RESTRICT;
 
 -- 투두리스트
 DROP TABLE IF EXISTS study_todolist RESTRICT;
@@ -336,22 +336,22 @@ ALTER TABLE studycafe
   MODIFY COLUMN cafe_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '스터디카페번호';
 
 -- 투두진행상태
-CREATE TABLE study_todolsit_progress (
+CREATE TABLE study_todolist_progress (
   progress_no INTEGER     NOT NULL COMMENT '진행상태번호', -- 진행상태번호
   name        VARCHAR(50) NOT NULL COMMENT '진행상태명' -- 진행상태명
 )
 COMMENT '투두진행상태';
 
 -- 투두진행상태
-ALTER TABLE study_todolsit_progress
-  ADD CONSTRAINT PK_study_todolsit_progress -- 투두진행상태 기본키
+ALTER TABLE study_todolist_progress
+  ADD CONSTRAINT PK_study_todolist_progress -- 투두진행상태 기본키
     PRIMARY KEY (
       progress_no -- 진행상태번호
     );
 
 -- 투두진행상태 유니크 인덱스
-CREATE UNIQUE INDEX UIX_study_todolsit_progress
-  ON study_todolsit_progress ( -- 투두진행상태
+CREATE UNIQUE INDEX UIX_study_todolist_progress
+  ON study_todolist_progress ( -- 투두진행상태
     name ASC -- 진행상태명
   );
 
@@ -939,11 +939,11 @@ ALTER TABLE studycafe
 
 -- 투두리스트
 ALTER TABLE study_todolist
-  ADD CONSTRAINT FK_study_todolsit_progress_TO_study_todolist -- 투두진행상태 -> 투두리스트
+  ADD CONSTRAINT FK_study_todolist_progress_TO_study_todolist -- 투두진행상태 -> 투두리스트
     FOREIGN KEY (
       progress_no -- 진행상태번호
     )
-    REFERENCES study_todolsit_progress ( -- 투두진행상태
+    REFERENCES study_todolist_progress ( -- 투두진행상태
       progress_no -- 진행상태번호
     );
 

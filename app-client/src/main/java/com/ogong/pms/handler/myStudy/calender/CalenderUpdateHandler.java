@@ -73,7 +73,7 @@ public class CalenderUpdateHandler implements Command {
 
     Date updateEndDay; 
     while (true) {
-      updateEndDay =  Prompt.inputDate(" 종료일(" + calender.getEndDay() + ") : ");
+      updateEndDay =  Prompt.inputDate(" 종료일(" + calender.getEndDate() + ") : ");
       if ((updateEndDay.getMonth() + 1 < updateMonth) || 
           ((updateEndDay.getMonth() + 1 == updateMonth) && (updateEndDay.getDate() < updateDay))) {
         System.out.println("\n >> 등록일 이후 날짜를 입력하세요.\n");
@@ -93,7 +93,7 @@ public class CalenderUpdateHandler implements Command {
     calender.setDayOftheWeek(updateDayOfTheWeek);
     calender.setCalenderContent(updateContent);
     //calender.setImportanceCalender(updateImportant);
-    calender.setEndDay(updateEndDay);
+    calender.setEndDate(updateEndDay);
 
     studyDao.update(myStudy);
 
