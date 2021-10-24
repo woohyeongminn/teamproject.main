@@ -9,20 +9,13 @@ public class ToDo {
 
   private int todoNo;             // 투두리스트 번호
   private int studyNo;            // 스터디 번호
-  private String todoTitle;       // 투두리스트 제목
+  // private String todoTitle;    // [필요 X] 투두리스트 제목
   private String todoContent;     // 투두리스트 내용
   private Member todoWriter;      // 투두리스트 작성자
   private String todoRemark;      // 투두리스트 비고
   private Date todoDate;          // 투두리스트 등록일
   private int todoStatus;         // 투두리스트 상태
   // private String todocomplete; // [필요 X] 완료된 투두리스트
-
-  @Override
-  public String toString() {
-    return "ToDo [todoNo=" + todoNo + ", studyNo=" + studyNo + ", todoTitle=" + todoTitle
-        + ", todoContent=" + todoContent + ", todoWriter=" + todoWriter + ", todoRemark="
-        + todoRemark + ", todoDate=" + todoDate + ", todoStatus=" + todoStatus + "]";
-  }
 
   public int getTodoNo() {
     return todoNo;
@@ -38,14 +31,6 @@ public class ToDo {
 
   public void setStudyNo(int studyNo) {
     this.studyNo = studyNo;
-  }
-
-  public String getTodoTitle() {
-    return todoTitle;
-  }
-
-  public void setTodoTitle(String todoTitle) {
-    this.todoTitle = todoTitle;
   }
 
   public String getTodoContent() {
