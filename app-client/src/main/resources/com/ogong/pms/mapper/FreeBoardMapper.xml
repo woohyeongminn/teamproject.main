@@ -24,7 +24,7 @@
     
     <collection property="freeBoardFile" ofType="FreeBoardFile">
       <id column="file_no" property="atcFileNo" />
-      <result column="st_board_no" property="boardNo" />
+      <result column="file_board_no" property="boardNo" />
       <result column="atcFileName" property="atcFileName" />
     </collection>
   </resultMap>
@@ -40,6 +40,7 @@
 	     m.member_no member_no,
 	     m.nickname member_nickname,
 	     m.status member_status,
+	     sbf.st_board_no file_board_no,
 	     sbf.file_no file_no,
 	     sbf.name atcFileName,
 	     (select count(*) from study_board_file sbf where sb.st_board_no=sbf.st_board_no) count_file,
@@ -60,7 +61,7 @@
   <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
     <include refid="select1"/>
     where
-      s.study_no=#{boardDao}
+      sb.st_board_no=#{boardDao}
     order by s.study_no
   </select>
   
