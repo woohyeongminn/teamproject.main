@@ -25,13 +25,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
-<<<<<<< HEAD
-=======
-import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
 import com.ogong.pms.dao.impl.MybatisFreeBoardDao;
-import com.ogong.pms.dao.impl.MybatisMemberDao;
-import com.ogong.pms.dao.impl.MybatisNoticeDao;
->>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
 import com.ogong.pms.dao.impl.MybatisStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
