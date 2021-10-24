@@ -488,12 +488,6 @@ public class MariadbStudyDao implements StudyDao {
     //    }
     return null;
   }
-  // 내 스터디 전체
-  @Override
-  public Study findByMyAll() throws Exception {
-    return null;
-  }
-
 
   // 내 스터디 상세
   @Override
