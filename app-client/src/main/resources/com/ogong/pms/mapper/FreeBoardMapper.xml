@@ -56,7 +56,14 @@
 	 where
       sb.study_no=#{studyNo}
   </select>
-   
+  
+  <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      s.study_no=#{boardDao}
+    order by s.study_no
+  </select>
+  
   <insert id="insert" parameterType="FreeBoard"
     useGeneratedKeys="true" keyColumn="st_board_no" keyProperty="freeBoardNo">
 	   insert into study_board
@@ -72,12 +79,5 @@
 	    values(#{atcFileName}, #{boardNo})
   </insert>
   
-  <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
-    <include refid="select1"/>
-    where
-      s.study_no=#{studyNo}
-    order by s.study_no
-  </select>
-   
   </mapper>
   
