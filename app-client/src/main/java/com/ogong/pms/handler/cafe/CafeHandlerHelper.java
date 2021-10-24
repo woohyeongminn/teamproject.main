@@ -54,8 +54,8 @@ public abstract class CafeHandlerHelper {
     System.out.printf(" 상태(%s) : \n", getCafeStatusLabel(status));
     int input = 0;
     do {
-      System.out.println(" 1: 운영중");
-      System.out.println(" 2: 운영중단");
+      System.out.println(" 2 : 운영중");
+      System.out.println(" 3 : 운영중단");
       input = Prompt.inputInt(" > ");
 
       if (input != GENERAL && input != STOP) {
@@ -65,4 +65,70 @@ public abstract class CafeHandlerHelper {
 
     return input;
   }
+
+  //  public static List<CafeImage> promptCafeImage(Cafe cafe) {
+  //
+  //    List<CafeImage> imageList = cafe.getCafeImgs(); // 원래 이미지 리스트
+  //    HashMap<Integer,CafeImage> params = new HashMap<>(); // 리스트 1부터 출력해서 쓰는,,
+  //    List<CafeImage> updateImageList = new ArrayList<>(); // 삭제할 이미지 리스트
+  //
+  //    if (!imageList.isEmpty()) {
+  //      for (int i = 0; i < imageList.size(); i++) {
+  //        CafeImage cafeImage = imageList.get(i);
+  //        params.put(i+1, cafeImage);
+  //
+  //        System.out.printf(" %d: %s\n",
+  //            i+1,
+  //            cafeImage.getName());
+  //      }
+  //
+  //      System.out.println();
+  //
+  //      while (true) {
+  //        try {
+  //          int deleteImageNo = Prompt.inputInt(" 삭제할 이미지 번호 (완료:빈 문자열) : ");
+  //
+  //          if (deleteImageNo < 0 && deleteImageNo > imageList.size()) {
+  //            System.out.println(" >> 번호를 다시 입력해주세요.");
+  //            continue;
+  //          }
+  //
+  //          CafeImage cafeImage = params.get(deleteImageNo);
+  //          cafeImage.setStatus(CafeImage.DELETE);
+  //          updateImageList.add(cafeImage);
+  //
+  //        } catch (NumberFormatException e) {
+  //          break;
+  //        }
+  //      }
+  //    }
+  //
+  //    System.out.println();
+  //
+  //    String input = Prompt.inputString(" 사진을 등록하시겠습니까? (네 / 아니오) ");
+  //    if (!input.equalsIgnoreCase("네")) {
+  //      return null;
+  //    }
+  //
+  //    while(true) {
+  //      String fileName = Prompt.inputString(" 등록할 사진 (완료:빈 문자열) : ");
+  //
+  //      if (fileName.length() == 0) {
+  //        break;
+  //      }
+  //
+  //      CafeImage cafeImage = new CafeImage();
+  //      cafeImage.setName(fileName);
+  //      cafeImage.setCafeNo(cafe.getNo());
+  //      cafeImage.setStatus(CafeImage.ADD);
+  //      updateImageList.add(cafeImage);
+  //    }
+  //
+  //    for (CafeImage cafeImage : updateImageList) {
+  //      System.out.println(cafeImage);
+  //    }
+  //
+  //    return updateImageList;
+  //  }
 }
+

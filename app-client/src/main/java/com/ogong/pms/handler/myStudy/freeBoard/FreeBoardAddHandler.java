@@ -3,8 +3,10 @@ package com.ogong.pms.handler.myStudy.freeBoard;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.FreeBoardFile;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -15,9 +17,11 @@ import com.ogong.util.Prompt;
 public class FreeBoardAddHandler implements Command {
 
   StudyDao studyDao;
+  FreeBoardDao freeboardDao;
 
-  public FreeBoardAddHandler(StudyDao studyDao) {
+  public FreeBoardAddHandler(StudyDao studyDao, FreeBoardDao freeboardDao) {
     this.studyDao = studyDao;
+    this.freeboardDao = freeboardDao;
   }
 
   @Override
@@ -35,13 +39,28 @@ public class FreeBoardAddHandler implements Command {
     List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
     FreeBoard freeBoard = new FreeBoard();
+    FreeBoardFile file = new FreeBoardFile();
+    List<FreeBoardFile> fileList = new ArrayList<>();
 
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
     freeBoard.setFreeBoardContent(Prompt.inputString(" 내용 : "));
-    freeBoard.setFreeBoardAtcFile(Prompt.inputString(" 첨부파일 : "));
+
+    while (true) {
+      String inputFile = Prompt.inputString(" 첨부파일 (완료:Enter) : ");
+
+      if (inputFile.equals("")) {
+        System.out.println(" >> 첨부파일 등록이 완료되었습니다.");
+        break;
+      }
+
+      fileList.add(file);
+      break;
+    }
+
+    freeBoard.setFreeBoardFile(fileList);
     freeBoard.setFreeBoardWriter(member);
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
-    freeBoard.setComment(new ArrayList<>());
+    //freeBoard.setComment(new ArrayList<>());
     freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString(" 게시글을 등록하시겠습니까? (네 / 아니오) ");
@@ -51,17 +70,24 @@ public class FreeBoardAddHandler implements Command {
     }
 
     // 마지막 자유게시판 번호 찾아서 새 게시글 등록시 +1 되도록 기능 구현
-    FreeBoard lastFreeBoard = null;
-    if (!freeBoardList.isEmpty()) {
-      lastFreeBoard = freeBoardList.get(freeBoardList.size() - 1);
-      freeBoard.setFreeBoardNo(lastFreeBoard.getFreeBoardNo() + 1);
-    } else {
-      freeBoard.setFreeBoardNo(1);
-    }
+    //    FreeBoard lastFreeBoard = null;
+    //    if (!freeBoardList.isEmpty()) {
+    //      lastFreeBoard = freeBoardList.get(freeBoardList.size() - 1);
+    //      freeBoard.setFreeBoardNo(lastFreeBoard.getFreeBoardNo() + 1);
+    //    } else {
+    //      freeBoard.setFreeBoardNo(1);
+    //    }
+
     freeBoardList.add(freeBoard);
     myStudy.setMyStudyFreeBoard(freeBoardList);
 
-    studyDao.update(myStudy);
+    //studyDao.update(myStudy);
+
+
+    freeboardDao.insert(freeBoard);
+    for (FreeBoardFile file2 : freeBoard.getFreeBoardFile()) {
+      freeboardDao.insertFile(file2);
+    }
 
     System.out.println(" >> 게시글이 등록되었습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);

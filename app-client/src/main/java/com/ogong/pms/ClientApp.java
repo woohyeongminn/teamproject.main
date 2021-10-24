@@ -20,6 +20,7 @@ import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
@@ -27,6 +28,7 @@ import com.ogong.pms.dao.impl.MybatisAdminDao;
 import com.ogong.pms.dao.impl.MybatisAskBoardDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
+import com.ogong.pms.dao.impl.MybatisFreeBoardDao;
 import com.ogong.pms.dao.impl.MybatisMemberDao;
 import com.ogong.pms.dao.impl.MybatisNoticeDao;
 import com.ogong.pms.dao.impl.MybatisStudyDao;
@@ -115,7 +117,6 @@ import com.ogong.pms.handler.myStudy.calender.CalenderUpdateHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentUpdateHandler;
-import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDetailHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardListHandler;
@@ -235,7 +236,9 @@ public class ClientApp {
     AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
     CafeDao cafeDao = new MybatisCafeDao(sqlSession);
     StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
     //StudyDao studyDao = new MariadbStudyDao(con);
+    //ToDoDao todoDao = new MybatisTodoDao(sqlSession);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -327,9 +330,9 @@ public class ClientApp {
     commandMap.put("/myStudy/calenderDelete", new CalenderDeleteHandler(studyDao));
 
     PromptFreeBoard promptFreeBoard = new PromptFreeBoard(requestAgent);
-    commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao));
-    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao));
-    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard));
+    commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
+    //commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, FreeBoardDao));
+    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
 

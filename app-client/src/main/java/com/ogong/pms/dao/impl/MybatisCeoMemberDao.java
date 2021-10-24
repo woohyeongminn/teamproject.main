@@ -1,6 +1,5 @@
 package com.ogong.pms.dao.impl;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -9,7 +8,6 @@ import com.ogong.pms.domain.CeoMember;
 
 public class MybatisCeoMemberDao implements CeoMemberDao {
 
-  Connection con;
   SqlSession sqlSession;
 
   public MybatisCeoMemberDao(SqlSession sqlSession){

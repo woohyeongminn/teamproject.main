@@ -110,7 +110,6 @@
       c.view_cnt,
       sp.photo_no,
       sp.name photo_name, 
-      sh.date, 
       c.operating_status_no, 
       c.member_no,
       cm.bossname, 
@@ -118,7 +117,6 @@
     from 
       studycafe c
       left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
-      left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
       join ceo_member cm on c.member_no=cm.member_no
   </sql>
   
@@ -129,7 +127,7 @@
   
   <sql id="listOrder1">
     order by 
-      cafe_no asc
+      c.operating_status_no asc,c.cafe_no asc
   </sql>
   
   <!-- 관리자용 전체리스트 -->
@@ -193,6 +191,32 @@
     (#{CafeImage.name},#{cafeNo})
     </foreach>
   </insert>
+  
+  <update id="updateCafe" parameterType="cafe">
+    update studycafe
+    <set>
+      <if test="info != null">
+      info=#{info},
+      </if>
+      <if test="location != null">
+      location=#{location},
+      </if>
+      <if test="phone != null">
+      phone=#{phone},
+      </if>
+      <if test="openTime != null">
+      open_time=#{openTime,jdbcType=TIME},
+      </if>
+      <if test="closeTime != null">
+      close_time=#{closeTime,jdbcType=TIME},
+      </if>
+      <if test="cafeStatus != null">
+      operating_status_no=#{cafeStatus}
+      </if>
+    </set>
+    where
+      cafe_no=#{no}
+  </update>
 
   <!-- 관리자 카페 승인  -->
   <update id="updateCafeStatusToGENERAL" parameterType="int">
@@ -207,6 +231,16 @@
 	     operating_status_no = 4
 	  where
 	     cafe_no = #{cafeNo}
+  </delete>
+  
+  <delete id="deleteCafeImage" parameterType="map">
+    delete from studycafe_photo
+    <where>
+      photo_no in
+      <foreach collection="fileNames" item="CafeImage" separator=","  open="(" close=")">
+        #{CafeImage.no}
+      </foreach>
+    </where>
   </delete>
   
   <!-- 금주의 휴무일 가져오기 -->
@@ -356,7 +390,7 @@
         people=#{people},
       </if>
       <if test="roomPrice != null">
-        hourly_amount=#{roomPrice},
+        hourly_amount=#{roomPrice}
       </if>
     </set>
     where studyroom_no=#{roomNo}
