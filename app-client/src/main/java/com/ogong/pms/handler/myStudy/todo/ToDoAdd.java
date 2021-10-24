@@ -1,8 +1,8 @@
 package com.ogong.pms.handler.myStudy.todo;
 
 import java.sql.Date;
-import java.util.List;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
@@ -14,12 +14,14 @@ import com.ogong.util.Prompt;
 public class ToDoAdd implements Command {
 
   StudyDao studyDao;
+  ToDoDao toDoDao;
 
-  public ToDoAdd(StudyDao studyDao) {
+  public ToDoAdd(StudyDao studyDao, ToDoDao toDoDao) {
     this.studyDao = studyDao;
+    this.toDoDao = toDoDao;
   }
 
-  //등록
+  // 등록
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 등록");
@@ -40,14 +42,14 @@ public class ToDoAdd implements Command {
       return;
     }
 
-    List <ToDo> todoList = myStudy.getMyStudyToDo();
+    // List <ToDo> todoList = myStudy.getMyStudyToDo();
     ToDo todo = new ToDo();
 
     todo.setStudyNo(myStudy.getStudyNo());
     todo.setTodoContent(Prompt.inputString(" 내용: "));
     todo.setTodoRemark(Prompt.inputString(" 비고: "));
     todo.setTodoStatus(1);
-    // todo.setTodoWriter(member);
+    todo.setTodoWriter(member);
     todo.setTodoDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
@@ -58,22 +60,22 @@ public class ToDoAdd implements Command {
     }
 
     // 마지막 Todo 번호 찾아서 새 Todo 등록시 +1 되도록 기능 구현
-    ToDo lastTodo = null;
-    if (!todoList.isEmpty()) {
-      lastTodo = todoList.get(todoList.size() - 1);
-      todo.setTodoNo(lastTodo.getTodoNo() + 1);
-    } else {
-      todo.setTodoNo(1);
-    }
-    todoList.add(todo);
-    myStudy.setMyStudyToDo(todoList);
+    // ToDo lastTodo = null;
+    // if (!todoList.isEmpty()) {
+    // lastTodo = todoList.get(todoList.size() - 1);
+    // todo.setTodoNo(lastTodo.getTodoNo() + 1);
+    // } else {
+    // todo.setTodoNo(1);
+    // }
+    // todoList.add(todo);
+    // myStudy.setMyStudyToDo(todoList);
 
-    studyDao.update(myStudy);
+    toDoDao.insert(todo);
+    // studyDao.update(myStudy);
 
     System.out.println(" >> 할 일이 등록되었습니다.");
     request.getRequestDispatcher("/myStudy/todoList").forward(request);
   }
 }
-
 
 

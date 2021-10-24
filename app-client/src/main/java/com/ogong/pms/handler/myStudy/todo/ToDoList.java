@@ -2,6 +2,7 @@ package com.ogong.pms.handler.myStudy.todo;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.Command;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class ToDoList implements Command {
 
   StudyDao studyDao;
+  ToDoDao toDoDao;
 
-  public ToDoList(StudyDao studyDao) {
+  public ToDoList(StudyDao studyDao, ToDoDao toDoDao) {
     this.studyDao = studyDao;
+    this.toDoDao = toDoDao;
   }
 
   //등록
@@ -26,7 +29,8 @@ public class ToDoList implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
-    List <ToDo> todoList = myStudy.getMyStudyToDo();
+    List <ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());
+    // List <ToDo> todoList = myStudy.getMyStudyToDo();
 
     if (todoList.isEmpty()) {
       System.out.println(" 등록된 TodoList가 없습니다.");

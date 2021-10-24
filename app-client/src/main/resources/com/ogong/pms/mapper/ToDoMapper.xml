@@ -65,7 +65,7 @@
   <insert id="insert" parameterType="ToDo">
     insert into
     study_todolist(study_no,member_no,content,note,progress_no)
-    values(#{studyNo},#{perNo},#{todoContent},#{todoRemark},#{todoStatus})
+    values(#{studyNo},#{todoWriter.perNo},#{todoContent},#{todoRemark},#{todoStatus})
   </insert>
 
   <update id="update" parameterType="ToDo">
