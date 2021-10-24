@@ -238,6 +238,7 @@ public class ClientApp {
     StudyDao studyDao = new MybatisStudyDao(sqlSession);
     FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
     //StudyDao studyDao = new MariadbStudyDao(con);
+    //ToDoDao todoDao = new MybatisTodoDao(sqlSession);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 

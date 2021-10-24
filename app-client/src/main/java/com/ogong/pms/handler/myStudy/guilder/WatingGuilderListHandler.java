@@ -25,20 +25,22 @@ public class WatingGuilderListHandler implements Command {
     System.out.println("▶ 승인 대기 목록");
     System.out.println();
 
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
 
+    System.out.println(myStudy);
+
     // 해당 스터디에 구성원 목록 가져오기
     List<Guilder> guilderList = studyDao.findByGuilderAll(myStudy.getStudyNo());
-
     System.out.println(guilderList);
 
     for (Guilder guilder : guilderList) {
-      if (guilder.getGuilderStatus() == 2) {
+      if (guilder.getGuilderStatus() == 2) { 
         myStudy.getMembers().add(guilder.getMember());
 
-      } else if (guilder.getGuilderStatus() == 1) {
+      } else if (guilder.getGuilderStatus() == 1) { 
         myStudy.getWatingMember().add(guilder.getMember());
       }
     }
@@ -47,6 +49,7 @@ public class WatingGuilderListHandler implements Command {
       for (Member m : myStudy.getWatingMember()) {
         System.out.println(m.getPerNickname());
       }
+
       System.out.println("\n----------------------");
       System.out.println(" [ 승인 / 거절 ] ");
       System.out.println();
