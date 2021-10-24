@@ -67,16 +67,13 @@
   
   <insert id="insert" parameterType="FreeBoard"
     useGeneratedKeys="true" keyColumn="st_board_no" keyProperty="freeBoardNo">
-	   insert into study_board
-	    (title, content, view_ct, created_dt, member_no, study_no)
-	   values
-	    (#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount},
-	     #{freeBoardRegisteredDate}, #{freeBoardWriter.perNo}, #{studyNo})
+	   insert into study_board(title, content, view_ct, member_no, study_no)
+	   values(#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount}, #{freeBoardWriter.perNo}, #{studyNo})
   </insert>
   
   <insert id="insertFile" parameterType="map"
    useGeneratedKeys="true" keyColumn="file_no" keyProperty="atcFileNo">
-	    insert into study_board_file (name, st_board_no)
+	    insert into study_board_file(name, st_board_no)
 	    values(#{atcFileName}, #{boardNo})
   </insert>
   
