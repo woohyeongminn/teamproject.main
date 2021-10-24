@@ -7,50 +7,90 @@
 
   <resultMap type="Study" id="StudyMap">
     <id column="study_no" property="studyNo"/> 
-    <result column="name" property="studyTitle"/>
+    <result column="study_title" property="studyTitle"/>
     <result column="subject_no" property="subjectNo"/>
     <result column="subject_name" property="subjectName"/>
+    <result column="area" property="area"/>
     <result column="no_people" property="numberOfPeple"/>
     <result column="face_no" property="faceNo"/>
     <result column="face_name" property="faceName"/>
     <result column="intreduction" property="introduction"/>
     <result column="created_dt" property="registeredDate"/>
-    <result column="score" property="score"/>
-  
+    <result column="study_score" property="score"/>
+    <result column="count_guilder" property="countMember"/>
+    <result column="count_wating_guilder" property="watingCountMember"/>
+    <result column="count_bookmark" property="countBookMember"/>
+    
+    <association property="owner" javaType="Member">
+    <id column="owner_no" property="perNo"/>
+    <result column="owner_name" property="perNickname"/>
+    </association>
+    
   </resultMap>
-  
-  
+
+  <sql id="select1">
+  select
+     s.study_no,
+     s.name study_title,
+     ss.subject_no subject_no,
+     ss.name subject_name,
+     s.area,
+     s.no_people,
+     sfs.face_no face_no,
+     sfs.name face_name,
+     s.introduction,
+     s.created_dt,
+     s.score study_score,
+     s.member_no owner_no,
+     m.nickname owner_name,
+    (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
+    (select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,
+    (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
+   from study s
+     left outer join study_subject ss on s.subject_no=ss.subject_no
+     left outer join study_face_status sfs on s.face_no=sfs.face_no
+     left outer join member m on s.member_no=m.member_no
+     left outer join study_guilder sg on s.study_no=sg.study_no
+     left outer join member m2 on sg.member_no=m2.member_no
+     left outer join study_bookmark sb on s.study_no=sb.study_no
+  </sql>
 
   <select id="findAll" resultMap="StudyMap">
-    select s.study_no,
-            s.name,
-            ss.name subject_name,
-            ss.subject_no subject_no,
-            s.no_people,
-            sfs.name face_name,
-            sfs.face_no face_no,
-            sl.name area_name,
-            sl.location_no area_no,
-            s.introduction,
-            s.created_dt,
-            s.member_no owner_no,
-            m.nickname owner_name,
-            sg.status status,
-            sg.member_no guilder_no,
-            m2.nickname guilder_nickname,
-            s.score study_score,
-            sb.member_no book_member_no,
-            s.score
-    from study s"
-    left outer join study_subject ss on s.subject_no=ss.subject_no
-    left outer join study_face_status sfs on s.face_no=sfs.face_no
-    left outer join member m on s.member_no=m.member_no
-    left outer join study_guilder sg on s.study_no=sg.study_no
-    left outer join member m2 on sg.member_no=m2.member_no
-    left outer join study_multiple_location sml on sml.study_no=s.study_no
-    left outer join study_location sl on sml.location_no=sl.location_no
-    left outer join study_bookmark sb on sb.study_no=s.study_no
+	 <include refid="select1"/>
+	   group by s.study_no
+	   order by s.study_no
   </select>
+
+  <select id="findByNo" resultMap="StudyMap" parameterType="int">
+  <include refid="select1"/>
+	  where
+	    s.study_no=#{studyNo}
+	  order by s.study_no
+  </select>
+  
+	<insert id="insert" parameterType="Study">
+	insert into study
+	   (name, subject_no, no_people, face_no, introduction, area, member_no)
+	   values
+	   (#{studyTitle}, #{subjectNo}, #{numberOfPeple}, #{faceNo}, #{introduction}, #{area}, #{owner.perNo})
+	</insert>
+	
+	<update id="update" parameterType="Study">
+	update study set
+	  name=#{studyTitle},no_people=#{numberOfPeple},face_no=#{faceNo},introduction=#{introduction}
+	 where
+	  study_no=#{studyNo}
+	</update>
+	
+	<delete id="deleteBookmark" parameterType="int">
+	delete from study_bookmark
+	  where study_no=#{studyNo}
+	</delete>
+	
+	<delete id="deleteStudy" parameterType="map">
+	delete from study
+	  where study_no=#{param1} and member_no=#{param2}
+	</delete>
 
 </mapper>
 
