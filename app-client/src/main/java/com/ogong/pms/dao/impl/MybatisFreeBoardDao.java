@@ -37,7 +37,7 @@ public class MybatisFreeBoardDao implements FreeBoardDao {
 
   @Override
   public List<FreeBoard> findAll(int studyNo) throws Exception {
-    return sqlSession.selectList("FreeBoardMapper.findAll");
+    return sqlSession.selectList("FreeBoardMapper.findAll", studyNo);
   }
 
   @Override

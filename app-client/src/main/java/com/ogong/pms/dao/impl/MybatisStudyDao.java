@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
@@ -75,19 +74,19 @@ public class MybatisStudyDao implements StudyDao {
 
   @Override
   public List<Member> findByWaitingGuilderAll(int studyNo) throws Exception {
-    return sqlSession.selectList("GuilderMapper.waiting", studyNo);
+    return sqlSession.selectList("StudyMapper.findByWaitingGuilderAll", studyNo);
   }
 
   @Override
   public List<Member> findByGuildersAll(int studyNo) throws Exception {
-    return sqlSession.selectList("GuilderMapper.guilder", studyNo);
+    return sqlSession.selectList("StudyMapper.findByGuildersAll", studyNo);
   }
 
   // 내가 들어가있는 스터디 목록
-  @Override
-  public List<Guilder> findByGuilderMyAll(int memberNo) throws Exception {
-    return sqlSession.selectList("StudyMapper.findByGuilderMyAll", memberNo);
-  }
+  //  @Override
+  //  public List<Guilder> findByGuilderMyAll(int memberNo) throws Exception {
+  //    return sqlSession.selectList("GuilderMapper.findByGuilderMyAll", memberNo);
+  //  }
 
   // 신청하기(joinHandler)
   @Override
@@ -96,7 +95,7 @@ public class MybatisStudyDao implements StudyDao {
     params.put("studyNo", studyNo);
     params.put("memberNo", memberNo);
 
-    sqlSession.insert("StudyMapper.insertGuilder", params);
+    sqlSession.insert("GuilderMapper.insertGuilder", params);
     sqlSession.commit();
 
   }
@@ -107,7 +106,7 @@ public class MybatisStudyDao implements StudyDao {
     HashMap<String,Object> params = new HashMap<>();
     params.put("memberNo", memberNo);
     params.put("studyNo", studyNo);
-    sqlSession.update("StudyMapper.updateOwner", params);
+    sqlSession.update("GuilderMapper.updateOwner", params);
     sqlSession.commit();
   }
 
@@ -117,7 +116,7 @@ public class MybatisStudyDao implements StudyDao {
     HashMap<String,Object> params = new HashMap<>();
     params.put("memberNo", memberNo);
     params.put("studyNo", studyNo);
-    sqlSession.update("StudyMapper.updateGuilder", params);
+    sqlSession.update("GuilderMapper.updateGuilder", params);
     sqlSession.commit();
   }
 
@@ -127,7 +126,7 @@ public class MybatisStudyDao implements StudyDao {
     HashMap<String,Object> params = new HashMap<>();
     params.put("memberNo", memberNo);
     params.put("studyNo", studyNo);
-    sqlSession.update("StudyMapper.deleteGuilder", params);
+    sqlSession.update("GuilderMapper.deleteGuilder", params);
     sqlSession.commit();
   }
 

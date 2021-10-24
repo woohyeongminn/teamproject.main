@@ -28,17 +28,26 @@
     
   </resultMap>
   
+  <!--  
   <resultMap type="Guilder" id="GuilderMap">
-	  <result column="study_no" property="studyNo"/> 
-	  <result column="guilder_status" property="guilderStatus"/> 
-	  
-	  <association property="member" javaType="Member">
-    <id column="member_no" property="perNo"/>
-    <result column="member_name" property="perName"/>
-    <result column="member_nickname" property="perNickname"/>
+     <result column="study_no" property="studyNo"/> 
+     <result column="guilder_status" property="guilderStatus"/> 
+     
+     <association property="guilder" javaType="Member">
+    <id column="guilder_no" property="perNo"/>
+    <result column="guilder_name" property="perName"/>
+    <result column="guilder_nickname" property="perNickname"/>
     </association>
     
   </resultMap>
+   -->
+  
+  <resultMap type="Member" id="MemberMap">
+		<id column="member_no" property="perNo"/>
+		<result column="member_name" property="perName"/>
+		<result column="member_nickname" property="perNickname"/>
+  </resultMap>
+
 
 <!--  ===[스터디 출력 중복]=== -->
   <sql id="select1">
@@ -70,9 +79,7 @@
   
   <!--  ===[구성원 출력 중복]=== -->
   <sql id="select2">
- select
-      sg.study_no,
-      sg.status guilder_status,
+   select
       sg.member_no,
       m.name member_name,
       m.nickname member_nickname
@@ -81,7 +88,6 @@
     join
       member m on m.member_no=sg.member_no
   </sql>
-
 
 <!--  ===========================[스터디]=========================== -->
  
@@ -125,16 +131,16 @@
   
   <!--  ===[전체 스터디 목록]=== -->
   <select id="findAll" resultMap="StudyMap">
-	 <include refid="select1"/>
-	   group by s.study_no
-	   order by s.study_no
+    <include refid="select1"/>
+      group by s.study_no
+      order by s.study_no
   </select>
 
  <!--  ===[스터디 상세]=== -->
   <select id="findByNo" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
-	  where
-	    s.study_no=#{studyNo}
+     where
+       s.study_no=#{studyNo}
   </select>
   
   <!--  ===[내스터디 상세]=== -->
@@ -144,30 +150,39 @@
       s.study_no=#{studyNo} and (s.member_no=#{memberNo} or sg.member_no=#{memberNo})
   </select>
 
-	<!--  ===========================[구성원]=========================== -->
-	
-	<!--  ===[해당 스터디의 구성원 목록]=== -->
-	<select id="findByGuilderAll" resultMap="GuilderMap" parameterType="int">
-		<include refid="select2"/>
-		where 
-		  sg.study_no=#{studyNo}
-	</select>
-
-	 
-	<!--  ===[내가 들어가있는 스터디 목록]=== -->
-	<select id="findByGuilderMyAll" resultMap="GuilderMap" parameterType="int">
+   <!--  ===========================[구성원]=========================== -->
+   
+   <select id="findByWaitingGuilderAll" resultMap="MemberMap" parameterType="int">
     <include refid="select2"/>
     where 
-      sg.member_no=#{memberNo}
-	</select>
-	
-	
-	<!--  ===[내가 어떤 스터디에 들어가 있는지 상세]=== -->
-	<select id="findByGuilderMyNo" resultMap="GuilderMap" parameterType="map">
+      sg.study_no=#{studyNo} and sg.status=1
+   </select>
+  
+   <select id="findByGuildersAll" resultMap="MemberMap" parameterType="int">
     <include refid="select2"/>
+    where 
+      sg.study_no=#{studyNo} and sg.status=2
+   </select>
+   
+   
+   <!-- 
+   <select id="findByGuilderMyAll" resultMap="GuilderMap" parameterType="int">
+   select
+      sg.study_no,
+      sg.status guilder_status,
+      sg.member_no,
+      m.name guilder_name,
+      m.nickname guilder_nickname
+    from
+      study_guilder sg
+    join
+      member m on m.member_no=sg.member_no
     where
-     sg.member_no=#{memberNo} and sg.study_no=#{studyNo}
+     sg.member_no=#{memberNo}
+     -->
+     <!-- and sg.study_no=#{studyNo} 
   </select>
+-->
   
   <!--  ===[신청하기(joinHandler)]=== -->
   <insert id="insertGuilder" parameterType="map">
@@ -214,14 +229,13 @@
   </insert>
 
 <!--  ===[북마크 취소하기]=== -->
-	<delete id="deleteBookmark" parameterType="map">
-	  delete from study_bookmark
-	   where
-	    study_no=#{studyNo} and member_no=#{memberNo}
-	</delete>
+   <delete id="deleteBookmark" parameterType="map">
+     delete from study_bookmark
+      where
+       study_no=#{studyNo} and member_no=#{memberNo}
+   </delete>
 
 </mapper>
-
 
 
 
