@@ -144,7 +144,6 @@ public class MybatisStudyDao implements StudyDao {
   }
 
   // ------------------------- [ 구성원 ] -----------------------------------
-
   //해당 스터디의 구성원 목록
   @Override
   public List<Guilder> findByGuilderAll(int studyNo) throws Exception {

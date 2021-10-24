@@ -29,6 +29,7 @@ public class StudyJoinHandler implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study study = studyDao.findByNo(inputNo);
+
     List<Guilder> guilderList = studyDao.findByGuilderMyAll(member.getPerNo());
 
     for (Guilder guilder : guilderList) {
@@ -39,7 +40,6 @@ public class StudyJoinHandler implements Command {
         study.getWatingMember().add(guilder.getMember());
       }
     }
-
 
     for (Member guilder : study.getMembers()) {
       if (guilder.getPerNo() == member.getPerNo()) {
