@@ -1,6 +1,8 @@
 package com.ogong.pms.handler.study;
 
+import java.util.List;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Guilder;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -27,6 +29,17 @@ public class StudyJoinHandler implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study study = studyDao.findByNo(inputNo);
+    List<Guilder> guilderList = studyDao.findByGuilderMyAll(member.getPerNo());
+
+    for (Guilder guilder : guilderList) {
+      if (guilder.getGuilderStatus() == 2) {
+        study.getMembers().add(guilder.getMember());
+
+      } else if (guilder.getGuilderStatus() == 1) {
+        study.getWatingMember().add(guilder.getMember());
+      }
+    }
+
 
     for (Member guilder : study.getMembers()) {
       if (guilder.getPerNo() == member.getPerNo()) {
