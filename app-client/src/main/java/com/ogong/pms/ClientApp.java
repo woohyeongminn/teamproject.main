@@ -112,6 +112,7 @@ import com.ogong.pms.handler.myStudy.calender.CalenderUpdateHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentUpdateHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDetailHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardListHandler;
@@ -327,7 +328,7 @@ public class ClientApp {
 
     PromptFreeBoard promptFreeBoard = new PromptFreeBoard(requestAgent);
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
-    //commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, FreeBoardDao));
+    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
