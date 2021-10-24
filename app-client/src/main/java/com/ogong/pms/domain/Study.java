@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Study {
-
   private int studyNo;          // 스터디 번호
   private String studyTitle;    // 스터디명
   private int subjectNo;        // 분야
@@ -29,9 +28,9 @@ public class Study {
   private int CountBookMember;                              // 북마크 수
   private List<Member> bookMarkMember = new ArrayList<>();  // 북마크한 회원
 
-  private List<Calender> myStudyCalender = new ArrayList<>(); // 내 스터디 캘린더
-  private List<FreeBoard> myStudyFreeBoard = new ArrayList<>(); // 내 스터디 자유 게시판
-  private List<ToDo> myStudyToDo = new ArrayList<>(); // 내 스터디 투두리스트
+  private List<Calender> myStudyCalender = new ArrayList<>();       // 내 스터디 캘린더
+  private List<FreeBoard> myStudyFreeBoard = new ArrayList<>();     // 내 스터디 자유 게시판
+  private List<ToDo> myStudyToDo = new ArrayList<>();               // 내 스터디 투두리스트
 
   @Override
   public String toString() {

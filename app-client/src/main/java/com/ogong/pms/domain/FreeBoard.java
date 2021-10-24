@@ -8,7 +8,10 @@ public class FreeBoard {
   private int freeBoardNo;              //글 번호
   private String freeBoardTitle;        //글 제목
   private String freeBoardContent;      //글 내용 
+
+  private String freeBoardAtcFileNo;      //글 첨부파일 번호
   private String freeBoardAtcFile;      //글 첨부파일
+
   private Member freeBoardWriter;       //글 작성자
   private int freeBoardViewcount;       //글 조회수
   private Date freeBoardRegisteredDate; //글 작성일
