@@ -18,15 +18,9 @@ import com.ogong.menu.MenuFilter;
 import com.ogong.menu.MenuGroup;
 import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.AskBoardDao;
-import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
-import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.impl.MybatisCafeDao;
-import com.ogong.pms.dao.impl.MybatisFreeBoardDao;
-import com.ogong.pms.dao.impl.MybatisStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -231,9 +225,9 @@ public class ClientApp {
     //    CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     //    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
-    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
-    StudyDao studyDao = new MybatisStudyDao(sqlSession);
-    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
+    //    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
+    //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    //    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
     //StudyDao studyDao = new MariadbStudyDao(con);
     //ToDoDao todoDao = new MybatisTodoDao(sqlSession);
 
