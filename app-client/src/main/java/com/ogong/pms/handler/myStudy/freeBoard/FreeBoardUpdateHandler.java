@@ -35,7 +35,7 @@ public class FreeBoardUpdateHandler implements Command {
 
     String freeBoardTitle = Prompt.inputString(" 제목(" + freeBoard.getFreeBoardTitle()  + ") : ");
     String freeBoardContent = Prompt.inputString(" 내용(" + freeBoard.getFreeBoardContent() + ") : ");
-    String freeBoardAtcFile = Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardAtcFile() + ") : ");
+    //String freeBoardAtcFile = Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardAtcFile() + ") : ");
 
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -46,7 +46,7 @@ public class FreeBoardUpdateHandler implements Command {
 
     freeBoard.setFreeBoardTitle(freeBoardTitle);
     freeBoard.setFreeBoardContent(freeBoardContent);
-    freeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
+    //freeBoard.setFreeBoardAtcFile(freeBoardAtcFile);
 
     studyDao.update(myStudy);
 
