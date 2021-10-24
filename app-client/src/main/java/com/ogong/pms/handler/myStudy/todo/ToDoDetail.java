@@ -2,6 +2,7 @@ package com.ogong.pms.handler.myStudy.todo;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.Command;
@@ -11,12 +12,14 @@ import com.ogong.util.Prompt;
 public class ToDoDetail implements Command {
 
   StudyDao studyDao;
+  ToDoDao toDoDao;
 
-  public ToDoDetail(StudyDao studyDao) {
+  public ToDoDetail(StudyDao studyDao, ToDoDao toDoDao) {
     this.studyDao = studyDao;
+    this.toDoDao = toDoDao;
   }
 
-  //상세
+  // 상세
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -26,7 +29,8 @@ public class ToDoDetail implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
-    List <ToDo> todoList = myStudy.getMyStudyToDo();
+    List<ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());
+    // List <ToDo> todoList = myStudy.getMyStudyToDo();
 
     while (true) {
       int inputTodoNo = Prompt.inputInt(" 번호 : ");
@@ -35,17 +39,18 @@ public class ToDoDetail implements Command {
       int[] arry = new int[2]; // studyNo와 해당 todo 번호 둘 다 넘기려고 배열로 받음
       arry[0] = (int) request.getAttribute("inputNo"); // study 번호를 넘겨 줌
 
-
       for (int i = 0; i < todoList.size(); i++) {
         if (todoList.get(i).getTodoNo() == inputTodoNo) {
-
           System.out.printf(" >> 내용 : %s\n", todoList.get(i).getTodoContent());
           System.out.printf(" >> 비고 : %s\n", todoList.get(i).getTodoRemark());
+
           if (todoList.get(i).getTodoStatus() == ToDo.PROGRESSING) {
             System.out.println(" >> 상태 : 진행 중");
+
           } else if (todoList.get(i).getTodoStatus() == ToDo.COMPLETE) {
             System.out.println(" >> 상태 : 완료");
           }
+
           System.out.printf(" >> DATE : %s\n", todoList.get(i).getTodoDate());
 
           arry[1] = i; // 해당 todo 넘겨 줌
@@ -66,13 +71,20 @@ public class ToDoDetail implements Command {
       System.out.println("2. 삭제");
       System.out.println("0. 이전");
       int selete = Prompt.inputInt("선택> ");
+
       switch (selete) {
-        case 1 : request.getRequestDispatcher("/myStudy/todoUpdate").forward(request); return;
-        case 2 : request.getRequestDispatcher("/myStudy/todoDelete").forward(request); return;
-        case 0 : request.getRequestDispatcher("/myStudy/todoList").forward(request); return;
-        default : return;
+        case 1:
+          request.getRequestDispatcher("/myStudy/todoUpdate").forward(request);
+          return;
+        case 2:
+          request.getRequestDispatcher("/myStudy/todoDelete").forward(request);
+          return;
+        case 0:
+          request.getRequestDispatcher("/myStudy/todoList").forward(request);
+          return;
+        default:
+          return;
       }
     }
   }
 }
-
