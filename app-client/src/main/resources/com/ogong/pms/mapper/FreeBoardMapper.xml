@@ -60,7 +60,7 @@
   <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
     <include refid="select1"/>
     where
-      s.study_no=#{boardDao}
+      sb.st_board_no=#{boardDao}
     order by s.study_no
   </select>
   
