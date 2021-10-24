@@ -17,15 +17,15 @@
     <result column="count_like" property="countLike"/>
     
     <association property="freeBoardWriter" javaType="Member">
-    <id column="per_no" property="perNo"/> 
-    <result column="nickname" property="perNickname"/>
+    <id column="member_no" property="perNo"/> 
+    <result column="member_nickname" property="perNickname"/>
     <result column="member_status" property="perStatus"/>
     </association>
     
-    <collection property="FreeBoardFile" ofType="FreeBoardFile">
+    <collection property="freeBoardFile" ofType="FreeBoardFile">
       <id column="file_no" property="atcFileNo" />
-      <result column="atcFileName" property="atcFileName" />
       <result column="st_board_no" property="boardNo" />
+      <result column="atcFileName" property="atcFileName" />
     </collection>
   </resultMap>
   
@@ -37,8 +37,8 @@
 	     sb.content,
 	     sb.view_ct,
 	     sb.created_dt,
-	     m.member_no per_no,
-	     m.nickname nickname,
+	     m.member_no member_no,
+	     m.nickname member_nickname,
 	     m.status member_status,
 	     sbf.file_no file_no,
 	     sbf.name atcFileName,
@@ -55,7 +55,6 @@
 	 <include refid="select1"/>
 	 where
       sb.study_no=#{studyNo}
-	   order by s.study_no
   </select>
    
   <insert id="insert" parameterType="FreeBoard"
@@ -73,7 +72,7 @@
 	    values(#{atcFileName}, #{boardNo})
   </insert>
   
-  <select id="findByNo" resultMap="StudyMap" parameterType="int">
+  <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
     <include refid="select1"/>
     where
       s.study_no=#{studyNo}

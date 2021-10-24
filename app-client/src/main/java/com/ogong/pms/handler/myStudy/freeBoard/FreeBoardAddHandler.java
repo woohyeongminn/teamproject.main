@@ -36,15 +36,16 @@ public class FreeBoardAddHandler implements Command {
 
     Study myStudy = studyDao.findByNo(inputNo);
 
-    List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
+    //List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
     FreeBoard freeBoard = new FreeBoard();
     FreeBoardFile file = new FreeBoardFile();
-    List<FreeBoardFile> fileList = new ArrayList<>();
+
 
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
     freeBoard.setFreeBoardContent(Prompt.inputString(" 내용 : "));
 
+    List<FreeBoardFile> fileList = new ArrayList<>();
     while (true) {
       String inputFile = Prompt.inputString(" 첨부파일 (완료:Enter) : ");
 
@@ -78,16 +79,10 @@ public class FreeBoardAddHandler implements Command {
     //      freeBoard.setFreeBoardNo(1);
     //    }
 
-    freeBoardList.add(freeBoard);
-    myStudy.setMyStudyFreeBoard(freeBoardList);
-
-    //studyDao.update(myStudy);
-
-
     freeboardDao.insert(freeBoard);
-    for (FreeBoardFile file2 : freeBoard.getFreeBoardFile()) {
-      freeboardDao.insertFile(file2);
-    }
+    //    for (FreeBoardFile file2 : freeBoard.getFreeBoardFile()) {
+    //      freeboardDao.insertFile(file2);
+    //    }
 
     System.out.println(" >> 게시글이 등록되었습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
