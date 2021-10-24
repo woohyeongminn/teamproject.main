@@ -221,7 +221,6 @@ public class ClientApp {
     AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
     //    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
     //    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
-    //    ToDoDao todoDao = sqlSession.getMapper(ToDoDao.class);
 
     // 마이바티스 
     //    AdminDao adminDao = new MybatisAdminDao(sqlSession);
