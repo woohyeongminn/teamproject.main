@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.member;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.menu.Menu;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
@@ -12,9 +13,11 @@ import com.ogong.util.Prompt;
 public class MemberUpdateHandler implements Command {
 
   MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public MemberUpdateHandler(MemberDao memberDao) {
+  public MemberUpdateHandler(MemberDao memberDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -51,7 +54,7 @@ public class MemberUpdateHandler implements Command {
           perName = Prompt.inputString(" 이  름(" + member.getPerName() + ") : ");
           for (Member preMemberName : memberList) {
             if (perName.equals(preMemberName.getPerName())) {
-              System.out.println(" >> 이미 사용중인 이름입니다.");
+              System.out.println(" >> 이미 사용 중인 이름입니다.");
               continue LOOP;
             }
           }
@@ -87,11 +90,13 @@ public class MemberUpdateHandler implements Command {
 
           for (Member perMemberTel : memberList) {
             if (perTel.equals(perMemberTel.getPerTel())) {
-              System.out.println(" >> 이미 사용중인 전화번호입니다.");
+              System.out.println(" >> 이미 사용 중인 전화번호입니다.");
               continue LOOP;
             }
           }
+          break;
         }
+        break;
 
       case 5:
         while (true) {
@@ -106,7 +111,7 @@ public class MemberUpdateHandler implements Command {
 
       case 6:
         while (true) {
-          perPassword = Prompt.inputString(" 비밀번호(" + member.getPerPassword() + ") : ");
+          perPassword = Prompt.inputString(" 변경할 비밀번호 : ");
           if (perPassword.length() < 8 || (!perPassword.contains("!") && !perPassword.contains("@")
               && !perPassword.contains("#") && !perPassword.contains("$")
               && !perPassword.contains("^") && !perPassword.contains("%")
@@ -120,10 +125,10 @@ public class MemberUpdateHandler implements Command {
         while (true) {
           String pw = Prompt.inputString(" 비밀번호 확인 : ");
           if (!pw.equals(perPassword)) {
-            System.out.println("\n >> 확인 실패!\n");
+            System.out.println("\n >> 확인 실패!");
             continue;
           } else {
-            System.out.println("\n >> 확인 완료!\n");
+            System.out.println("\n >> 확인 완료!");
           }
           break;
         }
@@ -146,29 +151,37 @@ public class MemberUpdateHandler implements Command {
     if (selectNo == 1) {
       member.setPerName(perName);
       memberDao.updateName(member);
+      sqlSession.commit();
 
     } else if (selectNo == 2) {
       member.setPerNickname(perNickName);
       memberDao.updateNickname(member);
+      sqlSession.commit();
 
     } else if (selectNo == 3) {
       member.setPerPhoto(perPhoto);
       memberDao.updatePhoto(member);
+      sqlSession.commit();
 
     } else if (selectNo == 4) {
       member.setPerTel(perTel);
       memberDao.updateTel(member);
+      sqlSession.commit();
 
     } else if (selectNo == 5) {
       member.setPerEmail(perEmail);
       memberDao.updateEmail(member);
+      sqlSession.commit();
 
     } else if (selectNo == 6) {
       member.setPerPassword(perPassword);
       memberDao.updatePassword(member);
+      sqlSession.commit();
+
       AuthPerMemberLoginHandler.loginUser = null;
       AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
-      System.out.println(" >> 로그아웃 되었습니다.\n");
+      System.out.println("\n >> 회원 정보를 변경하였습니다.\n");
+      System.out.println(" >> 다시 로그인 해 주세요.");
       return;
     }
 

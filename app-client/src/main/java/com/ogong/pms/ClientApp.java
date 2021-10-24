@@ -23,11 +23,9 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.impl.MybatisAdminDao;
 import com.ogong.pms.dao.impl.MybatisAskBoardDao;
 import com.ogong.pms.dao.impl.MybatisCafeDao;
 import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
-import com.ogong.pms.dao.impl.MybatisMemberDao;
 import com.ogong.pms.dao.impl.MybatisNoticeDao;
 import com.ogong.pms.dao.impl.MybatisStudyDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
@@ -217,19 +215,19 @@ public class ClientApp {
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
-    //    마이바티스 자동생성 
+    //    마이바티스 자동생성
     //      (insert,update,delete 사용하는 Handler에 sqlSession 생성자 추가해야 함)
-    //    AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
-    //    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+    AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
+    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     //    CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
     //    NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
     //    AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
     //    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
     //    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
 
-    // 마이바티스
-    AdminDao adminDao = new MybatisAdminDao(sqlSession);
-    MemberDao memberDao = new MybatisMemberDao(sqlSession);
+    // 마이바티스 
+    //    AdminDao adminDao = new MybatisAdminDao(sqlSession);
+    //    MemberDao memberDao = new MybatisMemberDao(sqlSession);
     CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
     NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
     AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
@@ -243,11 +241,11 @@ public class ClientApp {
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(memberDao));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
-    commandMap.put("/member/add", new MemberAddHandler(memberDao));
+    commandMap.put("/member/add", new MemberAddHandler(memberDao, sqlSession));
     commandMap.put("/member/detail", new MemberDetailHandler(memberDao));
     commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, memberDao));
-    commandMap.put("/member/update", new MemberUpdateHandler(memberDao));
-    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, studyDao));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberDao, sqlSession));
+    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, studyDao, sqlSession));
 
     commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao));
     commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao));

@@ -22,11 +22,11 @@ public class AuthPerMemberLoginHandler extends AbstractLoginHandler implements C
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    String inputEmail = Prompt.inputString(" 이메일 : ");
-    String inputPassword = Prompt.inputString(" 비밀번호 : ");
+    String email = Prompt.inputString(" 이메일 : ");
+    String password = Prompt.inputString(" 비밀번호 : ");
     // int inputActive = Member.INUSER;
 
-    Member member = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
+    Member member = memberDao.findByEmailAndPassword(email, password);
 
     if (member != null && member.getPerStatus() == Member.PER) {
 

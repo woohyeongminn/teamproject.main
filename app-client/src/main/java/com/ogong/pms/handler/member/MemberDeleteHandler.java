@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.member;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.menu.Menu;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
@@ -15,10 +16,12 @@ public class MemberDeleteHandler implements Command {
 
   MemberDao memberDao;
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public MemberDeleteHandler(MemberDao memberDao, StudyDao studyDao) {
+  public MemberDeleteHandler(MemberDao memberDao, StudyDao studyDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   // 개인
@@ -101,6 +104,7 @@ public class MemberDeleteHandler implements Command {
       member.setActive(Member.OUTUSER);
 
       memberDao.updateActive(member);
+      sqlSession.commit();
       AuthPerMemberLoginHandler.loginUser = null;
       AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
 
