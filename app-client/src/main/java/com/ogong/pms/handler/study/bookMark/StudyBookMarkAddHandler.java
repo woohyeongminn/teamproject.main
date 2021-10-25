@@ -1,5 +1,7 @@
 package com.ogong.pms.handler.study.bookMark;
 
+import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -11,9 +13,11 @@ import com.ogong.util.Prompt;
 public class StudyBookMarkAddHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public StudyBookMarkAddHandler(StudyDao studyDao) {
+  public StudyBookMarkAddHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -27,6 +31,15 @@ public class StudyBookMarkAddHandler implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study study = studyDao.findByNo(inputNo);
+
+    List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
+    study.setWatingMember(waitingGuilder);
+
+    List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
+    study.setMembers(guilders);
+
+    List<Member> bookmark = studyDao.findByBookmarkAll(study.getStudyNo());
+    study.setBookMarkMember(bookmark);
 
     for (Member joinMember : study.getMembers()) {
       if (member.getPerNo() == joinMember.getPerNo()) {
@@ -55,8 +68,13 @@ public class StudyBookMarkAddHandler implements Command {
       return;
     }
 
-    study.getBookMarkMember().add(member);
-    studyDao.insertBookmark(study.getStudyNo(), member.getPerNo());
+    try {
+      studyDao.insertBookmark(study.getStudyNo(), member.getPerNo());
+      sqlSession.commit();
+    } catch (Exception e) {
+      System.out.println("북마크 등록 실패!");
+      sqlSession.rollback();
+    }
 
     System.out.println();
     System.out.println(" >> 북마크가 완료되었습니다.");

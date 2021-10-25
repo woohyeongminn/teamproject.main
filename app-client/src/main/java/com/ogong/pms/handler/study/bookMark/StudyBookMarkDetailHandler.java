@@ -1,7 +1,5 @@
 package com.ogong.pms.handler.study.bookMark;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -25,42 +23,15 @@ public class StudyBookMarkDetailHandler implements Command {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    List<Study> studyList = studyDao.findAll();
-
-    List<Study> myBookMarkStudyList = new ArrayList<>();
-
-    for (Study study : studyList) {
-      for (Member bookMarkMember : study.getBookMarkMember()) {
-        if (member.getPerNo() == bookMarkMember.getPerNo()) {
-          myBookMarkStudyList.add(study);
-        }
-      }
-    }
-
     int inputNo;
-    int count = 0;
-    LOOP : while (true) {
-      try {
-        inputNo = Prompt.inputInt(" 번호 : ");
-      } catch(NumberFormatException e) {
-        return;
-      }
+    inputNo = Prompt.inputInt(" 번호 : ");
 
-      for (Study studyNo : myBookMarkStudyList) {
-        if(studyNo.getStudyNo() == inputNo) {
-          count++;
-          break;
-        } 
-      }
+    Study study = studyDao.findByBookmark(inputNo, member.getPerNo());
 
-      if (count == 0) {
-        System.out.println(" >> 내가 북마크한 스터디 번호를 입력하세요. / 종료(엔터)\n");
-        continue LOOP;
-      }
-      break;
+    if (study == null) {
+      System.out.println(" >> 내가 북마크한 스터디 번호를 입력하세요.");
+      return;
     }
-
-    Study study = studyDao.findByNo(inputNo);
 
     System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
     System.out.printf(" [%s]\n", study.getStudyTitle());

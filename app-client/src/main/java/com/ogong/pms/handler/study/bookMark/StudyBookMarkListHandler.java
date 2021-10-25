@@ -29,35 +29,31 @@ public class StudyBookMarkListHandler implements Command {
       return;
     }
 
-    List<Study> studyList = studyDao.findAll();
+    List<Study> studyList = studyDao.findByMyBookmark(member.getPerNo());
 
     int count = 0;
 
     for (Study study : studyList) {
       // 북마크 있는 경우
-      for (Member bookMarkMember : study.getBookMarkMember()) {
-        if (member.getPerNo() == bookMarkMember.getPerNo()) {
 
-          if (study.getStudyTitle().contains("탈퇴")) {
-            System.out.printf(" (%d)\n 스터디명 : %s\n",
-                study.getStudyNo(),
-                study.getStudyTitle());
-            System.out.println();
-          }
-
-          System.out.printf(" (%d) 🌟%d \n [%s] | 분류 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
-              study.getStudyNo(),
-              study.getBookMarkMember().size(),
-              study.getStudyTitle(),
-              study.getSubjectName(),
-              study.getMembers().size() + 1,
-              study.getNumberOfPeple(),
-              study.getOwner().getPerNickname(),
-              study.getFaceName());
-          System.out.println();
-          count++;
-        }
+      if (study.getStudyTitle().contains("탈퇴")) {
+        System.out.printf(" (%d)\n 스터디명 : %s\n",
+            study.getStudyNo(),
+            study.getStudyTitle());
+        System.out.println();
       }
+
+      System.out.printf(" (%d) 🌟%d \n [%s] | 분야 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
+          study.getStudyNo(),
+          study.getCountBookMember(),
+          study.getStudyTitle(),
+          study.getSubjectName(),
+          study.getCountMember() + 1,
+          study.getNumberOfPeple(),
+          study.getOwner().getPerNickname(),
+          study.getFaceName());
+      System.out.println();
+      count++;
     }
 
     if (count == 0) {

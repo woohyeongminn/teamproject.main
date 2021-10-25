@@ -294,10 +294,10 @@ public class ClientApp {
     commandMap.put("/study/join", new StudyJoinHandler(studyDao, sqlSession));
 
     // 1018 북마크 추가(eun)
-    commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao));
+    commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao, sqlSession));
     commandMap.put("/study/bookMarkList", new StudyBookMarkListHandler(studyDao));
     commandMap.put("/study/bookMarkDetail", new StudyBookMarkDetailHandler(studyDao));
-    commandMap.put("/study/bookMarkDelete", new StudyBookMarkDeleteHandler(studyDao));
+    commandMap.put("/study/bookMarkDelete", new StudyBookMarkDeleteHandler(studyDao, sqlSession));
     //
 
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyDao));
