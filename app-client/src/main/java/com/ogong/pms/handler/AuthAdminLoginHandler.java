@@ -9,7 +9,7 @@ public class AuthAdminLoginHandler extends AbstractLoginHandler implements Comma
 
   AdminDao adminDao;
 
-  static Admin loginAdmin;
+  public static Admin loginAdmin;
   public static Admin getLoginAdmin() {
     return loginAdmin;
   }

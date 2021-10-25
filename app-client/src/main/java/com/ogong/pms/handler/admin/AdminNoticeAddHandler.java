@@ -2,6 +2,7 @@ package com.ogong.pms.handler.admin;
 
 import java.sql.Date;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.Command;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class AdminNoticeAddHandler implements Command {
 
   NoticeDao noticeDao;
+  SqlSession sqlSession;
 
-  public AdminNoticeAddHandler(NoticeDao noticeDao) {
+  public AdminNoticeAddHandler(NoticeDao noticeDao, SqlSession sqlSession) {
     this.noticeDao = noticeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -53,6 +56,8 @@ public class AdminNoticeAddHandler implements Command {
     //    }
 
     noticeDao.insert(adminNotice);
+    noticeDao.insertFilepath(adminNotice);
+    sqlSession.commit();
 
     System.out.println(" >> 공지글 등록이 완료되었습니다.");
     request.getRequestDispatcher("/adminNotice/list").forward(request);

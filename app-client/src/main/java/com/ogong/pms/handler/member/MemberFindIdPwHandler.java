@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.member;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
@@ -12,10 +13,12 @@ public class MemberFindIdPwHandler implements Command {
 
   RandomPw randomPw;
   MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public MemberFindIdPwHandler(RandomPw randomPw, MemberDao memberDao) {
+  public MemberFindIdPwHandler(RandomPw randomPw, MemberDao memberDao, SqlSession sqlSession) {
     this.randomPw = randomPw;
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -112,6 +115,7 @@ public class MemberFindIdPwHandler implements Command {
             System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
 
             memberDao.updatePassword(memberEmail);
+            sqlSession.commit();
             return;
 
           } else {
@@ -142,6 +146,7 @@ public class MemberFindIdPwHandler implements Command {
             System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
 
             memberDao.updatePassword(memberTel);
+            sqlSession.commit();
             return;
 
           } else {

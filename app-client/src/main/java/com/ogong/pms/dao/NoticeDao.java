@@ -13,7 +13,7 @@ public interface NoticeDao {
   void updateContent(AdminNotice notice) throws Exception;
   //  void updateFilepath(AdminNotice notice) throws Exception;
   void delete(int noticeNo) throws Exception;
-  void deletefile(int noticeNo) throws Exception;
+  void deletenoticefile(int noticeNo) throws Exception;
   List<AdminNotice> findAll() throws Exception;
   AdminNotice findByNoticeNo(int noticeNo) throws Exception;
 

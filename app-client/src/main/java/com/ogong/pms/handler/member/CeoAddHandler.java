@@ -2,6 +2,7 @@ package com.ogong.pms.handler.member;
 
 import java.sql.Date;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class CeoAddHandler implements Command {
 
   CeoMemberDao ceoMemberDao;
+  SqlSession sqlSession;
 
-  public CeoAddHandler(CeoMemberDao ceoMemberDao) {
+  public CeoAddHandler(CeoMemberDao ceoMemberDao, SqlSession sqlSession) {
     this.ceoMemberDao = ceoMemberDao;
+    this.sqlSession = sqlSession;
   }
 
   // 기업 개인
@@ -120,6 +123,9 @@ public class CeoAddHandler implements Command {
     //    ceoMember.setCeoStatus(CeoMember.INUSER);
 
     ceoMemberDao.insert(ceoMember);
+    ceoMemberDao.insertCeo(ceoMember);
+    sqlSession.commit();
+
     System.out.println(" >> 회원가입이 완료되었습니다.");
   }
 }

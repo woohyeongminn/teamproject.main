@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="MemberMapper">
+<mapper namespace="com.ogong.pms.dao.MemberDao">
   
   <resultMap type="Member" id="MemberMap">
     <id column="member_no" property="perNo"/> 
@@ -26,6 +26,7 @@
     m.email,
     m.tel,
     m.photo,
+    m.password,
     m.created_dt,
     m.active,
     m.status
@@ -33,7 +34,7 @@
     member m
 	</sql>
 
-  <select id="findByEmailAndPassword" resultMap="MemberMap" parameterType="map">
+  <select id="findByEmailAndPassword" resultMap="MemberMap">
     select
       m.member_no member_no,
       m.nickname,
@@ -58,8 +59,7 @@
     m.member_no=#{no}
   </select>
   
-  <insert id="insert" parameterType="member"
-  useGeneratedKeys="true" keyColumn="member_no" keyProperty="perNo">
+  <insert id="insert" parameterType="member">
 		insert into member(name,nickname,email,password,tel,photo,status)
 		values(#{perName},#{perNickname},#{perEmail},password(#{perPassword}),#{perTel},#{perPhoto},#{perStatus})
   </insert>

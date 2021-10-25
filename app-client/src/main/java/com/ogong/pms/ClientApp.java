@@ -25,15 +25,6 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
-import com.ogong.pms.dao.impl.MybatisAdminDao;
-import com.ogong.pms.dao.impl.MybatisAskBoardDao;
-import com.ogong.pms.dao.impl.MybatisCafeDao;
-import com.ogong.pms.dao.impl.MybatisCeoMemberDao;
-import com.ogong.pms.dao.impl.MybatisFreeBoardDao;
-import com.ogong.pms.dao.impl.MybatisMemberDao;
-import com.ogong.pms.dao.impl.MybatisNoticeDao;
-import com.ogong.pms.dao.impl.MybatisStudyDao;
-import com.ogong.pms.dao.impl.MybatisToDoDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -221,27 +212,24 @@ public class ClientApp {
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
-    //    마이바티스 자동생성 
+    //    마이바티스 자동생성
     //      (insert,update,delete 사용하는 Handler에 sqlSession 생성자 추가해야 함)
-    //    AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
-    //    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
-    //    CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
-    //    NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
-    //    AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
-    //    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
-    //    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
+    AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
+    MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+    CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
+    NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+    AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
+    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
+    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
+    FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
+    ToDoDao todoDao = sqlSession.getMapper(ToDoDao.class);
+    //    CommentDao commentDao = sqlSession.getMapper(CommentDao.class); // 아직 안 함
 
-    // 마이바티스
-    AdminDao adminDao = new MybatisAdminDao(sqlSession);
-    MemberDao memberDao = new MybatisMemberDao(sqlSession);
-    CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
-    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
-    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
-    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
-    StudyDao studyDao = new MybatisStudyDao(sqlSession);
-    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
-    //StudyDao studyDao = new MariadbStudyDao(con);
-    ToDoDao toDoDao = new MybatisToDoDao(sqlSession);
+    // 마이바티스 
+    //    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
+    //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    //    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
+    //    ToDoDao toDoDao = new MybatisToDoDao(sqlSession);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -249,55 +237,53 @@ public class ClientApp {
     commandMap.put("/member/login", new AuthPerMemberLoginHandler(memberDao));
     commandMap.put("/member/logout", new AuthPerMemberLogoutHandler());
 
-    commandMap.put("/member/add", new MemberAddHandler(memberDao));
+    commandMap.put("/member/add", new MemberAddHandler(memberDao, sqlSession));
     commandMap.put("/member/detail", new MemberDetailHandler(memberDao));
-    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, memberDao));
-    commandMap.put("/member/update", new MemberUpdateHandler(memberDao));
-    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, studyDao));
+    commandMap.put("/member/findIdPw", new MemberFindIdPwHandler(randomPw, memberDao, sqlSession));
+    commandMap.put("/member/update", new MemberUpdateHandler(memberDao, sqlSession));
+    commandMap.put("/member/delete", new MemberDeleteHandler(memberDao, studyDao, sqlSession));
 
-    commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao));
-    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao));
-    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardDao));
+    commandMap.put("/askBoard/add", new AskBoardAddHandler(askBoardDao, sqlSession));
+    commandMap.put("/askBoard/update", new AskBoardUpdateHandler(askBoardDao, sqlSession));
+    commandMap.put("/askBoard/delete", new AskBoardDeleteHandler(askBoardDao, sqlSession));
     commandMap.put("/askBoard/perMyList", new AskBoardPerMyListHandler(askBoardDao));
     commandMap.put("/askBoard/ceoMyList", new AskBoardCeoMyListHandler(askBoardDao));
-    commandMap.put("/askBoard/perMydetail", new AskBoardPerMyDetailHandler(askBoardDao));
-    commandMap.put("/askBoard/ceoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/perMydetail", new AskBoardPerMyDetailHandler(askBoardDao, sqlSession));
+    commandMap.put("/askBoard/ceoMydetail", new AskBoardCeoMyDetailHandler(askBoardDao, sqlSession));
 
     commandMap.put("/askBoard/list", new AdminAskBoardListHandler(askBoardDao));
-    commandMap.put("/askBoard/detail", new AdminAskBoardDetailHandler(askBoardDao));
+    commandMap.put("/askBoard/detail", new AdminAskBoardDetailHandler(askBoardDao, sqlSession));
 
-    commandMap.put("/reply/add", new ReplyAddHandler(askBoardDao));
+    commandMap.put("/reply/add", new ReplyAddHandler(askBoardDao, sqlSession));
     commandMap.put("/reply/detail", new ReplyDetailHandler(askBoardDao));
 
-    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/add", new CeoAddHandler(ceoMemberDao, sqlSession));
     commandMap.put("/ceoMember/detail", new CeoDetailHandler(ceoMemberDao));
-    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberDao));
-    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberDao));
+    commandMap.put("/ceoMember/update", new CeoUpdateHandler(ceoMemberDao, sqlSession));
+    commandMap.put("/ceoMember/delete", new CeoDeleteHandler(ceoMemberDao, sqlSession));
     commandMap.put("/ceoMember/login", new AuthCeoMemberLoginHandler(ceoMemberDao));
     commandMap.put("/ceoMember/logout", new AuthCeoMemberLogoutHandler());
-    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(randomPw, ceoMemberDao));
+    commandMap.put("/ceoMember/findIdPw", new CeoFindIdPwHandler(randomPw, ceoMemberDao, sqlSession));
 
     commandMap.put("/admin/login", new AuthAdminLoginHandler(adminDao));
     commandMap.put("/admin/logout", new AuthAdminLogoutHandler());
 
-    commandMap.put("/admin/update", new AdminUpdateHandler(adminDao));
+    commandMap.put("/admin/update", new AdminUpdateHandler(adminDao, sqlSession));
     commandMap.put("/admin/detail", new AdminDetailHandler(adminDao));
 
     commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberDao));
     commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(ceoMemberDao));
-    //commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(ceoMemberDao));  // 아예 사용한함
     commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberDao));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
-    //commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));   // 아예 사용한함
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
-    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao));
+    commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao, sqlSession));
 
-    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao));
+    commandMap.put("/adminNotice/add", new AdminNoticeAddHandler(noticeDao, sqlSession));
     commandMap.put("/adminNotice/list", new AdminNoticeListHandler(noticeDao));
     commandMap.put("/adminNotice/detail", new AdminNoticeDetailHandler(noticeDao));
-    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao));
-    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao));
+    commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao, sqlSession));
+    commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao, sqlSession));
 
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao));
 
@@ -337,7 +323,7 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
+    commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao, freeBoardDao));
 
     //Socket chatSocket = new Socket(); 
     //    commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
@@ -348,11 +334,11 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(studyDao));
     commandMap.put("/myStudy/freeBoard/commentUpdate", new CommentUpdateHandler(studyDao));
 
-    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, todoDao));
+    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, todoDao));
+    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, todoDao));
+    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, todoDao));
+    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, todoDao));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));

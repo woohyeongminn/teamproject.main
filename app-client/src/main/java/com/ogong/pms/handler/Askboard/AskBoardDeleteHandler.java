@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.Askboard;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class AskBoardDeleteHandler implements Command {
 
   AskBoardDao askBoardDao;
+  SqlSession sqlSession;
 
-  public AskBoardDeleteHandler(AskBoardDao askBoardDao) {
+  public AskBoardDeleteHandler(AskBoardDao askBoardDao, SqlSession sqlSession) {
     this.askBoardDao = askBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -51,7 +54,9 @@ public class AskBoardDeleteHandler implements Command {
       return;
     }
 
+    askBoardDao.deletereply(askNo);
     askBoardDao.delete(askNo);
+    sqlSession.commit();
     System.out.println(" >> 문의글을 삭제하였습니다.");
   }
 

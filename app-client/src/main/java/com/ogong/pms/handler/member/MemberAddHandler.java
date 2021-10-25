@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.member;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.Command;
@@ -10,9 +11,11 @@ import com.ogong.util.Prompt;
 public class MemberAddHandler implements Command {
 
   MemberDao memberDao;
+  SqlSession sqlSession;
 
-  public MemberAddHandler(MemberDao memberDao) {
+  public MemberAddHandler(MemberDao memberDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
+    this.sqlSession = sqlSession;
   }
 
   // 개인
@@ -46,7 +49,7 @@ public class MemberAddHandler implements Command {
     LOOP: while (true) {
       String inputTel = Prompt.inputString(" 전화번호 : ");
       // if (!(inputTel.length() > 10 && inputTel.length() < 11)) {
-      // System.out.println(" >> 올바른 형식의 전화번호를 입력해 주세요.");
+      // System.out.println(" >> 올바 른 형식의 전화번호를 입력해 주세요.");
       // continue;
       // }
 
@@ -115,6 +118,7 @@ public class MemberAddHandler implements Command {
     // }
 
     memberDao.insert(member);
+    sqlSession.commit();
 
     System.out.println(" >> 회원가입이 완료되었습니다.");
   }

@@ -23,6 +23,9 @@
   </environments>
   
   <mappers>
+    <package name="com.ogong.pms.dao"/>
+  
+  <!--  
     <mapper resource="com/ogong/pms/mapper/AdminMapper.xml"/>
     <mapper resource="com/ogong/pms/mapper/MemberMapper.xml"/>
     <mapper resource="com/ogong/pms/mapper/CeoMemberMapper.xml"/>
@@ -33,8 +36,6 @@
     <mapper resource="com/ogong/pms/mapper/TodoMapper.xml"/> 
     <mapper resource="com/ogong/pms/mapper/TodoMapper.xml"/>
     <mapper resource="com/ogong/pms/mapper/FreeBoardMapper.xml"/>
-  
-  <!--  
   <package name="com.ogong.pms.dao"/>
    -->
   </mappers>

@@ -1,6 +1,7 @@
 package com.ogong.pms.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.ogong.pms.domain.Member;
 
 public interface MemberDao {
@@ -11,7 +12,7 @@ public interface MemberDao {
   Member findByName(String inputName) throws Exception;
   Member findByEmail(String inputEmail) throws Exception;
   Member findByTel(String inputTel) throws Exception;
-  Member findByEmailAndPassword(String inputEmail, String inputPassword) throws Exception;
+  Member findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
   void updateName(Member member) throws Exception;
   void updateNickname(Member member) throws Exception;
   void updatePhoto(Member member) throws Exception;

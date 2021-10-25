@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.admin;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
@@ -14,10 +15,12 @@ public class AdminMemberDeleteHandler implements Command {
 
   MemberDao memberDao;
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public AdminMemberDeleteHandler(MemberDao memberDao, StudyDao studyDao) {
+  public AdminMemberDeleteHandler(MemberDao memberDao, StudyDao studyDao, SqlSession sqlSession) {
     this.memberDao = memberDao;
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   // 개인
@@ -70,6 +73,7 @@ public class AdminMemberDeleteHandler implements Command {
         member.setActive(Member.OUTUSER);
 
         memberDao.updateActive(member);
+        sqlSession.commit();
 
         System.out.println(" >> 회원이 삭제되었습니다.");
         request.getRequestDispatcher("/adminMember/list").forward(request);

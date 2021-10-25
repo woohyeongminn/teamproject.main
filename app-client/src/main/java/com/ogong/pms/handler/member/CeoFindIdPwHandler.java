@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.member;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.handler.Command;
@@ -12,10 +13,12 @@ public class CeoFindIdPwHandler implements Command {
 
   RandomPw randomPw;
   CeoMemberDao ceoMemberDao;
+  SqlSession sqlSession;
 
-  public CeoFindIdPwHandler(RandomPw randomPw, CeoMemberDao ceoMemberDao) {
+  public CeoFindIdPwHandler(RandomPw randomPw, CeoMemberDao ceoMemberDao, SqlSession sqlSession) {
     this.randomPw = randomPw;
     this.ceoMemberDao = ceoMemberDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -98,6 +101,7 @@ public class CeoFindIdPwHandler implements Command {
         System.out.printf(" '%s님'의 임시 비밀번호가 메일로 전송되었습니다.\n", ceoMember.getCeoNickname());
         System.out.println(" >> 로그인 후 비밀번호를 변경해 주세요.");
         ceoMemberDao.updatePassword(ceoMember);
+        sqlSession.commit();
         return;
 
       } else {

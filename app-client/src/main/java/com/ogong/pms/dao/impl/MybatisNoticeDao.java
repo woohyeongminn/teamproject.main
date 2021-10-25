@@ -66,7 +66,7 @@ public class MybatisNoticeDao implements NoticeDao {
   }
 
   @Override
-  public void deletefile(int noticeNo) throws Exception {
+  public void deletenoticefile(int noticeNo) throws Exception {
     sqlSession.delete("NoticeMapper.deletenoticefile", noticeNo);
     sqlSession.commit();
   }

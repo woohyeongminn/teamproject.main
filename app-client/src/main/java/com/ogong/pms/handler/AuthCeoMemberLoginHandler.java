@@ -24,12 +24,12 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements C
   public void execute(CommandRequest request) throws Exception {
 
     System.out.println();
-    String inputEmail = Prompt.inputString(" 이메일 : ");
-    String inputPassword = Prompt.inputString(" 비밀번호 : ");
+    String email = Prompt.inputString(" 이메일 : ");
+    String password = Prompt.inputString(" 비밀번호 : ");
 
-    CeoMember ceoMember = ceoMemberDao.findByEmailAndPassword(inputEmail, inputPassword);
+    CeoMember ceoMember = ceoMemberDao.findByEmailAndPassword(email, password);
 
-    if (ceoMember != null && ceoMember.getCeoStatus()==CeoMember.CEO) {
+    if (ceoMember != null && ceoMember.getCeoStatus() == CeoMember.CEO) {
 
       if (ceoMember.getActive() == CeoMember.OUTUSER) {
         System.out.println();
@@ -40,7 +40,7 @@ public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements C
       System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoNickname());
       loginCeoMember = ceoMember;
       accessLevel = Menu.CEO_LOGIN;
-      return;
+      //      return;
 
     } else {
       System.out.println("\n >> 이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
