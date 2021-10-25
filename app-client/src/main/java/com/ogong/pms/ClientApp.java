@@ -281,11 +281,9 @@ public class ClientApp {
 
     commandMap.put("/adminCeoMember/list", new AdminCeoMemberListHandler(ceoMemberDao));
     commandMap.put("/adminCeoMember/detail", new AdminCeoMemberDetailHandler(ceoMemberDao));
-    //commandMap.put("/adminCeoMember/update", new AdminCeoMemberUpdateHandler(ceoMemberDao));  // 아예 사용한함
     commandMap.put("/adminCeoMember/delete", new AdminCeoMemberDeleteHandler(ceoMemberDao));
 
     commandMap.put("/adminMember/list", new AdminMemberListHandler(memberDao));
-    //commandMap.put("/adminMember/update", new AdminMemberUpdateHandler(memberDao));   // 아예 사용한함
     commandMap.put("/adminMember/detail", new AdminMemberDetailHandler(memberDao));
     commandMap.put("/adminMember/delete", new AdminMemberDeleteHandler(memberDao, studyDao, sqlSession));
 

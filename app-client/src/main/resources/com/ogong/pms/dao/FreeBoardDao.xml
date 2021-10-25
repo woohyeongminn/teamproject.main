@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ogong.pms.dao.FreeBoardDao">
-  
+ 
   <resultMap type="FreeBoard" id="FreeBoardMap">
     <id column="st_board_no" property="freeBoardNo"/> 
     <result column="study_no" property="studyNo"/>
@@ -24,7 +24,7 @@
     
     <collection property="freeBoardFile" ofType="FreeBoardFile">
       <id column="file_no" property="atcFileNo" />
-      <result column="st_board_no" property="boardNo" />
+      <result column="file_board_no" property="boardNo" />
       <result column="atcFileName" property="atcFileName" />
     </collection>
   </resultMap>
@@ -40,6 +40,7 @@
        m.member_no member_no,
        m.nickname member_nickname,
        m.status member_status,
+       sbf.st_board_no file_board_no,
        sbf.file_no file_no,
        sbf.name atcFileName,
        (select count(*) from study_board_file sbf where sb.st_board_no=sbf.st_board_no) count_file,
@@ -56,28 +57,43 @@
    where
       sb.study_no=#{studyNo}
   </select>
-   
+  
+  <select id="findByNo" resultMap="FreeBoardMap" parameterType="map">
+    <include refid="select1"/>
+    where
+      sb.st_board_no=#{boardNo} and sb.study_no=#{studyNo}
+  </select>
+  
   <insert id="insert" parameterType="FreeBoard"
     useGeneratedKeys="true" keyColumn="st_board_no" keyProperty="freeBoardNo">
-     insert into study_board
-      (title, content, view_ct, created_dt, member_no, study_no)
-     values
-      (#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount},
-       #{freeBoardRegisteredDate}, #{freeBoardWriter.perNo}, #{studyNo})
+     insert into study_board(title, content, view_ct, member_no, study_no)
+     values(#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount}, #{freeBoardWriter.perNo}, #{studyNo})
   </insert>
   
-  <insert id="insertFile" parameterType="map"
-   useGeneratedKeys="true" keyColumn="file_no" keyProperty="atcFileNo">
-      insert into study_board_file (name, st_board_no)
+  <insert id="insertFile" parameterType="map">
+      insert into study_board_file(name, st_board_no)
       values(#{atcFileName}, #{boardNo})
   </insert>
   
-  <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
-    <include refid="select1"/>
+  <update id="update" parameterType="map">
+    update study_board set
+      title = #{freeBoardTitle},
+      content = #{freeBoardContent}
     where
-      s.study_no=#{studyNo}
-    order by s.study_no
-  </select>
+      st_board_no=#{boardNo} and study_no=#{studyNo}
+  </update>
+  
+  <delete id="deleteFile" parameterType="map">
+     delete from study_board_file
+      where
+       st_board_no=#{boardNo}
+   </delete>
+   
+  <delete id="delete" parameterType="map">
+     delete from study_board
+      where
+       st_board_no=#{boardNo} and study_no=#{studyNo}
+   </delete>
    
   </mapper>
   
