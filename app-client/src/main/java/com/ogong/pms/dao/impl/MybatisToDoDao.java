@@ -1,6 +1,7 @@
 package com.ogong.pms.dao.impl;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.ToDoDao;
@@ -27,8 +28,12 @@ public class MybatisToDoDao implements ToDoDao {
   }
 
   @Override
-  public ToDo findByNo(int todoNo) throws Exception {
-    return sqlSession.selectOne("ToDoMapper.findByNo", todoNo);
+  public ToDo findByNo(int studyNo, int todoNo) throws Exception {
+    HashMap<String, Object> params = new HashMap<>();
+    params.put("studyNo", studyNo);
+    params.put("todoNo", todoNo);
+
+    return sqlSession.selectOne("ToDoMapper.findByNo", studyNo, todoNo);
   }
 
   @Override
