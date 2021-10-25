@@ -98,7 +98,6 @@ import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
-import com.ogong.pms.handler.myStudy.MyStudyExitHandler;
 import com.ogong.pms.handler.myStudy.MyStudyListHandler;
 import com.ogong.pms.handler.myStudy.MyStudyUpdateHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderAddHandler;
@@ -304,7 +303,7 @@ public class ClientApp {
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyDao));
     commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao));
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao));
-    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
+    //    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
     commandMap.put("/myStudy/guilder", new GuilderListHandler(studyDao));
 
     commandMap.put("/myStudy/watingGuilderList", new WatingGuilderListHandler(studyDao));
