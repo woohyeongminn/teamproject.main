@@ -1,14 +1,11 @@
 package com.ogong.pms.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
@@ -41,89 +38,40 @@ public class MybatisCafeDao implements CafeDao {
 
   @Override
   public Cafe findByCafeNo(int cafeNo) throws Exception {
-    Cafe cafe = sqlSession.selectOne("CafeMapper.findByCafeNo", cafeNo);
-
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("cafeNo", cafeNo);
-
-    if (cafe != null) {
-      cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
-    }
-
-    return cafe;
+    return sqlSession.selectOne("CafeMapper.findByCafeNo", cafeNo);
   }
 
   @Override
   public Cafe findByCafeNoMember(int cafeNo) throws Exception {
-    Cafe cafe = sqlSession.selectOne("CafeMapper.findByCafeNoMember", cafeNo);
-
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("cafeNo", cafeNo);
-
-    if (cafe != null) {
-      cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
-    }
-
-    return cafe;
+    return sqlSession.selectOne("CafeMapper.findByCafeNoMember", cafeNo);
   }
 
   @Override
   public Cafe findByCeoMember(int ceoNo) throws Exception {
-    Cafe cafe = sqlSession.selectOne("CafeMapper.findByCeoMember", ceoNo);
-
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("ceoNo", ceoNo);
-
-    if (cafe != null) {
-      cafe.setHoliday(sqlSession.selectOne("CafeMapper.getCafeHoliday", params));
-    }
-
-    return cafe;
+    return sqlSession.selectOne("CafeMapper.findByCeoMember", ceoNo);
   }
 
   @Override
-  public void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays) throws Exception {
+  public String getCafeHoliday(HashMap<String,Object> params) throws Exception {
+    return sqlSession.selectOne("CafeMapper.getCafeHoliday", params);
+  }
+
+  @Override
+  public void insertCafe(Cafe cafe) throws Exception {
     sqlSession.insert("CafeMapper.insertCafe", cafe);
-
-    insertCafeImage(cafe, fileNames);
-
-    if (!holidays.isEmpty()) {
-      // 해야됨 고민중
-    }
-
     sqlSession.commit();
-    System.out.println(" >> 카페 등록 완료!");
-
   }
 
   @Override
-  public void insertCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception {
-
-    if (!fileNames.isEmpty()) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("fileNames", fileNames);
-      params.put("cafeNo", cafe.getNo());
-
-      sqlSession.insert("CafeMapper.insertCafeImage", params);
-    }
-
+  public void insertCafeImage(HashMap<String,Object> params) throws Exception {
+    sqlSession.insert("CafeMapper.insertCafeImage", params);
     sqlSession.commit();
-    System.out.println(" >> 카페 사진 등록 완료!");
-
   }
 
   @Override
-  public void deleteCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception {
-
-    if (!fileNames.isEmpty()) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("fileNames", fileNames);
-
-      sqlSession.insert("CafeMapper.deleteCafeImage", params);
-    }
-
+  public void deleteCafeImage(HashMap<String,Object> params) throws Exception {
+    sqlSession.insert("CafeMapper.deleteCafeImage", params);
     sqlSession.commit();
-    System.out.println(" >> 카페 사진 삭제 완료!");
 
   }
 
@@ -169,7 +117,6 @@ public class MybatisCafeDao implements CafeDao {
   @Override
   public void insertCafeReview(CafeReview cafeReview) throws Exception {
     sqlSession.insert("CafeMapper.insertCafeReview", cafeReview);
-    sqlSession.update("CafeMapper.updateCafeReservationReviewStatus", cafeReview.getReservationNo());
     sqlSession.commit();
   }
 
@@ -197,26 +144,33 @@ public class MybatisCafeDao implements CafeDao {
   }
 
   @Override
-  public void insertCafeRoom(CafeRoom cafeRoom, ArrayList<CafeImage> fileNames) throws Exception {
+  public void insertCafeRoom(CafeRoom cafeRoom) throws Exception {
     sqlSession.insert("CafeMapper.insertCafeRoom", cafeRoom);
-
-    if (!fileNames.isEmpty()) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("fileNames", fileNames);
-      params.put("cafeRoomNo", cafeRoom.getRoomNo());
-
-      sqlSession.insert("CafeMapper.insertCafeRoomImage", params);
-    }
+    sqlSession.commit();
   }
 
   @Override
   public void updateCafeRoom(CafeRoom cafeRoom) throws Exception {
     sqlSession.update("CafeMapper.updateCafeRoom", cafeRoom);
+    sqlSession.commit();
   }
 
   @Override
   public void deleteCafeRoom(int roomNo) throws Exception {
     sqlSession.delete("CafeMapper.deleteCafeRoom", roomNo);
+    sqlSession.commit();
+  }
+
+  @Override
+  public void insertCafeRoomImage(HashMap<String,Object> params) throws Exception {
+    sqlSession.insert("CafeMapper.insertCafeRoomImage", params);
+    sqlSession.commit();
+  }
+
+  @Override
+  public void deleteCafeRoomImage(HashMap<String,Object> params) throws Exception {
+    sqlSession.insert("CafeMapper.deleteCafeRoomImage", params);
+    sqlSession.commit();
   }
 
   //-----------------------CafeReservation--------------------------------------
@@ -247,11 +201,13 @@ public class MybatisCafeDao implements CafeDao {
   @Override
   public void insertReservation(CafeReservation cafeReservation) throws Exception {
     sqlSession.insert("CafeMapper.insertReservation", cafeReservation);
+    sqlSession.commit();
   }
 
-  // mariadb에선 필요 없으나 다른 dao에서는 쓰는거라 일단 남겨둠
   @Override
-  public void updateWirteReview(int reservationNo) throws Exception {
+  public void updateCafeReservationReviewStatus(int reservationNo) throws Exception {
+    sqlSession.update("CafeMapper.updateCafeReservationReviewStatus", reservationNo);
+    sqlSession.commit();
   }
 
   @Override
@@ -260,6 +216,7 @@ public class MybatisCafeDao implements CafeDao {
     params.put("status", status);
     params.put("reservationNo", cafeReservation.getReservationNo());
     sqlSession.delete("CafeMapper.deleteReservation", params);
+    sqlSession.commit();
   }
 
 
