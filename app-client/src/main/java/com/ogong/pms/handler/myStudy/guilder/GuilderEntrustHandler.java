@@ -82,8 +82,9 @@ public class GuilderEntrustHandler implements Command {
           // 조장 위임 후 기존 길더는 길더에서 삭제되고 조장자리로 들어간다.
           // 조장은 길더에 추가되지 않고 스터디에서 탈퇴된다.
           try {
-            studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+            //studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
             studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+            studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
             sqlSession.commit();
           } catch (Exception e) {
             System.out.println(" 해당 스터디 탈퇴 오류!");
@@ -96,8 +97,8 @@ public class GuilderEntrustHandler implements Command {
 
         try { 
           studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());      // 조장 바꿔주고
-          studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());            // 기존 조장을 구성원에 넣고
-          studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());            // 승인여부를 승인으로 바로 바꿔준다
+          //studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());            // 기존 조장을 구성원에 넣고
+          //studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());            // 승인여부를 승인으로 바로 바꿔준다
           sqlSession.commit();
         } catch (Exception e) {
           System.out.println(" 구성원 등록 오류!");
