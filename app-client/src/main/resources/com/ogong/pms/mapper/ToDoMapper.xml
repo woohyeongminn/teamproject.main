@@ -59,7 +59,7 @@
   <select id="findByNo" resultMap="ToDoMap" parameterType="map">
     <include refid="select1" />
     where
-    todo.todolist_no=#{todoNo}
+    todo.todolist_no=#{todoNo} and s.study_no=#{studyNo}
   </select>
 
   <insert id="insert" parameterType="ToDo">

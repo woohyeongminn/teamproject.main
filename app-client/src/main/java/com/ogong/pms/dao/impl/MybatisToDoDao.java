@@ -33,7 +33,7 @@ public class MybatisToDoDao implements ToDoDao {
     params.put("studyNo", studyNo);
     params.put("todoNo", todoNo);
 
-    return sqlSession.selectOne("ToDoMapper.findByNo", studyNo, todoNo);
+    return sqlSession.selectOne("ToDoMapper.findByNo", params);
   }
 
   @Override
