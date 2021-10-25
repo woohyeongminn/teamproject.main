@@ -25,10 +25,6 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
-import com.ogong.pms.dao.impl.MybatisCafeDao;
-import com.ogong.pms.dao.impl.MybatisFreeBoardDao;
-import com.ogong.pms.dao.impl.MybatisStudyDao;
-import com.ogong.pms.dao.impl.MybatisToDoDao;
 import com.ogong.pms.handler.AbstractLoginHandler;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
 import com.ogong.pms.handler.AuthAdminLogoutHandler;
@@ -223,21 +219,17 @@ public class ClientApp {
     CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
     NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
     AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
-    //    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
-    //    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
-    //    ToDoDao todoDao = sqlSession.getMapper(ToDoDao.class);
+    CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
+    StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
+    FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
+    ToDoDao todoDao = sqlSession.getMapper(ToDoDao.class);
+    //    CommentDao commentDao = sqlSession.getMapper(CommentDao.class); // 아직 안 함
 
     // 마이바티스 
-    //    AdminDao adminDao = new MybatisAdminDao(sqlSession);
-    //    MemberDao memberDao = new MybatisMemberDao(sqlSession);
-    //    CeoMemberDao ceoMemberDao = new MybatisCeoMemberDao(sqlSession);
-    //    NoticeDao noticeDao = new MybatisNoticeDao(sqlSession);
-    //    AskBoardDao askBoardDao = new MybatisAskBoardDao(sqlSession);
-    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
-    StudyDao studyDao = new MybatisStudyDao(sqlSession);
-    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
-    //StudyDao studyDao = new MariadbStudyDao(con);
-    ToDoDao toDoDao = new MybatisToDoDao(sqlSession);
+    //    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
+    //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
+    //    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
+    //    ToDoDao toDoDao = new MybatisToDoDao(sqlSession);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -342,11 +334,11 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(studyDao));
     commandMap.put("/myStudy/freeBoard/commentUpdate", new CommentUpdateHandler(studyDao));
 
-    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, todoDao));
+    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, todoDao));
+    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, todoDao));
+    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, todoDao));
+    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, todoDao));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));
