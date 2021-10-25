@@ -1,11 +1,9 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.FreeBoardFile;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -28,7 +26,7 @@ public class FreeBoardUpdateHandler implements Command {
     System.out.println("▶ 게시글 수정");
     System.out.println();
 
-    // 게시글 데이터 가져오기
+    // 게시글 데이터 가져오기---
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
@@ -48,7 +46,7 @@ public class FreeBoardUpdateHandler implements Command {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
       return;
     }
-    //
+    //-----------------------------
 
     if (freeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println(" >> 수정 권한이 없습니다.");
@@ -59,19 +57,25 @@ public class FreeBoardUpdateHandler implements Command {
     String freeBoardTitle = Prompt.inputString(" 제목(" + freeBoard.getFreeBoardTitle()  + ") : ");
     String freeBoardContent = Prompt.inputString(" 내용(" + freeBoard.getFreeBoardContent() + ") : ");
 
-    List<FreeBoardFile> fileList = new ArrayList<>();
-    while (true) {
-      FreeBoardFile fileName = new FreeBoardFile();
-      String inputFileName = Prompt.inputString(" 첨부파일(" + freeBoard.getFileNames() + ") / (완료:Enter) : ");
 
-      if (inputFileName.equals("")) {
-        System.out.println(" >> 첨부파일 수정이 완료되었습니다.");
-        break;
-      }
-      fileName.setAtcFileName(inputFileName);
-      fileList.add(fileName);
-    }
-    freeBoard.setFreeBoardFile(fileList);
+
+    // 파일 update 메서드 추가해야함
+    //    List<FreeBoardFile> fileList = new ArrayList<>();
+    //    while (true) {
+    //      FreeBoardFile fileName = new FreeBoardFile();
+    //      String inputFileName = Prompt.inputString(" 첨부파일(" + freeBoard.getFileNames() + ") / (완료:Enter) : ");
+    //
+    //      if (inputFileName.equals("")) {
+    //        System.out.println(" >> 첨부파일 수정이 완료되었습니다.");
+    //        break;
+    //      }
+    //      fileName.setAtcFileName(inputFileName);
+    //      fileList.add(fileName);
+    //    }
+    //    freeBoard.setFreeBoardFile(fileList);
+
+
+
 
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {

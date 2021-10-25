@@ -77,12 +77,23 @@
   
   <update id="update" parameterType="map">
     update study_board set
-	    title = #{title},
-	    content = #{content},
-	    freeBoardFile = #{file}
+	    title = #{freeBoardTitle},
+	    content = #{freeBoardContent}
     where
-      sb.st_board_no=#{boardNo} and sb.study_no=#{studyNo}
+      st_board_no=#{boardNo} and study_no=#{studyNo}
   </update>
   
+  <delete id="deleteFile" parameterType="map">
+     delete from study_board_file
+      where
+       st_board_no=#{boardNo}
+   </delete>
+   
+  <delete id="delete" parameterType="map">
+     delete from study_board
+      where
+       st_board_no=#{boardNo} and study_no=#{studyNo}
+   </delete>
+   
   </mapper>
   
