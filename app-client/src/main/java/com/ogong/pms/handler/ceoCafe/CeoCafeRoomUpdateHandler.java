@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.ceoCafe;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.handler.Command;
@@ -9,9 +10,11 @@ import com.ogong.util.Prompt;
 public class CeoCafeRoomUpdateHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CeoCafeRoomUpdateHandler (CafeDao cafeDao) {
+  public CeoCafeRoomUpdateHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -77,6 +80,8 @@ public class CeoCafeRoomUpdateHandler implements Command {
     //    cafeRoom.setRoomImg(mainImg);
 
     cafeDao.updateCafeRoom(cafeRoom);
+    sqlSession.commit();
+
     System.out.println(" >> 수정완료. ");
   }
 }

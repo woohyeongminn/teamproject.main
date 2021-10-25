@@ -2,6 +2,7 @@ package com.ogong.pms.handler.ceoCafe;
 
 import static com.ogong.pms.domain.Cafe.DELETE;
 import java.time.LocalTime;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class CeoCafeDeleteHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CeoCafeDeleteHandler (CafeDao cafeDao) {
+  public CeoCafeDeleteHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -42,7 +45,8 @@ public class CeoCafeDeleteHandler implements Command {
     cafe.setTimePrice(0);
     cafe.setCafeStatus(DELETE);
 
-    cafeDao.deleteCafe(cafe);
+    cafeDao.deleteCafe(cafe.getNo());
+    sqlSession.commit();
 
     System.out.println(" >> 삭제가 완료되었습니다.");
   }

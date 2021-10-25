@@ -84,10 +84,10 @@
   </update>
   
   <update id="updateFile">
-    update study_board_file set
+    update study_board_file sbf set
       name = #{fileName.atcFileName}
     where
-      st_board_no=#{freeBoardNo}
+      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{fileName.} 
   </update>
   
   <update id="updateViewCount">

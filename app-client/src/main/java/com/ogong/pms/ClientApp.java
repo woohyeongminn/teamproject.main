@@ -222,7 +222,7 @@ public class ClientApp {
     CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
     StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
     FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
-    ToDoDao todoDao = sqlSession.getMapper(ToDoDao.class);
+    ToDoDao toDoDao = sqlSession.getMapper(ToDoDao.class);
     //    CommentDao commentDao = sqlSession.getMapper(CommentDao.class); // 아직 안 함
 
     // 마이바티스 
@@ -285,13 +285,13 @@ public class ClientApp {
     commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao, sqlSession));
     commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao, sqlSession));
 
-    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao));
+    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao, sqlSession));
 
     commandMap.put("/study/add", new StudyAddHandler(studyDao, sqlSession));
     commandMap.put("/study/list", new StudyListHandler(studyDao));
     commandMap.put("/study/detail", new StudyDetailHandler(studyDao));
     commandMap.put("/study/search", new StudySearchHandler(studyDao));
-    commandMap.put("/study/join", new StudyJoinHandler(studyDao));
+    commandMap.put("/study/join", new StudyJoinHandler(studyDao, sqlSession));
 
     // 1018 북마크 추가(eun)
     commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao));
@@ -302,14 +302,14 @@ public class ClientApp {
 
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyDao));
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyDao));
-    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao));
-    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao));
+    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao, sqlSession));
     commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao, sqlSession));
     commandMap.put("/myStudy/guilder", new GuilderListHandler(studyDao));
 
     commandMap.put("/myStudy/watingGuilderList", new WatingGuilderListHandler(studyDao));
-    commandMap.put("/myStudy/guilderEntrust", new GuilderEntrustHandler(studyDao));
-    commandMap.put("/myStudy/guilderDelete", new GuilderDeleteHandler(studyDao));
+    commandMap.put("/myStudy/guilderEntrust", new GuilderEntrustHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/guilderDelete", new GuilderDeleteHandler(studyDao, sqlSession));
 
     commandMap.put("/myStudy/calenderAdd", new CalenderAddHandler(studyDao));
     commandMap.put("/myStudy/calenderList", new CalenderListHandler(studyDao));
@@ -334,49 +334,49 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(studyDao));
     commandMap.put("/myStudy/freeBoard/commentUpdate", new CommentUpdateHandler(studyDao));
 
-    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, todoDao));
-    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, todoDao));
-    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, todoDao));
-    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, todoDao));
-    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, todoDao));
+    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, toDoDao, sqlSession));
+    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, toDoDao, sqlSession));
+    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, toDoDao, sqlSession));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));
-    commandMap.put("/cafe/reservation", new CafeReservationHandler(cafeDao));
+    commandMap.put("/cafe/reservation", new CafeReservationHandler(cafeDao, sqlSession));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeDao));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeDao));
 
     commandMap.put("/cafeReservation/list", new CafeMyReservationListHandler(cafeDao));
     commandMap.put("/cafeReservation/detail", new CafeMyReservationDetailHandler(cafeDao));
-    commandMap.put("/cafeReservation/delete", new CafeMyReservationDeleteHandler(cafeDao));
+    commandMap.put("/cafeReservation/delete", new CafeMyReservationDeleteHandler(cafeDao, sqlSession));
 
     commandMap.put("/cafe/myReviewList", new CafeMyReviewListHandler(cafeDao));
-    commandMap.put("/cafe/myReviewAdd", new CafeMyReviewAddHandler(cafeDao));
-    commandMap.put("/cafe/myReviewDelete", new CafeMyReviewDeleteHandler(cafeDao));
+    commandMap.put("/cafe/myReviewAdd", new CafeMyReviewAddHandler(cafeDao, sqlSession));
+    commandMap.put("/cafe/myReviewDelete", new CafeMyReviewDeleteHandler(cafeDao, sqlSession));
 
     //    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(cafeDao));
     commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(cafeDao));
-    commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(cafeDao));
-    commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(cafeDao));
-    commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(cafeDao, sqlSession));
+    commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(cafeDao, sqlSession));
+    commandMap.put("/ceoMember/cafeDelete", new CeoCafeDeleteHandler(cafeDao, sqlSession));
 
     commandMap.put("/ceoMember/cafeRoomList", new CeoCafeRoomListHandler(cafeDao));
     commandMap.put("/ceoMember/cafeRoomDetail", new CeoCafeRoomDetailHandler(cafeDao));
-    commandMap.put("/ceoMember/cafeRoomAdd", new CeoCafeRoomAddHandler(cafeDao));
-    commandMap.put("/ceoMember/cafeRoomUpdate", new CeoCafeRoomUpdateHandler(cafeDao));
-    commandMap.put("/ceoMember/cafeRoomDelete", new CeoCafeRoomDeleteHandler(cafeDao));
+    commandMap.put("/ceoMember/cafeRoomAdd", new CeoCafeRoomAddHandler(cafeDao, sqlSession));
+    commandMap.put("/ceoMember/cafeRoomUpdate", new CeoCafeRoomUpdateHandler(cafeDao, sqlSession));
+    commandMap.put("/ceoMember/cafeRoomDelete", new CeoCafeRoomDeleteHandler(cafeDao, sqlSession));
 
     //    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(cafeDao));
     commandMap.put("/ceoMember/ReservationDetail", new CeoReservationDetailHandler(cafeDao));
-    commandMap.put("/ceoMember/ReservationReject", new CeoReservationRejectHandler(cafeDao));
+    commandMap.put("/ceoMember/ReservationReject", new CeoReservationRejectHandler(cafeDao, sqlSession));
 
     commandMap.put("/cafe/control", new AdminCafeControlHandler(cafeDao));
     commandMap.put("/cafe/controlDetail", new AdminCafeDetailHandler(cafeDao));
-    commandMap.put("/cafe/controlApproval", new AdminCafeApprovalHandler(cafeDao));
-    commandMap.put("/cafe/controlDelete", new AdminCafeDeleteHandler(cafeDao));
+    commandMap.put("/cafe/controlApproval", new AdminCafeApprovalHandler(cafeDao, sqlSession));
+    commandMap.put("/cafe/controlDelete", new AdminCafeDeleteHandler(cafeDao, sqlSession));
 
     commandMap.put("/cafe/reviewList", new AdminCafeReviewListControlHandler(cafeDao)); 
-    commandMap.put("/cafe/reviewListDelete", new AdminCafeReviewListDeleteHandler(cafeDao)); 
+    commandMap.put("/cafe/reviewListDelete", new AdminCafeReviewListDeleteHandler(cafeDao, sqlSession)); 
 
   }  
 

@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.admin;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthAdminLoginHandler;
@@ -10,9 +11,11 @@ import com.ogong.util.Prompt;
 public class AdminStudyDeleteHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public AdminStudyDeleteHandler(StudyDao studyDao) {
+  public AdminStudyDeleteHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -37,8 +40,14 @@ public class AdminStudyDeleteHandler implements Command {
       }
     }
 
-    studyDao.delete(inputNo, study.getOwner().getPerNo());
-
+    try {
+      studyDao.deleteAllBookmark(inputNo);
+      studyDao.deleteStudy(inputNo, study.getOwner().getPerNo());
+      sqlSession.commit();
+    } catch (Exception e) {
+      System.out.println(" 스터디 삭제 오류!");
+      sqlSession.rollback();
+    }
     System.out.println(" >> 스터디를 삭제하였습니다.");
     request.getRequestDispatcher("/study/list").forward(request);
   }
