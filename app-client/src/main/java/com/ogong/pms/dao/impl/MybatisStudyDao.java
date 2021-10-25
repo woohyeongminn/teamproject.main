@@ -95,7 +95,7 @@ public class MybatisStudyDao implements StudyDao {
     params.put("studyNo", studyNo);
     params.put("memberNo", memberNo);
 
-    sqlSession.insert("GuilderMapper.insertGuilder", params);
+    sqlSession.insert("StudyMapper.insertGuilder", params);
     sqlSession.commit();
 
   }
@@ -106,7 +106,7 @@ public class MybatisStudyDao implements StudyDao {
     HashMap<String,Object> params = new HashMap<>();
     params.put("memberNo", memberNo);
     params.put("studyNo", studyNo);
-    sqlSession.update("GuilderMapper.updateOwner", params);
+    sqlSession.update("StudyMapper.updateOwner", params);
     sqlSession.commit();
   }
 
