@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.cafe;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
@@ -30,6 +31,10 @@ public class CafeDetailHandler implements Command {
       System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
       return;
     }
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("cafeNo", cafe.getNo());
+    cafe.setHoliday(cafeDao.getCafeHoliday(params));
 
     System.out.println();
     System.out.printf(" (%s)\n", cafe.getNo());

@@ -1,10 +1,8 @@
 package com.ogong.pms.dao;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
@@ -15,19 +13,23 @@ public interface CafeDao {
 
   List<Cafe> getCafeList() throws Exception;
   List<Cafe> getCafeListByMember() throws Exception;
-  //  List<Cafe> getCafeListByCeoMember(int ceoNo) throws Exception;
   List<Cafe> findCafeListByLocation(String input) throws Exception;
+
   Cafe findByCafeNo(int cafeNo) throws Exception;
   Cafe findByCafeNoMember(int cafeNo) throws Exception;
   Cafe findByCeoMember(int ceoNo) throws Exception;
-  void insertCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception;
+
+  // 카페 휴무일
+  String getCafeHoliday(HashMap<String,Object> params) throws Exception;
+
+  void insertCafe(Cafe cafe) throws Exception;
   void updateCafe(Cafe cafe) throws Exception;
   void updateCafeStatusToGENERAL(Cafe cafe) throws Exception;
   void deleteCafe(Cafe cafe) throws Exception;
 
   // 카페 이미지
-  void insertCafe(Cafe cafe, ArrayList<CafeImage> fileNames, ArrayList<Date> holidays) throws Exception;
-  void deleteCafeImage(Cafe cafe, ArrayList<CafeImage> fileNames) throws Exception;
+  void insertCafeImage(HashMap<String,Object> params) throws Exception;
+  void deleteCafeImage(HashMap<String,Object> param) throws Exception;
 
   //-----------------------CafeReview--------------------------------------
 
@@ -43,9 +45,13 @@ public interface CafeDao {
   List<CafeRoom> getCafeRoomList() throws Exception;
   List<CafeRoom> findCafeRoomListByCafe(int cafeNo) throws Exception;
   CafeRoom findByRoomNo(int roomNo) throws Exception;
-  void insertCafeRoom(CafeRoom cafeRoom, ArrayList<CafeImage> fileNames) throws Exception;
+  void insertCafeRoom(CafeRoom cafeRoom) throws Exception;
   void updateCafeRoom(CafeRoom cafeRoom) throws Exception;
   void deleteCafeRoom(int roomNo) throws Exception;
+
+  // 스터디룸 이미지
+  void insertCafeRoomImage(HashMap<String,Object> params) throws Exception;
+  void deleteCafeRoomImage(HashMap<String,Object> params) throws Exception;
 
   //-----------------------CafeReservation--------------------------------------
 
@@ -54,7 +60,7 @@ public interface CafeDao {
   List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception;
   CafeReservation findReservationByMember(int memberNo, int reserNo) throws Exception;
   void insertReservation(CafeReservation cafeReservation) throws Exception;
-  void updateWirteReview(int reservationNo) throws Exception;
+  void updateCafeReservationReviewStatus(int reservationNo) throws Exception;
   void deleteReservation(CafeReservation cafeReservation, int status) throws Exception;
 
 }

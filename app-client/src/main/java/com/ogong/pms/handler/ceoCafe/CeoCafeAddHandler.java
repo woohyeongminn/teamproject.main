@@ -4,6 +4,7 @@ import static com.ogong.pms.domain.Cafe.WAIT;
 import java.sql.Date;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
@@ -81,7 +82,17 @@ public class CeoCafeAddHandler implements Command {
       return;
     }
 
-    cafeDao.insertCafe(cafe, fileNames, holidays);
+    cafeDao.insertCafe(cafe);
+
+    if (!fileNames.isEmpty()) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("fileNames", fileNames);
+      params.put("cafeNo", cafe.getNo());
+
+      cafeDao.insertCafeImage(params);
+    }
+
+    System.out.println(" >> 카페 등록 완료!");
   }
 
 }

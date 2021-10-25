@@ -400,6 +400,16 @@
     delete from studycafe_room where studyroom_no = #{roomNo}
   </delete>
   
+  <delete id="deleteCafeRoomImage" parameterType="map">
+    delete from studycafe_room_photo
+    <where>
+      photo_no in
+      <foreach collection="fileNames" item="CafeRoomImage" separator=","  open="(" close=")">
+        #{CafeRoomImage.no}
+      </foreach>
+    </where>
+  </delete>
+  
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페예약ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
   <sql id="reservationListSelect">
 	  select 

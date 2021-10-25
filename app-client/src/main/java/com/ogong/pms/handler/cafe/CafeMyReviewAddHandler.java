@@ -48,6 +48,7 @@ public class CafeMyReviewAddHandler implements Command {
     cafeReview.setGrade(grade);
 
     cafeDao.insertCafeReview(cafeReview);
+    cafeDao.updateCafeReservationReviewStatus(cafeReview.getReservationNo());
 
     System.out.println(" >> 리뷰 등록 완료.");
 
