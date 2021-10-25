@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.guilder;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -12,9 +13,11 @@ import com.ogong.util.Prompt;
 public class GuilderEntrustHandler implements Command { 
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public GuilderEntrustHandler(StudyDao studyDao) {
+  public GuilderEntrustHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
 
@@ -78,16 +81,28 @@ public class GuilderEntrustHandler implements Command {
         if (!inputGuilder.equalsIgnoreCase("네")) {
           // 조장 위임 후 기존 길더는 길더에서 삭제되고 조장자리로 들어간다.
           // 조장은 길더에 추가되지 않고 스터디에서 탈퇴된다.
-          studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
-          studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+          try {
+            studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+            studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+            sqlSession.commit();
+          } catch (Exception e) {
+            System.out.println(" 해당 스터디 탈퇴 오류!");
+            sqlSession.rollback();
+          }
           System.out.println();
           System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
           return;
         }
 
-        studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());      // 조장 바꿔주고
-        studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());            // 기존 조장을 구성원에 넣고
-        studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());            // 승인여부를 승인으로 바로 바꿔준다
+        try { 
+          studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());      // 조장 바꿔주고
+          studyDao.insertGuilder(myStudy.getStudyNo(), member.getPerNo());            // 기존 조장을 구성원에 넣고
+          studyDao.updateGuilder(myStudy.getStudyNo(), member.getPerNo());            // 승인여부를 승인으로 바로 바꿔준다
+          sqlSession.commit();
+        } catch (Exception e) {
+          System.out.println(" 구성원 등록 오류!");
+          sqlSession.rollback();
+        }
         System.out.println();
         System.out.println(" >> 구성원이 되었습니다.");
       }

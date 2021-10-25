@@ -98,6 +98,7 @@ import com.ogong.pms.handler.member.MemberFindIdPwHandler;
 import com.ogong.pms.handler.member.MemberUpdateHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDeleteHandler;
 import com.ogong.pms.handler.myStudy.MyStudyDetailHandler;
+import com.ogong.pms.handler.myStudy.MyStudyExitHandler;
 import com.ogong.pms.handler.myStudy.MyStudyListHandler;
 import com.ogong.pms.handler.myStudy.MyStudyUpdateHandler;
 import com.ogong.pms.handler.myStudy.calender.CalenderAddHandler;
@@ -284,13 +285,13 @@ public class ClientApp {
     commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao, sqlSession));
     commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao, sqlSession));
 
-    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao));
+    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao, sqlSession));
 
     commandMap.put("/study/add", new StudyAddHandler(studyDao, sqlSession));
     commandMap.put("/study/list", new StudyListHandler(studyDao));
     commandMap.put("/study/detail", new StudyDetailHandler(studyDao));
     commandMap.put("/study/search", new StudySearchHandler(studyDao));
-    commandMap.put("/study/join", new StudyJoinHandler(studyDao));
+    commandMap.put("/study/join", new StudyJoinHandler(studyDao, sqlSession));
 
     // 1018 북마크 추가(eun)
     commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao));
@@ -301,14 +302,14 @@ public class ClientApp {
 
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyDao));
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyDao));
-    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao));
-    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao));
-    //    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
+    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao, sqlSession));
     commandMap.put("/myStudy/guilder", new GuilderListHandler(studyDao));
 
     commandMap.put("/myStudy/watingGuilderList", new WatingGuilderListHandler(studyDao));
-    commandMap.put("/myStudy/guilderEntrust", new GuilderEntrustHandler(studyDao));
-    commandMap.put("/myStudy/guilderDelete", new GuilderDeleteHandler(studyDao));
+    commandMap.put("/myStudy/guilderEntrust", new GuilderEntrustHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/guilderDelete", new GuilderDeleteHandler(studyDao, sqlSession));
 
     commandMap.put("/myStudy/calenderAdd", new CalenderAddHandler(studyDao));
     commandMap.put("/myStudy/calenderList", new CalenderListHandler(studyDao));
