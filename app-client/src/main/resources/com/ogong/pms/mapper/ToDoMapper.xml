@@ -56,7 +56,7 @@
     todolist_no asc
   </select>
 
-  <select id="findByNo" resultMap="ToDoMap" parameterType="int">
+  <select id="findByNo" resultMap="ToDoMap" parameterType="map">
     <include refid="select1" />
     where
     todo.todolist_no=#{todoNo}

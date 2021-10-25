@@ -27,7 +27,8 @@ public class ToDoUpdate implements Command {
     int[] arry = (int[]) request.getAttribute("studyTodoNo");
 
     Study myStudy = studyDao.findByNo(arry[0]);
-    ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
+    ToDo todo = toDoDao.findByNo(arry[1]);
+    // ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
 
     String todoContent = Prompt.inputString(String.format(" 내용(%s) : ", todo.getTodoContent()));
     String todoRemark = Prompt.inputString(String.format(" 비고(%s) : ", todo.getTodoRemark()));
