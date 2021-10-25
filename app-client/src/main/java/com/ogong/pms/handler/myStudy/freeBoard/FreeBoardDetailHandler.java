@@ -4,6 +4,7 @@ import java.util.List;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
@@ -26,28 +27,27 @@ public class FreeBoardDetailHandler implements Command {
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
 
-    int studyNo = (int) request.getAttribute("inputNo");
+    int inputNo = (int) request.getAttribute("inputNo");
 
-    //Study myStudy = studyDao.findByNo(studyNo);
+    Study myStudy = studyDao.findByNo(inputNo);
 
-    List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyNo);
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
 
     if (freeBoardList.isEmpty()) {
       System.out.println("자유게시판 게시글 목록이 없습니다!");
       return;
     }
 
-    int inputNo = Prompt.inputInt(" 번호 : ");
+    int inputBoardNo = Prompt.inputInt(" 번호 : ");
 
-    FreeBoard freeBoard = freeBoardDao.findByNo(inputNo, studyNo);
+    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, myStudy.getStudyNo());
 
     if (freeBoard == null) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
-      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
       return;
     }
 
-    if (freeBoard.getFreeBoardNo() == inputNo) {
+    if (freeBoard.getFreeBoardNo() == inputBoardNo) {
       System.out.printf(" [%s]\n", freeBoard.getFreeBoardTitle());
       System.out.printf(" >> 내용 : %s\n", freeBoard.getFreeBoardContent());
       System.out.printf(" >> 첨부파일 : %s\n", freeBoard.getFileNames());
@@ -59,6 +59,8 @@ public class FreeBoardDetailHandler implements Command {
       System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
       //promptFreeBoard.printComments(freeBoard); // 댓글호출
     }
+
+    request.setAttribute("boardNo", inputBoardNo);
 
     System.out.println("\n----------------------");
     System.out.println("1. 수정");
