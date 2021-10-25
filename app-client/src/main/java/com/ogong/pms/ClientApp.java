@@ -332,7 +332,7 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao));
+    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
 
     //Socket chatSocket = new Socket(); 
