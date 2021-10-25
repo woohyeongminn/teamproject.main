@@ -320,9 +320,9 @@ public class ClientApp {
 
     PromptFreeBoard promptFreeBoard = new PromptFreeBoard(requestAgent);
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao, freeBoardDao));
+    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao, sqlSession));
+    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao, sqlSession));
+    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao, freeBoardDao, sqlSession));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao, freeBoardDao));
 
     //Socket chatSocket = new Socket(); 

@@ -10,7 +10,7 @@
     <result column="study_no" property="studyNo"/>
     <result column="title" property="freeBoardTitle"/>
     <result column="content" property="freeBoardContent"/>
-    <result column="view_cnt" property="freeBoardViewcount"/>
+    <result column="view_ct" property="freeBoardViewcount"/>
     <result column="created_dt" property="freeBoardRegisteredDate"/>
     <result column="count_file" property="countFile"/>
     <result column="count_comment" property="countComment"/>
@@ -61,7 +61,7 @@
   <select id="findByNo" resultMap="FreeBoardMap" parameterType="map">
     <include refid="select1"/>
     where
-      sb.st_board_no=#{boardNo} and sb.study_no=#{studyNo}
+      sb.st_board_no=#{freeBoardNo} and sb.study_no=#{studyNo}
   </select>
   
   <insert id="insert" parameterType="FreeBoard"
@@ -72,27 +72,41 @@
   
   <insert id="insertFile" parameterType="map">
       insert into study_board_file(name, st_board_no)
-      values(#{atcFileName}, #{boardNo})
+      values(#{fileName.atcFileName}, #{freeBoardNo})
   </insert>
   
-  <update id="update" parameterType="map">
+  <update id="update">
     update study_board set
-      title = #{freeBoardTitle},
-      content = #{freeBoardContent}
+      title = #{freeBoard.freeBoardTitle},
+      content = #{freeBoard.freeBoardContent}
     where
-      st_board_no=#{boardNo} and study_no=#{studyNo}
+      st_board_no=#{freeBoard.freeBoardNo} and study_no=#{studyNo}
   </update>
   
-  <delete id="deleteFile" parameterType="map">
-     delete from study_board_file
-      where
-       st_board_no=#{boardNo}
-   </delete>
-   
+  <update id="updateFile">
+    update study_board_file sbf set
+      name = #{fileName.atcFileName}
+    where
+      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{fileName.} 
+  </update>
+  
+  <update id="updateViewCount">
+    update study_board set
+      view_ct = #{freeBoard.freeBoardViewcount}
+    where
+      st_board_no=#{freeBoard.freeBoardNo} and study_no=#{studyNo}
+  </update>
+  
   <delete id="delete" parameterType="map">
      delete from study_board
       where
-       st_board_no=#{boardNo} and study_no=#{studyNo}
+       st_board_no=#{freeBoardNo} and study_no=#{studyNo}
+   </delete>
+   
+  <delete id="deleteFile" parameterType="map">
+     delete from study_board_file
+      where
+       st_board_no=#{freeBoardNo}
    </delete>
    
   </mapper>

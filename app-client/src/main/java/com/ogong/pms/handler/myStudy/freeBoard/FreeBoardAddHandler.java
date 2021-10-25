@@ -3,6 +3,7 @@ package com.ogong.pms.handler.myStudy.freeBoard;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
@@ -18,10 +19,12 @@ public class FreeBoardAddHandler implements Command {
 
   StudyDao studyDao;
   FreeBoardDao freeboardDao;
+  SqlSession sqlSession;
 
-  public FreeBoardAddHandler(StudyDao studyDao, FreeBoardDao freeboardDao) {
+  public FreeBoardAddHandler(StudyDao studyDao, FreeBoardDao freeboardDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
     this.freeboardDao = freeboardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -35,8 +38,6 @@ public class FreeBoardAddHandler implements Command {
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     Study myStudy = studyDao.findByMyNo(inputNo, member.getPerNo());
-
-    //List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
     FreeBoard freeBoard = new FreeBoard();
 
@@ -69,13 +70,18 @@ public class FreeBoardAddHandler implements Command {
       return;
     }
 
-    freeboardDao.insert(freeBoard);
-
-    if (!freeBoard.getFreeBoardFile().isEmpty()) {
-      for (FreeBoardFile file : freeBoard.getFreeBoardFile()) {
-        freeboardDao.insertFile(file, freeBoard.getFreeBoardNo());
+    try {
+      freeboardDao.insert(freeBoard);
+      if (!freeBoard.getFreeBoardFile().isEmpty()) {
+        for (FreeBoardFile file : freeBoard.getFreeBoardFile()) {
+          freeboardDao.insertFile(file, freeBoard.getFreeBoardNo());
+        }
+        sqlSession.commit();
       }
+    } catch (Exception e) {
+      sqlSession.rollback();
     }
+
 
     System.out.println(" >> 게시글이 등록되었습니다.");
   }
