@@ -1,6 +1,5 @@
 package com.ogong.pms.handler.admin;
 
-import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import com.ogong.pms.handler.Command;
@@ -10,11 +9,9 @@ import com.ogong.util.Prompt;
 public class AdminNoticeDeleteHandler implements Command {
 
   NoticeDao noticeDao;
-  SqlSession sqlSession;
 
-  public AdminNoticeDeleteHandler(NoticeDao noticeDao, SqlSession sqlSession) {
+  public AdminNoticeDeleteHandler(NoticeDao noticeDao) {
     this.noticeDao = noticeDao;
-    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -32,14 +29,7 @@ public class AdminNoticeDeleteHandler implements Command {
       return;
     }
 
-    try {
-      noticeDao.deletenoticefile(noticeNo);
-      noticeDao.delete(noticeNo);
-      sqlSession.commit();
-    } catch (Exception e) {
-      System.out.println("공지 삭제 실패!");
-      sqlSession.rollback();
-    }
+    noticeDao.delete(noticeNo);
 
     System.out.println(" >> 공지가 삭제되었습니다.");
     request.getRequestDispatcher("/adminNotice/list").forward(request);

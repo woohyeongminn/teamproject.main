@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CeoMemberMapper">
+  
+  <resultMap type="ceoMember" id="CeoMemberMap">
+    <id column="member_no" property="ceoNo"/>
+    <result column="name" property="ceoName"/>
+    <result column="nickname" property="ceoNickname"/>
+    <result column="email" property="ceoEmail"/>
+    <result column="password" property="ceoPassword"/>
+    <result column="tel" property="ceoTel"/>
+    <result column="photo" property="ceoPhoto"/>
+    <result column="created_dt" property="ceoRegisteredDate"/>
+    <result column="status" property="ceoStatus"/>
+    <result column="active" property="active"/>
+    <result column="bossname" property="ceoBossName"/>
+    <result column="license_no" property="ceoLicenseNo"/>
+   </resultMap>
+  
+  <sql id="select1">
+      select
+      m.member_no,
+      m.name,
+      m.nickname,
+      m.email,
+      m.tel,
+      m.photo,
+      m.created_dt,
+      m.active,
+      m.status,
+      cm.bossname bossname,
+      cm.license_no license_no
+    from
+      member m
+    join
+      ceo_member cm on m.member_no=cm.member_no
+  </sql>
+  
+  <select id="findByEmailAndPassword" resultMap="CeoMemberMap" parameterType="map">
+    select
+      m.member_no,
+      m.nickname,
+      m.email,
+      m.status,
+      m.active
+    from 
+      member m
+    join
+      ceo_member cm on m.member_no=cm.member_no
+    where
+      email=#{email} and password=password(#{password}) and status=2
+  </select>
+
+  <select id="findAll" resultMap="CeoMemberMap">
+	 <include refid = "select1"/>
+	  order by name asc
+  </select>
+  
+  <select id="findByNo" resultMap="CeoMemberMap" parameterType="int">
+    <include refid = "select1"/>
+	  where
+	    cm.member_no=#{no}
+  </select>
+  
+  <insert id="insert" parameterType="CeoMember"
+      useGeneratedKeys="true" keyColumn="member_no" keyProperty="ceoNo">
+	  insert into member(name,nickname,email,password,tel,photo,status)
+	  values(#{ceoName},#{ceoNickname},#{ceoEmail},password(#{ceoPassword}),#{ceoTel},#{ceoPhoto},#{ceoStatus})
+  </insert>
+  
+  <insert id="insertCeo" parameterType="map">
+	  insert into ceo_member(member_no,bossname,license_no)
+	  values(#{ceoNo},#{ceoBossname},#{ceoLicenseNo})
+  </insert>
+  
+  <select id="findByName" resultMap="CeoMemberMap" parameterType="string">
+	  <include refid = "select1"/>
+	  where
+	    m.name=#{value}
+  </select>
+  
+  <select id="findByEmail" resultMap="CeoMemberMap" parameterType="string">
+	  <include refid = "select1"/>
+	  where
+	    m.email=#{value}
+  </select>
+    
+  <update id="updateName" parameterType="CeoMember">
+	  update member set
+	   name = #{ceoName}
+	  where
+	   member_no=#{ceoNo}
+  </update>
+  
+  <update id="updateNickName" parameterType="CeoMember">
+    update member set
+     nickname = #{ceoNickname}
+    where
+     member_no=#{ceoNo}
+  </update>
+  
+  <update id="updatePhoto" parameterType="CeoMember">
+    update member set
+     photo = #{ceoPhoto}
+    where
+     member_no=#{ceoNo}
+  </update>
+  
+  <update id="updateTel" parameterType="CeoMember">
+    update member set
+     tel = #{ceoTel}
+    where
+     member_no=#{ceoNo}
+  </update>
+  
+  <update id="updateEmail" parameterType="CeoMember">
+    update member set
+     email = #{ceoEmail}
+    where
+     member_no=#{ceoNo}
+  </update>
+  
+   <update id="updatePassword" parameterType="CeoMember">
+    update member set
+     password = password(#{ceoPassword})
+    where
+     member_no=#{ceoNo}
+  </update>
+  
+  <update id="updateActive" parameterType="CeoMember">
+    update member set
+      nickname=#{ceoNickname},
+	    name=#{ceoName},
+	    photo=#{ceoPhoto},
+	    tel=#{ceoTel}, 
+	    email=#{ceoEmail}, 
+	    password=password(#{ceoPassword}),
+	    active=2 
+    where
+     member_no=#{ceoNo}
+  </update>
+  
+  
+  
+</mapper>
+
+
+
+
+
+
+
