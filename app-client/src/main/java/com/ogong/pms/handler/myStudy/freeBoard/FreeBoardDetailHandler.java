@@ -4,7 +4,6 @@ import java.util.List;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
@@ -27,11 +26,11 @@ public class FreeBoardDetailHandler implements Command {
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
 
-    int freeBoadNo = (int) request.getAttribute("inputNo");
+    int studyNo = (int) request.getAttribute("inputNo");
 
-    Study myStudy = studyDao.findByNo(freeBoadNo);
+    //Study myStudy = studyDao.findByNo(studyNo);
 
-    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyNo);
 
     if (freeBoardList.isEmpty()) {
       System.out.println("자유게시판 게시글 목록이 없습니다!");
@@ -40,7 +39,7 @@ public class FreeBoardDetailHandler implements Command {
 
     int inputNo = Prompt.inputInt(" 번호 : ");
 
-    FreeBoard freeBoard = freeBoardDao.findByNo(inputNo);
+    FreeBoard freeBoard = freeBoardDao.findByNo(inputNo, studyNo);
 
     if (freeBoard == null) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
@@ -54,6 +53,8 @@ public class FreeBoardDetailHandler implements Command {
       System.out.printf(" >> 첨부파일 : %s\n", freeBoard.getFileNames());
       System.out.printf(" >> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
       System.out.printf(" >> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
+
+      // 조회수 증가 안됨
       freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
       System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
       //promptFreeBoard.printComments(freeBoard); // 댓글호출

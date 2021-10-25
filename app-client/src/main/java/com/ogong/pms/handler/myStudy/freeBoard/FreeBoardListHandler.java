@@ -32,9 +32,11 @@ public class FreeBoardListHandler implements Command {
     List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
 
     for (FreeBoard freeBoard : freeBoardList) {
+
+      // 조회수 카운트 안됨 
       System.out.printf(
-          " (%d)\n 제목 : %s\n 내용 : %s\n 첨부파일(%d) : %s\n 작성자 : %s\n 조회수 : %s\n 작성일 : %s\n"
-              + " 댓글수 : %d\n 좋아요 : %d\n",
+          " (%d) 제목 : %s | 내용 : %s | 첨부파일(%d) : %s | 작성자 : %s | 조회수 : %d | 작성일 : %s |"
+              + " 댓글수 : %d | 좋아요 : %d\n",
               freeBoard.getFreeBoardNo(), 
               freeBoard.getFreeBoardTitle(),
               freeBoard.getFreeBoardContent(),
@@ -58,7 +60,6 @@ public class FreeBoardListHandler implements Command {
         case 1 :request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request); return;
         case 2 : request.getRequestDispatcher("/myStudy/freeBoardAdd").forward(request); return;
         default : return;
-        //        default :request.getRequestDispatcher("/myStudy/detail").forward(request); return;
       }
     }
 
@@ -71,7 +72,6 @@ public class FreeBoardListHandler implements Command {
       switch (selete) {
         case 1 : request.getRequestDispatcher("/myStudy/freeBoardAdd").forward(request); return;
         default : return;
-        //default :request.getRequestDispatcher("/myStudy/detail").forward(request); return;
       }
     }
   }
