@@ -2,7 +2,6 @@ package com.ogong.pms.handler.myStudy.todo;
 
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -26,13 +25,13 @@ public class ToDoUpdate implements Command {
 
     int[] arry = (int[]) request.getAttribute("studyTodoNo");
 
-    Study myStudy = studyDao.findByNo(arry[0]);
-    ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
+    // Study myStudy = studyDao.findByNo(arry[0]);
+    ToDo todo = toDoDao.findByNo(arry[0], arry[1]);
+    // ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
 
     String todoContent = Prompt.inputString(String.format(" 내용(%s) : ", todo.getTodoContent()));
     String todoRemark = Prompt.inputString(String.format(" 비고(%s) : ", todo.getTodoRemark()));
     int todoStatus = promptStatus(todo.getTodoStatus());
-
 
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
@@ -53,9 +52,9 @@ public class ToDoUpdate implements Command {
   }
 
   // 상태 선택
-  private int promptStatus() {
-    return promptStatus(-1);
-  }
+  // private int promptStatus() {
+  // return promptStatus(-1);
+  // }
 
   private int promptStatus(int todoStatus) {
     if (todoStatus == -1) {

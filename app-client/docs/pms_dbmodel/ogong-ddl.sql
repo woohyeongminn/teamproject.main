@@ -483,6 +483,9 @@ ALTER TABLE study_board_file
       file_no -- 첨부파일번호
     );
 
+ALTER TABLE study_board_file
+  MODIFY COLUMN file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '첨부파일번호';
+
 -- 댓글
 CREATE TABLE study_board_comment (
   comment_no  INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
