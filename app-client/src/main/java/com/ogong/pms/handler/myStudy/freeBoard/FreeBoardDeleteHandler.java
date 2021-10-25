@@ -54,6 +54,10 @@ public class FreeBoardDeleteHandler implements Command {
       return;
     }
 
+    if (!freeBoard.getFreeBoardFile().isEmpty()) {
+      System.out.println(" >> 게시글의 첨부파일이 모두 삭제됩니다.");
+    }
+
     String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 삭제를 취소하였습니다.");
@@ -61,7 +65,7 @@ public class FreeBoardDeleteHandler implements Command {
       return;
     }
 
-    freeBoardDao.deleteFile(freeBoard.getFreeBoardNo()/*,파일번호 */);
+    freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
     freeBoardDao.delete(freeBoard.getFreeBoardNo(), myStudy.getStudyNo());
 
     System.out.println(" >> 게시글이 삭제되었습니다.");

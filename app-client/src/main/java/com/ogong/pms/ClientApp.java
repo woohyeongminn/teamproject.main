@@ -304,7 +304,7 @@ public class ClientApp {
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyDao));
     commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao));
     commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao));
-    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
+    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao, sqlSession));
     commandMap.put("/myStudy/guilder", new GuilderListHandler(studyDao));
 
     commandMap.put("/myStudy/watingGuilderList", new WatingGuilderListHandler(studyDao));
@@ -320,9 +320,9 @@ public class ClientApp {
 
     PromptFreeBoard promptFreeBoard = new PromptFreeBoard(requestAgent);
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao, freeBoardDao));
+    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao, sqlSession));
+    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao, sqlSession));
+    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao, freeBoardDao, sqlSession));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao, freeBoardDao));
 
     //Socket chatSocket = new Socket(); 
