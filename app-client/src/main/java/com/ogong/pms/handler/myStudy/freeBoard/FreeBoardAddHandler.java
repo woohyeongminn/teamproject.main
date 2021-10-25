@@ -34,35 +34,34 @@ public class FreeBoardAddHandler implements Command {
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    Study myStudy = studyDao.findByNo(inputNo);
+    Study myStudy = studyDao.findByMyNo(inputNo, member.getPerNo());
 
     //List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
 
     FreeBoard freeBoard = new FreeBoard();
-    FreeBoardFile file = new FreeBoardFile();
 
-
+    freeBoard.setStudyNo(myStudy.getStudyNo());
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
     freeBoard.setFreeBoardContent(Prompt.inputString(" 내용 : "));
+    freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
+    freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
+    freeBoard.setFreeBoardWriter(member);
 
     List<FreeBoardFile> fileList = new ArrayList<>();
     while (true) {
-      String inputFile = Prompt.inputString(" 첨부파일 (완료:Enter) : ");
+      FreeBoardFile fileName = new FreeBoardFile();
+      String inputFileName = Prompt.inputString(" 첨부파일 (완료:Enter) : ");
 
-      if (inputFile.equals("")) {
+      if (inputFileName.equals("")) {
         System.out.println(" >> 첨부파일 등록이 완료되었습니다.");
         break;
       }
-
-      fileList.add(file);
-      break;
+      fileName.setAtcFileName(inputFileName);
+      fileList.add(fileName);
     }
 
     freeBoard.setFreeBoardFile(fileList);
-    freeBoard.setFreeBoardWriter(member);
-    freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
     //freeBoard.setComment(new ArrayList<>());
-    freeBoard.setFreeBoardRegisteredDate(new Date(System.currentTimeMillis()));
 
     String input = Prompt.inputString(" 게시글을 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -70,23 +69,15 @@ public class FreeBoardAddHandler implements Command {
       return;
     }
 
-    // 마지막 자유게시판 번호 찾아서 새 게시글 등록시 +1 되도록 기능 구현
-    //    FreeBoard lastFreeBoard = null;
-    //    if (!freeBoardList.isEmpty()) {
-    //      lastFreeBoard = freeBoardList.get(freeBoardList.size() - 1);
-    //      freeBoard.setFreeBoardNo(lastFreeBoard.getFreeBoardNo() + 1);
-    //    } else {
-    //      freeBoard.setFreeBoardNo(1);
-    //    }
-
     freeboardDao.insert(freeBoard);
-    //    for (FreeBoardFile file2 : freeBoard.getFreeBoardFile()) {
-    //      freeboardDao.insertFile(file2);
-    //    }
+
+    if (!freeBoard.getFreeBoardFile().isEmpty()) {
+      for (FreeBoardFile file : freeBoard.getFreeBoardFile()) {
+        freeboardDao.insertFile(file, freeBoard.getFreeBoardNo());
+      }
+    }
 
     System.out.println(" >> 게시글이 등록되었습니다.");
-    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
-    return;
   }
 }
 

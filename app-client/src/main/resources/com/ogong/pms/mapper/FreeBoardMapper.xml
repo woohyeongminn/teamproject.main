@@ -58,11 +58,10 @@
       sb.study_no=#{studyNo}
   </select>
   
-  <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
+  <select id="findByNo" resultMap="FreeBoardMap" parameterType="map">
     <include refid="select1"/>
     where
-      sb.st_board_no=#{boardDao}
-    order by s.study_no
+      sb.st_board_no=#{boardDao} and sb.study_no=#{studyNo}
   </select>
   
   <insert id="insert" parameterType="FreeBoard"
@@ -71,8 +70,7 @@
 	   values(#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount}, #{freeBoardWriter.perNo}, #{studyNo})
   </insert>
   
-  <insert id="insertFile" parameterType="map"
-   useGeneratedKeys="true" keyColumn="file_no" keyProperty="atcFileNo">
+  <insert id="insertFile" parameterType="map">
 	    insert into study_board_file(name, st_board_no)
 	    values(#{atcFileName}, #{boardNo})
   </insert>
