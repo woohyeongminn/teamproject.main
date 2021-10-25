@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.myStudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class MyStudyExitHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public MyStudyExitHandler(StudyDao studyDao) {
+  public MyStudyExitHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -47,10 +50,16 @@ public class MyStudyExitHandler implements Command {
         return;
       }
 
-      studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
-      studyDao.delete(myStudy.getStudyNo(), member.getPerNo());
-      System.out.println(" >> 스터디가 삭제 되었습니다.");
-      return;
+      try {
+        studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
+        studyDao.deleteAllBookmark(myStudy.getStudyNo());
+        studyDao.deleteStudy(myStudy.getStudyNo(), member.getPerNo());
+        sqlSession.commit();
+        System.out.println(" >> 스터디가 삭제 되었습니다.");
+        return;
+      } catch (Exception e) {
+        sqlSession.rollback();
+      }
     }
 
     // 구성원일 때

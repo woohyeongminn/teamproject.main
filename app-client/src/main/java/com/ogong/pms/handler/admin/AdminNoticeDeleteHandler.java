@@ -32,9 +32,14 @@ public class AdminNoticeDeleteHandler implements Command {
       return;
     }
 
-    noticeDao.deletenoticefile(noticeNo);
-    noticeDao.delete(noticeNo);
-    sqlSession.commit();
+    try {
+      noticeDao.deletenoticefile(noticeNo);
+      noticeDao.delete(noticeNo);
+      sqlSession.commit();
+    } catch (Exception e) {
+      System.out.println("공지 삭제 실패!");
+      sqlSession.rollback();
+    }
 
     System.out.println(" >> 공지가 삭제되었습니다.");
     request.getRequestDispatcher("/adminNotice/list").forward(request);
