@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.guilder;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class GuilderDeleteHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public GuilderDeleteHandler(StudyDao studyDao) {
+  public GuilderDeleteHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -52,7 +55,13 @@ public class GuilderDeleteHandler implements Command {
           System.out.println("\n >> 구성원 탈퇴를 취소하였습니다.");
           return;
         }
-        studyDao.deleteGuilder(myStudy.getStudyNo(), guilderMember.getPerNo());
+        try {
+          studyDao.deleteGuilder(myStudy.getStudyNo(), guilderMember.getPerNo());
+          sqlSession.commit();
+        } catch (Exception e) {
+          System.out.println(" 구성원 탈퇴 오류!");
+          sqlSession.rollback();
+        }
         System.out.println("\n >> 구성원이 탈퇴되었습니다.");
         break;
       }

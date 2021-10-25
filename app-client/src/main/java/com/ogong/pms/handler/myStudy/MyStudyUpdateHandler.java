@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.myStudy;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -10,9 +11,11 @@ import com.ogong.util.Prompt;
 public class MyStudyUpdateHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public MyStudyUpdateHandler(StudyDao studyDao) {
+  public MyStudyUpdateHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -101,8 +104,13 @@ public class MyStudyUpdateHandler implements Command {
       return;
     }
 
-    studyDao.update(myStudy);
-
+    try {
+      studyDao.update(myStudy);
+      sqlSession.commit();
+    } catch (Exception e) {
+      System.out.println(" 스터디 수정 오류!");
+      sqlSession.rollback();
+    }
     System.out.println(" >> 스터디가 수정되었습니다.");
   }
 }
