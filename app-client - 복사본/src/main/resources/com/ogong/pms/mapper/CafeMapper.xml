@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CafeMapper">
+  
+  <resultMap type="Cafe" id="cafeMap">
+    <id column="cafe_no" property="no"/> 
+    <result column="name" property="name"/>
+    <result column="info" property="info"/>
+    <result column="location" property="location"/>
+    <result column="phone" property="phone"/>
+    <result column="open_time" property="openTime"/>
+    <result column="close_time" property="closeTime"/>
+    <result column="view_cnt" property="viewCount"/>
+    <result column="operating_status_no" property="cafeStatus"/>
+    
+    <association property="ceoMember" javaType="CeoMember">
+      <id column="member_no" property="ceoNo"/>
+      <result column="bossname" property="ceoBossName" />
+      <result column="license_no" property="ceoLicenseNo" />
+    </association>
+    
+    <collection property="cafeImgs" ofType="CafeImage">
+      <id column="photo_no" property="no" />
+      <result column="photo_name" property="name" />
+    </collection>
+  </resultMap>
+  
+  <resultMap type="CafeReview" id="reviewMap">
+    <id column="review_no" property="reviewNo"/>
+    <result column="studycafe_rsv_no" property="reservationNo"/>
+    <result column="content" property="content"/>
+    <result column="grade" property="grade"/>
+    <result column="created_dt" property="RegisteredDate"/>
+    <result column="status" property="reviewStatus"/>
+    
+    <association property="member" javaType="member">
+      <id column="member_no" property="perNo"/>
+      <result column="nickname" property="perNickname"/>
+    </association>
+    
+    <association property="cafe" javaType="cafe">
+      <id column="cafe_no" property="no"/>
+    </association>
+  </resultMap>
+  
+  <resultMap type="CafeReservation" id="reservationMap">
+    <id column="studycafe_rsv_no" property="reservationNo"/>
+    <result column="studyroom_no" property="roomNo"/>
+    <result column="rsv_dt" property="reservationDate"/>
+    <result column="using_dt" property="useDate"/>
+    <result column="start_time" property="startTime"/>
+    <result column="using_time" property="useTime"/>
+    <result column="people" property="useMemberNumber"/>
+    <result column="total_price" property="totalPrice"/>
+    <result column="rsv_status_no" property="reservationStatus"/>
+    <result column="rsv_name" property="reservationStatusName"/>
+    <result column="review" property="wirteReview"/>
+    
+    <association property="member" javaType="member">
+      <id column="member_no" property="perNo"/>
+    </association>
+    
+    <association property="cafe" javaType="cafe">
+      <id column="cafe_no" property="no"/>
+      <result column="cafe_name" property="name"/>
+    </association>
+  </resultMap>
+  
+  <resultMap type="CafeRoom" id="cafeRoomMap">
+    <id column="studyroom_no" property="roomNo"/>
+    <result column="room_name" property="roomName"/>
+    <result column="introduction" property="roomInfo"/>
+    <result column="people" property="people"/>
+    <result column="hourly_amount" property="roomPrice"/>
+
+    <association property="cafe" javaType="cafe">
+      <id column="cafe_no" property="no"/>
+    </association>
+    
+    <collection property="roomImgs" ofType="CafeRoomImage">
+      <id column="photo_no" property="no" />
+      <result column="photo_name" property="name" />
+    </collection>
+  </resultMap>
+  
+  <sql id="listSelect1">
+	  select 
+	    c.cafe_no, 
+	    c.name,
+	    c.location,
+	    c.open_time,
+	    c.close_time,
+	    c.operating_status_no
+	  from 
+	    studycafe c
+  </sql>
+  
+  <sql id="detailSelect1">
+    select 
+      c.cafe_no, 
+      c.name, 
+      c.info, 
+      c.location, 
+      c.phone, 
+      c.open_time, 
+      c.close_time,
+      c.view_cnt,
+      sp.photo_no,
+      sp.name photo_name, 
+      c.operating_status_no, 
+      c.member_no,
+      cm.bossname, 
+      cm.license_no
+    from 
+      studycafe c
+      left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
+      join ceo_member cm on c.member_no=cm.member_no
+  </sql>
+  
+  <sql id="memberWhere">
+      c.operating_status_no != 1 
+      and c.operating_status_no != 4
+  </sql>
+  
+  <sql id="listOrder1">
+    order by 
+      c.operating_status_no asc,c.cafe_no asc
+  </sql>
+  
+  <!-- 관리자용 전체리스트 -->
+  <select id="getCafeList" resultMap="cafeMap">
+    <include refid="listSelect1"/>
+    <include refid="listOrder1"/>
+  </select>
+  
+  <!-- 멤버용 전체리스트 -->
+  <select id="getCafeListByMember" resultMap="cafeMap">
+	  <include refid="listSelect1"/>
+	  where
+	   <include refid="memberWhere"/>
+	  <include refid="listOrder1"/>
+  </select>
+  
+  <!-- 멤버 검색용 리스트 -->
+  <select id="findCafeListByLocation" resultMap="cafeMap" parameterType="string">
+		<include refid="listSelect1"/>
+		where 
+		 <include refid="memberWhere"/>  
+		 and c.location like (concat('%',#{input},'%'))
+		<include refid="listOrder1"/>
+  </select>
+  
+  <!-- 여기저기서 쓰이는 카페(?) -->
+  <select id="findByCafeNo" resultMap="cafeMap" parameterType="int">
+    <include refid="detailSelect1"/>
+    where
+      c.cafe_no = #{cafeNo}
+  </select>
+  
+  <!-- 멤버용 카페 상세 -->
+  <select id="findByCafeNoMember" resultMap="cafeMap" parameterType="int">
+    <include refid="detailSelect1"/>
+		where
+		  <include refid="memberWhere"/> 
+		  and c.cafe_no = #{cafeNo}
+  </select>
+  
+  <!-- 사장용 카페 상세 -->
+  <select id="findByCeoMember" resultMap="cafeMap" parameterType="int">
+    <include refid="detailSelect1"/>
+    where
+      c.operating_status_no != 4
+      and c.member_no = #{ceoNo}
+  </select>
+  
+  <insert id="insertCafe" parameterType="cafe" 
+          useGeneratedKeys="true" keyColumn="cafe_no" keyProperty="no">
+	  insert into studycafe
+	    (name,info,location,phone,open_time,close_time,member_no,operating_status_no)
+	  values
+	    (#{name},#{info},#{location},#{phone},#{openTime,jdbcType=TIME},#{closeTime,jdbcType=TIME},#{ceoMember.ceoNo},1)
+  </insert>
+  
+  <insert id="insertCafeImage" parameterType="map">
+    insert into studycafe_photo(name, cafe_no) 
+    values
+    <foreach collection="fileNames" item="CafeImage" separator="," >
+    (#{CafeImage.name},#{cafeNo})
+    </foreach>
+  </insert>
+  
+  <update id="updateCafe" parameterType="cafe">
+    update studycafe
+    <set>
+      <if test="info != null">
+      info=#{info},
+      </if>
+      <if test="location != null">
+      location=#{location},
+      </if>
+      <if test="phone != null">
+      phone=#{phone},
+      </if>
+      <if test="openTime != null">
+      open_time=#{openTime,jdbcType=TIME},
+      </if>
+      <if test="closeTime != null">
+      close_time=#{closeTime,jdbcType=TIME},
+      </if>
+      <if test="cafeStatus != null">
+      operating_status_no=#{cafeStatus}
+      </if>
+    </set>
+    where
+      cafe_no=#{no}
+  </update>
+
+  <!-- 관리자 카페 승인  -->
+  <update id="updateCafeStatusToGENERAL" parameterType="int">
+	  update studycafe set
+	     operating_status_no = 2
+	  where
+	     cafe_no = #{cafeNo}
+  </update>
+  
+  <delete id="deleteCafe" parameterType="int">
+	  update studycafe set
+	     operating_status_no = 4
+	  where
+	     cafe_no = #{cafeNo}
+  </delete>
+  
+  <delete id="deleteCafeImage" parameterType="map">
+    delete from studycafe_photo
+    <where>
+      photo_no in
+      <foreach collection="fileNames" item="CafeImage" separator=","  open="(" close=")">
+        #{CafeImage.no}
+      </foreach>
+    </where>
+  </delete>
+  
+  <!-- 금주의 휴무일 가져오기 -->
+  <select id="getCafeHoliday" parameterType="int" resultType="string">
+    select 
+      group_concat(date separator ',') holiday
+    from 
+      studycafe_holiday
+    where 
+      weekofyear(curdate())=weekofyear(date)
+      <if test="cafeNo != null">
+        and cafe_no=#{cafeNo}
+      </if>
+      <if test="ceoNo != null">
+        and cafe_no = (select cafe_no from studycafe where member_no=#{ceoNo})
+      </if>
+  </select>
+  
+  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페리뷰ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <sql id="reviewListSelect">
+  select 
+      r.review_no,
+      r.grade, 
+      r.content, 
+      r.create_dt, 
+      r.status, 
+      sr.cafe_no,
+      rs.member_no,
+      m.nickname
+    from 
+      studycafe_review r
+      join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
+      join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+      join member m on rs.member_no=m.member_no
+  </sql>
+  
+  <select id="getCafeReviewList" resultMap="reviewMap">
+    <include refid="reviewListSelect"/>
+  </select>
+  
+  <!-- 카페 상세에서 출력되는 리뷰 리스트 -->
+  <select id="findReviewListByCafeNo" resultMap="reviewMap" parameterType="int">
+    <include refid="reviewListSelect"/>
+    where 
+      sr.cafe_no=#{cafeNo}
+  </select>
+  
+  <!-- 내 리뷰 목록 -->
+  <select id="findReviewListByMember" resultMap="reviewMap" parameterType="int">
+    <include refid="reviewListSelect"/>
+    where 
+      rs.member_no=#{memberNo}
+  </select>
+  
+  <select id="findByReviewNo" resultMap="reviewMap" parameterType="int">
+    <include refid="reviewListSelect"/>
+    where 
+      r.review_no=#{reviewNo}
+  </select>
+  
+  <insert id="insertCafeReview" parameterType="cafeReview">
+    insert into studycafe_review(studycafe_rsv_no, content, grade, status)
+    values(#{reservationNo},#{content},#{grade},1)
+  </insert>
+  
+  <!-- 리뷰 등록시 상태변경 -->
+  <update id="updateCafeReservationReviewStatus" parameterType="int">
+    update studycafe_reservation set
+      review=2
+    where
+      studycafe_rsv_no=#{reservationNo}
+  </update>
+  
+  <update id="deleteCafeReview" parameterType="int">
+    update studycafe_review set 
+      status = 2
+    where
+      review_no = #{reviewNo}
+  </update>
+  
+  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ스터디룸ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <sql id="cafeRoomListSelect">
+    select
+      studyroom_no, 
+      name room_name, 
+      cafe_no
+    from 
+      studycafe_room
+  </sql>
+  
+  <!-- 전체 룸 리스트 -->
+  <select id="getCafeRoomList" resultMap="cafeRoomMap">
+    <include refid="cafeRoomListSelect"/>
+  </select>
+  
+  <!-- 카페 상세> 스터디룸 예약하기 > 리스트 -->
+  <select id="findCafeRoomListByCafe" resultMap="cafeRoomMap" parameterType="int">
+    <include refid="cafeRoomListSelect"/>
+    where
+      cafe_no = #{cafeNo}
+    order by
+      studyroom_no asc
+  </select>
+  
+  <!-- 스터디룸 예약하기> 스터디룸 선택 > 스터디룸 상세 -->
+  <select id="findByRoomNo" resultMap="cafeRoomMap" parameterType="int">
+  select 
+	  r.studyroom_no, 
+	  r.name room_name, 
+	  r.cafe_no, 
+	  r.introduction, 
+	  r.people, 
+	  r.hourly_amount,
+	  rp.photo_no, 
+	  rp.name photo_name
+  from 
+    studycafe_room r
+    left outer join studycafe_room_photo rp on r.studyroom_no=rp.studyroom_no
+  where 
+    r.studyroom_no = #{roomNo}
+  </select>
+  
+  <insert id="insertCafeRoom" parameterType="CafeRoom"
+        useGeneratedKeys="true" keyColumn="studyroom_no" keyProperty="roomNo">
+    insert into studycafe_room(name, cafe_no, introduction, people, hourly_amount)
+    values (#{roomName},#{cafe.no},#{roomInfo},#{people},#{roomPrice})
+  </insert>
+  
+  <insert id="insertCafeRoomImage" parameterType="map">
+    insert into studycafe_room_photo(name, studyroom_no) 
+    values
+    <foreach collection="fileNames" item="roomImage" separator="," >
+    (#{roomImage.name},#{cafeRoomNo})
+    </foreach>
+  </insert>
+  
+  <update id="updateCafeRoom" parameterType="CafeRoom">
+    update studycafe_room
+    <set>
+      <if test="roomName != null">
+        name=#{roomName},
+      </if>
+      <if test="roomInfo != null">
+        introduction=#{roomInfo},
+      </if>
+      <if test="people != null">
+        people=#{people},
+      </if>
+      <if test="roomPrice != null">
+        hourly_amount=#{roomPrice}
+      </if>
+    </set>
+    where studyroom_no=#{roomNo}
+  </update>
+  
+  <delete id="deleteCafeRoom" parameterType="int">
+    delete from studycafe_room where studyroom_no = #{roomNo}
+  </delete>
+  
+  <delete id="deleteCafeRoomImage" parameterType="map">
+    delete from studycafe_room_photo
+    <where>
+      photo_no in
+      <foreach collection="fileNames" item="CafeRoomImage" separator=","  open="(" close=")">
+        #{CafeRoomImage.no}
+      </foreach>
+    </where>
+  </delete>
+  
+  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페예약ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <sql id="reservationListSelect">
+	  select 
+	      rs.studycafe_rsv_no, 
+	      rs.studyroom_no, 
+	      rs.member_no, 
+	      rs.rsv_dt, 
+	      rs.using_dt,
+	      rs.start_time, 
+	      rs.using_time, 
+	      rs.people, 
+	      rs.total_price,
+	      if(rs.review=1,'false','true') review, 
+	      rst.rsv_status_no,
+	      rst.rsv_name, 
+	      c.cafe_no, 
+	      c.name cafe_name
+	    from 
+	      studycafe_reservation rs
+	      join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no
+	      join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+	      join studycafe c on sr.cafe_no=c.cafe_no
+  </sql>
+  
+  <select id="getCafeReservationList" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    order by
+      rs.studycafe_rsv_no asc
+  </select>
+  
+  <!-- 내 예약 리스트 -->
+  <select id="findReservationListByMember" resultMap="reservationMap" parameterType="int">
+  <include refid="reservationListSelect"/>
+	  where 
+	    rs.member_no=#{memberNo}
+	  order by
+	    rs.studycafe_rsv_no asc
+  </select>
+  
+  <!-- 사장 카페 관리용 예약 리스트 -->
+  <select id="findReservationListByCeoMember" resultMap="reservationMap" parameterType="int">
+  <include refid="reservationListSelect"/>
+    where 
+      c.member_no=#{ceoNo}
+    order by 
+      rs.studycafe_rsv_no asc
+  </select>
+  
+  <!-- 내 예약 리스트 상세 -->
+  <select id="findReservationByMember" resultMap="reservationMap" parameterType="map">
+  <include refid="reservationListSelect"/>
+    where 
+      rs.member_no=#{memberNo}
+      and rs.studycafe_rsv_no=#{reserNo}
+    order by
+      rs.studycafe_rsv_no asc
+  </select>
+  
+  <insert id="insertReservation" parameterType="CafeReservation">
+  insert into studycafe_reservation
+    (studyroom_no, member_no, using_dt, start_time,using_time, people, 
+    total_price, rsv_status_no, review) 
+  values(#{roomNo},#{member.perNo},#{useDate},#{startTime},#{useTime},#{useMemberNumber},#{totalPrice},#{reservationStatus},1)
+  </insert>
+  
+  <delete id="deleteReservation" parameterType="map">
+    update
+      studycafe_reservation set rsv_status_no = #{status}
+    where
+      studycafe_rsv_no = #{reservationNo}
+  </delete>
+</mapper>
+
+
+
+
+
+
+
