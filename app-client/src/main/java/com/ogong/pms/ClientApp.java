@@ -287,7 +287,7 @@ public class ClientApp {
 
     commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao));
 
-    commandMap.put("/study/add", new StudyAddHandler(studyDao));
+    commandMap.put("/study/add", new StudyAddHandler(studyDao, sqlSession));
     commandMap.put("/study/list", new StudyListHandler(studyDao));
     commandMap.put("/study/detail", new StudyDetailHandler(studyDao));
     commandMap.put("/study/search", new StudySearchHandler(studyDao));
