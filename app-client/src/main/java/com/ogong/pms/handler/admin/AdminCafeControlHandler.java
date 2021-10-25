@@ -31,8 +31,7 @@ public class AdminCafeControlHandler implements Command {
 
     for(Cafe cafe : cafeList) {
       if (cafe.getCafeStatus() == DELETE) {
-        System.out.printf(" \n (%s)\n", cafe.getNo());
-        System.out.println(" 삭제된 장소입니다.");
+        System.out.printf(" \n (%s) | 삭제된 장소입니다. \n", cafe.getNo());
         continue;
       }
       System.out.printf(" \n (%s) | 이름 : %s | 주소 : %s | 운영시간 : %s ~ %s", 
@@ -42,7 +41,7 @@ public class AdminCafeControlHandler implements Command {
           cafe.getOpenTime(),
           cafe.getCloseTime());
       if (cafe.getCafeStatus() == WAIT) {
-        System.out.printf(" * 승인 대기 중인 카페입니다. \n");
+        System.out.printf(" * 승인 대기 중인 카페입니다.");
       }
       System.out.println();
     }

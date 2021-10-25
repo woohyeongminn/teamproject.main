@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.myStudy.todo;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Study;
@@ -12,10 +13,12 @@ public class ToDoUpdate implements Command {
 
   StudyDao studyDao;
   ToDoDao toDoDao;
+  SqlSession sqlSession;
 
-  public ToDoUpdate(StudyDao studyDao, ToDoDao toDoDao) {
+  public ToDoUpdate(StudyDao studyDao, ToDoDao toDoDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
     this.toDoDao = toDoDao;
+    this.sqlSession = sqlSession;
   }
 
   public void execute(CommandRequest request) throws Exception {
@@ -46,7 +49,7 @@ public class ToDoUpdate implements Command {
     todo.setTodoRemark(todoRemark);
 
     toDoDao.update(todo);
-    // studyDao.update(myStudy);
+    sqlSession.commit();
 
     System.out.println(" >> 할 일이 변경되었습니다.");
     request.getRequestDispatcher("/myStudy/todoList").forward(request);

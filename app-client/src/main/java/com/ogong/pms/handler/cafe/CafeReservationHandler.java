@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
@@ -19,10 +20,13 @@ import com.ogong.util.Prompt;
 public class CafeReservationHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CafeReservationHandler (CafeDao cafeDao) {
+  public CafeReservationHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -42,7 +46,8 @@ public class CafeReservationHandler implements Command {
     cafe.setHoliday(cafeDao.getCafeHoliday(params));
 
     if (selectReservation.equals("addReservation")) {
-      addReservation(cafe);
+      //      addReservation(cafe);
+      return;
     } else if (selectReservation.equals("addRoomReservation")) {
       addRoomReservation(cafe);
     }
@@ -312,6 +317,7 @@ public class CafeReservationHandler implements Command {
     reservation.setReservationStatus(1); // 1 : 예약완료
 
     cafeDao.insertReservation(reservation);
+    sqlSession.commit();
 
     System.out.println(" *** 예약 되었습니다 ***");
   }

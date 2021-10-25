@@ -33,7 +33,7 @@
     <result column="studycafe_rsv_no" property="reservationNo"/>
     <result column="content" property="content"/>
     <result column="grade" property="grade"/>
-    <result column="created_dt" property="RegisteredDate"/>
+    <result column="create_dt" property="RegisteredDate"/>
     <result column="status" property="reviewStatus"/>
     
     <association property="member" javaType="member">
@@ -133,7 +133,7 @@
   <!-- 관리자용 전체리스트 -->
   <select id="getCafeList" resultMap="cafeMap">
     <include refid="listSelect1"/>
-    <include refid="listOrder1"/>
+    order by c.cafe_no asc
   </select>
   
   <!-- 멤버용 전체리스트 -->
@@ -145,7 +145,7 @@
   </select>
   
   <!-- 멤버 검색용 리스트 -->
-  <select id="findCafeListByLocation" resultMap="cafeMap" parameterType="string">
+  <select id="findCafeListByLocation" resultMap="cafeMap">
     <include refid="listSelect1"/>
     where 
      <include refid="memberWhere"/>  
@@ -154,14 +154,14 @@
   </select>
   
   <!-- 여기저기서 쓰이는 카페(?) -->
-  <select id="findByCafeNo" resultMap="cafeMap" parameterType="int">
+  <select id="findByCafeNo" resultMap="cafeMap">
     <include refid="detailSelect1"/>
     where
       c.cafe_no = #{cafeNo}
   </select>
   
   <!-- 멤버용 카페 상세 -->
-  <select id="findByCafeNoMember" resultMap="cafeMap" parameterType="int">
+  <select id="findByCafeNoMember" resultMap="cafeMap">
     <include refid="detailSelect1"/>
     where
       <include refid="memberWhere"/> 
@@ -169,14 +169,14 @@
   </select>
   
   <!-- 사장용 카페 상세 -->
-  <select id="findByCeoMember" resultMap="cafeMap" parameterType="int">
+  <select id="findByCeoMember" resultMap="cafeMap">
     <include refid="detailSelect1"/>
     where
       c.operating_status_no != 4
       and c.member_no = #{ceoNo}
   </select>
   
-  <insert id="insertCafe" parameterType="cafe" 
+  <insert id="insertCafe"
           useGeneratedKeys="true" keyColumn="cafe_no" keyProperty="no">
     insert into studycafe
       (name,info,location,phone,open_time,close_time,member_no,operating_status_no)
@@ -184,7 +184,7 @@
       (#{name},#{info},#{location},#{phone},#{openTime,jdbcType=TIME},#{closeTime,jdbcType=TIME},#{ceoMember.ceoNo},1)
   </insert>
   
-  <insert id="insertCafeImage" parameterType="map">
+  <insert id="insertCafeImage">
     insert into studycafe_photo(name, cafe_no) 
     values
     <foreach collection="fileNames" item="CafeImage" separator="," >
@@ -192,7 +192,15 @@
     </foreach>
   </insert>
   
-  <update id="updateCafe" parameterType="cafe">
+  <insert id="insertCafeHolidays">
+    insert into studycafe_holiday(date, cafe_no) 
+    values
+    <foreach collection="holidays" item="Date" separator="," >
+    (#{Date},#{cafeNo})
+    </foreach>
+  </insert>
+  
+  <update id="updateCafe">
     update studycafe
     <set>
       <if test="info != null">
@@ -219,21 +227,21 @@
   </update>
 
   <!-- 관리자 카페 승인  -->
-  <update id="updateCafeStatusToGENERAL" parameterType="int">
+  <update id="updateCafeStatusToGENERAL">
     update studycafe set
        operating_status_no = 2
     where
        cafe_no = #{cafeNo}
   </update>
   
-  <delete id="deleteCafe" parameterType="int">
+  <delete id="deleteCafe">
     update studycafe set
        operating_status_no = 4
     where
        cafe_no = #{cafeNo}
   </delete>
   
-  <delete id="deleteCafeImage" parameterType="map">
+  <delete id="deleteCafeImage">
     delete from studycafe_photo
     <where>
       photo_no in
@@ -244,7 +252,7 @@
   </delete>
   
   <!-- 금주의 휴무일 가져오기 -->
-  <select id="getCafeHoliday" parameterType="int" resultType="string">
+  <select id="getCafeHoliday" resultType="string">
     select 
       group_concat(date separator ',') holiday
     from 
@@ -255,7 +263,8 @@
         and cafe_no=#{cafeNo}
       </if>
       <if test="ceoNo != null">
-        and cafe_no = (select cafe_no from studycafe where member_no=#{ceoNo})
+        and cafe_no = 
+        (select cafe_no from studycafe where member_no=#{ceoNo} and operating_status_no != 4)
       </if>
   </select>
   
@@ -282,39 +291,39 @@
   </select>
   
   <!-- 카페 상세에서 출력되는 리뷰 리스트 -->
-  <select id="findReviewListByCafeNo" resultMap="reviewMap" parameterType="int">
+  <select id="findReviewListByCafeNo" resultMap="reviewMap">
     <include refid="reviewListSelect"/>
     where 
       sr.cafe_no=#{cafeNo}
   </select>
   
   <!-- 내 리뷰 목록 -->
-  <select id="findReviewListByMember" resultMap="reviewMap" parameterType="int">
+  <select id="findReviewListByMember" resultMap="reviewMap">
     <include refid="reviewListSelect"/>
     where 
       rs.member_no=#{memberNo}
   </select>
   
-  <select id="findByReviewNo" resultMap="reviewMap" parameterType="int">
+  <select id="findByReviewNo" resultMap="reviewMap">
     <include refid="reviewListSelect"/>
     where 
       r.review_no=#{reviewNo}
   </select>
   
-  <insert id="insertCafeReview" parameterType="cafeReview">
+  <insert id="insertCafeReview">
     insert into studycafe_review(studycafe_rsv_no, content, grade, status)
     values(#{reservationNo},#{content},#{grade},1)
   </insert>
   
   <!-- 리뷰 등록시 상태변경 -->
-  <update id="updateCafeReservationReviewStatus" parameterType="int">
+  <update id="updateCafeReservationReviewStatus">
     update studycafe_reservation set
       review=2
     where
       studycafe_rsv_no=#{reservationNo}
   </update>
   
-  <update id="deleteCafeReview" parameterType="int">
+  <update id="deleteCafeReview">
     update studycafe_review set 
       status = 2
     where
@@ -337,7 +346,7 @@
   </select>
   
   <!-- 카페 상세> 스터디룸 예약하기 > 리스트 -->
-  <select id="findCafeRoomListByCafe" resultMap="cafeRoomMap" parameterType="int">
+  <select id="findCafeRoomListByCafe" resultMap="cafeRoomMap">
     <include refid="cafeRoomListSelect"/>
     where
       cafe_no = #{cafeNo}
@@ -346,7 +355,7 @@
   </select>
   
   <!-- 스터디룸 예약하기> 스터디룸 선택 > 스터디룸 상세 -->
-  <select id="findByRoomNo" resultMap="cafeRoomMap" parameterType="int">
+  <select id="findByRoomNo" resultMap="cafeRoomMap">
   select 
     r.studyroom_no, 
     r.name room_name, 
@@ -363,13 +372,13 @@
     r.studyroom_no = #{roomNo}
   </select>
   
-  <insert id="insertCafeRoom" parameterType="CafeRoom"
+  <insert id="insertCafeRoom"
         useGeneratedKeys="true" keyColumn="studyroom_no" keyProperty="roomNo">
     insert into studycafe_room(name, cafe_no, introduction, people, hourly_amount)
     values (#{roomName},#{cafe.no},#{roomInfo},#{people},#{roomPrice})
   </insert>
   
-  <insert id="insertCafeRoomImage" parameterType="map">
+  <insert id="insertCafeRoomImage">
     insert into studycafe_room_photo(name, studyroom_no) 
     values
     <foreach collection="fileNames" item="roomImage" separator="," >
@@ -396,11 +405,11 @@
     where studyroom_no=#{roomNo}
   </update>
   
-  <delete id="deleteCafeRoom" parameterType="int">
+  <delete id="deleteCafeRoom">
     delete from studycafe_room where studyroom_no = #{roomNo}
   </delete>
   
-  <delete id="deleteCafeRoomImage" parameterType="map">
+  <delete id="deleteCafeRoomImage">
     delete from studycafe_room_photo
     <where>
       photo_no in
@@ -441,7 +450,7 @@
   </select>
   
   <!-- 내 예약 리스트 -->
-  <select id="findReservationListByMember" resultMap="reservationMap" parameterType="int">
+  <select id="findReservationListByMember" resultMap="reservationMap">
   <include refid="reservationListSelect"/>
     where 
       rs.member_no=#{memberNo}
@@ -450,7 +459,7 @@
   </select>
   
   <!-- 사장 카페 관리용 예약 리스트 -->
-  <select id="findReservationListByCeoMember" resultMap="reservationMap" parameterType="int">
+  <select id="findReservationListByCeoMember" resultMap="reservationMap">
   <include refid="reservationListSelect"/>
     where 
       c.member_no=#{ceoNo}
@@ -459,7 +468,7 @@
   </select>
   
   <!-- 내 예약 리스트 상세 -->
-  <select id="findReservationByMember" resultMap="reservationMap" parameterType="map">
+  <select id="findReservationByMember" resultMap="reservationMap">
   <include refid="reservationListSelect"/>
     where 
       rs.member_no=#{memberNo}
@@ -468,14 +477,14 @@
       rs.studycafe_rsv_no asc
   </select>
   
-  <insert id="insertReservation" parameterType="CafeReservation">
+  <insert id="insertReservation">
   insert into studycafe_reservation
     (studyroom_no, member_no, using_dt, start_time,using_time, people, 
     total_price, rsv_status_no, review) 
   values(#{roomNo},#{member.perNo},#{useDate},#{startTime},#{useTime},#{useMemberNumber},#{totalPrice},#{reservationStatus},1)
   </insert>
   
-  <delete id="deleteReservation" parameterType="map">
+  <delete id="deleteReservation">
     update
       studycafe_reservation set rsv_status_no = #{status}
     where

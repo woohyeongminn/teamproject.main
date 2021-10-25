@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.cafe;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
@@ -11,11 +12,12 @@ import com.ogong.util.Prompt;
 public class CafeMyReviewAddHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CafeMyReviewAddHandler(CafeDao cafeDao) {
+  public CafeMyReviewAddHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
-
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -47,8 +49,13 @@ public class CafeMyReviewAddHandler implements Command {
     cafeReview.setContent(content);
     cafeReview.setGrade(grade);
 
-    cafeDao.insertCafeReview(cafeReview);
-    cafeDao.updateCafeReservationReviewStatus(cafeReview.getReservationNo());
+    try {
+      cafeDao.insertCafeReview(cafeReview);
+      cafeDao.updateCafeReservationReviewStatus(cafeReview.getReservationNo());
+      sqlSession.commit();
+    } catch (Exception e) {
+      sqlSession.rollback();
+    }
 
     System.out.println(" >> 리뷰 등록 완료.");
 

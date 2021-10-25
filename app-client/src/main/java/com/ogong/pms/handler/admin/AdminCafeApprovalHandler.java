@@ -1,6 +1,6 @@
 package com.ogong.pms.handler.admin;
 
-import static com.ogong.pms.domain.Cafe.GENERAL;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.handler.Command;
@@ -10,9 +10,11 @@ import com.ogong.util.Prompt;
 public class AdminCafeApprovalHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public AdminCafeApprovalHandler (CafeDao cafeDao) {
+  public AdminCafeApprovalHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -47,8 +49,10 @@ public class AdminCafeApprovalHandler implements Command {
           System.out.println(" >> 장소 승인을 취소하였습니다.");
           return;
         }
-        cafe.setCafeStatus(GENERAL);
-        cafeDao.updateCafeStatusToGENERAL(cafe);
+
+        cafeDao.updateCafeStatusToGENERAL(cafe.getNo());
+        sqlSession.commit();
+
         System.out.printf(" >> '%s'를 승인하였습니다.\n", cafe.getName());
         return;
       }
