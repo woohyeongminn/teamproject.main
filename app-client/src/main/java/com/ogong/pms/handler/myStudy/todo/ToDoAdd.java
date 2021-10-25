@@ -21,7 +21,6 @@ public class ToDoAdd implements Command {
     this.toDoDao = toDoDao;
   }
 
-  // 등록
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 등록");

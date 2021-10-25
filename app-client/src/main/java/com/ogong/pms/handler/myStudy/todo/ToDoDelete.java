@@ -18,19 +18,19 @@ public class ToDoDelete implements Command {
     this.toDoDao = toDoDao;
   }
 
-  // 삭제
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 삭제");
     System.out.println();
 
-    int[] arry = (int[]) request.getAttribute("studyTodoNo");
+    int studyNo = (int) request.getAttribute("inputNo");
+    int todoNo = (int) request.getAttribute("studyTodoNo");
 
-    Study myStudy = studyDao.findByNo(arry[0]);
-    ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
+    Study myStudy = studyDao.findByNo(studyNo);
+    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todoNo);
 
-    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오)");
+    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 삭제를 취소하였습니다.");
       request.getRequestDispatcher("/myStudy/todoList").forward(request);
