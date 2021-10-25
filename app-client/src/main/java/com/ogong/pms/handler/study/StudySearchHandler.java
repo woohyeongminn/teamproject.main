@@ -43,7 +43,7 @@ public class StudySearchHandler implements Command {
       System.out.printf(" >> 조장 : %s\n", searchStudy.getOwner().getPerNickname());
       System.out.printf(" >> 분야 : %s\n", searchStudy.getSubjectName());
       System.out.printf(" >> 지역 : %s\n", searchStudy.getArea());
-      System.out.printf(" >> 인원수 : %s/%s명\n", searchStudy.getMembers().size() + 1, searchStudy.getNumberOfPeple());
+      System.out.printf(" >> 인원수 : %s/%s명\n", searchStudy.getMembers().size(), searchStudy.getNumberOfPeple());
       System.out.printf(" >> 대면 : %s\n", searchStudy.getFaceName());
       System.out.printf(" >> 소개글 : %s\n", searchStudy.getIntroduction());
       count++;

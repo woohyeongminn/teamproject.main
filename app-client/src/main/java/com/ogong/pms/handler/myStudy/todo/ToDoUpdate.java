@@ -2,6 +2,7 @@ package com.ogong.pms.handler.myStudy.todo;
 
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
+import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -25,8 +26,8 @@ public class ToDoUpdate implements Command {
 
     int[] arry = (int[]) request.getAttribute("studyTodoNo");
 
-    // Study myStudy = studyDao.findByNo(arry[0]);
-    ToDo todo = toDoDao.findByNo(arry[0], arry[1]);
+    Study myStudy = studyDao.findByNo(arry[0]);
+    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), arry[1]);
     // ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
 
     String todoContent = Prompt.inputString(String.format(" 내용(%s) : ", todo.getTodoContent()));
