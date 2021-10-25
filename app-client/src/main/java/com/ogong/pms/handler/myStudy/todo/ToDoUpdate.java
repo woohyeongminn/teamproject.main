@@ -18,21 +18,21 @@ public class ToDoUpdate implements Command {
     this.toDoDao = toDoDao;
   }
 
-  // 삭제
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
     System.out.println("▶ To-Do List 변경");
     System.out.println();
 
-    int[] arry = (int[]) request.getAttribute("studyTodoNo");
+    int studyNo = (int) request.getAttribute("inputNo");
+    int todoNo = (int) request.getAttribute("studyTodoNo");
 
-    Study myStudy = studyDao.findByNo(arry[0]);
-    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), arry[1]);
-    // ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
+    Study myStudy = studyDao.findByNo(studyNo);
+    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todoNo);
 
     String todoContent = Prompt.inputString(String.format(" 내용(%s) : ", todo.getTodoContent()));
     String todoRemark = Prompt.inputString(String.format(" 비고(%s) : ", todo.getTodoRemark()));
     int todoStatus = promptStatus(todo.getTodoStatus());
+
 
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
@@ -51,11 +51,6 @@ public class ToDoUpdate implements Command {
     System.out.println(" >> 할 일이 변경되었습니다.");
     request.getRequestDispatcher("/myStudy/todoList").forward(request);
   }
-
-  // 상태 선택
-  // private int promptStatus() {
-  // return promptStatus(-1);
-  // }
 
   private int promptStatus(int todoStatus) {
     if (todoStatus == -1) {

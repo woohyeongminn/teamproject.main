@@ -19,7 +19,6 @@ public class ToDoList implements Command {
     this.toDoDao = toDoDao;
   }
 
-  //등록
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();
@@ -29,7 +28,7 @@ public class ToDoList implements Command {
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
-    List <ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());
+    List<ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());
     // List <ToDo> todoList = myStudy.getMyStudyToDo();
 
     if (todoList.isEmpty()) {
@@ -42,12 +41,9 @@ public class ToDoList implements Command {
 
       for (ToDo todo : todoList) {
         if (todo.getTodoStatus() == ToDo.PROGRESSING) {
-          System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
-              getStatusToDo(todo.getTodoStatus()),
-              todo.getTodoNo(),
-              todo.getTodoContent(),
-              todo.getTodoRemark(),
-              todo.getTodoDate());
+          System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n",
+              getStatusToDo(todo.getTodoStatus()), todo.getTodoNo(), todo.getTodoContent(),
+              todo.getTodoRemark(), todo.getTodoDate());
           System.out.println();
           countProgressing++;
         }
@@ -63,12 +59,9 @@ public class ToDoList implements Command {
 
       for (ToDo todo : todoList) {
         if (todo.getTodoStatus() == ToDo.COMPLETE) {
-          System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n", 
-              getStatusToDo(todo.getTodoStatus()),
-              todo.getTodoNo(),
-              todo.getTodoContent(),
-              todo.getTodoRemark(),
-              todo.getTodoDate());
+          System.out.printf(" %s | %s | 내용 : %s | 비고 : %s | DATE : %s\n",
+              getStatusToDo(todo.getTodoStatus()), todo.getTodoNo(), todo.getTodoContent(),
+              todo.getTodoRemark(), todo.getTodoDate());
           System.out.println();
           countComplete++;
         }
@@ -85,18 +78,26 @@ public class ToDoList implements Command {
     System.out.println("0. 이전");
     int selete = Prompt.inputInt("선택> ");
     switch (selete) {
-      case 1 : request.getRequestDispatcher("/myStudy/todoDetail").forward(request); return;
-      case 2 : request.getRequestDispatcher("/myStudy/todoAdd").forward(request); return;
-      default : return;
+      case 1:
+        request.getRequestDispatcher("/myStudy/todoDetail").forward(request);
+        return;
+      case 2:
+        request.getRequestDispatcher("/myStudy/todoAdd").forward(request);
+        return;
+      default:
+        return;
     }
   }
 
-  //상태 꺼내기
+  // 상태 꺼내기
   private String getStatusToDo(int todoStatus) {
     switch (todoStatus) {
-      case 1: return "○";
-      case 2: return "✔";
-      default: return null;
+      case 1:
+        return "○";
+      case 2:
+        return "✔";
+      default:
+        return null;
     }
   }
 }
