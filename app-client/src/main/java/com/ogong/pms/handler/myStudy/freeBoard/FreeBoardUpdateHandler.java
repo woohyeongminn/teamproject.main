@@ -83,13 +83,10 @@ public class FreeBoardUpdateHandler implements Command {
     freeBoard.setFreeBoardContent(freeBoardContent);
     freeBoard.setFreeBoardNo(freeBoard.getFreeBoardNo());
 
-    <<<<<<< HEAD
     //studyDao.update(myStudy);
-    =======
     freeBoardDao.update(freeBoard, myStudy.getStudyNo());
-    >>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
 
-      System.out.println(" >> 게시글을 수정하였습니다.");
+    System.out.println(" >> 게시글을 수정하였습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
     return;
   }
