@@ -37,6 +37,10 @@ public class CafeReservationHandler implements Command {
       return;
     }
 
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("cafeNo", cafe.getNo());
+    cafe.setHoliday(cafeDao.getCafeHoliday(params));
+
     if (selectReservation.equals("addReservation")) {
       addReservation(cafe);
     } else if (selectReservation.equals("addRoomReservation")) {

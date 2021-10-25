@@ -8,6 +8,8 @@ import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeImage;
+import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.cafe.CafeHandlerHelper;
@@ -28,7 +30,12 @@ public class CeoCafeUpdateHandler implements Command {
     System.out.println("▶ 장소 수정");
     System.out.println();
 
+    CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
     Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("ceoNo", ceoMember.getCeoNo());
+    cafe.setHoliday(cafeDao.getCafeHoliday(params));
 
     System.out.println(" 1. 사진 변경");
     System.out.println(" 2. 기본 정보 수정");
@@ -142,7 +149,9 @@ public class CeoCafeUpdateHandler implements Command {
     String input = Prompt.inputString(" 사진을 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       if (!deleteImageList.isEmpty()) {
-        cafeDao.deleteCafeImage(cafe, deleteImageList);
+        HashMap<String,Object> deleteParams = new HashMap<>();
+        deleteParams.put("fileNames", deleteImageList);
+        cafeDao.deleteCafeImage(deleteParams);
       }
       return;
     }
@@ -164,9 +173,21 @@ public class CeoCafeUpdateHandler implements Command {
 
     System.out.println();
 
-    cafeDao.deleteCafeImage(cafe, deleteImageList);
-    cafeDao.insertCafeImage(cafe, addImageList);
+    if (!deleteImageList.isEmpty()) {
+      HashMap<String,Object> deleteParams = new HashMap<>();
+      deleteParams.put("fileNames", deleteImageList);
+      cafeDao.deleteCafeImage(deleteParams);
+    }
 
+    if (!addImageList.isEmpty()) {
+      HashMap<String,Object> addParams = new HashMap<>();
+      addParams.put("fileNames", addImageList);
+      addParams.put("cafeNo", cafe.getNo());
+
+      cafeDao.insertCafeImage(addParams);
+    }
+
+    System.out.println(" >> 사진 변경 완료!");
   }
 
 }

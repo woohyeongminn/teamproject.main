@@ -8,7 +8,7 @@ public interface ToDoDao {
 
   List<ToDo> findAll(int studyNo) throws Exception;
 
-  ToDo findByNo(int todoNo) throws Exception;
+  ToDo findByNo(int studyNo, int todoNo) throws Exception;
 
   void delete(int todoNo) throws Exception;
 

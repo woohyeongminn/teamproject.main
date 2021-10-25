@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.ceoCafe;
 
+import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
@@ -39,6 +40,9 @@ public class CeoCafeDetailHandler implements Command {
         default : return;
       }
     }
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("ceoNo", ceoMember.getCeoNo());
+    cafe.setHoliday(cafeDao.getCafeHoliday(params));
 
     System.out.printf(" [%s]\n", cafe.getName());
     System.out.printf(" >> 대표자 : %s\n", cafe.getCeoMember().getCeoBossName());
