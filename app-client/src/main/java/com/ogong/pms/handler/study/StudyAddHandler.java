@@ -2,6 +2,7 @@ package com.ogong.pms.handler.study;
 
 import java.util.ArrayList;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -23,7 +24,7 @@ public class StudyAddHandler implements Command {
     System.out.println();
 
     Study study = new Study();
-
+    Member owner = AuthPerMemberLoginHandler.getLoginUser();
 
     // 스터디명
     String studyTitle;
@@ -137,7 +138,7 @@ public class StudyAddHandler implements Command {
       break;
     }
     study.setIntroduction(introduction);
-    study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
+    study.setOwner(owner);
 
     // 작성자,구성원,캘린더,자유게시판
     study.setOwner(AuthPerMemberLoginHandler.getLoginUser());
@@ -155,7 +156,13 @@ public class StudyAddHandler implements Command {
 
       return;
     }
-    studyDao.insert(study);
+    try {
+      studyDao.insert(study);
+      studyDao.insertGuilder(study.getStudyNo(), owner.getPerNo());
+      studyDao.updateGuilder(study.getStudyNo(), owner.getPerNo());
+    } catch (Exception e) {
+
+    }
     System.out.println(" >> 스터디가 등록되었습니다.");
 
 

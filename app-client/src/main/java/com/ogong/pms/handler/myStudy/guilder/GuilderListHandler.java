@@ -46,6 +46,13 @@ public class GuilderListHandler implements Command {
     List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
     myStudy.setMembers(guilders);
 
+    for (Member m : guilders) {
+      if (myStudy.getOwner().getPerNo() == m.getPerNo()) {
+        myStudy.getMembers().remove(m);
+        break;
+      }
+    }
+
     System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , myStudy.getMembers().size() + 1,
         myStudy.getNumberOfPeple());
     System.out.println(" 👤 조  장 : " + myStudy.getOwner().getPerNickname());

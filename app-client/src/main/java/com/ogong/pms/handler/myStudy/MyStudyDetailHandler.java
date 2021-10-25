@@ -50,7 +50,7 @@ public class MyStudyDetailHandler implements Command {
     System.out.printf(" >> 분야 : %s\n", myStudy.getSubjectName());
     System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
     System.out.printf(" >> 인원수 : %s/%s명\n",
-        myStudy.getMembers().size()+ 1, myStudy.getNumberOfPeple());
+        myStudy.getMembers().size(), myStudy.getNumberOfPeple());
     System.out.printf(" >> 대면 : %s\n", myStudy.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
     s = myStudy;
