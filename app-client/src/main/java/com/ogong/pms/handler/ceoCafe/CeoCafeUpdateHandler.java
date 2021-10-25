@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
@@ -19,9 +20,11 @@ import com.ogong.util.Prompt;
 public class CeoCafeUpdateHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CeoCafeUpdateHandler (CafeDao cafeDao) {
+  public CeoCafeUpdateHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -98,11 +101,9 @@ public class CeoCafeUpdateHandler implements Command {
       return;
     }
 
-    //    cafe.setName(name);
-    //    cafe.setMainImg(mainImg);
-    //    cafe.setHoliday(holiday);
-
     cafeDao.updateCafe(cafe);
+    sqlSession.commit();
+
     System.out.println(" >> 수정이 완료 되었습니다.");
   }
 
@@ -152,6 +153,10 @@ public class CeoCafeUpdateHandler implements Command {
         HashMap<String,Object> deleteParams = new HashMap<>();
         deleteParams.put("fileNames", deleteImageList);
         cafeDao.deleteCafeImage(deleteParams);
+
+        sqlSession.commit();
+
+        System.out.println(" >> 사진 변경을 완료하였습니다.");
       }
       return;
     }
@@ -173,18 +178,23 @@ public class CeoCafeUpdateHandler implements Command {
 
     System.out.println();
 
-    if (!deleteImageList.isEmpty()) {
-      HashMap<String,Object> deleteParams = new HashMap<>();
-      deleteParams.put("fileNames", deleteImageList);
-      cafeDao.deleteCafeImage(deleteParams);
-    }
+    try {
+      if (!deleteImageList.isEmpty()) {
+        HashMap<String,Object> deleteParams = new HashMap<>();
+        deleteParams.put("fileNames", deleteImageList);
+        cafeDao.deleteCafeImage(deleteParams);
+      }
 
-    if (!addImageList.isEmpty()) {
-      HashMap<String,Object> addParams = new HashMap<>();
-      addParams.put("fileNames", addImageList);
-      addParams.put("cafeNo", cafe.getNo());
+      if (!addImageList.isEmpty()) {
+        HashMap<String,Object> addParams = new HashMap<>();
+        addParams.put("fileNames", addImageList);
+        addParams.put("cafeNo", cafe.getNo());
 
-      cafeDao.insertCafeImage(addParams);
+        cafeDao.insertCafeImage(addParams);
+      }
+      sqlSession.commit();
+    } catch (Exception e) {
+      sqlSession.rollback();
     }
 
     System.out.println(" >> 사진 변경 완료!");

@@ -2,6 +2,7 @@ package com.ogong.pms.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeReview;
@@ -21,11 +22,14 @@ public interface CafeDao {
 
   // 카페 휴무일
   String getCafeHoliday(HashMap<String,Object> params) throws Exception;
+  void insertCafeHolidays(HashMap<String,Object> params) throws Exception;
 
   void insertCafe(Cafe cafe) throws Exception;
   void updateCafe(Cafe cafe) throws Exception;
-  void updateCafeStatusToGENERAL(Cafe cafe) throws Exception;
-  void deleteCafe(Cafe cafe) throws Exception;
+  void deleteCafe(int cafeNo) throws Exception;
+
+  // 관리자 카페 승인
+  void updateCafeStatusToGENERAL(int cafeNo) throws Exception;
 
   // 카페 이미지
   void insertCafeImage(HashMap<String,Object> params) throws Exception;
@@ -58,9 +62,10 @@ public interface CafeDao {
   List<CafeReservation> getCafeReservationList() throws Exception;
   List<CafeReservation> findReservationListByMember(int memberNo) throws Exception;
   List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception;
-  CafeReservation findReservationByMember(int memberNo, int reserNo) throws Exception;
+  CafeReservation findReservationByMember(@Param("memberNo")int memberNo, @Param("reserNo")int reserNo) throws Exception;
   void insertReservation(CafeReservation cafeReservation) throws Exception;
-  void updateCafeReservationReviewStatus(int reservationNo) throws Exception;
-  void deleteReservation(CafeReservation cafeReservation, int status) throws Exception;
+  void deleteReservation(@Param("reservationNo")int reservationNo, @Param("status")int status) throws Exception;
 
+  // 리뷰 등록시 예약테이블에도 리뷰 등록했다고 변경
+  void updateCafeReservationReviewStatus(int reservationNo) throws Exception;
 }

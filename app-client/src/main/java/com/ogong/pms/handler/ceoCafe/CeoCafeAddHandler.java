@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Address;
 import com.ogong.pms.domain.Cafe;
@@ -19,9 +20,11 @@ import com.ogong.util.Prompt;
 public class CeoCafeAddHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CeoCafeAddHandler (CafeDao cafeDao) {
+  public CeoCafeAddHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -82,14 +85,27 @@ public class CeoCafeAddHandler implements Command {
       return;
     }
 
-    cafeDao.insertCafe(cafe);
+    try {
+      cafeDao.insertCafe(cafe);
 
-    if (!fileNames.isEmpty()) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("fileNames", fileNames);
-      params.put("cafeNo", cafe.getNo());
+      if (!fileNames.isEmpty()) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("fileNames", fileNames);
+        params.put("cafeNo", cafe.getNo());
 
-      cafeDao.insertCafeImage(params);
+        cafeDao.insertCafeImage(params);
+      }
+
+      if (!holidays.isEmpty()) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("holidays", holidays);
+        params.put("cafeNo", cafe.getNo());
+
+        cafeDao.insertCafeHolidays(params);
+      }
+      sqlSession.commit();
+    } catch (Exception e) {
+      sqlSession.rollback();
     }
 
     System.out.println(" >> 카페 등록 완료!");

@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.admin;
 
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.handler.Command;
@@ -9,9 +10,11 @@ import com.ogong.util.Prompt;
 public class AdminCafeReviewListDeleteHandler implements Command{
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public AdminCafeReviewListDeleteHandler(CafeDao cafeDao) {
+  public AdminCafeReviewListDeleteHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -42,6 +45,8 @@ public class AdminCafeReviewListDeleteHandler implements Command{
     }
 
     cafeDao.deleteCafeReview(userReviewNo);
+    sqlSession.commit();
+
     System.out.println(" >> 리뷰 삭제를 완료하였습니다.");
   }
 }

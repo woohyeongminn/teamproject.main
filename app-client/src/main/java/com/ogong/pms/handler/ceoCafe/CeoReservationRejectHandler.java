@@ -2,6 +2,7 @@ package com.ogong.pms.handler.ceoCafe;
 
 import java.sql.Date;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.handler.Command;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class CeoReservationRejectHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CeoReservationRejectHandler(CafeDao cafeDao) {
+  public CeoReservationRejectHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -46,9 +49,10 @@ public class CeoReservationRejectHandler implements Command {
             System.out.println(" >> 예약 거절을 취소합니다.");
             return;
           }
-          //          cafeReservation.setReservationStatus(5);
-          //      reserList.remove(myReservation);
-          cafeDao.deleteReservation(cafeReservation, 5);
+
+          cafeDao.deleteReservation(cafeReservation.getReservationNo(), 5);
+          sqlSession.commit();
+
           System.out.println(" >> 예약을 거절하였습니다.");
           return;
 

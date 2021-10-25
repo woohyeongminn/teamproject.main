@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.cafe;
 
 import java.sql.Date;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.handler.Command;
@@ -10,10 +11,13 @@ import com.ogong.util.Prompt;
 public class CafeMyReservationDeleteHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CafeMyReservationDeleteHandler(CafeDao cafeDao) {
+  public CafeMyReservationDeleteHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
+
 
   @Override
   public void execute(CommandRequest request) throws Exception {
@@ -38,9 +42,10 @@ public class CafeMyReservationDeleteHandler implements Command {
         return;
       }
 
-      //      myReservation.setReservationStatus(2);
-      //      reserList.remove(myReservation);
-      cafeDao.deleteReservation(myReservation, 3);
+      cafeDao.deleteReservation(myReservation.getReservationNo(), 3);
+      sqlSession.commit();
+
+      System.out.println(" >> 예약이 취소되었습니다.");
 
     } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
       System.out.println(" >> 당일 예약은 취소 불가능합니다.");
