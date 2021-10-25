@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.ceoCafe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeImage;
@@ -49,7 +50,16 @@ public class CeoCafeRoomAddHandler implements Command {
       return;
     }
 
-    cafeDao.insertCafeRoom(cafeRoom, fileNames);
+    cafeDao.insertCafeRoom(cafeRoom);
+
+    if (!fileNames.isEmpty()) {
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("fileNames", fileNames);
+      params.put("cafeRoomNo", cafeRoom.getRoomNo());
+
+      cafeDao.insertCafeRoomImage(params);
+    }
+
     System.out.println(" >> 스터디룸 등록이 완료되었습니다.");
   }
 }

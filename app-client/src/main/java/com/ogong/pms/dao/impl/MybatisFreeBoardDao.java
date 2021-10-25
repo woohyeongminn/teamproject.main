@@ -49,13 +49,19 @@ public class MybatisFreeBoardDao implements FreeBoardDao {
     return sqlSession.selectOne("FreeBoardMapper.findByNo", params);
   }
 
-  //
-  //  // 탈퇴
-  //  @Override
-  //  public void updateActive(CeoMember ceoMember) throws Exception {
-  //    sqlSession.update("CeoMemberMapper.updateActive", ceoMember);
-  //    sqlSession.commit();
-  //  }
+  @Override
+  public void update(FreeBoard freeBoard, int studyNo) throws Exception {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("boardNo", freeBoard.getFreeBoardNo());
+    params.put("title", freeBoard.getFreeBoardTitle());
+    params.put("content", freeBoard.getFreeBoardContent());
+    params.put("file", freeBoard.getFreeBoardFile());
+    params.put("studyNo", studyNo);
+
+    sqlSession.update("FreeBoardMapper.update", freeBoard);
+    sqlSession.commit();
+  }
+
   //
   //  @Override
   //  public void delete(int no) throws Exception {

@@ -27,12 +27,12 @@ public class ToDoUpdate implements Command {
     int[] arry = (int[]) request.getAttribute("studyTodoNo");
 
     Study myStudy = studyDao.findByNo(arry[0]);
-    ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
+    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), arry[1]);
+    // ToDo todo = myStudy.getMyStudyToDo().get(arry[1]);
 
     String todoContent = Prompt.inputString(String.format(" 내용(%s) : ", todo.getTodoContent()));
     String todoRemark = Prompt.inputString(String.format(" 비고(%s) : ", todo.getTodoRemark()));
     int todoStatus = promptStatus(todo.getTodoStatus());
-
 
     System.out.println();
     String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
@@ -53,9 +53,9 @@ public class ToDoUpdate implements Command {
   }
 
   // 상태 선택
-  private int promptStatus() {
-    return promptStatus(-1);
-  }
+  // private int promptStatus() {
+  // return promptStatus(-1);
+  // }
 
   private int promptStatus(int todoStatus) {
     if (todoStatus == -1) {
