@@ -1,5 +1,6 @@
 package com.ogong.pms.handler.ceoCafe;
 
+import java.util.HashMap;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.handler.Command;
@@ -28,8 +29,14 @@ public class CeoCafeRoomDeleteHandler implements Command {
       return;
     }
 
+    if (!cafeRoom.getRoomImgs().isEmpty()) {
+      HashMap<String,Object> deleteParams = new HashMap<>();
+      deleteParams.put("fileNames", cafeRoom.getRoomImgs());
+      cafeDao.deleteCafeRoomImage(deleteParams);
+    }
+
     cafeDao.deleteCafeRoom(cafeRoom.getRoomNo());
-    System.out.println(" >> 삭제 완료.");
+    System.out.println(" >> 스터디룸 삭제 완료.");
   }
 
 }

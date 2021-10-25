@@ -61,7 +61,7 @@
   <select id="findByNo" resultMap="FreeBoardMap" parameterType="map">
     <include refid="select1"/>
     where
-      sb.st_board_no=#{boardDao} and sb.study_no=#{studyNo}
+      sb.st_board_no=#{boardNo} and sb.study_no=#{studyNo}
   </select>
   
   <insert id="insert" parameterType="FreeBoard"
@@ -74,6 +74,15 @@
 	    insert into study_board_file(name, st_board_no)
 	    values(#{atcFileName}, #{boardNo})
   </insert>
+  
+  <update id="update" parameterType="map">
+    update study_board set
+	    title = #{title},
+	    content = #{content},
+	    freeBoardFile = #{file}
+    where
+      sb.st_board_no=#{boardNo} and sb.study_no=#{studyNo}
+  </update>
   
   </mapper>
   
