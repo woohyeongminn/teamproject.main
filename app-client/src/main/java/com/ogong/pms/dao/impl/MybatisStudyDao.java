@@ -116,7 +116,7 @@ public class MybatisStudyDao implements StudyDao {
     HashMap<String,Object> params = new HashMap<>();
     params.put("memberNo", memberNo);
     params.put("studyNo", studyNo);
-    sqlSession.update("GuilderMapper.updateGuilder", params);
+    sqlSession.update("StudyMapper.updateGuilder", params);
     sqlSession.commit();
   }
 
@@ -126,7 +126,7 @@ public class MybatisStudyDao implements StudyDao {
     HashMap<String,Object> params = new HashMap<>();
     params.put("memberNo", memberNo);
     params.put("studyNo", studyNo);
-    sqlSession.update("GuilderMapper.deleteGuilder", params);
+    sqlSession.update("StudyMapper.deleteGuilder", params);
     sqlSession.commit();
   }
 
