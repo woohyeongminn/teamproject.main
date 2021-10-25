@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.study;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -12,9 +13,11 @@ import com.ogong.util.Prompt;
 public class StudyJoinHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public StudyJoinHandler(StudyDao studyDao) {
+  public StudyJoinHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -61,7 +64,13 @@ public class StudyJoinHandler implements Command {
     }
     study.getWatingMember().add(member);
 
-    studyDao.insertGuilder(study.getStudyNo(),member.getPerNo());
+    try {
+      studyDao.insertGuilder(study.getStudyNo(),member.getPerNo());
+      sqlSession.commit();
+    } catch (Exception e) {
+      System.out.println(" 참여 신청 오류!");
+      sqlSession.rollback();
+    }
 
     System.out.println();
     System.out.println(" >> 참여 신청이 완료되었습니다.\n   승인이 완료될 때까지 기다려 주세요.");

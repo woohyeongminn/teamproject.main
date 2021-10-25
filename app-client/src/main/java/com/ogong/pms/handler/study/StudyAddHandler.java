@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.study;
 
 import java.util.ArrayList;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -12,9 +13,11 @@ import com.ogong.util.Prompt;
 public class StudyAddHandler implements Command {
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
-  public StudyAddHandler(StudyDao studyDao) {
+  public StudyAddHandler(StudyDao studyDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -160,8 +163,10 @@ public class StudyAddHandler implements Command {
       studyDao.insert(study);
       studyDao.insertGuilder(study.getStudyNo(), owner.getPerNo());
       studyDao.updateGuilder(study.getStudyNo(), owner.getPerNo());
+      sqlSession.commit();
     } catch (Exception e) {
-
+      System.out.println(" 스터디 등록 오류!");
+      sqlSession.rollback();
     }
     System.out.println(" >> 스터디가 등록되었습니다.");
 

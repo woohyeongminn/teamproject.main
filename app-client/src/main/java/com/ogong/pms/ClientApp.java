@@ -222,7 +222,7 @@ public class ClientApp {
     CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
     StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
     FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
-    ToDoDao todoDao = sqlSession.getMapper(ToDoDao.class);
+    ToDoDao toDoDao = sqlSession.getMapper(ToDoDao.class);
     //    CommentDao commentDao = sqlSession.getMapper(CommentDao.class); // 아직 안 함
 
     // 마이바티스 
@@ -285,13 +285,13 @@ public class ClientApp {
     commandMap.put("/adminNotice/update", new AdminNoticeUpdateHandler(noticeDao, sqlSession));
     commandMap.put("/adminNotice/delete", new AdminNoticeDeleteHandler(noticeDao, sqlSession));
 
-    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao));
+    commandMap.put("/study/delete", new AdminStudyDeleteHandler(studyDao, sqlSession));
 
-    commandMap.put("/study/add", new StudyAddHandler(studyDao));
+    commandMap.put("/study/add", new StudyAddHandler(studyDao, sqlSession));
     commandMap.put("/study/list", new StudyListHandler(studyDao));
     commandMap.put("/study/detail", new StudyDetailHandler(studyDao));
     commandMap.put("/study/search", new StudySearchHandler(studyDao));
-    commandMap.put("/study/join", new StudyJoinHandler(studyDao));
+    commandMap.put("/study/join", new StudyJoinHandler(studyDao, sqlSession));
 
     // 1018 북마크 추가(eun)
     commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao));
@@ -302,14 +302,14 @@ public class ClientApp {
 
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyDao));
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyDao));
-    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao));
-    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao));
-    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao));
+    commandMap.put("/myStudy/update", new MyStudyUpdateHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/delete", new MyStudyDeleteHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/exit", new MyStudyExitHandler(studyDao, sqlSession));
     commandMap.put("/myStudy/guilder", new GuilderListHandler(studyDao));
 
     commandMap.put("/myStudy/watingGuilderList", new WatingGuilderListHandler(studyDao));
-    commandMap.put("/myStudy/guilderEntrust", new GuilderEntrustHandler(studyDao));
-    commandMap.put("/myStudy/guilderDelete", new GuilderDeleteHandler(studyDao));
+    commandMap.put("/myStudy/guilderEntrust", new GuilderEntrustHandler(studyDao, sqlSession));
+    commandMap.put("/myStudy/guilderDelete", new GuilderDeleteHandler(studyDao, sqlSession));
 
     commandMap.put("/myStudy/calenderAdd", new CalenderAddHandler(studyDao));
     commandMap.put("/myStudy/calenderList", new CalenderListHandler(studyDao));
@@ -334,11 +334,11 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(studyDao));
     commandMap.put("/myStudy/freeBoard/commentUpdate", new CommentUpdateHandler(studyDao));
 
-    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, todoDao));
-    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, todoDao));
-    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, todoDao));
-    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, todoDao));
-    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, todoDao));
+    commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, toDoDao, sqlSession));
+    commandMap.put("/myStudy/todoList", new ToDoList(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, toDoDao, sqlSession));
+    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, toDoDao, sqlSession));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));
