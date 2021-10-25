@@ -77,5 +77,3 @@ public class ToDoAdd implements Command {
     request.getRequestDispatcher("/myStudy/todoList").forward(request);
   }
 }
-
-

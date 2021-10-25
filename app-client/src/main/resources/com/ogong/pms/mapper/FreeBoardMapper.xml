@@ -24,7 +24,7 @@
     
     <collection property="freeBoardFile" ofType="FreeBoardFile">
       <id column="file_no" property="atcFileNo" />
-      <result column="st_board_no" property="boardNo" />
+      <result column="file_board_no" property="boardNo" />
       <result column="atcFileName" property="atcFileName" />
     </collection>
   </resultMap>
@@ -40,6 +40,7 @@
 	     m.member_no member_no,
 	     m.nickname member_nickname,
 	     m.status member_status,
+	     sbf.st_board_no file_board_no,
 	     sbf.file_no file_no,
 	     sbf.name atcFileName,
 	     (select count(*) from study_board_file sbf where sb.st_board_no=sbf.st_board_no) count_file,
@@ -57,25 +58,20 @@
       sb.study_no=#{studyNo}
   </select>
   
-  <select id="findByNo" resultMap="FreeBoardMap" parameterType="int">
+  <select id="findByNo" resultMap="FreeBoardMap" parameterType="map">
     <include refid="select1"/>
     where
-      s.study_no=#{boardDao}
-    order by s.study_no
+      sb.st_board_no=#{boardDao} and sb.study_no=#{studyNo}
   </select>
   
   <insert id="insert" parameterType="FreeBoard"
     useGeneratedKeys="true" keyColumn="st_board_no" keyProperty="freeBoardNo">
-	   insert into study_board
-	    (title, content, view_ct, created_dt, member_no, study_no)
-	   values
-	    (#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount},
-	     #{freeBoardRegisteredDate}, #{freeBoardWriter.perNo}, #{studyNo})
+	   insert into study_board(title, content, view_ct, member_no, study_no)
+	   values(#{freeBoardTitle}, #{freeBoardContent}, #{freeBoardViewcount}, #{freeBoardWriter.perNo}, #{studyNo})
   </insert>
   
-  <insert id="insertFile" parameterType="map"
-   useGeneratedKeys="true" keyColumn="file_no" keyProperty="atcFileNo">
-	    insert into study_board_file (name, st_board_no)
+  <insert id="insertFile" parameterType="map">
+	    insert into study_board_file(name, st_board_no)
 	    values(#{atcFileName}, #{boardNo})
   </insert>
   

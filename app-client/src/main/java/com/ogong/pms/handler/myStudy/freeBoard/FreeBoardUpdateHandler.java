@@ -1,8 +1,8 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -11,9 +11,11 @@ import com.ogong.util.Prompt;
 public class FreeBoardUpdateHandler implements Command {
 
   StudyDao studyDao;
+  FreeBoardDao freeBoardDao;
 
-  public FreeBoardUpdateHandler(StudyDao studyDao) {
+  public FreeBoardUpdateHandler(StudyDao studyDao, FreeBoardDao freeBoardDao) {
     this.studyDao = studyDao;
+    this.freeBoardDao = freeBoardDao;
   }
 
   @Override
@@ -24,8 +26,10 @@ public class FreeBoardUpdateHandler implements Command {
 
     int[] arry = (int[]) request.getAttribute("studyNoFreeNo");
 
-    Study myStudy = studyDao.findByNo(arry[0]);
-    FreeBoard freeBoard = myStudy.getMyStudyFreeBoard().get(arry[1]);
+    //Study myStudy = studyDao.findByNo(arry[0]);
+
+    FreeBoard freeBoard = freeBoardDao.findByNo(arr[1], arry[0]);
+
 
     if (freeBoard.getFreeBoardWriter().getPerNo() != AuthPerMemberLoginHandler.getLoginUser().getPerNo()) {
       System.out.println(" >> 수정 권한이 없습니다.");

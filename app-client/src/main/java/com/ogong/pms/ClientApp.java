@@ -114,6 +114,7 @@ import com.ogong.pms.handler.myStudy.calender.CalenderUpdateHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.CommentUpdateHandler;
+import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDetailHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardListHandler;
@@ -329,7 +330,7 @@ public class ClientApp {
 
     PromptFreeBoard promptFreeBoard = new PromptFreeBoard(requestAgent);
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
-    //commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, FreeBoardDao));
+    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
     commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
@@ -346,8 +347,8 @@ public class ClientApp {
     commandMap.put("/myStudy/todoAdd", new ToDoAdd(studyDao, toDoDao));
     commandMap.put("/myStudy/todoList", new ToDoList(studyDao, toDoDao));
     commandMap.put("/myStudy/todoDetail", new ToDoDetail(studyDao, toDoDao));
-    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao));
-    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao));
+    commandMap.put("/myStudy/todoUpdate", new ToDoUpdate(studyDao, toDoDao));
+    commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, toDoDao));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
     commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));
