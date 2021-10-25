@@ -2,6 +2,7 @@ package com.ogong.pms.handler.ceoCafe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeImage;
@@ -13,9 +14,11 @@ import com.ogong.util.Prompt;
 public class CeoCafeRoomAddHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CeoCafeRoomAddHandler (CafeDao cafeDao) {
+  public CeoCafeRoomAddHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -50,14 +53,19 @@ public class CeoCafeRoomAddHandler implements Command {
       return;
     }
 
-    cafeDao.insertCafeRoom(cafeRoom);
+    try {
+      cafeDao.insertCafeRoom(cafeRoom);
 
-    if (!fileNames.isEmpty()) {
-      HashMap<String,Object> params = new HashMap<>();
-      params.put("fileNames", fileNames);
-      params.put("cafeRoomNo", cafeRoom.getRoomNo());
+      if (!fileNames.isEmpty()) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("fileNames", fileNames);
+        params.put("cafeRoomNo", cafeRoom.getRoomNo());
 
-      cafeDao.insertCafeRoomImage(params);
+        cafeDao.insertCafeRoomImage(params);
+      }
+      sqlSession.commit();
+    } catch (Exception e) {
+      sqlSession.rollback();
     }
 
     System.out.println(" >> 스터디룸 등록이 완료되었습니다.");

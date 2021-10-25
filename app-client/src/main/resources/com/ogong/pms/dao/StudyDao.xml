@@ -78,7 +78,8 @@
 <!--  ===========================[스터디]=========================== -->
  
   <!--  ===[스터디 등록]=== -->
-  <insert id="insert" parameterType="Study">
+  <insert id="insert" parameterType="Study"
+   useGeneratedKeys="true" keyColumn="study_no" keyProperty="studyNo">
   insert into study
      (name, subject_no, no_people, face_no, introduction, area, member_no)
      values

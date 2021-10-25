@@ -164,12 +164,10 @@ public class StudyAddHandler implements Command {
       studyDao.insertGuilder(study.getStudyNo(), owner.getPerNo());
       studyDao.updateGuilder(study.getStudyNo(), owner.getPerNo());
       sqlSession.commit();
+      System.out.println(" >> 스터디가 등록되었습니다.");
     } catch (Exception e) {
       System.out.println(" 스터디 등록 오류!");
       sqlSession.rollback();
     }
-    System.out.println(" >> 스터디가 등록되었습니다.");
-
-
   }
 }

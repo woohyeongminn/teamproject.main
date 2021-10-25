@@ -1,6 +1,7 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
@@ -14,11 +15,14 @@ public class FreeBoardDetailHandler implements Command {
   StudyDao studyDao;
   FreeBoardDao freeBoardDao;
   PromptFreeBoard promptFreeBoard;
+  SqlSession sqlSession;
 
-  public FreeBoardDetailHandler(StudyDao studyDao, PromptFreeBoard promptFreeBoard, FreeBoardDao freeBoardDao) {
+  public FreeBoardDetailHandler
+  (StudyDao studyDao, PromptFreeBoard promptFreeBoard, FreeBoardDao freeBoardDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
     this.promptFreeBoard = promptFreeBoard;
     this.freeBoardDao = freeBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -53,14 +57,15 @@ public class FreeBoardDetailHandler implements Command {
       System.out.printf(" >> 첨부파일 : %s\n", freeBoard.getFileNames());
       System.out.printf(" >> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
       System.out.printf(" >> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
-
-      // 조회수 증가 안됨
       freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
       System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
       //promptFreeBoard.printComments(freeBoard); // 댓글호출
     }
 
     request.setAttribute("boardNo", inputBoardNo);
+
+    freeBoardDao.updateViewCount(freeBoard, myStudy.getStudyNo());
+    sqlSession.commit();
 
     System.out.println("\n----------------------");
     System.out.println("1. 수정");

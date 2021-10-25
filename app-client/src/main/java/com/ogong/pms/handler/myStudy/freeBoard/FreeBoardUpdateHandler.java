@@ -1,9 +1,12 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.FreeBoardFile;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
@@ -14,10 +17,12 @@ public class FreeBoardUpdateHandler implements Command {
 
   StudyDao studyDao;
   FreeBoardDao freeBoardDao;
+  SqlSession sqlSession;
 
-  public FreeBoardUpdateHandler(StudyDao studyDao, FreeBoardDao freeBoardDao) {
+  public FreeBoardUpdateHandler(StudyDao studyDao, FreeBoardDao freeBoardDao, SqlSession sqlSession) {
     this.studyDao = studyDao;
     this.freeBoardDao = freeBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -57,27 +62,24 @@ public class FreeBoardUpdateHandler implements Command {
     String freeBoardTitle = Prompt.inputString(" 제목(" + freeBoard.getFreeBoardTitle()  + ") : ");
     String freeBoardContent = Prompt.inputString(" 내용(" + freeBoard.getFreeBoardContent() + ") : ");
 
+    // 파일 수정 다시 해야함
+    List<FreeBoardFile> fileList = new ArrayList<>();
+    if (!freeBoard.getFreeBoardFile().isEmpty()) {
+      String inputFileName = null;
 
+      for (int i = 0; i < freeBoard.getFreeBoardFile().size(); i++) {
+        inputFileName =
+            Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardFile().get(i).getAtcFileName() + ") : ");
 
-    // 파일 update 메서드 추가해야함
-    //    List<FreeBoardFile> fileList = new ArrayList<>();
-    //    while (true) {
-    //      FreeBoardFile fileName = new FreeBoardFile();
-    //      String inputFileName = Prompt.inputString(" 첨부파일(" + freeBoard.getFileNames() + ") / (완료:Enter) : ");
-    //
-    //      if (inputFileName.equals("")) {
-    //        System.out.println(" >> 첨부파일 수정이 완료되었습니다.");
-    //        break;
-    //      }
-    //      fileName.setAtcFileName(inputFileName);
-    //      fileList.add(fileName);
-    //    }
-    //    freeBoard.setFreeBoardFile(fileList);
+        FreeBoardFile fileName = new FreeBoardFile();
 
+        fileName.setAtcFileName(inputFileName);
+        fileList.add(fileName);
+      }
+      freeBoard.setFreeBoardFile(fileList);
+    }
 
-
-
-    String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) ");
+    String input = Prompt.inputString("\n 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 변경을 취소되었습니다.");
       return;
@@ -87,8 +89,19 @@ public class FreeBoardUpdateHandler implements Command {
     freeBoard.setFreeBoardContent(freeBoardContent);
     freeBoard.setFreeBoardNo(freeBoard.getFreeBoardNo());
 
-    //studyDao.update(myStudy);
-    freeBoardDao.update(freeBoard, myStudy.getStudyNo());
+    try {
+      if (!freeBoard.getFreeBoardFile().isEmpty()) {
+        for (FreeBoardFile fileName : freeBoard.getFreeBoardFile()) {
+          freeBoardDao.updateFile(fileName, freeBoard.getFreeBoardNo());
+          sqlSession.commit();
+        }
+      }
+      freeBoardDao.update(freeBoard, myStudy.getStudyNo());
+      sqlSession.commit();
+    } catch (Exception e) {
+      sqlSession.rollback();
+    }
+
 
     System.out.println(" >> 게시글을 수정하였습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
