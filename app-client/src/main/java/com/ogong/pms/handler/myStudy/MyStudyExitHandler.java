@@ -47,6 +47,7 @@ public class MyStudyExitHandler implements Command {
         return;
       }
 
+      studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
       studyDao.delete(myStudy.getStudyNo(), member.getPerNo());
       System.out.println(" >> 스터디가 삭제 되었습니다.");
       return;

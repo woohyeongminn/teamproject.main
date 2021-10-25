@@ -49,7 +49,7 @@ public class StudyJoinHandler implements Command {
       }
     }
 
-    if(study.getMembers().size() == (study.getNumberOfPeple() - 1)) {
+    if(study.getMembers().size() == study.getNumberOfPeple()) {
       System.out.println(" >> 참여 가능 인원수를 초과하였습니다.");
       return;
     }

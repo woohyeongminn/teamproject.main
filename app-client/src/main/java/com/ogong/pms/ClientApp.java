@@ -123,7 +123,6 @@ import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardAddHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDeleteHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardDetailHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardListHandler;
-import com.ogong.pms.handler.myStudy.freeBoard.FreeBoardUpdateHandler;
 import com.ogong.pms.handler.myStudy.freeBoard.PromptFreeBoard;
 import com.ogong.pms.handler.myStudy.guilder.GuilderDeleteHandler;
 import com.ogong.pms.handler.myStudy.guilder.GuilderEntrustHandler;
@@ -336,7 +335,7 @@ public class ClientApp {
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao));
     commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, promptFreeBoard, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao));
+    //commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao));
 
     //Socket chatSocket = new Socket(); 

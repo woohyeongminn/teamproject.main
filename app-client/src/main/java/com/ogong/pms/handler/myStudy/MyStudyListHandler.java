@@ -31,7 +31,6 @@ public class MyStudyListHandler implements Command {
     List<Study> studyList = studyDao.findAll();
     //List<Guilder> guilderList = studyDao.findByGuilderMyAll(member.getPerNo());
 
-
     System.out.println(" ************** 내 스터디 ************** \n");
 
     //조장일때
@@ -57,9 +56,11 @@ public class MyStudyListHandler implements Command {
       studyList.get(i).setMembers(guilders);
       for (Member mem : studyList.get(i).getMembers())
         if (mem.getPerNo() == member.getPerNo()) {
-          System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
-          System.out.println();
-          joinCount++;
+          if (studyList.get(i).getOwner().getPerNo()!=member.getPerNo()) {
+            System.out.printf(" (%s) [%s]\n", studyList.get(i).getStudyNo(), studyList.get(i).getStudyTitle());
+            System.out.println();
+            joinCount++;
+          }
         }
     }
 
