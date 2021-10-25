@@ -23,7 +23,6 @@ public class MybatisFreeBoardDao implements FreeBoardDao {
 
   @Override
   public void insertFile(FreeBoardFile file, int boardNo) throws Exception {
-
     if (file != null) {
       HashMap<String,Object> params = new HashMap<>();
       params.put("atcFileName", file.getAtcFileName());
@@ -51,20 +50,36 @@ public class MybatisFreeBoardDao implements FreeBoardDao {
 
   @Override
   public void update(FreeBoard freeBoard, int studyNo) throws Exception {
+
     HashMap<String,Object> params = new HashMap<>();
+    params.put("freeBoardTitle", freeBoard.getFreeBoardTitle());
+    params.put("freeBoardContent", freeBoard.getFreeBoardContent());
+    //params.put("freeBoardFile", freeBoard.getFreeBoardFile());
     params.put("boardNo", freeBoard.getFreeBoardNo());
-    params.put("title", freeBoard.getFreeBoardTitle());
-    params.put("content", freeBoard.getFreeBoardContent());
-    params.put("file", freeBoard.getFreeBoardFile());
     params.put("studyNo", studyNo);
 
-    sqlSession.update("FreeBoardMapper.update", freeBoard);
+    sqlSession.update("FreeBoardMapper.update", params);
     sqlSession.commit();
   }
 
-  //
-  //  @Override
-  //  public void delete(int no) throws Exception {
-  //
-  //  }
+  @Override
+  public void deleteFile(int freeBoardNo/*, int fileNo*/) throws Exception {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("boardNo", freeBoardNo);
+    // 나중에 파일번호까지 따져서 삭제해야함
+    //params.put("fileNo", fileNo); 
+
+    sqlSession.update("FreeBoardMapper.deleteFile", params);
+    sqlSession.commit();
+  }
+
+  @Override
+  public void delete(int freeBoardNo, int studyNo) throws Exception {
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("boardNo", freeBoardNo);
+    params.put("studyNo", studyNo);
+
+    sqlSession.update("FreeBoardMapper.delete", params);
+    sqlSession.commit();
+  }
 }

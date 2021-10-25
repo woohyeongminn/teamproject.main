@@ -87,15 +87,15 @@
   </resultMap>
   
   <sql id="listSelect1">
-	  select 
-	    c.cafe_no, 
-	    c.name,
-	    c.location,
-	    c.open_time,
-	    c.close_time,
-	    c.operating_status_no
-	  from 
-	    studycafe c
+    select 
+      c.cafe_no, 
+      c.name,
+      c.location,
+      c.open_time,
+      c.close_time,
+      c.operating_status_no
+    from 
+      studycafe c
   </sql>
   
   <sql id="detailSelect1">
@@ -110,7 +110,6 @@
       c.view_cnt,
       sp.photo_no,
       sp.name photo_name, 
-      sh.date, 
       c.operating_status_no, 
       c.member_no,
       cm.bossname, 
@@ -118,7 +117,6 @@
     from 
       studycafe c
       left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
-      left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
       join ceo_member cm on c.member_no=cm.member_no
   </sql>
   
@@ -129,7 +127,7 @@
   
   <sql id="listOrder1">
     order by 
-      cafe_no asc
+      c.operating_status_no asc,c.cafe_no asc
   </sql>
   
   <!-- 관리자용 전체리스트 -->
@@ -140,19 +138,19 @@
   
   <!-- 멤버용 전체리스트 -->
   <select id="getCafeListByMember" resultMap="cafeMap">
-	  <include refid="listSelect1"/>
-	  where
-	   <include refid="memberWhere"/>
-	  <include refid="listOrder1"/>
+    <include refid="listSelect1"/>
+    where
+     <include refid="memberWhere"/>
+    <include refid="listOrder1"/>
   </select>
   
   <!-- 멤버 검색용 리스트 -->
   <select id="findCafeListByLocation" resultMap="cafeMap" parameterType="string">
-		<include refid="listSelect1"/>
-		where 
-		 <include refid="memberWhere"/>  
-		 and c.location like (concat('%',#{input},'%'))
-		<include refid="listOrder1"/>
+    <include refid="listSelect1"/>
+    where 
+     <include refid="memberWhere"/>  
+     and c.location like (concat('%',#{input},'%'))
+    <include refid="listOrder1"/>
   </select>
   
   <!-- 여기저기서 쓰이는 카페(?) -->
@@ -165,9 +163,9 @@
   <!-- 멤버용 카페 상세 -->
   <select id="findByCafeNoMember" resultMap="cafeMap" parameterType="int">
     <include refid="detailSelect1"/>
-		where
-		  <include refid="memberWhere"/> 
-		  and c.cafe_no = #{cafeNo}
+    where
+      <include refid="memberWhere"/> 
+      and c.cafe_no = #{cafeNo}
   </select>
   
   <!-- 사장용 카페 상세 -->
@@ -180,10 +178,10 @@
   
   <insert id="insertCafe" parameterType="cafe" 
           useGeneratedKeys="true" keyColumn="cafe_no" keyProperty="no">
-	  insert into studycafe
-	    (name,info,location,phone,open_time,close_time,member_no,operating_status_no)
-	  values
-	    (#{name},#{info},#{location},#{phone},#{openTime,jdbcType=TIME},#{closeTime,jdbcType=TIME},#{ceoMember.ceoNo},1)
+    insert into studycafe
+      (name,info,location,phone,open_time,close_time,member_no,operating_status_no)
+    values
+      (#{name},#{info},#{location},#{phone},#{openTime,jdbcType=TIME},#{closeTime,jdbcType=TIME},#{ceoMember.ceoNo},1)
   </insert>
   
   <insert id="insertCafeImage" parameterType="map">
@@ -193,20 +191,56 @@
     (#{CafeImage.name},#{cafeNo})
     </foreach>
   </insert>
+  
+  <update id="updateCafe" parameterType="cafe">
+    update studycafe
+    <set>
+      <if test="info != null">
+      info=#{info},
+      </if>
+      <if test="location != null">
+      location=#{location},
+      </if>
+      <if test="phone != null">
+      phone=#{phone},
+      </if>
+      <if test="openTime != null">
+      open_time=#{openTime,jdbcType=TIME},
+      </if>
+      <if test="closeTime != null">
+      close_time=#{closeTime,jdbcType=TIME},
+      </if>
+      <if test="cafeStatus != null">
+      operating_status_no=#{cafeStatus}
+      </if>
+    </set>
+    where
+      cafe_no=#{no}
+  </update>
 
   <!-- 관리자 카페 승인  -->
   <update id="updateCafeStatusToGENERAL" parameterType="int">
-	  update studycafe set
-	     operating_status_no = 2
-	  where
-	     cafe_no = #{cafeNo}
+    update studycafe set
+       operating_status_no = 2
+    where
+       cafe_no = #{cafeNo}
   </update>
   
   <delete id="deleteCafe" parameterType="int">
-	  update studycafe set
-	     operating_status_no = 4
-	  where
-	     cafe_no = #{cafeNo}
+    update studycafe set
+       operating_status_no = 4
+    where
+       cafe_no = #{cafeNo}
+  </delete>
+  
+  <delete id="deleteCafeImage" parameterType="map">
+    delete from studycafe_photo
+    <where>
+      photo_no in
+      <foreach collection="fileNames" item="CafeImage" separator=","  open="(" close=")">
+        #{CafeImage.no}
+      </foreach>
+    </where>
   </delete>
   
   <!-- 금주의 휴무일 가져오기 -->
@@ -314,14 +348,14 @@
   <!-- 스터디룸 예약하기> 스터디룸 선택 > 스터디룸 상세 -->
   <select id="findByRoomNo" resultMap="cafeRoomMap" parameterType="int">
   select 
-	  r.studyroom_no, 
-	  r.name room_name, 
-	  r.cafe_no, 
-	  r.introduction, 
-	  r.people, 
-	  r.hourly_amount,
-	  rp.photo_no, 
-	  rp.name photo_name
+    r.studyroom_no, 
+    r.name room_name, 
+    r.cafe_no, 
+    r.introduction, 
+    r.people, 
+    r.hourly_amount,
+    rp.photo_no, 
+    rp.name photo_name
   from 
     studycafe_room r
     left outer join studycafe_room_photo rp on r.studyroom_no=rp.studyroom_no
@@ -356,7 +390,7 @@
         people=#{people},
       </if>
       <if test="roomPrice != null">
-        hourly_amount=#{roomPrice},
+        hourly_amount=#{roomPrice}
       </if>
     </set>
     where studyroom_no=#{roomNo}
@@ -366,28 +400,38 @@
     delete from studycafe_room where studyroom_no = #{roomNo}
   </delete>
   
+  <delete id="deleteCafeRoomImage" parameterType="map">
+    delete from studycafe_room_photo
+    <where>
+      photo_no in
+      <foreach collection="fileNames" item="CafeRoomImage" separator=","  open="(" close=")">
+        #{CafeRoomImage.no}
+      </foreach>
+    </where>
+  </delete>
+  
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페예약ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
   <sql id="reservationListSelect">
-	  select 
-	      rs.studycafe_rsv_no, 
-	      rs.studyroom_no, 
-	      rs.member_no, 
-	      rs.rsv_dt, 
-	      rs.using_dt,
-	      rs.start_time, 
-	      rs.using_time, 
-	      rs.people, 
-	      rs.total_price,
-	      if(rs.review=1,'false','true') review, 
-	      rst.rsv_status_no,
-	      rst.rsv_name, 
-	      c.cafe_no, 
-	      c.name cafe_name
-	    from 
-	      studycafe_reservation rs
-	      join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no
-	      join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
-	      join studycafe c on sr.cafe_no=c.cafe_no
+    select 
+        rs.studycafe_rsv_no, 
+        rs.studyroom_no, 
+        rs.member_no, 
+        rs.rsv_dt, 
+        rs.using_dt,
+        rs.start_time, 
+        rs.using_time, 
+        rs.people, 
+        rs.total_price,
+        if(rs.review=1,'false','true') review, 
+        rst.rsv_status_no,
+        rst.rsv_name, 
+        c.cafe_no, 
+        c.name cafe_name
+      from 
+        studycafe_reservation rs
+        join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no
+        join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+        join studycafe c on sr.cafe_no=c.cafe_no
   </sql>
   
   <select id="getCafeReservationList" resultMap="reservationMap">
@@ -399,10 +443,10 @@
   <!-- 내 예약 리스트 -->
   <select id="findReservationListByMember" resultMap="reservationMap" parameterType="int">
   <include refid="reservationListSelect"/>
-	  where 
-	    rs.member_no=#{memberNo}
-	  order by
-	    rs.studycafe_rsv_no asc
+    where 
+      rs.member_no=#{memberNo}
+    order by
+      rs.studycafe_rsv_no asc
   </select>
   
   <!-- 사장 카페 관리용 예약 리스트 -->
