@@ -81,21 +81,22 @@ public class FreeBoardUpdateHandler implements Command {
     freeBoard.setFreeBoardTitle(freeBoardTitle);
     freeBoard.setFreeBoardContent(freeBoardContent);
 
-    freeBoardDao.update(freeBoard, myStudy.getStudyNo());
-    freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
+    //    freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
+    //    freeBoardDao.insertFile(fileName, freeBoard.getFreeBoardNo());
+
     try {
-      for (FreeBoardFile fileName : freeBoard.getFreeBoardFile()) {
-        freeBoardDao.insertFile(fileName, freeBoard.getFreeBoardNo());
-        sqlSession.commit();
+      if (!freeBoard.getFreeBoardFile().isEmpty()) {
+        for (FreeBoardFile fileName : freeBoard.getFreeBoardFile()) {
+          freeBoardDao.updateFile(fileName, freeBoard.getFreeBoardNo());
+          sqlSession.commit();
+        }
       }
-<<<<<<< HEAD
-=======
       freeBoardDao.update(freeBoard, freeBoard.getStudyNo());
->>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
       sqlSession.commit();
     } catch (Exception e) {
       sqlSession.rollback();
     }
+
 
 
     System.out.println(" >> 게시글을 수정하였습니다.");
