@@ -64,20 +64,25 @@ public class FreeBoardUpdateHandler implements Command {
 
     // 파일 수정 다시 해야함
     List<FreeBoardFile> fileList = new ArrayList<>();
-    if (!freeBoard.getFreeBoardFile().isEmpty()) {
-      String inputFileName = null;
+    String inputFileName = null;
 
-      for (int i = 0; i < freeBoard.getFreeBoardFile().size(); i++) {
-        inputFileName =
-            Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardFile().get(i).getAtcFileName() + ") : ");
+    for (int i = 0; i < freeBoard.getFreeBoardFile().size(); i++) {
+      FreeBoardFile fileName = new FreeBoardFile();
 
-        FreeBoardFile fileName = new FreeBoardFile();
+      inputFileName =
+          Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardFile().get(i).getAtcFileName() + ") (삭제:Enter) : ");
 
-        fileName.setAtcFileName(inputFileName);
-        fileList.add(fileName);
+      if (inputFileName.equals("")) {
+        freeBoard.setCountFile(freeBoard.getCountFile() - 1);
+        freeBoard.setCountFile(freeBoard.getFreeBoardFile().size() - 1);
+        System.out.println(" >> 첨부파일 삭제가 완료되었습니다.");
       }
-      freeBoard.setFreeBoardFile(fileList);
+
+      fileName.setAtcFileName(inputFileName);
+      fileList.add(fileName);
     }
+    freeBoard.setFreeBoardFile(fileList);
+
 
     String input = Prompt.inputString("\n 정말 변경하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -87,16 +92,14 @@ public class FreeBoardUpdateHandler implements Command {
 
     freeBoard.setFreeBoardTitle(freeBoardTitle);
     freeBoard.setFreeBoardContent(freeBoardContent);
-    freeBoard.setFreeBoardNo(freeBoard.getFreeBoardNo());
 
+    freeBoardDao.update(freeBoard, myStudy.getStudyNo());
+    freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
     try {
-      if (!freeBoard.getFreeBoardFile().isEmpty()) {
-        for (FreeBoardFile fileName : freeBoard.getFreeBoardFile()) {
-          freeBoardDao.updateFile(fileName, freeBoard.getFreeBoardNo());
-          sqlSession.commit();
-        }
+      for (FreeBoardFile fileName : freeBoard.getFreeBoardFile()) {
+        freeBoardDao.insertFile(fileName, freeBoard.getFreeBoardNo());
+        sqlSession.commit();
       }
-      freeBoardDao.update(freeBoard, myStudy.getStudyNo());
       sqlSession.commit();
     } catch (Exception e) {
       sqlSession.rollback();

@@ -37,4 +37,10 @@ select
   where
    sb.study_no=1
    order by s.study_no
+   
+   -- updateFile
+   update study_board_file sbf set
+      name = #{fileName.atcFileName}
+    where
+      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{atcFileNo}
  */

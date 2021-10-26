@@ -88,7 +88,7 @@
     update study_board_file sbf set
       name = #{fileName.atcFileName}
     where
-      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{fileName.} 
+      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{atcFileNo}
   </update>
   
   <update id="updateViewCount">
