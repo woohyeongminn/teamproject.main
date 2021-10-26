@@ -1,10 +1,8 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
-import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -12,12 +10,12 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardDeleteHandler implements Command {
 
-  StudyDao studyDao;
   FreeBoardDao freeBoardDao;
+  SqlSession sqlSession;
 
-  public FreeBoardDeleteHandler(StudyDao studyDao, FreeBoardDao freeBoardDao) {
-    this.studyDao = studyDao;
+  public FreeBoardDeleteHandler(FreeBoardDao freeBoardDao, SqlSession sqlSession) {
     this.freeBoardDao = freeBoardDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -26,21 +24,12 @@ public class FreeBoardDeleteHandler implements Command {
     System.out.println("▶ 게시글 삭제");
     System.out.println();
 
-    // 게시글 데이터 가져오기---
+    // inputNo = 내 스터디 상세에서 선택한 스터디 번호
     int inputNo = (int) request.getAttribute("inputNo");
-
-    Study myStudy = studyDao.findByNo(inputNo);
-
-    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
-
-    if (freeBoardList.isEmpty()) {
-      System.out.println("자유게시판 게시글 목록이 없습니다!");
-      return;
-    }
 
     int inputBoardNo = (int) request.getAttribute("boardNo");
 
-    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, myStudy.getStudyNo());
+    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, inputNo);
 
     if (freeBoard == null) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
@@ -65,8 +54,17 @@ public class FreeBoardDeleteHandler implements Command {
       return;
     }
 
-    freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
-    freeBoardDao.delete(freeBoard.getFreeBoardNo(), myStudy.getStudyNo());
+    System.out.println(freeBoard.getFreeBoardNo());
+    System.out.println(freeBoard.getStudyNo());
+
+    try {
+      freeBoardDao.deleteComment(freeBoard.getFreeBoardNo());
+      freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
+      freeBoardDao.delete(freeBoard.getFreeBoardNo(), freeBoard.getStudyNo());
+      sqlSession.commit();
+    } catch (Exception e) {
+      sqlSession.rollback();
+    }
 
     System.out.println(" >> 게시글이 삭제되었습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);

@@ -202,6 +202,7 @@
        study_no=#{studyNo} and member_no=#{memberNo}
    </delete>
    
+   
    <select id="findByBookmarkAll" resultMap="MemberMap" parameterType="int">
     select
       sbm.member_no,

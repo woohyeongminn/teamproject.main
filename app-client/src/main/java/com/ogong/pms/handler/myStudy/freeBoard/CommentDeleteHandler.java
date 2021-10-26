@@ -1,10 +1,11 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.List;
+import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -13,9 +14,11 @@ import com.ogong.util.Prompt;
 public class CommentDeleteHandler implements Command {
 
   StudyDao studyDao;
+  CommentDao commentDao;
 
-  public CommentDeleteHandler(StudyDao studyDao) {
+  public CommentDeleteHandler(StudyDao studyDao, CommentDao commentDao) {
     this.studyDao = studyDao;
+    this.commentDao = commentDao;
   }
 
   @Override
@@ -29,12 +32,14 @@ public class CommentDeleteHandler implements Command {
       return;
     }
 
-    int[] arry = (int[]) request.getAttribute("studyNoFreeNo");
+    FreeBoard freeBoard = (FreeBoard) request.getAttribute("freeBoard");
 
-    Study myStudy = studyDao.findByNo(arry[0]);
-    List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
-    FreeBoard freeBoard = freeBoardList.get(arry[1]);
-    List<Comment> commentList = freeBoard.getComment();
+    if (freeBoard == null) {
+      System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
+      return;
+    }
+
+    List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
     int commentNo = 0;
     while (true) {
@@ -47,11 +52,12 @@ public class CommentDeleteHandler implements Command {
       break;
     }
     int index = -1;
-    String perNickname = AuthPerMemberLoginHandler.getLoginUser().getPerNickname();
+
+    Member member = AuthPerMemberLoginHandler.getLoginUser();
 
     for (int i = 0; i < commentList.size(); i++) {
       if ((commentList.get(i).getCommentNo() == commentNo) &&
-          (commentList.get(i).getCommentWiter().getPerNickname().equals(perNickname))){
+          (commentList.get(i).getCommentWiter().getPerNo() == member.getPerNo())){
         index = i;
       }
     }
@@ -69,11 +75,8 @@ public class CommentDeleteHandler implements Command {
     }
 
     commentList.remove(commentList.get(index));
-    freeBoard.setComment(commentList);
-    freeBoardList.set(arry[1], freeBoard);
-    myStudy.setMyStudyFreeBoard(freeBoardList);
 
-    studyDao.update(myStudy);
+    commentDao.delete(commentNo);
 
     System.out.println(" >> 댓글이 삭제되었습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);
