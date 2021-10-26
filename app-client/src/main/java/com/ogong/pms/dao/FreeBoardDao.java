@@ -18,6 +18,7 @@ public interface FreeBoardDao {
   void updateViewCount(@Param("freeBoard") FreeBoard freeBoard, @Param("studyNo") int studyNo) throws Exception;
 
   void delete(@Param("freeBoardNo") int freeBoardNo, @Param("studyNo") int studyNo) throws Exception;
-  void deleteFile(int freeBoardNo/* , int fileNo */) throws Exception;
+  void deleteFile(int freeBoardNo) throws Exception;
+  void deleteComment(int freeBoardNo) throws Exception;
 
 }

@@ -1,30 +1,21 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
-import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
 
 public class FreeBoardDetailHandler implements Command {
 
-  StudyDao studyDao;
   FreeBoardDao freeBoardDao;
-  CommentDao commentDao;
   PromptFreeBoard promptFreeBoard;
   SqlSession sqlSession;
 
   public FreeBoardDetailHandler
-  (StudyDao studyDao, FreeBoardDao freeBoardDao, CommentDao commentDao, PromptFreeBoard promptFreeBoard, SqlSession sqlSession) {
-    this.studyDao = studyDao;
+  (FreeBoardDao freeBoardDao, PromptFreeBoard promptFreeBoard, SqlSession sqlSession) {
     this.freeBoardDao = freeBoardDao;
-    this.commentDao = commentDao;
     this.promptFreeBoard = promptFreeBoard;
     this.sqlSession = sqlSession;
   }
@@ -35,23 +26,16 @@ public class FreeBoardDetailHandler implements Command {
     System.out.println("▶ 게시글 상세보기");
     System.out.println();
 
+    // inputNo = 내 스터디 상세에서 선택한 스터디 번호
     int inputNo = (int) request.getAttribute("inputNo");
-
-    Study myStudy = studyDao.findByNo(inputNo);
-
-    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
-
-    if (freeBoardList.isEmpty()) {
-      System.out.println("자유게시판 게시글 목록이 없습니다!");
-      return;
-    }
 
     int inputBoardNo = Prompt.inputInt(" 번호 : ");
 
-    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, myStudy.getStudyNo());
+    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, inputNo);
 
     if (freeBoard == null) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
+      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
       return;
     }
 
@@ -72,21 +56,22 @@ public class FreeBoardDetailHandler implements Command {
     // 댓글 등록,수정,삭제에서 사용
     request.setAttribute("freeBoard", freeBoard);
 
-    freeBoardDao.updateViewCount(freeBoard, myStudy.getStudyNo());
-    sqlSession.commit();
-
-    List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
-
     System.out.println("\n----------------------");
     System.out.println("1. 수정");
     System.out.println("2. 삭제");
     System.out.println("3. 댓글 등록");
-    if (!commentList.isEmpty()) {
+
+    if (freeBoard.getCountComment() > 0) {
       System.out.println("4. 댓글 수정");
       System.out.println("5. 댓글 삭제");
     }
+
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
+
+    freeBoardDao.updateViewCount(freeBoard, freeBoard.getStudyNo());
+    sqlSession.commit();
+
     switch (selectNo) {
       case 1 : request.getRequestDispatcher("/myStudy/freeBoardUpdate").forward(request); return;
       case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;

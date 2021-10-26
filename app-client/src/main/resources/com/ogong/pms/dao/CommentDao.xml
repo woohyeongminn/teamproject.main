@@ -50,6 +50,12 @@
      content=#{content}
     where comment_no=#{commentNo}
   </update>
+  
+  <delete id="delete">
+    delete from study_board_comment
+    where
+      comment_no=#{commentNo}
+  </delete>
    
   </mapper>
   

@@ -11,7 +11,13 @@ insert into study_board (title, content, view_ct, created_dt, member_no, study_n
 values ('제목3', '내용3입니다.', '0', '2021-10-20', '5' , '1');
 
 insert into study_board (title, content, view_ct, created_dt, member_no, study_no)
-values ('제목1', '내용1입니다.', '0', '2021-09-01', '2' , '2');
+values ('제목1', '내용1입니다.', '0', '2021-09-01', '2' , '1');
+
+insert into study_board (title, content, view_ct, created_dt, member_no, study_no)
+values ('제목4', '내용4입니다.', '0', '2021-09-01', '4' , '1');
+
+insert into study_board (title, content, view_ct, created_dt, member_no, study_no)
+values ('제목6', '내용6입니다.', '0', '2021-09-01', '6' , '1');
 
 -- 목록
 /*
@@ -36,5 +42,15 @@ select
    left outer join study_board_file sbf on sb.st_board_no=sbf.st_board_no
   where
    sb.study_no=1
+<<<<<<< HEAD
    order by s.study_no
+   
+   -- updateFile
+   update study_board_file sbf set
+      name = #{fileName.atcFileName}
+    where
+      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{atcFileNo}
+=======
+   order by sb.st_board_no
+>>>>>>> a708787c8c160da7b71b0288f95277ff2a2ffc02
  */

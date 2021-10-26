@@ -84,12 +84,22 @@
       st_board_no=#{freeBoard.freeBoardNo} and study_no=#{studyNo}
   </update>
   
+  <!-- 기존 -->
   <update id="updateFile">
     update study_board_file sbf set
       name = #{fileName.atcFileName}
     where
       sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{fileName.} 
   </update>
+  
+  <!-- 추가
+  <update id="updateFile">
+    update study_board_file sbf set
+      name = #{fileName.atcFileName}
+    where
+      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{atcFileNo}
+  </update>
+  -->
   
   <update id="updateViewCount">
     update study_board set
@@ -98,6 +108,8 @@
       st_board_no=#{freeBoard.freeBoardNo} and study_no=#{studyNo}
   </update>
   
+  
+
   <delete id="delete" parameterType="map">
      delete from study_board
       where
@@ -106,6 +118,12 @@
    
   <delete id="deleteFile" parameterType="map">
      delete from study_board_file
+      where
+       st_board_no=#{freeBoardNo}
+   </delete>
+   
+   <delete id="deleteComment" parameterType="map">
+     delete from study_board_comment
       where
        st_board_no=#{freeBoardNo}
    </delete>

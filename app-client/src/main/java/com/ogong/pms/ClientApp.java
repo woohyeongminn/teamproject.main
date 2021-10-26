@@ -320,18 +320,18 @@ public class ClientApp {
     commandMap.put("/myStudy/calenderDelete", new CalenderDeleteHandler(studyDao));
 
     PromptFreeBoard promptFreeBoard = new PromptFreeBoard(commentDao);
-    commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(studyDao, freeBoardDao));
-    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(studyDao, freeBoardDao, sqlSession));
-    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(studyDao, freeBoardDao, commentDao, promptFreeBoard, sqlSession));
-    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler(studyDao, freeBoardDao, sqlSession));
-    commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(studyDao, freeBoardDao));
+    commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(freeBoardDao));
+    commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(freeBoardDao, sqlSession));
+    commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(freeBoardDao, promptFreeBoard, sqlSession));
+    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler( freeBoardDao, sqlSession));
+    commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(freeBoardDao, sqlSession));
 
     //Socket chatSocket = new Socket(); 
     //    commandMap.put("/myStudy/chat", new MyStudyChat(requestAgent));
     //commandMap.put("/myStudy/chatOpen", new MySocketServer(chatSocket, requestAgent));
     //commandMap.put("/myStudy/chatStart", new MySocketClient(requestAgent));
 
-    commandMap.put("/myStudy/freeBoard/commentDelete", new CommentDeleteHandler(studyDao));
+    commandMap.put("/myStudy/freeBoard/commentDelete", new CommentDeleteHandler(studyDao, commentDao));
     commandMap.put("/myStudy/freeBoard/commentAdd", new CommentAddHandler(commentDao, sqlSession));
     commandMap.put("/myStudy/freeBoard/commentUpdate", new CommentUpdateHandler(studyDao, commentDao));
 

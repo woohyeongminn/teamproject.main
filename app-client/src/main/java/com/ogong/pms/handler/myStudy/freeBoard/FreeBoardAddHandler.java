@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.FreeBoardFile;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -17,12 +15,10 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardAddHandler implements Command {
 
-  StudyDao studyDao;
   FreeBoardDao freeboardDao;
   SqlSession sqlSession;
 
-  public FreeBoardAddHandler(StudyDao studyDao, FreeBoardDao freeboardDao, SqlSession sqlSession) {
-    this.studyDao = studyDao;
+  public FreeBoardAddHandler(FreeBoardDao freeboardDao, SqlSession sqlSession) {
     this.freeboardDao = freeboardDao;
     this.sqlSession = sqlSession;
   }
@@ -33,15 +29,14 @@ public class FreeBoardAddHandler implements Command {
     System.out.println("▶ 게시글 작성");
     System.out.println();
 
+    // inputNo = 내 스터디 상세에서 선택한 스터디 번호
     int inputNo = (int) request.getAttribute("inputNo");
 
     Member member = AuthPerMemberLoginHandler.getLoginUser();
 
-    Study myStudy = studyDao.findByMyNo(inputNo, member.getPerNo());
-
     FreeBoard freeBoard = new FreeBoard();
 
-    freeBoard.setStudyNo(myStudy.getStudyNo());
+    freeBoard.setStudyNo(inputNo);
     freeBoard.setFreeBoardTitle(Prompt.inputString(" 제목 : "));
     freeBoard.setFreeBoardContent(Prompt.inputString(" 내용 : "));
     freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount());
@@ -62,7 +57,6 @@ public class FreeBoardAddHandler implements Command {
     }
 
     freeBoard.setFreeBoardFile(fileList);
-    //freeBoard.setComment(new ArrayList<>());
 
     String input = Prompt.inputString(" 게시글을 등록하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
@@ -82,8 +76,7 @@ public class FreeBoardAddHandler implements Command {
       sqlSession.rollback();
     }
 
-
     System.out.println(" >> 게시글이 등록되었습니다.");
+    request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
   }
 }
-
