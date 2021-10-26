@@ -2,7 +2,6 @@ package com.ogong.pms.handler.study;
 
 import java.util.List;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -36,20 +35,20 @@ public class StudyListHandler implements Command {
       }
 
       else {
-        List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
-        List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
-        study.setMembers(guilders);
-        study.setBookMarkMember(bookMem);
+        //List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
+        //List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
+        //study.setMembers(guilders);
+        //study.setBookMarkMember(bookMem);
         System.out.printf(
             " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
             study.getStudyNo(),
-            study.getBookMarkMember().size(),
+            study.getCountBookMember(),
             study.getStudyTitle(),
             study.getFaceName(),
             study.getOwner().getPerNickname(),
             study.getSubjectName(),
             study.getArea(),
-            study.getMembers().size(),
+            study.getCountMember(),
             study.getNumberOfPeple()
             );
         System.out.println();

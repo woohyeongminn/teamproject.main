@@ -31,7 +31,7 @@ public interface StudyDao {
   //--------------- [ 북마크 ] ----------------------------------------
   void insertBookmark(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   List<Member> findByBookmarkAll(int studyNo) throws Exception; // 스터디 번호 보내서 가져오기
-  List<Study> findByMyBookmark(int memberNo) throws Exception; // 번호 보내서 북마크 가져오기
+  List<Study> findByMyBookmark(int memberNo) throws Exception; // 멤버 번호 보내서 북마크 가져오기
   Study findByBookmark(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception; // 상세
   void deleteBookmark(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
 
