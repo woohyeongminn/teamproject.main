@@ -11,7 +11,13 @@ insert into study_board (title, content, view_ct, created_dt, member_no, study_n
 values ('제목3', '내용3입니다.', '0', '2021-10-20', '5' , '1');
 
 insert into study_board (title, content, view_ct, created_dt, member_no, study_no)
-values ('제목1', '내용1입니다.', '0', '2021-09-01', '2' , '2');
+values ('제목1', '내용1입니다.', '0', '2021-09-01', '2' , '1');
+
+insert into study_board (title, content, view_ct, created_dt, member_no, study_no)
+values ('제목4', '내용4입니다.', '0', '2021-09-01', '4' , '1');
+
+insert into study_board (title, content, view_ct, created_dt, member_no, study_no)
+values ('제목6', '내용6입니다.', '0', '2021-09-01', '6' , '1');
 
 -- 목록
 /*

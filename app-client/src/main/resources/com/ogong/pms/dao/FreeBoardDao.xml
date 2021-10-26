@@ -84,13 +84,6 @@
       st_board_no=#{freeBoard.freeBoardNo} and study_no=#{studyNo}
   </update>
   
-  <update id="updateFile">
-    update study_board_file sbf set
-      name = #{fileName.atcFileName}
-    where
-      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{fileName.} 
-  </update>
-  
   <update id="updateViewCount">
     update study_board set
       view_ct = #{freeBoard.freeBoardViewcount}
@@ -98,6 +91,8 @@
       st_board_no=#{freeBoard.freeBoardNo} and study_no=#{studyNo}
   </update>
   
+  
+
   <delete id="delete" parameterType="map">
      delete from study_board
       where
