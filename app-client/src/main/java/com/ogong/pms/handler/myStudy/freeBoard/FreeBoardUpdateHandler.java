@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.FreeBoardFile;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -15,12 +13,10 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardUpdateHandler implements Command {
 
-  StudyDao studyDao;
   FreeBoardDao freeBoardDao;
   SqlSession sqlSession;
 
-  public FreeBoardUpdateHandler(StudyDao studyDao, FreeBoardDao freeBoardDao, SqlSession sqlSession) {
-    this.studyDao = studyDao;
+  public FreeBoardUpdateHandler(FreeBoardDao freeBoardDao, SqlSession sqlSession) {
     this.freeBoardDao = freeBoardDao;
     this.sqlSession = sqlSession;
   }
@@ -31,21 +27,12 @@ public class FreeBoardUpdateHandler implements Command {
     System.out.println("▶ 게시글 수정");
     System.out.println();
 
-    // 게시글 데이터 가져오기---
+    // inputNo = 내 스터디 상세에서 선택한 스터디 번호
     int inputNo = (int) request.getAttribute("inputNo");
-
-    Study myStudy = studyDao.findByNo(inputNo);
-
-    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
-
-    if (freeBoardList.isEmpty()) {
-      System.out.println("자유게시판 게시글 목록이 없습니다!");
-      return;
-    }
 
     int inputBoardNo = (int) request.getAttribute("boardNo");
 
-    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, myStudy.getStudyNo());
+    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, inputNo);
 
     if (freeBoard == null) {
       System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
@@ -73,8 +60,9 @@ public class FreeBoardUpdateHandler implements Command {
           Prompt.inputString(" 첨부파일(" + freeBoard.getFreeBoardFile().get(i).getAtcFileName() + ") (삭제:Enter) : ");
 
       if (inputFileName.equals("")) {
-        freeBoard.setCountFile(freeBoard.getCountFile() - 1);
-        freeBoard.setCountFile(freeBoard.getFreeBoardFile().size() - 1);
+        freeBoard.getFreeBoardFile().remove(i);
+        //        freeBoard.setCountFile(freeBoard.getFreeBoardFile().size() - 1);
+        //        System.out.println("삭제 후" + freeBoard.getCountFile());
         System.out.println(" >> 첨부파일 삭제가 완료되었습니다.");
       }
 
@@ -93,17 +81,22 @@ public class FreeBoardUpdateHandler implements Command {
     freeBoard.setFreeBoardTitle(freeBoardTitle);
     freeBoard.setFreeBoardContent(freeBoardContent);
 
-    freeBoardDao.update(freeBoard, myStudy.getStudyNo());
-    freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
+//  freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
+  //    freeBoardDao.insertFile(fileName, freeBoard.getFreeBoardNo());
+    
     try {
-      for (FreeBoardFile fileName : freeBoard.getFreeBoardFile()) {
-        freeBoardDao.insertFile(fileName, freeBoard.getFreeBoardNo());
-        sqlSession.commit();
+      if (!freeBoard.getFreeBoardFile().isEmpty()) {
+        for (FreeBoardFile fileName : freeBoard.getFreeBoardFile()) {
+          freeBoardDao.updateFile(fileName, freeBoard.getFreeBoardNo());
+          sqlSession.commit();
+        }
       }
+      freeBoardDao.update(freeBoard, freeBoard.getStudyNo());
       sqlSession.commit();
     } catch (Exception e) {
       sqlSession.rollback();
     }
+
 
 
     System.out.println(" >> 게시글을 수정하였습니다.");

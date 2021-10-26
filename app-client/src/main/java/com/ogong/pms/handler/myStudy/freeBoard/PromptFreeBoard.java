@@ -17,7 +17,6 @@ public class PromptFreeBoard {
     System.out.println();
     System.out.println("============= 댓글 =============");
 
-    //int countFreeBoard = 0;
 
     List<Comment> commentList = commentDao.findAll(freeboard.getFreeBoardNo());
 
@@ -27,7 +26,6 @@ public class PromptFreeBoard {
           comment.getCommentText(),
           comment.getCommentWiter().getPerNickname(),
           comment.getCommentRegisteredDate());
-      //countFreeBoard++;
     }
 
     if (commentList.isEmpty()) {
