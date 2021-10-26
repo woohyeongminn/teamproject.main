@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Comment {
 
+  private int studyNo;                      //스터디 번호
   private int boardNo;                      //글 번호
   private int commentNo;                    // 댓글 번호
   private String commentText;               // 댓글 내용
@@ -12,9 +13,17 @@ public class Comment {
 
   @Override
   public String toString() {
-    return "Comment [boardNo=" + boardNo + ", commentNo=" + commentNo + ", commentText="
-        + commentText + ", commentWiter=" + commentWiter + ", commentRegisteredDate="
-        + commentRegisteredDate + "]";
+    return "Comment [studyNo=" + studyNo + ", boardNo=" + boardNo + ", commentNo=" + commentNo
+        + ", commentText=" + commentText + ", commentWiter=" + commentWiter
+        + ", commentRegisteredDate=" + commentRegisteredDate + "]";
+  }
+
+  public int getStudyNo() {
+    return studyNo;
+  }
+
+  public void setStudyNo(int studyNo) {
+    this.studyNo = studyNo;
   }
 
   public int getBoardNo() {

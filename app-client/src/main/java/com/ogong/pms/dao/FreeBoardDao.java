@@ -19,4 +19,5 @@ public interface FreeBoardDao {
 
   void delete(@Param("freeBoardNo") int freeBoardNo, @Param("studyNo") int studyNo) throws Exception;
   void deleteFile(int freeBoardNo/* , int fileNo */) throws Exception;
+
 }

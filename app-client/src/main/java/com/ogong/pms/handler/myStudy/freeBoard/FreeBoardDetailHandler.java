@@ -2,8 +2,10 @@ package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
@@ -14,14 +16,16 @@ public class FreeBoardDetailHandler implements Command {
 
   StudyDao studyDao;
   FreeBoardDao freeBoardDao;
+  CommentDao commentDao;
   PromptFreeBoard promptFreeBoard;
   SqlSession sqlSession;
 
   public FreeBoardDetailHandler
-  (StudyDao studyDao, PromptFreeBoard promptFreeBoard, FreeBoardDao freeBoardDao, SqlSession sqlSession) {
+  (StudyDao studyDao, FreeBoardDao freeBoardDao, CommentDao commentDao, PromptFreeBoard promptFreeBoard, SqlSession sqlSession) {
     this.studyDao = studyDao;
-    this.promptFreeBoard = promptFreeBoard;
     this.freeBoardDao = freeBoardDao;
+    this.commentDao = commentDao;
+    this.promptFreeBoard = promptFreeBoard;
     this.sqlSession = sqlSession;
   }
 
@@ -59,22 +63,28 @@ public class FreeBoardDetailHandler implements Command {
       System.out.printf(" >> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
       freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
       System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
-      //promptFreeBoard.printComments(freeBoard); // 댓글호출
+      promptFreeBoard.printComments(freeBoard); // 댓글호출
     }
 
+    // 게시글 수정,삭제에서 사용
     request.setAttribute("boardNo", inputBoardNo);
+
+    // 댓글 등록,수정,삭제에서 사용
+    request.setAttribute("freeBoard", freeBoard);
 
     freeBoardDao.updateViewCount(freeBoard, myStudy.getStudyNo());
     sqlSession.commit();
+
+    List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
     System.out.println("\n----------------------");
     System.out.println("1. 수정");
     System.out.println("2. 삭제");
     System.out.println("3. 댓글 등록");
-    //if (!freeBoardList.get(arry[1]).getComment().isEmpty()) {
-    System.out.println("4. 댓글 수정");
-    System.out.println("5. 댓글 삭제");
-    //}
+    if (!commentList.isEmpty()) {
+      System.out.println("4. 댓글 수정");
+      System.out.println("5. 댓글 삭제");
+    }
     System.out.println("0. 이전");
     int selectNo = Prompt.inputInt("선택> ");
     switch (selectNo) {
