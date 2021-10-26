@@ -1,6 +1,7 @@
 package com.ogong.pms.domain;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FreeBoard {
@@ -17,7 +18,7 @@ public class FreeBoard {
   private List<FreeBoardFile> freeBoardFile;  // 첨부파일
 
   private int countComment;       // 댓글 수
-  private List<Comment> comment; //댓글
+  private List<Comment> comment = new ArrayList<>(); //댓글
 
   private int countLike;       // 좋아요 수
 

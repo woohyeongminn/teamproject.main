@@ -1,10 +1,10 @@
 package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.List;
+import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -13,9 +13,11 @@ import com.ogong.util.Prompt;
 public class CommentUpdateHandler implements Command {
 
   StudyDao studyDao;
+  CommentDao commentDao;
 
-  public CommentUpdateHandler(StudyDao studyDao) {
+  public CommentUpdateHandler(StudyDao studyDao, CommentDao commentDao) {
     this.studyDao = studyDao;
+    this.commentDao = commentDao;
   }
 
   @Override
@@ -29,12 +31,14 @@ public class CommentUpdateHandler implements Command {
       return;
     }
 
-    int[] arry = (int[]) request.getAttribute("studyNoFreeNo");
+    FreeBoard freeBoard = (FreeBoard) request.getAttribute("freeBoard");
 
-    Study myStudy = studyDao.findByNo(arry[0]);
-    List<FreeBoard> freeBoardList = myStudy.getMyStudyFreeBoard();
-    FreeBoard freeBoard = freeBoardList.get(arry[1]);
-    List<Comment> commentList = freeBoard.getComment();
+    if (freeBoard == null) {
+      System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
+      return;
+    }
+
+    List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
     int commentNo = 0;
     while (true) {
@@ -75,12 +79,9 @@ public class CommentUpdateHandler implements Command {
       return;
     }
 
-    commentList.get(index).setCommentText(commentTitle);
     freeBoard.setComment(commentList);
-    freeBoardList.set(arry[1], freeBoard);
-    myStudy.setMyStudyFreeBoard(freeBoardList);
 
-    studyDao.update(myStudy);
+    commentDao.update(commentNo, commentTitle);
 
     System.out.println(" >> 댓글을 변경하였습니다.");
     request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request);

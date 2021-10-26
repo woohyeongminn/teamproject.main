@@ -5,6 +5,7 @@
 
 <mapper namespace="com.ogong.pms.dao.FreeBoardDao">
  
+  <!-- 게시글 -->
   <resultMap type="FreeBoard" id="FreeBoardMap">
     <id column="st_board_no" property="freeBoardNo"/> 
     <result column="study_no" property="studyNo"/>
