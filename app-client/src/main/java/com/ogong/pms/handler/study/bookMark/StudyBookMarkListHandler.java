@@ -42,10 +42,11 @@ public class StudyBookMarkListHandler implements Command {
             study.getStudyTitle());
         System.out.println();
       }
-
+      List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
+      study.setBookMarkMember(bookMem);
       System.out.printf(" (%d) 🌟%d \n [%s] | 분야 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
           study.getStudyNo(),
-          study.getCountBookMember(),
+          study.getBookMarkMember().size(),
           study.getStudyTitle(),
           study.getSubjectName(),
           study.getCountMember() + 1,
