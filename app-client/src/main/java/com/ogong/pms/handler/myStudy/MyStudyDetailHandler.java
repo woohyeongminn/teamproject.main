@@ -28,8 +28,6 @@ public class MyStudyDetailHandler implements Command {
 
     int studyNo = Prompt.inputInt(" 번호  : ");
 
-    Study s = new Study();
-
     Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
 
     if (myStudy == null) {
@@ -50,11 +48,9 @@ public class MyStudyDetailHandler implements Command {
     System.out.printf(" >> 분야 : %s\n", myStudy.getSubjectName());
     System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
     System.out.printf(" >> 인원수 : %s/%s명\n",
-        myStudy.getMembers().size(), myStudy.getNumberOfPeple());
+        myStudy.getCountMember(), myStudy.getNumberOfPeple());
     System.out.printf(" >> 대면 : %s\n", myStudy.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
-    s = myStudy;
-
 
     for (Member m : myStudy.getWatingMember()) {
       if (m.getPerNo() == member.getPerNo()) {
@@ -72,8 +68,7 @@ public class MyStudyDetailHandler implements Command {
     System.out.println("5. 화상미팅");
     System.out.println("6. 탈퇴하기");  
 
-    if (s.getOwner().getPerNickname().equals(
-        AuthPerMemberLoginHandler.loginUser.getPerNickname())) {
+    if (myStudy.getOwner().getPerNickname().equals(member.getPerNickname())) {
       System.out.println("7. 스터디 수정");
       System.out.println("8. 스터디 삭제");
     }

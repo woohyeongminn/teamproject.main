@@ -74,6 +74,36 @@
     join
       member m on m.member_no=sg.member_no
   </sql>
+  
+  <!--  ===[북마크 출력 중복]=== -->
+  <sql id="select3">
+  select
+     sbm.study_no,
+     s.study_no,
+     s.name study_title,
+     ss.subject_no subject_no,
+     ss.name subject_name,
+     s.area,
+     s.no_people,
+     sfs.face_no face_no,
+     sfs.name face_name,
+     s.introduction,
+     s.created_dt,
+     s.score study_score,
+     s.member_no owner_no,
+     m.nickname owner_name,
+     m2.member_no member_no,
+     m2.name member_name,
+     m2.nickname member_nickname,
+    (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
+    (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
+   from study_bookmark sbm
+      left outer join study s on s.study_no=sbm.study_no
+      left outer join member m on m.member_no=s.member_no
+      left outer join member m2 on m2.member_no=sbm.member_no
+      left outer join study_subject ss on s.subject_no=ss.subject_no
+      left outer join study_face_status sfs on s.face_no=sfs.face_no
+  </sql>
 
 <!--  ===========================[스터디]=========================== -->
  
@@ -203,77 +233,23 @@
    </delete>
    
    
+ <!--  ===[스터디 번호 보내서 가져오기]=== -->
    <select id="findByBookmarkAll" resultMap="MemberMap" parameterType="int">
-    select
-      sbm.member_no,
-      m.name member_name,
-      m.nickname member_nickname
-    from
-      study_bookmark sbm
-    join
-      member m on m.member_no=sbm.member_no
+    <include refid="select3"/>
     where 
       sbm.study_no=#{studyNo}
    </select>
    
+<!--  ===[멤버 번호 보내서 북마크 가져오기]=== -->   
    <select id="findByMyBookmark" resultMap="StudyMap" parameterType="int">
-   select
-     sbm.study_no,
-     s.study_no,
-     s.name study_title,
-     ss.subject_no subject_no,
-     ss.name subject_name,
-     s.area,
-     s.no_people,
-     sfs.face_no face_no,
-     sfs.name face_name,
-     s.introduction,
-     s.created_dt,
-     s.score study_score,
-     s.member_no owner_no,
-     m.nickname owner_name,
-     m2.member_no member_no,
-     m2.name member_name,
-     m2.nickname member_nickname,
-    (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
-    (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
-   from study_bookmark sbm
-      left outer join study s on s.study_no=sbm.study_no
-      left outer join member m on m.member_no=s.member_no
-      left outer join member m2 on m2.member_no=sbm.member_no
-      left outer join study_subject ss on s.subject_no=ss.subject_no
-      left outer join study_face_status sfs on s.face_no=sfs.face_no
+    <include refid="select3"/>
     where 
       sbm.member_no=#{memberNo}    
    </select>
    
+<!--  ===[상세]=== -->  
    <select id="findByBookmark" resultMap="StudyMap" parameterType="int">
-    select
-     sbm.study_no,
-     s.study_no,
-     s.name study_title,
-     ss.subject_no subject_no,
-     ss.name subject_name,
-     s.area,
-     s.no_people,
-     sfs.face_no face_no,
-     sfs.name face_name,
-     s.introduction,
-     s.created_dt,
-     s.score study_score,
-     s.member_no owner_no,
-     m.nickname owner_name,
-     m2.member_no member_no,
-     m2.name member_name,
-     m2.nickname member_nickname,
-    (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
-    (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
-   from study_bookmark sbm
-      left outer join study s on s.study_no=sbm.study_no
-      left outer join member m on m.member_no=s.member_no
-      left outer join member m2 on m2.member_no=sbm.member_no
-      left outer join study_subject ss on s.subject_no=ss.subject_no
-      left outer join study_face_status sfs on s.face_no=sfs.face_no
+    <include refid="select3"/>
     where 
       sbm.member_no=#{memberNo} and sbm.study_no=#{studyNo}
    </select>

@@ -39,22 +39,20 @@ public class GuilderDeleteHandler implements Command {
       return;
     }
 
-    if (!myStudy.getMemberNames().equals("")) {
-      String inputGuilderName = Prompt.inputString(" >> 탈퇴시킬 구성원의 닉네임을 입력하세요 : ");
+    System.out.printf("구성원 : %s\n", myStudy.getMemberNames());
+    System.out.println();
+    String inputGuilderName = Prompt.inputString(" >> 탈퇴시킬 구성원의 닉네임을 입력하세요 : ");
 
-      for (Member guilderMember : guilderList) { 
+    for (Member guilderMember : guilderList) { 
 
-        if (!guilderMember.getPerNickname().equals(inputGuilderName)) {
-          System.out.println("\n >> 해당 구성원이 존재하지 않습니다.");
-          return;
-        } 
-        System.out.println();
-        String input = Prompt.inputString(" 정말 탈퇴시키겠습니까? (네 / 아니오) ");
+      if (guilderMember.getPerNickname().equals(inputGuilderName)) {
+        String input = Prompt.inputString("\n 정말 탈퇴시키겠습니까? (네 / 아니오) ");
 
         if (!input.equalsIgnoreCase("네")) {
           System.out.println("\n >> 구성원 탈퇴를 취소하였습니다.");
           return;
         }
+
         try {
           studyDao.deleteGuilder(myStudy.getStudyNo(), guilderMember.getPerNo());
           sqlSession.commit();
@@ -63,9 +61,10 @@ public class GuilderDeleteHandler implements Command {
           sqlSession.rollback();
         }
         System.out.println("\n >> 구성원이 탈퇴되었습니다.");
-        break;
+        return;
       }
-      return;
-    }
+    } 
+    System.out.println("\n >> 해당 구성원이 존재하지 않습니다.");
+    return;
   }
 }

@@ -35,7 +35,7 @@ public class MyStudyExitHandler implements Command {
       System.out.println(" >> 구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.");
       return;
 
-      // 승인 대기중인 구성원이 있을때 (필요한가,,,,,,,,,,?)
+      // 승인 대기중인 구성원이 있을때 
     } else if (myStudy.getOwner().getPerNo() == member.getPerNo() &&
         myStudy.getWatingCountMember() > 0) {
       System.out.println(" >> 승인 대기 중인 구성원이 없어야 스터디 탈퇴가 가능합니다.");

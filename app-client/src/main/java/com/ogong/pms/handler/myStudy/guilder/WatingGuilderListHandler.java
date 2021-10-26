@@ -10,8 +10,8 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
 
 public class WatingGuilderListHandler implements Command {
-
   StudyDao studyDao;
+  Member member;
 
   public WatingGuilderListHandler(StudyDao studyDao) {
     this.studyDao = studyDao;
@@ -24,7 +24,7 @@ public class WatingGuilderListHandler implements Command {
     System.out.println("▶ 승인 대기 목록");
     System.out.println();
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    //member = AuthPerMemberLoginHandler.getLoginUser();
     int inputNo = (int) request.getAttribute("inputNo");
 
     Study myStudy = studyDao.findByNo(inputNo);
@@ -75,7 +75,7 @@ public class WatingGuilderListHandler implements Command {
   // 승인
   private void agreeStudyMember(Study myStudy) throws Exception {
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    member = AuthPerMemberLoginHandler.getLoginUser();
 
     List<Member> waitingMembers = myStudy.getWatingMember();
 
@@ -108,7 +108,7 @@ public class WatingGuilderListHandler implements Command {
   // 거절
   private void disagreeStudyMember(Study myStudy) throws Exception {
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    member = AuthPerMemberLoginHandler.getLoginUser();
 
     List<Member> waitingMembers = myStudy.getWatingMember();
 
