@@ -2,6 +2,7 @@ package com.ogong.pms.handler.cafe;
 
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
@@ -13,9 +14,11 @@ import com.ogong.util.Prompt;
 public class CafeDetailHandler implements Command {
 
   CafeDao cafeDao;
+  SqlSession sqlSession;
 
-  public CafeDetailHandler (CafeDao cafeDao) {
+  public CafeDetailHandler (CafeDao cafeDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.sqlSession = sqlSession;
   }
 
   @Override
@@ -47,9 +50,7 @@ public class CafeDetailHandler implements Command {
     System.out.printf(" >> 마감시간 : %s\n", cafe.getCloseTime());
     System.out.printf(" >> 이번주 휴무일 : %s\n", cafe.getHoliday());
     System.out.printf(" >> 조회수 : %d\n", cafe.getViewCount());
-    //    System.out.printf(" >> 예약가능 인원 : %d\n", cafe.getBookable());
-    //    System.out.printf(" >> 시간당 금액 : %d원\n", cafe.getTimePrice());
-    getStarRatingAverage(cafe); // 리뷰 평점계산
+    System.out.printf(" >> 리뷰평점 : ★ %.1f(%d)\n" , cafe.getAvgReview(), cafe.getCountReview());
     listReview(cafe); // 리뷰 목록
     System.out.println();
 
@@ -67,6 +68,9 @@ public class CafeDetailHandler implements Command {
     }
 
     request.setAttribute("cafeNo", cafe.getNo());
+    cafeDao.updateViewCount(cafe.getNo());
+    sqlSession.commit();
+
     if (roomCount != 0) {
       System.out.println("----------------------");
       System.out.println("1. 일반 예약(안됨)");
@@ -103,26 +107,6 @@ public class CafeDetailHandler implements Command {
           System.out.println(" >> 번호를 다시 선택해 주세요.");
       } 
     }       
-  }
-
-  private void getStarRatingAverage(Cafe cafe) throws Exception {
-    int starRating = 0;
-    int starRatingCount = 0;
-    double starRatingAverage = 0;
-
-    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
-
-    if (!reviewList.isEmpty()) {
-      for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 2) {
-          continue;
-        }
-        starRating += review.getGrade();
-        starRatingAverage =(double) starRating / ++starRatingCount;
-      }
-    } 
-
-    System.out.printf(" >> 리뷰평점 : ★ %.1f(%d)\n" , starRatingAverage , starRatingCount);
   }
 
   private void listReview(Cafe cafe) throws Exception {

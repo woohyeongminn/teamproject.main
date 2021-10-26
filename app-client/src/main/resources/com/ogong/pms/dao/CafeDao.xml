@@ -14,6 +14,8 @@
     <result column="open_time" property="openTime"/>
     <result column="close_time" property="closeTime"/>
     <result column="view_cnt" property="viewCount"/>
+    <result column="avgReview" property="avgReview"/>
+    <result column="countReview" property="countReview"/>
     <result column="operating_status_no" property="cafeStatus"/>
     
     <association property="ceoMember" javaType="CeoMember">
@@ -93,6 +95,25 @@
       c.location,
       c.open_time,
       c.close_time,
+      c.view_cnt,
+      (select
+          avg(grade)
+			 from studycafe_review srv
+			 join studycafe_reservation sr on srv.studycafe_rsv_no=sr.studycafe_rsv_no
+			 join studycafe_room srm on sr.studyroom_no=srm.studyroom_no
+			 where srv.status=1
+			 group by srm.cafe_no
+			 having srm.cafe_no=c.cafe_no
+			) avgReview,
+			(select 
+			   count(*)
+			 from studycafe_review srv
+			 join studycafe_reservation sr on srv.studycafe_rsv_no=sr.studycafe_rsv_no
+			 join studycafe_room srm on sr.studyroom_no=srm.studyroom_no
+			 where srv.status=1
+			 group by srm.cafe_no
+			 having srm.cafe_no=c.cafe_no
+			) countReview,
       c.operating_status_no
     from 
       studycafe c
@@ -108,6 +129,24 @@
       c.open_time, 
       c.close_time,
       c.view_cnt,
+      (select
+          avg(grade)
+       from studycafe_review srv
+       join studycafe_reservation sr on srv.studycafe_rsv_no=sr.studycafe_rsv_no
+       join studycafe_room srm on sr.studyroom_no=srm.studyroom_no
+       where srv.status=1
+       group by srm.cafe_no
+       having srm.cafe_no=c.cafe_no
+      ) avgReview,
+      (select 
+         count(*)
+       from studycafe_review srv
+       join studycafe_reservation sr on srv.studycafe_rsv_no=sr.studycafe_rsv_no
+       join studycafe_room srm on sr.studyroom_no=srm.studyroom_no
+       where srv.status=1
+       group by srm.cafe_no
+       having srm.cafe_no=c.cafe_no
+      ) countReview,
       sp.photo_no,
       sp.name photo_name, 
       c.operating_status_no, 
@@ -224,6 +263,12 @@
     </set>
     where
       cafe_no=#{no}
+  </update>
+  
+  <update id="updateViewCount">
+    update studycafe set
+      view_cnt=view_cnt + 1
+    where cafe_no=#{cafeNo}
   </update>
 
   <!-- 관리자 카페 승인  -->

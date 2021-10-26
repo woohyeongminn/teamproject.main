@@ -20,6 +20,9 @@ public interface CafeDao {
   Cafe findByCafeNoMember(int cafeNo) throws Exception;
   Cafe findByCeoMember(int ceoNo) throws Exception;
 
+  // 조회수 증가
+  void updateViewCount(int cafeNo) throws Exception;
+
   // 카페 휴무일
   String getCafeHoliday(HashMap<String,Object> params) throws Exception;
   void insertCafeHolidays(HashMap<String,Object> params) throws Exception;

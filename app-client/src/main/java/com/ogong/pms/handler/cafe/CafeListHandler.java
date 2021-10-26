@@ -27,12 +27,15 @@ public class CafeListHandler implements Command {
     }
 
     for(Cafe cafe : cafeList) {
-      System.out.printf("\n (%s) | 이름 : %s | 주소 : %s | 운영시간 : %s ~ %s\n", 
+      System.out.printf("\n (%d) | 이름 : %s | 주소 : %s | 운영시간 : %s ~ %s | 조회수 : %d | 리뷰 : ★%.1f(%d)\n", 
           cafe.getNo(), 
           cafe.getName(), 
           cafe.getLocation(), 
           cafe.getOpenTime(),
-          cafe.getCloseTime());
+          cafe.getCloseTime(),
+          cafe.getViewCount(),
+          cafe.getAvgReview(),
+          cafe.getCountReview());
       if (cafe.getCafeStatus() == Cafe.STOP) {
         System.out.println(" * 운영 중단");
       }

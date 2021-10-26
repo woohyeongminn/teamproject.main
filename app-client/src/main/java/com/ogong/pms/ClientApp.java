@@ -342,7 +342,7 @@ public class ClientApp {
     commandMap.put("/myStudy/todoDelete", new ToDoDelete(studyDao, toDoDao, sqlSession));
 
     commandMap.put("/cafe/list", new CafeListHandler(cafeDao));
-    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao));
+    commandMap.put("/cafe/detail", new CafeDetailHandler(cafeDao, sqlSession));
     commandMap.put("/cafe/reservation", new CafeReservationHandler(cafeDao, sqlSession));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeDao));
     commandMap.put("/cafe/search", new CafeSearchHandler(cafeDao));

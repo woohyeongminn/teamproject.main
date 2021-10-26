@@ -45,7 +45,7 @@ public class AdminCafeDetailHandler implements Command {
     System.out.printf(" >> 마감 시간 : %s\n", cafe.getCloseTime());
     System.out.printf(" >> 이번주 휴무일 : %s\n", cafe.getHoliday());
     System.out.printf(" >> 상태 : %s\n", CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus()));
-    getStarRatingAverage(cafe); // 리뷰 평점계산
+    System.out.printf(" >> 리뷰평점 : ★ %.1f(%d)\n" , cafe.getAvgReview(), cafe.getCountReview());
     listReview(cafe); // 리뷰 목록
     System.out.println();
 
@@ -61,26 +61,6 @@ public class AdminCafeDetailHandler implements Command {
       default :
         System.out.println(" >> 번호를 다시 선택해 주세요.");
     }
-  }
-
-  private void getStarRatingAverage(Cafe cafe) throws Exception {
-    int starRating = 0;
-    int starRatingCount = 0;
-    double starRatingAverage = 0;
-
-    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
-
-    if (!reviewList.isEmpty()) {
-      for (CafeReview review : reviewList) {
-        if (review.getReviewStatus() == 2) {
-          continue;
-        }
-        starRating += review.getGrade();
-        starRatingAverage =(double) starRating / ++starRatingCount;
-      }
-    } 
-
-    System.out.printf(" >> 리뷰평점 : ★ %.1f(%d)\n" , starRatingAverage , starRatingCount);
   }
 
   private void listReview(Cafe cafe) throws Exception {

@@ -30,13 +30,17 @@ public class Cafe {
   private int timePrice; // 시간당금액(개인좌석)
   private int cafeStatus; // 0 : 승인대기 , 1 : 운영중 , 2 : 운영중단 3 : 삭제 -> cafeStatus 관리자, 사장 한테만 보임
 
+  private int countReview; // 리뷰 수
+  private double avgReview; // 리뷰 평균
+
   @Override
   public String toString() {
     return "Cafe [no=" + no + ", ceoMember=" + ceoMember + ", name=" + name + ", mainImg=" + mainImg
         + ", cafeImgs=" + cafeImgs + ", info=" + info + ", location=" + location + ", phone="
         + phone + ", openTime=" + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday
         + ", cafeHolidays=" + cafeHolidays + ", viewCount=" + viewCount + ", bookable=" + bookable
-        + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus + "]";
+        + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus + ", countReview=" + countReview
+        + ", avgReview=" + avgReview + "]";
   }
 
   public int getNo() {
@@ -168,6 +172,22 @@ public class Cafe {
 
   public void setCafeImgs(ArrayList<CafeImage> cafeImgs) {
     this.cafeImgs = cafeImgs;
+  }
+
+  public int getCountReview() {
+    return countReview;
+  }
+
+  public void setCountReview(int countReview) {
+    this.countReview = countReview;
+  }
+
+  public double getAvgReview() {
+    return avgReview;
+  }
+
+  public void setAvgReview(double avgReview) {
+    this.avgReview = avgReview;
   }
 
   public String getCafeImageNames() {
