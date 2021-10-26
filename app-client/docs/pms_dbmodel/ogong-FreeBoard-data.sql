@@ -42,5 +42,5 @@ select
    left outer join study_board_file sbf on sb.st_board_no=sbf.st_board_no
   where
    sb.study_no=1
-   order by s.study_no
+   order by sb.st_board_no
  */

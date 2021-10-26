@@ -2,20 +2,16 @@ package com.ogong.pms.handler.myStudy.freeBoard;
 
 import java.util.List;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
 import com.ogong.util.Prompt;
 
 public class FreeBoardListHandler implements Command {
 
-  StudyDao studyDao;
   FreeBoardDao freeBoardDao;
 
-  public FreeBoardListHandler(StudyDao studyDao,FreeBoardDao freeBoardDao) {
-    this.studyDao = studyDao;
+  public FreeBoardListHandler(FreeBoardDao freeBoardDao) {
     this.freeBoardDao = freeBoardDao;
   }
 
@@ -25,15 +21,13 @@ public class FreeBoardListHandler implements Command {
     System.out.println("▶ 게시글 목록");
     System.out.println();
 
+    // inputNo = 내 스터디 상세에서 선택한 스터디 번호
     int inputNo = (int) request.getAttribute("inputNo");
 
-    Study myStudy = studyDao.findByNo(inputNo);
-
-    List<FreeBoard> freeBoardList = freeBoardDao.findAll(myStudy.getStudyNo());
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll(inputNo);
 
     for (FreeBoard freeBoard : freeBoardList) {
 
-      // 조회수 카운트 안됨 
       System.out.printf(
           " (%d) 제목 : %s | 내용 : %s | 첨부파일(%d) : %s | 작성자 : %s | 조회수 : %d | 작성일 : %s |"
               + " 댓글수 : %d | 좋아요 : %d\n",
@@ -76,5 +70,3 @@ public class FreeBoardListHandler implements Command {
     }
   }
 }
-
-

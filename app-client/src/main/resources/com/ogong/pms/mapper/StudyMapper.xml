@@ -223,6 +223,10 @@
 
 <!--  ===========================[북마크]=========================== -->
 
+
+
+
+
 <!--  ===[북마크 하기]=== -->
   <insert id="insertBookmark" parameterType="map">
   insert into study_bookmark(study_no, member_no)

@@ -39,9 +39,11 @@ public class StudyDetailHandler implements Command {
     }
 
     List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
+    List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
     study.setMembers(guilders);
+    study.setBookMarkMember(bookMem);
 
-    System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getCountBookMember());
+    System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getBookMarkMember().size());
     System.out.printf(" [%s]\n", study.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", study.getSubjectName());
