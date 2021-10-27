@@ -45,7 +45,7 @@ public class StudyDetailHandler extends GenericServlet {
     out.println("  </style>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>상세</h1>");
+    out.println("<h1>스터디 상세</h1>");
 
     int no = Integer.parseInt(request.getParameter("no"));
 

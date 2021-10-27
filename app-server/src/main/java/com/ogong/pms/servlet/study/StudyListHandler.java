@@ -38,7 +38,7 @@ public class StudyListHandler extends GenericServlet {
     out.println("  <title>📖 스터디 찾기</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>목록</h1>");
+    out.println("<h1>스터디 목록</h1>");
     // out.println("<a href='form'>스터디 등록</a><br>");
     out.println("<table border='1'>");
     out.println("<thead>");
