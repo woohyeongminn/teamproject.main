@@ -45,7 +45,7 @@ public class StudyBookMarkDetailHandler extends GenericServlet {
     out.println("  </style>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>▶ 내 북마크 - 스터디 상세</h1>");
+    out.println("<h1>▶ 내 스크랩 상세</h1>");
 
     int no = Integer.parseInt(request.getParameter("no"));
 

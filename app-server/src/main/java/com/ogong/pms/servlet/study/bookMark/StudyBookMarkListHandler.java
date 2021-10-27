@@ -38,7 +38,7 @@ public class StudyBookMarkListHandler extends GenericServlet {
     out.println("  <title>🌟 내 스크랩</title>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>▶ 내 북마크 - 스터디 목록</h1>");
+    out.println("<h1>▶ 내 스크랩 목록</h1>");
     // out.println("<a href='form'>북마크 추가</a><br>");
     out.println("<table border='1'>");
     out.println("<thead>");
