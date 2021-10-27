@@ -32,8 +32,9 @@ public class AppInitListener implements ServletContextListener {
 
     try {
       // Mybatis의 SqlSession 객체 준비
-      sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-          "com/ogong/pms/conf/mybatis-config.xml")).openSession();
+      sqlSession = new SqlSessionFactoryBuilder()
+          .build(Resources.getResourceAsStream("com/ogong/pms/conf/mybatis-config.xml"))
+          .openSession();
 
       // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
       AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
@@ -57,22 +58,20 @@ public class AppInitListener implements ServletContextListener {
       // 웹 애플리케이션 공용 저장소에 DAO 객체를 보관한다.
       // => 이 저장소에 보관된 객체는 서블릿에서 사용할 것이다.
       웹애플리케이션공용저장소.setAttribute("memberDao", memberDao);
-
-      // 여기 주석 풀어서 사용
-      //      웹애플리케이션공용저장소.setAttribute("ceoMemberDao", ceoMemberDao);
+      웹애플리케이션공용저장소.setAttribute("ceoMemberDao", ceoMemberDao);
       //      웹애플리케이션공용저장소.setAttribute("adminDao", adminDao);
       웹애플리케이션공용저장소.setAttribute("noticeDao", noticeDao);
       //      웹애플리케이션공용저장소.setAttribute("askBoardDao", askBoardDao);
-      //      웹애플리케이션공용저장소.setAttribute("cafeDao", cafeDao);
+      웹애플리케이션공용저장소.setAttribute("cafeDao", cafeDao);
       //      웹애플리케이션공용저장소.setAttribute("cafeReservationDao", cafeReservationDao);
-      //      웹애플리케이션공용저장소.setAttribute("cafeReviewDao", cafeReviewDao);
-      //      웹애플리케이션공용저장소.setAttribute("cafeRoomDao", cafeRoomDao);
-      //      웹애플리케이션공용저장소.setAttribute("studyDao", studyDao);
+      웹애플리케이션공용저장소.setAttribute("cafeReviewDao", cafeReviewDao);
+      웹애플리케이션공용저장소.setAttribute("cafeRoomDao", cafeRoomDao);
+      웹애플리케이션공용저장소.setAttribute("studyDao", studyDao);
       //      웹애플리케이션공용저장소.setAttribute("freeBoardDao", freeBoardDao);
       //      웹애플리케이션공용저장소.setAttribute("toDoDao", toDoDao);
       //      웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
 
-      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
+      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
