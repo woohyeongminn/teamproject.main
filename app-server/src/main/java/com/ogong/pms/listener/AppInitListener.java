@@ -7,7 +7,16 @@ import javax.servlet.annotation.WebListener;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.dao.AskBoardDao;
+import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CeoMemberDao;
+import com.ogong.pms.dao.CommentDao;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.dao.NoticeDao;
+import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.dao.ToDoDao;
 
 @WebListener
 public class AppInitListener implements ServletContextListener {
@@ -24,7 +33,17 @@ public class AppInitListener implements ServletContextListener {
           "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
       // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
+      AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
       MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
+      CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
+      NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
+      AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
+      CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
+      StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
+      FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
+      ToDoDao toDoDao = sqlSession.getMapper(ToDoDao.class);
+      CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
+
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -32,6 +51,17 @@ public class AppInitListener implements ServletContextListener {
       // 웹 애플리케이션 공용 저장소에 DAO 객체를 보관한다.
       // => 이 저장소에 보관된 객체는 서블릿에서 사용할 것이다.
       웹애플리케이션공용저장소.setAttribute("memberDao", memberDao);
+
+      // 여기 주석 풀어서 사용
+      //      웹애플리케이션공용저장소.setAttribute("ceoMemberDao", ceoMemberDao);
+      //      웹애플리케이션공용저장소.setAttribute("adminDao", adminDao);
+      //      웹애플리케이션공용저장소.setAttribute("noticeDao", noticeDao);
+      //      웹애플리케이션공용저장소.setAttribute("askBoardDao", askBoardDao);
+      //      웹애플리케이션공용저장소.setAttribute("cafeDao", cafeDao);
+      //      웹애플리케이션공용저장소.setAttribute("studyDao", studyDao);
+      //      웹애플리케이션공용저장소.setAttribute("freeBoardDao", freeBoardDao);
+      //      웹애플리케이션공용저장소.setAttribute("toDoDao", toDoDao);
+      //      웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
 
