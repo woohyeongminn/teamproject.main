@@ -5,12 +5,13 @@ import java.sql.Date;
 public class Calender {
 
   private int calenderNo;
-
+  private Date startDate;
   private int month;   //월
   private int day;     //일
   private String dayOftheWeek; //요일
   private String calenderContent;   // 내용
-  private Date endDay;    // 종료일
+  private Date endDate;    // 종료일
+  private int importanceNo; // 중요도 번호
   private String importanceCalender;  // 중요도 정하기
 
   public int getCalenderNo() {
@@ -18,6 +19,12 @@ public class Calender {
   }
   public void setCalenderNo(int calenderNo) {
     this.calenderNo = calenderNo;
+  }
+  public Date getStartDate() {
+    return startDate;
+  }
+  public void setStartDate(Date startDate) {
+    this.startDate = startDate;
   }
   public int getMonth() {
     return month;
@@ -43,11 +50,17 @@ public class Calender {
   public void setCalenderContent(String calenderContent) {
     this.calenderContent = calenderContent;
   }
-  public Date getEndDay() {
-    return endDay;
+  public Date getEndDate() {
+    return endDate;
   }
-  public void setEndDay(Date endDay) {
-    this.endDay = endDay;
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+  public int getImportanceNo() {
+    return importanceNo;
+  }
+  public void setImportanceNo(int importanceNo) {
+    this.importanceNo = importanceNo;
   }
   public String getImportanceCalender() {
     return importanceCalender;
@@ -58,13 +71,9 @@ public class Calender {
 
   @Override
   public String toString() {
-    return "Calender [calenderNo=" + calenderNo + ", month=" + month + ", day=" + day
-        + ", dayOftheWeek=" + dayOftheWeek + ", calenderContent=" + calenderContent + ", endDay="
-        + endDay + ", importanceCalender=" + importanceCalender + "]";
+    return "Calender [calenderNo=" + calenderNo + ", startDate=" + startDate + ", month=" + month
+        + ", day=" + day + ", dayOftheWeek=" + dayOftheWeek + ", calenderContent=" + calenderContent
+        + ", endDate=" + endDate + ", importanceNo=" + importanceNo + ", importanceCalender="
+        + importanceCalender + "]";
   }
-
-
-
-
-
 }

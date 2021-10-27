@@ -15,11 +15,11 @@ import com.ogong.util.Prompt;
 
 public class FreeBoardAddHandler implements Command {
 
-  FreeBoardDao freeboardDao;
+  FreeBoardDao freeBoardDao;
   SqlSession sqlSession;
 
-  public FreeBoardAddHandler(FreeBoardDao freeboardDao, SqlSession sqlSession) {
-    this.freeboardDao = freeboardDao;
+  public FreeBoardAddHandler(FreeBoardDao freeBoardDao, SqlSession sqlSession) {
+    this.freeBoardDao = freeBoardDao;
     this.sqlSession = sqlSession;
   }
 
@@ -65,10 +65,10 @@ public class FreeBoardAddHandler implements Command {
     }
 
     try {
-      freeboardDao.insert(freeBoard);
+      freeBoardDao.insert(freeBoard);
       if (!freeBoard.getFreeBoardFile().isEmpty()) {
         for (FreeBoardFile file : freeBoard.getFreeBoardFile()) {
-          freeboardDao.insertFile(file, freeBoard.getFreeBoardNo());
+          freeBoardDao.insertFile(file, freeBoard.getFreeBoardNo());
         }
         sqlSession.commit();
       }

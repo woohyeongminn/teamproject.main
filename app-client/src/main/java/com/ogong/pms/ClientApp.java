@@ -5,7 +5,6 @@ import static com.ogong.menu.Menu.CEO_LOGIN;
 import static com.ogong.menu.Menu.LOGOUT;
 import static com.ogong.menu.Menu.PER_LOGIN;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -206,15 +205,10 @@ public class ClientApp {
     // 서버와 접속을 하지 않음.
     requestAgent = null;
 
-    // DBMS와 연결한다.
-    con = DriverManager.getConnection(
-        "jdbc:mysql://localhost:3306/ogongdb?user=ogong&password=1111");
-
     SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
         "com/ogong/pms/conf/mybatis-config.xml")).openSession();
 
     //    마이바티스 자동생성
-    //      (insert,update,delete 사용하는 Handler에 sqlSession 생성자 추가해야 함)
     AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
     MemberDao memberDao = sqlSession.getMapper(MemberDao.class);
     CeoMemberDao ceoMemberDao = sqlSession.getMapper(CeoMemberDao.class);
@@ -225,12 +219,6 @@ public class ClientApp {
     FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
     ToDoDao toDoDao = sqlSession.getMapper(ToDoDao.class);
     CommentDao commentDao = sqlSession.getMapper(CommentDao.class); // 아직 안 함
-
-    // 마이바티스 
-    //    CafeDao cafeDao = new MybatisCafeDao(sqlSession);
-    //    StudyDao studyDao = new MybatisStudyDao(sqlSession);
-    //    FreeBoardDao freeBoardDao = new MybatisFreeBoardDao(sqlSession);
-    //    ToDoDao toDoDao = new MybatisToDoDao(sqlSession);
 
     System.out.println("서버에 접속 성공!"); // 접속 확인용
 
@@ -294,12 +282,10 @@ public class ClientApp {
     commandMap.put("/study/search", new StudySearchHandler(studyDao));
     commandMap.put("/study/join", new StudyJoinHandler(studyDao, sqlSession));
 
-    // 1018 북마크 추가(eun)
     commandMap.put("/study/bookMarkAdd", new StudyBookMarkAddHandler(studyDao, sqlSession));
     commandMap.put("/study/bookMarkList", new StudyBookMarkListHandler(studyDao));
     commandMap.put("/study/bookMarkDetail", new StudyBookMarkDetailHandler(studyDao));
     commandMap.put("/study/bookMarkDelete", new StudyBookMarkDeleteHandler(studyDao, sqlSession));
-    //
 
     commandMap.put("/myStudy/list", new MyStudyListHandler(studyDao));
     commandMap.put("/myStudy/detail", new MyStudyDetailHandler(studyDao));
@@ -319,11 +305,11 @@ public class ClientApp {
     commandMap.put("/myStudy/calenderUpdate", new CalenderUpdateHandler(studyDao));
     commandMap.put("/myStudy/calenderDelete", new CalenderDeleteHandler(studyDao));
 
-    PromptFreeBoard promptFreeBoard = new PromptFreeBoard(commentDao);
+    PromptFreeBoard promptFreeBoard = new PromptFreeBoard(commentDao, freeBoardDao, sqlSession);
     commandMap.put("/myStudy/freeBoardList", new FreeBoardListHandler(freeBoardDao));
     commandMap.put("/myStudy/freeBoardAdd", new FreeBoardAddHandler(freeBoardDao, sqlSession));
     commandMap.put("/myStudy/freeBoardDetail", new FreeBoardDetailHandler(freeBoardDao, promptFreeBoard, sqlSession));
-    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler( freeBoardDao, sqlSession));
+    commandMap.put("/myStudy/freeBoardUpdate", new FreeBoardUpdateHandler( freeBoardDao, promptFreeBoard, sqlSession));
     commandMap.put("/myStudy/freeBoardDelete", new FreeBoardDeleteHandler(freeBoardDao, sqlSession));
 
     //Socket chatSocket = new Socket(); 
@@ -355,7 +341,6 @@ public class ClientApp {
     commandMap.put("/cafe/myReviewAdd", new CafeMyReviewAddHandler(cafeDao, sqlSession));
     commandMap.put("/cafe/myReviewDelete", new CafeMyReviewDeleteHandler(cafeDao, sqlSession));
 
-    //    commandMap.put("/ceoMember/myCafeList", new CeoCafeListHandler(cafeDao));
     commandMap.put("/ceoMember/myCafeDetail", new CeoCafeDetailHandler(cafeDao));
     commandMap.put("/ceoMember/cafeAdd", new CeoCafeAddHandler(cafeDao, sqlSession));
     commandMap.put("/ceoMember/cafeUpdate", new CeoCafeUpdateHandler(cafeDao, sqlSession));
@@ -367,7 +352,6 @@ public class ClientApp {
     commandMap.put("/ceoMember/cafeRoomUpdate", new CeoCafeRoomUpdateHandler(cafeDao, sqlSession));
     commandMap.put("/ceoMember/cafeRoomDelete", new CeoCafeRoomDeleteHandler(cafeDao, sqlSession));
 
-    //    commandMap.put("/ceoMember/ReservationList", new CeoReservationListHandler(cafeDao));
     commandMap.put("/ceoMember/ReservationDetail", new CeoReservationDetailHandler(cafeDao));
     commandMap.put("/ceoMember/ReservationReject", new CeoReservationRejectHandler(cafeDao, sqlSession));
 
@@ -535,8 +519,6 @@ public class ClientApp {
     return allStudyMenu; 
   }     
 
-  // 이거 일단 다 보이게 하고 들어갔을 때 if문으로 필터하기 !!!!!!!
-  // (조장 아니면 들어는 갈 수 있는데 if문으로 팅김)
   //개인 하위 메뉴4 - 내 스터디
   private Menu createMystudyMenu() {
     MenuGroup myStudyMenu = new MenuGroup("🖊 내 스터디", PER_LOGIN);
@@ -616,10 +598,6 @@ public class ClientApp {
     ceoPageMenu.add(new MenuItem("🏘 카페관리", "/ceoMember/myCafeDetail"));
     ceoPageMenu.add(new MenuItem("💬 문의내역", "/askBoard/ceoMyList"));
     ceoPageMenu.add(new MenuItem("😢 탈퇴하기", "/ceoMember/delete"));
-
-    //    ceoPageMenu.add(new MenuItem("카페 등록", "/cafe/add"));
-    //    ceoPageMenu.add(new MenuItem("📞 예약내역", "/ceoMember/ReservationList"));
-    //    ceoPageMenu.add(new MenuItem("후기내역", "/cafe/myReviewList"));
 
     return ceoPageMenu;
   }
