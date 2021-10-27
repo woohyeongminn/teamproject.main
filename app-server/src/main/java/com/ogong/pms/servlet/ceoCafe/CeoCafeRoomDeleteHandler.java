@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.ceoCafe;
+package com.ogong.pms.servlet.ceoCafe;
 
 import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;

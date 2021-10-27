@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.cafe;
+package com.ogong.pms.servlet.cafe;
 
 import java.sql.Date;
 import org.apache.ibatis.session.SqlSession;

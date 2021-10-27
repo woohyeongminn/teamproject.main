@@ -1,4 +1,4 @@
-package com.ogong.pms.handler.cafe;
+package com.ogong.pms.servlet.cafe;
 
 import java.util.HashMap;
 import java.util.List;

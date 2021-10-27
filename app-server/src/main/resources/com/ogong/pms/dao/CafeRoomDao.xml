@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ogong.pms.dao.CafeRoomDao">
+  
+  <resultMap type="CafeRoom" id="cafeRoomMap">
+    <id column="studyroom_no" property="roomNo"/>
+    <result column="room_name" property="roomName"/>
+    <result column="introduction" property="roomInfo"/>
+    <result column="people" property="people"/>
+    <result column="hourly_amount" property="roomPrice"/>
+
+    <association property="cafe" javaType="cafe">
+      <id column="cafe_no" property="no"/>
+    </association>
+    
+    <collection property="roomImgs" ofType="CafeRoomImage">
+      <id column="photo_no" property="no" />
+      <result column="photo_name" property="name" />
+    </collection>
+  </resultMap>
+  
+  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ스터디룸ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <sql id="cafeRoomListSelect">
+    select
+      studyroom_no, 
+      name room_name, 
+      cafe_no
+    from 
+      studycafe_room
+  </sql>
+  
+  <!-- 전체 룸 리스트 -->
+  <select id="getCafeRoomList" resultMap="cafeRoomMap">
+    <include refid="cafeRoomListSelect"/>
+  </select>
+  
+  <!-- 카페 상세> 스터디룸 예약하기 > 리스트 -->
+  <select id="findCafeRoomListByCafe" resultMap="cafeRoomMap">
+    <include refid="cafeRoomListSelect"/>
+    where
+      cafe_no = #{cafeNo}
+    order by
+      studyroom_no asc
+  </select>
+  
+  <!-- 스터디룸 예약하기> 스터디룸 선택 > 스터디룸 상세 -->
+  <select id="findByRoomNo" resultMap="cafeRoomMap">
+  select 
+    r.studyroom_no, 
+    r.name room_name, 
+    r.cafe_no, 
+    r.introduction, 
+    r.people, 
+    r.hourly_amount,
+    rp.photo_no, 
+    rp.name photo_name
+  from 
+    studycafe_room r
+    left outer join studycafe_room_photo rp on r.studyroom_no=rp.studyroom_no
+  where 
+    r.studyroom_no = #{roomNo}
+  </select>
+  
+  <insert id="insertCafeRoom"
+        useGeneratedKeys="true" keyColumn="studyroom_no" keyProperty="roomNo">
+    insert into studycafe_room(name, cafe_no, introduction, people, hourly_amount)
+    values (#{roomName},#{cafe.no},#{roomInfo},#{people},#{roomPrice})
+  </insert>
+  
+  <insert id="insertCafeRoomImage">
+    insert into studycafe_room_photo(name, studyroom_no) 
+    values
+    <foreach collection="fileNames" item="roomImage" separator="," >
+    (#{roomImage.name},#{cafeRoomNo})
+    </foreach>
+  </insert>
+  
+  <update id="updateCafeRoom" parameterType="CafeRoom">
+    update studycafe_room
+    <set>
+      <if test="roomName != null">
+        name=#{roomName},
+      </if>
+      <if test="roomInfo != null">
+        introduction=#{roomInfo},
+      </if>
+      <if test="people != null">
+        people=#{people},
+      </if>
+      <if test="roomPrice != null">
+        hourly_amount=#{roomPrice}
+      </if>
+    </set>
+    where studyroom_no=#{roomNo}
+  </update>
+  
+  <delete id="deleteCafeRoom">
+    delete from studycafe_room where studyroom_no = #{roomNo}
+  </delete>
+  
+  <delete id="deleteCafeRoomImage">
+    delete from studycafe_room_photo
+    <where>
+      photo_no in
+      <foreach collection="fileNames" item="CafeRoomImage" separator=","  open="(" close=")">
+        #{CafeRoomImage.no}
+      </foreach>
+    </where>
+  </delete>
+</mapper>
+
+
+
+
+
+
+
