@@ -34,7 +34,7 @@ public class StudyDetailHandler extends GenericServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("  <title>스터디 상세</title>");
+    out.println("  <title>📖 스터디 찾기</title>");
     out.println("  <style>");
     out.println("  label {");
     out.println("    margin-right: 5px;");
@@ -45,7 +45,7 @@ public class StudyDetailHandler extends GenericServlet {
     out.println("  </style>");
     out.println("</head>");
     out.println("<body>");
-    out.println("<h1>스터디 상세</h1>");
+    out.println("<h1>상세</h1>");
 
     int no = Integer.parseInt(request.getParameter("no"));
 
