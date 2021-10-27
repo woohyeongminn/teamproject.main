@@ -60,26 +60,13 @@ public class StudyListHandler extends GenericServlet {
       Collection<Study> studyList = studyDao.findAll();
 
       for (Study study : studyList) {
-        out.printf("<tr>"
-            + "<td>%d</td>"
-            + " <td>%d</td>"
-            + " <td>%s</td>"
-            + " <td>%s</td>"
-            + " <td><a href='detail?no=%1$d'>%s</a></td>"
-            + " <td>%s</td>"
-            + " <td>%s</td>"
-            + " <td>%d</td>"
-            + " <td>%d</td>"
-            + "</tr>", 
-            study.getStudyNo(), 
-            study.getCountBookMember(), 
-            study.getStudyTitle(), 
-            study.getFaceName(), 
-            study.getOwner().getPerNickname(), 
-            study.getSubjectName(), 
-            study.getArea(), 
-            study.getCountMember(), 
-            study.getNumberOfPeple());
+        out.printf(
+            "<tr>" + "<td>%d</td>" + " <td>%d</td>" + " <td><a href='detail?no=%1$d'>%s</a></td>"
+                + " <td>%s</td>" + " <td>%s</td>" + " <td>%s</td>" + " <td>%s</td>" + " <td>%d</td>"
+                + " <td>%d</td>" + "</tr>",
+                study.getStudyNo(), study.getCountBookMember(), study.getStudyTitle(),
+                study.getFaceName(), study.getOwner().getPerNickname(), study.getSubjectName(),
+                study.getArea(), study.getCountMember(), study.getNumberOfPeple());
       }
 
     } catch (Exception e) {
@@ -93,44 +80,44 @@ public class StudyListHandler extends GenericServlet {
   }
 }
 
-//  @Override
-//  public void execute(CommandRequest request) throws Exception {
-//    System.out.println();
-//    System.out.println("▶ 스터디 목록");
-//    System.out.println();
+// @Override
+// public void execute(CommandRequest request) throws Exception {
+// System.out.println();
+// System.out.println("▶ 스터디 목록");
+// System.out.println();
 //
-//    List<Study> studyList = studyDao.findAll();
+// List<Study> studyList = studyDao.findAll();
 //
-//    if (studyList.isEmpty()) {
-//      System.out.println(" >> 스터디 목록이 없습니다.");  
-//      return;
-//    }
+// if (studyList.isEmpty()) {
+// System.out.println(" >> 스터디 목록이 없습니다.");
+// return;
+// }
 //
-//    for (Study study : studyList) {
+// for (Study study : studyList) {
 //
-//      if (study.getStudyTitle().contains("탈퇴")) {
-//        System.out.printf(" (%d)\n 스터디명 : %s\n", study.getStudyNo(), study.getStudyTitle());
-//        System.out.println();
-//      }
+// if (study.getStudyTitle().contains("탈퇴")) {
+// System.out.printf(" (%d)\n 스터디명 : %s\n", study.getStudyNo(), study.getStudyTitle());
+// System.out.println();
+// }
 //
-//      else {
-//        //List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
-//        //List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
-//        //study.setMembers(guilders);
-//        //study.setBookMarkMember(bookMem);
-//        System.out.printf(
-//            " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
-//            study.getStudyNo(),
-//            study.getCountBookMember(),
-//            study.getStudyTitle(),
-//            study.getFaceName(),
-//            study.getOwner().getPerNickname(),
-//            study.getSubjectName(),
-//            study.getArea(),
-//            study.getCountMember(),
-//            study.getNumberOfPeple()
-//            );
-//        System.out.println();
-//      }
-//    }
-//  }
+// else {
+// //List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
+// //List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
+// //study.setMembers(guilders);
+// //study.setBookMarkMember(bookMem);
+// System.out.printf(
+// " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
+// study.getStudyNo(),
+// study.getCountBookMember(),
+// study.getStudyTitle(),
+// study.getFaceName(),
+// study.getOwner().getPerNickname(),
+// study.getSubjectName(),
+// study.getArea(),
+// study.getCountMember(),
+// study.getNumberOfPeple()
+// );
+// System.out.println();
+// }
+// }
+// }
