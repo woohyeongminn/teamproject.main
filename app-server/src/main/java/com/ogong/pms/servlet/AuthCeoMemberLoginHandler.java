@@ -1,50 +1,68 @@
 package com.ogong.pms.servlet;
 
-import com.ogong.menu.Menu;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.util.Prompt;
 
-public class AuthCeoMemberLoginHandler extends AbstractLoginHandler implements Command  {
+@WebServlet("/ceomember/login")
+public abstract class AuthCeoMemberLoginHandler extends HttpServlet {
+
+  private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
 
-  public static CeoMember loginCeoMember;
-  public static CeoMember getLoginCeoMember() {
-    return loginCeoMember;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
   }
-
-  public AuthCeoMemberLoginHandler(CeoMemberDao ceoMemberDao) {
-    this.ceoMemberDao = ceoMemberDao;
-  }
-
-  // ----------------------------------------------------------------------
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    System.out.println();
-    String email = Prompt.inputString(" 이메일 : ");
-    String password = Prompt.inputString(" 비밀번호 : ");
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
 
-    CeoMember ceoMember = ceoMemberDao.findByEmailAndPassword(email, password);
+    out.println("<!DOCTYPE html>");
+    out.println("<html>");
+    out.println("<head>");
+    out.println("  <title>로그인 성공</title>");
+    out.println("</head>");
+    out.println("<body>");
 
-    if (ceoMember != null && ceoMember.getCeoStatus() == CeoMember.CEO) {
+    String email = request.getParameter("email");
+    String password = request.getParameter("password");
 
-      if (ceoMember.getActive() == CeoMember.OUTUSER) {
-        System.out.println();
-        System.out.println(" >> 회원가입을 진행해 주세요.");
+    try {
+      CeoMember ceoMember = ceoMemberDao.findByEmailAndPassword(email, password);
+
+      if (ceoMember != null && ceoMember.getCeoStatus() == CeoMember.CEO) {
+
+        if (ceoMember.getActive() == CeoMember.OUTUSER) {
+          out.println();
+          out.println("<p>회원가입을 진행해 주세요.</p>");
+          return;
+        }
+
+        out.printf("<p>'%s'님 환영합니다! 🖐</p>", ceoMember.getCeoNickname());
+
+      } else {
+        out.println("<p>이메일과 암호가 일치하는 회원을 찾을 수 없습니다.</p>");
         return;
       }
-
-      System.out.printf("\n >> '%s'님 환영합니다!\n", ceoMember.getCeoNickname());
-      loginCeoMember = ceoMember;
-      accessLevel = Menu.CEO_LOGIN;
-      //      return;
-
-    } else {
-      System.out.println("\n >> 이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
-      return;
+    } catch (Exception e) {
+      throw new ServletException(e);
     }
+    out.println("</body>");
+    out.println("</html>");
   }
 }
