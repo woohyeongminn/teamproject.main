@@ -3,6 +3,8 @@ package com.ogong.pms.handler.ceoCafe;
 import java.util.ArrayList;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
@@ -15,9 +17,13 @@ import com.ogong.util.Prompt;
 public class CeoReservationDetailHandler implements Command {
 
   CafeDao cafeDao;
+  CafeReservationDao cafeReservationDao;
+  CafeRoomDao cafeRoomDao;
 
-  public CeoReservationDetailHandler(CafeDao cafeDao) {
+  public CeoReservationDetailHandler(CafeDao cafeDao, CafeReservationDao cafeReservationDao, CafeRoomDao cafeRoomDao) {
     this.cafeDao = cafeDao;
+    this.cafeReservationDao = cafeReservationDao;
+    this.cafeRoomDao = cafeRoomDao;
   }
 
   @Override
@@ -54,12 +60,12 @@ public class CeoReservationDetailHandler implements Command {
   private List<CafeReservation> printMyCafeReserDetail(CeoMember ceoMember) throws Exception {
     List<CafeReservation> myCafeReserList = new ArrayList<>();
     List<CafeReservation> reserList = 
-        cafeDao.findReservationListByCeoMember(ceoMember.getCeoNo());
+        cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
 
     for (CafeReservation cafeReser : reserList) {
       myCafeReserList.add(cafeReser);
       Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
-      CafeRoom cafeRoom = cafeDao.findByRoomNo(cafeReser.getRoomNo());
+      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(cafeReser.getRoomNo());
       String reserStatusLable = cafeReser.getReservationStatusName();
 
       System.out.printf(" (%d)\n 예약날짜 : %s\n 이용날짜 : %s\n 예약장소 : %s\n"

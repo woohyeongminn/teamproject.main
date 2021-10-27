@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
@@ -20,10 +22,14 @@ import com.ogong.util.Prompt;
 public class CafeReservationHandler implements Command {
 
   CafeDao cafeDao;
+  CafeRoomDao cafeRoomDao;
+  CafeReservationDao cafeReservationDao;
   SqlSession sqlSession;
 
-  public CafeReservationHandler (CafeDao cafeDao, SqlSession sqlSession) {
+  public CafeReservationHandler (CafeDao cafeDao, CafeRoomDao cafeRoomDao, CafeReservationDao cafeReservationDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.cafeRoomDao = cafeRoomDao;
+    this.cafeReservationDao = cafeReservationDao;
     this.sqlSession = sqlSession;
   }
 
@@ -114,7 +120,7 @@ public class CafeReservationHandler implements Command {
     }
 
     // 고유번호 + 1
-    List<CafeReservation> cafeReservationList = cafeDao.getCafeReservationList();
+    List<CafeReservation> cafeReservationList = cafeReservationDao.getCafeReservationList();
     if (!cafeReservationList.isEmpty()) {
       reservation.setReservationNo(
           cafeReservationList.get(cafeReservationList.size() - 1).getReservationNo() + 1);
@@ -133,7 +139,7 @@ public class CafeReservationHandler implements Command {
 
     cafe.setBookable(cafe.getBookable() - 1);
 
-    cafeDao.insertReservation(reservation);
+    cafeReservationDao.insertReservation(reservation);
   }
 
   private void addRoomReservation(Cafe cafe) throws Exception {
@@ -149,7 +155,7 @@ public class CafeReservationHandler implements Command {
     int i = 1;
     HashMap<Integer, Integer> selectRoomNo = new HashMap<>();
 
-    List<CafeRoom> roomList = cafeDao.findCafeRoomListByCafe(cafe.getNo());
+    List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByCafe(cafe.getNo());
     for (CafeRoom cafeRoom : roomList) {
       System.out.println(" " + i + ". " + cafeRoom.getRoomName());
       selectRoomNo.put(i, cafeRoom.getRoomNo());
@@ -164,7 +170,7 @@ public class CafeReservationHandler implements Command {
     int selectNo = Prompt.inputInt(" 선택> ");
     CafeRoom cafeRoom = null;
     try {
-      cafeRoom = cafeDao.findByRoomNo(selectRoomNo.get(selectNo));
+      cafeRoom = cafeRoomDao.findByRoomNo(selectRoomNo.get(selectNo));
     } catch (NullPointerException e) {
       System.out.println(" >> 스터디룸 번호를 잘못 선택하셨습니다.");
       return;
@@ -176,7 +182,7 @@ public class CafeReservationHandler implements Command {
   private void detailRoomReservation(int cafeNo, Integer selectNo) throws Exception {
     //    int roomNo = selectNo; // room 고유번호
     Cafe cafe = cafeDao.findByCafeNoMember(cafeNo);
-    CafeRoom cafeRoom = cafeDao.findByRoomNo(selectNo);
+    CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(selectNo);
 
     System.out.printf("\n [%s]\n", cafeRoom.getRoomName());
     System.out.printf(" >> 스터디룸 이미지 : %s\n", cafeRoom.getCafeRoomImageNames());
@@ -316,7 +322,7 @@ public class CafeReservationHandler implements Command {
     reservation.setRoomNo(selectNo);
     reservation.setReservationStatus(1); // 1 : 예약완료
 
-    cafeDao.insertReservation(reservation);
+    cafeReservationDao.insertReservation(reservation);
     sqlSession.commit();
 
     System.out.println(" *** 예약 되었습니다 ***");
@@ -325,7 +331,7 @@ public class CafeReservationHandler implements Command {
   private List<CafeReservation> getCafeReserList(
       int cafeNo, int roomNo, Date reservationDate) throws Exception {
 
-    List<CafeReservation> reserList = cafeDao.getCafeReservationList();
+    List<CafeReservation> reserList = cafeReservationDao.getCafeReservationList();
 
     List<CafeReservation> todayReserList = new ArrayList<>();
     for (CafeReservation cafeReser : reserList) {

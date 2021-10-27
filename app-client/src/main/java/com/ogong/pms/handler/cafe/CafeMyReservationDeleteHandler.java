@@ -2,7 +2,7 @@ package com.ogong.pms.handler.cafe;
 
 import java.sql.Date;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -10,11 +10,11 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationDeleteHandler implements Command {
 
-  CafeDao cafeDao;
+  CafeReservationDao cafeReservationDao;
   SqlSession sqlSession;
 
-  public CafeMyReservationDeleteHandler (CafeDao cafeDao, SqlSession sqlSession) {
-    this.cafeDao = cafeDao;
+  public CafeMyReservationDeleteHandler (CafeReservationDao cafeReservationDao, SqlSession sqlSession) {
+    this.cafeReservationDao = cafeReservationDao;
     this.sqlSession = sqlSession;
   }
 
@@ -42,7 +42,7 @@ public class CafeMyReservationDeleteHandler implements Command {
         return;
       }
 
-      cafeDao.deleteReservation(myReservation.getReservationNo(), 3);
+      cafeReservationDao.deleteReservation(myReservation.getReservationNo(), 3);
       sqlSession.commit();
 
       System.out.println(" >> 예약이 취소되었습니다.");

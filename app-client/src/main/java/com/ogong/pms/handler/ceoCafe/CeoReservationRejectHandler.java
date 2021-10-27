@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -12,10 +13,12 @@ import com.ogong.util.Prompt;
 public class CeoReservationRejectHandler implements Command {
 
   CafeDao cafeDao;
+  CafeReservationDao cafeReservationDao;
   SqlSession sqlSession;
 
-  public CeoReservationRejectHandler (CafeDao cafeDao, SqlSession sqlSession) {
+  public CeoReservationRejectHandler (CafeDao cafeDao, CafeReservationDao cafeReservationDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.cafeReservationDao = cafeReservationDao;
     this.sqlSession = sqlSession;
   }
 
@@ -25,7 +28,7 @@ public class CeoReservationRejectHandler implements Command {
     System.out.println("▶ 예약 거절");
     System.out.println();
 
-    List<CafeReservation> cafeReservationList = cafeDao.getCafeReservationList(); 
+    List<CafeReservation> cafeReservationList = cafeReservationDao.getCafeReservationList(); 
 
     int reservationNo = Prompt.inputInt(" 번호 : ");
     for (CafeReservation cafeReservation : cafeReservationList) {
@@ -50,7 +53,7 @@ public class CeoReservationRejectHandler implements Command {
             return;
           }
 
-          cafeDao.deleteReservation(cafeReservation.getReservationNo(), 5);
+          cafeReservationDao.deleteReservation(cafeReservation.getReservationNo(), 5);
           sqlSession.commit();
 
           System.out.println(" >> 예약을 거절하였습니다.");

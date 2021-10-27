@@ -1,7 +1,7 @@
 package com.ogong.pms.handler.cafe;
 
 import java.util.List;
-import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -11,10 +11,10 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReservationListHandler implements Command {
 
-  CafeDao cafeDao;
+  CafeReservationDao cafeReservationDao;
 
-  public CafeMyReservationListHandler (CafeDao cafeDao) {
-    this.cafeDao = cafeDao;
+  public CafeMyReservationListHandler (CafeReservationDao cafeReservationDao) {
+    this.cafeReservationDao = cafeReservationDao;
   }
 
   @Override
@@ -31,7 +31,7 @@ public class CafeMyReservationListHandler implements Command {
     }
 
     List<CafeReservation> reserList = 
-        cafeDao.findReservationListByMember(member.getPerNo());
+        cafeReservationDao.findReservationListByMember(member.getPerNo());
 
     if (reserList.isEmpty()) {
       System.out.println(" >> 예약 내역이 존재하지 않습니다.");

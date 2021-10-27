@@ -2,6 +2,8 @@ package com.ogong.pms.handler.cafe;
 
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
+import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -12,10 +14,14 @@ import com.ogong.util.Prompt;
 public class CafeMyReviewAddHandler implements Command {
 
   CafeDao cafeDao;
+  CafeReviewDao cafeReviewDao;
+  CafeReservationDao cafeReservationDao;
   SqlSession sqlSession;
 
-  public CafeMyReviewAddHandler (CafeDao cafeDao, SqlSession sqlSession) {
+  public CafeMyReviewAddHandler (CafeDao cafeDao, CafeReviewDao cafeReviewDao, CafeReservationDao cafeReservationDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.cafeReviewDao = cafeReviewDao;
+    this.cafeReservationDao = cafeReservationDao;
     this.sqlSession = sqlSession;
   }
   @Override
@@ -50,8 +56,8 @@ public class CafeMyReviewAddHandler implements Command {
     cafeReview.setGrade(grade);
 
     try {
-      cafeDao.insertCafeReview(cafeReview);
-      cafeDao.updateCafeReservationReviewStatus(cafeReview.getReservationNo());
+      cafeReviewDao.insertCafeReview(cafeReview);
+      cafeReservationDao.updateCafeReservationReviewStatus(cafeReview.getReservationNo());
       sqlSession.commit();
     } catch (Exception e) {
       sqlSession.rollback();

@@ -3,6 +3,7 @@ package com.ogong.pms.handler.ceoCafe;
 import java.util.HashMap;
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CeoMember;
@@ -15,8 +16,9 @@ import com.ogong.util.Prompt;
 public class CeoCafeDetailHandler implements Command {
 
   CafeDao cafeDao;
+  CafeReviewDao cafeReviewDao;
 
-  public CeoCafeDetailHandler (CafeDao cafeDao) {
+  public CeoCafeDetailHandler (CafeDao cafeDao, CafeReviewDao cafeReviewDao) {
     this.cafeDao = cafeDao;
   }
 
@@ -84,11 +86,9 @@ public class CeoCafeDetailHandler implements Command {
     System.out.println();
     System.out.println("============= 리뷰 =============");
 
-    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
+    try {
+      List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
 
-    if (reviewList.isEmpty()) {
-      System.out.println(" >> 등록된 리뷰가 없습니다.");
-    } else {
       for (CafeReview review : reviewList) {
         if (review.getReviewStatus() == 2) {
           //System.out.printf(" \n (%s)\n", review.getReviewNo());
@@ -100,6 +100,11 @@ public class CeoCafeDetailHandler implements Command {
             i++, nickname, CafeHandlerHelper.getReviewGradeStatusLabel(review.getGrade())
             , review.getContent(), review.getRegisteredDate());
       }
+    } catch (NullPointerException e) {
+      System.out.println(" >> 등록된 리뷰가 없습니다.");
     }
+
+
+
   }
 }
