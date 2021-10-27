@@ -2,6 +2,7 @@ package com.ogong.pms.handler.ceoCafe;
 
 import java.util.HashMap;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.handler.Command;
@@ -11,9 +12,11 @@ import com.ogong.util.Prompt;
 public class CeoCafeRoomDetailHandler implements Command {
 
   CafeDao cafeDao;
+  CafeRoomDao cafeRoomDao;
 
-  public CeoCafeRoomDetailHandler (CafeDao cafeDao) {
+  public CeoCafeRoomDetailHandler (CafeDao cafeDao, CafeRoomDao cafeRoomDao) {
     this.cafeDao = cafeDao;
+    this.cafeRoomDao = cafeRoomDao;
   }
 
   @Override
@@ -35,7 +38,7 @@ public class CeoCafeRoomDetailHandler implements Command {
         continue;
       }
 
-      cafeRoom = cafeDao.findByRoomNo(selectRoomNo.get(input));
+      cafeRoom = cafeRoomDao.findByRoomNo(selectRoomNo.get(input));
 
       if (cafeRoom != null && cafeRoom.getCafe().getNo() == cafe.getNo()) {
         break;

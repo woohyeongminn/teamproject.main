@@ -1,7 +1,7 @@
 package com.ogong.pms.handler.ceoCafe;
 
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -9,11 +9,11 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeRoomUpdateHandler implements Command {
 
-  CafeDao cafeDao;
+  CafeRoomDao cafeRoomDao;
   SqlSession sqlSession;
 
-  public CeoCafeRoomUpdateHandler (CafeDao cafeDao, SqlSession sqlSession) {
-    this.cafeDao = cafeDao;
+  public CeoCafeRoomUpdateHandler (CafeRoomDao cafeRoomDao, SqlSession sqlSession) {
+    this.cafeRoomDao = cafeRoomDao;
     this.sqlSession = sqlSession;
   }
 
@@ -79,7 +79,7 @@ public class CeoCafeRoomUpdateHandler implements Command {
     //    String mainImg = Prompt.inputString(String.format(" 스터디룸 사진(%s) : ", cafeRoom.getRoomImg()));
     //    cafeRoom.setRoomImg(mainImg);
 
-    cafeDao.updateCafeRoom(cafeRoom);
+    cafeRoomDao.updateCafeRoom(cafeRoom);
     sqlSession.commit();
 
     System.out.println(" >> 수정완료. ");

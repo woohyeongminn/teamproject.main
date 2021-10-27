@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ogong.pms.dao.CafeReviewDao">
+
+  <resultMap type="CafeReview" id="reviewMap">
+    <id column="review_no" property="reviewNo"/>
+    <result column="studycafe_rsv_no" property="reservationNo"/>
+    <result column="content" property="content"/>
+    <result column="grade" property="grade"/>
+    <result column="create_dt" property="RegisteredDate"/>
+    <result column="status" property="reviewStatus"/>
+    
+    <association property="member" javaType="member">
+      <id column="member_no" property="perNo"/>
+      <result column="nickname" property="perNickname"/>
+    </association>
+    
+    <association property="cafe" javaType="cafe">
+      <id column="cafe_no" property="no"/>
+    </association>
+  </resultMap>
+  
+  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페리뷰ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <sql id="reviewListSelect">
+  select 
+      r.review_no,
+      r.grade, 
+      r.content, 
+      r.create_dt, 
+      r.status, 
+      sr.cafe_no,
+      rs.member_no,
+      m.nickname
+    from 
+      studycafe_review r
+      join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
+      join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+      join member m on rs.member_no=m.member_no
+  </sql>
+  
+  <select id="getCafeReviewList" resultMap="reviewMap">
+    <include refid="reviewListSelect"/>
+  </select>
+  
+  <!-- 카페 상세에서 출력되는 리뷰 리스트 -->
+  <select id="findReviewListByCafeNo" resultMap="reviewMap">
+    <include refid="reviewListSelect"/>
+    where 
+      sr.cafe_no=#{cafeNo}
+  </select>
+  
+  <!-- 내 리뷰 목록 -->
+  <select id="findReviewListByMember" resultMap="reviewMap">
+    <include refid="reviewListSelect"/>
+    where 
+      rs.member_no=#{memberNo}
+  </select>
+  
+  <select id="findByReviewNo" resultMap="reviewMap">
+    <include refid="reviewListSelect"/>
+    where 
+      r.review_no=#{reviewNo}
+  </select>
+  
+  <insert id="insertCafeReview">
+    insert into studycafe_review(studycafe_rsv_no, content, grade, status)
+    values(#{reservationNo},#{content},#{grade},1)
+  </insert>
+  
+  <!-- 리뷰 등록시 상태변경 -->
+  <update id="updateCafeReservationReviewStatus">
+    update studycafe_reservation set
+      review=2
+    where
+      studycafe_rsv_no=#{reservationNo}
+  </update>
+  
+  <update id="deleteCafeReview">
+    update studycafe_review set 
+      status = 2
+    where
+      review_no = #{reviewNo}
+  </update>
+</mapper>
+
+
+
+
+
+
+

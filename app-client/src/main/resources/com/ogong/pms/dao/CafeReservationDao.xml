@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ogong.pms.dao.CafeReservationDao">
+ 
+  <resultMap type="CafeReservation" id="reservationMap">
+    <id column="studycafe_rsv_no" property="reservationNo"/>
+    <result column="studyroom_no" property="roomNo"/>
+    <result column="rsv_dt" property="reservationDate"/>
+    <result column="using_dt" property="useDate"/>
+    <result column="start_time" property="startTime"/>
+    <result column="using_time" property="useTime"/>
+    <result column="people" property="useMemberNumber"/>
+    <result column="total_price" property="totalPrice"/>
+    <result column="rsv_status_no" property="reservationStatus"/>
+    <result column="rsv_name" property="reservationStatusName"/>
+    <result column="review" property="wirteReview"/>
+    
+    <association property="member" javaType="member">
+      <id column="member_no" property="perNo"/>
+    </association>
+    
+    <association property="cafe" javaType="cafe">
+      <id column="cafe_no" property="no"/>
+      <result column="cafe_name" property="name"/>
+    </association>
+  </resultMap>
+
+  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ카페예약ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+  <sql id="reservationListSelect">
+    select 
+        rs.studycafe_rsv_no, 
+        rs.studyroom_no, 
+        rs.member_no, 
+        rs.rsv_dt, 
+        rs.using_dt,
+        rs.start_time, 
+        rs.using_time, 
+        rs.people, 
+        rs.total_price,
+        if(rs.review=1,'false','true') review, 
+        rst.rsv_status_no,
+        rst.rsv_name, 
+        c.cafe_no, 
+        c.name cafe_name
+      from 
+        studycafe_reservation rs
+        join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no
+        join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+        join studycafe c on sr.cafe_no=c.cafe_no
+  </sql>
+  
+  <select id="getCafeReservationList" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    order by
+      rs.studycafe_rsv_no asc
+  </select>
+  
+  <!-- 내 예약 리스트 -->
+  <select id="findReservationListByMember" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    where 
+      rs.member_no=#{memberNo}
+    order by
+      rs.studycafe_rsv_no asc
+  </select>
+  
+  <!-- 사장 카페 관리용 예약 리스트 -->
+  <select id="findReservationListByCeoMember" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    where 
+      c.member_no=#{ceoNo}
+    order by 
+      rs.studycafe_rsv_no asc
+  </select>
+  
+  <!-- 내 예약 리스트 상세 -->
+  <select id="findReservationByMember" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    where 
+      rs.member_no=#{memberNo}
+      and rs.studycafe_rsv_no=#{reserNo}
+    order by
+      rs.studycafe_rsv_no asc
+  </select>
+  
+  <insert id="insertReservation">
+  insert into studycafe_reservation
+    (studyroom_no, member_no, using_dt, start_time,using_time, people, 
+    total_price, rsv_status_no, review) 
+  values(#{roomNo},#{member.perNo},#{useDate},#{startTime},#{useTime},#{useMemberNumber},#{totalPrice},#{reservationStatus},1)
+  </insert>
+  
+  <delete id="deleteReservation">
+    update
+      studycafe_reservation set rsv_status_no = #{status}
+    where
+      studycafe_rsv_no = #{reservationNo}
+  </delete>
+</mapper>
+
+
+
+
+
+
+

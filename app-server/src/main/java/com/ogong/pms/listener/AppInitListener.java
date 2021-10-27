@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
+import com.ogong.pms.dao.CafeReviewDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
@@ -29,8 +32,9 @@ public class AppInitListener implements ServletContextListener {
 
     try {
       // Mybatis의 SqlSession 객체 준비
-      sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream(
-          "com/ogong/pms/conf/mybatis-config.xml")).openSession();
+      sqlSession = new SqlSessionFactoryBuilder()
+          .build(Resources.getResourceAsStream("com/ogong/pms/conf/mybatis-config.xml"))
+          .openSession();
 
       // SqlSession 객체를 통해 MemberDao 구현체를 자동 생성한다.
       AdminDao adminDao = sqlSession.getMapper(AdminDao.class);
@@ -39,6 +43,9 @@ public class AppInitListener implements ServletContextListener {
       NoticeDao noticeDao = sqlSession.getMapper(NoticeDao.class);
       AskBoardDao askBoardDao = sqlSession.getMapper(AskBoardDao.class);
       CafeDao cafeDao = sqlSession.getMapper(CafeDao.class);
+      CafeReservationDao cafeReservationDao = sqlSession.getMapper(CafeReservationDao.class);
+      CafeReviewDao cafeReviewDao = sqlSession.getMapper(CafeReviewDao.class);
+      CafeRoomDao cafeRoomDao = sqlSession.getMapper(CafeRoomDao.class);
       StudyDao studyDao = sqlSession.getMapper(StudyDao.class);
       FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
       ToDoDao toDoDao = sqlSession.getMapper(ToDoDao.class);
@@ -53,17 +60,21 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("memberDao", memberDao);
 
       // 여기 주석 풀어서 사용
-      //      웹애플리케이션공용저장소.setAttribute("ceoMemberDao", ceoMemberDao);
-      //      웹애플리케이션공용저장소.setAttribute("adminDao", adminDao);
-      //      웹애플리케이션공용저장소.setAttribute("noticeDao", noticeDao);
-      //      웹애플리케이션공용저장소.setAttribute("askBoardDao", askBoardDao);
-      //      웹애플리케이션공용저장소.setAttribute("cafeDao", cafeDao);
+      // 웹애플리케이션공용저장소.setAttribute("ceoMemberDao", ceoMemberDao);
+      // 웹애플리케이션공용저장소.setAttribute("adminDao", adminDao);
+      // 웹애플리케이션공용저장소.setAttribute("noticeDao", noticeDao);
+      // 웹애플리케이션공용저장소.setAttribute("askBoardDao", askBoardDao);
+      // 웹애플리케이션공용저장소.setAttribute("cafeDao", cafeDao);
       웹애플리케이션공용저장소.setAttribute("studyDao", studyDao);
-      //      웹애플리케이션공용저장소.setAttribute("freeBoardDao", freeBoardDao);
-      //      웹애플리케이션공용저장소.setAttribute("toDoDao", toDoDao);
-      //      웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
+      // 웹애플리케이션공용저장소.setAttribute("cafeReservationDao", cafeReservationDao);
+      // 웹애플리케이션공용저장소.setAttribute("cafeReviewDao", cafeReviewDao);
+      // 웹애플리케이션공용저장소.setAttribute("cafeRoomDao", cafeRoomDao);
+      // 웹애플리케이션공용저장소.setAttribute("studyDao", studyDao);
+      // 웹애플리케이션공용저장소.setAttribute("freeBoardDao", freeBoardDao);
+      // 웹애플리케이션공용저장소.setAttribute("toDoDao", toDoDao);
+      // 웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
 
-      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);      
+      웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");

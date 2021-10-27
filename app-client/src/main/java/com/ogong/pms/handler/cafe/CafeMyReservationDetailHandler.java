@@ -2,6 +2,8 @@ package com.ogong.pms.handler.cafe;
 
 import java.sql.Date;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReservationDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
@@ -14,9 +16,13 @@ import com.ogong.util.Prompt;
 public class CafeMyReservationDetailHandler implements Command {
 
   CafeDao cafeDao;
+  CafeReservationDao cafeReservationDao;
+  CafeRoomDao cafeRoomDao;
 
-  public CafeMyReservationDetailHandler(CafeDao cafeDao) {
+  public CafeMyReservationDetailHandler(CafeDao cafeDao, CafeReservationDao cafeReservationDao, CafeRoomDao cafeRoomDao) {
     this.cafeDao = cafeDao;
+    this.cafeReservationDao = cafeReservationDao;
+    this.cafeRoomDao = cafeRoomDao;
   }
 
   @Override
@@ -99,11 +105,11 @@ public class CafeMyReservationDetailHandler implements Command {
 
   private CafeReservation printMyReserDetail(Member member, int input) throws Exception {
     CafeReservation cafeReser = 
-        cafeDao.findReservationByMember(member.getPerNo(), input);
+        cafeReservationDao.findReservationByMember(member.getPerNo(), input);
 
     if (cafeReser != null) {
       Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
-      CafeRoom cafeRoom = cafeDao.findByRoomNo(cafeReser.getRoomNo());
+      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(cafeReser.getRoomNo());
 
       String reviewStatusLable = CafeHandlerHelper.getReviewStatusLabel(
           String.valueOf(cafeReser.getWirteReview()));

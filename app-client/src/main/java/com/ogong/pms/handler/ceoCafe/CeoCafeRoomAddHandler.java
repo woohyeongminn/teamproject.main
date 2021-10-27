@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeRoom;
@@ -14,10 +15,12 @@ import com.ogong.util.Prompt;
 public class CeoCafeRoomAddHandler implements Command {
 
   CafeDao cafeDao;
+  CafeRoomDao cafeRoomDao;
   SqlSession sqlSession;
 
-  public CeoCafeRoomAddHandler (CafeDao cafeDao, SqlSession sqlSession) {
+  public CeoCafeRoomAddHandler (CafeDao cafeDao, CafeRoomDao cafeRoomDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.cafeRoomDao = cafeRoomDao;
     this.sqlSession = sqlSession;
   }
 
@@ -54,14 +57,14 @@ public class CeoCafeRoomAddHandler implements Command {
     }
 
     try {
-      cafeDao.insertCafeRoom(cafeRoom);
+      cafeRoomDao.insertCafeRoom(cafeRoom);
 
       if (!fileNames.isEmpty()) {
         HashMap<String,Object> params = new HashMap<>();
         params.put("fileNames", fileNames);
         params.put("cafeRoomNo", cafeRoom.getRoomNo());
 
-        cafeDao.insertCafeRoomImage(params);
+        cafeRoomDao.insertCafeRoomImage(params);
       }
       sqlSession.commit();
     } catch (Exception e) {

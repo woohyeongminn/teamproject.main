@@ -1,7 +1,7 @@
 package com.ogong.pms.handler.admin;
 
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -9,11 +9,11 @@ import com.ogong.util.Prompt;
 
 public class AdminCafeReviewListDeleteHandler implements Command{
 
-  CafeDao cafeDao;
+  CafeReviewDao cafeReviewDao;
   SqlSession sqlSession;
 
-  public AdminCafeReviewListDeleteHandler (CafeDao cafeDao, SqlSession sqlSession) {
-    this.cafeDao = cafeDao;
+  public AdminCafeReviewListDeleteHandler (CafeReviewDao cafeReviewDao, SqlSession sqlSession) {
+    this.cafeReviewDao = cafeReviewDao;
     this.sqlSession = sqlSession;
   }
 
@@ -25,7 +25,7 @@ public class AdminCafeReviewListDeleteHandler implements Command{
 
     int userReviewNo = Prompt.inputInt(" 번호 : ");
 
-    CafeReview cafeReview = cafeDao.findByReviewNo(userReviewNo);
+    CafeReview cafeReview = cafeReviewDao.findByReviewNo(userReviewNo);
 
     if (cafeReview == null) {
       System.out.println(" >> 리뷰가 존재하지 않습니다.");
@@ -44,7 +44,7 @@ public class AdminCafeReviewListDeleteHandler implements Command{
       return;
     }
 
-    cafeDao.deleteCafeReview(userReviewNo);
+    cafeReviewDao.deleteCafeReview(userReviewNo);
     sqlSession.commit();
 
     System.out.println(" >> 리뷰 삭제를 완료하였습니다.");

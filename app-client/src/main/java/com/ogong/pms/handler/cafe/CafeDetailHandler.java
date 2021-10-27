@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReviewDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CafeRoom;
@@ -14,10 +16,14 @@ import com.ogong.util.Prompt;
 public class CafeDetailHandler implements Command {
 
   CafeDao cafeDao;
+  CafeReviewDao cafeReviewDao;
+  CafeRoomDao cafeRoomDao;
   SqlSession sqlSession;
 
-  public CafeDetailHandler (CafeDao cafeDao, SqlSession sqlSession) {
+  public CafeDetailHandler (CafeDao cafeDao, CafeReviewDao cafeReviewDao, CafeRoomDao cafeRoomDao, SqlSession sqlSession) {
     this.cafeDao = cafeDao;
+    this.cafeReviewDao = cafeReviewDao;
+    this.cafeRoomDao = cafeRoomDao;
     this.sqlSession = sqlSession;
   }
 
@@ -60,7 +66,7 @@ public class CafeDetailHandler implements Command {
     }
 
     int roomCount = 0;
-    List<CafeRoom> roomList = cafeDao.getCafeRoomList();
+    List<CafeRoom> roomList = cafeRoomDao.getCafeRoomList();
     for (CafeRoom cafeRoom : roomList) {
       if (cafeRoom.getCafe().getNo() == cafe.getNo()) {
         roomCount++;
@@ -114,7 +120,7 @@ public class CafeDetailHandler implements Command {
     System.out.println();
     System.out.println("============= 리뷰 =============");
 
-    List<CafeReview> reviewList = cafeDao.findReviewListByCafeNo(cafe.getNo());
+    List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 등록된 리뷰가 없습니다.");

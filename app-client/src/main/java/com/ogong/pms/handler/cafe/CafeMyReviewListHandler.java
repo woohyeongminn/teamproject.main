@@ -2,6 +2,7 @@ package com.ogong.pms.handler.cafe;
 
 import java.util.List;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
@@ -13,9 +14,11 @@ import com.ogong.util.Prompt;
 public class CafeMyReviewListHandler implements Command {
 
   CafeDao cafeDao;
+  CafeReviewDao cafeReviewDao;
 
-  public CafeMyReviewListHandler (CafeDao cafeDao) {
+  public CafeMyReviewListHandler (CafeDao cafeDao, CafeReviewDao cafeReviewDao) {
     this.cafeDao = cafeDao;
+    this.cafeReviewDao = cafeReviewDao;
   }
 
   @Override
@@ -31,7 +34,7 @@ public class CafeMyReviewListHandler implements Command {
       return;
     }
 
-    List<CafeReview> reviewList = cafeDao.findReviewListByMember(member.getPerNo());
+    List<CafeReview> reviewList = cafeReviewDao.findReviewListByMember(member.getPerNo());
 
     if (reviewList.isEmpty()) {
       System.out.println(" >> 리뷰 내역이 존재하지 않습니다.");

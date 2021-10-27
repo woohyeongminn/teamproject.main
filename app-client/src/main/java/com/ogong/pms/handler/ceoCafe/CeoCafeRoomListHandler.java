@@ -2,7 +2,7 @@ package com.ogong.pms.handler.ceoCafe;
 
 import java.util.HashMap;
 import java.util.List;
-import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
@@ -10,10 +10,10 @@ import com.ogong.util.Prompt;
 
 public class CeoCafeRoomListHandler implements Command {
 
-  CafeDao cafeDao;
+  CafeRoomDao cafeRoomDao;
 
-  public CeoCafeRoomListHandler (CafeDao cafeDao) {
-    this.cafeDao = cafeDao;
+  public CeoCafeRoomListHandler (CafeRoomDao cafeRoomDao) {
+    this.cafeRoomDao = cafeRoomDao;
   }
 
   @Override
@@ -24,7 +24,7 @@ public class CeoCafeRoomListHandler implements Command {
 
     int cafeNo = (int) request.getAttribute("cafeNo");
 
-    List<CafeRoom> cafeRoom = cafeDao.findCafeRoomListByCafe(cafeNo);
+    List<CafeRoom> cafeRoom = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
 
     if (cafeRoom.isEmpty()) {
       System.out.println(" >> 등록된 스터디룸이 없습니다.");

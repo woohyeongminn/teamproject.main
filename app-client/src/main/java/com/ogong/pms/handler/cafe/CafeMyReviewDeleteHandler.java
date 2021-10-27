@@ -2,7 +2,7 @@ package com.ogong.pms.handler.cafe;
 
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.handler.AuthPerMemberLoginHandler;
@@ -12,11 +12,11 @@ import com.ogong.util.Prompt;
 
 public class CafeMyReviewDeleteHandler implements Command {
 
-  CafeDao cafeDao;
+  CafeReviewDao cafeReviewDao;
   SqlSession sqlSession;
 
-  public CafeMyReviewDeleteHandler (CafeDao cafeDao, SqlSession sqlSession) {
-    this.cafeDao = cafeDao;
+  public CafeMyReviewDeleteHandler (CafeReviewDao cafeReviewDao, SqlSession sqlSession) {
+    this.cafeReviewDao = cafeReviewDao;
     this.sqlSession = sqlSession;
   }
 
@@ -50,14 +50,14 @@ public class CafeMyReviewDeleteHandler implements Command {
       return;
     }
 
-    cafeDao.deleteCafeReview(myReviewByNo.getReviewNo());
+    cafeReviewDao.deleteCafeReview(myReviewByNo.getReviewNo());
     sqlSession.commit();
 
     System.out.println(" >> 삭제를 완료하였습니다.");
   }
 
   private CafeReview getMyReviewByNo(Member member, int reviewNo) throws Exception {
-    List<CafeReview> reviewList = cafeDao.getCafeReviewList();
+    List<CafeReview> reviewList = cafeReviewDao.getCafeReviewList();
     for (CafeReview cafeReview : reviewList) {
       if (cafeReview.getMember().getPerNo() == member.getPerNo() &&
           cafeReview.getReviewNo() == reviewNo) {
