@@ -13,7 +13,7 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/login")
-public abstract class AuthCeoMemberLoginHandler extends HttpServlet {
+public class AuthCeoMemberLoginHandler extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 
