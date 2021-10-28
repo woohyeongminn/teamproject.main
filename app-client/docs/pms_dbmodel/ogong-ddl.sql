@@ -94,6 +94,9 @@ DROP TABLE IF EXISTS member RESTRICT;
 -- 스터디구성원
 DROP TABLE IF EXISTS study_guilder RESTRICT;
 
+-- 점수
+DROP TABLE IF EXISTS point RESTRICT;
+
 -- 스터디카페룸사진
 CREATE TABLE studycafe_room_photo (
   photo_no     INTEGER      NOT NULL COMMENT '사진번호', -- 사진번호
@@ -488,12 +491,13 @@ ALTER TABLE study_board_file
 
 -- 댓글
 CREATE TABLE study_board_comment (
-  comment_no  INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
-  st_board_no INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
-  content     VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  created_dt  DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
-  member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  study_no    INTEGER      NOT NULL COMMENT '스터디번호' -- 스터디번호
+  comment_no     INTEGER      NOT NULL COMMENT '댓글번호', -- 댓글번호
+  st_board_no    INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
+  content        VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  created_dt     DATETIME     NOT NULL DEFAULT now() COMMENT '작성일', -- 작성일
+  member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no       INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
+  whether_report INTEGER      NULL     DEFAULT 0 COMMENT '신고여부' -- 신고여부
 )
 COMMENT '댓글';
 
@@ -509,14 +513,15 @@ ALTER TABLE study_board_comment
 
 -- 스터디게시판
 CREATE TABLE study_board (
-  st_board_no INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
-  title       VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
-  content     VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  view_ct     INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
-  created_dt  DATETIME     NOT NULL DEFAULT now()
+  st_board_no    INTEGER      NOT NULL COMMENT '스터디자유게시판번호', -- 스터디자유게시판번호
+  title          VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content        VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  view_ct        INTEGER      NOT NULL DEFAULT 0 COMMENT '조회수', -- 조회수
+  created_dt     DATETIME     NOT NULL DEFAULT now()
    COMMENT '작성일', -- 작성일
-  member_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  study_no    INTEGER      NOT NULL COMMENT '스터디번호' -- 스터디번호
+  member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no       INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
+  whether_report INTEGER      NULL     DEFAULT 0 COMMENT '신고여부' -- 신고여부
 )
 COMMENT '스터디게시판';
 
@@ -538,16 +543,17 @@ ALTER TABLE study_board
 
 -- 스터디
 CREATE TABLE study (
-  study_no     INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
-  name         VARCHAR(50)  NOT NULL COMMENT '스터디명', -- 스터디명
-  subject_no   INTEGER      NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
-  no_people    INTEGER      NOT NULL COMMENT '인원수', -- 인원수
-  face_no      INTEGER      NOT NULL COMMENT '대면상태번호', -- 대면상태번호
-  introduction TEXT         NULL     COMMENT '소개글', -- 소개글
-  created_dt   DATE         NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
-  member_no    INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-  score        INTEGER      NOT NULL DEFAULT 0 COMMENT '스터디활동점수', -- 스터디활동점수
-  area         VARCHAR(255) NULL     COMMENT '스터디지역' -- 스터디지역
+  study_no       INTEGER      NOT NULL COMMENT '스터디번호', -- 스터디번호
+  name           VARCHAR(50)  NOT NULL COMMENT '스터디명', -- 스터디명
+  subject_no     INTEGER      NOT NULL COMMENT '스터디과목번호', -- 스터디과목번호
+  no_people      INTEGER      NOT NULL COMMENT '인원수', -- 인원수
+  face_no        INTEGER      NOT NULL COMMENT '대면상태번호', -- 대면상태번호
+  introduction   TEXT         NULL     COMMENT '소개글', -- 소개글
+  created_dt     DATE         NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
+  member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  area           VARCHAR(255) NULL     COMMENT '스터디지역', -- 스터디지역
+  status         INTEGER      NULL     COMMENT '스터디상태', -- 스터디상태
+  whether_report INTEGER      NULL     DEFAULT 0 COMMENT '신고여부' -- 신고여부
 )
 COMMENT '스터디';
 
@@ -770,7 +776,8 @@ CREATE TABLE member (
   photo      VARCHAR(255) NULL     COMMENT '사진', -- 사진
   created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '가입일', -- 가입일
   status     INTEGER      NOT NULL COMMENT '상태', -- 상태
-  active     INTEGER      NOT NULL DEFAULT 1 COMMENT '탈퇴' -- 탈퇴
+  active     INTEGER      NOT NULL DEFAULT 1 COMMENT '탈퇴', -- 탈퇴
+  report     INTEGER      NULL     DEFAULT 0 COMMENT '신고횟수' -- 신고횟수
 )
 COMMENT '회원';
 
@@ -806,6 +813,22 @@ ALTER TABLE study_guilder
     PRIMARY KEY (
       member_no, -- 회원번호
       study_no   -- 스터디번호
+    );
+
+-- 점수
+CREATE TABLE point (
+  point_no  INTEGER NOT NULL COMMENT '점수번호', -- 점수번호
+  member_no INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
+  study_no  INTEGER NOT NULL COMMENT '스터디번호', -- 스터디번호
+  point     INTEGER NOT NULL COMMENT '포인트' -- 포인트
+)
+COMMENT '점수';
+
+-- 점수
+ALTER TABLE point
+  ADD CONSTRAINT PK_point -- 점수 기본키
+    PRIMARY KEY (
+      point_no -- 점수번호
     );
 
 -- 스터디카페룸사진
@@ -1156,4 +1179,16 @@ ALTER TABLE study_guilder
     )
     REFERENCES study ( -- 스터디
       study_no -- 스터디번호
+    );
+
+-- 점수
+ALTER TABLE point
+  ADD CONSTRAINT FK_study_guilder_TO_point -- 스터디구성원 -> 점수
+    FOREIGN KEY (
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
+    )
+    REFERENCES study_guilder ( -- 스터디구성원
+      member_no, -- 회원번호
+      study_no   -- 스터디번호
     );
