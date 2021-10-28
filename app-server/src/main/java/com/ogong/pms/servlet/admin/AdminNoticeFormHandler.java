@@ -34,12 +34,32 @@ public class AdminNoticeFormHandler extends GenericServlet {
     out.println("</head>");
     out.println("<body>");
     out.println("<h1> ▶ 새 공지 </h1>");
+    out.println("<hr>");
 
     out.println("<form action='add'>");
-    out.println("<label for='f-title'>제목</label> <input id='f-title' type='text' name='title'><br>");
-    out.println("<label for='f-content'>내용</label> <input id='f-content' type='text' name='content'><br>");
-    out.println("<label for='f-filepath'>파일</label> <input id='f-filepath' type='text' name='filepath'><br>");
-    out.println("<button>등록</button><br>");
+    out.println("<fieldset>");
+    out.println("<legend><b> 🔔 공지게시글 등록 </b></legend>");
+    out.println("<table>");
+    out.println("<tr>");
+    out.println("<td><label for='title'>제목</label></td>");
+    out.println("<td><input id='f-title' type='text' name='title'></td>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td><label for='content'>내용</label></td>");
+    out.println("<td><input id='f-content' type='text' name='content'></td>");
+    out.println("</tr>");
+    out.println("<tr>");
+    out.println("<td><label for='filepath'>파일</label></td>");
+    out.println("<td><input id='f-filepath' type='file' name='filepath'></td>");
+    out.println("</tr>");
+    out.println("</table>");
+    out.println("<input type='submit'/>");
+    out.println("</fieldset>");
+
+    //    out.println("<label for='f-title'>제목</label> <input id='f-title' type='text' name='title'><br>");
+    //    out.println("<label for='f-content'>내용</label> <input id='f-content' type='text' name='content'><br>");
+    //    out.println("<label for='f-filepath'>파일</label> <input id='f-filepath' type='text' name='filepath'><br>");
+    //    out.println("<button>등록</button><br>");
     out.println("</form>");
 
 

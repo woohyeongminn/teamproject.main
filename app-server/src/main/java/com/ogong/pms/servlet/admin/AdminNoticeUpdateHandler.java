@@ -40,6 +40,7 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
     out.println("</head>");
     out.println("<body>");
     out.println("<h1> ▶ 공지 변경 </h1>");
+    out.println("<hr>");
 
     try {
       int noticeNo = Integer.parseInt(request.getParameter("no"));

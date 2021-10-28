@@ -40,6 +40,7 @@ public class AdminNoticeDeleteHandler extends HttpServlet {
     out.println("</head>");
     out.println("<body>");
     out.println("<h1> ▶ 공지 삭제 </h1>");
+    out.println("<hr>");
 
     try {
       int noticeNo = Integer.parseInt(request.getParameter("no"));

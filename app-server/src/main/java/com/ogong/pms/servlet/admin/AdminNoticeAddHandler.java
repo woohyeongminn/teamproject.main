@@ -41,6 +41,7 @@ public class AdminNoticeAddHandler extends HttpServlet {
     out.println("</head>");
     out.println("<body>");
     out.println("<h1>▶ 공지 등록 </h1>");
+    out.println("<hr>");
 
     AdminNotice adminNotice = new AdminNotice();
 

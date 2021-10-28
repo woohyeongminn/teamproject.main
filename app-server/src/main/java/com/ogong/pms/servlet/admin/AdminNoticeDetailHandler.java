@@ -49,27 +49,51 @@ public class AdminNoticeDetailHandler extends GenericServlet {
     out.println("</head>");
     out.println("<body>");
     out.println("<h1> ▶ 공지 상세 </h1>");
-    out.println("<table border='2'>");
+    out.println("<hr>");
+    //    out.println("<table border='2'>");
+
+    out.println("<fieldset>");
+    out.println("<legend><b> 🔔 공지게시글 상세 </b></legend>");
+    out.println("<table>");
 
     int adminnotiNo = Integer.parseInt(request.getParameter("no"));
 
     try {
       AdminNotice adminNotice = noticeDao.findByNoticeNo(adminnotiNo);
-
+      out.println("<form action='update'>");
       if (adminNotice.getAdminNotiFile() != null) { 
-        out.println("<form action='update'>");
-        out.printf("<tr><td><label for='f-title'>제목</label></td> <td> [ %s ] </td></tr>", adminNotice.getAdminNotiTitle());
-        out.printf("<tr><td><label for='f-content'>내용</label></td> <td>%s</td></tr>", adminNotice.getAdminNotiContent());
-        out.printf("<tr><td><label for='f-filepath'>파일</label></td> <td>%s</td></tr>", adminNotice.getAdminNotiFile());
-        out.printf("<tr><td><label for='f-registeredDate'>등록일</label></td> <td><span id='f-registeredDate'>%s</span><td></tr>", adminNotice.getAdminNotiRegisteredDate());
+        out.println("<tr>");
+        out.printf("<td><a href='detail?no=%1$d'>( %d )</a></td>", adminNotice.getAdminNotiNo());
+        out.println("<tr>");
+        out.printf("<td><label for='title'>제목</label> ㅣ  %s</td>", adminNotice.getAdminNotiTitle());
+        out.println("</tr>");
+        out.println("<tr>");
+        out.printf("<td><label for='filepath'>파일</label> ㅣ  %s</td>", adminNotice.getAdminNotiFile());
+        out.println("</tr>");
+        out.println("<tr>");
+        out.printf("<td><label for='registeredDate'>등록일</label>ㅣ  %s</td>", adminNotice.getAdminNotiRegisteredDate());
+        out.println("</tr>");
+        //        out.printf("<tr><td><label for='f-title'>제목</label></td> <td> [ %s ] </td></tr>", adminNotice.getAdminNotiTitle());
+        //        out.printf("<tr><td><label for='f-content'>내용</label></td> <td>%s</td></tr>", adminNotice.getAdminNotiContent());
+        //        out.printf("<tr><td><label for='f-filepath'>파일</label></td> <td>%s</td></tr>", adminNotice.getAdminNotiFile());
+        //        out.printf("<tr><td><label for='f-registeredDate'>등록일</label></td> <td><span id='f-registeredDate'>%s</span><td></tr>", adminNotice.getAdminNotiRegisteredDate());
       }
       else if (adminNotice.getAdminNotiFile() == null) {
-        out.println("<form action='update'>");
-        out.printf("<tr><td><label for='f-title'>제목</label></td> <td> [ %s ] </td></tr>", adminNotice.getAdminNotiTitle());
-        out.printf("<tr><td><label for='f-content'>내용</label></td> <td>%s</td></tr>", adminNotice.getAdminNotiContent());
-        out.printf("<tr><td><label for='f-registeredDate'>등록일</label></td> <td><span id='f-registeredDate'>%s</span><td></tr>", adminNotice.getAdminNotiRegisteredDate());
+        //        out.println("<form action='update'>");
+        out.println("<tr>");
+        out.printf("<td><a href='detail?no=%1$d'>( %d )</a></td>", adminNotice.getAdminNotiNo());
+        out.println("<tr>");
+        out.printf("<td><label for='title'>제목</label>  ㅣ  %s</td>", adminNotice.getAdminNotiTitle());
+        out.println("</tr>");
+        out.println("<tr>");
+        out.printf("<td><label for='registeredDate'>등록일</label>ㅣ  %s</td>", adminNotice.getAdminNotiRegisteredDate());
+        out.println("</tr>");
+        //        out.printf("<tr><td><label for='f-title'>제목</label></td> <td> [ %s ] </td></tr>", adminNotice.getAdminNotiTitle());
+        //        out.printf("<tr><td><label for='f-content'>내용</label></td> <td>%s</td></tr>", adminNotice.getAdminNotiContent());
+        //        out.printf("<tr><td><label for='f-registeredDate'>등록일</label></td> <td><span id='f-registeredDate'>%s</span><td></tr>", adminNotice.getAdminNotiRegisteredDate());
       }
-
+      out.println("</table>");
+      out.println("</fieldset>");
       out.println("<button><a href='list'>목록</a></button>");
       out.printf("<button><a href='update?no=%d'>변경</a></button>", adminNotice.getAdminNotiNo());
       out.printf("<button><a href='delete?no=%d'>삭제</a></button>", adminNotice.getAdminNotiNo());
@@ -78,6 +102,7 @@ public class AdminNoticeDetailHandler extends GenericServlet {
     } catch (Exception e) {
       throw new ServletException(e);
     }
+
 
     out.println("</body>");
     out.println("</html>");
