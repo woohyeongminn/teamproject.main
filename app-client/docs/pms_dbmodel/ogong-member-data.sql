@@ -23,6 +23,10 @@ insert into member(member_no, name, nickname, email, password, tel, photo, creat
 values(6, '송중수', '중수중수중중수', 'todaystudymail@gmail.com', password('t1'), '010-6666-6666',
 'gmail.jpg', '2021-04-14', 1, 1);
 
+insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active, report) 
+values(7, '박명수', '한머리두냄새', 'onehair@twosmell.com', password('o1'), '010-7777-7777',
+'test.jpg', '2021-10-15', 1, 1, 6);
+
 ----------------------------------------------------------------------------------------------------
 /*
 -- findByEmailAndPassword
