@@ -51,13 +51,7 @@ public class MemberDetailHandler extends GenericServlet {
     out.println("</head>");
     out.println("<body>");
 
-    //    int no;
-    //    try {
-    //      no = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
-    //    } catch (NullPointerException e) {
-    //      out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
-    //      return;
-    //    }
+
     try {
       int no = Integer.parseInt(request.getParameter("no")); 
       Member member = memberDao.findByNo(no);
@@ -72,6 +66,18 @@ public class MemberDetailHandler extends GenericServlet {
         out.printf("<td>번호:%s</td><br>", member.getPerTel());
         out.printf("<td>이메일:%s</td><br>", member.getPerEmail());
         out.printf("<td>가입일:%s</td><br>", member.getPerRegisteredDate());
+
+        out.printf("<button>");
+        out.printf("<a href='detail?no=%1$d'>", member.getPerNo());
+        out.printf("<p>개인정보수정</p>");
+        out.printf("</a>");
+        out.printf("</button>");
+        out.printf("<button>");
+        out.printf("<a href='detail?no=%1$d'>", member.getPerNo());
+        out.printf("<p>회원탈퇴</p>");
+        out.printf("</a>");
+        out.printf("</button>");
+
       }
     } catch (Exception e) {
       // 에러를 통제하는 출력을 직접 관리할 수 있다.

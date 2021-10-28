@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet;
+package com.ogong.pms.servlet.auth;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/form")
+@WebServlet("/login/form")
 public class PerLoginFormHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class PerLoginFormHandler extends HttpServlet {
     out.println("<body>");
     out.println("<h1>[로그인]</h1>");
 
-    out.println("<form action='login'>");
+    out.println("<form action='../member/login'>");
     out.println(
         "<label for='f-email'>이메일</label> <input id='f-email' type='email' name='email'><br>");
     out.println(

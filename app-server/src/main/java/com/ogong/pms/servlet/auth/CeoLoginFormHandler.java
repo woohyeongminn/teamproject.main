@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet;
+package com.ogong.pms.servlet.auth;
 
 import java.io.IOException;
 import java.io.PrintWriter;
