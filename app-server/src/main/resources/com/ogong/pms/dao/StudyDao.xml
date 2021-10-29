@@ -15,11 +15,13 @@
     <result column="face_no" property="faceNo"/>
     <result column="face_name" property="faceName"/>
     <result column="introduction" property="introduction"/>
-    <result column="created_dt" property="registeredDate"/>
     <result column="study_point" property="point"/>
+    <result column="created_dt" property="registeredDate"/>
     <result column="count_guilder" property="countMember"/>
     <result column="count_wating_guilder" property="watingCountMember"/>
     <result column="count_bookmark" property="countBookMember"/>
+    <result column="status" property="studyStatus"/>
+    <result column="whether_report" property="report"/>
     
     <association property="owner" javaType="Member">
     <id column="owner_no" property="perNo"/>
@@ -48,9 +50,11 @@
      sfs.name face_name,
      s.introduction,
      s.created_dt,
-     s.point study_point,
      s.member_no owner_no,
      m.nickname owner_name,
+     p.point study_point,
+     s.status,
+     s.whether_report,
     (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
     (select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,
     (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
@@ -61,6 +65,8 @@
      left outer join study_guilder sg on s.study_no=sg.study_no
      left outer join member m2 on sg.member_no=m2.member_no
      left outer join study_bookmark sb on s.study_no=sb.study_no
+     left outer join point p on s.study_no=p.study_no
+           
   </sql>
   
   <!--  ===[구성원 출력 중복]=== -->
@@ -89,12 +95,14 @@
      sfs.name face_name,
      s.introduction,
      s.created_dt,
-     s.point study_point,
      s.member_no owner_no,
      m.nickname owner_name,
      m2.member_no member_no,
      m2.name member_name,
      m2.nickname member_nickname,
+     p.point study_point,
+     s.status,
+     s.whether_report,
     (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
     (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
    from study_bookmark sbm
@@ -103,6 +111,7 @@
       left outer join member m2 on m2.member_no=sbm.member_no
       left outer join study_subject ss on s.subject_no=ss.subject_no
       left outer join study_face_status sfs on s.face_no=sfs.face_no
+      left outer join point p on s.study_no=p.study_no
   </sql>
 
 <!--  ===========================[스터디]=========================== -->
@@ -124,6 +133,22 @@
     study_no=#{studyNo}
   </update>
   
+   <update id="updateStatusEnd" parameterType="Study">
+  update study set
+    status=2
+   where
+    study_no=#{studyNo}
+  </update>
+  
+  <update id="updateStatusDelete" parameterType="Study">
+  update study set
+    status=3
+   where
+    study_no=#{studyNo}
+  </update>
+  
+  
+  
   <!--  ===[스터디 삭제(북마크)]=== -->
   <delete id="deleteAllBookmark" parameterType="int">
   delete from study_bookmark
@@ -139,32 +164,52 @@
   <!--  ===[스터디 검색]=== -->
   <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
    <include refid="select1"/>
-   where s.name like(concat('%',#{keyword},'%'))
+   where (s.name like(concat('%',#{keyword},'%'))
      or ss.name like (concat('%',#{keyword},'%'))
-     or s.area like (concat('%',#{keyword},'%'))
+     or s.area like (concat('%',#{keyword},'%')))
+     and (s.status=1 or s.status=2)
     group by s.study_no
-    order by s.study_no
+    order by s.created_dt
   </select>
   
-  <!--  ===[전체 스터디 목록]=== -->
+  <!--  ===[전체 스터디 목록(전체)]=== -->
   <select id="findAll" resultMap="StudyMap">
     <include refid="select1"/>
+    where s.status=1 or s.status=2
       group by s.study_no
-      order by s.study_no
+      order by s.created_dt
   </select>
-
+  
+  <!--  ===[전체 스터디 목록(진행 중)]=== -->
+  <select id="findAllIng" resultMap="StudyMap">
+    <include refid="select1"/>
+    where s.status=1
+      group by s.study_no
+      order by s.created_dt
+  </select>
+  
+   <!--  ===[전체 스터디 목록(완료)]=== -->
+  <select id="findAllEnd" resultMap="StudyMap">
+    <include refid="select1"/>
+    where s.status=2
+      group by s.study_no
+      order by s.created_dt
+  </select>
+  
  <!--  ===[스터디 상세]=== -->
   <select id="findByNo" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
      where
-       s.study_no=#{studyNo}
+       s.study_no=#{studyNo} and (s.status=1 or s.status=2)
   </select>
   
   <!--  ===[내스터디 상세]=== -->
   <select id="findByMyNo" resultMap="StudyMap" parameterType="map"> 
     <include refid="select1"/>
     where
-      s.study_no=#{studyNo} and (s.member_no=#{memberNo} or sg.member_no=#{memberNo})
+      s.study_no=#{studyNo} 
+       and (s.member_no=#{memberNo} or sg.member_no=#{memberNo}) 
+       and (s.status=1 or s.status=2) 
   </select>
 
    <!--  ===========================[구성원]=========================== -->
@@ -201,6 +246,22 @@
    status=2
   where
    study_no=#{studyNo} and member_no=#{memberNo}
+  </update>
+  
+  <!--  ===[구성원 탈퇴시키기 및 탈퇴하기]=== -->
+  <update id="updateGuilderExpulsion" parameterType="map">
+  update study_guilder set 
+   status=3
+  where
+   study_no=#{studyNo} and member_no=#{memberNo}
+  </update>
+  
+  <!--  ===[구성원 전체 탈퇴시키기(삭제x상태변경)]=== -->
+  <update id="updateGuilderExpulsionAll" parameterType="int">
+  update study_guilder set 
+   status=3
+  where
+   study_no=#{studyNo}
   </update>
   
 <!--  ===[구성원에서 삭제하기]=== -->
