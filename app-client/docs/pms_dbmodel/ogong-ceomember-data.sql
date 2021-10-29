@@ -16,7 +16,7 @@ values(11, '조사장', '조사장카페', 'cafe4@test.com', password('c4'), '01
 'cafe4.gif', 2);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, status) 
-values(13, '반사장', '반사장카페', 'cafe5@test.com', password('c5'), '010-5555-0000', 
+values(12, '반사장', '반사장카페', 'cafe5@test.com', password('c5'), '010-5555-0000', 
 'cafe5.gif', 2);
 
 -------------------------------------------------------------------------------------------------
@@ -35,4 +35,4 @@ insert into ceo_member(member_no, bossname, license_no)
 values(11, '조사장', '333-28-15464');
 
 insert into ceo_member(member_no, bossname, license_no) 
-values(13, '반사장', '632-94-37294');
+values(12, '반사장', '632-94-37294');
