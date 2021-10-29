@@ -61,7 +61,6 @@ public class AdminNoticeDetailHandler extends GenericServlet {
     try {
       AdminNotice adminNotice = noticeDao.findByNoticeNo(adminnotiNo);
       //      if (adminNotice.getAdminNotiFile() != null) { 
-      out.println("<form action='update'>");
       out.println("<tr>");
       out.printf("<td>( %d )</td>", adminNotice.getAdminNotiNo());
       out.println("</tr>");
@@ -103,9 +102,9 @@ public class AdminNoticeDetailHandler extends GenericServlet {
       out.println("</table>");
       out.println("</fieldset>");
       out.println("<button><a href='list'>목록</a></button>");
-      out.printf("<button><a href='update?no=%1$d'>변경</a></button>", adminNotice.getAdminNotiNo());
+      out.printf("<button><a href='Updateform?no=%1$d'>변경</a></button>", adminNotice.getAdminNotiNo());
       out.printf(" <button><a href='delete?no=%d'>삭제</a></button>", adminNotice.getAdminNotiNo());
-      out.println("</form>");
+
 
     } catch (Exception e) {
       throw new ServletException(e);
