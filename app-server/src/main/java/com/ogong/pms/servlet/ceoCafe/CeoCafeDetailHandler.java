@@ -28,7 +28,7 @@ public class CeoCafeDetailHandler implements Command {
     System.out.println("▶ 내 카페 관리");
     System.out.println();
 
-    CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+    CeoMember ceoMember = AuthCeoMemberLoginController.getLoginCeoMember();
     Cafe cafe = cafeDao.findByCeoMember(ceoMember.getCeoNo());
 
     if (cafe == null) {

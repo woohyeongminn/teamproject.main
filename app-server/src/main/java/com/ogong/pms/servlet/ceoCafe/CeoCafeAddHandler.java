@@ -33,7 +33,7 @@ public class CeoCafeAddHandler implements Command {
     System.out.println("▶ 장소 등록");
     System.out.println();
 
-    CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+    CeoMember ceoMember = AuthCeoMemberLoginController.getLoginCeoMember();
 
     Cafe cafe = new Cafe();
 
