@@ -5,6 +5,7 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.handler.Command;
 import com.ogong.pms.handler.CommandRequest;
+import com.ogong.util.Prompt;
 
 public class StudyListHandler implements Command {
 
@@ -35,9 +36,17 @@ public class StudyListHandler implements Command {
       }
 
       else {
+
+        System.out.printf( " (%d)", study.getStudyNo());
+
+        if(study.getCountMember() != study.getNumberOfPeple()) {
+          System.out.printf(" [모집중] " );
+        } else {
+          System.out.printf(" [모집완료] " );
+        }
+
         System.out.printf(
-            " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
-            study.getStudyNo(),
+            "🌟%d\n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
             study.getCountBookMember(),
             study.getStudyTitle(),
             study.getFaceName(),
@@ -50,5 +59,18 @@ public class StudyListHandler implements Command {
         System.out.println();
       }
     }
+
+    System.out.println("1. 진행중");
+    System.out.println("2. 완료");
+    System.out.println("0. 이전");
+    int selectNo = Prompt.inputInt("선택> ");
+    switch (selectNo) {
+      case 1: request.getRequestDispatcher("/studying/list").forward(request); return;
+      case 2: request.getRequestDispatcher("/studyend/list").forward(request); return;
+      case 3: return;
+    }
+
+
+
   }
 }

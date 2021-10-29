@@ -40,6 +40,10 @@ insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
 values(7, 'MVC', 5, 10, 1, 'MBC', '2021-6-6', 1);
 
+insert into study(
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
+values(8, 'JAVA', 5, 10, 1, '공부가 제일 좋아', '2021-7-6', 2, 2);
+
 update study set status=1;
 update study set whether_report=1;
 -------------------------------------------------------------------------------------------------

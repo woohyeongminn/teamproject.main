@@ -36,6 +36,14 @@ public class StudyIngListHandler implements Command {
       }
 
       else { 
+
+        System.out.printf( " (%d)", study.getStudyNo());
+
+        if(study.getCountMember() != study.getNumberOfPeple()) {
+          System.out.printf(" [모집중] " );
+        } else {
+          System.out.printf(" [모집완료] " );
+        }
         System.out.printf(
             " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
             study.getStudyNo(),
