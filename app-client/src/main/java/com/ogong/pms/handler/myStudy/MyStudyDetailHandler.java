@@ -42,7 +42,16 @@ public class MyStudyDetailHandler implements Command {
     List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
     myStudy.setMembers(guilders);
 
-    System.out.printf(" \n (%s) 🌟%d\n", myStudy.getStudyNo(), myStudy.getCountBookMember());
+
+    System.out.printf( " (%d)", myStudy.getStudyNo());
+
+    if(myStudy.getCountMember() != myStudy.getNumberOfPeple()) {
+      System.out.printf(" [모집중] " );
+    } else {
+      System.out.printf(" [모집완료] " );
+    }
+
+    System.out.printf("🌟%d\n", myStudy.getCountBookMember());
     System.out.printf(" [%s]\n", myStudy.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", myStudy.getSubjectName());
