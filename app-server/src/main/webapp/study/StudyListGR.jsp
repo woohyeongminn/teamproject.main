@@ -25,13 +25,22 @@
 			</tr>
 			</thread>
 		<tbody>
+
 			<c:forEach items="${studyList}" var="study">
+				<!-- <c:choose>
+					<c:when test="${study.studyTitle}.contains(탈퇴)">(${study.studyNo})<br>스터디명 : ${study.studyTitle}</c:when>
+					<c:otherwise>${study.studyNo}</c:otherwise>
+					<c:choose>
+						<c:when test="${study.countMember ne study.numberOfPeple}">[모집중]</c:when>
+						<c:otherwise>[모집완료]</c:otherwise>
+					</c:choose>
+				</c:choose> -->
 				<tr>
 					<td>${study.studyNo}</td>
 					<td>${study.countBookMember}</td>
 					<td><a href='detail?no=${study.studyNo}'>${study.studyTitle}</a></td>
 					<td>${study.faceName}</td>
-					<td>${owner.perNickname}<%-- <%=study.getOwner().getPerNickname()%> --%></td>
+					<td>${owner.perNickname}</td>
 					<td>${study.subjectName}</td>
 					<td>${study.area}</td>
 					<td>${study.countMember}</td>
