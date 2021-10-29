@@ -45,15 +45,5 @@ select
    left outer join study_board_file sbf on sb.st_board_no=sbf.st_board_no
   where
    sb.study_no=1
-<<<<<<< HEAD
-   order by s.study_no
-   
-   -- updateFile
-   update study_board_file sbf set
-      name = #{fileName.atcFileName}
-    where
-      sbf.st_board_no=#{freeBoardNo} and sbf.file_no=#{atcFileNo}
-=======
    order by sb.st_board_no
->>>>>>> a708787c8c160da7b71b0288f95277ff2a2ffc02
  */
