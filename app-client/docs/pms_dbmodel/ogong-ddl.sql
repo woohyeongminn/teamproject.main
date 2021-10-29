@@ -552,7 +552,7 @@ CREATE TABLE study (
   created_dt     DATE         NOT NULL DEFAULT curdate() COMMENT '스터디등록일', -- 스터디등록일
   member_no      INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   area           VARCHAR(255) NULL     COMMENT '스터디지역', -- 스터디지역
-  status         INTEGER      NULL     COMMENT '스터디상태', -- 스터디상태
+  status         INTEGER      NULL     DEFAULT 1 COMMENT '스터디상태', -- 스터디상태
   whether_report INTEGER      NULL     DEFAULT 0 COMMENT '신고여부' -- 신고여부
 )
 COMMENT '스터디';

@@ -11,32 +11,32 @@ insert into study_face_status(face_no, name) values(1, '대면');
 insert into study_face_status(face_no, name) values(2, '비대면');
 insert into study_face_status(face_no, name) values(3, '대면/비대면');
 
-
 -- 스터디그룹 test 값
 insert into study(
-study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(1, '삼성뿌셔', 3, 5, 3, '취업 뿌셔뿌셔', '2021-1-1', 1);
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
+values(1, '삼성뿌셔', 3, 5, 3, '취업 뿌셔뿌셔', '2021-1-1', 1, 1);
 
 insert into study(
-study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(2, '정처기준비', 2, 10, 2, '한 번에 붙자', '2021-2-2', 1);
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
+values(2, '정처기준비', 2, 10, 2, '한 번에 붙자', '2021-2-2', 1, 1);
 
 insert into study(
-study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, area) 
-values(3, '하반기 삼성 공모전', 3, 6, 3, '공모전 아자', '2021-3-3', 2,'경기도');
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, area, status) 
+values(3, '하반기 삼성 공모전', 3, 6, 3, '공모전 아자', '2021-3-3', 2,'경기도', 1);
 
 insert into study(
-study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, area) 
-values(4, '중앙대 컴공 기말고사', 6, 3, 1, '시험 아자', '2021-3-3', 3,'서울시');
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, area, status) 
+values(4, '중앙대 컴공 기말고사', 6, 3, 1, '시험 아자', '2021-3-3', 3,'서울시', 1);
 
 insert into study(
-study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(5, '알고리즘 스터디', 4, 20, 2, '지옥같은 SI 탈출', '2021-3-3', 3);
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
+values(5, '알고리즘 스터디', 4, 20, 2, '지옥같은 SI 탈출', '2021-3-3', 3, 1);
 
 insert into study(
-study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, whether_report) 
-values(6, '불법광고', 4, 20, 2, '흑채 팔아요~', '2021-3-3', 7, '5');
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, whether_report, status) 
+values(6, '불법광고', 4, 20, 2, '흑채 팔아요~', '2021-3-3', 7, '5', 1);
 
+update study set status=1;
 -------------------------------------------------------------------------------------------------
 
 -- 스터디 북마크 test 값
@@ -53,6 +53,8 @@ insert study_calender_importance(importance_no, importance) values(3, '★★★
 insert study_calender_importance(importance_no, importance) values(2, '★★★★☆');
 insert study_calender_importance(importance_no, importance) values(1, '★★★★★');
 
+
+insert into point(member_no, study_no, point) values(1, 1, 100);
 
 -- 스터디 전체 조회 (북마크한 사람들 카운트만, 구성원들 카운드만)
 /*

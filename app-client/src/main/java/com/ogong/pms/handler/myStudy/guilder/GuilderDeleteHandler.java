@@ -54,7 +54,7 @@ public class GuilderDeleteHandler implements Command {
         }
 
         try {
-          studyDao.deleteGuilder(myStudy.getStudyNo(), guilderMember.getPerNo());
+          studyDao.updateGuilderExpulsion(myStudy.getStudyNo(), guilderMember.getPerNo());
           sqlSession.commit();
         } catch (Exception e) {
           System.out.println(" 구성원 탈퇴 오류!");

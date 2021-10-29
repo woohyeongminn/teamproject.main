@@ -25,6 +25,7 @@ public interface StudyDao {
   void insertGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void updateOwner(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void updateGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
+  void updateGuilderExpulsion(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void deleteGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void deleteAllGuilder(int studyNo) throws Exception;
 

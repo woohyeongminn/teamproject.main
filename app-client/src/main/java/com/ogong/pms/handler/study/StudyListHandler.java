@@ -35,10 +35,6 @@ public class StudyListHandler implements Command {
       }
 
       else {
-        //List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
-        //List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
-        //study.setMembers(guilders);
-        //study.setBookMarkMember(bookMem);
         System.out.printf(
             " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
             study.getStudyNo(),

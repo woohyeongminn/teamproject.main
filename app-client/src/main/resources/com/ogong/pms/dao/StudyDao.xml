@@ -15,11 +15,13 @@
     <result column="face_no" property="faceNo"/>
     <result column="face_name" property="faceName"/>
     <result column="introduction" property="introduction"/>
+    <result column="study_point" property="point"/>
     <result column="created_dt" property="registeredDate"/>
-    <result column="study_score" property="score"/>
     <result column="count_guilder" property="countMember"/>
     <result column="count_wating_guilder" property="watingCountMember"/>
     <result column="count_bookmark" property="countBookMember"/>
+    <result column="status" property="studyStatus"/>
+    <result column="whether_report" property="report"/>
     
     <association property="owner" javaType="Member">
     <id column="owner_no" property="perNo"/>
@@ -48,9 +50,11 @@
      sfs.name face_name,
      s.introduction,
      s.created_dt,
-     s.score study_score,
      s.member_no owner_no,
      m.nickname owner_name,
+     p.point study_point,
+     s.status,
+     s.whether_report,
     (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
     (select count(*) from study_guilder where study_no=s.study_no and status=1) count_wating_guilder,
     (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
@@ -61,6 +65,8 @@
      left outer join study_guilder sg on s.study_no=sg.study_no
      left outer join member m2 on sg.member_no=m2.member_no
      left outer join study_bookmark sb on s.study_no=sb.study_no
+     left outer join point p on s.study_no=p.study_no
+     
   </sql>
   
   <!--  ===[구성원 출력 중복]=== -->
@@ -89,12 +95,14 @@
      sfs.name face_name,
      s.introduction,
      s.created_dt,
-     s.score study_score,
      s.member_no owner_no,
      m.nickname owner_name,
      m2.member_no member_no,
      m2.name member_name,
      m2.nickname member_nickname,
+     p.point study_point,
+     s.status,
+     s.whether_report,
     (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
     (select count(*) from study_bookmark where study_no=s.study_no) count_bookmark
    from study_bookmark sbm
@@ -103,6 +111,7 @@
       left outer join member m2 on m2.member_no=sbm.member_no
       left outer join study_subject ss on s.subject_no=ss.subject_no
       left outer join study_face_status sfs on s.face_no=sfs.face_no
+      left outer join point p on s.study_no=p.study_no
   </sql>
 
 <!--  ===========================[스터디]=========================== -->
@@ -199,6 +208,14 @@
   <update id="updateGuilder" parameterType="map">
   update study_guilder set 
    status=2
+  where
+   study_no=#{studyNo} and member_no=#{memberNo}
+  </update>
+  
+  <!--  ===[구성원 탈퇴시키기 및 탈퇴하기]=== -->
+  <update id="updateGuilderExpulsion" parameterType="map">
+  update study_guilder set 
+   status=3
   where
    study_no=#{studyNo} and member_no=#{memberNo}
   </update>

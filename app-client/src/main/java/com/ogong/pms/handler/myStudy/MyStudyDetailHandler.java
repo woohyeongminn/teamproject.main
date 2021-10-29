@@ -51,6 +51,7 @@ public class MyStudyDetailHandler implements Command {
         myStudy.getCountMember(), myStudy.getNumberOfPeple());
     System.out.printf(" >> 대면 : %s\n", myStudy.getFaceName());
     System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
+    System.out.printf(" >> 활동점수 : %d\n", myStudy.getPoint());
 
     for (Member m : myStudy.getWatingMember()) {
       if (m.getPerNo() == member.getPerNo()) {
