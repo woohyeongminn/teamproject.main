@@ -1,7 +1,5 @@
-package com.ogong.pms.servlet.auth;
-//package com.ogong.pms.servlet;
-//
-//import com.ogong.menu.Menu;
+//package com.ogong.pms.servlet.auth;
+//import java.awt.Menu;
 //
 //public class AuthAdminLogoutHandler implements Command {
 //

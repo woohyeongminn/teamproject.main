@@ -59,12 +59,6 @@
     where notice_no=#{adminNotiNo}
   </update>
   
-  <update id="updateFilepath" parameterType="AdminNotice">
-    update notice set
-      filepath=#{adminNotiFile}
-    where notice_no=#{adminNotiNo}
-  </update>
-  
   <insert id="insertFilepath" parameterType="map">
     insert into notice_file(notice_no,filepath)
     values(#{adminNotiNo},#{adminNotiFile})
