@@ -31,72 +31,64 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("   <title>공지게시판</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("  <style>");
-    out.println("  label {");
-    out.println("    margin-right: 5px;");
-    out.println("    text-align: center;");
-    out.println("    display: inline;");
-    out.println("    width: 60px;");
-    out.println("  }");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1> ▶ 공지 변경 </h1>");
-    out.println("<hr>");
-
-    out.println("<fieldset>");
-    out.println("<legend><b> 🔔 공지게시글 수정 </b></legend>");
-    out.println("<table>");
+    int noticeNo = Integer.parseInt(request.getParameter("no"));
 
     try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
 
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
-      //      out.println("<form action='update'>");
+      if (notice == null) {
+        throw new Exception(" >> 해당 번호의 공지글을 찾을 수 없습니다.");
+      } else {
 
-      notice.setAdminNotiTitle(request.getParameter("title"));
-      //      noticeDao.updateTitle(notice);
-      //      sqlSession.commit();
+        notice.setAdminNotiTitle(request.getParameter("title"));
 
-      notice.setAdminNotiContent(request.getParameter("content"));
-      //      noticeDao.updateContent(notice);
-      //      sqlSession.commit();
+        notice.setAdminNotiContent(request.getParameter("content"));
 
-      if (notice.getAdminNotiFile() != null) {
-        out.println(" >> 이미 등록된 첨부파일이 있습니다.<br>");
+        notice.setAdminNotiFile(request.getParameter("filepath"));
+
+        noticeDao.updateTitle(notice);
+        noticeDao.updateContent(notice);
+        noticeDao.deletenoticefile(noticeNo);
+        noticeDao.insertFilepath(notice);
+        sqlSession.commit();
       }
-      //      else {
-      notice.setAdminNotiFile(request.getParameter("filepath"));
-      //        noticeDao.insertFilepath(notice);
-      //        sqlSession.commit();
-      //      }
+      response.sendRedirect("list");
 
-      noticeDao.updateTitle(notice);
-      noticeDao.updateContent(notice);
-      noticeDao.insertFilepath(notice);
-      sqlSession.commit();
+      //      out.println(" >> 공지가 변경되었습니다.<br>");
+      //      out.println("<button><a href='list'>목록</a></button>");
 
-      out.println(" >> 공지가 변경되었습니다.<br>");
+    } catch (Exception e) {
+      response.setContentType("text/html;charset=UTF-8");
+      PrintWriter out = response.getWriter();
 
+      out.println("<!DOCTYPE html>");
+      out.println("<html>");
+      out.println("<head>");
+      out.println("   <title>공지게시판</title>");
+      out.println("</head>");
+      out.println("<body>");
+      out.println("  <style>");
+      out.println("  label {");
+      out.println("    margin-right: 5px;");
+      out.println("    text-align: center;");
+      out.println("    display: inline;");
+      out.println("    width: 60px;");
+      out.println("  }");
+      out.println("  </style>");
+      out.println("</head>");
+      out.println("<body>");
+      out.println("<h1> ▶ 공지 변경 오류 </h1>");
+      out.println("<hr>");
+      out.println("<fieldset>");
+      out.println("<legend><b> 🔔 공지게시글 수정 오류 </b></legend>");
+      out.println("<table>");
       out.println("</table>");
       out.println("</fieldset>");
-      out.println("<button><a href='list'>목록</a></button>");
       out.println("</form>");
-    } catch (Exception e) {
-      throw new ServletException(e);
+      out.println("</body>");
+      out.println("</html>");
+      e.printStackTrace();
     }
-
-    out.println("</body>");
-    out.println("</html>");
   }
-
 }

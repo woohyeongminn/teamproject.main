@@ -11,7 +11,7 @@ public interface StudyDao {
   void insert(Study study) throws Exception;
   void update(Study study) throws Exception;
   void deleteAllBookmark(int studyNo) throws Exception;
-  void deleteStudy(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
+  //void deleteStudy(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   List<Study> findAll() throws Exception;
   List<Study> findAllIng() throws Exception;
   List<Study> findAllEnd() throws Exception;
@@ -28,8 +28,9 @@ public interface StudyDao {
   void updateOwner(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void updateGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void updateGuilderExpulsion(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
+  void updateGuilderExpulsionAll(int studyNo) throws Exception;
   void deleteGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
-  void deleteAllGuilder(int studyNo) throws Exception;
+  //void deleteAllGuilder(int studyNo) throws Exception;
 
   //--------------- [ 북마크 ] ----------------------------------------
   void insertBookmark(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
@@ -38,5 +39,8 @@ public interface StudyDao {
   Study findByBookmark(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception; // 상세
   void deleteBookmark(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
 
+  //------------------[구현중/스터디 삭제 대신 수정으로]-----------------------------------------
+  void updateStatusDelete(Study study) throws Exception;
+  void updateStatusEnd(Study study) throws Exception;
 
 }

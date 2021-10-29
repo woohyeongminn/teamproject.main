@@ -51,9 +51,10 @@ public class MyStudyExitHandler implements Command {
       }
 
       try {
-        studyDao.deleteGuilder(myStudy.getStudyNo(), member.getPerNo());
-        studyDao.deleteAllBookmark(myStudy.getStudyNo());
-        studyDao.deleteStudy(myStudy.getStudyNo(), member.getPerNo());
+        //studyDao.updateGuilderExpulsion(myStudy.getStudyNo(), member.getPerNo());
+        //studyDao.deleteAllBookmark(myStudy.getStudyNo());
+        //studyDao.deleteStudy(myStudy.getStudyNo(), member.getPerNo());
+        studyDao.updateStatusDelete(myStudy);
         sqlSession.commit();
         System.out.println(" >> 스터디가 삭제 되었습니다.");
         return;

@@ -2,7 +2,7 @@
 <%@page import="java.util.Collection"%>
 <%@page import="com.ogong.pms.dao.StudyDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +28,14 @@
 				</thread>
 		<tbody>
 			<%
-Collection<Study> studyList = studyDao.findAll();
+			Collection<Study> studyList = studyDao.findAll();
 
-for (Study study : studyList) {
-%>
+			for (Study study : studyList) {
+			%>
 			<tr>
 				<td><%=study.getStudyNo()%></td>
 				<td><%=study.getCountBookMember()%></td>
-				<td><a href='detail?no=%1$d'><%=study.getStudyTitle()%></a></td>
+				<td><a href='StudyDetail.jsp?no=<%=study.getStudyNo()%>'><%=study.getStudyTitle()%></a></td>
 				<td><%=study.getFaceName()%></td>
 				<td><%=study.getOwner().getPerNickname()%></td>
 				<td><%=study.getSubjectName()%></td>
@@ -43,17 +43,17 @@ for (Study study : studyList) {
 				<td><%=study.getCountMember()%></td>
 				<td><%=study.getNumberOfPeple()%></td>
 			</tr>
-			<%} %>
+			<%
+			}
+			%>
 		</tbody>
 	</table>
 </body>
 </html>
-<%
-    StudyDao studyDao;
+<%!StudyDao studyDao;
 
-    public void jspInit() {
-        ServletConfig config = getServletConfig();
-        ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-        studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    }
-%>
+  public void jspInit() {
+    ServletConfig config = getServletConfig();
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
+  }%>

@@ -43,65 +43,64 @@ public class GuilderEntrustHandler implements Command {
       return;
     }
 
+    System.out.println(" <구성원>"); 
     for (int i = 0; i < guilders.size(); i++) {
-      System.out.println(" 구성원 : " + guilders.get(i).getPerNickname());
+      System.out.println(guilders.get(i).getPerNickname());
     }
 
     System.out.println("----------------------");
     System.out.println();
 
-    if (guilders != null) {
-      String inputGuilderNick = Prompt.inputString(" >> 조장 권한을 위임해 줄 구성원을 선택하세요 : ");
+    String inputGuilderNick = Prompt.inputString(" >> 조장 권한을 위임해 줄 구성원을 선택하세요 : ");
 
-      for (Member entrustGuilder : guilders) {
+    for (Member entrustGuilder : guilders) {
+      if (entrustGuilder.getPerNickname().equals(inputGuilderNick)) {
+        System.out.println();
+        System.out.printf(
+            " '%s'님에게 조장 권한을 위임하시겠습니까?", entrustGuilder.getPerNickname());
 
-        if (entrustGuilder.getPerNickname().equals(inputGuilderNick)) {
+        String input = Prompt.inputString(" (네 / 아니오) ");
+
+        if (!input.equalsIgnoreCase("네")) {
           System.out.println();
-          System.out.printf(" '%s'님에게 조장 권한을 위임하시겠습니까?", entrustGuilder.getPerNickname());
-          String input = Prompt.inputString(" (네 / 아니오) ");
+          System.out.println(" >> 다시 진행해 주세요.");
+          return;
+        } 
 
-          if (!input.equalsIgnoreCase("네")) {
-            System.out.println();
-            System.out.println(" >> 다시 진행해 주세요.");
-            return;
-          } 
+        System.out.printf(" >> '%s'님이 조장이 되었습니다.\n", entrustGuilder.getPerNickname());
 
-          System.out.printf(" >> '%s'님이 조장이 되었습니다.\n", inputGuilderNick);
+        System.out.println();
+        String inputGuilder = Prompt.inputString(
+            " >> 구성원으로 다시 돌아가시겠습니까? (네 / 아니오) ");
 
-          System.out.println();
-          String inputGuilder = Prompt.inputString(
-              " >> 구성원으로 다시 돌아가시겠습니까? (네 / 아니오) ");
-
-          if (!inputGuilder.equalsIgnoreCase("네")) {
-            // 조장 위임 후 기존 길더는 길더에서 삭제되고 조장자리로 들어간다.
-            // 조장은 길더에 추가되지 않고 스터디에서 탈퇴된다.
-            try {
-              //studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
-              studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
-              studyDao.updateGuilderExpulsion(myStudy.getStudyNo(), member.getPerNo());
-              sqlSession.commit();
-            } catch (Exception e) {
-              System.out.println(" 해당 스터디 탈퇴 오류!");
-              sqlSession.rollback();
-            }
-            System.out.println();
-            System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
-            return;
-          }
-          try { 
-            studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo()); // 조장 바꿔주고
+        if (!inputGuilder.equalsIgnoreCase("네")) {
+          try {
+            //studyDao.deleteGuilder(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+            studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+            studyDao.updateGuilderExpulsion(myStudy.getStudyNo(), member.getPerNo());
             sqlSession.commit();
           } catch (Exception e) {
-            System.out.println(" 구성원 등록 오류!");
+            System.out.println(" 해당 스터디 탈퇴 오류!");
             sqlSession.rollback();
           }
           System.out.println();
-          System.out.println(" >> 구성원이 되었습니다.");
+          System.out.println(" >> 해당 스터디에서 탈퇴되었습니다.");
           return;
         }
+        try { 
+          studyDao.updateOwner(myStudy.getStudyNo(), entrustGuilder.getPerNo());
+          sqlSession.commit();
+        } catch (Exception e) {
+          System.out.println(" 구성원 등록 오류!");
+          sqlSession.rollback();
+        }
+        System.out.println();
+        System.out.println(" >> 구성원이 되었습니다.");
+        return;
       }
-      System.out.println();
-      System.out.println(" >> 구성원의 닉네임을 다시 입력하세요.");
     }
+    System.out.println();
+    System.out.println(" >> 구성원의 닉네임을 다시 입력하세요.");
+
   }
 }

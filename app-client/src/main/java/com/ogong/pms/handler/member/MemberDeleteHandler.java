@@ -89,7 +89,7 @@ public class MemberDeleteHandler implements Command {
       for (int i = 0; i < studyList.size(); i++) {
         for (Member mem : studyList.get(i).getMembers()) {
           if (mem.getPerNo() == member.getPerNo()) {
-            studyDao.deleteGuilder(studyList.get(i).getStudyNo(), mem.getPerNo());
+            studyDao.updateGuilderExpulsion(studyList.get(i).getStudyNo(), mem.getPerNo());
           }
         }
       }

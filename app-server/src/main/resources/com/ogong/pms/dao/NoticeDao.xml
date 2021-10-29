@@ -22,8 +22,8 @@
       n.title,
       n.content,
       n.created_dt,
-      nf.notice_file_no,
-      nf.filepath
+      nf.notice_file_no notice_file_no,
+      nf.filepath filepath
     from
       notice n
       left outer join notice_file nf on n.notice_no=nf.notice_no
@@ -56,6 +56,12 @@
   <update id="updateContent" parameterType="AdminNotice">
     update notice set
       content=#{adminNotiContent}
+    where notice_no=#{adminNotiNo}
+  </update>
+  
+  <update id="updateFilepath" parameterType="AdminNotice">
+    update notice set
+      filepath=#{adminNotiFile}
     where notice_no=#{adminNotiNo}
   </update>
   
