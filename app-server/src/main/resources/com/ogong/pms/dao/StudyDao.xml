@@ -16,7 +16,7 @@
     <result column="face_name" property="faceName"/>
     <result column="introduction" property="introduction"/>
     <result column="created_dt" property="registeredDate"/>
-    <result column="study_score" property="score"/>
+    <result column="study_point" property="point"/>
     <result column="count_guilder" property="countMember"/>
     <result column="count_wating_guilder" property="watingCountMember"/>
     <result column="count_bookmark" property="countBookMember"/>
@@ -48,7 +48,7 @@
      sfs.name face_name,
      s.introduction,
      s.created_dt,
-     s.score study_score,
+     s.point study_point,
      s.member_no owner_no,
      m.nickname owner_name,
     (select count(*) from study_guilder where study_no=s.study_no and status=2) count_guilder,
@@ -89,7 +89,7 @@
      sfs.name face_name,
      s.introduction,
      s.created_dt,
-     s.score study_score,
+     s.point study_point,
      s.member_no owner_no,
      m.nickname owner_name,
      m2.member_no member_no,
