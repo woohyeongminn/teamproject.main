@@ -47,7 +47,6 @@ public class AdminNoticeAddHandler extends HttpServlet {
 
     adminNotice.setAdminNotiTitle(request.getParameter("title"));
     adminNotice.setAdminNotiContent(request.getParameter("content"));
-
     adminNotice.setAdminNotiFile(request.getParameter("filepath"));
     adminNotice.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
 

@@ -74,6 +74,9 @@ public class AdminNoticeListHandler extends GenericServlet {
           out.printf("<td><label for='title'>제목</label>  ㅣ  %s</td>", noticeList.getAdminNotiTitle());
           out.println("</tr>");
           out.println("<tr>");
+          out.printf("<td><label for='content'>내용</label>  ㅣ  %s</td>", noticeList.getAdminNotiContent());
+          out.println("</tr>");
+          out.println("<tr>");
           out.printf("<td><label for='filepath'>파일</label>  ㅣ  %s</td>", noticeList.getAdminNotiFile());
           out.println("</tr>");
           out.println("<tr>");
@@ -85,6 +88,9 @@ public class AdminNoticeListHandler extends GenericServlet {
           out.printf("<td><a href='detail?no=%1$d'>( %d )</a></td>", noticeList.getAdminNotiNo());
           out.println("<tr>");
           out.printf("<td><label for='title'>제목</label>  ㅣ  %s</td>", noticeList.getAdminNotiTitle());
+          out.println("</tr>");
+          out.println("<tr>");
+          out.printf("<td><label for='content'>내용</label>  ㅣ  %s</td>", noticeList.getAdminNotiContent());
           out.println("</tr>");
           out.println("<tr>");
           out.printf("<td><label for='registeredDate'>등록일</label>ㅣ  %s</td>", noticeList.getAdminNotiRegisteredDate());
