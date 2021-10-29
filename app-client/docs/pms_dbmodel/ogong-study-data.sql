@@ -14,7 +14,7 @@ insert into study_face_status(face_no, name) values(3, '대면/비대면');
 -- 스터디그룹 test 값
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(1, '삼성뿌셔', 3, 5, 3, '취업 뿌셔뿌셔', '2021-1-1', 1);
+values(1, '삼성뿌셔', 3, 6, 3, '취업 뿌셔뿌셔', '2021-1-1', 1);
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
