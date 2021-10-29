@@ -52,13 +52,13 @@ insert into study_guilder(study_no, member_no, status) values(1, 4, 1);
 
 -------------------------------------------------------------------------------------------------
 -- 캘린더 중요도 값
-insert study_calender_importance(importance_no, importance) values(5, '★☆☆☆☆');
-insert study_calender_importance(importance_no, importance) values(4, '★★☆☆☆');
-insert study_calender_importance(importance_no, importance) values(3, '★★★☆☆');
-insert study_calender_importance(importance_no, importance) values(2, '★★★★☆');
-insert study_calender_importance(importance_no, importance) values(1, '★★★★★');
+insert into study_calender_importance(importance_no, importance) values(5, '★☆☆☆☆');
+insert into study_calender_importance(importance_no, importance) values(4, '★★☆☆☆');
+insert into study_calender_importance(importance_no, importance) values(3, '★★★☆☆');
+insert into study_calender_importance(importance_no, importance) values(2, '★★★★☆');
+insert into study_calender_importance(importance_no, importance) values(1, '★★★★★');
 
-
+-- 포인트 테스트값
 insert into point(member_no, study_no, point) values(1, 1, 100);
 
 -- 스터디 전체 조회 (북마크한 사람들 카운트만, 구성원들 카운드만)
