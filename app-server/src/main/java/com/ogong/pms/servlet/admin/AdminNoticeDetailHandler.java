@@ -50,8 +50,6 @@ public class AdminNoticeDetailHandler extends GenericServlet {
     out.println("<body>");
     out.println("<h1> ▶ 공지 상세 </h1>");
     out.println("<hr>");
-    //    out.println("<table border='2'>");
-
     out.println("<fieldset>");
     out.println("<legend><b> 🔔 공지게시글 상세 </b></legend>");
     out.println("<table>");
