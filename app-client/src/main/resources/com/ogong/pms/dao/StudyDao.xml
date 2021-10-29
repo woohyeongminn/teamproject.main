@@ -133,6 +133,22 @@
     study_no=#{studyNo}
   </update>
   
+   <update id="updateStatusEnd" parameterType="Study">
+  update study set
+    status=2
+   where
+    study_no=#{studyNo}
+  </update>
+  
+  <update id="updateStatusDelete" parameterType="Study">
+  update study set
+    status=3
+   where
+    study_no=#{studyNo}
+  </update>
+  
+  
+  
   <!--  ===[스터디 삭제(북마크)]=== -->
   <delete id="deleteAllBookmark" parameterType="int">
   delete from study_bookmark
@@ -148,16 +164,18 @@
   <!--  ===[스터디 검색]=== -->
   <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
    <include refid="select1"/>
-   where s.name like(concat('%',#{keyword},'%'))
+   where (s.name like(concat('%',#{keyword},'%'))
      or ss.name like (concat('%',#{keyword},'%'))
-     or s.area like (concat('%',#{keyword},'%'))
+     or s.area like (concat('%',#{keyword},'%')))
+     and (s.status=1 or s.status=2)
     group by s.study_no
-    order by s.study_no
+    order by s.created_dt
   </select>
   
   <!--  ===[전체 스터디 목록(전체)]=== -->
   <select id="findAll" resultMap="StudyMap">
     <include refid="select1"/>
+    where s.status=1 or s.status=2
       group by s.study_no
       order by s.created_dt
   </select>
@@ -170,7 +188,7 @@
       order by s.created_dt
   </select>
   
-   <!--  ===[전체 스터디 목록(완료 중)]=== -->
+   <!--  ===[전체 스터디 목록(완료)]=== -->
   <select id="findAllEnd" resultMap="StudyMap">
     <include refid="select1"/>
     where s.status=2
@@ -182,14 +200,16 @@
   <select id="findByNo" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
      where
-       s.study_no=#{studyNo}
+       s.study_no=#{studyNo} and (s.status=1 or s.status=2)
   </select>
   
   <!--  ===[내스터디 상세]=== -->
   <select id="findByMyNo" resultMap="StudyMap" parameterType="map"> 
     <include refid="select1"/>
     where
-      s.study_no=#{studyNo} and (s.member_no=#{memberNo} or sg.member_no=#{memberNo})
+      s.study_no=#{studyNo} 
+       and (s.member_no=#{memberNo} or sg.member_no=#{memberNo}) 
+       and (s.status=1 or s.status=2) 
   </select>
 
    <!--  ===========================[구성원]=========================== -->
@@ -234,6 +254,14 @@
    status=3
   where
    study_no=#{studyNo} and member_no=#{memberNo}
+  </update>
+  
+  <!--  ===[구성원 전체 탈퇴시키기(삭제x상태변경)]=== -->
+  <update id="updateGuilderExpulsionAll" parameterType="int">
+  update study_guilder set 
+   status=3
+  where
+   study_no=#{studyNo}
   </update>
   
 <!--  ===[구성원에서 삭제하기]=== -->

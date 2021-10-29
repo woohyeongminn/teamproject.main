@@ -21,3 +21,6 @@ values(6,1,'2021-10-25',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
 values(7,1,'2021-10-25',2);
+
+-- 포인트 테스트값
+insert into point(member_no, study_no, point) values(1, 1, 100);

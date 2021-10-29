@@ -32,6 +32,10 @@ public class StudyJoinHandler implements Command {
 
     Study study = studyDao.findByNo(inputNo);
 
+    if (study.getStatus()==2) {
+      System.out.println(" >> 완료된 스터디 입니다.");
+      return;
+    }
     List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
     study.setWatingMember(waitingGuilder);
 

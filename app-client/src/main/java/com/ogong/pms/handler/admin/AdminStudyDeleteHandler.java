@@ -46,9 +46,9 @@ public class AdminStudyDeleteHandler implements Command {
 
     try {
 
-      studyDao.deleteAllGuilder(study.getStudyNo());
-      studyDao.deleteAllBookmark(study.getStudyNo());
-      studyDao.deleteStudy(study.getStudyNo(), study.getOwner().getPerNo());
+      //      studyDao.deleteAllGuilder(study.getStudyNo());
+      //      studyDao.deleteAllBookmark(study.getStudyNo());
+      studyDao.updateStatusDelete(study);
       sqlSession.commit();
       System.out.println(" >> 스터디를 삭제하였습니다.");
     } catch (Exception e) {
