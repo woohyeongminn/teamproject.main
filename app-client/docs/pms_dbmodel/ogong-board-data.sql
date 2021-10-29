@@ -29,7 +29,7 @@ order by n.notice_no asc
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
 values(1, 1, '문의합니다.', '예약 방법에 대해 알고 싶습니다.', 0, '2020-02-01', 1);
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
-values(2, 7, '가게 등록..', '가게 승인 요청 어떻게 하나요?', 0, '2020-12-10', 1);
+values(2, 9, '가게 등록..', '가게 승인 요청 어떻게 하나요?', 0, '2020-12-10', 1);
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
 values(3, 3, '관리자님', '이메일로 문의 드리고 싶어요!', 0, '2021-04-18', 2);
 
