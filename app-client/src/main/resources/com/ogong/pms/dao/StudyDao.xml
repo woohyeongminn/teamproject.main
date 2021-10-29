@@ -66,7 +66,7 @@
      left outer join member m2 on sg.member_no=m2.member_no
      left outer join study_bookmark sb on s.study_no=sb.study_no
      left outer join point p on s.study_no=p.study_no
-     
+           
   </sql>
   
   <!--  ===[구성원 출력 중복]=== -->
@@ -155,13 +155,29 @@
     order by s.study_no
   </select>
   
-  <!--  ===[전체 스터디 목록]=== -->
+  <!--  ===[전체 스터디 목록(전체)]=== -->
   <select id="findAll" resultMap="StudyMap">
     <include refid="select1"/>
       group by s.study_no
-      order by s.study_no
+      order by s.created_dt
   </select>
-
+  
+  <!--  ===[전체 스터디 목록(진행 중)]=== -->
+  <select id="findAllIng" resultMap="StudyMap">
+    <include refid="select1"/>
+    where s.status=1
+      group by s.study_no
+      order by s.created_dt
+  </select>
+  
+   <!--  ===[전체 스터디 목록(완료 중)]=== -->
+  <select id="findAllEnd" resultMap="StudyMap">
+    <include refid="select1"/>
+    where s.status=2
+      group by s.study_no
+      order by s.created_dt
+  </select>
+  
  <!--  ===[스터디 상세]=== -->
   <select id="findByNo" resultMap="StudyMap" parameterType="int">
     <include refid="select1"/>
