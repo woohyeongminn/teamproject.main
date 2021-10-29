@@ -13,6 +13,8 @@ public interface StudyDao {
   void deleteAllBookmark(int studyNo) throws Exception;
   void deleteStudy(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   List<Study> findAll() throws Exception;
+  List<Study> findAllIng() throws Exception;
+  List<Study> findAllEnd() throws Exception;
   List<Study> findByKeyword(String keyword) throws Exception;
   Study findByNo(int studyinputNo) throws Exception;
 
