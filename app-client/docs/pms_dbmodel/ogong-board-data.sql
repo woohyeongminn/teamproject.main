@@ -13,12 +13,12 @@ values(3, 'ID 및 PW 찾기에 관하여',
 insert into notice_file(notice_file_no, notice_no, filepath)
 values(1, 1, 'gif');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(3, 3, 'jpeg');
+values(2, 3, 'jpeg');
 
 -- 확인용
 /*
 select
- n.notice_no,n.title,n.content,n.create_dt,nf.notice_file_no,nf.filepath 
+ n.notice_no,n.title,n.content,n.created_dt,nf.notice_file_no,nf.filepath 
 from notice n left
  outer join notice_file nf on n.notice_no=nf.notice_no 
 order by n.notice_no asc
@@ -29,7 +29,7 @@ order by n.notice_no asc
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
 values(1, 1, '문의합니다.', '예약 방법에 대해 알고 싶습니다.', 0, '2020-02-01', 1);
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
-values(2, 7, '가게 등록..', '가게 승인 요청 어떻게 하나요?', 0, '2020-12-10', 1);
+values(2, 9, '가게 등록..', '가게 승인 요청 어떻게 하나요?', 0, '2020-12-10', 1);
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
 values(3, 3, '관리자님', '이메일로 문의 드리고 싶어요!', 0, '2021-04-18', 2);
 
