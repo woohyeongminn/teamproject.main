@@ -1,4 +1,3 @@
-
 --스터디 조장, 구성원 테스트값 보면서 넣어야함
 
 insert into study_board (title, content, view_ct, created_dt, member_no, study_no)
