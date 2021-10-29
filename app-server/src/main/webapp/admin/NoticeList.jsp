@@ -17,25 +17,33 @@
   }
   </style>
 </head>
-
 <body>
-<h1> ▶ 공지 목록 </h1>
-<hr>
+<!-- <h1> ▶ 공지 목록 </h1> -->
 <fieldset>
-<legend><b> 🔔 공지게시글 목록 </b></legend>
-<table>
+<legend ><b> 🔔 공지게시글 목록 </b></legend>
+<hr>
+<table class="table table-responsive">
+<thead>
+<tr>
+<th>번호</th>
+<th>제목</th>
+<th>내용</th>
+<th>파일</th>
+<th>등록일</th>
+</tr>
+</thead>
+<tbody>
+<!--<caption>공지사항입니다.</caption>-->
 <c:forEach items="${adminNoticeList}" var="noticeList">
 <tr>
-<td><a href='detail?no=${noticeList.adminNotiNo}'>( ${noticeList.adminNotiNo} )</a></td><tr>
-<td>제목ㅣ${noticeList.adminNotiTitle}</td></tr>
-<tr>
-<td>내용ㅣ${noticeList.adminNotiContent}</td></tr>
-<tr>
-<td>파일ㅣ${noticeList.adminNotiFile}</td></tr>
-<tr>
-<td>등록일ㅣ${noticeList.adminNotiRegisteredDate}</td></tr>
-<tr>
+	<td>( ${noticeList.adminNotiNo} )</td>
+	<td><a href='detail?no=${noticeList.adminNotiNo}'>${noticeList.adminNotiTitle}</a></td>
+	<td>${noticeList.adminNotiContent}</td>
+	<td>${noticeList.adminNotiFile}</td>
+	<td>${noticeList.adminNotiRegisteredDate}</td>
+</tr>
 </c:forEach>
+</tbody>
 </table>
 </fieldset>
 </body>
