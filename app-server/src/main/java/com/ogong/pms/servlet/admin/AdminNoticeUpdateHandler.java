@@ -34,34 +34,62 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
+    out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("  <title>공지게시판</title>");
+    out.println("   <title>공지게시판</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("  <style>");
+    out.println("  label {");
+    out.println("    margin-right: 5px;");
+    out.println("    text-align: center;");
+    out.println("    display: inline;");
+    out.println("    width: 60px;");
+    out.println("  }");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1> ▶ 공지 변경 </h1>");
     out.println("<hr>");
+
+    out.println("<fieldset>");
+    out.println("<legend><b> 🔔 공지게시글 수정 </b></legend>");
+    out.println("<table>");
 
     try {
       int noticeNo = Integer.parseInt(request.getParameter("no"));
 
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
-      notice.setAdminNotiTitle(request.getParameter("title"));
+      out.println("<tr>");
+      out.printf("<td><label for='f-no'>( '%d' )</label></td><br>\n", notice.getAdminNotiNo());
+      out.println("</tr>");
+      out.println("<tr>");
+      out.printf("<td><label for='f-title'>제목</label> ㅣ <input id='f-title' type='text' name='title' value='%s'></td><br>\n", notice.getAdminNotiTitle());
+      out.println("</tr>");
+      out.println("<tr>");
+      out.printf("<td><label for='f-content'>내용</label> ㅣ  <input id='f-content' type='text' name='content' value='%s'></td><br>\n", notice.getAdminNotiContent());
+      out.println("</tr>");
+      out.println("<tr>");
+      out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='text' name='filepath' value='%s'></td><br>\n", notice.getAdminNotiFile());
+      out.println("</tr>");
+
+      //      notice.setAdminNotiTitle(request.getParameter("title"));
       //      noticeDao.updateTitle(notice);
       //      sqlSession.commit();
 
-      notice.setAdminNotiContent(request.getParameter("content"));
+      //      notice.setAdminNotiContent(request.getParameter("content"));
       //      noticeDao.updateContent(notice);
       //      sqlSession.commit();
 
       if (notice.getAdminNotiFile() != null) {
         out.println(" >> 이미 등록된 첨부파일이 있습니다.<br>");
-      } else {
-        notice.setAdminNotiFile(request.getParameter("filepath"));
-        //        noticeDao.insertFilepath(notice);
-        //        sqlSession.commit();
       }
+      //      else {
+      //        notice.setAdminNotiFile(request.getParameter("filepath"));
+      //        noticeDao.insertFilepath(notice);
+      //        sqlSession.commit();
+      //      }
 
       noticeDao.updateTitle(notice);
       noticeDao.updateContent(notice);
@@ -70,10 +98,13 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
 
       out.println(" >> 공지가 변경되었습니다.<br>");
 
+      out.println("</table>");
+      out.println("</fieldset>");
       out.println("<button><a href='list'>목록</a></button>");
 
     } catch (Exception e) {
-      throw new ServletException(e);
+      e.printStackTrace();
+      //      throw new ServletException(e);
     }
 
     out.println("</body>");
