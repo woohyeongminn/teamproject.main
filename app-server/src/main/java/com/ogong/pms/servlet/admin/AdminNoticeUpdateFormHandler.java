@@ -58,7 +58,7 @@ public class AdminNoticeUpdateFormHandler extends GenericServlet {
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
       out.println("<tr>");
-      out.printf("<td><label for='f-no'>( %d )</label></td><br>\n", notice.getAdminNotiNo());
+      out.printf("<td><label for='f-no'>( %d )</label><input id='f-no' type='hidden' name='no' value='%1$d'></td><br>\n", notice.getAdminNotiNo());
       out.println("</tr>");
       out.println("<tr>");
       out.printf("<td><label for='f-title'>제목</label> ㅣ <input id='f-title' type='text' name='title' value='%s'></td><br>\n", notice.getAdminNotiTitle());
