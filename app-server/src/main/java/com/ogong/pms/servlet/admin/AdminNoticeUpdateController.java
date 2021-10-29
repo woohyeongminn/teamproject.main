@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 
 @WebServlet("/adminNotice/update")
-public class AdminNoticeUpdateHandler extends HttpServlet {
+public class AdminNoticeUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -31,20 +30,16 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    int noticeNo = Integer.parseInt(request.getParameter("no"));
-
     try {
-
+      int noticeNo = Integer.parseInt(request.getParameter("no"));
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
       if (notice == null) {
         throw new Exception(" >> 해당 번호의 공지글을 찾을 수 없습니다.");
-      } else {
+      } 
 
         notice.setAdminNotiTitle(request.getParameter("title"));
-
         notice.setAdminNotiContent(request.getParameter("content"));
-
         notice.setAdminNotiFile(request.getParameter("filepath"));
 
         noticeDao.updateTitle(notice);
@@ -52,43 +47,12 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
         noticeDao.deletenoticefile(noticeNo);
         noticeDao.insertFilepath(notice);
         sqlSession.commit();
-      }
+        
       response.sendRedirect("list");
 
-      //      out.println(" >> 공지가 변경되었습니다.<br>");
-      //      out.println("<button><a href='list'>목록</a></button>");
-
     } catch (Exception e) {
-      response.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = response.getWriter();
-
-      out.println("<!DOCTYPE html>");
-      out.println("<html>");
-      out.println("<head>");
-      out.println("   <title>공지게시판</title>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("  <style>");
-      out.println("  label {");
-      out.println("    margin-right: 5px;");
-      out.println("    text-align: center;");
-      out.println("    display: inline;");
-      out.println("    width: 60px;");
-      out.println("  }");
-      out.println("  </style>");
-      out.println("</head>");
-      out.println("<body>");
-      out.println("<h1> ▶ 공지 변경 오류 </h1>");
-      out.println("<hr>");
-      out.println("<fieldset>");
-      out.println("<legend><b> 🔔 공지게시글 수정 오류 </b></legend>");
-      out.println("<table>");
-      out.println("</table>");
-      out.println("</fieldset>");
-      out.println("</form>");
-      out.println("</body>");
-      out.println("</html>");
-      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
