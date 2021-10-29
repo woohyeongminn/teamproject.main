@@ -56,43 +56,41 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
     out.println("<legend><b> 🔔 공지게시글 수정 </b></legend>");
     out.println("<table>");
 
+    int noticeNo = Integer.parseInt(request.getParameter("no"));
     try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
+      out.println("test.......");
 
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
-      out.println("<tr>");
-      out.printf("<td><label for='f-no'>( '%d' )</label></td><br>\n", notice.getAdminNotiNo());
-      out.println("</tr>");
-      out.println("<tr>");
-      out.printf("<td><label for='f-title'>제목</label> ㅣ <input id='f-title' type='text' name='title' value='%s'></td><br>\n", notice.getAdminNotiTitle());
-      out.println("</tr>");
-      out.println("<tr>");
-      out.printf("<td><label for='f-content'>내용</label> ㅣ  <input id='f-content' type='text' name='content' value='%s'></td><br>\n", notice.getAdminNotiContent());
-      out.println("</tr>");
-      out.println("<tr>");
-      out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='text' name='filepath' value='%s'></td><br>\n", notice.getAdminNotiFile());
-      out.println("</tr>");
+      //      out.println("<form action='update'>");
 
-      //      notice.setAdminNotiTitle(request.getParameter("title"));
+      notice.setAdminNotiTitle(request.getParameter("title"));
       //      noticeDao.updateTitle(notice);
       //      sqlSession.commit();
 
-      //      notice.setAdminNotiContent(request.getParameter("content"));
+      notice.setAdminNotiContent(request.getParameter("content"));
       //      noticeDao.updateContent(notice);
       //      sqlSession.commit();
 
       if (notice.getAdminNotiFile() != null) {
         out.println(" >> 이미 등록된 첨부파일이 있습니다.<br>");
+        noticeDao.updateTitle(notice);
+        noticeDao.updateContent(notice);
+        sqlSession.commit();
+
+        out.println(" >> 공지가 변경되었습니다.<br>");
+
+        return;
       }
       //      else {
-      //        notice.setAdminNotiFile(request.getParameter("filepath"));
+      notice.setAdminNotiFile(request.getParameter("filepath"));
       //        noticeDao.insertFilepath(notice);
       //        sqlSession.commit();
       //      }
 
       noticeDao.updateTitle(notice);
       noticeDao.updateContent(notice);
+      noticeDao.deletenoticefile(noticeNo);
       noticeDao.insertFilepath(notice);
       sqlSession.commit();
 
@@ -101,10 +99,9 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
       out.println("</table>");
       out.println("</fieldset>");
       out.println("<button><a href='list'>목록</a></button>");
-
+      out.println("</form>");
     } catch (Exception e) {
-      e.printStackTrace();
-      //      throw new ServletException(e);
+      throw new ServletException(e);
     }
 
     out.println("</body>");

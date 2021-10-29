@@ -44,8 +44,6 @@ insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
 values(8, 'JAVA', 5, 10, 1, '공부가 제일 좋아', '2021-7-6', 2, 2);
 
-update study set status=1;
-update study set whether_report=1;
 -------------------------------------------------------------------------------------------------
 
 -- 스터디 북마크 test 값
@@ -61,9 +59,6 @@ insert into study_calender_importance(importance_no, importance) values(4, '★�
 insert into study_calender_importance(importance_no, importance) values(3, '★★★☆☆');
 insert into study_calender_importance(importance_no, importance) values(2, '★★★★☆');
 insert into study_calender_importance(importance_no, importance) values(1, '★★★★★');
-
--- 포인트 테스트값
-insert into point(member_no, study_no, point) values(1, 1, 100);
 
 -- 스터디 전체 조회 (북마크한 사람들 카운트만, 구성원들 카운드만)
 /*
