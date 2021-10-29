@@ -32,8 +32,6 @@ public class GuilderDeleteHandler implements Command {
     List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
     myStudy.setMembers(guilders);
 
-    List<Member> guilderList = myStudy.getMembers();
-
     if (myStudy.getMembers().isEmpty()) {
       System.out.println(" >> 탈퇴시킬 구성원이 없습니다.");
       return;
@@ -43,7 +41,7 @@ public class GuilderDeleteHandler implements Command {
     System.out.println();
     String inputGuilderName = Prompt.inputString(" >> 탈퇴시킬 구성원의 닉네임을 입력하세요 : ");
 
-    for (Member guilderMember : guilderList) { 
+    for (Member guilderMember : myStudy.getMembers()) { 
 
       if (guilderMember.getPerNickname().equals(inputGuilderName)) {
         String input = Prompt.inputString("\n 정말 탈퇴시키겠습니까? (네 / 아니오) ");
