@@ -14,7 +14,7 @@ insert into study_face_status(face_no, name) values(3, '대면/비대면');
 -- 스터디그룹 test 값
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(1, '삼성뿌셔', 3, 6, 3, '취업 뿌셔뿌셔', '2021-1-1', 1);
+values(1, '삼성뿌셔', 3, 5, 3, '취업 뿌셔뿌셔', '2021-1-1', 1);
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
@@ -39,6 +39,10 @@ values(6, '불법광고', 4, 20, 2, '흑채 팔아요~', '2021-3-3', 7, 2);
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
 values(7, 'MVC', 5, 10, 1, 'MBC', '2021-6-6', 1);
+
+insert into study(
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
+values(8, 'JAVA', 5, 10, 1, '공부가 제일 좋아', '2021-7-6', 2, 2);
 
 update study set status=1;
 update study set whether_report=1;

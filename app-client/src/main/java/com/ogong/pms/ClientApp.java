@@ -130,6 +130,8 @@ import com.ogong.pms.handler.myStudy.todo.ToDoList;
 import com.ogong.pms.handler.myStudy.todo.ToDoUpdate;
 import com.ogong.pms.handler.study.StudyAddHandler;
 import com.ogong.pms.handler.study.StudyDetailHandler;
+import com.ogong.pms.handler.study.StudyEndListHandler;
+import com.ogong.pms.handler.study.StudyIngListHandler;
 import com.ogong.pms.handler.study.StudyJoinHandler;
 import com.ogong.pms.handler.study.StudyListHandler;
 import com.ogong.pms.handler.study.StudySearchHandler;
@@ -284,6 +286,8 @@ public class ClientApp {
 
     commandMap.put("/study/add", new StudyAddHandler(studyDao, sqlSession));
     commandMap.put("/study/list", new StudyListHandler(studyDao));
+    commandMap.put("/studying/list", new StudyIngListHandler(studyDao));
+    commandMap.put("/studyend/list", new StudyEndListHandler(studyDao));
     commandMap.put("/study/detail", new StudyDetailHandler(studyDao));
     commandMap.put("/study/search", new StudySearchHandler(studyDao));
     commandMap.put("/study/join", new StudyJoinHandler(studyDao, sqlSession));
