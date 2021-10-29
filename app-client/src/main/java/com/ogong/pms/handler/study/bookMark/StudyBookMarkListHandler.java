@@ -41,20 +41,28 @@ public class StudyBookMarkListHandler implements Command {
             study.getStudyNo(),
             study.getStudyTitle());
         System.out.println();
+      } else {
+
+        System.out.printf( " (%d)", study.getStudyNo());
+
+        if(study.getCountMember() != study.getNumberOfPeple()) {
+          System.out.printf(" [모집중] " );
+        } else {
+          System.out.printf(" [모집완료] " );
+        }
+
+
+        System.out.printf("🌟%d \n [%s] | 분야 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
+            study.getCountBookMember(),
+            study.getStudyTitle(),
+            study.getSubjectName(),
+            study.getCountMember(),
+            study.getNumberOfPeple(),
+            study.getOwner().getPerNickname(),
+            study.getFaceName());
+        System.out.println();
+        count++;
       }
-      //      List<Member> bookMem = studyDao.findByBookmarkAll(study.getStudyNo());
-      //      study.setBookMarkMember(bookMem);
-      System.out.printf(" (%d) 🌟%d \n [%s] | 분야 : %s | 인원수 : %s/%s명 | 조장 : %s | 대면/비대면 : %s\n",
-          study.getStudyNo(),
-          study.getCountBookMember(),
-          study.getStudyTitle(),
-          study.getSubjectName(),
-          study.getCountMember(),
-          study.getNumberOfPeple(),
-          study.getOwner().getPerNickname(),
-          study.getFaceName());
-      System.out.println();
-      count++;
     }
 
     if (count == 0) {

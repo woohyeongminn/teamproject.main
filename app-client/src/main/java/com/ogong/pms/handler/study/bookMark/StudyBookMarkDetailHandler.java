@@ -33,7 +33,15 @@ public class StudyBookMarkDetailHandler implements Command {
       return;
     }
 
-    System.out.printf(" \n (%s) 🌟%d\n", study.getStudyNo(), study.getCountBookMember());
+    System.out.printf( "\n (%d)", study.getStudyNo());
+
+    if(study.getCountMember() != study.getNumberOfPeple()) {
+      System.out.printf(" [모집중] " );
+    } else {
+      System.out.printf(" [모집완료] " );
+    }
+
+    System.out.printf(" 🌟%d\n", study.getCountBookMember());
     System.out.printf(" [%s]\n", study.getStudyTitle());
     System.out.printf(" >> 조장 : %s\n", study.getOwner().getPerNickname());
     System.out.printf(" >> 분야 : %s\n", study.getSubjectName());

@@ -56,9 +56,8 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
     out.println("<legend><b> 🔔 공지게시글 수정 </b></legend>");
     out.println("<table>");
 
-    int noticeNo = Integer.parseInt(request.getParameter("no"));
     try {
-      out.println("test.......");
+      int noticeNo = Integer.parseInt(request.getParameter("no"));
 
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
@@ -74,13 +73,6 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
 
       if (notice.getAdminNotiFile() != null) {
         out.println(" >> 이미 등록된 첨부파일이 있습니다.<br>");
-        noticeDao.updateTitle(notice);
-        noticeDao.updateContent(notice);
-        sqlSession.commit();
-
-        out.println(" >> 공지가 변경되었습니다.<br>");
-
-        return;
       }
       //      else {
       notice.setAdminNotiFile(request.getParameter("filepath"));
@@ -90,7 +82,6 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
 
       noticeDao.updateTitle(notice);
       noticeDao.updateContent(notice);
-      noticeDao.deletenoticefile(noticeNo);
       noticeDao.insertFilepath(notice);
       sqlSession.commit();
 
