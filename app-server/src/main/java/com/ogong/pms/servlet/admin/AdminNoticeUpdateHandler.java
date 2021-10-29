@@ -74,11 +74,11 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
       out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='text' name='filepath' value='%s'></td><br>\n", notice.getAdminNotiFile());
       out.println("</tr>");
 
-      //      notice.setAdminNotiTitle(request.getParameter("title"));
+      notice.setAdminNotiTitle(request.getParameter("title"));
       //      noticeDao.updateTitle(notice);
       //      sqlSession.commit();
 
-      //      notice.setAdminNotiContent(request.getParameter("content"));
+      notice.setAdminNotiContent(request.getParameter("content"));
       //      noticeDao.updateContent(notice);
       //      sqlSession.commit();
 
@@ -86,7 +86,7 @@ public class AdminNoticeUpdateHandler extends HttpServlet {
         out.println(" >> 이미 등록된 첨부파일이 있습니다.<br>");
       }
       //      else {
-      //        notice.setAdminNotiFile(request.getParameter("filepath"));
+      notice.setAdminNotiFile(request.getParameter("filepath"));
       //        noticeDao.insertFilepath(notice);
       //        sqlSession.commit();
       //      }
