@@ -831,6 +831,9 @@ ALTER TABLE point
       point_no -- 점수번호
     );
 
+ALTER TABLE point
+  MODIFY COLUMN point_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '점수번호';
+
 -- 스터디카페룸사진
 ALTER TABLE studycafe_room_photo
   ADD CONSTRAINT FK_studycafe_room_TO_studycafe_room_photo -- 스터디카페룸 -> 스터디카페룸사진
