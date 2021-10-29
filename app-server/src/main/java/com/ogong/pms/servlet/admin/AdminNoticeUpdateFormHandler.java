@@ -34,15 +34,15 @@ public class AdminNoticeUpdateFormHandler extends GenericServlet {
     out.println("<!DOCTYPE html>");
     out.println("<html>");
     out.println("<head>");
-    out.println("   <title>공지게시판</title>");
-    out.println("  <style>");
-    out.println("  label {");
-    out.println("    margin-right: 5px;");
-    out.println("    text-align: center;");
-    out.println("    display: inline;");
-    out.println("    width: 60px;");
-    out.println("  }");
-    out.println("  </style>");
+    out.println("<title>공지게시판</title>");
+    out.println("<style>");
+    out.println("label {");
+    out.println("margin-right: 5px;");
+    out.println("text-align: center;");
+    out.println("display: inline;");
+    out.println("width: 60px;");
+    out.println("}");
+    out.println("</style>");
     out.println("</head>");
     out.println("<body>");
     out.println("<h1> ▶ 공지 변경 </h1>");
@@ -52,22 +52,28 @@ public class AdminNoticeUpdateFormHandler extends GenericServlet {
     out.println("<legend><b> 🔔 공지게시글 수정 </b></legend>");
     out.println("<table>");
 
+    int noticeNo = Integer.parseInt(request.getParameter("no"));
     try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
 
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
       out.println("<tr>");
-      out.printf("<td><label for='f-no'>( %d )</label><input id='f-no' type='hidden' name='no' value='%1$d'></td><br>\n", notice.getAdminNotiNo());
+      out.printf("<td><label for='f-no'>( %d )</label><input id='f-no' type='hidden' name='no' value='%1$d'></td>", notice.getAdminNotiNo());
       out.println("</tr>");
       out.println("<tr>");
-      out.printf("<td><label for='f-title'>제목</label> ㅣ <input id='f-title' type='text' name='title' value='%s'></td><br>\n", notice.getAdminNotiTitle());
+      out.printf("<td><label for='f-title'>제목</label> ㅣ <input id='f-title' type='text' name='title' value='%s'></td>", notice.getAdminNotiTitle());
       out.println("</tr>");
       out.println("<tr>");
-      out.printf("<td><label for='f-content'>내용</label> ㅣ  <input id='f-content' type='text' name='content' value='%s'></td><br>\n", notice.getAdminNotiContent());
+      out.printf("<td><label for='f-content'>내용</label> ㅣ  <input id='f-content' type='text' name='content' value='%s'></td>", notice.getAdminNotiContent());
       out.println("</tr>");
       out.println("<tr>");
-      out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='text' name='filepath' value='%s'></td><br>\n", notice.getAdminNotiFile());
+      if (!notice.getAdminNotiFile().equals("")) {
+        out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='image' name='filepath' value='%s'></td>", notice.getAdminNotiFile());
+        out.printf("<td><input id='f-filepath' type='file' name='filepath' value='%s'></td>", notice.getAdminNotiFile());
+      }
+      else {
+        out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='file' name='filepath' value='%s'></td>", notice.getAdminNotiFile());
+      }
       out.println("</tr>");
       out.println("</table>");
       out.println("<input type='submit'/>");
