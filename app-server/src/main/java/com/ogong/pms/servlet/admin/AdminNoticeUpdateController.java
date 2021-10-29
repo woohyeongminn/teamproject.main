@@ -38,19 +38,20 @@ public class AdminNoticeUpdateController extends HttpServlet {
         throw new Exception(" >> 해당 번호의 공지글을 찾을 수 없습니다.");
       } 
 
-        notice.setAdminNotiTitle(request.getParameter("title"));
-        notice.setAdminNotiContent(request.getParameter("content"));
-        notice.setAdminNotiFile(request.getParameter("filepath"));
+      notice.setAdminNotiTitle(request.getParameter("title"));
+      notice.setAdminNotiContent(request.getParameter("content"));
+      notice.setAdminNotiFile(request.getParameter("filepath"));
 
-        noticeDao.updateTitle(notice);
-        noticeDao.updateContent(notice);
-        noticeDao.deletenoticefile(noticeNo);
-        noticeDao.insertFilepath(notice);
-        sqlSession.commit();
-        
+      noticeDao.updateTitle(notice);
+      noticeDao.updateContent(notice);
+      noticeDao.deletenoticefile(noticeNo);
+      noticeDao.insertFilepath(notice);
+      sqlSession.commit();
+
       response.sendRedirect("list");
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
