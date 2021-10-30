@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.cafe;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,19 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ogong.pms.dao.CafeDao;
-import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.dao.CafeReservationDao;
 
-@WebServlet("/cafe/list")
-public class CafeListController extends HttpServlet {
+@WebServlet("/cafe/reviewAdd")
+public class CafeMyReviewAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  CafeDao cafeDao;
+  CafeReservationDao cafeReservationDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
+    cafeReservationDao = (CafeReservationDao) 웹애플리케이션공용저장소.getAttribute("cafeReservationDao");
   }
 
   @Override
@@ -29,18 +27,16 @@ public class CafeListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      List<Cafe> cafeList = cafeDao.getCafeListByMember();
+      int memberNo = Integer.parseInt(request.getParameter("perNo"));
+      int reservationNo = Integer.parseInt(request.getParameter("reservationNo"));
+      System.out.println(memberNo + ", " + reservationNo);
 
-      if (cafeList == null) {
-        throw new Exception("등록된 스터디카페가 없습니다.");
-      }
-
-      request.setAttribute("cafeList", cafeList);
-      request.setAttribute("perNo", request.getParameter("perNo"));
-      request.getRequestDispatcher("/cafe/CafeList.jsp").forward(request, response);
+      request.setAttribute("perNo", memberNo);
+      request.setAttribute("reservationNo", reservationNo);
+      request.getRequestDispatcher("/cafe/CafeReviewForm.jsp").forward(request, response);
 
     } catch (Exception e) {
-      throw new ServletException(e);
+      e.printStackTrace();
     }
   }
 }

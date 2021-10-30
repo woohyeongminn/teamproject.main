@@ -59,7 +59,7 @@ label {
 		<a href='delete?no=${study.studyNo}'>삭제</a>
 	</button>
 	<button>
-		<a href='list'>목록</a>
+		<a href='list?no=${study.studyNo}'>목록</a>
 	</button>
 	<br>
 

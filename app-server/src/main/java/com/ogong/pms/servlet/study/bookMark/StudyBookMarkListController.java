@@ -25,6 +25,7 @@ public class StudyBookMarkListController extends GenericServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
@@ -33,7 +34,7 @@ public class StudyBookMarkListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int no = (int) request.getAttribute("no");
+      int no = Integer.parseInt(request.getParameter("no"));
       Member member = memberDao.findByNo(no);
 
       Collection<Study> studyList = studyDao.findByMyBookmark(member.getPerNo());
