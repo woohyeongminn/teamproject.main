@@ -11,8 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
-@WebServlet("/ceomember/detail")
-public class CeoDetailController  extends GenericServlet {
+@WebServlet("/ceomember/updateform")
+public class CeoUpdateFormHandler extends GenericServlet  {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
@@ -23,13 +23,17 @@ public class CeoDetailController  extends GenericServlet {
     ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
   }
 
-  //마이페이지
+  // 기업회원 개인정보 수정은 이름,이메일,비밀번호만 가능
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
+    System.out.println();
+    System.out.println("▶ 기업 프로필 수정"); 
+    System.out.println();
+
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      int no = (int) request.getAttribute("no");
       CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
       if (ceoMember == null) {
@@ -37,7 +41,8 @@ public class CeoDetailController  extends GenericServlet {
       } 
 
       request.setAttribute("ceoMember", ceoMember);
-      request.getRequestDispatcher("/ceoMember/CeoMemberDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/ceoMember/CeoMemberUpdateForm.jsp").forward(request, response);
+
 
     } catch (Exception e) {
       request.setAttribute("error", e);
@@ -45,3 +50,10 @@ public class CeoDetailController  extends GenericServlet {
     }
   }
 }
+
+
+
+
+
+
+

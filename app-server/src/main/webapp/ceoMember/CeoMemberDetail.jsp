@@ -35,5 +35,8 @@
    <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
    <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
    <span>가입일ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
+   <button type="submit">
+      <a href='updateform?no=${ceoMember.ceoNo}'>프로필 수정하기</a>
+    </button>
 </body>
 </html>
