@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/study/bookmark/detail")
+@WebServlet("/member/bookmark/detail")
 public class StudyBookMarkDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 

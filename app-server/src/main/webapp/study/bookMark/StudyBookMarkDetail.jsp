@@ -25,18 +25,19 @@ label {
 	<br>
 	<label for='f-studyTitle'>제목</label>
 	<input id='f-studyTitle' type='text' name='studyTitle'
-		value='${study.studyTitle}'>
+		value='${study.studyTitle}' readonly>
 	<br>
 	<label for='f-owner'>조장</label>
 	<input id='f-owner' type='text' name='owner'
-		value='${owner.perNickname}'>
+		value='${owner.perNickname}' readonly>
 	<br>
 	<label for='f-subjectName'>분야</label>
 	<input id='f-subjectName' type='text' name='subjectName'
-		value='${study.subjectName}'>
+		value='${study.subjectName}' readonly>
 	<br>
 	<label for='f-area'>지역</label>
-	<input id='f-area' type='text' name='area' value='${study.area}'>
+	<input id='f-area' type='text' name='area' value='${study.area}'
+		readonly>
 	<br>
 	<label for='f-countMember'>인원수</label>
 	<input id='f-countMember' type='text' name='countMember'
@@ -48,14 +49,18 @@ label {
 	<br>
 	<label for='f-faceName'>대면/비대면</label>
 	<input id='f-faceName' type='text' name='faceName'
-		value='${study.faceName}'>
+		value='${study.faceName}' readonly>
 	<br>
 	<label for='f-introduction'>소개글</label>
 	<input id='f-introduction' type='text' name='introduction'
-		value='${study.introduction}'>
+		value='${study.introduction}' readonly>
 	<br>
-	<a href='delete?no=${study.studyNo}'>[삭제]</a>
-	<a href='list'>[목록]</a>
+	<button>
+		<a href='delete?no=${study.studyNo}'>삭제</a>
+	</button>
+	<button>
+		<a href='list'>목록</a>
+	</button>
 	<br>
 
 </body>
