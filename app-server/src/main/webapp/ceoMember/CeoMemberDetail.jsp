@@ -36,11 +36,11 @@
 	   <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
 	   <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
 	   <span>가입일ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
-	   <button type="submit">
+	   <button type="submit" value="수정" formaction="updateform">
 	      <a href='updateform?no=${ceoMember.ceoNo}'>프로필 수정하기</a>
 	   </button>
-	   <button type="submit">
-	      <a href='delete?no=${ceoMember.ceoNo}'>탈퇴하기</a>
+	   <button type="submit" value="삭제" formaction="delete">
+	      <a href='deleteform?no=${ceoMember.ceoNo}'>탈퇴하기</a>
 	    </button>
     </form>
 </body>
