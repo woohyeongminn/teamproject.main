@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/add")
-public class MemberAddHandler extends HttpServlet {
+@WebServlet("/member/update")
+public class MemberUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
@@ -26,28 +26,36 @@ public class MemberAddHandler extends HttpServlet {
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
-  // 개인
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    //List<Member> memberList = memberDao.findAll();
 
     try {
-      Member member = new Member();
+      int no = Integer.parseInt(request.getParameter("no"));
+      Member perMember = memberDao.findByNo(no);
 
-      member.setPerName(request.getParameter("name"));
-      member.setPerNickname(request.getParameter("nickname"));
-      member.setPerEmail(request.getParameter("email"));
-      member.setPerPassword(request.getParameter("password"));
-      member.setPerPhoto(request.getParameter("photo"));
-      member.setPerTel(request.getParameter("tel"));
-      member.setPerStatus(Member.PER);
+      if (perMember == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
 
-      memberDao.insert(member);
+      perMember.setPerNickname(request.getParameter("nickname"));
+      perMember.setPerName(request.getParameter("name"));
+      perMember.setPerEmail(request.getParameter("email"));
+      perMember.setPerPassword(request.getParameter("password"));
+      perMember.setPerPhoto(request.getParameter("photo"));
+      perMember.setPerTel(request.getParameter("tel"));
+
+      memberDao.updateName(perMember);
+      memberDao.updateNickname(perMember);
+      memberDao.updateEmail(perMember);
+      memberDao.updatePassword(perMember);
+      memberDao.updatePhoto(perMember);
+      memberDao.updateTel(perMember);
       sqlSession.commit();
-      request.getRequestDispatcher("/member/PerMemberAdd.jsp").forward(request, response);
 
-    } catch (Exception e) {
+      response.sendRedirect("detail?no="+ perMember.getPerNo());
+
+    }catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

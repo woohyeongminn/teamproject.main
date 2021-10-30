@@ -12,7 +12,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
 @WebServlet("/member/login")
-public class AuthPerMemberLoginHandler extends HttpServlet {
+public class AuthPerMemberLoginController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 

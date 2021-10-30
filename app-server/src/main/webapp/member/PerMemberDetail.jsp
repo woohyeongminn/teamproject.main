@@ -32,11 +32,14 @@
      <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle"><br>
      <span>전화번호ㅣ</span> <span>${perMember.perTel}</span><br>
      <span>가입일ㅣ</span> <span>${perMember.perRegisteredDate}</span><br>
-     <button type="submit">
+     <button type="submit" value="수정" formaction="updateform">
         <a href='updateform?no=${perMember.perNo}'>프로필 수정하기</a>
      </button>
-     <button type="submit">
+    <button type="submit" value="삭제" formaction="delete">
         <a href='delete?no=${perMember.perNo}'>탈퇴하기</a>
+      </button>
+      <button type="submit" value="로그아웃">
+        <a href='logout'>로그아웃</a>
       </button>
     </form>
 </body>
