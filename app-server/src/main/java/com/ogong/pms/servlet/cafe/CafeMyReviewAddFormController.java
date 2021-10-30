@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeReservationDao;
 
-@WebServlet("/cafe/reviewAdd")
+@WebServlet("/cafe/reviewAddForm")
 public class CafeMyReviewAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

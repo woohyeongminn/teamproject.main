@@ -20,6 +20,7 @@
     
     <association property="cafe" javaType="cafe">
       <id column="cafe_no" property="no"/>
+      <result column="cafe_name" property="name"/>
     </association>
   </resultMap>
   
@@ -32,12 +33,14 @@
       r.create_dt, 
       r.status, 
       sr.cafe_no,
+      c.name cafe_name,
       rs.member_no,
       m.nickname
     from 
       studycafe_review r
       join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
       join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+      join studycafe c on sr.cafe_no=c.cafe_no
       join member m on rs.member_no=m.member_no
   </sql>
   

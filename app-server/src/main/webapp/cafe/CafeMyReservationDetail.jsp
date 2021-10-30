@@ -37,7 +37,7 @@
 	</div>
 <br>&nbsp;&nbsp;
 <c:if test="${reviewStatusLable eq '작성대기'}">
-  <button type="button" class="btn btn-outline-dark"><a href="reviewAdd?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">리뷰등록</a></button>
+  <button type="button" class="btn btn-outline-dark"><a href="reviewAddForm?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">리뷰등록</a></button>
 </c:if>
 &nbsp;&nbsp;<button type="button" class="btn btn-outline-dark"><a href="myReservationList?perNo=${memberNo}">목록</a></button>
 </body>
