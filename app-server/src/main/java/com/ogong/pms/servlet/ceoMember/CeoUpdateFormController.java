@@ -33,7 +33,7 @@ public class CeoUpdateFormController extends GenericServlet  {
     System.out.println();
 
     try {
-      int no = (int) request.getAttribute("no");
+      int no = Integer.parseInt(request.getParameter("no"));
       //int no = 5;
       CeoMember ceoMember = ceoMemberDao.findByNo(no);
 

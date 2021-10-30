@@ -40,7 +40,16 @@ label {
 		<label for='f-point'>활동 점수</label><input id='f-point' type='text'
 			name='point' value='${study.point}'><br>
 		<button>수정</button>
-		<a href='delete?no=${study.studyNo}'>[삭제]</a> <a href='list'>[목록]</a><br>
+		<button>
+			<a href='delete?no=${study.studyNo}'>삭제</a>
+		</button>
+		<button>
+      <a href='bookmark/add?no=${study.studyNo}'>북마크 추가</a>
+    </button>
+		<button>
+			<a href='list'>목록</a>
+		</button>
+		<br>
 	</form>
 
 </body>

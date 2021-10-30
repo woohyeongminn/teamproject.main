@@ -39,7 +39,7 @@ public class AuthCeoMemberLoginController extends HttpServlet {
 
       CeoMember ceoMember = ceoMemberDao.findByEmailAndPassword(email, password);
 
-      if (ceoMember == null || ceoMember.getCeoStatus() == CeoMember.OUTUSER) {
+      if (ceoMember == null) {
         throw new Exception("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
       } 
 
