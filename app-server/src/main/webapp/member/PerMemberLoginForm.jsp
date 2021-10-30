@@ -37,7 +37,7 @@
 
   <div class="mb-3">
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">회원가입</a>
+    <a class="dropdown-item" href="addform">회원가입</a>
     <a class="dropdown-item" href="#">비밀번호찾기</a>
   </div>
   </div>
