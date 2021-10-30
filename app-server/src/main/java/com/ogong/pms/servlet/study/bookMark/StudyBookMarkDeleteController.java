@@ -26,6 +26,7 @@ public class StudyBookMarkDeleteController extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
@@ -35,19 +36,21 @@ public class StudyBookMarkDeleteController extends HttpServlet {
 
     try {
       int studyNo = Integer.parseInt(request.getParameter("no"));
-      Member member = memberDao.findByNo(studyNo);
 
+      Member member = memberDao.findByNo(studyNo);
       Study myStudy = studyDao.findByBookmark(studyNo, member.getPerNo());
 
-      for (int i = 0; i < myStudy.getBookMarkMember().size(); i++) {
-        if (member.getPerNo() == myStudy.getBookMarkMember().get(i).getPerNo()) {
-          myStudy.getBookMarkMember().remove(i);
-          break;
-        }
-      }
+      // for (int i = 0; i < myStudy.getBookMarkMember().size(); i++) {
+      // if (member.getPerNo() == myStudy.getBookMarkMember().get(i).getPerNo()) {
+      // myStudy.getBookMarkMember().remove(i);
+      // break;
+      // }
+      // }
 
       studyDao.deleteBookmark(myStudy.getStudyNo(), member.getPerNo());
       sqlSession.commit();
+
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       sqlSession.rollback();
