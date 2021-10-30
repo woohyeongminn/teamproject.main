@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>🌟 내 북마크</title>
+<title>상세 | 🌟 내 북마크</title>
 <style>
 label {
 	margin-right: 5px;
