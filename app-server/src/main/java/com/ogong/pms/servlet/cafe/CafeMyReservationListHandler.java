@@ -1,65 +1,71 @@
 package com.ogong.pms.servlet.cafe;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.Member;
-import com.ogong.pms.handler.AuthPerMemberLoginHandler;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class CafeMyReservationListHandler implements Command {
+@WebServlet("/cafe/myReservationList")
+public class CafeMyReservationListHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   CafeReservationDao cafeReservationDao;
 
-  public CafeMyReservationListHandler (CafeReservationDao cafeReservationDao) {
-    this.cafeReservationDao = cafeReservationDao;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeReservationDao = (CafeReservationDao) 웹애플리케이션공용저장소.getAttribute("cafeReservationDao");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 내 예약 내역 보기");
-    System.out.println();
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser(); 
+    try {
+      int memberNo = Integer.parseInt(request.getParameter("perNo"));
+      System.out.println(memberNo);
 
-    if (member == null) {
-      System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
-      return;
-    }
+      List<CafeReservation> reserList = 
+          cafeReservationDao.findReservationListByMember(memberNo);
 
-    List<CafeReservation> reserList = 
-        cafeReservationDao.findReservationListByMember(member.getPerNo());
+      request.setAttribute("reserList", reserList);
+      request.getRequestDispatcher("/cafe/CafeMyReservationList.jsp").forward(request, response);
 
-    if (reserList.isEmpty()) {
-      System.out.println(" >> 예약 내역이 존재하지 않습니다.");
-      return;
-    } else {
-      for (CafeReservation myReservationList : reserList) {
-        System.out.printf(" (%d) | 예약날짜 : %s | 이용날짜 : %s | 예약장소 : %s | 결제금액 : %d원 | 상태 : %s\n", 
-            myReservationList.getReservationNo(), 
-            myReservationList.getReservationDate(),
-            myReservationList.getUseDate(),
-            myReservationList.getCafe().getName(), 
-            myReservationList.getTotalPrice(),
-            myReservationList.getReservationStatusName());
-        System.out.println();
-      }
-    }
+      //      Member member = AuthPerMemberLoginHandler.getLoginUser(); 
 
-    System.out.println("----------------------");
-    System.out.println("1. 상세");
-    System.out.println("0. 이전");
-    while (true) {
-      int selectNo = Prompt.inputInt("선택> ");
-      switch (selectNo) {
-        case 1: request.getRequestDispatcher("/cafeReservation/detail").forward(request); return;
-        case 0: return;
-        default : 
-          System.out.println(" >> 번호를 다시 선택해 주세요.");
-      }
+      //      if (member == null) {
+      //        System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
+      //        return;
+      //      }
+      //
+      //      List<CafeReservation> reserList = 
+      //          cafeReservationDao.findReservationListByMember(member.getPerNo());
+      //
+      //      if (reserList.isEmpty()) {
+      //        System.out.println(" >> 예약 내역이 존재하지 않습니다.");
+      //        return;
+      //      } else {
+      //        for (CafeReservation myReservationList : reserList) {
+      //          System.out.printf(" (%d) | 예약날짜 : %s | 이용날짜 : %s | 예약장소 : %s | 결제금액 : %d원 | 상태 : %s\n", 
+      //              myReservationList.getReservationNo(), 
+      //              myReservationList.getReservationDate(),
+      //              myReservationList.getUseDate(),
+      //              myReservationList.getCafe().getName(), 
+      //              myReservationList.getTotalPrice(),
+      //              myReservationList.getReservationStatusName());
+      //          System.out.println();
+      //        }
+      //      }
+      //    }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }

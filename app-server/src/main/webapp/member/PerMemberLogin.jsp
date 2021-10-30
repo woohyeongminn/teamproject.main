@@ -26,6 +26,7 @@
   <h4>개인 회원 로그인 성공</h4>
 
  <p>'${perMember.perNickname}'님 환영합니다! 🖐</p>
- <button><a href='detail?no=${perMember.perNo}'>마이페이지</a></button> 
+ <button><a href='detail?no=${perMember.perNo}'>마이페이지</a></button>
+ <button><a href='../cafe/list?perNo=${perMember.perNo}'>스터디카페 예약하기</a></button> 
  </body>
-</html>>
+</html>

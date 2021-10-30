@@ -1,7 +1,8 @@
 package com.ogong.pms.servlet.cafe;
 
 import java.io.IOException;
-import java.util.List;
+import java.sql.Date;
+import java.time.LocalTime;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,11 +14,11 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeRoomDao;
-import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeRoom;
+import com.ogong.pms.domain.CafeReservation;
+import com.ogong.pms.domain.Member;
 
-@WebServlet("/cafe/reservation")
-public class CafeReservationController extends HttpServlet {
+@WebServlet("/cafe/reservationEnd")
+public class CafeReservationController4 extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
@@ -39,18 +40,35 @@ public class CafeReservationController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int cafeNo = Integer.parseInt(request.getParameter("no"));
+      int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+      String startTime = request.getParameter("startTime");
+      int usingTime = Integer.parseInt(request.getParameter("usingTime"));
+      int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
+      Date selectedDate = Date.valueOf(request.getParameter("selectedDate"));
+      int people = Integer.parseInt(request.getParameter("people"));
+      int memberNo = Integer.parseInt(request.getParameter("perNo"));
 
-      Cafe cafe = cafeDao.findByCafeNoMember(cafeNo);
+      CafeReservation reservation = new CafeReservation();
 
-      if (cafe == null) {
-        throw new Exception(" >> 해당 번호의 장소가 존재하지 않습니다.");
-      }
+      Member member = new Member();
+      member.setPerNo(memberNo);
 
-      List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByCafe(cafe.getNo());
-      request.setAttribute("roomList", roomList);
-      request.setAttribute("perNo", request.getParameter("perNo"));
-      request.getRequestDispatcher("/cafe/CafeReservation.jsp").forward(request, response);
+      reservation.setMember(member);
+      reservation.setUseDate(selectedDate);
+      reservation.setStartTime(LocalTime.parse(startTime));
+      reservation.setUseTime(usingTime);
+      reservation.setUseMemberNumber(people);
+      reservation.setTotalPrice(totalPrice);
+      reservation.setRoomNo(roomNo);
+      reservation.setReservationStatus(1); // 1 : 예약완료
+
+      cafeReservationDao.insertReservation(reservation);
+      sqlSession.commit();
+
+      System.out.println(" *** 예약 되었습니다 ***");
+
+      request.setAttribute("perNo", memberNo);
+      request.getRequestDispatcher("/cafe/CafeReservationEnd.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
