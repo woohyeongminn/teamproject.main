@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.auth;
+package com.ogong.pms.servlet.ceoMember;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;

@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.auth;
+package com.ogong.pms.servlet.ceoMember;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/ceomember/form")
-public class CeoLoginFormHandler extends HttpServlet {
+public class CeoLoginFormController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
 

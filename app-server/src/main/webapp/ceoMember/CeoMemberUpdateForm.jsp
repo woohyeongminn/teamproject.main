@@ -26,7 +26,7 @@
 <body>
   <h5>기업 회원 프로필 수정</h5>
 
-  <span>(${ceoMember.ceoNo})</span><br>
+  <span id='no' name='no'>(${ceoMember.ceoNo})</span><br>
 
   <label for='f-name' class='form-label' size='100px'>이름</label>
   <input id='f-name' type='text' name='name' value='${ceoMember.ceoName}'><br>

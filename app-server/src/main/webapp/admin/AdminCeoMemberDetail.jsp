@@ -32,5 +32,7 @@
    <span>닉네임ㅣ</span><span>${ceoMember.ceoNickname}</span><br>
    <span>이메일ㅣ</span><span>${ceoMember.ceoEmail}</span><br>
    <span>가입일ㅣ</span><span>${ceoMember.ceoRegisteredDate}</span><br>
+   <button type="button" class="btn btn-outline-dark"><a href='list'>목록</a></button>
+<button type="button" class="btn btn-outline-dark"><a href='delete?no=${ceoMember.ceoNo}'>삭제</a></button>
 </body>
 </html>

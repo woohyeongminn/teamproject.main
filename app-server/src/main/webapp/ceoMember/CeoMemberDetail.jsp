@@ -26,17 +26,22 @@
 <body>
    <b> 📖 기업회원 상세</b>
    <hr>
-   <span>(${ceoMember.ceoNo})</span><br>
-   <span>이름ㅣ</span> <span>${ceoMember.ceoName}</span><br>
-   <span>닉네임ㅣ</span> <span>${ceoMember.ceoNickname}</span><br>
-   <span>이메일ㅣ</span> <span>${ceoMember.ceoEmail}</span><br>
-   <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle"><br>
-   <span>전화번호ㅣ</span> <span>${ceoMember.ceoTel}</span><br>
-   <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
-   <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
-   <span>가입일ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
-   <button type="submit">
-      <a href='updateform?no=${ceoMember.ceoNo}'>프로필 수정하기</a>
-    </button>
+   <form action='updateform'>
+	   <span id='no' name='no'>(${ceoMember.ceoNo})</span><br>
+	   <span>이름ㅣ</span> <span>${ceoMember.ceoName}</span><br>
+	   <span>닉네임ㅣ</span> <span>${ceoMember.ceoNickname}</span><br>
+	   <span>이메일ㅣ</span> <span>${ceoMember.ceoEmail}</span><br>
+	   <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle"><br>
+	   <span>전화번호ㅣ</span> <span>${ceoMember.ceoTel}</span><br>
+	   <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
+	   <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
+	   <span>가입일ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
+	   <button type="submit">
+	      <a href='updateform?no=${ceoMember.ceoNo}'>프로필 수정하기</a>
+	   </button>
+	   <button type="submit">
+	      <a href='delete?no=${ceoMember.ceoNo}'>탈퇴하기</a>
+	    </button>
+    </form>
 </body>
 </html>
