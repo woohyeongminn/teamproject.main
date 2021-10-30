@@ -91,8 +91,8 @@ public class MemberFindIdPwHandler implements Command {
 
     while (true) {
       System.out.println();
-      System.out.println("1. 이메일");
-      System.out.println("2. 전화번호");
+      System.out.println("1. 이메일로 발급");
+      System.out.println("2. 전화번호로 발급");
       System.out.println("0. 이전");
       int selectNo = Prompt.inputInt("선택> ");
 

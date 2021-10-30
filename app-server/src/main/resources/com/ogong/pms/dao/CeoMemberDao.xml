@@ -80,13 +80,19 @@
   <select id="findByName" resultMap="CeoMemberMap" parameterType="string">
 	  <include refid = "select1"/>
 	  where
-	    m.name=#{value}
+	    m.name=#{value} and m.status=2
   </select>
   
   <select id="findByEmail" resultMap="CeoMemberMap" parameterType="string">
 	  <include refid = "select1"/>
 	  where
-	    m.email=#{value}
+	    m.email=#{value} and m.status=2
+  </select>
+  
+   <select id="findByTel" resultMap="CeoMemberMap" parameterType="string">
+    <include refid = "select1"/>
+   where
+    tel=#{tel} and m.status=2
   </select>
     
   <update id="updateName" parameterType="CeoMember">

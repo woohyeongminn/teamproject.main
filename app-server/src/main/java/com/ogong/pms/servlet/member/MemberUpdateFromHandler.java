@@ -6,13 +6,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/update/form")
+@WebServlet("/update/form")
 public class MemberUpdateFromHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -22,8 +20,18 @@ public class MemberUpdateFromHandler extends HttpServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-    protected void service(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-      request.getRequestDispatcher("/auth/PerLoginForm.jsp").forward(request, response);
+
+    try {
+      int no = (int) request.getAttribute("no");
+      // List<Member> memberList = memberDao.findAll();
+      Member member = memberDao.findByNo(no);
+      request.setAttribute("updateMember", member);
+      request.getRequestDispatcher("MemberUpdateForm.jsp").forward(request, response);
+
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
+
   }
+}

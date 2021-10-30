@@ -1,147 +1,64 @@
 package com.ogong.pms.servlet.cafe;
 
-import java.sql.Date;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
-import com.ogong.pms.domain.Member;
-import com.ogong.pms.handler.AuthPerMemberLoginHandler;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class CafeReservationHandler implements Command {
+@WebServlet("/cafe/reservation")
+public class CafeReservationController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
   CafeRoomDao cafeRoomDao;
   CafeReservationDao cafeReservationDao;
   SqlSession sqlSession;
 
-  public CafeReservationHandler (CafeDao cafeDao, CafeRoomDao cafeRoomDao, CafeReservationDao cafeReservationDao, SqlSession sqlSession) {
-    this.cafeDao = cafeDao;
-    this.cafeRoomDao = cafeRoomDao;
-    this.cafeReservationDao = cafeReservationDao;
-    this.sqlSession = sqlSession;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
+    cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
+    cafeReservationDao = (CafeReservationDao) 웹애플리케이션공용저장소.getAttribute("cafeReservationDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
-
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
+  public void service(ServletRequest request, ServletResponse response)
+      throws ServletException, IOException {
 
-    int cafeNo = (int) request.getAttribute("cafeNo");
-    String selectReservation = (String) request.getAttribute("selectReservation");
+    try {
+      int cafeNo = Integer.parseInt(request.getParameter("no"));
 
-    Cafe cafe = cafeDao.findByCafeNoMember(cafeNo);
+      Cafe cafe = cafeDao.findByCafeNoMember(cafeNo);
 
-    if (cafe == null) {
-      System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
-      return;
-    }
-
-    HashMap<String,Object> params = new HashMap<>();
-    params.put("cafeNo", cafe.getNo());
-    cafe.setHoliday(cafeDao.getCafeHoliday(params));
-
-    if (selectReservation.equals("addReservation")) {
-      //      addReservation(cafe);
-      return;
-    } else if (selectReservation.equals("addRoomReservation")) {
-      addRoomReservation(cafe);
-    }
-
-  }
-
-  private void addReservation(Cafe cafe) throws Exception {
-    System.out.println();
-    System.out.println("▶ 예약하기");
-
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-    if (member == null) {
-      System.out.println(" >> 로그인 한 회원만 예약 가능합니다.");
-      return;
-    }
-
-    CafeReservation reservation = new CafeReservation();
-
-    Date today = new Date(System.currentTimeMillis());
-    Date reservationDate = Prompt.inputDate(" 예약 날짜 : ");
-    while (today.toLocalDate().compareTo(reservationDate.toLocalDate()) > 0) {
-      System.out.println(" >> 이전 날짜는 예약 불가능합니다.");
-      System.out.println("    날짜를 다시 입력해 주세요.\n");
-      reservationDate = Prompt.inputDate(" 예약 날짜 : ");
-    }
-
-    String openTime = cafe.getOpenTime().toString();    
-    String closeTime = cafe.getCloseTime().toString();
-    String closeTimeMinus1 = cafe.getCloseTime().minusHours(1).toString();
-
-    LocalTime startTime;
-    while (true) {
-      startTime = LocalTime.parse(Prompt.inputString(
-          String.format(" 시작 시간 (%s~%s) : ", openTime, closeTimeMinus1)));
-      if (startTime.isBefore(cafe.getOpenTime())) {
-        System.out.println(" >> 오픈 시간 전입니다.");
-        System.out.println("    시작 시간을 다시 입력해 주세요.\n");
-        continue;
-      } else if (startTime.isAfter(cafe.getCloseTime().minusHours(1))) {
-        System.out.println(" >> " + closeTimeMinus1 + " 까지만 가능합니다.");
-        System.out.println("    시작 시간을 다시 입력해 주세요.\n");
-        continue;
+      if (cafe == null) {
+        throw new Exception(" >> 해당 번호의 장소가 존재하지 않습니다.");
       }
-      break;
+
+      List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByCafe(cafe.getNo());
+      request.setAttribute("roomList", roomList);
+      request.getRequestDispatcher("/cafe/CafeReservation.jsp").forward(request, response);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      //      request.setAttribute("error", e);
+      //      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
 
-    int useTime = Prompt.inputInt(String.format(" 이용 시간 (%s 마감) 예시 > 2 : ", closeTime));
-    int availableTime = (int) ChronoUnit.HOURS.between(startTime, cafe.getCloseTime());
-    while (useTime > availableTime) {
-      System.out.printf(" >> 마감 시간(%s)을 초과하여 예약할 수 없습니다.\n", closeTime);
-      System.out.println("    이용 시간을 다시 입력해 주세요.\n");
-      useTime = Prompt.inputInt(String.format(" 이용할 시간 (%s 마감) : ", closeTime));
-    }
-
-    int useMemberNumber = Prompt.inputInt(" 사용 인원 : ");
-    int totalPrice = useTime * useMemberNumber * cafe.getTimePrice();
-    System.out.printf(" 총 금액 : %d원\n" , totalPrice);
-
-    String input = Prompt.inputString(" 정말 예약하시겠습니까? (네 / 아니오) ");
-
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 장소 예약을 취소하였습니다.");
-      return;
-    }
-
-    // 고유번호 + 1
-    List<CafeReservation> cafeReservationList = cafeReservationDao.getCafeReservationList();
-    if (!cafeReservationList.isEmpty()) {
-      reservation.setReservationNo(
-          cafeReservationList.get(cafeReservationList.size() - 1).getReservationNo() + 1);
-    } else {
-      reservation.setReservationNo(1);
-    }
-
-    reservation.setMember(member);
-    reservation.setCafe(cafe);
-    reservation.setReservationDate(reservationDate);
-    reservation.setStartTime(startTime);
-    reservation.setUseTime(useTime);
-    reservation.setUseMemberNumber(useMemberNumber);
-    reservation.setTotalPrice(totalPrice);
-    reservation.setWirteReview(false);
-
-    cafe.setBookable(cafe.getBookable() - 1);
-
-    cafeReservationDao.insertReservation(reservation);
   }
-
+  /*
   private void addRoomReservation(Cafe cafe) throws Exception {
     System.out.println();
     System.out.println("▶ 스터디룸 예약하기");
@@ -361,4 +278,5 @@ public class CafeReservationHandler implements Command {
     }
     return true;
   }
+   */
 }

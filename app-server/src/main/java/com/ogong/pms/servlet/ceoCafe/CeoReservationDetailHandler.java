@@ -32,7 +32,7 @@ public class CeoReservationDetailHandler implements Command {
     System.out.println("▶ 예약 내역");
     System.out.println();
 
-    CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+    CeoMember ceoMember = AuthCeoMemberLoginController.getLoginCeoMember();
     List<CafeReservation> cafeReservationList = printMyCafeReserDetail(ceoMember);
     if (cafeReservationList.size() == 0) {
       System.out.println(" >> 예약 내역이 없습니다.");

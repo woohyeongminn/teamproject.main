@@ -11,6 +11,7 @@ public interface CeoMemberDao {
   CeoMember findByNo(int no) throws Exception;
   CeoMember findByName(String inputNick) throws Exception;
   CeoMember findByEmail(String inputEmail) throws Exception;
+  CeoMember findByTel(String inputTel) throws Exception;
   CeoMember findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
 
   void insert(CeoMember ceoMember) throws Exception;

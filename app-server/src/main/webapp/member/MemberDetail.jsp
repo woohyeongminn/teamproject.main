@@ -23,7 +23,6 @@
 	  <td>번호:${myPageMember.perTel}</td><br>
 	  <td>이메일:${myPageMember.perEmail}</td><br> 
 	  <td>가입일:${myPageMember.perRegisteredDate}</td><br>
-	  <button><a href='update/form?no={myPageMember.perNo}'><p>개인정보수정</p></a></button>
-	  <button><a href='delete?no={myPageMember.perNo}'><p>회원탈퇴</p></a></button></tbody>
+	  <button><a href='../update/form?no=${myPageMember.perNo}'><p>개인정보수정</p></a></button>
 </body>
 </html>

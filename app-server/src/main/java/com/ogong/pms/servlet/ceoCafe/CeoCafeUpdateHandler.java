@@ -33,7 +33,7 @@ public class CeoCafeUpdateHandler implements Command {
     System.out.println("▶ 장소 수정");
     System.out.println();
 
-    CeoMember ceoMember = AuthCeoMemberLoginHandler.getLoginCeoMember();
+    CeoMember ceoMember = AuthCeoMemberLoginController.getLoginCeoMember();
     Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));
 
     HashMap<String,Object> params = new HashMap<>();

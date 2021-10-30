@@ -56,44 +56,50 @@
   </select>
 
   <select id="findAll" resultMap="CeoMemberMap">
-	 <include refid = "select1"/>
-	  order by name asc
+   <include refid = "select1"/>
+    order by name asc
   </select>
   
   <select id="findByNo" resultMap="CeoMemberMap" parameterType="int">
     <include refid = "select1"/>
-	  where
-	    cm.member_no=#{no}
+    where
+      cm.member_no=#{no}
   </select>
   
   <insert id="insert" parameterType="CeoMember"
       useGeneratedKeys="true" keyColumn="member_no" keyProperty="ceoNo">
-	  insert into member(name,nickname,email,password,tel,photo,status)
-	  values(#{ceoName},#{ceoNickname},#{ceoEmail},password(#{ceoPassword}),#{ceoTel},#{ceoPhoto},#{ceoStatus})
+    insert into member(name,nickname,email,password,tel,photo,status)
+    values(#{ceoName},#{ceoNickname},#{ceoEmail},password(#{ceoPassword}),#{ceoTel},#{ceoPhoto},#{ceoStatus})
   </insert>
   
   <insert id="insertCeo" parameterType="map">
-	  insert into ceo_member(member_no,bossname,license_no)
-	  values(#{ceoNo},#{ceoBossName},#{ceoLicenseNo})
+    insert into ceo_member(member_no,bossname,license_no)
+    values(#{ceoNo},#{ceoBossName},#{ceoLicenseNo})
   </insert>
   
   <select id="findByName" resultMap="CeoMemberMap" parameterType="string">
-	  <include refid = "select1"/>
-	  where
-	    m.name=#{value}
+    <include refid = "select1"/>
+    where
+      m.name=#{value} and m.status=2
   </select>
   
   <select id="findByEmail" resultMap="CeoMemberMap" parameterType="string">
-	  <include refid = "select1"/>
-	  where
-	    m.email=#{value}
+    <include refid = "select1"/>
+    where
+      m.email=#{value} and m.status=2
+  </select>
+  
+   <select id="findByTel" resultMap="CeoMemberMap" parameterType="string">
+    <include refid = "select1"/>
+   where
+    tel=#{tel} and m.status=2
   </select>
     
   <update id="updateName" parameterType="CeoMember">
-	  update member set
-	   name = #{ceoName}
-	  where
-	   member_no=#{ceoNo}
+    update member set
+     name = #{ceoName}
+    where
+     member_no=#{ceoNo}
   </update>
   
   <update id="updateNickName" parameterType="CeoMember">
@@ -134,12 +140,12 @@
   <update id="updateActive" parameterType="CeoMember">
     update member set
       nickname=#{ceoNickname},
-	    name=#{ceoName},
-	    photo=#{ceoPhoto},
-	    tel=#{ceoTel}, 
-	    email=#{ceoEmail}, 
-	    password=password(#{ceoPassword}),
-	    active=2 
+      name=#{ceoName},
+      photo=#{ceoPhoto},
+      tel=#{ceoTel}, 
+      email=#{ceoEmail}, 
+      password=password(#{ceoPassword}),
+      active=2 
     where
      member_no=#{ceoNo}
   </update>
