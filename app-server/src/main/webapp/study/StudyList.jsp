@@ -33,7 +33,7 @@
 					<td>${study.countBookMember}</td>
 					<td><a href='detail?no=${study.studyNo}'>${study.studyTitle}</a></td>
 					<td>${study.faceName}</td>
-					<td>${owner.perNickname}<%-- <%=study.getOwner().getPerNickname()%> --%></td>
+					<td>${study.owner.perNickname}</td>
 					<td>${study.subjectName}</td>
 					<td>${study.area}</td>
 					<td>${study.countMember}</td>
