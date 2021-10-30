@@ -12,7 +12,7 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/updateform")
-public class CeoUpdateFormHandler extends GenericServlet  {
+public class CeoUpdateFormController extends GenericServlet  {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
