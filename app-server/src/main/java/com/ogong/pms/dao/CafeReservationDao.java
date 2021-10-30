@@ -10,6 +10,7 @@ public interface CafeReservationDao {
 
   List<CafeReservation> getCafeReservationList() throws Exception;
   List<CafeReservation> findReservationListByMember(int memberNo) throws Exception;
+  List<CafeReservation> findReservationListByDate(@Param("selectedDate")String selectedDate, @Param("roomNo")int roomNo) throws Exception;
   List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception;
   CafeReservation findReservationByMember(@Param("memberNo")int memberNo, @Param("reserNo")int reserNo) throws Exception;
   void insertReservation(CafeReservation cafeReservation) throws Exception;

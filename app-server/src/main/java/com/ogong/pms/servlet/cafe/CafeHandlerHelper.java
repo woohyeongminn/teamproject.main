@@ -4,7 +4,6 @@ import static com.ogong.pms.domain.Cafe.DELETE;
 import static com.ogong.pms.domain.Cafe.GENERAL;
 import static com.ogong.pms.domain.Cafe.STOP;
 import static com.ogong.pms.domain.Cafe.WAIT;
-import com.ogong.util.Prompt;
 
 public abstract class CafeHandlerHelper {
 
@@ -50,21 +49,21 @@ public abstract class CafeHandlerHelper {
     }
   }
 
-  public static int promptCafeStatus(int status) {
-    System.out.printf(" 상태(%s) : \n", getCafeStatusLabel(status));
-    int input = 0;
-    do {
-      System.out.println(" 2 : 운영중");
-      System.out.println(" 3 : 운영중단");
-      input = Prompt.inputInt(" > ");
-
-      if (input != GENERAL && input != STOP) {
-        System.out.println(" >> 번호를 잘못 선택하셨습니다.\n    다시 입력해 주세요.\n");
-      }
-    } while (input != GENERAL && input != STOP);
-
-    return input;
-  }
+  //  public static int promptCafeStatus(int status) {
+  //    System.out.printf(" 상태(%s) : \n", getCafeStatusLabel(status));
+  //    int input = 0;
+  //    do {
+  //      System.out.println(" 2 : 운영중");
+  //      System.out.println(" 3 : 운영중단");
+  //      input = Prompt.inputInt(" > ");
+  //
+  //      if (input != GENERAL && input != STOP) {
+  //        System.out.println(" >> 번호를 잘못 선택하셨습니다.\n    다시 입력해 주세요.\n");
+  //      }
+  //    } while (input != GENERAL && input != STOP);
+  //
+  //    return input;
+  //  }
 
   //  public static List<CafeImage> promptCafeImage(Cafe cafe) {
   //
