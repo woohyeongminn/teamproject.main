@@ -18,11 +18,6 @@ public class AuthPerMemberLoginHandler extends HttpServlet {
 
   MemberDao memberDao;
 
-  public static Member loginUser;
-  public static Member getLoginUser() {
-    return loginUser;
-  }
-
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
