@@ -33,7 +33,7 @@ public class StudyBookMarkListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int no = (int) request.getAttribute("no");
+      int no = Integer.parseInt(request.getParameter("no"));
       Member member = memberDao.findByNo(no);
 
       Collection<Study> studyList = studyDao.findByMyBookmark(member.getPerNo());
