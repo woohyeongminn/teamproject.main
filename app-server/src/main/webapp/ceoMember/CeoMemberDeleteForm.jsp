@@ -42,7 +42,7 @@
   <c:out value='<p>비밀번호가 일치하지 않습니다.</p>'/>
   </c:if>
    -->
-     <button type="submit" value="삭제" formaction="delete"  class="btn btn-primary">
+     <button type="submit" value="삭제" formaction="delete" class="btn btn-primary">
         <a href='delete?no=${ceoMember.ceoNo}'>탈퇴하기</a>
       </button>
       

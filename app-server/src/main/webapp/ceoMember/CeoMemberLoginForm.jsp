@@ -26,23 +26,25 @@
   <h5>기업 회원 로그인</h5>
 
   <form action='login'>
-  <label for='f-email' class='form-label' size='100px'>이메일</label> <input id='f-email' type='email' name='email' placeholder='아이디' size='20'><br>
-  <label for='f-password' class='form-label' size='100px'>암호</label> <input id='f-password' type='password' name='password' placeholder='암호' size='20'><br>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-    <label class="form-check-label" for="dropdownCheck">
-      Remembr me
-    </label>
-  </div>
-
-  <div class="mb-3">
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="addform">회원가입</a>
-    <a class="dropdown-item" href="#">비밀번호찾기</a>
-  </div>
-  </div>
+  
+	  <label for='f-email' class='form-label' size='100px'>이메일</label> <input id='f-email' type='email' name='email' placeholder='아이디' size='20'><br>
+	  <label for='f-password' class='form-label' size='100px'>암호</label> <input id='f-password' type='password' name='password' placeholder='암호' size='20'><br>
+	  
+	  <div class="form-check">
+	    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+	    <label class="form-check-label" for="dropdownCheck">
+	      Remembr me
+	    </label>
+	  </div>
+	
+	  <div class="mb-3">
+	    <div class="dropdown-divider"></div>
+		    <a class="dropdown-item" href="addform">회원가입</a>
+		    <a class="dropdown-item" href="#">비밀번호찾기</a>
+	  </div>
   
   <button type="submit" class="btn btn-primary">로그인</button>
   </form>
+  
  </body>
 </html>

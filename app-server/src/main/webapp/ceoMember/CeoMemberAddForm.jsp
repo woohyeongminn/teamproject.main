@@ -25,7 +25,7 @@
 
 <body>
   <h5>기업 회원 회원가입</h5>
-  <form action='add'>
+  <form action='add' method="post">
 	  <label for='f-name' class='form-label' size='100px'>이름</label>
 	  <input id='f-name' type='text' name='name' placeholder="이름"><br>
 	  
@@ -33,7 +33,7 @@
 	  <input id='f-nickname' type='text' name='nickname' placeholder="닉네임"><br>
 	  
 	  <label for='f-photo' class='form-label' size='100px'>사진</label>
-	  <input id='f-photo' type='text' name='email' placeholder="사진"><br>
+	  <input id='f-photo' type='text' name='photo' placeholder="사진"><br>
 	  
 	  <label for='f-tel' class='form-label' size='100px'>전화번호</label>
 	  <input id='f-tel' type='tel' name='tel' placeholder="전화번호"><br>
@@ -42,10 +42,10 @@
     <input id='f-bossname' type='text' name='bossname' placeholder="대표자명"><br>
     
     <label for='f-licenseno' class='form-label' size='100px'>사업자 등록번호</label>
-    <input id='f-licenseno' type='text' name='bossname' placeholder="사업자 등록번호"><br>
+    <input id='f-licenseno' type='text' name='licenseno' placeholder="사업자 등록번호"><br>
     
 	  <label for='f-email' class='form-label' size='100px'>이메일</label>
-	  <input id='f-email' type='email' name='licenseno' placeholder="이메일"><br>
+	  <input id='f-email' type='email' name='email' placeholder="이메일"><br>
 	  
 	  <label for='f-password' class='form-label' size='100px'>암호</label>
 	  <input id='f-password' type='password' name='password' placeholder="암호"><br>
@@ -54,5 +54,6 @@
 	    회원가입
 	  </button>
 	 </form>
+	 
  </body>
 </html>
