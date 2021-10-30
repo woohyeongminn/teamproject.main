@@ -70,14 +70,6 @@
     values(#{reservationNo},#{content},#{grade},1)
   </insert>
   
-  <!-- 리뷰 등록시 상태변경 -->
-  <update id="updateCafeReservationReviewStatus">
-    update studycafe_reservation set
-      review=2
-    where
-      studycafe_rsv_no=#{reservationNo}
-  </update>
-  
   <update id="deleteCafeReview">
     update studycafe_review set 
       status = 2

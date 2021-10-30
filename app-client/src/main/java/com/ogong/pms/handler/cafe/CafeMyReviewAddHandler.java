@@ -60,6 +60,7 @@ public class CafeMyReviewAddHandler implements Command {
       cafeReservationDao.updateCafeReservationReviewStatus(cafeReview.getReservationNo());
       sqlSession.commit();
     } catch (Exception e) {
+      e.printStackTrace();
       sqlSession.rollback();
     }
 

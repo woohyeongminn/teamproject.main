@@ -67,6 +67,17 @@
       rs.studycafe_rsv_no asc
   </select>
   
+  <!-- 해당 날짜의 예약 리스트 -->
+  <select id="findReservationListByDate" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    where 
+      (rst.rsv_status_no=1 or rst.rsv_status_no=2)
+      and rs.using_dt=#{selectedDate}
+      and rs.studyroom_no=#{roomNo}
+    order by
+      rs.start_time asc
+  </select>
+  
   <!-- 사장 카페 관리용 예약 리스트 -->
   <select id="findReservationListByCeoMember" resultMap="reservationMap">
   <include refid="reservationListSelect"/>
@@ -92,6 +103,14 @@
     total_price, rsv_status_no, review) 
   values(#{roomNo},#{member.perNo},#{useDate},#{startTime},#{useTime},#{useMemberNumber},#{totalPrice},#{reservationStatus},1)
   </insert>
+  
+  <!-- 리뷰 등록시 상태변경 -->
+  <update id="updateCafeReservationReviewStatus">
+    update studycafe_reservation set
+      review=2
+    where
+      studycafe_rsv_no=#{reservationNo}
+  </update>
   
   <delete id="deleteReservation">
     update
