@@ -56,7 +56,7 @@
 	    <div class="card">
 	      <svg class="bd-placeholder-img rounded" width="425" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text></svg>
 	      <div class="card-body">
-	        <a href='detail?no=${cafe.no}'>${cafe.name}</a><br>
+	        <a href='detail?no=${cafe.no}&perNo=${perNo}'>${cafe.name}</a><br>
 	        ${cafe.location}<br>
 	        영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
 	        ⭐${cafe.avgReview}(${cafe.countReview})

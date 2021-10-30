@@ -12,31 +12,27 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>예약현황</h1>
-<form action="reservationPay">
-  <c:forEach items="${statusOfNumber}" var="i">
-	  <ul class="list-group">
-			<li class="list-group-item">
-			  <c:choose>
-			    <c:when test="${fn:split(i.value, ',')[2] eq '예약 불가'}">
-				    <input class="form-check-input me-1" type="checkbox" value="${i.key},${i.value}" aria-label="${i.value}" name="selectedTime" disabled>
-				    ${fn:split(i.value, ',')[0]} ~ ${fn:split(i.value, ',')[1]} : ${fn:split(i.value, ',')[2]}
-			    </c:when>
-			    <c:otherwise>
-	          <input class="form-check-input me-1" type="checkbox" value="${i.key},${i.value}" aria-label="${i.value}" name="selectedTime">
-	          ${fn:split(i.value, ',')[0]} ~ ${fn:split(i.value, ',')[1]} : ${fn:split(i.value, ',')[2]}
-			    </c:otherwise>
-			  </c:choose>
-      </li>
-	  </ul>
-  </c:forEach>
-인원수 : <input type="number" min="1" max="${people}" name="people"><br>
+<h1>예약 시간 확인</h1>
+<br>
+<form action="reservationEnd">
+  <ol class="list-group list-group-numbered">
+    <c:forEach items="${reservationInfo}" var="i">
+      <li class="list-group-item">${fn:split(i.value, ',')[0]} ~ ${fn:split(i.value, ',')[1]}</li>
+    </c:forEach>
+  </ol>
+<br>
+이용 시간 : ${usingTime}시간<br>
+총 금액 : ${totalPrice}원<br><br>
 <input type="hidden" name="roomNo" value="${roomNo}">
+<input type="hidden" name="startTime" value="${startTime}">
+<input type="hidden" name="usingTime" value="${usingTime}">
+<input type="hidden" name="totalPrice" value="${totalPrice}">
 <input type="hidden" name="selectedDate" value="${selectedDate}">
+<input type="hidden" name="people" value="${people}">
 <input type="hidden" name="perNo" value="${perNo}">
 <input type="submit">
 </form>
 <br>
-<button type="button" class="btn btn-outline-dark"><a href="list">목록</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">목록</a></button>
 </body>
 </html>
