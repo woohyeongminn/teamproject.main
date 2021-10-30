@@ -37,6 +37,15 @@ public class CeoDeleteController extends HttpServlet {
         throw new Exception("로그인 하세요.");
       }
 
+      String email = request.getParameter("email");
+      String password = request.getParameter("password");
+
+      if (!ceoMember.getCeoEmail().equals(email)) {
+        //        System.out.println();
+        //        System.out.println(" >> 이메일이 일치하지 않습니다.");
+        //        return;
+      } 
+
       ceoMember.setCeoName("Deleted Member("+ ceoMember.getCeoName() +")");
       ceoMember.setCeoNickname("Deleted Member("+ ceoMember.getCeoNickname() +")");
       ceoMember.setCeoBossName("Deleted Member("+ ceoMember.getCeoBossName() +")");

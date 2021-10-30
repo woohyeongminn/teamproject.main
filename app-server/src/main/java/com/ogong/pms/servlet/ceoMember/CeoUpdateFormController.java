@@ -28,22 +28,16 @@ public class CeoUpdateFormController extends GenericServlet  {
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
-    System.out.println();
-    System.out.println("▶ 기업 프로필 수정"); 
-    System.out.println();
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      //int no = 5;
       CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
       if (ceoMember == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
-      } 
+      }
 
       request.setAttribute("ceoMember", ceoMember);
       request.getRequestDispatcher("/ceoMember/CeoMemberUpdateForm.jsp").forward(request, response);
-
 
     } catch (Exception e) {
       request.setAttribute("error", e);

@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
-@WebServlet("/ceomember/deleteform")
-public class CeoDeleteFormController extends HttpServlet {
+@WebServlet("/ceomember/update")
+public class CeoUpdateHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
@@ -26,20 +26,41 @@ public class CeoDeleteFormController extends HttpServlet {
     ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
   }
 
-  // 수정해야함
+  // 기업회원 개인정보 수정은 이름,이메일,비밀번호만 가능
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     try {
       int no = Integer.parseInt(request.getParameter("no"));
+
       CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
       if (ceoMember == null) {
-        throw new Exception("로그인 하세요.");
+        throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
-      request.setAttribute("ceoMember", ceoMember);
-      request.getRequestDispatcher("/ceoMember/CeoMemberDeleteForm.jsp").forward(request, response);
+      ceoMember.setCeoName(request.getParameter("name"));
+      ceoMember.setCeoNickname(request.getParameter("nickname"));
+      ceoMember.setCeoPhoto(request.getParameter("photo"));
+      ceoMember.setCeoTel(request.getParameter("tel"));
+      ceoMember.setCeoEmail(request.getParameter("email"));
+      ceoMember.setCeoPassword(request.getParameter("password"));
+
+      System.out.println(ceoMember);
+
+      ceoMemberDao.updateName(ceoMember);
+      ceoMemberDao.updateNickName(ceoMember);
+      ceoMemberDao.updatePhoto(ceoMember);
+      ceoMemberDao.updateTel(ceoMember);
+      ceoMemberDao.updateEmail(ceoMember);
+      ceoMemberDao.updatePassword(ceoMember);
+
+      sqlSession.commit();
+
+      response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
+
+      //AuthCeoMemberLoginHandler.loginCeoMember = null;
 
     } catch (Exception e) {
       request.setAttribute("error", e);
