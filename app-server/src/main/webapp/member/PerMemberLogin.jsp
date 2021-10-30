@@ -27,5 +27,6 @@
 
  <p>'${perMember.perNickname}'님 환영합니다! 🖐</p>
  <button><a href='detail?no=${perMember.perNo}'>마이페이지</a></button> 
+ <button><a href='bookmark/list?no=${perMember.perNo}'>내 북마크</a></button> 
  </body>
-</html>>
+</html>

@@ -12,9 +12,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/study/bookmark/list")
+@WebServlet("/member/bookmark/list")
 public class StudyBookMarkListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
@@ -30,12 +31,13 @@ public class StudyBookMarkListController extends GenericServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-    try {
-      // int no = (int) request.getAttribute("no");
-      // Member member = memberDao.findByNo(no);
 
-      // Collection<Study> studyList = studyDao.findByMyBookmark(member.getPerNo());
-      Collection<Study> studyList = studyDao.findAll();
+    try {
+      int no = (int) request.getAttribute("no");
+      Member member = memberDao.findByNo(no);
+
+      Collection<Study> studyList = studyDao.findByMyBookmark(member.getPerNo());
+      // Collection<Study> studyList = studyDao.findAll();
 
       request.setAttribute("studyList", studyList);
 
