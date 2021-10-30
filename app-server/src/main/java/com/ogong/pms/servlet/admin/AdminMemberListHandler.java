@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
@@ -27,66 +26,19 @@ public class AdminMemberListHandler extends GenericServlet {
 
   // 관리자
   @Override
-  public void service(ServletRequest requset, ServletResponse response)
+  public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-
-    // 클라이언트로 출력할 때 utf-8로 인코딩 해서 한다는 의미
-    response.setContentType("text/html;charset=UTF-8");
-    // 출력 스트림을 달라는 의미
-    PrintWriter out = response.getWriter();
-
-    out.println("<!DOCTYPE html>");
-    out.println("<html>");
-    out.println("<head>");
-    out.println("   <title>개인회원목록</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1> ▶회원 목록</h1>");
-    out.println("<table border='1'>");
-    out.println("<thead>");
-    out.println("  <tr>");
-    out.println("    <th>번호</th>");
-    out.println("    <th>이름</th>");
-    out.println("    <th>이메일</th>");
-    out.println("    <th>전화</th>");
-    out.println("    <th>등록일</th>");
-    out.println("  <tr>");
-    out.println("</thead>");
-    out.println("<tbody>");
 
     try {
       Collection<Member> memberList = memberDao.findAll();
+      request.setAttribute("memberList", memberList);
+      request.getRequestDispatcher("../admin/AdminPerMemberList.jsp").forward(request, response);
 
-      for (Member member : memberList) {
-        out.printf("<tr>"
-            + "<td>(%d)</td>"
-            + "<td>%s</td>"
-            + "<td>%s</td>"
-            + "<td>%s</td>"
-            + "<td>%s</td>"
-            + "</tr>",
-            member.getPerNo(),
-            member.getPerName(),
-            member.getPerNickname(), 
-            member.getPerEmail(),
-            member.getPerRegisteredDate());
-        System.out.println();
-      }
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
-  @Override
-  public String getServletInfo() {
-    return null;
-  }
-
-  @Override
-  public ServletConfig getServletConfig() {
-    return null;
-  }
-
 }
 
 

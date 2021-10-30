@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.auth;
+package com.ogong.pms.servlet.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -14,6 +14,6 @@ public class PerLoginFormHandler extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("/auth/PerLoginForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/member/PerMemberLoginForm.jsp").forward(request, response);
   } 
 }
