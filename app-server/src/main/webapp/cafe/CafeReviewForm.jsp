@@ -15,10 +15,11 @@
 	</style>
 </head>
 <body>
-<h1>예약 내역 상세보기</h1>
+<h1>리뷰 등록</h1>
 <hr>
 	<div id='content'>
-
+    내용 <input type="text" name="content"><br>
+    점수 <input type="number" min="0" max="5">
 	</div>
 </body>
 </html>
