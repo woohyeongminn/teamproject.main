@@ -12,12 +12,12 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/add")
-public class MemberAddHandler extends HttpServlet {
+@WebServlet("/member/update")
+public class MemberUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  MemberDao memberDao;
   SqlSession sqlSession;
+  MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -26,32 +26,47 @@ public class MemberAddHandler extends HttpServlet {
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
-  // 개인
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    //List<Member> memberList = memberDao.findAll();
 
     try {
-      Member member = new Member();
+      int no = Integer.parseInt(request.getParameter("no"));
+      Member member = memberDao.findByNo(no);
 
+      member.setPerNickname("nickname");
       member.setPerName(request.getParameter("name"));
-      member.setPerNickname(request.getParameter("nickname"));
       member.setPerEmail(request.getParameter("email"));
       member.setPerPassword(request.getParameter("password"));
       member.setPerPhoto(request.getParameter("photo"));
       member.setPerTel(request.getParameter("tel"));
-      member.setPerStatus(Member.PER);
 
-      memberDao.insert(member);
+      memberDao.updateName(member);
+      memberDao.updateNickname(member);
+      memberDao.updateEmail(member);
+      memberDao.updatePassword(member);
+      memberDao.updatePhoto(member);
+      memberDao.updateTel(member);
       sqlSession.commit();
-      request.getRequestDispatcher("/member/PerMemberAdd.jsp").forward(request, response);
 
-    } catch (Exception e) {
+      response.sendRedirect("list");
+
+    }catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
+
+  @Override
+  public String getServletInfo() {
+    return null;
+  }
+
+  @Override
+  public ServletConfig getServletConfig() {
+    return null;
+  }
+
 }
 
 

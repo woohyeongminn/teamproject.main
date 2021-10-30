@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 
-@WebServlet("/member/addform")
-public class MemberAddFormHandler extends HttpServlet {
+@WebServlet("/member/deleteform")
+public class MemberDeleteFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;
@@ -21,21 +21,17 @@ public class MemberAddFormHandler extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
-
   // 개인
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      request.getRequestDispatcher("/member/PerMemberAddForm.jsp").forward(request, response);
+      request.getRequestDispatcher("/member/PerMemberDeleteForm.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
   }
 }
-
-

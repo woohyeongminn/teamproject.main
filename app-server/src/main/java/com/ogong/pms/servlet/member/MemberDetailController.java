@@ -12,7 +12,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
 @WebServlet("/member/detail")
-public class MemberDetailHandler extends GenericServlet {
+public class MemberDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;

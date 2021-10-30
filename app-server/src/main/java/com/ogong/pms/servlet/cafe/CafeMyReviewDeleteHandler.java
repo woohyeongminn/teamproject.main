@@ -25,7 +25,7 @@ public class CafeMyReviewDeleteHandler implements Command {
     System.out.println();
     int inputNo = Prompt.inputInt(" 삭제할 리뷰 번호 : ");
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
+    Member member = AuthPerMemberLoginController.getLoginUser();
 
     if (member == null) {
       System.out.println(" >> 로그인 한 회원만 삭제할 수 있습니다.");

@@ -8,55 +8,50 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/login")
-public class AuthPerMemberLoginHandler extends HttpServlet {
-
+@WebServlet("/member/add")
+public class MemberAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
-
-  public static Member loginUser;
-  public static Member getLoginUser() {
-    return loginUser;
-  }
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
+  // 개인
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    //List<Member> memberList = memberDao.findAll();
 
     try {
-      String email = request.getParameter("email");
-      String password = request.getParameter("password");
+      Member member = new Member();
 
-      Member member = memberDao.findByEmailAndPassword(email, password);
+      member.setPerName(request.getParameter("name"));
+      member.setPerNickname(request.getParameter("nickname"));
+      member.setPerEmail(request.getParameter("email"));
+      member.setPerPassword(request.getParameter("password"));
+      member.setPerPhoto(request.getParameter("photo"));
+      member.setPerTel(request.getParameter("tel"));
+      member.setPerStatus(Member.PER);
 
-      if (member == null) {
-        throw new Exception("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
-      }
-
-      if (member != null && member.getPerStatus() == Member.PER) {
-        if (member.getActive() == Member.OUTUSER) {
-          throw new Exception ("<p>회원가입을 진행해 주세요.</p>");
-        }
-      }
-
-      request.setAttribute("perMember", member);
-      request.getRequestDispatcher("/member/PerMemberLogin.jsp").forward(request, response);
+      memberDao.insert(member);
+      sqlSession.commit();
+      request.getRequestDispatcher("/member/PerMemberAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
-
     }
-
-  } 
+  }
 }
+
+

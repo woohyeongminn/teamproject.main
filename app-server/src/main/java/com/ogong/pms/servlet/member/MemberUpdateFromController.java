@@ -11,7 +11,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
 @WebServlet("/member/updateform")
-public class MemberUpdateFromHandler extends HttpServlet {
+public class MemberUpdateFromController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;

@@ -23,7 +23,7 @@ public class CafeMyReservationListHandler implements Command {
     System.out.println("▶ 내 예약 내역 보기");
     System.out.println();
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser(); 
+    Member member = AuthPerMemberLoginController.getLoginUser(); 
 
     if (member == null) {
       System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");

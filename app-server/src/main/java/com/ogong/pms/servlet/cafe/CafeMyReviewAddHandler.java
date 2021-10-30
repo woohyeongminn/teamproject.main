@@ -29,7 +29,7 @@ public class CafeMyReviewAddHandler implements Command {
     System.out.println();
     System.out.println("▶ 리뷰 등록하기");
 
-    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
+    if (AuthPerMemberLoginController.getLoginUser() == null) {
       System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
       return;
     }
