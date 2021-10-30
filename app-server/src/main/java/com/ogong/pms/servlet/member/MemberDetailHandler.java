@@ -30,24 +30,17 @@ public class MemberDetailHandler extends GenericServlet {
     try {
       int no = Integer.parseInt(request.getParameter("no")); 
       Member member = memberDao.findByNo(no);
-      request.setAttribute("myPageMember", member);
-      request.getRequestDispatcher("MemberDetail.jsp").forward(request, response);
+
+      if (member == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      } 
+
+      request.setAttribute("perMember", member);
+      request.getRequestDispatcher("/member/PerMemberDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
   }
-
-  @Override
-  public String getServletInfo() {
-    return null;
-  }
-
-  @Override
-  public ServletConfig getServletConfig() {
-    return null;
-  }
-
 }

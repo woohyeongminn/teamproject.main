@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/update/form")
+@WebServlet("/member/updateform")
 public class MemberUpdateFromHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class MemberUpdateFromHandler extends HttpServlet {
       // List<Member> memberList = memberDao.findAll();
       Member member = memberDao.findByNo(no);
       request.setAttribute("updateMember", member);
-      request.getRequestDispatcher("MemberUpdateForm.jsp").forward(request, response);
+      request.getRequestDispatcher("/member/PerMemberUpdateForm.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
