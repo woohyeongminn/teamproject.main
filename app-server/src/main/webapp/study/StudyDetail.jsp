@@ -44,6 +44,9 @@ label {
 			<a href='delete?no=${study.studyNo}'>삭제</a>
 		</button>
 		<button>
+      <a href='bookmark/add?no=${study.studyNo}'>북마크 추가</a>
+    </button>
+		<button>
 			<a href='list'>목록</a>
 		</button>
 		<br>
