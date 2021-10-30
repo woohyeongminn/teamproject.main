@@ -175,7 +175,7 @@
   <!--  ===[전체 스터디 목록(전체)]=== -->
   <select id="findAll" resultMap="StudyMap">
     <include refid="select1"/>
-    where s.status=1 or s.status=2
+    where s.status=1 or s.status=2 
       group by s.study_no
       order by s.created_dt
   </select>
@@ -248,7 +248,7 @@
    study_no=#{studyNo} and member_no=#{memberNo}
   </update>
   
-  <!--  ===[구성원 탈퇴시키기 및 탈퇴하기]=== -->
+  <!--  ===[구성원 탈퇴시키기 및 탈퇴하기(삭제x상태변경o)]=== -->
   <update id="updateGuilderExpulsion" parameterType="map">
   update study_guilder set 
    status=3
@@ -256,7 +256,7 @@
    study_no=#{studyNo} and member_no=#{memberNo}
   </update>
   
-  <!--  ===[구성원 전체 탈퇴시키기(삭제x상태변경)]=== -->
+  <!--  ===[구성원 전체 탈퇴시키기(삭제x상태변경o)]=== -->
   <update id="updateGuilderExpulsionAll" parameterType="int">
   update study_guilder set 
    status=3
