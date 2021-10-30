@@ -42,20 +42,23 @@ public class StudyAddController extends HttpServlet {
       Study study = new Study();
 
       study.setStudyTitle(request.getParameter("studyTitle"));
-      study.setSubjectName(request.getParameter("subjectName"));
+      study.setOwner(member);
+      study.setSubjectNo(Integer.parseInt(request.getParameter("subjectNo")));
       study.setArea(request.getParameter("area"));
       study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberOfPeple")));
-      study.setFaceName(request.getParameter("faceName"));
+      study.setFaceNo(Integer.parseInt(request.getParameter("faceNo")));
       study.setIntroduction(request.getParameter("introduction"));
+      System.out.println(study);
 
       studyDao.insert(study);
       studyDao.insertGuilder(study.getStudyNo(), member.getPerNo());
       studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list");
-      request.getRequestDispatcher("StudyAdd.jsp").forward(request, response);
+      // request.getRequestDispatcher("StudyAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
 
       RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
