@@ -1,42 +1,45 @@
 package com.ogong.pms.servlet.member;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/detail")
-public class MemberDetailHandler extends GenericServlet {
+@WebServlet("/member/deleteform")
+public class MemberDeleteFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  SqlSession sqlSession;
   MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
-
+  // 개인
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no")); 
-      Member member = memberDao.findByNo(no);
+      int no = Integer.parseInt(request.getParameter("no"));
+      Member perMember = memberDao.findByNo(no);
 
-      if (member == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
-      } 
+      if (perMember == null) {
+        throw new Exception("로그인 하세요.");
+      }
 
-      request.setAttribute("perMember", member);
-      request.getRequestDispatcher("/member/PerMemberDetail.jsp").forward(request, response);
+      request.setAttribute("perMember", perMember);
+      request.getRequestDispatcher("/member/PerMemberDeleteForm.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
