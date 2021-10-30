@@ -14,7 +14,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/study/bookMarkList")
+@WebServlet("/study/bookmark/list")
 public class StudyBookMarkListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
