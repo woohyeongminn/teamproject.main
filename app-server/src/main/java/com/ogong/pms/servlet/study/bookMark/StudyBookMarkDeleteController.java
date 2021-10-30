@@ -1,8 +1,6 @@
 package com.ogong.pms.servlet.study.bookMark;
 
 import java.io.IOException;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,8 +14,8 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/study/bookmark/add")
-public class StudyBookMarkAddController extends HttpServlet {
+@WebServlet("/member/bookmark/delete")
+public class StudyBookMarkDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
@@ -35,30 +33,29 @@ public class StudyBookMarkAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
     try {
-      int no = (int) request.getAttribute("no");
-      Member member = memberDao.findByNo(no);
+      int studyNo = Integer.parseInt(request.getParameter("no"));
 
-      Study study = studyDao.findByNo(no);
+      Member member = memberDao.findByNo(studyNo);
+      Study myStudy = studyDao.findByBookmark(studyNo, member.getPerNo());
 
-      List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
-      study.setWatingMember(waitingGuilder);
+      // for (int i = 0; i < myStudy.getBookMarkMember().size(); i++) {
+      // if (member.getPerNo() == myStudy.getBookMarkMember().get(i).getPerNo()) {
+      // myStudy.getBookMarkMember().remove(i);
+      // break;
+      // }
+      // }
 
-      List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
-      study.setMembers(guilders);
-
-      List<Member> bookmark = studyDao.findByBookmarkAll(study.getStudyNo());
-      study.setBookMarkMember(bookmark);
-
-      studyDao.insertBookmark(study.getStudyNo(), member.getPerNo());
+      studyDao.deleteBookmark(myStudy.getStudyNo(), member.getPerNo());
       sqlSession.commit();
+
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       sqlSession.rollback();
       request.setAttribute("error", e);
-
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

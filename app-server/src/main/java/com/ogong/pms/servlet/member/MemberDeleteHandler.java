@@ -1,9 +1,6 @@
 package com.ogong.pms.servlet.member;
 
-import java.awt.Menu;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,119 +9,66 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
-import com.ogong.util.Prompt;
 
 public class MemberDeleteHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
-  StudyDao studyDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
   // 개인
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
 
-    out.println("<html>");
-    out.println("<head>");
-    out.println("   <title>회원탈퇴</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>[회원 탈퇴]</h1>");
-
-    if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-      System.out.println(" >> 로그인 하세요.");
-      return;
-    }
-
-    int no;
     try {
-      no = (int) request.getAttribute("memberNo");
-    } catch (NullPointerException e) {
-      no = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
+      String email = request.getParameter("email");
+      String password = request.getParameter("password");
+
+      Member perMember = memberDao.findByEmailAndPassword(email, password);
+
+      if (perMember == null) {
+        throw new Exception("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+      }
+    } catch (Exception e) {
+
     }
 
-    Member member = memberDao.findByNo(no);
 
-    System.out.println(" << 이메일 확인 >>");
-    String inputEmail = Prompt.inputString(" 이메일을 입력하세요 : ");
 
-    if (!(inputEmail.equals(member.getPerEmail()))) {
-      System.out.println();
-      System.out.println(" >> 이메일이 일치하지 않습니다.");
-      return;
+    // 조장일때
+    for (Study study : studyList) {
+      if (study.getOwner().getPerNo() == member.getPerNo()) {
+        System.out.println("\n >> 스터디 삭제 후 탈퇴 가능합니다.");
+        return;
+      }
     }
+
+    member.setPerNickname("Deleted Member("+ member.getPerNickname() +")");
+    member.setPerName("Deleted Name");
+    member.setPerPhoto("Deleted Photo");
+    member.setPerTel("Deleted Tel");
+    member.setPerEmail("Deleted Email");
+    member.setPerPassword("Deleted Password");
+    member.setPerStatus(Member.PER);
+    member.setActive(Member.OUTUSER);
+
+    memberDao.updateActive(member);
+    sqlSession.commit();
+    //AuthPerMemberLoginHandler.loginUser = null;
+    //AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
 
     System.out.println();
-    System.out.println(" << 비밀번호 확인 >>");
-    String inputPassword = Prompt.inputString(" 비밀번호를 입력하세요 : ");
+    System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
+    return;
 
-    Member perMember = memberDao.findByEmailAndPassword(inputEmail, inputPassword);
-
-    if (perMember == null) {
-      System.out.println();
-      System.out.println(" >> 비밀번호가 일치하지 않습니다.");
-      return;
-    }
-
-    System.out.println();
-    String input = Prompt.inputString(" 정말 탈퇴하시겠습니까? (네 /아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 회원 탈퇴를 취소하였습니다.");
-      return;
-    }
-
-    if (input.equals("네")) {
-      List<Study> studyList = studyDao.findAll();
-
-      // 조장일때
-      for (Study study : studyList) {
-        if (study.getOwner().getPerNo() == member.getPerNo()) {
-          System.out.println("\n >> 스터디 삭제 후 탈퇴 가능합니다.");
-          return;
-        }
-      }
-
-      // 구성원일때 스터디에서 자동으로 탈퇴
-      for (int i = 0; i < studyList.size(); i++) {
-        for (Member mem : studyList.get(i).getMembers()) {
-          if (mem.getPerNo() == member.getPerNo()) {
-            studyDao.deleteGuilder(studyList.get(i).getStudyNo(), mem.getPerNo());
-          }
-        }
-      }
-
-      member.setPerNickname("Deleted Member("+ member.getPerNickname() +")");
-      member.setPerName("Deleted Name");
-      member.setPerPhoto("Deleted Photo");
-      member.setPerTel("Deleted Tel");
-      member.setPerEmail("Deleted Email");
-      member.setPerPassword("Deleted Password");
-      member.setPerStatus(Member.PER);
-      member.setActive(Member.OUTUSER);
-
-      memberDao.updateActive(member);
-      sqlSession.commit();
-      AuthPerMemberLoginHandler.loginUser = null;
-      AuthPerMemberLoginHandler.accessLevel = Menu.LOGOUT;
-
-      System.out.println();
-      System.out.println(" >> 회원 탈퇴를 완료하였습니다.");
-      return;
-    }
   }
 }
 

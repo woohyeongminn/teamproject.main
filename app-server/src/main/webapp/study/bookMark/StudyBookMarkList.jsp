@@ -31,7 +31,7 @@
 					<td>${study.subjectName}</td>
 					<td>${study.countMember}</td>
 					<td>${study.numberOfPeple}</td>
-					<td>${study.owner.perNickname}</td>
+					<td>${owner.perNickname}</td>
 					<td>${study.faceName}</td>
 				</tr>
 			</c:forEach>

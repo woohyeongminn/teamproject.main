@@ -1,8 +1,6 @@
-package com.ogong.pms.servlet.study.bookMark;
+package com.ogong.pms.servlet.member;
 
 import java.io.IOException;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,16 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
 
-@WebServlet("/study/bookmark/add")
-public class StudyBookMarkAddController extends HttpServlet {
+@WebServlet("/member/add")
+public class MemberAddHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
-  StudyDao studyDao;
   SqlSession sqlSession;
 
   @Override
@@ -29,36 +24,34 @@ public class StudyBookMarkAddController extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
+  // 개인
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    //List<Member> memberList = memberDao.findAll();
+
     try {
-      int no = (int) request.getAttribute("no");
-      Member member = memberDao.findByNo(no);
+      Member member = new Member();
 
-      Study study = studyDao.findByNo(no);
+      member.setPerName(request.getParameter("name"));
+      member.setPerNickname(request.getParameter("nickname"));
+      member.setPerEmail(request.getParameter("email"));
+      member.setPerPassword(request.getParameter("password"));
+      member.setPerPhoto(request.getParameter("photo"));
+      member.setPerTel(request.getParameter("tel"));
+      member.setPerStatus(Member.PER);
 
-      List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
-      study.setWatingMember(waitingGuilder);
-
-      List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
-      study.setMembers(guilders);
-
-      List<Member> bookmark = studyDao.findByBookmarkAll(study.getStudyNo());
-      study.setBookMarkMember(bookmark);
-
-      studyDao.insertBookmark(study.getStudyNo(), member.getPerNo());
+      memberDao.insert(member);
       sqlSession.commit();
+      request.getRequestDispatcher("/member/PerMemberAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
-      sqlSession.rollback();
       request.setAttribute("error", e);
-
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
+
+
