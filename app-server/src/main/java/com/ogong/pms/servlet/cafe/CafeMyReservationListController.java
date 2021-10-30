@@ -13,7 +13,7 @@ import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.domain.CafeReservation;
 
 @WebServlet("/cafe/myReservationList")
-public class CafeMyReservationListHandler extends HttpServlet {
+public class CafeMyReservationListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeReservationDao cafeReservationDao;
@@ -35,7 +35,12 @@ public class CafeMyReservationListHandler extends HttpServlet {
       List<CafeReservation> reserList = 
           cafeReservationDao.findReservationListByMember(memberNo);
 
+      if (reserList.isEmpty()) {
+        throw new Exception("예약 내역이 없습니다.");
+      }
+
       request.setAttribute("reserList", reserList);
+      request.setAttribute("perNo", memberNo);
       request.getRequestDispatcher("/cafe/CafeMyReservationList.jsp").forward(request, response);
 
       //      Member member = AuthPerMemberLoginHandler.getLoginUser(); 

@@ -19,7 +19,7 @@
   </style>
 </head>
 <body>
-<h1>내 스터디카페 예약 목록</h1>
+<h1>내 예약 목록</h1>
 <br>
 
 <table class="table table-striped text-center">
@@ -37,7 +37,7 @@
 
 <c:forEach items="${reserList}" var="reservation">
 <tr>
-    <td><a href='detail?no=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
+    <td><a href='myReservationDetail?perNo=${perNo}&reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
     <td>${reservation.reservationDate}</td> 
     <td>${reservation.useDate}</td> 
     <td>${reservation.cafe.name}</td> 

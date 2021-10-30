@@ -43,10 +43,11 @@ public class CafeReservationController3 extends HttpServlet {
       for(int i = 0; i < selectedTime.length; i++) {
         System.out.println(selectedTime[i]);
 
-        //        if (Integer.parseInt(selectedTime[i].split(",")[0]) != Integer.parseInt(selectedTime[i+1].split(",")[0]) -1) {
-        //          response.setHeader("Refresh", "1;url=list");
-        //          throw new Exception("연속된 시간만 선택 가능합니다. 다시 선택해 주세요.");
-        //        }
+        if (Integer.parseInt(selectedTime[i].split(",")[0]) != 
+            Integer.parseInt(selectedTime[i+1].split(",")[0]) -1) {
+          response.setHeader("Refresh", "1;url=list");
+          throw new Exception("연속된 시간만 선택 가능합니다. 다시 선택해 주세요.");
+        }
 
         int index = Integer.parseInt(selectedTime[i].split(",")[0]);
         String startTime = selectedTime[i].split(",")[1];

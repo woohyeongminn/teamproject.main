@@ -33,6 +33,6 @@
 <input type="submit">
 </form>
 <br>
-<button type="button" class="btn btn-outline-dark"><a href="list">목록</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">목록</a></button>
 </body>
 </html>
