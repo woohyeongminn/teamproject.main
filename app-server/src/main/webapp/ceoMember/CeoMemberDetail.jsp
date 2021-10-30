@@ -27,7 +27,7 @@
    <b> 📖 기업회원 상세</b>
    <hr>
    <form action='updateform'>
-	   <span id='no' name='no'>(${ceoMember.ceoNo})</span><br>
+	   <span>(${ceoMember.ceoNo})</span><br>
 	   <span>이름ㅣ</span> <span>${ceoMember.ceoName}</span><br>
 	   <span>닉네임ㅣ</span> <span>${ceoMember.ceoNickname}</span><br>
 	   <span>이메일ㅣ</span> <span>${ceoMember.ceoEmail}</span><br>

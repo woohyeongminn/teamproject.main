@@ -48,9 +48,11 @@
   
   <span>가입일ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
   
-  <button type="submit" class="btn btn-primary">
-    <!--  <a href='update?no=${ceoMember.ceoNo}'>수정</a>-->
-    <a class="dropdown-item" href="update">수정</a>
-  </button>
+  <!--  <button type="submit" class="btn btn-primary">
+ <a href='update?no=${ceoMember.ceoNo}'>수정</a>
+  </button> -->
+  
+  <a class="btn btn-info" href="update">수정</a>
+  
  </body>
 </html>
