@@ -33,17 +33,22 @@ public class MemberDeleteController extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
-    //    String email = request.getParameter("email");
-    //    String password = request.getParameter("password");
-
     try {
-      //Member perMember = memberDao.findByEmailAndPassword(email, password);
       int no = Integer.parseInt(request.getParameter("no"));
       Member perMember = memberDao.findByNo(no);
 
       if (perMember == null) {
-        throw new Exception("정확히 입력해주세요.");
+        throw new Exception("로그인 하세요.");
       }
+
+      String email = request.getParameter("email");
+      String password = request.getParameter("password");
+
+      if (!perMember.getPerEmail().equals(email)) {
+        //        System.out.println();
+        //        System.out.println(" >> 이메일이 일치하지 않습니다.");
+        //        return;
+      } 
 
       perMember.setPerName("Deleted Name");
       perMember.setPerNickname("Deleted Member("+ perMember.getPerNickname() +")");
@@ -52,9 +57,8 @@ public class MemberDeleteController extends HttpServlet {
       perMember.setPerPhoto("Deleted Photo");
       perMember.setPerStatus(Member.PER);
       perMember.setActive(Member.OUTUSER);
-      out.println("test");
+
       memberDao.updateActive(perMember);
-      out.println("test");
       sqlSession.commit();
 
     } catch (Exception e) {

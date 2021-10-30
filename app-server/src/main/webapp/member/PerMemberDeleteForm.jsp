@@ -25,10 +25,15 @@
 <body>
   <h5>개인 회원 탈퇴</h5>
 
-  <form action='../member/delete'>
+  <form action='delete'>
   <label for='f-email' class='form-label' size='100px'>이메일</label> <input id='f-email' type='email' name='email' placeholder='아이디' size='20'><br>
   <label for='f-password' class='form-label' size='100px'>암호</label> <input id='f-password' type='password' name='password' placeholder='암호' size='20'><br>
-  <button type="submit" class="btn btn-primary">탈퇴</button>
+  <input type ='hidden' name='no' value='${perMember.perNo}'>
+
+
+   <button type="submit" value="삭제" class="btn btn-primary">
+     탈퇴하기
+  </button>
   
   </form>
  </body>
