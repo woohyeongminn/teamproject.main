@@ -41,27 +41,6 @@ public class StudyBookMarkAddHandler implements Command {
     List<Member> bookmark = studyDao.findByBookmarkAll(study.getStudyNo());
     study.setBookMarkMember(bookmark);
 
-    for (Member joinMember : study.getMembers()) {
-      if (member.getPerNo() == joinMember.getPerNo()) {
-        System.out.println(" >> 이미 참여 중인 스터디입니다.");
-        return;
-      }
-    }
-
-    for (Member watingMember : study.getWatingMember()) {
-      if (member.getPerNo() == watingMember.getPerNo()) {
-        System.out.println(" >> 이미 승인 대기 중인 스터디입니다.");
-        return;
-      }
-    }
-
-    for (Member bookMarkMember : study.getBookMarkMember()) {
-      if (member.getPerNo() == bookMarkMember.getPerNo()) {
-        System.out.println(" >> 이미 북마크 중인 스터디입니다.");
-        return;
-      }
-    }
-
     String input = Prompt.inputString(" 이 스터디를 북마크하시겠습니까? (네 / 아니오) ");
     if (!input.equalsIgnoreCase("네")) {
       System.out.println(" >> 북마크가 취소되었습니다.");

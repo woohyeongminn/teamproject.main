@@ -36,7 +36,7 @@ public class StudyBookMarkDetailController extends GenericServlet {
       }
 
       request.setAttribute("study", study);
-      request.getRequestDispatcher("/study/StudyDetail.jsp").forward(request,
+      request.getRequestDispatcher("/study/bookMark/StudyBookMarkDetail.jsp").forward(request,
           response);
 
     } catch (Exception e) {

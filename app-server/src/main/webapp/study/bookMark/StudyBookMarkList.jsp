@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>🌟 내 북마크</title>
+<title>목록 | 🌟 내 북마크</title>
 </head>
 <body>
 	<h1>내 북마크 목록</h1>

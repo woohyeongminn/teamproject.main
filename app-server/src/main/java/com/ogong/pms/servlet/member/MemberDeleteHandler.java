@@ -1,5 +1,6 @@
 package com.ogong.pms.servlet.member;
 
+import java.awt.Menu;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -10,12 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.menu.Menu;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
-import com.ogong.pms.servlet.auth.AuthPerMemberLoginHandler;
 import com.ogong.util.Prompt;
 
 public class MemberDeleteHandler extends HttpServlet {

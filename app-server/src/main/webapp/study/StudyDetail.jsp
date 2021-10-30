@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>📖 스터디 찾기</title>
+<title>상세 | 📖 스터디 찾기</title>
 <style>
 label {
 	margin-right: 5px;

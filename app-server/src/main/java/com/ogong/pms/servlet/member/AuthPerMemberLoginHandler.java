@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.auth;
+package com.ogong.pms.servlet.member;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -13,9 +13,15 @@ import com.ogong.pms.domain.Member;
 
 @WebServlet("/member/login")
 public class AuthPerMemberLoginHandler extends HttpServlet {
+
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
+
+  public static Member loginUser;
+  public static Member getLoginUser() {
+    return loginUser;
+  }
 
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -27,17 +33,27 @@ public class AuthPerMemberLoginHandler extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    String email = request.getParameter("email");
-    String password = request.getParameter("password");
-
     try {
+      String email = request.getParameter("email");
+      String password = request.getParameter("password");
+
       Member member = memberDao.findByEmailAndPassword(email, password);
-      request.setAttribute("loginMember", member);
-      request.getRequestDispatcher("../auth/PerLogin.jsp").forward(request, response);
+
+      if (member == null) {
+        throw new Exception("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+      }
+
+      if (member != null && member.getPerStatus() == Member.PER) {
+        if (member.getActive() == Member.OUTUSER) {
+          throw new Exception ("<p>회원가입을 진행해 주세요.</p>");
+        }
+      }
+
+      request.setAttribute("perMember", member);
+      request.getRequestDispatcher("/member/PerMemberLogin.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
 
     }

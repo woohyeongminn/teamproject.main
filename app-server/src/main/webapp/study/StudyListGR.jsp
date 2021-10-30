@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>📖 스터디 찾기</title>
+<title>목록 | 📖 스터디 찾기</title>
 </head>
 <body>
 	<h1>스터디 목록</h1>
