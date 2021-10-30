@@ -26,6 +26,7 @@ public class CeoDeleteFormController extends HttpServlet {
     ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
   }
 
+  // 수정해야함
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {

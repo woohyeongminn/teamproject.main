@@ -40,7 +40,7 @@
 	      <a href='updateform?no=${ceoMember.ceoNo}'>프로필 수정하기</a>
 	   </button>
 	   <button type="submit" value="삭제" formaction="delete">
-	      <a href='deleteform?no=${ceoMember.ceoNo}'>탈퇴하기</a>
+	      <a href='delete?no=${ceoMember.ceoNo}'>탈퇴하기</a>
 	    </button>
     </form>
 </body>

@@ -26,7 +26,8 @@
 <body>
   <h5>기업 회원 프로필 수정</h5>
 
-  <span id='no' name='no'>(${ceoMember.ceoNo})</span><br>
+  <form action="update">
+  <span>(${ceoMember.ceoNo})</span><br>
 
   <label for='f-name' class='form-label' size='100px'>이름</label>
   <input id='f-name' type='text' name='name' value='${ceoMember.ceoName}'><br>
@@ -35,7 +36,7 @@
   <input id='f-nickname' type='text' name='nickname' value='${ceoMember.ceoNickname}'><br>
   
   <label for='f-photo' class='form-label' size='100px'>사진</label>
-  <input id='f-photo' type='text' name='email' value='${ceoMember.ceoPhoto}'><br>
+  <input id='f-photo' type='text' name='photo' value='${ceoMember.ceoPhoto}'><br>
   
   <label for='f-tel' class='form-label' size='100px'>전화번호</label>
   <input id='f-tel' type='tel' name='tel' value='${ceoMember.ceoTel}'><br>
@@ -48,11 +49,18 @@
   
   <span>가입일ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
   
-  <!--  <button type="submit" class="btn btn-primary">
- <a href='update?no=${ceoMember.ceoNo}'>수정</a>
-  </button> -->
+  <!-- 
+  <button type="submit" class="btn btn-primary">
+    <a href='update?no=${ceoMember.ceoNo}'>수정</a>
+  </button>
+  -->
   
-  <a class="btn btn-info" href="update">수정</a>
+  <button type="button" class="btn btn-primary">
+    <a href='update?no=${ceoMember.ceoNo}'>수정</a>
+  </button>
+  <a href='delete?no=${ceoMember.ceoNo}'></a>
+  <!-- <a class="btn btn-info" href="update">수정</a>-->
+  </form>
   
  </body>
 </html>
