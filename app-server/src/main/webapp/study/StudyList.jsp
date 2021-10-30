@@ -8,7 +8,9 @@
 </head>
 <body>
 	<h1>스터디 목록</h1>
-	<a href='form'>스터디 등록</a>
+	<button>
+		<a href='form'>등록</a>
+	</button>
 	<br>
 	<table border='1'>
 		<thead>
