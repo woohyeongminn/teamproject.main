@@ -1,17 +1,33 @@
 package com.ogong.pms.servlet.ceoMember;
-//package com.ogong.pms.servlet.auth;
-//
-//import com.ogong.menu.Menu;
-//
-//public class AuthCeoMemberLogoutHandler implements Command {
-//
-//  @Override
-//  public void execute(CommandRequest request) {
-//    System.out.println();
-//    AuthCeoMemberLoginHandler.loginCeoMember = null;
-//    AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
-//    System.out.println(" >> 로그아웃 되었습니다.");
-//  }
-//
-//
-//}
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.ogong.pms.domain.CeoMember;
+
+@WebServlet("/ceomember/logout")
+public class AuthCeoMemberLogoutController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
+
+  public static CeoMember loginCeoMember;
+  public static CeoMember getLoginCeoMember() {
+    return loginCeoMember;
+  }
+
+  @Override
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+
+    AuthCeoMemberLogoutController.loginCeoMember = null;
+
+    request.getRequestDispatcher("/ceoMember/CeoMemberLoginForm.jsp").forward(request, response);
+
+    //AuthCeoMemberLogoutController.accessLevel = Menu.LOGOUT;
+  }
+
+
+}

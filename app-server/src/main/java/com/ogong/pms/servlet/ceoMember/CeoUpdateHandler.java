@@ -47,6 +47,8 @@ public class CeoUpdateHandler extends HttpServlet {
       ceoMember.setCeoEmail(request.getParameter("email"));
       ceoMember.setCeoPassword(request.getParameter("password"));
 
+      System.out.println(ceoMember);
+
       ceoMemberDao.updateName(ceoMember);
       ceoMemberDao.updateNickName(ceoMember);
       ceoMemberDao.updatePhoto(ceoMember);
@@ -56,56 +58,13 @@ public class CeoUpdateHandler extends HttpServlet {
 
       sqlSession.commit();
 
-      //response.sendRedirect("detail");
+      response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
 
       //AuthCeoMemberLoginHandler.loginCeoMember = null;
-      request.getRequestDispatcher("/ceoMember/CeoMemberDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-    //
-    //    ceoMember.setCeoName(ceoName);
-    //    ceoMemberDao.updateName(ceoMember);
-    //    sqlSession.commit();
-    //
-    //
-    //    ceoMember.setCeoNickname(ceoNickName);
-    //    ceoMemberDao.updateNickName(ceoMember);
-    //    sqlSession.commit();
-    //
-    //
-    //    ceoMember.setCeoPhoto(ceophoto);
-    //    ceoMemberDao.updatePhoto(ceoMember);
-    //    sqlSession.commit();
-    //
-    //
-    //    ceoMember.setCeoTel(ceoTel);
-    //    ceoMemberDao.updateTel(ceoMember);
-    //    sqlSession.commit();
-    //
-    //
-    //    ceoMember.setCeoEmail(ceoEmail);
-    //    ceoMemberDao.updateEmail(ceoMember);
-    //    sqlSession.commit();
-    //
-    //
-    //    ceoMember.setCeoPassword(ceoPassword);
-    //    ceoMemberDao.updatePassword(ceoMember);
-    //    AuthCeoMemberLoginHandler.loginCeoMember = null;
-    //    AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
-    //    sqlSession.commit();
-
-
   }
 }
-
-
-
-
-
-
-

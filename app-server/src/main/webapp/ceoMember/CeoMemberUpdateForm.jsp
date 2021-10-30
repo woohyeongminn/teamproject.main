@@ -47,19 +47,12 @@
   <label for='f-password' class='form-label' size='100px'>암호</label>
   <input id='f-password' type='password' name='password'><br>
   
-  <span>가입일ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
+  <span>가입일ㅣ</span> <span>${ceoMember.ceoRegisteredDate}</span><br>
   
-  <!-- 
-  <button type="submit" class="btn btn-primary">
-    <a href='update?no=${ceoMember.ceoNo}'>수정</a>
-  </button>
-  -->
+  <input type ='hidden' name='no' value='${ceoMember.ceoNo}'>
   
-  <button type="button" class="btn btn-primary">
-    <a href='update?no=${ceoMember.ceoNo}'>수정</a>
-  </button>
-  <a href='delete?no=${ceoMember.ceoNo}'></a>
-  <!-- <a class="btn btn-info" href="update">수정</a>-->
+  <button type="submit" value="수정">수정</button>
+
   </form>
   
  </body>
