@@ -14,7 +14,7 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/member/bookmark/delete")
+@WebServlet("/bookmark/delete")
 public class StudyBookMarkDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

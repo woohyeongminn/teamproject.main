@@ -16,7 +16,7 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/member/bookmark/add")
+@WebServlet("/bookmark/add")
 public class StudyBookMarkAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -36,10 +36,11 @@ public class StudyBookMarkAddController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      int no = (int) request.getAttribute("no");
-      Member member = memberDao.findByNo(no);
+      int perNo = (int) request.getAttribute("perno");
+      Member member = memberDao.findByNo(perNo);
 
-      Study study = studyDao.findByNo(no);
+      int studyNo = (int) request.getAttribute("studyno");
+      Study study = studyDao.findByNo(studyNo);
 
       List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
       study.setWatingMember(waitingGuilder);
