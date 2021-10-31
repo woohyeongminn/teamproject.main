@@ -18,6 +18,13 @@
   legend {
     text-align: center;
   }
+  a {
+  color : black;
+  text-decoration : auto;
+  }
+  a:hover {
+  color : indianred;
+  }
   </style>
 </head>
 <body>

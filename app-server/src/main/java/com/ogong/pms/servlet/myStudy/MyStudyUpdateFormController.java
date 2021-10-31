@@ -1,25 +1,28 @@
-package com.ogong.pms.servlet.study.bookMark;
+package com.ogong.pms.servlet.myStudy;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/bookmark/detail")
-public class StudyBookMarkDetailController extends GenericServlet {
+@WebServlet("/study/updateform")
+public class MyStudyUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
@@ -28,18 +31,15 @@ public class StudyBookMarkDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Study study = studyDao.findByNo(no);
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
+      Study myStudy = studyDao.findByNo(studyNo);
 
-      if (study == null) {
-        throw new Exception("해당 번호의 북마크가 없습니다.");
-      }
-
-      request.setAttribute("study", study);
-      request.getRequestDispatcher("/study/bookMark/StudyBookMarkDetail.jsp").forward(request,
-          response);
+      request.setAttribute("study", myStudy);
+      request.getRequestDispatcher("/myStudy/MyStudyUpdateForm.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
+      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

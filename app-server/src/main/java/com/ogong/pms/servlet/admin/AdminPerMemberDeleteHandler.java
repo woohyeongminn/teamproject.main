@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.member;
+package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -12,12 +12,12 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/update")
-public class MemberUpdateHandler extends HttpServlet {
+@WebServlet("/admin/permemberdelete")
+public class AdminPerMemberDeleteHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  SqlSession sqlSession;
   MemberDao memberDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -29,44 +29,33 @@ public class MemberUpdateHandler extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
-      Member member = memberDao.findByNo(no);
+      Member perMember = memberDao.findByNo(no);
 
-      member.setPerNickname("nickname");
-      member.setPerName(request.getParameter("name"));
-      member.setPerEmail(request.getParameter("email"));
-      member.setPerPassword(request.getParameter("password"));
-      member.setPerPhoto(request.getParameter("photo"));
-      member.setPerTel(request.getParameter("tel"));
+      if (perMember == null) {
+        throw new Exception("해당 번호의 회원이 없습니다.");
+      }
 
-      memberDao.updateName(member);
-      memberDao.updateNickname(member);
-      memberDao.updateEmail(member);
-      memberDao.updatePassword(member);
-      memberDao.updatePhoto(member);
-      memberDao.updateTel(member);
+      perMember.setPerName("Deleted Name");
+      perMember.setPerNickname("Deleted Member("+ perMember.getPerNickname() +")");
+      perMember.setPerEmail("Deleted Email");
+      perMember.setPerPassword("Deleted Password");
+      perMember.setPerPhoto("Deleted Photo");
+      perMember.setPerStatus(Member.PER);
+      perMember.setActive(Member.OUTUSER);
+
+      memberDao.updateActive(perMember);
       sqlSession.commit();
 
-      response.sendRedirect("list");
+      response.sendRedirect("permemberlist");
 
-    }catch (Exception e) {
+      //        AuthCeoMemberLoginHandler.loginCeoMember = null;
+      //        AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
+
+    } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
-  @Override
-  public String getServletInfo() {
-    return null;
-  }
-
-  @Override
-  public ServletConfig getServletConfig() {
-    return null;
-  }
-
 }
-
-

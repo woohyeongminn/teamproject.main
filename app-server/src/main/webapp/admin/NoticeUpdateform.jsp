@@ -17,6 +17,10 @@
   legend {
     text-align: center;
   }
+  input {
+  border : white;
+  outline-color : lightgray;
+  }
   </style>
 </head>
 <body>
@@ -35,15 +39,17 @@
 <th>등록일</th>
 </tr>
 </thead>
-  <td><span id='f-no'>(${notice.adminNotiNo})</span></td>
+  <td><form action='update'><span>(${notice.adminNotiNo})</span></td>
   <td><input id='f-title' type='text' name='title' value='${notice.adminNotiTitle}'></td>
   <td><input id='f-content' type='text' name='content' value='${notice.adminNotiContent}'></td>
   <td><input id='f-filepath' type='text' name='filepath' value='${notice.adminNotiFile}'></td>
   <td><span id='f-registeredDate'>${notice.adminNotiRegisteredDate}</span></td>
 </table>
 </fieldset>
+<input type='hidden' name='no' value='${notice.adminNotiNo}'>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<button type="button" class="btn btn-outline-dark"><a href='update?no=${notice.adminNotiNo}'>변경</a></button>
+<button type="submit" class="btn btn-outline-dark" value="변경">변경</button>
+</form>
 </div>
 </body>
 </html>

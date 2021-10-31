@@ -18,6 +18,13 @@
   legend {
     text-align: center;
   }
+  a {
+  color : black;
+  text-decoration : blink;
+  }
+  a:hover {
+  color : white;
+  }
   </style>
 </head>
 <body>
@@ -46,9 +53,9 @@
 </table>
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<button type="button" class="btn btn-outline-dark"><a href='list'>목록</a></button>
-<button type="button" class="btn btn-outline-dark"><a href='Updateform?no=${adminNotice.adminNotiNo}'>변경</a></button>
-<button type="button" class="btn btn-outline-dark"><a href='delete?no=${adminNotice.adminNotiNo}'>삭제</a></button></body>
+<button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button>
+<button type="submit" class="btn btn-outline-dark" value="변경"><a href='Updateform?no=${adminNotice.adminNotiNo}'>변경</a></button>
+<button type="submit" class="btn btn-outline-dark" value="삭제"><a href='delete?no=${adminNotice.adminNotiNo}'>삭제</a></button></body>
 </div>
 </body>
 </html>

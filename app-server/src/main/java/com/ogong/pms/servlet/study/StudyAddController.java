@@ -1,6 +1,7 @@
-package com.ogong.pms.servlet.study.bookMark;
+package com.ogong.pms.servlet.study;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,8 +15,8 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/bookmark/delete")
-public class StudyBookMarkDeleteController extends HttpServlet {
+@WebServlet("/study/add")
+public class StudyAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
@@ -35,27 +36,33 @@ public class StudyBookMarkDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int studyNo = Integer.parseInt(request.getParameter("no"));
+      int no = Integer.parseInt(request.getParameter("no"));
+      Member member = memberDao.findByNo(no);
 
-      Member member = memberDao.findByNo(studyNo);
-      Study myStudy = studyDao.findByBookmark(studyNo, member.getPerNo());
+      Study study = new Study();
 
-      // for (int i = 0; i < myStudy.getBookMarkMember().size(); i++) {
-      // if (member.getPerNo() == myStudy.getBookMarkMember().get(i).getPerNo()) {
-      // myStudy.getBookMarkMember().remove(i);
-      // break;
-      // }
-      // }
+      study.setStudyTitle(request.getParameter("studyTitle"));
+      study.setOwner(member);
+      study.setSubjectNo(Integer.parseInt(request.getParameter("subjectNo")));
+      study.setArea(request.getParameter("area"));
+      study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberOfPeple")));
+      study.setFaceNo(Integer.parseInt(request.getParameter("faceNo")));
+      study.setIntroduction(request.getParameter("introduction"));
+      System.out.println(study);
 
-      studyDao.deleteBookmark(myStudy.getStudyNo(), member.getPerNo());
+      studyDao.insert(study);
+      studyDao.insertGuilder(study.getStudyNo(), member.getPerNo());
+      studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
-
-      response.sendRedirect("list");
+      response.setHeader("Refresh", "1;url=list");
+      // request.getRequestDispatcher("StudyAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
-      sqlSession.rollback();
+      e.printStackTrace();
       request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+
+      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
+      요청배달자.forward(request, response);
     }
   }
 }

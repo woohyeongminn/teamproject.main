@@ -17,9 +17,14 @@
 <body>
 <h1>리뷰 등록</h1>
 <hr>
+<form action="reviewAdd">
 	<div id='content'>
     내용 <input type="text" name="content"><br>
-    점수 <input type="number" min="0" max="5">
+    평점(0~5점) <input type="number" min="0" max="5" name="grade">
 	</div>
+	<input type="hidden" name="perNo" value="${perNo}">
+	<input type="hidden" name="reservationNo" value="${reservationNo}">
+	<input type="submit">
+</form>
 </body>
 </html>

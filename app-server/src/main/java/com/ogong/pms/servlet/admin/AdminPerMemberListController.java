@@ -1,6 +1,7 @@
-package com.ogong.pms.servlet.study.bookMark;
+package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
+import java.util.Collection;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -8,36 +9,30 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Study;
+import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.domain.Member;
 
-@WebServlet("/bookmark/detail")
-public class StudyBookMarkDetailController extends GenericServlet {
+@WebServlet("/admin/permemberlist")
+public class AdminPerMemberListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-  StudyDao studyDao;
+  MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
+  // 관리자
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Study study = studyDao.findByNo(no);
-
-      if (study == null) {
-        throw new Exception("해당 번호의 북마크가 없습니다.");
-      }
-
-      request.setAttribute("study", study);
-      request.getRequestDispatcher("/study/bookMark/StudyBookMarkDetail.jsp").forward(request,
-          response);
+      Collection<Member> perMemberList = memberDao.findAll();
+      request.setAttribute("perMemberList", perMemberList);
+      request.getRequestDispatcher("/admin/AdminPerMemberList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
@@ -45,3 +40,9 @@ public class StudyBookMarkDetailController extends GenericServlet {
     }
   }
 }
+
+
+
+
+
+
