@@ -2,7 +2,6 @@ package com.ogong.pms.servlet.study.bookMark;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -57,9 +56,7 @@ public class StudyBookMarkAddController extends HttpServlet {
     } catch (Exception e) {
       sqlSession.rollback();
       request.setAttribute("error", e);
-
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

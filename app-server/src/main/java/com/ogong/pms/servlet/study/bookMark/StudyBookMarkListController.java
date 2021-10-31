@@ -3,7 +3,6 @@ package com.ogong.pms.servlet.study.bookMark;
 import java.io.IOException;
 import java.util.Collection;
 import javax.servlet.GenericServlet;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -41,16 +40,11 @@ public class StudyBookMarkListController extends GenericServlet {
       // Collection<Study> studyList = studyDao.findAll();
 
       request.setAttribute("studyList", studyList);
-
-      RequestDispatcher 요청배달자 =
-          request.getRequestDispatcher("/study/bookMark/StudyBookMarkList.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/study/bookMark/StudyBookMarkList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
-
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher("/Error.jsp");
-      요청배달자.forward(request, response);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
