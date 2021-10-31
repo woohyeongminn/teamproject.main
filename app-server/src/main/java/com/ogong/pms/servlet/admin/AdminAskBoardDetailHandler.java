@@ -47,7 +47,7 @@ public class AdminAskBoardDetailHandler implements Command {
       // 로그인 안했을 때 (비회원)
       if (AuthPerMemberLoginHandler.getLoginUser() == null &&
           AuthCeoMemberLoginHandler.getLoginCeoMember() == null &&
-          AuthAdminLoginHandler.getLoginAdmin() == null) {
+          AuthAdminLoginController.getLoginAdmin() == null) {
         System.out.println(" >> 열람 권한이 없습니다.");
         return;
       }
@@ -99,7 +99,7 @@ public class AdminAskBoardDetailHandler implements Command {
     request.setAttribute("askNo", askNo);
 
     // 관리자가 로그인 했을 때
-    if (AuthAdminLoginHandler.getLoginAdmin() != null) {
+    if (AuthAdminLoginController.getLoginAdmin() != null) {
       System.out.println("\n---------------------");
       System.out.println("1. 문의글 삭제");
       System.out.println("2. 답변 등록");

@@ -24,7 +24,6 @@
   </style>
 </head>
 <body>
-<!-- <h1>  ▶ 공지 수정 </h1> -->
 <fieldset>
 <br>
 <legend><b> 🔔 공지게시글 수정 </b></legend><br>
