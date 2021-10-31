@@ -9,16 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 @WebServlet("/study/delete")
 public class MyStudyDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  MemberDao memberDao;
+  // MemberDao memberDao;
   StudyDao studyDao;
   SqlSession sqlSession;
 
@@ -26,7 +24,7 @@ public class MyStudyDeleteController extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
@@ -35,28 +33,28 @@ public class MyStudyDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+      // int perNo = Integer.parseInt(request.getParameter("perno"));
+      // Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study myStudy = studyDao.findByNo(studyNo);
 
-      if (myStudy.getOwner().getPerNo() != member.getPerNo()) {
-        throw new Exception(" >> 삭제 권한이 없습니다.");
+      // if (myStudy.getOwner().getPerNo() != member.getPerNo()) {
+      // throw new Exception(" >> 삭제 권한이 없습니다.");
+      //
+      // } else {
+      // if (myStudy.getCountMember() > 0) {
+      // throw new Exception(" >> 구성원이 있는 스터디는 삭제할 수 없습니다.");
+      //
+      // } else if (myStudy.getWatingCountMember() > 0) {
+      // System.out.println(" >> 승인 대기 중인 구성원이 없어야 스터디 삭제가 가능합니다.");
+      //
+      // studyDao.updateGuilderExpulsionAll(myStudy.getStudyNo());
+      // System.out.println(" >> 구성원을 모두 삭제하였습니다.\n");
+      // }
+      // }
 
-      } else {
-        if (myStudy.getCountMember() > 0) {
-          throw new Exception(" >> 구성원이 있는 스터디는 삭제할 수 없습니다.");
-
-        } else if (myStudy.getWatingCountMember() > 0) {
-          System.out.println(" >> 승인 대기 중인 구성원이 없어야 스터디 삭제가 가능합니다.");
-
-          studyDao.deleteAllGuilder(myStudy.getStudyNo());
-          System.out.println(" >> 구성원을 모두 삭제하였습니다.\n");
-        }
-      }
-
-      studyDao.deleteStudy(myStudy.getStudyNo(), member.getPerNo());
+      studyDao.updateStatusDelete(myStudy);
       sqlSession.commit();
 
       response.sendRedirect("list");
