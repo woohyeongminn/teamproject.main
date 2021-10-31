@@ -50,7 +50,7 @@ label {
 		<input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
 		<button>수정</button>
 		<button>
-			<a href='delete?no=${study.studyNo}'>삭제</a>
+			<a href='delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
 		</button>
 		<button>
 			<a href='../bookmark/add?perno=${member.perNo}&studyno=${study.studyNo}'>북마크 추가</a>
