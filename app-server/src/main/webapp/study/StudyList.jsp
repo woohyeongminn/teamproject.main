@@ -31,7 +31,7 @@
 				<tr>
 					<td>${study.studyNo}</td>
 					<td>${study.countBookMember}</td>
-					<td><a href='detail?no=${study.studyNo}'>${study.studyTitle}</a></td>
+					<td><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></td>
 					<td>${study.faceName}</td>
 					<td>${study.owner.perNickname}</td>
 					<td>${study.subjectName}</td>

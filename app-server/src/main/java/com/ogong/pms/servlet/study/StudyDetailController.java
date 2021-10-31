@@ -28,17 +28,19 @@ public class StudyDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Study study = studyDao.findByNo(no);
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
+      Study study = studyDao.findByNo(studyNo);
 
       if (study == null) {
         throw new Exception("해당 번호의 스터디가 없습니다.");
       }
 
+      request.setAttribute("perno", request.getParameter("perno"));
       request.setAttribute("study", study);
       request.getRequestDispatcher("/study/StudyDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
