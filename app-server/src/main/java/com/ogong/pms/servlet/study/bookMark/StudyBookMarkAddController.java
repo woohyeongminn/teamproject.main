@@ -16,7 +16,7 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/study/bookmark/add")
+@WebServlet("/member/bookmark/add")
 public class StudyBookMarkAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
