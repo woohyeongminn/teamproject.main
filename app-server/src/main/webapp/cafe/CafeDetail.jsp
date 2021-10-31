@@ -87,7 +87,7 @@
 	 등록된 리뷰가 없습니다.<br><br>	
 </c:if>
 <button type="button" class="btn btn-outline-dark"><a href="reservation?no=${cafe.no}&perNo=${perNo}">스터디룸 예약</a></button>
-<button type="button" class="btn btn-outline-dark"><a href="list">목록</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">목록</a></button>
 
 </body>
 </html>

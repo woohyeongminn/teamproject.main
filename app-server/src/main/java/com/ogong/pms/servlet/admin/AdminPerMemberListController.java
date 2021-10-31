@@ -13,7 +13,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
 @WebServlet("/admin/permemberlist")
-public class AdminMemberListHandler extends GenericServlet {
+public class AdminPerMemberListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   MemberDao memberDao;
@@ -30,9 +30,9 @@ public class AdminMemberListHandler extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<Member> memberList = memberDao.findAll();
-      request.setAttribute("memberList", memberList);
-      request.getRequestDispatcher("../admin/AdminPerMemberList.jsp").forward(request, response);
+      Collection<Member> perMemberList = memberDao.findAll();
+      request.setAttribute("perMemberList", perMemberList);
+      request.getRequestDispatcher("/admin/AdminPerMemberList.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
