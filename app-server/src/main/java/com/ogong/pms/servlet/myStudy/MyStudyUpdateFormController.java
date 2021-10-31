@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/member/updateform")
+@WebServlet("/study/updateform")
 public class MyStudyUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
