@@ -6,7 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>개인회원목록</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>개인회원 목록(관리자)</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
   label {
@@ -21,33 +23,39 @@
 </head>
 
 <body>
-	 <hr>
-	 <fieldset>
-	 <legend>
-   <b> 📗개인회원 목록</b>
+  <hr>
+  <fieldset>
+  <legend>
+   <b> 📗 개인회원 목록</b>
   </legend>
     <table class="table">
 
-			<thead>
-			  <tr>
-			    <th>번호</th>
-			    <th>이름</th>
-			    <th>닉네임</th>
-			    <th>이메일</th>
-			    <th>전화</th>
-			    <th>등록일</th>
-         </tr>
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>닉네임</th>
+            <th>이메일</th>
+            <th>가입일</th>
+          </tr>
           </thead>
           <tbody>
-          <c:forEach items="${memberList}" var="member">
-					 <tr>
-					
-						<td>${member.perNo}</td>
-						<td>${member.perName}</td>
-						<td>${member.perNickname}</td>
-						<td>${member.perEmail}</td>
-						<td>${member.perRegisteredDate}</td>
-						
+          <c:forEach items="${perMemberList}" var="perMember">
+             <tr>
+              <td>(${perMember.perNo})</td>
+             
+
+              <td><a href='permemberdetail?no=${perMember.perNo}'>${perMember.perName}</a></td> 
+              
+              
+              <td>${perMember.perNickname}</td> 
+              
+              
+              <td>${perMember.perEmail}</td> 
+              
+             
+              <td>${perMember.perRegisteredDate}</td>
+              
              </tr>
          </c:forEach>
         </tbody>
