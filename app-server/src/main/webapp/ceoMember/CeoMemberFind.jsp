@@ -24,27 +24,25 @@
 </head>
 
 <body>
-   <b> 📖 기업회원 상세</b>
+   <b> 아이디 비밀번호 찾기</b>
    <hr>
-   <form action='updateform'>
-	   <span>(${ceoMember.ceoNo})</span><br>
-	   <span>이름ㅣ</span> <span>${ceoMember.ceoName}</span><br>
-	   <span>닉네임ㅣ</span> <span>${ceoMember.ceoNickname}</span><br>
-	   <span>이메일ㅣ</span> <span>${ceoMember.ceoEmail}</span><br>
-	   <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle"><br>
-	   <span>전화번호ㅣ</span> <span>${ceoMember.ceoTel}</span><br>
-	   <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
-	   <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
-	   <span>가입일ㅣ</span> <span>${ceoMember.ceoRegisteredDate}</span><br>
-	   <button type="submit" value="수정" formaction="updateform">
-	      <a href='updateform?no=${ceoMember.ceoNo}'>프로필 수정하기</a>
-	   </button>
-	   <button type="submit" value="삭제" formaction="delete">
-	      <a href='deleteform?no=${ceoMember.ceoNo}'>탈퇴하기</a>
-	    </button>
-	    <button type="submit" value="로그아웃">
-        <a href='logout'>로그아웃</a>
-      </button>
-    </form>
+   <dl>
+      <dt>아이디 찾기</dt>
+      <dd><input id='name' type='text' name='name' placeholder='이름을 입력하세요' size='30px'></dd>
+      <p>해당 이름이 존재하지 않습니다.</p>
+      <dd><input id='tel' type='tel' name='tel' placeholder='전화번호를 입력하세요' size='30px'></dd>
+      <p>회원 이름과 전화번호가 일치하지 않습니다.</p>
+      <p>'%s님'의 이메일 >> ", ceoMember.getCeoName()</p>
+      <dt>비밀번호 찾기</dt>
+      <ul>
+        이메일로 발급
+        <dd><input id='name' type='text' name='name' placeholder='이름을 입력하세요' size='30px'></dd>
+        <dd><input id='email' type='email' name='email' placeholder='이메일를 입력하세요' size='30px'></dd>
+      </ul>
+      <ul>전화번호로 발급
+        <dd><input id='name' type='text' name='name' placeholder='이름을 입력하세요' size='30px'></dd>
+        <dd><input id='tel' type='tel' name='tel' placeholder='전화번호를 입력하세요' size='30px'></dd>
+      </ul>
+   </dl>
 </body>
 </html>
