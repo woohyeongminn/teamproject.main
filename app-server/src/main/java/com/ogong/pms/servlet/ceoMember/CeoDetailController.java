@@ -12,7 +12,7 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/detail")
-public class CeoDetailController  extends GenericServlet {
+public class CeoDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
@@ -27,7 +27,6 @@ public class CeoDetailController  extends GenericServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       CeoMember ceoMember = ceoMemberDao.findByNo(no);
