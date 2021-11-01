@@ -31,7 +31,7 @@ public class AdminAskBoardListHandler extends GenericServlet {
     try {
       Collection<AskBoard> adminAskBoardList = askBoardDao.findAll();
 
-      if (adminAskBoardList.isEmpty()) {
+      if (adminAskBoardList == null) {
         throw new Exception(" >> 등록된 글이 없습니다.");
       }
 

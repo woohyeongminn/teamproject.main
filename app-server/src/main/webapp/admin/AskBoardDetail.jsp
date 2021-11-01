@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -24,30 +23,27 @@
 </head>
 
 <body>
-   <b> 💬 문의글 상세</b>
+   <b> 💬 문의글 상세[관리자 전용]</b>
    <hr>
-   <c:if test="${false}" var="result1">
    <form action='updateform'>
-     <span id='no' name='no'>(${askBoard.askNo})</span><br>
-     <span>제목ㅣ</span> <span>${askBoard.askTitle}</span><br>
-     <span>내용ㅣ</span> <span>${askBoard.askContent}</span><br>
-     <span>작성일ㅣ</span> <span>${askBoard.perRegisteredDate}</span><br>
-    
-    <button type="submit" value="수정" formaction="updateform">
-      <a href='updateform?no=${askBoard.askNo}'>프로필 수정하기</a>
-    </button>
-   
-    <button type="submit" value="삭제" formaction="delete">
-      <a href='delete?no=${askBoard.askNo}'>탈퇴하기</a>
-    </button>
-    
-    <button type="submit" value="로그아웃">
-      <a href='logout'>로그아웃</a>
-    </button>
-   </form>
-   </c:if>
+     <span id='no' name='no'>(${adminAskBoard.askNo})</span><br>
+     <span>제목ㅣ</span> <span>${adminAskBoard.askTitle}</span><br>
+     <span>내용ㅣ</span> <span>${adminAskBoard.askContent}</span><br>
+     <span>작성자ㅣ</span> <span>${adminAskBoard.askMemberWriter.perNickname}</span><br>
+     <span>작성일ㅣ</span> <span>${adminAskBoard.askRegisteredDate}</span><br>
 </body>
-</html>
+
+  <button type="submit" value="답변" formaction="reply">
+        <a href='?????no=${adminAskBoard.askNo}'>답변등록</a>
+      </button>
+   <button type="submit" value="삭제" formaction="delete">
+        <a href='?????no=${adminAskBoard.askNo}'>문의글삭제</a>
+      </button>   
 
 
 
+</html>  
+     
+     
+     
+     

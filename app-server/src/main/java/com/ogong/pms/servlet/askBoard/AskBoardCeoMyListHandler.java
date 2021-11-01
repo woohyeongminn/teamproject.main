@@ -32,12 +32,11 @@ public class AskBoardCeoMyListHandler extends GenericServlet {
     try {
 
       int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
-
       Collection<AskBoard> myAskBoardList = askBoardDao.findCeoMyAll(ceoNo);
 
-      if (myAskBoardList == null) {
-        throw new Exception("문의 게시글이 존재하지 않습니다.");
-      }
+      //      if (myAskBoardList == null) {
+      //        throw new Exception("문의 게시글이 존재하지 않습니다.");
+      //      }
 
       request.setAttribute("myAskBoardList", myAskBoardList);
       request.getRequestDispatcher("/askBoard/AskBoardCeoMyList.jsp").forward(request, response);
