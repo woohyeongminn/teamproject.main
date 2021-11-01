@@ -29,9 +29,19 @@
      <span id='no' name='no'>(${myAskBoard.askNo})</span><br>
      <span>제목ㅣ</span> <span>${myAskBoard.askTitle}</span><br>
      <span>내용ㅣ</span> <span>${myAskBoard.askContent}</span><br>
+     <!-- 멤버에 씨이오멤버가 들어감... -->
      <span>작성자ㅣ</span> <span>${myAskBoard.askMemberWriter.perNickname}</span><br>
      <span>작성일ㅣ</span> <span>${myAskBoard.askRegisteredDate}</span><br>
 </body>
+
+   <button type="submit" value="수정" formaction="update">
+        <a href='?????no=${myAskBoard.askNo}'>문의글수정</a>
+   </button>
+   
+   <button type="submit" value="삭제" formaction="delete">
+        <a href='perdelete?askNo=${myAskBoard.askNo}&perNo=${myAskBoard.askMemberWriter.perNo}'>문의글삭제</a>
+   </button>   
+
 </html>  
      
      

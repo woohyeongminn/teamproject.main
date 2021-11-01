@@ -45,7 +45,8 @@ public class CeoCafeAddController extends HttpServlet {
 
       Cafe cafe = new Cafe();
 
-      cafe.setInfo(request.getParameter("cafeName"));
+      cafe.setName(request.getParameter("name"));
+
       cafe.setCeoMember(ceoMember); 
       cafe.setInfo(request.getParameter("info"));
       cafe.setLocation(request.getParameter("location"));
@@ -55,6 +56,8 @@ public class CeoCafeAddController extends HttpServlet {
       cafe.setHoliday(request.getParameter("holiday"));
       cafe.setCafeStatus(Integer.parseInt(request.getParameter("cafeStatus")));
       //cafe.setCafeImgs(request.getParameter("filename[]"));
+
+      System.out.println(cafe);
 
       cafeDao.insertCafe(cafe);
       sqlSession.commit();
@@ -82,6 +85,7 @@ public class CeoCafeAddController extends HttpServlet {
       //sqlSession.rollback();
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

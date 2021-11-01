@@ -1,18 +1,18 @@
 package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
 @WebServlet("/admin/askboarddetail")
-public class AdminAskBoardDetailHandler extends GenericServlet {
+public class AdminAskBoardDetailHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;

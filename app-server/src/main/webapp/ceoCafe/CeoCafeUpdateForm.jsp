@@ -115,32 +115,21 @@
       <input id='f-closeTime' type='time' name='closeTime' value='${cafe.closeTime}' size="auto"><br>
       
       <label for='f-holiday'>이번주 휴무일</label>
-      <input id='f-holiday' type='text' name='holiday' value='${cafe.holiday}' size="auto"><br>
+      <input id='f-holiday' type='date' name='holiday' value='${cafe.holiday}' size="auto"><br>
       
       <label for='f-viewCount'>상태</label>
-      <!--<input id='i-cafeStatus' type='text' name='cafeStatus' value='${cafe.cafeStatus}' size="auto"><br>-->
+      
       <select name="cafeStatus">
-        <!--
-        <c:if test='${cafe.cafeStatus}==1'>
-        <option value="1" selected>
-          운영중
-        </option>
+        <c:if test='${cafe.cafeStatus==1}'>
+          <option value="${cafe.cafeStatus}">${cafeStatus}</option>
         </c:if>
-               
-        <option value="0" disabled>승인대기</option>
-        <c:if test='${cafe.cafeStatus}!=1'>
-          <option value="1">운영중</option> 
+        
+        <c:if test='${cafe.cafeStatus==2}'>
+	        <option value="1" disabled>승인대기</option>
+	        <option value="2" name="cafeStatus" >운영중</option>
+	        <option value="3" name="cafeStatus" >운영중단</option>
+	        <option value="4" disabled>삭제</option>
         </c:if>
-        <option value="2">운영중단</option>
-        <option value="3" disabled>삭제</option>
-        -->
-        
-        <option value="${cafe.cafeStatus}">${cafeStatus}</option>
-        <option value="0" name="cafeStatus" disabled>승인대기</option>
-        <option value="1" name="cafeStatus" >운영중</option>
-        <option value="2" name="cafeStatus" >운영중단</option>
-        <option value="3" name="cafeStatus" disabled>삭제</option>
-        
       </select><br>
       
       <label for='f-review'>리뷰평점</label>⭐${cafe.avgReview}(${cafe.countReview})

@@ -54,10 +54,13 @@ public class CeoCafeDeleteController extends GenericServlet {
       cafeDao.deleteCafe(cafe.getNo());
       sqlSession.commit();
 
-      // ceomember/detail
 
-      int ceoNo = cafe.getCeoMember().getCeoNo();
-      response.sendRedirect("detail?no="+ ceoNo);
+      //response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
+
+      //response.sendRedirect("detail?no="+ cafe.getCeoMember().getCeoNo());
+
+      //response.sendRedirect("login?email="+cafe.getCeoMember().getCeoEmail()+"&password="+ cafe.getCeoMember().getCeoPassword());
+
 
     } catch (Exception e) {
       e.printStackTrace();
