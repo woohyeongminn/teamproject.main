@@ -67,6 +67,17 @@
       ab.ask_board_no asc
   </select>
   
+  <!-- ======[개인회원 내 문의글 목록]====== -->
+  <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
+  <include refid="select1"/>
+      abr.reply_dt r_dt
+  <include refid="from1"/>
+  where
+     m.member_no=#{perMemberNo}
+     order by
+      ab.ask_board_no asc
+  </select>
+  
   <select id="findByNo" resultMap="AskBoardMap" parameterType="int">
   <include refid="select1"/>
       abr.reply_dt r_dt,

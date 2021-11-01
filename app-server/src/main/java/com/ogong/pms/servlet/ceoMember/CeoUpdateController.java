@@ -13,7 +13,7 @@ import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/update")
-public class CeoUpdateHandler extends HttpServlet {
+public class CeoUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
@@ -46,8 +46,6 @@ public class CeoUpdateHandler extends HttpServlet {
       ceoMember.setCeoTel(request.getParameter("tel"));
       ceoMember.setCeoEmail(request.getParameter("email"));
       ceoMember.setCeoPassword(request.getParameter("password"));
-
-      System.out.println(ceoMember);
 
       ceoMemberDao.updateName(ceoMember);
       ceoMemberDao.updateNickName(ceoMember);

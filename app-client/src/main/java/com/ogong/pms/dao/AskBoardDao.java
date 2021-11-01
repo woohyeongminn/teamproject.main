@@ -10,6 +10,10 @@ public interface AskBoardDao {
   void update(AskBoard askBoard) throws Exception;
   void delete(int no) throws Exception;
   List<AskBoard> findAll() throws Exception;
+  // 개인회원 문의게시글 목록(로그인 유저)
+  List<AskBoard> findPerMyAll(int perMemberNo) throws Exception;
+  //사장회원 문의게시글 목록(로그인 유저)
+  //List<AskBoard> findCeoMyAll(int ceoMemberNo) throws Exception;
   AskBoard findByNo(int no) throws Exception;
 
   // 답변 전용
