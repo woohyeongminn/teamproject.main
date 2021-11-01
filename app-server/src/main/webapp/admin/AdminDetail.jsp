@@ -23,6 +23,9 @@
   input {
   border : white;
   outline-color : lightgray;
+      margin-left: 10px;
+    text-align: center;
+    display: inline;
   }
   p {
     margin: 10px;
@@ -42,6 +45,37 @@
   a:hover {
   color : white;
   }
+  .card .card-header {
+    padding: 0;
+    height: 48px;
+  }
+  .card .card-header .profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 1000px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid wheat;
+    background-color: white;
+    box-shadow: 0 0 10px lightyellow;
+  }
+  .card .card-header .profile-img:hover {
+    width: 150px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    border: 4px solid wheat;
+  }
+  .card {
+    max-width: 400px;
+    margin: 150px auto 0;
+    background-color: white;
+    box-shadow: 0 10px 90px ivory;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 15px;
+    border: 2px solid lightgray;
+  }
 </style>
 </head>
 <body>
@@ -50,21 +84,21 @@
 <legend><b> 🙂 마이페이지 </b></legend><br>
 <hr>
 <table class="table table-responsive">
+
+<div class="card">
+  <div class="card-header">
+      <img src="https://lh3.googleusercontent.com/ogw/ADea4I5r4FiJPO5QcSWwbxnVlYE-NDM7GrABSzLctf_I=s83-c-mo" alt="Profile Image" class="profile-img">
+  </div>
+<p><input id='f-nickName' type='nickName' name='nickName' placeholder='${adminpro.masterNickname} 👑' size='20' readonly></p>
 <br>
-<p><img src="https://lh3.googleusercontent.com/ogw/ADea4I5r4FiJPO5QcSWwbxnVlYE-NDM7GrABSzLctf_I=s83-c-mo" width="80"></p>
+<p><input id='f-email' type='email' name='email' placeholder='${adminpro.masterEmail}' size='20' readonly></p>
 <br>
-<p><label for='f-nickName' class='form-label' size='100px'>닉네임 | </label>
-<input id='f-nickName' type='nickName' name='nickName' placeholder='${adminpro.masterNickname}' size='20' readonly></p>
-<br>
-<p><label for='f-email' class='form-label' size='100px'>이메일 | </label>
-<input id='f-email' type='email' name='email' placeholder='${adminpro.masterEmail}' size='20' readonly></p>
 <br>
 </table>  
 </fieldset>
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<div class="d-grid gap-2 d-md-flex justify-content-md-end" style="transform: translate(-45%, 30%);">
 <button type="submit" class="btn btn-outline-dark" value="변경" ><a href='updateForm?no=${adminpro.masterNo}'>변경</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='logout'>로그아웃</a></button> 
-
 </div>
 </form>
 </body>

@@ -35,7 +35,7 @@ public class StudyAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      int no = Integer.parseInt(request.getParameter("perno"));
       Member member = memberDao.findByNo(no);
 
       Study study = new Study();
@@ -53,7 +53,8 @@ public class StudyAddController extends HttpServlet {
       studyDao.insertGuilder(study.getStudyNo(), member.getPerNo());
       studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
-      response.setHeader("Refresh", "1;url=list");
+
+      response.sendRedirect("list");
       // request.getRequestDispatcher("StudyAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

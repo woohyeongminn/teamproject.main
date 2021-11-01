@@ -37,7 +37,7 @@
         <a href='?????no=${adminAskBoard.askNo}'>답변등록</a>
       </button>
    <button type="submit" value="삭제" formaction="delete">
-        <a href='?????no=${adminAskBoard.askNo}'>문의글삭제</a>
+        <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
       </button>   
 
 

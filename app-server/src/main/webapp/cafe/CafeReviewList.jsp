@@ -56,7 +56,7 @@
 	    <td>${review.content}</td>
 	    <td>${review.registeredDate}</td>
 	    <td>
-	      <button class="btn btn-outline-dark">수정</button>
+	      <button class="btn btn-outline-dark"><a href="reviewUpdateForm?perNo=${perNo}&reviewNo=${review.reviewNo}">수정</a></button>
 	    </td>
 	    <td>
 	      <button class="btn btn-outline-dark"><a href="reviewDelete?perNo=${perNo}&reviewNo=${review.reviewNo}">삭제</a></button>

@@ -27,11 +27,11 @@
 				<tr>
 					<td>${study.studyNo}</td>
 					<td>${study.countBookMember}</td>
-					<td><a href='detail?no=${study.studyNo}'>${study.studyTitle}</a></td>
+					<td><a href='detail?perno=${member.perNo}&studyno=${study.studyNo}'>${study.studyTitle}</a></td>
 					<td>${study.subjectName}</td>
 					<td>${study.countMember}</td>
 					<td>${study.numberOfPeple}</td>
-					<td>${owner.perNickname}</td>
+					<td>${study.owner.perNickname}</td>
 					<td>${study.faceName}</td>
 				</tr>
 			</c:forEach>

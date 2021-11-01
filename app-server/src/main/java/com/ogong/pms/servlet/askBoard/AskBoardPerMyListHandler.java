@@ -34,9 +34,10 @@ public class AskBoardPerMyListHandler extends GenericServlet {
 
       Collection<AskBoard> myAskBoardList = askBoardDao.findPerMyAll(perNo);
 
-      //      if (myAskBoardList == null) {
-      //        throw new Exception("문의 게시글이 존재하지 않습니다.");
-      //      }
+      if (myAskBoardList == null) {
+        throw new Exception("문의 게시글이 존재하지 않습니다.");
+      }
+
 
       request.setAttribute("myAskBoardList", myAskBoardList);
       request.getRequestDispatcher("/askBoard/AskBoardPerMyList.jsp").forward(request, response);

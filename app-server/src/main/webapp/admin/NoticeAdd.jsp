@@ -11,6 +11,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
   legend {
+  text-align: center;
+  }
+  p {
+    height: 50px;
     text-align: center;
   }
   </style>
@@ -20,12 +24,10 @@
 <br>
 <legend><b> 🔔 공지게시글 등록 </b></legend><br>
 <hr>
-<table class="table table-responsive">
 <br>
-  <td>공지글 등록이 완료되었습니다.</td>
-  <td>공지게시판 목록으로 돌아갑니다.</td>
+  <p>공지글 등록이 완료되었습니다.</p>
+  <p>공지게시판 목록으로 돌아갑니다.</p>
 <br>
-</table>
 </fieldset>
 </body>
 </html>
