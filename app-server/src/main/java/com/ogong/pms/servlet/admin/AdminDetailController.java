@@ -8,19 +8,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.ogong.pms.dao.NoticeDao;
-import com.ogong.pms.domain.AdminNotice;
+import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.domain.Admin;
 
-@WebServlet("/adminNotice/Updateform")
-public class AdminNoticeUpdateFormController extends GenericServlet {
+@WebServlet("/admin/detail")
+public class AdminDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-  NoticeDao noticeDao;
+  AdminDao adminDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
+    adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
   }
 
   @Override
@@ -28,12 +28,16 @@ public class AdminNoticeUpdateFormController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
-      AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
+      int no = Integer.parseInt(request.getParameter("no"));
+      Admin adminpro = adminDao.findByAdminNo(no);
 
-      request.setAttribute("notice", notice);
+      if (adminpro == null) {
+        throw new Exception(" >> 다시 선택해 주세요.");
+      }
 
-      request.getRequestDispatcher("/admin/NoticeUpdateform.jsp").forward(request, response);
+      request.setAttribute("adminpro", adminpro);
+
+      request.getRequestDispatcher("/admin/AdminDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
@@ -41,4 +45,3 @@ public class AdminNoticeUpdateFormController extends GenericServlet {
     }
   }
 }
-

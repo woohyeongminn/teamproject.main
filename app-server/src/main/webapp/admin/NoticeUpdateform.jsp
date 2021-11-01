@@ -41,7 +41,7 @@
   <td><form action='update'><span>(${notice.adminNotiNo})</span></td>
   <td><input id='f-title' type='text' name='title' value='${notice.adminNotiTitle}'></td>
   <td><input id='f-content' type='text' name='content' value='${notice.adminNotiContent}'></td>
-  <td><input id='f-filepath' type='text' name='filepath' value='${notice.adminNotiFile}'></td>
+  <td><input id='f-filepath' type='file' name='filepath' value='${notice.adminNotiFile}'></td>
   <td><span id='f-registeredDate'>${notice.adminNotiRegisteredDate}</span></td>
 </table>
 </fieldset>

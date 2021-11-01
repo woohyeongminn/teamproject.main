@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.NoticeDao;
-import com.ogong.pms.domain.AdminNotice;
+import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.domain.Admin;
 
-@WebServlet("/adminNotice/update")
-public class AdminNoticeUpdateController extends HttpServlet {
+@WebServlet("/admin/update")
+public class AdminUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  AdminDao adminDao;
   SqlSession sqlSession;
-  NoticeDao noticeDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
+    adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
   }
 
   @Override
@@ -31,24 +31,26 @@ public class AdminNoticeUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
-      AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
+      int adminNo = Integer.parseInt(request.getParameter("no"));
+      Admin admin = adminDao.findByAdminNo(adminNo);
 
-      if (notice == null) {
-        throw new Exception(" >> 해당 번호의 공지글을 찾을 수 없습니다.");
+      if (admin == null) {
+        throw new Exception(" >> 다시 선택해 주세요.");
       } 
 
-      notice.setAdminNotiTitle(request.getParameter("title"));
-      notice.setAdminNotiContent(request.getParameter("content"));
-      notice.setAdminNotiFile(request.getParameter("filepath"));
-
-      noticeDao.updateTitle(notice);
-      noticeDao.updateContent(notice);
-      noticeDao.deletenoticefile(noticeNo);
-      noticeDao.insertFilepath(notice);
+      admin.setMasterNickname(request.getParameter("nickName"));
+      adminDao.updateNickname(admin);
       sqlSession.commit();
 
-      response.sendRedirect("list");
+      admin.setMasterEmail(request.getParameter("email"));
+      adminDao.updateEmail(admin);
+      sqlSession.commit();
+
+      admin.setMasterPassword(request.getParameter("password"));
+      adminDao.updatePassword(admin);
+      sqlSession.commit();
+
+      response.sendRedirect("logout");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

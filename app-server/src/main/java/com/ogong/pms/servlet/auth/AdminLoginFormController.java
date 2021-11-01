@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.domain.Admin;
 
 @WebServlet("/admin/form")
-public class AdminLoginFormHandler extends HttpServlet {
+public class AdminLoginFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   public static Admin loginAdmin;
