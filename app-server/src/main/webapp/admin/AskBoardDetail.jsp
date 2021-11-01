@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 문의글 상세(개인회원)</title>
+<title>문의글 상세(관리자)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
@@ -23,16 +23,27 @@
 </head>
 
 <body>
-   <b> 💬 문의글 상세[개인 회원 마이페이지]</b>
+   <b> 💬 문의글 상세[관리자 전용]</b>
    <hr>
    <form action='updateform'>
-     <span id='no' name='no'>(${myAskBoard.askNo})</span><br>
-     <span>제목ㅣ</span> <span>${myAskBoard.askTitle}</span><br>
-     <span>내용ㅣ</span> <span>${myAskBoard.askContent}</span><br>
-     <span>작성자ㅣ</span> <span>${myAskBoard.askMemberWriter.perNickname}</span><br>
-     <span>작성일ㅣ</span> <span>${myAskBoard.askRegisteredDate}</span><br>
+     <span id='no' name='no'>(${adminAskBoard.askNo})</span><br>
+     <span>제목ㅣ</span> <span>${adminAskBoard.askTitle}</span><br>
+     <span>내용ㅣ</span> <span>${adminAskBoard.askContent}</span><br>
+     <span>작성자ㅣ</span> <span>${adminAskBoard.askMemberWriter.perNickname}</span><br>
+     <span>작성일ㅣ</span> <span>${adminAskBoard.askRegisteredDate}</span><br>
 </body>
+
+  <button type="submit" value="답변" formaction="reply">
+        <a href='?????no=${adminAskBoard.askNo}'>답변등록</a>
+      </button>
+   <button type="submit" value="삭제" formaction="delete">
+        <a href='?????no=${adminAskBoard.askNo}'>문의글삭제</a>
+      </button>   
+
+
+
 </html>  
+     
      
      
      

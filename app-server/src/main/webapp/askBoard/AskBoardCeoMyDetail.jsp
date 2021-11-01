@@ -24,7 +24,7 @@
 </head>
 
 <body>
-   <b> 💬 문의글 상세</b>
+   <b> 💬 문의글 상세[사장 회원 마이페이지]</b>
    <hr>
    <form action='updateform'>
      <span id='no' name='no'>(${myAskBoard.askNo})</span><br>

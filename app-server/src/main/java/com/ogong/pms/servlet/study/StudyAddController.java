@@ -35,7 +35,7 @@ public class StudyAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
+      int no = Integer.parseInt(request.getParameter("perno"));
       Member member = memberDao.findByNo(no);
 
       Study study = new Study();

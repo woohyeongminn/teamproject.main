@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>내 문의 게시판(사장회원)</title>
+   <title>문의 게시판(관리자)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
@@ -33,7 +33,7 @@
 <body>
 <fieldset>
 <br>
-<legend ><b> 💬 문의게시글 목록 </b></legend><br>
+<legend ><b> 💬 문의게시글 목록(관리자 전용) </b></legend><br>
 <hr>
 <table class="table table-responsive">
 <thead>
@@ -46,10 +46,10 @@
 </tr>
 </thead>
 <tbody>
-<c:forEach items="${myAskBoardList}" var="askBoard">
+<c:forEach items="${adminAskBoardList}" var="askBoard">
 <tr>
   <td>( ${askBoard.askNo} )</td>
-  <td><a href='ceomydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+  <td><a href='askboarddetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
   <td>${askBoard.askMemberWriter.perNickname}</td>
   <td>${askBoard.askVeiwCount}</td>
   <td>${askBoard.askRegisteredDate}</td>
@@ -58,11 +58,12 @@
 </tbody>
 </table>
 </fieldset>
-<c:if test="${empty myAskBoardList}">
-       등록한 문의글이 없습니다.
+<c:if test="${empty adminAskBoardList}">
+       등록된 문의글이 없습니다.
 </c:if>
 </body>
 </html>
+
 
 
 

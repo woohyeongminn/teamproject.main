@@ -46,9 +46,6 @@ values(8, 'JAVA', 5, 10, 1, '공부가 제일 좋아', '2021-7-6', 2, 2);
 
 -------------------------------------------------------------------------------------------------
 
--- 스터디 북마크 test 값
-insert into study_bookmark(member_no, study_no) values(3, 1);
-
 -- 스터디 길더 test 값
 insert into study_guilder(study_no, member_no, status) values(1, 4, 1);
 
