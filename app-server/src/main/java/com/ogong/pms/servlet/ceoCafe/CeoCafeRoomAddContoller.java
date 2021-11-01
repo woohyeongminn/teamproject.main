@@ -15,7 +15,7 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeRoom;
 
 @WebServlet("/ceomember/cafe/roomadd")
-public class CeoCafeRoomAddHandler extends HttpServlet {
+public class CeoCafeRoomAddContoller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
@@ -47,7 +47,6 @@ public class CeoCafeRoomAddHandler extends HttpServlet {
       cafeRoom.setRoomPrice(Integer.parseInt(request.getParameter("roomPrice")));
 
       //fileNames.add(new CafeImage(fileName));
-      cafeRoomDao.insertCafeRoom(cafeRoom);
 
       //      if (!fileNames.isEmpty()) {
       //        HashMap<String,Object> params = new HashMap<>();
@@ -56,11 +55,17 @@ public class CeoCafeRoomAddHandler extends HttpServlet {
       //
       //        cafeRoomDao.insertCafeRoomImage(params);
       //      }
+
+      cafeRoomDao.insertCafeRoom(cafeRoom);
       sqlSession.commit();
+
+      response.sendRedirect("roomlist?no="+ cafe.getNo());
+
+
     } catch (Exception e) {
-
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-    System.out.println(" >> 스터디룸 등록이 완료되었습니다.");
   }
 }
