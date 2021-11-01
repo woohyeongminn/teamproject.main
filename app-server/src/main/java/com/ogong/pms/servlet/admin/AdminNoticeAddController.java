@@ -44,7 +44,7 @@ public class AdminNoticeAddController extends HttpServlet {
       sqlSession.commit();
       response.setHeader("Refresh", "10;url=list"); 
 
-      request.getRequestDispatcher("NoticeAdd.jsp").forward(request, response);
+      request.getRequestDispatcher("/admin/NoticeAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

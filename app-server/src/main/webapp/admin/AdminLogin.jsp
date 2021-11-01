@@ -18,6 +18,18 @@
   }
   div {
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  }
+  button[type=button] {
+    background-color: beige;
+    color: black;
+  }
+  button[type=button]:hover {
+    background-color: gold;
+    color: black;
   }
   a {
   color : black;
@@ -35,10 +47,19 @@
 <p>👑 '${admin.masterNickname}'님 환영합니다! 🖐</p>
 <br>
 <br>
+<div class="btn-group dropend">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    💌 고객센터 관리
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/ogong/adminNotice/list">공지게시판</a></li>
+    <li><a class="dropdown-item" href="/ogong/adminNotice/list">문의게시판</a></li>
+  </ul>
+</div>
+
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='logout'>로그아웃</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="마이페이지" ><a href='detail?no=${admin.masterNo}'>마이페이지</a></button> 
-<button type="submit" class="btn btn-outline-dark" value="목록"><a href='/ogong/adminNotice/list'>공지게시판</a></button>
 </div>
  </body>
 </html>
