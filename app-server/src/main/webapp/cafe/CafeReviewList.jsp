@@ -39,30 +39,38 @@
   </tr>
 </thead>
 <tbody>
-
-<c:forEach items="${reviewList}" var="review">
-<tr>
-    <td>${review.reviewNo}</td>
-    <td><a href='detail?no=${review.cafe.no}&perNo=${perNo}'>${review.cafe.name}</a></td>
-    <td>
-    <c:set var="grade" value="${review.grade}" /> 
-          <% 
-          int grade = (int) pageContext.getAttribute("grade");
-          String star = CafeHandlerHelper.getReviewGradeStatusLabel(grade);
-          pageContext.setAttribute("star", star);
-          %>
-      ${star}(${review.grade}/5)
-    </td>
-    <td>${review.content}</td>
-    <td>${review.registeredDate}</td>
-    <td><button class="btn btn-outline-dark">수정</button></td>
-    <td><button class="btn btn-outline-dark">삭제</button></td>
-</tr>
-</c:forEach>
+<c:if test='${not empty reviewList}'>
+	<c:forEach items="${reviewList}" var="review">
+	<tr>
+	    <td>${review.reviewNo}</td>
+	    <td><a href='detail?no=${review.cafe.no}&perNo=${perNo}'>${review.cafe.name}</a></td>
+	    <td>
+	    <c:set var="grade" value="${review.grade}" /> 
+	          <% 
+	          int grade = (int) pageContext.getAttribute("grade");
+	          String star = CafeHandlerHelper.getReviewGradeStatusLabel(grade);
+	          pageContext.setAttribute("star", star);
+	          %>
+	      ${star}(${review.grade}/5)
+	    </td>
+	    <td>${review.content}</td>
+	    <td>${review.registeredDate}</td>
+	    <td>
+	      <button class="btn btn-outline-dark">수정</button>
+	    </td>
+	    <td>
+	      <button class="btn btn-outline-dark"><a href="reviewDelete?perNo=${perNo}&reviewNo=${review.reviewNo}">삭제</a></button>
+	    </td>
+	</tr>
+	</c:forEach>
+</c:if>
+<c:if test='${empty reviewList}'>
+   등록된 리뷰가 없습니다.<br><br>  
+</c:if>
 </tbody>
 </table>
 <br>
-<button type="button" class="btn btn-outline-dark">스터디카페 목록</a></button>
+
 
 <!-- 
 

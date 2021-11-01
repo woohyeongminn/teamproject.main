@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,7 @@
 <c:forEach items="${myAskBoardList}" var="askBoard">
 <tr>
   <td>( ${askBoard.askNo} )</td>
-  <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+  <td><a href='detail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
   <td>${askBoard.askMemberWriter.perNickname}</td>
   <td>${askBoard.askVeiwCount}</td>
   <td>${askBoard.askRegisteredDate}</td>
@@ -59,7 +60,7 @@
 </fieldset>
 </tbody>
 <c:if test="${empty myAskBoardList}">
-       !등록한 문의글이 없습니다.
+       등록한 문의글이 없습니다.
 </c:if>
 </body>
 </html>

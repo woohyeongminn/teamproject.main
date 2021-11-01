@@ -77,6 +77,17 @@
       ab.ask_board_no asc
   </select>
   
+  <select id="findCeoMyAll" resultMap="AskBoardMap" parameterType="int">
+  <include refid="select1"/>
+      abr.reply_dt r_dt
+  <include refid="from1"/>
+  left outer join ceo_member cm on cm.member_no = m.member_no
+  where
+     m.member_no=#{perMemberNo}
+     order by
+      ab.ask_board_no asc
+  </select>
+  
   <select id="findByNo" resultMap="AskBoardMap" parameterType="int">
   <include refid="select1"/>
       abr.reply_dt r_dt,
