@@ -47,8 +47,6 @@ public class CeoUpdateController extends HttpServlet {
       ceoMember.setCeoEmail(request.getParameter("email"));
       ceoMember.setCeoPassword(request.getParameter("password"));
 
-      System.out.println(ceoMember);
-
       ceoMemberDao.updateName(ceoMember);
       ceoMemberDao.updateNickName(ceoMember);
       ceoMemberDao.updatePhoto(ceoMember);
