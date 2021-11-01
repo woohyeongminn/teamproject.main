@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ceomember/loginform")
+@WebServlet("/ceomember/form")
 public class CeoLoginFormController extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
