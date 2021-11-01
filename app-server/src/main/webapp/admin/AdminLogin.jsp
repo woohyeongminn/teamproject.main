@@ -39,6 +39,7 @@
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='logout'>로그아웃</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="마이페이지" ><a href='detail?no=${admin.masterNo}'>마이페이지</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="목록"><a href='/ogong/adminNotice/list'>공지게시판</a></button>
+<button type="submit" class="btn btn-outline-dark" value="목록"><a href='askboardlist'>문의게시판</a></button>
 </div>
  </body>
 </html>

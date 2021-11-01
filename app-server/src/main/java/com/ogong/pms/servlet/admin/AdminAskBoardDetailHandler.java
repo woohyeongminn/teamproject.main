@@ -28,13 +28,13 @@ public class AdminAskBoardDetailHandler extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int askBoardNo = Integer.parseInt(request.getParameter("no"));
-      AskBoard askBoard = askBoardDao.findByNo(askBoardNo);
+      int askBoardNo = Integer.parseInt(request.getParameter("askNo"));
+      AskBoard adminAskBoard = askBoardDao.findByNo(askBoardNo);
 
-      if (askBoard == null) {
+      if (adminAskBoard == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
       }
-      request.setAttribute("askBoard", askBoard);
+      request.setAttribute("adminAskBoard", adminAskBoard);
       request.getRequestDispatcher("/admin/AskBoardDetail.jsp").forward(request, response);
 
     } catch (Exception e) {

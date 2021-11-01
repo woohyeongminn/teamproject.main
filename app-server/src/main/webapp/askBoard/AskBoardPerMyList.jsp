@@ -50,7 +50,7 @@
 <c:forEach items="${myAskBoardList}" var="askBoard">
 <tr>
   <td>( ${askBoard.askNo} )</td>
-  <td><a href='detail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+  <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
   <td>${askBoard.askMemberWriter.perNickname}</td>
   <td>${askBoard.askVeiwCount}</td>
   <td>${askBoard.askRegisteredDate}</td>
