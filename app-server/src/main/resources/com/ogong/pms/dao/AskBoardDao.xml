@@ -67,7 +67,7 @@
       ab.ask_board_no asc
   </select>
   
-    <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
+  <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
   <include refid="select1"/>
       abr.reply_dt r_dt
   <include refid="from1"/>

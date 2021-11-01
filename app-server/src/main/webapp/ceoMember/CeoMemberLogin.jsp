@@ -28,5 +28,6 @@
  <p>'${ceoMember.ceoNickname}'님 환영합니다! 🖐</p>
  <button><a href='detail?no=${ceoMember.ceoNo}'>내 프로필</a></button> 
  <button><a href='cafe/detail?no=${ceoMember.ceoNo}'>내 카페</a></button> 
+ <button><a href='../askboard/ceomylist?perNo=${ceoMember.ceoNo}'>내 문의게시판</a></button>
  </body>
 </html>
