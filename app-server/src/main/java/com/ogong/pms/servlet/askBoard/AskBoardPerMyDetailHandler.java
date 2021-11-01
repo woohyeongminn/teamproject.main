@@ -13,6 +13,7 @@ import com.ogong.pms.domain.AskBoard;
 
 @WebServlet("/askboard/permydetail")
 public class AskBoardPerMyDetailHandler extends GenericServlet {
+  private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
 
@@ -44,15 +45,4 @@ public class AskBoardPerMyDetailHandler extends GenericServlet {
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
-
-
-
-
-
-
-
-
-
-
-
 }

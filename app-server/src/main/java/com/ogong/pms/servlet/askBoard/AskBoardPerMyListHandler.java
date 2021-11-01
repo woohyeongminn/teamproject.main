@@ -14,6 +14,7 @@ import com.ogong.pms.domain.AskBoard;
 
 @WebServlet("/askboard/permylist")
 public class AskBoardPerMyListHandler extends GenericServlet {
+  private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
 
