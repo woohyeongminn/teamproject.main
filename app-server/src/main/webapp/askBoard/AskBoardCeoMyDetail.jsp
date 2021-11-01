@@ -33,4 +33,13 @@
      <span>작성자ㅣ</span> <span>${myAskBoard.askCeoWriter.ceoNickname}</span><br>
      <span>작성일ㅣ</span> <span>${myAskBoard.askRegisteredDate}</span><br>
 </body>
+
+   <button type="submit" value="수정" formaction="update">
+        <a href='?????no=${myAskBoard.askNo}'>문의글수정</a>
+   </button>
+   
+   <button type="submit" value="삭제" formaction="delete">
+        <a href='ceodelete?askNo=${myAskBoard.askNo}&ceoNo=${myAskBoard.askCeoWriter.ceoNo}'>문의글삭제</a>
+   </button> 
+
 </html>  
