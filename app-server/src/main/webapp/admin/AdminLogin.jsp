@@ -32,7 +32,7 @@
 <br>
 <legend><b> 🖐 관리자 로그인 </b></legend><br>
 <hr>
-<p>'${admin.masterNickname}'님 환영합니다! 🖐</p>
+<p>👑 '${admin.masterNickname}'님 환영합니다! 🖐</p>
 <br>
 <br>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">

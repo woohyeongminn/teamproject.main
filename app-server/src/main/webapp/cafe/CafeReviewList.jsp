@@ -43,7 +43,7 @@
 <c:forEach items="${reviewList}" var="review">
 <tr>
     <td>${review.reviewNo}</td>
-    <td>${review.cafe.name}</td>
+    <td><a href='detail?no=${review.cafe.no}&perNo=${perNo}'>${review.cafe.name}</a></td>
     <td>
     <c:set var="grade" value="${review.grade}" /> 
           <% 
@@ -62,7 +62,7 @@
 </tbody>
 </table>
 <br>
-<button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">스터디카페 목록</a></button>
+<button type="button" class="btn btn-outline-dark">스터디카페 목록</a></button>
 
 <!-- 
 

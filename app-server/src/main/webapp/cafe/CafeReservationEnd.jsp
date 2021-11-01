@@ -14,6 +14,6 @@
 <body>
 <h1>예약 완료</h1>
 <button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">목록</a></button>
-<button type="button" class="btn btn-outline-dark"><a href="myReservationList?perNo=${perNo}">내 예약내역 보기</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="reservationList?perNo=${perNo}">내 예약내역 보기</a></button>
 </body>
 </html>
