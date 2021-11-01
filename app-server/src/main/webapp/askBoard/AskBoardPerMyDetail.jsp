@@ -1,3 +1,4 @@
+<!-- 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
@@ -33,7 +34,7 @@
      <span>작성일ㅣ</span> <span>${myAskBoard.askRegisteredDate}</span><br>
 </body>
 </html>  
-     
+--> 
      
      
      

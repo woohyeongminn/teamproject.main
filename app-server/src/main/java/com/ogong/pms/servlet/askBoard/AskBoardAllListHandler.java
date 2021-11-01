@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/permylist")
-public class AskBoardPerMyListHandler extends GenericServlet {
+@WebServlet("/askboard/list")
+public class AskBoardAllListHandler extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
@@ -30,37 +30,20 @@ public class AskBoardPerMyListHandler extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
 
-      Collection<AskBoard> myAskBoardList = askBoardDao.findPerMyAll(perNo);
-
+      Collection<AskBoard> askBoardList = askBoardDao.findAll();
       //      if (myAskBoardList == null) {
       //        throw new Exception("문의 게시글이 존재하지 않습니다.");
       //      }
 
-      request.setAttribute("myAskBoardList", myAskBoardList);
-      request.getRequestDispatcher("/askBoard/AskBoardPerMyList.jsp").forward(request, response);
+      request.setAttribute("askBoardList", askBoardList);
+      request.getRequestDispatcher("/askBoard/AskBoardAllList.jsp").forward(request, response);
+
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 }
-
-

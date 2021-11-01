@@ -1,3 +1,4 @@
+<!-- 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
@@ -49,8 +50,8 @@
 <c:forEach items="${myAskBoardList}" var="askBoard">
 <tr>
   <td>( ${askBoard.askNo} )</td>
-  <td><a href='ceomydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
-  <td>${askBoard.askCeoWriter.ceoNickname}</td>
+  <td><a href='detail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+  <td>${askBoard.askMemberWriter.perNickname}</td>
   <td>${askBoard.askVeiwCount}</td>
   <td>${askBoard.askRegisteredDate}</td>
 </tr>
@@ -63,7 +64,7 @@
 </c:if>
 </body>
 </html>
-
+ -->
 
 
 
