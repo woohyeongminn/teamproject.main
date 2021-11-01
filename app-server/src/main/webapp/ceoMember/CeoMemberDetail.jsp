@@ -42,9 +42,6 @@
 	   <button type="submit" value="삭제" formaction="delete">
 	      <a href='deleteform?no=${ceoMember.ceoNo}'>탈퇴하기</a>
 	    </button>
-	    <button type="submit" value="로그아웃">
-        <a href='logout'>로그아웃</a>
-      </button>
     </form>
 </body>
 </html>

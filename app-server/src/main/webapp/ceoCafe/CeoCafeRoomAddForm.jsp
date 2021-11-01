@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업회원 스터디카페 등록</title>
+<title>기업회원 스터디카페 룸 등록</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
@@ -79,13 +79,13 @@
 </head>
 
 <body>
-  <b>👩‍🏫 내 스터디카페 등록</b><br>
-  <p>등록된 카페가 없습니다. 스터디 카페를 등록하고 승인을 기다리세요:)</p>
+  <b>👩‍🏫 내 스터디카페 룸 등록</b><br>
+  <p>등록된 스터디룸이 없습니다.</p>
   <hr>
     <div id='aside'>
-      <span id='c-image'>대표이미지</span>
+      <span id='c-image'>사진</span>
       <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input id="input-file" type="file" multiple="multiple" style='display:none' name='filename[]'/>
+        <input id="input-roomFile" type="file" multiple="multiple" style='display:none' name='filename[]'/>
         <label id="input-file-button" for="input-file">
           파일 첨부
         </label>
@@ -93,39 +93,19 @@
     </div>
     <form action='add'>
     <div id='content'>
-      <input type ='hidden' name='no' value='${ceoMember.ceoNo}'>
+      <input type ='hidden' name='cafeno' value='${cafeNo}'>
       
-      <label for='f-cafeName'>상호명</label>
-      <input id='f-cafeName' type='text' name='name'><br>
+      <label for='f-roomName'>스터디룸 이름</label>
+      <input id='f-roomName' type='text' name='name'><br>
       
-      <label for='f-bossName'>대표자</label><span>${ceoMember.ceoBossName}</span><br>
-      <label for='f-licenseNo'>사업자 등록번호</label><span>${ceoMember.ceoLicenseNo}</span><br>
+      <label for='f-roomInfo'>스터디룸 설명</label>
+      <input id='f-roomInfo' type='text' name='info'><br>
       
-      <label for='f-info'>소개글</label>
-      <input id='f-info' type='text' name='info'><br>
-      
-      <label for='f-location'>주소</label>
-      <input id='f-location' type='text' name='location'><br>
-      
-      <label for='f-tel'>전화번호</label>
-      <input id='f-tel' type='tel' name='tel'><br>
-  
-      <label for='f-openTime'>오픈시간</label>
-      <input id='f-openTime' type='time' name='openTime'><br>
-  
-      <label for='f-closeTime'>마감시간</label>
-      <input id='f-closeTime' type='time' name='closeTime'><br>
-      
-      <label for='f-holiday'>이번주 휴무일</label>
-      <input id='f-holiday' type='date' name='holiday'><br>
-      
-      <label for='f-viewCount'>상태</label>
-      <select name="cafeStatus">       
-        <option value="1" name="cafeStatus" selected>승인대기</option>
-        <option value="2" disabled>운영중</option>
-        <option value="3" disabled>운영중단</option>
-        <option value="4" disabled>삭제</option>
-      </select><br>
+      <label for='f-roomPeople'>스터디룸 최대인원</label>
+      <input id='f-roomPeople' type="number" pattern="\d*" name='people'><br>
+
+      <label for='f-roomPrice'>스터디룸 시간당금액</label>
+      <input id='f-roomPrice' type='tel' pattern="\d*"  name='roomPrice'><br>
       
     </div>
     <div id='button'>

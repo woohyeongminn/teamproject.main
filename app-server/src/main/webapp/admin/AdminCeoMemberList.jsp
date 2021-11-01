@@ -43,19 +43,10 @@
           <c:forEach items="${ceoMemberList}" var="ceoMember">
              <tr>
               <td>(${ceoMember.ceoNo})</td>
-             
-
               <td><a href='detail?no=${ceoMember.ceoNo}'>${ceoMember.ceoName}</a></td> 
-              
-              
               <td>${ceoMember.ceoNickname}</td> 
-              
-              
               <td>${ceoMember.ceoEmail}</td> 
-              
-             
               <td>${ceoMember.ceoRegisteredDate}</td>
-              
              </tr>
          </c:forEach>
         </tbody>
