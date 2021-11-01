@@ -44,13 +44,8 @@ public class CeoCafeDetailWrapController extends GenericServlet {
       Cafe cafe = cafeDao.findByCeoMember(ceoMember.getCeoNo());
 
       if (cafe == null) {
-        //String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
-        //List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
-
         request.setAttribute("ceoMember", ceoMember);
         request.setAttribute("cafe", cafe);
-        //request.setAttribute("cafeStatus", status);
-        //request.setAttribute("reviewList", reviewList);
 
         request.getRequestDispatcher("/ceoCafe/CeoCafeAddForm.jsp").forward(request, response);
         return;
@@ -66,10 +61,6 @@ public class CeoCafeDetailWrapController extends GenericServlet {
 
       request.getRequestDispatcher("/ceoCafe/CeoCafeDetail.jsp").forward(request, response);
 
-      //      request.getRequestDispatcher("/ceoMember/cafeAdd").forward(request); return;
-      //      request.getRequestDispatcher("/ceoMember/cafeUpdate").forward(request); return;
-      //      request.getRequestDispatcher("/ceoMember/cafeDelete").forward(request); return;
-      //      request.getRequestDispatcher("/ceoMember/cafeRoomList").forward(request); return;
       //      request.getRequestDispatcher("/ceoMember/ReservationDetail").forward(request); return;
 
     } catch (Exception e) {

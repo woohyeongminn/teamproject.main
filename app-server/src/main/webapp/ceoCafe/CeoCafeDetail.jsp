@@ -107,7 +107,7 @@
 	      <a href='deleteform?no=${cafe.no}'>스터디카페 삭제</a>
 	    </button>
 	    <button id='b-but' type="submit" value="스터디룸관리">
-        <a href='#'>스터디룸 관리</a>
+        <a href='roomlist?no=${cafe.no}'>스터디룸 관리</a>
       </button>
       <button id='b-but' type="submit" value="예약관리">
         <a href='#'>예약 관리</a>

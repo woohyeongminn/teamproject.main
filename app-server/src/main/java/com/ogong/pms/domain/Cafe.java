@@ -28,7 +28,7 @@ public class Cafe {
   private int viewCount; // 조회수
   private int bookable; // 예약가능인원(개인좌석)
   private int timePrice; // 시간당금액(개인좌석)
-  private int cafeStatus; // 0 : 승인대기 , 1 : 운영중 , 2 : 운영중단 3 : 삭제 -> cafeStatus 관리자, 사장 한테만 보임
+  private int cafeStatus; // 1 : 승인대기 , 2 : 운영중 , 3 : 운영중단 4 : 삭제 -> cafeStatus 관리자, 사장 한테만 보임
 
   private int countReview; // 리뷰 수
   private double avgReview; // 리뷰 평균

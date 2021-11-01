@@ -58,8 +58,6 @@ public class CeoUpdateController extends HttpServlet {
 
       response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
 
-      //AuthCeoMemberLoginHandler.loginCeoMember = null;
-
     } catch (Exception e) {
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
