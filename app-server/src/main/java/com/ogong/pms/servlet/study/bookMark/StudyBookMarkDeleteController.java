@@ -35,10 +35,11 @@ public class StudyBookMarkDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int studyNo = Integer.parseInt(request.getParameter("no"));
+      int perNo = Integer.parseInt(request.getParameter("perno"));
+      Member member = memberDao.findByNo(perNo);
 
-      Member member = memberDao.findByNo(studyNo);
-      Study myStudy = studyDao.findByBookmark(studyNo, member.getPerNo());
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
+      Study study = studyDao.findByBookmark(studyNo, member.getPerNo());
 
       // for (int i = 0; i < myStudy.getBookMarkMember().size(); i++) {
       // if (member.getPerNo() == myStudy.getBookMarkMember().get(i).getPerNo()) {
@@ -47,12 +48,15 @@ public class StudyBookMarkDeleteController extends HttpServlet {
       // }
       // }
 
-      studyDao.deleteBookmark(myStudy.getStudyNo(), member.getPerNo());
+      studyDao.deleteBookmark(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
 
+      request.setAttribute("member", member);
+      request.setAttribute("study", study);
       response.sendRedirect("list");
 
     } catch (Exception e) {
+      e.printStackTrace();
       sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);

@@ -39,7 +39,7 @@ public class StudyBookMarkListController extends GenericServlet {
       Collection<Study> studyList = studyDao.findByMyBookmark(member.getPerNo());
       // Collection<Study> studyList = studyDao.findAll();
 
-      request.setAttribute("perno", request.getParameter("perno"));
+      request.setAttribute("member", member);
       request.setAttribute("studyList", studyList);
       request.getRequestDispatcher("/study/bookMark/StudyBookMarkList.jsp").forward(request,
           response);
