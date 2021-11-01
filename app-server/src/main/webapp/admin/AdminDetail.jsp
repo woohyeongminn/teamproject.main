@@ -38,7 +38,6 @@
   flex-direction: row;
   justify-content: center;
   }
-  
   a {
   color : black;
   text-decoration : blink;
