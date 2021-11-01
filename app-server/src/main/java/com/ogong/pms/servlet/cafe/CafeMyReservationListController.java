@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.domain.CafeReservation;
 
-@WebServlet("/cafe/myReservationList")
+@WebServlet("/cafe/reservationList")
 public class CafeMyReservationListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

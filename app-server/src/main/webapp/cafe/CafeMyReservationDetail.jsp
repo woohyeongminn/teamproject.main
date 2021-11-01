@@ -39,7 +39,10 @@
 <c:if test="${reviewStatusLable eq '작성대기'}">
   <button type="button" class="btn btn-outline-dark"><a href="reviewAddForm?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">리뷰등록</a></button>
 </c:if>
-&nbsp;&nbsp;<button type="button" class="btn btn-outline-dark"><a href="myReservationList?perNo=${memberNo}">목록</a></button>
+<c:if test="${reserStatusLable eq '예약완료'}">
+<button type="button" class="btn btn-outline-dark"><a href="reservationDelete?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">예약취소</a></button>
+</c:if>
+<button type="button" class="btn btn-outline-dark"><a href="reservationList?perNo=${memberNo}">목록</a></button>
 </body>
 </html>
 
