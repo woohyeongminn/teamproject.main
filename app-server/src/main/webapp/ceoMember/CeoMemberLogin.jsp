@@ -26,6 +26,7 @@
   <h4>기업 회원 로그인 성공</h4>
 
  <p>'${ceoMember.ceoNickname}'님 환영합니다! 🖐</p>
- <button><a href='detail?no=${ceoMember.ceoNo}'>마이페이지</a></button> 
+ <button><a href='detail?no=${ceoMember.ceoNo}'>내 프로필</a></button> 
+ <button><a href='cafe/detail?no=${ceoMember.ceoNo}'>내 카페</a></button> 
  </body>
 </html>

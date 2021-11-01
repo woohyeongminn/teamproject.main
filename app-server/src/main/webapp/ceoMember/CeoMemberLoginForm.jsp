@@ -40,7 +40,7 @@
 	  <div class="mb-3">
 	    <div class="dropdown-divider"></div>
 		    <a class="dropdown-item" href="addform">회원가입</a>
-		    <a class="dropdown-item" href="#">비밀번호찾기</a>
+		    <a class="dropdown-item" href="find">아이디·비밀번호찾기</a>
 	  </div>
   
   <button type="submit" class="btn btn-primary">로그인</button>
