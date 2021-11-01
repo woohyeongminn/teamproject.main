@@ -10,17 +10,23 @@ values (4, '삭제');
 
 -- 카페
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (1, '에이스터디카페', '스터디 모임 전문 공간 에이스터디카페 입니다.', 
-'서울 강남구 강남대로94길 11 맨하탄어학원빌딩 4층', '02-111-1111', '08:00', '21:00', 2, 8);
+values (1, '에이스터디카페', '스터디 모임 전문 공간 에이스터디카페 입니다.\n매일 소독제 청소 & 정기 방역으로 쾌적한 환경 제공', 
+'서울 강남구 역삼동 818-13, 맨하탄어학원빌딩 4층', '02-111-1111', '08:00', '21:00', 2, 8);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (2, '해피해피스터디카페', '안녕하세요! 강남에 위치한 해피해피스터디카페 입니다.', 
-'서울 강남구 강남대로92길 13 5층', '02-123-1234', '07:00', '23:00', 2, 9);
+values (2, '해피해피스터디카페', '안녕하세요! 강남에 위치한 해피해피스터디카페 입니다.\n담요, 독서대, 학용품, 핸드폰 충전기, 무선마우스, 개인 스탠드 조명 비치되어 있습니다', 
+'서울 강남구 역삼동 819-9, 5층', '02-123-1234', '07:00', '23:00', 2, 9);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
 values (3, '광명스터디카페', '공부가 잘 되는 공간, 광명스터디카페 입니다.', 
-'경기 광명시 철산로 12 2층 2호', '010-5555-5555', '06:00', '22:00', 2, 10);
+'경기 광명시 철산동 264, 2층 2호', '010-5555-5555', '06:00', '22:00', 2, 10);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
 values (4, '비트스터디카페 판교센터', '안녕하세요! 비트스터디카페 판교센터 입니다.', 
-'경기 성남시 분당구 서판교로 36 나이스빌딩 4층 402호', '010-5555-5555', '05:00', '23:00', 1, 11);
+'경기 성남시 분당구 판교동 577-3, 나이스빌딩 4층 402호', '010-6789-5555', '05:00', '23:00', 2, 11);
+insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
+values (5, '초심스터디카페', '안녕하세요! 비트스터디카페 판교센터 입니다.', 
+'서울 서초구 서초동 1316-28, 우송빌딩 지하 2층', '02-1245-9999', '09:00', '23:00', 2, 12);
+insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
+values (6, '어라운드스터디카페', '어라운드스터디카페 강남역삼점입니다\n3,4층 : 스터디존 5층 : 카페존 & 테라스', 
+'서울 강남구 역삼동 817-19, 3~5층, 나이스빌딩 4층 402호', '010-4545-7878', '05:00', '23:00', 1, 13);
 
 -- 카페 사진
 insert into studycafe_photo(photo_no, name, cafe_no)
@@ -59,6 +65,21 @@ values (4, 'B타입(4인)', 2, '최대 4인이 이용할 수 있는 스터디룸
 4, 9000);
 insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
 values (5, 'C타입(5~6인)', 1, '5~6인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
+6, 15000);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+values (6, 'A타입(2~3인)', 3, '2~3인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
+3, 6000);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+values (7, 'A타입(2인)', 4, '최대 2인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
+2, 6000);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+values (8, 'A타입(3~4인)', 5, '3~4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
+4, 9000);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+values (9, 'A타입(4인)', 6, '최대 4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
+4, 9000);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+values (10, 'B타입(5~6인)', 6, '5~6인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
 6, 15000);
 
 -- 카페 스터디룸 사진
