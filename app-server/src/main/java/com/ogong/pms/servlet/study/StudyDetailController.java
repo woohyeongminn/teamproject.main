@@ -35,7 +35,7 @@ public class StudyDetailController extends GenericServlet {
         throw new Exception("해당 번호의 스터디가 없습니다.");
       }
 
-      request.setAttribute("perno", request.getParameter("perno"));
+      request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
       request.setAttribute("study", study);
       request.getRequestDispatcher("/study/StudyDetail.jsp").forward(request, response);
 

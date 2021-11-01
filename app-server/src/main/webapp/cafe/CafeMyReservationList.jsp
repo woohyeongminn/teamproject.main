@@ -10,18 +10,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
-  #content {
-    margin-left: 30px;
-  }
-  .col {
-    width: 450px;
+  h3 {
+    text-align: center;
+    font-weight: bolder;
   }
   </style>
 </head>
 <body>
-<h1>내 예약 목록</h1>
 <br>
-
+<h3> 📝 내 예약 목록 </h3><br>
+<c:if test='${not empty reserList}'>
 <table class="table table-striped text-center">
 <thead>
   <tr>
@@ -34,7 +32,7 @@
   </tr>
 </thead>
 <tbody>
-<c:if test='${not empty reserList}'>
+
 	<c:forEach items="${reserList}" var="reservation">
 	<tr>
 	    <td><a href='reservationDetail?perNo=${perNo}&reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
@@ -45,12 +43,13 @@
 	    <td>${reservation.reservationStatusName}</td> 
 	</tr>
 	</c:forEach>
+	</tbody>
+</table>
 </c:if>
 <c:if test='${empty reserList}'>
    예약 내역이 없습니다.<br><br>  
 </c:if>
-</tbody>
-</table>
+
 
 
 <!-- 

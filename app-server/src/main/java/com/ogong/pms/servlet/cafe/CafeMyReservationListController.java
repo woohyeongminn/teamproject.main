@@ -30,7 +30,7 @@ public class CafeMyReservationListController extends HttpServlet {
 
     try {
       int memberNo = Integer.parseInt(request.getParameter("perNo"));
-      System.out.println(memberNo);
+      //      System.out.println(memberNo);
 
       List<CafeReservation> reserList = 
           cafeReservationDao.findReservationListByMember(memberNo);

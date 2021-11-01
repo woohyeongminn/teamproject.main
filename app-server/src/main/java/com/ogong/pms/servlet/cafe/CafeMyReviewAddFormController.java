@@ -18,7 +18,7 @@ public class CafeMyReviewAddFormController extends HttpServlet {
     try {
       int memberNo = Integer.parseInt(request.getParameter("perNo"));
       int reservationNo = Integer.parseInt(request.getParameter("reservationNo"));
-      System.out.println(memberNo + ", " + reservationNo);
+      //      System.out.println(memberNo + ", " + reservationNo);
 
       request.setAttribute("perNo", memberNo);
       request.setAttribute("reservationNo", reservationNo);

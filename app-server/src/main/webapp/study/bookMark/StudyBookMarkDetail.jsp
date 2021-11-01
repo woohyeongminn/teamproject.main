@@ -56,10 +56,10 @@ label {
 		value='${study.introduction}' readonly>
 	<br>
 	<button>
-		<a href='delete?studyno=${study.studyNo}'>삭제</a>
+		<a href='delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
 	</button>
 	<button>
-		<a href='list?perno=${perno}'>목록</a>
+		<a href='list?perno=${member.perNo}'>목록</a>
 	</button>
 	<br>
 
