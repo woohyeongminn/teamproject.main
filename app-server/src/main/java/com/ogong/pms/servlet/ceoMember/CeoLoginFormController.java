@@ -16,7 +16,7 @@ public class CeoLoginFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/ceoCafe/CeoMemberLoginForm.jsp").forward(request, response);
+    request.getRequestDispatcher("/ceoMember/CeoMemberLoginForm.jsp").forward(request, response);
 
   }
 }
