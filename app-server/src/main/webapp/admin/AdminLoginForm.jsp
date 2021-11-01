@@ -23,6 +23,9 @@
   border : white;
   outline-color : lightgray;
   }
+  input[type=checkbox]:checked {
+  background-color: black;
+  }
   p {
   text-align-last: center;
   }
