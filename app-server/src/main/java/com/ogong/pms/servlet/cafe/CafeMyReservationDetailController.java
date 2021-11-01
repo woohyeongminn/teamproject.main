@@ -15,7 +15,7 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
 
-@WebServlet("/cafe/myReservationDetail")
+@WebServlet("/cafe/reservationDetail")
 public class CafeMyReservationDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

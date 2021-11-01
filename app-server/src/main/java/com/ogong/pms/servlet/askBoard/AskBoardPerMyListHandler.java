@@ -1,85 +1,66 @@
 package com.ogong.pms.servlet.askBoard;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.Collection;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.handler.AuthPerMemberLoginHandler;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class AskBoardPerMyListHandler implements Command {
+@WebServlet("/askboard/permylist")
+public class AskBoardPerMyListHandler extends GenericServlet {
+  private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
 
-  public AskBoardPerMyListHandler(AskBoardDao askBoardDao) {
-    this.askBoardDao = askBoardDao;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
   }
 
   // 마이페이지 - 내가 쓴 문의내역(개인)
   @Override
-  public void execute(CommandRequest request) throws Exception {
+  public void service(ServletRequest request, ServletResponse response)
+      throws ServletException, IOException {
 
-    List<AskBoard> askBoardList = askBoardDao.findAll();
+    try {
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
 
-    if (AuthPerMemberLoginHandler.getLoginUser() != null) {
+      Collection<AskBoard> myAskBoardList = askBoardDao.findPerMyAll(perNo);
 
-      // 개인이 쓴 문의글
-      int count = 0;
-      for (AskBoard askBoard : askBoardList) {
-        int memberNo = AuthPerMemberLoginHandler.getLoginUser().getPerNo();
-        if(askBoard.getAskMemberWriter().getPerNo() == memberNo) {
+      //      if (myAskBoardList == null) {
+      //        throw new Exception("문의 게시글이 존재하지 않습니다.");
+      //      }
 
-          System.out.println();
-          String reply = "";
-          if (askBoard.getReply() != null) {
-            reply = "📖 > 등록된 답변이 있습니다.";
-          } else {
-            reply = "📕 > 등록된 답변이 없습니다.";
-          }
+      request.setAttribute("myAskBoardList", myAskBoardList);
+      request.getRequestDispatcher("/askBoard/AskBoardPerMyList.jsp").forward(request, response);
 
-          if (askBoard.getAskStatus() == 1) {
-            System.out.printf(" (%d)\n 제목 : %s\n 작성자 : %s\n 작성일 : %s\n 조회수 : %d\n", 
-                askBoard.getAskNo(), 
-                askBoard.getAskTitle(), 
-                askBoard.getAskMemberWriter().getPerNickname(),
-                askBoard.getAskRegisteredDate(),
-                askBoard.getAskVeiwCount());
-            count++;
-          }
-
-          else if (askBoard.getAskStatus() == 2) {
-            System.out.printf(" (%d)\n 작성자 : %s", 
-                askBoard.getAskNo(), 
-                askBoard.getAskMemberWriter().getPerNickname());
-            System.out.println();
-            System.out.println("\n 🔒 비밀글입니다.");
-            count++;
-          }
-        } 
-
-      }
-      if (count == 0) {
-        System.out.println("\n >> 내가 등록한 문의글이 없습니다.");
-        return;
-      }
-
-    } else {
-      System.out.println();
-      System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
-      return;
+    } catch (Exception e) {
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-    System.out.println();
-    System.out.println("---------------------");
-    System.out.println("1. 상세");
-    System.out.println("0. 이전");
-    int selectNo = Prompt.inputInt("선택> ");
 
-    switch (selectNo) {
-      case 1: request.getRequestDispatcher("/askBoard/perMydetail").forward(request); return;
-      case 0: return;
-      default : System.out.println(" >> 번호를 다시 선택해 주세요.");
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
-
 }
+
+

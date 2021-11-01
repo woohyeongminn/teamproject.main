@@ -42,8 +42,8 @@
       ab.content,
       m.nickname,
       m.status member_status,
-  if (m.status=1, m.member_no, null) per_no,
-  if (m.status=2, m.member_no, null) ceo_no,
+  if (m.status=1, m.member_no, 0) per_no,
+  if (m.status=2, m.member_no, 0) ceo_no,
       ab.use_secret ask_status,
       ab.temppw,
       ab.created_dt,
@@ -63,6 +63,27 @@
   <include refid="select1"/>
       abr.reply_dt r_dt
   <include refid="from1"/>
+     order by
+      ab.ask_board_no asc
+  </select>
+  
+  <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
+  <include refid="select1"/>
+      abr.reply_dt r_dt
+  <include refid="from1"/>
+  where
+     m.member_no=#{perMemberNo}
+     order by
+      ab.ask_board_no asc
+  </select>
+  
+  <select id="findCeoMyAll" resultMap="AskBoardMap" parameterType="int">
+  <include refid="select1"/>
+      abr.reply_dt r_dt
+  <include refid="from1"/>
+  left outer join ceo_member cm on cm.member_no = m.member_no
+  where
+     m.member_no=#{perMemberNo}
      order by
       ab.ask_board_no asc
   </select>

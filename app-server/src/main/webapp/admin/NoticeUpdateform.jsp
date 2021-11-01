@@ -24,7 +24,6 @@
   </style>
 </head>
 <body>
-<!-- <h1>  ▶ 공지 수정 </h1> -->
 <fieldset>
 <br>
 <legend><b> 🔔 공지게시글 수정 </b></legend><br>
@@ -42,7 +41,7 @@
   <td><form action='update'><span>(${notice.adminNotiNo})</span></td>
   <td><input id='f-title' type='text' name='title' value='${notice.adminNotiTitle}'></td>
   <td><input id='f-content' type='text' name='content' value='${notice.adminNotiContent}'></td>
-  <td><input id='f-filepath' type='text' name='filepath' value='${notice.adminNotiFile}'></td>
+  <td><input id='f-filepath' type='file' name='filepath' value='${notice.adminNotiFile}'></td>
   <td><span id='f-registeredDate'>${notice.adminNotiRegisteredDate}</span></td>
 </table>
 </fieldset>

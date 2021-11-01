@@ -32,6 +32,8 @@ insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created
 values(2, 9, '가게 등록..', '가게 승인 요청 어떻게 하나요?', 0, '2020-12-10', 1);
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
 values(3, 3, '관리자님', '이메일로 문의 드리고 싶어요!', 0, '2021-04-18', 2);
+insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
+values(4, 1, '궁금합니다.', '스터디생성방법이궁금해요.', 0, '2020-02-01', 1);
 
 -------------------------------------------------------------------------------------------------
 -- 문의게시판 댓글 test 값
@@ -39,6 +41,8 @@ insert into ask_board_reply(ask_board_no, reply_no, reply_title, reply_content, 
 values(1, 1, '문의합니다', '공지게시판을 참조해 주세요.', '2020-02-01');
 insert into ask_board_reply(ask_board_no, reply_no, reply_title, reply_content, reply_dt)
 values(3, 3, '관리자님', 'ogong@test.com 여기로 이메일 보내 주세요~!', '2021-04-19');
+insert into ask_board_reply(ask_board_no, reply_no, reply_title, reply_content, reply_dt)
+values(2, 9, '가게 등록..', '공지게시판을 참조해 주세요.', '2020-12-15');
 
 
 -- 목록

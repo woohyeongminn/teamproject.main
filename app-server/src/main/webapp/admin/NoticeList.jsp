@@ -18,6 +18,9 @@
   legend {
     text-align: center;
   }
+  div {
+  margin-right: 10px;
+  }
   a {
   color : black;
   text-decoration : auto;
@@ -28,7 +31,6 @@
   </style>
 </head>
 <body>
-<!-- <h1> ▶ 공지 목록 </h1> -->
 <fieldset>
 <br>
 <legend ><b> 🔔 공지게시글 목록 </b></legend><br>
@@ -58,6 +60,7 @@
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="등록"><a href='form'>등록</a></button>
+<button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
 </div>
 </body>
 </html>
