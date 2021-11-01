@@ -45,7 +45,7 @@ public class AuthAdminLoginController extends HttpServlet {
       }
 
       else {
-        throw new Exception("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+        throw new Exception(" >> 이메일과 암호가 일치하는 관리자를 찾을 수 없습니다.");
       }
 
     } catch (Exception e) {

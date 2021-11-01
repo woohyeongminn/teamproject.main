@@ -31,14 +31,6 @@ public class AdminNoticeUpdateFormController extends GenericServlet {
       int noticeNo = Integer.parseInt(request.getParameter("no"));
       AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
 
-      //      if (!notice.getAdminNotiFile().equals("")) {
-      //        out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='image' name='filepath' value='%s'></td>", notice.getAdminNotiFile());
-      //        out.printf("<td><input id='f-filepath' type='file' name='filepath' value='%s'></td>", notice.getAdminNotiFile());
-      //      }
-      //      else {
-      //        out.printf("<td><label for='filepath'>파일</label> ㅣ  <input id='f-filepath' type='file' name='filepath' value='%s'></td>", notice.getAdminNotiFile());
-      //      }
-
       request.setAttribute("notice", notice);
 
       request.getRequestDispatcher("/admin/NoticeUpdateform.jsp").forward(request, response);

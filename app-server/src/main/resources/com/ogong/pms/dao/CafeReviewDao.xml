@@ -73,12 +73,21 @@
     values(#{reservationNo},#{content},#{grade},1)
   </insert>
   
-  <update id="deleteCafeReview">
+  <delete id="deleteCafeReview">
+    delete from studycafe_review
+    where
+      review_no = #{reviewNo}
+  </delete>
+  
+  <!-- 리뷰 삭제 처음에는 status로 구분하려고 했는데 그냥 delete 하기로 -->
+  <!-- 그래서 얘는 안쓸예정 
+  <delete id="deleteCafeReview">
     update studycafe_review set 
       status = 2
     where
       review_no = #{reviewNo}
-  </update>
+  </delete>
+  -->
 </mapper>
 
 

@@ -103,8 +103,8 @@
 	   <button id='b-but' type="submit" value="수정" formaction="updateform">
 	      <a href='updateform?no=${ceoMember.ceoNo}&cafeno=${cafe.no}'> 스터디카페 수정</a>
 	   </button>
-	   <button id='b-but' type="submit" value="삭제" formaction="delete">
-	      <a href='deleteform?no=${ceoMember.ceoNo}'>스터디카페 삭제</a>
+	   <button id='b-but' type="submit" value="삭제" formaction="deleteform">
+	      <a href='deleteform?no=${cafe.no}'>스터디카페 삭제</a>
 	    </button>
 	    <button id='b-but' type="submit" value="스터디룸관리">
         <a href='#'>스터디룸 관리</a>

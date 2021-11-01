@@ -147,7 +147,7 @@
     </div>
     <div id='button'>
      <button id='b-but' type="submit" value="수정" formaction="update">수정</button>
-     <button id='b-but' type="submit" value="상세"> 뒤로가기 </button>
+     <button id='b-but' type="submit" value="상세"><a href='delete?no=${cafe.no}'>뒤로가기</a></button>
     </div>
   </form> 
 </body>

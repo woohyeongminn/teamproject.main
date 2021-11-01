@@ -34,18 +34,21 @@
   </tr>
 </thead>
 <tbody>
-
-<c:forEach items="${reserList}" var="reservation">
-<tr>
-    <td><a href='myReservationDetail?perNo=${perNo}&reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
-    <td>${reservation.reservationDate}</td> 
-    <td>${reservation.useDate}</td> 
-    <td>${reservation.cafe.name}</td> 
-    <td>${reservation.totalPrice}</td> 
-    <td>${reservation.reservationStatusName}</td> 
-</tr>
-</c:forEach>
-
+<c:if test='${not empty reserList}'>
+	<c:forEach items="${reserList}" var="reservation">
+	<tr>
+	    <td><a href='reservationDetail?perNo=${perNo}&reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
+	    <td>${reservation.reservationDate}</td> 
+	    <td>${reservation.useDate}</td> 
+	    <td>${reservation.cafe.name}</td> 
+	    <td>${reservation.totalPrice}</td> 
+	    <td>${reservation.reservationStatusName}</td> 
+	</tr>
+	</c:forEach>
+</c:if>
+<c:if test='${empty reserList}'>
+   예약 내역이 없습니다.<br><br>  
+</c:if>
 </tbody>
 </table>
 

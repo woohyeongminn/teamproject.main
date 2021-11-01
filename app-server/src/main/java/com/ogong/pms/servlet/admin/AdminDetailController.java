@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
-import java.util.Collection;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -9,19 +8,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import com.ogong.pms.dao.AskBoardDao;
-import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.dao.AdminDao;
+import com.ogong.pms.domain.Admin;
 
-@WebServlet("/admin/askboardlist")
-public class AdminAskBoardListHandler extends GenericServlet {
+@WebServlet("/admin/detail")
+public class AdminDetailController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
-  AskBoardDao askBoardDao;
+  AdminDao adminDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
+    adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
   }
 
   @Override
@@ -29,17 +28,18 @@ public class AdminAskBoardListHandler extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<AskBoard> adminAskBoardList = askBoardDao.findAll();
+      int no = Integer.parseInt(request.getParameter("no"));
+      Admin adminpro = adminDao.findByAdminNo(no);
 
-      if (adminAskBoardList.isEmpty()) {
-        throw new Exception(" >> 등록된 글이 없습니다.");
+      if (adminpro == null) {
+        throw new Exception(" >> 다시 선택해 주세요.");
       }
 
-      request.setAttribute("adminAskBoardList", adminAskBoardList);
-      request.getRequestDispatcher("/admin/AskBoardList.jsp").forward(request, response);   
+      request.setAttribute("adminpro", adminpro);
+
+      request.getRequestDispatcher("/admin/AdminDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
