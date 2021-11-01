@@ -10,17 +10,48 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
+  h3 {
+    text-align: center;
+    font-weight: bolder;
+  }
   #content {
-    margin-left: 30px;
+    margin-left: 20px;
+    width: 58%;
+    xborder: 1px solid black;
   }
   .col {
-    width: 450px;
+    width: 420px;
+  }
+  .card {
+    height: 350px;
   }
   </style>
 </head>
 <body>
-<h1>스터디카페 목록</h1>
 <br>
+<h3> 🏘 스터디카페 목록 </h3><br>
+
+	<div id="content">
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+		<c:forEach items="${cafeList}" var="cafe">
+		  <div class="col">
+		    <div class="card">
+		      <svg class="bd-placeholder-img rounded" width="395" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text></svg>
+		      <div class="card-body">
+		        <a href='detail?no=${cafe.no}&perNo=${perNo}'>${cafe.name}</a><br>
+		        ${cafe.location}<br>
+		        영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
+		        ⭐${cafe.avgReview}(${cafe.countReview})
+		      </div>
+		    </div>
+		  </div>
+		</c:forEach>
+		</div>
+	</div>
+
+</body>
+</html>
+
 <!--
 <table class="table table-striped text-center">
 <thead>
@@ -48,28 +79,7 @@
 
 </tbody>
 </table>
--->
-<div id="content">
-	<div class="row row-cols-1 row-cols-md-3 g-4">
-	<c:forEach items="${cafeList}" var="cafe">
-	  <div class="col">
-	    <div class="card">
-	      <svg class="bd-placeholder-img rounded" width="425" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text></svg>
-	      <div class="card-body">
-	        <a href='detail?no=${cafe.no}&perNo=${perNo}'>${cafe.name}</a><br>
-	        ${cafe.location}<br>
-	        영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
-	        ⭐${cafe.avgReview}(${cafe.countReview})
-	      </div>
-	    </div>
-	  </div>
-	</c:forEach>
-	</div>
-</div>
-</body>
-</html>
 
-<!-- 
 
       for(Cafe cafe : cafeList) {
         out.printf("<tr> "
