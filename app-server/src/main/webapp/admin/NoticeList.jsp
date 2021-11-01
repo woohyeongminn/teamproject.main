@@ -31,7 +31,6 @@
   </style>
 </head>
 <body>
-<!-- <h1> ▶ 공지 목록 </h1> -->
 <fieldset>
 <br>
 <legend ><b> 🔔 공지게시글 목록 </b></legend><br>
