@@ -53,7 +53,7 @@ public class StudyBookMarkDeleteController extends HttpServlet {
 
       request.setAttribute("member", member);
       request.setAttribute("study", study);
-      response.sendRedirect("list");
+      response.sendRedirect("list?perno="+ member.getPerNo());
 
     } catch (Exception e) {
       e.printStackTrace();
