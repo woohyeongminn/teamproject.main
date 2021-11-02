@@ -59,8 +59,13 @@
 </table>
 </fieldset>
 <c:if test="${empty myAskBoardList}">
-       등록한 문의글이 없습니다.
+       등록한 문의글이 없습니다.<br>
 </c:if>
+
+   <button type="submit" value="등록" formaction="add">
+        <a href='ceoaddform?ceoNo=${ceoNo}'>등록하기</a>
+   </button>
+
 </body>
 </html>
 

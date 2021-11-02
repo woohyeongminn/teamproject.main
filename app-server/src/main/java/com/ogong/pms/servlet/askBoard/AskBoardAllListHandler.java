@@ -2,18 +2,18 @@ package com.ogong.pms.servlet.askBoard;
 
 import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
 @WebServlet("/askboard/list")
-public class AskBoardAllListHandler extends GenericServlet {
+public class AskBoardAllListHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
@@ -26,7 +26,7 @@ public class AskBoardAllListHandler extends GenericServlet {
 
   // 마이페이지 - 내가 쓴 문의내역(개인)
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {

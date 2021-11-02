@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인회원 회원가입</title>
+<title>개인회원 문의글 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
@@ -22,9 +22,26 @@
   }
 </style>
 </head>
+
 <body>
-<h1>회원등록결과</h1>
-<p>회원을 등록했습니다.</p>
-<a class="btn btn-info" href="form">로그인 하러가기</a>
-</body>
+  <h5>개인 회원 문의글 수정</h5>
+
+  <form action="ceoupdate">
+    span>(${perAskBoard.askNo})</span><br>
+    
+    <label for='f-title'>제목</label>
+    <input id='f-title' type='text' name='title' value='${perAskBoard.askTitle}'><br>
+    
+    <label for='f-content'>내용</label>
+    <input id='f-content' type='text' name='content' value='${perAskBoard.askContent}'><br>
+    
+    <span id='f-registeredDate'>${perAskBoard.askRegisteredDate}</span><br>
+<
+    <input type ='hidden' name='askNo' value='${perAskBoard.askNo}'>
+  
+    <button type="submit" value="수정">수정</button>
+
+  </form>
+  
+ </body>
 </html>

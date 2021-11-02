@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.askBoard;
 
 import java.io.IOException;
-import java.util.Collection;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/ceomylist")
-public class AskBoardCeoMyListHandler extends HttpServlet {
+@WebServlet("/askboard/ceoupdateform")
+public class AskBoardCeoUpdateFormHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
@@ -24,23 +23,17 @@ public class AskBoardCeoMyListHandler extends HttpServlet {
     askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
   }
 
-  // 마이페이지 - 내가 쓴 문의내역(개인)
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
 
-      int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
-      Collection<AskBoard> myAskBoardList = askBoardDao.findCeoMyAll(ceoNo);
+      int askNo = Integer.parseInt(request.getParameter("askNo"));
+      AskBoard ceoAskBoard = askBoardDao.findByNo(askNo);
 
-      if (myAskBoardList == null) {
-        throw new Exception("문의 게시글이 존재하지 않습니다.");
-      }
-
-      request.setAttribute("ceoNo", ceoNo);
-      request.setAttribute("myAskBoardList", myAskBoardList);
-      request.getRequestDispatcher("/askBoard/AskBoardCeoMyList.jsp").forward(request, response);
+      request.setAttribute("ceoAskBoard", ceoAskBoard);
+      request.getRequestDispatcher("/askBoard/AskBoardCeoUpdateForm.jsp").forward(request, response);
 
 
     } catch (Exception e) {
