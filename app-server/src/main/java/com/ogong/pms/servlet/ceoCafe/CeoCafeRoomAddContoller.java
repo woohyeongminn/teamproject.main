@@ -27,6 +27,7 @@ public class CeoCafeRoomAddContoller extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
     cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
