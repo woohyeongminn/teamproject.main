@@ -9,7 +9,7 @@
 <body>
 	<h1>스터디 목록</h1>
 	<button>
-		<a href='form'>등록</a>
+		<a href='form?perno=${perno}'>등록</a>
 	</button>
 	<br>
 	<table border='1'>

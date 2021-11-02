@@ -91,7 +91,7 @@
         </label>
       </form>
     </div>
-    <form action='roomadd'>
+    <form action='add'>
     <div id='content'>
       <input type ='hidden' name='no' value='${cafeNo}'>
       
@@ -109,7 +109,7 @@
       
     </div>
     <div id='button'>
-     <button id='b-but' type="submit" value="등록" formaction="roomadd">등록</button>
+     <button id='b-but' type="submit" value="등록" formaction="add">등록</button>
     </div>
   </form> 
 </body>
