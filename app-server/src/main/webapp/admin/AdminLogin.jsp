@@ -103,7 +103,7 @@
   </button>
   <div class="dropdown-menu" role="menu" style="border-color: white;">
     <button class="dromdown-item" type="button1">
-      <a href="/ogong/cafe/list" style="color: black;">📝 장소 목록</a></button><br>
+      <a href="/ogong/admin/cafeList" style="color: black;">📝 장소 목록</a></button><br>
     <button class="dromdown-item" type="button1">
       <a href="/ogong/cafe/list" style="color: black;">🔖 장소 리뷰</a></button>
   </div>
