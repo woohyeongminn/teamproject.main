@@ -8,7 +8,18 @@
 </head>
 <body>
 	<h1>📖 스터디 목록</h1>
-	<a href='form'>스터디 등록</a>
+	<button>
+    <a href='../list?perno=${perno}'>전체</a>
+  </button>
+  <button>
+    <a href='../list/ing?perno=${perno}'>진행</a>
+  </button>
+  <button>
+    <a href='../list/end?perno=${perno}'>완료</a>
+  </button><br>
+	<button>
+		<a href='../form?perno=${perno}'>등록</a>
+	</button>
 	<br>
 	<table border='1'>
 		<thead>
@@ -25,22 +36,13 @@
 			</tr>
 			</thread>
 		<tbody>
-
 			<c:forEach items="${studyList}" var="study">
-				<!-- <c:choose>
-					<c:when test="${study.studyTitle}.contains(탈퇴)">(${study.studyNo})<br>스터디명 : ${study.studyTitle}</c:when>
-					<c:otherwise>${study.studyNo}</c:otherwise>
-					<c:choose>
-						<c:when test="${study.countMember ne study.numberOfPeple}">[모집중]</c:when>
-						<c:otherwise>[모집완료]</c:otherwise>
-					</c:choose>
-				</c:choose> -->
 				<tr>
 					<td>${study.studyNo}</td>
 					<td>${study.countBookMember}</td>
-					<td><a href='detail?no=${study.studyNo}'>${study.studyTitle}</a></td>
+					<td><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></td>
 					<td>${study.faceName}</td>
-					<td>${owner.perNickname}</td>
+					<td>${study.owner.perNickname}</td>
 					<td>${study.subjectName}</td>
 					<td>${study.area}</td>
 					<td>${study.countMember}</td>

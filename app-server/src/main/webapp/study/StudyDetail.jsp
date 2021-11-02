@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 📖 스터디 찾기</title>
+<title>상세 | 스터디 찾기</title>
 <style>
 label {
 	margin-right: 5px;
@@ -14,7 +14,7 @@ label {
 </style>
 </head>
 <body>
-	<h1>스터디 상세</h1>
+	<h1>📖 스터디 상세</h1>
 	<form action='update'>
 		<label for='f-studyNo'>번호</label>
 		<input id='f-studyNo' type='text' name='studyNo' value='${study.studyNo}' readonly><br>
@@ -48,12 +48,14 @@ label {
 		
 		<label for='f-point'>활동 점수</label>
 		<input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
+		<c:if test="${study.owner.perNo} == ${perno}">
 		<button>
       <a href='update?studyno=${study.studyNo}'>수정</a>
     </button>
 		<button>
 			<a href='delete?studyno=${study.studyNo}'>삭제</a>
 		</button>
+		</c:if>
 		<button>
 			<a href='../bookmark/add?perno=${perno}&studyno=${study.studyNo}'>북마크 추가</a>
 		</button>

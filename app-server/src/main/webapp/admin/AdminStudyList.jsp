@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>목록 - 관리자 | 📖 스터디 찾기</title>
+<title>목록 | 스터디 관리</title>
 </head>
 <body>
-  <h1>스터디 목록</h1>
+  <h1>📖 스터디 목록</h1>
   <br>
   <table border='1'>
     <thead>

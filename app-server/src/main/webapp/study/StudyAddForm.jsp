@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>등록 | 📖 스터디 찾기</title>
+<title>등록 | 스터디 찾기</title>
 <style>
 label {
 	margin-right: 5px;
@@ -14,7 +14,7 @@ label {
 </style>
 </head>
 <body>
-	<h1>스터디 등록</h1>
+	<h1>📖 스터디 등록</h1>
 	<form action='add'>
     <input type='hidden' name='perno' value='${perno}'>
         <label for='f-studyTitle'>제목</label> <input id='f-studyTitle' type='text' name='studytitle'><br>

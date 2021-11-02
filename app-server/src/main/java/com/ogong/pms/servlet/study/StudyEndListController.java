@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/study/list")
-public class StudyListController extends GenericServlet {
+@WebServlet("/study/list/end")
+public class StudyEndListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
@@ -29,7 +29,7 @@ public class StudyListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      Collection<Study> studyList = studyDao.findAll();
+      Collection<Study> studyList = studyDao.findAllEnd();
 
       if (studyList.isEmpty()) {
         throw new Exception("스터디 목록이 없습니다.");
@@ -37,7 +37,30 @@ public class StudyListController extends GenericServlet {
 
       request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
       request.setAttribute("studyList", studyList);
-      request.getRequestDispatcher("/study/StudyList.jsp").forward(request, response);
+      request.getRequestDispatcher("/study/StudyEndList.jsp").forward(request, response);
+
+      // for (Study study : studyList) {
+      //
+      // if (study.getStudyTitle().contains("탈퇴")) {
+      // System.out.printf(" (%d)\n 스터디명 : %s\n", study.getStudyNo(), study.getStudyTitle());
+      // System.out.println();
+      // }
+      //
+      // else {
+      // System.out.printf(
+      // " (%d) 🌟%d \n [%s] | %s | 조장 : %s | 분야 : %s | 지역 : %s | 인원수 : %s/%s명\n",
+      // study.getStudyNo(),
+      // study.getCountBookMember(),
+      // study.getStudyTitle(),
+      // study.getFaceName(),
+      // study.getOwner().getPerNickname(),
+      // study.getSubjectName(),
+      // study.getArea(),
+      // study.getCountMember(),
+      // study.getNumberOfPeple()
+      // );
+      // }
+      // }
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -25,7 +25,6 @@
 <body>
    <b> 💬 문의글 상세[개인 회원 마이페이지]</b>
    <hr>
-   <form action='updateform'>
      <span id='no' name='no'>(${myAskBoard.askNo})</span><br>
      <span>제목ㅣ</span> <span>${myAskBoard.askTitle}</span><br>
      <span>내용ㅣ</span> <span>${myAskBoard.askContent}</span><br>
@@ -35,7 +34,7 @@
 </body>
 
    <button type="submit" value="수정" formaction="update">
-        <a href='?????no=${myAskBoard.askNo}'>문의글수정</a>
+        <a href='perupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
    </button>
    
    <button type="submit" value="삭제" formaction="delete">

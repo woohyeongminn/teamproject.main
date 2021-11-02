@@ -4,10 +4,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>목록 | 📖 스터디 찾기</title>
+<title>목록 | 스터디 찾기</title>
 </head>
 <body>
-	<h1>스터디 목록</h1>
+	<h1>📖 스터디 목록</h1>
+	<button>
+    <a href='list?perno=${perno}'>전체</a>
+  </button>
+  <button>
+    <a href='list/ing?perno=${perno}'>진행</a>
+  </button>
+	<button>
+		<a href='list/end?perno=${perno}'>완료</a>
+	</button><br>
 	<button>
 		<a href='form?perno=${perno}'>등록</a>
 	</button>

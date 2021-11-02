@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/study/form")
-public class StudyFormController extends HttpServlet {
+public class StudyAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
@@ -17,7 +17,7 @@ public class StudyFormController extends HttpServlet {
 
     try {
       request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
-      request.getRequestDispatcher("/study/StudyForm.jsp").forward(request, response);
+      request.getRequestDispatcher("/study/StudyAddForm.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

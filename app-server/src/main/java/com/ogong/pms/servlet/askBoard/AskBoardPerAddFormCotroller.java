@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.AskBoardDao;
+import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.domain.Member;
 
-@WebServlet("/askboard/perdelete")
-public class AskBoardPerDeleteHandler extends HttpServlet {
+@WebServlet("/askboard/peraddform")
+public class AskBoardPerAddFormCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  AskBoardDao askBoardDao;
   SqlSession sqlSession;
+  MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
@@ -30,24 +31,18 @@ public class AskBoardPerDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int askNo = Integer.parseInt(request.getParameter("askNo")); 
-      int perNo = Integer.parseInt(request.getParameter("perNo")); 
-      askBoardDao.deletereply(askNo);
-      askBoardDao.delete(askNo);
-      sqlSession.commit();
-      response.sendRedirect("permylist?perNo=" + perNo);
+
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      Member member = memberDao.findByNo(perNo);
+
+      request.setAttribute("member", member);
+      request.getRequestDispatcher("/askBoard/AskBoardPerAddForm.jsp").forward(request, response);
+
 
     } catch (Exception e) {
-      e.getStackTrace();
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
-
-
-

@@ -8,10 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업회원 스터디카페 룸 등록</title>
+<title>기업회원 스터디룸 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <style>
+   <style>
    a {
    text-decoration:none;
   }
@@ -79,8 +79,7 @@
 </head>
 
 <body>
-  <b>👩‍🏫 내 스터디카페 룸 등록</b><br>
-  <p>등록된 스터디룸이 없습니다.</p>
+  <b>👩‍🏫 내 스터디카페 룸 수정</b><br>
   <hr>
     <div id='aside'>
       <span id='c-image'>사진</span>
@@ -91,22 +90,22 @@
         </label>
       </form>
     </div>
-    <form action='add'>
+    <form action='updae'>
     <div id='content'>
       <input type ='hidden' name='no' value='${cafeNo}'>
+      <input type ='hidden' name='roomno' value='${cafeRoom.roomNo}'>
       
       <label for='f-roomName'>스터디룸 이름</label>
-      <input id='f-roomName' type='text' name='name'><br>
+      <input id='f-roomName' type='text' name='name' value='${cafeRoom.roomName}'><br>
       
       <label for='f-roomInfo'>스터디룸 설명</label>
-      <input id='f-roomInfo' type='text' name='info'><br>
+      <input id='f-roomInfo' type='text' name='info'  value='${cafeRoom.roomInfo}'><br>
       
       <label for='f-roomPeople'>스터디룸 최대인원</label>
-      <input id='f-roomPeople' type="number" pattern="\d*" name='people'><br>
+      <input id='f-roomPeople' type="number" pattern="\d*" name='people'  value='${cafeRoom.people}'><br>
 
       <label for='f-roomPrice'>스터디룸 시간당금액</label>
-      <input id='f-roomPrice' type='tel' pattern="\d*"  name='roomPrice'><br>
-      
+      <input id='f-roomPrice' type='tel' pattern="\d*"  name='roomPrice'  value='${cafeRoom.roomPrice}'><br>
       
       <!-- 
       if (people <= 0) {
@@ -122,9 +121,10 @@
           System.out.println(" >> 50만원 이상 입력할 수 없습니다. 다시 입력해주세요.");
         } 
          -->
+
     </div>
     <div id='button'>
-     <button id='b-but' type="submit" value="등록" formaction="add">등록</button>
+     <button id='b-but' type="submit" value="수정" formaction="update">수정</button>
     </div>
   </form> 
 </body>

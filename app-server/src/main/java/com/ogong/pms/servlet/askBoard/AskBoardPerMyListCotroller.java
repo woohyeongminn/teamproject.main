@@ -2,18 +2,18 @@ package com.ogong.pms.servlet.askBoard;
 
 import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/ceomylist")
-public class AskBoardCeoMyListHandler extends GenericServlet {
+@WebServlet("/askboard/permylist")
+public class AskBoardPerMyListCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
@@ -26,26 +26,41 @@ public class AskBoardCeoMyListHandler extends GenericServlet {
 
   // 마이페이지 - 내가 쓴 문의내역(개인)
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      Collection<AskBoard> myAskBoardList = askBoardDao.findPerMyAll(perNo);
 
-      int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
-      Collection<AskBoard> myAskBoardList = askBoardDao.findCeoMyAll(ceoNo);
+      if (myAskBoardList == null) {
+        throw new Exception("문의 게시글이 존재하지 않습니다.");
+      }
 
-      //      if (myAskBoardList == null) {
-      //        throw new Exception("문의 게시글이 존재하지 않습니다.");
-      //      }
-
+      request.setAttribute("perNo", perNo);
       request.setAttribute("myAskBoardList", myAskBoardList);
-      request.getRequestDispatcher("/askBoard/AskBoardCeoMyList.jsp").forward(request, response);
-
+      request.getRequestDispatcher("/askBoard/AskBoardPerMyList.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 }
+
+
