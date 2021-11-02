@@ -48,12 +48,14 @@ label {
 		
 		<label for='f-point'>활동 점수</label>
 		<input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
+		<c:if test="${study.owner.perNo} == ${perno}">
 		<button>
       <a href='update?studyno=${study.studyNo}'>수정</a>
     </button>
 		<button>
 			<a href='delete?studyno=${study.studyNo}'>삭제</a>
 		</button>
+		</c:if>
 		<button>
 			<a href='../bookmark/add?perno=${perno}&studyno=${study.studyNo}'>북마크 추가</a>
 		</button>
