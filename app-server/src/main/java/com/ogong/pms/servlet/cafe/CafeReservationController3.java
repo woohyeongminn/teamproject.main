@@ -41,7 +41,7 @@ public class CafeReservationController3 extends HttpServlet {
       HashMap<Integer,String> reservationInfo = new HashMap<>();
       String[] selectedTime = request.getParameterValues("selectedTime");
       for(int i = 0; i < selectedTime.length; i++) {
-        System.out.println(selectedTime[i]);
+        //        System.out.println(selectedTime[i]);
 
         //        if (Integer.parseInt(selectedTime[i].split(",")[0]) != 
         //            Integer.parseInt(selectedTime[i+1].split(",")[0]) -1) {
@@ -61,7 +61,7 @@ public class CafeReservationController3 extends HttpServlet {
 
       String selectedDate = request.getParameter("selectedDate");
       int people = Integer.parseInt(request.getParameter("people"));
-      System.out.println("people : " + people);
+      //      System.out.println("people : " + people);
 
       request.setAttribute("roomNo", roomNo);
       request.setAttribute("reservationInfo", reservationInfo);

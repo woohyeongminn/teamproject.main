@@ -1,6 +1,7 @@
 package com.ogong.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -19,6 +20,7 @@ public interface StudyDao {
   Study findByNo(int studyinputNo) throws Exception;
 
   //--------------- [ 내 스터디 ] ----------------------------------------
+  List<Map<String,String>> findAllByMyNo(int memberNo) throws Exception;
   Study findByMyNo(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
 
   //--------------- [ 구성원 ] ----------------------------------------
