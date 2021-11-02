@@ -2,6 +2,7 @@ package com.ogong.pms.servlet.admin;
 
 import static com.ogong.pms.domain.Cafe.DELETE;
 import java.io.IOException;
+import java.time.LocalTime;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -36,22 +37,32 @@ public class AdminCafeDeleteController extends HttpServlet {
       Cafe cafe = cafeDao.findByCafeNo(Integer.parseInt(request.getParameter("cafeNo")));
 
       if (cafe == null) {
-        System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
-        return;
+        throw new Exception(" >> 해당 번호의 장소가 존재하지 않습니다.");
       } 
 
       else if (cafe.getCafeStatus() == DELETE) {
-        System.out.println(" >> 이미 삭제된 장소입니다.");
-        return;
+        throw new Exception(" >> 이미 삭제된 장소입니다.");
       }
 
+      cafe.setName("");
+      cafe.setMainImg("");
+      cafe.setInfo("");
+      cafe.setLocation("");
+      cafe.setPhone("");
+      cafe.setOpenTime(LocalTime.of(00, 00));
+      cafe.setCloseTime(LocalTime.of(00, 00));
+      cafe.setHoliday("");
+      cafe.setBookable(0);
+      cafe.setTimePrice(0);
+      cafe.setCafeStatus(DELETE);
+
+      cafeDao.updateCafe(cafe);
       cafeDao.deleteCafe(cafe.getNo());
       sqlSession.commit();
 
       response.sendRedirect("cafeList");
 
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

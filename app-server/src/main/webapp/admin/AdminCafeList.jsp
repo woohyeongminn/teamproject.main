@@ -33,7 +33,7 @@
   color : lightgray;
   }
   .col {
-    width: 420px;
+    width: 450px;
   }
   .card {
     height: 350px;
@@ -49,12 +49,23 @@
     <c:forEach items="${cafeList}" var="cafe">
       <div class="col">
         <div class="card">
-          <svg class="bd-placeholder-img rounded" width="395" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text></svg>
+          <svg class="bd-placeholder-img rounded" width="425" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text></svg>
           <div class="card-body">
             <a href='cafeDetail?no=${cafe.no}'><b>${cafe.name}</b></a><br>
             ${cafe.location}<br>
             영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
-            ⭐${cafe.avgReview}(${cafe.countReview})
+            ⭐${cafe.avgReview}(${cafe.countReview})<br>
+            <script>
+         if(${cafe.cafeStatus == 1}) {
+           document.write("<label for='f-cafeStatus'>❗ </label>승인 대기 중인 카페입니다.");
+         } else if(${cafe.cafeStatus == 2}) {
+           document.write("<label for='f-cafeStatus'>🔆 </label>현재 운영 중입니다.");
+         } else if(${cafe.cafeStatus == 3}) {
+           document.write("<label for='f-cafeStatus'>⛔ </label>운영 중단된 카페입니다.");
+         } else if(${cafe.cafeStatus == 4}) {
+           document.write("<label for='f-cafeStatus'>❌ </label>삭제된 카페입니다.");
+         } 
+       </script>
           </div>
         </div>
       </div>
@@ -64,56 +75,3 @@
 
 </body>
 </html>
-
-<!--
-<table class="table table-striped text-center">
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>이름</th>
-    <th>주소</th>
-    <th>운영시간</th>
-    <th>조회수</th>
-    <th>리뷰</th>
-  </tr>
-</thead>
-<tbody>
-
-<c:forEach items="${cafeList}" var="cafe">
-<tr>
-    <td>${cafe.no}</td>
-    <td><a href='detail?no=${cafe.no}'>${cafe.name}</a></td> 
-    <td>${cafe.location}</td> 
-    <td>${cafe.openTime} ~ ${cafe.closeTime}</td>
-    <td>${cafe.viewCount}</td>
-    <td>⭐${cafe.avgReview}(${cafe.countReview})</td>
-</tr>
-</c:forEach>
-
-</tbody>
-</table>
-
-
-      for(Cafe cafe : cafeList) {
-        out.printf("<tr> "
-            + " <td>%d</td>"
-            + " <td><a href='detail?no=%1$d'>%s</a></td>"
-            + " <td>%s</td>"
-            + " <td>%s ~ %s</td>"
-            + " <td>%d</td>"
-            + " <td>★%.1f(%d)</td>"
-            + "</tr>", 
-            cafe.getNo(), 
-            cafe.getName(), 
-            cafe.getLocation(), 
-            cafe.getOpenTime(),
-            cafe.getCloseTime(),
-            cafe.getViewCount(),
-            cafe.getAvgReview(),
-            cafe.getCountReview());
-        if (cafe.getCafeStatus() == Cafe.STOP) {
-          out.println(" * 운영 중단");
-        }
-      }
-
- -->
