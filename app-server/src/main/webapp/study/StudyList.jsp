@@ -8,6 +8,11 @@
 </head>
 <body>
 	<h1>📖 스터디 목록</h1>
+	<div class="row">
+  <div class="col-md-4"><a href='list?perno=${perno}'>전체</a></div>
+  <div class="col-md-4"><a href='list/ing?perno=${perno}'>진행</a></div>
+  <div class="col-md-4"><a href='list/end?perno=${perno}'>완료</a></div>
+  </div>
 	<button>
     <a href='list?perno=${perno}'>전체</a>
   </button>
@@ -21,7 +26,7 @@
 		<a href='form?perno=${perno}'>등록</a>
 	</button>
 	<br>
-	<table border='1'>
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
