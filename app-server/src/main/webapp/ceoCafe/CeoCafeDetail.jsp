@@ -58,8 +58,8 @@
   </div>
   <form action='updateform'>
   <div id='content'>
-    <label for='f-info'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
-    <label for='f-info'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
+    <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
+    <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
     <label for='f-info'>소개글</label><span>${cafe.info}</span><br>
     <label for='f-location'>주소</label><span>${cafe.location}</span><br>
     <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
@@ -107,7 +107,7 @@
 	      <a href='deleteform?no=${cafe.no}'>스터디카페 삭제</a>
 	    </button>
 	    <button id='b-but' type="submit" value="스터디룸관리">
-        <a href='roomlist?no=${cafe.no}'>스터디룸 관리</a>
+        <a href='room/list?no=${cafe.no}'>스터디룸 관리</a>
       </button>
       <button id='b-but' type="submit" value="예약관리">
         <a href='#'>예약 관리</a>

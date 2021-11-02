@@ -14,7 +14,7 @@ import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.CafeRoom;
 
-@WebServlet("/ceomember/cafe/roomaddform")
+@WebServlet("/ceomember/cafe/room/addform")
 public class CeoCafeRoomAddFormContoller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
