@@ -113,6 +113,17 @@
       left outer join study_face_status sfs on s.face_no=sfs.face_no
       left outer join point p on s.study_no=p.study_no
   </sql>
+  
+  <!--  ===[내 스터디 목록 간단하게 스터디 번호, 이름만 가져오기]=== -->
+  <sql id="select4">
+  select
+	  sg.member_no,
+	  sg.study_no,
+	  sg.status,
+	  s.name
+  from study_guilder sg
+	  left outer join study s on s.study_no=sg.study_no
+  </sql>
 
 <!--  ===========================[스터디]=========================== -->
  
@@ -194,6 +205,13 @@
     where s.status=2
       group by s.study_no
       order by s.created_dt
+  </select>
+  
+  <!--  ===[내 스터디 목록(간단)]=== -->
+  <select id="findAllByMyNo" resultType="HashMap">
+    <include refid="select4"/>
+    where sg.status=2
+      and sg.member_no=#{memberNo};
   </select>
   
  <!--  ===[스터디 상세]=== -->

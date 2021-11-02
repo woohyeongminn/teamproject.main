@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>목록 | 📖 스터디 찾기</title>
+<title>목록 | 스터디 찾기</title>
 </head>
 <body>
-	<h1>스터디 목록</h1>
+	<h1>📖 스터디 목록</h1>
 	<button>
-		<a href='form'>등록</a>
+		<a href='form?perno=${perno}'>등록</a>
 	</button>
 	<br>
 	<table border='1'>

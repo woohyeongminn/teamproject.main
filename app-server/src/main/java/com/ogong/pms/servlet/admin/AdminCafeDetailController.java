@@ -1,75 +1,72 @@
 package com.ogong.pms.servlet.admin;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.pms.handler.cafe.CafeHandlerHelper;
-import com.ogong.util.Prompt;
+import com.ogong.pms.servlet.cafe.CafeHandlerHelper;
 
-public class AdminCafeDetailController implements Command {
+@WebServlet("/admin/cafeDetail")
+public class AdminCafeDetailController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
   CafeReviewDao cafeReviewDao;
+  SqlSession sqlSession;
 
-  public AdminCafeDetailController (CafeDao cafeDao, CafeReviewDao cafeReviewDao) {
-    this.cafeDao = cafeDao;
-    this.cafeReviewDao = cafeReviewDao;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
+    cafeReviewDao = (CafeReviewDao) 웹애플리케이션공용저장소.getAttribute("cafeReviewDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 장소 상세");
-    System.out.println();
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    Cafe cafe = cafeDao.findByCafeNo(Prompt.inputInt(" 장소 번호 : "));
-    System.out.println();
+    try {
+      Cafe cafe = cafeDao.findByCafeNo(Integer.parseInt(request.getParameter("no")));
 
-    if (cafe == null) {
-      System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
-      return;
-    }
+      if (cafe == null) {
+        System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
+        return;
+      }
 
-    if (cafe.getHoliday() == null) {
-      cafe.setHoliday("없음");
-    }
+      List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
 
-    System.out.printf(" (%s)\n", cafe.getNo());
-    System.out.printf(" [%s]\n", cafe.getName());
-    System.out.printf(" >> 대표 이미지 : %s\n", cafe.getCafeImageNames());
-    System.out.printf(" >> 소개글 : %s\n", cafe.getInfo());
-    System.out.printf(" >> 주소 : %s\n", cafe.getLocation());
-    System.out.printf(" >> 번호 : %s\n", cafe.getPhone());
-    System.out.printf(" >> 오픈 시간 : %s\n", cafe.getOpenTime());
-    System.out.printf(" >> 마감 시간 : %s\n", cafe.getCloseTime());
-    System.out.printf(" >> 이번주 휴무일 : %s\n", cafe.getHoliday());
-    System.out.printf(" >> 상태 : %s\n", CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus()));
-    System.out.printf(" >> 리뷰평점 : ★ %.1f(%d)\n" , cafe.getAvgReview(), cafe.getCountReview());
-    listReview(cafe); // 리뷰 목록
-    System.out.println();
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("cafeNo", cafe.getNo());
+      cafe.setHoliday(cafeDao.getCafeHoliday(params));
 
-    request.setAttribute("cafeNo", cafe.getNo());
+      cafeDao.updateViewCount(cafe.getNo());
+      sqlSession.commit();
 
-    System.out.println("----------------------");
-    System.out.println("1. 장소 삭제");
-    System.out.println("0. 뒤로 가기");
-    int selectNo = Prompt.inputInt("선택> ");
-    switch (selectNo) {
-      case 1 : request.getRequestDispatcher("/cafe/controlDelete").forward(request); break;
-      case 0: return;
-      default :
-        System.out.println(" >> 번호를 다시 선택해 주세요.");
+      request.setAttribute("cafe", cafe);
+      request.setAttribute("reviewList", reviewList);
+      //      request.setAttribute("perNo", request.getParameter("perNo"));
+      request.getRequestDispatcher("/admin/AdminCafeDetail.jsp").forward(request, response);
+    } catch (Exception e) {
+      throw new ServletException(e);
     }
   }
 
-  private void listReview(Cafe cafe) throws Exception {
-    int i = 1;
-    System.out.println();
-    System.out.println("============= 리뷰 =============");
+  private void listReview(Cafe cafe, PrintWriter out) throws Exception {
+    out.println();
+    out.println("================= 리뷰 =================<br>");
 
     List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
 
@@ -78,14 +75,16 @@ public class AdminCafeDetailController implements Command {
     } else {
       for (CafeReview review : reviewList) {
         if (review.getReviewStatus() == 2) {
-          //System.out.printf(" \n (%s)\n", review.getReviewNo());
-          System.out.printf(" (%d) | 삭제 된 리뷰입니다. |\n", i++);
+          out.printf("<div id='c-review'>삭제 된 리뷰입니다.</div><br>");
           continue;
         }
         String nickname = review.getMember().getPerNickname();
-        System.out.printf(" (%d) 닉네임 : %s | 별점 : %s | 내용 : %s | 등록일 : %s\n",
-            i++, nickname, CafeHandlerHelper.getReviewGradeStatusLabel(review.getGrade())
-            , review.getContent(), review.getRegisteredDate());
+        out.printf("<div id='c-review'><span>%s</span> <span id='c-grade'>%s(%d/5)</span> <span id='c-grade'>%s</span> <br><p id='c-review-content'>%s</p><br></div>",
+            nickname
+            , CafeHandlerHelper.getReviewGradeStatusLabel(review.getGrade())
+            , review.getGrade()
+            , review.getRegisteredDate()
+            , review.getContent());
       }
     }
   }
