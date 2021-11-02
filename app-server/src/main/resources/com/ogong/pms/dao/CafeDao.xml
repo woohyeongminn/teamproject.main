@@ -130,7 +130,7 @@
     <include refid="listSelect1"/>
     where 
      <include refid="memberWhere"/>  
-     and c.location like (concat('%',#{input},'%'))
+     and c.${input} like (concat('%',#{keyword},'%'))
     <include refid="listOrder1"/>
   </select>
   

@@ -3,6 +3,8 @@ package com.ogong.pms.servlet.cafe;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,9 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
-import com.ogong.pms.dao.CafeRoomDao;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.Member;
 
@@ -21,17 +22,15 @@ import com.ogong.pms.domain.Member;
 public class CafeReservationController4 extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  CafeDao cafeDao;
-  CafeRoomDao cafeRoomDao;
   CafeReservationDao cafeReservationDao;
+  StudyDao studyDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
-    cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
     cafeReservationDao = (CafeReservationDao) 웹애플리케이션공용저장소.getAttribute("cafeReservationDao");
+    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
@@ -65,9 +64,10 @@ public class CafeReservationController4 extends HttpServlet {
       cafeReservationDao.insertReservation(reservation);
       sqlSession.commit();
 
-      System.out.println(" *** 예약 되었습니다 ***");
+      List<Map<String,String>> myStudy = studyDao.findAllByMyNo(memberNo);
 
       request.setAttribute("perNo", memberNo);
+      request.setAttribute("myStudy", myStudy);
       request.getRequestDispatcher("/cafe/CafeReservationEnd.jsp").forward(request, response);
 
     } catch (Exception e) {
