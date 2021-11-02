@@ -55,6 +55,13 @@
   color : white;
   }
   </style>
+  <c:if test='${cafe.cafeStatus == 4}'>
+<style>
+#deleted {
+display: none;
+}
+</style>
+</c:if>
 </head>
 <body>
   <input id='c-no' type='hidden' value='${cafe.no}'><br>
@@ -67,6 +74,8 @@
     <span id='c-image'>대표이미지</span>
   </div>
   <div id='content'>
+    <label for='f-bossName'>대표자</label><span id='deleted'>${cafe.ceoMember.ceoBossName}</span><br>
+    <label for='f-licenseNo'>사업자 등록 번호</label><span id='deleted'>${cafe.ceoMember.ceoLicenseNo}</span><br>    
     <label for='f-info'>소개글</label>${cafe.info}<br>
       <label for='f-location'>주소</label>${cafe.location}<br>
       <label for='f-tel'>전화번호</label>${cafe.phone}<br>
@@ -86,7 +95,6 @@
        document.write("<label for='f-cafeStatus'>운영 상태</label>삭제");
      } 
    </script>
-    <!--<label for='f-cafeStatus'>운영 상태</label>${cafe.cafeStatus}<br>-->
     </div>
 <br>
 <c:if test='${not empty reviewList}'>
@@ -116,13 +124,6 @@
 </c:if>
 <br>
 <button type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeList">목록</a></button>
-<c:if test='${cafe.cafeStatus == 4}'>
-<style>
-#deleted {
-display: none;
-}
-</style>
-</c:if>
 <button id="deleted" type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
 </div>
