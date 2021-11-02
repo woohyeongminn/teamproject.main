@@ -8,22 +8,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.dao.AskBoardDao;
+import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/ceoaddform")
-public class AskBoardCeoAddFormHandler extends HttpServlet {
+@WebServlet("/askboard/detail")
+public class AskBoardDetailCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  SqlSession sqlSession;
-  CeoMemberDao ceoMemberDao;
+  AskBoardDao askBoardDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
+    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
   }
 
   @Override
@@ -31,18 +28,27 @@ public class AskBoardCeoAddFormHandler extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      int askNo = Integer.parseInt(request.getParameter("askNo"));
 
-      int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+      AskBoard askBoard = askBoardDao.findByNo(askNo);
 
-      request.setAttribute("ceoMember", ceoMember);
-      request.getRequestDispatcher("/askBoard/AskBoardCeoAddForm.jsp").forward(request, response);
+      if (askBoard == null) {
+        throw new Exception("문의게시글 상세 오류!");
+      }
 
+      request.setAttribute("askBoard", askBoard);
+      request.getRequestDispatcher("/askBoard/AskBoardDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
+      e.getStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
+
+
+
+
+
+

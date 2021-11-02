@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
+import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/perdelete")
-public class AskBoardPerDeleteHandler extends HttpServlet {
+@WebServlet("/askboard/ceoupdate")
+public class AskBoardCeoUpdateCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
@@ -21,8 +22,8 @@ public class AskBoardPerDeleteHandler extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
   }
 
   @Override
@@ -30,24 +31,21 @@ public class AskBoardPerDeleteHandler extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int askNo = Integer.parseInt(request.getParameter("askNo")); 
-      int perNo = Integer.parseInt(request.getParameter("perNo")); 
-      askBoardDao.deletereply(askNo);
-      askBoardDao.delete(askNo);
-      sqlSession.commit();
-      response.sendRedirect("permylist?perNo=" + perNo);
+
+      int askNo = Integer.parseInt(request.getParameter("askNo"));
+      AskBoard ceoAskBoard = askBoardDao.findByNo(askNo);
+
+      ceoAskBoard.setAskTitle(request.getParameter("title"));
+      ceoAskBoard.setAskContent(request.getParameter("content"));
+
+      askBoardDao.update(ceoAskBoard);
+
+      response.sendRedirect("ceomydetail?askNo="+ ceoAskBoard.getAskNo());
 
     } catch (Exception e) {
-      e.getStackTrace();
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
-
-
-

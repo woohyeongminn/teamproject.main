@@ -15,7 +15,7 @@ import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/askboard/ceoadd")
-public class AskBoardCeoAddHandler extends HttpServlet {
+public class AskBoardCeoAddCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;

@@ -12,7 +12,7 @@ import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
 @WebServlet("/askboard/ceoupdateform")
-public class AskBoardCeoUpdateFormHandler extends HttpServlet {
+public class AskBoardCeoUpdateFormCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;

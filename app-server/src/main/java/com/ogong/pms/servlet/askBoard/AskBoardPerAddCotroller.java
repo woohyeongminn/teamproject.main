@@ -15,7 +15,7 @@ import com.ogong.pms.domain.AskBoard;
 import com.ogong.pms.domain.Member;
 
 @WebServlet("/askboard/peradd")
-public class AskBoardPerAddHandler extends HttpServlet {
+public class AskBoardPerAddCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   SqlSession sqlSession;

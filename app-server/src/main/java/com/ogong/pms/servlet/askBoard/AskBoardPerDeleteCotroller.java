@@ -8,36 +8,34 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
-import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/permydetail")
-public class AskBoardPerMyDetailHandler extends HttpServlet {
+@WebServlet("/askboard/perdelete")
+public class AskBoardPerDeleteCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
-  //마이페이지 - 내가 쓴 문의내역(개인)
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      int askNo = Integer.parseInt(request.getParameter("askNo"));
-      AskBoard myAskBoard = askBoardDao.findByNo(askNo);
-
-      if (myAskBoard == null) {
-        throw new Exception("문의게시글 상세 오류!");
-      }
-
-      request.setAttribute("myAskBoard", myAskBoard);
-      request.getRequestDispatcher("/askBoard/AskBoardPerMyDetail.jsp").forward(request, response);
+      int askNo = Integer.parseInt(request.getParameter("askNo")); 
+      int perNo = Integer.parseInt(request.getParameter("perNo")); 
+      askBoardDao.deletereply(askNo);
+      askBoardDao.delete(askNo);
+      sqlSession.commit();
+      response.sendRedirect("permylist?perNo=" + perNo);
 
     } catch (Exception e) {
       e.getStackTrace();
@@ -46,3 +44,10 @@ public class AskBoardPerMyDetailHandler extends HttpServlet {
     }
   }
 }
+
+
+
+
+
+
+
