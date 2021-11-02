@@ -11,9 +11,6 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<style>
-	h3 {
-    font-weight: bolder;
-  }
 	a {
 	 text-decoration:none;
 	}
@@ -50,9 +47,9 @@
 	</style>
 </head>
 <body>
-	<input id='c-no' type='hidden' value='${cafe.no}'>
-	<br>
-  <h3> 🏘 ${cafe.name} </h3><br>
+<br>
+	<input id='c-no' type='hidden' value='${cafe.no}'><br>
+	<h2>${cafe.name}</h2>
 	<hr>
 	<div id='aside'>
     <span id='c-image'>대표이미지</span>
@@ -64,7 +61,7 @@
 		<label for='f-openTime'>오픈시간</label>${cafe.openTime}<br>
 		<label for='f-closeTime'>마감시간</label>${cafe.closeTime}<br>
 		<label for='f-holiday'>이번주 휴무일</label>${cafe.holiday}<br>
-		<label for='f-viewCount'>조회수</label>${cafe.viewCount}<br>
+		<label for='f-cafeStatus'>운영 상태</label>${cafe.cafeStatus}<br>
 		<label for='f-review'>리뷰평점</label>⭐${cafe.avgReview}(${cafe.countReview})
 	</div>
 <br>
@@ -94,23 +91,3 @@
 
 </body>
 </html>
-
-<!-- 
-if (cafe.getCafeStatus() == Cafe.STOP) {
-        // 카페가 운영중단 상태일때는 예약 메뉴 출력 안하고 상세보기만
-        return;
-      }
-
-      int roomCount = 0;
-      List<CafeRoom> roomList = cafeRoomDao.getCafeRoomList();
-      for (CafeRoom cafeRoom : roomList) {
-        if (cafeRoom.getCafe().getNo() == cafe.getNo()) {
-          roomCount++;
-        }
-      }
-      out.println("<a href='list'>목록</a>");
-
-      if (roomCount != 0) {
-        out.println("<button>스터디룸 예약</button>");
-      }
- -->

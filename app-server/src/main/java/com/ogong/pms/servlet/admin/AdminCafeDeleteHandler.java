@@ -17,7 +17,7 @@ public class AdminCafeDeleteHandler implements Command {
     this.cafeDao = cafeDao;
     this.sqlSession = sqlSession;
   }
-
+  // 삭제할 때 파라미터로 cafeNo만 넘어왔으니까 그것만 주면 됨
   @Override
   public void execute(CommandRequest request) throws Exception {
     System.out.println();

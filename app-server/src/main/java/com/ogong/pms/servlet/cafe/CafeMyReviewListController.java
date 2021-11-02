@@ -43,9 +43,9 @@ public class CafeMyReviewListController extends HttpServlet {
 
       List<CafeReview> reviewList = cafeReviewDao.findReviewListByMember(memberNo);
 
-      if (reviewList.isEmpty()) {
-        throw new Exception("리뷰 내역이 없습니다.");
-      } 
+      //      if (reviewList.isEmpty()) {
+      //        throw new Exception("리뷰 내역이 없습니다.");
+      //      } 
 
       request.setAttribute("perNo", memberNo);
       request.setAttribute("reviewList", reviewList);

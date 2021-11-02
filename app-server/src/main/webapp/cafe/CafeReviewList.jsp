@@ -11,37 +11,36 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
+  h3 {
+    text-align: center;
+    font-weight: bolder;
+  }
   a {
    text-decoration:none;
-  }
-  #content {
-    margin-left: 30px;
-  }
-  .col {
-    width: 450px;
   }
   </style>
 </head>
 <body>
-<h1>내 리뷰 목록</h1>
 <br>
+<h3> 🔖 내 리뷰 목록 </h3><br>
 
-<table class="table table-striped text-center">
-<thead>
-  <tr>
-    <th>번호</th>
-    <th>스터디카페</th>
-    <th>별점</th>
-    <th>내용</th>
-    <th>등록일</th>
-    <th>수정</th>
-    <th>삭제</th>
-  </tr>
-</thead>
-<tbody>
 <c:if test='${not empty reviewList}'>
+<table class="table table-striped text-center">
+	<thead>
+	  <tr>
+	    <th>번호</th>
+	    <th>스터디카페</th>
+	    <th>별점</th>
+	    <th>내용</th>
+	    <th>등록일</th>
+	    <th>수정</th>
+	    <th>삭제</th>
+	  </tr>
+	</thead>
+  <tbody>
+
 	<c:forEach items="${reviewList}" var="review">
-	<tr>
+	 <tr>
 	    <td>${review.reviewNo}</td>
 	    <td><a href='detail?no=${review.cafe.no}&perNo=${perNo}'>${review.cafe.name}</a></td>
 	    <td>
@@ -61,16 +60,16 @@
 	    <td>
 	      <button class="btn btn-outline-dark"><a href="reviewDelete?perNo=${perNo}&reviewNo=${review.reviewNo}">삭제</a></button>
 	    </td>
-	</tr>
+	 </tr>
 	</c:forEach>
+  </tbody>
+</table>
 </c:if>
+
 <c:if test='${empty reviewList}'>
    등록된 리뷰가 없습니다.<br><br>  
 </c:if>
-</tbody>
-</table>
 <br>
-
 
 <!-- 
 
