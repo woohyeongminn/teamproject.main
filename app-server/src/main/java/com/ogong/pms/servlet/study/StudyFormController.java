@@ -15,6 +15,14 @@ public class StudyFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/study/StudyForm.jsp").forward(request, response);
+    try {
+      request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
+      request.getRequestDispatcher("/study/StudyForm.jsp").forward(request, response);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    }
   }
 }
