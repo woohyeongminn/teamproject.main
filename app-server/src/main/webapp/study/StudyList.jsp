@@ -11,6 +11,9 @@
 	<button>
     <a href='list?perno=${perno}'>전체</a>
   </button>
+  <button>
+    <a href='list/ing?perno=${perno}'>진행</a>
+  </button>
 	<button>
 		<a href='list/end?perno=${perno}'>완료</a>
 	</button><br>
