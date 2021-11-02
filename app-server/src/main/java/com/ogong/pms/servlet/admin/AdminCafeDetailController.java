@@ -10,12 +10,12 @@ import com.ogong.pms.handler.CommandRequest;
 import com.ogong.pms.handler.cafe.CafeHandlerHelper;
 import com.ogong.util.Prompt;
 
-public class AdminCafeDetailHandler implements Command {
+public class AdminCafeDetailController implements Command {
 
   CafeDao cafeDao;
   CafeReviewDao cafeReviewDao;
 
-  public AdminCafeDetailHandler (CafeDao cafeDao, CafeReviewDao cafeReviewDao) {
+  public AdminCafeDetailController (CafeDao cafeDao, CafeReviewDao cafeReviewDao) {
     this.cafeDao = cafeDao;
     this.cafeReviewDao = cafeReviewDao;
   }
