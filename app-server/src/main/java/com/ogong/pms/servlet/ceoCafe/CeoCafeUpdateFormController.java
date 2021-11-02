@@ -1,13 +1,13 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.Cafe;
@@ -15,7 +15,7 @@ import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.servlet.cafe.CafeHandlerHelper;
 
 @WebServlet("/ceomember/cafe/updateform")
-public class CeoCafeUpdateFormController extends GenericServlet  {
+public class CeoCafeUpdateFormController extends HttpServlet  {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;

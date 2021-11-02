@@ -4,44 +4,46 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import com.ogong.pms.dao.CafeDao;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.CafeRoom;
 
-@WebServlet("/ceomember/cafe/room/detail")
-public class CeoCafeRoomDetailHandler extends HttpServlet {
+@WebServlet("/ceomember/cafe/room/updateform")
+public class CeoCafeRoomUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  CafeDao cafeDao;
   CafeRoomDao cafeRoomDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
     cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
     try {
-      //Cafe cafe = cafeDao.findByCafeNo((int) request.getAttribute("cafeNo"));     // 카페번호
 
-      int roomNo = Integer.parseInt(request.getParameter("roomno"));
+      int no = Integer.parseInt(request.getParameter("no")); // 스터디룸 번호
 
-      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);     // 스터디룸 번호
+      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(no);
+
+      if (cafeRoom == null) {
+        throw new Exception("해당 번호의 스터디룸이 없습니다.");
+      }
 
       request.setAttribute("cafeRoom", cafeRoom);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/ceoMember/CeoCafeRoomUpdateForm.jsp").forward(request, response);
 
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

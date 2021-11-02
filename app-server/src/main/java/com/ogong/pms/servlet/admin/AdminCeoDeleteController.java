@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
-@WebServlet("/adminceomember/delete")
+@WebServlet("/admin/ceomember/delete")
 public class AdminCeoDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

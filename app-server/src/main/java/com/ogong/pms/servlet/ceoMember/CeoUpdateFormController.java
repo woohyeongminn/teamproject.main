@@ -1,18 +1,18 @@
 package com.ogong.pms.servlet.ceoMember;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/updateform")
-public class CeoUpdateFormController extends GenericServlet  {
+public class CeoUpdateFormController extends HttpServlet  {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
