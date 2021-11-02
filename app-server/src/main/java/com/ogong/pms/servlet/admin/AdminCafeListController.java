@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.cafe;
+package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 
-@WebServlet("/cafe/search")
-public class CafeSearchHandler extends HttpServlet {
+@WebServlet("/admin/cafeList")
+public class AdminCafeListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
@@ -29,23 +29,17 @@ public class CafeSearchHandler extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      List<Cafe> cafeList = cafeDao.getCafeList();
 
-      String input = request.getParameter("where");
-      if (input.equals("1")) {
-        input = "location";
-      } else if (input.equals("2")) {
-        input = "name";
+      if (cafeList == null) {
+        throw new Exception("등록된 스터디카페가 없습니다.");
       }
 
-      String keyword = request.getParameter("keyword");
-
-      List<Cafe> cafeList = cafeDao.findCafeListByLocation(input, keyword);
-
       request.setAttribute("cafeList", cafeList);
-      request.setAttribute("perNo", request.getParameter("perNo"));
-      request.getRequestDispatcher("/cafe/CafeList.jsp").forward(request, response);
+      request.getRequestDispatcher("/admin/AdminCafeList.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       throw new ServletException(e);
     }
   }

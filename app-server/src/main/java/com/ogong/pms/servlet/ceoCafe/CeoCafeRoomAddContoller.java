@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,18 +8,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeRoomDao;
+import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeRoom;
 
-@WebServlet("/ceomember/cafe/room/list")
-public class CeoCafeRoomListController extends HttpServlet {
+@WebServlet("/ceomember/cafe/room/add")
+public class CeoCafeRoomAddContoller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  CafeDao cafeDao;
   CafeRoomDao cafeRoomDao;
+  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
     cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
   }
 
@@ -31,18 +36,31 @@ public class CeoCafeRoomListController extends HttpServlet {
     try {
       int cafeNo = Integer.parseInt(request.getParameter("no"));    //카페번호
 
-      List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
+      Cafe cafe = cafeDao.findByCafeNo(cafeNo);
 
-      //      if (cafeRoomList.isEmpty()) {
-      //        request.setAttribute("cafeNo", cafeNo);
-      //        request.setAttribute("cafeRoomList", cafeRoomList);
-      //        request.getRequestDispatcher("/ceoCafe/CeoCafeRoomAddForm.jsp").forward(request, response);
-      //        return;
+      CafeRoom cafeRoom = new CafeRoom();
+
+      cafeRoom.setCafe(cafe);
+      cafeRoom.setRoomName(request.getParameter("name"));
+      cafeRoom.setRoomInfo(request.getParameter("info"));
+      cafeRoom.setPeople(Integer.parseInt(request.getParameter("people")));
+      cafeRoom.setRoomPrice(Integer.parseInt(request.getParameter("roomPrice")));
+
+      //fileNames.add(new CafeImage(fileName));
+
+      //      if (!fileNames.isEmpty()) {
+      //        HashMap<String,Object> params = new HashMap<>();
+      //        params.put("fileNames", fileNames);
+      //        params.put("cafeRoomNo", cafeRoom.getRoomNo());
+      //
+      //        cafeRoomDao.insertCafeRoomImage(params);
       //      }
 
-      request.setAttribute("cafeNo", cafeNo);
-      request.setAttribute("cafeRoomList", cafeRoomList);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomList.jsp").forward(request, response);
+      cafeRoomDao.insertCafeRoom(cafeRoom);
+      sqlSession.commit();
+
+      response.sendRedirect("roomlist?no="+ cafe.getNo());
+
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -51,4 +69,3 @@ public class CeoCafeRoomListController extends HttpServlet {
     }
   }
 }
-

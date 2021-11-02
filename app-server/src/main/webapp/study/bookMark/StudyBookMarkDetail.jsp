@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 🌟 내 북마크</title>
+<title>상세 | 내 북마크</title>
 <style>
 label {
 	margin-right: 5px;
@@ -14,7 +14,7 @@ label {
 </style>
 </head>
 <body>
-	<h1>내 북마크 상세</h1>
+	<h1>🌟 내 북마크 상세</h1>
 	<label for='f-studyNo'>번호</label>
 	<input id='f-studyNo' type='text' name='studyNo'
 		value='${study.studyNo}' readonly>
@@ -56,10 +56,10 @@ label {
 		value='${study.introduction}' readonly>
 	<br>
 	<button>
-		<a href='delete?studyno=${study.studyNo}'>삭제</a>
+		<a href='delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
 	</button>
 	<button>
-		<a href='list?perno=${perno}'>목록</a>
+		<a href='list?perno=${member.perNo}'>목록</a>
 	</button>
 	<br>
 

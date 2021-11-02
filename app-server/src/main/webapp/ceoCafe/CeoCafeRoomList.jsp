@@ -24,39 +24,39 @@
 <br>
 <div id="content">
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+ <div class="row row-cols-1 row-cols-md-3 g-4">
   
   <c:forEach items="${cafeRoomList}" var="cafeRoom">
-  
     <div class="col">
-    
       <div class="card">
-      
-        <!--  
+       
         <svg class="bd-placeholder-img rounded" width="425" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false">
         <title>Placeholder</title>
         <rect width="100%" height="100%" fill="#868e96"></rect>
         <text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text>
         </svg>
-        -->
         
         <div class="card-body">
           ${cafeRoom.roomImg}<br>
-          <a href='detail?no=${cafeRoom.roomNo}'><b>${cafeRoom.roomName}</b></a><br>
+          <a href='detail?roomno=${cafeRoom.roomNo}'><b>${cafeRoom.roomName}</b></a><br>
           ${cafeRoom.roomInfo}<br>
           인원수 | ${cafeRoom.people} <br>
           시간당 금액 | ${cafeRoom.roomPrice}<br>
         </div>
-        
       </div>
-      
     </div>
-    
   </c:forEach>
   
-  </div>
-  
+  <c:if test="${empty cafeRoomList}">
+	  <p>등록한 스터디룸이 없습니다.</p>
+	  <button id='button'>
+      <a href="addform?no=${cafeNo}">등록하러 가기</a>
+    </button>
+  </c:if>
+  <button id='button'>
+      <a href="addform?no=${cafeNo}">스터디 룸 추가</a>
+    </button>
+  </div> 
 </div>
-
 </body>
 </html>

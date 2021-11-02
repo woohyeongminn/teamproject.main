@@ -40,12 +40,12 @@ public class StudyAddController extends HttpServlet {
 
       Study study = new Study();
 
-      study.setStudyTitle(request.getParameter("studyTitle"));
+      study.setStudyTitle(request.getParameter("studytitle"));
       study.setOwner(member);
-      study.setSubjectNo(Integer.parseInt(request.getParameter("subjectNo")));
+      study.setSubjectNo(Integer.parseInt(request.getParameter("subjectno")));
       study.setArea(request.getParameter("area"));
-      study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberOfPeple")));
-      study.setFaceNo(Integer.parseInt(request.getParameter("faceNo")));
+      study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberofpeple")));
+      study.setFaceNo(Integer.parseInt(request.getParameter("faceno")));
       study.setIntroduction(request.getParameter("introduction"));
       System.out.println(study);
 
@@ -54,7 +54,8 @@ public class StudyAddController extends HttpServlet {
       studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
 
-      response.sendRedirect("list");
+      request.setAttribute("member", member);
+      response.sendRedirect("list?perno=" + member.getPerNo());
       // request.getRequestDispatcher("StudyAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

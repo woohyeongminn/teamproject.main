@@ -37,27 +37,28 @@ public class MyStudyDeleteController extends HttpServlet {
       // Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      Study myStudy = studyDao.findByNo(studyNo);
+      Study study = studyDao.findByNo(studyNo);
 
-      // if (myStudy.getOwner().getPerNo() != member.getPerNo()) {
+      // if (study.getOwner().getPerNo() != member.getPerNo()) {
       // throw new Exception(" >> 삭제 권한이 없습니다.");
       //
       // } else {
-      // if (myStudy.getCountMember() > 0) {
+      // if (study.getCountMember() > 0) {
       // throw new Exception(" >> 구성원이 있는 스터디는 삭제할 수 없습니다.");
       //
-      // } else if (myStudy.getWatingCountMember() > 0) {
+      // } else if (study.getWatingCountMember() > 0) {
       // System.out.println(" >> 승인 대기 중인 구성원이 없어야 스터디 삭제가 가능합니다.");
       //
-      // studyDao.updateGuilderExpulsionAll(myStudy.getStudyNo());
+      // studyDao.updateGuilderExpulsionAll(study.getStudyNo());
       // System.out.println(" >> 구성원을 모두 삭제하였습니다.\n");
       // }
       // }
 
-      studyDao.updateStatusDelete(myStudy);
+      studyDao.updateStatusDelete(study);
       sqlSession.commit();
 
-      response.sendRedirect("list");
+      request.setAttribute("study", study);
+      response.sendRedirect("list?perno=" + Integer.getInteger(request.getParameter("perno")));
 
     } catch (Exception e) {
       e.printStackTrace();

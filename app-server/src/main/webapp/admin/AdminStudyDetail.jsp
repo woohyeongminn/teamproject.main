@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 스터디 찾기</title>
+<title>상세 | 스터디 관리</title>
 <style>
 label {
 	margin-right: 5px;
@@ -49,16 +49,10 @@ label {
 		<label for='f-point'>활동 점수</label>
 		<input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
 		<button>
-      <a href='update?studyno=${study.studyNo}'>수정</a>
-    </button>
-		<button>
-			<a href='delete?studyno=${study.studyNo}'>삭제</a>
+			<a href='../study/delete?studyno=${study.studyNo}'>삭제</a>
 		</button>
 		<button>
-			<a href='../bookmark/add?perno=${perno}&studyno=${study.studyNo}'>북마크 추가</a>
-		</button>
-		<button>
-			<a href='list?perno=${perno}'>목록</a>
+			<a href='../study/list'>목록</a>
 		</button>
 		<br>
 	</form>

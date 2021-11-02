@@ -1,6 +1,7 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeRoomDao;
-import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeRoom;
 
-@WebServlet("/ceomember/cafe/roomadd")
-public class CeoCafeRoomAddHandler extends HttpServlet {
+@WebServlet("/ceomember/cafe/room/addform")
+public class CeoCafeRoomAddFormContoller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
@@ -36,31 +36,17 @@ public class CeoCafeRoomAddHandler extends HttpServlet {
     try {
       int cafeNo = Integer.parseInt(request.getParameter("no"));    //카페번호
 
-      Cafe cafe = cafeDao.findByCafeNo(cafeNo);
+      List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
 
-      CafeRoom cafeRoom = new CafeRoom();
+      request.setAttribute("cafeNo", cafeNo);
+      request.setAttribute("cafeRoomList", cafeRoomList);
+      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomAddForm.jsp").forward(request, response);
 
-      cafeRoom.setCafe(cafe);
-      cafeRoom.setRoomName(request.getParameter("name"));
-      cafeRoom.setRoomInfo(request.getParameter("info"));
-      cafeRoom.setPeople(Integer.parseInt(request.getParameter("people")));
-      cafeRoom.setRoomPrice(Integer.parseInt(request.getParameter("roomPrice")));
 
-      //fileNames.add(new CafeImage(fileName));
-      cafeRoomDao.insertCafeRoom(cafeRoom);
-
-      //      if (!fileNames.isEmpty()) {
-      //        HashMap<String,Object> params = new HashMap<>();
-      //        params.put("fileNames", fileNames);
-      //        params.put("cafeRoomNo", cafeRoom.getRoomNo());
-      //
-      //        cafeRoomDao.insertCafeRoomImage(params);
-      //      }
-      sqlSession.commit();
     } catch (Exception e) {
-
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
-    System.out.println(" >> 스터디룸 등록이 완료되었습니다.");
   }
 }

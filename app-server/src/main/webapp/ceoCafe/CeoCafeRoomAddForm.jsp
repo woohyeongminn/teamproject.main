@@ -93,7 +93,7 @@
     </div>
     <form action='add'>
     <div id='content'>
-      <input type ='hidden' name='cafeno' value='${cafeNo}'>
+      <input type ='hidden' name='no' value='${cafeNo}'>
       
       <label for='f-roomName'>스터디룸 이름</label>
       <input id='f-roomName' type='text' name='name'><br>
