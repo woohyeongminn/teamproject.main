@@ -27,9 +27,6 @@ public class StudyEndListController extends GenericServlet {
   @Override
   public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
-    System.out.println();
-    System.out.println("▶ 스터디 목록 - 완료");
-    System.out.println();
 
     try {
       List<Study> studyList = studyDao.findAllEnd();
