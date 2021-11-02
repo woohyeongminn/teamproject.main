@@ -87,13 +87,13 @@
 </div>
 <div class="btn-group">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-    📖 스터디 관리(미완)
+    📖 스터디 관리
   </button>
   <div class="dropdown-menu" role="menu" style="border-color: white;">
     <button class="dromdown-item" type="button1">
-      <a href="/ogong/study/list" style="color: black;">📚 스터디 목록</a></button><br>
-    <button class="dromdown-item" type="button1">
-      <a href="/ogong/study/list" style="color: black;">📔 스터디 삭제</a></button>
+      <a href="study/list" style="color: black;">📚 스터디 목록</a></button><br>
+    <!-- <button class="dromdown-item" type="button1">
+      <a href="/study/list" style="color: black;">📔 스터디 삭제</a></button> -->
   </div>
 </div>
 
