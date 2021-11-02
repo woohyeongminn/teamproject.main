@@ -2,6 +2,7 @@ package com.ogong.pms.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.ogong.pms.domain.Cafe;
 
 public interface CafeDao {
@@ -10,7 +11,7 @@ public interface CafeDao {
 
   List<Cafe> getCafeList() throws Exception;
   List<Cafe> getCafeListByMember() throws Exception;
-  List<Cafe> findCafeListByLocation(String input) throws Exception;
+  List<Cafe> findCafeListByLocation(@Param("input")String input, @Param("keyword")String keyword) throws Exception;
 
   Cafe findByCafeNo(int cafeNo) throws Exception;
   Cafe findByCafeNoMember(int cafeNo) throws Exception;

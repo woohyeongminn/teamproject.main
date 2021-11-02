@@ -1,41 +1,52 @@
 package com.ogong.pms.servlet.cafe;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class CafeSearchHandler implements Command {
+@WebServlet("/cafe/search")
+public class CafeSearchHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
 
-  public CafeSearchHandler (CafeDao cafeDao) {
-    this.cafeDao = cafeDao;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 장소 검색");
-    System.out.println();
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    String input = Prompt.inputString(" 지역 : ");
+    try {
 
-    List<Cafe> cafeList = cafeDao.findCafeListByLocation(input);
-
-    if (!cafeList.isEmpty()) {
-      for (Cafe cafe : cafeList) {
-        System.out.printf("\n (%s) | 이름 : %s | 주소 : %s | 운영시간 : %s ~ %s\n", 
-            cafe.getNo(), 
-            cafe.getName(), 
-            cafe.getLocation(), 
-            cafe.getOpenTime(),
-            cafe.getCloseTime());
+      String input = request.getParameter("where");
+      if (input.equals("1")) {
+        input = "location";
+      } else if (input.equals("2")) {
+        input = "name";
       }
-    } else {
-      System.out.println(" >> 검색 결과가 존재하지 않습니다.");
+
+      String keyword = request.getParameter("keyword");
+
+      List<Cafe> cafeList = cafeDao.findCafeListByLocation(input, keyword);
+
+      request.setAttribute("cafeList", cafeList);
+      request.setAttribute("perNo", request.getParameter("perNo"));
+      request.getRequestDispatcher("/cafe/CafeList.jsp").forward(request, response);
+
+    } catch (Exception e) {
+      throw new ServletException(e);
     }
   }
 }
