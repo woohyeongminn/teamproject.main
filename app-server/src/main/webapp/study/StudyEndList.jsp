@@ -9,13 +9,13 @@
 <body>
 	<h1>📖 스터디 목록</h1>
 	<button>
-    <a href='list?perno=${perno}'>전체</a>
+    <a href='../list?perno=${perno}'>전체</a>
   </button>
+  <button>
+    <a href='../list/end?perno=${perno}'>완료</a>
+  </button><br>
 	<button>
-		<a href='list/end?perno=${perno}'>완료</a>
-	</button><br>
-	<button>
-		<a href='form?perno=${perno}'>등록</a>
+		<a href='../form?perno=${perno}'>등록</a>
 	</button>
 	<br>
 	<table border='1'>
