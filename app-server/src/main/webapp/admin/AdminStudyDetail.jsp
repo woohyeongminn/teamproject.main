@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 - 관리자 | 📖 스터디 찾기</title>
+<title>상세 | 스터디 관리</title>
 <style>
 label {
 	margin-right: 5px;
@@ -14,7 +14,7 @@ label {
 </style>
 </head>
 <body>
-	<h1>스터디 상세</h1>
+	<h1>📖 스터디 상세</h1>
 	<form action='update'>
 		<label for='f-studyNo'>번호</label>
 		<input id='f-studyNo' type='text' name='studyNo' value='${study.studyNo}' readonly><br>
