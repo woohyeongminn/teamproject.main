@@ -54,6 +54,7 @@ public class StudyAddController extends HttpServlet {
       studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
 
+      request.setAttribute("member", member);
       response.sendRedirect("list");
       // request.getRequestDispatcher("StudyAdd.jsp").forward(request, response);
 

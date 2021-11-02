@@ -56,7 +56,7 @@ public class StudyBookMarkAddController extends HttpServlet {
 
       request.setAttribute("member", member);
       request.setAttribute("study", study);
-      response.sendRedirect("list");
+      response.sendRedirect("list?perno="+ member.getPerNo());
       // request.getRequestDispatcher("/study/bookMark/StudyBookMarkAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

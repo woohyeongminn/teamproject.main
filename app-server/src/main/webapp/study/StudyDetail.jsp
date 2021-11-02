@@ -58,7 +58,7 @@ label {
 			<a href='../bookmark/add?perno=${perno}&studyno=${study.studyNo}'>북마크 추가</a>
 		</button>
 		<button>
-			<a href='list'>목록</a>
+			<a href='list?perno=${perno}'>목록</a>
 		</button>
 		<br>
 	</form>
