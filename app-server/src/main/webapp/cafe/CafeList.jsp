@@ -47,7 +47,7 @@
 		  <option value="2">이름</option>
 		</select>
   	<input type="text" name="keyword">
-  	<button class="btn btn-outline-dark"><a>검색</a></button>
+  	<button class="btn btn-outline-dark">검색</button>
   	</form>
 	</div>
   <br>

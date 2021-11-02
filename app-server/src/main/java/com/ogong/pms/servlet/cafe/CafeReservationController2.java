@@ -48,7 +48,7 @@ public class CafeReservationController2 extends HttpServlet {
       String selectedDate = request.getParameter("date");
       int cafeNo = Integer.parseInt(request.getParameter("cafeNo"));
 
-      System.out.println(roomNo + ", " + selectedDate + ", " + cafeNo);
+      //      System.out.println(roomNo + ", " + selectedDate + ", " + cafeNo);
 
       Cafe cafe = cafeDao.findByCafeNo(cafeNo);
       CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
@@ -80,7 +80,7 @@ public class CafeReservationController2 extends HttpServlet {
       int availableTime = (int) ChronoUnit.HOURS.between(startTime, endTime);
       HashMap<Integer, String> statusOfNumber = new HashMap<>();
 
-      System.out.println("\n [ 예약 현황 ]");
+      //      System.out.println("\n [ 예약 현황 ]");
       for (int i = 0; i < availableTime; i++) {
         if (i == 0) {
           tempEndTime = startTime.plusHours(1);
@@ -98,7 +98,7 @@ public class CafeReservationController2 extends HttpServlet {
             }
           }
         }
-        System.out.printf(" %d. %s ~ %s : %s\n", i+1, startTime, tempEndTime, status);
+        //        System.out.printf(" %d. %s ~ %s : %s\n", i+1, startTime, tempEndTime, status);
         statusOfNumber.put(i+1, startTime + "," + tempEndTime + "," + status);
       }
 
