@@ -27,7 +27,10 @@
     select
       studyroom_no, 
       name room_name, 
-      cafe_no
+      cafe_no,
+      Introduction,
+      people,
+      hourly_amount
     from 
       studycafe_room
   </sql>

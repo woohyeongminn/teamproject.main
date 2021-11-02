@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
-@WebServlet("/adminceomember/list")
+@WebServlet("/admin/ceomember/list")
 public class AdminCeoMemberListController extends GenericServlet  {
   private static final long serialVersionUID = 1L;
 

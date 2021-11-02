@@ -16,6 +16,12 @@
   .col {
     width: 450px;
   }
+   .ellipsis{
+        width:300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    } 
   </style>
 </head>
 
@@ -39,7 +45,7 @@
         <div class="card-body">
           ${cafeRoom.roomImg}<br>
           <a href='detail?roomno=${cafeRoom.roomNo}'><b>${cafeRoom.roomName}</b></a><br>
-          ${cafeRoom.roomInfo}<br>
+          <p class = 'ellipsis'>${cafeRoom.roomInfo}</p>
           인원수 | ${cafeRoom.people} <br>
           시간당 금액 | ${cafeRoom.roomPrice}<br>
         </div>
@@ -49,14 +55,13 @@
   
   <c:if test="${empty cafeRoomList}">
 	  <p>등록한 스터디룸이 없습니다.</p>
-	  <button id='button'>
-      <a href="addform?no=${cafeNo}">등록하러 가기</a>
-    </button>
   </c:if>
+  </div>
+  <br>
   <button id='button'>
       <a href="addform?no=${cafeNo}">스터디 룸 추가</a>
     </button>
-  </div> 
+  
 </div>
 </body>
 </html>

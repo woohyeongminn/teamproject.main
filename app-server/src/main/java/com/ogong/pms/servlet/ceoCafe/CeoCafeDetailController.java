@@ -2,13 +2,13 @@ package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.dao.CeoMemberDao;
@@ -18,7 +18,7 @@ import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.servlet.cafe.CafeHandlerHelper;
 
 @WebServlet("/ceomember/cafe/detail")
-public class CeoCafeDetailController extends GenericServlet {
+public class CeoCafeDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CeoMemberDao ceoMemberDao;
@@ -34,7 +34,7 @@ public class CeoCafeDetailController extends GenericServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {

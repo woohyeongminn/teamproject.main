@@ -3,19 +3,19 @@ package com.ogong.pms.servlet.ceoCafe;
 import static com.ogong.pms.domain.Cafe.DELETE;
 import java.io.IOException;
 import java.time.LocalTime;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 
 @WebServlet("/ceomember/cafe/delete")
-public class CeoCafeDeleteController extends GenericServlet {
+public class CeoCafeDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
@@ -29,7 +29,7 @@ public class CeoCafeDeleteController extends GenericServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
@@ -51,6 +51,7 @@ public class CeoCafeDeleteController extends GenericServlet {
       cafe.setTimePrice(0);
       cafe.setCafeStatus(DELETE);
 
+      cafeDao.updateCafe(cafe);
       cafeDao.deleteCafe(cafe.getNo());
       sqlSession.commit();
 
@@ -59,7 +60,7 @@ public class CeoCafeDeleteController extends GenericServlet {
 
       //response.sendRedirect("detail?no="+ cafe.getCeoMember().getCeoNo());
 
-      //response.sendRedirect("login?email="+cafe.getCeoMember().getCeoEmail()+"&password="+ cafe.getCeoMember().getCeoPassword());
+      response.sendRedirect("login?email="+cafe.getCeoMember().getCeoEmail()+"&password="+ cafe.getCeoMember().getCeoPassword());
 
 
     } catch (Exception e) {
