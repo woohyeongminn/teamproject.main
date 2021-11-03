@@ -39,7 +39,6 @@ public class CeoReservationListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
       int ceoNo = Integer.parseInt(request.getParameter("ceono"));  //기업 회원 번호
 
       CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);

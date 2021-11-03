@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,6 +13,8 @@ import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CafeReservation;
+import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.servlet.cafe.CafeHandlerHelper;
 
 @WebServlet("/ceomember/cafe/reser/detail")
 public class CeoReservationDetailHandler extends HttpServlet {
@@ -40,14 +41,21 @@ public class CeoReservationDetailHandler extends HttpServlet {
     try {
 
       int no = Integer.parseInt(request.getParameter("no"));  // 예약번호
+      int ceoNo = Integer.parseInt(request.getParameter("ceono"));  // 기업 회원 번호
 
-      //CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
-      List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
+      CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+
+      CafeReservation cafeReservation = cafeReservationDao.findReservationByCeoMember(ceoMember.getCeoNo(), no);
+
+      String reviewStatusLable = CafeHandlerHelper.getReviewStatusLabel(
+          String.valueOf(cafeReservation.getWirteReview()));
 
       request.setAttribute("ceoMember", ceoMember);
-      request.setAttribute("reserList", reserList);
-
-      //request.getRequestDispatcher("/ceoCafe/CeoCafeReservationDetail.jsp").forward(request, response);
+      request.setAttribute("cafeReser", cafeReservation);
+      request.setAttribute("reviewStatusLable", reviewStatusLable);
+      request.setAttribute("cafeReserEndTime", 
+          cafeReservation.getStartTime().plusHours(cafeReservation.getUseTime()));
+      request.getRequestDispatcher("/ceoCafe/CeoCafeReservationDetail.jsp").forward(request, response);
 
 
     } catch (Exception e) {
