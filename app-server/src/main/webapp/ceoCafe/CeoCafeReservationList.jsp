@@ -27,8 +27,8 @@
     <th>예약 날짜</th>
     <th>이용 날짜</th>
     <th>예약 장소</th>
-    <th>이용 시간</th>
-    <th>스터디룸 번호</th>
+    <th>이용 시작 시간</th>
+    <th>스터디룸</th>
     <th>결제 금액</th>
     <th>예약 상태</th>
   </tr>
@@ -36,12 +36,12 @@
 <tbody>
   <c:forEach items="${reserList}" var="reservation">
   <tr>
-      <td><a href='reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
+      <td><a href='detail?no=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
       <td>${reservation.reservationDate}</td>
       <td>${reservation.useDate}</td>
       <td>${reservation.cafe.name}</td>
-      <td>${reservation.startTime} ~ ${reservation.startTime + reservation.useTime} }</td>             <!-- 이용시간 -->
-      <td>${reservation.roomNo}</td>       <!-- 스터디룸 -->
+      <td>${reservation.startTime}</td>      <!-- 이용시간 -->
+      <td>${reservation.roomName}</td>       <!-- 스터디룸 -->
       <td>${reservation.totalPrice}</td>      
       <td>${reservation.reservationStatusName}</td>
   </tr>

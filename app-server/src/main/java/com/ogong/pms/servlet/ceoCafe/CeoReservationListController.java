@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -47,38 +46,10 @@ public class CeoReservationListController extends HttpServlet {
       CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
       List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
 
-      List<CafeReservation> myCafeReserList = new ArrayList<>();
-      //
-      //      CafeRoom cafeRoom = null;
-      //      Cafe cafe = null;
-      //      for (CafeReservation cafeReser : reserList) {
-      //        myCafeReserList.add(cafeReser);
-      //        cafe = cafeDao.findByCafeNo(no);
-      //        cafeRoom = cafeRoomDao.findByRoomNo(cafeReser.getRoomNo());
-      //      }
-      //
-      //      if (cafeRoom == null) {
-      //        throw new Exception("등록된 스터디룸이 없습니다.");
-      //      }
-
       request.setAttribute("ceoMember", ceoMember);
-      //request.setAttribute("cafe", cafe);
-      request.setAttribute("cafeReservationList", reserList);
-      //request.setAttribute("cafeRoom", cafeRoom);
-      //request.setAttribute("cafeReser", cafeReser);
+      request.setAttribute("reserList", reserList);
 
       request.getRequestDispatcher("/ceoCafe/CeoCafeReservationList.jsp").forward(request, response);
-      //CeoCafeReservationDetail.jsp
-
-      //    List<CafeReservation> myCafeReserList = new ArrayList<>();
-      //    List<CafeReservation> reserList = 
-      //        cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
-      //
-      //    for (CafeReservation cafeReser : reserList) {
-      //      myCafeReserList.add(cafeReser);
-      //      Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
-      //      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(cafeReser.getRoomNo());
-      //      String reserStatusLable = cafeReser.getReservationStatusName();
 
 
     } catch (Exception e) {
