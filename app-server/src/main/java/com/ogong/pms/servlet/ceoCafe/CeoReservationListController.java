@@ -1,6 +1,7 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -46,7 +47,7 @@ public class CeoReservationListController extends HttpServlet {
       CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
       List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
 
-      //      List<CafeReservation> myCafeReserList = new ArrayList<>();
+      List<CafeReservation> myCafeReserList = new ArrayList<>();
       //
       //      CafeRoom cafeRoom = null;
       //      Cafe cafe = null;
