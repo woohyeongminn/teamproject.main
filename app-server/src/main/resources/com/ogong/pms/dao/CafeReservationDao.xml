@@ -89,6 +89,16 @@
       rs.studycafe_rsv_no asc
   </select>
   
+    <!-- 사장 카페 관리용 예약 상세 -->
+  <select id="findReservationByCeoMember" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    where 
+      c.member_no=#{ceoNo}
+      and rs.studycafe_rsv_no=#{reserNo}
+    order by
+      rs.studycafe_rsv_no asc
+  </select>
+  
   <!-- 내 예약 리스트 상세 -->
   <select id="findReservationByMember" resultMap="reservationMap">
   <include refid="reservationListSelect"/>

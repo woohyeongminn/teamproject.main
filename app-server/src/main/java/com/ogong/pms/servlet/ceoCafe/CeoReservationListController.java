@@ -40,10 +40,10 @@ public class CeoReservationListController extends HttpServlet {
 
     try {
 
-      int no = Integer.parseInt(request.getParameter("no"));  // 카페번호
       int ceoNo = Integer.parseInt(request.getParameter("ceono"));  //기업 회원 번호
 
       CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+
       List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
 
       request.setAttribute("ceoMember", ceoMember);

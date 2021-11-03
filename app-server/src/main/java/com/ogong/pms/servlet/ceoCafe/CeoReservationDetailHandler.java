@@ -14,7 +14,6 @@ import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/cafe/reser/detail")
 public class CeoReservationDetailHandler extends HttpServlet {
@@ -40,16 +39,15 @@ public class CeoReservationDetailHandler extends HttpServlet {
 
     try {
 
-      int no = Integer.parseInt(request.getParameter("no"));  // 카페번호
-      int ceoNo = Integer.parseInt(request.getParameter("ceono"));  //기업 회원 번호
+      int no = Integer.parseInt(request.getParameter("no"));  // 예약번호
 
-      CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+      //CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
       List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
 
       request.setAttribute("ceoMember", ceoMember);
       request.setAttribute("reserList", reserList);
 
-      request.getRequestDispatcher("/ceoCafe/CeoCafeReservationList.jsp").forward(request, response);
+      //request.getRequestDispatcher("/ceoCafe/CeoCafeReservationDetail.jsp").forward(request, response);
 
 
     } catch (Exception e) {

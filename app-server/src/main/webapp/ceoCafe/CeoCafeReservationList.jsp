@@ -36,7 +36,7 @@
 <tbody>
   <c:forEach items="${reserList}" var="reservation">
   <tr>
-      <td><a href='detail?no=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
+      <td><a href='detail?no=${reservation.reservationNo}&ceono=${ceoMember.ceoNo}'>${reservation.reservationNo}</a></td>
       <td>${reservation.reservationDate}</td>
       <td>${reservation.useDate}</td>
       <td>${reservation.cafe.name}</td>
