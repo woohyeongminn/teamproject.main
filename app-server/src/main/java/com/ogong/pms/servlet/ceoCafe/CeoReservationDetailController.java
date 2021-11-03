@@ -17,7 +17,7 @@ import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.servlet.cafe.CafeHandlerHelper;
 
 @WebServlet("/ceomember/cafe/reser/detail")
-public class CeoReservationDetailHandler extends HttpServlet {
+public class CeoReservationDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;

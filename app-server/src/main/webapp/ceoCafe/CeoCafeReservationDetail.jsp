@@ -42,8 +42,8 @@
 
 <!-- 예약 거절 버튼 -->
 
-<%-- <c:if test="${reserStatusLable eq '예약완료'}">
-<button type="button" class="btn btn-outline-dark"><a href="reservationDelete?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">예약취소</a></button>
+<c:if test="${reserStatusLable eq '예약완료'}">
+<button type="button" class="btn btn-outline-dark"><a href="reservationDelete?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">예약거절</a></button>
 </c:if>
 
 <button type="button" class="btn btn-outline-dark"><a href="reservationList?perNo=${memberNo}">목록</a></button> --%>
