@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,19 +49,27 @@ label {
 		
 		<label for='f-point'>활동 점수</label>
 		<input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
-		<c:if test="${study.owner.perNickname eq member.perNickname}">
+		<c:if test="${study.owner.perNo eq member.perNo}">
+      <button>
+      <a href='update?studyno=${study.studyNo}'>수정</a>
+    </button>
+      <button>
+         <a href='delete?studyno=${study.studyNo}'>삭제</a>
+      </button>
+      </c:if>
+		<!-- <c:if test="${study.owner.perNickname eq member.perNickname}">
 		<button id="writer">
       <a href='update?studyno=${study.studyNo}'>수정</a>
     </button>
 		<button id="writer">
 			<a href='delete?studyno=${study.studyNo}'>삭제</a>
 		</button>
-		<!-- <style>
+		<style>
 		#writer {
 		visibility: visible;
 		}
-		</style> -->
-		</c:if>
+		</style>
+		</c:if> -->
 		<button>
 			<a href='../bookmark/add?perno=${member.perNo}&studyno=${study.studyNo}'>북마크 추가</a>
 		</button>
