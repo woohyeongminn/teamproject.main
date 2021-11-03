@@ -35,10 +35,6 @@ public class CafeMyReservationListController extends HttpServlet {
       List<CafeReservation> reserList = 
           cafeReservationDao.findReservationListByMember(memberNo);
 
-      if (reserList.isEmpty()) {
-        throw new Exception("예약 내역이 없습니다.");
-      }
-
       request.setAttribute("reserList", reserList);
       request.setAttribute("perNo", memberNo);
       request.getRequestDispatcher("/cafe/CafeMyReservationList.jsp").forward(request, response);
