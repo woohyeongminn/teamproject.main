@@ -1,24 +1,71 @@
-//package com.ogong.pms.servlet.admin;
-//
-//import static com.ogong.pms.domain.Cafe.DELETE;
-//import static com.ogong.pms.domain.Cafe.WAIT;
-//import java.util.List;
-//import com.ogong.pms.dao.CafeDao;
-//import com.ogong.pms.domain.Cafe;
-//import com.ogong.pms.handler.Command;
-//import com.ogong.pms.handler.CommandRequest;
-//import com.ogong.util.Prompt;
-//
-//public class AdminCafeControlHandler implements Command {
-//
-//  CafeDao cafeDao;
-//
-//  public AdminCafeControlHandler (CafeDao cafeDao) {
-//    this.cafeDao = cafeDao;
-//  }
-//
-//  @Override
-//  public void execute(CommandRequest request) throws Exception {
+package com.ogong.pms.servlet.admin;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CafeReviewDao;
+import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReview;
+
+@WebServlet("/admin/cafeControl")
+public class AdminCafeControlHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
+  // updateForm형식
+  CafeDao cafeDao;
+  CafeReviewDao cafeReviewDao;
+  SqlSession sqlSession;
+
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
+    cafeReviewDao = (CafeReviewDao) 웹애플리케이션공용저장소.getAttribute("cafeReviewDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+  }
+
+  @Override
+  public void service(ServletRequest request, ServletResponse response)
+      throws ServletException, IOException {
+
+    try {
+      Cafe cafe = cafeDao.findByCafeNo(Integer.parseInt(request.getParameter("no")));
+
+      if (cafe == null) {
+        System.out.println(" >> 해당 번호의 장소가 존재하지 않습니다.");
+        return;
+      }
+
+      List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
+
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("cafeNo", cafe.getNo());
+      cafe.setHoliday(cafeDao.getCafeHoliday(params));
+
+      cafeDao.updateViewCount(cafe.getNo());
+      sqlSession.commit();
+
+      request.setAttribute("cafe", cafe);
+      request.setAttribute("reviewList", reviewList);
+
+      request.getRequestDispatcher("/admin/AdminCafeApprovalForm.jsp").forward(request, response);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    }
+  }
+}
+//    
 //    System.out.println();
 //    System.out.println("▶ 장소 목록");
 //

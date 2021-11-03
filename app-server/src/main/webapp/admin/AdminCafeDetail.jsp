@@ -57,9 +57,16 @@
   color : white;
   }
   </style>
-  <c:if test='${cafe.cafeStatus == 4}'>
+<c:if test='${cafe.cafeStatus == 4}'>
 <style>
 #deleted {
+display: none;
+}
+</style>
+</c:if>
+<c:if test='${cafe.cafeStatus != 4 && cafe.cafeStatus != 1}'>
+<style>
+#agree {
 display: none;
 }
 </style>
@@ -126,6 +133,7 @@ display: none;
 </c:if>
 <br>
 <button type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeList">목록</a></button>
+<button id="agree" type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeControl?no=${cafe.no}">승인</a></button>
 <button id="deleted" type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
 </div>
