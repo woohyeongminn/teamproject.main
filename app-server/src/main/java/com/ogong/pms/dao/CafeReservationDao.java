@@ -13,6 +13,7 @@ public interface CafeReservationDao {
   List<CafeReservation> findReservationListByDate(@Param("selectedDate")String selectedDate, @Param("roomNo")int roomNo) throws Exception;
   List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception;
   CafeReservation findReservationByMember(@Param("memberNo")int memberNo, @Param("reserNo")int reserNo) throws Exception;
+  CafeReservation findReservationByCeoMember(@Param("ceoNo")int ceoNo, @Param("reserNo")int reserNo) throws Exception;
   void insertReservation(CafeReservation cafeReservation) throws Exception;
   void deleteReservation(@Param("reservationNo")int reservationNo, @Param("status")int status) throws Exception;
 
