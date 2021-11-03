@@ -49,6 +49,10 @@
     background-color: blanchedalmond;
     color: black;
   }
+  .dropdown-menu {
+  background-color: rgba(211, 211, 211, 0);
+  border: rgba(211, 211, 211, 0);
+  }
   a {
   color : black;
   text-decoration : blink;
