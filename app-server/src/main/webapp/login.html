@@ -2,7 +2,10 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>오늘의 공부</title>
+<title>오늘의 공부-로그인</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -44,6 +47,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 8px 34px;
+  border-bottom:  1px solid rgba(0,0,0,.125);
 }
 
 .header_logo {
@@ -63,7 +67,6 @@ header {
   width: 100%;
   vertical-align: middle;
 }
-
 
 .header_menu {
   display: flex;
@@ -136,35 +139,59 @@ header {
   }
 }
 
-/*body 시작*/
+/*body 시작-------------------------------------*/
 section {
   width:100%;
   z-index:500;
 }
 
 .contents {
-  background-color: beige;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  position: relative;
 }
 
-.contents .c1 {
+.contents .c-top {
   width: 100%;
-  height: 800px;
+  padding: 60px 0 15px 50px;
+  font-weight: bold;
   background-color: #f0e3d4;
 }
 
-.contents .c2 {
-  width: 100%;
+.contents .c1 {
   height: 800px;
-  background-color: wheat;
+  padding-left:30px;
 }
 
-.contents .c3 {
-  width: 100%;
-  height: 800px;
-  background-color: cornsilk;
+.contents .c1 #box {
+  margin: 20px;
+  height: 180px;
+  margin-top: 100px;
+}
+
+.contents .c1 .card {
+  border: none;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.contents .c1 .card span a {
+  background-color: #ccc0ae;
+  border  :1px solid #ccc0ae;
+  color: white;
+}
+
+.contents .c1 .card a:hover {
+  background-color: #f0e3d4;
+  border  :1px solid #f0e3d4;
+  color:  #616161;
+}
+
+.contents .c1 .card .card-text {
+  margin-bottom: 16px;
+  font-size: small;
 }
 
 /*footer 시작*/
@@ -195,35 +222,57 @@ footer {
 </head>
 
 <body>
+  <div class="contains">
     <header>
       <div class='header_logo'>
-        <a href="main.html"><img src="logo.png"></a>
+        <a href="#"><img src="logo.png"></a>
       </div>
 
       <ul class="header_menu">
-        <li><a href="study/list">스터디 찾기</a></li>
-        <li><a href="cafe/list">스터디 장소 찾기</a></li>
+        <li><a href="#">스터디 찾기</a></li>
+        <li><a href="#">스터디 장소 찾기</a></li>
         <li><a href="#">내 스터디</a></li>
-        <li><a href="adminNotice/list">공지사항</a></li>
+        <li><a href="#">공지사항</a></li>
       </ul>
 
       <ul class="header_login">
         <li><a href="login.html">로그인</a></li>
-        <li><a href="member/addform">회원가입</a></li>
+        <li><a href="#">회원가입</a></li>
       </ul>
     </header>
 
     <section>
     <div class="contents">
-      <div class="c1">
-        첫번째 내용
+      <div class="c-top">
+        | 로그인 할 계정을 선택해주세요.
       </div>
-      <div class="c2">
-        두번째 내용
+      <div class="c1 row">
+        <div class="col" id="box">
+          <div class="card">
+              <h4 class="card-title">관리자&ensp;<i class="fas fa-child"></i></h4>
+              <span class="card-text">관리자 로그인<br> 페이지로 이동합니다.</span>
+              <span class="but"><a href="admin/form" class="btn btn-primary">LOGIN</a></span>
+            </div>
+        </div>
+
+        <div class="col" id="box">
+          <div class="card">
+              <h4 class="card-title">개인 회원</h4>
+              <span class="card-text">개인 회원 로그인<br> 페이지로 이동합니다.</span>
+              <span><a href="member/form" class="btn btn-primary">LOGIN</a></span>
+            </div>
+        </div>
+
+        <div class="col" id="box">
+          <div class="card">
+              <h4 class="card-title">기업 회원</h4>
+              <span class="card-text">기업 회원 로그인<br> 페이지로 이동합니다.</span>
+              <span><a href="ceomember/form" class="btn btn-primary">LOGIN</a></span>
+            </div>
+        </div>
       </div>
-      <div class="c3">
-        세번째 내용
-      </div>
+
+
     </div>
     </section>
 
@@ -246,5 +295,7 @@ footer {
       <hr>
       <p class="footer_copyright">COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.</p>
     </footer>
+
+  </div>
 </body>
 </html>

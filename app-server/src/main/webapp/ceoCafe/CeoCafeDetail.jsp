@@ -116,7 +116,7 @@
         <a href='room/list?no=${cafe.no}'>스터디룸 관리</a>
       </button>
       <button id='b-but' type="submit" value="예약관리">
-        <a href='reser/detail?no='>예약 관리</a>
+        <a href='reser/list?no=${cafe.no}&ceono=${ceoMember.ceoNo}'>예약 관리</a>
       </button>
     </div>
     </form>
