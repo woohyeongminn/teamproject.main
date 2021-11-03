@@ -32,8 +32,12 @@
     color: black;
   }
   button[type=button]:hover {
-    background-color: yellow;
+    background-color: blanchedalmond;
     color: black;
+  }
+  .btn-secondary:focus {
+  background-color: beige;
+  color: black;
   }
   button[type=button1] {
     border-radius: 10px;
@@ -42,8 +46,12 @@
     color: black;
   }
   button[type=button1]:hover {
-    background-color: yellow;
+    background-color: blanchedalmond;
     color: black;
+  }
+  .dropdown-menu {
+  background-color: rgba(211, 211, 211, 0);
+  border: rgba(211, 211, 211, 0);
   }
   a {
   color : black;
@@ -73,7 +81,6 @@
   </div>
 </div>
 
-</div>
 <div class="btn-group">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
     📁 회원 관리
