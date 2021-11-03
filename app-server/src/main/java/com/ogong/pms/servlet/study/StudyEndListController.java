@@ -1,7 +1,7 @@
 package com.ogong.pms.servlet.study;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -29,9 +29,9 @@ public class StudyEndListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      List<Study> studyList = studyDao.findAllEnd();
+      Collection<Study> studyList = studyDao.findAllEnd();
 
-      if (studyList == null) {
+      if (studyList.isEmpty()) {
         throw new Exception("스터디 목록이 없습니다.");
       }
 

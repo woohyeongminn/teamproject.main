@@ -31,7 +31,7 @@ public class StudyListController extends GenericServlet {
     try {
       Collection<Study> studyList = studyDao.findAll();
 
-      if (studyList == null) {
+      if (studyList.isEmpty()) {
         throw new Exception("스터디 목록이 없습니다.");
       }
 

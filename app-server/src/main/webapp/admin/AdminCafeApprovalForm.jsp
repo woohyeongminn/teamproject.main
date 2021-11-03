@@ -65,7 +65,7 @@ display: none;
 </head>
 <body>
   <input id='c-no' type='hidden' value='${cafe.no}'><br>
-  <legend><b> 🏘 스터디 카페 상세 </b></legend><br>
+  <legend><b> 🏘 스터디 카페 승인 </b></legend><br>
   <hr>
   <div id='all'>
   <b><h4>${cafe.name}</h4></b>
@@ -84,17 +84,21 @@ display: none;
       <label for='f-holiday'>이번 주 휴무일</label>${cafe.holiday}<br>
       <label for='f-viewCount'>조회수</label>${cafe.viewCount}<br>
       <label for='f-review'>리뷰 평점</label>⭐${cafe.avgReview}(${cafe.countReview})<br>
-   <script>
-     if(${cafe.cafeStatus == 1}) {
-       document.write("<label for='f-cafeStatus'>운영 상태</label>승인 대기");
-     } else if(${cafe.cafeStatus == 2}) {
-       document.write("<label for='f-cafeStatus'>운영 상태</label>운영 중");
-     } else if(${cafe.cafeStatus == 3}) {
-       document.write("<label for='f-cafeStatus'>운영 상태</label>운영 중단");
-     } else if(${cafe.cafeStatus == 4}) {
-       document.write("<label for='f-cafeStatus'>운영 상태</label>삭제");
-     } 
-   </script>
+    <label for='f-cafeStatus'>운영 상태</label>
+      <select name="cafeStatus">
+
+    <c:if test='${cafe.cafeStatus==1}'>
+          <option value="${cafe.cafeStatus}">운영 상태</option>
+        </c:if>
+
+        <c:if test='${cafe.cafeStatus==2}'>
+          <option value="1" name="cafeStatus">승인대기</option>
+          <option value="2" name="cafeStatus" >운영중</option>
+          <option value="3" name="cafeStatus" >운영중단</option>
+          <option value="4" disabled>삭제</option>
+        </c:if>
+      </select><br>
+      
     </div>
 <br>
 <c:if test='${not empty reviewList}'>
@@ -123,8 +127,13 @@ display: none;
    등록된 리뷰가 없습니다.<br><br>  
 </c:if>
 <br>
-<button type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeList">목록</a></button>
-<button id="deleted" type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
+<script>
+function disagree()  {
+  confirm(" 승인을 거절하시겠습니까? ");
+}
+</script>
+<button type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeDelete?cafeNo=${cafe.no}">승인</a></button>
+<button type="button" class="btn btn-outline-dark" onclick="disagree()"><a href="/ogong/admin/cafeList">거절</a></button>
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
 </div>
 </body>
