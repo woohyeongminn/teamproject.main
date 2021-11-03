@@ -8,12 +8,10 @@
 <head>
   <meta charset="UTF-8">
   <title>🏘 스터디 카페</title>
-
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
    
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-
   <style>
   legend {
   text-align: center;
@@ -22,6 +20,9 @@
     display: inline-block;
     margin-right: 5px;
     width: 130px;
+  }
+  form {
+  display: inline-block;
   }
   #all {
   margin: 50px;
@@ -59,7 +60,7 @@
   color : white;
   }
   </style>
-  <c:if test='${cafe.cafeStatus == 4}'>
+<c:if test='${cafe.cafeStatus == 4}'>
 <style>
 #deleted {
 display: none;
@@ -89,16 +90,13 @@ display: none;
       <label for='f-viewCount'>조회수</label>${cafe.viewCount}<br>
       <label for='f-review'>리뷰 평점</label>⭐${cafe.avgReview}(${cafe.countReview})<br>
     <label for='f-cafeStatus'>운영 상태</label>
-      <select name="cafeStatus">
-
+   <form action='cafeApproval'>
+   <input type="hidden" value="${cafe.no}" name="no"></input>
+    <select name="cafeStatus">
     <c:if test='${cafe.cafeStatus==1}'>
-          <option value="${cafe.cafeStatus}">운영 상태</option>
-        </c:if>
-
-        <c:if test='${cafe.cafeStatus==2}'>
-          <option value="1" name="cafeStatus">승인대기</option>
-          <option value="2" name="cafeStatus" >운영중</option>
-          <option value="3" name="cafeStatus" >운영중단</option>
+          <option value="${cafe.cafeStatus}">승인 대기</option>
+          <option value="2" name="cafeStatus" >운영 중</option>
+          <option value="3" name="cafeStatus" >운영 중단</option>
           <option value="4" disabled>삭제</option>
         </c:if>
       </select><br>
@@ -136,9 +134,10 @@ function disagree()  {
   confirm(" 승인을 거절하시겠습니까? ");
 }
 </script>
-<button type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeDelete?cafeNo=${cafe.no}">승인</a></button>
+<button type="submit" class="btn btn-outline-dark">승인</button>
 <button type="button" class="btn btn-outline-dark" onclick="disagree()"><a href="/ogong/admin/cafeList">거절</a></button>
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
+</form>
 </div>
 </body>
 </html>
