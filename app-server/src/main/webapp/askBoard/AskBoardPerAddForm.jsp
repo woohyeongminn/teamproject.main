@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +18,7 @@
     display: inline;
     width: 60px;
     size:100px;
-    display: none;
-
-}
+    }
   
   legend {
   text-align: center;
@@ -33,47 +32,47 @@
       font-size: 50px;
   }
 
-  input {
-      
+  .title {
+    f
   }
+  
 
 </style>
 </head>
 
 <body>
-  <h5>💬문의글 등록[개인 회원]</h5>
+  <h5>💬문의글 등록</h5>
   <form action='peradd'>
-    <label for='f-title' class='form-label'>제목</label>
-    <input id='f-title' type='text' name='title' placeholder="제목"><br>
-    
-    <label for='f-content' class='form-label' size='100px'>내용</label>
-    <input id='f-content' type='text' name='content' placeholder="내용"><br>
-
-    <input type ='hidden' name='writer' value='1'>       
-      
-    <!-- 
-     <span>
-     1. 공개 / 2. 비공개<br>
-     </span> 
-    <label for='f-status' calss= form-label' size='100px'>문의글 상태</label>
-    <input id='f-status' type='number' name='status' pattern="/d*" placeholder="문의글 상태"><br>
-    -->
-    
-    <label for='f-status'>문의글 상태</label>
+  
+    <label for='f-status'>공개</label>
     <select id="f-status" name='status' >
     <option value='1' name='status'>공개</option>
     <option value='2' name='status'>비공개</option>
-    </select><br>
+    </select><br> 
+    
     <div id="passwordRow">
-    <label for='f-tempPW' size='100px'>🔑문의글 비밀번호(4자리)</label>
-      <input id='f-tempPW' type='password' name='tempPW' pattern="/d*" placeholder="문의글 비밀번호(4자리)"><br>
+      <label for='f-tempPW' size='100px'>🔑비밀번호</label>
+      <input id='f-tempPW' type='password' name='tempPW' placeholder="4자리"><br>
     </div>
-    <br>
-    <br>
+    
+  
+    <div class="title">
+    <label for='f-title' class='form-label'>제목</label>
+    <input id='f-title' type='text' name='title' placeholder="제목을 입력하세요"><br>
+    </div>
+    
+    <div class="content">
+    <label for='f-content' class='form-label' size='100px'>내용</label>
+    <input id='f-content' type='text' name='content' placeholder="내용을 입력하세요"><br>
+    </div>
+
+    <input type ='hidden' name='writer' value='${member.perNo}'></input>      
+  
+    <br><br>
     <button type="submit" class="btn btn-primary" style='background-color: rgb(46, 45, 45)'>
       등록하기
     </button>
-   </form>
+  </form>
 
 <script>
 var fStatus = document.querySelector("#f-status");

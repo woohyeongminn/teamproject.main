@@ -24,29 +24,53 @@
 </head>
 
 <body>
-  <h5>💬 문의글 등록[사장 회원]</h5>
+  <h5>💬문의글 등록</h5>
   <form action='ceoadd'>
-    <label for='f-title' class='form-label' size='100px'>제목</label>
-    <input id='f-title' type='text' name='title' placeholder="제목"><br>
+  
+    <label for='f-status'>공개</label>
+    <select id="f-status" name='status' >
+    <option value='1' name='status'>공개</option>
+    <option value='2' name='status'>비공개</option>
+    </select><br> 
     
+    <div id="passwordRow">
+      <label for='f-tempPW' size='100px'>🔑비밀번호</label>
+      <input id='f-tempPW' type='password' name='tempPW' placeholder="4자리"><br>
+    </div>
+    
+  
+    <div class="title">
+    <label for='f-title' class='form-label'>제목</label>
+    <input id='f-title' type='text' name='title' placeholder="제목을 입력하세요"><br>
+    </div>
+    
+    <div class="content">
     <label for='f-content' class='form-label' size='100px'>내용</label>
-    <input id='f-content' type='text' name='content' placeholder="내용"><br>
+    <input id='f-content' type='text' name='content' placeholder="내용을 입력하세요"><br>
+    </div>
 
-    <input type ='hidden' name='writer' value='${ceoMember.ceoNo}'>       
-      
-     <span>
-     1. 공개 / 2. 비공개<br>
-     </span> 
-    <label for='f-status' calss= form-label' size='100px'>문의글 상태</label>
-    <input id='f-status' type='number' name='status' pattern="/d*" placeholder="문의글 상태"><br>
-
-    <label for='f-tempPW' class='form-label' size='100px'>🔑문의글 비밀번호(4가지)</label>
-    <input id='f-tel' type='number' name='tempPW' pattern="/d*" placeholder="문의글 비밀번호"><br>
-    
-    <button type="submit" class="btn btn-primary">
+    <input type ='hidden' name='writer' value="${ceoMember.ceoNo}"></input>      
+  
+    <br><br>
+    <button type="submit" class="btn btn-primary" style='background-color: rgb(46, 45, 45)'>
       등록하기
     </button>
-   </form>
+  </form>
+ 
+ <script>
+var fStatus = document.querySelector("#f-status");
+var passwordRow = document.querySelector("#passwordRow");
+
+passwordRow.style["display"] = "none";
+
+fStatus.addEventListener("input", function() {
+  if (fStatus.value == "2") {
+    passwordRow.style["display"] = "";
+  } else {
+     passwordRow.style["display"] = "none";
+  }
+});
+</script>
  </body>
 </html>
 
