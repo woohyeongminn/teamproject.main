@@ -8,6 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="../header.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<style>
@@ -21,6 +22,9 @@
 	  display: inline-block;
 	  margin-right: 5px;
 	  width: 130px;
+	}
+	#c-detail-content {
+    padding-left: 34px;
 	}
 	#aside {
 	   width: 120px;
@@ -50,6 +54,9 @@
 	</style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
+
+<div id="c-detail-content">
 	<input id='c-no' type='hidden' value='${cafe.no}'>
 	<br>
   <h3> 🏘 ${cafe.name} </h3><br>
@@ -91,7 +98,7 @@
 </c:if>
 <button type="button" class="btn btn-outline-dark"><a href="reservation?no=${cafe.no}&perNo=${perNo}">스터디룸 예약</a></button>
 <button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">목록</a></button>
-
+</div>
 </body>
 </html>
 
