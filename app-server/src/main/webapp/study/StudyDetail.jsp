@@ -71,6 +71,9 @@ label {
 		</style>
 		</c:if> -->
 		<button>
+			<a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>
+		</button>
+		<button>
 			<a href='../bookmark/add?perno=${member.perNo}&studyno=${study.studyNo}'>북마크 추가</a>
 		</button>
 		<button>
@@ -78,6 +81,5 @@ label {
 		</button>
 		<br>
 	</form>
-
 </body>
 </html>

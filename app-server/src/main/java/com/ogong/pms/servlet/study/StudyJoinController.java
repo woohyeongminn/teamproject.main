@@ -1,82 +1,91 @@
-package com.ogong.pms.handler.study;
+package com.ogong.pms.servlet.study;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
-import com.ogong.pms.handler.AuthPerMemberLoginHandler;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class StudyJoinHandler implements Command {
+@WebServlet("/study/join")
+public class StudyJoinController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
+  MemberDao memberDao;
   StudyDao studyDao;
   SqlSession sqlSession;
 
-  public StudyJoinHandler(StudyDao studyDao, SqlSession sqlSession) {
-    this.studyDao = studyDao;
-    this.sqlSession = sqlSession;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 스터디 신청");
-    System.out.println();
-
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
-
-    int inputNo = (int) request.getAttribute("inputNo");
-
-    Study study = studyDao.findByNo(inputNo);
-
-    if (study.getStatus()==2) {
-      System.out.println(" >> 완료된 스터디 입니다.");
-      return;
-    }
-    List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
-    study.setWatingMember(waitingGuilder);
-
-    List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
-    study.setMembers(guilders);
-
-    for (Member guilder : study.getMembers()) {
-      if (guilder.getPerNo() == member.getPerNo()) {
-        System.out.println(" >> 이미 참여 중인 스터디입니다.");
-        return;
-      }
-    }
-
-    for (Member memberWating : study.getWatingMember()) {
-      if (memberWating.getPerNo() == member.getPerNo()) {
-        System.out.println(" >> 이미 승인 대기 중인 스터디입니다.");
-        return;
-      }
-    }
-
-    if(study.getMembers().size() == study.getNumberOfPeple()) {
-      System.out.println(" >> 참여 가능 인원수를 초과하였습니다.");
-      return;
-    }
-
-    String input = Prompt.inputString(" 스터디에 참여하시겠습니까? (네 / 아니오) ");
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 참여 신청이 취소되었습니다.");
-      return;
-    }
-    study.getWatingMember().add(member);
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
     try {
-      studyDao.insertGuilder(study.getStudyNo(),member.getPerNo());
-      sqlSession.commit();
-    } catch (Exception e) {
-      System.out.println(" 참여 신청 오류!");
-      sqlSession.rollback();
-    }
+      // System.out.println("▶ 스터디 신청");
 
-    System.out.println();
-    System.out.println(" >> 참여 신청이 완료되었습니다.\n   승인이 완료될 때까지 기다려 주세요.");
+      int perNo = Integer.parseInt(request.getParameter("perno"));
+      Member member = memberDao.findByNo(perNo);
+
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
+      Study study = studyDao.findByNo(studyNo);
+
+      // if (study.getStatus() == 2) {
+      // throw new Exception(" >> 완료된 스터디 입니다.");
+      // }
+
+      List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
+      study.setWatingMember(waitingGuilder);
+
+      List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
+      study.setMembers(guilders);
+
+      // for (Member guilder : study.getMembers()) {
+      // if (guilder.getPerNo() == member.getPerNo()) {
+      // throw new Exception(" >> 이미 참여 중인 스터디입니다.");
+      // }
+      // }
+
+      // for (Member memberWating : study.getWatingMember()) {
+      // if (memberWating.getPerNo() == member.getPerNo()) {
+      // throw new Exception(" >> 이미 승인 대기 중인 스터디입니다.");
+      // }
+      // }
+
+      // if (study.getMembers().size() == study.getNumberOfPeple()) {
+      // throw new Exception(" >> 참여 가능 인원수를 초과하였습니다.");
+      // }
+
+      study.getWatingMember().add(member);
+
+      studyDao.insertGuilder(study.getStudyNo(), member.getPerNo());
+      sqlSession.commit();
+
+      request.setAttribute("member", member);
+      request.setAttribute("study", study);
+      request.getRequestDispatcher("/study/StudyJoin.jsp").forward(request, response);
+
+      // System.out.println(" >> 참여 신청이 완료되었습니다.\n 승인이 완료될 때까지 기다려 주세요.");
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      sqlSession.rollback();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    }
   }
 }
