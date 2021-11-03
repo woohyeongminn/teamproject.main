@@ -1,7 +1,15 @@
 package com.ogong.pms.servlet.ceoCafe;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeRoomDao;
@@ -9,76 +17,48 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.handler.AuthCeoMemberLoginHandler;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
+import com.ogong.pms.servlet.ceoMember.AuthCeoMemberLoginController;
 import com.ogong.util.Prompt;
 
-public class CeoReservationDetailHandler implements Command {
+@WebServlet("/ceomember/cafe/reser/detail")
+public class CeoReservationDetailHandler extends HttpServlet {
 
   CafeDao cafeDao;
   CafeReservationDao cafeReservationDao;
   CafeRoomDao cafeRoomDao;
 
-  public CeoReservationDetailHandler(CafeDao cafeDao, CafeReservationDao cafeReservationDao, CafeRoomDao cafeRoomDao) {
-    this.cafeDao = cafeDao;
-    this.cafeReservationDao = cafeReservationDao;
-    this.cafeRoomDao = cafeRoomDao;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
+    cafeReservationDao = (CafeReservationDao) 웹애플리케이션공용저장소.getAttribute("cafeReservationDao");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 예약 내역");
-    System.out.println();
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+
+
+    int no = Integer.parseInt(request.getParameter("no"));  // 카페번호
+    // 회원번호
+    CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
     CeoMember ceoMember = AuthCeoMemberLoginController.getLoginCeoMember();
-    List<CafeReservation> cafeReservationList = printMyCafeReserDetail(ceoMember);
-    if (cafeReservationList.size() == 0) {
-      System.out.println(" >> 예약 내역이 없습니다.");
-      return;
-    }
 
     request.setAttribute("cafeReservationList", cafeReservationList);
 
-    System.out.println("----------------------");
-    System.out.println("1. 예약 거절");
-    System.out.println("0. 이전");
-    while (true) {
-      int selectNo = Prompt.inputInt("선택> ");
-      switch (selectNo) {
-        case 1: 
-          request.getRequestDispatcher("/ceoMember/ReservationReject").forward(request); 
-          return;
-        case 0: return;
-        default : 
-          System.out.println(" >> 번호를 다시 선택해 주세요.");
-      }
-    }
+
+    CeoCafeReservationDetail.jsp
+
+    //    List<CafeReservation> myCafeReserList = new ArrayList<>();
+    //    List<CafeReservation> reserList = 
+    //        cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
+    //
+    //    for (CafeReservation cafeReser : reserList) {
+    //      myCafeReserList.add(cafeReser);
+    //      Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
+    //      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(cafeReser.getRoomNo());
+    //      String reserStatusLable = cafeReser.getReservationStatusName();
+
+
   }
-
-  private List<CafeReservation> printMyCafeReserDetail(CeoMember ceoMember) throws Exception {
-    List<CafeReservation> myCafeReserList = new ArrayList<>();
-    List<CafeReservation> reserList = 
-        cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
-
-    for (CafeReservation cafeReser : reserList) {
-      myCafeReserList.add(cafeReser);
-      Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
-      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(cafeReser.getRoomNo());
-      String reserStatusLable = cafeReser.getReservationStatusName();
-
-      System.out.printf(" (%d)\n 예약날짜 : %s\n 이용날짜 : %s\n 예약장소 : %s\n"
-          + " 이용시간 : %s ~ %s (%s시간)\n 스터디룸 : %s\n"
-          + " 결제금액 : %d원\n 상태 : %s\n"
-          , cafeReser.getReservationNo(), cafeReser.getReservationDate(), cafeReser.getUseDate()
-          , cafeReserCafe.getName(), cafeReser.getStartTime()
-          , cafeReser.getStartTime().plusHours(cafeReser.getUseTime())
-          , cafeReser.getUseTime(), cafeRoom.getRoomName(), cafeReser.getTotalPrice()
-          , reserStatusLable);
-      System.out.println();  
-
-    }
-    return myCafeReserList;
-  }
-}

@@ -103,14 +103,20 @@
 	   <button id='b-but' type="submit" value="수정" formaction="updateform">
 	      <a href='updateform?no=${ceoMember.ceoNo}&cafeno=${cafe.no}'> 스터디카페 수정</a>
 	   </button>
+	   
 	   <button id='b-but' type="submit" value="삭제" formaction="deleteform">
-	      <a href='deleteform?no=${cafe.no}'>스터디카페 삭제</a>
-	    </button>
+	      <a href='deleteform?no=${cafe.no}&ceono=${ceoMember.ceoNo}'>스터디카페 삭제</a>
+	   </button>
+	   
+	     <!--
+	      <button onclick="window.open('http://localhost:8080/ogong/ceomember/cafe//deleteform?no=${cafe.no}&ceono=${ceoMember.ceoNo}','deleteform','width=430,height=200,location=no,status=no,scrollbars=yes');">스터디카페 삭제</button>
+	     -->
+	   
 	    <button id='b-but' type="submit" value="스터디룸관리">
         <a href='room/list?no=${cafe.no}'>스터디룸 관리</a>
       </button>
       <button id='b-but' type="submit" value="예약관리">
-        <a href='#'>예약 관리</a>
+        <a href='reser/detail?no='>예약 관리</a>
       </button>
     </div>
     </form>

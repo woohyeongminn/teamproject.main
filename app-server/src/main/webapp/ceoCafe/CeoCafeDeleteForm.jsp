@@ -41,11 +41,9 @@ label {
 <body>
   <b>&emsp;&emsp;👩‍🏫 내 스터디카페 삭제</b><br>
   <hr>
-    <P>&emsp;&emsp;등록된 스터디카페 삭제 시 복구가 불가능합니다.</P>
-    </div>
-    <div id='button'>
-     <button id='b-but' type="submit"><a href='delete?no=${cafe.no}'>삭제</a></button>
-    </div>
-  </form> 
+  <P>&emsp;&emsp;등록된 스터디카페 삭제 시 복구가 불가능합니다.</P>
+  <div id='button'>
+     <a href='delete?no=${cafe.no}&ceoNo=${ceoNo}'>삭제</a>
+  </div>
 </body>
 </html>

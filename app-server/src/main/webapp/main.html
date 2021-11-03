@@ -17,157 +17,234 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: top;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: top;
 }
 
 body {
-	line-height: 1.5;
+  line-height: 1.5;
 }
 
 ul li {
   list-style-type: none;
-  display: inline;
-  margin-left: 35px;
-  background-color: khaki;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/*header 시작*/
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 34px;
+}
+
+.header_logo {
+  font-size: 20px;
+  text-align: center;
+}
+
+.header_logo a {
+  display: inline-block;
+  width: 180px;
+  height: 60px;
+  margin: 0 auto;
+  line-height: 60px;
+}
+
+.header_logo a img {
   width: 100%;
-  height: 100px;
-  box-sizing: border-box;
-  background: #ff0;
-  padding-top: 35px;
+  vertical-align: middle;
 }
 
-#logo{
-  width: 20%;
-  float: left;
-  text-align: center;
-  box-sizing: border-box;
-  background: darkmagenta;
+
+.header_menu {
+  display: flex;
 }
 
-.header_left {
-  width: 60%;
-  float: left;
-  box-sizing: border-box;
-  text-align: center;
-  background: #0ff;
+.header_menu li {
+  font-size: 14px;
+  padding: 8px 34px;
 }
 
-.header_right {
-  width: 20%;
-  float: right;
-  box-sizing: border-box;
-  text-align: center;
-  background: rgb(9, 119, 119);
+.header_menu li a {
+  padding: 4px;
+  
+}
+.header_menu li a:hover {
+  color: darkgrey;
+  box-shadow: inset 0 -2px darkgrey;
+  line-height: 20px;
 }
 
+.header_login {
+ display: flex;
+ box-sizing: border-box;
+ border-left: 2px solid darkgrey;
+}
+
+.header_login li {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-self: start;
+    padding: 5px 0;
+  }
+
+  .header_logo {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+  }
+  
+  .header_menu {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .header_menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header_login {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .header_login li {
+    text-align: center;
+    margin: 4px;
+  }
+
+  .header_login li a {
+    padding: 10px;
+  }
+}
+
+/*body 시작*/
 section {
   width:100%;
-	z-index:500;
-}
-
-section #content {
-  width: 100%;
-  position:relative;
   z-index:500;
 }
 
-section #content #c {
-  width: 100%;
-  height: 600px;
-  margin:0 auto;
-  position:relative;
-  box-sizing: border-box;
-  background-color: ivory;
-  border: 3px solid rgb(216, 13, 13);
-  text-align: center;
+.content {
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
-footer {
-  width:100%;
-  padding: 10px 0 10px 0;
-	background-color:cornflowerblue;
-	position:relative;
-	z-index:400;
+.content .c1 {
+  width: 100%;
+  height: 800px;
+  background-color: burlywood;
 }
+
+.content .c2 {
+  width: 100%;
+  height: 800px;
+  background-color: wheat;
+}
+
+.content .c3 {
+  width: 100%;
+  height: 800px;
+  background-color: cornsilk;
+}
+
+/*footer 시작*/
+footer {
+  font-size: 14px;
+  padding: 8px 0;
+  background-color: whitesmoke;
+}
+
+.footer_company {
+  display: flex;
+  margin-left: 20px;
+}
+
+.footer_company li a{
+  padding: 2px 10px 2px 0;
+}
+
+.footer_address {
+  margin-left: 20px;
+}
+
+.footer_copyright {
+  margin-left: 20px;
+}
+
 </style>
 </head>
 
 <body>
     <header>
-      <div id='logo'>
-        오늘의공부 로고
+      <div class='header_logo'>
+        <a href="#"><img src="logo.png"></a>
       </div>
-        <div class="header_left">
-        	<ul>
-            <li id="header_li"><a href="#">스터디 찾기</a></li>
-            <li id="header_li"><a href="#">스터디 장소 찾기</a></li>
-            <li id="header_li"><a href="#">내 스터디</a></li>
-            <li id="header_li"><a href="#">공지사항</a></li>
-          </ul>
-        </div>
-        <div class="header_right">
-          <ul>
-            <li id="login"><a href="#">로그인</a></li>
-            <li id="sign_up"><a href="#">회원가입</a></li>
-          </ul>
-        </div>
+
+      <ul class="header_menu">
+        <li><a href="#">스터디 찾기</a></li>
+        <li><a href="#">스터디 장소 찾기</a></li>
+        <li><a href="#">내 스터디</a></li>
+        <li><a href="#">공지사항</a></li>
+      </ul>
+
+      <ul class="header_login">
+        <li><a href="#">로그인</a></li>
+        <li><a href="#">회원가입</a></li>
+      </ul>
     </header>
 
     <section>
-    <div id="content">
-      <div id="c">
+    <div class="content">
+      <div class="c1">
         첫번째 내용
       </div>
-      <div id="c">
+      <div class="c2">
         두번째 내용
       </div>
-      <div id="c">
+      <div class="c3">
         세번째 내용
       </div>
     </div>
     </section>
 
     <footer>
-      <div id="footer">
-        <div id="footer_wrap">
-          <div id="company">
-            <ul id="company_left">
-            <li><a href="#">오늘의 공부 소개</a></li>
-            <li><a href="#">이용약관</a></li>
-            <li><a href="#" id="orange">개인정보처리방침</a></li>
-            <li><a href="#">1:1문의</a></li>
-            <li><a href="#">법적고지</a></li>
-            <li><a href="#">사이트맵</a></li>
-            </ul>
-          </div>
-          <div id="address">
-            <hr>
-            <div>
-            &emsp;&emsp;상호명 : 오늘의 스터디 ㅣ 주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩
-            <br>
-            &emsp;&emsp;FAX : 0505-111-1111 ㅣ Email: bit.study2@gmail.com
-            <br>
-            &emsp;&emsp;고객센터 : 1577-1111 (평일 09:30 ~ 18:30 / 점심 12:00 ~ 13:00)
-            <br>
-            &emsp;&emsp;사업자등록번호 : 391-11-1111 ㅣ 통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 김땡땡
-            <hr>
-            <p>
-              &emsp;&emsp;COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.
-            </p>
-            </div>
-          </div>
-        </div>
+      <ul class="footer_company">
+        <li><a href="#">오늘의 공부 소개</a></li>
+        <li><a href="#">이용약관</a></li>
+        <li><a href="#" class="orange">개인정보처리방침</a></li>
+        <li><a href="#">1:1문의</a></li>
+        <li><a href="#">법적고지</a></li>
+        <li><a href="#">사이트맵</a></li>
+      </ul>
+      <hr>
+      <div class="footer_address">
+        <p>상호명 : 오늘의 스터디&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
+        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.company_left</p>
+        <p>고객센터 : 1577-1111 (평일 09:30 ~ 18:30 / 점심 12:00 ~ 13:00)</p>
+        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 김땡땡</p>
       </div>
+      <hr>
+      <p class="footer_copyright">COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.</p>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/slick.js"></script>
 </body>
 </html>

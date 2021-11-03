@@ -64,11 +64,11 @@
     <label for='f-roomPrice'>시간당금액</label><span>${cafeRoom.roomPrice}</span><br>
   </div>
    <div id='button'>
-	   <button id='b-but' type="submit" value="수정" formaction="updateform">
-	      <a href='updateform?no=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}'> 스터디카페 수정</a>
+	   <button id='b-but' type="submit" value="수정" >
+	      <a href='updateform?no=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}'> 스터디룸 수정</a>
 	   </button>
-	   <button id='b-but' type="submit" value="삭제" formaction="deleteform">
-	      <a href='deleteform?no=${cafeRoom.roomNo}'>스터디카페 삭제</a>
+	   <button id='b-but' type="submit" value="삭제" >
+	      <a href='delete?no=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}'>스터디룸 삭제</a>
 	    </button>
     </div>
     </form>

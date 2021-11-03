@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
+import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.Cafe;
 
 @WebServlet("/ceomember/cafe/delete")
@@ -19,12 +20,14 @@ public class CeoCafeDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeDao cafeDao;
+  CeoMemberDao ceoMemberDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
+    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
@@ -34,6 +37,10 @@ public class CeoCafeDeleteController extends HttpServlet {
     try {
       int no = Integer.parseInt(request.getParameter("no"));
       Cafe cafe = cafeDao.findByCafeNo(no);
+
+      int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
+      // 밑에 주석부분에서 쓰려고 만들었음
+      //CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
 
       if (cafe == null) {
         throw new Exception("등록된 카페가 없습니다.");
@@ -56,11 +63,13 @@ public class CeoCafeDeleteController extends HttpServlet {
       sqlSession.commit();
 
 
+      // 로그인했을때 화면으로 돌아가야하는데
+      // 돌아갈 곳이 없다,,,,,,
       //response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
 
       //response.sendRedirect("detail?no="+ cafe.getCeoMember().getCeoNo());
 
-      response.sendRedirect("login?email="+cafe.getCeoMember().getCeoEmail()+"&password="+ cafe.getCeoMember().getCeoPassword());
+      //response.sendRedirect("login?email="+ceoMember.getCeoEmail()+"&password="+ ceoMember.getCeoPassword());
 
 
     } catch (Exception e) {
