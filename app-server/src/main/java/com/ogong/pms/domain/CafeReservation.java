@@ -105,7 +105,7 @@ public class CafeReservation {
     this.totalPrice = totalPrice;
   }
 
-  public boolean isWirteReview() {
+  public boolean getWirteReview() {
     return wirteReview;
   }
 
