@@ -17,6 +17,7 @@
     <result column="rsv_status_no" property="reservationStatus"/>
     <result column="rsv_name" property="reservationStatusName"/>
     <result column="review" property="wirteReview"/>
+    <result column="roomName" property="roomName"/>
     
     <association property="member" javaType="member">
       <id column="member_no" property="perNo"/>
@@ -44,7 +45,8 @@
         rst.rsv_status_no,
         rst.rsv_name, 
         c.cafe_no, 
-        c.name cafe_name
+        c.name cafe_name,
+        sr.name roomName
       from 
         studycafe_reservation rs
         join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no

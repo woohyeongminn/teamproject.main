@@ -27,7 +27,7 @@
   <h5>개인 회원 프로필 수정</h5>
 
   <form action="update">
-    span>(${perMember.perNo})</span><br>
+    <span>(${perMember.perNo})</span><br>
     
     <label for='f-nickname'>닉네임</label>
     <input id='f-nickname' type='text' name='nickname' value='${perMember.perNickname}'><br>

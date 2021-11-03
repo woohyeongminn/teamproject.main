@@ -16,6 +16,7 @@ public class CafeReservation {
   private int totalPrice; // 총금액
   private boolean wirteReview; // 리뷰작성 여부
   private int roomNo; // 룸 예약시 룸 번호
+  private String roomName;  // 룸 이름
   private int paymentNo; // 결제시 결제 번호
   private int reservationStatus; // 1 : 예약완료(현장결제) , 2 : 결제완료 , 
   //                                3 : 예약취소(개인) , 4 : 결제취소(개인) ,
@@ -28,8 +29,8 @@ public class CafeReservation {
         + cafe + ", reservationDate=" + reservationDate + ", useDate=" + useDate + ", startTime="
         + startTime + ", useTime=" + useTime + ", useMemberNumber=" + useMemberNumber
         + ", totalPrice=" + totalPrice + ", wirteReview=" + wirteReview + ", roomNo=" + roomNo
-        + ", paymentNo=" + paymentNo + ", reservationStatus=" + reservationStatus
-        + ", reservationStatusName=" + reservationStatusName + "]";
+        + ", roomName=" + roomName + ", paymentNo=" + paymentNo + ", reservationStatus="
+        + reservationStatus + ", reservationStatusName=" + reservationStatusName + "]";
   }
 
   public int getReservationNo() {
@@ -62,6 +63,14 @@ public class CafeReservation {
 
   public void setReservationDate(Date reservationDate) {
     this.reservationDate = reservationDate;
+  }
+
+  public Date getUseDate() {
+    return useDate;
+  }
+
+  public void setUseDate(Date useDate) {
+    this.useDate = useDate;
   }
 
   public LocalTime getStartTime() {
@@ -112,6 +121,14 @@ public class CafeReservation {
     this.roomNo = roomNo;
   }
 
+  public String getRoomName() {
+    return roomName;
+  }
+
+  public void setRoomName(String roomName) {
+    this.roomName = roomName;
+  }
+
   public int getPaymentNo() {
     return paymentNo;
   }
@@ -128,14 +145,6 @@ public class CafeReservation {
     this.reservationStatus = reservationStatus;
   }
 
-  public Date getUseDate() {
-    return useDate;
-  }
-
-  public void setUseDate(Date useDate) {
-    this.useDate = useDate;
-  }
-
   public String getReservationStatusName() {
     return reservationStatusName;
   }
@@ -143,4 +152,7 @@ public class CafeReservation {
   public void setReservationStatusName(String reservationStatusName) {
     this.reservationStatusName = reservationStatusName;
   }
+
+
+
 }
