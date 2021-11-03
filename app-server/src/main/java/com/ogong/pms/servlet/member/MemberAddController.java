@@ -48,6 +48,7 @@ public class MemberAddController extends HttpServlet {
       request.getRequestDispatcher("/member/PerMemberAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

@@ -4,6 +4,10 @@
 <html>
 <head>
 <title>상세 | 스터디 관리</title>
+   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+   
+   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
+   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
 label {
 	margin-right: 5px;
