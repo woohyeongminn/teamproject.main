@@ -61,6 +61,10 @@
    background-color: beige;
    color: black;
   }
+  
+  #empty {
+  text-align: center;
+  }
   </style>
 </head>
 <body>
@@ -86,7 +90,7 @@
   <td>${askBoard.askNo}.</td>
   </div>
   <td><a href='ceomydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
-  <td>${askBoard.askMemberWriter.perNickname}</td>
+  <td><a href='ceomydetail?askNo=${askBoard.askNo}'>${askBoard.askMemberWriter.perNickname}</a></td>
   <td>${askBoard.askVeiwCount}</td>
   <td>${askBoard.askRegisteredDate}</td>
       <c:choose>
@@ -103,7 +107,7 @@
 </table>
 </fieldset>
 <c:if test="${empty myAskBoardList}">
-       등록한 문의글이 없습니다.<br>
+       <form id="empty">등록한 문의글이 없습니다.</form><br>
 </c:if>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="add">

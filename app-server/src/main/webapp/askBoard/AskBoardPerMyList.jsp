@@ -6,9 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>내 문의 게시판(개인회원)</title>
+   <title>문의 게시글(개인회원)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  
   <style>
   label {
     margin-right: 5px;
@@ -18,7 +19,7 @@
     size:100px;
   }
   legend {
-  font-family: '굴림체';
+    font-family: '굴림체';
     text-align: center;
      background-color: blanchedalmond;
      text-align: center;
@@ -31,35 +32,45 @@
   font-family: '굴림체';
   margin-right: 10px;
   }
-  a {
   
+  a {
   color : black;
   text-decoration : auto;
   }
+  
   a:hover {
   color : lightgray;
   }
+  
   #head {
   font-family: '굴림체';
   background-color: beige;
   color: black;
   font-size: 25px;
   }
+  
   div {
     font-family: '굴림체';
   }
+  
   td {
     font-size: 15px;
   }
+  
   .btn {
    border-radius: 4px;
    background-color: blanchedalmond;
    color: black;
    font-size: 18px;
   }
+  
   .btn:hover {
    background-color: beige;
    color: black;
+  }
+  
+  #empty {
+  text-align: center;
   }
   </style>
 </head>
@@ -72,11 +83,11 @@
 <table class="table table-responsive">
 <thead>
 <tr id="head">
-<th>No.</th>
-<th>제목</th>
-<th>작성자</th>
-<th>조회수</th>
-<th>등록일</th>
+	<th>No.</th>
+	<th>제목</th>
+	<th>작성자</th>
+	<th>조회수</th>
+	<th>등록일</th>
 <th></th>
 </tr>
 </thead>
@@ -104,7 +115,7 @@
 </fieldset>
 </tbody>
 <c:if test="${empty myAskBoardList}">
-       <span>등록한 문의글이 없습니다.</span><br>
+       <form id="empty">등록한 문의글이 없습니다.</form><br>
 </c:if>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="add">

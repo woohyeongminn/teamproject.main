@@ -8,24 +8,55 @@
 <head>
 <meta charset="UTF-8">
 <title>문의 게시글 등록(사장 회원)</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
 <style>
-  label {
+
+  label { 
+    font-family: '굴림체';
     margin-right: 5px;
     text-align: center;
     display: inline;
     width: 60px;
+    size:100px;
+    font-size: 20px;
   }
-  legend {
-  text-align: center;
+  
+  div {
+    font-family: '굴림체';
+    font-size: 20px;
   }
+
+  h5 {
+      background-color: blanchedalmond;
+      text-align: center;
+      color: black;
+      margin-top: 10px;
+      font-size: 50px;
+  }
+
+.btn {
+   border-radius: 4px;
+   background-color: blanchedalmond;
+   color: black;
+   font-size: 18px;
+  }
+  .btn:hover {
+   background-color: beige;
+   color: black;
+  }
+
 </style>
 </head>
 
 <body>
+<br>
   <h5>💬문의글 등록</h5>
-  <form action='ceoadd'>
+  <form >
   
     <label for='f-status'>공개</label>
     <select id="f-status" name='status' >
@@ -38,23 +69,27 @@
       <input id='f-tempPW' type='password' name='tempPW' placeholder="4자리"><br>
     </div>
     
-  
-    <div class="title">
-    <label for='f-title' class='form-label'>제목</label>
-    <input id='f-title' type='text' name='title' placeholder="제목을 입력하세요"><br>
+    <br>
+    <div class="mb-3">
+      <label for="f-title" class="form-label">제목</label>
+      <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요"></input>
     </div>
     
-    <div class="content">
-    <label for='f-content' class='form-label' size='100px'>내용</label>
-    <input id='f-content' type='text' name='content' placeholder="내용을 입력하세요"><br>
+    <div class="mb-3">
+      <label for="f-content" class="form-label">내용</label>
+      <input class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요"></input>
     </div>
 
     <input type ='hidden' name='writer' value="${ceoMember.ceoNo}"></input>      
   
     <br><br>
-    <button type="submit" class="btn btn-primary" style='background-color: rgb(46, 45, 45)'>
-      등록하기
-    </button>
+    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <button class="btn btn-outline-primary me-md-2 btn-small" 
+	     type="submit" value="등록" formaction="ceoadd">
+	     등록하기
+     </button>
+    </div>
   </form>
  
  <script>
@@ -71,7 +106,7 @@ fStatus.addEventListener("input", function() {
   }
 });
 </script>
- </body>
+</body>
 </html>
 
 
