@@ -6,12 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>참여 신청 | 스터디 찾기</title>
+<link rel="stylesheet" type="text/css" href="../header.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" type="text/css" 
         href="../node_modules/sweetalert2/dist/sweetalert2.css">
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <!-- <button id="join" type="button">참여 신청</button>
 <button id="join" type="button">
   <a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>

@@ -5,8 +5,10 @@
 <html>
 <head>
 <title>목록 | 스터디 찾기</title>
+<link rel="stylesheet" type="text/css" href="../header.css">
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 목록</h1>
 	<a href='form'>스터디 등록</a>
 	<br>
