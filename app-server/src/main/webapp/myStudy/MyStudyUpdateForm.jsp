@@ -21,6 +21,7 @@ label {
   <form action='update'>
     <label for='f-studyNo'>번호</label>
     <input id='f-studyNo' type='text' name='studyNo' value='${study.studyNo}' readonly><br>
+    
     <label for='f-countBookMember'>북마크</label>
     <input id='f-countBookMember' type='text' name='countBookMember' value='${study.countBookMember}' readonly><br>
     
@@ -35,10 +36,13 @@ label {
     
     <label for='f-area'>지역</label>
     <input id='f-area' type='text' name='area' value='${study.area}'><br>
+    
     <label for='f-countMember'>인원수</label>
     <input id='f-countMember' type='text' name='countMember' value='${study.countMember}' readonly><br>
+    
     <label for='f-numberOfPeple'>최대 인원수</label>
     <input id='f-numberOfPeple' type='text' name='numberOfPeple' value='${study.numberOfPeple}'><br>
+    
     <label for='f-faceName'>대면/비대면</label>
     <input id='f-faceName' type='text' name='faceName' value='${study.faceName}'><br>
     
@@ -49,34 +53,9 @@ label {
     <input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
     <c:if test="${study.owner.perNo eq member.perNo}">
       <button>
-      <a href='update?studyno=${study.studyNo}'>수정</a>
-    </button>
-      <button>
-         <a href='delete?studyno=${study.studyNo}'>삭제</a>
+        <a href='update?studyno=${study.studyNo}'>수정</a>
       </button>
       </c:if>
-    <!-- <c:if test="${study.owner.perNickname eq member.perNickname}">
-    <button id="writer">
-      <a href='update?studyno=${study.studyNo}'>수정</a>
-    </button>
-    <button id="writer">
-      <a href='delete?studyno=${study.studyNo}'>삭제</a>
-    </button>
-    <style>
-    #writer {
-    visibility: visible;
-    }
-    </style>
-    </c:if> -->
-    <button>
-      <a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>
-    </button>
-    <button>
-      <a href='../bookmark/add?perno=${member.perNo}&studyno=${study.studyNo}'>북마크 추가</a>
-    </button>
-    <button>
-      <a href='list?perno=${member.perNo}'>목록</a>
-    </button>
     <br>
   </form>
 </body>
