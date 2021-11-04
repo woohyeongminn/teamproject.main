@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -33,12 +34,25 @@
      <span>작성일ㅣ</span> <span>${adminAskBoard.askRegisteredDate}</span><br>
 </body>
 
+<c:choose>
+<c:when test="${empty adminAskBoard.reply}">
   <button type="submit" value="답변" formaction="reply">
-        <a href='?????no=${adminAskBoard.askNo}'>답변등록</a>
-      </button>
-   <button type="submit" value="삭제" formaction="delete">
-        <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
-      </button>   
+    <a href='../askboard/replyaddform?askNo=${adminAskBoard.askNo}'>답변등록</a>
+  </button>
+</c:when>
+<c:otherwise>
+  <span>답변 내용ㅣ</span>
+   <span>${adminAskBoard.reply.replyTitle}
+    ㅣ ${adminAskBoard.reply.replyContent}
+    ㅣ${adminAskBoard.reply.replyRegisteredDate}</span><br>
+</c:otherwise>
+
+
+</c:choose>
+  
+  <button type="submit" value="삭제" formaction="delete">
+   <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
+  </button>   
 
 
 

@@ -28,7 +28,7 @@
 		<a href='form?perno=${perno}'>등록</a>
 	</button>
 	<br>
-	<table class="table">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>

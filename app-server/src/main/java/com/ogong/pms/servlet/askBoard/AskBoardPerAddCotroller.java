@@ -46,7 +46,10 @@ public class AskBoardPerAddCotroller extends HttpServlet {
       askBoard.setAskContent(request.getParameter("content"));
       askBoard.setAskMemberWriter(member);
       askBoard.setAskStatus(Integer.parseInt(request.getParameter("status")));
-      askBoard.setAskTempPW(Integer.parseInt(request.getParameter("tempPW")));
+
+      if (askBoard.getAskStatus() == 2) {
+        askBoard.setAskTempPW(Integer.parseInt(request.getParameter("tempPW")));
+      }
 
       System.out.println(askBoard);
       askBoardDao.insertPer(askBoard);

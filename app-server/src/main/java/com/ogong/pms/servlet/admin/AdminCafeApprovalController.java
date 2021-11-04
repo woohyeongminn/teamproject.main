@@ -13,7 +13,7 @@ import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.domain.Cafe;
 
 @WebServlet("/admin/cafeApproval")
-public class AdminCafeApprovalHandler extends HttpServlet {
+public class AdminCafeApprovalController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   // update 형식
   CafeDao cafeDao;

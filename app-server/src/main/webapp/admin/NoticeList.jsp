@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>공지게시판</title>
+   <title>📢 공지게시판</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
    
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
@@ -24,6 +24,7 @@
     color: lightgrey;
   }
   button[type=button] {
+    margin-block: 10px;
     border-radius: 10px;
     background-color: beige;
     color: black;
@@ -37,6 +38,7 @@
   color: black;
   }
   button[type=button1] {
+    margin-left: 15px;
     border-radius: 10px;
     border-color: lightgray;
     background-color: beige;
@@ -46,9 +48,23 @@
     background-color: blanchedalmond;
     color: black;
   }
+  .dropdown-menu {
+  background-color: rgba(211, 211, 211, 0);
+  border: rgba(211, 211, 211, 0);
+  }
   .btn-group {
+  margin-top: 10px;
   display: block;
-  
+  }
+  .offcanvas-start {
+  width: 350px;
+  }
+  button[type=button2] {
+  margin-left: 70px;
+    color: black;
+  }
+  button[type=button2]:hover {
+    color: black;
   }
   div {
   margin-right: 10px;
@@ -92,18 +108,18 @@
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="등록"><a href='form'>등록</a></button>
-<button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
 </div>
 </body>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">관리자</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <h4 class="offcanvas-title" id="offcanvasExampleLabel">👑 관리자 👑</h4>
+    <button type="button2" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <hr>
   </div>
 
   <div class="offcanvas-body">
     <div>
-      이동하실 탭을 선택하세요.
+      <b>이동하고 싶은 탭을 선택해 주세요!</b>
     </div>
 
     <div class="btn-group dropend">
@@ -113,10 +129,11 @@
       <div class="dropdown-menu" role="menu" style="border-color: white;">
         <button class="dromdown-item" type="button1">
           <a href='logout' style="color: black;">🖐 로그아웃</a></button><br>
-        <button class="dromdown-item" type="button1">
-          <a href='detail?no=${admin.masterNo}' style="color: black;">🙂 마이페이지</a></button>
+        <%-- <button class="dromdown-item" type="button1">
+          <a href='detail?no=${admin.masterNo}' style="color: black;">🙂 마이페이지</a></button> --%>
       </div>
-      
+    </div>
+    
     <div class="btn-group dropend">
 		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 		    📁 회원 관리
@@ -143,13 +160,13 @@
 		
 		<div class="btn-group dropend">
 		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-		    🏘 장소 관리(미완)
+		    🏘 장소 관리
 		  </button>
 		  <div class="dropdown-menu" role="menu" style="border-color: white;">
 		    <button class="dromdown-item" type="button1">
 		      <a href="/ogong/admin/cafeList" style="color: black;">📝 장소 목록</a></button><br>
 		    <button class="dromdown-item" type="button1">
-		      <a href="/ogong/cafe/list" style="color: black;">🔖 장소 리뷰</a></button>
+		      <a href="/ogong/admin/reviewList" style="color: black;">🔖 장소 리뷰</a></button>
 		  </div>
 		</div>
 		

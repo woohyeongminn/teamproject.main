@@ -27,7 +27,7 @@
   <h5>사장 회원 문의글 수정</h5>
 
   <form action="ceoupdate">
-    span>(${ceoAskBoard.askNo})</span><br>
+    <span>(${ceoAskBoard.askNo})</span><br>
     
     <label for='f-title'>제목</label>
     <input id='f-title' type='text' name='title' value='${ceoAskBoard.askTitle}'><br>

@@ -1,25 +1,20 @@
+<%@page import="com.ogong.pms.servlet.cafe.CafeHandlerHelper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
+    trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>🎓 개인 회원</title>
+  <meta charset="UTF-8">
+  <title>🏘 스터디 카페</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
    
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
-  label {
-    margin-right: 5px;
-    text-align: center;
-    display: inline;
-  }
   legend {
-  text-align: center;
+    text-align: center;
   }
   legend:hover {
     color: lightgrey;
@@ -70,46 +65,72 @@
   div {
   margin-right: 10px;
   }
-</style>
+  a {
+  color : black;
+  text-decoration : auto;
+  }
+  a:hover {
+  color : lightgray;
+  }
+  </style>
 </head>
 <body>
 <br>
-  <fieldset>
-<legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 📗 개인 회원 목록 </b></legend><br>
+<legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 🔖 스터디 카페 리뷰 목록 </b></legend><br>
 <hr>
-    <table class="table">
 
-        <thead>
-          <tr>
-            <th>번호</th>
-            <th>이름</th>
-            <th>닉네임</th>
-            <th>이메일</th>
-            <th>가입일</th>
-          </tr>
-          </thead>
-          <tbody>
-          <c:forEach items="${perMemberList}" var="perMember">
-             <tr>
-              <td>(${perMember.perNo})</td>
-              <td><a href='permemberdetail?no=${perMember.perNo}'>${perMember.perName}</a></td> 
-              <td>${perMember.perNickname}</td> 
-              <td>${perMember.perEmail}</td> 
-              <td>${perMember.perRegisteredDate}</td>
-             </tr>
-         </c:forEach>
-        </tbody>
-  </table>
-  </fieldset>
-  </body>
-  
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+<c:if test='${not empty reviewList}'>
+<table class="table table-striped text-center">
+	<thead>
+	  <tr>
+	    <th>번호</th>
+	    <th>스터디카페</th>
+	    <th>별점</th>
+	    <th>내용</th>
+	    <th>등록일</th>
+	    <th>삭제</th>
+	  </tr>
+	</thead>
+  <tbody>
+
+	<c:forEach items="${reviewList}" var="review">
+	 <tr>
+	    <td>${review.reviewNo}</td>
+	    <td><a href='detail?no=${review.cafe.no}'>${review.cafe.name}</a></td>
+	    <td>
+	    <c:set var="grade" value="${review.grade}" /> 
+	          <% 
+	          int grade = (int) pageContext.getAttribute("grade");
+	          String star = CafeHandlerHelper.getReviewGradeStatusLabel(grade);
+	          pageContext.setAttribute("star", star);
+	          %>
+	      ${star}(${review.grade}/5)
+	    </td>
+	    <td>${review.content}</td>
+	    <td>${review.registeredDate}</td>
+	    <td>
+	      <button class="btn btn-outline-dark"><a href="reviewDelete?reviewNo=${review.reviewNo}">삭제</a></button>
+	    </td>
+	 </tr>
+	</c:forEach>
+  </tbody>
+</table>
+</c:if>
+
+<c:if test='${empty reviewList}'>
+   등록된 리뷰가 없습니다.<br><br>  
+</c:if>
+<br>
+
+</body>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h4 class="offcanvas-title" id="offcanvasExampleLabel">👑 관리자 👑</h4>
     <button type="button2" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     <hr>
   </div>
-  
+
   <div class="offcanvas-body">
     <div>
       <b>이동하고 싶은 탭을 선택해 주세요!</b>
@@ -175,10 +196,7 @@
       </div>
     </div>
       
-  </div>
+    </div>
+</div>
 
 </html>
-
-
-
-

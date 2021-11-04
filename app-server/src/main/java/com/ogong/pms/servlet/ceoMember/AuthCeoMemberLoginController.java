@@ -54,6 +54,7 @@ public class AuthCeoMemberLoginController extends HttpServlet {
 
       } 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
