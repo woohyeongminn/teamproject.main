@@ -1,53 +1,53 @@
 package com.ogong.pms.servlet.askBoard;
 
-import java.sql.Date;
+import java.io.IOException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.Reply;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class ReplyAddFromHandler implements Command {
+@WebServlet("/askboard/replyaddform")
+public class ReplyAddFromHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
-  AskBoardDao askBoardDao;
   SqlSession sqlSession;
+  AskBoardDao askBoardDao;
 
-  public ReplyAddFromHandler(AskBoardDao askBoardDao, SqlSession sqlSession) {
-    this.askBoardDao = askBoardDao;
-    this.sqlSession = sqlSession;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
   }
 
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println(" ▶ 답변 등록");
-    System.out.println();
+  @Override
+  public void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    int askNo = (int) request.getAttribute("askNo");
+    try {
 
-    AskBoard askBoard = askBoardDao.findByNo(askNo);
+      int askNo = Integer.parseInt(request.getParameter("askNo"));
 
-    if (askBoard.getReply() != null) {
-      System.out.println(" >> 이미 등록된 답변이 있습니다.");
-      return;
+      AskBoard askBoard = askBoardDao.findByNo(askNo);
+
+      if (askBoard.getReply() != null) {
+        throw new Exception(" >> 이미 등록된 답변이 있습니다.");
+      }
+
+      request.setAttribute("askBoard", askBoard);
+      request.getRequestDispatcher("/askBoard/ReplyAddForm.jsp").forward(request, response);
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
 
-    Reply reply = new Reply();
-    reply.setReplyTitle(askBoard.getAskTitle());
-    reply.setReplyContent(Prompt.inputString(" 내용: "));
-    reply.setReplyRegisteredDate(new Date(System.currentTimeMillis()));
-
-    String input = Prompt.inputString("\n 정말 등록하시겠습니까? (네 / 아니오) ");
-    if (!input.equals("네")) {
-      System.out.println(" >> 등록을 취소하였습니다.");
-      return;
-    }
-
-    askBoard.setReply(reply);
-
-    askBoardDao.insertreply(askBoard);
-    sqlSession.commit();
-    System.out.println(" >> 답글이 등록되었습니다.");
   }
 }

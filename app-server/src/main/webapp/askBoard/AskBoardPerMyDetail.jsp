@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -31,6 +32,21 @@
      <!-- 멤버에 씨이오멤버가 들어감... -->
      <span>작성자ㅣ</span> <span>${myAskBoard.askMemberWriter.perNickname}</span><br>
      <span>작성일ㅣ</span> <span>${myAskBoard.askRegisteredDate}</span><br>
+     
+     <c:choose>
+      <c:when test="${empty myAskBoard.reply}">
+      <span>
+        등록된 답변이 없습니다.
+      </span><br>      
+      </c:when>
+      <c:otherwise>
+      <span>관리자ㅣ</span>
+       <span>
+       ${myAskBoard.reply.replyTitle} | ${myAskBoard.reply.replyContent} | 
+       ${myAskBoard.reply.replyRegisteredDate}
+       </span><br>
+      </c:otherwise>
+     </c:choose>
 </body>
 
    <button type="submit" value="수정" formaction="update">

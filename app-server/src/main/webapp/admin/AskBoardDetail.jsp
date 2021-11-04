@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +35,7 @@
 </body>
 
   <button type="submit" value="답변" formaction="reply">
-        <a href='?????no=${adminAskBoard.askNo}'>답변등록</a>
+        <a href='../askboard/replyaddform?askNo=${adminAskBoard.askNo}'>답변등록</a>
       </button>
    <button type="submit" value="삭제" formaction="delete">
         <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
