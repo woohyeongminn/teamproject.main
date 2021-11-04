@@ -18,47 +18,28 @@ label {
 <body>
 <jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 상세</h1>
-	<form action='update'>
-		<label for='f-studyNo'>번호</label>
-		<input id='f-studyNo' type='text' name='studyNo' value='${study.studyNo}' readonly><br>
-
-		<label for='f-countBookMember'>북마크</label>
-		<input id='f-countBookMember' type='text' name='countBookMember' value='${study.countBookMember}' readonly><br>
+	<form action='updateform'>
+	  <input type='hidden' name='subjectNo' value='${study.subjectNo}'>
+		<span>번호ㅣ</span> <span>${study.studyNo}</span><br>
+    <span>북마크ㅣ</span> <span>${study.countBookMember}</span><br>
+    <span>제목ㅣ</span> <span>${study.studyTitle}</span><br>
+    <span>조장ㅣ</span> <span>${study.owner.perNickname}</span><br>
+    <span>분야ㅣ</span> <span>${study.subjectName}</span><br>
+    <span>지역ㅣ</span> <span>${study.area}</span><br>
+    <span>인원수ㅣ</span> <span>${study.countMember}</span><br>
+    <span>최대 인원수ㅣ</span> <span>${study.numberOfPeple}</span><br>
+    <span>대면 상태ㅣ</span> <span>${study.faceName}</span><br>
+    <span>소개글ㅣ</span> <span>${study.introduction}</span><br>
+    <span>활동 점수ㅣ</span> <span>${study.point}</span><br>
 		
-		<label for='f-studyTitle'>제목</label>
-		<input id='f-studyTitle' type='text' name='studyTitle' value='${study.studyTitle}'><br>
-    
-		<label for='f-owner'>조장</label>
-		<input id='f-owner' type='text' name='owner' value='${study.owner.perNickname}' readonly><br>
-		
-		<label for='f-subjectName'>분야</label>
-		<input id='f-subjectName' type='text' name='subjectName' value='${study.subjectName}'><br>
-		
-		<label for='f-area'>지역</label>
-		<input id='f-area' type='text' name='area' value='${study.area}'><br>
-
-		<label for='f-countMember'>인원수</label>
-		<input id='f-countMember' type='text' name='countMember' value='${study.countMember}' readonly><br>
-
-		<label for='f-numberOfPeple'>최대 인원수</label>
-		<input id='f-numberOfPeple' type='text' name='numberOfPeple' value='${study.numberOfPeple}'><br>
-
-		<label for='f-faceName'>대면/비대면</label>
-		<input id='f-faceName' type='text' name='faceName' value='${study.faceName}'><br>
-		
-		<label for='f-introduction'>소개글</label>
-		<input id='f-introduction' type='text' name='introduction' value='${study.introduction}'><br>
-		
-		<label for='f-point'>활동 점수</label>
-		<input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
 		<c:if test="${study.owner.perNo eq member.perNo}">
-      <button>
-      <a href='update?studyno=${study.studyNo}'>수정</a>
+    <button  type="submit" value="수정" formaction="updateform">
+      <a href='updateform?perno=${member.perNo}&studyno=${study.studyNo}'>수정</a>
     </button>
-      <button>
-         <a href='delete?studyno=${study.studyNo}'>삭제</a>
-      </button>
-      </c:if>
+    <button>
+       <a href='delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
+    </button>
+    </c:if>
 		<!-- <c:if test="${study.owner.perNickname eq member.perNickname}">
 		<button id="writer">
       <a href='update?studyno=${study.studyNo}'>수정</a>
@@ -72,6 +53,7 @@ label {
 		}
 		</style>
 		</c:if> -->
+		
 		<button>
 			<a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>
 		</button>

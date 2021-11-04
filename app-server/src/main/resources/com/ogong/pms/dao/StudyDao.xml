@@ -158,7 +158,33 @@
     study_no=#{studyNo}
   </update>
   
+  <update id="updateStudyTitle" parameterType="Study">
+    update study set
+     study_title = #{studyTitle}
+    where
+     study_no=#{studyNo}
+  </update>
   
+  <update id="updateNumberOfPeple" parameterType="Study">
+    update study set
+     no_people = #{numberOfPeple}
+    where
+     study_no=#{studyNo}
+  </update>
+  
+  <update id="updateFaceNo" parameterType="Study">
+    update study set
+     face_no = #{faceNo}
+    where
+     study_no=#{studyNo}
+  </update>
+  
+  <update id="updateIntroduction" parameterType="Study">
+    update study set
+     introduction = #{introduction}
+    where
+     study_no=#{studyNo}
+  </update>
   
   <!--  ===[스터디 삭제(북마크)]=== -->
   <delete id="deleteAllBookmark" parameterType="int">
