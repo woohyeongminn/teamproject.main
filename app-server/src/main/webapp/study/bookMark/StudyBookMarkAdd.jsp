@@ -7,7 +7,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="../header.css"> -->
 </head>
 <body>
-<!-- <jsp:include page="../bookMark/header.jsp"/> -->
+<jsp:include page="../../header.jsp"/>
 	<h1>📖 북마크 추가</h1>
 	<table border='1'>
 		<tbody>

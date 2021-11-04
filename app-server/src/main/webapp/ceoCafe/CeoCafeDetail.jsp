@@ -72,10 +72,10 @@
   
   <span>============= 리뷰 =============</span>
 	 <c:if test='${not empty reviewList}'>
-		 <c:forEach items="${reviewList}" var="reviewList">
+		 <c:forEach items="${reviewList}" var="review">
 		  <div id='c-review'>
 			   <span>닉네임ㅣ</span>
-			   <span>${reviewList.member.perNickname}</span>
+			   <span>${review.member.perNickname}</span>
 			   
 			   <span>별점 </span>
 			   <span id='c-grade'>
