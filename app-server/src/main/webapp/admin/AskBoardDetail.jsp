@@ -22,7 +22,7 @@
   }
 </style>
 </head>
-
+    
 <body>
    <b> 💬 문의글 상세[관리자 전용]</b>
    <hr>
@@ -51,10 +51,6 @@
   <button type="submit" value="삭제" formaction="delete">
    <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
   </button>  
-  
- 
-
-
 </html>  
      
      
