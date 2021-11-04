@@ -8,7 +8,6 @@
   <meta charset="UTF-8">
   <title>🏘 스터디 카페</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <style>
@@ -25,6 +24,7 @@
     xborder: 1px solid black;
   }
   rect {
+  width: 414px;
   fill: lightyellow;
   }
   text {
@@ -92,6 +92,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <br>
 <legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 🏘 스터디 카페 목록 </b></legend><br>
 <hr>

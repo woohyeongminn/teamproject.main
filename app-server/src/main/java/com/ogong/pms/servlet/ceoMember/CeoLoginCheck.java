@@ -8,41 +8,43 @@
 //import javax.servlet.http.HttpServlet;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
-//import org.apache.ibatis.session.SqlSession;
 //import com.ogong.pms.dao.CeoMemberDao;
+//import com.ogong.pms.domain.CeoMember;
 //
-//@WebServlet("/ceomember/add/idcheck")
-//public class CeoEmailCheckController extends HttpServlet {
+//@WebServlet("/ceomember/logincheck")
+//public class CeoLoginCheck extends HttpServlet {
+//
 //  private static final long serialVersionUID = 1L;
 //
 //  CeoMemberDao ceoMemberDao;
-//  SqlSession sqlSession;
+//
+//  public static CeoMember loginCeoMember;
+//  public static CeoMember getLoginCeoMember() {
+//    return loginCeoMember;
+//  }
 //
 //  @Override
 //  public void init(ServletConfig config) throws ServletException {
 //    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-//    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
 //    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
 //  }
 //
-//  // 기업 개인
 //  @Override
 //  protected void service(HttpServletRequest request, HttpServletResponse response)
 //      throws ServletException, IOException {
 //
 //    try {
-//      String email =  request.getParameter("checkEmail");
+//      String email = request.getParameter("email");
 //
-//      ceoMemberDao
+//      CeoMember ceoMember = ceoMemberDao.findByEmail(email);
 //
-//
-//      //response.setHeader("Refresh", "1;url=list");
-//      request.getRequestDispatcher("/ceoMember/CeoMemberAdd.jsp").forward(request, response);
-//
-//    } catch (Exception e) {
-//      request.setAttribute("error", e);
-//      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-//    }
-//
+//      if (email.equals(ceoMember.getCeoEmail())) {
+//        
+//      }
+//    } 
+//  } catch (Exception e) {
+//    e.printStackTrace();
+//    request.setAttribute("error", e);
+//    request.getRequestDispatcher("/Error.jsp").forward(request, response);
 //  }
 //}

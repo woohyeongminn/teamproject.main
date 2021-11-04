@@ -19,7 +19,7 @@
   text-align-last: center;
   }
   div {
-  margin-left: 100px;
+  margin-left: 120px;
   display: flex;
   align-items: center;
   flex-direction: row;

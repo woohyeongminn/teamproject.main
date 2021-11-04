@@ -28,37 +28,9 @@
   
 </style>
 <script type="text/javascript">
-
 function checkValue() {
 	
 	var form = document.ceoInfo;
-		
-	if(!form.email.value){
-				alert("이메일을 입력하세요.");
-				return false;
-	 }
-	
-	 if(!form.email.value != "checkEmail"){
-				 alert("이메일 중복체크를 해주세요.");
-				 return false;
-	 }
-	 
-	if(!form.password.value){
-				alert("비밀번호를 입력하세요.");
-				return false;
-	 }
-	
-	if(form.passwordcheck.value ==""){
-		    alert("비밀번호 확인란에 입력해주세요.");
-		    form.passwordcheck.focus();
-		    return false;
-	  }
-	
-	if(form.password.value != form.passwordcheck.value){
-				alert("비밀번호를 동일하게 입력하세요.");
-				form.passwordcheck.focus();
-				return false;
-	 }
 	
 	if(!form.name.value){
 	      alert("이름을 입력하세요.");
@@ -84,16 +56,35 @@ function checkValue() {
         alert("사업자번호를 입력하세요.");
         return false;
     }
+
+	  if(!form.email.value){
+	        alert("이메일을 입력하세요.");
+	        return false;
+	   }
+	  
+	   if(!form.email.value != "checkEmail"){
+	         alert("이메일 중복체크를 해주세요.");
+	         return false;
+	   }
+	   
+	  if(!form.password.value){
+	        alert("비밀번호를 입력하세요.");
+	        return false;
+	   }
+	  
+	  if(form.passwordcheck.value ==""){
+	        alert("비밀번호 확인란에 입력해주세요.");
+	        form.passwordcheck.focus();
+	        return false;
+	    }
+	  
+	  if(form.password.value != form.passwordcheck.value){
+	        alert("비밀번호를 동일하게 입력하세요.");
+	        form.passwordcheck.focus();
+	        return false;
+	   }
 }
 
-function openEmailCheck() {
-	   window.name = "parentForm";
-	   window.open("ceoMember/CeoEmailCheckForm.jsp", "chkForm", "width=500, height=300, resizable = no, scrollbars = no")
-}
-	
-function inputEmail() {
-	document.ceoInfo.emailUncheck.value = "emailUncheck";
-}
 	</script>
 </head>
 
@@ -108,26 +99,26 @@ function inputEmail() {
   
   <form action='add' method="post" name='ceoInfo' onsubmit="return checkValue()">
 	  <label for='f-name' class='form-label'>이름</label>
-	  <input id='f-name' type='text' name='name' placeholder="이름" required/><br>
+	  <input id='f-name' type='text' name='name' placeholder="이름"/><br>
 	  
 	  <label for='f-nickname' class='form-label'>닉네임</label>
-	  <input id='f-nickname' type='text' name='nickname' placeholder="닉네임" required/>
+	  <input id='f-nickname' type='text' name='nickname' placeholder="닉네임" />
 	  <input type="button" value="중복확인" /><br>
 
 	  <label for='f-photo' class='form-label'>사진</label>
 	  <input id='f-photo' type='text' name='photo' placeholder="사진"/><br>
 	  
 	  <label for='f-tel' class='form-label' >전화번호</label>
-	  <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;" required/> -
-	  <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='3' maxlength='4'  style="width:50px;" required/> -
-	  <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='3' maxlength='4'  style="width:50px;" required/> <br>
+	  <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
+	  <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='3' maxlength='4'  style="width:50px;"/> -
+	  <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='3' maxlength='4'  style="width:50px;"/> <br>
 	  
 	  <label for='f-bossname' class='form-label'>대표자명</label>
-    <input id='f-bossname' type='text' name='bossname' placeholder="대표자명" required/><br>
+    <input id='f-bossname' type='text' name='bossname' placeholder="대표자명"/><br>
     
     <label for='f-licenseno' class='form-label'>사업자 등록번호</label>
     <input id='f-licenseno' type='text' name='licenseno'
-     pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="사업자 등록번호" required/><br>
+     pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="사업자 등록번호"/><br>
     
 	  <label for='f-email' class='form-label'>이메일</label>
 	  <input id='f-email' type='text' name='email' pattern="^[a-zA-Z0-9]+$" placeholder="이메일" onkeydown="inputEmail()"/>@
@@ -137,17 +128,16 @@ function inputEmail() {
 		  <option>gmail.com</option>
 		  <option>kakao.com</option>
 	  </select>
-	  <input type="button" value="중복확인" onclick="openEmailCheck()"/>
-	  <input type="hidden" value="emailUncheck" value="emailUncheck"/><br>
+	  <input type="button" value="중복확인"/><br>
 	  
 	  <label for='f-password' class='form-label'>비밀번호</label>
 	  <input id='f-password' type='password' name='password'
 	   pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,16}$"
 	   title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
-	   placeholder="비밀번호" required/><br>
+	   placeholder="비밀번호"/><br>
 	 
 	  <label for='f-passwordcheck' class='form-label'>비밀번호 확인</label>
-	  <input id='f-passwordcheck' type='password' name='passwordcheck' placeholder="비밀번호 확인" required/><br>
+	  <input id='f-passwordcheck' type='password' name='passwordcheck' placeholder="비밀번호 확인"/><br>
 	  
 	  <button type="submit" class="btn btn-primary">회원가입</button>
 	  <input type="button" value="취소"/>

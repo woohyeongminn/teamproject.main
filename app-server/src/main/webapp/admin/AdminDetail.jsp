@@ -89,7 +89,7 @@
 
 <div class="card">
   <div class="card-header">
-      <img src="https://lh3.googleusercontent.com/ogw/ADea4I5r4FiJPO5QcSWwbxnVlYE-NDM7GrABSzLctf_I=s83-c-mo" alt="Profile Image" class="profile-img">
+      <img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img">
   </div>
 <p><input id='f-nickName' type='nickName' name='nickName' placeholder='${adminpro.masterNickname} 👑' size='20' readonly></p>
 <br>

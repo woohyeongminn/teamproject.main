@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <title>오늘의 공부</title>
-<link rel="icon" href="./favicon.ico" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="./img/favicon.ico" type="image/x-icon" sizes="16x16">
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -153,19 +154,32 @@ section {
 .contents .c1 {
   width: 100%;
   height: 800px;
-  background-color: #f0e3d4;
+  background-color: rgb(219, 211, 209);
 }
 
 .contents .c2 {
   width: 100%;
   height: 800px;
-  background-color: wheat;
+  background-color: rgb(247, 231, 215);
 }
 
 .contents .c3 {
   width: 100%;
   height: 800px;
-  background-color: cornsilk;
+  background-color: rgb(247, 247, 247);
+}
+
+a.navbar-brand {
+color: white;
+background-color: gray;
+border-radius: 50%;
+opacity: 0.3;
+padding: 12px 10px;
+margin: 0 auto;
+display: inline-block;
+position: fixed;
+right: 30px;
+bottom: 20px;
 }
 
 /*footer 시작*/
@@ -197,8 +211,8 @@ footer {
 
 <body>
     <header>
-      <div class='header_logo'>
-        <a href="index.html"><img src="logo.png"></a>
+      <div class='header_logo' id="first">
+        <a href="index.html"><img src="img/logo.png"></a>
       </div>
 
       <ul class="header_menu">
@@ -226,7 +240,13 @@ footer {
         세번째 내용
       </div>
     </div>
+    
     </section>
+    
+    <nav id="navbar-example2" class="navbar navbar-light bg-light px-3 navbarbtn">
+      <a class="navbar-brand" href="#first">
+      <i class="fas fa-graduation-cap fa-2x"></i></a>
+    </nav>
 
     <footer>
       <ul class="footer_company">
