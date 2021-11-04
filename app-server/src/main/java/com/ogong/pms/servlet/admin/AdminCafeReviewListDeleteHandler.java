@@ -1,52 +1,48 @@
 package com.ogong.pms.servlet.admin;
 
+import java.io.IOException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.CafeReview;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class AdminCafeReviewListDeleteHandler implements Command{
+@WebServlet("/admin/reviewDelete")
+public class AdminCafeReviewListDeleteHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   CafeReviewDao cafeReviewDao;
   SqlSession sqlSession;
 
-  public AdminCafeReviewListDeleteHandler (CafeReviewDao cafeReviewDao, SqlSession sqlSession) {
-    this.cafeReviewDao = cafeReviewDao;
-    this.sqlSession = sqlSession;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeReviewDao = (CafeReviewDao) 웹애플리케이션공용저장소.getAttribute("cafeReviewDao");
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 리뷰 삭제하기");
-    System.out.println();
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    int userReviewNo = Prompt.inputInt(" 번호 : ");
+    try {
 
-    CafeReview cafeReview = cafeReviewDao.findByReviewNo(userReviewNo);
+      int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 
-    if (cafeReview == null) {
-      System.out.println(" >> 리뷰가 존재하지 않습니다.");
-      return;
+      CafeReview cafeReview = cafeReviewDao.findByReviewNo(reviewNo);
+
+      cafeReviewDao.deleteCafeReview(reviewNo);
+      sqlSession.commit();
+
+      response.sendRedirect("cafeList");
+
+    } catch (Exception e) {
+      e.printStackTrace();
     }
-
-    if (cafeReview.getReviewStatus() == 2) {
-      System.out.println(" >> 이미 삭제된 리뷰입니다.");
-      return;
-    }
-
-    String input = Prompt.inputString(" 정말 삭제하시겠습니까? (네 /아니오) ");
-    System.out.println();
-    if (!input.equalsIgnoreCase("네")) {
-      System.out.println(" >> 삭제를 취소합니다.");
-      return;
-    }
-
-    cafeReviewDao.deleteCafeReview(userReviewNo);
-    sqlSession.commit();
-
-    System.out.println(" >> 리뷰 삭제를 완료하였습니다.");
-  }
+  } 
 }

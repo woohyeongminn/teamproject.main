@@ -1,22 +1,43 @@
 package com.ogong.pms.servlet.ceoMember;
 
 import java.io.IOException;
+import java.util.Collection;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ogong.pms.dao.CeoMemberDao;
+import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/addform")
 public class CeoAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  // 기업 개인
+  CeoMemberDao ceoMemberDao;
+
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
+  }
+
+  // 기업 회원가입
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    request.getRequestDispatcher("/ceoMember/CeoMemberAddForm.jsp").forward(request, response);
+    try {
+      Collection<CeoMember> ceoMemberList  = ceoMemberDao.findAll();
+
+      request.setAttribute("ceoMemberList", ceoMemberList);
+      request.getRequestDispatcher("/ceoMember/CeoMemberAddForm.jsp").forward(request, response);
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
+
 
   }
 }

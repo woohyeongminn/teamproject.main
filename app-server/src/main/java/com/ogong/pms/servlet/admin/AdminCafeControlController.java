@@ -17,7 +17,7 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 
 @WebServlet("/admin/cafeControl")
-public class AdminCafeControlHandler extends HttpServlet {
+public class AdminCafeControlController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   // updateForm형식
   CafeDao cafeDao;
