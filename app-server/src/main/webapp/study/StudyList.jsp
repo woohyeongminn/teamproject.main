@@ -14,21 +14,20 @@
 	<!-- <div class="row" style="background-color: yellow">
   <div class="col-md-4"><a href='list?perno=${perno}'>전체</a></div>
   <div class="col-md-4"><a href='list/ing?perno=${perno}'>진행</a></div>
-  <div class="col-md-4"><a href='list/end?perno=${perno}'>완료</a></div> -->
-  </div>
-	<button>
+  <div class="col-md-4"><a href='list/end?perno=${perno}'>완료</a></div>
+  </div> -->
+<button>
     <a href='list?perno=${perno}'>전체</a>
-  </button>
-  <button>
+</button>
+<button>
     <a href='list/ing?perno=${perno}'>진행</a>
-  </button>
-	<button>
-		<a href='list/end?perno=${perno}'>완료</a>
-	</button><br>
-	<button>
-		<a href='form?perno=${perno}'>등록</a>
-	</button>
-	<br>
+</button>
+<button>
+	<a href='list/end?perno=${perno}'>완료</a>
+</button><br>
+<button>
+	<a href='form?perno=${perno}'>등록</a>
+</button><br>
 	<table class="table table-hover">
 		<thead>
 			<tr>

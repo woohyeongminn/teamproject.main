@@ -11,6 +11,10 @@ public interface StudyDao {
   // --------------- [ 스터디 ] ----------------------------------------
   void insert(Study study) throws Exception;
   void update(Study study) throws Exception;
+  void updateStudyTitle(Study study) throws Exception;
+  void updateNumberOfPeple(Study study) throws Exception;
+  void updateFaceNo(Study study) throws Exception;
+  void updateIntroduction(Study study) throws Exception;
   void deleteAllBookmark(int studyNo) throws Exception;
   //void deleteStudy(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   List<Study> findAll() throws Exception;

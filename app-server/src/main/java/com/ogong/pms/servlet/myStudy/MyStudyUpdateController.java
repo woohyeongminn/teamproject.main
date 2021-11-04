@@ -9,13 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 @WebServlet("/study/update")
 public class MyStudyUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  MemberDao memberDao;
   StudyDao studyDao;
   SqlSession sqlSession;
 
@@ -23,6 +26,7 @@ public class MyStudyUpdateController extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
@@ -31,23 +35,26 @@ public class MyStudyUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      // int no = Integer.parseInt(request.getParameter("no"));
-      // Member member = memberDao.findByNo(no);
+      int perNo = Integer.parseInt(request.getParameter("perno"));
+      Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      Study myStudy = studyDao.findByNo(studyNo);
+      Study study = studyDao.findByNo(studyNo);
 
-      myStudy.setStudyTitle(request.getParameter("studyTitle"));
-      myStudy.setSubjectNo(Integer.parseInt(request.getParameter("subjectNo")));
-      myStudy.setArea(request.getParameter("area"));
-      myStudy.setNumberOfPeple(Integer.parseInt(request.getParameter("numberOfPeple")));
-      myStudy.setFaceNo(Integer.parseInt(request.getParameter("faceNo")));
-      myStudy.setIntroduction(request.getParameter("introduction"));
+      study.setStudyTitle(request.getParameter("studyTitle"));
+      study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberOfPeple")));
+      study.setFaceNo(Integer.parseInt(request.getParameter("faceNo")));
+      study.setIntroduction(request.getParameter("introduction"));
 
-      studyDao.update(myStudy);
+      studyDao.updateStudyTitle(study);
+      studyDao.updateNumberOfPeple(study);
+      studyDao.updateFaceNo(study);
+      studyDao.updateIntroduction(study);
       sqlSession.commit();
 
-      response.sendRedirect("list");
+      request.setAttribute("member", member);
+      request.setAttribute("study", study);
+      response.sendRedirect("detail?studyno=" + study.getStudyNo());
 
     } catch (Exception e) {
       e.printStackTrace();
