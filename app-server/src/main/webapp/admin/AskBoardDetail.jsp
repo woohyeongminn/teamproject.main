@@ -46,14 +46,13 @@
     ㅣ ${adminAskBoard.reply.replyContent}
     ㅣ${adminAskBoard.reply.replyRegisteredDate}</span><br>
 </c:otherwise>
-
-
 </c:choose>
   
   <button type="submit" value="삭제" formaction="delete">
    <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
-  </button>   
-
+  </button>  
+  
+ 
 
 
 </html>  
