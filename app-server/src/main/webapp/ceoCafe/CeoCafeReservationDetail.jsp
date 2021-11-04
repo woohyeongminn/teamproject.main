@@ -26,13 +26,12 @@
 <body>
 <br>
 <h3> 📝 예약 내역 상세</h3><br>
-<h1>예약 내역 상세보기</h1>
 <hr>
   <div id='content'>
     <label>예약날짜</label>${cafeReser.reservationDate}<br>
     <label>이용날짜</label>${cafeReser.useDate}<br>
-    <label>예약장소</label>${reservation.cafe.name}<br>
-    <label>스터디룸</label>${reservation.roomName}<br>
+    <label>예약장소</label>${cafeReser.cafe.name}<br>
+    <label>스터디룸</label>${cafeReser.roomName}<br>
     <label>이용시간</label>${cafeReser.startTime} ~ ${cafeReserEndTime} (${cafeReser.useTime}시간)<br>
     <label>결제금액</label>${cafeReser.totalPrice}<br>
     <label>리뷰작성여부</label>${reviewStatusLable}<br>
@@ -41,14 +40,11 @@
 <br>&nbsp;&nbsp;
 
 <!-- 예약 거절 버튼 -->
-
-<c:if test="${reserStatusLable eq '예약완료'}">
-<button type="button" class="btn btn-outline-dark"><a href="reservationDelete?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">예약거절</a></button>
+<c:if test="${cafeReser.reservationStatusName eq '예약완료'}">
+<a href='rejectform?no=${cafeReser.reservationNo}&ceono=${ceoMember.ceoNo}' class="btn btn-outline-dark">예약거절</a>
 </c:if>
 
-<button type="button" class="btn btn-outline-dark"><a href="reservationList?perNo=${memberNo}">목록</a></button> --%>
-
-
+  <a href="list?ceono=${ceoMember.ceoNo}" class="btn btn-outline-dark">목록</a>
 
 
 </body>
