@@ -45,6 +45,14 @@ public class CeoReservationRejectController extends HttpServlet {
       response.sendRedirect("list?ceono=" + ceoNo );
 
 
+      //    } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
+      //      System.out.println(" >> 당일 예약은 거절 불가능합니다.");
+      //      return;
+      //    } else {
+      //      System.out.println(" >> 지난 예약은 선택할 수 없습니다.");
+      //      return;
+      //    }
+
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

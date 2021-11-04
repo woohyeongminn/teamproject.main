@@ -44,7 +44,12 @@
 <a href='rejectform?no=${cafeReser.reservationNo}&ceono=${ceoMember.ceoNo}' class="btn btn-outline-dark">예약거절</a>
 </c:if>
 
-  <a href="list?ceono=${ceoMember.ceoNo}" class="btn btn-outline-dark">목록</a>
+<!-- 결제 거절 버튼 -->
+<c:if test="${cafeReser.reservationStatusName eq '결제완료'}">
+<a href='#<%-- ?no=${cafeReser.reservationNo}&ceono=${ceoMember.ceoNo} --%>' class="btn btn-outline-dark">결제 환불</a>
+</c:if>
+
+<a href="list?ceono=${ceoMember.ceoNo}" class="btn btn-outline-dark">목록</a>
 
 
 </body>

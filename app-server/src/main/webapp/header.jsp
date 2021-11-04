@@ -4,7 +4,7 @@
 
 <header>
   <div class='header_logo'>
-    <a href="/ogong/main.html"><img src="logo.png"></a>
+    <a href="/ogong/index.html"><img src="/ogong/logo.png"></a>
   </div>
 
   <ul class="header_menu">

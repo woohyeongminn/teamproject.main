@@ -45,7 +45,13 @@ public class CeoAddController extends HttpServlet {
     ceoMember.setCeoPhoto(request.getParameter("photo"));
 
     // 전화번호
-    ceoMember.setCeoTel(request.getParameter("tel"));
+    int tel1 = Integer.parseInt(request.getParameter("tel1"));
+    int tel2 = Integer.parseInt(request.getParameter("tel2"));
+    int tel3 = Integer.parseInt(request.getParameter("tel3"));
+
+    String tel = tel1 + "-" + tel2 + "-" + tel3;
+
+    ceoMember.setCeoTel(tel);
 
     // 대표자명
     ceoMember.setCeoBossName(request.getParameter("bossname"));
@@ -54,10 +60,13 @@ public class CeoAddController extends HttpServlet {
     ceoMember.setCeoLicenseNo(request.getParameter("licenseno"));
 
     // 이메일
-    ceoMember.setCeoEmail(request.getParameter("email"));
+    String email = request.getParameter("email");
+    String site = request.getParameter("site");
+
+    ceoMember.setCeoEmail(email +'@'+ site);
 
     // 비밀번호
-    ceoMember.setCeoPassword(request.getParameter("password"));
+    ceoMember.setCeoPassword(request.getParameter("passwordcheck"));
 
     // 가입일
     ceoMember.setCeoRegisteredDate(new Date(System.currentTimeMillis()));
