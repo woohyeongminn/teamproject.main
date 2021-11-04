@@ -36,7 +36,7 @@ public class AdminCafeReviewListControlHandler extends HttpServlet {
       List<CafeReview> reviewList = cafeReviewDao.getCafeReviewList();
 
       request.setAttribute("reviewList", reviewList);
-      request.getRequestDispatcher("/admin/AdminCafeReview.jsp").forward(request, response);
+      request.getRequestDispatcher("/admin/AdminCafeReviewList.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

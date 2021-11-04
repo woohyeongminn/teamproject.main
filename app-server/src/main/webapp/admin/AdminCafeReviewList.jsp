@@ -109,7 +109,6 @@
 	    <td>${review.content}</td>
 	    <td>${review.registeredDate}</td>
 	    <td>
-	    <td>
 	      <button class="btn btn-outline-dark"><a href="reviewDelete?reviewNo=${review.reviewNo}">삭제</a></button>
 	    </td>
 	 </tr>
