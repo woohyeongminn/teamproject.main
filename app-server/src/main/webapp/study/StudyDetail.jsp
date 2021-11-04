@@ -5,6 +5,7 @@
 <html>
 <head>
 <title>상세 | 스터디 찾기</title>
+<link rel="stylesheet" type="text/css" href="../header.css">
 <style>
 label {
 	margin-right: 5px;
@@ -15,6 +16,7 @@ label {
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 상세</h1>
 	<form action='update'>
 		<label for='f-studyNo'>번호</label>
