@@ -4,10 +4,10 @@
 <html>
 <head>
 <title>북마크 추가 | 스터디 찾기</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
+<!-- <link rel="stylesheet" type="text/css" href="../header.css"> -->
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<!-- <jsp:include page="../bookMark/header.jsp"/> -->
 	<h1>📖 북마크 추가</h1>
 	<table border='1'>
 		<tbody>

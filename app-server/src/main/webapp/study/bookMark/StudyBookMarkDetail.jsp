@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>상세 | 내 북마크</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
+<!-- <link rel="stylesheet" type="text/css" href="../header.css"> -->
 <style>
 label {
 	margin-right: 5px;
@@ -15,7 +15,7 @@ label {
 </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<!-- <jsp:include page="../bookMark/header.jsp"/> -->
 	<h1>🌟 내 북마크 상세</h1>
 	<label for='f-studyNo'>번호</label>
 	<input id='f-studyNo' type='text' name='studyNo'
