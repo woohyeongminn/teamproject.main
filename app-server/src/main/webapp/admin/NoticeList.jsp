@@ -160,13 +160,13 @@
 		
 		<div class="btn-group dropend">
 		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-		    🏘 장소 관리(미완)
+		    🏘 장소 관리
 		  </button>
 		  <div class="dropdown-menu" role="menu" style="border-color: white;">
 		    <button class="dromdown-item" type="button1">
 		      <a href="/ogong/admin/cafeList" style="color: black;">📝 장소 목록</a></button><br>
 		    <button class="dromdown-item" type="button1">
-		      <a href="/ogong/cafe/list" style="color: black;">🔖 장소 리뷰</a></button>
+		      <a href="/ogong/admin/reviewList" style="color: black;">🔖 장소 리뷰</a></button>
 		  </div>
 		</div>
 		
