@@ -12,7 +12,7 @@ import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
 @WebServlet("/askboard/detail")
-public class AskBoardDetailCotroller extends HttpServlet {
+public class AskBoardAllDetailCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
@@ -37,7 +37,7 @@ public class AskBoardDetailCotroller extends HttpServlet {
       }
 
       request.setAttribute("askBoard", askBoard);
-      request.getRequestDispatcher("/askBoard/AskBoardDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/askBoard/AskBoardAllDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.getStackTrace();
