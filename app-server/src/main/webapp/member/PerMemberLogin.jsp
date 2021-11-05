@@ -33,5 +33,6 @@
  <button><a href='../cafe/reservationList?perNo=${perMember.perNo}'>내 예약 목록</a></button>
  <button><a href='../cafe/reviewList?perNo=${perMember.perNo}'>내 리뷰 목록</a></button>
  <button><a href='../askboard/permylist?perNo=${perMember.perNo}'>내 문의게시판</a></button>
+ <button><a href='../mystudy/waitinglist?perNo=${perMember.perNo}'>내 스터디</a></button>
  </body>
 </html>
