@@ -20,17 +20,17 @@ label {
 	<h1>📖 스터디 상세</h1>
 	<form action='updateform'>
 	  <input type='hidden' name='subjectNo' value='${study.subjectNo}'>
-		<span>번호ㅣ</span> <span>${study.studyNo}</span><br>
-    <span>북마크ㅣ</span> <span>${study.countBookMember}</span><br>
-    <span>제목ㅣ</span> <span>${study.studyTitle}</span><br>
-    <span>조장ㅣ</span> <span>${study.owner.perNickname}</span><br>
-    <span>분야ㅣ</span> <span>${study.subjectName}</span><br>
-    <span>지역ㅣ</span> <span>${study.area}</span><br>
-    <span>인원수ㅣ</span> <span>${study.countMember}</span><br>
-    <span>최대 인원수ㅣ</span> <span>${study.numberOfPeple}</span><br>
-    <span>대면 상태ㅣ</span> <span>${study.faceName}</span><br>
-    <span>소개글ㅣ</span> <span>${study.introduction}</span><br>
-    <span>활동 점수ㅣ</span> <span>${study.point}</span><br>
+		<span>번호 </span> <span>${study.studyNo}</span><br>
+    <span>북마크 </span> <span>${study.countBookMember}</span><br>
+    <span>제목 </span> <span>${study.studyTitle}</span><br>
+    <span>조장 </span> <span>${study.owner.perNickname}</span><br>
+    <span>분야 </span> <span>${study.subjectName}</span><br>
+    <span>지역 </span> <span>${study.area}</span><br>
+    <span>인원수 </span> <span>${study.countMember}</span><br>
+    <span>최대 인원수 </span> <span>${study.numberOfPeple}</span><br>
+    <span>대면 상태 </span> <span>${study.faceName}</span><br>
+    <span>소개글 </span> <span>${study.introduction}</span><br>
+    <span>활동 점수 </span> <span>${study.point}</span><br>
 		
 		<c:if test="${study.owner.perNo eq member.perNo}">
     <button  type="submit" value="수정" formaction="updateform">
