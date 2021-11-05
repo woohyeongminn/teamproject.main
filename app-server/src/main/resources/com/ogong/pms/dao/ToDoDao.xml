@@ -14,8 +14,8 @@
     <result column="progress_no" property="todoStatus" />
 
     <association property="todoWriter" javaType="Member">
-      <id column="member_no" property="perNo" />
-      <result column="member_nickname" property="perNickname" />
+      <id column="perno" property="perNo" />
+      <result column="perNickname" property="perNickname" />
     </association>
   </resultMap>
 
@@ -26,10 +26,9 @@
     todo.content,
     todo.note,
     todo.create_dt,
-    m.member_no,
-    m.nickname,
-    tp.progress_no
-    progress_no
+    m.member_no perno,
+    m.nickname perNickname,
+    tp.progress_no progress_no
     from
     study_todolist todo
     inner join

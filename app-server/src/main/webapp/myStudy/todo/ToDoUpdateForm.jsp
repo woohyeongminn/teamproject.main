@@ -37,6 +37,7 @@
     <th>번호</th>
 		<th>내용</th>
 		<th>비고</th>
+		<th>작성자</th>
 		<th>날짜</th>
       </tr>
       </thead>
@@ -54,14 +55,16 @@
       </select></td>
   <input type='hidden' name='studyno' value='${study.studyNo}'>
   <input type='hidden' name='todono' value='${todo.todoNo}'>
+  <input type='hidden' name='perno' value='${member.perNo}'>
   <td><span>(${todo.todoNo})</span></td>
   <td><input id='f-content' type='text' name='content' value='${todo.todoContent}'></td>
   <td><input id='f-note' type='text' name='note' value='${todo.todoRemark}'></td>
+  <td><input id='f-writer' type='text' name='writer' value='${todo.todoWriter.perNickname}' readonly></td>
   <td><span id='f-create_dt'>${todo.todoDate}</span></td>
   </table>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button class="btn btn-outline-dark">변경</button>
-      <button class="btn btn-outline-dark"><a href="list?todono=${todo.todoNo}&studyno=${study.studyNo}">목록</a></button>
+      <button class="btn btn-outline-dark"><a href="list?perno=${member.perNo}&studyno=${study.studyNo}">목록</a></button>
   </div>
 </form>
 </body>

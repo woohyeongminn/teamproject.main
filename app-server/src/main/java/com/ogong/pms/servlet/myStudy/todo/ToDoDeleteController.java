@@ -1,13 +1,13 @@
 package com.ogong.pms.servlet.myStudy.todo;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
@@ -16,8 +16,8 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 
-@WebServlet("/mystudy/todo/updateform")
-public class ToDoUpdateFormController extends GenericServlet {
+@WebServlet("/mystudy/todo/delete")
+public class ToDoDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
@@ -34,8 +34,9 @@ public class ToDoUpdateFormController extends GenericServlet {
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
+
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -49,14 +50,12 @@ public class ToDoUpdateFormController extends GenericServlet {
       int todoNo = Integer.parseInt(request.getParameter("todono"));
       ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todoNo);
 
-      request.setAttribute("todo", todo);
-      request.setAttribute("member", member);
-      request.setAttribute("study", myStudy);
+      toDoDao.delete(todo.getTodoNo());
+      sqlSession.commit();
 
-      request.getRequestDispatcher("/myStudy/todo/ToDoUpdateForm.jsp").forward(request, response);
+      response.sendRedirect("list?perno="+member.getPerNo()+"&studyno="+myStudy.getStudyNo());
 
     } catch (Exception e) {
-      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

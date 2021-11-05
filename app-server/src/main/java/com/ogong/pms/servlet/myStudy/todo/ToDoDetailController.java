@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 
@@ -36,8 +37,8 @@ public class ToDoDetailController extends GenericServlet {
 
     try {
 
-      //      int perNo = Integer.parseInt(request.getParameter("perno"));
-      //      Member member = memberDao.findByNo(perNo);
+      int perNo = Integer.parseInt(request.getParameter("perno"));
+      Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study myStudy = studyDao.findByNo(studyNo);
@@ -46,7 +47,7 @@ public class ToDoDetailController extends GenericServlet {
       ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todoNo);
 
       request.setAttribute("todo", todo);
-      //      request.setAttribute("member", member);
+      request.setAttribute("member", member);
       request.setAttribute("study", myStudy);
       request.getRequestDispatcher("/myStudy/todo/ToDoDetail.jsp").forward(request, response);
 
