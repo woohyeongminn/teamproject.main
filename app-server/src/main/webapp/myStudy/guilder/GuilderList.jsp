@@ -90,9 +90,11 @@ ul{list-style:none;}
         <tbody>
           <c:forEach items="${waitingGuilderList}" var="waitingMember">
             <div class="card-body">
-            <div class="photo">${waitingMember.perPhoto}</div>
-            <h5><a class="profile" href="agree?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a></h5>
-          </div>
+	            <div class="photo">${waitingMember.perPhoto}</div>
+	            <h5><a class="profile" href="detail?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a></h5>
+            </div>
+            <a type="button" class="agreebtn" href="agree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">승인</a></div>
+            <a type="button" class="agreebtn" href="disagree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">거절</a></div>
           </c:forEach>
         </tbody>
       </table>
