@@ -11,19 +11,27 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
   label {
-    margin-left: 10px;
+    margin-right: 10px;
     text-align: center;
     display: inline;
     width: 60px;
   }
   legend {
   text-align: center;
+  font-size: 16px;
   }
-  input {
-  border : white;
-  outline-color : lightgray;
+  form {
+  max-width: 500px;
   }
-  input[type=checkbox]:checked {
+  .input {
+  display: inline-block;
+  padding:10px;
+  width:100%;
+  margin-top: 10px;
+  border-color : lightgray;
+  border-radius: 6px;
+  }
+  .input[type=checkbox]:checked {
   background-color: black;
   }
   p {
@@ -31,7 +39,7 @@
   }
   div {
   margin-right: 10px;
-  display: flex;
+  xdisplay: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
@@ -41,44 +49,73 @@
   text-decoration : blink;
   }
   a:hover {
-  color : white;
+  color : darkgray;
   }
+  
+  button {
+   width: 100%
+  }
+  
+  .form-check {
+  display: block;
+  padding: 0;
+  margin-bottom: 12px;
+  }
+
+  .form-check span {
+  font-size: 14px;
+  }
+  
+  .all-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+    margin-top:120px;
+  }
+  .inner {
+    max-width: 500px;
+    margin : 10px 0;
+  }
+  
+  .mb {
+  margin : 0;
+  text-align: center;
+  }
+  
+  .mb a {
+  padding: 5px;
+  font-size: 14px;
+  }
+  
 </style>
 </head>
 
 <body>
-<fieldset>
+<jsp:include page="../header.jsp"/>
+<div class="all-content">
+<b style="font-size:20px"> 🖐 기업 회원 로그인 </b>
 <br>
-<legend><b> 🖐 기업 회원 로그인 </b></legend><br>
 <hr>
-<table class="table table-responsive">
-  <form action='login'>
-		<br>
-			<p><label for='f-email' class='form-label' size='100px'>이메일</label>
-			<input id='f-email' type='email' name='email' placeholder='아이디' size='20'></p>
+<form action='login'>
+			<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
+			<input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
 			<br>
-			<p><label for='f-password' class='form-label' size='100px'>비밀번호</label>
-			<input id='f-password' type='password' name='password' placeholder='패스워드' size='20'><br></p>
-			<br>
-	</table>
-	</fieldset>
+			<!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
+			<input class="input" id='f-password' type='password' name='password' placeholder='Password'>
 	<div class="inner">
-	  <span ></span>
 	  <div class="form-check">
-	   <input type="checkbox" class="form-check-input" id="dropdownCheck">
-	   <label class="form-check-label" for="dropdownCheck">
+	   <input type="checkbox" class="rememberCheck" id="dropdownCheck">
+	   <span>
 	    정보 기억하기
-	   </label>
+	   </span>
 	  </div>
+		  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
 	</div>
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
-  </div>
 </form>
-<div class="mb-3">
-  <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="addform">회원가입</a>
-    <a class="dropdown-item" href="#">비밀번호찾기</a>
+<div class="mb">
+    <a href="addform">회원가입</a> |
+    <a href="#">비밀번호찾기</a>
    </div>
 </div>
 </body>
