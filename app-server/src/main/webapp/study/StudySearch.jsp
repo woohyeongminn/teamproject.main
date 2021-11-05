@@ -13,5 +13,5 @@ request.setCharacterEncoding("utf-8");
 		<option value="name">분야</option>
 		<option value="name">제목</option>
 	</select> <input type="text" name="sv"> <input type="submit"
-		value="검색버튼">
+		value="검색">
 </form>

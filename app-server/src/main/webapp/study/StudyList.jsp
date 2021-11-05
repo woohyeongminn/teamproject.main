@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ page import="java.sql.DriverManager"%>
-<%@ page import="java.sql.Connection"%>
-<%@ page import="java.sql.PreparedStatement"%>
-<%@ page import="java.sql.ResultSet"%>
-<%@ page import="java.sql.SQLException"%>
+<!-- @ page import="java.sql.DriverManager"%>
+@ page import="java.sql.Connection"%>
+@ page import="java.sql.PreparedStatement"%>
+@ page import="java.sql.ResultSet"%>
+@ page import="java.sql.SQLException"%> -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>목록 | 스터디 찾기</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -43,7 +44,7 @@
 		<a href='form?perno=${perno}'>등록</a>
 	</button>
 	<br>
-	<!-- <div class="input-group mb-3">
+	<div class="input-group mb-3">
 		<select name="sk">
 			<option value="area">지역</option>
 			<option value="subjectName">분야</option>
@@ -53,7 +54,7 @@
 			aria-label="Recipient's username" aria-describedby="button-addon2">
 		<input type="submit" value="검색" class="btn btn-outline-secondary"
 			id="button-addon2">
-	</div> -->
+	</div>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -68,7 +69,7 @@
 				<th>최대 인원수</th>
 			</tr>
 			</thread>
-
+			<!-- [GR] Search Ver.2 -->
 			<!-- request.setCharacterEncoding("utf-8");
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -124,8 +125,9 @@
 			}
 			} -->
 
-			<%@ include file="/study/StudySearch.jsp"%>
-			<%
+			<!-- [GR] Search Ver.3 -->
+			<!-- @ include file="/study/StudySearch.jsp"%>
+			
 			request.setCharacterEncoding("utf-8");
 			String sk = request.getParameter("sk");
 			String sv = request.getParameter("sv");
@@ -161,8 +163,7 @@
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-			%>
-		
+			%> -->
 		<tbody>
 			<c:forEach items="${studyList}" var="study">
 				<tr>
@@ -178,12 +179,11 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-		<%
-		}
+		<!-- }
 		rs.close();
 		pstmt.close();
 		conn.close();
-		%>
+		%>  -->
 	</table>
 </body>
 </html>
