@@ -26,27 +26,24 @@
   </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
 <fieldset>
 <br>
-<legend><b> 🔔 공지게시글 등록 </b></legend><br>
+<legend><b> 🪧 자유게시판 등록 </b></legend><br>
 <hr>
 <table class="table table-responsive">
 <thead>
 <tr>
-<th><label for='f-no'>번호</label></th>
 <th><label for='f-title'>제목</label></th>
 <th><label for='f-content'>내용</label></th>
 <th><label for='f-filepath'>파일</label></th>
-<th><label for='f-registeredDate'>등록일</label></th>
 </tr>
 </thead>
-  <form action='add'></td>
-  <td></td>
+  <form action='freeboardadd'></td>
+  <input type='hidden' name='perNo' value='${member.perNo}'>
+  <input type='hidden' name='studyNo' value='${studyNo}'>
   <td></label><input id='f-title' type='text' name='title'></td>
   <td><input id='f-content' type='text' name='content'></td>
   <td><input id='f-filepath' type='file' name='filepath'></td>
-  <td></td>
 </table>
 </fieldset>
 

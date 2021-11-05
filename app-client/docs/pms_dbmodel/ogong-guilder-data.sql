@@ -9,8 +9,8 @@ insert into study_guilder(member_no,study_no,created_dt,status)
 values(3,1,'2021-10-25',2);
 
 -- 스터디구성원 test 값 (4번은 study-data 에 있음)
---insert into study_guilder(member_no,study_no,created_dt,status) 
---values(4,1,'2021-10-25',2);
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(4,1,'2021-10-25',2);
 
 -- 스터디구성원 test 값
 insert into study_guilder(member_no,study_no,created_dt,status) 
