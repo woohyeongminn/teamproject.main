@@ -20,7 +20,7 @@ label {
 <body>
 <jsp:include page="../header.jsp"/>
   <h1>📖 스터디 상세</h1>
-  <form action='canclestudy'>
+  <form >
     <input type='hidden' name='subjectNo' value='${waitingStudy.subjectNo}'>
     <span>번호ㅣ</span> <span>${waitingStudy.studyNo}</span><br>
     <span>북마크ㅣ</span> <span>${waitingStudy.countBookMember}</span><br>
@@ -34,7 +34,7 @@ label {
     <span>소개글ㅣ</span> <span>${waitingStudy.introduction}</span><br>
     <span>활동 점수ㅣ</span> <span>${waitingStudy.point}</span><br>
     <button>
-      <a href='waitinglist?perNo=${member.perNo}'>참여취소</a>
+      <a href='waitingcancel?perNo=${member.perNo}&studyNo=${waitingStudy.studyNo}'>참여취소</a>
     </button>
     <button>
       <a href='waitinglist?perNo=${member.perNo}'>목록</a>
