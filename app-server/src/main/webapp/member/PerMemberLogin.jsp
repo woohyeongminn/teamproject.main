@@ -37,5 +37,6 @@
  <button><a href='../mystudy/ownerList?perNo=${perMember.perNo}'>내 스터디(조장)</a></button>
  <button><a href='../mystudy/guilderList?perNo=${perMember.perNo}'>내 스터디(구성원)</a></button>
  <button><a href='../mystudy/waitinglist?perNo=${perMember.perNo}'>내 스터디(승인 대기)</a></button>
+ <button><a href='../mystudy/list?perNo=${perMember.perNo}'>내 스터디 목록(통합)</a></button>
  </body>
 </html>
