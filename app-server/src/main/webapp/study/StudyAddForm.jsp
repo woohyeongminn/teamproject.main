@@ -38,7 +38,7 @@ label {
 				2. 비대면<br>
 				3. 대면/비대면<br>
 				</p>
-        <label for='f-faceNo'>대면/비대면</label> <input id='f-faceNo' type='text' name='faceno'><br>
+        <label for='f-faceNo'>대면 상태</label> <input id='f-faceNo' type='text' name='faceno'><br>
         <label for='f-introduction'>소개글</label> <input id='f-introduction' type='text' name='introduction'><br>
     <button type="submit" value="등록">등록</button><br>
 	</form>

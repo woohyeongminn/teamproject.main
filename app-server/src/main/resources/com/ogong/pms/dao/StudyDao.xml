@@ -160,7 +160,7 @@
   
   <update id="updateStudyTitle" parameterType="Study">
     update study set
-     study_title = #{studyTitle}
+     name = #{studyTitle}
     where
      study_no=#{studyNo}
   </update>
