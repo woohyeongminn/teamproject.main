@@ -11,15 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/mystudy/freeboardadd")
-public class FreeBoardAddHandler extends HttpServlet {
+@WebServlet("/mystudy/freeboardaddform")
+public class FreeBoardAddFormHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  FreeBoardDao freeBoardDao;
   MemberDao memberDao;
+  FreeBoardDao freeBoardDao;
   SqlSession sqlSession;
 
   @Override
@@ -27,9 +26,7 @@ public class FreeBoardAddHandler extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
-
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -40,30 +37,19 @@ public class FreeBoardAddHandler extends HttpServlet {
       int perNo = Integer.parseInt(request.getParameter("perNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-      // inputNo = 내 스터디 상세에서 선택한 스터디 번호
       Member member = memberDao.findByNo(perNo);
 
-      FreeBoard freeBoard = new FreeBoard();
+      request.setAttribute("studyNo", studyNo);
+      request.setAttribute("member", member);
 
-      freeBoard.setStudyNo(studyNo);
-      freeBoard.setFreeBoardTitle(request.getParameter("title"));
-      freeBoard.setFreeBoardContent(request.getParameter("content"));
-      freeBoard.setFreeBoardWriter(member);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardAddForm.jsp").forward(request, response);
 
-      freeBoardDao.insert(freeBoard);
-      sqlSession.commit();
-
-      response.sendRedirect(
-          "freeboardlist?studyNo="+ studyNo + "&perNo=" + perNo);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
+
   }
 }
-
-
-
-

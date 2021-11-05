@@ -39,11 +39,13 @@ public class AskBoardPerUpdateCotroller extends HttpServlet {
       perAskBoard.setAskContent(request.getParameter("content"));
 
       askBoardDao.update(perAskBoard);
+      sqlSession.commit();
 
       response.sendRedirect("permydetail?askNo="+ perAskBoard.getAskNo());
 
     } catch (Exception e) {
       e.printStackTrace();
+      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

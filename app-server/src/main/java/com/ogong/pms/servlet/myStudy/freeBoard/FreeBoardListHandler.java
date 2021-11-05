@@ -13,6 +13,7 @@ import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Member;
 
 @WebServlet("/mystudy/freeboardlist")
 public class FreeBoardListHandler extends HttpServlet {
@@ -36,9 +37,13 @@ public class FreeBoardListHandler extends HttpServlet {
 
     try {
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
+
+      Member member = memberDao.findByNo(perNo);
       List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyNo);
 
-      //request.setAttribute("member", member);
+      request.setAttribute("member", member);
+      request.setAttribute("studyNo", studyNo);
       request.setAttribute("freeBoardList", freeBoardList);
       request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardList.jsp").forward(request, response);
 

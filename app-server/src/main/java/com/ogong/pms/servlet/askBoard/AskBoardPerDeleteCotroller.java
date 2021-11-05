@@ -39,6 +39,7 @@ public class AskBoardPerDeleteCotroller extends HttpServlet {
 
     } catch (Exception e) {
       e.getStackTrace();
+      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

@@ -1,85 +1,60 @@
-package com.ogong.pms.handler.myStudy.freeBoard;
+package com.ogong.pms.servlet.myStudy.freeBoard;
 
-import org.apache.ibatis.session.SqlSession;
+import java.io.IOException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.FreeBoardDao;
+import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class FreeBoardDetailHandler implements Command {
+@WebServlet("/mystudy/freeboarddetail")
+public class FreeBoardDetailHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   FreeBoardDao freeBoardDao;
-  PromptFreeBoard promptFreeBoard;
-  SqlSession sqlSession;
+  StudyDao studyDao;
+  MemberDao memberDao;
 
-  public FreeBoardDetailHandler
-  (FreeBoardDao freeBoardDao, PromptFreeBoard promptFreeBoard, SqlSession sqlSession) {
-    this.freeBoardDao = freeBoardDao;
-    this.promptFreeBoard = promptFreeBoard;
-    this.sqlSession = sqlSession;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
   }
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 게시글 상세보기");
-    System.out.println();
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    // inputNo = 내 스터디 상세에서 선택한 스터디 번호
-    int inputNo = (int) request.getAttribute("inputNo");
+    try {
+      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      int freeNo = Integer.parseInt(request.getParameter("freeNo"));
 
-    int inputBoardNo = Prompt.inputInt(" 번호 : ");
+      FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
 
-    FreeBoard freeBoard = freeBoardDao.findByNo(inputBoardNo, inputNo);
+      //    if (freeBoard == null) {
+      //      System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
+      //      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+      //      return;
+      //    }
 
-    if (freeBoard == null) {
-      System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
-      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
-      return;
-    }
+      request.setAttribute("freeBoard", freeBoard);
+      request.setAttribute("perNo", perNo);
+      request.getRequestDispatcher(
+          "/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request, response);
 
-    if (freeBoard.getFreeBoardNo() == inputBoardNo) {
-      System.out.printf(" [%s]\n", freeBoard.getFreeBoardTitle());
-      System.out.printf(" >> 내용 : %s\n", freeBoard.getFreeBoardContent());
-      System.out.printf(" >> 첨부파일 : %s\n", freeBoard.getFileNames());
-      System.out.printf(" >> 작성자 : %s\n", freeBoard.getFreeBoardWriter().getPerNickname());
-      System.out.printf(" >> 등록일 : %s\n", freeBoard.getFreeBoardRegisteredDate());
-      freeBoard.setFreeBoardViewcount(freeBoard.getFreeBoardViewcount() + 1);
-      System.out.printf(" >> 조회수 : %d\n", freeBoard.getFreeBoardViewcount());
-      promptFreeBoard.printComments(freeBoard); // 댓글호출
-    }
-
-    // 게시글 수정,삭제에서 사용
-    request.setAttribute("boardNo", inputBoardNo);
-
-    // 댓글 등록,수정,삭제에서 사용
-    request.setAttribute("freeBoard", freeBoard);
-
-    System.out.println("\n----------------------");
-    System.out.println("1. 수정");
-    System.out.println("2. 삭제");
-    System.out.println("3. 댓글 등록");
-
-    if (freeBoard.getCountComment() > 0) {
-      System.out.println("4. 댓글 수정");
-      System.out.println("5. 댓글 삭제");
-    }
-
-    System.out.println("0. 이전");
-    int selectNo = Prompt.inputInt("선택> ");
-
-    freeBoardDao.updateViewCount(freeBoard, freeBoard.getStudyNo());
-    sqlSession.commit();
-
-    switch (selectNo) {
-      case 1 : request.getRequestDispatcher("/myStudy/freeBoardUpdate").forward(request); return;
-      case 2 : request.getRequestDispatcher("/myStudy/freeBoardDelete").forward(request); return;
-      case 3 : request.getRequestDispatcher("/myStudy/freeBoard/commentAdd").forward(request); return;
-      case 4 : request.getRequestDispatcher("/myStudy/freeBoard/commentUpdate").forward(request); return;
-      case 5 : request.getRequestDispatcher("/myStudy/freeBoard/commentDelete").forward(request); return;
-      case 0 : request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
-      default : return;
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
