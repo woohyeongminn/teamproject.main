@@ -76,6 +76,9 @@
   a:hover {
   color : lightgray;
   }
+  #add:hover {
+  color : white;
+  }
   </style>
 </head>
 <body>
@@ -107,7 +110,7 @@
 </table>
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<button type="submit" class="btn btn-outline-dark" value="등록"><a href='form'>등록</a></button>
+<button type="submit" class="btn btn-outline-dark" value="등록"><a href='form' id='add'>등록</a></button>
 </div>
 </body>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
