@@ -31,7 +31,7 @@
   }
   div {
   margin-right: 10px;
-  display: flex;
+  xdisplay: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
@@ -43,9 +43,21 @@
   a:hover {
   color : white;
   }
+  .all-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .inner {
+    float: left;
+  }
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
+
+<br>
+<div class="all-content">
 <fieldset>
 <br>
 <legend><b> 🖐 개인 회원 로그인 </b></legend><br>
@@ -74,7 +86,7 @@
 </form>
 </div>
 
-  <div class="mb-3">
+  <div>
     <div class="dropdown-divider"></div>
      <a class="dropdown-item" href="addform">회원가입</a>
      <a class="dropdown-item" href="#">비밀번호찾기</a>

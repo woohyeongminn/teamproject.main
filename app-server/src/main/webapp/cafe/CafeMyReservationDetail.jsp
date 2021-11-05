@@ -15,25 +15,39 @@
    text-decoration:none;
   }
   label {
-    display: inline-block;
+    xdisplay: inline-block;
     margin-right: 5px;
     margin-left: 20px;
-    width: 130px;
+    xwidth: 130px;
   }
+  h3 {
+    text-align: center;
+    font-weight: bolder;
+  }
+  .all-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
 	</style>
 </head>
 <body>
-<h1>예약 내역 상세보기</h1>
+<jsp:include page="../header.jsp"/>
+<br><br>
+<div class="all-content">
+<h3> 📝 예약 내역 </h3>
 <hr>
 	<div id='content'>
-    <label>예약날짜</label>${cafeReser.reservationDate}<br>
-		<label>이용날짜</label>${cafeReser.useDate}<br>
-		<label>예약장소</label>${cafeName}<br>
-		<label>스터디룸</label>${cafeRoomName}<br>
-		<label>이용시간</label>${cafeReser.startTime} ~ ${cafeReserEndTime} (${cafeReser.useTime}시간)<br>
-		<label>결제금액</label>${cafeReser.totalPrice}<br>
-		<label>리뷰작성여부</label>${reviewStatusLable}<br>
-		<label>예약상태</label>${reserStatusLable}
+    <label>예약날짜</label><span>${cafeReser.reservationDate}</span><br>
+		<label>이용날짜</label><span>${cafeReser.useDate}</span><br>
+		<label>예약장소</label><span>${cafeName}</span><br>
+		<label>스터디룸</label><span>${cafeRoomName}</span><br>
+		<label>이용시간</label><span>${cafeReser.startTime} ~ ${cafeReserEndTime} (${cafeReser.useTime}시간)</span><br>
+		<label>결제금액</label><span>${cafeReser.totalPrice}</span><br>
+		<label>리뷰작성여부</label><span>${reviewStatusLable}</span><br>
+		<label>예약상태</label><span>${reserStatusLable}</span>
 	</div>
 <br>&nbsp;&nbsp;
 <c:if test="${reviewStatusLable eq '작성대기'}">
@@ -43,6 +57,7 @@
 <button type="button" class="btn btn-outline-dark"><a href="reservationDelete?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">예약취소</a></button>
 </c:if>
 <button type="button" class="btn btn-outline-dark"><a href="reservationList?perNo=${memberNo}">목록</a></button>
+</div>
 </body>
 </html>
 
