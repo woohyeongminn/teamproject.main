@@ -27,7 +27,7 @@ ul{list-style:none;}
   text-align:center; 
   background :#f9f9f9;
 }
-.tabmenu ul li a{
+.tabmenu ul li .btn{
   display:block;
   line-height:40px;
   height:40px;
@@ -54,6 +54,49 @@ ul{list-style:none;}
 .btnCon:target .tabCon{
   display: block;
 }
+
+.agreebtn {
+  display: block;
+  float: left;
+}
+
+.card {
+display: flex;
+flex-direction: row;
+}
+
+.card .body-photo {
+width: 30%;
+}
+
+.card .body-photo a{
+display: inline-block;
+vertical-align: middle;
+}
+
+.card .body-left {
+width: 30%;
+vertical-align: middle;
+}
+
+.card .body-left a{
+display: inline-block;
+vertical-align: middle;
+}
+
+.card .body-right {
+width: 40%;
+vertical-align: middle;
+}
+
+.card .body-right .agreebtn{
+display: inline-block;
+vertical-align: middle;
+padding: 10px;
+border-radius:4px; 
+border:1px solid gray;
+}
+
 </style>
 </head>
 <body>
@@ -70,8 +113,10 @@ ul{list-style:none;}
       <table class="table table-hover">
         <tbody>
           <c:forEach items="${guildersList}" var="guilderMember">
-            <div class="photo">${guilderMember.perPhoto}</div>
-            <h5><a class="profile" href="detail?guilderNo=${guilderMember.perNo}">${guilderMember.perNickname}</a></h5>
+          <div class="card">
+            <div class="body-photo">${guilderMember.perPhoto} 프로필사진</div>
+            <div class="body-left"><a class="profile" href="detail?guilderNo=${guilderMember.perNo}">${guilderMember.perNickname}</a></div>
+          </div>
           </c:forEach>
         </tbody>
       </table>
@@ -89,12 +134,14 @@ ul{list-style:none;}
       <table class="table table-hover">
         <tbody>
           <c:forEach items="${waitingGuilderList}" var="waitingMember">
-            <div class="card-body">
-	            <div class="photo">${waitingMember.perPhoto}</div>
-	            <h5><a class="profile" href="detail?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a></h5>
+            <div class="card">
+	            <div class="body-photo">${waitingMember.perPhoto} 프로필사진</div>
+	            <div class="body-left"><a class="profile" href="detail?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a></div>
+	            <div class="body-right">
+	            <a type="button" class="agreebtn" href="agree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">승인</a>
+	            <a type="button" class="agreebtn" href="disagree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">거절</a>
+              </div>
             </div>
-            <a type="button" class="agreebtn" href="agree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">승인</a></div>
-            <a type="button" class="agreebtn" href="disagree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">거절</a></div>
           </c:forEach>
         </tbody>
       </table>

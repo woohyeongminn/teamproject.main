@@ -12,8 +12,8 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 
-@WebServlet("/mystudy/guilder/agree")
-public class GuilderAgreeController extends HttpServlet {
+@WebServlet("/mystudy/guilder/disagree")
+public class GuilderDisagreeController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
@@ -38,7 +38,7 @@ public class GuilderAgreeController extends HttpServlet {
       int watingMemberNo = Integer.parseInt(request.getParameter("watingMemberNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-      studyDao.updateGuilder(studyNo, watingMemberNo);
+      studyDao.deleteGuilder(studyNo, watingMemberNo);
       sqlSession.commit();
 
       //      request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
