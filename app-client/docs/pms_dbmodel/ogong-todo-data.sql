@@ -1,10 +1,17 @@
 -- 투두진행상태 test 값
 insert into study_todolist_progress(progress_no,name) 
-values(1,'1');
+values(1,'진행 중');
+insert into study_todolist_progress(progress_no,name) 
+values(2,'완료');
 
 -- 투두리스트 test 값
-insert into study_todolist(study_no,member_no,content,note,progress_no) 
-values(1,1,'1','1',1);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(1, 1,1,'내일 맛있는 거 먹기','토요일',1);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(2, 1,1,'대면 싫어요','월요일',2);
+
+-- todolist_no 넣어 준 이유: 강제로 번호 주입
+-- 테스트 추가하고 싶으면 제외하고 넣으면 됨
 
 -- findAll
 select
