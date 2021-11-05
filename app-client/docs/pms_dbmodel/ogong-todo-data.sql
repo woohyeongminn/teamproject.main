@@ -1,4 +1,4 @@
--- 투두진행상태 test 값
+-- 투두진행상태 필수 값
 insert into study_todolist_progress(progress_no,name) 
 values(1,'진행 중');
 insert into study_todolist_progress(progress_no,name) 

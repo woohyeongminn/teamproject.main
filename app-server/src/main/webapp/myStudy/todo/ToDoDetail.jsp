@@ -46,6 +46,7 @@ button {
     <span>번호ㅣ</span> <span>${todo.todoNo}</span><br>
     <span>내용ㅣ</span> <span>${todo.todoContent}</span><br>
     <span>비고ㅣ</span> <span>${todo.todoRemark}</span><br>
+    <span>작성자ㅣ</span> <span>${todo.todoWriter.perNickname}</span><br>
     <span>날짜ㅣ</span> <span>${todo.todoDate}</span><br>
       </tr>
       </thead>
@@ -54,8 +55,10 @@ button {
     </tbody>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button class="btn btn-outline-dark"><a href="list?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">목록</a></button>
+      <c:if test='${todo.todoWriter.perNickname eq member.perNickname}'>
       <button class="btn btn-outline-dark"><a href="updateform?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">수정</a></button>
       <button class="btn btn-outline-dark"><a href="delete?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">삭제</a></button>
+      </c:if>
   </div>
 </body>
 </html>

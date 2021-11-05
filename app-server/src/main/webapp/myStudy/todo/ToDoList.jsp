@@ -30,6 +30,7 @@
 				<th>번호</th>
 				<th>내용</th>
 				<th>비고</th>
+				<th>작성자</th>
 				<th>날짜</th>
 			</tr>
 			</thead>
@@ -46,15 +47,16 @@
 				<tr>
 					<td>${todo.todocomplete}</td>
 					<td>${todo.todoNo}</td>
-					<td><a href="detail?todono=${todo.todoNo}&studyno=${study.studyNo}">${todo.todoContent}</a></td>
+					<td><a href="detail?todono=${todo.todoNo}&studyno=${study.studyNo}&perno=${member.perNo}">${todo.todoContent}</a></td>
 					<td>${todo.todoRemark}</td>
+					<td>${todo.todoWriter.perNickname}</td>
 					<td>${todo.todoDate}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-outline-dark"><a href="todo/add?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">등록</a></button>
+      <button class="btn btn-outline-dark"><a href="addform?studyno=${study.studyNo}&perno=${member.perNo}">등록</a></button>
 <%--       <button class="btn btn-outline-dark"><a href="todo/detail?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">상세</a></button> --%> 
 </div>
 </body>

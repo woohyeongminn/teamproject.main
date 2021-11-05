@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
+import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 
@@ -38,8 +39,8 @@ public class ToDoListController extends HttpServlet {
 
     try {
 
-      //      int perNo = Integer.parseInt(request.getParameter("perno"));
-      //      Member member = memberDao.findByNo(perNo);
+      int perNo = Integer.parseInt(request.getParameter("perno"));
+      Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
@@ -58,7 +59,7 @@ public class ToDoListController extends HttpServlet {
         }
       }
 
-      //      request.setAttribute("member", member);
+      request.setAttribute("member", member);
       request.setAttribute("study", myStudy);
       request.setAttribute("countProgressing", countProgressing);
       request.getRequestDispatcher("/myStudy/todo/ToDoList.jsp").forward(request, response);
