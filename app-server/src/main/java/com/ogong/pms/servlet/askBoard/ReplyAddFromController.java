@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.Reply;
 
-@WebServlet("/askboard/replyadd")
-public class ReplyAddHandler extends HttpServlet {
+@WebServlet("/askboard/replyaddform")
+public class ReplyAddFromController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  AskBoardDao askBoardDao;
   SqlSession sqlSession;
+  AskBoardDao askBoardDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -34,27 +33,21 @@ public class ReplyAddHandler extends HttpServlet {
     try {
 
       int askNo = Integer.parseInt(request.getParameter("askNo"));
+
       AskBoard askBoard = askBoardDao.findByNo(askNo);
 
       if (askBoard.getReply() != null) {
         throw new Exception(" >> 이미 등록된 답변이 있습니다.");
       }
 
-      Reply reply = new Reply();
-      reply.setReplyTitle(request.getParameter("title"));
-      reply.setReplyContent(request.getParameter("content"));
-
-      askBoard.setReply(reply);
-
-      askBoardDao.insertreply(askBoard);
-      sqlSession.commit();
-
-      response.sendRedirect("../admin/askboardlist");
+      request.setAttribute("askBoard", askBoard);
+      request.getRequestDispatcher("/askBoard/ReplyAddForm.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
+
   }
 }
