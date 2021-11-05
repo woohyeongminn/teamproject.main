@@ -38,9 +38,9 @@ public class GuilderListController extends HttpServlet {
     try {
 
       int perNo = Integer.parseInt(request.getParameter("perNo"));      //로그인 유저
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-
       Member member = memberDao.findByNo(perNo);
+
+      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
       Study myStudy = studyDao.findByMyNo(studyNo, perNo);
 
       List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());

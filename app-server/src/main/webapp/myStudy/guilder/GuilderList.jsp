@@ -127,6 +127,8 @@ border:1px solid gray;
       </div>
       
     </li>
+    
+    <c:if test="${member.perNo eq study.owner.perNo}">
     <li id="tab2" class="btnCon"><a class="btn" href="#tab2">승인대기중인 구성원</a>
       <div class="tabCon" >
       <br>
@@ -150,7 +152,8 @@ border:1px solid gray;
       </c:if>
       </div>
       
-    </li>    
+    </li> 
+    </c:if>   
     
   </ul>
 </div>
