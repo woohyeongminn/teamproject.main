@@ -32,14 +32,22 @@ label {
     <span>소개글 </span> <span>${study.introduction}</span><br>
     <span>활동 점수 </span> <span>${study.point}</span><br>
 		
-		<c:if test="${study.owner.perNo eq member.perNo}">
+		<c:choose>
+		<c:when test="${study.owner.perNo eq member.perNo}">
     <button  type="submit" value="수정" formaction="updateform">
       <a href='updateform?perno=${member.perNo}&studyno=${study.studyNo}'>수정</a>
     </button>
     <button>
        <a href='delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
     </button>
-    </c:if>
+    </c:when>
+    
+    <c:when test="${study.owner.perNo ne member.perNo}">
+    <button>
+      <a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>
+    </button>
+    </c:when>
+    </c:choose>
 		<!-- <c:if test="${study.owner.perNickname eq member.perNickname}">
 		<button id="writer">
       <a href='update?studyno=${study.studyNo}'>수정</a>
@@ -54,9 +62,6 @@ label {
 		</style>
 		</c:if> -->
 		
-		<button>
-			<a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>
-		</button>
 		<button>
 			<a href='../bookmark/add?perno=${member.perNo}&studyno=${study.studyNo}'>북마크 추가</a>
 		</button>
