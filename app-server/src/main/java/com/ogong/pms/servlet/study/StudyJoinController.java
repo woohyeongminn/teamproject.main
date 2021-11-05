@@ -77,7 +77,8 @@ public class StudyJoinController extends HttpServlet {
 
       request.setAttribute("member", member);
       request.setAttribute("study", study);
-      request.getRequestDispatcher("/study/StudyJoin.jsp").forward(request, response);
+      response.sendRedirect("list?perno="+ member.getPerNo());
+      // request.getRequestDispatcher("/study/StudyJoin.jsp").forward(request, response);
 
       // System.out.println(" >> 참여 신청이 완료되었습니다.\n 승인이 완료될 때까지 기다려 주세요.");
 
