@@ -11,7 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
   label {
-    margin-right: 5px;
+    margin-left: 10px;
     text-align: center;
     display: inline;
     width: 60px;
@@ -19,32 +19,67 @@
   legend {
   text-align: center;
   }
+  input {
+  border : white;
+  outline-color : lightgray;
+  }
+  input[type=checkbox]:checked {
+  background-color: black;
+  }
+  p {
+  text-align-last: center;
+  }
+  div {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  }
+  a {
+  color : black;
+  text-decoration : blink;
+  }
+  a:hover {
+  color : white;
+  }
 </style>
 </head>
 
 <body>
-  <h5>기업 회원 로그인</h5>
-
+<fieldset>
+<br>
+<legend><b> 🖐 기업 회원 로그인 </b></legend><br>
+<hr>
+<table class="table table-responsive">
   <form action='login'>
-  
-	  <label for='f-email' class='form-label' size='100px'>이메일</label> <input id='f-email' type='email' name='email' placeholder='아이디' size='20'><br>
-	  <label for='f-password' class='form-label' size='100px'>암호</label> <input id='f-password' type='password' name='password' placeholder='암호' size='20'><br>
-	  
+		<br>
+			<p><label for='f-email' class='form-label' size='100px'>이메일</label>
+			<input id='f-email' type='email' name='email' placeholder='아이디' size='20'></p>
+			<br>
+			<p><label for='f-password' class='form-label' size='100px'>비밀번호</label>
+			<input id='f-password' type='password' name='password' placeholder='패스워드' size='20'><br></p>
+			<br>
+	</table>
+	</fieldset>
+	<div class="inner">
+	  <span ></span>
 	  <div class="form-check">
-	    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-	    <label class="form-check-label" for="dropdownCheck">
-	      Remembr me
-	    </label>
+	   <input type="checkbox" class="form-check-input" id="dropdownCheck">
+	   <label class="form-check-label" for="dropdownCheck">
+	    정보 기억하기
+	   </label>
 	  </div>
-	
-	  <div class="mb-3">
-	    <div class="dropdown-divider"></div>
-		    <a class="dropdown-item" href="addform">회원가입</a>
-		    <a class="dropdown-item" href="find">아이디·비밀번호찾기</a>
-	  </div>
-  
-  <button type="submit" class="btn btn-primary">로그인</button>
-  </form>
-  
- </body>
+	</div>
+	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+  </div>
+</form>
+<div class="mb-3">
+  <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="addform">회원가입</a>
+    <a class="dropdown-item" href="#">비밀번호찾기</a>
+   </div>
+</div>
+</body>
 </html>
