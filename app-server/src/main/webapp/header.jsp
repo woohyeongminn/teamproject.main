@@ -152,7 +152,7 @@ header a {
 
   <ul class="header_login">
     <li><a href="/ogong/login.html">로그인</a></li>
-    <li><a href="/ogong/member/addform">회원가입</a></li>
+    <li><a href="/ogong/signup">회원가입</a></li>
   </ul>
 </header>
 </body>
