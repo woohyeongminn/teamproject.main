@@ -1,87 +1,57 @@
 package com.ogong.pms.servlet.myStudy;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
-import com.ogong.pms.handler.AuthPerMemberLoginHandler;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class MyStudyGuilderDetailController implements Command {
+@WebServlet("/mystudy/guilderDetail")
+public class MyStudyGuilderDetailController extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
-
-  public MyStudyGuilderDetailController(StudyDao studyDao) {
-    this.studyDao = studyDao;
-  }
-
+  MemberDao memberDao;
 
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 내 스터디 상세");
-    System.out.println();
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+  }
 
-    Member member = AuthPerMemberLoginHandler.getLoginUser();
+  @Override
+  protected void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    int studyNo = Prompt.inputInt(" 번호  : ");
+    try {
 
-    Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
+      int perNo = Integer.parseInt(request.getParameter("perno"));
+      Member member = memberDao.findByNo(perNo);
 
-    if (myStudy == null) {
-      System.out.println();
-      System.out.println(" >> 스터디 번호가 일치하지 않습니다.");
-      return;
-    } 
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
-    List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
-    myStudy.setMembers(guilders);
+      Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
 
+      List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
+      myStudy.setMembers(guilders);
 
-    System.out.printf( " (%d)", myStudy.getStudyNo());
+      request.setAttribute("member", member);
+      request.setAttribute("study", myStudy);
+      request.getRequestDispatcher("/myStudy/MyStudyGuilderDetail.jsp").forward(request, response);
 
-    if(myStudy.getCountMember() != myStudy.getNumberOfPeple()) {
-      System.out.printf(" [모집중] " );
-    } else {
-      System.out.printf(" [모집완료] " );
-    }
-
-    System.out.printf("🌟%d\n", myStudy.getCountBookMember());
-    System.out.printf(" [%s]\n", myStudy.getStudyTitle());
-    System.out.printf(" >> 조장 : %s\n", myStudy.getOwner().getPerNickname());
-    System.out.printf(" >> 분야 : %s\n", myStudy.getSubjectName());
-    System.out.printf(" >> 지역 : %s\n", myStudy.getArea());
-    System.out.printf(" >> 인원수 : %s/%s명\n",
-        myStudy.getCountMember(), myStudy.getNumberOfPeple());
-    System.out.printf(" >> 대면 : %s\n", myStudy.getFaceName());
-    System.out.printf(" >> 소개글 : %s\n", myStudy.getIntroduction());
-    System.out.printf(" >> 활동점수 : %d\n", myStudy.getPoint());
-
-    System.out.println("\n----------------------");
-    System.out.println("1. 구성원");
-    System.out.println("2. 캘린더");
-    System.out.println("3. To-do");
-    System.out.println("4. 자유게시판");
-    System.out.println("5. 화상미팅");
-    System.out.println("6. 탈퇴하기");  
-
-    System.out.println("0. 뒤로 가기");
-
-    request.setAttribute("inputNo", myStudy.getStudyNo());
-
-    int selectNo = Prompt.inputInt("선택> "); 
-    switch (selectNo) {
-      case 1: request.getRequestDispatcher("/myStudy/guilder").forward(request); return;
-      case 2: request.getRequestDispatcher("/myStudy/calenderList").forward(request); return;
-      case 3: request.getRequestDispatcher("/myStudy/todoList").forward(request); break;
-      case 4: request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return;
-      case 5: request.getRequestDispatcher("/myStudy/chat").forward(request); return;
-      case 6: request.getRequestDispatcher("/myStudy/exit").forward(request); return;  
-      case 7: request.getRequestDispatcher("/myStudy/update").forward(request); return;
-      case 8: request.getRequestDispatcher("/myStudy/delete").forward(request); return;
-      default : return;
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

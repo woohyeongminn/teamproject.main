@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-	<h1>📖 구성원 스터디 목록</h1>
+	<h3>📖 | 👨‍👩‍👧‍👧 구성원 | 스터디 목록</h3>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -30,7 +30,7 @@
 				<tr>
 					<td>${study.studyNo}</td>
 					<td>${study.countBookMember}</td>
-					<td><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></td>
+					<td><a href='guilderDetail?studyno=${study.studyNo}&perno=${member.perNo}'>${study.studyTitle}</a></td>
 					<td>${study.faceName}</td>
 					<td>${study.owner.perNickname}</td>
 					<td>${study.subjectName}</td>
@@ -47,9 +47,3 @@
 </body>
 </html>
 
-
-<!--     Member member = AuthPerMemberLoginHandler.getLoginUser();
-    if (member == null ) {
-      System.out.println(" >> 로그인 한 회원만 조회 가능합니다.");
-      return;
-    } -->
