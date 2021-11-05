@@ -16,8 +16,8 @@ import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/comment/update")
-public class CommentUpdateController extends HttpServlet {
+@WebServlet("/comment/updateform")
+public class CommentUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
@@ -36,54 +36,14 @@ public class CommentUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      // System.out.println("▶ 댓글 수정");
-
-      /*
-       * if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-       * System.out.println(" >> 변경 권한이 없습니다."); return; }
-       */
-
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
       Study study = studyDao.findByNo(studyNo);
 
-      // FreeBoard freeBoard = (FreeBoard) request.getAttribute("freeBoard");
       int freeBoardNo = Integer.parseInt(request.getParameter("freeBoardNo"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
-      if (freeBoard == null) {
-        throw new Exception(" >> 해당 번호의 게시글이 없습니다.\n");
-      }
-
       List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
-      /*
-       * int commentNo = 0; while (true) { try { commentNo = Prompt.inputInt(" 번호 : "); } catch
-       * (NumberFormatException e){ System.out.println(" >> 숫자를 입력해 주세요."); continue; } break; }
-       * 
-       * String commentTitle = null; String perNickname =
-       * AuthPerMemberLoginHandler.getLoginUser().getPerNickname();
-       * 
-       * int index = -1; for (int i = 0; i < commentList.size(); i++) { if
-       * ((commentList.get(i).getCommentNo() == commentNo) &&
-       * (commentList.get(i).getCommentWiter().getPerNickname().equals(perNickname))){
-       * 
-       * commentTitle = Prompt.inputString( "댓글 내용(" + commentList.get(i).getCommentText() +
-       * ") : "); System.out.println(); index = i; } }
-       * 
-       * if (index < 0) { System.out.println(" >> 알맞는 번호를 입력해 주세요.");
-       * request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request); return; }
-       * 
-       * String input = Prompt.inputString(" 정말 변경하시겠습니까? (네 / 아니오) "); if
-       * (!input.equalsIgnoreCase("네")) { System.out.println(" >> 댓글 변경이 취소되었습니다.");
-       * request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return; }
-       */
-
-      freeBoard.setComment(commentList);
-
-      commentDao.update(Integer.parseInt(request.getParameter("commentNo")),
-          request.getParameter("commentTitle"));
-
-      // System.out.println(" >> 댓글을 변경하였습니다.");
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.setAttribute("commentList", commentList);
