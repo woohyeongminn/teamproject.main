@@ -159,8 +159,8 @@ header a {
 	  </c:when>
 	
 	  <c:when test="${not empty loginCeoUser || empty loginPerUser}">
-	    <li><a href="/ogong/member/detail">기업페이지</a></li>
-	    <li><a href="/ogong//member/logout">로그아웃</a></li>
+	    <li><a href="/ogong/ceomember/detail">기업페이지</a></li>
+	    <li><a href="/ogong/ceomember/logout">로그아웃</a></li>
 	  </c:when>
 	
 		<!-- <c:otherwise> -->

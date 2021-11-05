@@ -35,7 +35,10 @@ public class CeoCafeRoomDetailController extends HttpServlet {
 
       int roomNo = Integer.parseInt(request.getParameter("roomno"));
 
-      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);     // 스터디룸 번호
+      //CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);     // 스터디룸 번호
+
+      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
+      cafeRoom.setRoomInfo(cafeRoom.getRoomInfo().replace("\n", "<br><br>"));
 
       request.setAttribute("cafeRoom", cafeRoom);
       request.getRequestDispatcher("/ceoCafe/CeoCafeRoomDetail.jsp").forward(request, response);
