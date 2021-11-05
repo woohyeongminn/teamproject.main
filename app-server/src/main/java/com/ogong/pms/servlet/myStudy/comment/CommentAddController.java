@@ -45,9 +45,10 @@ public class CommentAddController extends HttpServlet {
     try {
       // System.out.println("▶ 댓글 작성");
 
-      // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-      // System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
-      // }
+      /*
+       * if (AuthPerMemberLoginHandler.getLoginUser() == null) {
+       * System.out.println(" >> 로그인 한 회원만 등록 가능합니다."); }
+       */
 
       int no = Integer.parseInt(request.getParameter("perNo"));
       Member member = memberDao.findByNo(no);
@@ -71,12 +72,13 @@ public class CommentAddController extends HttpServlet {
       comment.setCommentWiter(member);
       // comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
 
-      // String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
-
-      // if (!input.equalsIgnoreCase("네")) {
-      // request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
-      // throw new Exception(" >> 댓글 등록을 취소하였습니다.");
-      // }
+      /*
+       * String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
+       * 
+       * if (!input.equalsIgnoreCase("네")) {
+       * request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); throw new
+       * Exception(" >> 댓글 등록을 취소하였습니다."); }
+       */
 
       freeBoard.getComment().add(comment);
 
