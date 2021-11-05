@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,10 +151,28 @@ header a {
     <li><a href="/ogong/adminNotice/list">공지사항</a></li>
   </ul>
 
-  <ul class="header_login">
-    <li><a href="/ogong/login.html">로그인</a></li>
-    <li><a href="/ogong/signup">회원가입</a></li>
-  </ul>
+ <ul class="header_login">
+<%--   <c:choose>
+	  <c:when test="${not empty loginPerUser || empty loginCeoUser}">
+	    <li><a href="/ogong/member/detail">마이페이지</a></li>
+	    <li><a href="/ogong//member/logout">로그아웃</a></li>
+	  </c:when>
+	
+	  <c:when test="${not empty loginCeoUser || empty loginPerUser}">
+	    <li><a href="/ogong/member/detail">기업페이지</a></li>
+	    <li><a href="/ogong//member/logout">로그아웃</a></li>
+	  </c:when>
+	
+		<!-- <c:otherwise> -->
+		<c:when test="${empty loginPerUser || empty loginCeoUser}">
+		  <li><a href="/ogong/signup">회원가입</a></li>
+	    <li><a href="/ogong/login">로그인</a></li>
+	  </c:when>  
+  </c:choose> --%>
+  
+  <li><a href="/ogong/signup">회원가입</a></li>
+  <li><a href="/ogong/login">로그인</a></li>
+</ul>
 </header>
 </body>
 </html>

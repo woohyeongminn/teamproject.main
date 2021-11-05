@@ -23,7 +23,9 @@
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../header.jsp">
+  <jsp:param name="loginPerUser" value="${perMember.perNo}" />
+</jsp:include>
   <h4>개인 회원 로그인 성공</h4>
 
  <p>'${perMember.perNickname}'님 환영합니다! 🖐</p>
@@ -34,7 +36,7 @@
  <button><a href='../cafe/reservationList?perNo=${perMember.perNo}'>내 예약 목록</a></button>
  <button><a href='../cafe/reviewList?perNo=${perMember.perNo}'>내 리뷰 목록</a></button>
  <button><a href='../askboard/permylist?perNo=${perMember.perNo}'>내 문의게시판</a></button>
- <button><a href='../mystudy/guilderList?perNo=${perMember.perNo}'>내 스터디(조장)</a></button>
+ <button><a href='../mystudy/ownerList?perNo=${perMember.perNo}'>내 스터디(조장)</a></button>
  <button><a href='../mystudy/guilderList?perNo=${perMember.perNo}'>내 스터디(구성원)</a></button>
  <button><a href='../mystudy/waitinglist?perNo=${perMember.perNo}'>내 스터디(승인 대기)</a></button>
  </body>
