@@ -1,92 +1,64 @@
 package com.ogong.pms.servlet.myStudy.guilder;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
-import com.ogong.pms.handler.AuthPerMemberLoginHandler;
-import com.ogong.pms.handler.Command;
-import com.ogong.pms.handler.CommandRequest;
-import com.ogong.util.Prompt;
 
-public class GuilderListHandler implements Command {
+
+@WebServlet("/mystudy/guilder/list")
+public class GuilderListHandler extends HttpServlet {
+  private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
+  MemberDao memberDao;
 
-  public GuilderListHandler(StudyDao studyDao) {
-    this.studyDao = studyDao;
+  @Override
+  public void init(ServletConfig config) throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
+
 
   // 스터디 구성원 목록
   @Override
-  public void execute(CommandRequest request) throws Exception {
-    System.out.println();
-    System.out.println("▶ 구성원");
-    System.out.println();
+  public void service(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-    int inputNo = (int) request.getAttribute("inputNo");
+    try {
 
-    Study myStudy = studyDao.findByNo(inputNo);
+      int perNo = Integer.parseInt(request.getParameter("perNo"));      //로그인 유저
+      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-    // 해당 스터디에 구성원 목록 가져오기
-    //    List<Guilder> guilderList = studyDao.findByGuilderAll(myStudy.getStudyNo());
-    //
-    //    for (Guilder guilder : guilderList) {
-    //      if (guilder.getGuilderStatus() == 2) {
-    //        myStudy.getMembers().add(guilder.getMember());
-    //
-    //      } else if (guilder.getGuilderStatus() == 1) {
-    //        myStudy.getWatingMember().add(guilder.getMember());
-    //      }
-    //    }
+      Member member = memberDao.findByNo(perNo);
+      Study myStudy = studyDao.findByMyNo(studyNo, perNo);
 
-    List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());
-    myStudy.setWatingMember(waitingGuilder);
+      List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());
+      myStudy.setWatingMember(waitingGuilder);
 
-    List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
-    myStudy.setMembers(guilders);
+      List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
+      myStudy.setMembers(guilders);
 
-    for (Member m : guilders) {
-      if (myStudy.getOwner().getPerNo() == m.getPerNo()) {
-        myStudy.getMembers().remove(m);
-        break;
-      }
-    }
+      request.setAttribute("member", member);
+      request.setAttribute("waitingGuilderList", waitingGuilder);
+      request.setAttribute("guildersList", guilders);
+      request.setAttribute("study", myStudy);
+      request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
 
-    System.out.printf(" >> 스터디 구성원 (%s/%s명)\n" , myStudy.getMembers().size() + 1,
-        myStudy.getNumberOfPeple());
-    System.out.println(" 👤 조  장 : " + myStudy.getOwner().getPerNickname());
-    System.out.println(" 👥 구성원 : " + myStudy.getMemberNames());
-
-    // 조장만 보임
-    if (AuthPerMemberLoginHandler.getLoginUser().getPerNo() !=
-        myStudy.getOwner().getPerNo()) {
-      return;
-    }
-
-    if(!myStudy.getWatingMemberNames().isEmpty()) {
-      System.out.printf("\n ★ > 승인 대기 중인 회원이 %d명 있습니다.", myStudy.getWatingMember().size());
-
-    } else if(myStudy.getWatingMemberNames().isEmpty()) {
-      System.out.println("\n ☆ > 승인 대기 중인 회원이 없습니다.");
-    }
-
-    request.setAttribute("inputNo", myStudy.getStudyNo());
-
-    System.out.println("\n----------------------");
-    System.out.println();
-    System.out.println("1. 승인 대기 목록");
-    System.out.println("2. 조장 권한 위임");
-    System.out.println("3. 구성원 탈퇴시키기");
-    System.out.println("0. 뒤로 돌아가기");
-    System.out.println();
-
-    int inputGuilerNo = Prompt.inputInt("선택> ");
-    switch (inputGuilerNo) {
-      case 1: request.getRequestDispatcher("/myStudy/watingGuilderList").forward(request); return;
-      case 2: request.getRequestDispatcher("/myStudy/guilderEntrust").forward(request); return;
-      case 3: request.getRequestDispatcher("/myStudy/guilderDelete").forward(request); return;
-      default: return;
+    } catch (Exception e) {
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 

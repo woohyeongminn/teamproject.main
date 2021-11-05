@@ -48,7 +48,7 @@ label {
     <br>
     
     <span>링크 안 걸었음</span><br>
-    <span>구성원&emsp;</span>
+    <span><a href='guilder/list?studyNo=${study.studyNo}&perNo=${member.perNo}'>구성원&emsp;</a></span>
     <span>캘린더&emsp;</span>
     <span><a href='todo/list?studyno=${study.studyNo}&perno=${member.perNo}'>To-do&emsp;</a></span>
     <span>자유게시판&emsp;</span>

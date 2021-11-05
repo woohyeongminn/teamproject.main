@@ -29,6 +29,21 @@ public class StudyListController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
+      /* [GR] Search Ver.1 */
+      /*
+       * String field_ = request.getParameter("f"); String query_ = request.getParameter("q");
+       * 
+       * String field = "title"; if (field_ != null && !field_.equals("")) field = field_;
+       * 
+       * String query = ""; if (query_ != null && !query_.equals("")) query = query_;
+       * 
+       * NoticeService service = new NoticeService(); List<Notice> list=
+       * service.getNoticeList(field, query ,1);
+       * 
+       * request.setAttribute("list", list);
+       * request.getRequestDispatcher("/WEB-INF/view/notice/list.jsp").forward(request, response); }
+       */
+
       Collection<Study> studyList = studyDao.findAll();
 
       if (studyList.isEmpty()) {
