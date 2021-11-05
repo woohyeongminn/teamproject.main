@@ -14,10 +14,17 @@
     text-align: center;
     font-weight: bolder;
   }
+  .all-content {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
   </style>
 </head>
 <body>
-<br>
+<jsp:include page="../header.jsp"/>
+<br><br>
+<div class="all-content">
 <h3> 📝 내 예약 목록 </h3><br>
 <c:if test='${not empty reserList}'>
 <table class="table table-striped text-center">
@@ -49,7 +56,7 @@
 <c:if test='${empty reserList}'>
    예약 내역이 없습니다.<br><br>  
 </c:if>
-
+</div>
 
 
 <!-- 
