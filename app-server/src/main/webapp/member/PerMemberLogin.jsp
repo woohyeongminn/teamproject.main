@@ -23,9 +23,7 @@
 </head>
 
 <body>
-<jsp:include page="../header.jsp">
-  <jsp:param name="loginPerUser" value="${perMember.perNo}" />
-</jsp:include>
+<jsp:include page="../header.jsp"/>
   <h4>개인 회원 로그인 성공</h4>
 
  <p>'${perMember.perNickname}'님 환영합니다! 🖐</p>
