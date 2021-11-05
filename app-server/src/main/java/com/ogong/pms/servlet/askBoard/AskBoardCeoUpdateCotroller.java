@@ -39,11 +39,13 @@ public class AskBoardCeoUpdateCotroller extends HttpServlet {
       ceoAskBoard.setAskContent(request.getParameter("content"));
 
       askBoardDao.update(ceoAskBoard);
+      sqlSession.commit();
 
       response.sendRedirect("ceomydetail?askNo="+ ceoAskBoard.getAskNo());
 
     } catch (Exception e) {
       e.printStackTrace();
+      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

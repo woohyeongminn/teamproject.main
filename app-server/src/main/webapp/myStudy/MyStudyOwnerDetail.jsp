@@ -51,7 +51,7 @@ label {
     <span>구성원&emsp;</span>
     <span>캘린더&emsp;</span>
     <span>To-do&emsp;</span>
-    <span>자유게시판&emsp;</span>
+    <span><a href="freeboardlist?studyNo=${study.studyNo}">자유게시판&emsp;</a></span>
     <span>화상미팅&emsp;</span>
     <span>탈퇴하기&emsp;</span>
     <span>스터디 수정&emsp;</span>

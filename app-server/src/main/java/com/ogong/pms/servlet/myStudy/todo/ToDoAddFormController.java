@@ -1,23 +1,23 @@
 package com.ogong.pms.servlet.myStudy.todo;
 
 import java.io.IOException;
-import javax.servlet.GenericServlet;
+import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 
-@WebServlet("/mystudy/todo/updateform")
-public class ToDoUpdateFormController extends GenericServlet {
+@WebServlet("/mystudy/todo/addform")
+public class ToDoAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
@@ -35,7 +35,7 @@ public class ToDoUpdateFormController extends GenericServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -44,16 +44,15 @@ public class ToDoUpdateFormController extends GenericServlet {
       Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      Study myStudy = studyDao.findByNo(studyNo);
+      //      Member member = AuthPerMemberLoginHandler.getLoginUser();
+      //      Study myStudy = studyDao.findByNo(studyNo);
 
-      int todoNo = Integer.parseInt(request.getParameter("todono"));
-      ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todoNo);
+      List<ToDo> todoList = toDoDao.findAll(studyNo);
 
-      request.setAttribute("todo", todo);
       request.setAttribute("member", member);
-      request.setAttribute("study", myStudy);
-
-      request.getRequestDispatcher("/myStudy/todo/ToDoUpdateForm.jsp").forward(request, response);
+      request.setAttribute("studyno", studyNo);
+      request.setAttribute("todoList", todoList); // todoList가 없을 때 사용하기 jsp에서
+      request.getRequestDispatcher("/myStudy/todo/ToDoAddForm.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

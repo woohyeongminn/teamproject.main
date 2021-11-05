@@ -1,6 +1,7 @@
-package com.ogong.pms.servlet.myStudy.todo;
+package com.ogong.pms.servlet.myStudy.freeBoard;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,30 +9,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.dao.ToDoDao;
+import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
-import com.ogong.pms.domain.ToDo;
 
-@WebServlet("/mystudy/todo/update")
-public class ToDoUpdateController extends HttpServlet {
+@WebServlet("/mystudy/freeboardlist")
+public class FreeBoardListHandler extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  FreeBoardDao freeBoardDao;
   StudyDao studyDao;
   MemberDao memberDao;
-  ToDoDao toDoDao;
-  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    toDoDao = (ToDoDao) 웹애플리케이션공용저장소.getAttribute("toDoDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
   }
 
   @Override
@@ -39,27 +36,16 @@ public class ToDoUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
 
-      int perNo = Integer.parseInt(request.getParameter("perno"));
       Member member = memberDao.findByNo(perNo);
+      List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyNo);
 
-      int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      Study myStudy = studyDao.findByNo(studyNo);
-
-      int todoNo = Integer.parseInt(request.getParameter("todono"));
-      ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todoNo);
-
-      int status = Integer.parseInt(request.getParameter("progress_no"));
-
-      todo.setTodoStatus(status);
-      todo.setTodoContent(request.getParameter("content"));
-      todo.setTodoRemark(request.getParameter("note"));
-      todo.setTodoWriter(member);
-
-      toDoDao.update(todo);
-      sqlSession.commit();
-
-      response.sendRedirect("list?perno="+member.getPerNo()+"&studyno="+myStudy.getStudyNo());
+      request.setAttribute("member", member);
+      request.setAttribute("studyNo", studyNo);
+      request.setAttribute("freeBoardList", freeBoardList);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardList.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
