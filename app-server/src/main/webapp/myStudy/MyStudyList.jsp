@@ -81,7 +81,7 @@ ul{list-style:none;}
 		        <tr>
 		          <td>${study.studyNo}</td>
 		          <td>${study.countBookMember}</td>
-		          <td><a href='ownerdetail?studyNo=${study.studyNo}&perNo=${member.perNo}'>${study.studyTitle}</a></td>
+		          <td><a href='../mystudy/detail?studyNo=${study.studyNo}&perNo=${member.perNo}'>${study.studyTitle}</a></td>
 		          <td>${study.faceName}</td>
 		          <td>${study.owner.perNickname}</td>
 		          <td>${study.subjectName}</td>
@@ -123,7 +123,7 @@ ul{list-style:none;}
 		        <tr>
 		          <td>${study.studyNo}</td>
 		          <td>${study.countBookMember}</td>
-		          <td><a href='guilderDetail?studyno=${study.studyNo}&perno=${member.perNo}'>${study.studyTitle}</a></td>
+		          <td><a href='../mystudy/detail?studyNo=${study.studyNo}&perNo=${member.perNo}'>${study.studyTitle}</a></td>
 		          <td>${study.faceName}</td>
 		          <td>${study.owner.perNickname}</td>
 		          <td>${study.subjectName}</td>
