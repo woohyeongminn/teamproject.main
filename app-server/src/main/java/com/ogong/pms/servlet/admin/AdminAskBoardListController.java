@@ -1,51 +1,47 @@
 package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
+import java.util.Collection;
+import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
+import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/admin/askboarddelete")
-public class AdminAskBoardDeleteHandler extends HttpServlet {
+@WebServlet("/admin/askboardlist")
+public class AdminAskBoardListController extends GenericServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
-  SqlSession sqlSession;
+
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  public void service(ServletRequest request, ServletResponse response)
       throws ServletException, IOException {
 
     try {
-      int askNo = Integer.parseInt(request.getParameter("askNo")); 
-      askBoardDao.deletereply(askNo);
-      askBoardDao.delete(askNo);
-      sqlSession.commit();
-      response.sendRedirect("askboardlist");
+      Collection<AskBoard> adminAskBoardList = askBoardDao.findAll();
+
+      if (adminAskBoardList == null) {
+        throw new Exception(" >> 등록된 글이 없습니다.");
+      }
+
+      request.setAttribute("adminAskBoardList", adminAskBoardList);
+      request.getRequestDispatcher("/admin/AskBoardList.jsp").forward(request, response);   
 
     } catch (Exception e) {
-      e.getStackTrace();
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
-
-
-

@@ -32,10 +32,10 @@ label {
     <input id='f-owner' type='text' name='owner' value='${study.owner.perNickname}' readonly><br>
     
     <label for='f-subjectName'>분야</label>
-    <input id='f-subjectName' type='text' name='subjectName' value='${study.subjectName}'><br>
+    <input id='f-subjectName' type='text' name='subjectName' value='${study.subjectName}' readonly><br>
     
     <label for='f-area'>지역</label>
-    <input id='f-area' type='text' name='area' value='${study.area}'><br>
+    <input id='f-area' type='text' name='area' value='${study.area}' readonly><br>
     
     <label for='f-countMember'>인원수</label>
     <input id='f-countMember' type='text' name='countMember' value='${study.countMember}' readonly><br>
@@ -43,7 +43,7 @@ label {
     <label for='f-numberOfPeple'>최대 인원수</label>
     <input id='f-numberOfPeple' type='text' name='numberOfPeple' value='${study.numberOfPeple}'><br>
     
-    <label for='f-faceName'>대면/비대면</label>
+    <label for='f-faceName'>대면 상태</label>
     <input id='f-faceName' type='text' name='faceName' value='${study.faceName}'><br>
     
     <label for='f-introduction'>소개글</label>
@@ -52,9 +52,7 @@ label {
     <label for='f-point'>활동 점수</label>
     <input id='f-point' type='text' name='point' value='${study.point}' readonly><br>
     <c:if test="${study.owner.perNo eq member.perNo}">
-      <button>
-        <a href='update?studyno=${study.studyNo}'>수정</a>
-      </button>
+      <button type="submit" value="수정">수정</button>
       </c:if>
     <br>
   </form>

@@ -54,7 +54,7 @@ public class MyStudyUpdateController extends HttpServlet {
 
       request.setAttribute("member", member);
       request.setAttribute("study", study);
-      response.sendRedirect("detail?studyno=" + study.getStudyNo());
+      response.sendRedirect("detail?studyno=" + study.getStudyNo() + "&perno=" + member.getPerNo());
 
     } catch (Exception e) {
       e.printStackTrace();
