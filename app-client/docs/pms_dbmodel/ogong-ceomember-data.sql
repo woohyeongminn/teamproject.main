@@ -27,6 +27,11 @@ insert into member(member_no, name, nickname, email, password, tel, photo, statu
 values(14, '박사장', '박사장카페', 'cafe7@test.com', password('c7'), '010-7777-0000', 
 'cafe5.gif', 2);
 
+
+insert into member(name,nickname,email,password,tel,photo,status)
+    values(#{ceoName},#{ceoNickname},#{ceoEmail},password(#{ceoPassword}),#{ceoTel},#{ceoPhoto},#{ceoStatus})
+    
+    
 -------------------------------------------------------------------------------------------------
 
 -- 사장회원 test 값

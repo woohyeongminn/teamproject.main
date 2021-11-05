@@ -62,11 +62,11 @@ function checkValue() {
 	        return false;
 	   }
 	  
-	   if(!form.email.value != "checkEmail"){
+/* 	   if(!form.email.value != "checkEmail"){
 	         alert("이메일 중복체크를 해주세요.");
 	         return false;
 	   }
-	   
+	    */
 	  if(!form.password.value){
 	        alert("비밀번호를 입력하세요.");
 	        return false;
@@ -97,7 +97,7 @@ function checkValue() {
       </c:if>
     </c:forEach>
   
-  <form action='add' method="post" name='ceoInfo' onsubmit="return checkValue()">
+  <form action='add' method="get" name='ceoInfo' onsubmit="return checkValue()">
 	  <label for='f-name' class='form-label'>이름</label>
 	  <input id='f-name' type='text' name='name' placeholder="이름"/><br>
 	  

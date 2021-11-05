@@ -23,6 +23,9 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp">
+  <jsp:param name="loginCeoUser" value="${ceoMember.ceoNo}" />
+</jsp:include>
   <h4>기업 회원 로그인 성공</h4>
  
  <p>'${ceoMember.ceoNickname}'님 환영합니다! 🖐</p>
