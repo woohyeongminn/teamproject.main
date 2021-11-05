@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>스터디 상세</title>
+<title>상세 | 스터디</title>
 <link rel="stylesheet" type="text/css" href="../header.css">
 <style>
 label {
@@ -50,6 +50,8 @@ label {
     <span>링크 안 걸었음</span><br>
     <span><a href='guilder/list?studyNo=${study.studyNo}&perNo=${member.perNo}'>구성원&emsp;</a></span>
     <span>캘린더&emsp;</span>
+    <span>To-do&emsp;</span>
+    <span><a href="freeboardlist?studyNo=${study.studyNo}&perNo=${member.perNo}">자유게시판&emsp;</a></span>
     <span><a href='todo/list?studyno=${study.studyNo}&perno=${member.perNo}'>To-do&emsp;</a></span>
     <span>자유게시판&emsp;</span>
     <span>화상미팅&emsp;</span>
