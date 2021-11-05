@@ -22,6 +22,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
 <br>
 <legend><b> 🔔 공지게시글 등록 </b></legend><br>

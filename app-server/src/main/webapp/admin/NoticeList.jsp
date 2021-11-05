@@ -82,6 +82,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
 <br>
 <legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 🔔 공지게시글 목록 </b></legend><br>

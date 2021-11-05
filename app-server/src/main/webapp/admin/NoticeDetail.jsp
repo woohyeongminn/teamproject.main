@@ -30,6 +30,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <!-- <h1>  ▶ 공지 상세 </h1> -->
 <fieldset>
 <br>
