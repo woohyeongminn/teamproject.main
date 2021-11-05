@@ -1,22 +1,21 @@
 package com.ogong.pms.servlet.myStudy;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/mystudy/waitinglist")
-public class MyStudyWaitingListController extends HttpServlet {
+@WebServlet("/mystudy/guilderDetail")
+public class MyStudyGuilderDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
@@ -30,37 +29,29 @@ public class MyStudyWaitingListController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
 
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      int perNo = Integer.parseInt(request.getParameter("perno"));
       Member member = memberDao.findByNo(perNo);
-      List<Study> studyList = studyDao.findAll();
 
-      List<Study> waitingStudyList = new ArrayList<>();
-      for (int i = 0; i < studyList.size(); i++) {
-        List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
-        studyList.get(i).setWatingMember(waiting);
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
-        for (Member mem : studyList.get(i).getWatingMember()) {
-          if (member.getPerNo() == mem.getPerNo()) {
-            waitingStudyList.add(studyList.get(i));
-          }
-        }
-      }
+      Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
+
+      List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
+      myStudy.setMembers(guilders);
 
       request.setAttribute("member", member);
-      request.setAttribute("waitingStudyList", waitingStudyList);
-      request.getRequestDispatcher("/myStudy/MyStudyWaitingList.jsp").forward(request, response);
-
+      request.setAttribute("study", myStudy);
+      request.getRequestDispatcher("/myStudy/MyStudyGuilderDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
   }
 }

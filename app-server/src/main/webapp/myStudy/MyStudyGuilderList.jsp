@@ -10,24 +10,7 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-	<h1>📖 스터디 목록</h1>
-	<!-- <div class="row" style="background-color: yellow">
-  <div class="col-md-4"><a href='list?perno=${perno}'>전체</a></div>
-  <div class="col-md-4"><a href='list/ing?perno=${perno}'>진행</a></div>
-  <div class="col-md-4"><a href='list/end?perno=${perno}'>완료</a></div>
-  </div> -->
-<button>
-    <a href='list?perno=${perno}'>전체</a>
-</button>
-<button>
-    <a href='list/ing?perno=${perno}'>진행</a>
-</button>
-<button>
-	<a href='list/end?perno=${perno}'>완료</a>
-</button><br>
-<button>
-	<a href='form?perno=${perno}'>등록</a>
-</button><br>
+	<h3>📖 | 👨‍👩‍👧‍👧 구성원 | 스터디 목록</h3>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -43,11 +26,11 @@
 			</tr>
 			</thread>
 		<tbody>
-			<c:forEach items="${studyList}" var="study">
+			<c:forEach items="${guilderMembers}" var="study">
 				<tr>
 					<td>${study.studyNo}</td>
 					<td>${study.countBookMember}</td>
-					<td><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></td>
+					<td><a href='guilderDetail?studyno=${study.studyNo}&perno=${member.perNo}'>${study.studyTitle}</a></td>
 					<td>${study.faceName}</td>
 					<td>${study.owner.perNickname}</td>
 					<td>${study.subjectName}</td>
@@ -58,5 +41,9 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<c:if test="${empty guilderMembers}">
+	구성원으로 참여 중인 스터디가 없습니다.
+	</c:if>
 </body>
 </html>
+

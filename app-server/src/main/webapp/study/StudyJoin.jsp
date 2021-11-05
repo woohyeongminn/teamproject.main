@@ -19,9 +19,11 @@
   <a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>
 </button> -->
 
-<c:if test="${study.status eq 2}">
-완료된 스터디 입니다.
+<c:forEach var="memberWating" items="${study.watingMember}">
+<c:if test="${memberWating.perNo eq member.perNo}">
+이미 승인 대기 중인 스터디입니다.
 </c:if>
+</c:forEach>
 
 <c:forEach var="guilder" items="${study.members}">
 <c:if test="${guilder.perNo eq member.perNo}">
@@ -29,15 +31,15 @@
 </c:if>
 </c:forEach>
 
-<c:forEach var="memberWating" items="${study.watingMember}">
-<c:if test="${memberWating.perNo eq member.perNo}">
-이미 승인 대기 중인 스터디입니다.
-</c:if>
-</c:forEach>
+<c:choose>
+<c:when test="${study.status eq 2}">
+완료된 스터디 입니다.
+</c:when>
 
-<c:if test="${fn:length(study.members) eq study.numberOfPeple}">
+<c:when test="${fn:length(study.members) eq study.numberOfPeple}">
 참여 가능 인원수를 초과하였습니다.
-</c:if>
+</c:when>
+</c:choose>
 
 <script>
   var onlineBtn = document.getElementById("join");

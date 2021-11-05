@@ -6,17 +6,17 @@ import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/mystudy/waitinglist")
-public class MyStudyWaitingListController extends HttpServlet {
+@WebServlet("/mystudy/guilderList")
+public class MyStudyGuilderListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
@@ -30,37 +30,37 @@ public class MyStudyWaitingListController extends HttpServlet {
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
 
       int perNo = Integer.parseInt(request.getParameter("perNo"));
       Member member = memberDao.findByNo(perNo);
+
       List<Study> studyList = studyDao.findAll();
 
-      List<Study> waitingStudyList = new ArrayList<>();
+      List<Study> guilderMembers = new ArrayList<>();
+      //      System.out.println(" | 👥 구성원 | ");
       for (int i = 0; i < studyList.size(); i++) {
-        List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
-        studyList.get(i).setWatingMember(waiting);
-
-        for (Member mem : studyList.get(i).getWatingMember()) {
-          if (member.getPerNo() == mem.getPerNo()) {
-            waitingStudyList.add(studyList.get(i));
+        List<Member> guilders = studyDao.findByGuildersAll(studyList.get(i).getStudyNo());
+        studyList.get(i).setMembers(guilders);
+        for (Member mem : studyList.get(i).getMembers())
+          if (mem.getPerNo() == member.getPerNo()) {
+            if (studyList.get(i).getOwner().getPerNo()!=member.getPerNo()) {
+              guilderMembers.add(studyList.get(i));
+            }
           }
-        }
       }
 
       request.setAttribute("member", member);
-      request.setAttribute("waitingStudyList", waitingStudyList);
-      request.getRequestDispatcher("/myStudy/MyStudyWaitingList.jsp").forward(request, response);
-
+      request.setAttribute("guilderMembers", guilderMembers);
+      request.getRequestDispatcher("/myStudy/MyStudyGuilderList.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
   }
 }
