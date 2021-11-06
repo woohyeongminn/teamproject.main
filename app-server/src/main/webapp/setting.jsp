@@ -12,20 +12,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  <!-- 우리꺼 기본 스타일 -->
-  <link rel="stylesheet" href="setting.css">
 </head>
 <style>
-section {
-  width:100%;
-  z-index:500;
-}
-
 .all-content {
   width: 100%;
   margin: 0 auto;
-  padding: 40px;
-  margin-top:50px;
 }
 
 .all-content .c-top {
@@ -40,7 +31,7 @@ section {
 <body>
 <jsp:include page="../header.jsp"/>
 
-    <div class="all-content">
+    <div class="all-content"> <!-- 이건 복붙해도되고 안해도됨 -->
       <div class="c-top">
         | 여기에 페이지 이름?제목? 써주기
       </div>
