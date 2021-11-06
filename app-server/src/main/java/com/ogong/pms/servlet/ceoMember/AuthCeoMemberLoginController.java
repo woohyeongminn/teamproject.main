@@ -18,10 +18,10 @@ public class AuthCeoMemberLoginController extends HttpServlet {
 
   CeoMemberDao ceoMemberDao;
 
-  public static CeoMember loginCeoMember;
-  public static CeoMember getLoginCeoMember() {
-    return loginCeoMember;
-  }
+  //  public static CeoMember loginCeoMember;
+  //  public static CeoMember getLoginCeoMember() {
+  //    return loginCeoMember;
+  //  }
 
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -49,7 +49,8 @@ public class AuthCeoMemberLoginController extends HttpServlet {
           throw new Exception ("회원가입을 진행해 주세요.");
         }
 
-        request.setAttribute("ceoMember", ceoMember);
+        //request.setAttribute("ceoMember", ceoMember);
+        request.getSession().setAttribute("loginCeoUser", ceoMember);
         request.getRequestDispatcher("/ceoMember/CeoMemberLogin.jsp").forward(request, response);
 
       } 

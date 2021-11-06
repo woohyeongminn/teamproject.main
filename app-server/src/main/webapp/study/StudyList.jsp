@@ -10,7 +10,9 @@
 <html>
 <head>
 <title>목록 | 스터디 찾기</title>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="../header.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -21,16 +23,59 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 	crossorigin="anonymous"></script>
+<style>
+*{
+  margin:0;
+  padding:0;
+  font-size:15px;
+  line-height:1.3;
+}
+ul{
+  list-style:none;
+}
+.tabmenu{
+  max-width:900px;
+  margin: 0 auto;
+  position:relative;
+}
+.tabmenu ul li{
+  display: inline-block;
+  width:33.33%; 
+  float:left;
+  text-align:center;
+}
+.tabmenu ul li a{
+  display:block;
+  line-height:40px;
+  xheight:40px;
+  text-decoration:none; 
+  xcolor: #000;
+}
+.tabCon{
+  display:none;
+  padding: 20px;
+  position:absolute; 
+  left:0;
+  top:40px;
+  box-sizing: border-box;
+  xborder : 5px solid #f9f9f9;
+  width: 900px;
+}
+.btnCon:target  {
+  background : #ccc;
+}
+.btnCon:target .tabCon{
+  display: block;
+}
+</style>
 </head>
-<body>
-	<jsp:include page="../header.jsp" />
-	<h1>📖 스터디 목록</h1>
+	<!-- <h3><a href="list?perno=${perno}">📖 스터디 목록</a></h3><br> -->
 	<!-- <div class="row" style="background-color: yellow">
   <div class="col-md-4"><a href='list?perno=${perno}'>전체</a></div>
   <div class="col-md-4"><a href='list/ing?perno=${perno}'>진행</a></div>
   <div class="col-md-4"><a href='list/end?perno=${perno}'>완료</a></div>
   </div> -->
-	<button>
+	<!-- <button>
 		<a href='list?perno=${perno}'>전체</a>
 	</button>
 	<button>
@@ -43,8 +88,9 @@
 	<button>
 		<a href='form?perno=${perno}'>등록</a>
 	</button>
-	<br>
-	<div class="input-group mb-3">
+	<br> -->
+	<!-- [GR] Search Ver.2 -->
+	<!-- <div class="input-group mb-3">
 		<select name="sk">
 			<option value="area">지역</option>
 			<option value="subjectName">분야</option>
@@ -54,8 +100,156 @@
 			aria-label="Recipient's username" aria-describedby="button-addon2">
 		<input type="submit" value="검색" class="btn btn-outline-secondary"
 			id="button-addon2">
-	</div>
-	<table class="table table-hover">
+	</div>  -->
+	<body>
+  <jsp:include page="../header.jsp" />
+  <div class="tabmenu">
+  <ul>
+  <!-- 전체 스터디 목록 -->
+    <li id="tab1" class="btnCon"><a class="btn first" href="#tab1">전체</a>
+      <div class="tabCon" >
+      <br>
+	<div id="search">
+    <form action="search">
+    <select name="where">
+      <option value="1">분야</option>
+      <option value="2">제목</option>
+      <option value="3">지역</option>
+    </select>
+    <input type="text" name="keyword">
+  <input type='hidden' name='perno' value='${perno}'>
+    <button class="btn btn-outline-dark">검색</button>
+    </form>
+  </div>
+  <br>
+<c:if test='${not empty studyList}'>
+  <div id="content">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <c:forEach items="${studyList}" var="study">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <span style="color:royalblue">${study.subjectName}</span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            ${study.faceName}<br>
+            <c:if test="${study.faceName ne '비대면'}">
+            ${study.area}<br>
+            </c:if>
+            인원 ${study.countMember}/${study.numberOfPeple}<br>
+            ${study.owner.perNickname}
+            🔖${study.countBookMember}
+          </div>
+        </div>
+      </div>
+    </c:forEach>
+    </div>
+  </div>
+</c:if>
+<c:if test='${empty studyList}'>
+   검색 결과가 존재하지 않습니다.<br><br>
+</c:if>
+</div>
+</li>
+
+<!-- 진행 스터디 목록 -->
+<li id="tab2" class="btnCon"><a class="btn" href="#tab2">진행</a>
+      <div class="tabCon" >
+      <br>
+  <div id="search">
+    <form action="search">
+    <select name="where">
+      <option value="1">분야</option>
+      <option value="2">제목</option>
+      <option value="3">지역</option>
+    </select>
+    <input type="text" name="keyword">
+  <input type='hidden' name='perno' value='${perno}'>
+    <button class="btn btn-outline-dark">검색</button>
+    </form>
+  </div>
+  <br>
+<c:if test='${not empty studyIngList}'>
+  <div id="content">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <c:forEach items="${studyIngList}" var="study">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <span style="color:royalblue">${study.subjectName}</span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            ${study.faceName}<br>
+            <c:if test="${study.faceName ne '비대면'}">
+            ${study.area}<br>
+            </c:if>
+            인원 ${study.countMember}/${study.numberOfPeple}<br>
+            ${study.owner.perNickname}
+            🔖${study.countBookMember}
+          </div>
+        </div>
+      </div>
+    </c:forEach>
+    </div>
+  </div>
+</c:if>
+<c:if test='${empty studyIngList}'>
+   검색 결과가 존재하지 않습니다.<br><br>
+</c:if>
+</div>
+</li>
+
+<!-- 종료 스터디 목록 -->
+<li id="tab3" class="btnCon"><a class="btn" href="#tab3">종료</a>
+      <div class="tabCon" >
+      <br>
+  <div id="search">
+    <form action="search">
+    <select name="where">
+      <option value="1">분야</option>
+      <option value="2">제목</option>
+      <option value="3">지역</option>
+    </select>
+    <input type="text" name="keyword">
+  <input type='hidden' name='perno' value='${perno}'>
+    <button class="btn btn-outline-dark">검색</button>
+    </form>
+  </div>
+  <br>
+<c:if test='${not empty studyEndList}'>
+  <div id="content">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <c:forEach items="${studyEndList}" var="study">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <span style="color:royalblue">${study.subjectName}</span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            ${study.faceName}<br>
+            <c:if test="${study.faceName ne '비대면'}">
+            ${study.area}<br>
+            </c:if>
+            인원 ${study.countMember}/${study.numberOfPeple}<br>
+            ${study.owner.perNickname}
+            🔖${study.countBookMember}
+          </div>
+        </div>
+      </div>
+    </c:forEach>
+    </div>
+  </div>
+</c:if>
+<c:if test='${empty studyEndList}'>
+   검색 결과가 존재하지 않습니다.<br><br>
+</c:if>
+</div>
+</li>
+</ul>
+</div>
+<script>
+location.href = "#tab1";
+</script>
+</body>
+</html>
+	<!-- <table class="table table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -68,7 +262,7 @@
 				<th>인원수</th>
 				<th>최대 인원수</th>
 			</tr>
-			</thread>
+			</thead> -->
 			<!-- [GR] Search Ver.2 -->
 			<!-- request.setCharacterEncoding("utf-8");
 			Connection conn = null;
@@ -164,7 +358,7 @@
 
 			while (rs.next()) {
 			%> -->
-		<tbody>
+		<!-- <tbody>
 			<c:forEach items="${studyList}" var="study">
 				<tr>
 					<td>${study.studyNo}</td>
@@ -178,12 +372,10 @@
 					<td>${study.numberOfPeple}</td>
 				</tr>
 			</c:forEach>
-		</tbody>
+		</tbody> -->
 		<!-- }
 		rs.close();
 		pstmt.close();
 		conn.close();
 		%>  -->
-	</table>
-</body>
-</html>
+	<!-- </table> -->

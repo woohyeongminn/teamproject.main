@@ -29,38 +29,46 @@ public class StudySearchController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      // System.out.println("▶ 스터디 검색");
-
       // System.out.println(" 지역 / 분야 / 스터디명으로 검색할 수 있습니다.");
       // String input = Prompt.inputString(" 검색어 : ");
 
       // int count = 0;
+      String input = request.getParameter("where");
 
-      List<Study> studyList = studyDao.findByKeyword(input);
+      if (input.equals("1")) {
+        input = "ss.name";
 
-      if (studyList.isEmpty()) {
-        throw new Exception("해당 검색어의 스터디가 존재하지 않습니다.");
+      } else if (input.equals("2")) {
+        input = "s.name";
+
+      } else if (input.equals("3")) {
+        input = "s.area";
       }
 
-      for (Study searchStudy : studyList) {
-        System.out.printf(" \n (%s)\n", searchStudy.getStudyNo());
-        System.out.printf(" [%s]\n", searchStudy.getStudyTitle());
-        System.out.printf(" >> 조장 : %s\n", searchStudy.getOwner().getPerNickname());
-        System.out.printf(" >> 분야 : %s\n", searchStudy.getSubjectName());
-        System.out.printf(" >> 지역 : %s\n", searchStudy.getArea());
-        System.out.printf(" >> 인원수 : %s/%s명\n", searchStudy.getCountMember(),
-            searchStudy.getNumberOfPeple());
-        System.out.printf(" >> 대면 : %s\n", searchStudy.getFaceName());
-        System.out.printf(" >> 소개글 : %s\n", searchStudy.getIntroduction());
-        // count++;
-      }
+      String keyword = request.getParameter("keyword");
 
-      // if (count == 0) {
-      // throw new Exception(" >> 검색어를 다시 입력해 주세요.");
-      // }
+      List<Study> studyList = studyDao.findByKeyword(input, keyword);
+
+      /*
+       * if (studyList.isEmpty()) { throw new Exception("해당 검색어의 스터디가 존재하지 않습니다."); }
+       *
+       * for (Study searchStudy : studyList) { System.out.printf(" \n (%s)\n",
+       * searchStudy.getStudyNo()); System.out.printf(" [%s]\n", searchStudy.getStudyTitle());
+       * System.out.printf(" >> 조장 : %s\n", searchStudy.getOwner().getPerNickname());
+       * System.out.printf(" >> 분야 : %s\n", searchStudy.getSubjectName());
+       * System.out.printf(" >> 지역 : %s\n", searchStudy.getArea());
+       * System.out.printf(" >> 인원수 : %s/%s명\n", searchStudy.getCountMember(),
+       * searchStudy.getNumberOfPeple()); System.out.printf(" >> 대면 : %s\n",
+       * searchStudy.getFaceName()); System.out.printf(" >> 소개글 : %s\n",
+       * searchStudy.getIntroduction()); count++; }
+       * 
+       * if (count == 0) { throw new Exception(" >> 검색어를 다시 입력해 주세요."); }
+       */
 
       request.setAttribute("studyList", studyList);
-      request.getRequestDispatcher("/study/StudySearch.jsp").forward(request, response);
+      request.setAttribute("perno", request.getParameter("perno"));
+      request.getRequestDispatcher("/study/StudyList.jsp").forward(request, response);
+      // request.getRequestDispatcher("/study/StudySearch.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
