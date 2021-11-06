@@ -31,12 +31,7 @@ public class CafeListController extends HttpServlet {
     try {
       List<Cafe> cafeList = cafeDao.getCafeListByMember();
 
-      if (cafeList == null) {
-        throw new Exception("등록된 스터디카페가 없습니다.");
-      }
-
       request.setAttribute("cafeList", cafeList);
-      request.setAttribute("perNo", request.getParameter("perNo"));
       request.getRequestDispatcher("/cafe/CafeList.jsp").forward(request, response);
 
     } catch (Exception e) {
