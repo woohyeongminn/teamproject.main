@@ -24,6 +24,7 @@
 </head>
 
 <body>
+  <jsp:include page="../header.jsp"/>
   <h5>기업 회원 탈퇴</h5>
 
   <form action='delete'>
@@ -41,7 +42,7 @@
   <label for='f-password' class='form-label' size='100px'>암호</label>
   <input id='f-password' type='password' name='password' placeholder='암호' size='20'><br>
 
-  <input type ='hidden' name='no' value='${ceoMember.ceoNo}'>
+  <input type ='hidden' name='no' value='${loginCeoUser.ceoNo}'>
 
   <button type="submit" value="삭제" class="btn btn-primary">
      탈퇴하기

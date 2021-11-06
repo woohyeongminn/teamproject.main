@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/deleteform")
 public class CeoDeleteFormController extends HttpServlet {
@@ -31,14 +30,14 @@ public class CeoDeleteFormController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
-
-      if (ceoMember == null) {
-        throw new Exception("로그인 하세요.");
-      }
-
-      request.setAttribute("ceoMember", ceoMember);
+      //      int no = Integer.parseInt(request.getParameter("no"));
+      //      CeoMember ceoMember = ceoMemberDao.findByNo(no);
+      //
+      //      if (ceoMember == null) {
+      //        throw new Exception("로그인 하세요.");
+      //      }
+      //
+      //      request.setAttribute("ceoMember", ceoMember);
       request.getRequestDispatcher("/ceoMember/CeoMemberDeleteForm.jsp").forward(request, response);
 
     } catch (Exception e) {
