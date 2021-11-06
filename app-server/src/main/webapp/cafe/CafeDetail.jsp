@@ -51,16 +51,23 @@
 	  height: 80px;
 	  margin-bottom: 10px;
 	}
+	.c-top {
+    width: 100%;
+    padding: 20px 0 20px 50px;
+    font-weight: bold;
+    background-color: rgb(247, 231, 215);
+  }
 	</style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
 
+<div class="c-top">
+  | ${cafe.name}
+</div>
+<br><br>
 <div id="c-detail-content">
 	<input id='c-no' type='hidden' value='${cafe.no}'>
-	<br>
-  <h3> 🏘 ${cafe.name} </h3><br>
-	<hr>
 	<div id='aside'>
     <span id='c-image'>대표이미지</span>
 	</div>
