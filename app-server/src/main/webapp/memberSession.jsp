@@ -7,11 +7,9 @@
     Member loginUser = (Member)session.getAttribute("loginUser");
     CeoMember loginCeoUser = (CeoMember)session.getAttribute("loginCeoUser");
     Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
-    String a;
    
-    if(loginUser==null)
+    if(loginUser==null || loginCeoUser==null || loginAdmin==null)
     {
-      a = "a";
       response.sendRedirect("login.jsp");
     }
     
@@ -20,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
 <body>
 </body>
