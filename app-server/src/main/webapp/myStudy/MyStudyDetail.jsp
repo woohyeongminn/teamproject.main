@@ -67,7 +67,7 @@ label {
 	<br>
 	<hr>
 	<br>
-	<c:if test='${study.owner.perNo == member.perNo}'>
+	<c:if test='${study.owner.perNo == loginUser.perNo}'>
 		<button type="submit" value="수정" formaction="updateform">
 			<a
 				href='../study/updateform?perno=${member.perNo}&studyno=${study.studyNo}'>수정</a>
@@ -91,7 +91,7 @@ label {
 	<span>자유게시판&emsp;</span>
 	<span>화상미팅&emsp;</span>
 	<button>
-		<a href='list?perNo=${member.perNo}'>목록</a>
+		<a href='list'>목록</a>
 	</button>
 	<br>
 	</form>

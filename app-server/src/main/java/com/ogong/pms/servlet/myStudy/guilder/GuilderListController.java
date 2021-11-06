@@ -37,8 +37,6 @@ public class GuilderListController extends HttpServlet {
 
     try {
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      //int perNo = Integer.parseInt(request.getParameter("perNo"));      //로그인 유저
-      //Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
       Study myStudy = studyDao.findByMyNo(studyNo, loginUser.getPerNo());
@@ -56,7 +54,6 @@ public class GuilderListController extends HttpServlet {
         request.setAttribute("waitingGuilderList", waitingGuilder);
       }
 
-      //request.setAttribute("member", member);
       request.setAttribute("study", myStudy);
       request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
 
