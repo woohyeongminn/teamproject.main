@@ -25,6 +25,7 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
   <hr>
   <fieldset>
   <legend>

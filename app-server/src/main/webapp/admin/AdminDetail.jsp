@@ -81,6 +81,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
 <br>
 <legend><b> 🙂 마이페이지 </b></legend><br>
@@ -91,15 +92,15 @@
   <div class="card-header">
       <img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img">
   </div>
-<p><input id='f-nickName' type='nickName' name='nickName' placeholder='${adminpro.masterNickname} 👑' size='20' readonly></p>
+<p><input id='f-nickName' type='nickName' name='nickName' placeholder='${loginAdmin.masterNickname} 👑' size='20' readonly></p>
 <br>
-<p><input id='f-email' type='email' name='email' placeholder='${adminpro.masterEmail}' size='20' readonly></p>
+<p><input id='f-email' type='email' name='email' placeholder='${loginAdmin.masterEmail}' size='20' readonly></p>
 <br>
 <br>
 </table>  
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="transform: translate(-45%, 30%);">
-<button type="submit" class="btn btn-outline-dark" value="변경" ><a href='updateForm?no=${adminpro.masterNo}'>변경</a></button> 
+<button type="submit" class="btn btn-outline-dark" value="변경" ><a href='updateForm'>변경</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='logout'>로그아웃</a></button> 
 </div>
 </form>

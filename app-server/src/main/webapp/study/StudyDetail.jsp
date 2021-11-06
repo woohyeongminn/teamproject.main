@@ -19,7 +19,6 @@ label {
 <jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 상세</h1>
 	<form action='updateform'>
-	  <input type='hidden' name='subjectNo' value='${study.subjectNo}'>
 		<span>번호 </span> <span>${study.studyNo}</span><br>
     <span>북마크 </span> <span>${study.countBookMember}</span><br>
     <span>제목 </span> <span>${study.studyTitle}</span><br>
@@ -33,18 +32,18 @@ label {
     <span>활동 점수 </span> <span>${study.point}</span><br>
 		
 		<c:choose>
-		<c:when test="${study.owner.perNo eq member.perNo}">
+		<c:when test="${study.owner.perNo eq loginUser.perNo}">
     <button  type="submit" value="수정" formaction="updateform">
-      <a href='updateform?perno=${member.perNo}&studyno=${study.studyNo}'>수정</a>
+      <a href='updateform?studyno=${study.studyNo}'>수정</a>
     </button>
     <button>
-       <a href='delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
+       <a href='delete?studyno=${study.studyNo}'>삭제</a>
     </button>
     </c:when>
     
     <c:when test="${study.owner.perNo ne member.perNo}">
     <button>
-      <a href='join?perno=${member.perNo}&studyno=${study.studyNo}'>참여 신청</a>
+      <a href='join?studyno=${study.studyNo}'>참여 신청</a>
     </button>
     </c:when>
     </c:choose>
@@ -63,10 +62,10 @@ label {
 		</c:if> -->
 		
 		<button>
-			<a href='../bookmark/add?perno=${member.perNo}&studyno=${study.studyNo}'>북마크 추가</a>
+			<a href='../bookmark/add?studyno=${study.studyNo}'>북마크 추가</a>
 		</button>
 		<button>
-			<a href='list?perno=${member.perNo}'>목록</a>
+			<a href='list'>목록</a>
 		</button>
 		<br>
 	</form>

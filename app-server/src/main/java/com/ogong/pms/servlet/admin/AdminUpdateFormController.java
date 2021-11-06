@@ -9,7 +9,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.AdminDao;
-import com.ogong.pms.domain.Admin;
 
 @WebServlet("/admin/updateForm")
 public class AdminUpdateFormController extends GenericServlet {
@@ -28,10 +27,10 @@ public class AdminUpdateFormController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int adminNo = Integer.parseInt(request.getParameter("no"));
-      Admin admin = adminDao.findByAdminNo(adminNo);
-
-      request.setAttribute("admin", admin);
+      //      int adminNo = Integer.parseInt(request.getParameter("no"));
+      //      Admin admin = adminDao.findByAdminNo(adminNo);
+      //
+      //      request.setAttribute("admin", admin);
 
       request.getRequestDispatcher("/admin/AdminUpdateForm.jsp").forward(request, response);
 

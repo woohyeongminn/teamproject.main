@@ -85,10 +85,7 @@ ul{
 		<a href='list/end?perno=${perno}'>완료</a>
 	</button>
 	<br>
-	<button>
-		<a href='form?perno=${perno}'>등록</a>
-	</button>
-	<br> -->
+	
 	<!-- [GR] Search Ver.2 -->
 	<!-- <div class="input-group mb-3">
 		<select name="sk">
@@ -117,10 +114,13 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-  <input type='hidden' name='perno' value='${perno}'>
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
+  <br>
+  <button>
+    <a href='form?perno=${loginUser.perNo}'>등록</a>
+  </button>
   <br>
 <c:if test='${not empty studyList}'>
   <div id="content">
@@ -130,7 +130,7 @@ ul{
         <div class="card">
           <div class="card-body">
             <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
             ${study.faceName}<br>
             <c:if test="${study.faceName ne '비대면'}">
             ${study.area}<br>
@@ -163,7 +163,6 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-  <input type='hidden' name='perno' value='${perno}'>
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
@@ -176,7 +175,7 @@ ul{
         <div class="card">
           <div class="card-body">
             <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
             ${study.faceName}<br>
             <c:if test="${study.faceName ne '비대면'}">
             ${study.area}<br>
@@ -209,7 +208,6 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-  <input type='hidden' name='perno' value='${perno}'>
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
@@ -222,7 +220,7 @@ ul{
         <div class="card">
           <div class="card-body">
             <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
             ${study.faceName}<br>
             <c:if test="${study.faceName ne '비대면'}">
             ${study.area}<br>

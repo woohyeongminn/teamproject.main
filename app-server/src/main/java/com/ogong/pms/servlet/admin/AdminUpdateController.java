@@ -31,8 +31,8 @@ public class AdminUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int adminNo = Integer.parseInt(request.getParameter("no"));
-      Admin admin = adminDao.findByAdminNo(adminNo);
+      Admin loginAdmin = (Admin) request.getSession().getAttribute("loginAdmin");
+      Admin admin = adminDao.findByAdminNo(loginAdmin.getMasterNo());
 
       if (admin == null) {
         throw new Exception(" >> 다시 선택해 주세요.");

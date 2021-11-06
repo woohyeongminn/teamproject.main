@@ -35,8 +35,8 @@ public class StudyAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(no);
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
       Study study = new Study();
 
@@ -54,8 +54,8 @@ public class StudyAddController extends HttpServlet {
       studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
 
-      request.setAttribute("member", member);
-      response.sendRedirect("list?perno=" + member.getPerNo());
+      // request.setAttribute("member", member);
+      response.sendRedirect("list");
       // request.getRequestDispatcher("StudyAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

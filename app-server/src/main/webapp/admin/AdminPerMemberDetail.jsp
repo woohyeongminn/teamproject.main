@@ -26,6 +26,7 @@
 </head>>
 
 <body>
+<jsp:include page="../header.jsp"/>
    <b> 📖 개인회원 상세</b>
    <hr>
    <span>(${perMember.perNo})</span><br>
