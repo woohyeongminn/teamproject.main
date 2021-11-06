@@ -22,6 +22,7 @@ public class AuthAdminLogoutController extends HttpServlet {
 
     AuthAdminLogoutController.loginAdmin = null;
     request.getSession().invalidate();
-    request.getRequestDispatcher("/admin/AdminLoginForm.jsp").forward(request, response);
+    response.sendRedirect("../index.jsp");
+    //    request.getRequestDispatcher("/admin/AdminLoginForm.jsp").forward(request, response);
   }
 }

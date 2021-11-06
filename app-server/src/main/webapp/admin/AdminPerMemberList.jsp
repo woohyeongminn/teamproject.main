@@ -73,6 +73,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <br>
   <fieldset>
 <legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 📗 개인 회원 목록 </b></legend><br>

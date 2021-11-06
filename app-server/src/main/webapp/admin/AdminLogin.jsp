@@ -50,8 +50,8 @@
     color: black;
   }
   .dropdown-menu {
-  background-color: rgba(211, 211, 211, 0);
-  border: rgba(211, 211, 211, 0);
+  background-color: rgba(255, 255, 255, 0);
+  border: rgba(255, 255, 255, 0);
   }
   a {
   color : black;
@@ -63,10 +63,11 @@
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <br>
 <legend><b> 🖐 관리자 로그인 </b></legend><br>
 <hr>
-<p>👑 '${admin.masterNickname}'님 환영합니다! 🖐</p>
+<p>👑 '${loginAdmin.masterNickname}'님 환영합니다! 🖐</p>
 <br>
 <br>
 <div class="btn-group">
@@ -77,7 +78,7 @@
     <button class="dromdown-item" type="button1">
       <a href='logout' style="color: black;">🖐 로그아웃</a></button><br>
     <button class="dromdown-item" type="button1">
-      <a href='detail?no=${admin.masterNo}' style="color: black;">🙂 마이페이지</a></button>
+      <a href='detail' style="color: black;">🙂 마이페이지</a></button>
   </div>
 </div>
 

@@ -73,6 +73,7 @@ display: none;
 </c:if>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
   <input id='c-no' type='hidden' value='${cafe.no}'><br>
   <legend><b> 🏘 스터디 카페 상세 </b></legend><br>
   <hr>
