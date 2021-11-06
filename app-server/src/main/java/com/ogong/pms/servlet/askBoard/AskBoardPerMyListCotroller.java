@@ -37,7 +37,7 @@ public class AskBoardPerMyListCotroller extends HttpServlet {
         throw new Exception("문의 게시글이 존재하지 않습니다.");
       }
 
-      request.setAttribute("perNo", perNo);
+      //request.setAttribute("perNo", perNo);
       request.setAttribute("myAskBoardList", myAskBoardList);
       request.getRequestDispatcher("/askBoard/AskBoardPerMyList.jsp").forward(request, response);
 

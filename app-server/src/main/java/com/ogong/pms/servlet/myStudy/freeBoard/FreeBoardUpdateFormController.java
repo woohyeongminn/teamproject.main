@@ -33,12 +33,12 @@ public class FreeBoardUpdateFormController extends HttpServlet {
     try {
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
       int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      //int perNo = Integer.parseInt(request.getParameter("perNo"));
 
       FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
 
 
-      request.setAttribute("perNo", perNo);
+      //request.setAttribute("perNo", perNo);
       request.setAttribute("studyNo", studyNo);
       request.setAttribute("freeNo", freeNo);
       request.setAttribute("freeBoard", freeBoard);

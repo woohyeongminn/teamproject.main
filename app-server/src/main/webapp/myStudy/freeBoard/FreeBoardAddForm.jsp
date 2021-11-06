@@ -26,6 +26,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../../header.jsp"/>
 <fieldset>
 <br>
 <legend><b> 🪧 자유게시판 등록 </b></legend><br>
@@ -39,7 +40,7 @@
 </tr>
 </thead>
   <form action='freeboardadd'></td>
-  <input type='hidden' name='perNo' value='${member.perNo}'>
+  <input type='hidden' name='userNo' value='${loginUser.perNo}'>
   <input type='hidden' name='studyNo' value='${studyNo}'>
   <td></label><input id='f-title' type='text' name='title'></td>
   <td><input id='f-content' type='text' name='content'></td>

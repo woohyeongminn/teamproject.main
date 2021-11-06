@@ -53,7 +53,7 @@ public class AskBoardCeoAddCotroller extends HttpServlet {
       askBoardDao.insertCeo(askBoard);
       sqlSession.commit();
 
-      request.setAttribute("ceoNo", askBoard.getAskCeoWriter().getCeoNo());
+      //request.setAttribute("ceoNo", askBoard.getAskCeoWriter().getCeoNo());
       request.getRequestDispatcher("/askBoard/AskBoardCeoAdd.jsp").forward(request, response);
 
 

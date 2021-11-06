@@ -28,6 +28,7 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
   <h5> 📕답변 등록 </h5>
   <form action='replyadd'>
   

@@ -1,13 +1,15 @@
+<%@page import="com.ogong.pms.domain.CeoMember"%>
+<%@page import="com.ogong.pms.domain.Admin"%>
 <%@page import="com.ogong.pms.domain.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
     Member loginUser = (Member)session.getAttribute("loginUser");
-    String a;
+    CeoMember loginCeoUser = (CeoMember)session.getAttribute("loginCeoUser");
+    Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
    
-    if(loginUser==null)
+    if(loginUser==null || loginCeoUser==null || loginAdmin==null)
     {
-      a = "a";
       response.sendRedirect("login.jsp");
     }
     
@@ -16,7 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
 <body>
 </body>

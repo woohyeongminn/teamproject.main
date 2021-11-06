@@ -49,7 +49,7 @@ public class FreeBoardDetailController extends HttpServlet {
       //    }
 
       request.setAttribute("freeBoard", freeBoard);
-      request.setAttribute("member", member);
+      //request.setAttribute("member", member);
       request.getRequestDispatcher(
           "/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request, response);
 

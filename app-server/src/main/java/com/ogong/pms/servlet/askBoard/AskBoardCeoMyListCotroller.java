@@ -38,7 +38,7 @@ public class AskBoardCeoMyListCotroller extends HttpServlet {
         throw new Exception("문의 게시글이 존재하지 않습니다.");
       }
 
-      request.setAttribute("ceoNo", ceoNo);
+      //request.setAttribute("ceoNo", ceoNo);
       request.setAttribute("myAskBoardList", myAskBoardList);
       request.getRequestDispatcher("/askBoard/AskBoardCeoMyList.jsp").forward(request, response);
 
