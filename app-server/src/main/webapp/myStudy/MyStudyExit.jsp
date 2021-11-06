@@ -31,7 +31,7 @@ label {
 	<span>스터디 탈퇴가 완료되었습니다.</span>
 	<br>
 	<button>
-		<a href='../mystudy/list?perNo=${member.perNo}'>이전</a>
+		<a href='../mystudy/list?perNo=${member.perNo}'>목록</a>
 	</button>
 </body>
 </html>
