@@ -39,7 +39,7 @@ label {
 				</p>
         <label for='f-faceNo'>대면/비대면</label> <input id='f-faceNo' type='text' name='faceNo'><br>
         <label for='f-introduction'>소개글</label> <input id='f-introduction' type='text' name='introduction'><br>
-    <input type='hidden' name='no' value='1'>
+    <input type='hidden' name='perNo' value='${loginUser.perNo}'>
     <button>등록</button><br>
 	</form>
 </body>

@@ -85,10 +85,7 @@ ul{
 		<a href='list/end?perno=${perno}'>완료</a>
 	</button>
 	<br>
-	<button>
-		<a href='form?perno=${perno}'>등록</a>
-	</button>
-	<br> -->
+	
 	<!-- [GR] Search Ver.2 -->
 	<!-- <div class="input-group mb-3">
 		<select name="sk">
@@ -117,10 +114,14 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-  <input type='hidden' name='perno' value='${perno}'>
+  <input type='hidden' name='perno' value='${loginUser.perNo}'>
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
+  <br>
+  <button>
+    <a href='form?perno=${loginUser.perNo}'>등록</a>
+  </button>
   <br>
 <c:if test='${not empty studyList}'>
   <div id="content">

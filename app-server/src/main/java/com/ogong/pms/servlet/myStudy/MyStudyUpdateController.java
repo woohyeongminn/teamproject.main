@@ -35,8 +35,8 @@ public class MyStudyUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
@@ -54,7 +54,7 @@ public class MyStudyUpdateController extends HttpServlet {
 
       request.setAttribute("member", member);
       request.setAttribute("study", study);
-      response.sendRedirect("detail?studyno=" + study.getStudyNo() + "&perno=" + member.getPerNo());
+      response.sendRedirect("detail?studyno=" + study.getStudyNo());
 
     } catch (Exception e) {
       e.printStackTrace();
