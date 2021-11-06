@@ -93,6 +93,7 @@
 
 <body>
 <jsp:include page="../header.jsp"/>
+
 <div class="all-content">
 <b style="font-size:20px"> 🖐 기업 회원 로그인 </b>
 <br>
