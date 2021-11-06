@@ -96,9 +96,19 @@
 <c:if test='${empty reviewList}'>
 	 등록된 리뷰가 없습니다.<br><br>	
 </c:if>
-<button type="button" class="btn btn-outline-dark"><a href="reservation?no=${cafe.no}&perNo=${perNo}">스터디룸 예약</a></button>
-<button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">목록</a></button>
+<button type="button" class="btn btn-outline-dark" onclick="reserBtn_click(${loginUser.perNo}); return false;">스터디룸 예약</button>
+<button type="button" class="btn btn-outline-dark"><a href="list">목록</a></button>
 </div>
+
+<script>
+function reserBtn_click(user) {
+  if (user == null) {
+	  alert('로그인 한 회원만 예약 가능합니다.');
+  } else {
+	  location.href="reservation?no="+${cafe.no};
+  }
+}
+</script>
 </body>
 </html>
 
