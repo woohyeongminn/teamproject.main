@@ -25,9 +25,17 @@
   font-weight: bold;
   background-color: rgb(247, 231, 215);
 }
+.table > :not(caption) > * > * {
+    text-align: center;
+}
   input {
   border : white;
   outline-color : lightgray;
+  margin-left: 80px;
+  }
+  button[type=submit] {
+    margin-right: 10px;
+    margin-bottom: 300px;
   }
   </style>
 </head>
@@ -58,5 +66,6 @@
 </form>
 </div>
 </section>
+ <jsp:include page="../footer.jsp"/>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +29,10 @@
   }
   a:hover {
   color : white;
+  }
+  button[type=submit] {
+    margin-bottom: 300px;
+    margin-right: 10px;
   }
   .c-top {
   width: 100%;
@@ -66,9 +71,12 @@
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button>
+<c:if test="${not empty loginAdmin}">
 <button type="submit" class="btn btn-outline-dark" value="변경"><a href='Updateform?no=${adminNotice.adminNotiNo}'>변경</a></button>
 <button type="submit" class="btn btn-outline-dark" value="삭제"><a href='delete?no=${adminNotice.adminNotiNo}'>삭제</a></button></body>
+</c:if>
 </div>
 </section>
+ <jsp:include page="../footer.jsp"/>
 </body>
 </html>

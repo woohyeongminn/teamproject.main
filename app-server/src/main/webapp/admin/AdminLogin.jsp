@@ -12,13 +12,21 @@
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
+  .c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  }
   legend {
   text-align: center;
   }
-  p {
-  text-align-last: center;
+  p#welcome {
+    text-align: center;
+    margin: 100px;
   }
-  div {
+  div .btn-group {
   margin-left: 120px;
   display: flex;
   align-items: center;
@@ -30,6 +38,8 @@
     border-radius: 10px;
     background-color: beige;
     color: black;
+    margin-left: 120px;
+    margin-bottom: 200px;
   }
   button[type=button]:hover {
     background-color: blanchedalmond;
@@ -60,14 +70,16 @@
   a:hover {
   color : white;
   }
+
 </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<br>
-<legend><b> 🖐 관리자 로그인 </b></legend><br>
-<hr>
-<p>👑 '${loginAdmin.masterNickname}'님 환영합니다! 🖐</p>
+<section>
+<div class="c-top">
+      🖐 오늘의 공부 로그인
+      </div>
+<p id="welcome"><b>👑 '${loginAdmin.masterNickname}'님 환영합니다! 👑</b></p>
 <br>
 <br>
 <div class="btn-group">
@@ -130,5 +142,7 @@
       <a href="/ogong/admin/askboardlist" style="color: black;">💬 문의사항</a></button>
   </div>
 </div>
+</section>
+ <jsp:include page="../footer.jsp"/>
 </body>
 </html>
