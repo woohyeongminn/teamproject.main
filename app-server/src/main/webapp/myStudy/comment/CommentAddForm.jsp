@@ -41,11 +41,9 @@ input {
 				</tr>
 			</thead>
 			<form action='add'>
-				<input type='hidden' name='perNo' value='${member.perNo}'> <input
-					type='hidden' name='studyNo' value='${study.studyNo}'> <input
-					type='hidden' name='freeNo' value='${freeBoard.freeBoardNo}'>
-				<input type='hidden' name='commentNo' value='${comment.commentNo}'>
-				<td><input id='f-commentText' type='text' name='commentText'></td>
+				<input type='hidden' name='studyno' value='${study.studyNo}'>
+				<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'>
+				<td><input id='f-commentText' type='text' name='commenttext'></td>
 		</table>
 	</fieldset>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
