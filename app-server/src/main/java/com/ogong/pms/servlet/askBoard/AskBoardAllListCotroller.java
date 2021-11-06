@@ -32,9 +32,6 @@ public class AskBoardAllListCotroller extends HttpServlet {
     try {
 
       Collection<AskBoard> askBoardList = askBoardDao.findAll();
-      //      if (myAskBoardList == null) {
-      //        throw new Exception("문의 게시글이 존재하지 않습니다.");
-      //      }
 
       request.setAttribute("askBoardList", askBoardList);
       request.getRequestDispatcher("/askBoard/AskBoardAllList.jsp").forward(request, response);

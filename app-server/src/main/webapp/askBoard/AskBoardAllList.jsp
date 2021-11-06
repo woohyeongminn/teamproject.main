@@ -67,6 +67,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
 <br>
 <legend ><b> 💬 문의게시글 목록 </b></legend><br>

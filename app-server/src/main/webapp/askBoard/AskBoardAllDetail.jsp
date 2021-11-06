@@ -34,6 +34,7 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
    <form id="head">💬 문의글 상세</form>
    <hr>
    <form action='updateform'>

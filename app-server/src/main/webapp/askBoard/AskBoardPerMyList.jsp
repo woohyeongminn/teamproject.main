@@ -77,6 +77,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 
 <fieldset>
 <br>
@@ -121,7 +122,7 @@
 </c:if>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="add">
-     <a href='peraddform?perNo=${perNo}'>등록하기</a>
+     <a href='peraddform'>등록하기</a>
      </button>
    </div> 
 </body>
