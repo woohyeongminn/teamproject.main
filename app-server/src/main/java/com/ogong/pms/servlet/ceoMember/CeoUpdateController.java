@@ -32,9 +32,8 @@ public class CeoUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
+      CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
+      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
       if (ceoMember == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");
@@ -56,7 +55,7 @@ public class CeoUpdateController extends HttpServlet {
 
       sqlSession.commit();
 
-      response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
+      response.sendRedirect("detail");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

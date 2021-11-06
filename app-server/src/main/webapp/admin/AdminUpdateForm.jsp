@@ -43,13 +43,22 @@
   a:hover {
   color : white;
   }
+  .c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
-<br>
-<legend><b> 🙂 마이페이지 수정 </b></legend><br>
-<hr>
+<section>
+<div class="c-top">
+        🙂 마이페이지
+      </div>
 <table class="table table-responsive">
 <td><form action='update'></td>
 <br>
@@ -62,10 +71,11 @@
 <br>
 </table>
 </fieldset>
-<input type='hidden' name='no' value='${admin.masterNo}'>
+<%-- <input type='hidden' name='no' value='${loginAdmin.masterNo}'> --%>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="변경" >변경</button> 
 </div>
 </form>
+</section>
 </body>
 </html>

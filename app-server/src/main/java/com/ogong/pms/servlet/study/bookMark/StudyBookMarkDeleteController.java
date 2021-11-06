@@ -35,8 +35,8 @@ public class StudyBookMarkDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByBookmark(studyNo, member.getPerNo());
@@ -51,9 +51,9 @@ public class StudyBookMarkDeleteController extends HttpServlet {
       studyDao.deleteBookmark(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
 
-      request.setAttribute("member", member);
+      // request.setAttribute("member", member);
       request.setAttribute("study", study);
-      response.sendRedirect("list?perno="+ member.getPerNo());
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       e.printStackTrace();

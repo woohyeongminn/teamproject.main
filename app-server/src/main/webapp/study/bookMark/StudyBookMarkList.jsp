@@ -5,13 +5,14 @@
 <html>
 <head>
 <title>목록 | 내 북마크</title>
-<!-- <link rel="stylesheet" type="text/css" href="../header.css"> -->
+<link rel="stylesheet" type="text/css" href="../header.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
 <jsp:include page="../../header.jsp"/>
-	<h1>🌟 내 북마크 목록</h1>
+	<h3>🌟 내 북마크 목록</h3>
+	<input type="hidden" name="loginUser" value="${loginUser.perNo}">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -26,12 +27,11 @@
 			</tr>
 				</thread>
 		<tbody>
-
 			<c:forEach items="${studyList}" var="study">
 				<tr>
 					<td>${study.studyNo}</td>
 					<td>${study.countBookMember}</td>
-					<td><a href='detail?perno=${member.perNo}&studyno=${study.studyNo}'>${study.studyTitle}</a></td>
+					<td><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></td>
 					<td>${study.subjectName}</td>
 					<td>${study.countMember}</td>
 					<td>${study.numberOfPeple}</td>
@@ -39,7 +39,6 @@
 					<td>${study.faceName}</td>
 				</tr>
 			</c:forEach>
-
 		</tbody>
 	</table>
 </body>

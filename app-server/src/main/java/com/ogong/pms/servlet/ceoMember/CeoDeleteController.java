@@ -30,8 +30,8 @@ public class CeoDeleteController extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
+      CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
+      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
       if (ceoMember == null) {
         throw new Exception("로그인 하세요.");
@@ -53,11 +53,14 @@ public class CeoDeleteController extends HttpServlet {
       ceoMember.setCeoPassword("Deleted Password");
       ceoMember.setCeoPhoto("Deleted Photo");
       ceoMember.setCeoLicenseNo("Deleted LicenseNo");
+      ceoMember.setCeoTel("Deleted Tel");
       ceoMember.setCeoStatus(CeoMember.CEO);
       ceoMember.setActive(CeoMember.OUTUSER);
 
       ceoMemberDao.updateActive(ceoMember);
       sqlSession.commit();
+
+      response.sendRedirect("logout");
       //        AuthCeoMemberLoginHandler.loginCeoMember = null;
       //        AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
 

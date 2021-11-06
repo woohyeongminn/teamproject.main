@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>탈퇴 | 내 스터디</title>
+<title>상세 | 내 스터디</title>
 <link rel="stylesheet" type="text/css" href="../header.css">
 <style>
 label {
@@ -18,7 +18,7 @@ label {
 <body>
 	<jsp:include page="../header.jsp" />
 	<h1>🖊 내 스터디 탈퇴</h1>
-	<c:if test="study.owner.perNo eq member.perNo">
+	<c:if test="study.owner.perNo eq loginUser.perNo">
 		<c:choose>
 			<c:when test="study.countMember > 0">
         구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.
@@ -31,7 +31,7 @@ label {
 	<span>스터디 탈퇴가 완료되었습니다.</span>
 	<br>
 	<button>
-		<a href='../mystudy/list?perNo=${member.perNo}'>목록</a>
+		<a href='../mystudy/list'>목록</a>
 	</button>
 </body>
 </html>

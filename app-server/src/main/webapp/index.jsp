@@ -42,7 +42,7 @@ a {
   color: black;
 }
 
-/*header 시작*/
+/* /*header 시작*/
 header {
   display: flex;
   justify-content: space-between;
@@ -138,7 +138,7 @@ header {
   .header_login li a {
     padding: 10px;
   }
-}
+} */
 
 /*body 시작*/
 section {
@@ -196,6 +196,16 @@ section {
   width: 100%;
   height: 800px;
   background-color: rgb(247, 247, 247);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.contents .c3 #main_3 {
+  opacity: 35%;
+  width: 100%;
+  height: 30%;
+  dispaly: inline-block;
 }
 
 a.navbar-brand {
@@ -211,7 +221,7 @@ right: 30px;
 bottom: 20px;
 }
 
-/*footer 시작*/
+/* /*footer 시작*/
 footer {
   font-size: 14px;
   padding: 8px 0;
@@ -221,6 +231,7 @@ footer {
 .footer_company {
   display: flex;
   margin-left: 20px;
+  justify-content: center;
 }
 
 .footer_company li a{
@@ -229,16 +240,18 @@ footer {
 
 .footer_address {
   margin-left: 20px;
+  text-align: center;
 }
 
 .footer_copyright {
   margin-left: 20px;
-}
+  text-align: center;
+} */
 
 </style>
 </head>
 
-<body>
+<body id="first">
     <jsp:include page="header.jsp"/>
 
     <section>
@@ -249,8 +262,7 @@ footer {
         <div class="c2-leftbox">오늘의 공부 텍스트 박스</div>
         <div class="c2-rightbox"><img src="img/main_2.jpg" id="main_2"></div>
       </div>
-      <div class="c3">
-        세번째 내용
+      <div class="c3"><img src="img/main_3.JPG" id="main_3">
       </div>
     </div>
     
@@ -261,7 +273,7 @@ footer {
       <i class="fas fa-graduation-cap fa-2x"></i></a>
     </nav>
 
-    <footer>
+<footer>
       <ul class="footer_company">
         <li><a href="#">오늘의 공부 소개</a></li>
         <li><a href="#">이용약관</a></li>

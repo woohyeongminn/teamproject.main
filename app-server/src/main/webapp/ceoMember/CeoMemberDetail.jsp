@@ -29,14 +29,14 @@
    <hr>
    <form action='updateform'>
 	   <span>(${loginCeoUser.ceoNo})</span><br>
-	   <span>이름ㅣ</span> <span>${loginCeoUser.ceoName}</span><br>
-	   <span>닉네임ㅣ</span> <span>${loginCeoUser.ceoNickname}</span><br>
-	   <span>이메일ㅣ</span> <span>${loginCeoUser.ceoEmail}</span><br>
+	   <span>이름ㅣ</span> <span>${ceoMember.ceoName}</span><br>
+	   <span>닉네임ㅣ</span> <span>${ceoMember.ceoNickname}</span><br>
+	   <span>이메일ㅣ</span> <span>${ceoMember.ceoEmail}</span><br>
 	   <span>사진ㅣ</span> <img src="..." alt="#" class="img-circle"><br>
-	   <span>전화번호ㅣ</span> <span>${loginCeoUser.ceoTel}</span><br>
-	   <span>대표자명ㅣ</span> <span>${loginCeoUser.ceoBossName}</span><br>
-	   <span>사업자 번호ㅣ</span> <span>${loginCeoUser.ceoLicenseNo}</span><br>
-	   <span>가입일ㅣ</span> <span>${loginCeoUser.ceoRegisteredDate}</span><br>
+	   <span>전화번호ㅣ</span> <span>${ceoMember.ceoTel}</span><br>
+	   <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
+	   <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
+	   <span>가입일ㅣ</span> <span>${ceoMember.ceoRegisteredDate}</span><br>
 	   <button type="submit" value="수정" formaction="updateform">
 	      <a href='updateform'>프로필 수정하기</a>
 	   </button>

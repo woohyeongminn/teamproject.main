@@ -146,6 +146,6 @@ function checkValue() {
 	  <button type="submit" class="class="btn btn-outline-dark">회원가입</button>
 	  <input type="button" class="class="btn btn-outline-dark"> 취소</input>
 	 </form>
-	 
+	 </div>
  </body>
 </html>

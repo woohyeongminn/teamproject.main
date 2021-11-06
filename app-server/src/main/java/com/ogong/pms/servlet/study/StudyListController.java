@@ -57,7 +57,7 @@ public class StudyListController extends GenericServlet {
         throw new Exception("스터디 목록이 없습니다.");
       }
 
-      request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
+      // request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
       request.setAttribute("studyList", studyList);
       request.setAttribute("studyIngList", studyIngList);
       request.setAttribute("studyEndList", studyEndList);

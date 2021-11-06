@@ -31,13 +31,10 @@ public class CafeMyReviewUpdateFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int memberNo = Integer.parseInt(request.getParameter("perNo"));
       int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-      //      System.out.println(memberNo + ", " + reviewNo);
 
       CafeReview cafeReview = cafeReviewDao.findByReviewNo(reviewNo);
 
-      request.setAttribute("perNo", memberNo);
       request.setAttribute("cafeReview", cafeReview);
       request.getRequestDispatcher("/cafe/CafeReviewUpdateForm.jsp").forward(request, response);
 

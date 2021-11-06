@@ -32,10 +32,13 @@ public class CeoAddFormController extends HttpServlet {
     try {
       Collection<CeoMember> ceoMemberList  = ceoMemberDao.findAll();
 
+      // 중복체크 하려고 보냈음
       request.setAttribute("ceoMemberList", ceoMemberList);
+
       request.getRequestDispatcher("/ceoMember/CeoMemberAddForm.jsp").forward(request, response);
     } catch (Exception e) {
-      // TODO: handle exception
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
 
 

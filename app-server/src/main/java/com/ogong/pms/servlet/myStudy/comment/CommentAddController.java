@@ -43,21 +43,17 @@ public class CommentAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      // System.out.println("▶ 댓글 작성");
+      // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
+      // System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
+      // }
 
-      /*
-       * if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-       * System.out.println(" >> 로그인 한 회원만 등록 가능합니다."); }
-       */
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
-      int no = Integer.parseInt(request.getParameter("perNo"));
-      Member member = memberDao.findByNo(no);
-
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
 
-      // FreeBoard freeBoard = (FreeBoard) request.getAttribute("freeBoard");
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeBoardNo"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       if (freeBoard == null) {
@@ -66,9 +62,9 @@ public class CommentAddController extends HttpServlet {
 
       Comment comment = new Comment();
 
-      comment.setStudyNo(Integer.parseInt(request.getParameter("studyNo")));
-      comment.setBoardNo(Integer.parseInt(request.getParameter("freeNo")));
-      comment.setCommentText(request.getParameter("area"));
+      comment.setStudyNo(Integer.parseInt(request.getParameter("studyno")));
+      comment.setBoardNo(Integer.parseInt(request.getParameter("freeboardno")));
+      comment.setCommentText(request.getParameter("commenttext"));
       comment.setCommentWiter(member);
       // comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
 
@@ -86,7 +82,7 @@ public class CommentAddController extends HttpServlet {
       sqlSession.commit();
 
       // System.out.println(" >> 댓글이 등록되었습니다.");
-      request.setAttribute("member", member);
+      // request.setAttribute("member", member);
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.getRequestDispatcher("/myStudy/freeBoardDetail.jsp").forward(request, response);

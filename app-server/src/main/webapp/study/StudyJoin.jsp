@@ -20,13 +20,13 @@
 </button> -->
 
 <c:forEach var="memberWating" items="${study.watingMember}">
-<c:if test="${memberWating.perNo eq member.perNo}">
+<c:if test="${memberWating.perNo eq loginUser.perNo}">
 이미 승인 대기 중인 스터디입니다.
 </c:if>
 </c:forEach>
 
 <c:forEach var="guilder" items="${study.members}">
-<c:if test="${guilder.perNo eq member.perNo}">
+<c:if test="${guilder.perNo eq loginUser.perNo}">
 이미 참여 중인 스터디입니다.
 </c:if>
 </c:forEach>

@@ -78,30 +78,117 @@
     border-radius: 15px;
     border: 2px solid lightgray;
   }
+  .c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
+  .c-top:hover {
+    color: cornflowerblue;
+  }
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
-<br>
-<legend><b> 🙂 마이페이지 </b></legend><br>
-<hr>
+<section>
+<div class="c-top" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      🙂 마이페이지
+      </div>
 <table class="table table-responsive">
 
 <div class="card">
   <div class="card-header">
       <img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img">
   </div>
-<p><input id='f-nickName' type='nickName' name='nickName' placeholder='${adminpro.masterNickname} 👑' size='20' readonly></p>
+<p><input id='f-nickName' type='nickName' name='nickName' placeholder='${loginAdmin.masterNickname} 👑' size='20' readonly></p>
 <br>
-<p><input id='f-email' type='email' name='email' placeholder='${adminpro.masterEmail}' size='20' readonly></p>
+<p><input id='f-email' type='email' name='email' placeholder='${loginAdmin.masterEmail}' size='20' readonly></p>
 <br>
 <br>
 </table>  
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="transform: translate(-45%, 30%);">
-<button type="submit" class="btn btn-outline-dark" value="변경" ><a href='updateForm?no=${adminpro.masterNo}'>변경</a></button> 
+<button type="submit" class="btn btn-outline-dark" value="변경" ><a href='updateForm'>변경</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='logout'>로그아웃</a></button> 
 </div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h4 class="offcanvas-title" id="offcanvasExampleLabel">👑 관리자 👑</h4>
+    <button type="button2" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <hr>
+  </div>
+
+  <div class="offcanvas-body">
+    <div>
+      <b>이동하고 싶은 탭을 선택해 주세요!</b>
+    </div>
+
+    <div class="btn-group dropend">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        👑 관리자 페이지
+      </button>
+      <div class="dropdown-menu" role="menu" style="border-color: white;">
+        <button class="dromdown-item" type="button1">
+          <a href='logout' style="color: black;">🖐 로그아웃</a></button><br>
+        <button class="dromdown-item" type="button1">
+          <a href='/ogong/admin/detail' style="color: black;">🙂 마이페이지</a></button>
+      </div>
+    </div>
+    
+    <div class="btn-group dropend">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        📁 회원 관리
+      </button>
+      <div class="dropdown-menu" role="menu" style="border-color: white;">
+        <button class="dromdown-item" type="button1">
+          <a href="/ogong/admin/permemberlist" style="color: black;">🎓 개인 회원</a></button><br>
+        <button class="dromdown-item" type="button1">
+          <a href="/ogong/admin/ceomember/list" style="color: black;">👔 기업 회원</a></button>
+      </div>
+    </div>
+      
+    <div class="btn-group dropend">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        📖 스터디 관리
+      </button>
+      <div class="dropdown-menu" role="menu" style="border-color: white;">
+        <button class="dromdown-item" type="button1">
+          <a href="study/list" style="color: black;">📚 스터디 목록</a></button><br>
+        <!-- <button class="dromdown-item" type="button1">
+          <a href="/study/list" style="color: black;">📔 스터디 삭제</a></button> -->
+      </div>
+    </div>
+    
+    <div class="btn-group dropend">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        🏘 장소 관리
+      </button>
+      <div class="dropdown-menu" role="menu" style="border-color: white;">
+        <button class="dromdown-item" type="button1">
+          <a href="/ogong/admin/cafeList" style="color: black;">📝 장소 목록</a></button><br>
+        <button class="dromdown-item" type="button1">
+          <a href="/ogong/admin/reviewList" style="color: black;">🔖 장소 리뷰</a></button>
+      </div>
+    </div>
+    
+    <div class="btn-group dropend">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        💌 고객센터 관리
+      </button>
+      <div class="dropdown-menu" role="menu" style="border-color: white;">
+        <button class="dromdown-item" type="button1">
+          <a href="/ogong/adminNotice/list" style="color: black;">📢 공지사항</a></button><br>
+        <button class="dromdown-item" type="button1">
+          <a href="/ogong/admin/askboardlist" style="color: black;">💬 문의사항</a></button>
+      </div>
+    </div>
+      
+    </div>
 </form>
+</section>
 </body>
 </html>

@@ -60,18 +60,27 @@
   display: block;
   padding: 0;
   margin-bottom: 12px;
+  text-align: left;
   }
 
   .form-check span {
   font-size: 14px;
   }
   
+   .c-top {
+  width: 100%;
+  padding: 20px 0 20px 50px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
+
   .all-content {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
     padding: 50px;
-    margin-top:120px;
+    margin-top:40px;
+    text-align: center;
   }
   .inner {
     max-width: 500px;
@@ -93,6 +102,9 @@
 
 <body>
 <jsp:include page="../header.jsp"/>
+<div class="c-top">
+  | 🖐 오늘의 공부 로그인
+</div>
 
 <div class="all-content">
 <b style="font-size:20px"> 🖐 기업 회원 로그인 </b>

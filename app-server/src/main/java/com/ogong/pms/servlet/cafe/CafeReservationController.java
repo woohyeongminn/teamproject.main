@@ -49,7 +49,6 @@ public class CafeReservationController extends HttpServlet {
 
       List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByCafe(cafe.getNo());
       request.setAttribute("roomList", roomList);
-      request.setAttribute("perNo", request.getParameter("perNo"));
       request.getRequestDispatcher("/cafe/CafeReservation.jsp").forward(request, response);
 
     } catch (Exception e) {
