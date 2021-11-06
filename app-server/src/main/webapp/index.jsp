@@ -42,6 +42,104 @@ a {
   color: black;
 }
 
+/*header 시작*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 34px;
+}
+
+.header_logo {
+  font-size: 20px;
+  text-align: center;
+}
+
+.header_logo a {
+  display: inline-block;
+  width: 180px;
+  height: 60px;
+  margin: 0 auto;
+  line-height: 60px;
+}
+
+.header_logo a img {
+  width: 100%;
+  vertical-align: middle;
+}
+
+
+.header_menu {
+  display: flex;
+}
+
+.header_menu li {
+  font-size: 14px;
+  padding: 8px 34px;
+}
+
+.header_menu li a {
+  padding: 4px;
+  
+}
+.header_menu li a:hover {
+  color: darkgrey;
+  box-shadow: inset 0 -2px darkgrey;
+  line-height: 20px;
+}
+
+.header_login {
+ display: flex;
+ box-sizing: border-box;
+ border-left: 2px solid darkgrey;
+}
+
+.header_login li {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-self: start;
+    padding: 5px 0;
+  }
+
+  .header_logo {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+  }
+  
+  .header_menu {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .header_menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .header_login {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .header_login li {
+    text-align: center;
+    margin: 4px;
+  }
+
+  .header_login li a {
+    padding: 10px;
+  }
+}
+
 /*body 시작*/
 section {
   width:100%;
@@ -59,12 +157,39 @@ section {
   width: 100%;
   height: 800px;
   background-color: rgb(219, 211, 209);
+  text-align: center;
+}
+
+.contents .c1 #main_1 {
+  opacity: 35%;
 }
 
 .contents .c2 {
   width: 100%;
   height: 800px;
   background-color: rgb(247, 231, 215);
+  display: flex;
+  flex-direction: row;
+}
+
+.contents .c2 .c2-leftbox {
+  width: 50%;
+  border: 3px solid red;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.contents .c2 .c2-rightbox {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contents .c2 #main_2 {
+  max-width: 90%;
+  dispaly: inline-block;
 }
 
 .contents .c3 {
@@ -114,15 +239,15 @@ footer {
 </head>
 
 <body>
-   <jsp:include page="header.jsp"/>
+    <jsp:include page="header.jsp"/>
 
     <section>
     <div class="contents">
-      <div class="c1">
-        첫번째 내용
+      <div class="c1"><img src="img/main_1.JPG" id="main_1">
       </div>
       <div class="c2">
-        두번째 내용
+        <div class="c2-leftbox">오늘의 공부 텍스트 박스</div>
+        <div class="c2-rightbox"><img src="img/main_2.jpg" id="main_2"></div>
       </div>
       <div class="c3">
         세번째 내용
