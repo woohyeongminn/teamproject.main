@@ -28,6 +28,8 @@
   }
   p {
   text-align-last: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
   }
   div {
   margin-right: 10px;
@@ -35,6 +37,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: center;
+  flex-direction: column;
   }
   a {
   color : black;
@@ -49,7 +52,12 @@
   text-align: center;
   font-weight: bold;
   background-color: rgb(247, 231, 215);
-}
+  }
+  button[type=submit] {
+  margin-top: -66px;
+  margin-bottom: 100px;
+  margin-inline: auto;
+  }
 </style>
 </head>
 <body>
@@ -60,18 +68,17 @@
         🙂 마이페이지
       </div>
 <table class="table table-responsive">
-<td><form action='update'></td>
+<form action='update'>
 <br>
 <p><label for='f-nickName' class='form-label' size='100px'>닉네임</label>
-<input id='f-nickName' type='nickName' name='nickName' placeholder='닉네임' size='20'></p>
-<p><label for='f-email' class='form-label' size='100px'>이메일</label>
-<input id='f-email' type='email' name='email' placeholder='아이디' size='20'></p>
-<p><label for='f-password' class='form-label' size='100px'>비밀번호</label>
+<input id='f-nickName' type='nickName' name='nickName' placeholder='닉네임' size='20'><br>
+<br><label for='f-email' class='form-label' size='100px'>이메일</label>
+<input id='f-email' type='email' name='email' placeholder='아이디' size='20'><br>
+<br><label for='f-password' class='form-label' size='100px'>비밀번호</label>
 <input id='f-password' type='password' name='password' placeholder='비밀번호' size='20'></p>
 <br>
 </table>
 </fieldset>
-<%-- <input type='hidden' name='no' value='${loginAdmin.masterNo}'> --%>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="변경" >변경</button> 
 </div>
