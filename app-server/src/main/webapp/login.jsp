@@ -107,6 +107,10 @@ footer {
   font-size: 14px;
   padding: 8px 0;
   background-color: whitesmoke;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
 }
 
 .footer_company {
