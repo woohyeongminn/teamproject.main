@@ -18,12 +18,28 @@
   a {
    text-decoration:none;
   }
+  .all-content {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .c-top {
+    width: 100%;
+    padding: 20px 0 20px 50px;
+    font-weight: bold;
+    background-color: rgb(247, 231, 215);
+    text-align: center;
+  }
   </style>
 </head>
 <body>
-<br>
-<h3> 🔖 내 리뷰 목록 </h3><br>
-
+<jsp:include page="../header.jsp"/>
+<div class="c-top">
+🔖 내 리뷰 목록
+</div>
+<br><br>
+<div class="all-content">
 <c:if test='${not empty reviewList}'>
 <table class="table table-striped text-center">
 	<thead>
@@ -42,7 +58,7 @@
 	<c:forEach items="${reviewList}" var="review">
 	 <tr>
 	    <td>${review.reviewNo}</td>
-	    <td><a href='detail?no=${review.cafe.no}&perNo=${perNo}'>${review.cafe.name}</a></td>
+	    <td><a href='detail?no=${review.cafe.no}'>${review.cafe.name}</a></td>
 	    <td>
 	    <c:set var="grade" value="${review.grade}" /> 
 	          <% 
@@ -55,10 +71,10 @@
 	    <td>${review.content}</td>
 	    <td>${review.registeredDate}</td>
 	    <td>
-	      <button class="btn btn-outline-dark"><a href="reviewUpdateForm?perNo=${perNo}&reviewNo=${review.reviewNo}">수정</a></button>
+	      <button class="btn btn-outline-dark"><a href="reviewUpdateForm?reviewNo=${review.reviewNo}">수정</a></button>
 	    </td>
 	    <td>
-	      <button class="btn btn-outline-dark"><a href="reviewDelete?perNo=${perNo}&reviewNo=${review.reviewNo}">삭제</a></button>
+	      <button class="btn btn-outline-dark"><a href="reviewDelete?reviewNo=${review.reviewNo}">삭제</a></button>
 	    </td>
 	 </tr>
 	</c:forEach>
@@ -70,7 +86,9 @@
    등록된 리뷰가 없습니다.<br><br>  
 </c:if>
 <br>
-
+</div>
+</body>
+</html>
 <!-- 
 
 for (CafeReview cafeReview : reviewList) {

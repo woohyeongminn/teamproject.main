@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.domain.Member;
 
 @WebServlet("/cafe/reviewList")
 public class CafeMyReviewListController extends HttpServlet {
@@ -33,21 +34,10 @@ public class CafeMyReviewListController extends HttpServlet {
 
     try {
 
-      //      Member member = AuthPerMemberLoginHandler.getLoginUser();
-      //
-      //      if (member == null) {
-      //        System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
-      //        return;
-      //      }
-      int memberNo = Integer.parseInt(request.getParameter("perNo"));
+      Member member = (Member)request.getSession().getAttribute("loginUser");
 
-      List<CafeReview> reviewList = cafeReviewDao.findReviewListByMember(memberNo);
+      List<CafeReview> reviewList = cafeReviewDao.findReviewListByMember(member.getPerNo());
 
-      //      if (reviewList.isEmpty()) {
-      //        throw new Exception("리뷰 내역이 없습니다.");
-      //      } 
-
-      request.setAttribute("perNo", memberNo);
       request.setAttribute("reviewList", reviewList);
       request.getRequestDispatcher("/cafe/CafeReviewList.jsp").forward(request, response);
 

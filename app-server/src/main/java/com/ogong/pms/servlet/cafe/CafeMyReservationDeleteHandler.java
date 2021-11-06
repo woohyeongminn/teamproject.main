@@ -31,13 +31,12 @@ public class CafeMyReservationDeleteHandler extends HttpServlet {
 
     try {
 
-      int memberNo = Integer.parseInt(request.getParameter("perNo"));
       int reservationNo = Integer.parseInt(request.getParameter("reservationNo"));
 
       cafeReservationDao.deleteReservation(reservationNo, 3);
       sqlSession.commit();
 
-      response.sendRedirect("reservationDetail?perNo=" + memberNo + "&reservationNo=" + reservationNo);
+      response.sendRedirect("reservationDetail?reservationNo=" + reservationNo);
 
     } catch (Exception e) {
       e.printStackTrace();

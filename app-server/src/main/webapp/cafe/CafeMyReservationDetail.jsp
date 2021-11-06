@@ -12,7 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<style>
   a {
-   text-decoration:none;
+   text-decoration: none;
   }
   label {
     xdisplay: inline-block;
@@ -30,15 +30,22 @@
     margin: 0 auto;
     text-align: center;
   }
-
+  .c-top {
+    width: 100%;
+    padding: 20px 0 20px 50px;
+    font-weight: bold;
+    background-color: rgb(247, 231, 215);
+    text-align: center;
+  }
 	</style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+<div class="c-top">
+📝 예약 내역
+</div>
 <br><br>
 <div class="all-content">
-<h3> 📝 예약 내역 </h3>
-<hr>
 	<div id='content'>
     <label>예약날짜</label><span>${cafeReser.reservationDate}</span><br>
 		<label>이용날짜</label><span>${cafeReser.useDate}</span><br>
@@ -51,12 +58,12 @@
 	</div>
 <br>&nbsp;&nbsp;
 <c:if test="${reviewStatusLable eq '작성대기'}">
-  <button type="button" class="btn btn-outline-dark"><a href="reviewAddForm?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">리뷰등록</a></button>
+  <button type="button" class="btn btn-outline-dark"><a href="reviewAddForm?reservationNo=${cafeReser.reservationNo}">리뷰등록</a></button>
 </c:if>
 <c:if test="${reserStatusLable eq '예약완료'}">
-<button type="button" class="btn btn-outline-dark"><a href="reservationDelete?perNo=${memberNo}&reservationNo=${cafeReser.reservationNo}">예약취소</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="reservationDelete?reservationNo=${cafeReser.reservationNo}">예약취소</a></button>
 </c:if>
-<button type="button" class="btn btn-outline-dark"><a href="reservationList?perNo=${memberNo}">목록</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="reservationList">목록</a></button>
 </div>
 </body>
 </html>

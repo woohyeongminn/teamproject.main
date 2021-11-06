@@ -24,6 +24,7 @@
     padding: 20px 0 20px 50px;
     font-weight: bold;
     background-color: rgb(247, 231, 215);
+    text-align: center;
   }
   
   /*footer 시작*/
@@ -59,7 +60,7 @@
 <body>
 <jsp:include page="../header.jsp"/>
 <div class="c-top">
-  | 📝 내 예약 목록
+📝 내 예약 목록
 </div>
 <br>
 <div class="all-content">
@@ -79,7 +80,7 @@
 
 	<c:forEach items="${reserList}" var="reservation">
 	<tr>
-	    <td><a href='reservationDetail?perNo=${perNo}&reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
+	    <td><a href='reservationDetail?reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
 	    <td>${reservation.reservationDate}</td> 
 	    <td>${reservation.useDate}</td> 
 	    <td>${reservation.cafe.name}</td> 
