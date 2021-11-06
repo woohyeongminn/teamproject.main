@@ -36,10 +36,8 @@ public class StudyJoinController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      // System.out.println("▶ 스터디 신청");
-
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
@@ -75,9 +73,9 @@ public class StudyJoinController extends HttpServlet {
       studyDao.insertGuilder(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
 
-      request.setAttribute("member", member);
+      // request.setAttribute("member", member);
       request.setAttribute("study", study);
-      response.sendRedirect("list?perno="+ member.getPerNo());
+      response.sendRedirect("list");
       // request.getRequestDispatcher("/study/StudyJoin.jsp").forward(request, response);
 
       // System.out.println(" >> 참여 신청이 완료되었습니다.\n 승인이 완료될 때까지 기다려 주세요.");
