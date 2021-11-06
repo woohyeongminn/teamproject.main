@@ -89,7 +89,7 @@ width: 40%;
 vertical-align: middle;
 }
 
-.card .body-right .agreebtn{
+.ownerbtn{
 display: inline-block;
 vertical-align: middle;
 padding: 10px;
@@ -115,7 +115,25 @@ border:1px solid gray;
           <c:forEach items="${guildersList}" var="guilderMember">
           <div class="card">
             <div class="body-photo">${guilderMember.perPhoto} 프로필사진</div>
-            <div class="body-left"><a class="profile" href="detail?guilderNo=${guilderMember.perNo}">${guilderMember.perNickname}</a></div>
+            <div class="body-left">
+              <a class="profile" href="detail?guilderNo=${guilderMember.perNo}">
+              <c:choose>
+	              <c:when test="${study.owner.perNo == guilderMember.perNo}">
+	                조장 : ${guilderMember.perNickname}
+	              </c:when>
+                <c:otherwise> ${guilderMember.perNickname} </c:otherwise>
+              </c:choose>
+              </a>
+            </div>
+          
+          <c:if test="${member.perNo eq study.owner.perNo}">
+            <c:if test="${study.owner.perNo != guilderMember.perNo}">
+		          <a type="button" class="ownerbtn" href="entrustexit?guilderMemberNo=${guilderMember.perNo}&studyNo=${study.studyNo}&perNo=${member.perNo}">조장 권한 넘겨주기(후 탈퇴))</a>
+		          <a type="button" class="ownerbtn" href="entrust?guilderMemberNo=${guilderMember.perNo}&studyNo=${study.studyNo}&perNo=${member.perNo}">조장 권한 넘겨주기(후 구성원)</a>
+		          <a type="button" class="ownerbtn" href="delete?guilderMemberNo=${guilderMember.perNo}&studyNo=${study.studyNo}&perNo=${member.perNo}">탈퇴시키기</a>
+            </c:if>
+          </c:if>
+          
           </div>
           </c:forEach>
         </tbody>
@@ -140,8 +158,8 @@ border:1px solid gray;
 	            <div class="body-photo">${waitingMember.perPhoto} 프로필사진</div>
 	            <div class="body-left"><a class="profile" href="detail?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a></div>
 	            <div class="body-right">
-	            <a type="button" class="agreebtn" href="agree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">승인</a>
-	            <a type="button" class="agreebtn" href="disagree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&loginNo=${member.perNo}">거절</a>
+	            <a type="button" class="ownerbtn" href="agree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&perNo=${member.perNo}">승인</a>
+	            <a type="button" class="ownerbtn" href="disagree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}&perNo=${member.perNo}">거절</a>
               </div>
             </div>
           </c:forEach>

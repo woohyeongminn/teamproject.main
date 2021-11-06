@@ -43,15 +43,20 @@ public class GuilderListController extends HttpServlet {
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
       Study myStudy = studyDao.findByMyNo(studyNo, perNo);
 
-      List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());
-      myStudy.setWatingMember(waitingGuilder);
 
       List<Member> guilders = studyDao.findByGuildersAll(myStudy.getStudyNo());
-      myStudy.setMembers(guilders);
+      if (!guilders.isEmpty()) {
+        myStudy.setWatingMember(guilders);
+        request.setAttribute("guildersList", guilders);
+      }
+
+      List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());
+      if (!waitingGuilder.isEmpty()) {
+        myStudy.setWatingMember(waitingGuilder);
+        request.setAttribute("waitingGuilderList", waitingGuilder);
+      }
 
       request.setAttribute("member", member);
-      request.setAttribute("waitingGuilderList", waitingGuilder);
-      request.setAttribute("guildersList", guilders);
       request.setAttribute("study", myStudy);
       request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
 
