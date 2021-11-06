@@ -38,6 +38,7 @@ public class CeoDeleteFormController extends HttpServlet {
       //      }
       //
       //      request.setAttribute("ceoMember", ceoMember);
+
       request.getRequestDispatcher("/ceoMember/CeoMemberDeleteForm.jsp").forward(request, response);
 
     } catch (Exception e) {

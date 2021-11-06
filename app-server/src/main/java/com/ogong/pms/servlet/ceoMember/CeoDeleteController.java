@@ -53,11 +53,14 @@ public class CeoDeleteController extends HttpServlet {
       ceoMember.setCeoPassword("Deleted Password");
       ceoMember.setCeoPhoto("Deleted Photo");
       ceoMember.setCeoLicenseNo("Deleted LicenseNo");
+      ceoMember.setCeoTel("Deleted Tel");
       ceoMember.setCeoStatus(CeoMember.CEO);
       ceoMember.setActive(CeoMember.OUTUSER);
 
       ceoMemberDao.updateActive(ceoMember);
       sqlSession.commit();
+
+      response.sendRedirect("logout");
       //        AuthCeoMemberLoginHandler.loginCeoMember = null;
       //        AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
 
