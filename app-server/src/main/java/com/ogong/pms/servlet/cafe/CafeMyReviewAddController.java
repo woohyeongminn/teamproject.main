@@ -38,7 +38,6 @@ public class CafeMyReviewAddController extends HttpServlet {
 
     try {
 
-      int memberNo = Integer.parseInt(request.getParameter("perNo"));
       int reservationNo = Integer.parseInt(request.getParameter("reservationNo"));
       String content = request.getParameter("content");
       int grade = Integer.parseInt(request.getParameter("grade"));
@@ -57,9 +56,7 @@ public class CafeMyReviewAddController extends HttpServlet {
         sqlSession.rollback();
       }
 
-      //      request.setAttribute("perNo", memberNo);
-      //      request.getRequestDispatcher("reviewList").forward(request, response);
-      response.sendRedirect("reviewList?perNo=" + memberNo);
+      response.sendRedirect("reviewList");
     } catch (Exception e) {
       e.printStackTrace();
     }

@@ -14,6 +14,7 @@ import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CafeRoom;
+import com.ogong.pms.domain.Member;
 
 @WebServlet("/cafe/reservationDetail")
 public class CafeMyReservationDetailController extends HttpServlet {
@@ -36,21 +37,11 @@ public class CafeMyReservationDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
-      //      Member member = AuthPerMemberLoginHandler.getLoginUser(); 
-      //      if (member == null) {
-      //        System.out.println(" >> 로그인 한 회원만 볼 수 있습니다.");
-      //        return;
-      //      }
-
-      int memberNo = Integer.parseInt(request.getParameter("perNo"));
+      Member member = (Member)request.getSession().getAttribute("loginUser");
       int reservationNo = Integer.parseInt(request.getParameter("reservationNo"));
 
       CafeReservation cafeReser = 
-          cafeReservationDao.findReservationByMember(memberNo, reservationNo);
-      if (cafeReser == null) {
-        throw new Exception("예약 내역이 없습니다.");
-      }
+          cafeReservationDao.findReservationByMember(member.getPerNo(), reservationNo);
 
       Cafe cafeReserCafe = cafeDao.findByCafeNo(cafeReser.getCafe().getNo());
       CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(cafeReser.getRoomNo());
@@ -70,7 +61,6 @@ public class CafeMyReservationDetailController extends HttpServlet {
       request.setAttribute("cafeRoomName", cafeRoom.getRoomName());
       request.setAttribute("reviewStatusLable", reviewStatusLable);
       request.setAttribute("reserStatusLable", reserStatusLable);
-      request.setAttribute("memberNo", memberNo);
       request.getRequestDispatcher("/cafe/CafeMyReservationDetail.jsp").forward(request, response);
 
     } catch (Exception e) {

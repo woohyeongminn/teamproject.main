@@ -56,6 +56,7 @@
     padding: 20px 0 20px 50px;
     font-weight: bold;
     background-color: rgb(247, 231, 215);
+    text-align: center;
   }
 	</style>
 </head>
@@ -63,7 +64,7 @@
 <jsp:include page="../header.jsp"/>
 
 <div class="c-top">
-  | ${cafe.name}
+🏘 ${cafe.name}
 </div>
 <br><br>
 <div id="c-detail-content">

@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>상세 | 내 북마크</title>
-<!-- <link rel="stylesheet" type="text/css" href="../header.css"> -->
+<link rel="stylesheet" type="text/css" href="../header.css">
 <style>
 label {
 	margin-right: 5px;
@@ -17,16 +17,17 @@ label {
 <body>
 <jsp:include page="../../header.jsp"/>
 	<h1>🌟 내 북마크 상세</h1>
+	<input type="hidden" name="loginUser" value="${loginUser.perNo}">
 	<label for='f-studyNo'>번호</label>
-	<input id='f-studyNo' type='text' name='studyNo'
+	<input id='f-studyNo' type='text' name='studyno'
 		value='${study.studyNo}' readonly>
 	<br>
 	<label for='f-countBookMember'>북마크</label>
-	<input id='f-countBookMember' type='text' name='countBookMember'
+	<input id='f-countBookMember' type='text' name='countbookmember'
 		value='${study.countBookMember}' readonly>
 	<br>
 	<label for='f-studyTitle'>제목</label>
-	<input id='f-studyTitle' type='text' name='studyTitle'
+	<input id='f-studyTitle' type='text' name='studytitle'
 		value='${study.studyTitle}' readonly>
 	<br>
 	<label for='f-owner'>조장</label>
@@ -34,7 +35,7 @@ label {
 		value='${owner.perNickname}' readonly>
 	<br>
 	<label for='f-subjectName'>분야</label>
-	<input id='f-subjectName' type='text' name='subjectName'
+	<input id='f-subjectName' type='text' name='subjectname'
 		value='${study.subjectName}' readonly>
 	<br>
 	<label for='f-area'>지역</label>
@@ -42,15 +43,15 @@ label {
 		readonly>
 	<br>
 	<label for='f-countMember'>인원수</label>
-	<input id='f-countMember' type='text' name='countMember'
+	<input id='f-countMember' type='text' name='countmember'
 		value='${study.countBookMember}' readonly>
 	<br>
 	<label for='f-numberOfPeple'>최대 인원수</label>
-	<input id='f-numberOfPeple' type='text' name='numberOfPeple'
+	<input id='f-numberOfPeple' type='text' name='numberofpeple'
 		value='${study.numberOfPeple}' readonly>
 	<br>
 	<label for='f-faceName'>대면/비대면</label>
-	<input id='f-faceName' type='text' name='faceName'
+	<input id='f-faceName' type='text' name='facename'
 		value='${study.faceName}' readonly>
 	<br>
 	<label for='f-introduction'>소개글</label>
@@ -58,12 +59,11 @@ label {
 		value='${study.introduction}' readonly>
 	<br>
 	<button>
-		<a href='delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
+		<a href='delete?studyno=${study.studyNo}'>삭제</a>
 	</button>
 	<button>
-		<a href='list?perno=${member.perNo}'>목록</a>
+		<a href='list'>목록</a>
 	</button>
 	<br>
-
 </body>
 </html>
