@@ -44,7 +44,7 @@
   </c:if>
 	<br>
 	<button>
-		<a href='addform?studyNo=${studyno}'>등록</a>
+		<a href='addform?studyno=${studyno}'>등록</a>
 	</button>
 </body>
 </html>

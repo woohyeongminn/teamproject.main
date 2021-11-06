@@ -19,6 +19,11 @@
     display: inline;
     width: 60px;
   }
+  input {
+  text-align: center;
+  border: 0;
+  border-bottom: inset;
+  }
   button[type=button] {
     margin-block: 10px;
     border-radius: 10px;
@@ -84,8 +89,8 @@
     border: white;
   }
   .card .card-header .profile-img {
-    width: 130px;
-    height: 130px;
+    width: 100px;
+    height: 100px;
     border-radius: 1000px;
     position: absolute;
     left: 50%;
@@ -95,8 +100,8 @@
     box-shadow: 0 0 10px lightyellow;
   }
   .card .card-header .profile-img:hover {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     transform: translate(-50%, -50%);
     border: 4px solid wheat;
   }
@@ -104,11 +109,11 @@
     max-width: 400px;
     margin: 150px auto 0;
     background-color: white;
-    box-shadow: 0 10px 90px ivory;
+    /* box-shadow: 0 10px 90px ivory; */
     text-align: center;
     font-size: 20px;
     border-radius: 15px;
-    border: 2px solid lightgray;
+    border: 2px solid rgb(110, 110, 110);
   }
   .c-top {
   width: 100%;
@@ -120,39 +125,43 @@
   .c-top:hover {
     color: cornflowerblue;
   }
-  button[type=submit] {
+  /* button[type=submit] {
   margin-top: -66px;
   margin-bottom: 300px;
-  }
-  .btn2 {
-  margin-left: 20px;
+  } */
+  #box {
+  text-align: center;
+  margin: 50px 0;
   }
 </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<fieldset>
 <section>
+<fieldset>
 <div class="c-top" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
       🙂 마이페이지
       </div>
-<table class="table table-responsive">
+<!-- <table class="table table-responsive"> -->
 
 <div class="card">
   <div class="card-header">
       <img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img">
   </div>
-<p><input id='f-nickName' type='nickName' name='nickName' placeholder='${loginAdmin.masterNickname} 👑' size='20' readonly></p>
+<p><input id='f-nickName' type='nickName' name='nickName' placeholder='${loginAdmin.masterNickname} 👑' size='13' readonly></p>
 <br>
-<p><input id='f-email' type='email' name='email' placeholder='${loginAdmin.masterEmail}' size='20' readonly></p>
+<p><input id='f-email' type='email' name='email' placeholder='${loginAdmin.masterEmail}' size='13' readonly></p>
 <br>
 <br>
-</table>  
-</fieldset>
-<div class="d-grid gap-2 d-md-flex justify-content-md-end" style="transform: translate(-45%, 30%);">
-<button type="submit" class="btn btn-outline-dark btn2" value="변경" ><a href='updateForm'>변경</a></button> 
-<button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='logout'>로그아웃</a></button> 
 </div>
+<!-- </table> -->  
+<!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="transform: translate(-45%, 30%);"> -->
+  <div id="box">
+<button type="submit" class="btn btn-outline-dark" value="변경" id="submit"><a href='updateForm'>변경</a></button> 
+<button type="submit" class="btn btn-outline-dark" value="로그아웃" id="submit"><a href='logout'>로그아웃</a></button> 
+  </div>
+<!-- </div> -->
+</fieldset>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
