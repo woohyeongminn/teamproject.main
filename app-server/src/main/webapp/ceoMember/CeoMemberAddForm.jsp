@@ -21,7 +21,9 @@
   legend {
   text-align: center;
   }
-  
+  form {
+  max-width: 500px;
+  }
   input:invalid {
     color: grey;
   }
@@ -90,14 +92,16 @@ function checkValue() {
 
 <body>
 	<jsp:include page="../header.jsp"/>
-  <h5>기업 회원 회원가입</h5>
-  
-    <c:forEach items="${ceoMemberList}" var="ceoMember">
+	<div class="all-content">
+  <b style="font-size:20px"> 기업 회원가입 </b>
+  <br>
+  <hr>
+   <%--  <c:forEach items="${ceoMemberList}" var="ceoMember">
       <c:if test="${ceoMember.ceoNickname eq nickname}">
       </c:if>
-    </c:forEach>
+    </c:forEach> --%>
   
-  <form action='add' method="get" name='ceoInfo' onsubmit="return checkValue()">
+  <form action='add' name='ceoInfo' onsubmit="return checkValue()">
 	  <label for='f-name' class='form-label'>이름</label>
 	  <input id='f-name' type='text' name='name' placeholder="이름"/><br>
 	  
@@ -139,8 +143,8 @@ function checkValue() {
 	  <label for='f-passwordcheck' class='form-label'>비밀번호 확인</label>
 	  <input id='f-passwordcheck' type='password' name='passwordcheck' placeholder="비밀번호 확인"/><br>
 	  
-	  <button type="submit" class="btn btn-primary">회원가입</button>
-	  <input type="button" value="취소"/>
+	  <button type="submit" class="class="btn btn-outline-dark">회원가입</button>
+	  <input type="button" class="class="btn btn-outline-dark"> 취소</input>
 	 </form>
 	 
  </body>

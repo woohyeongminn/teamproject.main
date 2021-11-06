@@ -171,16 +171,39 @@ header a {
 	  </c:when>  
   </c:choose> --%>
   
-  <c:choose>
-    <c:when test="${empty loginUser}">
+	  <c:choose>
+	    <c:when test="${empty loginUser}">
+	      <li><a href="/ogong/signup">회원가입</a></li>
+	      <li><a href="/ogong/login">로그인</a></li>
+	    </c:when>
+	    <c:otherwise>
+	      <li><a href="/ogong/member/detail">마이페이지</a></li>
+	      <li><a href="/ogong//member/logout">로그아웃</a></li>
+	    </c:otherwise>
+	 </c:choose>
+ 
+ <c:choose>
+    <c:when test="${empty loginCeoUser}">
       <li><a href="/ogong/signup">회원가입</a></li>
       <li><a href="/ogong/login">로그인</a></li>
     </c:when>
     <c:otherwise>
-      <li><a href="/ogong/member/detail">마이페이지</a></li>
-      <li><a href="/ogong//member/logout">로그아웃</a></li>
+      <li><a href="/ogong/ceomember/detail">기업페이지</a></li>
+      <li><a href="/ogong/ceomember/logout">로그아웃</a></li>
     </c:otherwise>
-  </c:choose>
+ </c:choose>
+ 
+  <c:choose> 
+    <c:when test="${empty loginAdmin}">
+      <li><a href="/ogong/signup">회원가입</a></li>
+      <li><a href="/ogong/login">로그인</a></li>
+    </c:when>
+    <c:otherwise>
+      <li><a href="/ogong/admin/detail">관리자페이지</a></li>
+      <li><a href="/ogong/admin/logout">로그아웃</a></li>
+    </c:otherwise>
+   </c:choose> 
+
 </ul>
 </header>
 </body>
