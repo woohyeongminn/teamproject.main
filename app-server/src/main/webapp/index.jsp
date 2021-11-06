@@ -42,7 +42,7 @@ a {
   color: black;
 }
 
-/* /*header 시작*/
+/*header 시작*/
 header {
   display: flex;
   justify-content: space-between;
@@ -138,7 +138,7 @@ header {
   .header_login li a {
     padding: 10px;
   }
-} */
+}
 
 /*body 시작*/
 section {
@@ -221,7 +221,7 @@ right: 30px;
 bottom: 20px;
 }
 
-/* /*footer 시작*/
+/*footer 시작*/
 footer {
   font-size: 14px;
   padding: 8px 0;
@@ -231,7 +231,6 @@ footer {
 .footer_company {
   display: flex;
   margin-left: 20px;
-  justify-content: center;
 }
 
 .footer_company li a{
@@ -240,18 +239,16 @@ footer {
 
 .footer_address {
   margin-left: 20px;
-  text-align: center;
 }
 
 .footer_copyright {
   margin-left: 20px;
-  text-align: center;
-} */
+}
 
 </style>
 </head>
 
-<body id="first">
+<body>
     <jsp:include page="header.jsp"/>
 
     <section>
@@ -273,7 +270,7 @@ footer {
       <i class="fas fa-graduation-cap fa-2x"></i></a>
     </nav>
 
-<footer>
+    <footer>
       <ul class="footer_company">
         <li><a href="#">오늘의 공부 소개</a></li>
         <li><a href="#">이용약관</a></li>

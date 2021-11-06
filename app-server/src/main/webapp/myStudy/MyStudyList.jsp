@@ -49,11 +49,20 @@ ul{list-style:none;}
 .btnCon:target .tabCon{
   display: block;
 }
+ .c-top {
+  width: 100%;
+  padding: 20px 0 20px 50px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
 </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-
+<div class="c-top">
+  👩‍👧‍👧 ‍스터디 목록
+</div>
 <br><br><br>
 <div class="tabmenu">
   <ul>
@@ -81,7 +90,7 @@ ul{list-style:none;}
 		        <tr>
 		          <td>${study.studyNo}</td>
 		          <td>${study.countBookMember}</td>
-		          <td><a href='../mystudy/detail?studyNo=${study.studyNo}&perNo=${member.perNo}'>${study.studyTitle}</a></td>
+		          <td><a href='../mystudy/detail?studyNo=${study.studyNo}'>${study.studyTitle}</a></td>
 		          <td>${study.faceName}</td>
 		          <td>${study.owner.perNickname}</td>
 		          <td>${study.subjectName}</td>
@@ -123,7 +132,7 @@ ul{list-style:none;}
 		        <tr>
 		          <td>${study.studyNo}</td>
 		          <td>${study.countBookMember}</td>
-		          <td><a href='../mystudy/detail?studyNo=${study.studyNo}&perNo=${member.perNo}'>${study.studyTitle}</a></td>
+		          <td><a href='../mystudy/detail?studyNo=${study.studyNo}'>${study.studyTitle}</a></td>
 		          <td>${study.faceName}</td>
 		          <td>${study.owner.perNickname}</td>
 		          <td>${study.subjectName}</td>
@@ -164,7 +173,7 @@ ul{list-style:none;}
 		        <tr>
 		          <td>${study.studyNo}</td>
 		          <td>${study.countBookMember}</td>
-		          <td><a href='waitingdetail?studyNo=${study.studyNo}&perNo=${member.perNo}'>${study.studyTitle}</a></td>
+		          <td><a href='waitingdetail?studyNo=${study.studyNo}'>${study.studyTitle}</a></td>
 		          <td>${study.faceName}</td>
 		          <td>${study.owner.perNickname}</td>
 		          <td>${study.subjectName}</td>

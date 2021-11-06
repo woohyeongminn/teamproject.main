@@ -32,12 +32,12 @@ public class MyStudyDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      //int perNo = Integer.parseInt(request.getParameter("perNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-      Member member = memberDao.findByNo(perNo);
-      Study myStudy = studyDao.findByMyNo(studyNo, perNo);
+      Member member = memberDao.findByNo(loginUser.getPerNo());
+      Study myStudy = studyDao.findByMyNo(studyNo, loginUser.getPerNo());
 
       request.setAttribute("member", member);
       request.setAttribute("study", myStudy);

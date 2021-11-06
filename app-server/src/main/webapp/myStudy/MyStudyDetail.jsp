@@ -81,7 +81,7 @@ label {
 		<a href='../study/exit?perno=${member.perNo}&studyno=${study.studyNo}'>탈퇴</a>
 	</button>
 	<span><a
-		href='guilder/list?studyNo=${study.studyNo}&perNo=${member.perNo}'>구성원&emsp;</a></span>
+		href='guilder/list?studyNo=${study.studyNo}'>구성원&emsp;</a></span>
 	<span>캘린더&emsp;</span>
 	<span>To-do&emsp;</span>
 	<span><a
