@@ -16,43 +16,41 @@
   <link rel="stylesheet" href="setting.css">
 </head>
 <style>
+section {
+  width:100%;
+  z-index:500;
+}
 
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  margin-top:50px;
+}
+
+.all-content .c-top {
+  width: 100%;
+  padding: 20px 0 20px 50px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
+/* 버튼  class = "btn btn-outline-dark"  이걸로 통일 */
 </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<section>
+
     <div class="all-content">
       <div class="c-top">
         | 여기에 페이지 이름?제목? 써주기
       </div>
-<!-- 이 영역에 작성하기-->
-<!-- 버튼        class = "btn btn-outline-dark"    이걸로 통일 -->
+      
+      <!-- 여기에 내용작성 -->
+      
+    </div>
 
-
-
-<!---->
-</div>
-</section>
-    <!-- 풋터필요없으면 지우기 -->
-    <footer>
-      <ul class="footer_company">
-        <li><a href="#">오늘의 공부 소개</a></li>
-        <li><a href="#">이용약관</a></li>
-        <li><a href="#" class="orange">개인정보처리방침</a></li>
-        <li><a href="#">1:1문의</a></li>
-        <li><a href="#">법적고지</a></li>
-        <li><a href="#">사이트맵</a></li>
-      </ul>
-      <hr>
-      <div class="footer_address">
-        <p>상호명 : 오늘의 스터디&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
-        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.company_left</p>
-        <p>고객센터 : 1577-1111 (평일 09:30 ~ 18:30 / 점심 12:00 ~ 13:00)</p>
-        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 김땡땡</p>
-      </div>
-      <hr>
-      <p class="footer_copyright">COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.</p>
-    </footer>
 </body>
-</html>
+</html>     
+      
+      
+      
