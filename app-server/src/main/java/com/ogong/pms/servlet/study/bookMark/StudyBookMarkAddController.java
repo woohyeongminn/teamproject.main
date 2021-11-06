@@ -36,8 +36,8 @@ public class StudyBookMarkAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
@@ -54,9 +54,9 @@ public class StudyBookMarkAddController extends HttpServlet {
       studyDao.insertBookmark(study.getStudyNo(), member.getPerNo());
       sqlSession.commit();
 
-      request.setAttribute("member", member);
+      // request.setAttribute("member", member);
       request.setAttribute("study", study);
-      response.sendRedirect("list?perno="+ member.getPerNo());
+      response.sendRedirect("list");
       // request.getRequestDispatcher("/study/bookMark/StudyBookMarkAdd.jsp").forward(request, response);
 
     } catch (Exception e) {
