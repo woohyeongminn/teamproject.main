@@ -9,6 +9,8 @@
    
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- 아이콘 -->
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <style>
   label {
     margin-right: 5px;
@@ -23,14 +25,22 @@
   border : white;
   outline-color : lightgray;
   }
+  .c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
   </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
 <fieldset>
-<br>
-<legend><b> 🔔 공지게시글 수정 </b></legend><br>
-<hr>
+<section>
+      <div class="c-top">
+        🔔 공지게시글 변경
+      </div>
 <table class="table table-responsive">
 <thead>
 <tr>
@@ -53,5 +63,6 @@
 <button type="submit" class="btn btn-outline-dark" value="변경">변경</button>
 </form>
 </div>
+</section>
 </body>
 </html>

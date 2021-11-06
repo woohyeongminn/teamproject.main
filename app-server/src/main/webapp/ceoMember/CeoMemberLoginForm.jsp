@@ -60,24 +60,28 @@
   display: block;
   padding: 0;
   margin-bottom: 12px;
+  text-align: left;
   }
 
   .form-check span {
   font-size: 14px;
   }
+  
+   .c-top {
+  width: 100%;
+  padding: 20px 0 20px 50px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
 
   .all-content {
-	  width: 100%;
-	  margin: 0 auto;
-	}
-
-	.all-content .c-top {
-	  width: 100%;
-	  padding: 20px 0 20px 50px;
-	  font-weight: bold;
-	  background-color: rgb(247, 231, 215);
-	}
-	
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 50px;
+    margin-top:40px;
+    text-align: center;
+  }
   .inner {
     max-width: 500px;
     margin : 10px 0;
@@ -98,11 +102,14 @@
 
 <body>
 <jsp:include page="../header.jsp"/>
+<div class="c-top">
+  | 🖐 오늘의 공부 로그인
+</div>
 
 <div class="all-content">
-	<div class="c-top">
-	| 🖐 기업 회원 로그인
-	</div>
+<b style="font-size:20px"> 🖐 기업 회원 로그인 </b>
+<br>
+<hr>
 <form action='login'>
 			<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
 			<input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
@@ -119,7 +126,7 @@
 		  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
 	</div>
 </form>
-  <div class="mb">
+<div class="mb">
     <a href="addform">회원가입</a> |
     <a href="#">비밀번호찾기</a>
    </div>
