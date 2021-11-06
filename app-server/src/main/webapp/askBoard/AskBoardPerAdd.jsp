@@ -62,7 +62,7 @@
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-outline-primary me-md-2 btn-small" 
      type="submit" value="등록" formaction="peradd">
-     <a class="btn btn-info" href="permylist?perNo=${loginUser.perNo}">보러가기</a>
+     <a class="btn btn-info" href="mylist">보러가기</a>
      </button>
    </div> 
 

@@ -125,7 +125,7 @@
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="add">
-     <a href='../main.html'>등록하기</a>
+     <a href='../index.jsp'>등록하기</a>
      </button>
    </div>
 

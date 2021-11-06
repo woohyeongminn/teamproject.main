@@ -67,7 +67,7 @@ label {
 	<br>
 	<hr>
 	<br>
-	<c:if test='${study.owner.perNo == member.perNo}'>
+	<c:if test='${study.owner.perNo == loginUser.perNo}'>
 		<button type="submit" value="수정" formaction="updateform">
 			<a
 				href='../study/updateform?perno=${member.perNo}&studyno=${study.studyNo}'>수정</a>
@@ -81,7 +81,7 @@ label {
 		<a href='../study/exit?perno=${member.perNo}&studyno=${study.studyNo}'>탈퇴</a>
 	</button>
 	<span><a
-		href='guilder/list?studyNo=${study.studyNo}&perNo=${member.perNo}'>구성원&emsp;</a></span>
+		href='guilder/list?studyNo=${study.studyNo}'>구성원&emsp;</a></span>
 	<span>캘린더&emsp;</span>
 	<span>To-do&emsp;</span>
 	<span><a
@@ -91,7 +91,7 @@ label {
 	<span>자유게시판&emsp;</span>
 	<span>화상미팅&emsp;</span>
 	<button>
-		<a href='list?perNo=${member.perNo}'>목록</a>
+		<a href='list'>목록</a>
 	</button>
 	<br>
 	</form>

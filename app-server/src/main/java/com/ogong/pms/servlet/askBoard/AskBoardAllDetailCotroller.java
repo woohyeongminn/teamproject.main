@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/detail")
+@WebServlet("/askboard/alldetail")
 public class AskBoardAllDetailCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

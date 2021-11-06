@@ -25,6 +25,7 @@
   padding: 20px 0 20px 50px;
   font-weight: bold;
   background-color: rgb(247, 231, 215);
+  text-align: center;
 }
 /* 버튼  class = "btn btn-outline-dark"  이걸로 통일 */
 </style>

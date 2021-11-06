@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
@@ -20,13 +19,11 @@ public class MyStudyListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   StudyDao studyDao;
-  MemberDao memberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
@@ -35,16 +32,17 @@ public class MyStudyListController extends HttpServlet {
 
     try {
 
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
-      Member member = memberDao.findByNo(perNo);
+      //      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      //      Member member = memberDao.findByNo(perNo);
 
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
       List<Study> studyList = studyDao.findAll();
 
       // 조장
       List<Study> ownerStudyList = new ArrayList<>();
 
       for (Study study : studyList) {
-        if (study.getOwner().getPerNo() == member.getPerNo()) {
+        if (study.getOwner().getPerNo() == loginUser.getPerNo()) {
           ownerStudyList.add(study);
         }
       }
@@ -56,8 +54,8 @@ public class MyStudyListController extends HttpServlet {
         List<Member> guilders = studyDao.findByGuildersAll(studyList.get(i).getStudyNo());
         studyList.get(i).setMembers(guilders);
         for (Member mem : studyList.get(i).getMembers())
-          if (mem.getPerNo() == member.getPerNo()) {
-            if (studyList.get(i).getOwner().getPerNo()!=member.getPerNo()) {
+          if (mem.getPerNo() == loginUser.getPerNo()) {
+            if (studyList.get(i).getOwner().getPerNo()!=loginUser.getPerNo()) {
               guilderMembers.add(studyList.get(i));
             }
           }
@@ -70,13 +68,13 @@ public class MyStudyListController extends HttpServlet {
         studyList.get(i).setWatingMember(waiting);
 
         for (Member mem : studyList.get(i).getWatingMember()) {
-          if (member.getPerNo() == mem.getPerNo()) {
+          if (loginUser.getPerNo() == mem.getPerNo()) {
             waitingStudyList.add(studyList.get(i));
           }
         }
       }
 
-      request.setAttribute("member", member);
+      //request.setAttribute("member", member);
       request.setAttribute("ownerStudyList", ownerStudyList);
       request.setAttribute("guilderMembers", guilderMembers);
       request.setAttribute("waitingStudyList", waitingStudyList);

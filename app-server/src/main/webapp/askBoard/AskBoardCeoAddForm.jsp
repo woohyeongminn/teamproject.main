@@ -80,9 +80,7 @@
       <label for="f-content" class="form-label">내용</label>
       <input class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요"></input>
     </div>
-
     <input type ='hidden' name='writer' value="${loginCeoUser.ceoNo}"></input>      
-  
     <br><br>
     
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
