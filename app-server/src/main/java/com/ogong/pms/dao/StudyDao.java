@@ -19,7 +19,7 @@ public interface StudyDao {
   List<Study> findAll() throws Exception;
   List<Study> findAllIng() throws Exception;
   List<Study> findAllEnd() throws Exception;
-  List<Study> findByKeyword(String keyword) throws Exception;
+  List<Study> findByKeyword(@Param("input")String input, @Param("keyword")String keyword) throws Exception;
   Study findByNo(int studyinputNo) throws Exception;
 
   //--------------- [ 내 스터디 ] ----------------------------------------

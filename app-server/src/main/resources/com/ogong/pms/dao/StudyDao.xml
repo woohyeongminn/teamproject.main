@@ -199,7 +199,15 @@
   </delete>
   
   <!--  ===[스터디 검색]=== -->
-  <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
+  <select id="findByKeyword" resultMap="StudyMap">
+   <include refid="select1"/>
+   where ${input} like(concat('%',#{keyword},'%'))
+    group by s.study_no
+    order by s.created_dt
+  </select>
+  
+  <!--  ===[스터디 검색]=== -->
+  <!-- <select id="findByKeyword" resultMap="StudyMap" parameterType="string">
    <include refid="select1"/>
    where (s.name like(concat('%',#{keyword},'%'))
      or ss.name like (concat('%',#{keyword},'%'))
@@ -207,7 +215,7 @@
      and (s.status=1 or s.status=2)
     group by s.study_no
     order by s.created_dt
-  </select>
+  </select> -->
   
   <!--  ===[전체 스터디 목록(전체)]=== -->
   <select id="findAll" resultMap="StudyMap">

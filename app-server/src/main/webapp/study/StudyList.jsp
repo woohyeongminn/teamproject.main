@@ -10,7 +10,9 @@
 <html>
 <head>
 <title>목록 | 스터디 찾기</title>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="stylesheet" type="text/css" href="../header.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -44,7 +46,8 @@
 		<a href='form?perno=${perno}'>등록</a>
 	</button>
 	<br>
-	<div class="input-group mb-3">
+	<!-- [GR] Search Ver.2 -->
+	<!-- <div class="input-group mb-3">
 		<select name="sk">
 			<option value="area">지역</option>
 			<option value="subjectName">분야</option>
@@ -54,8 +57,47 @@
 			aria-label="Recipient's username" aria-describedby="button-addon2">
 		<input type="submit" value="검색" class="btn btn-outline-secondary"
 			id="button-addon2">
-	</div>
-	<table class="table table-hover">
+	</div>  -->
+	<div id="search">
+    <form action="search">
+    <select name="where">
+      <option value="1">분야</option>
+      <option value="2">제목</option>
+      <option value="3">지역</option>
+    </select>
+    <input type="text" name="keyword">
+  <input type='hidden' name='perno' value='${perno}'>
+    <button class="btn btn-outline-dark">검색</button>
+    </form>
+  </div>
+  <br>
+<c:if test='${not empty studyList}'>
+  <div id="content">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <c:forEach items="${studyList}" var="study">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            ${study.subjectName}<br>
+            <a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a><br>
+            ${study.faceName}<br>
+            ${study.area}<br>
+            인원 ${study.countMember} / ${study.numberOfPeple}<br>
+            ${study.owner.perNickname}
+            🔖${study.countBookMember}
+          </div>
+        </div>
+      </div>
+    </c:forEach>
+    </div>
+  </div>
+</c:if>
+<c:if test='${empty studyList}'>
+   검색 결과가 존재하지 않습니다.<br><br>
+</c:if>
+</body>
+</html>
+	<!-- <table class="table table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -68,7 +110,7 @@
 				<th>인원수</th>
 				<th>최대 인원수</th>
 			</tr>
-			</thread>
+			</thead> -->
 			<!-- [GR] Search Ver.2 -->
 			<!-- request.setCharacterEncoding("utf-8");
 			Connection conn = null;
@@ -164,7 +206,7 @@
 
 			while (rs.next()) {
 			%> -->
-		<tbody>
+		<!-- <tbody>
 			<c:forEach items="${studyList}" var="study">
 				<tr>
 					<td>${study.studyNo}</td>
@@ -178,12 +220,10 @@
 					<td>${study.numberOfPeple}</td>
 				</tr>
 			</c:forEach>
-		</tbody>
+		</tbody> -->
 		<!-- }
 		rs.close();
 		pstmt.close();
 		conn.close();
 		%>  -->
-	</table>
-</body>
-</html>
+	<!-- </table> -->
