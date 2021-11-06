@@ -196,6 +196,16 @@ section {
   width: 100%;
   height: 800px;
   background-color: rgb(247, 247, 247);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.contents .c3 #main_3 {
+  opacity: 35%;
+  width: 100%;
+  height: 30%;
+  dispaly: inline-block;
 }
 
 a.navbar-brand {
@@ -249,8 +259,7 @@ footer {
         <div class="c2-leftbox">오늘의 공부 텍스트 박스</div>
         <div class="c2-rightbox"><img src="img/main_2.jpg" id="main_2"></div>
       </div>
-      <div class="c3">
-        세번째 내용
+      <div class="c3"><img src="img/main_3.JPG" id="main_3">
       </div>
     </div>
     
