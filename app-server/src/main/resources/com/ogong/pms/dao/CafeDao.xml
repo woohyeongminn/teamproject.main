@@ -56,9 +56,12 @@
 			 group by srm.cafe_no
 			 having srm.cafe_no=c.cafe_no
 			) countReview,
-      c.operating_status_no
+      c.operating_status_no,
+      sp.photo_no,
+      sp.name photo_name
     from 
       studycafe c
+      left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
   </sql>
   
   <sql id="detailSelect1">

@@ -44,7 +44,14 @@ public class StudyListController extends GenericServlet {
        * request.getRequestDispatcher("/WEB-INF/view/notice/list.jsp").forward(request, response); }
        */
 
+      // 전체 스터디 목록
       Collection<Study> studyList = studyDao.findAll();
+
+      // 진행 스터디 목록
+      Collection<Study> studyIngList = studyDao.findAllIng();
+
+      // 종료 스터디 목록
+      Collection<Study> studyEndList = studyDao.findAllEnd();
 
       if (studyList.isEmpty()) {
         throw new Exception("스터디 목록이 없습니다.");
@@ -52,6 +59,8 @@ public class StudyListController extends GenericServlet {
 
       request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
       request.setAttribute("studyList", studyList);
+      request.setAttribute("studyIngList", studyIngList);
+      request.setAttribute("studyEndList", studyEndList);
       request.getRequestDispatcher("/study/StudyList.jsp").forward(request, response);
 
     } catch (Exception e) {
