@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.domain.Member;
 
 @WebServlet("/mystudy/freeboardaddform")
 public class FreeBoardAddFormController extends HttpServlet {
@@ -34,13 +33,12 @@ public class FreeBoardAddFormController extends HttpServlet {
 
     try {
 
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      //int perNo = Integer.parseInt(request.getParameter("perNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-      Member member = memberDao.findByNo(perNo);
-
+      //Member member = memberDao.findByNo(perNo);
+      //request.setAttribute("member", member);
       request.setAttribute("studyNo", studyNo);
-      request.setAttribute("member", member);
 
       request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardAddForm.jsp").forward(request, response);
 

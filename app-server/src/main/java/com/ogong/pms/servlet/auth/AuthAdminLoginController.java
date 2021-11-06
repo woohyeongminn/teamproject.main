@@ -17,10 +17,10 @@ public class AuthAdminLoginController extends HttpServlet {
 
   AdminDao adminDao;
 
-  public static Admin loginAdmin;
-  public static Admin getLoginAdmin() {
-    return loginAdmin;
-  }
+  //  public static Admin loginAdmin;
+  //  public static Admin getLoginAdmin() {
+  //    return loginAdmin;
+  //  }
 
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -40,7 +40,8 @@ public class AuthAdminLoginController extends HttpServlet {
 
       if (admin != null) {
 
-        request.setAttribute("admin", admin);
+        //        request.setAttribute("admin", admin);
+        request.getSession().setAttribute("loginAdmin", admin);
         request.getRequestDispatcher("/admin/AdminLogin.jsp").forward(request, response);
       }
 

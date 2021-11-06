@@ -54,6 +54,7 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
 <br>
   <h5>💬문의글 등록</h5>
   <form >
@@ -80,7 +81,7 @@
       <input class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요"></input>
     </div>
 
-    <input type ='hidden' name='writer' value="${ceoMember.ceoNo}"></input>      
+    <input type ='hidden' name='writer' value="${loginCeoUser.ceoNo}"></input>      
   
     <br><br>
     

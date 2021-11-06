@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,23 +19,34 @@
   a {
    text-decoration:none;
   }
+  body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
   #search {
     text-align: center;
   }
   .form-select {
     display: inline-block;
   }
+  .c-content {
+    height: 530px;
+  }
   #content {
     margin-left: 20px;
     width: 47%;
     xborder: 1px solid black;
     float: left;
+    overflow-y: scroll;
+    height: inherit;
+    overflow-x:hidden
   }
   .col {
     width: 355px;
   }
   .card {
-    height: 350px;
+    height: 386px;
   }
   </style>
 </head>
@@ -42,7 +54,10 @@
 <jsp:include page="../header.jsp"/>
 
 <br>
-<h3><a href="list?perNo=${perNo}"> 🏘 스터디카페 목록 </a></h3><br>
+<h3>
+  <a href="list?perNo=${perNo}"> 🏘 스터디카페 목록 </a>
+</h3>
+<br>
 	<div id="search">
   	<form action="search">
   	<select name="where">
@@ -55,30 +70,37 @@
   	</form>
 	</div>
   <br>
+  
+<div class="c-content">
+<div id="content">
 <c:if test='${not empty cafeList}'>
-	<div id="content">
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 		<c:forEach items="${cafeList}" var="cafe">
 		  <div class="col">
 		    <div class="card">
-		      <svg class="bd-placeholder-img rounded" width="330" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text></svg>
+		      <img src="../img/aaa.jpg" class="card-img-top" alt="...">
 		      <div class="card-body">
-		        <a href='detail?no=${cafe.no}&perNo=${perNo}'>${cafe.name}</a><br>
-		        ${cafe.location}<br>
-		        영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
-		        ⭐${cafe.avgReview}(${cafe.countReview})
+		        <h5 class="card-title">
+		          <a href='detail?no=${cafe.no}'>${cafe.name}</a>
+		        </h5>
+		        <p>
+		        ${fn:split(cafe.location, ',')[0]}<br>
+		        ${cafe.openTime} ~ ${cafe.closeTime}<br>
+		        ⭐${cafe.avgReview}(${cafe.countReview})</p>
 		      </div>
 		    </div>
 		  </div>
 		</c:forEach>
 		</div>
-	</div>
-</c:if>
+  </c:if>
 <c:if test='${empty cafeList}'>
    검색 결과가 존재하지 않습니다.<br><br>  
 </c:if>
+</div>
 
-  <div id="map" style="width:755px;height:660px;"></div>
+<div id="map" style="width:770px;height:530px;"></div>
+  
+</div>  
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
   <script>
     var container = document.getElementById('map');
@@ -86,7 +108,6 @@
       center: new kakao.maps.LatLng(33.450701, 126.570667),
       level: 3
     };
-
     var map = new kakao.maps.Map(container, options);
   </script>
 </body>

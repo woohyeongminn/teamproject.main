@@ -71,6 +71,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
 <br>
 <legend ><b> 💬 문의게시글 목록 </b></legend><br>
@@ -114,7 +115,7 @@
 </c:if>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="add">
-     <a href='ceoaddform?ceoNo=${ceoNo}'>등록하기</a>
+     <a href='ceoaddform?ceoNo=${loginCeoUser.ceoNo}'>등록하기</a>
      </button>
    </div> 
 </body>

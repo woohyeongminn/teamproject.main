@@ -40,7 +40,7 @@
     
     <span id='f-registeredDate'>${freeBoard.freeBoardRegisteredDate}</span><br>
 <
-    <input type ='hidden' name='perNo' value='${perNo}'>
+    <input type ='hidden' name='perNo' value='${loginUser.perNo}'>
     <input type ='hidden' name='freeNo' value='${freeNo}'>
     <input type ='hidden' name='studyNo' value='${studyNo}'>
   
