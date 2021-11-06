@@ -12,9 +12,8 @@ import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Member;
 
-@WebServlet("/mystudy/freeboarddetail")
+@WebServlet("/freeboard/detail")
 public class FreeBoardDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -35,23 +34,24 @@ public class FreeBoardDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
-      int freeNo = Integer.parseInt(request.getParameter("freeNo"));
+      // int perNo = Integer.parseInt(request.getParameter("perno"));
+      // Member member = memberDao.findByNo(perNo);
 
-      Member member = memberDao.findByNo(perNo);
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
+      int freeNo = Integer.parseInt(request.getParameter("freeboardno"));
+
       FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
 
-      //    if (freeBoard == null) {
-      //      System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
-      //      request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
-      //      return;
-      //    }
+      // if (freeBoard == null) {
+      // System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
+      // request.getRequestDispatcher("/myStudy/freeBoardList").forward(request);
+      // return;
+      // }
 
+      // request.setAttribute("member", member);
       request.setAttribute("freeBoard", freeBoard);
-      //request.setAttribute("member", member);
-      request.getRequestDispatcher(
-          "/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
+          response);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -60,4 +60,3 @@ public class FreeBoardDetailController extends HttpServlet {
     }
   }
 }
-

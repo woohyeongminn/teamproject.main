@@ -14,7 +14,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/mystudy/freeboardadd")
+@WebServlet("/freeboard/add")
 public class FreeBoardAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -36,12 +36,10 @@ public class FreeBoardAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-
-      // inputNo = 내 스터디 상세에서 선택한 스터디 번호
+      int perNo = Integer.parseInt(request.getParameter("perno"));
       Member member = memberDao.findByNo(perNo);
+
+      int studyNo = Integer.parseInt(request.getParameter("studno"));
 
       FreeBoard freeBoard = new FreeBoard();
 
@@ -53,8 +51,7 @@ public class FreeBoardAddController extends HttpServlet {
       freeBoardDao.insert(freeBoard);
       sqlSession.commit();
 
-      response.sendRedirect(
-          "freeboardlist?studyNo="+ studyNo + "&perNo=" + member.getPerNo());
+      response.sendRedirect("list?studyno=" + studyNo);
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -63,7 +60,3 @@ public class FreeBoardAddController extends HttpServlet {
     }
   }
 }
-
-
-
-

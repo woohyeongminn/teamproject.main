@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.domain.FreeBoard;
 
-@WebServlet("/mystudy/freeboardupdateform")
+@WebServlet("/freeboard/updateform")
 public class FreeBoardUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -31,19 +31,18 @@ public class FreeBoardUpdateFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-      int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-      //int perNo = Integer.parseInt(request.getParameter("perNo"));
+      // int perNo = Integer.parseInt(request.getParameter("perNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
-      FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
+      FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
-
-      //request.setAttribute("perNo", perNo);
-      request.setAttribute("studyNo", studyNo);
-      request.setAttribute("freeNo", freeNo);
+      // request.setAttribute("perNo", perNo);
+      request.setAttribute("studyno", studyNo);
+      request.setAttribute("freeboardno", freeBoardNo);
       request.setAttribute("freeBoard", freeBoard);
-
-      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardUpdate.jsp").forward(request, response);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardUpdate.jsp").forward(request,
+          response);
 
     } catch (Exception e) {
       e.printStackTrace();
