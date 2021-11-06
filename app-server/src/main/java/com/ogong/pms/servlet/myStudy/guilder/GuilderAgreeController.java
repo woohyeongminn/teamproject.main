@@ -34,7 +34,7 @@ public class GuilderAgreeController extends HttpServlet {
 
     try {
 
-      int loginNo = Integer.parseInt(request.getParameter("loginNo"));
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
       int watingMemberNo = Integer.parseInt(request.getParameter("watingMemberNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
@@ -44,7 +44,7 @@ public class GuilderAgreeController extends HttpServlet {
       //      request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
 
       // 길더리스트로 가야함
-      response.sendRedirect("list?perNo="+loginNo+"&studyNo="+studyNo);
+      response.sendRedirect("list?perNo="+perNo+"&studyNo="+studyNo);
 
     } catch (Exception e) {
       e.printStackTrace();

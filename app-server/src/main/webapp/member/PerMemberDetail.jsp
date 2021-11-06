@@ -1,6 +1,6 @@
+<%@page import="com.ogong.pms.domain.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,21 +22,22 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
    <b> 📖 개인회원 상세</b>
    <hr>
    <form action='updateform'>
-     <span id='no' name='no'>(${perMember.perNo})</span><br>
-     <span>이름ㅣ</span> <span>${perMember.perName}</span><br>
-     <span>닉네임ㅣ</span> <span>${perMember.perNickname}</span><br>
-     <span>이메일ㅣ</span> <span>${perMember.perEmail}</span><br>
+     <span id='no' name='no'>(${loginUser.perNo})</span><br>
+     <span>이름ㅣ</span> <span>${loginUser.perName}</span><br>
+     <span>닉네임ㅣ</span> <span>${loginUser.perNickname}</span><br>
+     <span>이메일ㅣ</span> <span>${loginUser.perEmail}</span><br>
      <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle"><br>
-     <span>전화번호ㅣ</span> <span>${perMember.perTel}</span><br>
-     <span>가입일ㅣ</span> <span>${perMember.perRegisteredDate}</span><br>
+     <span>전화번호ㅣ</span> <span>${loginUser.perTel}</span><br>
+     <span>가입일ㅣ</span> <span>${loginUser.perRegisteredDate}</span><br>
      <button type="submit" value="수정" formaction="updateform">
-        <a href='updateform?no=${perMember.perNo}'>프로필 수정하기</a>
+        <a href='updateform?no=${loginUser.perNo}'>프로필 수정하기</a>
      </button>
     <button type="submit" value="삭제" formaction="delete">
-        <a href='delete?no=${perMember.perNo}'>탈퇴하기</a>
+        <a href='delete?no=${loginUser.perNo}'>탈퇴하기</a>
       </button>
       <button type="submit" value="로그아웃">
         <a href='logout'>로그아웃</a>

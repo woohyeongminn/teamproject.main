@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Study;
 
-@WebServlet("/mystudy/guilder/disagree")
-public class GuilderDisagreeController extends HttpServlet {
+@WebServlet("/mystudy/guilder/entrust")
+public class GuilderEntrustController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  StudyDao studyDao;
   MemberDao memberDao;
+  StudyDao studyDao;
   SqlSession sqlSession;
 
   @Override
@@ -28,23 +29,31 @@ public class GuilderDisagreeController extends HttpServlet {
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
+  // 조장 권한 위임
   @Override
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-
       int perNo = Integer.parseInt(request.getParameter("perNo"));
-      int watingMemberNo = Integer.parseInt(request.getParameter("watingMemberNo"));
+
+      int guilderMemberNo = Integer.parseInt(request.getParameter("guilderMemberNo"));
+
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-      studyDao.deleteGuilder(studyNo, watingMemberNo);
+
+      Study myStudy = studyDao.findByNo(studyNo);
+      //    List<Member> guilder = studyDao.findByGuildersAll(myStudy.getStudyNo());
+      //    myStudy.setMembers(guilder);
+      //    List<Member> guilders = myStudy.getMembers();
+
+      // 조장 권한 넘겨주고 본인은 구성원으로 돌아가기
+
+      studyDao.updateOwner(myStudy.getStudyNo(), guilderMemberNo);
       sqlSession.commit();
 
-      //      request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
 
-      // 길더리스트로 가야함
-      response.sendRedirect("list?perNo="+perNo+"&studyNo="+studyNo);
+      response.sendRedirect("list?&studyNo="+studyNo+"&perNo="+perNo+"#tab1");
 
     } catch (Exception e) {
       e.printStackTrace();
