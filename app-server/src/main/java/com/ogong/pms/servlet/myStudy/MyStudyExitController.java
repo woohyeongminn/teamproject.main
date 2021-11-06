@@ -35,8 +35,8 @@ public class MyStudyExitController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
@@ -51,7 +51,7 @@ public class MyStudyExitController extends HttpServlet {
       studyDao.deleteGuilder(study.getStudyNo(), member.getPerNo());
       // System.out.println(" >> 탈퇴되었습니다.");
 
-      request.setAttribute("member", member);
+      // request.setAttribute("member", member);
       request.setAttribute("study", study);
       request.getRequestDispatcher("/myStudy/MyStudyExit.jsp").forward(request, response);
 

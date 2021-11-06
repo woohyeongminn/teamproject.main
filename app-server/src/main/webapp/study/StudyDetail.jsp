@@ -18,7 +18,6 @@ label {
 <body>
 <jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 상세</h1>
-	<form action='updateform'>
 		<span>번호 </span> <span>${study.studyNo}</span><br>
     <span>북마크 </span> <span>${study.countBookMember}</span><br>
     <span>제목 </span> <span>${study.studyTitle}</span><br>
@@ -30,17 +29,15 @@ label {
     <span>대면 상태 </span> <span>${study.faceName}</span><br>
     <span>소개글 </span> <span>${study.introduction}</span><br>
     <span>활동 점수 </span> <span>${study.point}</span><br>
-		
 		<c:choose>
 		<c:when test="${study.owner.perNo eq loginUser.perNo}">
-    <button  type="submit" value="수정" formaction="updateform">
+    <button>
       <a href='updateform?studyno=${study.studyNo}'>수정</a>
     </button>
     <button>
        <a href='delete?studyno=${study.studyNo}'>삭제</a>
     </button>
     </c:when>
-    
     <c:when test="${study.owner.perNo ne member.perNo}">
     <button>
       <a href='join?studyno=${study.studyNo}'>참여 신청</a>
@@ -60,7 +57,6 @@ label {
 		}
 		</style>
 		</c:if> -->
-		
 		<button>
 			<a href='../bookmark/add?studyno=${study.studyNo}'>북마크 추가</a>
 		</button>
@@ -68,6 +64,5 @@ label {
 			<a href='list'>목록</a>
 		</button>
 		<br>
-	</form>
 </body>
 </html>

@@ -35,7 +35,6 @@ public class AdminStudyListController extends GenericServlet {
         throw new Exception("스터디 목록이 없습니다.");
       }
 
-      // request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
       request.setAttribute("studyList", studyList);
       request.getRequestDispatcher("/admin/AdminStudyList.jsp").forward(request, response);
 
