@@ -21,16 +21,24 @@ values(12, '반사장', '반사장카페', 'cafe5@test.com', password('c5'), '01
 
 insert into member(member_no, name, nickname, email, password, tel, photo, status) 
 values(13, '이사장', '이사장카페', 'cafe6@test.com', password('c6'), '010-6666-0000', 
-'cafe5.gif', 2);
+'cafe6.gif', 2);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, status) 
 values(14, '박사장', '박사장카페', 'cafe7@test.com', password('c7'), '010-7777-0000', 
-'cafe5.gif', 2);
+'cafe7.gif', 2);
 
+insert into member(member_no, name, nickname, email, password, tel, photo, status) 
+values(15, '한사장', '한사장카페', 'cafe8@test.com', password('c8'), '010-8888-0000', 
+'cafe7.gif', 2);
 
+insert into member(member_no, name, nickname, email, password, tel, photo, status) 
+values(16, '최사장', '최사장카페', 'cafe9@test.com', password('c9'), '010-9999-0000', 
+'cafe7.gif', 2);
+
+/*
 insert into member(name,nickname,email,password,tel,photo,status)
     values(#{ceoName},#{ceoNickname},#{ceoEmail},password(#{ceoPassword}),#{ceoTel},#{ceoPhoto},#{ceoStatus})
-    
+*/    
     
 -------------------------------------------------------------------------------------------------
 
@@ -55,3 +63,9 @@ values(13, '이사장', '584-12-37294');
 
 insert into ceo_member(member_no, bossname, license_no) 
 values(14, '박사장', '125-65-45895');
+
+insert into ceo_member(member_no, bossname, license_no) 
+values(15, '한사장', '125-65-45895');
+
+insert into ceo_member(member_no, bossname, license_no) 
+values(16, '최사장', '125-65-45895');
