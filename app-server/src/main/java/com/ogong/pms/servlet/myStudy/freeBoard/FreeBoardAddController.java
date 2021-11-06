@@ -15,7 +15,7 @@ import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 
 @WebServlet("/mystudy/freeboardadd")
-public class FreeBoardAddHandler extends HttpServlet {
+public class FreeBoardAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   FreeBoardDao freeBoardDao;
@@ -54,7 +54,7 @@ public class FreeBoardAddHandler extends HttpServlet {
       sqlSession.commit();
 
       response.sendRedirect(
-          "freeboardlist?studyNo="+ studyNo + "&perNo=" + perNo);
+          "freeboardlist?studyNo="+ studyNo + "&perNo=" + member.getPerNo());
 
     } catch (Exception e) {
       e.printStackTrace();

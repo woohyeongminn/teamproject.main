@@ -34,6 +34,7 @@
   <c:if test="${empty freeBoardList}">
     등록된 게시글이 없습니다.
   </c:if>
+      <br>
       <button>
       <a href='freeboardaddform?studyNo=${studyNo}&perNo=${member.perNo}'>등록</a>
       </button>

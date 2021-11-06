@@ -28,16 +28,16 @@ label {
     <span>작성일ㅣ</span> <span>${freeBoard.freeBoardRegisteredDate}</span><br>
     <span>조회수ㅣ</span> <span>${freeBoard.freeBoardViewcount}</span><br>
     <button>
-      <a href='freeboardlist?studyNo=${freeBoard.studyNo}&perNo=${perNo}'>목록</a>
+      <a href='freeboardlist?studyNo=${freeBoard.studyNo}&perNo=${member.perNo}'>목록</a>
     </button>
     <button>
       <a href='freeboardlist?studyNo=${freeBoard.studyNo}'>댓글달기</a>
     </button>
     <button>
-      <a href='freeboardlist?studyNo=${freeBoard.studyNo}'>수정</a>
+      <a href='freeboardupdateform?studyNo=${freeBoard.studyNo}&freeNo=${freeBoard.freeBoardNo}&perNo=${member.perNo}'>수정</a>
     </button>
     <button>
-      <a href='freeboardlist?studyNo=${freeBoard.studyNo}'>삭제</a>
+      <a href='freeboarddelete?studyNo=${freeBoard.studyNo}&freeNo=${freeBoard.freeBoardNo}&perNo=${member.perNo}'>삭제</a>
     </button>
  </form>
 </body>
