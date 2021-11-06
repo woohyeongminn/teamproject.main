@@ -16,12 +16,13 @@
   <link rel="stylesheet" href="setting.css">
 </head>
 <style>
+
 .all-content {
   width: 100%;
   margin: 0 auto;
 }
 
-.all-content .c-top {
+ .c-top {
   width: 100%;
   padding: 20px 0 20px 50px;
   font-weight: bold;
@@ -33,15 +34,16 @@
 <body>
 <jsp:include page="../header.jsp"/>
 
-    <div class="all-content"> <!-- 이건 복붙해도되고 안해도됨 -->
-      <div class="c-top">
+    <div class="c-top">
         | 여기에 페이지 이름?제목? 써주기
-      </div>
-      
-      <!-- 여기에 내용작성 -->
-      
     </div>
-
+    
+    
+    <!-- 이건 복붙해도되고 안해도됨 -->
+    <div class="all-content"> 
+    </div>
+    
+    
 </body>
 </html>     
       
