@@ -231,6 +231,7 @@ footer {
 .footer_company {
   display: flex;
   margin-left: 20px;
+  justify-content: center;
 }
 
 .footer_company li a{
@@ -239,16 +240,18 @@ footer {
 
 .footer_address {
   margin-left: 20px;
+  text-align: center;
 }
 
 .footer_copyright {
   margin-left: 20px;
+  text-align: center;
 } */
 
 </style>
 </head>
 
-<body>
+<body id="first">
     <jsp:include page="header.jsp"/>
 
     <section>

@@ -22,8 +22,9 @@ footer {
 
 .footer_company {
   display: flex;
-  margin:10px 0 0 20px;
+  margin: 10px 0 0 20px;
   padding: 15px 0 0 0;
+  justify-content: center;
 }
 
 .footer_company .footer_li {
@@ -44,11 +45,13 @@ list-style-type: none;
 .footer_address > p {
     margin: 0;
     padding: 4px;
+    text-align: center;
 }
 .footer_copyright {
   margin:0px;
   margin-left: 20px;
   padding-bottom: 10px;
+  text-align: center;
 }
 
 </style>

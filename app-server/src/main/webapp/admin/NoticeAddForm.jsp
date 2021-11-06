@@ -9,6 +9,8 @@
    
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- 아이콘 -->
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <style>
   label {
     margin-right: 5px;
@@ -16,9 +18,13 @@
     display: inline;
     width: 60px;
   }
-  legend {
-    text-align: center;
-  }
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
   input {
   border : white;
   outline-color : lightgray;
@@ -28,25 +34,22 @@
 <body>
 <jsp:include page="../header.jsp"/>
 <fieldset>
-<br>
-<legend><b> 🔔 공지게시글 등록 </b></legend><br>
-<hr>
+<section>
+      <div class="c-top">
+        🔔 공지게시글 등록
+      </div>
 <table class="table table-responsive">
 <thead>
 <tr>
-<th><label for='f-no'>번호</label></th>
 <th><label for='f-title'>제목</label></th>
 <th><label for='f-content'>내용</label></th>
 <th><label for='f-filepath'>파일</label></th>
-<th><label for='f-registeredDate'>등록일</label></th>
 </tr>
 </thead>
   <form action='add'></td>
-  <td></td>
   <td></label><input id='f-title' type='text' name='title'></td>
   <td><input id='f-content' type='text' name='content'></td>
   <td><input id='f-filepath' type='file' name='filepath'></td>
-  <td></td>
 </table>
 </fieldset>
 
@@ -54,5 +57,6 @@
 <button type="submit" class="btn btn-outline-dark" value="등록">등록</button>
 </form>
 </div>
+</section>
 </body>
 </html>

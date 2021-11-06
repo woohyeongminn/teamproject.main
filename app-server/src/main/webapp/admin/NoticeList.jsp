@@ -10,18 +10,14 @@
    
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- 아이콘 -->
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <style>
   label {
     margin-right: 5px;
     text-align: center;
     display: inline;
     width: 60px;
-  }
-  legend {
-    text-align: center;
-  }
-  legend:hover {
-    color: lightgrey;
   }
   button[type=button] {
     margin-block: 10px;
@@ -79,14 +75,25 @@
   #add:hover {
   color : white;
   }
+  .c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
+  .c-top:hover {
+    color: cornflowerblue;
+  }
   </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
 <fieldset>
-<br>
-<legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 🔔 공지게시글 목록 </b></legend><br>
-<hr>
+<section>
+<div class="c-top" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      🔔 공지게시글 목록
+      </div>
 <table class="table table-responsive">
 <thead>
 <tr>
@@ -113,7 +120,7 @@
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="등록"><a href='form' id='add'>등록</a></button>
 </div>
-</body>
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h4 class="offcanvas-title" id="offcanvasExampleLabel">👑 관리자 👑</h4>
@@ -133,8 +140,8 @@
       <div class="dropdown-menu" role="menu" style="border-color: white;">
         <button class="dromdown-item" type="button1">
           <a href='logout' style="color: black;">🖐 로그아웃</a></button><br>
-        <%-- <button class="dromdown-item" type="button1">
-          <a href='detail?no=${admin.masterNo}' style="color: black;">🙂 마이페이지</a></button> --%>
+        <button class="dromdown-item" type="button1">
+          <a href='/ogong/admin/detail' style="color: black;">🙂 마이페이지</a></button>
       </div>
     </div>
     
@@ -188,4 +195,6 @@
       
     </div>
 </div>
+</section>
+</body>
 </html>
