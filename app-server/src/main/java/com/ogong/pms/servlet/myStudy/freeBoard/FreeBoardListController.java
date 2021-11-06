@@ -16,7 +16,7 @@ import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 
 @WebServlet("/mystudy/freeboardlist")
-public class FreeBoardListHandler extends HttpServlet {
+public class FreeBoardListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   FreeBoardDao freeBoardDao;

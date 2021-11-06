@@ -12,58 +12,50 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Member;
 
-@WebServlet("/mystudy/freeboardadd")
-public class FreeBoardAddHandler extends HttpServlet {
+@WebServlet("/mystudy/freeboardupdate")
+public class FreeBoardUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  FreeBoardDao freeBoardDao;
   MemberDao memberDao;
+  FreeBoardDao freeBoardDao;
+  //PromptFreeBoard promptFreeBoard;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
-
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int freeNo = Integer.parseInt(request.getParameter("freeNo"));
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
 
-      // inputNo = 내 스터디 상세에서 선택한 스터디 번호
-      Member member = memberDao.findByNo(perNo);
+      FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
 
-      FreeBoard freeBoard = new FreeBoard();
-
-      freeBoard.setStudyNo(studyNo);
       freeBoard.setFreeBoardTitle(request.getParameter("title"));
       freeBoard.setFreeBoardContent(request.getParameter("content"));
-      freeBoard.setFreeBoardWriter(member);
 
-      freeBoardDao.insert(freeBoard);
+      freeBoardDao.update(freeBoard, studyNo);
       sqlSession.commit();
 
+
       response.sendRedirect(
-          "freeboardlist?studyNo="+ studyNo + "&perNo=" + perNo);
+          "freeboarddetail?freeNo=" + freeNo + "&studyNo=" + studyNo + "&perNo=" + perNo);
 
     } catch (Exception e) {
       e.printStackTrace();
+      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
-
-
-
-
