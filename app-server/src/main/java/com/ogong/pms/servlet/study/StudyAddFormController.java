@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.domain.Member;
 
 @WebServlet("/study/form")
 public class StudyAddFormController extends HttpServlet {
@@ -28,10 +27,10 @@ public class StudyAddFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(no);
+      // Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      // Member member = memberDao.findByNo(loginUser.getPerNo());
 
-      request.setAttribute("member", member);
+      // request.setAttribute("member", member);
       request.getRequestDispatcher("/study/StudyAddForm.jsp").forward(request, response);
 
     } catch (Exception e) {
