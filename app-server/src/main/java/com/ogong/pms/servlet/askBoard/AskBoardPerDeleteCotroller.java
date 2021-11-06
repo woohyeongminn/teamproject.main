@@ -31,11 +31,10 @@ public class AskBoardPerDeleteCotroller extends HttpServlet {
 
     try {
       int askNo = Integer.parseInt(request.getParameter("askNo")); 
-      int perNo = Integer.parseInt(request.getParameter("perNo")); 
       askBoardDao.deletereply(askNo);
       askBoardDao.delete(askNo);
       sqlSession.commit();
-      response.sendRedirect("permylist?perNo=" + perNo);
+      response.sendRedirect("mylist");
 
     } catch (Exception e) {
       e.getStackTrace();

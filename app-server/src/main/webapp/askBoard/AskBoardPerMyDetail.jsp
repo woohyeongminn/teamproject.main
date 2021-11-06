@@ -71,11 +71,6 @@
 		      <span>
 		        등록된 답변이 없습니다.
 		      </span><br>  
-           <div class="d-grid gap-2 d-md-flex ">
-             <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="add">
-             <a href='perupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
-             </button>
-           </div>		          
 	      </c:when>
 	      <c:otherwise>
 	       <span>관리자ㅣ</span>
@@ -86,14 +81,21 @@
 	      </c:otherwise>
      </c:choose>
 </body>
-    
+   <div class="d-grid gap-2 d-md-flex ">
+     <button class="btn btn-primary me-md-2" type="submit" value="수정" formaction="add">
+     <a href='perupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
+     </button>
+   </div>    
    <div class="d-grid gap-2 d-md-flex ">
      <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="add">
-     <a href='perdelete?askNo=${myAskBoard.askNo}&perNo=${myAskBoard.askMemberWriter.perNo}'>문의글삭제</a>
+     <a href='perdelete?askNo=${myAskBoard.askNo}'>문의글삭제</a>
      </button>
    </div> 
-   
-
+   <div class="d-grid gap-2 d-md-flex ">
+     <button class="btn btn-primary me-md-2" type="submit" value="목록" formaction="list">
+     <a href='mylist'>내 목록보기</a>
+     </button>   
+   </div> 
 </html>  
      
      
