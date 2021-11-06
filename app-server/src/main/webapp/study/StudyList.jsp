@@ -130,7 +130,7 @@ ul{
         <div class="card">
           <div class="card-body">
             <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
             ${study.faceName}<br>
             <c:if test="${study.faceName ne '비대면'}">
             ${study.area}<br>
@@ -175,7 +175,7 @@ ul{
         <div class="card">
           <div class="card-body">
             <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
             ${study.faceName}<br>
             <c:if test="${study.faceName ne '비대면'}">
             ${study.area}<br>
@@ -220,7 +220,7 @@ ul{
         <div class="card">
           <div class="card-body">
             <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}&perno=${perno}'>${study.studyTitle}</a></span><br>
+            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
             ${study.faceName}<br>
             <c:if test="${study.faceName ne '비대면'}">
             ${study.area}<br>
