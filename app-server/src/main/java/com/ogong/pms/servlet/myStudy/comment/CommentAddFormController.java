@@ -40,10 +40,10 @@ public class CommentAddFormController extends HttpServlet {
       // int no = Integer.parseInt(request.getParameter("perNo"));
       // Member member = memberDao.findByNo(no);
 
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
 
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeBoardNo"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       // request.setAttribute("member", member);
