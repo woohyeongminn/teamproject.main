@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인회원 문의글 수정</title>
+<title>수정 | 자유 게시판</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -27,20 +27,22 @@
 </head>
 
 <body>
-  <h5>개인 회원 문의글 수정</h5>
+  <h5>🪧 자유게시판 수정</h5>
 
-  <form action="ceoupdate">
-    <span>(${perAskBoard.askNo})</span><br>
+  <form action="freeboardupdate">
+    <span>(${freeBoard.freeBoardNo})</span><br>
     
     <label for='f-title'>제목</label>
-    <input id='f-title' type='text' name='title' value='${perAskBoard.askTitle}'><br>
+    <input id='f-title' type='text' name='title' value='${freeBoard.freeBoardTitle}'><br>
     
     <label for='f-content'>내용</label>
-    <input id='f-content' type='text' name='content' value='${perAskBoard.askContent}'><br>
+    <input id='f-content' type='text' name='content' value='${freeBoard.freeBoardContent}'><br>
     
-    <span id='f-registeredDate'>${perAskBoard.askRegisteredDate}</span><br>
+    <span id='f-registeredDate'>${freeBoard.freeBoardRegisteredDate}</span><br>
 <
-    <input type ='hidden' name='askNo' value='${perAskBoard.askNo}'>
+    <input type ='hidden' name='perNo' value='${perNo}'>
+    <input type ='hidden' name='freeNo' value='${freeNo}'>
+    <input type ='hidden' name='studyNo' value='${studyNo}'>
   
     <button type="submit" value="수정">수정</button>
 

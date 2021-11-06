@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.myStudy.guilder;
+package com.ogong.pms.servlet.myStudy.freeBoard;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
@@ -9,47 +9,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Member;
 
-@WebServlet("/mystudy/guilder/disagree")
-public class GuilderDisagreeController extends HttpServlet {
+@WebServlet("/mystudy/freeboardaddform")
+public class FreeBoardAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  StudyDao studyDao;
   MemberDao memberDao;
+  FreeBoardDao freeBoardDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
 
       int perNo = Integer.parseInt(request.getParameter("perNo"));
-      int watingMemberNo = Integer.parseInt(request.getParameter("watingMemberNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-      studyDao.deleteGuilder(studyNo, watingMemberNo);
-      sqlSession.commit();
+      Member member = memberDao.findByNo(perNo);
 
-      //      request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
+      request.setAttribute("studyNo", studyNo);
+      request.setAttribute("member", member);
 
-      // 길더리스트로 가야함
-      response.sendRedirect("list?perNo="+perNo+"&studyNo="+studyNo);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardAddForm.jsp").forward(request, response);
+
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
+
   }
 }

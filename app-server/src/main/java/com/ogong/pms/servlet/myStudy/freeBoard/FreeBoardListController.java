@@ -1,6 +1,7 @@
-package com.ogong.pms.servlet.myStudy.guilder;
+package com.ogong.pms.servlet.myStudy.freeBoard;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,43 +9,43 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Member;
 
-@WebServlet("/mystudy/guilder/disagree")
-public class GuilderDisagreeController extends HttpServlet {
+@WebServlet("/mystudy/freeboardlist")
+public class FreeBoardListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  FreeBoardDao freeBoardDao;
   StudyDao studyDao;
   MemberDao memberDao;
-  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
   }
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
-      int watingMemberNo = Integer.parseInt(request.getParameter("watingMemberNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int perNo = Integer.parseInt(request.getParameter("perNo"));
 
-      studyDao.deleteGuilder(studyNo, watingMemberNo);
-      sqlSession.commit();
+      Member member = memberDao.findByNo(perNo);
+      List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyNo);
 
-      //      request.getRequestDispatcher("/myStudy/guilder/GuilderList.jsp").forward(request, response);
-
-      // 길더리스트로 가야함
-      response.sendRedirect("list?perNo="+perNo+"&studyNo="+studyNo);
+      request.setAttribute("member", member);
+      request.setAttribute("studyNo", studyNo);
+      request.setAttribute("freeBoardList", freeBoardList);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardList.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

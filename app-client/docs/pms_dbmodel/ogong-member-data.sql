@@ -27,7 +27,7 @@ insert into member(member_no, name, nickname, email, password, tel, photo, creat
 values(7, '박명수', '한머리두냄새', 'onehair@twosmell.com', password('o1'), '010-7777-7777',
 'test.jpg', '2021-10-15', 1, 1, 6);
 
--- ceomember가 14번까지 있으니까 member 더 추가하려면 15번부터~
+-- ceomember가 16번까지 있으니까 member 더 추가하려면 17번부터~
 
 ----------------------------------------------------------------------------------------------------
 /*

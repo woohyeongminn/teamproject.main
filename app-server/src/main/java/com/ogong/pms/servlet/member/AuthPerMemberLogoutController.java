@@ -23,7 +23,7 @@ public class AuthPerMemberLogoutController extends HttpServlet {
 
 
     AuthPerMemberLogoutController.loginperMember = null;
-
+    request.getSession().invalidate();
     request.getRequestDispatcher("/member/PerMemberLoginForm.jsp").forward(request, response);
 
     //AuthCeoMemberLogoutController.accessLevel = Menu.LOGOUT;

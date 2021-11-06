@@ -139,9 +139,10 @@ header a {
   </style>
 </head>
 <body>
+<%@include file="memberSession.jsp" %>
 <header>
   <div class='header_logo'>
-    <a href="/ogong/index.html"><img src="/ogong/img/logo.png"></a>
+    <a href="/ogong/index.jsp"><img src="/ogong/img/logo.png"></a>
   </div>
 
   <ul class="header_menu">
@@ -170,8 +171,16 @@ header a {
 	  </c:when>  
   </c:choose> --%>
   
-  <li><a href="/ogong/signup">회원가입</a></li>
-  <li><a href="/ogong/login">로그인</a></li>
+  <c:choose>
+    <c:when test="${empty loginUser}">
+      <li><a href="/ogong/signup">회원가입</a></li>
+      <li><a href="/ogong/login">로그인</a></li>
+    </c:when>
+    <c:otherwise>
+      <li><a href="/ogong/member/detail">마이페이지</a></li>
+      <li><a href="/ogong//member/logout">로그아웃</a></li>
+    </c:otherwise>
+  </c:choose>
 </ul>
 </header>
 </body>
