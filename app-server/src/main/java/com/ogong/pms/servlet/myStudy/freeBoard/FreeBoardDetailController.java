@@ -38,9 +38,9 @@ public class FreeBoardDetailController extends HttpServlet {
       // Member member = memberDao.findByNo(perNo);
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      int freeNo = Integer.parseInt(request.getParameter("freeboardno"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
-      FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
+      FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       // if (freeBoard == null) {
       // System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");

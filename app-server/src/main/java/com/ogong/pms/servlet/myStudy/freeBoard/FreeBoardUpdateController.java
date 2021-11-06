@@ -36,9 +36,9 @@ public class FreeBoardUpdateController extends HttpServlet {
     try {
       // int perNo = Integer.parseInt(request.getParameter("perNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      int freeNo = Integer.parseInt(request.getParameter("freeboardno"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
-      FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
+      FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       freeBoard.setFreeBoardTitle(request.getParameter("title"));
       freeBoard.setFreeBoardContent(request.getParameter("content"));
@@ -46,7 +46,7 @@ public class FreeBoardUpdateController extends HttpServlet {
       freeBoardDao.update(freeBoard, studyNo);
       sqlSession.commit();
 
-      response.sendRedirect("detail?freeboardno=" + freeNo + "&studyno=" + studyNo);
+      response.sendRedirect("detail?studyno=" + studyNo + "&freeboardno=" + freeBoardNo);
 
     } catch (Exception e) {
       e.printStackTrace();
