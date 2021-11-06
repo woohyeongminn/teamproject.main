@@ -103,7 +103,7 @@
       🖐 오늘의 공부 로그인
       </div>
 <div class="all-content">
-<legend><b> 🖐 관리자 로그인 </b></legend>
+<legend><b> 👑 관리자 로그인 </b></legend>
 <br>
 <hr>
 <form action='login'>

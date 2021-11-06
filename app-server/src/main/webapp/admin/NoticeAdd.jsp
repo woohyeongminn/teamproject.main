@@ -23,6 +23,8 @@
 }
 p {
 text-align: center;
+margin-top: 50px;
+margin-bottom: 300px;
 }
   </style>
 </head>
@@ -34,10 +36,11 @@ text-align: center;
       🔔 공지게시글 등록
       </div>
 <br>
-  <p>공지글 등록이 완료되었습니다.</p>
-  <p>공지게시판 목록으로 돌아갑니다.</p>
+
+  <p>공지글 등록이 완료되었습니다.<br><br>공지게시판 목록으로 돌아갑니다.</p>
 <br>
 </fieldset>
 </section>
+ <jsp:include page="../footer.jsp"/>
 </body>
 </html>

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
+import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.NoticeDao;
+import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AdminNotice;
 
 @WebServlet("/adminNotice/add")
@@ -19,30 +21,40 @@ public class AdminNoticeAddController extends HttpServlet {
 
   SqlSession sqlSession;
   NoticeDao noticeDao;
+  AdminDao adminDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
+    adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
   }
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    AdminNotice adminNotice = new AdminNotice();
-
-    adminNotice.setAdminNotiTitle(request.getParameter("title"));
-    adminNotice.setAdminNotiContent(request.getParameter("content"));
-    adminNotice.setAdminNotiFile(request.getParameter("filepath"));
-    adminNotice.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
-
     try {
+      Admin loginAdmin = (Admin) request.getSession().getAttribute("loginAdmin");
+      Admin admin = adminDao.findByAdminNo(loginAdmin.getMasterNo());
+
+      if (admin == null) {
+        request.getRequestDispatcher("/admin/NoticeAdd.jsp").forward(request, response);
+      }
+
+      AdminNotice adminNotice = new AdminNotice();
+
+      adminNotice.setAdminNotiTitle(request.getParameter("title"));
+      adminNotice.setAdminNotiContent(request.getParameter("content"));
+      adminNotice.setAdminNotiFile(request.getParameter("filepath"));
+      adminNotice.setAdminNotiRegisteredDate(new Date(System.currentTimeMillis()));
+
+
       noticeDao.insert(adminNotice);
       noticeDao.insertFilepath(adminNotice);
       sqlSession.commit();
-      response.setHeader("Refresh", "5;url=list"); 
+      response.setHeader("Refresh", "3;url=list"); 
 
       request.getRequestDispatcher("/admin/NoticeAdd.jsp").forward(request, response);
 

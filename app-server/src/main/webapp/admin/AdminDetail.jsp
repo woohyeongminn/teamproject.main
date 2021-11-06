@@ -13,36 +13,61 @@
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
-  label {
-    margin-left: 10px;
+   label {
+    margin-right: 5px;
     text-align: center;
     display: inline;
     width: 60px;
   }
-  legend {
-  text-align: center;
+  button[type=button] {
+    margin-block: 10px;
+    border-radius: 10px;
+    background-color: beige;
+    color: black;
   }
-  input {
-  border : white;
-  outline-color : lightgray;
-      margin-left: 10px;
-    text-align: center;
-    display: inline;
+  button[type=button]:hover {
+    background-color: blanchedalmond;
+    color: black;
   }
-  p {
-    margin: 10px;
-    text-align-last: center;
+  .btn-secondary:focus {
+  background-color: beige;
+  color: black;
+  }
+  button[type=button1] {
+    margin-left: 15px;
+    border-radius: 10px;
+    border-color: lightgray;
+    background-color: beige;
+    color: black;
+  }
+  button[type=button1]:hover {
+    background-color: blanchedalmond;
+    color: black;
+  }
+  .dropdown-menu {
+  background-color: rgba(211, 211, 211, 0);
+  border: rgba(211, 211, 211, 0);
+  }
+  .btn-group {
+  margin-top: 10px;
+  display: block;
+  }
+  .offcanvas-start {
+  width: 350px;
+  }
+  button[type=button2] {
+  margin-left: 70px;
+    color: black;
+  }
+  button[type=button2]:hover {
+    color: black;
   }
   div {
   margin-right: 10px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
   }
   a {
   color : black;
-  text-decoration : blink;
+  text-decoration : auto;
   }
   a:hover {
   color : white;
@@ -50,6 +75,13 @@
   .card .card-header {
     padding: 0;
     height: 48px;
+    display: flex;
+	  align-items: center;
+	  flex-direction: row;
+	  justify-content: center;
+	  margin-left: 10px;
+    background-color: white;
+    border: white;
   }
   .card .card-header .profile-img {
     width: 130px;
@@ -88,6 +120,13 @@
   .c-top:hover {
     color: cornflowerblue;
   }
+  button[type=submit] {
+  margin-top: -66px;
+  margin-bottom: 300px;
+  }
+  .btn2 {
+  margin-left: 20px;
+  }
 </style>
 </head>
 <body>
@@ -111,7 +150,7 @@
 </table>  
 </fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="transform: translate(-45%, 30%);">
-<button type="submit" class="btn btn-outline-dark" value="변경" ><a href='updateForm'>변경</a></button> 
+<button type="submit" class="btn btn-outline-dark btn2" value="변경" ><a href='updateForm'>변경</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='logout'>로그아웃</a></button> 
 </div>
 
@@ -186,9 +225,10 @@
           <a href="/ogong/admin/askboardlist" style="color: black;">💬 문의사항</a></button>
       </div>
     </div>
-      
+  </div>
     </div>
 </form>
 </section>
+ <jsp:include page="../footer.jsp"/>
 </body>
 </html>

@@ -32,6 +32,10 @@
   font-weight: bold;
   background-color: rgb(247, 231, 215);
 }
+button[type=submit] {
+    margin-bottom: 300px;
+    margin-right: 10px;
+  }
   </style>
 </head>
 <body>
@@ -64,5 +68,6 @@
 </form>
 </div>
 </section>
+ <jsp:include page="../footer.jsp"/>
 </body>
 </html>
