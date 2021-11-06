@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeReviewDao;
+import com.ogong.pms.domain.Member;
 
 @WebServlet("/cafe/reviewDelete")
 public class CafeMyReviewDeleteHandler extends HttpServlet {
@@ -31,20 +32,13 @@ public class CafeMyReviewDeleteHandler extends HttpServlet {
 
     try {
 
-      int memberNo = Integer.parseInt(request.getParameter("perNo"));
+      Member member = (Member)request.getSession().getAttribute("loginUser");
       int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-
-      //      Member member = AuthPerMemberLoginController.getLoginUser();
-      //
-      //      if (member == null) {
-      //        System.out.println(" >> 로그인 한 회원만 삭제할 수 있습니다.");
-      //        return;
-      //      }
 
       cafeReviewDao.deleteCafeReview(reviewNo);
       sqlSession.commit();
 
-      response.sendRedirect("reviewList?perNo=" + memberNo);
+      response.sendRedirect("reviewList?perNo=" + member.getPerNo());
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.domain.Member;
 
 @WebServlet("/cafe/reviewUpdate")
 public class CafeMyReviewUpdateController extends HttpServlet {
@@ -31,8 +32,7 @@ public class CafeMyReviewUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int memberNo = Integer.parseInt(request.getParameter("perNo"));
-      //      System.out.println(memberNo + ", " + reviewNo);
+      Member member = (Member)request.getSession().getAttribute("loginUser");
 
       CafeReview cafeReview = new CafeReview();
       cafeReview.setContent(request.getParameter("content"));
@@ -42,7 +42,7 @@ public class CafeMyReviewUpdateController extends HttpServlet {
       cafeReviewDao.updateCafeReview(cafeReview);
       sqlSession.commit();
 
-      response.sendRedirect("reviewList?perNo=" + memberNo);
+      response.sendRedirect("reviewList?perNo=" + member.getPerNo());
 
     } catch (Exception e) {
       e.printStackTrace();
