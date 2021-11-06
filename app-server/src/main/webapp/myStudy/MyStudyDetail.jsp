@@ -76,6 +76,10 @@ label {
 			<a
 				href='../study/delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
 		</button>
+		<button>
+			<a
+				href='../study/exit?perno=${member.perNo}&studyno=${study.studyNo}'>탈퇴</a>
+		</button>
 	</c:if>
 	<span><a
 		href='guilder/list?studyNo=${study.studyNo}&perNo=${member.perNo}'>구성원&emsp;</a></span>
@@ -87,7 +91,6 @@ label {
 		href='todo/list?studyno=${study.studyNo}&perno=${member.perNo}'>To-do&emsp;</a></span>
 	<span>자유게시판&emsp;</span>
 	<span>화상미팅&emsp;</span>
-	<span>탈퇴하기&emsp;</span>
 	<span>내 스터디 목록</span>
 	<br>
 	</form>

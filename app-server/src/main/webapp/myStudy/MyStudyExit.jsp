@@ -20,15 +20,18 @@ label {
 	<h1>🖊 내 스터디 탈퇴</h1>
 	<c:if test="study.owner.perNo eq member.perNo">
 		<c:choose>
-			<!-- 내가 조장일 때 -->
 			<c:when test="study.countMember > 0">
         구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.
       </c:when>
-			<!-- 승인 대기중인 구성원이 있을때 -->
 			<c:when test="study.watingCountMember > 0">
         승인 대기 중인 구성원이 없어야 스터디 탈퇴가 가능합니다.
       </c:when>
 		</c:choose>
 	</c:if>
+	<span>스터디 탈퇴가 완료되었습니다.</span>
+	<br>
+	<button>
+		<a href='../mystudy/list?perNo=${member.perNo}'>이전</a>
+	</button>
 </body>
 </html>
