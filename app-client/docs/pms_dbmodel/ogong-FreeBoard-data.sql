@@ -21,6 +21,9 @@ values (6, '제목6', '내용6입니다.', '0', '2021-09-01', '6' , '1', '2');
 insert into study_board (st_board_no, title, content, view_ct, created_dt, member_no, study_no, whether_report)
 values (7, '제목7', '내용7입니다.', '0', '2021-09-01', '7' , '1', '2');
 
+insert into study_board (st_board_no, title, content, view_ct, created_dt, member_no, study_no)
+values (8, '제목1', '내용1입니다.', '2', '2021-10-5', '1' , '12');
+
 -- 목록
 /*
 select

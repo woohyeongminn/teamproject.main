@@ -12,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 
-@WebServlet("/mystudy/freeboardaddform")
+@WebServlet("/freeboard/addform")
 public class FreeBoardAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -32,22 +32,20 @@ public class FreeBoardAddFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      // int perNo = Integer.parseInt(request.getParameter("perNo"));
+      // Member member = memberDao.findByNo(perNo);
 
-      //int perNo = Integer.parseInt(request.getParameter("perNo"));
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
-      //Member member = memberDao.findByNo(perNo);
-      //request.setAttribute("member", member);
-      request.setAttribute("studyNo", studyNo);
-
-      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardAddForm.jsp").forward(request, response);
-
+      // request.setAttribute("member", member);
+      request.setAttribute("studyno", studyNo);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardAddForm.jsp").forward(request,
+          response);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
   }
 }

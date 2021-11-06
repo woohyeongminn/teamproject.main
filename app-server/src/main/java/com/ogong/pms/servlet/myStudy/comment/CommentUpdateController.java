@@ -36,18 +36,15 @@ public class CommentUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      // System.out.println("▶ 댓글 수정");
+      // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
+      // System.out.println(" >> 변경 권한이 없습니다.");
+      // return;
+      // }
 
-      /*
-       * if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-       * System.out.println(" >> 변경 권한이 없습니다."); return; }
-       */
-
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
 
-      // FreeBoard freeBoard = (FreeBoard) request.getAttribute("freeBoard");
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeBoardNo"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       if (freeBoard == null) {
@@ -80,8 +77,8 @@ public class CommentUpdateController extends HttpServlet {
 
       freeBoard.setComment(commentList);
 
-      commentDao.update(Integer.parseInt(request.getParameter("commentNo")),
-          request.getParameter("commentTitle"));
+      commentDao.update(Integer.parseInt(request.getParameter("commentno")),
+          request.getParameter("commenttitle"));
 
       // System.out.println(" >> 댓글을 변경하였습니다.");
       request.setAttribute("study", study);

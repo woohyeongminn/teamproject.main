@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/askboard/ceomylist")
-public class AskBoardCeoMyListCotroller extends HttpServlet {
+@WebServlet("/askboard/mylist")
+public class AskBoardMyListCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
@@ -31,8 +31,9 @@ public class AskBoardCeoMyListCotroller extends HttpServlet {
 
     try {
 
-      int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
-      Collection<AskBoard> myAskBoardList = askBoardDao.findCeoMyAll(ceoNo);
+      //int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
+      //Collection<AskBoard> myAskBoardList = askBoardDao.findCeoMyAll(ceoNo);
+      Collection<AskBoard> myAskBoardList = askBoardDao.findAll();
 
       if (myAskBoardList == null) {
         throw new Exception("문의 게시글이 존재하지 않습니다.");
@@ -40,7 +41,7 @@ public class AskBoardCeoMyListCotroller extends HttpServlet {
 
       //request.setAttribute("ceoNo", ceoNo);
       request.setAttribute("myAskBoardList", myAskBoardList);
-      request.getRequestDispatcher("/askBoard/AskBoardCeoMyList.jsp").forward(request, response);
+      request.getRequestDispatcher("/askBoard/AskBoardMyList.jsp").forward(request, response);
 
 
     } catch (Exception e) {

@@ -10,24 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.FreeBoard;
 
-@WebServlet("/mystudy/freeboardupdate")
+@WebServlet("/freeboard/update")
 public class FreeBoardUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  MemberDao memberDao;
+  // MemberDao memberDao;
   FreeBoardDao freeBoardDao;
-  //PromptFreeBoard promptFreeBoard;
+  // PromptFreeBoard promptFreeBoard;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
@@ -35,9 +34,9 @@ public class FreeBoardUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-      int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
+      // int perNo = Integer.parseInt(request.getParameter("perNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
+      int freeNo = Integer.parseInt(request.getParameter("freeboardno"));
 
       FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
 
@@ -47,9 +46,7 @@ public class FreeBoardUpdateController extends HttpServlet {
       freeBoardDao.update(freeBoard, studyNo);
       sqlSession.commit();
 
-
-      response.sendRedirect(
-          "freeboarddetail?freeNo=" + freeNo + "&studyNo=" + studyNo + "&perNo=" + perNo);
+      response.sendRedirect("detail?freeboardno=" + freeNo + "&studyno=" + studyNo);
 
     } catch (Exception e) {
       e.printStackTrace();

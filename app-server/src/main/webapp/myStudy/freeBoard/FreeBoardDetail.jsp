@@ -27,28 +27,24 @@ label {
     <span>내용ㅣ</span> <span>${freeBoard.freeBoardContent}</span><br>
     <span>작성일ㅣ</span> <span>${freeBoard.freeBoardRegisteredDate}</span><br>
     <span>조회수ㅣ</span> <span>${freeBoard.freeBoardViewcount}</span><br>
+    <div class="input-group mb-3">
+    <span>댓글</span><br>
+    <form action='add'>
+    <input type='hidden' name='loginUser' value='${loginUser.perNo}'>
+	  <input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'>
+	  <input type="text" class="form-control" placeholder="내용을 입력하세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+	  <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><a href='../comment/add?studyno=${freeBoard.studyNo}'>등록</a></button>
+    </form>
+	  </div>
     <button>
-      <a href='freeboardlist?studyNo=${freeBoard.studyNo}&perNo=${loginUser.perNo}'>목록</a>
+      <a href='freeboardlist?studyno=${freeBoard.studyNo}&perNo=${loginUser.perNo}'>목록</a>
     </button>
     <button>
-      <a href='freeboardlist?studyNo=${freeBoard.studyNo}'>댓글달기</a>
+      <a href='freeboardupdateform?studyno=${freeBoard.studyNo}&freeNo=${freeBoard.freeBoardNo}&perNo=${loginUser.perNo}'>수정</a>
     </button>
     <button>
-      <a href='freeboardupdateform?studyNo=${freeBoard.studyNo}&freeNo=${freeBoard.freeBoardNo}&perNo=${loginUser.perNo}'>수정</a>
-    </button>
-    <button>
-      <a href='freeboarddelete?studyNo=${freeBoard.studyNo}&freeNo=${freeBoard.freeBoardNo}&perNo=${loginUser.perNo}'>삭제</a>
+      <a href='freeboarddelete?studyno=${freeBoard.studyNo}&freeNo=${freeBoard.freeBoardNo}&perNo=${loginUser.perNo}'>삭제</a>
     </button>
  </form>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

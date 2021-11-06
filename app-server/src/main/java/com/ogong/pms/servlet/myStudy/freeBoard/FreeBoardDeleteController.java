@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.FreeBoard;
 
-@WebServlet("/mystudy/freeboarddelete")
+@WebServlet("/freeboard/delete")
 public class FreeBoardDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  // MemberDao memberDao;
   FreeBoardDao freeBoardDao;
-  MemberDao memberDao;
   SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
+    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
   }
 
   @Override
@@ -34,19 +33,18 @@ public class FreeBoardDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      // int perNo = Integer.parseInt(request.getParameter("perNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       int freeNo = Integer.parseInt(request.getParameter("freeNo"));
-      int perNo = Integer.parseInt(request.getParameter("perNo"));
+
       FreeBoard freeBoard = freeBoardDao.findByNo(freeNo, studyNo);
 
       if (freeBoard == null) {
-        System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
-        return;
+        throw new Exception(" >> 해당 번호의 게시글이 없습니다.\n");
       }
 
       if (!freeBoard.getFreeBoardFile().isEmpty()) {
-        System.out.println(" >> 게시글의 첨부파일이 모두 삭제됩니다.");
+        throw new Exception(" >> 게시글의 첨부파일이 모두 삭제됩니다.");
       }
 
       freeBoardDao.deleteComment(freeNo);
@@ -54,16 +52,12 @@ public class FreeBoardDeleteController extends HttpServlet {
       freeBoardDao.delete(freeNo, studyNo);
       sqlSession.commit();
 
-      response.sendRedirect(
-          "freeboardlist?studyNo="+studyNo+"&perNo="+ perNo);
+      response.sendRedirect("list?studyno=" + studyNo);
 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
-
   }
 }
-
-

@@ -77,17 +77,20 @@
         </c:otherwise>
      </c:choose>
 </body>
-
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-primary me-md-2" type="submit" value="수정" >
+   <div class="d-grid gap-2 d-md-flex ">
+     <button class="btn btn-primary me-md-2" type="submit" value="수정" formaction="update">
      <a href='ceoupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
      </button>
-   </div> 
-   
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-primary me-md-2" type="submit" value="삭제" >
-     <a href='ceodelete?askNo=${myAskBoard.askNo}&ceoNo=${myAskBoard.askCeoWriter.ceoNo}'>문의글삭제</a>
+   </div>    
+   <div class="d-grid gap-2 d-md-flex ">
+     <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="delete">
+     <a href='ceodelete?askNo=${myAskBoard.askNo}'>문의글삭제</a>
      </button>
-   </div>
+   </div> 
+   <div class="d-grid gap-2 d-md-flex ">
+     <button class="btn btn-primary me-md-2" type="submit" value="목록" formaction="list">
+     <a href='mylist'>내 목록보기</a>
+     </button>   
+   </div> 
 
 </html>  

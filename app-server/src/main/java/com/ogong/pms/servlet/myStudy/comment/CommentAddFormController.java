@@ -10,17 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 @WebServlet("/comment/form")
 public class CommentAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  MemberDao memberDao;
+  // MemberDao memberDao;
   StudyDao studyDao;
   FreeBoardDao freeBoardDao;
   CommentDao commentDao;
@@ -28,7 +26,7 @@ public class CommentAddFormController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
+    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
     commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
@@ -39,16 +37,16 @@ public class CommentAddFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("perNo"));
-      Member member = memberDao.findByNo(no);
+      // int no = Integer.parseInt(request.getParameter("perNo"));
+      // Member member = memberDao.findByNo(no);
 
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
 
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeBoardNo"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
-      request.setAttribute("member", member);
+      // request.setAttribute("member", member);
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request, response);

@@ -36,10 +36,10 @@ public class CommentUpdateFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
 
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeBoardNo"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
@@ -47,7 +47,7 @@ public class CommentUpdateFormController extends HttpServlet {
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("/myStudy/freeBoardDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/myStudy/comment/CommentUpdateForm.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

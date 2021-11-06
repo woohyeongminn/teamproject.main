@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 
-@WebServlet("/mystudy/freeboardlist")
+@WebServlet("/freeboard/list")
 public class FreeBoardListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  FreeBoardDao freeBoardDao;
+  // MemberDao memberDao;
   StudyDao studyDao;
-  MemberDao memberDao;
+  FreeBoardDao freeBoardDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
   }
 
@@ -35,16 +34,17 @@ public class FreeBoardListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
-      //      int perNo = Integer.parseInt(request.getParameter("perNo"));
-      //
-      //      Member member = memberDao.findByNo(perNo);
+      // int perNo = Integer.parseInt(request.getParameter("perNo"));
+      // Member member = memberDao.findByNo(perNo);
+
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyNo);
 
-      //request.setAttribute("member", member);
-      request.setAttribute("studyNo", studyNo);
+      // request.setAttribute("member", member);
+      request.setAttribute("studyno", studyNo);
       request.setAttribute("freeBoardList", freeBoardList);
-      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardList.jsp").forward(request, response);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardList.jsp").forward(request,
+          response);
 
     } catch (Exception e) {
       e.printStackTrace();
