@@ -43,6 +43,7 @@ public class CafeDetailController extends HttpServlet {
     try {
 
       Cafe cafe = cafeDao.findByCafeNoMember(Integer.parseInt(request.getParameter("no")));
+      cafe.setInfo(cafe.getInfo().replace("\n", "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
 
       HashMap<String,Object> params = new HashMap<>();
       params.put("cafeNo", cafe.getNo());
