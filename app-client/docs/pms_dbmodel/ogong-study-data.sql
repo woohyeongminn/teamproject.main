@@ -14,40 +14,76 @@ insert into study_face_status(face_no, name) values(3, '대면/비대면');
 -- 스터디그룹 test 값
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(1, '삼성뿌셔', 3, 5, 3, '취업 뿌셔뿌셔', '2021-1-1', 1);
+values(1, '삼성뿌셔', 3, 7, 3, '취업 뿌셔뿌셔', '2021-1-1', 1);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,1,'2021-10-25',2);
+
+
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
 values(2, '정처기준비', 2, 10, 2, '한 번에 붙자', '2021-2-2', 1);
 
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,2,'2021-10-25',2);
+
+
+
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, area) 
 values(3, '하반기 삼성 공모전', 3, 6, 3, '공모전 아자', '2021-3-3', 2,'경기도');
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,3,'2021-10-25',2);
+
+
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, area) 
 values(4, '중앙대 컴공 기말고사', 6, 3, 1, '시험 아자', '2021-3-3', 3,'서울시');
 
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(3,4,'2021-10-25',2);
+
+
+
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(5, '알고리즘 스터디', 4, 20, 2, '지옥같은 SI 탈출', '2021-3-3', 3);
+values(5, '알고리즘 스터디', 4, 12, 2, '지옥같은 SI 탈출', '2021-3-3', 3);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(3,5,'2021-10-25',2);
+
+
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, whether_report) 
 values(6, '불법광고', 4, 20, 2, '흑채 팔아요~', '2021-3-3', 7, 2);
 
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(7,6,'2021-10-25',2);
+
+
+
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no) 
-values(7, 'MVC', 5, 10, 1, 'MBC', '2021-6-6', 1);
+values(7, 'MVC', 5, 4, 2, 'MBC', '2021-6-6', 1);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,7,'2021-10-25',2);
+
+
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
-values(8, 'JAVA', 5, 10, 1, '공부가 제일 좋아', '2021-7-6', 2, 2);
+values(8, 'JAVA', 5, 10, 3, '공부가 제일 좋아', '2021-7-6', 2, 2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(2,8,'2021-10-25',2);
+
 
 -------------------------------------------------------------------------------------------------
-
--- 스터디 길더 test 값
-insert into study_guilder(study_no, member_no, status) values(1, 3, 1);
 
 -------------------------------------------------------------------------------------------------
 -- 캘린더 중요도 값
