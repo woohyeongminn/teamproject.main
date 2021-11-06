@@ -59,8 +59,8 @@
 <body>
 <jsp:include page="header.jsp"/>
 <section class='s'>
-	<b style="font-size:20px; padding-left:20px;"> 오늘의 공부 회원가입 </b>
-	<p b style="padding-left:20px;">임시로 만들었으니 아무나 디자인 막 해도됩니다유,,,,,,</p>
+	<b style="font-size:20px; padding-left:20px; margin: auto;"> 🎓 오늘의 공부에 오신 걸 환영합니다! 회원가입을 진행해 주세요! 🎓 </b>
+	<p b style="padding-left:20px;"></p>
 	<div class="all-content">
 		<a class="signUp" href="/ogong/member/addform" value="개인회원 가입" ><span>개인<br>회원가입</span></a> 
 		<a class="signUp" href="/ogong/ceomember/addform" value="기업회원 가입" ><span>기업<br>회원가입</span></a> 
