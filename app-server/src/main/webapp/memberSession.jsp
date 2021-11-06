@@ -7,6 +7,7 @@
     Member loginUser = (Member)session.getAttribute("loginUser");
     CeoMember loginCeoUser = (CeoMember)session.getAttribute("loginCeoUser");
     Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
+    String a;
    
     if(loginUser==null || loginCeoUser==null || loginAdmin==null)
     {

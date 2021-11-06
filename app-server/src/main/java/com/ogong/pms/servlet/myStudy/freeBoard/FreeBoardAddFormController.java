@@ -37,9 +37,8 @@ public class FreeBoardAddFormController extends HttpServlet {
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
       //Member member = memberDao.findByNo(perNo);
-
-      request.setAttribute("studyNo", studyNo);
       //request.setAttribute("member", member);
+      request.setAttribute("studyNo", studyNo);
 
       request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardAddForm.jsp").forward(request, response);
 

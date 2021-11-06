@@ -43,9 +43,7 @@ public class CafeDetailController extends HttpServlet {
     try {
 
       Cafe cafe = cafeDao.findByCafeNoMember(Integer.parseInt(request.getParameter("no")));
-      if (cafe == null) {
-        throw new Exception(" >> 해당 번호의 장소가 존재하지 않습니다.");
-      }
+
       HashMap<String,Object> params = new HashMap<>();
       params.put("cafeNo", cafe.getNo());
       cafe.setHoliday(cafeDao.getCafeHoliday(params));
@@ -58,7 +56,6 @@ public class CafeDetailController extends HttpServlet {
 
       request.setAttribute("cafe", cafe);
       request.setAttribute("reviewList", reviewList);
-      request.setAttribute("perNo", request.getParameter("perNo"));
       request.setAttribute("roomList", roomList);
       request.setAttribute("roomListSize", roomList.size());
       request.getRequestDispatcher("/cafe/CafeDetail.jsp").forward(request, response);
