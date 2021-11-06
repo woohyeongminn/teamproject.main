@@ -175,10 +175,10 @@ footer {
       </ul>
       <hr>
       <div class="footer_address">
-        <p>상호명 : 오늘의 스터디&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
-        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.company_left</p>
-        <p>고객센터 : 1577-1111 (평일 09:30 ~ 18:30 / 점심 12:00 ~ 13:00)</p>
-        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 김땡땡</p>
+        <p>상호명 : 오늘의 공부&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
+        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.com</p>
+        <p>고객센터 : 1577-1111 (평일 09:00 ~ 18:00 / 점심 12:00 ~ 13:00)</p>
+        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 엄땡땡</p>
       </div>
       <hr>
       <p class="footer_copyright">COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.</p>
