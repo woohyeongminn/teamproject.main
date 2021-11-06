@@ -30,6 +30,6 @@
  <button type="submit" value="로그아웃"><a href='logout'>로그아웃</a></button>
  <button><a href='detail'>내 프로필</a></button> 
  <button><a href='cafe/wrap'>내 카페</a></button> 
- <button><a href='../askboard/ceomylist'>내 문의게시판</a></button>
+ <button><a href='../askboard/mylist'>내 문의게시판</a></button>
  </body>
 </html>

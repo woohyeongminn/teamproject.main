@@ -37,23 +37,19 @@ public class CommentDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      System.out.println("▶ 댓글 삭제");
+      // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
+      // System.out.println(" >> 삭제 권한이 없습니다.");
+      // return;
+      // }
 
-      /*
-       * if (AuthPerMemberLoginHandler.getLoginUser() == null) {
-       * System.out.println(" >> 삭제 권한이 없습니다."); return; }
-       */
-
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
 
-      // FreeBoard freeBoard = (FreeBoard) request.getAttribute("freeBoard");
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeBoardNo"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       if (freeBoard == null) {
-        System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
-        return;
+        throw new Exception(" >> 해당 번호의 게시글이 없습니다.");
       }
 
       List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
@@ -84,10 +80,10 @@ public class CommentDeleteController extends HttpServlet {
        * commentList.remove(commentList.get(index));
        */
 
-      commentDao.delete(Integer.parseInt(request.getParameter("commentNo")));
+      commentDao.delete(Integer.parseInt(request.getParameter("commentno")));
 
       // System.out.println(" >> 댓글이 삭제되었습니다.");
-      request.setAttribute("perNo", Integer.parseInt(request.getParameter("perNo")));
+      // request.setAttribute("perNo", Integer.parseInt(request.getParameter("perNo")));
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.setAttribute("commentList", commentList);

@@ -31,6 +31,9 @@
  <button><a href='../bookmark/list?perno=${loginUser.perNo}'>내 북마크</a></button>
  <button><a href='../study/list?perno=${loginUser.perNo}'>스터디 찾기</a></button>
  <button><a href='../cafe/list?perNo=${perMember.perNo}'>스터디카페 예약하기</a></button>
+ <button><a href='../cafe/reservationList?perNo=${perMember.perNo}'>내 예약 목록</a></button>
+ <button><a href='../cafe/reviewList?perNo=${perMember.perNo}'>내 리뷰 목록</a></button>
+ <button><a href='../askboard/mylist'>내 문의게시판</a></button>
  <button><a href='../cafe/reservationList'>내 예약 목록</a></button>
  <button><a href='../cafe/reviewList'>내 리뷰 목록</a></button>
  <button><a href='../askboard/permylist?perNo=${loginUser.perNo}'>내 문의게시판</a></button>

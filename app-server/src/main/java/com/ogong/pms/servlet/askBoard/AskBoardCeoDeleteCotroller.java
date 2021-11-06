@@ -30,11 +30,10 @@ public class AskBoardCeoDeleteCotroller extends HttpServlet {
 
     try {
       int askNo = Integer.parseInt(request.getParameter("askNo")); 
-      int ceoNo = Integer.parseInt(request.getParameter("ceoNo")); 
       askBoardDao.deletereply(askNo);
       askBoardDao.delete(askNo);
       sqlSession.commit();
-      response.sendRedirect("ceomylist?ceoNo=" + ceoNo);
+      response.sendRedirect("mylist");
 
     } catch (Exception e) {
       e.getStackTrace();
