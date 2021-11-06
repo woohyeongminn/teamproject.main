@@ -30,14 +30,13 @@ public class FreeBoardAddController extends HttpServlet {
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
-
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+      Member member = memberDao.findByNo(loginUser.getPerNo());
 
       int studyNo = Integer.parseInt(request.getParameter("studno"));
 

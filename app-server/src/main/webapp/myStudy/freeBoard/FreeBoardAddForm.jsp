@@ -44,7 +44,6 @@ input {
 				</tr>
 			</thead>
 			<form action='add'>
-				</td> <input type='hidden' name='loginUser' value='${loginUser.perNo}'>
 				<input type='hidden' name='studyno' value='${studyno}'>
 				<td></label><input id='f-title' type='text' name='title'></td>
 				<td><input id='f-content' type='text' name='content'></td>

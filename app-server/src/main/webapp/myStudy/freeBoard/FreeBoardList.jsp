@@ -32,7 +32,7 @@
 				<tr>
 					<td>${freeBoard.freeBoardNo}</td>
 					<td><a
-						href="detail?freeboardno=${freeBoard.freeBoardNo}&studyno=${freeBoard.studyNo}">${freeBoard.freeBoardTitle}</a></td>
+						href="detail?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}">${freeBoard.freeBoardTitle}</a></td>
 					<td>${freeBoard.freeBoardWriter.perNickname}</td>
 					<td>${freeBoard.freeBoardViewcount}</td>
 				</tr>

@@ -35,14 +35,13 @@ label {
 		<div class="input-group mb-3">
 			<span>댓글</span><br>
 			<form action='add'>
-				<input type='hidden' name='loginUser' value='${loginUser.perNo}'>
-				<input type='hidden' name='freeboardno'
-					value='${freeBoard.freeBoardNo}'> <input type="text"
-					class="form-control" placeholder="내용을 입력하세요."
-					aria-label="Recipient's username" aria-describedby="button-addon2">
+				<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'>
+				<input id='f-commentText' type="text" name='commenttext'
+					class="form-control" placeholder="내용을 입력하세요." aria-describedby="button-addon2">
 				<button class="btn btn-outline-secondary" type="submit"
 					id="button-addon2">
-					<a href='../comment/add?studyno=${freeBoard.studyNo}'>등록</a>
+					<a
+						href='../comment/add?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>등록</a>
 				</button>
 			</form>
 		</div>
@@ -51,11 +50,11 @@ label {
 		</button>
 		<button>
 			<a
-				href='updateform?studyno=${freeBoard.studyNo}&freeno=${freeBoard.freeBoardNo}'>수정</a>
+				href='updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>수정</a>
 		</button>
 		<button>
 			<a
-				href='delete?studyno=${freeBoard.studyNo}&freeno=${freeBoard.freeBoardNo}'>삭제</a>
+				href='delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>삭제</a>
 		</button>
 	</form>
 </body>

@@ -70,25 +70,23 @@ label {
 	<c:if test='${study.owner.perNo == loginUser.perNo}'>
 		<button type="submit" value="수정" formaction="updateform">
 			<a
-				href='../study/updateform?perno=${member.perNo}&studyno=${study.studyNo}'>수정</a>
+				href='../study/updateform?studyno=${study.studyNo}'>수정</a>
 		</button>
 		<button>
 			<a
-				href='../study/delete?perno=${member.perNo}&studyno=${study.studyNo}'>삭제</a>
+				href='../study/delete?studyno=${study.studyNo}'>삭제</a>
 		</button>
 	</c:if>
 	<button>
-		<a href='../study/exit?perno=${member.perNo}&studyno=${study.studyNo}'>탈퇴</a>
+		<a href='../study/exit?studyno=${study.studyNo}'>탈퇴</a>
 	</button>
-	<span><a
-		href='guilder/list?studyNo=${study.studyNo}'>구성원&emsp;</a></span>
+	<span><a href='guilder/list?studyNo=${study.studyNo}'>구성원&emsp;</a></span>
 	<span>캘린더&emsp;</span>
-	<span>To-do&emsp;</span>
-	<span><a
-		href="freeboardlist?studyNo=${study.studyNo}&perNo=${member.perNo}">자유게시판&emsp;</a></span>
-	<span><a
-		href='todo/list?studyno=${study.studyNo}&perno=${member.perNo}'>To-do&emsp;</a></span>
-	<span>자유게시판&emsp;</span>
+	<button>
+		<a href="../freeboard/list?studyno=${study.studyNo}">자유 게시판</a>
+	</button>
+	<a href='todo/list?studyno=${study.studyNo}&perno=${member.perNo}'>To-do&emsp;</a>
+	</span>
 	<span>화상미팅&emsp;</span>
 	<button>
 		<a href='list'>목록</a>
