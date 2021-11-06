@@ -9,7 +9,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.domain.Member;
 
 @WebServlet("/member/detail")
 public class MemberDetailController extends GenericServlet {
@@ -28,14 +27,14 @@ public class MemberDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no")); 
-      Member member = memberDao.findByNo(no);
+      //      int no = Integer.parseInt(request.getParameter("no")); 
+      //      Member member = memberDao.findByNo(no);
 
-      if (member == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
-      } 
-
-      request.setAttribute("perMember", member);
+      //      if (member == null) {
+      //        throw new Exception("해당 번호의 회원이 없습니다.");
+      //      } 
+      //
+      //      request.setAttribute("perMember", member);
       request.getRequestDispatcher("/member/PerMemberDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
