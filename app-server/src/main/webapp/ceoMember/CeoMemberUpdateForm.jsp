@@ -24,10 +24,11 @@
 </head>
 
 <body>
+  <jsp:include page="../header.jsp"/>
   <h5>기업 회원 프로필 수정</h5>
 
   <form action="update">
-  <span>(${ceoMember.ceoNo})</span><br>
+  <span>(${loginCeoUser.ceoNo})</span><br>
 
   <label for='f-name' class='form-label' size='100px'>이름</label>
   <input id='f-name' type='text' name='name' value='${ceoMember.ceoName}'><br>
@@ -48,8 +49,6 @@
   <input id='f-password' type='password' name='password'><br>
   
   <span>가입일ㅣ</span> <span>${ceoMember.ceoRegisteredDate}</span><br>
-  
-  <input type ='hidden' name='no' value='${ceoMember.ceoNo}'>
   
   <button type="submit" value="수정">수정</button>
 

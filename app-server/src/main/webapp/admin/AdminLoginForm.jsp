@@ -48,6 +48,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <fieldset>
 <br>
 <legend><b> 🖐 관리자 로그인 </b></legend><br>

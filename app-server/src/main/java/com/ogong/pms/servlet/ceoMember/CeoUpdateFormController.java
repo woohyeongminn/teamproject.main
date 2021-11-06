@@ -4,10 +4,10 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CeoMember;
 
@@ -25,12 +25,12 @@ public class CeoUpdateFormController extends HttpServlet  {
 
   // 기업회원 개인정보 수정은 이름,이메일,비밀번호만 가능
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
+      CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
+      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
       if (ceoMember == null) {
         throw new Exception("해당 번호의 회원이 없습니다.");

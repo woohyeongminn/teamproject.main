@@ -75,6 +75,7 @@
   </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <br>
 <legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 🔖 스터디 카페 리뷰 목록 </b></legend><br>
 <hr>
@@ -96,7 +97,7 @@
 	<c:forEach items="${reviewList}" var="review">
 	 <tr>
 	    <td>${review.reviewNo}</td>
-	    <td><a href='detail?no=${review.cafe.no}'>${review.cafe.name}</a></td>
+	    <td>${review.cafe.name}</td>
 	    <td>
 	    <c:set var="grade" value="${review.grade}" /> 
 	          <% 

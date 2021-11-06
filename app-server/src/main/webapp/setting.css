@@ -1,5 +1,6 @@
 @charset "UTF-8";
-  html, body, div, span, applet, object, iframe,
+
+ html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -18,4 +19,68 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: top;
+}
+
+body {
+  line-height: 1.5;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/*body 시작-------------------------------------*/
+section {
+  width:100%;
+  z-index:500;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.contents .c-top {
+  width: 100%;
+  padding: 20px 0 20px 50px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
+
+  .all-content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top:50px;
+  }
+  
+/*footer 시작*/
+footer {
+  font-size: 14px;
+  padding: 8px 0;
+  background-color: whitesmoke;
+}
+
+.footer_company {
+  display: flex;
+  margin-left: 20px;
+}
+
+.footer_company li a{
+  padding: 2px 10px 2px 0;
+}
+
+.footer_address {
+  margin-left: 20px;
+}
+
+.footer_copyright {
+  margin-left: 20px;
 }

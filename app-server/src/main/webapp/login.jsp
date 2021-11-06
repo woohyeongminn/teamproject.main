@@ -61,9 +61,9 @@ section {
 
 .contents .c-top {
   width: 100%;
-  padding: 60px 0 15px 50px;
+  padding: 20px 0 20px 50px;
   font-weight: bold;
-  background-color: #f0e3d4;
+  background-color: rgb(247, 231, 215);
 }
 
 .contents .c1 {
@@ -80,22 +80,22 @@ section {
 
 .contents .c1 .card {
   border: none;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid darkgray;
   border-radius: 10px;
   padding: 30px;
 }
-
+/* 
 .contents .c1 .card span .btn {
-  background-color: #ccc0ae;
-  border  :1px solid #ccc0ae;
-  color: white;
+  background-color: rgb(247, 231, 215);
+  border  :1px solid rgb(247, 231, 215);
+  color: #616161;
 }
 
 .contents .c1 .card .btn:hover {
-  background-color: #f0e3d4;
-  border  :1px solid #f0e3d4;
-  color:  #616161;
-}
+  background-color:  rgb(219, 211, 209);
+  border  :1px solid rgb(219, 211, 209);
+  color:  white;
+} */
 
 .contents .c1 .card .card-text {
   margin-bottom: 16px;
@@ -141,7 +141,7 @@ footer {
           <div class="card">
               <h4 class="card-title">관리자&ensp;<i class="fas fa-child"></i></h4>
               <span class="card-text">관리자 로그인<br> 페이지로 이동합니다.</span>
-              <span class="but"><a href="admin/form" class="btn btn-primary">LOGIN</a></span>
+              <span class="but"><a href="admin/form" class="btn btn-outline-dark">LOGIN</a></span>
             </div>
         </div>
 
@@ -149,7 +149,7 @@ footer {
           <div class="card">
               <h4 class="card-title">개인 회원</h4>
               <span class="card-text">개인 회원 로그인<br> 페이지로 이동합니다.</span>
-              <span><a href="member/form" class="btn btn-primary">LOGIN</a>&emsp;
+              <span><a href="member/form" class="btn btn-outline-dark">LOGIN</a>&emsp;
               <!-- 네이버 로그인 버튼 노출 영역 -->
 			  <div id="naver_id_login"></div>
 			  <!-- //네이버 로그인 버튼 노출 영역 -->
@@ -170,7 +170,7 @@ footer {
           <div class="card">
               <h4 class="card-title">기업 회원</h4>
               <span class="card-text">기업 회원 로그인<br> 페이지로 이동합니다.</span>
-              <span><a href="ceomember/form" class="btn btn-primary">LOGIN</a></span>
+              <span><a href="ceomember/form" class="btn btn-outline-dark">LOGIN</a></span>
             </div>
         </div>
       </div>
@@ -190,10 +190,10 @@ footer {
       </ul>
       <hr>
       <div class="footer_address">
-        <p>상호명 : 오늘의 스터디&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
-        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.company_left</p>
-        <p>고객센터 : 1577-1111 (평일 09:30 ~ 18:30 / 점심 12:00 ~ 13:00)</p>
-        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 김땡땡</p>
+        <p>상호명 : 오늘의 공부&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
+        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.com</p>
+        <p>고객센터 : 1577-1111 (평일 09:00 ~ 18:00 / 점심 12:00 ~ 13:00)</p>
+        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 엄땡땡</p>
       </div>
       <hr>
       <p class="footer_copyright">COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.</p>

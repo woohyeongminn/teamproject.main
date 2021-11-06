@@ -9,7 +9,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import com.ogong.pms.dao.AdminDao;
-import com.ogong.pms.domain.Admin;
 
 @WebServlet("/admin/detail")
 public class AdminDetailController extends GenericServlet {
@@ -28,14 +27,14 @@ public class AdminDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Admin adminpro = adminDao.findByAdminNo(no);
-
-      if (adminpro == null) {
-        throw new Exception(" >> 다시 선택해 주세요.");
-      }
-
-      request.setAttribute("adminpro", adminpro);
+      //      int no = Integer.parseInt(request.getParameter("no"));
+      //      Admin adminpro = adminDao.findByAdminNo(no);
+      //
+      //      if (adminpro == null) {
+      //        throw new Exception(" >> 다시 선택해 주세요.");
+      //      }
+      //
+      //      request.setAttribute("adminpro", adminpro);
 
       request.getRequestDispatcher("/admin/AdminDetail.jsp").forward(request, response);
 

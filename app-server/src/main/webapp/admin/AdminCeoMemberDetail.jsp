@@ -26,6 +26,7 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
    <b> 📖 기업회원 상세</b>
    <hr>
    <span>(${ceoMember.ceoNo})</span><br>

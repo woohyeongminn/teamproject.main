@@ -95,6 +95,9 @@
 <jsp:include page="../header.jsp"/>
 
 <div class="all-content">
+      <div class="c-top">
+        | 여기에 페이지 이름?제목? 써주기
+      </div>
 <b style="font-size:20px"> 🖐 기업 회원 로그인 </b>
 <br>
 <hr>
