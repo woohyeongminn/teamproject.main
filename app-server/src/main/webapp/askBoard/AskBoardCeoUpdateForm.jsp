@@ -27,6 +27,7 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
   <h5>사장 회원 문의글 수정</h5>
 
   <form action="ceoupdate">

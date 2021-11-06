@@ -24,7 +24,7 @@
       <c:forEach items="${freeBoardList}" var="freeBoard">
         <tr>
           <td>${freeBoard.freeBoardNo}</td>
-          <td><a href="freeboarddetail?freeNo=${freeBoard.freeBoardNo}&studyNo=${freeBoard.studyNo}&perNo=${member.perNo}">${freeBoard.freeBoardTitle}</a></td>
+          <td><a href="freeboarddetail?freeNo=${freeBoard.freeBoardNo}&studyNo=${freeBoard.studyNo}&perNo=${loginUser.perNo}">${freeBoard.freeBoardTitle}</a></td>
           <td>${freeBoard.freeBoardWriter.perNickname}</td>
           <td>${freeBoard.freeBoardViewcount}</td>
         </tr>
@@ -36,7 +36,7 @@
   </c:if>
       <br>
       <button>
-      <a href='freeboardaddform?studyNo=${studyNo}&perNo=${member.perNo}'>등록</a>
+      <a href='freeboardaddform?studyNo=${studyNo}&perNo=${loginUser.perNo}'>등록</a>
       </button>
 </body>
 </html>

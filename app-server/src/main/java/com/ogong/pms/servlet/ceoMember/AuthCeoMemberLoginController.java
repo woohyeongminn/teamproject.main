@@ -51,6 +51,7 @@ public class AuthCeoMemberLoginController extends HttpServlet {
 
         //request.setAttribute("ceoMember", ceoMember);
         request.getSession().setAttribute("loginCeoUser", ceoMember);
+
         request.getRequestDispatcher("/ceoMember/CeoMemberLogin.jsp").forward(request, response);
 
       } 

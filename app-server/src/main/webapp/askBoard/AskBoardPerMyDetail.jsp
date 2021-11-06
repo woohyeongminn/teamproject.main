@@ -57,6 +57,7 @@
 </head>
 
 <body>
+<jsp:include page="../header.jsp"/>
    <form> 💬 문의글 상세보기[개인 회원]</form>
     
      <span id='no' name='no'>(${myAskBoard.askNo})</span><br>

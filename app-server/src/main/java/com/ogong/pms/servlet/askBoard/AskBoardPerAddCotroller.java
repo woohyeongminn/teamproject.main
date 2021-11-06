@@ -55,7 +55,7 @@ public class AskBoardPerAddCotroller extends HttpServlet {
       askBoardDao.insertPer(askBoard);
       sqlSession.commit();
 
-      request.setAttribute("perNo", askBoard.getAskMemberWriter().getPerNo());
+      //request.setAttribute("perNo", askBoard.getAskMemberWriter().getPerNo());
       request.getRequestDispatcher("/askBoard/AskBoardPerAdd.jsp").forward(request, response);
 
 

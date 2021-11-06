@@ -55,13 +55,14 @@
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 <h1>💬문의글 등록결과</h1> 
 <p>문의글을 등록했습니다.</p>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-outline-primary me-md-2 btn-small" 
      type="submit" value="등록" formaction="peradd">
-     <a class="btn btn-info" href="ceomylist?ceoNo=${ceoNo}">보러가기</a>
+     <a class="btn btn-info" href="ceomylist?ceoNo=${loginCeoUser.ceoNo}">보러가기</a>
      </button>
    </div> 
 </body>

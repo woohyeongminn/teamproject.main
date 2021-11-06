@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/askboard/ceoaddform")
 public class AskBoardCeoAddFormCotroller extends HttpServlet {
@@ -32,10 +31,9 @@ public class AskBoardCeoAddFormCotroller extends HttpServlet {
 
     try {
 
-      int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
-
-      request.setAttribute("ceoMember", ceoMember);
+      //int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
+      //CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+      //request.setAttribute("ceoMember", ceoMember);
       request.getRequestDispatcher("/askBoard/AskBoardCeoAddForm.jsp").forward(request, response);
 
 
