@@ -114,7 +114,6 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-  <input type='hidden' name='perno' value='${loginUser.perNo}'>
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
@@ -164,7 +163,6 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-  <input type='hidden' name='perno' value='${perno}'>
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
@@ -210,7 +208,6 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-  <input type='hidden' name='perno' value='${perno}'>
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
