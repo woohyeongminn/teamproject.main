@@ -20,9 +20,13 @@
     width: 60px;
   }
   input {
-  text-align: center;
-  border: 0;
-  border-bottom: inset;
+    text-align: center;
+    display: inline-block;
+    padding: 5px;
+    width: 70%;
+    margin-top: 10px;
+    border-color: lightgray;
+    border-radius: 6px;
   }
   button[type=button] {
     margin-block: 10px;
@@ -81,10 +85,10 @@
     padding: 0;
     height: 48px;
     display: flex;
-	  align-items: center;
-	  flex-direction: row;
-	  justify-content: center;
-	  margin-left: 10px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 10px;
     background-color: white;
     border: white;
   }
@@ -109,7 +113,6 @@
     max-width: 400px;
     margin: 150px auto 0;
     background-color: white;
-    /* box-shadow: 0 10px 90px ivory; */
     text-align: center;
     font-size: 20px;
     border-radius: 15px;
@@ -125,10 +128,6 @@
   .c-top:hover {
     color: cornflowerblue;
   }
-  /* button[type=submit] {
-  margin-top: -66px;
-  margin-bottom: 300px;
-  } */
   #box {
   text-align: center;
   margin: 50px 0;
@@ -142,7 +141,6 @@
 <div class="c-top" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
       🙂 마이페이지
       </div>
-<!-- <table class="table table-responsive"> -->
 
 <div class="card">
   <div class="card-header">
@@ -154,13 +152,10 @@
 <br>
 <br>
 </div>
-<!-- </table> -->  
-<!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="transform: translate(-45%, 30%);"> -->
   <div id="box">
 <button type="submit" class="btn btn-outline-dark" value="변경" id="submit"><a href='updateForm'>변경</a></button> 
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" id="submit"><a href='logout'>로그아웃</a></button> 
   </div>
-<!-- </div> -->
 </fieldset>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
