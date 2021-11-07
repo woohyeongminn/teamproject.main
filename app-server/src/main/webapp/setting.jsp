@@ -22,7 +22,7 @@
 
  .c-top {
   width: 100%;
-  padding: 20px 0 20px 50px;
+  padding: 20px 0 20px 0px;
   font-weight: bold;
   background-color: rgb(247, 231, 215);
   text-align: center;
