@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.myStudy.comment;
+package com.ogong.pms.servlet.myStudy.freeBoard.comment;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;
