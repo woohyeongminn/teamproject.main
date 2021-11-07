@@ -35,16 +35,16 @@ public class FreeBoardDeleteController extends HttpServlet {
     try {
       // int perNo = Integer.parseInt(request.getParameter("perNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeNo"));
+      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       if (freeBoard == null) {
-        throw new Exception(" >> 해당 번호의 게시글이 없습니다.\n");
+        throw new Exception("해당 번호의 게시글이 없습니다.");
       }
 
       if (!freeBoard.getFreeBoardFile().isEmpty()) {
-        throw new Exception(" >> 게시글의 첨부파일이 모두 삭제됩니다.");
+        throw new Exception("게시글의 첨부파일이 모두 삭제됩니다.");
       }
 
       freeBoardDao.deleteComment(freeBoardNo);

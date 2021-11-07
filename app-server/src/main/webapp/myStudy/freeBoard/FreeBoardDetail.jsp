@@ -33,15 +33,16 @@ label {
 		<span>${freeBoard.freeBoardRegisteredDate}</span><br> <span>조회수ㅣ</span>
 		<span>${freeBoard.freeBoardViewcount}</span><br>
 		<div class="input-group mb-3">
-			<span>댓글</span><br>
+			<span>댓글&nbsp;</span><br>
 			<form action='add'>
-				<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'>
-				<input id='f-commentText' type="text" name='commenttext'
-					class="form-control" placeholder="내용을 입력하세요." aria-describedby="button-addon2">
+			<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'>
+				<input type='hidden' name='studyno' value='${freeBoard.studyNo}'>
+				<input id='f-commentText'
+					type="text" name='commenttext' class="form-control"
+					placeholder="내용을 입력하세요." aria-describedby="button-addon2">
 				<button class="btn btn-outline-secondary" type="submit"
-					id="button-addon2">
-					<a
-						href='../comment/add?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>등록</a>
+					id="button-addon2"
+					onclick='../comment/add?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>등록
 				</button>
 			</form>
 		</div>
