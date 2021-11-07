@@ -9,13 +9,13 @@
 /*footer 시작*/
 
 footer {
-  font-size: 14px;
+  font-size: 10px;
   background-color: whitesmoke;
   position: inherit;
   z-index:-99;
   margin-top:60px;
   width: 100%;
-  height:260px;
+  height:220px;
   bottom: 0;
   left: 0;
 }
