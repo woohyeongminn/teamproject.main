@@ -45,13 +45,39 @@
     height: 80px;
     margin-bottom: 10px;
   }
+  
+  .all-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
+  
   </style>
 </head>
 
 <body>
+  <jsp:include page="../header.jsp"/>
+  <div class="c-top">
+        👩‍🏫 내 스터디카페 상세
+    </div>
+  <div class="all-content"> 
+  <c:choose>
+  <c:when test='${empty cafe}'>
+     <p>등록된 카페가 없습니다.</p><br>
+      <button id='b-but' type="submit" value="수정" formaction="updateform">
+        <a href='addform'>카페 등록하러 가기</a>
+     </button>
+  </c:when>
+   
+  <c:otherwise>
   <input id='c-no' type='hidden' value='${cafe.no}'><br>
-  <b>👩‍🏫 내 스터디카페 상세</b>
-  <hr>
   <h5>[${cafe.name}]</h5>
   <div id='aside'>
     <span id='c-image'>대표이미지</span>
@@ -101,11 +127,11 @@
    </c:if>
    <div id='button'>
 	   <button id='b-but' type="submit" value="수정" formaction="updateform">
-	      <a href='updateform?no=${ceoMember.ceoNo}&cafeno=${cafe.no}'> 스터디카페 수정</a>
+	      <a href='updateform?cafeno=${cafe.no}'> 스터디카페 수정</a>
 	   </button>
 	   
 	   <button id='b-but' type="submit" value="삭제" formaction="deleteform">
-	      <a href='deleteform?no=${cafe.no}&ceono=${ceoMember.ceoNo}'>스터디카페 삭제</a>
+	      <a href='deleteform?cafeno=${cafe.no}'>스터디카페 삭제</a>
 	   </button>
 	   
 	     <!--
@@ -113,12 +139,15 @@
 	     -->
 	   
 	    <button id='b-but' type="submit" value="스터디룸관리">
-        <a href='room/list?no=${cafe.no}'>스터디룸 관리</a>
+        <a href='room/list?cafeno=${cafe.no}'>스터디룸 관리</a>
       </button>
       <button id='b-but' type="submit" value="예약관리">
-        <a href='reser/list?ceono=${ceoMember.ceoNo}'>예약 관리</a>
+        <a href='reser/list'>예약 관리</a>
       </button>
     </div>
     </form>
+    </c:otherwise>
+  </c:choose>
+  </div>
 </body>
 </html>

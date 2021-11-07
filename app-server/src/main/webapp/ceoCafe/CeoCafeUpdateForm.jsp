@@ -95,7 +95,6 @@
     <form action='update'>
     <div id='content'>
       <input type ='hidden' name='cafeno' value='${cafe.no}'><br>
-      <input type ='hidden' name='no' value='${ceoMember.ceoNo}'>
       <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
       <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
       
@@ -132,7 +131,7 @@
         </c:if>
       </select><br>
       
-      <label for='f-review'>리뷰평점</label>⭐${cafe.avgReview}(${cafe.countReview})
+    <label for='f-review'>리뷰평점</label>⭐${cafe.avgReview}(${cafe.countReview})
     </div>
     <div id='button'>
      <button id='b-but' type="submit" value="수정" formaction="update">수정</button>
