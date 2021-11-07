@@ -26,7 +26,7 @@
   <jsp:include page="../../header.jsp" />
   <h5>🪧 자유게시판 수정</h5>
   <form action="update">
-    <input type ='hidden' name='freeno' value='${freeno}'>
+    <input type ='hidden' name='freeboardno' value='${freeboardno}'>
     <input type ='hidden' name='studyno' value='${studyno}'>
     <span>(${freeBoard.freeBoardNo})</span><br>
     <label for='f-title'>제목</label>

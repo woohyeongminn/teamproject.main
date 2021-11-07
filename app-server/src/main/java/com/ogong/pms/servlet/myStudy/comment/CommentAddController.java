@@ -85,7 +85,8 @@ public class CommentAddController extends HttpServlet {
       // request.setAttribute("member", member);
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
-      request.getRequestDispatcher("/myStudy/freeBoardDetail.jsp").forward(request, response);
+      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
+          response);
 
     } catch (Exception e) {
       e.printStackTrace();
