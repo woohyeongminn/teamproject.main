@@ -62,11 +62,12 @@ public class CommentAddController extends HttpServlet {
 
       Comment comment = new Comment();
 
+      comment.setCommentWiter(member);
       comment.setStudyNo(Integer.parseInt(request.getParameter("studyno")));
       comment.setBoardNo(Integer.parseInt(request.getParameter("freeboardno")));
       comment.setCommentText(request.getParameter("commenttext"));
-      comment.setCommentWiter(member);
       // comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
+      System.out.println(comment);
 
       /*
        * String input = Prompt.inputString(" 정말 등록하시겠습니까? (네 / 아니오) ");
