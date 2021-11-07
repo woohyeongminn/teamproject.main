@@ -18,6 +18,7 @@ public class AuthCeoMemberLoginController extends HttpServlet {
 
   CeoMemberDao ceoMemberDao;
 
+
   //  public static CeoMember loginCeoMember;
   //  public static CeoMember getLoginCeoMember() {
   //    return loginCeoMember;
@@ -27,6 +28,7 @@ public class AuthCeoMemberLoginController extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
+
   }
 
   @Override
@@ -45,16 +47,10 @@ public class AuthCeoMemberLoginController extends HttpServlet {
 
       if (ceoMember != null && ceoMember.getCeoStatus() == CeoMember.CEO) {
 
-        if (ceoMember.getActive() == CeoMember.OUTUSER) {
-          throw new Exception ("회원가입을 진행해 주세요.");
-        }
-
-        //request.setAttribute("ceoMember", ceoMember);
         request.getSession().setAttribute("loginCeoUser", ceoMember);
+        request.getRequestDispatcher("../index.jsp").forward(request, response);
+      }
 
-        request.getRequestDispatcher("/ceoMember/CeoMemberLogin.jsp").forward(request, response);
-
-      } 
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

@@ -49,11 +49,22 @@ legend {
 	padding-bottom: 30px;
 }
 
-.profile>span {
-	display: inline-block;
-	padding: 5px 0;
-	font-size: 14px;
+.profile > label, span {
+  display: inline-block;
+  padding: 5px 0;
+  font-size: 14px;
+  width: 100px;
 }
+
+.profile input {
+	font-size: 14px;
+	border:0;
+}
+
+.profile input:focus {
+  outline: none;
+}
+
 
 .profile .profile-header {
 	padding: 0;
@@ -93,7 +104,7 @@ legend {
  
  .btn_wrap .btn {
   font-size: 12px;
-  margin: 0 8px;
+  margin: 0 7px;
     padding: 5px 10px;
  }
  
@@ -116,20 +127,35 @@ legend {
 			   <div class="profile-header">
 			      <a href="#"><img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img"></a>
 			   </div>
-		   <span>이름ㅣ</span> <span>${ceoMember.ceoName}</span><br>
-		   <span>닉네임ㅣ</span> <span>${ceoMember.ceoNickname}</span><br>
-		   <span>이메일ㅣ</span> <span>${ceoMember.ceoEmail}</span><br>
-		   <span>전화번호ㅣ</span> <span>${ceoMember.ceoTel}</span><br>
-		   <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
-		   <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
-		   <span>가입일ㅣ</span> <span>${ceoMember.ceoRegisteredDate}</span><br>
+		   
+		   <label for='f-name' class='form-label'>이름</label>
+        <input id='f-name' type='text' name='name' readonly value='${ceoMember.ceoName}'><br>
+        
+        <label for='f-nickname' class='form-label'>닉네임</label>
+        <input id='f-nickname' type='text' name='nickname' readonly value='${ceoMember.ceoNickname}'><br>
+        
+        <label for='f-tel' class='form-label'>전화번호</label>
+        <input id='f-tel' type='tel' name='tel' readonly value='${ceoMember.ceoTel}'><br>
+        
+        <label for='f-bossName' class='form-label'>대표자명</label>
+        <input id='f-bossName' type='bossName' name='bossName' readonly value='${ceoMember.ceoBossName}'><br>
+        
+        <label for='f-licenseNo' class='form-label'>사업자 번호</label>
+        <input id='f-licenseNo' type='licenseNo' name='licenseNo' readonly value='${ceoMember.ceoLicenseNo}'><br>
+        
+        <label for='f-email' class='form-label'>이메일</label>
+        <input id='f-email' type='email' name='email' readonly value='${ceoMember.ceoEmail}'><br>
+        
+        <label for='f-registeredDate' class='form-label'>가입일</label>
+        <input id='f-registeredDate' type='registeredDate'
+         name='registeredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
 		   </div>
 		   
 		   <div class="btn_wrap">
-		     <a href='updateform' class = "btn btn-outline-dark"><button type="submit" style="border:0px; background-color: transparent;">프로필 수정하기</button></a>
-		     <a href='deleteform' class = "btn btn-outline-dark">탈퇴하기</a>
-		     <a href='cafe/wrap' class = "btn btn-outline-dark">내 카페</a>
+		     <a href='updateform' class = "btn btn-outline-dark">프로필 수정하기</a>
+		     <a href='cafe/datail' class = "btn btn-outline-dark">내 카페</a>
 	       <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a>
+		     <a href='deleteform' class = "btn btn-outline-dark">탈퇴하기</a>
        </div>
 	    </form>
     </div>

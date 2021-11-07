@@ -36,17 +36,12 @@ public class CeoCafeAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
-
-      if (ceoMember == null) {
-        throw new Exception("등록된 카페가 없습니다.");
-      }
+      CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
+      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
       Cafe cafe = new Cafe();
 
       cafe.setName(request.getParameter("name"));
-
       cafe.setCeoMember(ceoMember); 
       cafe.setInfo(request.getParameter("info"));
       cafe.setLocation(request.getParameter("location"));
@@ -80,7 +75,7 @@ public class CeoCafeAddController extends HttpServlet {
       //        sqlSession.commit();
       //      }
 
-      response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
+      response.sendRedirect("detail");
 
       //sqlSession.rollback();
 

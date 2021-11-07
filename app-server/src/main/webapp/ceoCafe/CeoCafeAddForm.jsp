@@ -75,11 +75,31 @@
   cursor: pointer;
   text-align: center;
 }
+
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
+
+
 </style>
 </head>
 
 <body>
-  <b>👩‍🏫 내 스터디카페 등록</b><br>
+  <jsp:include page="../header.jsp"/>
+  <div class="c-top">
+        👩‍🏫 내 스터디카페 등록
+    </div>
+  <div class="all-content">
+  <br>
   <p>등록된 카페가 없습니다. 스터디 카페를 등록하고 승인을 기다리세요:)</p>
   <hr>
     <div id='aside'>
@@ -93,7 +113,6 @@
     </div>
     <form action='add'>
     <div id='content'>
-      <input type ='hidden' name='no' value='${ceoMember.ceoNo}'>
       
       <label for='f-cafeName'>상호명</label>
       <input id='f-cafeName' type='text' name='name'><br>
@@ -131,6 +150,7 @@
     <div id='button'>
      <button id='b-but' type="submit" value="등록" formaction="add">등록</button>
     </div>
-  </form> 
+  </form>
+  </div>
 </body>
 </html>
