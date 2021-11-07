@@ -38,14 +38,15 @@ public class FreeBoardAddController extends HttpServlet {
       Member loginUser = (Member) request.getSession().getAttribute("loginUser");
       Member member = memberDao.findByNo(loginUser.getPerNo());
 
-      int studyNo = Integer.parseInt(request.getParameter("studno"));
+      int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
       FreeBoard freeBoard = new FreeBoard();
 
       freeBoard.setStudyNo(studyNo);
+      freeBoard.setFreeBoardWriter(member);
       freeBoard.setFreeBoardTitle(request.getParameter("title"));
       freeBoard.setFreeBoardContent(request.getParameter("content"));
-      freeBoard.setFreeBoardWriter(member);
+      System.out.println(freeBoard);
 
       freeBoardDao.insert(freeBoard);
       sqlSession.commit();
