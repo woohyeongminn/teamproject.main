@@ -35,17 +35,27 @@ label {
 		<div class="input-group mb-3">
 			<span>댓글&nbsp;</span><br>
 			<form action='add'>
-			<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'>
-				<input type='hidden' name='studyno' value='${freeBoard.studyNo}'>
-				<input id='f-commentText'
-					type="text" name='commenttext' class="form-control"
-					placeholder="내용을 입력하세요." aria-describedby="button-addon2">
+				<input type='hidden' name='freeboardno'
+					value='${freeBoard.freeBoardNo}'> <input type='hidden'
+					name='studyno' value='${freeBoard.studyNo}'> <input
+					id='f-commentText' type="text" name='commenttext'
+					class="form-control" placeholder="내용을 입력하세요."
+					aria-describedby="button-addon2">
 				<button class="btn btn-outline-secondary" type="submit"
-					id="button-addon2"
-					onclick='../comment/add?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>등록
+					id="button-addon2">
+					<a href="../comment/add">등록</a>
 				</button>
 			</form>
-		</div>
+		</div><br>
+			<c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if><br>
+			<c:forEach items="${commentList}" var="comment">
+        <span>내용ㅣ${comment.commentText}</span>
+        <br>
+        <span>작성자ㅣ${comment.commentWriter.perNickname}</span>
+        <br>
+        <span>등록일ㅣ${comment.commentText}</span>
+        <br>
+      </c:forEach>
 		<button>
 			<a href='list?studyno=${freeBoard.studyNo}'>목록</a>
 		</button>

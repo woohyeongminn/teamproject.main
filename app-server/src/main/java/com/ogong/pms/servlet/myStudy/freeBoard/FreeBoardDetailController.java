@@ -1,6 +1,7 @@
 package com.ogong.pms.servlet.myStudy.freeBoard;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -8,25 +9,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 
 @WebServlet("/freeboard/detail")
 public class FreeBoardDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  FreeBoardDao freeBoardDao;
+  // MemberDao memberDao;
   StudyDao studyDao;
-  MemberDao memberDao;
+  FreeBoardDao freeBoardDao;
+  CommentDao commentDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
+    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
+
   }
 
   @Override
@@ -41,6 +46,7 @@ public class FreeBoardDetailController extends HttpServlet {
       int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
+      System.out.println(freeBoard.getFreeBoardNo());
 
       // if (freeBoard == null) {
       // System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
@@ -48,8 +54,15 @@ public class FreeBoardDetailController extends HttpServlet {
       // return;
       // }
 
+      List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
+
+      if (commentList.isEmpty()) {
+        System.out.println("이놈");
+      }
+
       // request.setAttribute("member", member);
       request.setAttribute("freeBoard", freeBoard);
+      request.setAttribute("commentList", commentList);
       request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
           response);
 

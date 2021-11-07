@@ -16,7 +16,6 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
 
 @WebServlet("/comment/add")
 public class CommentAddController extends HttpServlet {
@@ -51,22 +50,22 @@ public class CommentAddController extends HttpServlet {
       Member member = memberDao.findByNo(loginUser.getPerNo());
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      Study study = studyDao.findByNo(studyNo);
-
       int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
+      String commentText = request.getParameter("commenttext");
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
       if (freeBoard == null) {
-        throw new Exception(" >> 해당 번호의 게시글이 없습니다.\n");
+        throw new Exception("해당 번호의 게시글이 없습니다.");
       }
 
       Comment comment = new Comment();
 
-      comment.setCommentWiter(member);
-      comment.setStudyNo(Integer.parseInt(request.getParameter("studyno")));
-      comment.setBoardNo(Integer.parseInt(request.getParameter("freeboardno")));
-      comment.setCommentText(request.getParameter("commenttext"));
+      comment.setCommentWriter(member);
+      comment.setStudyNo(studyNo);
+      comment.setBoardNo(freeBoardNo);
+      comment.setCommentText(commentText);
       // comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
+      freeBoard.getComment().add(comment);
       System.out.println(comment);
 
       /*
@@ -77,14 +76,12 @@ public class CommentAddController extends HttpServlet {
        * Exception(" >> 댓글 등록을 취소하였습니다."); }
        */
 
-      freeBoard.getComment().add(comment);
-
-      commentDao.insert(freeBoard.getStudyNo(), freeBoard.getFreeBoardNo(), comment);
+      commentDao.insert(studyNo, freeBoardNo, comment);
       sqlSession.commit();
 
       // System.out.println(" >> 댓글이 등록되었습니다.");
       // request.setAttribute("member", member);
-      request.setAttribute("study", study);
+      // request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
           response);

@@ -51,7 +51,6 @@ public class AppInitListener implements ServletContextListener {
       ToDoDao toDoDao = sqlSession.getMapper(ToDoDao.class);
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
 
-
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
 
@@ -69,14 +68,13 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("studyDao", studyDao);
       웹애플리케이션공용저장소.setAttribute("freeBoardDao", freeBoardDao);
       웹애플리케이션공용저장소.setAttribute("toDoDao", toDoDao);
-      //웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
+      웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);
 
     } catch (Exception e) {
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }
-
   }
 
   @Override
