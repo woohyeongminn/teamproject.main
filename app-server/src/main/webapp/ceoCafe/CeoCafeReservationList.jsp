@@ -54,7 +54,6 @@
 <tbody>
   <c:forEach items="${reserList}" var="reservation">
   <tr>
-      
       <td><a href='detail?resno=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
       <td>${reservation.reservationDate}</td>
       <td>${reservation.useDate}</td>
