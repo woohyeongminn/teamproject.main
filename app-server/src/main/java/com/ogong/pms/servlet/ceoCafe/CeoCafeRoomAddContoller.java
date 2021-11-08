@@ -35,7 +35,7 @@ public class CeoCafeRoomAddContoller extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int cafeNo = Integer.parseInt(request.getParameter("no"));    //카페번호
+      int cafeNo = Integer.parseInt(request.getParameter("cafeno"));    //카페번호
 
       Cafe cafe = cafeDao.findByCafeNo(cafeNo);
 
@@ -60,7 +60,7 @@ public class CeoCafeRoomAddContoller extends HttpServlet {
       cafeRoomDao.insertCafeRoom(cafeRoom);
       sqlSession.commit();
 
-      response.sendRedirect("list?no="+ cafe.getNo());
+      response.sendRedirect("list?cafeno="+ cafe.getNo());
 
 
     } catch (Exception e) {

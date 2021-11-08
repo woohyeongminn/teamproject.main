@@ -122,7 +122,8 @@ CREATE TABLE studycafe_room (
   cafe_no       INTEGER     NOT NULL COMMENT '스터디카페번호', -- 스터디카페번호
   Introduction  TEXT        NOT NULL COMMENT '소개글', -- 소개글
   people        INTEGER     NOT NULL DEFAULT 1 COMMENT '인원제한수', -- 인원제한수
-  hourly_amount INTEGER     NOT NULL COMMENT '시간당금액' -- 시간당금액
+  hourly_amount INTEGER     NOT NULL COMMENT '시간당금액', -- 시간당금액
+  status        INTEGER     NOT NULL DEFAULT 1 COMMENT '상태' -- 상태
 )
 COMMENT '스터디카페룸';
 

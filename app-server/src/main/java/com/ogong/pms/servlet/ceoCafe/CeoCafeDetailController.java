@@ -38,25 +38,26 @@ public class CeoCafeDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
+      CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
+      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
-      Cafe cafe = cafeDao.findByCeoMember(ceoMember.getCeoNo());
+      Cafe cafe = cafeDao.findByCeoMember(loginCeo.getCeoNo());
 
       if (cafe == null) {
-        throw new Exception("등록된 카페가 없습니다.");
+        request.setAttribute("ceoMember", ceoMember);
+        request.getRequestDispatcher("/ceoCafe/CeoCafeDetail.jsp").forward(request, response);
+
+      } else {
+
+        String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
+        List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
+
+        request.setAttribute("ceoMember", ceoMember);
+        request.setAttribute("cafe", cafe);
+        request.setAttribute("cafeStatus", status);
+        request.setAttribute("reviewList", reviewList);
+        request.getRequestDispatcher("/ceoCafe/CeoCafeDetail.jsp").forward(request, response);
       }
-
-      String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
-      List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
-
-      request.setAttribute("ceoMember", ceoMember);
-      request.setAttribute("cafe", cafe);
-      request.setAttribute("cafeStatus", status);
-      request.setAttribute("reviewList", reviewList);
-
-      request.getRequestDispatcher("/ceoCafe/CeoCafeDetail.jsp").forward(request, response);
-
       //      request.getRequestDispatcher("/ceoMember/cafeAdd").forward(request); return;
       //      request.getRequestDispatcher("/ceoMember/cafeUpdate").forward(request); return;
       //      request.getRequestDispatcher("/ceoMember/cafeDelete").forward(request); return;

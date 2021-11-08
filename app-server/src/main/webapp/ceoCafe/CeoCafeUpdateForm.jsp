@@ -75,13 +75,27 @@
   cursor: pointer;
   text-align: center;
 }
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
+
 </style>
 </head>
 
 <body>
-  
-  <b>👩‍🏫 내 스터디카페 수정</b>
-  <hr>
+  <jsp:include page="../header.jsp"/>
+  <div class="c-top">
+      👩‍🏫 내 스터디카페 수정
+  </div>
   <h5>[${cafe.name}]</h5>
     <div id='aside'>
       <span id='c-image'>대표이미지</span>

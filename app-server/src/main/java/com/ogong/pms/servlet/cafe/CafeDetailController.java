@@ -50,7 +50,7 @@ public class CafeDetailController extends HttpServlet {
       cafe.setHoliday(cafeDao.getCafeHoliday(params));
 
       List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
-      List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByCafe(cafe.getNo());
+      List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByMember(cafe.getNo());
 
       cafeDao.updateViewCount(cafe.getNo());
       sqlSession.commit();

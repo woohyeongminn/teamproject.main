@@ -12,7 +12,7 @@ public class CafeRoom {
   private String roomInfo; // 룸 설명
   private int people; // 인원제한수
   private int roomPrice; // 룸 시간당금액
-  private int roomStatus; // 0 : 룸 운영중 1 : 룸 운영중단
+  private int roomStatus; // 1 : 룸 운영중 2 : 룸 운영중단
 
   @Override
   public String toString() {

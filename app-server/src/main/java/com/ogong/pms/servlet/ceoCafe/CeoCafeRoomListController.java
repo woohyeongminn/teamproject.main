@@ -29,7 +29,7 @@ public class CeoCafeRoomListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int cafeNo = Integer.parseInt(request.getParameter("no"));    //카페번호
+      int cafeNo = Integer.parseInt(request.getParameter("cafeno"));    //카페번호
 
       List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
 
