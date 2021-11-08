@@ -87,7 +87,7 @@ public class CommentDeleteController extends HttpServlet {
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request, response);
+      request.getRequestDispatcher("../detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno=" + freeBoard.getFreeBoardNo()).forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

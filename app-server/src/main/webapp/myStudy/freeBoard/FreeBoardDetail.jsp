@@ -34,8 +34,8 @@ label {
 		<div class="input-group mb-3">
 			<span>댓글&nbsp;</span>
 			<form action='/ogong/freeboard/comment/add'>
-				<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'/>
 				<input type='hidden' name='studyno' value='${freeBoard.studyNo}'/>
+				<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'/>
 				<input id='f-commentText' type="text" name='commenttext' class="form-control"
 					     placeholder="내용을 입력하세요." aria-describedby="button-addon2"/>
 				<button class="btn btn-outline-secondary" type="submit" id="button-addon2">등록</button>
@@ -51,10 +51,10 @@ label {
         <br>
         <span>등록일ㅣ${comment.commentRegisteredDate}</span><br>
         <button>
-		      <a href='list?studyno=${freeBoard.studyNo}'>수정</a>
+		      <a href='comment/update?commentno=${comment.commentNo}'>수정</a>
 		    </button>
         <button>
-		      <a href='list?studyno=${freeBoard.studyNo}'>삭제</a>
+		      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>삭제</a>
 		    </button>
         </div>
         </div>
