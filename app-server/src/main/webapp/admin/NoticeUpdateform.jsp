@@ -15,15 +15,35 @@
   label {
     margin-right: 5px;
     text-align: center;
-    display: inline;
+/*     display: inline; */
     width: 60px;
+  }
+  label#content {
+    position: relative;
+    bottom: 400px;
   }
   legend {
     text-align: center;
   }
   input {
+  width: 700px;
+  font-size: 14px;
+  text-align: center;
   border : white;
   outline-color : lightgray;
+  font-weight: 400;
+  }
+  #f-content {
+  text-align: justify;
+  margin: 0;
+  word-wrap: break-word;
+  width: 700px;
+  font-size: 14px;
+  min-height: 370px;
+  letter-spacing: 0;
+  border: 0px solid white;
+  outline-color: lightgray;
+  border-radius: 1px;
   }
   .c-top {
   width: 100%;
@@ -31,12 +51,27 @@
   text-align: center;
   font-weight: bold;
   background-color: rgb(247, 231, 215);
-}
-button[type=submit] {
+  }
+  th {
+  text-align: center;
+  }
+  button[type=submit] {
     margin-bottom: 300px;
     margin-right: 10px;
   }
+  .all-content {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 14px;
+  }
+  thead, tbody, tfoot, tr, td, th {
+    border-color: black;
+    border-style: solid;
+    border-width: 0;
+  }
   </style>
+  
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
@@ -45,29 +80,59 @@ button[type=submit] {
       <div class="c-top">
         🔔 공지게시글 변경
       </div>
+<br>
+<div class="all-content">
 <table class="table table-responsive">
 <thead>
+
+<form id="notice-update" action='update'>
 <tr>
-<th>번호</th>
-<th>제목</th>
-<th>내용</th>
-<th>파일</th>
-<th>등록일</th>
+  <th scope="col"></th>
+  <th scope="col">🔔 공지게시판 게시글 변경</th>
+  <th scope="col">&emsp;&emsp;&emsp;</th>
 </tr>
+
+<tr>
+<th scope="row"><label for='f-title'>제목</label></th>
+<td><input id='f-title' type='text' name='title' placeholder='${notice.adminNotiTitle}' autocomplete='off'></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row"><label for='f-content' id="content">내용</label></th>
+<td><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" autocomplete='off' placeholder='${notice.adminNotiContent}'></textarea></td>
+<td></td>
+</tr>
+
+<tr>
+<th scope="row"><label for='f-filepath'>파일</label></th>
+<td><input id='f-filepath' type='file' name='filepath' value='${notice.adminNotiFile}' placeholder='${notice.adminNotiFile}'></td>
+<td></td>
+</tr>
+
 </thead>
-  <td><form action='update'><span>(${notice.adminNotiNo})</span></td>
-  <td><input id='f-title' type='text' name='title' value='${notice.adminNotiTitle}'></td>
-  <td><input id='f-content' type='text' name='content' value='${notice.adminNotiContent}'></td>
-  <td><input id='f-filepath' type='file' name='filepath' value='${notice.adminNotiFile}'></td>
-  <td><span id='f-registeredDate'>${notice.adminNotiRegisteredDate}</span></td>
 </table>
-</fieldset>
+
 <input type='hidden' name='no' value='${notice.adminNotiNo}'>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="변경">변경</button>
 </form>
 </div>
+</div>
+</fieldset>
 </section>
+
+<script>
+document.querySelector("#notice-update").onsubmit = () => {
+  if (document.querySelector("#f-title").value == "" ||
+        document.querySelector("#f-content").value == "") {
+    /* window.alert("필수 입력 항목이 비어 있습니다.") */
+    Swal.fire('제목이나 내용을 입력해 주세요.')
+    return false; // 일단 서버에 보내지 마
+  }
+};
+</script>
+
  <jsp:include page="../footer.jsp"/>
 </body>
 </html>

@@ -24,7 +24,7 @@
     position: relative;
     bottom: 400px;
   }
-.c-top {
+  .c-top {
   width: 100%;
   padding: 20px 0 20px 0px;
   text-align: center;
@@ -63,8 +63,18 @@
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
+    font-size: 14px;
   }
+  thead, tbody, tfoot, tr, td, th {
+    border-color: black;
+    border-style: solid;
+    border-width: 0;
+  }
+  .photoFrame:hover{
+      cursor: pointer;
+    }
   </style>
+  
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
@@ -77,23 +87,35 @@
 <div class="all-content">
 <table class="table table-responsive text-center">
 <thead>
+
 <form id="notice-add" action='add'>
 <tr>
   <th scope="col"></th>
   <th scope="col">🔔 공지게시판 게시글 등록</th>
+  <th scope="col">&emsp;&emsp;&emsp;</th>
 </tr>
+
 <tr>
 <th scope="row"><label for='f-title'>제목</label></th>
 <td><input id='f-title' type='text' name='title' placeholder="제목을 입력해 주세요." autocomplete='off'></td>
+<td></td>
 </tr>
+
 <tr>
 <th scope="row"><label for='f-content' id="content">내용</label></th>
 <td><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" autocomplete='off' placeholder="내용을 입력해 주세요."></textarea></td>
+<td></td>
 </tr>
+
 <tr>
 <th scope="row"><label for='f-filepath'>파일</label></th>
-<td><input id='f-filepath' type='file' name='filepath'></td>
+<td><div class="image-container">
+    <img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+    <input style="display: block;" type="file" id="f-filepath" name='filepath'></td>
+</div>
+<td></td>
 </tr>
+
 </thead>
 </table>
 
@@ -101,8 +123,37 @@
 <button type="submit" class="btn btn-outline-dark" value="등록" on>등록</button>
 </form>
 </div>
+</div>
 </fieldset>
 </section>
+
+<!-- <script src="file.js"></script> -->
+
+<script>
+function readImage(input) {
+    // 인풋 태그에 파일이 있는 경우
+    if(input.files && input.files[0]) {
+        // 이미지 파일인지 검사 (생략)
+        // FileReader 인스턴스 생성
+        const reader = new FileReader()
+        // 이미지가 로드가 된 경우
+        reader.onload = e => {
+            const previewImage = document.getElementById("preview-image")
+            previewImage.src = e.target.result
+        }
+        // reader가 이미지 읽도록 하기
+        reader.readAsDataURL(input.files[0])
+        
+        var formData = new FormData();
+        formData.append('img',document.getElementById('f-filepath').files[0]);
+    }
+}
+// input file에 change 이벤트 부여
+const inputImage = document.getElementById("f-filepath")
+inputImage.addEventListener("change", e => {
+    readImage(e.target)
+})
+</script>
 
 <script>
 document.querySelector("#notice-add").onsubmit = () => {
@@ -112,6 +163,7 @@ document.querySelector("#notice-add").onsubmit = () => {
     Swal.fire('제목이나 내용을 입력해 주세요.')
     return false; // 일단 서버에 보내지 마
   }
+
 /*   else {
 	  Swal.fire({
 	      title: '🔔 공지게시글 등록',

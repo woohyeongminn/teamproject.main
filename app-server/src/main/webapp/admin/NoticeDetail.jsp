@@ -44,7 +44,6 @@
   text-align: center;
   border : white;
   outline-color : lightgray;
-  /* margin-left: 80px; */
   font-weight: 400;
   }
   #f-content {
@@ -59,21 +58,61 @@
   outline-color: lightgray;
   border-radius: 1px;
   }
+  #f-filepath {
+  margin: 0;
+  width: 300px;
+  font-size: 14px;
+  min-height: 370px;
+  }
   .c-top {
   width: 100%;
   padding: 20px 0 20px 0px;
   text-align: center;
   font-weight: bold;
   background-color: rgb(247, 231, 215);
-}
- .c-top:hover {
-    color: cornflowerblue;
   }
   .all-content {
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
+    font-size: 14px;
   }
+  th#date {
+    font: small-caption;
+  }
+  thead, tbody, tfoot, tr, td, th {
+    border-color: black;
+    border-style: solid;
+    border-width: 0;
+  }
+/*   tr#first {
+    border-bottom: black;
+    border-style: double;
+    border-top-color: white;
+    border-left-color: white;
+    border-right-color: white;
+  }
+  th#date {
+    font: caption;
+    font-size: small;
+  }
+  th#second {
+    border: lightgray;
+    border-style: solid;
+    border-left: white;
+    border-top-color: white;
+    border-bottom-width: 0;
+    font-size: 14px;
+  }
+  th#third {
+    border: lightgray;
+    border-style: solid;
+    border-left: white;
+    border-top-color: white;
+    border-bottom-width: 1px;
+    font-size: 14px;
+  } */
+  
   </style>
 </head>
 <body>
@@ -83,36 +122,35 @@
 <div class="c-top">
         🔔 공지게시글 상세
       </div>
+<br>
 <div class="all-content">
 <table class="table table-responsive text-center">
 <thead>
-<tr>
-  <th scope="col"></th>
-  <th scope="col">🔔 ${adminNotice.adminNotiTitle}</th>
-</tr>
-<!-- <th>번호</th>
-<th>제목</th>
-<th>내용</th>
-<th>파일</th>
-<th>등록일</th>
-</tr> -->
 
-<%-- <tr>
-<th scope="row"><label for='f-no'>번호</label></th>
-<td>( ${adminNotice.adminNotiNo} )</td>
-</tr> --%>
-<tr>
-<th scope="row"><label for='f-content'>내용</label></th>
-<td>${adminNotice.adminNotiContent}</td>
+<tr id="first">
+  <th scope="col"></th>
+  <th scope="col">🔔 공지게시판 게시글 상세</th>
+  <th scope="col" id="date">${adminNotice.adminNotiRegisteredDate}</th>
 </tr>
+
 <tr>
-<th scope="row"><label for='f-filepath'>파일</label></th>
-<td>${adminNotice.adminNotiFile}</td>
+<th scope="row"><label for='f-title'>제목</label></th>
+<td><input id='f-title' type='text' name='title' value="${adminNotice.adminNotiTitle}" readonly></td>
+<td></td>
 </tr>
+
 <tr>
-<th scope="row"><label for='f-registeredDate'>등록일</label></th>
-<td>${adminNotice.adminNotiRegisteredDate}</td>
+<th scope="row" id="second"><label for='f-content' id="content">내용</label></th>
+<td><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" readonly>${adminNotice.adminNotiContent}</textarea></td>
+<td></td>
 </tr>
+
+<tr>
+<th scope="row" id="third"><label for='f-filepath'>파일</label></th>
+<td><span id="f-filepath">${adminNotice.adminNotiFile}</span></td>
+<td></td>
+</tr>
+
 </thead>
 </table>
 
@@ -127,6 +165,7 @@
 </div>
 </fieldset>
 </section>
+
  <jsp:include page="../footer.jsp"/>
 </body>
 </html>
