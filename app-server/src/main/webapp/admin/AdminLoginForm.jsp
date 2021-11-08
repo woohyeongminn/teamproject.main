@@ -107,10 +107,8 @@
 <br>
 <hr>
 <form action='login'>
-      <!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
       <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
       <br>
-      <!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
       <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
   <div class="inner">
 	  <div class="form-check">

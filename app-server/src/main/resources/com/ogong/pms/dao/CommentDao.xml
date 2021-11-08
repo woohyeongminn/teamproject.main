@@ -12,7 +12,7 @@
     <result column="content" property="commentText"/>
     <result column="created_dt" property="commentRegisteredDate"/>
     
-    <association property="commentWiter" javaType="Member">
+    <association property="commentWriter" javaType="Member">
 	    <id column="member_no" property="perNo"/> 
 	    <result column="member_nickname" property="perNickname"/>
 	    <result column="member_status" property="perStatus"/>
@@ -42,7 +42,7 @@
   
   <insert id="insert">
      insert into study_board_comment(content, created_dt, st_board_no, member_no, study_no)
-     values(#{comment.commentText}, #{comment.commentRegisteredDate}, #{boardNo}, #{comment.commentWiter.perNo}, #{studyNo})
+     values(#{comment.commentText}, #{comment.commentRegisteredDate}, #{boardNo}, #{comment.commentWriter.perNo}, #{studyNo})
   </insert>
   
   <update id="update">

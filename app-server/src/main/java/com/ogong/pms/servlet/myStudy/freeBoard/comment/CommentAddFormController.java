@@ -1,7 +1,6 @@
-package com.ogong.pms.servlet.myStudy.comment;
+package com.ogong.pms.servlet.myStudy.freeBoard.comment;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/comment/updateform")
-public class CommentUpdateFormController extends HttpServlet {
+@WebServlet("/comment/form")
+public class CommentAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  // MemberDao memberDao;
   StudyDao studyDao;
   FreeBoardDao freeBoardDao;
   CommentDao commentDao;
@@ -27,8 +26,10 @@ public class CommentUpdateFormController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
+    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
   }
 
   @Override
@@ -36,18 +37,19 @@ public class CommentUpdateFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
+      // int no = Integer.parseInt(request.getParameter("perNo"));
+      // Member member = memberDao.findByNo(no);
+
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       Study study = studyDao.findByNo(studyNo);
 
       int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
-      List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
-
+      // request.setAttribute("member", member);
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
-      request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("/myStudy/comment/CommentUpdateForm.jsp").forward(request, response);
+      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

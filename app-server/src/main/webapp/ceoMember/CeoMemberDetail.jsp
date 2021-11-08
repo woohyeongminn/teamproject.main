@@ -46,13 +46,25 @@ legend {
 	border-radius: 15px;
 	border: 2px solid rgb(110, 110, 110);
 	text-align: center;
-	padding-bottom: 40px;
+	padding-bottom: 30px;
 }
 
-.profile>span {
-	display: inline-block;
-	padding: 5px 0;
+.profile > label, span {
+  display: inline-block;
+  padding: 5px 0;
+  font-size: 14px;
+  width: 100px;
 }
+
+.profile input {
+	font-size: 14px;
+	border:0;
+}
+
+.profile input:focus {
+  outline: none;
+}
+
 
 .profile .profile-header {
 	padding: 0;
@@ -70,15 +82,36 @@ legend {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	border: 4px solid wheat;
+	border: 2px solid rgb(110, 110, 110);
 	background-color: white;
 	vertical-align: middle;
 }
 
  .profile .profile-header .profile-img {
-	margin-top: 5px;
+	  margin-top: 8px;
+    margin-left: 3px;
 }
 
+ .btn_wrap {
+  max-width: 420px;
+  margin: 20px auto 0;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 100px;
+ }
+ 
+ .btn_wrap .btn {
+  font-size: 12px;
+  margin: 0 7px;
+    padding: 5px 10px;
+ }
+ 
+ button:hover {
+	color: white;
+}
+ 
 </style>
 </head>
 
@@ -89,27 +122,43 @@ legend {
     </div>
    <div class="all-content"> 
 	   <form action='updateform'>
+	   
 		   <div class="profile">
-		   <div class="profile-header">
-		      <a href="#">
-		        <img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img">
-		      </a>
+			   <div class="profile-header">
+			      <a href="#"><img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img"></a>
+			   </div>
+		   
+		   <label for='f-name' class='form-label'>이름</label>
+        <input id='f-name' type='text' name='name' readonly value='${ceoMember.ceoName}'><br>
+        
+        <label for='f-nickname' class='form-label'>닉네임</label>
+        <input id='f-nickname' type='text' name='nickname' readonly value='${ceoMember.ceoNickname}'><br>
+        
+        <label for='f-tel' class='form-label'>전화번호</label>
+        <input id='f-tel' type='tel' name='tel' readonly value='${ceoMember.ceoTel}'><br>
+        
+        <label for='f-bossName' class='form-label'>대표자명</label>
+        <input id='f-bossName' type='bossName' name='bossName' readonly value='${ceoMember.ceoBossName}'><br>
+        
+        <label for='f-licenseNo' class='form-label'>사업자 번호</label>
+        <input id='f-licenseNo' type='licenseNo' name='licenseNo' readonly value='${ceoMember.ceoLicenseNo}'><br>
+        
+        <label for='f-email' class='form-label'>이메일</label>
+        <input id='f-email' type='email' name='email' readonly value='${ceoMember.ceoEmail}'><br>
+        
+        <label for='f-registeredDate' class='form-label'>가입일</label>
+        <input id='f-registeredDate' type='registeredDate'
+         name='registeredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
 		   </div>
-		   <span>이름ㅣ</span> <span>${ceoMember.ceoName}</span><br>
-		   <span>닉네임ㅣ</span> <span>${ceoMember.ceoNickname}</span><br>
-		   <span>이메일ㅣ</span> <span>${ceoMember.ceoEmail}</span><br>
-		   <span>전화번호ㅣ</span> <span>${ceoMember.ceoTel}</span><br>
-		   <span>대표자명ㅣ</span> <span>${ceoMember.ceoBossName}</span><br>
-		   <span>사업자 번호ㅣ</span> <span>${ceoMember.ceoLicenseNo}</span><br>
-		   <span>가입일ㅣ</span> <span>${ceoMember.ceoRegisteredDate}</span><br>
-		   </div>
-	     <button type="submit" style="border:0px; background-color: transparent;">
-	       <a href='updateform' class = "btn btn-outline-dark">프로필 수정하기</a>
-	     </button>
-	    <a href='deleteform' class = "btn btn-outline-dark">탈퇴하기</a>
-	     <a href='cafe/wrap' class = "btn btn-outline-dark">내 카페</a>
-       <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a>
+		   
+		   <div class="btn_wrap">
+		     <a href='updateform' class = "btn btn-outline-dark">프로필 수정하기</a>
+		     <a href='cafe/datail' class = "btn btn-outline-dark">내 카페</a>
+	       <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a>
+		     <a href='deleteform' class = "btn btn-outline-dark">탈퇴하기</a>
+       </div>
 	    </form>
     </div>
+  <jsp:include page="../footer.jsp"/>
 </body>
 </html>

@@ -8,13 +8,13 @@ public class Comment {
   private int boardNo;                      //글 번호
   private int commentNo;                    // 댓글 번호
   private String commentText;               // 댓글 내용
-  private Member commentWiter;              // 댓글 작성자
+  private Member commentWriter;              // 댓글 작성자
   private Date commentRegisteredDate;       // 댓글 작성일
 
   @Override
   public String toString() {
     return "Comment [studyNo=" + studyNo + ", boardNo=" + boardNo + ", commentNo=" + commentNo
-        + ", commentText=" + commentText + ", commentWiter=" + commentWiter
+        + ", commentText=" + commentText + ", commentWriter=" + commentWriter
         + ", commentRegisteredDate=" + commentRegisteredDate + "]";
   }
 
@@ -50,12 +50,12 @@ public class Comment {
     this.commentText = commentText;
   }
 
-  public Member getCommentWiter() {
-    return commentWiter;
+  public Member getCommentWriter() {
+    return commentWriter;
   }
 
-  public void setCommentWiter(Member commentWiter) {
-    this.commentWiter = commentWiter;
+  public void setCommentWriter(Member commentWriter) {
+    this.commentWriter = commentWriter;
   }
 
   public Date getCommentRegisteredDate() {
@@ -65,6 +65,4 @@ public class Comment {
   public void setCommentRegisteredDate(Date commentRegisteredDate) {
     this.commentRegisteredDate = commentRegisteredDate;
   }
-
-
 }
