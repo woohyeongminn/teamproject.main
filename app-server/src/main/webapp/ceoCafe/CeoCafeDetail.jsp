@@ -65,9 +65,10 @@
 <body>
   <jsp:include page="../header.jsp"/>
   <div class="c-top">
-        👩‍🏫 내 스터디카페 상세
-    </div>
-  <div class="all-content"> 
+     👩‍🏫 내 스터디카페 상세
+  </div>
+  <div class="all-content">
+  
   <c:choose>
   <c:when test='${empty cafe}'>
      <p>등록된 카페가 없습니다.</p><br>
@@ -75,7 +76,6 @@
         <a href='addform'>카페 등록하러 가기</a>
      </button>
   </c:when>
-   
   <c:otherwise>
   <input id='c-no' type='hidden' value='${cafe.no}'><br>
   <h5>[${cafe.name}]</h5>
@@ -146,7 +146,7 @@
       </button>
     </div>
     </form>
-    </c:otherwise>
+   </c:otherwise>
   </c:choose>
   </div>
 </body>

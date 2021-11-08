@@ -20,13 +20,29 @@
     margin-left: 20px;
     width: 130px;
   }
-  </style>
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
+
+
+</style>
 </head>
 
 <body>
-<br>
-<h3> 📝 예약 내역 상세</h3><br>
-<hr>
+  <jsp:include page="../header.jsp"/>
+  <div class="c-top">
+      📝 예약내역 상세
+    </div>
+  <div class="all-content">
   <div id='content'>
     <label>예약날짜</label>${cafeReser.reservationDate}<br>
     <label>이용날짜</label>${cafeReser.useDate}<br>
@@ -41,16 +57,16 @@
 
 <!-- 예약 거절 버튼 -->
 <c:if test="${cafeReser.reservationStatusName eq '예약완료'}">
-<a href='rejectform?no=${cafeReser.reservationNo}&ceono=${ceoMember.ceoNo}' class="btn btn-outline-dark">예약거절</a>
+<a href='rejectform?resno=${cafeReser.reservationNo}' class="btn btn-outline-dark">예약거절</a>
 </c:if>
 
 <!-- 결제 거절 버튼 -->
 <c:if test="${cafeReser.reservationStatusName eq '결제완료'}">
-<a href='#<%-- ?no=${cafeReser.reservationNo}&ceono=${ceoMember.ceoNo} --%>' class="btn btn-outline-dark">결제 환불</a>
+<a href='#<%-- ?no=${cafeReser.reservationNo}--%>' class="btn btn-outline-dark">결제 환불</a>
 </c:if>
 
 <a href="list?ceono=${ceoMember.ceoNo}" class="btn btn-outline-dark">목록</a>
 
-
+</div>
 </body>
 </html>

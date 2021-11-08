@@ -79,8 +79,11 @@
 </head>
 
 <body>
-  <b>👩‍🏫 내 스터디카페 룸 수정</b><br>
-  <hr>
+<jsp:include page="../header.jsp"/>
+<div class="all-content">
+<div class="c-top">
+    👩‍🏫 내 스터디카페 룸 수정
+ </div>
     <div id='aside'>
       <span id='c-image'>사진</span>
       <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -92,7 +95,7 @@
     </div>
     <form action='updae'>
     <div id='content'>
-      <input type ='hidden' name='no' value='${cafeNo}'>
+      <input type ='hidden' name='cafeno' value='${cafeRoom.cafe.no}'>
       <input type ='hidden' name='roomno' value='${cafeRoom.roomNo}'>
       
       <label for='f-roomName'>스터디룸 이름</label>
@@ -127,5 +130,6 @@
      <button id='b-but' type="submit" value="수정" formaction="update">수정</button>
     </div>
   </form> 
+  </div>
 </body>
 </html>

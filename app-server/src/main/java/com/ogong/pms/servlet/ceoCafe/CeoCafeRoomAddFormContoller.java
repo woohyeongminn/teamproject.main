@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeRoomDao;
-import com.ogong.pms.domain.CafeRoom;
 
 @WebServlet("/ceomember/cafe/room/addform")
 public class CeoCafeRoomAddFormContoller extends HttpServlet {
@@ -34,12 +32,12 @@ public class CeoCafeRoomAddFormContoller extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int cafeNo = Integer.parseInt(request.getParameter("no"));    //카페번호
+      int cafeNo = Integer.parseInt(request.getParameter("cafeno"));    //카페번호
 
-      List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
+      //      List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
 
       request.setAttribute("cafeNo", cafeNo);
-      request.setAttribute("cafeRoomList", cafeRoomList);
+      //      request.setAttribute("cafeRoomList", cafeRoomList);
       request.getRequestDispatcher("/ceoCafe/CeoCafeRoomAddForm.jsp").forward(request, response);
 
 

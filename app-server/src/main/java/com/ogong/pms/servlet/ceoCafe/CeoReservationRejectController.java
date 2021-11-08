@@ -35,14 +35,12 @@ public class CeoReservationRejectController extends HttpServlet {
 
     try {
 
-      int no = Integer.parseInt(request.getParameter("no"));  // 예약번호
-      int ceoNo = Integer.parseInt(request.getParameter("ceono"));  // 기업회원 번호
+      int resNo = Integer.parseInt(request.getParameter("resno"));  // 예약번호
 
-
-      cafeReservationDao.deleteReservation(no, 5);
+      cafeReservationDao.deleteReservation(resNo, 5);
       sqlSession.commit();
 
-      response.sendRedirect("list?ceono=" + ceoNo );
+      response.sendRedirect("detail?resno=" + resNo);
 
 
       //    } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {

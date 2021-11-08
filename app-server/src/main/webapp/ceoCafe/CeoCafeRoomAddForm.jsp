@@ -79,7 +79,11 @@
 </head>
 
 <body>
-  <b>👩‍🏫 내 스터디카페 룸 등록</b><br>
+  <jsp:include page="../header.jsp"/>
+<div class="all-content">
+<div class="c-top">
+    👩‍🏫 내 스터디카페 룸 등록
+ </div>
   <p>등록된 스터디룸이 없습니다.</p>
   <hr>
     <div id='aside'>
@@ -93,7 +97,7 @@
     </div>
     <form action='add'>
     <div id='content'>
-      <input type ='hidden' name='no' value='${cafeNo}'>
+      <input type ='hidden' name='cafeno' value='${cafeNo}'>
       
       <label for='f-roomName'>스터디룸 이름</label>
       <input id='f-roomName' type='text' name='name'><br>

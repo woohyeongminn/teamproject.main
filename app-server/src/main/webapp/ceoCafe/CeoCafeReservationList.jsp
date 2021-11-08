@@ -14,11 +14,29 @@
     text-align: center;
     font-weight: bolder;
   }
-  </style>
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
+
+
+</style>
 </head>
+
 <body>
-<br>
-<h3> 📝 예약 내역 목록 </h3><br>
+  <jsp:include page="../header.jsp"/>
+  <div class="c-top">
+        📝 예약 내역 목록
+    </div>
+  <div class="all-content">
 <c:if test='${not empty reserList}'>
 <table class="table table-striped text-center">
 <thead>
@@ -36,7 +54,8 @@
 <tbody>
   <c:forEach items="${reserList}" var="reservation">
   <tr>
-      <td><a href='detail?no=${reservation.reservationNo}&ceono=${ceoMember.ceoNo}'>${reservation.reservationNo}</a></td>
+      
+      <td><a href='detail?resno=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
       <td>${reservation.reservationDate}</td>
       <td>${reservation.useDate}</td>
       <td>${reservation.cafe.name}</td>
@@ -52,3 +71,6 @@
 <c:if test='${empty reserList}'>
    예약 내역이 없습니다.<br><br>  
 </c:if>
+</div>
+</body>
+</html>

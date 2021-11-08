@@ -8,7 +8,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.domain.CafeRoom;
 
@@ -17,13 +16,11 @@ public class CeoCafeRoomUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   CafeRoomDao cafeRoomDao;
-  SqlSession sqlSession;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
@@ -32,9 +29,10 @@ public class CeoCafeRoomUpdateFormController extends HttpServlet {
 
     try {
 
-      int no = Integer.parseInt(request.getParameter("no")); // 스터디룸 번호
+      int roomNo = Integer.parseInt(request.getParameter("roomno")); // 스터디룸 번호
+      //      int cafeNo = Integer.parseInt(request.getParameter("cafeno")); // 스터디룸 번호
 
-      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(no);
+      CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
 
       if (cafeRoom == null) {
         throw new Exception("해당 번호의 스터디룸이 없습니다.");

@@ -45,13 +45,28 @@
     height: 80px;
     margin-bottom: 10px;
   }
+    .all-content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px;
+    margin-top:50px;
+  }
+  .c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
   </style>
 </head>
 
 <body>
-  <input id='c-no' type='hidden' value='${cafe.no}'><br>
-  <b>👩‍🏫 내 스터디카페 상세</b>
-  <hr>
+<jsp:include page="../header.jsp"/>
+<div class="all-content">
+<div class="c-top">
+    👩‍🏫 내 스터디카페 룸 상세
+ </div>
   <h5>[${cafeRoom.roomName}]</h5>
   <div id='aside'>
     <span id='c-image'>대표이미지</span>
@@ -65,12 +80,16 @@
   </div>
    <div id='button'>
 	   <button id='b-but' type="submit" value="수정" >
-	      <a href='updateform?no=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}'> 스터디룸 수정</a>
+	      <a href='updateform?roomno=${cafeRoom.roomNo}'> 스터디룸 수정</a>
 	   </button>
 	   <button id='b-but' type="submit" value="삭제" >
-	      <a href='delete?no=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}'>스터디룸 삭제</a>
+	      <a href='delete?roomno=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}'>스터디룸 삭제</a>
 	    </button>
+	    <button id='b-but' type="submit" value="삭제" >
+        <a href='list?cafeno=${cafeRoom.cafe.no}'>목록</a>
+      </button>
     </div>
     </form>
+</div>
 </body>
 </html>

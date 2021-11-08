@@ -11,15 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
-import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/cafe/update")
 public class CeoCafeUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  CeoMemberDao ceoMemberDao;
   CafeDao cafeDao;
   SqlSession sqlSession;
 
@@ -27,7 +24,6 @@ public class CeoCafeUpdateController extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
     cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
   }
 
@@ -36,8 +32,6 @@ public class CeoCafeUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
 
       Cafe cafe = cafeDao.findByCafeNo(Integer.parseInt(request.getParameter("cafeno")));
 
@@ -75,7 +69,7 @@ public class CeoCafeUpdateController extends HttpServlet {
       //        sqlSession.commit();
       //      }
 
-      response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
+      response.sendRedirect("detail");
 
       //sqlSession.rollback();
 

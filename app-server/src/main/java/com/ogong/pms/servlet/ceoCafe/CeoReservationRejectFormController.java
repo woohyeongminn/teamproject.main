@@ -35,11 +35,9 @@ public class CeoReservationRejectFormController extends HttpServlet {
 
     try {
 
-      int no = Integer.parseInt(request.getParameter("no"));  // 예약번호
-      int ceoNo = Integer.parseInt(request.getParameter("ceono"));  // 기업 회원 번호
+      int resNo = Integer.parseInt(request.getParameter("resno"));  // 예약번호
 
-      request.setAttribute("reserNo", no);
-      request.setAttribute("ceoNo", ceoNo);
+      request.setAttribute("reserNo", resNo);
       request.getRequestDispatcher("/ceoCafe/CeoCafeReservationRejectForm.jsp").forward(request, response);
 
 

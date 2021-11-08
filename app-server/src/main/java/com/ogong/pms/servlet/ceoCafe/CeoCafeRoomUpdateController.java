@@ -31,7 +31,6 @@ public class CeoCafeRoomUpdateController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
       int no = Integer.parseInt(request.getParameter("roomno")); // 룸 번호
 
       CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(no);
