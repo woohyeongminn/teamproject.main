@@ -2,14 +2,15 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>🏘 스터디 카페</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
-   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
   legend {
   text-align: center;
@@ -17,11 +18,9 @@
   legend:hover {
     color: lightgrey;
   }
-  #content {
-  float: center;
-    margin-left: 20px;
-    width: 58%;
-    xborder: 1px solid black;
+  h3 {
+    text-align: center;
+    font-weight: bolder;
   }
   rect {
   width: 414px;
@@ -83,30 +82,82 @@
   a:hover {
   color : lightgray;
   }
+  body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  #search {
+    text-align: center;
+  }
+  .form-select {
+    display: inline-block;
+  }
+  .c-content {
+    height: 530px;
+  }
+  #content {
+    margin-left: 20px;
+    width: 47%;
+    xborder: 1px solid black;
+    float: left;
+    overflow-y: scroll;
+    height: inherit;
+    overflow-x:hidden
+  }
   .col {
-    width: 450px;
+    width: 355px;
   }
   .card {
-    height: 350px;
+    height: 433px;
+  }
+  .c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
+  .c-top:hover {
+    color: cornflowerblue;
   }
   </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+<section>
+<div class="c-top" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      🏘 스터디 카페 목록
+      </div>
 <br>
-<legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 🏘 스터디 카페 목록 </b></legend><br>
-<hr>
-  <div id="content">
-    <div class="row row-cols-1 row-cols-md-3 g-4" style="float: left">
+  <div id="search">
+    <form action="search">
+    <select name="where">
+      <option value="1">지역</option>
+      <option value="2">이름</option>
+    </select>
+    <input type="text" name="keyword">
+    <button class="btn btn-outline-dark">검색</button>
+    </form>
+  </div>
+  <br>
+
+<div class="c-content">
+<div id="content">
+<c:if test='${not empty cafeList}'>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
     <c:forEach items="${cafeList}" var="cafe">
       <div class="col">
         <div class="card">
-          <svg class="bd-placeholder-img rounded" width="425" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 200x200" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="45%" y="50%" fill="#dee2e6" dy=".3em">이미지</text></svg>
+          <img src="../img/aaa.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <a href='cafeDetail?no=${cafe.no}'><b>${cafe.name}</b></a><br>
-            ${cafe.location}<br>
-            영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
-            ⭐${cafe.avgReview}(${cafe.countReview})<br>
+            <h5 class="card-title">
+              <a href='cafeDetail?no=${cafe.no}'>${cafe.name}</a>
+            </h5>
+            <p>
+            ${fn:split(cafe.location, ',')[0]}<br>
+            ${cafe.openTime} ~ ${cafe.closeTime}<br>
+            ⭐${cafe.avgReview}(${cafe.countReview})</p>
             <script>
          if(${cafe.cafeStatus == 1}) {
            document.write("<label for='f-cafeStatus'>❗ </label>승인 대기 중인 카페입니다.");
@@ -123,8 +174,26 @@
       </div>
     </c:forEach>
     </div>
-  </div>
-</body>
+  </c:if>
+  
+  <c:if test='${empty cafeList}'>
+   검색 결과가 존재하지 않습니다.<br><br>  
+</c:if>
+</div>
+  
+  <div id="map" style="width:770px;height:530px;"></div>
+  
+</div>  
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
+  <script>
+    var container = document.getElementById('map');
+    var options = {
+      center: new kakao.maps.LatLng(33.450701, 126.570667),
+      level: 3
+    };
+    var map = new kakao.maps.Map(container, options);
+  </script>
+  
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h4 class="offcanvas-title" id="offcanvasExampleLabel">👑 관리자 👑</h4>
@@ -144,8 +213,8 @@
       <div class="dropdown-menu" role="menu" style="border-color: white;">
         <button class="dromdown-item" type="button1">
           <a href='logout' style="color: black;">🖐 로그아웃</a></button><br>
-        <%-- <button class="dromdown-item" type="button1">
-          <a href='detail?no=${admin.masterNo}' style="color: black;">🙂 마이페이지</a></button> --%>
+        <button class="dromdown-item" type="button1">
+          <a href='/ogong/admin/detail' style="color: black;">🙂 마이페이지</a></button>
       </div>
     </div>
     
@@ -199,4 +268,8 @@
       
   </div>
 </div>
+
+</section>
+   <jsp:include page="../footer.jsp"/>
+</body>
 </html>
