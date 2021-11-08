@@ -48,7 +48,8 @@ public class AuthCeoMemberLoginController extends HttpServlet {
       if (ceoMember != null && ceoMember.getCeoStatus() == CeoMember.CEO) {
         if (ceoMember.getActive() == CeoMember.INUSER) {
           request.getSession().setAttribute("loginCeoUser", ceoMember);
-          request.getRequestDispatcher("../index.jsp").forward(request, response);
+          response.sendRedirect("../index.jsp");
+          //          request.getRequestDispatcher("../index.jsp").forward(request, response);
         }
       }
     } catch (Exception e) {
