@@ -16,7 +16,7 @@ import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/comment/update")
+@WebServlet("/freeboard/comment/update")
 public class CommentUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
