@@ -31,7 +31,7 @@ public class Study {
   private int countBookMember;                              // 북마크 수
   private List<Member> bookMarkMember = new ArrayList<>();  // 북마크한 회원
 
-  private List<Calender> myStudyCalender = new ArrayList<>();       // 내 스터디 캘린더
+  private List<Calendar> myStudyCalender = new ArrayList<>();       // 내 스터디 캘린더
   private List<FreeBoard> myStudyFreeBoard = new ArrayList<>();     // 내 스터디 자유 게시판
   private List<ToDo> myStudyToDo = new ArrayList<>();               // 내 스터디 투두리스트
 
@@ -231,11 +231,11 @@ public class Study {
     this.bookMarkMember = bookMarkMember;
   }
 
-  public List<Calender> getMyStudyCalender() {
+  public List<Calendar> getMyStudyCalender() {
     return myStudyCalender;
   }
 
-  public void setMyStudyCalender(List<Calender> myStudyCalender) {
+  public void setMyStudyCalender(List<Calendar> myStudyCalender) {
     this.myStudyCalender = myStudyCalender;
   }
 

@@ -56,6 +56,7 @@ public class AuthPerMemberLoginController extends HttpServlet {
       request.getRequestDispatcher("/member/PerMemberLogin.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
 

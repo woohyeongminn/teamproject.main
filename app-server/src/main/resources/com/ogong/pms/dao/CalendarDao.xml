@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ogong.pms.dao.CalendarDao">
+
+  <resultMap type="Calendar" id="CalendarMap">
+  <id column="calender_no" property="calenderNo"/>
+  <result column="year" property="year"/>
+  <result column="month" property="month"/>
+  <result column="day" property="day"/>
+  <result column="day_week" property="dayOftheWeek"/>
+  <result column="content" property="calenderContent"/>
+  <result column="end_dt" property="endDay"/>
+  <result column="importance_no" property="importanceNo"/>
+  <result column="importance" property="importanceCalender"/>
+  </resultMap>
+
+  <insert id="insert" parameterType="Calender"> 
+  </insert>
+  
+  
+  
+  <select id="findAll" resultMap="CalenderMap">
+  
+  </select>
+
+
+</mapper>
