@@ -51,7 +51,7 @@ label {
         <br>
         <span>등록일ㅣ${comment.commentRegisteredDate}</span><br>
         <button>
-		      <a href='comment/update?commentno=${comment.commentNo}'>수정</a>
+		      <a href='comment/updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>수정</a>
 		    </button>
         <button>
 		      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>삭제</a>
