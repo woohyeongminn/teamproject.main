@@ -3,8 +3,54 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ogong.pms.dao.CalendarDao">
+<mapper namespace="com.ogong.pms.dao.AdminDao">
   
+  <resultMap type="Admin" id="AdminMap">
+    <id column="admin_no" property="masterNo"/> 
+    <result column="nickname" property="masterNickname"/>
+    <result column="email" property="masterEmail"/>
+    <result column="password" property="masterPassword"/>
+  </resultMap>
+  
+    <sql id="select1">
+    select
+      admin_no,
+      nickname,
+      email,
+      password
+    from
+      admin
+    </sql>
+  
+  <update id="updateNickname" parameterType="admin">
+    update admin set
+      nickname=#{masterNickname}
+    where admin_no=#{masterNo}
+  </update>
+  
+  <update id="updateEmail" parameterType="admin">
+    update admin set
+      email=#{masterEmail}
+    where admin_no=#{masterNo}
+  </update>
+  
+  <update id="updatePassword" parameterType="admin">
+    update admin set
+      password=password(#{masterPassword})
+    where admin_no=#{masterNo}
+  </update>
+  
+  <select id="findByAdminNo" resultMap="AdminMap" parameterType="int">
+    <include refid="select1"/>
+    where
+      admin_no=#{no}
+  </select>
+  
+  <select id="findByEmailAndPassword" resultMap="AdminMap" parameterType="map">
+    <include refid="select1"/>
+    where
+      email=#{email} and password=password(#{password})
+  </select>
   
 </mapper>
 

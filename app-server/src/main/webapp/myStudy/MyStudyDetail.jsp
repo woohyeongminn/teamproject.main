@@ -81,7 +81,7 @@ label {
 		<a href='../study/exit?studyno=${study.studyNo}'>탈퇴</a>
 	</button>
 	<span><a href='guilder/list?studyNo=${study.studyNo}'>구성원&emsp;</a></span>
-	<span>캘린더&emsp;</span>
+	<span><a href='calendarlist?studyNo=${study.studyNo}'>캘린더&emsp;</a></span>
 	<button>
 		<a href="../freeboard/list?studyno=${study.studyNo}">자유 게시판</a>
 	</button>

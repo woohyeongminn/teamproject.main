@@ -6,6 +6,7 @@ public class Calendar {
 
   private int calendarNo;
   private Date startDate;
+  private int year; // 년
   private int month;   //월
   private int day;     //일
   private String dayOftheWeek; //요일
@@ -13,6 +14,7 @@ public class Calendar {
   private Date endDate;    // 종료일
   private int importanceNo; // 중요도 번호
   private String importanceCalendar;  // 중요도 정하기
+
   public int getCalendarNo() {
     return calendarNo;
   }
@@ -24,6 +26,12 @@ public class Calendar {
   }
   public void setStartDate(Date startDate) {
     this.startDate = startDate;
+  }
+  public int getYear() {
+    return year;
+  }
+  public void setYear(int year) {
+    this.year = year;
   }
   public int getMonth() {
     return month;
@@ -67,14 +75,12 @@ public class Calendar {
   public void setImportanceCalendar(String importanceCalendar) {
     this.importanceCalendar = importanceCalendar;
   }
+
   @Override
   public String toString() {
-    return "Calendar [calendarNo=" + calendarNo + ", startDate=" + startDate + ", month=" + month
-        + ", day=" + day + ", dayOftheWeek=" + dayOftheWeek + ", calendarContent=" + calendarContent
-        + ", endDate=" + endDate + ", importanceNo=" + importanceNo + ", importanceCalendar="
-        + importanceCalendar + "]";
+    return "Calendar [calendarNo=" + calendarNo + ", startDate=" + startDate + ", year=" + year
+        + ", month=" + month + ", day=" + day + ", dayOftheWeek=" + dayOftheWeek
+        + ", calendarContent=" + calendarContent + ", endDate=" + endDate + ", importanceNo="
+        + importanceNo + ", importanceCalendar=" + importanceCalendar + "]";
   }
-
-
-
 }

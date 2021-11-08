@@ -73,6 +73,7 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);
 
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }
   }
