@@ -122,7 +122,7 @@ header {
 </style>
  </head>
  <body>
-    <jsp:include page="../header.jsp"/>
+    <jsp:include page="../../header.jsp"/>
 <div id="calendar-wrap">
         <header>
           <h1>December 2017</h1>
