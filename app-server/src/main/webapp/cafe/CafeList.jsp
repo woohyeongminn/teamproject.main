@@ -42,9 +42,14 @@
     width: 47%;
     float: left;
     overflow-y: scroll;
-    height: 100%;
     overflow-x:hidden;
-    padding-bottom: 267px;
+    --desktopHeaderContentHeight: 77px;
+    --headerVerticalPadding: 12px;
+    --desktopNavHeight: calc(var(--headerVerticalPadding) + var(--desktopHeaderContentHeight) + var(--headerVerticalPadding));
+    --desktopSearchBarHeight: 64px;
+    --desktopSearchBarPadding: 60px;
+    --desktopSearchBar: calc(var(--desktopSearchBarHeight) + var(--desktopSearchBarPadding));
+    height: calc(100% - var(--desktopNavHeight) - var(--desktopSearchBar));
   }
   .col {
     width: 355px;
@@ -108,7 +113,7 @@
 </c:if>
 </div>
 
-<div id="map" style="width:50%;"></div>
+<div id="map" style="width:51%;"></div>
   
 </div>  
 
