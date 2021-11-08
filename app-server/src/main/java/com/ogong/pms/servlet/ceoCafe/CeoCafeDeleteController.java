@@ -35,12 +35,8 @@ public class CeoCafeDeleteController extends HttpServlet {
   public void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Cafe cafe = cafeDao.findByCafeNo(no);
-
-      int ceoNo = Integer.parseInt(request.getParameter("ceoNo"));
-      // 밑에 주석부분에서 쓰려고 만들었음
-      //CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+      int cafeNo = Integer.parseInt(request.getParameter("cafeno"));
+      Cafe cafe = cafeDao.findByCafeNo(cafeNo);
 
       if (cafe == null) {
         throw new Exception("등록된 카페가 없습니다.");
@@ -62,6 +58,7 @@ public class CeoCafeDeleteController extends HttpServlet {
       cafeDao.deleteCafe(cafe.getNo());
       sqlSession.commit();
 
+      response.sendRedirect("detail");
 
       // 로그인했을때 화면으로 돌아가야하는데
       // 돌아갈 곳이 없다,,,,,,

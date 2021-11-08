@@ -100,7 +100,7 @@
     </div>
   <div class="all-content">
   <br>
-  <p>등록된 카페가 없습니다. 스터디 카페를 등록하고 승인을 기다리세요:)</p>
+  <p>스터디 카페를 등록하고 승인을 기다리세요:)</p>
   <hr>
     <div id='aside'>
       <span id='c-image'>대표이미지</span>

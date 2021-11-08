@@ -39,17 +39,20 @@ public class CeoReservationListController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int ceoNo = Integer.parseInt(request.getParameter("ceono"));  //기업 회원 번호
+      CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
+      //      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
-      CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+      List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(loginCeo.getCeoNo());
 
-      List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(ceoMember.getCeoNo());
+      if (reserList.isEmpty()) {
+        request.getRequestDispatcher("/ceoCafe/CeoCafeReservationList.jsp").forward(request, response);
+      } else {
+        //      request.setAttribute("ceoMember", ceoMember);
 
-      request.setAttribute("ceoMember", ceoMember);
-      request.setAttribute("reserList", reserList);
+        request.setAttribute("reserList", reserList);
 
-      request.getRequestDispatcher("/ceoCafe/CeoCafeReservationList.jsp").forward(request, response);
-
+        request.getRequestDispatcher("/ceoCafe/CeoCafeReservationList.jsp").forward(request, response);
+      }
 
     } catch (Exception e) {
       e.printStackTrace();

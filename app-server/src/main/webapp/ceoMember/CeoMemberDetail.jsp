@@ -153,7 +153,7 @@ legend {
 		   
 		   <div class="btn_wrap">
 		     <a href='updateform' class = "btn btn-outline-dark">프로필 수정하기</a>
-		     <a href='cafe/datail' class = "btn btn-outline-dark">내 카페</a>
+		     <a href='cafe/detail' class = "btn btn-outline-dark">내 카페</a>
 	       <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a>
 		     <a href='deleteform' class = "btn btn-outline-dark">탈퇴하기</a>
        </div>

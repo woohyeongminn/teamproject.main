@@ -40,17 +40,16 @@ public class CeoReservationDetailController extends HttpServlet {
 
     try {
 
-      int no = Integer.parseInt(request.getParameter("no"));  // 예약번호
-      int ceoNo = Integer.parseInt(request.getParameter("ceono"));  // 기업 회원 번호
+      int resNo = Integer.parseInt(request.getParameter("resno"));  // 예약번호
 
-      CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+      CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
+      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
-      CafeReservation cafeReservation = cafeReservationDao.findReservationByCeoMember(ceoMember.getCeoNo(), no);
+      CafeReservation cafeReservation = cafeReservationDao.findReservationByCeoMember(ceoMember.getCeoNo(), resNo);
 
       String reviewStatusLable = CafeHandlerHelper.getReviewStatusLabel(
           String.valueOf(cafeReservation.getWirteReview()));
 
-      request.setAttribute("ceoMember", ceoMember);
       request.setAttribute("cafeReser", cafeReservation);
       request.setAttribute("reviewStatusLable", reviewStatusLable);
       request.setAttribute("cafeReserEndTime", 

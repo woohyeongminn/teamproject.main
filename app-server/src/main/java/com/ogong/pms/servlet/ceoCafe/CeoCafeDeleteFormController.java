@@ -30,10 +30,8 @@ public class CeoCafeDeleteFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Cafe cafe = cafeDao.findByCafeNo(no);
-
-      int ceoNo = Integer.parseInt(request.getParameter("ceono"));
+      int cafeNo = Integer.parseInt(request.getParameter("cafeno"));
+      Cafe cafe = cafeDao.findByCafeNo(cafeNo);
 
       if (cafe == null) {
         throw new Exception("등록된 카페가 없습니다.");
@@ -41,7 +39,6 @@ public class CeoCafeDeleteFormController extends HttpServlet {
 
       String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
 
-      request.setAttribute("ceoNo", ceoNo);
       request.setAttribute("cafe", cafe);
       request.setAttribute("cafeStatus", status);
       request.getRequestDispatcher("/ceoCafe/CeoCafeDeleteForm.jsp").forward(request, response);

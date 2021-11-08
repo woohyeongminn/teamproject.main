@@ -32,9 +32,9 @@ public class CeoCafeRoomDeleteController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      int cafeno = Integer.parseInt(request.getParameter("cafeno"));
+      int cafeNo = Integer.parseInt(request.getParameter("cafeno"));
 
-      int roomNo = Integer.parseInt(request.getParameter("no"));
+      int roomNo = Integer.parseInt(request.getParameter("roomno"));
       CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
 
       if (!cafeRoom.getRoomImgs().isEmpty()) {
@@ -46,7 +46,7 @@ public class CeoCafeRoomDeleteController extends HttpServlet {
       cafeRoomDao.deleteCafeRoom(cafeRoom.getRoomNo());
       sqlSession.commit();
 
-      response.sendRedirect("list?no="+ cafeno);
+      response.sendRedirect("list?cafeno="+ cafeNo);
 
     } catch (Exception e) {
       e.printStackTrace();

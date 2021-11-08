@@ -20,14 +20,31 @@ label {
   margin-right: 5px;
   width: 130px;
 }
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+}
 
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+}
 </style>
 </head>
 
 <body>
-  <b>&emsp;&emsp;👩‍🏫 내 스터디카페 삭제</b><br>
+<jsp:include page="../header.jsp"/>
+  <div class="c-top">
+        👩‍🏫 내 스터디카페 삭제
+  </div>
+   <div class="all-content">
+  
   <hr>
   <P>&emsp;&emsp;등록된 스터디카페 삭제 시 복구가 불가능합니다.</P>
-  <a href='delete?no=${cafe.no}&ceoNo=${ceoNo}' class='btn btn-outline-dark'>삭제</a>
+  <a href='delete?cafeno=${cafe.no}' class='btn btn-outline-dark'>삭제</a>
+  </div>
 </body>
 </html>

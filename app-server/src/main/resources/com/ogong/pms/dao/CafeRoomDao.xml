@@ -11,6 +11,7 @@
     <result column="introduction" property="roomInfo"/>
     <result column="people" property="people"/>
     <result column="hourly_amount" property="roomPrice"/>
+    <result column="status" property="roomStatus"/>
 
     <association property="cafe" javaType="cafe">
       <id column="cafe_no" property="no"/>
@@ -30,7 +31,8 @@
       cafe_no,
       Introduction,
       people,
-      hourly_amount
+      hourly_amount,
+      status
     from 
       studycafe_room
   </sql>
@@ -40,11 +42,21 @@
     <include refid="cafeRoomListSelect"/>
   </select>
   
-  <!-- 카페 상세> 스터디룸 예약하기 > 리스트 -->
+  <!-- 관리자, 사장 용 해당 카페의 룸 리스트 -->
   <select id="findCafeRoomListByCafe" resultMap="cafeRoomMap">
     <include refid="cafeRoomListSelect"/>
     where
       cafe_no = #{cafeNo}
+    order by
+      studyroom_no asc
+  </select>
+  
+  <!-- 멤버용 룸 리스트(운영중인 것만 출력) -->
+  <select id="findCafeRoomListByMember" resultMap="cafeRoomMap">
+    <include refid="cafeRoomListSelect"/>
+    where
+      cafe_no = #{cafeNo}
+      and status = 1
     order by
       studyroom_no asc
   </select>
