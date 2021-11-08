@@ -62,6 +62,10 @@
   button[type=button2]:hover {
     color: black;
   }
+  #addbutton {
+  text-align: center;
+  margin: 50px 0 10vw 0;
+  }
   div {
   margin-right: 10px;
   }
@@ -85,6 +89,11 @@
   .c-top:hover {
     color: cornflowerblue;
   }
+  .all-content {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
   </style>
 </head>
 <body>
@@ -94,13 +103,15 @@
 <div class="c-top" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
       🔔 공지게시글 목록
       </div>
-<table class="table table-responsive">
+<br>
+<div class="all-content">
+<table class="table table-responsive text-center">
 <thead>
 <tr>
 <th>번호</th>
 <th>제목</th>
-<th>내용</th>
-<th>파일</th>
+<!-- <th>내용</th> -->
+<!-- <th>파일</th> -->
 <th>등록일</th>
 </tr>
 </thead>
@@ -109,17 +120,18 @@
 <tr>
 	<td>( ${noticeList.adminNotiNo} )</td>
 	<td><a href='detail?no=${noticeList.adminNotiNo}'>${noticeList.adminNotiTitle}</a></td>
-	<td>${noticeList.adminNotiContent}</td>
-	<td>${noticeList.adminNotiFile}</td>
+<%-- 	<td>${noticeList.adminNotiContent}</td>
+	<td>${noticeList.adminNotiFile}</td> --%>
 	<td>${noticeList.adminNotiRegisteredDate}</td>
 </tr>
 </c:forEach>
 </tbody>
 </table>
-</fieldset>
+
 <c:choose>
 <c:when test="${not empty loginAdmin}">
 
+<div id="addbutton">
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 <button type="submit" class="btn btn-outline-dark" value="등록"><a href='form' id='add'>등록</a></button>
 </div>
@@ -207,6 +219,8 @@
 
 </c:otherwise>
 </c:choose>
+</div>
+</fieldset>
 </section>
  <jsp:include page="../footer.jsp"/>
 </body>
