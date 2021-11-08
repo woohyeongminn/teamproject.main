@@ -46,7 +46,7 @@ public class CeoCafeRoomDeleteController extends HttpServlet {
       cafeRoomDao.deleteCafeRoom(cafeRoom.getRoomNo());
       sqlSession.commit();
 
-      response.sendRedirect("list?no="+ cafeNo);
+      response.sendRedirect("list?cafeno="+ cafeNo);
 
     } catch (Exception e) {
       e.printStackTrace();
