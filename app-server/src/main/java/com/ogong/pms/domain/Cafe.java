@@ -32,6 +32,7 @@ public class Cafe {
 
   private int countReview; // 리뷰 수
   private double avgReview; // 리뷰 평균
+  private int countRoom; // 리뷰 수
 
   @Override
   public String toString() {
@@ -40,7 +41,7 @@ public class Cafe {
         + phone + ", openTime=" + openTime + ", closeTime=" + closeTime + ", holiday=" + holiday
         + ", cafeHolidays=" + cafeHolidays + ", viewCount=" + viewCount + ", bookable=" + bookable
         + ", timePrice=" + timePrice + ", cafeStatus=" + cafeStatus + ", countReview=" + countReview
-        + ", avgReview=" + avgReview + "]";
+        + ", avgReview=" + avgReview + ", countRoom=" + countRoom + "]";
   }
 
   public int getNo() {
@@ -188,6 +189,14 @@ public class Cafe {
 
   public void setAvgReview(double avgReview) {
     this.avgReview = avgReview;
+  }
+
+  public int getCountRoom() {
+    return countRoom;
+  }
+
+  public void setCountRoom(int countRoom) {
+    this.countRoom = countRoom;
   }
 
   public String getCafeImageNames() {
