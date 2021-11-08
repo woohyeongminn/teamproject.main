@@ -43,7 +43,7 @@ label {
 					aria-describedby="button-addon2">
 				<button class="btn btn-outline-secondary" type="submit"
 					id="button-addon2">
-					<a href="../comment/add">등록</a>
+					<a href="../comment/add?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}">등록</a>
 				</button>
 			</form>
 		</div><br>
