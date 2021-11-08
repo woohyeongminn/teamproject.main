@@ -17,12 +17,12 @@
   <result column="importance" property="importanceCalender"/>
   </resultMap>
 
-  <insert id="insert" parameterType="Calender"> 
+  <insert id="insert" parameterType="Calendar"> 
   </insert>
   
   
   
-  <select id="findAll" resultMap="CalenderMap">
+  <select id="findAll" resultMap="CalendarMap">
   
   </select>
 
