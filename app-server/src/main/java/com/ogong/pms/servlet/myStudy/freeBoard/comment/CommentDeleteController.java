@@ -16,7 +16,7 @@ import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/comment/delete")
+@WebServlet("/freeboard/comment/delete")
 public class CommentDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -87,7 +87,7 @@ public class CommentDeleteController extends HttpServlet {
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request, response);
+      request.getRequestDispatcher("../detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno=" + freeBoard.getFreeBoardNo()).forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -16,7 +16,8 @@
     <result column="view_cnt" property="viewCount"/>
     <result column="avgReview" property="avgReview"/>
     <result column="countReview" property="countReview"/>
-    <result column="operating_status_no" property="cafeStatus"/>
+    <result column="countReview" property="countReview"/>
+    <result column="countRoom" property="countRoom"/>
     
     <association property="ceoMember" javaType="CeoMember">
       <id column="member_no" property="ceoNo"/>
@@ -56,6 +57,13 @@
 			 group by srm.cafe_no
 			 having srm.cafe_no=c.cafe_no
 			) countReview,
+			(select 
+			   count(*)
+			from studycafe_room srm
+			where srm.status=1
+			group by srm.cafe_no
+			having srm.cafe_no=c.cafe_no
+			) countRoom,
       c.operating_status_no,
       sp.photo_no,
       sp.name photo_name

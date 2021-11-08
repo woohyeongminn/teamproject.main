@@ -16,7 +16,7 @@ import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/comment/updateform")
+@WebServlet("/freeboard/comment/updateform")
 public class CommentUpdateFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -44,10 +44,18 @@ public class CommentUpdateFormController extends HttpServlet {
 
       List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
-      request.setAttribute("study", study);
-      request.setAttribute("freeBoard", freeBoard);
-      request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("/myStudy/comment/CommentUpdateForm.jsp").forward(request, response);
+      if (commentList.isEmpty()) {
+        request.setAttribute("study", study);
+        request.setAttribute("freeBoard", freeBoard);
+        request.getRequestDispatcher("/myStudy/comment/CommentUpdateForm.jsp").forward(request, response);
+      }
+
+      else {
+        request.setAttribute("study", study);
+        request.setAttribute("freeBoard", freeBoard);
+        request.setAttribute("commentList", commentList);
+        request.getRequestDispatcher("/myStudy/comment/CommentUpdateForm.jsp").forward(request, response);
+      }
 
     } catch (Exception e) {
       e.printStackTrace();

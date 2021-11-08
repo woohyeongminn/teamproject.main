@@ -14,7 +14,7 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/comment/form")
+@WebServlet("/freeboard/comment/form")
 public class CommentAddFormController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
