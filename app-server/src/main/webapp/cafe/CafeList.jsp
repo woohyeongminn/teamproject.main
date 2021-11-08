@@ -12,6 +12,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
+  html {
+    height: 100%;
+  }
   h3 {
     text-align: center;
     font-weight: bolder;
@@ -31,16 +34,17 @@
     display: inline-block;
   }
   .c-content {
-    height: 530px;
+    display: flex;
+    height: 100%;
   }
   #content {
     margin-left: 20px;
     width: 47%;
-    xborder: 1px solid black;
     float: left;
     overflow-y: scroll;
-    height: inherit;
-    overflow-x:hidden
+    height: 100%;
+    overflow-x:hidden;
+    padding-bottom: 267px;
   }
   .col {
     width: 355px;
@@ -48,60 +52,67 @@
   .card {
     height: 386px;
   }
+  .c-top {
+    width: 100%;
+    padding: 20px 0 20px 50px;
+    font-weight: bold;
+    background-color: rgb(247, 231, 215);
+    text-align: center;
+  }
   </style>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
 
+<div class="c-top">
+🏘 스터디카페 목록
+</div>
 <br>
-<h3>
-  <a href="list?perNo=${perNo}"> 🏘 스터디카페 목록 </a>
-</h3>
-<br>
-	<div id="search">
-  	<form action="search">
-  	<select name="where">
-		  <option value="1">지역</option>
-		  <option value="2">이름</option>
-		</select>
-  	<input type="text" name="keyword">
-  	<input type="hidden" name="perNo" value="${perNo}">
-  	<button class="btn btn-outline-dark">검색</button>
-  	</form>
-	</div>
+  <div id="search">
+    <form action="search">
+    <select name="where">
+      <option value="1">지역</option>
+      <option value="2">이름</option>
+    </select>
+    <input type="text" name="keyword">
+    <input type="hidden" name="perNo" value="${perNo}">
+    <button class="btn btn-outline-dark">검색</button>
+    </form>
+  </div>
   <br>
   
 <div class="c-content">
 <div id="content">
 <c:if test='${not empty cafeList}'>
-		<div class="row row-cols-1 row-cols-md-3 g-4">
-		<c:forEach items="${cafeList}" var="cafe">
-		  <div class="col">
-		    <div class="card">
-		      <img src="../img/aaa.jpg" class="card-img-top" alt="...">
-		      <div class="card-body">
-		        <h5 class="card-title">
-		          <a href='detail?no=${cafe.no}'>${cafe.name}</a>
-		        </h5>
-		        <p>
-		        ${fn:split(cafe.location, ',')[0]}<br>
-		        ${cafe.openTime} ~ ${cafe.closeTime}<br>
-		        ⭐${cafe.avgReview}(${cafe.countReview})</p>
-		      </div>
-		    </div>
-		  </div>
-		</c:forEach>
-		</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <c:forEach items="${cafeList}" var="cafe">
+      <div class="col">
+        <div class="card">
+          <img src="../img/aaa.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href='detail?no=${cafe.no}'>${cafe.name}</a>
+            </h5>
+            <p>
+            ${fn:split(cafe.location, ',')[0]}<br>
+            ${cafe.openTime} ~ ${cafe.closeTime}<br>
+            ⭐${cafe.avgReview}(${cafe.countReview})</p>
+          </div>
+        </div>
+      </div>
+    </c:forEach>
+    </div>
   </c:if>
 <c:if test='${empty cafeList}'>
    검색 결과가 존재하지 않습니다.<br><br>  
 </c:if>
 </div>
 
-<div id="map" style="width:770px;height:530px;"></div>
+<div id="map" style="width:50%;"></div>
   
 </div>  
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
   <script>
     var container = document.getElementById('map');
     var options = {
@@ -110,6 +121,7 @@
     };
     var map = new kakao.maps.Map(container, options);
   </script>
+
 </body>
 </html>
 
