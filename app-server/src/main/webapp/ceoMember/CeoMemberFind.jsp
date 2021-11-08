@@ -21,6 +21,29 @@
   text-align: center;
   }
 </style>
+<script type="text/javascript">
+function id_search1() { //이름,핸드폰으로 '찾기' 버튼
+
+	  var frm = document.idfindscreen;
+
+	  if (frm.name.value.length < 1) {
+	   alert("이름을 입력해주세요");
+	   return;
+	  }
+
+	  if (frm.phone1.value.length<2 || frm.phone1.value.length>4) {
+	   alert("핸드폰번호를 정확하게 입력해주세요");
+	   return;
+	  }
+	  if (frm.phone2.value.length<2 || frm.phone2.value.length>4) {
+	   alert("핸드폰번호를 정확하게 입력해주세요");
+	   return;
+	  }
+
+	  frm.method = "post";
+	  frm.action = "./id_searchCtl.jsp"; //넘어간화면
+	  frm.submit();  }
+</script>
 </head>
 
 <body>
@@ -29,9 +52,13 @@
    <dl>
       <dt>아이디 찾기</dt>
       <dd><input id='name' type='text' name='name' placeholder='이름을 입력하세요' size='30px'></dd>
-      <p>해당 이름이 존재하지 않습니다.</p>
       <dd><input id='tel' type='tel' name='tel' placeholder='전화번호를 입력하세요' size='30px'></dd>
-      <p>회원 이름과 전화번호가 일치하지 않습니다.</p>
+      <input type="button" name="enter2" value="  찾기  "
+               align="center"
+               style="cursor: pointer; background: white; color: black; border-color: black;"
+               onClick="id_search1()">
+     
+     
       <p>'%s님'의 이메일 >> ", ceoMember.getCeoName()</p>
       <dt>비밀번호 찾기</dt>
       <ul>
