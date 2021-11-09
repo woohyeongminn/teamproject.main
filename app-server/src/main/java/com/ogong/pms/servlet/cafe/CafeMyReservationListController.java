@@ -51,14 +51,15 @@ public class CafeMyReservationListController extends HttpServlet {
       reserList = cafeReservationDao.findReservationListByMember(member.getPerNo());
 
       for (CafeReservation cafeReser : reserList) {
-        cafeReser.setWirteReviewLable(CafeHandlerHelper.getReviewStatusLabel(
-            String.valueOf(cafeReser.getWirteReview())));
 
-        if (cafeReser.getReservationStatus() != 1 && cafeReser.getReservationStatus() != 2) {
+        if (cafeReser.getReservationStatus() == 7 && cafeReser.getWirteReview()) {
+          cafeReser.setWirteReviewLable("작성완료");
+        } else if(cafeReser.getReservationStatus() == 7 && !cafeReser.getWirteReview()) {
+          cafeReser.setWirteReviewLable("작성가능");
+        } else {
           cafeReser.setWirteReviewLable("작성불가");
         }
       }
-
       request.setAttribute("reserList", reserList);
       request.getRequestDispatcher("/cafe/CafeMyReservationList.jsp").forward(request, response);
 

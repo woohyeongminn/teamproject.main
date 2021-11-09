@@ -29,46 +29,19 @@ public class CafeMyReservationDeleteHandler extends HttpServlet {
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
+    request.setCharacterEncoding("UTF-8");
     try {
+      String[] reservationNo = request.getParameterValues("reservationNo");
 
-      int reservationNo = Integer.parseInt(request.getParameter("reservationNo"));
+      for(int i = 0; i < reservationNo.length; i++) {
+        cafeReservationDao.deleteReservation(Integer.parseInt(reservationNo[i]), 3);
+        sqlSession.commit();
+      }
 
-      cafeReservationDao.deleteReservation(reservationNo, 3);
-      sqlSession.commit();
-
-      response.sendRedirect("reservationDetail?reservationNo=" + reservationNo);
+      response.sendRedirect("reservationList");
 
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
-
-/*
-
-Date today = new Date(System.currentTimeMillis());
-      Date reserDate = myReservation.getUseDate();
-
-      if (reserDate.toLocalDate().compareTo(today.toLocalDate()) > 0) {
-
-        String input = Prompt.inputString(" 정말 예약 취소 하시겠습니까? (네 / 아니오) ");
-
-        if (!input.equalsIgnoreCase("네")) {
-          System.out.println(" >> 예약 취소를 취소합니다.");
-          return;
-        }
-
-        cafeReservationDao.deleteReservation(myReservation.getReservationNo(), 3);
-        sqlSession.commit();
-
-        System.out.println(" >> 예약이 취소되었습니다.");
-
-      } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
-        System.out.println(" >> 당일 예약은 취소 불가능합니다.");
-        return;
-      } else {
-        System.out.println(" >> 지난 예약은 선택할 수 없습니다.");
-        return;
-      }
-
- */
