@@ -29,6 +29,7 @@ public class CommentUpdateFormController extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
+    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
   }
 
   @Override
@@ -47,14 +48,16 @@ public class CommentUpdateFormController extends HttpServlet {
       if (commentList.isEmpty()) {
         request.setAttribute("study", study);
         request.setAttribute("freeBoard", freeBoard);
-        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp")
+        .forward(request, response);
       }
 
       else {
         request.setAttribute("study", study);
         request.setAttribute("freeBoard", freeBoard);
         request.setAttribute("commentList", commentList);
-        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp")
+        .forward(request, response);
       }
 
     } catch (Exception e) {
