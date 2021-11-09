@@ -78,7 +78,7 @@ public class CommentUpdateController extends HttpServlet {
       freeBoard.setComment(commentList);
 
       commentDao.update(Integer.parseInt(request.getParameter("commentno")),
-          request.getParameter("commenttitle"));
+          request.getParameter("commenttext"));
 
       // System.out.println(" >> 댓글을 변경하였습니다.");
       request.setAttribute("study", study);
