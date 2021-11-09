@@ -251,8 +251,8 @@ font-weight: bold;
 		      </div>
 
 		      <div class="btn_wrap">
-		      <button type="submit" class = "btn btn-outline-dark">수정</button>
-		      <a href='detail' class = "btn btn-outline-dark">뒤로가기</a>
+		      <button type="submit" class="btn btn-outline-dark">수정</button>
+		      <a href='detail' class="btn btn-outline-dark">뒤로가기</a>
 		      </div>
         </form>
        </div>
