@@ -36,11 +36,18 @@ a {
 
 /*header 시작*/
 header {
+  width: 100%;
+}
+
+.header_background {
+  width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 34px;
+  padding: 10px 0;
   border-bottom:  1px solid rgba(0,0,0,.125);
+  margin: 0 auto;
+  background-color: white;
 }
 
 header a {
@@ -141,6 +148,8 @@ header a {
 <body>
 <%@include file="memberSession.jsp" %>
 <header>
+
+<div class="header_background">
   <div class='header_logo'>
     <a href="/ogong/index.jsp"><img src="/ogong/img/logo.png"></a>
   </div>
@@ -174,6 +183,7 @@ header a {
 	 </c:choose>
 
 </ul>
+</div>
 </header>
 </body>
 </html>
