@@ -47,14 +47,14 @@ public class CommentUpdateFormController extends HttpServlet {
       if (commentList.isEmpty()) {
         request.setAttribute("study", study);
         request.setAttribute("freeBoard", freeBoard);
-        request.getRequestDispatcher("/myStudy/comment/CommentUpdateForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp").forward(request, response);
       }
 
       else {
         request.setAttribute("study", study);
         request.setAttribute("freeBoard", freeBoard);
         request.setAttribute("commentList", commentList);
-        request.getRequestDispatcher("/myStudy/comment/CommentUpdateForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp").forward(request, response);
       }
 
     } catch (Exception e) {
