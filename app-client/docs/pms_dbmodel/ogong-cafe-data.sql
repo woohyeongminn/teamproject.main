@@ -131,6 +131,8 @@ insert into studycafe_reservation_status(rsv_status_no, rsv_name)
 values (5, '예약거절(사장)');
 insert into studycafe_reservation_status(rsv_status_no, rsv_name)
 values (6, '결제거절(사장)');
+insert into studycafe_reservation_status(rsv_status_no, rsv_name)
+values (7, '이용완료');
 
 -- 카페 예약 
 -- review : 1 => 리뷰 작성 아직 안함,, 2 => 리뷰 작성 완료
