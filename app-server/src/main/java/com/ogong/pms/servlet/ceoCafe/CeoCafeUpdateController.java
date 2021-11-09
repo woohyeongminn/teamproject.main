@@ -69,7 +69,7 @@ public class CeoCafeUpdateController extends HttpServlet {
       //        sqlSession.commit();
       //      }
 
-      response.sendRedirect("detail");
+      response.sendRedirect("../detail#tab2");
 
       //sqlSession.rollback();
 

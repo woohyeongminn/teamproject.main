@@ -135,7 +135,20 @@
 </head>
 
 <body>
-  <div class="all-content">
+  <jsp:include page="../header.jsp"/>
+    <div class="c-top">
+        🙂 마이페이지
+    </div>
+    <br><br><br>
+    <div class="all-content"> 
+      <div class="tabmenu">
+       <ul>
+        <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
+        <div class="tabCon" >
+        </div>
+        </li>
+       <li id="tab2" class="btnCon"><a class="tabbtn" href="#tab2">내 카페</a>
+        <div class="tabCon" >
   <c:choose>
   <c:when test='${empty cafe}'>
      <span>등록된 카페가 없습니다.</span><br>
@@ -225,5 +238,20 @@
    </c:otherwise>
   </c:choose>
   </div>
+  </li>
+       <li id="tab3" class="btnCon"><a class="tabbtn" href="#tab3">내 문의내역</a>
+        <div class="tabCon" >
+            <!-- <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a> -->
+        </div>
+        </li>
+   </ul>
+  </div>
+  </div>
+  <div class = "footer" style="bottom: 0;">
+   <jsp:include page="../footer.jsp"/>
+    </div>
+    <script>
+  location.href = "#tab2";
+  </script>
 </body>
 </html>

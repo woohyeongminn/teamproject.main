@@ -228,18 +228,20 @@ font-weight: bold;
 	      </li>
 	      <li id="tab2" class="btnCon"><a class="tabbtn" href="#tab2">내 카페</a>
 	        <div class="tabCon" >
+	        
+	        
            <form action='update'>
 						  <div class = "cafe-top">
 							  <div id='aside'>
 							    <span id='c-image'>대표이미지</span>
-							    <form action="upload.php" method="post" enctype="multipart/form-data">
+							    <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
 	                <input id="input-file" type="file" multiple="multiple" style='display:none' name='filename[]'/>
 	                <label id="input-file-button" for="input-file">파일 첨부</label>
-	                </form>
+	                </form> -->
 							  </div>
 							  <div id='content' class="cafe-form">
 							  <h5>[${cafe.name}]</h5>
-							  <input id='c-no' type='hidden' value='${cafe.no}'>
+							  <input id='c-no' type='hidden' name="cafeno" value='${cafe.no}'>
 							  <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
 							  <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
 							  <label for='f-location'>주소</label>
@@ -278,9 +280,10 @@ font-weight: bold;
 							    </select><br>
 						   
 						    <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span>
+						    
 						    <div id='button'>
-					       <button id='b-but' type="submit" class="btn btn-outline-dark">수정</button>
-					       <a href='detail?no=${cafe.no}' class="btn btn-outline-dark">뒤로가기</a>
+					       <button type="submit" class="btn btn-outline-dark">수정</button>
+					       <a href='detail?cafeno=${cafe.no}' class="btn btn-outline-dark">뒤로가기</a>
 					      </div>
 					</form>
 						  </div>
