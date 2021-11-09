@@ -13,11 +13,11 @@
    <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  
   <style>
   label {
     margin-right: 5px;
     text-align: center;
-/*     display: inline; */
     width: 60px;
   }
   label#content {
@@ -70,9 +70,6 @@
     border-style: solid;
     border-width: 0;
   }
-  .photoFrame:hover{
-      cursor: pointer;
-    }
   </style>
   
 </head>
@@ -89,6 +86,8 @@
 <thead>
 
 <form id="notice-add" action='add'>
+<!-- <form action="../upload/uploadCheck.jsp" method="post" enctype="multipart/form-data"> -->
+
 <tr>
   <th scope="col"></th>
   <th scope="col">🔔 공지게시판 게시글 등록</th>
@@ -109,10 +108,12 @@
 
 <tr>
 <th scope="row"><label for='f-filepath'>파일</label></th>
-<td><div class="image-container">
+<td><input type="file" name="filepath"></td><br>
+<!-- <input type="submit" value="파일 올리기"> -->
+<!-- <div class="image-container">
     <img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-    <input style="display: block;" type="file" id="f-filepath" name='filepath'></td>
-</div>
+    <input style="display: block;" type="file" id="f-filepath" name='filepath'>
+</div> -->
 <td></td>
 </tr>
 
@@ -123,37 +124,10 @@
 <button type="submit" class="btn btn-outline-dark" value="등록" on>등록</button>
 </form>
 </div>
-</div>
 </fieldset>
 </section>
 
 <!-- <script src="file.js"></script> -->
-
-<script>
-function readImage(input) {
-    // 인풋 태그에 파일이 있는 경우
-    if(input.files && input.files[0]) {
-        // 이미지 파일인지 검사 (생략)
-        // FileReader 인스턴스 생성
-        const reader = new FileReader()
-        // 이미지가 로드가 된 경우
-        reader.onload = e => {
-            const previewImage = document.getElementById("preview-image")
-            previewImage.src = e.target.result
-        }
-        // reader가 이미지 읽도록 하기
-        reader.readAsDataURL(input.files[0])
-        
-        var formData = new FormData();
-        formData.append('img',document.getElementById('f-filepath').files[0]);
-    }
-}
-// input file에 change 이벤트 부여
-const inputImage = document.getElementById("f-filepath")
-inputImage.addEventListener("change", e => {
-    readImage(e.target)
-})
-</script>
 
 <script>
 document.querySelector("#notice-add").onsubmit = () => {
@@ -163,32 +137,30 @@ document.querySelector("#notice-add").onsubmit = () => {
     Swal.fire('제목이나 내용을 입력해 주세요.')
     return false; // 일단 서버에 보내지 마
   }
-
 /*   else {
-	  Swal.fire({
-	      title: '🔔 공지게시글 등록',
-	      text: "정말 등록하시겠습니까?",
-	      icon: 'warning',
-	      showCancelButton: true,
-	      confirmButtonColor: '#3085d6',
-	      cancelButtonColor: '#d33',
-	      confirmButtonText: '네',
-	      cancelButtonText: '아니오'
-	    }).then((result) => {
-	      if (result.isConfirmed) {
-	        Swal.fire(
-	          '🔔 공지게시글 등록',
-	          '공지게시글 등록이 완료되었습니다.',
-	          'success'
-	          return true;
-	        )
-	      }
-	      return false;
-	    })	  
+    Swal.fire({
+        title: '🔔 공지게시글 등록',
+        text: "정말 등록하시겠습니까?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '네',
+        cancelButtonText: '아니오'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            '🔔 공지게시글 등록',
+            '공지게시글 등록이 완료되었습니다.',
+            'success'
+            return true;
+          )
+        }
+        return false;
+      })    
   } */
 };
 </script>
-
  <jsp:include page="../footer.jsp"/>
 </body>
 </html>
