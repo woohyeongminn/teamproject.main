@@ -78,7 +78,7 @@
 	    <td>
 		    <c:choose>
 		      <c:when test="${reservation.wirteReviewLable eq '작성가능'}">
-            <button type="button" class="btn btn-outline-dark btn-sm">리뷰쓰기</button>		      
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">리뷰쓰기</button>		      
 		      </c:when>
 		      <c:otherwise>
 				    ${reservation.wirteReviewLable}		      
@@ -102,6 +102,36 @@
 
 </form>	
 </div> <!-- .all-content -->
+
+<!-- 리뷰쓰기 창 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">리뷰쓰기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="reviewForm" action="reviewAdd" method="POST">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">점수</label>
+            <input type="number" min="0" max="5" name="grade" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">내용</label>
+            <textarea class="form-control" id="message-text" name="content"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="btnReviewAdd">등록</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- .modal -->
+
+
 <jsp:include page="../footer.jsp"/>
 
 <script>
@@ -133,30 +163,26 @@ document.querySelector("#btnCancle").onclick = () => {
 		      }
 		    })
 	}
-	
 }
+
+var exampleModal = document.getElementById('exampleModal');
+exampleModal.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  var button = event.relatedTarget;
+  // Extract info from data-bs-* attributes
+  var recipient = button.getAttribute('data-bs-whatever');
+  // If necessary, you could initiate an AJAX request here
+  // and then do the updating in a callback.
+  //
+  // Update the modal's content.
+  var modalTitle = exampleModal.querySelector('.modal-title');
+  var modalBodyInput = exampleModal.querySelector('.modal-body input');
+
+  modalTitle.textContent = '리뷰 작성';
+  // modalBodyInput.value = recipient;
+})
 
 
 </script>
 </body>
 </html>
-
-
-<!-- 
-
-      //      if (reserList.isEmpty()) {
-      //        System.out.println(" >> 예약 내역이 존재하지 않습니다.");
-      //        return;
-      //      } else {
-      //        for (CafeReservation myReservationList : reserList) {
-      //          System.out.printf(" (%d) | 예약날짜 : %s | 이용날짜 : %s | 예약장소 : %s | 결제금액 : %d원 | 상태 : %s\n", 
-      //              myReservationList.getReservationNo(), 
-      //              myReservationList.getReservationDate(),
-      //              myReservationList.getUseDate(),
-      //              myReservationList.getCafe().getName(), 
-      //              myReservationList.getTotalPrice(),
-      //              myReservationList.getReservationStatusName());
-      //          System.out.println();
-      //        
-
- -->
