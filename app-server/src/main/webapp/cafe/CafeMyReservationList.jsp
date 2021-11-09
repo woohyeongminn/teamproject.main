@@ -78,7 +78,7 @@
 	    <td>
 		    <c:choose>
 		      <c:when test="${reservation.wirteReviewLable eq '작성가능'}">
-            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">리뷰쓰기</button>		      
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">리뷰쓰기</button>		      
 		      </c:when>
 		      <c:otherwise>
 				    ${reservation.wirteReviewLable}		      
@@ -121,6 +121,7 @@
             <label for="message-text" class="col-form-label">내용</label>
             <textarea class="form-control" id="message-text" name="content"></textarea>
           </div>
+            <input type="hidden" name="reservationNo" id="reservationNo">
         </form>
       </div>
       <div class="modal-footer">
@@ -169,19 +170,37 @@ var exampleModal = document.getElementById('exampleModal');
 exampleModal.addEventListener('show.bs.modal', function (event) {
   // Button that triggered the modal
   var button = event.relatedTarget;
-  // Extract info from data-bs-* attributes
-  var recipient = button.getAttribute('data-bs-whatever');
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  // Update the modal's content.
+  var reservationNo = button.parentNode.parentNode.children[0].children[0].value;
+  
   var modalTitle = exampleModal.querySelector('.modal-title');
   var modalBodyInput = exampleModal.querySelector('.modal-body input');
+  var modalBodyReservationInput = exampleModal.querySelector('.modal-body input[name="reservationNo"]');
 
   modalTitle.textContent = '리뷰 작성';
-  // modalBodyInput.value = recipient;
+  modalBodyReservationInput.value = reservationNo;
 })
 
+document.querySelector("#btnReviewAdd").onclick = () => {
+  
+  var grade = document.querySelector('input[name="grade"]');
+  var content = document.querySelector('textarea[name="content"]');
+  
+   if (grade.value.length == 0 || content.value.length == 0){
+    swal.fire("점수와 내용을 모두 입력해주세요.");
+    return false;
+  } else {
+    Swal.fire({
+          title: '리뷰를 정말 등록하시겠습니까?',
+          showCancelButton: true,
+          confirmButtonText: '네',
+          cancelButtonText: '아니오'
+        }).then((result) => {
+          if (result.value) { 
+              document.querySelector("#reviewForm").submit();
+          }
+        })
+  } 
+}
 
 </script>
 </body>
