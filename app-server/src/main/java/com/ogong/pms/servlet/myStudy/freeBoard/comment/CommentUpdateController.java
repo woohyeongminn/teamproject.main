@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.myStudy.freeBoard.comment;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.StudyDao;
@@ -20,6 +20,7 @@ import com.ogong.pms.domain.Study;
 public class CommentUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  SqlSession sqlSession;
   StudyDao studyDao;
   FreeBoardDao freeBoardDao;
   CommentDao commentDao;
@@ -27,6 +28,7 @@ public class CommentUpdateController extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
     commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
@@ -52,7 +54,10 @@ public class CommentUpdateController extends HttpServlet {
         throw new Exception(" >> 해당 번호의 게시글이 없습니다.\n");
       }
 
-      List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
+      int commentNo = Integer.parseInt(request.getParameter("commentno"));
+      Comment comment = commentDao.findByNo(commentNo);
+
+      // List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
       /*
        * int commentNo = 0; while (true) { try { commentNo = Prompt.inputInt(" 번호 : "); } catch
@@ -76,16 +81,18 @@ public class CommentUpdateController extends HttpServlet {
        * request.getRequestDispatcher("/myStudy/freeBoardList").forward(request); return; }
        */
 
-      freeBoard.setComment(commentList);
+      comment.setCommentText(request.getParameter("commenttext"));
 
-      commentDao.update(Integer.parseInt(request.getParameter("commentno")),
-          request.getParameter("commenttext"));
+      commentDao.updateContent(comment);
+      sqlSession.commit();
 
       // System.out.println(" >> 댓글을 변경하였습니다.");
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
-      request.setAttribute("commentList", commentList);
-      request.getRequestDispatcher("/myStudy/freeBoardDetail.jsp").forward(request, response);
+      request.setAttribute("comment", comment);
+      request.getRequestDispatcher("../detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno=" + freeBoard.getFreeBoardNo()).forward(request, response);
+      // request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
+      // response);
 
     } catch (Exception e) {
       e.printStackTrace();

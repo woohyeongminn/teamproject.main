@@ -45,17 +45,23 @@
      values(#{comment.commentText}, #{comment.commentRegisteredDate}, #{boardNo}, #{comment.commentWriter.perNo}, #{studyNo})
   </insert>
   
-  <update id="update">
+  <update id="updateContent" parameterType="Comment">
     update study_board_comment set
-     content=#{content}
+     content=#{commentText}
     where comment_no=#{commentNo}
   </update>
   
-  <delete id="delete">
+  <delete id="delete" parameterType="int">
     delete from study_board_comment
     where
       comment_no=#{commentNo}
   </delete>
+   
+  <select id="findByNo" resultMap="CommentMap" parameterType="int">
+    <include refid="select1"/>
+     where
+       comment_no=#{commentNo}
+  </select>
    
   </mapper>
   
