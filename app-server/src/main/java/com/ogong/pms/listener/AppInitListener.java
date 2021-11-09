@@ -13,6 +13,7 @@ import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.dao.CafeRoomDao;
+import com.ogong.pms.dao.CalendarDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
@@ -50,6 +51,7 @@ public class AppInitListener implements ServletContextListener {
       FreeBoardDao freeBoardDao = sqlSession.getMapper(FreeBoardDao.class);
       ToDoDao toDoDao = sqlSession.getMapper(ToDoDao.class);
       CommentDao commentDao = sqlSession.getMapper(CommentDao.class);
+      CalendarDao calendarDao = sqlSession.getMapper(CalendarDao.class);
 
       // 모든 웹 애플리케이션의 컴포넌트(서블릿, 리스너, 필터)가 공유할 객체를 두는 저장소
       ServletContext 웹애플리케이션공용저장소 = sce.getServletContext();
@@ -69,10 +71,12 @@ public class AppInitListener implements ServletContextListener {
       웹애플리케이션공용저장소.setAttribute("freeBoardDao", freeBoardDao);
       웹애플리케이션공용저장소.setAttribute("toDoDao", toDoDao);
       웹애플리케이션공용저장소.setAttribute("commentDao", commentDao);
+      웹애플리케이션공용저장소.setAttribute("calendarDao", calendarDao);
 
       웹애플리케이션공용저장소.setAttribute("sqlSession", sqlSession);
 
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println("DAO 객체 준비 중 오류 발생!");
     }
   }

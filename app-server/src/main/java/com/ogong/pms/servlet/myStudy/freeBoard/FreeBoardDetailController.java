@@ -46,7 +46,7 @@ public class FreeBoardDetailController extends HttpServlet {
       int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
-      System.out.println(freeBoard.getFreeBoardNo());
+      // System.out.println(freeBoard.getFreeBoardNo());
 
       // if (freeBoard == null) {
       // System.out.println(" >> 해당 번호의 게시글이 없습니다.\n");
@@ -56,9 +56,10 @@ public class FreeBoardDetailController extends HttpServlet {
 
       List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
-      if (commentList.isEmpty()) {
-        System.out.println("이놈");
-      }
+      /* [Test] */
+      // if (commentList.isEmpty()) {
+      // System.out.println("댓글 목록이 비어 있습니다.");
+      // }
 
       // request.setAttribute("member", member);
       request.setAttribute("freeBoard", freeBoard);

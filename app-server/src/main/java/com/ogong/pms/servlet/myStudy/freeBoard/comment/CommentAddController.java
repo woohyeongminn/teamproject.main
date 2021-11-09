@@ -1,6 +1,7 @@
 package com.ogong.pms.servlet.myStudy.freeBoard.comment;
 
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/comment/add")
+@WebServlet("/freeboard/comment/add")
 public class CommentAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -51,8 +52,8 @@ public class CommentAddController extends HttpServlet {
 
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
       int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
-      String commentText = request.getParameter("commenttext");
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
+      String commentText = request.getParameter("commenttext");
 
       if (freeBoard == null) {
         throw new Exception("해당 번호의 게시글이 없습니다.");
@@ -64,7 +65,7 @@ public class CommentAddController extends HttpServlet {
       comment.setStudyNo(studyNo);
       comment.setBoardNo(freeBoardNo);
       comment.setCommentText(commentText);
-      // comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
+      comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
       freeBoard.getComment().add(comment);
       System.out.println(comment);
 
@@ -82,9 +83,11 @@ public class CommentAddController extends HttpServlet {
       // System.out.println(" >> 댓글이 등록되었습니다.");
       // request.setAttribute("member", member);
       // request.setAttribute("study", study);
-      request.setAttribute("freeBoard", freeBoard);
-      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
-          response);
+      // request.setAttribute("freeBoard", freeBoard);
+      // request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
+      // response);
+      response.sendRedirect("../detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno="
+          + freeBoard.getFreeBoardNo());
 
     } catch (Exception e) {
       e.printStackTrace();
