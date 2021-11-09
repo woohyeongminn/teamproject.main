@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
@@ -6,7 +7,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Insert title here</title>
+  <title>내 예약 목록</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
@@ -14,10 +15,21 @@
     text-align: center;
     font-weight: bolder;
   }
+  tr a {
+    text-decoration: none;
+    color: black;
+  }
+  tr a:visited {
+    color: black;
+  }
+  tr:hover {
+    cursor: pointer;
+  }
   .all-content {
     width: 100%;
-    max-width: 900px;
+    xmax-width: 900px;
     margin: 0 auto;
+    padding: 80px 0;
   }
   .c-top {
     width: 100%;
@@ -26,35 +38,6 @@
     background-color: rgb(247, 231, 215);
     text-align: center;
   }
-  
-  /*footer 시작*/
-	footer {
-	  font-size: 14px;
-	  padding: 8px 0;
-	  background-color: whitesmoke;
-	  position: absolute;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-	}
-	
-	.footer_company {
-	  display: flex;
-	  margin-left: 20px;
-	}
-	
-	.footer_company li a{
-	  padding: 2px 10px 2px 0;
-	}
-	
-	.footer_address {
-	  margin-left: 20px;
-	}
-	
-	.footer_copyright {
-	  margin-left: 20px;
-	}
-  
   </style>
 </head>
 <body>
@@ -68,52 +51,82 @@
 <table class="table table-striped text-center">
 <thead>
   <tr>
-    <th>번호</th>
+    <th>선택</th>
     <th>예약날짜</th>
     <th>이용날짜</th>
-    <th>예약장소</th>
+    <th>이용시간</th>
+    <th>스터디카페 - 스터디룸</th>
     <th>결제금액</th>
-    <th>상태</th>
+    <th>예약상태</th>
+    <th>리뷰</th>
   </tr>
 </thead>
 <tbody>
 
 	<c:forEach items="${reserList}" var="reservation">
 	<tr>
-	    <td><a href='reservationDetail?reservationNo=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
+	    <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" data-no="${reservation.reservationNo}"></td>
 	    <td>${reservation.reservationDate}</td> 
 	    <td>${reservation.useDate}</td> 
-	    <td>${reservation.cafe.name}</td> 
+	    
+	    <c:set var="startTime" value="${reservation.startTime}" /> 
+	    <c:set var="useTime" value="${reservation.useTime}" /> 
+         <% 
+         LocalTime startTime = (LocalTime) pageContext.getAttribute("startTime");
+         int useTime = (int) pageContext.getAttribute("useTime");
+         LocalTime endTime = startTime.plusHours(useTime);
+         pageContext.setAttribute("endTime", endTime);
+         %>
+	    
+	    <td>${reservation.startTime} ~ ${endTime} (${reservation.useTime}시간)</td> 
+	    <td>${reservation.cafe.name} - ${reservation.roomName}</td> 
 	    <td>${reservation.totalPrice}</td> 
 	    <td>${reservation.reservationStatusName}</td> 
+	    <td>${reservation.wirteReviewLable}</td> 
 	</tr>
 	</c:forEach>
+	
 	</tbody>
 </table>
 </c:if>
 <c:if test='${empty reserList}'>
    예약 내역이 없습니다.<br><br>  
 </c:if>
+
+<div class="btnSection text-center">
+  <button type="button" class="btn btn-outline-dark" id="btnCancle">
+    예약취소
+  </button>
 </div>
-<footer>
-      <ul class="footer_company">
-        <li><a href="#">오늘의 공부 소개</a></li>
-        <li><a href="#">이용약관</a></li>
-        <li><a href="#" class="orange">개인정보처리방침</a></li>
-        <li><a href="#">1:1문의</a></li>
-        <li><a href="#">법적고지</a></li>
-        <li><a href="#">사이트맵</a></li>
-      </ul>
-      <hr>
-      <div class="footer_address">
-        <p>상호명 : 오늘의 공부&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
-        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.com</p>
-        <p>고객센터 : 1577-1111 (평일 09:00 ~ 18:00 / 점심 12:00 ~ 13:00)</p>
-        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 엄땡땡</p>
-      </div>
-      <hr>
-      <p class="footer_copyright">COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.</p>
-</footer>
+
+</div> <!-- .all-content -->
+<jsp:include page="../footer.jsp"/>
+
+<script>
+document.querySelectorAll("tbody a").forEach((a) => {
+	a.onclick = () => false;
+});
+var trList = document.querySelectorAll("tbody tr");
+trList.forEach(function(tr) {
+	
+	if (tr.children[6].innerText != "예약완료") {
+		//tr.children[0].disabled = true;
+		tr.children[0].children[0].disabled = true;
+	}
+
+	tr.onclick = (e) => {
+		// window.location.href = e.currentTarget.querySelector("a").href;
+	}
+	
+});
+
+/* var checkboxes = document.querySelectorAll("#checkboxNoLabel");
+checkboxes.forEach((cbx) => {
+	console.log(cbx);
+}); */
+
+
+</script>
 </body>
 </html>
 

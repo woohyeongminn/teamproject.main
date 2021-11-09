@@ -15,12 +15,14 @@ public class CafeReservation {
   private int useMemberNumber; // 사용인원
   private int totalPrice; // 총금액
   private boolean wirteReview; // 리뷰작성 여부
+  private String wirteReviewLable; // 리뷰 작성가능 / 작성불가 출력
   private int roomNo; // 룸 예약시 룸 번호
   private String roomName;  // 룸 이름
   private int paymentNo; // 결제시 결제 번호
   private int reservationStatus; // 1 : 예약완료(현장결제) , 2 : 결제완료 , 
   //                                3 : 예약취소(개인) , 4 : 결제취소(개인) ,
   //                                5 : 예약거절(사장) , 6 : 결제거절(사장)
+  //                                7 : 이용완료
   private String reservationStatusName; // 예약상태이름
 
   @Override
@@ -28,9 +30,10 @@ public class CafeReservation {
     return "CafeReservation [reservationNo=" + reservationNo + ", member=" + member + ", cafe="
         + cafe + ", reservationDate=" + reservationDate + ", useDate=" + useDate + ", startTime="
         + startTime + ", useTime=" + useTime + ", useMemberNumber=" + useMemberNumber
-        + ", totalPrice=" + totalPrice + ", wirteReview=" + wirteReview + ", roomNo=" + roomNo
-        + ", roomName=" + roomName + ", paymentNo=" + paymentNo + ", reservationStatus="
-        + reservationStatus + ", reservationStatusName=" + reservationStatusName + "]";
+        + ", totalPrice=" + totalPrice + ", wirteReview=" + wirteReview + ", wirteReviewLable="
+        + wirteReviewLable + ", roomNo=" + roomNo + ", roomName=" + roomName + ", paymentNo="
+        + paymentNo + ", reservationStatus=" + reservationStatus + ", reservationStatusName="
+        + reservationStatusName + "]";
   }
 
   public int getReservationNo() {
@@ -153,6 +156,12 @@ public class CafeReservation {
     this.reservationStatusName = reservationStatusName;
   }
 
+  public String getWirteReviewLable() {
+    return wirteReviewLable;
+  }
 
+  public void setWirteReviewLable(String wirteReviewLable) {
+    this.wirteReviewLable = wirteReviewLable;
+  }
 
 }

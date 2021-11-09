@@ -15,6 +15,7 @@ public interface CafeReservationDao {
   CafeReservation findReservationByMember(@Param("memberNo")int memberNo, @Param("reserNo")int reserNo) throws Exception;
   CafeReservation findReservationByCeoMember(@Param("ceoNo")int ceoNo, @Param("reserNo")int reserNo) throws Exception;
   void insertReservation(CafeReservation cafeReservation) throws Exception;
+  void updateReservationStatusComplete(int reservationNo) throws Exception;
   void deleteReservation(@Param("reservationNo")int reservationNo, @Param("status")int status) throws Exception;
 
   // 리뷰 등록시 예약테이블에도 리뷰 등록했다고 변경

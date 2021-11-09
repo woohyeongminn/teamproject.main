@@ -7,12 +7,16 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>내 예약 목록 상세보기</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<style>
   a {
    text-decoration: none;
+   color: black;
+  }
+  a:visited {
+    color: black;
   }
   label {
     xdisplay: inline-block;
@@ -29,6 +33,7 @@
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
+    padding: 80px 0;
   }
   .c-top {
     width: 100%;
@@ -57,14 +62,35 @@
 		<label>예약상태</label><span>${reserStatusLable}</span>
 	</div>
 <br>&nbsp;&nbsp;
+
 <c:if test="${reviewStatusLable eq '작성대기'}">
-  <button type="button" class="btn btn-outline-dark"><a href="reviewAddForm?reservationNo=${cafeReser.reservationNo}">리뷰등록</a></button>
+  <button type="button" class="btn btn-outline-dark" id="btnReviewAdd">
+    <a href="reviewAddForm?reservationNo=${cafeReser.reservationNo}">리뷰등록</a>
+  </button>
 </c:if>
+
 <c:if test="${reserStatusLable eq '예약완료'}">
-<button type="button" class="btn btn-outline-dark"><a href="reservationDelete?reservationNo=${cafeReser.reservationNo}">예약취소</a></button>
+  <button type="button" class="btn btn-outline-dark">
+    <a href="reservationDelete?reservationNo=${cafeReser.reservationNo}">예약취소</a>
+  </button>
 </c:if>
-<button type="button" class="btn btn-outline-dark"><a href="reservationList">목록</a></button>
+
+  <button type="button" class="btn btn-outline-dark">
+    <a href="reservationList">목록</a>
+  </button>
 </div>
+
+<jsp:include page="../footer.jsp"/>
+
+<script>
+document.querySelector("#btnReviewAdd").onclick = () => {
+	
+	var useDate = document.querySelector("#content span:nth-child(3)");
+	console.log(useDate);
+	
+	return false;
+}
+</script>
 </body>
 </html>
 
