@@ -29,6 +29,7 @@ public class CommentUpdateController extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
+    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
   }
 
   @Override
