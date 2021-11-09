@@ -9,7 +9,6 @@
   <meta charset="UTF-8">
   <title>🏘 스터디 카페</title>
    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   
    <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <style>
@@ -57,6 +56,7 @@
   color : white;
   }
   </style>
+  
 <c:if test='${cafe.cafeStatus == 4}'>
 <style>
 #deleted {
@@ -64,6 +64,7 @@ display: none;
 }
 </style>
 </c:if>
+
 <c:if test='${cafe.cafeStatus != 4 && cafe.cafeStatus != 1}'>
 <style>
 #agree {
@@ -71,12 +72,15 @@ display: none;
 }
 </style>
 </c:if>
+
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+
   <input id='c-no' type='hidden' value='${cafe.no}'><br>
   <legend><b> 🏘 스터디 카페 상세 </b></legend><br>
   <hr>
+  
   <div id='all'>
   <b><h4>${cafe.name}</h4></b>
   <hr>
@@ -94,6 +98,7 @@ display: none;
       <label for='f-holiday'>이번 주 휴무일</label>${cafe.holiday}<br>
       <label for='f-viewCount'>조회수</label>${cafe.viewCount}<br>
       <label for='f-review'>리뷰 평점</label>⭐${cafe.avgReview}(${cafe.countReview})<br>
+      
    <script>
      if(${cafe.cafeStatus == 1}) {
        document.write("<label for='f-cafeStatus'>운영 상태</label>승인 대기");
@@ -106,6 +111,7 @@ display: none;
      } 
    </script>
     </div>
+    
 <br>
 <c:if test='${not empty reviewList}'>
   <c:forEach items="${reviewList}" var="review">
@@ -124,19 +130,23 @@ display: none;
       <br><p id='c-review-content'>${review.content}</p><br>
     </div>
   </c:forEach>
+  
   <br>
   <br>
   <br>
   <br>
 </c:if>
+
 <c:if test='${empty reviewList}'>
    등록된 리뷰가 없습니다.<br><br>  
 </c:if>
+
 <br>
 <button type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeList">목록</a></button>
 <button id="agree" type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeControl?no=${cafe.no}">승인</a></button>
 <button id="deleted" type="button" class="btn btn-outline-dark"><a href="/ogong/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
 <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
 </div>
+
 </body>
 </html>
