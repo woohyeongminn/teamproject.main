@@ -76,7 +76,7 @@
 <th>작성자</th>
 <th>조회수</th>
 <th>등록일</th>
-<th></th>
+<th>답변📔/📖</th>
 </tr>
 </thead>
 <tbody>
@@ -91,7 +91,7 @@
   <td>${askBoard.askRegisteredDate}</td>
        <c:choose>
         <c:when test="${empty askBoard.reply}">
-        <td> 📕 </td>
+        <td> 📔 </td>
         </c:when>
         <c:otherwise>
         <td> 📖 </td>

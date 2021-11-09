@@ -18,12 +18,15 @@
   legend {
   text-align: center;
   }
+  b {
+  text-align: center;
+  }
 </style>
 </head>
 
 <body>
 <jsp:include page="../header.jsp"/>
-   <b> 📖 개인회원 상세</b>
+   <b> 📜 마이 페이지</b>
    <hr>
    <form action='updateform'>
      <span id='no' name='no'>(${loginUser.perNo})</span><br>
