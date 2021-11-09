@@ -48,7 +48,7 @@
     where
       cafe_no = #{cafeNo}
     order by
-      studyroom_no asc
+      status asc, studyroom_no asc
   </select>
   
   <!-- 멤버용 룸 리스트(운영중인 것만 출력) -->
@@ -109,6 +109,13 @@
         hourly_amount=#{roomPrice}
       </if>
     </set>
+    where studyroom_no=#{roomNo}
+  </update>
+  
+  
+    <update id="updateCafeRoomStatus" parameterType="CafeRoom">
+    update studycafe_room set
+    status = 2
     where studyroom_no=#{roomNo}
   </update>
   

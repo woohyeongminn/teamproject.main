@@ -46,6 +46,7 @@ public class CeoCafeRoomAddContoller extends HttpServlet {
       cafeRoom.setRoomInfo(request.getParameter("info"));
       cafeRoom.setPeople(Integer.parseInt(request.getParameter("people")));
       cafeRoom.setRoomPrice(Integer.parseInt(request.getParameter("roomPrice")));
+      cafeRoom.setRoomStatus(1);
 
       //fileNames.add(new CafeImage(fileName));
 

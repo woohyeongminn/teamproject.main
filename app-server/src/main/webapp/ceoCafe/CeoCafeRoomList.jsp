@@ -53,6 +53,12 @@
                   </a>
                   <div class="card-body p-3">
                       <div class="text-center">
+                          <c:if test="${cafeRoom.roomStatus == 1}">
+                          <p>운영중</p>
+                          </c:if>
+                          <c:if test="${cafeRoom.roomStatus == 2}">
+                          <p style="color:red">운영중단</p>
+                          </c:if>
                           <h5 class="fw-bolder"><a href='detail?roomno=${cafeRoom.roomNo}'><b>${cafeRoom.roomName}</b></a></h5>
                           <p>소개 | ${cafeRoom.roomInfo}</p>
                           <p>인원수 | ${cafeRoom.people}</p>

@@ -87,7 +87,7 @@ function checkValue() {
 	   }
 }
 
-	</script>
+</script>
 </head>
 
 <body>

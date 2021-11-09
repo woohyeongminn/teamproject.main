@@ -1,6 +1,7 @@
 package com.ogong.pms.servlet.ceoCafe;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -49,7 +50,14 @@ public class CeoCafeDetailController extends HttpServlet {
 
       } else {
 
+        cafe.setInfo(cafe.getInfo().replace("\n", "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
+
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("cafeNo", cafe.getNo());
+        cafe.setHoliday(cafeDao.getCafeHoliday(params));
+
         String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
+
         List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
 
         request.setAttribute("ceoMember", ceoMember);
