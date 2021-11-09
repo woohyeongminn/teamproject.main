@@ -9,21 +9,14 @@
   <meta charset="UTF-8">
   <title>내 예약 목록</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
   <style>
   h3 {
     text-align: center;
     font-weight: bolder;
-  }
-  tr a {
-    text-decoration: none;
-    color: black;
-  }
-  tr a:visited {
-    color: black;
-  }
-  tr:hover {
-    cursor: pointer;
   }
   .all-content {
     width: 100%;
@@ -47,6 +40,7 @@
 </div>
 <br>
 <div class="all-content">
+<form id="reservationForm" action="reservationDelete" method="POST">
 <c:if test='${not empty reserList}'>
 <table class="table table-striped text-center">
 <thead>
@@ -62,10 +56,9 @@
   </tr>
 </thead>
 <tbody>
-
 	<c:forEach items="${reserList}" var="reservation">
 	<tr>
-	    <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" data-no="${reservation.reservationNo}"></td>
+	    <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="reservationNo" value="${reservation.reservationNo}"></td>
 	    <td>${reservation.reservationDate}</td> 
 	    <td>${reservation.useDate}</td> 
 	    
@@ -82,10 +75,18 @@
 	    <td>${reservation.cafe.name} - ${reservation.roomName}</td> 
 	    <td>${reservation.totalPrice}</td> 
 	    <td>${reservation.reservationStatusName}</td> 
-	    <td>${reservation.wirteReviewLable}</td> 
+	    <td>
+		    <c:choose>
+		      <c:when test="${reservation.wirteReviewLable eq '작성가능'}">
+            <button type="button" class="btn btn-outline-dark btn-sm">리뷰쓰기</button>		      
+		      </c:when>
+		      <c:otherwise>
+				    ${reservation.wirteReviewLable}		      
+		      </c:otherwise>
+		    </c:choose>
+	    </td> 
 	</tr>
 	</c:forEach>
-	
 	</tbody>
 </table>
 </c:if>
@@ -99,31 +100,41 @@
   </button>
 </div>
 
+</form>	
 </div> <!-- .all-content -->
 <jsp:include page="../footer.jsp"/>
 
 <script>
-document.querySelectorAll("tbody a").forEach((a) => {
-	a.onclick = () => false;
-});
 var trList = document.querySelectorAll("tbody tr");
 trList.forEach(function(tr) {
 	
 	if (tr.children[6].innerText != "예약완료") {
-		//tr.children[0].disabled = true;
 		tr.children[0].children[0].disabled = true;
 	}
 
-	tr.onclick = (e) => {
-		// window.location.href = e.currentTarget.querySelector("a").href;
-	}
-	
 });
 
-/* var checkboxes = document.querySelectorAll("#checkboxNoLabel");
-checkboxes.forEach((cbx) => {
-	console.log(cbx);
-}); */
+document.querySelector("#btnCancle").onclick = () => {
+	const selectedList = document.querySelectorAll('input[name="reservationNo"]:checked');
+	if (selectedList.length == 0){
+		swal.fire("취소할 예약을 선택해주세요.");
+		return false;
+	} else {
+		Swal.fire({
+		      title: '예약을 정말 취소하시겠습니까?',
+		      text: "취소하시면 다시 복구시킬 수 없습니다.",
+		      icon: 'warning',
+		      showCancelButton: true,
+		      confirmButtonText: '네',
+		      cancelButtonText: '아니오'
+		    }).then((result) => {
+		      if (result.value) { 
+						  document.querySelector("#reservationForm").submit();
+		      }
+		    })
+	}
+	
+}
 
 
 </script>
