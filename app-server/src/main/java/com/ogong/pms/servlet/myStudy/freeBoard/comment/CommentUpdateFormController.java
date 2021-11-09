@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.myStudy.freeBoard.comment;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,22 +42,16 @@ public class CommentUpdateFormController extends HttpServlet {
       int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
       FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
 
-      List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
+      int commentNo = Integer.parseInt(request.getParameter("commentno"));
+      Comment comment = commentDao.findByNo(commentNo);
 
-      if (commentList.isEmpty()) {
-        request.setAttribute("study", study);
-        request.setAttribute("freeBoard", freeBoard);
-        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp")
-        .forward(request, response);
-      }
+      // List<Comment> commentList = commentDao.findAll(freeBoard.getFreeBoardNo());
 
-      else {
-        request.setAttribute("study", study);
-        request.setAttribute("freeBoard", freeBoard);
-        request.setAttribute("commentList", commentList);
-        request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp")
-        .forward(request, response);
-      }
+      request.setAttribute("study", study);
+      request.setAttribute("freeBoard", freeBoard);
+      request.setAttribute("comment", comment);
+      request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp")
+      .forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

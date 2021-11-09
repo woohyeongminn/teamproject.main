@@ -24,7 +24,7 @@
 <br>
 <br>날짜<br>
 <input type="date" name="date">
-<input type="hidden" name="perNo" value="${perNo}">
+<input type="hidden" name="perNo" value="${loginUser.perNo}">
 <input type="submit">
 </form>
 </body>
