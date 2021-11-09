@@ -29,6 +29,7 @@ public class CommentUpdateController extends HttpServlet {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
+    commentDao = (CommentDao) 웹애플리케이션공용저장소.getAttribute("commentDao");
   }
 
   @Override
@@ -78,7 +79,7 @@ public class CommentUpdateController extends HttpServlet {
       freeBoard.setComment(commentList);
 
       commentDao.update(Integer.parseInt(request.getParameter("commentno")),
-          request.getParameter("commenttitle"));
+          request.getParameter("commenttext"));
 
       // System.out.println(" >> 댓글을 변경하였습니다.");
       request.setAttribute("study", study);
