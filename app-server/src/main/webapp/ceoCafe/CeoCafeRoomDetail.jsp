@@ -73,6 +73,12 @@
   </div>
   <form action='updateform'>
   <div id='content'>
+	  <c:if test="${cafeRoom.roomStatus == 1}">
+	  <p>운영중</p>
+	  </c:if>
+	  <c:if test="${cafeRoom.roomStatus == 2}">
+	  <p style="color:gray">운영중단</p>
+	  </c:if>
     <label for='f-image'>대표이미지</label><span>${cafeRoom.roomImg}</span><br>
     <label for='f-roomInfo'>소개글</label><span>${cafeRoom.roomInfo}</span><br>
     <label for='f-people'>인원</label><span>${cafeRoom.people}</span><br>

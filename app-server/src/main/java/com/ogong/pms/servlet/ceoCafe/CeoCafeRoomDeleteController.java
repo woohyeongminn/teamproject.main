@@ -43,7 +43,7 @@ public class CeoCafeRoomDeleteController extends HttpServlet {
         cafeRoomDao.deleteCafeRoomImage(deleteParams);
       }
 
-      cafeRoomDao.deleteCafeRoom(cafeRoom.getRoomNo());
+      cafeRoomDao.updateCafeRoomStatus(cafeRoom.getRoomNo());
       sqlSession.commit();
 
       response.sendRedirect("list?cafeno="+ cafeNo);

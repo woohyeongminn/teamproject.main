@@ -14,7 +14,8 @@ public interface CafeRoomDao {
   CafeRoom findByRoomNo(int roomNo) throws Exception;
   void insertCafeRoom(CafeRoom cafeRoom) throws Exception;
   void updateCafeRoom(CafeRoom cafeRoom) throws Exception;
-  void deleteCafeRoom(int roomNo) throws Exception;
+  void updateCafeRoomStatus(int roomNo) throws Exception;
+  void deleteCafeRoom(int roomNo) throws Exception; // 안씀
 
   // 스터디룸 이미지
   void insertCafeRoomImage(HashMap<String,Object> params) throws Exception;

@@ -65,36 +65,36 @@ insert into studycafe_holiday(holiday_no, cafe_no, date)
 values (3, 1, '2021-11-21');
 
 -- 카페 스터디룸
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (1, 'A타입(2~3인)', 1, '2~3인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-3, 6000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+3, 6000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (2, 'A타입(2인)', 2, '최대 2인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-2, 6000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+2, 6000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (3, 'B타입(3~4인)', 1, '3~4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-4, 9000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+4, 9000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (4, 'B타입(4인)', 2, '최대 4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-4, 9000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+4, 9000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (5, 'C타입(5~6인)', 1, '5~6인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-6, 15000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+6, 15000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (6, 'A타입(2~3인)', 3, '2~3인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-3, 6000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+3, 6000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (7, 'A타입(2인)', 4, '최대 2인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-2, 6000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+2, 6000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (8, 'A타입(3~4인)', 5, '3~4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-4, 9000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+4, 9000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (9, 'A타입(4인)', 6, '최대 4인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-4, 9000);
-insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount)
+4, 9000, 1);
+insert into studycafe_room(studyroom_no, name, cafe_no, introduction, people, hourly_amount, status)
 values (10, 'B타입(5~6인)', 7, '5~6인이 이용할 수 있는 스터디룸 입니다.\n기본설비 : 화이트보드, 무선인터넷',
-6, 15000);
+6, 15000, 1);
 
 -- 카페 스터디룸 사진
 insert into studycafe_room_photo(photo_no, studyroom_no, name)
