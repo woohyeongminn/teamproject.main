@@ -18,6 +18,7 @@
     <result column="countReview" property="countReview"/>
     <result column="countReview" property="countReview"/>
     <result column="countRoom" property="countRoom"/>
+    <result column="operating_status_no" property="cafeStatus"/>
     
     <association property="ceoMember" javaType="CeoMember">
       <id column="member_no" property="ceoNo"/>
