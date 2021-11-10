@@ -14,6 +14,9 @@ public class SignUp extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("signUp.jsp").forward(request, response);
+
+    request.setAttribute("pageTitle", "회원가입");
+    request.setAttribute("contentUrl", "signUp.jsp");
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
   } 
 }
