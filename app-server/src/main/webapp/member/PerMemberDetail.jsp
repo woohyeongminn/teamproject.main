@@ -18,30 +18,53 @@
   legend {
   text-align: center;
   }
+  b {
+  text-align: center;
+  }
+    .btn {
+    border-radius: 10px;
+    background-color: tan;
+    color: black;
+    font-size: 18px;
+  }
+  .btn:hover {
+    background-color: blanchedalmond;
+    color: black;
+  }
+  #photo {
+    
+  }
 </style>
 </head>
 
 <body>
 <jsp:include page="../header.jsp"/>
-   <b> 📖 개인회원 상세</b>
+   <legend> <b> 📜 마이 페이지</b></legend><br>
+  
    <hr>
    <form action='updateform'>
-     <span id='no' name='no'>(${loginUser.perNo})</span><br>
+   
+     <!-- <span id='no' name='no'>(${loginUser.perNo})</span><br> -->
+     <div id="photo">
+     <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle">
+     </div>
      <span>이름ㅣ</span> <span>${loginUser.perName}</span><br>
      <span>닉네임ㅣ</span> <span>${loginUser.perNickname}</span><br>
      <span>이메일ㅣ</span> <span>${loginUser.perEmail}</span><br>
-     <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle"><br>
      <span>전화번호ㅣ</span> <span>${loginUser.perTel}</span><br>
      <span>가입일ㅣ</span> <span>${loginUser.perRegisteredDate}</span><br>
-     <button type="submit" value="수정" formaction="updateform">
+     
+     <br>
+     <button class="btn btn-outline-primary me-md-2 btn-small" type="submit" value="수정" formaction="updateform">
         <a href='updateform?no=${loginUser.perNo}'>프로필 수정하기</a>
      </button>
-    <button type="submit" value="삭제" formaction="delete">
+     
+     <button class="btn btn-outline-primary me-md-2 btn-small" type="submit" value="삭제" formaction="delete">
         <a href='delete?no=${loginUser.perNo}'>탈퇴하기</a>
-      </button>
-      <button type="submit" value="로그아웃">
+     </button>
+     <button class="btn btn-outline-primary me-md-2 btn-small" type="submit" value="로그아웃">
         <a href='logout'>로그아웃</a>
-      </button>
+     </button>
     </form>
 </body>
 </html>

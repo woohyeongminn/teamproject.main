@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>문의 게시글(개인회원)</title>
+   <title>목록 | 문의 게시글</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
   
   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
@@ -91,7 +91,7 @@
   <th>작성자</th>
   <th>조회수</th>
   <th>등록일</th>
-<th></th>
+  <th>답변📔/📖</th>
 </tr>
 </thead>
 <tbody>
@@ -108,7 +108,7 @@
         <td>${askBoard.askRegisteredDate}</td>     
            <c:choose>
              <c:when test="${empty askBoard.reply}">
-               <td> 📕 </td>
+               <td> 📔 </td>
              </c:when>
             <c:otherwise>
                <td> 📖 </td>
