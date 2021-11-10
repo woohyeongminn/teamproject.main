@@ -53,7 +53,9 @@ public class MyStudyExitController extends HttpServlet {
 
       // request.setAttribute("member", member);
       request.setAttribute("study", study);
-      request.getRequestDispatcher("/myStudy/MyStudyExit.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "내 스터디 탈퇴");
+      request.setAttribute("contentUrl", "/myStudy/MyStudyExit.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

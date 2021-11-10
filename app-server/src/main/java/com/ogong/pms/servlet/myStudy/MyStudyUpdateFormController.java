@@ -42,7 +42,9 @@ public class MyStudyUpdateFormController extends HttpServlet {
       // request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
       // request.setAttribute("member", member);
       request.setAttribute("study", study);
-      request.getRequestDispatcher("/myStudy/MyStudyUpdateForm.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "내 스터디 수정");
+      request.setAttribute("contentUrl", "/myStudy/MyStudyUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

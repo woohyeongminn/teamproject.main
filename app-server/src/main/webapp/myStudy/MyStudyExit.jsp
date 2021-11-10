@@ -5,8 +5,10 @@
 <html>
 <head>
 <title>상세 | 내 스터디</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
 <style>
+*{
+  font-size:14px;
+}
 label {
 	margin-right: 5px;
 	text-align: right;
@@ -16,7 +18,6 @@ label {
 </style>
 </head>
 <body>
-	<jsp:include page="../header.jsp" />
 	<h1>🖊 내 스터디 탈퇴</h1>
 	<c:if test="study.owner.perNo eq loginUser.perNo">
 		<c:choose>

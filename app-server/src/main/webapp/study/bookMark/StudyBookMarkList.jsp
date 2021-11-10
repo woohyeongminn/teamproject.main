@@ -12,7 +12,6 @@
 </style>
 </head>
 <body>
-<jsp:include page="../../header.jsp"/>
 	<h3>🌟 내 북마크 목록</h3>
 	<input type="hidden" name="loginUser" value="${loginUser.perNo}">
 	<table class="table table-hover">
