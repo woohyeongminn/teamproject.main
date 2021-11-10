@@ -50,8 +50,9 @@ public class CommentUpdateFormController extends HttpServlet {
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.setAttribute("comment", comment);
-      request.getRequestDispatcher("/myStudy/freeBoard/comment/CommentUpdateForm.jsp")
-      .forward(request, response);
+      request.setAttribute("pageTitle", "댓글 수정");
+      request.setAttribute("contentUrl", "/myStudy/freeBoard/comment/CommentUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

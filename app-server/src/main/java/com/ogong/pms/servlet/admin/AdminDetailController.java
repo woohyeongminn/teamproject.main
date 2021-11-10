@@ -36,7 +36,11 @@ public class AdminDetailController extends GenericServlet {
       //
       //      request.setAttribute("adminpro", adminpro);
 
-      request.getRequestDispatcher("/admin/AdminDetail.jsp").forward(request, response);
+      //request.getRequestDispatcher("/admin/AdminDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "🙂 마이페이지");
+      request.setAttribute("contentUrl", "/admin/AdminDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

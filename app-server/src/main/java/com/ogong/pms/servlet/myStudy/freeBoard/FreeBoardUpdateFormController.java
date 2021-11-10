@@ -41,8 +41,9 @@ public class FreeBoardUpdateFormController extends HttpServlet {
       request.setAttribute("studyno", studyNo);
       request.setAttribute("freeboardno", freeBoardNo);
       request.setAttribute("freeBoard", freeBoard);
-      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardUpdateForm.jsp").forward(request,
-          response);
+      request.setAttribute("pageTitle", "자유 게시판 수정");
+      request.setAttribute("contentUrl", "/myStudy/freeBoard/FreeBoardUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

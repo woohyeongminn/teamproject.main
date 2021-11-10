@@ -119,7 +119,7 @@
 <tbody>
 <c:forEach items="${adminNoticeList}" var="noticeList">
 <tr>
-	<td>( ${noticeList.adminNotiNo} )</td>
+	<td><b> ${noticeList.adminNotiNo} </b></td>
 	<td><a href='detail?no=${noticeList.adminNotiNo}'>${noticeList.adminNotiTitle}</a></td>
 <%-- 	<td>${noticeList.adminNotiContent}</td>
 	<td>${noticeList.adminNotiFile}</td> --%>

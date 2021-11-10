@@ -4,11 +4,10 @@
 <html>
 <head>
 <title>상세 | 스터디 관리</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
-<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-<script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
-<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
+*{
+  font-size:14px;
+}
 label {
 	margin-right: 5px;
 	text-align: right;
@@ -18,7 +17,6 @@ label {
 </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 상세</h1>
 		<label for='f-studyNo'>번호</label>
 		<input id='f-studyNo' type='text' name='studyno' value='${study.studyNo}' readonly><br>

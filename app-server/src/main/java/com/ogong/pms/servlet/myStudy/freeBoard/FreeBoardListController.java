@@ -43,8 +43,9 @@ public class FreeBoardListController extends HttpServlet {
       // request.setAttribute("member", member);
       request.setAttribute("studyno", studyNo);
       request.setAttribute("freeBoardList", freeBoardList);
-      request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardList.jsp").forward(request,
-          response);
+      request.setAttribute("pageTitle", "자유 게시판 목록");
+      request.setAttribute("contentUrl", "/myStudy/freeBoard/FreeBoardList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

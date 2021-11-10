@@ -42,8 +42,10 @@ public class StudyDetailController extends HttpServlet {
 
       // request.setAttribute("member", member);
       request.setAttribute("study", study);
-      request.getRequestDispatcher("/study/StudyDetail.jsp").forward(request, response);
-
+      request.setAttribute("pageTitle", "스터디 상세");
+      request.setAttribute("contentUrl", "/study/StudyDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

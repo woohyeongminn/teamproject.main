@@ -30,7 +30,9 @@ public class StudyAddFormController extends HttpServlet {
       // Member member = memberDao.findByNo(loginUser.getPerNo());
 
       // request.setAttribute("member", member);
-      request.getRequestDispatcher("/study/StudyAddForm.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "스터디 등록");
+      request.setAttribute("contentUrl", "/study/StudyAddForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

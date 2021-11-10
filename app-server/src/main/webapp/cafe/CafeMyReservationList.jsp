@@ -7,38 +7,19 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>내 예약 목록</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.css">
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
   <style>
-  h3 {
-    text-align: center;
-    font-weight: bolder;
+  * {
+    font-size: 14px;
   }
   .all-content {
     width: 100%;
-    xmax-width: 900px;
     margin: 0 auto;
     padding: 80px 0;
-  }
-  .c-top {
-    width: 100%;
-    padding: 20px 0 20px 50px;
-    font-weight: bold;
-    background-color: rgb(247, 231, 215);
-    text-align: center;
   }
   </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
-<div class="c-top">
-📝 내 예약 목록
-</div>
-<br>
+
 <div class="all-content">
 <form id="reservationForm" action="reservationDelete" method="POST">
 <c:if test='${not empty reserList}'>
@@ -132,9 +113,6 @@
   </div>
 </div> <!-- .modal -->
 
-
-<jsp:include page="../footer.jsp"/>
-
 <script>
 var trList = document.querySelectorAll("tbody tr");
 trList.forEach(function(tr) {
@@ -203,5 +181,3 @@ document.querySelector("#btnReviewAdd").onclick = () => {
 }
 
 </script>
-</body>
-</html>
