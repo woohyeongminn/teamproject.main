@@ -49,7 +49,7 @@ public class CommentAddFormController extends HttpServlet {
       // request.setAttribute("member", member);
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
-      request.getRequestDispatcher("/myStudy/freeBoardDetail").forward(request, response);
+      response.sendRedirect("../detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno=" + freeBoard.getFreeBoardNo());
 
     } catch (Exception e) {
       e.printStackTrace();
