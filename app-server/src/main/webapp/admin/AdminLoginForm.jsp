@@ -13,6 +13,9 @@
    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+     <!-- JQUERY -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  
 <style>
   legend {
   text-align: center;
@@ -27,6 +30,7 @@
   margin-top: 10px;
   border-color : lightgray;
   border-radius: 6px;
+  font-size: 14px;
   }
   input[type=checkbox]:checked {
   background-color: black;
@@ -50,9 +54,12 @@
   }
   
   button {
-   width: 100%
+   width: 100%;
   }
-  
+  input#dropdownCheck {
+    width: 15px;
+    height: 15px;
+  }
   .form-check {
   display: block;
   padding: 0;
@@ -69,11 +76,19 @@
     max-width: 500px;
     margin: 0 auto;
     padding: 50px;
-    margin-top: 40px;
+    margin-top: 100px;
   }
   .inner {
     max-width: 500px;
     margin : 10px 0;
+  }
+  
+  #remember {
+   font-size: 12px;
+  }
+
+  button[type=submit] {
+   font-size: 14px;
   }
   
   .mb {
@@ -97,32 +112,34 @@
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
-<section>
-<div class="c-top">
-      🖐 오늘의 공부 로그인
-      </div>
-<div class="all-content">
-<legend><b> 👑 관리자 로그인 </b></legend>
-<br>
-<hr>
-<form action='login'>
-      <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
-      <br>
-      <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
-  <div class="inner">
-	  <div class="form-check">
-	    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-	      <span>
-	      정보 기억하기
-	     </span>
-	  </div>
-      <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
-  </div>
-</form>
-</div>
-</section>
 
- <jsp:include page="../footer.jsp"/>
+	<section>
+	<div class="c-top">
+	      🖐 오늘의 공부 로그인
+	      </div>
+	      
+	<div class="all-content">
+	<legend><b> 👑 관리자 로그인 </b></legend>
+	<br>
+	<hr>
+	
+	<form action='login'>
+	      <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
+	      <br>
+	      <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
+	  <div class="inner">
+		  <div class="form-check">
+		    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+		      <span id="remember">
+		      정보 기억하기
+		     </span>
+		  </div>
+	      <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+	  </div>
+	</form>
+	
+	</div>
+	</section>
+
 </body>
 </html>

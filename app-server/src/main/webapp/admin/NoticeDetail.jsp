@@ -23,10 +23,6 @@
     /* display: inline; */
     width: 60px;
   }
-  label#content {
-    position: relative;
-    bottom: 400px;
-  }
   legend {
     text-align: center;
   }
@@ -88,6 +84,9 @@
     border-style: solid;
     border-width: 0;
   }
+  tr#blockbox {
+    vertical-align: top;
+  }
 /*   tr#first {
     border-bottom: black;
     border-style: double;
@@ -142,13 +141,13 @@
 <td></td>
 </tr>
 
-<tr>
+<tr id="blockbox">
 <th scope="row" id="second"><label for='f-content' id="content">내용</label></th>
 <td><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" readonly>${adminNotice.adminNotiContent}</textarea></td>
 <td></td>
 </tr>
 
-<tr>
+<tr id="blockbox">
 <th scope="row" id="third"><label for='f-filepath'>파일</label></th>
 <td><img id="f-photo-image" src="../upload/notice/${adminNotice.adminNotiFile}"></td>
 <td></td>

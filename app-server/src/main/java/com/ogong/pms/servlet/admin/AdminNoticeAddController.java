@@ -16,6 +16,10 @@ import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AdminNotice;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/adminNotice/add")
@@ -59,6 +63,17 @@ public class AdminNoticeAddController extends HttpServlet {
         // 상속받은 서블릿 중에서 getServletContext를 리턴받는 애가 있음
         // 걔를 통해서 getRealPath(업로드 경로)를 알아내서 저장
         adminNotice.setAdminNotiFile(filename); // 실제 저장한 파일명을 데이터 베이스에 저장하도록
+
+        Thumbnails.of(getServletContext().getRealPath("/upload/notice") + "/" + filename)
+        .size(20, 20)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_20x20";
+          }
+        });
       }
 
       noticeDao.insert(adminNotice);

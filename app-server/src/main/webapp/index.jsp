@@ -176,7 +176,7 @@ bottom: 20px;
 <body>
 <div id="first"></div>
     <jsp:include page="header.jsp"/>
-
+    
   <section>
     <div class="contents">
     
@@ -210,7 +210,8 @@ bottom: 20px;
       <a class="navbar-brand" href="#first">
       <i class="fas fa-graduation-cap fa-2x"></i></a>
     </nav>
-
+    
     <jsp:include page="footer.jsp"/>
+    
 </body>
 </html>
