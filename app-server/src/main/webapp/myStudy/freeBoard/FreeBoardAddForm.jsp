@@ -4,11 +4,10 @@
 <html>
 <head>
 <title>등록 | 자유 게시판</title>
-<link rel="stylesheet"
-	href="../node_modules/bootstrap/dist/css/bootstrap.css">
-<script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
+*{
+  font-size:14px;
+}
 label {
 	margin-right: 5px;
 	text-align: center;
@@ -27,7 +26,6 @@ input {
 </style>
 </head>
 <body>
-	<jsp:include page="../../header.jsp" />
 	<fieldset>
 		<br>
 		<legend>

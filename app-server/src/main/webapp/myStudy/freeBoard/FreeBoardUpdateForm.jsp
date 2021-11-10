@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>상세 | 자유 게시판</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
+  *{
+    font-size:14px;
+	}
   label {
     margin-right: 5px;
     text-align: center;
@@ -23,7 +23,6 @@
 </style>
 </head>
 <body>
-  <jsp:include page="../../header.jsp" />
   <h5>🪧 자유게시판 수정</h5>
   <form action="update">
     <input type ='hidden' name='freeboardno' value='${freeboardno}'>
