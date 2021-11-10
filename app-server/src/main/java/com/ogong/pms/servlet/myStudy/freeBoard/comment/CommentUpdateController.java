@@ -90,7 +90,7 @@ public class CommentUpdateController extends HttpServlet {
       request.setAttribute("study", study);
       request.setAttribute("freeBoard", freeBoard);
       request.setAttribute("comment", comment);
-      request.getRequestDispatcher("../detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno=" + freeBoard.getFreeBoardNo()).forward(request, response);
+      response.sendRedirect("../detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno=" + freeBoard.getFreeBoardNo());
       // request.getRequestDispatcher("/myStudy/freeBoard/FreeBoardDetail.jsp").forward(request,
       // response);
 
