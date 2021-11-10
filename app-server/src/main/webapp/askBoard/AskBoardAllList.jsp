@@ -7,7 +7,7 @@
 <html>
 <head>
    <title>목록 | 문의 게시글</title>
-   <style>
+<style>
   * {
   font-size: 14px;
   }
@@ -23,7 +23,7 @@
   .btn {
     line-height: 14px;
   }
-  </style>
+</style>
 </head>
 <body>
 <fieldset>

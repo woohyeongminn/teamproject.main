@@ -27,7 +27,7 @@
 </style>
 </head>
 <body>
-  <form action="ceoupdate">
+  <form action="ceoupdate" method="post">
     <span>(${ceoAskBoard.askNo})</span><br>
     
     <label for='f-title'>제목</label>

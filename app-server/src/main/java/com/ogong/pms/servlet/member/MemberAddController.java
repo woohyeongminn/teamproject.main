@@ -30,7 +30,6 @@ public class MemberAddController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    //List<Member> memberList = memberDao.findAll();
 
     try {
       Member member = new Member();
@@ -45,10 +44,14 @@ public class MemberAddController extends HttpServlet {
 
       memberDao.insert(member);
       sqlSession.commit();
-      request.getRequestDispatcher("/member/PerMemberAdd.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "✏회원 가입");
+      request.setAttribute("contentUrl", "/member/PerMemberAdd.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
+      sqlSession.rollback();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

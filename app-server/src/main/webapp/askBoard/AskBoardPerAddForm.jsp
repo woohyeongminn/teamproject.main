@@ -29,7 +29,7 @@
 
 <body>
 <br>
-  <form>
+  <form method="post">
     <label for='f-status'>공개</label>
     <select id="f-status" name='status' >
 	    <option value='1' name='status'>공개</option>
@@ -42,15 +42,11 @@
     </div><br>
   
     <br>
-    <div class="mb-3">
 		  <label for="f-title" class="form-label">제목</label>
 		  <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요"></input>
-    </div>
     
-    <div class="mb-3">
 		  <label for="f-content" class="form-label">내용</label>
 		  <input class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요"></input>
-    </div>
     
     <input type ='hidden' name='writer' value='${loginUser.perNo}'></input>      
   

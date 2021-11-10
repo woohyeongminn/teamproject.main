@@ -17,7 +17,10 @@ public class MemberAddFormController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      request.getRequestDispatcher("/member/PerMemberAddForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "✏회원 가입");
+      request.setAttribute("contentUrl", "/member/PerMemberAddForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
