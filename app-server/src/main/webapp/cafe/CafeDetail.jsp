@@ -8,6 +8,9 @@
 <head>
 	<meta charset="UTF-8">
 	<style>
+	* {
+	 font-size: 14px;
+	}
 	h3 {
     font-weight: bolder;
   }
