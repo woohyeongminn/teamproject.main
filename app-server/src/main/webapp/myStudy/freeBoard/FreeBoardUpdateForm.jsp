@@ -24,7 +24,7 @@
 </head>
 <body>
   <h5>🪧 자유게시판 수정</h5>
-  <form action="update">
+  <form action="update" method='post' enctype="multipart/form-data">
     <input type ='hidden' name='freeboardno' value='${freeboardno}'>
     <input type ='hidden' name='studyno' value='${studyno}'>
     <span>(${freeBoard.freeBoardNo})</span><br>

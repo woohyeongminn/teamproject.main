@@ -19,7 +19,7 @@ label {
 </head>
 <body>
   <h1>🖊 내 스터디 수정</h1>
-  <form action='update'>
+  <form action='update' method='post'>
     <label for='f-studyTitle'>제목</label> <input id='f-studyTitle' type='text' name='studytitle'><br>
         <p>
 				[ 분야 ]<br>
