@@ -42,11 +42,14 @@ public class CafeSearchHandler extends HttpServlet {
       List<Cafe> cafeList = cafeDao.findCafeListByLocation(input, keyword);
 
       request.setAttribute("cafeList", cafeList);
-      request.setAttribute("perNo", request.getParameter("perNo"));
-      request.getRequestDispatcher("/cafe/CafeList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "스터디 장소 검색");
+      request.setAttribute("contentUrl", "/cafe/CafeList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
-      throw new ServletException(e);
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

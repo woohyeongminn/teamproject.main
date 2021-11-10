@@ -8,42 +8,27 @@
 <head>
 <meta charset="UTF-8">
 <title> ✏회원가입</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<style>
-  label {
-    margin-right: 10px;
-    text-align: center;
-    width: 60px;
-    display: inline-flexbox;
+  <style>
+  * {
+  font-size: 14px;
   }
-  h5 {
-    text-align: center;
-  }
-  #addform {
-    text-align: center;
-  }
-  #file {
   
+  label {
+    margin-right: 5px;
+    text-align: center;
+    display: inline;
+    width: 60px;
+    size:100px;
   }
+  
   .btn {
-    border-radius: 10px;
-    background-color: tan;
-    color: black;
-    font-size: 18px;
+    line-height: 14px;
   }
-  .btn:hover {
-    background-color: blanchedalmond;
-    color: black;
-  }
-</style>
+  </style>
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/><br>
-  <h5>✏회원가입</h5><br>
-   <form action='add'>
-       <div id="addform">
+   <form action='add' method="post">
         <label for='f-name' class='form-label' size='100px'>이름</label>
         <input id='f-name' type='text' name='name' placeholder="이름"><br>
         
@@ -56,19 +41,15 @@
         <label for='f-nickname' class='form-label' size='100px'>닉네임</label>
         <input id='f-nickname' type='name' name='nickname' placeholder='닉네임' size='20'><br>
         
-        <div id="file">
         <label for='f-photo' class='form-label' size='100px'>사진</label>
         <input id='f-photo' type='file' name='photo' placeholder="사진"><br>
-        </div>
         
         <label for='f-tel' class='form-label' size='100px'>전화번호</label>
         <input id='f-tel' type='tel' name='tel' placeholder="전화번호"><br><br>
     </div>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-     <button class="btn btn-outline-primary me-md-2 btn-small" 
-       type="submit" value="가입" formaction="add">
-       회원가입
-     </button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="add">등록하기</button>
+   </div>
     </div>
    </form>
  </body>

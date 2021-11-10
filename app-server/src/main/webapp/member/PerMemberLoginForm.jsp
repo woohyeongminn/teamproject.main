@@ -7,29 +7,41 @@
 <head>
 <meta charset="UTF-8">
 <title>개인회원 로그인</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
- <style>
+<style>
+  * {
+  font-size: 14px;
+  }
+  
   label {
+    margin-right: 5px;
+    text-align: center;
+    display: inline;
+    width: 60px;
+    size:100px;
+  }
+  
+  .btn {
+    line-height: 14px;
+  }
+    label {
     margin-left: 10px;
     text-align: center;
     display: inline;
     width: 60px;
   }
-  legend {
-  text-align: center;
-  }
+  
   input {
   border : white;
   outline-color : lightgray;
   }
+  
   input[type=checkbox]:checked {
   background-color: black;
   }
   p {
   text-align-last: center;
   }
-  div {
+    div {
   margin-right: 10px;
   xdisplay: flex;
   align-items: center;
@@ -43,7 +55,7 @@
   a:hover {
   color : white;
   }
-  .all-content {
+    .all-content {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
@@ -51,16 +63,15 @@
   .inner {
     float: left;
   }
- </style>
+  
+</style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
 
 <br>
 <div class="all-content">
 <fieldset>
 <br>
-<legend><b> 🖐 개인 회원 로그인 </b></legend><br>
 <hr>
 <table class="table table-responsive">
 <td><form action='login' method="post"></td>
@@ -83,7 +94,7 @@
 	    </div>
 	 </div>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+<button type="submit" class= "btn btn-outline-dark" value="로그인" >로그인</button> 
   </form>
   </div>
 

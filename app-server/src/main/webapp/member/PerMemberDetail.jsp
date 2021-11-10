@@ -6,62 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 | 상세</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
+  * {
+  font-size: 14px;
+  }
+  
   label {
     margin-right: 5px;
     text-align: center;
     display: inline;
     width: 60px;
+    size:100px;
   }
-  legend {
-  text-align: center;
+  
+  .btn {
+    line-height: 14px;
   }
-  b {
-  text-align: center;
+	 #info {
+  text-align-last: center;
   }
-	.n-btn {
-	    border-radius: 10px;
-	    background-color: blanchedalmond;
-	    color: black;
-	    font-size: 18px;
-	  }
-	  .n-btn:hover {
-	    background-color: lightyellow;
-	    color: black;
-	  }
 </style>
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
-   <legend> <b> 📜 마이 페이지</b></legend><br>
   
    <hr>
-   <form action='updateform'>
-   
+   <form >
      <!-- <span id='no' name='no'>(${loginUser.perNo})</span><br> -->
      <div id="photo">
      <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle">
      </div>
+     <div id="info">
      <span>이름ㅣ</span> <span>${loginUser.perName}</span><br>
      <span>닉네임ㅣ</span> <span>${loginUser.perNickname}</span><br>
      <span>이메일ㅣ</span> <span>${loginUser.perEmail}</span><br>
      <span>전화번호ㅣ</span> <span>${loginUser.perTel}</span><br>
      <span>가입일ㅣ</span> <span>${loginUser.perRegisteredDate}</span><br>
-     
+     </div>
      <br>
-     <button class="n-btn w100 btn-sm btn-default cert-hidden" type="submit" value="수정" formaction="updateform">
-        <a href='updateform'>프로필 수정하기</a>
-     </button>
-     
-     <button class="n-btn w100 btn-sm btn-default cert-hidden" type="submit" value="삭제" formaction="delete">
-        <a href='delete'>탈퇴하기</a>
-     </button>
-     <button class="n-btn w100 btn-sm btn-default cert-hidden" type="submit" value="로그아웃">
-        <a href='logout'>로그아웃</a>
-     </button>
+     <button class = "btn btn-outline-dark" ><a href='updateform'>프로필 수정</a></button>
+     <button class = "btn btn-outline-dark" ><a href='delete'>회원 탈퇴</a></button>
+     <button class = "btn btn-outline-dark" ><a href='logout'>로그아웃</a></button>
     </form>
 </body>
 </html>

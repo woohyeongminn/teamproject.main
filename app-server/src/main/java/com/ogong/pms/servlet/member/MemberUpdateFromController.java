@@ -17,7 +17,9 @@ public class MemberUpdateFromController extends HttpServlet {
 
     try {
 
-      request.getRequestDispatcher("/member/PerMemberUpdateForm.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "💬프로필 수정");
+      request.setAttribute("contentUrl", "/member/PerMemberUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

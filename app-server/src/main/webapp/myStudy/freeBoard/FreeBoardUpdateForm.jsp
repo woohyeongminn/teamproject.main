@@ -8,15 +8,17 @@
 <meta charset="UTF-8">
 <title>상세 | 자유 게시판</title>
 <style>
-  *{
+  * {
     font-size:14px;
 	}
+
   label {
     margin-right: 5px;
     text-align: center;
     display: inline;
     width: 60px;
   }
+
   legend {
   text-align: center;
   }

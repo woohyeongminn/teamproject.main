@@ -80,7 +80,9 @@ public class AdminNoticeAddController extends HttpServlet {
       noticeDao.insertFilepath(adminNotice);
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list"); 
+
       request.setAttribute("contentUrl", "/admin/NoticeAdd.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
       // request.getRequestDispatcher("/admin/NoticeAdd.jsp").forward(request, response);
 
     } catch (Exception e) {

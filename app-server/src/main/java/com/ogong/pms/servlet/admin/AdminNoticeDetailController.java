@@ -37,7 +37,11 @@ public class AdminNoticeDetailController extends GenericServlet {
 
       request.setAttribute("adminNotice", adminNotice);
 
-      request.getRequestDispatcher("/admin/NoticeDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "🔔 공지게시글 상세");
+      request.setAttribute("contentUrl", "/admin/NoticeDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
+      //request.getRequestDispatcher("/admin/NoticeDetail.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
