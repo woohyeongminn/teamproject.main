@@ -12,7 +12,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>myStudy | calendar</title>
- <link href="../../calstyle.css" rel="stylesheet" type="text/css">
+ <link href="../../css/calstyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <jsp:include page="../../header.jsp"/>
@@ -44,6 +44,6 @@
 	    </div>
     </div>
     
-     <script type="text/javascript" src="../../calendar.js"></script>
+     <script type="text/javascript" src="../../js/calendar.js"></script>
 </body>
 </html>

@@ -32,11 +32,13 @@ public class AdminAskBoardListController extends GenericServlet {
       Collection<AskBoard> adminAskBoardList = askBoardDao.findAll();
 
       if (adminAskBoardList == null) {
-        throw new Exception(" >> 등록된 글이 없습니다.");
+        throw new Exception("문의 게시글이 존재하지 않습니다.");
       }
 
+      request.setAttribute("pageTitle", "💬문의글 목록");
       request.setAttribute("adminAskBoardList", adminAskBoardList);
-      request.getRequestDispatcher("/admin/AskBoardList.jsp").forward(request, response);   
+      request.setAttribute("contentUrl", "/admin/AskBoardList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

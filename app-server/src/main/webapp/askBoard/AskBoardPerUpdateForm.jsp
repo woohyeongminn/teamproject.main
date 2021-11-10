@@ -7,29 +7,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인회원 문의글 수정</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+<title>수정 | 문의 게시글</title>
+ <style>
+  * {
+  font-size: 14px;
+  }
   
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-
-<style>
   label {
     margin-right: 5px;
     text-align: center;
     display: inline;
     width: 60px;
+    size:100px;
   }
-  legend {
-  text-align: center;
+  
+  .btn {
+    line-height: 14px;
   }
 </style>
 </head>
-
 <body>
-<jsp:include page="../header.jsp"/>
-  <h5>개인 회원 문의글 수정</h5>
-
   <form action="perupdate">
     <span>(${perAskBoard.askNo})</span><br>
     
@@ -40,12 +37,9 @@
     <input id='f-content' type='text' name='content' value='${perAskBoard.askContent}'><br>
     
     <span id='f-registeredDate'>${perAskBoard.askRegisteredDate}</span><br>
-<
     <input type ='hidden' name='askNo' value='${perAskBoard.askNo}'>
   
-    <button type="submit" value="수정">수정</button>
-
+    <button class = "btn btn-outline-dark"  type="submit" value="수정">수정</button>
   </form>
-  
  </body>
 </html>

@@ -35,9 +35,10 @@ public class AskBoardAllDetailCotroller extends HttpServlet {
       if (askBoard == null) {
         throw new Exception("문의게시글 상세 오류!");
       }
-
+      request.setAttribute("pageTitle", "💬문의글 상세");
       request.setAttribute("askBoard", askBoard);
-      request.getRequestDispatcher("/askBoard/AskBoardAllDetail.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/askBoard/AskBoardAllDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.getStackTrace();

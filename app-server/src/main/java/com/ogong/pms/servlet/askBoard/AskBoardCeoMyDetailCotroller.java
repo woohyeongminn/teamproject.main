@@ -36,8 +36,10 @@ public class AskBoardCeoMyDetailCotroller extends HttpServlet {
         throw new Exception("문의게시글 상세 오류!");
       }
 
+      request.setAttribute("pageTitle", "💬문의글 상세");
       request.setAttribute("myAskBoard", myAskBoard);
-      request.getRequestDispatcher("/askBoard/AskBoardCeoMyDetail.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/askBoard/AskBoardCeoMyDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.getStackTrace();

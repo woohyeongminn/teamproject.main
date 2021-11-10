@@ -32,10 +32,13 @@ public class AdminAskBoardDetailController extends HttpServlet {
       AskBoard adminAskBoard = askBoardDao.findByNo(askBoardNo);
 
       if (adminAskBoard == null) {
-        throw new Exception("해당 번호의 게시글이 없습니다.");
+        throw new Exception("문의게시글 상세 오류!");
       }
+
+      request.setAttribute("pageTitle", "💬문의글 상세");
       request.setAttribute("adminAskBoard", adminAskBoard);
-      request.getRequestDispatcher("/admin/AskBoardDetail.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/admin/AskBoardDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

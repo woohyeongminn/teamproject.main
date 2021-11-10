@@ -32,9 +32,10 @@ public class AskBoardCeoUpdateFormCotroller extends HttpServlet {
       int askNo = Integer.parseInt(request.getParameter("askNo"));
       AskBoard ceoAskBoard = askBoardDao.findByNo(askNo);
 
+      request.setAttribute("pageTitle", "💬문의글 수정");
       request.setAttribute("ceoAskBoard", ceoAskBoard);
-      request.getRequestDispatcher("/askBoard/AskBoardCeoUpdateForm.jsp").forward(request, response);
-
+      request.setAttribute("contentUrl", "/askBoard/AskBoardCeoUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
