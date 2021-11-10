@@ -18,7 +18,7 @@ label {
 </head>
 <body>
 	<h1>📖 스터디 등록</h1>
-	<form action='add'>
+	<form action='add' method='post'>
     <input type='hidden' name='perno' value='${member.perNo}'>
         <label for='f-studyTitle'>제목</label> <input id='f-studyTitle' type='text' name='studytitle'><br>
         <p>

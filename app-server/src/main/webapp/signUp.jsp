@@ -12,41 +12,39 @@
 <style>
 
 .s {
-    width: 100%;
+width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 50px;
-    margin-top:50px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
 }
   .all-content {
-    width: 100%;
-    margin: 0 auto;
-    padding: 50px;
-    margin-top:50px;
+     width: 600px;
     display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
   }
 
   .signUp {
-    text-decoration:none;
+    text-decoration: none;
     display: inline-block;
-    width: 50%;
-    height: 250px;
+    width: 33%;
+    height: 168px;
     margin: 50px;
-    background-color:  #ccc0ae;
+    background-color: #ccc0ae;
     border-radius: 30px;
   }
 
   .signUp span {
     display: inline-block;
     vertical-align: middle;
-    font-weight: 900;
-    font-size: 30px;
+    font-weight: 600;
+    font-size: 22px;
     color: white;
-    margin-top: 90px;
+    margin-top: 80px;
     margin-left: 20px;
-    line-height: 1.1;
+    line-height: 1.2;
   }
 
  .signUp:hover {
@@ -57,9 +55,8 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"/>
 <section class='s'>
-	<b style="font-size:20px; padding-left:20px; margin: auto;"> 🎓 오늘의 공부에 오신 걸 환영합니다! 회원가입을 진행해 주세요! 🎓 </b>
+	<b style="font-size:16px; padding-left:20px; margin: auto;"> 🎓 오늘의 공부에 오신 걸 환영합니다! 회원가입을 진행해 주세요! 🎓 </b>
 	<p b style="padding-left:20px;"></p>
 	<div class="all-content">
 		<a class="signUp" href="/ogong/member/addform" value="개인회원 가입" ><span>개인<br>회원가입</span></a> 

@@ -5,9 +5,10 @@
 <head>
 <title>등록 | 자유 게시판</title>
 <style>
-*{
-  font-size:14px;
+* {
+    font-size: 14px;
 }
+
 label {
 	margin-right: 5px;
 	text-align: center;
@@ -41,7 +42,7 @@ input {
 					<th><label for='f-filepath'>파일</label></th>
 				</tr>
 			</thead>
-			<form action='add'>
+			<form action='add' method='post' enctype="multipart/form-data">
 				<input type='hidden' name='studyno' value='${studyno}'>
 				<td></label><input id='f-title' type='text' name='title'></td>
 				<td><input id='f-content' type='text' name='content'></td>

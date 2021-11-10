@@ -26,7 +26,7 @@ label {
 		<span>${freeBoard.freeBoardViewcount}</span><br>
 		<div class="input-group mb-3">
 			<span>댓글&nbsp;</span>
-			<form action='/ogong/freeboard/comment/add'>
+			<form action='/ogong/freeboard/comment/add' method='post'>
 				<input type='hidden' name='studyno' value='${freeBoard.studyNo}'/>
 				<input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'/>
 				<input id='f-commentText' type="text" name='commenttext' class="form-control"

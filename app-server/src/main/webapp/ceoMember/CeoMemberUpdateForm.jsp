@@ -5,9 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로필 수정</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
 
 * {
@@ -168,7 +165,7 @@ font-weight: bold;
 </style>
 
 <script type="text/javascript">
-/* function checkValue() {
+function checkValue() {
   
   var form = document.ceoInfo;
   
@@ -192,29 +189,21 @@ font-weight: bold;
           return false;
      }
     
-/*     if(!form.email.value != "checkEmail"){
+     if(!form.email.value != "checkEmail"){
            alert("이메일 중복체크를 해주세요.");
            return false;
      }
-      */
+      
     if(!form.password.value){
           alert("비밀번호를 입력하세요.");
           return false;
      }
     
 }
- */
-  </script>
-
-
-
+</script>
 </head>
 
 <body>
-  <jsp:include page="../header.jsp"/>
-    <div class="c-top">
-        🙂 마이페이지 - 프로필 수정
-    </div>
     <br><br><br>
     <div class="all-content"> 
       <div class="tabmenu">
@@ -271,11 +260,8 @@ font-weight: bold;
       </ul>
       </div> 
     </div> 
-    <div class = "footer" style="bottom: 0;">
-      <jsp:include page="../footer.jsp"/>
-    </div>
-  <script>
+ <script>
   location.href = "#tab1";
-  </script>
+ </script>
 </body>
 </html>
