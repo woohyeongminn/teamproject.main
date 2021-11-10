@@ -31,16 +31,16 @@ public class CeoCafeRoomDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
       int roomNo = Integer.parseInt(request.getParameter("roomno"));
 
       CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
-      //      System.out.println(cafeRoom);
-
-      //      cafeRoom.setRoomInfo(cafeRoom.getRoomInfo().replace("\n", "<br><br>"));
+      cafeRoom.setRoomInfo(cafeRoom.getRoomInfo().replace("\n", "<br><br>"));
 
       request.setAttribute("cafeRoom", cafeRoom);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "👩‍🏫 " + cafeRoom.getCafe().getName() + " -" + " 스터디룸 상세");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeRoomDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

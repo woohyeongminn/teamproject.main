@@ -39,7 +39,6 @@ public class CeoReservationDetailController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-
       int resNo = Integer.parseInt(request.getParameter("resno"));  // 예약번호
 
       CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
@@ -54,7 +53,10 @@ public class CeoReservationDetailController extends HttpServlet {
       request.setAttribute("reviewStatusLable", reviewStatusLable);
       request.setAttribute("cafeReserEndTime", 
           cafeReservation.getStartTime().plusHours(cafeReservation.getUseTime()));
-      request.getRequestDispatcher("/ceoCafe/CeoCafeReservationDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "📝 예약 내역 상세");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeReservationDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
 
     } catch (Exception e) {

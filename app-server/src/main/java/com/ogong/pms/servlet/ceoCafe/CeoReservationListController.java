@@ -9,10 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
-import com.ogong.pms.dao.CafeRoomDao;
-import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.CafeReservation;
 import com.ogong.pms.domain.CeoMember;
 
@@ -20,18 +17,12 @@ import com.ogong.pms.domain.CeoMember;
 public class CeoReservationListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  CafeDao cafeDao;
-  CafeRoomDao cafeRoomDao;
   CafeReservationDao cafeReservationDao;
-  CeoMemberDao ceoMemberDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
-    cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
     cafeReservationDao = (CafeReservationDao) 웹애플리케이션공용저장소.getAttribute("cafeReservationDao");
-    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
   }
 
   @Override
@@ -40,18 +31,22 @@ public class CeoReservationListController extends HttpServlet {
 
     try {
       CeoMember loginCeo = (CeoMember) request.getSession().getAttribute("loginCeoUser");
-      //      CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
+      // CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
       List<CafeReservation> reserList = cafeReservationDao.findReservationListByCeoMember(loginCeo.getCeoNo());
 
       if (reserList.isEmpty()) {
-        request.getRequestDispatcher("/ceoCafe/CeoCafeReservationList.jsp").forward(request, response);
-      } else {
-        //      request.setAttribute("ceoMember", ceoMember);
+        request.setAttribute("pageTitle", "📝 예약 내역 목록");
+        request.setAttribute("contentUrl", "/ceoCafe/CeoCafeReservationList.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
+      } else {
+        // request.setAttribute("ceoMember", ceoMember);
         request.setAttribute("reserList", reserList);
 
-        request.getRequestDispatcher("/ceoCafe/CeoCafeReservationList.jsp").forward(request, response);
+        request.setAttribute("pageTitle", "📝 예약 내역 목록");
+        request.setAttribute("contentUrl", "/ceoCafe/CeoCafeReservationList.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
       }
 
     } catch (Exception e) {

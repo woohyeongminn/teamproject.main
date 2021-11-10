@@ -30,16 +30,18 @@ public class CeoCafeRoomUpdateFormController extends HttpServlet {
     try {
 
       int roomNo = Integer.parseInt(request.getParameter("roomno")); // 스터디룸 번호
-      //      int cafeNo = Integer.parseInt(request.getParameter("cafeno")); // 스터디룸 번호
 
       CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
 
       if (cafeRoom == null) {
-        throw new Exception("해당 번호의 스터디룸이 없습니다.");
+        throw new Exception("해당 스터디룸이 없습니다.");
       }
 
       request.setAttribute("cafeRoom", cafeRoom);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomUpdateForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "👩‍🏫 " + cafeRoom.getCafe().getName() + " -" + " 스터디룸 수정");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeRoomUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
