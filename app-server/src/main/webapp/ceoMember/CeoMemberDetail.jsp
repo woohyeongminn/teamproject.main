@@ -28,7 +28,7 @@ legend {
 .all-content {
   width: 100%;
   margin: 0 auto;
-  height: 700px;
+  height: 800px;
 }
 
 .c-top {
@@ -223,9 +223,9 @@ font-weight: bold;
 			    </form>
 			  </div>
 			 </li>
-			 <li id="tab2" class="btnCon"><a class="tabbtn" href="#tab2">내 카페</a>
+			 <li id="tab2" class="btnCon"><a class="tabbtn" href="cafe/detail">내 카페</a>
 			  <div class="tabCon" >
-			     <jsp:include page="../ceoCafe/CeoCafeMyDetail.jsp"/>
+			     <%-- <jsp:include page="../ceoCafe/CeoCafeMyDetail.jsp"/> --%>
 				    <!-- <a href='cafe/detail' class = "btn btn-outline-dark">내 카페</a> -->
 			  </div>
 			 </li>
@@ -237,7 +237,7 @@ font-weight: bold;
 	    </ul>
 	    </div> 
     </div> 
-    <div class = "footer" style="bottom: 0;">
+    <div style="bottom: 0;">
       <jsp:include page="../footer.jsp"/>
     </div>
   <script>

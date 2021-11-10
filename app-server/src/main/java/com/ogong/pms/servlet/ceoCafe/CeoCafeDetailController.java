@@ -64,7 +64,7 @@ public class CeoCafeDetailController extends HttpServlet {
         request.setAttribute("cafe", cafe);
         request.setAttribute("cafeStatus", status);
         request.setAttribute("reviewList", reviewList);
-        request.getRequestDispatcher("/ceoCafe/CeoCafeDetail.jsp").forward(request, response);
+        request.getRequestDispatcher("/ceoCafe/CeoCafeMyDetail.jsp").forward(request, response);
       }
       //      request.getRequestDispatcher("/ceoMember/cafeAdd").forward(request); return;
       //      request.getRequestDispatcher("/ceoMember/cafeUpdate").forward(request); return;
