@@ -116,7 +116,7 @@ function readImage(input) {
         const reader = new FileReader()
         // 이미지가 로드가 된 경우
         reader.onload = e => {
-            const previewImage = document.getElementById("preview")
+            const previewImage = document.getElementById("preview-image")
             previewImage.src = e.target.result
         }
         
