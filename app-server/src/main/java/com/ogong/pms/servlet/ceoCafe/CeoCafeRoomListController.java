@@ -42,7 +42,10 @@ public class CeoCafeRoomListController extends HttpServlet {
 
       request.setAttribute("cafeNo", cafeNo);
       request.setAttribute("cafeRoomList", cafeRoomList);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomList.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "👩‍🏫 스터디룸 목록");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeRoomList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

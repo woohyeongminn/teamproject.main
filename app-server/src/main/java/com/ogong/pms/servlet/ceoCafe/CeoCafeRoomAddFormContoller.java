@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeRoomDao;
+import com.ogong.pms.domain.Cafe;
 
 @WebServlet("/ceomember/cafe/room/addform")
 public class CeoCafeRoomAddFormContoller extends HttpServlet {
@@ -33,12 +34,13 @@ public class CeoCafeRoomAddFormContoller extends HttpServlet {
 
     try {
       int cafeNo = Integer.parseInt(request.getParameter("cafeno"));    //카페번호
-
-      //      List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
+      Cafe cafe = cafeDao.findByCafeNo(cafeNo);
 
       request.setAttribute("cafeNo", cafeNo);
-      //      request.setAttribute("cafeRoomList", cafeRoomList);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomAddForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "👩‍🏫 " + cafe.getName() + " -" + " 스터디룸 등록");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeRoomAddForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
 
     } catch (Exception e) {

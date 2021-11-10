@@ -33,6 +33,5 @@
 	     탈퇴하기
 	  </button>
   </form>
-  
  </body>
 </html>

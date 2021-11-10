@@ -61,7 +61,7 @@ public class CeoDetailController extends HttpServlet {
 
       request.setAttribute("ceoMember", ceoMember);
 
-      request.setAttribute("pageTitle", "기업회원 회원가입");
+      request.setAttribute("pageTitle", "🙂 마이페이지");
       request.setAttribute("contentUrl", "/ceoMember/CeoMemberDetail.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 

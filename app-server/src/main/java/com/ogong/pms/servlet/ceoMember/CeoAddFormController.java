@@ -35,7 +35,7 @@ public class CeoAddFormController extends HttpServlet {
       // 중복체크 하려고 보냈음
       request.setAttribute("ceoMemberList", ceoMemberList);
 
-      request.setAttribute("pageTitle", "기업회원 상세");
+      request.setAttribute("pageTitle", "기업 회원가입");
       request.setAttribute("contentUrl", "/ceoMember/CeoMemberAddForm.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
