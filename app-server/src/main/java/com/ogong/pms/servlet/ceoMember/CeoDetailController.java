@@ -60,7 +60,11 @@ public class CeoDetailController extends HttpServlet {
       }
 
       request.setAttribute("ceoMember", ceoMember);
-      request.getRequestDispatcher("/ceoMember/CeoMemberDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "기업회원 회원가입");
+      request.setAttribute("contentUrl", "/ceoMember/CeoMemberDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
 
     } catch (Exception e) {
       request.setAttribute("error", e);

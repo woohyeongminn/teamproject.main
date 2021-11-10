@@ -6,9 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업회원 로그인</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
 
   * {
@@ -25,6 +22,7 @@
   text-align: center;
   font-size: 16px;
   }
+  
   form {
   max-width: 500px;
   }
@@ -106,35 +104,28 @@
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
-<div class="c-top">
-  | 🖐 오늘의 공부 로그인
-</div>
-
 <div class="all-content">
-<b style="font-size:20px"> 🖐 기업 회원 로그인 </b>
+<b style="font-size:20px"> 기업 회원 로그인 </b>
 <br>
 <hr>
 <form action='login'>
-			<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
-			<input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
-			<br>
-			<!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
-			<input class="input" id='f-password' type='password' name='password' placeholder='Password'>
+	<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
+	<input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
+	<br>
+	<!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
+	<input class="input" id='f-password' type='password' name='password' placeholder='Password'>
 	<div class="inner">
 	  <div class="form-check">
-	   <input type="checkbox" class="rememberCheck" id="dropdownCheck">
-	   <span>
-	    정보 기억하기
-	   </span>
+		   <input type="checkbox" class="rememberCheck" id="dropdownCheck">
+		   <span>정보 기억하기</span>
 	  </div>
-		  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+	  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
 	</div>
 </form>
 <div class="mb">
-    <a href="addform">회원가입</a> |
-    <a href="#">비밀번호찾기</a>
-   </div>
+	 <a href="addform">회원가입</a> |
+	 <a href="#">비밀번호찾기</a>
+</div>
 </div>
 </body>
 </html>
