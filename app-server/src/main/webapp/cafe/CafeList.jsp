@@ -52,11 +52,10 @@
   }
   #content {
     margin-left: 20px;
-    width: 47%;
+    width: 722px;
     float: left;
     overflow-y: scroll;
     overflow-x:hidden;
-    
   }
   .col {
     width: 355px;
@@ -112,7 +111,7 @@
 </c:if>
 </div>
 
-<div id="map" style="width:51%;"></div>
+<div id="map" style="width:calc(100% - 722px - 38px);"></div>
   
 </div>  
 

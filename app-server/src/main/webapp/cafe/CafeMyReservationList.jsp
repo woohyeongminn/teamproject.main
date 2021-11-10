@@ -23,7 +23,7 @@
 <div class="all-content">
 <form id="reservationForm" action="reservationDelete" method="POST">
 <c:if test='${not empty reserList}'>
-<table class="table table-striped text-center align-middle">
+<table class="table table-responsive text-center align-middle">
 <thead>
   <tr>
     <th>선택</th>
