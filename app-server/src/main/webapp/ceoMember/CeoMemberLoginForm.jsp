@@ -8,10 +8,7 @@
 <meta charset="UTF-8">
 <style>
 
-  * {
-  font-size: 14px;
-  }
-  
+
   label {
     margin-right: 10px;
     text-align: center;
@@ -55,8 +52,11 @@
   color : darkgray;
   }
   
-  button {
-   width: 100%
+  .btn {
+   width: 100%;
+   font-size: 14px;
+   line-height: 24px;
+   
   }
   
   .form-check {
