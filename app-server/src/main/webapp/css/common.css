@@ -1,18 +1,15 @@
 @charset "UTF-8";
 
 /* 에러 */
-
 #error-content {
   xborder: 1px dashed yellow;
   margin-left: 100px; 
 }
 
-
 .error-container {
     xborder: 1px solid red;
     width: 800px;
 }
-
 
 /* 헤더 */
 ol, ul, li {
@@ -151,7 +148,9 @@ header a {
   }
 }
 
-
+.template-content {
+	height: 900px;
+}
 
 /*footer 시작*/
 footer {

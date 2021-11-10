@@ -11,6 +11,7 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <style>
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -106,7 +107,7 @@ section {
 </head>
 
 <body>
-<jsp:include page="header.jsp"/>
+
     <section>
     <div class="contents">
       <div class="c-top">
@@ -154,8 +155,6 @@ section {
 
     </div>
     </section>
- <jsp:include page="footer.jsp"/>
-
 
   </div>
 </body>
