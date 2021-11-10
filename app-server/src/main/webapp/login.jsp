@@ -51,6 +51,10 @@ a {
 }
 
 /*body 시작-------------------------------------*/
+* {
+  font-size: 14px;
+}
+
 section {
   width:100%;
   z-index:500;
@@ -61,18 +65,18 @@ section {
   flex-direction: column;
   flex-wrap: nowrap;
   position: relative;
-  width: 100%;
+  width: 1200px;
+  margin: 0 auto;
 }
 
 .contents .c1 {
-  margin-right: 20px;
-  height: 600px;
-  padding-left:30px;
+  width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .contents .c1 #box {
-  margin: 20px;
-  height: 180px;
+  margin: 40px;
   margin-top: 100px;
 }
 
@@ -80,7 +84,8 @@ section {
   border: none;
   border: 1px solid darkgray;
   border-radius: 10px;
-  padding: 30px;
+  padding: 25px;
+  height: 230px;
 }
 /* 
 .contents .c1 .card span .btn {
@@ -97,7 +102,16 @@ section {
 
 .contents .c1 .card .card-text {
   margin-bottom: 16px;
-  font-size: small;
+  font-size: 13px;
+}
+
+#naver_id_login {
+margin: 10px 0;
+}
+
+.btn {
+  font-size: 12px;
+  line-height: 12px;
 }
 
 </style>
@@ -121,21 +135,20 @@ section {
           <div class="card">
               <h4 class="card-title">개인 회원</h4>
               <span class="card-text">개인 회원 로그인<br> 페이지로 이동합니다.</span>
-              <span><a href="member/form" class="btn btn-outline-dark">LOGIN</a>&emsp;
-              <!-- 네이버 로그인 버튼 노출 영역 -->
-			  <div id="naver_id_login"></div>
-			  <!-- //네이버 로그인 버튼 노출 영역 -->
-			  <script type="text/javascript">
-			    var naver_id_login = new naver_id_login("wh8zH3W5STAuoCbw48Fz", "http://localhost:8080/ogong/adminNotice/list");
-			    var state = naver_id_login.getUniqState();
-			    naver_id_login.setButton("green", 1, 40);
-			    naver_id_login.setDomain("http://localhost:8080/ogong/login");
-			    naver_id_login.setState(state);
-			    naver_id_login.setPopup();
-			    naver_id_login.init_naver_id_login();
-			  </script>
-			  </span>
-            </div>
+              <span><a href="member/form" class="btn btn-outline-dark">LOGIN</a>&emsp;</span>
+       
+			        <!-- 네이버 로그인 버튼 노출 영역 -->
+						  <div id="naver_id_login"></div>
+						  <script type="text/javascript">
+						    var naver_id_login = new naver_id_login("wh8zH3W5STAuoCbw48Fz", "http://localhost:8080/ogong/adminNotice/list");
+						    var state = naver_id_login.getUniqState();
+						    naver_id_login.setButton("green", 1, 40);
+						    naver_id_login.setDomain("http://localhost:8080/ogong/login");
+						    naver_id_login.setState(state);
+						    naver_id_login.setPopup();
+						    naver_id_login.init_naver_id_login();
+						  </script>
+          </div>
         </div>
 
         <div class="col" id="box">
