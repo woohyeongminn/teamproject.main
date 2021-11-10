@@ -49,7 +49,9 @@ public class ReplyAddController extends HttpServlet {
       askBoardDao.insertreply(askBoard);
       sqlSession.commit();
 
-      response.sendRedirect("../admin/askboardlist");
+      request.setAttribute("pageTitle", "📖답변 등록");
+      request.setAttribute("contentUrl", "/askBoard/ReplyAdd.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -32,7 +32,7 @@ input {
       <b>🪧 댓글 수정</b>
     </legend>
     <table class="table table-responsive">
-      <form action='/ogong/freeboard/comment/update'>
+      <form action='/ogong/freeboard/comment/update' method='post'>
         <input type='hidden' name='studyno' value='${freeBoard.studyNo}'>
         <input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'>
         <input type='hidden' name='commentno' value='${comment.commentNo}'>

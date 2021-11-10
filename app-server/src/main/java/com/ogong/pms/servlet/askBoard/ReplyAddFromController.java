@@ -40,8 +40,10 @@ public class ReplyAddFromController extends HttpServlet {
         throw new Exception(" >> 이미 등록된 답변이 있습니다.");
       }
 
+      request.setAttribute("pageTitle", "📖문의글 등록");
       request.setAttribute("askBoard", askBoard);
-      request.getRequestDispatcher("/askBoard/ReplyAddForm.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/askBoard/ReplyAddForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
