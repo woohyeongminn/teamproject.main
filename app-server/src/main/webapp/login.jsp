@@ -8,8 +8,11 @@
 <title>오늘의 공부-로그인</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!-- 아이콘 -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<!-- 네이버 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<!-- JQUERY -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <style>
@@ -58,13 +61,7 @@ section {
   flex-direction: column;
   flex-wrap: nowrap;
   position: relative;
-}
-
-.contents .c-top {
   width: 100%;
-  padding: 20px 0 20px 50px;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
 }
 
 .contents .c1 {
@@ -110,9 +107,7 @@ section {
 
     <section>
     <div class="contents">
-      <div class="c-top">
-        | 로그인 할 계정을 선택해주세요.
-      </div>
+      
       <div class="c1 row">
         <div class="col" id="box">
           <div class="card">

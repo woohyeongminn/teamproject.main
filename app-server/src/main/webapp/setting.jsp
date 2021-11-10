@@ -28,6 +28,13 @@
   text-align: center;
 }
 /* 버튼  class = "btn btn-outline-dark"  이걸로 통일 */
+
+/* 테이블  class = "table table-responsive text-center"  이걸로 통일 */
+/* 번호, 제목, 작성자, 등록일, 조회수 */
+/* 각자 페이지에 맞게 목록형은 알아서~ */
+
+
+
 </style>
 </head>
 <body>

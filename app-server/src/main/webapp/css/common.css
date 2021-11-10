@@ -49,7 +49,6 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  border-bottom:  1px solid rgba(0,0,0,.125);
   margin: 0 auto;
   background-color: white;
 }
@@ -57,6 +56,7 @@ header {
 header a {
   text-decoration: none;
   color: black;
+  font-size: 12px;
 }
 
 .header_logo {
@@ -88,6 +88,7 @@ header a {
 
 .header_menu li a {
   padding: 4px;
+  font-size: 12px;
   
 }
 .header_menu li a:hover {
@@ -152,6 +153,37 @@ header a {
 	height: 900px;
 }
 
+/* content */
+
+.template-wrap {
+	width: 100%;
+}
+
+.template-wrap .template-content {
+	width: 1200px;
+	margin: 0 auto;
+	background-color: white;
+}
+
+/* .template-top {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 100%;
+  background-color: orange;
+} */
+
+.template-wrap .template-top {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0 20px 50px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+  font-size: 14px;
+}
+
 /*footer 시작*/
 footer {
 width: 100%;
@@ -163,7 +195,7 @@ background-color: whitesmoke;
   position: inherit;
   z-index:-99;
   width: 1200px;
-  height:170px;
+  height:190px;
   margin: 0 auto;
   bottom: 0;
   left: 0;

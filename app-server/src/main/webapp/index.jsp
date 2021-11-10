@@ -146,15 +146,12 @@ position: absolute;
   margin: 0 auto;
   position: relative;
   display: flex;
-  flex-direction: column-reverse;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 
 .contents .c3 #main_3 {
-  dispaly: block;
   opacity: 35%;
-  width: 90%;
-  height: 30%;
-  magin: 0 auto;
 }
 
 a.navbar-brand {
@@ -211,6 +208,9 @@ bottom: 20px;
       <i class="fas fa-graduation-cap fa-2x"></i></a>
     </nav>
 
+<p align="center"><iframe width="20" height="20" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/131362507&amp;color=%2397cbff&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true" frameborder="no" scrolling="no" allow="autoplay"></iframe></p>
+
     <jsp:include page="footer.jsp"/>
+    
 </body>
 </html>
