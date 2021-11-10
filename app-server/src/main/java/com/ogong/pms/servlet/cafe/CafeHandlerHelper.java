@@ -41,10 +41,10 @@ public abstract class CafeHandlerHelper {
 
   public static String getCafeStatusLabel(int status) {
     switch (status) {
-      case WAIT: return "승인대기";
-      case GENERAL: return "운영중";
-      case STOP: return "운영중단";
-      case DELETE: return "삭제";
+      case WAIT: return "승인대기";         // 1
+      case GENERAL: return "운영중";        // 2
+      case STOP: return "운영중단";         // 3
+      case DELETE: return "삭제";           // 4
       default: return "오류";
     }
   }

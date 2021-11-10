@@ -13,108 +13,173 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 
-	* {
+* {
 	font-size: 14px;
- }
+}
 	
-  a {
+ a {
    text-decoration:none;
- }
+}
  
-  .all-content {
-  max-width: 900px;
+ .all-content {
+  width: 100%;
   margin: 0 auto;
- }
+  height: 800px;
+}
+ 
+.c-top {
+  width: 100%;
+  padding: 20px 0 20px 0px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+  text-align: center;
+  font-size: 16px;
+}
   
-  #aside {
-     width: 45%;
-     height: 100%;
-     background-color: lightsteelblue;
-     display: inline-block;
-  }
-  
-  #content {
-  width: 55%;
-  margin-left: 20px;
-  }
-  
-  .cafe-top {
+ul {
+list-style:none;
+}
+
+.tabmenu{ 
+  max-width:900px; 
+  margin: 0 auto; 
+  position:relative; 
+}
+
+.tabmenu > ul {
+  padding: 0;
+}
+
+.tabmenu > ul > li{
+  display:  inline-block;
+  width:33.33%; 
+  float:left;  
+  text-align:center; 
+  background :#f9f9f9;
+}
+
+.tabmenu > ul > li > a{
+  display:block;
+  line-height:40px;
+  height:40px;
+  text-decoration:none; 
+  color: #000;
+}
+
+.tabCon{
+  display:none; 
+  padding: 20px;
+  position:absolute;
+  left:0;
+  box-sizing: border-box; 
+  border : 5px solid #f9f9f9;
+  width: 900px;
+  height: 620px;
+}
+
+.btnCon:target  {
+  background : #ccc;
+}
+
+.btnCon:target .tabCon {
+  display: block;
+}
+
+.btnCon:target .tabbtn {
+  font-weight: bold;
+}
+
+.cafe-top {
+  width: 100%;
+  height: 200px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 40px 20px 10px 20px;
-  height:250px;
-  }
+  margin-bottom: 15px;
+}
   
-  .cafe-form {  
-    text-align: left;
-  }
+#aside {
+  width: 45%;
+  height: 100%;
+  background-color: lightsteelblue;
+  margin: 10px;
+  display: inline-block;
+}
   
-  .cafe-form > label {
-  width: 120px;
-  font-weight: bold;
-  padding: 5px 0;
-  }
+#content {
+  display: block;
+  width: 53%;
+  margin: 10px;
+}
   
-  .cafe-form > span {
-  width: 300px;
-  padding: 5px 0;
-  }
+.cafe-form {  
+  text-align: left;
+}
   
-  #c-image {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-  }
-  
-  .cafe-bottom {
-    width:100%;
-    text-align: left;
-    padding: 5px 20px;
-  }
-  
-  .cafe-bottom > label {
-   width: 15%;
-   font-weight: bold;
-   padding: 5px 0;
-  }
-  
-  .cafe-bottom > span {
-  width: 80%;
-  padding: 5px 0;
-  }
-  
+.cafe-form > label {
+	width: 120px;
+	font-weight: bold;
+	padding: 5px 0;
+}
+
+.cafe-form > span {
+	width: 300px;
+	padding: 5px 0;
+}
+
+#c-image {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.cafe-bottom {
+  width: 100%;
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.cafe-bottom > label {
+	 width: 15%;
+	 font-weight: bold;
+	 padding: 5px 0;
+}
+
+.cafe-bottom > span {
+	width: 80%;
+	padding: 5px 0;
+}
   
 .cafe-bottom-review {
   width: 100%;
   padding: 10px 20px;
   text-align: left;
-  }
+}
  
- .line {
- width: 100%;
- height: 4px;
- background: gray;
- }
+.line {
+	 width: 100%;
+	 height: 4px;
+	 background: gray;
+}
  
-  #c-grade {
-  margin-left: 41px;
-  vertical-align: 4px;
-  }
+#c-grade {
+	 margin-left: 41px;
+	 vertical-align: 4px;
+}
   
-  #c-review {
-   width: 427px;
-   background-color: whitesmoke;
-   height: 80px;
-   margin-bottom: 10px;
-  }
+#c-review {
+  width: 427px;
+  background-color: whitesmoke;
+  height: 80px;
+  margin-bottom: 10px;
+}
   
-  button {
+button {
   border: 0;
   background: transparent;
-  }
-  
- .btn_wrap {
+}
+
+.btn_wrap {
   max-width: 420px;
   margin: 20px auto 0;
   text-align: center;
@@ -122,20 +187,33 @@
   flex-direction: row;
   justify-content: center;
   margin-bottom: 100px;
- }
+}
  
- .btn_wrap .btn {
+.btn_wrap .btn {
   margin: 0 7px;
   padding: 5px 10px;
   height: auto;
   line-height: inherit;
- }
+}
   
   </style>
 </head>
 
 <body>
-  <div class="all-content">
+  <jsp:include page="../header.jsp"/>
+    <div class="c-top">
+        🙂 마이페이지
+    </div>
+    <br><br><br>
+    <div class="all-content"> 
+      <div class="tabmenu">
+       <ul>
+        <li id="tab1" class="btnCon"><a class="tabbtn first" href="../detail">내 프로필</a>
+        <div class="tabCon" >
+        </div>
+        </li>
+       <li id="tab2" class="btnCon"><a class="tabbtn" href="cafe/detail">내 카페</a>
+        <div class="tabCon" >
   <c:choose>
   <c:when test='${empty cafe}'>
      <span>등록된 카페가 없습니다.</span><br>
@@ -203,11 +281,11 @@
    </div>
    <div id='button_wrap'>
      <button id='b-but' type="submit" value="수정" formaction="updateform">
-        <a href='cafe/updateform?cafeno=${cafe.no}' class="btn btn-outline-dark"> 스터디카페 수정</a>
+        <a href='updateform?cafeno=${cafe.no}' class="btn btn-outline-dark"> 스터디카페 수정</a>
      </button>
      
      <button id='b-but' type="submit" value="삭제" formaction="deleteform">
-        <a href='cafe/deleteform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 삭제</a>
+        <a href='deleteform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 삭제</a>
      </button>
      
        <!--
@@ -215,15 +293,30 @@
        -->
      
       <button id='b-but' type="submit" value="스터디룸관리">
-        <a href='cafe/room/list?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디룸 관리</a>
+        <a href='room/list?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디룸 관리</a>
       </button>
       <button id='b-but' type="submit" value="예약관리">
-        <a href='cafe/reser/list' class="btn btn-outline-dark">예약 관리</a>
+        <a href='reser/list' class="btn btn-outline-dark">예약 관리</a>
       </button>
     
     </div>
    </c:otherwise>
   </c:choose>
   </div>
+  </li>
+       <li id="tab3" class="btnCon"><a class="tabbtn" href="#tab3">내 문의내역</a>
+        <div class="tabCon" >
+            <!-- <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a> -->
+        </div>
+        </li>
+   </ul>
+  </div>
+  </div>
+  <div class = "footer" style="bottom: 0;">
+      <jsp:include page="../footer.jsp"/>
+    </div>
+    <script>
+  location.href = "#tab2";
+  </script>
 </body>
 </html>

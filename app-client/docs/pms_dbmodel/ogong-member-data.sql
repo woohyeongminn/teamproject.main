@@ -16,7 +16,7 @@ values(4, '우음악', '음악대장', 'daum@test.com', password('d1'), '010-444
 'daum.gif', '2021-08-23', 1, 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
-values(5, '조고수', '고수고수왕고수', 'hanmail@test.com', password('h1'), '010-5555-5555',
+values(5, '조고수', '고수고수왕고수', 'hanmail@test.com', password('h11'), '010-5555-5555',
 'hanmail.gif', '2021-02-03', 1, 1); 
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 

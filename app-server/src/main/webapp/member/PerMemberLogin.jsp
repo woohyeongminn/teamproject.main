@@ -27,6 +27,10 @@
   <h4>개인 회원 로그인 성공</h4>
 
  <p>'${loginUser.perNickname}'님 환영합니다! 🖐</p>
+ <p>'${loginUser.perName}'(이름)님 환영합니다! 🖐</p>
+ <p>'${loginUser.perEmail}'(이메일)님 환영합니다! 🖐</p>
+ <p>'${loginUser.perTel}'님 (전화번호)환영합니다! 🖐</p>
+ <p>'${loginUser.perRegisteredDate}'(가입일)님 환영합니다! 🖐</p>
  <button><a href='detail'>마이페이지</a></button>
  <button><a href='../bookmark/list?perno=${loginUser.perNo}'>내 북마크</a></button>
  <button><a href='../study/list?perno=${loginUser.perNo}'>스터디 찾기</a></button>

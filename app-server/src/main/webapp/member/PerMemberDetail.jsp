@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인회원 상세</title>
+<title>회원 정보 | 상세</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
@@ -21,19 +21,16 @@
   b {
   text-align: center;
   }
-    .btn {
-    border-radius: 10px;
-    background-color: tan;
-    color: black;
-    font-size: 18px;
-  }
-  .btn:hover {
-    background-color: blanchedalmond;
-    color: black;
-  }
-  #photo {
-    
-  }
+	.n-btn {
+	    border-radius: 10px;
+	    background-color: blanchedalmond;
+	    color: black;
+	    font-size: 18px;
+	  }
+	  .n-btn:hover {
+	    background-color: lightyellow;
+	    color: black;
+	  }
 </style>
 </head>
 
@@ -55,14 +52,14 @@
      <span>가입일ㅣ</span> <span>${loginUser.perRegisteredDate}</span><br>
      
      <br>
-     <button class="btn btn-outline-primary me-md-2 btn-small" type="submit" value="수정" formaction="updateform">
-        <a href='updateform?no=${loginUser.perNo}'>프로필 수정하기</a>
+     <button class="n-btn w100 btn-sm btn-default cert-hidden" type="submit" value="수정" formaction="updateform">
+        <a href='updateform'>프로필 수정하기</a>
      </button>
      
-     <button class="btn btn-outline-primary me-md-2 btn-small" type="submit" value="삭제" formaction="delete">
-        <a href='delete?no=${loginUser.perNo}'>탈퇴하기</a>
+     <button class="n-btn w100 btn-sm btn-default cert-hidden" type="submit" value="삭제" formaction="delete">
+        <a href='delete'>탈퇴하기</a>
      </button>
-     <button class="btn btn-outline-primary me-md-2 btn-small" type="submit" value="로그아웃">
+     <button class="n-btn w100 btn-sm btn-default cert-hidden" type="submit" value="로그아웃">
         <a href='logout'>로그아웃</a>
      </button>
     </form>

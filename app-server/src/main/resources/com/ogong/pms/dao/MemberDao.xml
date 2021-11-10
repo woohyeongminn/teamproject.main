@@ -39,6 +39,10 @@
       m.member_no member_no,
       m.nickname,
       m.email,
+      m.password,
+      m.tel,
+      m.name,
+      m.created_dt,
       m.status,
       m.active
     from 
