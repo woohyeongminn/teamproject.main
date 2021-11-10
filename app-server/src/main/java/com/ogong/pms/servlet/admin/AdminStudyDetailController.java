@@ -37,7 +37,9 @@ public class AdminStudyDetailController extends GenericServlet {
 
       // request.setAttribute("perno", Integer.parseInt(request.getParameter("perno")));
       request.setAttribute("study", study);
-      request.getRequestDispatcher("/admin/AdminStudyDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "스터디 상세");
+      request.setAttribute("contentUrl", "/admin/AdminStudyDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

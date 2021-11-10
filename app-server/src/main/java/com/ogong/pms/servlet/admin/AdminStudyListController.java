@@ -36,7 +36,9 @@ public class AdminStudyListController extends GenericServlet {
       }
 
       request.setAttribute("studyList", studyList);
-      request.getRequestDispatcher("/admin/AdminStudyList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "스터디 목록");
+      request.setAttribute("contentUrl", "/admin/AdminStudyList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
