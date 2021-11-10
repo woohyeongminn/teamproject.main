@@ -41,7 +41,7 @@
       c.close_time,
       c.view_cnt,
       (select
-          avg(grade)
+          TRUNCATE(avg(grade),1)
 			 from studycafe_review srv
 			 join studycafe_reservation sr on srv.studycafe_rsv_no=sr.studycafe_rsv_no
 			 join studycafe_room srm on sr.studyroom_no=srm.studyroom_no
@@ -84,7 +84,7 @@
       c.close_time,
       c.view_cnt,
       (select
-          avg(grade)
+          TRUNCATE(avg(grade),1)
        from studycafe_review srv
        join studycafe_reservation sr on srv.studycafe_rsv_no=sr.studycafe_rsv_no
        join studycafe_room srm on sr.studyroom_no=srm.studyroom_no

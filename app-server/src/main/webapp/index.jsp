@@ -42,108 +42,11 @@ a {
   color: black;
 }
 
-/*header 시작*/
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 34px;
-}
-
-.header_logo {
-  font-size: 20px;
-  text-align: center;
-}
-
-.header_logo a {
-  display: inline-block;
-  width: 180px;
-  height: 60px;
-  margin: 0 auto;
-  line-height: 60px;
-}
-
-.header_logo a img {
-  width: 100%;
-  vertical-align: middle;
-}
-
-
-.header_menu {
-  display: flex;
-}
-
-.header_menu li {
-  font-size: 14px;
-  padding: 8px 34px;
-}
-
-.header_menu li a {
-  padding: 4px;
-  
-}
-.header_menu li a:hover {
-  color: darkgrey;
-  box-shadow: inset 0 -2px darkgrey;
-  line-height: 20px;
-}
-
-.header_login {
- display: flex;
- box-sizing: border-box;
- border-left: 2px solid darkgrey;
-}
-
-.header_login li {
-  font-size: 12px;
-  padding: 2px 8px;
-}
-
-@media screen and (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-self: start;
-    padding: 5px 0;
-  }
-
-  .header_logo {
-    margin: 0;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 5px;
-    border-bottom: 1px solid black;
-  }
-  
-  .header_menu {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .header_menu li {
-    width: 100%;
-    text-align: center;
-  }
-
-  .header_login {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .header_login li {
-    text-align: center;
-    margin: 4px;
-  }
-
-  .header_login li a {
-    padding: 10px;
-  }
-}
-
 /*body 시작*/
 section {
   width:100%;
   z-index:500;
+  margin: 0 auto;
 }
 
 .contents {
@@ -153,23 +56,58 @@ section {
   flex-wrap: nowrap;
 }
 
-.contents .c1 {
+.background {
   width: 100%;
+  background-color: rgb(219, 211, 209);
+}
+
+.contents .c1 {
+  width: 1200px;
   height: 800px;
   background-color: rgb(219, 211, 209);
   text-align: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.contents .c1 #photo_1 {
+    position: absolute;
+    z-index: 9999;
+    top: 35%;
+    left: 25%;
+    margin: 0 auto;
+}
+
+.contents .p1_back {
+width: 600px;
+height: 166px;
+position: absolute;
+    z-index: 999;
+    top: 35%;
+    left: 25%;
+    margin: 0 auto;
+	background-color: gray;
+	border-radius: 50px;
+	padding: 15px;
+	opacity: 30%;
 }
 
 .contents .c1 #main_1 {
   opacity: 35%;
 }
 
-.contents .c2 {
+.background_2 {
   width: 100%;
+  background-color: rgb(247, 231, 215);
+}
+
+.contents .c2 {
+  width: 1200px;
   height: 800px;
   background-color: rgb(247, 231, 215);
   display: flex;
   flex-direction: row;
+  margin: 0 auto;
 }
 
 .contents .c2 .c2-leftbox {
@@ -192,20 +130,28 @@ section {
   dispaly: inline-block;
 }
 
-.contents .c3 {
+.background_3 {
   width: 100%;
+  background-color: rgb(247, 247, 247);
+}
+
+.contents .c3 {
+  width: 1200px;
   height: 800px;
   background-color: rgb(247, 247, 247);
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column-reverse;
 }
 
 .contents .c3 #main_3 {
+  dispaly: block;
   opacity: 35%;
-  width: 100%;
+  width: 90%;
   height: 30%;
-  dispaly: inline-block;
+  magin: 0 auto;
 }
 
 a.navbar-brand {
@@ -221,73 +167,47 @@ right: 30px;
 bottom: 20px;
 }
 
-/*footer 시작*/
-footer {
-  font-size: 14px;
-  padding: 8px 0;
-  background-color: whitesmoke;
-}
-
-.footer_company {
-  display: flex;
-  margin-left: 20px;
-}
-
-.footer_company li a{
-  padding: 2px 10px 2px 0;
-}
-
-.footer_address {
-  margin-left: 20px;
-}
-
-.footer_copyright {
-  margin-left: 20px;
-}
-
 </style>
 </head>
 
 <body>
+<div id="first"></div>
     <jsp:include page="header.jsp"/>
 
-    <section>
+  <section>
     <div class="contents">
-      <div class="c1"><img src="img/main_1.JPG" id="main_1">
-      </div>
-      <div class="c2">
-        <div class="c2-leftbox">오늘의 공부 텍스트 박스</div>
-        <div class="c2-rightbox"><img src="img/main_2.jpg" id="main_2"></div>
-      </div>
-      <div class="c3"><img src="img/main_3.JPG" id="main_3">
-      </div>
-    </div>
     
-    </section>
+    <div class="background">
+      <div class="c1">
+        <div class="box">
+		      <img src="img/logo.png" id="photo_1">
+		      <div class="p1_back"></div>
+        </div>
+	      <img src="img/main_1.JPG" id="main_1">
+      </div>
+	 </div>
+	 
+	  <div class="background_2">
+	      <div class="c2">
+	        <div class="c2-leftbox" id="second">오늘의 공부 텍스트 박스</div>
+	        <div class="c2-rightbox"><img src="img/main_2.jpg" id="main_2"></div>
+	      </div>
+	  </div>
+	  
+	 <div class="background_3">
+	    <div class="c3">
+	      <img src="img/main_3.JPG" id="main_3">
+	    </div>
+	 </div>
+    
+	</div>
+	</section>
     
     <nav id="navbar-example2" class="navbar navbar-light bg-light px-3 navbarbtn">
       <a class="navbar-brand" href="#first">
       <i class="fas fa-graduation-cap fa-2x"></i></a>
     </nav>
 
-    <footer>
-      <ul class="footer_company">
-        <li><a href="#">오늘의 공부 소개</a></li>
-        <li><a href="#">이용약관</a></li>
-        <li><a href="#" class="orange">개인정보처리방침</a></li>
-        <li><a href="#">1:1문의</a></li>
-        <li><a href="#">법적고지</a></li>
-        <li><a href="#">사이트맵</a></li>
-      </ul>
-      <hr>
-      <div class="footer_address">
-        <p>상호명 : 오늘의 공부&emsp;ㅣ&emsp;주소 : (우)1111 서울특별시 강남구 역삼동 819-3 삼오빌딩</p>
-        <p>FAX : 0505-111-1111&emsp;ㅣ&emsp;Email: bit.study2@gmail.com</p>
-        <p>고객센터 : 1577-1111 (평일 09:00 ~ 18:00 / 점심 12:00 ~ 13:00)</p>
-        <p>사업자등록번호 : 391-11-1111&emsp;ㅣ&emsp;통신판매업신고번호: 제 2021-서울강남-1111 호 ㅣ 대표: 엄땡땡</p>
-      </div>
-      <hr>
-      <p class="footer_copyright">COPYRIGHTⓒ2021 TODAYSTUDY. ALL RIGHTS RESERVED.</p>
-    </footer>
+    <jsp:include page="footer.jsp"/>
 </body>
 </html>

@@ -137,99 +137,30 @@ values (7, '이용완료');
 -- 카페 예약 
 -- review : 1 => 리뷰 작성 아직 안함,, 2 => 리뷰 작성 완료
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (1, 1, 1, '2021-7-22', '2021-8-1', '10:00', 1, 2, 12000, 1, 1);
+values (1, 1, 1, '2021-7-22', '2021-8-1', '10:00', 1, 2, 12000, 1, 2);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (2, 3, 2, '2021-8-22', '2021-9-1', '10:00', 1, 2, 12000, 1, 1);
+values (2, 3, 2, '2021-8-22', '2021-9-1', '11:00', 1, 2, 12000, 1, 2);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (3, 3, 3, '2021-9-22', '2021-10-11', '10:00', 1, 2, 12000, 1, 1);
+values (3, 3, 3, '2021-9-22', '2021-10-11', '12:00', 1, 2, 12000, 1, 2);
+insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
+values (4, 4, 1, '2021-10-01', '2021-10-11', '10:00', 3, 5, 45000, 1, 1);
+insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
+values (5, 3, 1, '2021-10-10', '2021-12-1', '15:00', 2, 5, 30000, 1, 1);
+insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
+values (6, 2, 2, '2021-11-02', '2021-11-01', '12:00', 1, 2, 12000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (4, 5, 1, '2021-11-30', '10:00', 3, 5, 45000, 1, 1);
+values (7, 5, 1, '2021-11-30', '10:00', 3, 5, 45000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (5, 5, 2, '2021-11-30', '15:00', 2, 5, 30000, 1, 1);
+values (8, 5, 2, '2021-11-30', '15:00', 2, 5, 30000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (6, 2, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
+values (9, 6, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
 
 
+--카페 리뷰
+insert into studycafe_review(review_no, studycafe_rsv_no, content, grade, create_dt)
+values (1, 1, '괜찮아요', 4, '2021-8-11');
+insert into studycafe_review(review_no, studycafe_rsv_no, content, grade, create_dt)
+values (2, 2, '좋아요', 5, '2021-9-3');
+insert into studycafe_review(review_no, studycafe_rsv_no, content, grade, create_dt)
+values (3, 3, '별로;;', 2, '2021-10-20');
 
-
-
-
-
-
--- 카페 리뷰 상태 컬럼 추가
---alter table studycafe_review add column status integer;
--- 카페 예약 이용시간 도메인 숫자로 변경
---alter table studycafe_reservation modify using_time integer;
-
---insert into studycafe_holiday(holiday_no, cafe_no, date)
---values (4, 1, '2021-11-22');
-
-/*
-select c.cafe_no, c.name, c.location, c.open_time, c.close_time
-from studycafe c
-join studycafe_operating_status cs on c.operating_status_no=cs.operating_status_no
-where c.operating_status_no != 1 and c.operating_status_no != 4
-and c.location like '%서울%'
-order by cafe_no asc;
-
-select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,
-c.view_cnt, sp.name, sh.date
-from studycafe c
-left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
-left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
-where c.operating_status_no != 1 and c.operating_status_no !=4
-order by cafe_no asc
-
---and c.cafe_no = 1
-order by cafe_no asc
-
-select review_no, studycafe_rsv_no, content, grade, create_dt
-from studycafe_review;
-
-
-select studyroom_no, name
-from studycafe_room
-where cafe_no = 1;
-
-select r.studyroom_no, r.name room_name, r.cafe_no, r.introduction, r.people, r.hourly_amount, rp.photo_no, rp.name photo_name
-from studycafe_room r
-left outer join studycafe_room_photo rp on r.studyroom_no=rp.studyroom_no
-where r.studyroom_no = 1
-            
-select rs.studycafe_rsv_no, rs.studyroom_no, rs.per_member_no, rs.rsv_dt, rs.using_dt, rs.start_time, 
-rs.using_time, rs.people, rs.total_price, rs.review, rst.rsv_status_no, rst.rsv_name, c.cafe_no, c.name
-from studycafe_reservation rs
-join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no
-join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
-join studycafe c on sr.cafe_no=c.cafe_no
-join per_member pm on rs.per_member_no=pm.per_member_no
-where pm.member_no = 1 and rs.studycafe_rsv_no =
-order by rs.studycafe_rsv_no asc;
-            
-update studycafe_reservation set rsv_status_no = ? where studycafe_rsv_no = ?
-            
-select r.review_no, r.grade, r.content, r.create_dt, sr.cafe_no
-from studycafe_review r
-join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
-join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
-join per_member pm on rs.per_member_no=pm.per_member_no
-join member m on pm.member_no=m.member_no
-where m.member_no = 1;
-
-
-select c.cafe_no, c.name, c.info, c.location, c.phone, c.open_time, c.close_time,
-c.view_cnt, sp.name, sh.date, c.operating_status_no
-from studycafe c
-left outer join studycafe_photo sp on c.cafe_no = sp.cafe_no
-left outer join studycafe_holiday sh on c.cafe_no = sh.cafe_no
-and c.cafe_no = ?
-
-update member set nickname = '테스트' where member_no = (select member_no from ceo_member where ceo_member_no=2);
-            
-
-
-insert into studycafe_photo(photo_no, name, cafe_no)
-values (8, 'xxx.jpg', 1);
-insert into studycafe_photo(photo_no, name, cafe_no)
-values (9, 'zzz.jpg', 1);
-*/
