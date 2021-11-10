@@ -55,9 +55,9 @@ public class AskBoardPerAddCotroller extends HttpServlet {
       askBoardDao.insertPer(askBoard);
       sqlSession.commit();
 
-      //request.setAttribute("perNo", askBoard.getAskMemberWriter().getPerNo());
-      request.getRequestDispatcher("/askBoard/AskBoardPerAdd.jsp").forward(request, response);
-
+      request.setAttribute("pageTitle", "💬문의글 등록");
+      request.setAttribute("contentUrl", "/askBoard/AskBoardPerAdd.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

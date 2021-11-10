@@ -53,9 +53,9 @@ public class AskBoardCeoAddCotroller extends HttpServlet {
       askBoardDao.insertCeo(askBoard);
       sqlSession.commit();
 
-      //request.setAttribute("ceoNo", askBoard.getAskCeoWriter().getCeoNo());
-      request.getRequestDispatcher("/askBoard/AskBoardCeoAdd.jsp").forward(request, response);
-
+      request.setAttribute("pageTitle", "💬문의글 등록");
+      request.setAttribute("contentUrl", "/askBoard/AskBoardCeoAdd.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

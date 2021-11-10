@@ -7,58 +7,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의 게시글 등록(개인 회원)</title>
-
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+<title>등록 | 문의 게시글</title>
+  <style>
+  * {
+  font-size: 14px;
+  }
   
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-
-<style>
- 
-  label { 
-    font-family: '굴림체';
+  label {
     margin-right: 5px;
     text-align: center;
     display: inline;
     width: 60px;
     size:100px;
-    font-size: 20px;
   }
   
-  div {
-	  font-family: '굴림체';
-	  font-size: 20px;
+  .btn {
+    line-height: 14px;
   }
-
-  h5 {
-      background-color: blanchedalmond;
-      text-align: center;
-       color: black;ss
-      margin-top: 10px;
-      font-size: 50px;
-  }
-
-.btn {
-   border-radius: 4px;
-   background-color: blanchedalmond;
-   color: black;
-   font-size: 18px;
-  }
-  .btn:hover {
-   background-color: beige;
-   color: black;
-  }
-
-</style>
+  </style>
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
 <br>
-  <h5>💬문의글 등록</h5>
   <form>
-  
     <label for='f-status'>공개</label>
     <select id="f-status" name='status' >
 	    <option value='1' name='status'>공개</option>
@@ -86,10 +57,7 @@
     <br><br>
     
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-outline-primary me-md-2 btn-small" 
-     type="submit" value="등록" formaction="peradd">
-     등록하기
-     </button>
+     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="peradd">등록하기</button>
    </div> 
   </form>
 

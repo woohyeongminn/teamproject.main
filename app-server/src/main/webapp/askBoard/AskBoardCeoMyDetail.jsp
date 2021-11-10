@@ -8,12 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <title>문의글 상세</title>
-<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  
-  <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-
 <style>
+  * {
+  font-size: 14px;
+  }
+  
   label {
     margin-right: 5px;
     text-align: center;
@@ -22,40 +21,12 @@
     size:100px;
   }
   
-   form {
-    font-family: '굴림체';
-    text-align: center;
-     background-color: blanchedalmond;
-     text-align: center;
-     color: black;
-     margin-top: 10px;
-     font-size: 50px;
+  .btn {
+    line-height: 14px;
   }
-  
-  span {
-    text-align: center;
-    font-size: 15px;
-  }
-  
-   .btn {
-   border-radius: 4px;
-   background-color: blanchedalmond;
-   color: black;
-   font-size: 18px;
-  }
-  
-  .btn:hover {
-   background-color: beige;
-   color: black;
-  }
-  
 </style>
 </head>
-
 <body>
-<jsp:include page="../header.jsp"/>
-   <form> 💬 문의글 상세보기[사장 회원]</form>
-   <hr>
      <span id='no' name='no'>(${myAskBoard.askNo})</span><br>
      <span>제목ㅣ</span> <span>${myAskBoard.askTitle}</span><br>
      <span>내용ㅣ</span> <span>${myAskBoard.askContent}</span><br>
@@ -76,21 +47,15 @@
          </span><br>
         </c:otherwise>
      </c:choose>
-</body>
-   <div class="d-grid gap-2 d-md-flex ">
-     <button class="btn btn-primary me-md-2" type="submit" value="수정" formaction="update">
+      <br>
+     <button class = "btn btn-outline-dark" type="submit" value="수정" formaction="add">
      <a href='ceoupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
      </button>
-   </div>    
-   <div class="d-grid gap-2 d-md-flex ">
-     <button class="btn btn-primary me-md-2" type="submit" value="등록" formaction="delete">
-     <a href='ceodelete?askNo=${myAskBoard.askNo}'>문의글삭제</a>
+     <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
+     <a href='delete?askNo=${myAskBoard.askNo}'>문의글삭제</a>
      </button>
-   </div> 
-   <div class="d-grid gap-2 d-md-flex ">
-     <button class="btn btn-primary me-md-2" type="submit" value="목록" formaction="list">
+     <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="list">
      <a href='mylist'>내 목록보기</a>
-     </button>   
-   </div> 
-
-</html>  
+     </button> 
+</body> 
+</html> 

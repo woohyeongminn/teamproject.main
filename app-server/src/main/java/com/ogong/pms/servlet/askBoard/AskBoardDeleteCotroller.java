@@ -11,12 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 
-@WebServlet("/askboard/ceodelete")
-public class AskBoardCeoDeleteCotroller extends HttpServlet {
+@WebServlet("/askboard/delete")
+public class AskBoardDeleteCotroller extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   AskBoardDao askBoardDao;
   SqlSession sqlSession;
+
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();

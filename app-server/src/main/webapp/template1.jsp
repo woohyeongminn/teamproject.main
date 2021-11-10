@@ -33,7 +33,7 @@
 			</div>  
 		</div>
 		
-		<div class="template-footer" style="bottom: 0;">
+		<div class="template-footer" style="bottom: 0; font-size: 10px;">
 		  <jsp:include page="/footer.jsp"/>
 		</div>
 		

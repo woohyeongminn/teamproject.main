@@ -6,10 +6,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>문의 게시판(관리자)</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <title>목록 | 문의 게시글</title>
   <style>
+  * {
+  font-size: 14px;
+  }
+  
   label {
     margin-right: 5px;
     text-align: center;
@@ -17,67 +19,26 @@
     width: 60px;
     size:100px;
   }
-  legend {
-  font-family: '굴림체';
-    text-align: center;
-     background-color: blanchedalmond;
-     text-align: center;
-     color: black;
-     margin-top: 10px;
-     font-size: 50px;
-  }
-
-  div {
-  font-family: '굴림체';
-  margin-right: 10px;
-  }
-  a {
   
-  color : black;
-  text-decoration : auto;
-  }
-  a:hover {
-  color : lightgray;
-  }
-  #head {
-  font-family: '굴림체';
-  background-color: beige;
-  color: black;
-  font-size: 25px;
-  }
-  div {
-    font-family: '굴림체';
-  }
-  td {
-    font-size: 15px;
-  }
   .btn {
-   border-radius: 4px;
-   background-color: blanchedalmond;
-   color: black;
-   font-size: 18px;
-  }
-  .btn:hover {
-   background-color: beige;
-   color: black;
+    line-height: 14px;
   }
   </style>
 </head>
 <body>
 <fieldset>
 <br>
-<legend ><b> 💬 문의게시글 목록(관리자 전용) </b></legend><br>
 <hr>
-<table class="table table-responsive">
+<table class="table table-responsive text-center">
 <thead>
-<tr id="head">
-<th>No.</th>
-<th>제목</th>
-<th>작성자</th>
-<th>조회수</th>
-<th>등록일</th>
-<th>답변📔/📖</th>
-</tr>
+  <tr id="head">
+      <th>번호</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>조회수</th>
+      <th>등록일</th>
+      <th>답변📔/📖</th>
+  </tr>
 </thead>
 <tbody>
 <c:forEach items="${adminAskBoardList}" var="askBoard">
