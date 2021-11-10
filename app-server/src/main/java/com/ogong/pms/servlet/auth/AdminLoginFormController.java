@@ -20,7 +20,10 @@ public class AdminLoginFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+    // request.getRequestDispatcher("/admin/AdminLoginForm.jsp").forward(request, response);
 
-    request.getRequestDispatcher("/admin/AdminLoginForm.jsp").forward(request, response);
+    request.setAttribute("pageTitle", "로그인 선택");
+    request.setAttribute("contentUrl", "/admin/AdminLoginForm.jsp");
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
   } 
 }

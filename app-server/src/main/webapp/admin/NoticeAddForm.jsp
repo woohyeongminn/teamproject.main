@@ -20,10 +20,6 @@
     text-align: center;
     width: 60px;
   }
-  label#content {
-    position: relative;
-    bottom: 400px;
-  }
   .c-top {
   width: 100%;
   padding: 20px 0 20px 0px;
@@ -70,6 +66,9 @@
     border-style: solid;
     border-width: 0;
   }
+  tr#blockbox {
+    vertical-align: top;
+  }
   </style>
   
 </head>
@@ -99,15 +98,16 @@
 <td></td>
 </tr>
 
-<tr>
+<tr id="blockbox">
 <th scope="row"><label for='f-content' id="content">내용</label></th>
 <td><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" autocomplete='off' placeholder="내용을 입력해 주세요."></textarea></td>
 <td></td>
 </tr>
 
-<tr>
+<tr id="blockbox">
 <th scope="row"><label for='f-filepath'>파일</label></th>
-<td><input type="file" name="filepath"></td><br>
+<td><img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+<input style="display: block;" type="file" name="filepath" id="input-image"></td><br>
 <td></td>
 </tr>
 
@@ -120,6 +120,30 @@
 </div>
 </fieldset>
 </section>
+
+<script>
+function readImage(input) {
+    // 인풋 태그에 파일이 있는 경우
+    if(input.files && input.files[0]) {
+        // 이미지 파일인지 검사 (생략)
+        // FileReader 인스턴스 생성
+        const reader = new FileReader()
+        // 이미지가 로드가 된 경우
+        reader.onload = e => {
+            const previewImage = document.getElementById("preview-image")
+            previewImage.src = e.target.result
+        }
+        
+        // reader가 이미지 읽도록 하기
+        reader.readAsDataURL(input.files[0])
+    }
+}
+// input file에 change 이벤트 부여
+const inputImage = document.getElementById("input-image")
+inputImage.addEventListener("change", e => {
+    readImage(e.target)
+})
+</script>
 
 <script>
 document.querySelector("#notice-add").onsubmit = () => {

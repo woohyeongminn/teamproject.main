@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>${pageTitle}</title>
+  <title>오늘의 공부</title>
   <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="${contextPath}/node_modules/sweetalert2/dist/sweetalert2.css">
   <link rel="stylesheet" href="${contextPath}/css/common.css">
@@ -13,16 +13,30 @@
   <script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
   <script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
   <script src="${contextPath}/node_modules/sweetalert2/dist/sweetalert2.js"></script>
+  
 </head>
 	<body>
 		<jsp:include page="/header.jsp"/>
-		<div class="template-content">
-		  <jsp:include page="${contentUrl}"/>
+		
+		
+		<!-- template-wrap 은 100% 짜리 배경-->
+		
+		<div class="template-wrap" style="background-color: rgb(247, 231, 215);">
+		  <div class="template-top">
+        ${pageTitle}
+      </div>
+    </div>
+
+		<div class="template-wrap">
+			<div class="template-content">
+			  <jsp:include page="${contentUrl}"/>
+			</div>  
 		</div>
 		
 		<div class="template-footer" style="bottom: 0;">
 		  <jsp:include page="/footer.jsp"/>
 		</div>
+		
 	</body>
 </html>
 
