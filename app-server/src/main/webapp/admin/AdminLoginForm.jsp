@@ -2,19 +2,11 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 로그인</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   
-   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
-   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-   <!-- 아이콘 -->
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-     <!-- JQUERY -->
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   
 <style>
   legend {
@@ -100,30 +92,20 @@
   padding: 5px;
   font-size: 14px;
   }
-  .c-top {
-  width: 100%;
-  padding: 20px 0 20px 0px;
-  text-align: center;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-}
 
 </style>
-</head>
 
+</head>
 <body>
 
 	<section>
-	<div class="c-top">
-	      🖐 오늘의 공부 로그인
-	      </div>
-	      
+
 	<div class="all-content">
 	<legend><b> 👑 관리자 로그인 </b></legend>
 	<br>
 	<hr>
 	
-	<form action='login'>
+	<form action='login' name='login' onsubmit="return notEmpty()">
 	      <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
 	      <br>
 	      <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
@@ -134,12 +116,29 @@
 		      정보 기억하기
 		     </span>
 		  </div>
-	      <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+	      <button type="submit" class="btn btn-outline-dark" value="로그인">로그인</button> 
 	  </div>
 	</form>
 	
 	</div>
 	</section>
+
+<script type="text/javascript">
+function notEmpty() {
+  
+  var valueForm = document.login;
+  
+  if(!valueForm.email.value){
+    Swal.fire("아이디를 입력해 주세요.");
+    return false;
+  }
+  
+  if(!valueForm.password.value){
+	    Swal.fire("비밀번호를 입력해 주세요.");
+	    return false;
+	  }
+}
+</script>
 
 </body>
 </html>
