@@ -1,154 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-  <style>
-    ol, ul, li {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: top;
-}
 
-body {
-  line-height: 1.5;
-}
-
-ul {
-  padding: 0;
-}
-
-ul li {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-/*header 시작*/
-header {
-  width: 100%;
-}
-
-.header_background {
-  width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom:  1px solid rgba(0,0,0,.125);
-  margin: 0 auto;
-  background-color: white;
-}
-
-header a {
-  text-decoration: none;
-  color: black;
-}
-
-.header_logo {
-  font-size: 20px;
-  text-align: center;
-}
-
-.header_logo a {
-  display: inline-block;
-  width: 180px;
-  height: 60px;
-  margin: 0 auto;
-  line-height: 60px;
-}
-
-.header_logo a img {
-  width: 100%;
-  vertical-align: middle;
-}
-
-.header_menu {
-  display: flex;
-}
-
-.header_menu li {
-  font-size: 14px;
-  padding: 8px 34px;
-}
-
-.header_menu li a {
-  padding: 4px;
-  
-}
-.header_menu li a:hover {
-  color: darkgrey;
-  box-shadow: inset 0 -2px darkgrey;
-  line-height: 20px;
-}
-
-.header_login {
- display: flex;
- box-sizing: border-box;
- border-left: 2px solid darkgrey;
-}
-
-.header_login li {
-  font-size: 12px;
-  padding: 2px 8px;
-}
-
-@media screen and (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-self: start;
-    padding: 5px 0;
-  }
-
-  .header_logo {
-    margin: 0;
-    width: 100%;
-    text-align: center;
-    padding-bottom: 5px;
-    border-bottom: 1px solid black;
-  }
-  
-  .header_menu {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .header_menu li {
-    width: 100%;
-    text-align: center;
-  }
-
-  .header_login {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .header_login li {
-    text-align: center;
-    margin: 4px;
-  }
-
-  .header_login li a {
-    padding: 10px;
-  }
-}
-  </style>
-</head>
-<body>
 <%@include file="memberSession.jsp" %>
 <header>
-
 <div class="header_background">
   <div class='header_logo'>
     <a href="/ogong/index.jsp"><img src="/ogong/img/logo.png"></a>
@@ -162,7 +17,6 @@ header a {
   </ul>
 
  <ul class="header_login">
- 
 	  <c:choose>
 	    <c:when test="${empty loginUser && empty loginCeoUser && empty loginAdmin}">
 	      <li><a href="/ogong/signup">회원가입</a></li>
@@ -181,9 +35,6 @@ header a {
         <li><a href="/ogong/admin/logout">로그아웃</a></li>
       </c:when>
 	 </c:choose>
-
-</ul>
-</div>
+  </ul>
+  </div>
 </header>
-</body>
-</html>

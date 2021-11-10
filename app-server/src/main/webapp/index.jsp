@@ -7,6 +7,9 @@
 <title>오늘의 공부</title>
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon" sizes="16x16">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
+<link rel="stylesheet" href="css/common.css">
+
 <style>
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,

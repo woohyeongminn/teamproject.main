@@ -1,17 +1,21 @@
 @charset "UTF-8";
-  html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+
+/* 에러 */
+
+#error-content {
+  xborder: 1px dashed yellow;
+  margin-left: 100px; 
+}
+
+
+.error-container {
+    xborder: 1px solid red;
+    width: 800px;
+}
+
+
+/* 헤더 */
+ol, ul, li {
   margin: 0;
   padding: 0;
   border: 0;
@@ -25,7 +29,7 @@ body {
 }
 
 ul {
-	padding: 0;
+  padding: 0;
 }
 
 ul li {
@@ -39,15 +43,22 @@ a {
 
 /*header 시작*/
 header {
+  width: 100%;
+}
+
+.header_background {
+  width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 34px;
+  padding: 10px 0;
   border-bottom:  1px solid rgba(0,0,0,.125);
+  margin: 0 auto;
+  background-color: white;
 }
 
 header a {
-	text-decoration: none;
+  text-decoration: none;
   color: black;
 }
 
@@ -138,4 +149,57 @@ header a {
   .header_login li a {
     padding: 10px;
   }
+}
+
+
+
+/*footer 시작*/
+footer {
+width: 100%;
+background-color: whitesmoke;
+}
+.footer_background {
+  font-size: 10px;
+  background-color: whitesmoke;
+  position: inherit;
+  z-index:-99;
+  width: 1200px;
+  height:170px;
+  margin: 0 auto;
+  bottom: 0;
+  left: 0;
+}
+
+.footer_company {
+  display: flex;
+  margin: 0 0 0 20px;
+  padding: 15px 0 0 0;
+  justify-content: center;
+}
+
+.footer_company .footer_li {
+list-style-type: none;
+}
+
+.footer_company .footer_li .footer_a{
+  padding: 2px 10px 2px 0;
+  
+  text-decoration: none;
+  color: black;
+}
+
+.footer_address {
+  margin-left: 20px;
+}
+
+.footer_address > p {
+    margin: 0;
+    padding: 4px;
+    text-align: center;
+}
+.footer_copyright {
+  margin:0px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+  text-align: center;
 }
