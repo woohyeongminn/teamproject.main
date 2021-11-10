@@ -37,7 +37,10 @@ public class CeoUpdateFormController extends HttpServlet  {
       }
 
       request.setAttribute("ceoMember", ceoMember);
-      request.getRequestDispatcher("/ceoMember/CeoMemberUpdateForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "🙂 마이페이지 - 프로필 수정");
+      request.setAttribute("contentUrl", "/ceoMember/CeoMemberUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

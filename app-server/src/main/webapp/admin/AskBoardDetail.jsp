@@ -36,21 +36,28 @@
 
 <c:choose>
 <c:when test="${empty adminAskBoard.reply}">
-  <button class = "btn btn-outline-dark" type="submit" value="답변" formaction="reply">
-    <a href='../askboard/replyaddform?askNo=${adminAskBoard.askNo}'>답변등록</a>
-  </button>
+	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	   <button class = "btn btn-outline-dark" type="submit" value="답변" formaction="reply">
+	    <a href='../askboard/replyaddform?askNo=${adminAskBoard.askNo}'>답변등록</a>
+	   </button>
+	   <button class = "btn btn-outline-dark" type="submit" value="삭제" formaction="delete">
+	   <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
+	   </button>  
+  </div>
 </c:when>
 <c:otherwise>
   <span>답변 내용ㅣ</span>
    <span>${adminAskBoard.reply.replyTitle}
     ㅣ ${adminAskBoard.reply.replyContent}
     ㅣ${adminAskBoard.reply.replyRegisteredDate}</span><br>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	   <button class = "btn btn-outline-dark" type="submit" value="삭제" formaction="delete">
+	   <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
+	   </button>  
+  </div>
 </c:otherwise>
 </c:choose>
   
-  <button class = "btn btn-outline-dark" type="submit" value="삭제" formaction="delete">
-   <a href='askboarddelete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
-  </button>  
 </html>  
      
      

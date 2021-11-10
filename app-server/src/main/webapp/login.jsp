@@ -111,7 +111,8 @@ margin: 10px 0;
 
 .btn {
   font-size: 12px;
-  line-height: 12px;
+  line-height: 17px;
+  width: 124px;
 }
 
 </style>
