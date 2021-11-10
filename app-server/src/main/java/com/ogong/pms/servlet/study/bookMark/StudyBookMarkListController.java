@@ -40,8 +40,9 @@ public class StudyBookMarkListController extends HttpServlet {
 
       // request.setAttribute("member", member);
       request.setAttribute("studyList", studyList);
-      request.getRequestDispatcher("/study/bookMark/StudyBookMarkList.jsp").forward(request,
-          response);
+      request.setAttribute("pageTitle", "북마크 목록");
+      request.setAttribute("contentUrl", "/study/bookMark/StudyBookMarkList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -10,24 +10,12 @@
 <html>
 <head>
 <title>목록 | 스터디 찾기</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
 <style>
 *{
   margin:0;
   padding:0;
-  font-size:15px;
+  font-size:14px;
   line-height:1.3;
 }
 ul{
@@ -67,6 +55,11 @@ ul{
 .btnCon:target .tabCon{
   display: block;
 }
+.card-body {
+	flex: 1 1 auto;
+	padding: 1rem 1rem;
+	height: 190px;
+}
 </style>
 </head>
 	<!-- <h3><a href="list?perno=${perno}">📖 스터디 목록</a></h3><br> -->
@@ -99,7 +92,6 @@ ul{
 			id="button-addon2">
 	</div>  -->
 	<body>
-  <jsp:include page="../header.jsp" />
   <div class="tabmenu">
   <ul>
   <!-- 전체 스터디 목록 -->

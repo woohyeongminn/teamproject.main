@@ -4,8 +4,10 @@
 <html>
 <head>
 <title>등록 | 스터디 찾기</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
 <style>
+*{
+  font-size:14px;
+}
 label {
 	margin-right: 5px;
 	text-align: right;
@@ -15,7 +17,6 @@ label {
 </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 등록</h1>
 	<form action='add'>
     <input type='hidden' name='perno' value='${member.perNo}'>

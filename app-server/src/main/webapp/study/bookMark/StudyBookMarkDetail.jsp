@@ -4,8 +4,10 @@
 <html>
 <head>
 <title>상세 | 내 북마크</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
 <style>
+*{
+  font-size:14px;
+}
 label {
 	margin-right: 5px;
 	text-align: right;
@@ -15,7 +17,6 @@ label {
 </style>
 </head>
 <body>
-<jsp:include page="../../header.jsp"/>
 	<h1>🌟 내 북마크 상세</h1>
 	<input type="hidden" name="loginUser" value="${loginUser.perNo}">
 	<label for='f-studyNo'>번호</label>

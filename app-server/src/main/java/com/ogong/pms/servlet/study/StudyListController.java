@@ -61,7 +61,9 @@ public class StudyListController extends GenericServlet {
       request.setAttribute("studyList", studyList);
       request.setAttribute("studyIngList", studyIngList);
       request.setAttribute("studyEndList", studyEndList);
-      request.getRequestDispatcher("/study/StudyList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "스터디 목록");
+      request.setAttribute("contentUrl", "/study/StudyList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

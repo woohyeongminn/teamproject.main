@@ -5,8 +5,10 @@
 <html>
 <head>
 <title>상세 | 스터디 찾기</title>
-<link rel="stylesheet" type="text/css" href="../header.css">
 <style>
+*{
+  font-size:14px;
+}
 label {
 	margin-right: 5px;
 	text-align: right;
@@ -16,7 +18,6 @@ label {
 </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
 	<h1>📖 스터디 상세</h1>
 		<span>번호 </span> <span>${study.studyNo}</span><br>
     <span>북마크 </span> <span>${study.countBookMember}</span><br>
