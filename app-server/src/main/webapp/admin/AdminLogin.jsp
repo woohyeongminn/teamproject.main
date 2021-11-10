@@ -27,27 +27,27 @@ font-size: 14px;
   }
   button[type=button] {
     border-radius: 10px;
-    background-color: beige;
+    background-color: white;
     color: black;
     margin: 0 40px;
     margin-bottom: 200px;
   }
   button[type=button]:hover {
-    background-color: blanchedalmond;
+    background-color: beige;
     color: black;
   }
   .btn-secondary:focus {
-  background-color: beige;
+  background-color: white;
   color: black;
   }
   button[type=button1] {
     border-radius: 10px;
     border-color: lightgray;
-    background-color: beige;
+    background-color: white;
     color: black;
   }
   button[type=button1]:hover {
-    background-color: blanchedalmond;
+    background-color: beige;
     color: black;
   }
   .dropdown-menu {
