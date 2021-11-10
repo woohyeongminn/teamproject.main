@@ -7,49 +7,43 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의 게시글 등록</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+<title>등록 | 문의 게시글 답변</title>
 <style>
-
-.btn {
-   border-radius: 4px;
-   background-color: blanchedalmond;
-   color: black;
-   font-size: 18px;
+  * {
+  font-size: 14px;
   }
-  .btn:hover {
-   background-color: beige;
-   color: black;
-  }
-
-</style>
-</head>
-
-<body>
-<jsp:include page="../header.jsp"/>
-  <h5> 📕답변 등록 </h5>
-  <form action='replyadd'>
   
+  label {
+    margin-right: 5px;
+    text-align: center;
+    display: inline;
+    width: 60px;
+    size:100px;
+  }
+  
+  .btn {
+    line-height: 14px;
+  }
+  </style>
+</head>
+<body>
+ <br>
+  <form> 
     <div class="title">
     <label for='f-title' class='form-label'>제목</label>
-    <input id='f-title' type='text' name='title' placeholder="제목을 입력하세요"><br>
+    <input type ='text' class="form-control" name='title' placeholder="제목을 입력하세요"><br>
     </div>
     
     <div class="content">
     <label for='f-content' class='form-label' size='100px'>내용</label>
-    <input id='f-content' type='text' name='content' placeholder="내용을 입력하세요"><br>
+    <input type='text' class="form-control" name='content' placeholder="내용을 입력하세요"><br>
     </div>
     
     <input type ='hidden' name='askNo' value='${askBoard.askNo}'></input> 
     
     <br><br>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-primary me-md-2 btn-small" 
-     type="submit" value="등록" >
-     등록하기
-     </button>
+     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="replyadd">등록하기</button>
    </div> 
   </form>
 </body>
