@@ -14,6 +14,9 @@
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <style>
+  #f-photo-image {
+  height: 300px;
+  }
   label {
     margin-right: 5px;
     text-align: center;
@@ -147,7 +150,7 @@
 
 <tr>
 <th scope="row" id="third"><label for='f-filepath'>파일</label></th>
-<td><span id="f-filepath">${adminNotice.adminNotiFile}</span></td>
+<td><img id="f-photo-image" src="../upload/notice/${adminNotice.adminNotiFile}"></td>
 <td></td>
 </tr>
 

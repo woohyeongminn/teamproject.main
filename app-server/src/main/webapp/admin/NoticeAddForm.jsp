@@ -85,8 +85,7 @@
 <table class="table table-responsive text-center">
 <thead>
 
-<form id="notice-add" action='add'>
-<!-- <form action="../upload/uploadCheck.jsp" method="post" enctype="multipart/form-data"> -->
+<form id="notice-add" action='add' method='post' enctype="multipart/form-data">
 
 <tr>
   <th scope="col"></th>
@@ -109,11 +108,6 @@
 <tr>
 <th scope="row"><label for='f-filepath'>파일</label></th>
 <td><input type="file" name="filepath"></td><br>
-<!-- <input type="submit" value="파일 올리기"> -->
-<!-- <div class="image-container">
-    <img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-    <input style="display: block;" type="file" id="f-filepath" name='filepath'>
-</div> -->
 <td></td>
 </tr>
 
@@ -126,8 +120,6 @@
 </div>
 </fieldset>
 </section>
-
-<!-- <script src="file.js"></script> -->
 
 <script>
 document.querySelector("#notice-add").onsubmit = () => {

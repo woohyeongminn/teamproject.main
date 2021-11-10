@@ -12,6 +12,9 @@
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <style>
+  #f-photo-image {
+  height: 300px;
+  }
   label {
     margin-right: 5px;
     text-align: center;
@@ -85,7 +88,7 @@
 <table class="table table-responsive">
 <thead>
 
-<form id="notice-update" action='update'>
+<form id="notice-update" action='update' method='post' enctype="multipart/form-data">
 <tr>
   <th scope="col"></th>
   <th scope="col">🔔 공지게시판 게시글 변경</th>
@@ -106,7 +109,8 @@
 
 <tr>
 <th scope="row"><label for='f-filepath'>파일</label></th>
-<td><input id='f-filepath' type='file' name='filepath' value='${notice.adminNotiFile}' placeholder='${notice.adminNotiFile}'></td>
+<td><img id="f-photo-image" src="../upload/notice/${notice.adminNotiFile}">
+<input id='f-filepath' type='file' name='filepath'></td>
 <td></td>
 </tr>
 
