@@ -1,15 +1,18 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>calendar: my study</title>
-<link rel="stylesheet" href="calstyle.css">
 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>myStudy | calendar</title>
+ <link href="../../calstyle.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <jsp:include page="../../header.jsp"/>
@@ -40,6 +43,7 @@
 	        </div>
 	    </div>
     </div>
-    <script src="calindex.js"></script>
+    
+     <script type="text/javascript" src="../../calendar.js"></script>
 </body>
 </html>

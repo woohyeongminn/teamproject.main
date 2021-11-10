@@ -41,7 +41,7 @@ public class MemberUpdateController extends HttpServlet {
       perMember.setPerNickname(request.getParameter("nickname"));
       perMember.setPerName(request.getParameter("name"));
       perMember.setPerEmail(request.getParameter("email"));
-      perMember.setPerPassword(request.getParameter("password"));
+      perMember.setPerPassword(request.getParameter("confirmPassword"));
       perMember.setPerPhoto(request.getParameter("photo"));
       perMember.setPerTel(request.getParameter("tel"));
 

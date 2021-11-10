@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.cafe;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -39,14 +38,8 @@ public class CafeMyReservationListController extends HttpServlet {
       List<CafeReservation> reserList = 
           cafeReservationDao.findReservationListByMember(member.getPerNo());
 
-      for (CafeReservation cafeReser : reserList) {
-        Date today = new Date(System.currentTimeMillis());
-
-        if (today.compareTo(cafeReser.getUseDate()) > 0 && (cafeReser.getReservationStatus() == 1 || cafeReser.getReservationStatus() == 2)) {
-          cafeReservationDao.updateReservationStatusComplete(cafeReser.getReservationNo());
-          sqlSession.commit();
-        }
-      }
+      cafeReservationDao.updateReservationStatusComplete();
+      sqlSession.commit();
 
       reserList = cafeReservationDao.findReservationListByMember(member.getPerNo());
 

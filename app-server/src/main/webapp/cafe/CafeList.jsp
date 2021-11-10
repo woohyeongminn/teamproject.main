@@ -7,8 +7,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Insert title here</title>
-  <link rel="stylesheet" type="text/css" href="../header.css">
+  <title>스터디카페 | 목록</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
@@ -46,7 +45,7 @@
     --desktopHeaderContentHeight: 77px;
     --headerVerticalPadding: 12px;
     --desktopNavHeight: calc(var(--headerVerticalPadding) + var(--desktopHeaderContentHeight) + var(--headerVerticalPadding));
-    --desktopSearchBarHeight: 64px;
+    --desktopSearchBarHeight: 72px;
     --desktopSearchBarPadding: 60px;
     --desktopSearchBar: calc(var(--desktopSearchBarHeight) + var(--desktopSearchBarPadding));
     height: calc(100% - var(--desktopNavHeight) - var(--desktopSearchBar));
@@ -91,6 +90,7 @@
 <c:if test='${not empty cafeList}'>
     <div class="row row-cols-1 row-cols-md-3 g-4">
     <c:forEach items="${cafeList}" var="cafe">
+    <c:if test='${cafe.countRoom > 0}'>
       <div class="col">
         <div class="card">
           <img src="../img/aaa.jpg" class="card-img-top" alt="...">
@@ -105,6 +105,7 @@
           </div>
         </div>
       </div>
+    </c:if>
     </c:forEach>
     </div>
   </c:if>
@@ -157,28 +158,5 @@
 
 </tbody>
 </table>
-
-
-      for(Cafe cafe : cafeList) {
-        out.printf("<tr> "
-            + " <td>%d</td>"
-            + " <td><a href='detail?no=%1$d'>%s</a></td>"
-            + " <td>%s</td>"
-            + " <td>%s ~ %s</td>"
-            + " <td>%d</td>"
-            + " <td>★%.1f(%d)</td>"
-            + "</tr>", 
-            cafe.getNo(), 
-            cafe.getName(), 
-            cafe.getLocation(), 
-            cafe.getOpenTime(),
-            cafe.getCloseTime(),
-            cafe.getViewCount(),
-            cafe.getAvgReview(),
-            cafe.getCountReview());
-        if (cafe.getCafeStatus() == Cafe.STOP) {
-          out.println(" * 운영 중단");
-        }
-      }
 
  -->
