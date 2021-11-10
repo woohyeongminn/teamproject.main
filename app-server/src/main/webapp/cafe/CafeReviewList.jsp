@@ -7,41 +7,25 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Insert title here</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <style>
-  h3 {
-    text-align: center;
-    font-weight: bolder;
+  * {
+    font-size: 14px;
   }
   a {
    text-decoration:none;
   }
   .all-content {
     width: 100%;
-    max-width: 900px;
     margin: 0 auto;
-    text-align: center;
-  }
-  .c-top {
-    width: 100%;
-    padding: 20px 0 20px 50px;
-    font-weight: bold;
-    background-color: rgb(247, 231, 215);
-    text-align: center;
+    padding: 40px 0;
   }
   </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
-<div class="c-top">
-🔖 내 리뷰 목록
-</div>
 <br><br>
 <div class="all-content">
 <c:if test='${not empty reviewList}'>
-<table class="table table-striped text-center">
+<table class="table table-responsive text-center align-middle">
 	<thead>
 	  <tr>
 	    <th>번호</th>
@@ -71,10 +55,10 @@
 	    <td>${review.content}</td>
 	    <td>${review.registeredDate}</td>
 	    <td>
-	      <button class="btn btn-outline-dark"><a href="reviewUpdateForm?reviewNo=${review.reviewNo}">수정</a></button>
+	      <button class="btn btn-outline-dark btn-sm"><a href="reviewUpdateForm?reviewNo=${review.reviewNo}">수정</a></button>
 	    </td>
 	    <td>
-	      <button class="btn btn-outline-dark"><a href="reviewDelete?reviewNo=${review.reviewNo}">삭제</a></button>
+	      <button class="btn btn-outline-dark btn-sm"><a href="reviewDelete?reviewNo=${review.reviewNo}">삭제</a></button>
 	    </td>
 	 </tr>
 	</c:forEach>
@@ -87,27 +71,3 @@
 </c:if>
 <br>
 </div>
-</body>
-</html>
-<!-- 
-
-for (CafeReview cafeReview : reviewList) {
-        if (cafeReview.getReviewStatus() == 2) {
-          System.out.printf(" \n (%s)", cafeReview.getReviewNo());
-          System.out.println(" >> 삭제한 리뷰입니다.\n");
-          continue;
-        }
-
-        Cafe cafe = cafeDao.findByCafeNo(cafeReview.getCafe().getNo());
-
-        System.out.printf(" (%d)\n [%s]\n 별점 : %s (%d)\n 내용 : %s\n 등록일 : %s\n",
-            cafeReview.getReviewNo(), 
-            cafe.getName(), 
-            CafeHandlerHelper.getReviewGradeStatusLabel(cafeReview.getGrade()), 
-            cafeReview.getGrade(), 
-            cafeReview.getContent(), 
-            cafeReview.getRegisteredDate());
-        System.out.println();
-      }
-
- -->

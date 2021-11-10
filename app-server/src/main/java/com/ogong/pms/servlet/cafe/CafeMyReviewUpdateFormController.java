@@ -36,10 +36,14 @@ public class CafeMyReviewUpdateFormController extends HttpServlet {
       CafeReview cafeReview = cafeReviewDao.findByReviewNo(reviewNo);
 
       request.setAttribute("cafeReview", cafeReview);
-      request.getRequestDispatcher("/cafe/CafeReviewUpdateForm.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "리뷰 수정");
+      request.setAttribute("contentUrl", "/cafe/CafeReviewUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }

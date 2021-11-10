@@ -39,10 +39,14 @@ public class CafeMyReviewListController extends HttpServlet {
       List<CafeReview> reviewList = cafeReviewDao.findReviewListByMember(member.getPerNo());
 
       request.setAttribute("reviewList", reviewList);
-      request.getRequestDispatcher("/cafe/CafeReviewList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "내 리뷰 내역");
+      request.setAttribute("contentUrl", "/cafe/CafeReviewList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
