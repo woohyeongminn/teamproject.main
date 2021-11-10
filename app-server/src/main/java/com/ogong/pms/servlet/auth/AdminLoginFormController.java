@@ -22,7 +22,7 @@ public class AdminLoginFormController extends HttpServlet {
       throws ServletException, IOException {
     // request.getRequestDispatcher("/admin/AdminLoginForm.jsp").forward(request, response);
 
-    request.setAttribute("pageTitle", "로그인 선택");
+    request.setAttribute("pageTitle", "🖐 오늘의 공부 로그인");
     request.setAttribute("contentUrl", "/admin/AdminLoginForm.jsp");
     request.getRequestDispatcher("/template1.jsp").forward(request, response);
   } 

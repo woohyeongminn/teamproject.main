@@ -40,9 +40,12 @@ public class AuthAdminLoginController extends HttpServlet {
 
       if (admin != null) {
 
-        //        request.setAttribute("admin", admin);
         request.getSession().setAttribute("loginAdmin", admin);
-        request.getRequestDispatcher("/admin/AdminLogin.jsp").forward(request, response);
+        //request.getRequestDispatcher("/admin/AdminLogin.jsp").forward(request, response);
+
+        request.setAttribute("pageTitle", "🖐 오늘의 공부 로그인");
+        request.setAttribute("contentUrl", "/admin/AdminLogin.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
       }
 
       else {

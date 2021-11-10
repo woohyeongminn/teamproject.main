@@ -6,22 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 로그인</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
    
-   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
-   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
-  .c-top {
-  width: 100%;
-  padding: 20px 0 20px 0px;
-  text-align: center;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-  }
-  legend {
-  text-align: center;
-  }
+* {
+font-size: 14px;
+}
   p#welcome {
     text-align: center;
     margin: 100px;
@@ -35,10 +24,6 @@
   .btn-group {
   margin: 0 10px;
   align-items: center;
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  float: left; */
   }
   button[type=button] {
     border-radius: 10px;
@@ -78,17 +63,18 @@
   }
 
 </style>
+
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+
 <section>
-<div class="c-top">
-      🖐 오늘의 공부 로그인
-      </div>
+
 <p id="welcome"><b>👑 '${loginAdmin.masterNickname}'님 환영합니다! 👑</b></p>
 <br>
 <br>
+
 <div class="groupwarp">
+
 	<div class="btn-group">
 	  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 	    👑 관리자 페이지
@@ -120,8 +106,6 @@
 	  <div class="dropdown-menu" role="menu" style="border-color: white;">
 	    <button class="dromdown-item" type="button1">
 	      <a href="study/list" style="color: black;">📚 스터디 목록</a></button><br>
-	    <!-- <button class="dromdown-item" type="button1">
-	      <a href="/study/list" style="color: black;">📔 스터디 삭제</a></button> -->
 	  </div>
 	</div>
 	
@@ -148,9 +132,10 @@
 	      <a href="/ogong/admin/askboardlist" style="color: black;">💬 문의사항</a></button>
 	  </div>
 	</div>
+	
 </div>
 
 </section>
- <jsp:include page="../footer.jsp"/>
+
 </body>
 </html>

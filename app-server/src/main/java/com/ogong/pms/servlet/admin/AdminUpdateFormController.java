@@ -32,7 +32,11 @@ public class AdminUpdateFormController extends GenericServlet {
       //
       //      request.setAttribute("admin", admin);
 
-      request.getRequestDispatcher("/admin/AdminUpdateForm.jsp").forward(request, response);
+      //request.getRequestDispatcher("/admin/AdminUpdateForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "🙂 마이페이지");
+      request.setAttribute("contentUrl", "/admin/AdminUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
