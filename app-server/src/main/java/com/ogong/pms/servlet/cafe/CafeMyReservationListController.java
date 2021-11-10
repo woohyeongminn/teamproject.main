@@ -54,10 +54,14 @@ public class CafeMyReservationListController extends HttpServlet {
         }
       }
       request.setAttribute("reserList", reserList);
-      request.getRequestDispatcher("/cafe/CafeMyReservationList.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "내 예약 내역");
+      request.setAttribute("contentUrl", "/cafe/CafeMyReservationList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
