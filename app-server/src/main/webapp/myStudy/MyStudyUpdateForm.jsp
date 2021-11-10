@@ -6,6 +6,9 @@
 <head>
 <title>상세 | 내 스터디</title>
 <style>
+*{
+font-size:14px;
+}
 label {
   margin-right: 5px;
   text-align: right;
