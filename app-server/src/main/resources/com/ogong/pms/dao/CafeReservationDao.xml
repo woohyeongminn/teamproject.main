@@ -124,12 +124,15 @@
       studycafe_rsv_no=#{reservationNo}
   </update>
   
-  <!-- 이용날짜가 지난 경우 상태를 이용완료로 변경 -->
+  <!-- 예약완료 or 결제완료이고, 이용날짜가 지난 경우 상태를 이용완료로 변경 -->
   <update id="updateReservationStatusComplete">
+  <![CDATA[
     update studycafe_reservation set
       rsv_status_no=7
     where
-      studycafe_rsv_no=#{reservationNo}
+      using_dt < curdate()
+      and (rsv_status_no=1 || rsv_status_no=2)
+  ]]>
   </update>
   
   <delete id="deleteReservation">

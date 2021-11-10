@@ -139,21 +139,21 @@ values (7, '이용완료');
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
 values (1, 1, 1, '2021-7-22', '2021-8-1', '10:00', 1, 2, 12000, 1, 2);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (2, 3, 2, '2021-8-22', '2021-9-1', '10:00', 1, 2, 12000, 1, 2);
+values (2, 3, 2, '2021-8-22', '2021-9-1', '11:00', 1, 2, 12000, 1, 2);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (3, 3, 3, '2021-9-22', '2021-10-11', '10:00', 1, 2, 12000, 1, 2);
+values (3, 3, 3, '2021-9-22', '2021-10-11', '12:00', 1, 2, 12000, 1, 2);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (4, 3, 1, '2021-10-01', '2021-10-11', '10:00', 3, 5, 45000, 1, 1);
+values (4, 4, 1, '2021-10-01', '2021-10-11', '10:00', 3, 5, 45000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
 values (5, 3, 1, '2021-10-10', '2021-12-1', '15:00', 2, 5, 30000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, rsv_dt, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (6, 3, 2, '2021-11-02', '2021-11-01', '12:00', 1, 2, 12000, 1, 1);
+values (6, 2, 2, '2021-11-02', '2021-11-01', '12:00', 1, 2, 12000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
 values (7, 5, 1, '2021-11-30', '10:00', 3, 5, 45000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
 values (8, 5, 2, '2021-11-30', '15:00', 2, 5, 30000, 1, 1);
 insert into studycafe_reservation(studycafe_rsv_no, studyroom_no, member_no, using_dt, start_time, using_time, people, total_price, rsv_status_no, review)
-values (9, 2, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
+values (9, 6, 2, '2021-12-12', '12:00', 1, 2, 12000, 1, 1);
 
 
 --카페 리뷰
