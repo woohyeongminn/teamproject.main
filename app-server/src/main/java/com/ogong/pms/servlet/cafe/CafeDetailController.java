@@ -59,9 +59,14 @@ public class CafeDetailController extends HttpServlet {
       request.setAttribute("reviewList", reviewList);
       request.setAttribute("roomList", roomList);
       request.setAttribute("roomListSize", roomList.size());
-      request.getRequestDispatcher("/cafe/CafeDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", cafe.getName());
+      request.setAttribute("contentUrl", "/cafe/CafeDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
     } catch (Exception e) {
-      throw new ServletException(e);
+      e.printStackTrace();
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 }
