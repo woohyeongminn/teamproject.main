@@ -82,11 +82,32 @@ list-style:none;
 
 .cafe-top {
   width: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 15px;
 }
+
+    .slide{height:300px;overflow:hidden;}
+    .slide ul{width:calc(100% * 4);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
+    .slide li{width:calc(100% / 4);height:300px;}
+    .slide li:nth-child(1){background:#ffa;}
+    .slide li:nth-child(2){background:#faa;}
+    .slide li:nth-child(3){background:#afa;}
+    .slide li:nth-child(4){background:#aaf;}
+    @keyframes slide {
+      0% {margin-left:0;} /* 0 ~ 10  : 정지 */
+      10% {margin-left:0;} /* 10 ~ 25 : 변이 */
+      25% {margin-left:-100%;} /* 25 ~ 35 : 정지 */
+      35% {margin-left:-100%;} /* 35 ~ 50 : 변이 */
+      50% {margin-left:-200%;}
+      60% {margin-left:-200%;}
+      75% {margin-left:-300%;}
+      85% {margin-left:-300%;}
+      100% {margin-left:0;}
+    }
+
 
 #content {
   display: block;
@@ -209,113 +230,8 @@ button {
   line-height: inherit;
 }
 
-/* 슬라이드 */
-* {box-sizing: border-box;}
-body {font-family: Verdana, sans-serif;}
-.mySlides {display: none;}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-  height:300px;
-  overflow: hidden;
-  background-color: lightsteelblue;
-  margin: 10px;
-  display: inline-block;
-}
-
-/* Caption text */
-.text {
-  color: #000000;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
 </style>
 </head>
-<script type="text/javascript">
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
-
-
 
 <body>
 <br><br><br>
@@ -340,32 +256,17 @@ function showSlides(n) {
 	    
 	    <!-- 카페 이미지 목록 (슬라이드) -->
        <!-- <span id='c-image'><img src="../../img/aaa.jpg" style="width: 370px; height: 200px;"></span> -->
-        <div class="slideshow-container">
-					<div class="mySlides fade">
-					  <div class="numbertext">1 / 3</div>
-					  <img src="../../img/aaa.jpg" style="width:100%">
-					  <div class="text">Caption One</div>
-					</div>
-					
-					<div class="mySlides fade">
-					  <div class="numbertext">2 / 3</div>
-					  <img src="../../img/bbb.jpg" style="width:100%">
-					  <div class="text">Caption Two</div>
-					</div>
-					
-					<div class="mySlides fade">
-					  <div class="numbertext">3 / 3</div>
-					  <img src="../../img/ccc.jpg" style="width:100%">
-					  <div class="text">Caption Three</div>
-					</div>
-					
-					</div>
-					
-					<div style="text-align:center">
-					  <span class="dot"></span> 
-					  <span class="dot"></span> 
-					  <span class="dot"></span> 
-					</div>
+					  
+					  
+					  
+			  <div class="slide">
+			    <ul>
+			      <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
+			      <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
+			      <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
+            <%-- <li><img src="../upload/cafe/${cafe.cafeImgs[2].name}.jpg" style="width:100%"></li> --%>
+			    </ul>
+			  </div>
        </div>
 
 

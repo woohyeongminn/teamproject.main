@@ -79,6 +79,7 @@ public class CeoAddController extends HttpServlet {
         });
 
       }
+
       // 전화번호
       int tel1 = Integer.parseInt(request.getParameter("tel1"));
       int tel2 = Integer.parseInt(request.getParameter("tel2"));

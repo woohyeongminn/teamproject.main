@@ -171,7 +171,6 @@ font-weight: bold;
  button:hover {
   color: white;
 }
- 
 </style>
 </head>
 
@@ -226,7 +225,7 @@ font-weight: bold;
 				    <!-- <a href='cafe/detail' class = "btn btn-outline-dark">내 카페</a> -->
 			  </div>
 			 </li>
-			 <li id="tab3" class="btnCon"><a class="tabbtn" href="#tab3">내 문의내역</a>
+			 <li id="tab3" class="btnCon"><a class="tabbtn" href="../askboard/mylist">내 문의내역</a>
 			  <div class="tabCon" >
 			      <!-- <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a> -->
 		    </div>

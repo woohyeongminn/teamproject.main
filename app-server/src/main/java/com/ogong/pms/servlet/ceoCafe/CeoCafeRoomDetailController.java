@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeRoomDao;
+import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeRoom;
 
 @WebServlet("/ceomember/cafe/room/detail")
@@ -34,11 +35,14 @@ public class CeoCafeRoomDetailController extends HttpServlet {
       int roomNo = Integer.parseInt(request.getParameter("roomno"));
 
       CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
+
+      Cafe cafe = cafeDao.findByCafeNo(cafeRoom.getCafe().getNo());
+
       cafeRoom.setRoomInfo(cafeRoom.getRoomInfo().replace("\n", "<br><br>"));
 
       request.setAttribute("cafeRoom", cafeRoom);
 
-      request.setAttribute("pageTitle", "👩‍🏫 " + cafeRoom.getCafe().getName() + " -" + " 스터디룸 상세");
+      request.setAttribute("pageTitle", "👩‍🏫 " + cafe.getName() + " -" + " 스터디룸 상세");
       request.setAttribute("contentUrl", "/ceoCafe/CeoCafeRoomDetail.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 

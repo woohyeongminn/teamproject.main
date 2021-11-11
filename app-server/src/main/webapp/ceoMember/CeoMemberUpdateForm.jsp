@@ -158,6 +158,14 @@ font-weight: bold;
 button:hover {
   color: white;
 }
+
+#f-photo {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    display: block;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -212,16 +220,14 @@ function checkValue() {
                  <img id="f-photo-image" src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
              </a>
           </div>
-          <input id='f-photo' type='file' name='photo' class="form-control">
+          
+          <input id='f-photo' type='file' name='photo' value='${ceoMember.ceoPhoto}'>
 	
 	        <label for='f-name' class='form-label'>이름</label>
-	        <input id='f-name' type='text' name='name' value='${ceoMember.ceoName}'><br>
+	        <input id='f-name' type='text' name='name'  value='${ceoMember.ceoName}'><br>
 	        
 	        <label for='f-nickname' class='form-label'>닉네임</label>
 	        <input id='f-nickname' type='text' name='nickname' value='${ceoMember.ceoNickname}'><br>
-	        
-	        <label for='f-photo' class='form-label'>사진</label>
-	        <input id='f-photo' type='text' name='photo' value='${ceoMember.ceoPhoto}'><br>
 	        
 	        <label for='f-tel' class='form-label'>전화번호</label>
 	        <input id='f-tel' type='tel' name='tel' value='${ceoMember.ceoTel}'><br>
@@ -233,7 +239,7 @@ function checkValue() {
 	        <input id='f-password' type='password' name='password' value='${ceoMember.ceoPassword}'><br>
 	        
 	        <label for='f-registeredDate' class='form-label'>가입일</label>
-	        <input id='f-registeredDate' type='registeredDate' style="border:0px"
+	        <input id='f-registeredDate' type='registeredDate' style/.''="border:0px"
 	         name='registeredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
 	      </div>
 	

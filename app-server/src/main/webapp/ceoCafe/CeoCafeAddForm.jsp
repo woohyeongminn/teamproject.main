@@ -149,11 +149,8 @@ label {
 	    <input id='f-photo' type='file' name='photo' /><br>
 	    
 	    
-	    
-	    
-	    
 	    <c:if test="${empty photo}">
-	      <input id='f-photo' type='hidden' name='filename[]' value="ceoProfile_80x80.jpg"/><br>
+	      <input id='f-photo' type='hidden' name='filename' value="cafe_80x80.jpg"/><br>
 	    </c:if>
     </div>
     <div id='button'>

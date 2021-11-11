@@ -94,8 +94,37 @@
    where
     tel=#{tel} and m.status=2
   </select>
+   
+   
+   <update id="updateCeoMember" parameterType="CeoMember">
+    update member
+    <set>
+      <if test="ceoName != null">
+        name = #{ceoName},
+      </if>
+       <if test="ceoNickname != null">
+        nickname = #{ceoNickname},
+      </if>
+       <if test="ceoPhoto != null">
+        photo = #{ceoPhoto},
+      </if>
+       <if test="ceoTel != null">
+        tel = #{ceoTel},
+      </if>
+      <if test="ceoEmail != null">
+        email = #{ceoEmail},
+      </if>
+      <if test="ceoPassword != null">
+        password = password(#{ceoPassword})
+      </if>
+    </set>
+    where
+     member_no=#{ceoNo}
+  </update>
+   
+   
     
-  <update id="updateName" parameterType="CeoMember">
+<!--   <update id="updateName" parameterType="CeoMember">
 	  update member set
 	   name = #{ceoName}
 	  where
@@ -135,7 +164,7 @@
      password = password(#{ceoPassword})
     where
      member_no=#{ceoNo}
-  </update>
+  </update> -->
   
   <update id="updateActive" parameterType="CeoMember">
     update member set
