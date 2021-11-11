@@ -19,8 +19,6 @@
     line-height: 14px;
   }
 </style>
-</head>
-<body>
 <fieldset>
 <br>
 <hr>

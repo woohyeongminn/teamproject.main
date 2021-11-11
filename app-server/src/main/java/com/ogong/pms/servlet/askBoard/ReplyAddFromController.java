@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.askBoard;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,14 +19,14 @@ public class ReplyAddFromController extends HttpServlet {
   AskBoardDao askBoardDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
   }
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -35,7 +34,6 @@ public class ReplyAddFromController extends HttpServlet {
       int askNo = Integer.parseInt(request.getParameter("askNo"));
 
       AskBoard askBoard = askBoardDao.findByNo(askNo);
-
       if (askBoard.getReply() != null) {
         throw new Exception(" >> 이미 등록된 답변이 있습니다.");
       }

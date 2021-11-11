@@ -1,11 +1,7 @@
 <%@page import="com.ogong.pms.domain.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원 정보 | 상세</title>
+
 <style>
   * {
   font-size: 14px;
@@ -26,12 +22,8 @@
   text-align-last: center;
   }
 </style>
-</head>
 
-<body>
-  
-   <hr>
-   <form >
+
      <!-- <span id='no' name='no'>(${loginUser.perNo})</span><br> -->
      <div id="photo">
      <span>사진ㅣ</span> <img src="..." alt="..." class="img-circle">
@@ -47,6 +39,11 @@
      <button class = "btn btn-outline-dark" ><a href='updateform'>프로필 수정</a></button>
      <button class = "btn btn-outline-dark" ><a href='delete'>회원 탈퇴</a></button>
      <button class = "btn btn-outline-dark" ><a href='logout'>로그아웃</a></button>
-    </form>
-</body>
-</html>
+     <button class = "btn btn-outline-dark" ><a href='../bookmark/list?perno=${loginUser.perNo}'>내 북마크</a></button>
+		 <button class = "btn btn-outline-dark" ><a href='../study/list?perno=${loginUser.perNo}'>스터디 찾기</a></button>
+		 <button class = "btn btn-outline-dark" ><a href='../cafe/list'>스터디카페 예약하기</a></button>
+		 <button class = "btn btn-outline-dark" ><a href='../cafe/reservationList'>내 예약 목록</a></button>
+		 <button class = "btn btn-outline-dark" ><a href='../cafe/reviewList'>내 리뷰 목록</a></button>
+		 <button class = "btn btn-outline-dark" ><a href='../askboard/mylist'>내 문의게시판</a></button>
+
+

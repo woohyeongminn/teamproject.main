@@ -72,15 +72,12 @@
                <td> 📖 </td>
             </c:otherwise>
            </c:choose> 
-    </c:if>    
+    </c:if> 
 </tr>
 </c:forEach>
 </table>
 </fieldset>
 </tbody> 
-<c:if test="${empty myAskBoardList}">
-   <form id="empty">등록한 문의글이 없습니다.</form><br>
-</c:if>
 <c:if test="${not empty loginUser}">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 	   <button class ="btn btn-outline-dark" type="submit" value="등록" formaction="add">

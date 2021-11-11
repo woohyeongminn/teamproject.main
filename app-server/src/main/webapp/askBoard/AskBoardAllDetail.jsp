@@ -19,14 +19,8 @@
   .btn {
     line-height: 14px;
   }
-  
   </style>
-</head>
 
-</head>
-
-<body>
-    
      <span id='no' name='no'>(${askBoard.askNo})</span><br>
      <span>제목ㅣ</span> <span>${askBoard.askTitle}</span><br>
      <span>내용ㅣ</span> <span>${askBoard.askContent}</span><br>
@@ -47,9 +41,7 @@
          </span><br>
         </c:otherwise>
      </c:choose>
-</body>
-</html>  
-     
+
      
      
      
