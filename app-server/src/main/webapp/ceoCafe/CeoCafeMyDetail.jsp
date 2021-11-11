@@ -213,7 +213,7 @@ button {
 		  <c:otherwise>
 		  <div class = "cafe-top">
 		  <div id='aside'>
-		    <span id='c-image'>대표이미지</span>
+		    <span id='c-image'><img src="../../img/aaa.jpg" style="width: 370px; height: 200px;"></span>
 		  </div>
 		  <div id='content'>
 		    <form action='updateform' class="cafe-form" method='post' enctype="multipart/form-data">

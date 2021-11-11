@@ -4,6 +4,31 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
+
+
+
+
+
+<!-- 이거 안쓰고 CeoCafeMyDetail 사용 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>

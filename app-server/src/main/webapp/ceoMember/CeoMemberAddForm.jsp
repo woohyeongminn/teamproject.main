@@ -104,6 +104,9 @@ function checkValue() {
 
 	  <label for='f-photo' class='form-label'>사진</label>
 	  <input id='f-photo' type='file' name='photo' /><br>
+	  <c:if test="${empty photo}">
+	    <input id='f-photo' type='hidden' name='photo' value="ceoProfile_80x80.jpg"/><br>
+	  </c:if>
 	  
 	  <label for='f-tel' class='form-label' >전화번호</label>
 	  <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
