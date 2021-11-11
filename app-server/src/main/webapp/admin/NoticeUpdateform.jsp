@@ -28,6 +28,12 @@
     text-align: center;
     width: 60px;
   }
+  label#click {
+    width: 150px;
+  }
+  label#click:hover {
+    color: silver;
+  }
   input {
   width: 700px;
   font-size: 14px;
@@ -35,6 +41,15 @@
   border : white;
   outline-color : lightgray;
   font-weight: 400;
+  }
+  input#chooseFile {
+   font-size: 12px;
+   color: white;
+   line-height: 12px;
+   /*mix-blend-mode: color;*/
+  }
+  input::file-selector-button {
+  display: none;
   }
   tr#blockbox {
     vertical-align: top;
@@ -51,9 +66,15 @@
   border: 0px solid white;
   outline-color: lightgray;
   border-radius: 1px;
-  }  
+  }
+  .img_button {
+  text-align: center;
+  }
   #f-photo-image {
   height: 300px;
+  }
+  .click_button {
+  text-align: center;
   }
   button[type=submit] {
     font-size: 14px;
@@ -95,8 +116,13 @@
   
   <tr id="blockbox">
     <th scope="row"><label for='f-filepath'>파일</label></th>
-    <td><img id="f-photo-image" src="../upload/notice/${notice.adminNotiFile}">
-    <input id='f-filepath' type='file' name='filepath'></td>
+    <td><div class="img_button">
+    <img id="f-photo-image" src="../upload/notice/${notice.adminNotiFile}"></div>
+    <div class="click_button">
+              <br>
+              <label for="chooseFile" id="click"><b>👉 CLICK HERE! 👈</b></label>
+          </div>
+          <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"></td>
     <td></td>
   </tr>
   
