@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>수정 | 문의 게시글</title>
  <style>
   * {
   font-size: 14px;
@@ -41,5 +35,3 @@
   
     <button class = "btn btn-outline-dark" type="submit" value="수정">수정</button>
   </form>
- </body>
-</html>

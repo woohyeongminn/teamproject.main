@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>문의글 상세</title>
 <style>
   * {
   font-size: 14px;
@@ -57,5 +51,3 @@
      <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="list">
      <a href='mylist'>내 목록보기</a>
      </button> 
-</body> 
-</html> 
