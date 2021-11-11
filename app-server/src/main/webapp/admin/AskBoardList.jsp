@@ -51,29 +51,51 @@
 </thead>
 <tbody>
 <c:forEach items="${adminAskBoardList}" var="askBoard">
-<tr>
-  <div>
-      <td>${askBoard.askNo}.</td>
-    </div>
-  <td><a href='askboarddetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
-  <td>${askBoard.askMemberWriter.perNickname}</td>
-  <td>${askBoard.askVeiwCount}</td>
-  <td>${askBoard.askRegisteredDate}</td>
-       <c:choose>
-        <c:when test="${empty askBoard.reply}">
-        <td> 📔 </td>
-        </c:when>
-        <c:otherwise>
-        <td> 📖 </td>
-        </c:otherwise>
-      </c:choose>  
-</tr>
+ <c:choose>
+  <c:when test="${askBoard.askMemberWriter.perStatus == 1}">
+		<tr>
+		  <div>
+		      <td>${askBoard.askNo}.</td>
+		  </div>
+				  <td><a href='askboarddetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+				  <td>[개인]${askBoard.askMemberWriter.perNickname}</td>
+				  <td>${askBoard.askVeiwCount}</td>
+				  <td>${askBoard.askRegisteredDate}</td>
+				       <c:choose>
+				        <c:when test="${empty askBoard.reply}">
+				          <td> 📔 </td>
+				        </c:when>
+				        <c:otherwise>
+				          <td> 📖 </td>
+				        </c:otherwise>
+				      </c:choose>  
+		</tr>
+	</c:when>
+	<c:when test="${askBoard.askCeoWriter.ceoStatus == 2}">
+    <tr>
+      <div>
+          <td>${askBoard.askNo}.</td>
+      </div>
+          <td><a href='askboarddetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+          <td>[사장]${askBoard.askCeoWriter.ceoNickname}</td>
+          <td>${askBoard.askVeiwCount}</td>
+          <td>${askBoard.askRegisteredDate}</td>
+               <c:choose>
+                <c:when test="${empty askBoard.reply}">
+                  <td> 📔 </td>
+                </c:when>
+                <c:otherwise>
+                  <td> 📖 </td>
+                </c:otherwise>
+              </c:choose>  
+    </tr>	
+	</c:when>	
+ </c:choose>		
 </c:forEach>
 </tbody>
 </table>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-
   <jsp:include page="AdminMenu.jsp"/>
     
 </div>

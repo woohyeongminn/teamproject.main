@@ -2,11 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-   <title>목록 | 문의 게시글</title>
   <style>
   * {
   font-size: 14px;
@@ -71,7 +66,7 @@
         <td>${askBoard.askRegisteredDate}</td>     
            <c:choose>
              <c:when test="${empty askBoard.reply}">
-               <td> 📕 </td>
+               <td> 📔 </td>
              </c:when>
             <c:otherwise>
                <td> 📖 </td>
@@ -87,21 +82,25 @@
    <form id="empty">등록한 문의글이 없습니다.</form><br>
 </c:if>
 <c:if test="${not empty loginUser}">
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <button class ="btn btn-outline-dark" type="submit" value="등록" formaction="add">
-   <a href='peraddform'>등록하기</a>
-   </button>
-</div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	   <button class ="btn btn-outline-dark" type="submit" value="등록" formaction="add">
+	   <a href='peraddform'>등록하기</a>
+	   </button>
+   </div>
 </c:if>
 <c:if test="${not empty loginCeoUser}">
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
-   <a href='ceoaddform'>등록하기</a>
-   </button>
-</div>
+   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	   <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
+	   <a href='ceoaddform'>등록하기</a>
+	   </button>
+   </div>
 </c:if>
-</body>
-</html> 
+   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="add">
+     <a href='list'>문의글 전체보기</a>
+   </button>
+
+
 
 
 
