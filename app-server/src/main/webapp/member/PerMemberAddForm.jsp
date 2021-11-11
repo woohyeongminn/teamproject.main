@@ -27,7 +27,7 @@
   </style>
 </head>
 
-<body>
+<body><br>
    <form action='add' method="post">
         <label for='f-name' class='form-label' size='100px'>이름</label>
         <input id='f-name' type='text' name='name' placeholder="이름"><br>
@@ -37,9 +37,11 @@
         
         <label for='f-password' class='form-label' size='100px'>암호</label>
         <input id='f-password' type='password' name='password' placeholder="암호"><br>
-    
+      
+        <div id="nickname">
         <label for='f-nickname' class='form-label' size='100px'>닉네임</label>
         <input id='f-nickname' type='name' name='nickname' placeholder='닉네임' size='20'><br>
+        </div>
         
         <label for='f-photo' class='form-label' size='100px'>사진</label>
         <input id='f-photo' type='file' name='photo' placeholder="사진"><br>
@@ -52,6 +54,13 @@
    </div>
     </div>
    </form>
+   
+   <script type="text/javascript">
+   var fNickname = document.querySelector()
+   
+   </script>
+   
+   
  </body>
 </html>
 
