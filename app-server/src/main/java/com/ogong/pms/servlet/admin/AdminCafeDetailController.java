@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,15 +26,15 @@ public class AdminCafeDetailController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
     cafeReviewDao = (CafeReviewDao) 웹애플리케이션공용저장소.getAttribute("cafeReviewDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -58,9 +57,15 @@ public class AdminCafeDetailController extends HttpServlet {
       request.setAttribute("cafe", cafe);
       request.setAttribute("reviewList", reviewList);
       //      request.setAttribute("perNo", request.getParameter("perNo"));
-      request.getRequestDispatcher("/admin/AdminCafeDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "🏘 스터디 카페 상세");
+      request.setAttribute("contentUrl", "/admin/AdminCafeDetail.jsp");
+
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+      //request.getRequestDispatcher("/admin/AdminCafeDetail.jsp").forward(request, response);
     } catch (Exception e) {
-      throw new ServletException(e);
+      request.setAttribute("error", e);
+      request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }
   }
 
