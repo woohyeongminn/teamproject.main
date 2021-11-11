@@ -37,7 +37,10 @@ public class AdminCeoMemberDetailController extends GenericServlet {
       } 
 
       request.setAttribute("ceoMember", ceoMember);
-      request.getRequestDispatcher("/admin/AdminCeoMemberDetail.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", " 🏢 기업회원 상세");
+      request.setAttribute("contentUrl", "/admin/AdminCeoMemberDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
