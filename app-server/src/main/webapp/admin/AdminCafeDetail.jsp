@@ -164,18 +164,15 @@ button {
   justify-content: center;
   margin-bottom: 100px;
 }
- 
+ div#button_wrap {
+    margin: 20px 0;
+}
 /* .btn_wrap .btn {
   margin: 0 7px;
   padding: 5px 10px;
   height: auto;
   line-height: inherit;
 } */
-
-div#button_wrap {
-    margin: 20px 0;
-}
-
   /* #aside {
      width: 120px;
      height: 200px;
@@ -352,5 +349,4 @@ display: none;
 	  <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
   </div>
 
-</div>
 </div>
