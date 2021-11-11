@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +19,8 @@ public class AdminUpdateController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
   }
@@ -39,15 +38,13 @@ public class AdminUpdateController extends HttpServlet {
       } 
 
       admin.setMasterNickname(request.getParameter("nickName"));
-      adminDao.updateNickname(admin);
-      sqlSession.commit();
-
       admin.setMasterEmail(request.getParameter("email"));
-      adminDao.updateEmail(admin);
-      sqlSession.commit();
-
       admin.setMasterPassword(request.getParameter("password"));
+
+      adminDao.updateNickname(admin);
+      adminDao.updateEmail(admin);
       adminDao.updatePassword(admin);
+
       sqlSession.commit();
 
       response.sendRedirect("logout");
