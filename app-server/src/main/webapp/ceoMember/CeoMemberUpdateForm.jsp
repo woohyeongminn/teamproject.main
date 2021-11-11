@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
 <style>
 * {
 font-size: 14px;
@@ -13,7 +14,6 @@ font-size: 14px;
 body {
   height: auto;
 }
-
 a {
 text-decoration: none;
 }
@@ -25,16 +25,7 @@ legend {
 .all-content {
   width: 100%;
   margin: 0 auto;
-  height: 700px;
-}
-
-.c-top {
-  width: 100%;
-  padding: 20px 0 20px 0px;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-  text-align: center;
-  font-size: 16px;
+  height: 800px;
 }
 
 ul{list-style:none;}
@@ -78,37 +69,38 @@ ul{list-style:none;}
 
 .btnCon:target  {
   background : #ccc;
- }
+  
+  }
 
 .btnCon:target .tabCon{
   display: block;
 }
 
 .btnCon:target .tabbtn{
-font-weight: bold;
+  font-weight: bold;
 }
 
 .profile {
-  max-width: 400px;
+  max-width: 500px;
   margin: 100px auto 0;
   background-color: white;
   border-radius: 15px;
   border: 2px solid rgb(110, 110, 110);
   text-align: center;
   padding-bottom: 30px;
+  padding-left: 60px;
 }
 
 .profile > label {
   margin-right: 5px;
   text-align: center;
-  display: inline;
-  width: 60px;
+  font-weight: 600;
 }
 
 .profile > label, span {
   display: inline-block;
-  padding: 5px 0;
-  width: 100px;
+  padding: 5px 5px;
+  width: 103px;
 }
 
 .profile .profile-header {
@@ -121,9 +113,10 @@ font-weight: bold;
 .profile .profile-header>a {
   display:inline-block;
   text-decoration:none;
-  width: 100px;
-  height: 100px;
-  border-radius: 1000px;
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  border-radius: 100px;
   position: absolute;
   left: 50%;
   margin-top: 30px;
@@ -133,12 +126,12 @@ font-weight: bold;
   vertical-align: middle;
 }
 
-.profile .profile-header .profile-img {
-  margin-top: 8px;
-  margin-left: 3px;
+ .profile .profile-header .profile-img {
+    margin-top: 8px;
+    margin-left: 3px;
 }
 
-.btn_wrap {
+ .btn_wrap {
   max-width: 420px;
   margin: 20px auto 0;
   text-align: center;
@@ -146,16 +139,16 @@ font-weight: bold;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 100px;
-}
+ }
  
-.btn_wrap .btn {
+ .btn_wrap .btn {
   margin: 0 7px;
   padding: 5px 10px;
   height: auto;
   line-height: inherit;
-}
+ }
  
-button:hover {
+ button:hover {
   color: white;
 }
 
@@ -203,6 +196,7 @@ function checkValue() {
         return false;
     }
 }
+
 </script>
 </head>
 
@@ -216,9 +210,9 @@ function checkValue() {
       <form action='update' method='post' enctype="multipart/form-data">
 	      <div class="profile">
 	        <div class="profile-header">
-             <a href="../upload/ceoMember/${ceoMember.ceoPhoto}" >
-                 <img id="f-photo-image" src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
-             </a>
+              <a href="../upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
+                <img id="f-photo-image" style="margin-top: 8px;"   src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
+              </a>
           </div>
           
           <input id='f-photo' type='file' name='photo' value='${ceoMember.ceoPhoto}'>
@@ -235,13 +229,65 @@ function checkValue() {
 	        <label for='f-email' class='form-label'>이메일</label>
 	        <input id='f-email' type='email' name='email' value='${ceoMember.ceoEmail}'><br>
 	        
-	        <label for='f-password' class='form-label'>암호</label>
-	        <input id='f-password' type='password' name='password' value='${ceoMember.ceoPassword}'><br>
+	        <%-- <label for='f-password' class='form-label'>암호</label>
+	        <input id='f-password' type='password' name='password' value='${ceoMember.ceoPassword}'><br> --%>
 	        
 	        <label for='f-registeredDate' class='form-label'>가입일</label>
-	        <input id='f-registeredDate' type='registeredDate' style/.''="border:0px"
+	        <input id='f-registeredDate' type='registeredDate' style="border:0px"
 	         name='registeredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
 	      </div>
+	
+
+	
+	
+	<section class="n-section-block">
+      <table class="n-table table-row my-info-modify">
+       <tr id="password-area">
+         <th scope="row">비밀번호</th>
+         <td><button  class="n-btn w100 btn-sm btn-default cert-hidden" id="change-password-btn">비밀번호 변경</button></td>
+       </tr>
+                     <!--비밀번호 변경-->
+       <tr id="change-password-area" style="display: none">
+         <th scope="row">비밀번호</th>
+           <td colspan="2">
+             <div class="my-info-modify">
+                 <div class="my-info-modify">
+                   <div class="input">
+                       <label for="password">현재 비밀번호</label>
+                       <input type="password" class="n-input" id="password">
+                       <span id="password-invalid" class="validate danger"></span>
+                   </div>
+                   
+                   <div class="input">
+                       <label for="newPassword">신규 비밀번호</label>
+                       <input type="password" class="n-input" id="newPassword" maxlength="20">
+                       <span id = "new-password-invalid" class="validate danger"></span>
+                       <span id="valid-newPassword" class="validate" style="display: none">사용 가능한 비밀번호입니다.</span>
+                   </div>
+                   
+                   <div class="input">
+                       <label for="confirmPassword">신규 비밀번호 재 입력</label>
+                       <input type="password" class="n-input" id="confirmPassword" maxlength="20">
+                       <span id="confirm-password-invalid" class="validate danger"></span>
+                       <span  id="valid-confirmPassword" class="validate" style="display: none">사용 가능한 비밀번호입니다.</span>
+                   </div>
+                   <div class="btn-group">
+                       <button type="button" class="n-btn btn-sm btn-lighter" id="change-password-cancel-btn">취소</button>
+                       <button type="button" class="n-btn btn-sm btn-accent disabled" id="change-password-finish-btn" disabled >완료</button>
+                   </div>
+             </div>
+           </td>
+       </tr>
+      </table>
+     </section>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	      <div class="btn_wrap">
 		      <button type="submit" class="btn btn-outline-dark">수정</button>
@@ -264,8 +310,8 @@ function checkValue() {
    </ul>
   </div> 
 </div> 
- <script>
-  location.href = "#tab1";
- </script>
+
+ <script type="text/javascript" src="../js/update.js"></script>
+ <script> location.href = "#tab1"; </script>
 </body>
 </html>

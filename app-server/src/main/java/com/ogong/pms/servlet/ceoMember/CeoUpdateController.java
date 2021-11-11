@@ -51,9 +51,6 @@ public class CeoUpdateController extends HttpServlet {
       //      if (photoPart.getSize() > 0) {
       if (photoPart != null) {
         String filename = UUID.randomUUID().toString();
-
-        System.out.println(filename);
-
         photoPart.write(getServletContext().getRealPath("/upload/ceoMember") + "/" + filename);
         ceoMember.setCeoPhoto(filename);
 

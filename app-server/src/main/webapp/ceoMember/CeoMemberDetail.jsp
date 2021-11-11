@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-
 * {
 font-size: 14px;
 }
@@ -27,15 +26,6 @@ legend {
   width: 100%;
   margin: 0 auto;
   height: 800px;
-}
-
-.c-top {
-	width: 100%;
-	padding: 20px 0 20px 0px;
-	font-weight: bold;
-	background-color: rgb(247, 231, 215);
-	text-align: center;
-	font-size: 16px;
 }
 
 ul{list-style:none;}
@@ -87,31 +77,30 @@ ul{list-style:none;}
 }
 
 .btnCon:target .tabbtn{
-font-weight: bold;
+  font-weight: bold;
 }
 
-
 .profile {
-  max-width: 400px;
+  max-width: 500px;
   margin: 100px auto 0;
   background-color: white;
   border-radius: 15px;
   border: 2px solid rgb(110, 110, 110);
   text-align: center;
   padding-bottom: 30px;
+  padding-left: 60px;
 }
 
 .profile > label {
   margin-right: 5px;
   text-align: center;
-  display: inline;
-  width: 60px;
+  font-weight: 600;
 }
 
 .profile > label, span {
   display: inline-block;
-  padding: 5px 0;
-  width: 100px;
+  padding: 5px 5px;
+  width: 103px;
 }
 
 .profile input {
@@ -133,9 +122,10 @@ font-weight: bold;
 .profile .profile-header>a {
   display:inline-block;
   text-decoration:none;
-  width: 100px;
-  height: 100px;
-  border-radius: 1000px;
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  border-radius: 100px;
   position: absolute;
   left: 50%;
   margin-top: 30px;
@@ -184,8 +174,8 @@ font-weight: bold;
 			  <form action='updateform' method='post' enctype="multipart/form-data">
 				   <div class="profile">
 					   <div class="profile-header">
-					      <a href="../upload/ceoMember/${ceoMember.ceoPhoto}" >
-						        <img id="f-photo-image" src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
+					      <a href="../upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
+						        <img id="f-photo-image" style="margin-top: 8px;"   src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
 						    </a>
 						    <!-- <input id='f-photo' type='file' name='photo' class="form-control"> -->
 					   </div>

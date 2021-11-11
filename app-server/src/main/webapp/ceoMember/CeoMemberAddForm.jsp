@@ -104,8 +104,9 @@ function checkValue() {
 
 	  <label for='f-photo' class='form-label'>사진</label>
 	  <input id='f-photo' type='file' name='photo' /><br>
+	  <p>사진 미선택시 기본 프로필 사진이 등록됩니다.</p>
 	  <c:if test="${empty photo}">
-	    <input id='f-photo' type='hidden' name='photo' value="ceoProfile_80x80.jpg"/><br>
+	    <input id='f-photo' type='hidden' name='photo' value="ceoProfile"/><br>
 	  </c:if>
 	  
 	  <label for='f-tel' class='form-label' >전화번호</label>

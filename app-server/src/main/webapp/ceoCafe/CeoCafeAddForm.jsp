@@ -110,7 +110,8 @@ label {
         </label>
       </form>
     </div>
-    <form action='add' method='post' enctype="multipart/form-data">
+    <!-- <form action='add' method='post' enctype="multipart/form-data"> -->
+    <form action='add' method='get'>
     <div id='content'>
       
       <label for='f-cafeName'>상호명</label>
@@ -145,13 +146,13 @@ label {
         <option value="4" disabled>삭제</option>
       </select><br>
       
-      <label for='f-photo' class='form-label'>사진등록</label>
+   <%--    <label for='f-photo' class='form-label'>사진등록</label>
 	    <input id='f-photo' type='file' name='photo' /><br>
-	    
 	    
 	    <c:if test="${empty photo}">
 	      <input id='f-photo' type='hidden' name='filename' value="cafe_80x80.jpg"/><br>
-	    </c:if>
+	    </c:if> --%>
+	    
     </div>
     <div id='button'>
      <button id='b-btn' type="submit" value="등록" class="btn btn-outline-dark">등록</button>
