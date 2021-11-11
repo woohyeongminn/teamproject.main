@@ -145,7 +145,7 @@ label {
         <option value="4" disabled>삭제</option>
       </select><br>
       
-      <label for='f-photo' class='form-label'>사진</label>
+      <label for='f-photo' class='form-label'>사진등록</label>
 	    <input id='f-photo' type='file' name='photo' /><br>
 	    
 	    

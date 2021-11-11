@@ -188,7 +188,7 @@ font-weight: bold;
 					      <a href="../upload/ceoMember/${ceoMember.ceoPhoto}" >
 						        <img id="f-photo-image" src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
 						    </a>
-						    <input id='f-photo' type='file' name='photo' class="form-control">
+						    <!-- <input id='f-photo' type='file' name='photo' class="form-control"> -->
 					   </div>
 					    <label for='f-name' class='form-label'>이름</label>
 			        <input id='f-name' type='text' name='name' readonly value='${ceoMember.ceoName}'><br>
