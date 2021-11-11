@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>개인회원 프로필 수정</title>
+<script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
  <style>
  * {
   font-size: 14px;

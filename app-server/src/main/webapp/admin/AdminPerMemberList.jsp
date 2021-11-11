@@ -7,11 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>🎓 개인 회원</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   
-   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
-   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<title>관리자 | 개인 회원 목록</title>
 <style>
   label {
     margin-right: 5px;
@@ -73,7 +69,6 @@
 </style>
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
 <br>
   <fieldset>
 <legend data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><b> 📗 개인 회원 목록 </b></legend><br>
@@ -92,7 +87,7 @@
           <tbody>
           <c:forEach items="${perMemberList}" var="perMember">
              <tr>
-              <td>(${perMember.perNo})</td>
+              <td>${perMember.perNo}</td>
               <td><a href='permemberdetail?no=${perMember.perNo}'>${perMember.perName}</a></td> 
               <td>${perMember.perNickname}</td> 
               <td>${perMember.perEmail}</td> 

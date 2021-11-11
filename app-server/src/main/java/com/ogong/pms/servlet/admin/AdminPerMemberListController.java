@@ -31,8 +31,11 @@ public class AdminPerMemberListController extends GenericServlet {
 
     try {
       Collection<Member> perMemberList = memberDao.findAll();
+
+      request.setAttribute("pageTitle", "🎓 개인 회원");
       request.setAttribute("perMemberList", perMemberList);
-      request.getRequestDispatcher("/admin/AdminPerMemberList.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/admin/AdminPerMemberList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);
