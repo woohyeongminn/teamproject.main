@@ -20,12 +20,27 @@
   label {
     width: 60px;
   }
+  label#click {
+    width: 150px;
+  }
+  label#click:hover {
+    color: silver;
+  }
   input {
   width: 700px;
   font-size: 14px;
   text-align: center;
   border : white;
   outline-color : lightgray;
+  }
+  input#chooseFile {
+   font-size: 12px;
+   color: white;
+   line-height: 12px;
+   /*mix-blend-mode: color;*/
+  }
+  input::file-selector-button {
+  display: none;
   }
   #f-content {
   text-align: justify;
@@ -90,7 +105,11 @@
   <tr id="blockbox">
     <th scope="row"><label for='f-filepath'>파일</label></th>
     <td><img style="width: 200px;" id="preview-image" src="https://dummyimage.com/200x200/ffffff/000000.png&text=preview">
-    <input style="display: block;" type="file" name="filepath" id="input-image"></td>
+    <div class="button">
+              <label for="chooseFile" id="click"><b>👉 CLICK HERE! 👈</b></label>
+          </div>
+          <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"></td>
+    <!-- <input style="display: block;" type="file" name="filepath" id="input-image"> -->
     <td></td>
   </tr>
   
@@ -125,7 +144,7 @@ function readImage(input) {
     }
 }
 // input file에 change 이벤트 부여
-const inputImage = document.getElementById("input-image")
+const inputImage = document.getElementById("chooseFile")
 inputImage.addEventListener("change", e => {
     readImage(e.target)
 })

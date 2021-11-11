@@ -46,7 +46,10 @@ public class CeoCafeDetailController extends HttpServlet {
 
       if (cafe == null) {
         request.setAttribute("ceoMember", ceoMember);
-        request.getRequestDispatcher("/ceoCafe/CeoCafeDetail.jsp").forward(request, response);
+
+        request.setAttribute("pageTitle", "🙂 마이페이지");
+        request.setAttribute("contentUrl", "/ceoCafe/CeoCafeMyDetail.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
       } else {
 
@@ -64,7 +67,10 @@ public class CeoCafeDetailController extends HttpServlet {
         request.setAttribute("cafe", cafe);
         request.setAttribute("cafeStatus", status);
         request.setAttribute("reviewList", reviewList);
-        request.getRequestDispatcher("/ceoCafe/CeoCafeMyDetail.jsp").forward(request, response);
+
+        request.setAttribute("pageTitle", "🙂 마이페이지");
+        request.setAttribute("contentUrl", "/ceoCafe/CeoCafeMyDetail.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
       }
       //      request.getRequestDispatcher("/ceoMember/cafeAdd").forward(request); return;
       //      request.getRequestDispatcher("/ceoMember/cafeUpdate").forward(request); return;

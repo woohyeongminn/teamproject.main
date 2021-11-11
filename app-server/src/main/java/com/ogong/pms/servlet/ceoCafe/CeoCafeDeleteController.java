@@ -60,15 +60,6 @@ public class CeoCafeDeleteController extends HttpServlet {
 
       response.sendRedirect("detail");
 
-      // 로그인했을때 화면으로 돌아가야하는데
-      // 돌아갈 곳이 없다,,,,,,
-      //response.sendRedirect("detail?no="+ ceoMember.getCeoNo());
-
-      //response.sendRedirect("detail?no="+ cafe.getCeoMember().getCeoNo());
-
-      //response.sendRedirect("login?email="+ceoMember.getCeoEmail()+"&password="+ ceoMember.getCeoPassword());
-
-
     } catch (Exception e) {
       e.printStackTrace();
       request.setAttribute("error", e);

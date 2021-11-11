@@ -27,9 +27,6 @@ public class AuthCeoMemberLogoutController extends HttpServlet {
 
     response.sendRedirect("../index.jsp");
 
-    //request.getRequestDispatcher("/ceoMember/CeoMemberLoginForm.jsp").forward(request, response);
-
-    //AuthCeoMemberLogoutController.accessLevel = Menu.LOGOUT;
   }
 
 

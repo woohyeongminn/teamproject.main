@@ -41,7 +41,10 @@ public class CeoCafeDeleteFormController extends HttpServlet {
 
       request.setAttribute("cafe", cafe);
       request.setAttribute("cafeStatus", status);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeDeleteForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "🙂 마이페이지");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeDeleteForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

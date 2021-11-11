@@ -7,8 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <style>
-
-
   label {
     margin-right: 10px;
     text-align: center;

@@ -11,25 +11,32 @@
 <title>기업회원 스터디룸 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-   <style>
-   a {
-   text-decoration:none;
-  }
-  label {
-    display: inline-block;
-    margin-right: 5px;
-    width: 130px;
-  }
-  #aside {
-     width: 120px;
-     height: 171px;
-     float: left;
-  }
-  #content {
-     margin-left: 130px;
-  } 
+<style>
+* {
+  font-size: 14px;
+}
 
-  #input-file-button {
+ a {
+ text-decoration:none;
+}
+
+label {
+  display: inline-block;
+  margin-right: 5px;
+  width: 130px;
+}
+
+#aside {
+   width: 120px;
+   height: 171px;
+   float: left;
+}
+
+#content {
+   margin-left: 130px;
+} 
+
+#input-file-button {
   display: inline-table;
   width: 120px;
   padding: 2px;
@@ -40,9 +47,9 @@
   cursor: pointer;
   text-align: center;
   margin-top: 5px;
- }
+}
 
- #c-image {
+#c-image {
   width: 120px;
   height: 150px;
   background-color: darkgray;
@@ -50,40 +57,29 @@
   vertical-align: middle;
   text-align: center;
 }
+
 #c-grade {
   margin-left: 41px;
   vertical-align: 4px;
 }
+
 #c-review {
   width: 427px;
   background-color: whitesmoke;
   height: 80px;
   margin-bottom: 10px;
 }
+
 #button {
   margin-left: 130px;
   margin-top: 30px;
 }
-#b-but {
-  width: 140px;
-  padding: 5px;
-  margin-right: 10px;
-  background-color: dimgray(209, 209, 209);
-  border-radius: 4px;
-  color: black;
-  font-size: smaller;
-  cursor: pointer;
-  text-align: center;
-}
+
 </style>
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
 <div class="all-content">
-<div class="c-top">
-    👩‍🏫 내 스터디카페 룸 수정
- </div>
     <div id='aside'>
       <span id='c-image'>사진</span>
       <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -93,7 +89,7 @@
         </label>
       </form>
     </div>
-    <form action='updae'>
+    <form action='update'>
     <div id='content'>
       <input type ='hidden' name='cafeno' value='${cafeRoom.cafe.no}'>
       <input type ='hidden' name='roomno' value='${cafeRoom.roomNo}'>
@@ -127,7 +123,8 @@
 
     </div>
     <div id='button'>
-     <button id='b-but' type="submit" value="수정" formaction="update">수정</button>
+     <button type="submit" value="수정" formaction="update"   class="btn btn-outline-dark">수정</button>
+     <a href="detail?roomno=${cafeRoom.roomNo}" class="btn btn-outline-dark">뒤로가기</a>
     </div>
   </form> 
   </div>
