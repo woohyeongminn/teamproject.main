@@ -97,7 +97,7 @@ label {
         </label>
       </form>
     </div>
-    <form action='add'>
+    <form action='add' method='post' enctype="multipart/form-data">
     <div id='content'>
       <input type ='hidden' name='cafeno' value='${cafeNo}'>
       

@@ -110,7 +110,7 @@ label {
         </label>
       </form>
     </div>
-    <form action='add'>
+    <form action='add' method='post'>
     <div id='content'>
       
       <label for='f-cafeName'>상호명</label>

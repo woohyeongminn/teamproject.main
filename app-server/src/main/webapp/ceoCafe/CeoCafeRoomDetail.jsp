@@ -79,7 +79,7 @@ label {
   <div id='aside'>
     <span id='c-image'>대표이미지</span>
   </div>
-  <form action='updateform'>
+  <form action='updateform' method='post' enctype="multipart/form-data">
   <div id='content'>
 	  <c:if test="${cafeRoom.roomStatus == 1}">
 	  <p>운영중</p>

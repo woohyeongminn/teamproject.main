@@ -216,7 +216,7 @@ button {
 		    <span id='c-image'>대표이미지</span>
 		  </div>
 		  <div id='content'>
-		    <form action='updateform' class="cafe-form">
+		    <form action='updateform' class="cafe-form" method='post' enctype="multipart/form-data">
 		    <input id='c-no' type='hidden' value='${cafe.no}'>
 		    <h5>[${cafe.name}]</h5>
 		    <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
