@@ -94,7 +94,7 @@ function checkValue() {
       </c:if>
     </c:forEach> --%>
   
-  <form action='add' name='ceoInfo' onsubmit="return checkValue()">
+  <form action='add' name='ceoInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
 	  <label for='f-name' class='form-label'>이름</label>
 	  <input id='f-name' type='text' name='name' placeholder="이름"/><br>
 	  
@@ -103,7 +103,7 @@ function checkValue() {
 	  <input type="button" value="중복확인" /><br>
 
 	  <label for='f-photo' class='form-label'>사진</label>
-	  <input id='f-photo' type='text' name='photo' placeholder="사진"/><br>
+	  <input id='f-photo' type='file' name='photo' /><br>
 	  
 	  <label for='f-tel' class='form-label' >전화번호</label>
 	  <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
