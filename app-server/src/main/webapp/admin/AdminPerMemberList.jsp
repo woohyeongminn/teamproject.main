@@ -76,16 +76,7 @@
           <tr>
             <th>번호</th>
             <th>이름</th>
-            
-        <c:choose>
-		      <c:when test="${not empty loginAdmin}">
 		       <th style="margin-left: auto;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">닉네임</th>
-		      </c:when>
-		      <c:otherwise>
-		       <th>닉네임</th>
-		      </c:otherwise>
-		    </c:choose>
-            
             <th>이메일</th>
             <th>가입일</th>
           </tr>
