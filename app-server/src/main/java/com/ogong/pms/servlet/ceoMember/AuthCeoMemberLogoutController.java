@@ -18,9 +18,8 @@ public class AuthCeoMemberLogoutController extends HttpServlet {
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-
 
     AuthCeoMemberLogoutController.loginCeoMember = null;
     request.getSession().invalidate();

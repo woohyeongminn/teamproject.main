@@ -36,7 +36,7 @@ public class CeoAddController extends HttpServlet {
 
   // 기업 개인
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
