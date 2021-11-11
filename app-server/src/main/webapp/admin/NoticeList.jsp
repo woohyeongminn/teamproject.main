@@ -21,7 +21,7 @@
   text-decoration : auto;
   }
   a:hover {
-  color : lightgray;
+  color : white;
   }
   #addbutton {
   text-align: center;
@@ -32,7 +32,7 @@
   }
   button[type=submit] {
     font-size: 14px;
-    line-height: 14px;;
+    line-height: 14px;
   }
 </style>
 

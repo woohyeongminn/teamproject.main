@@ -4,9 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
  <style>
- * {
- font-size: 14px;
- }
+  * {
+   font-size: 14px;
+  }
   rect {
   fill: lightyellow;
   }
@@ -20,13 +20,6 @@
   div {
   margin-right: 10px;
   }
-  /* .c-content {
-    display: flex;
-    --desktopSearchBarHeight: 38px;
-    --desktopSearchBarPadding: 20px;
-    --desktopSearchBar: calc(var(--desktopSearchBarHeight) + var(--desktopSearchBarPadding) + var(--desktopSearchBarPadding));
-    height: calc(100% - var(--desktopSearchBar));
-  } */
   #content {
     float: center;
     margin-left: 50px;
@@ -67,6 +60,13 @@
   .card {
     height: 450px;
   }
+  .btn-sm, .btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 14px;
+    margin-bottom: 2px;
+    border-radius: 0.2rem;
+  }
   </style>
   
 </head>
@@ -75,24 +75,23 @@
 
   <div id="search">
     <form action="search">
-    <select name="where">
-      <option value="1">지역</option>
-      <option value="2">이름</option>
+    <select name="where" style="font-size: 12px;">
+      <option value="1" style="font-size: 12px; line-height: 14px;">지역</option>
+      <option value="2" style="font-size: 12px; line-height: 14px;">이름</option>
     </select>
-    <input type="text" name="keyword">
+    <input type="text" name="keyword" style="font-size: 12px;">
     <input type="hidden" name="perNo" value="${perNo}">
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
 
-<!-- <div class="c-content"> -->
   <div id="content">
   <c:if test='${not empty cafeList}'>
     <div class="row row-cols-1 row-cols-md-3 g-4" style="float: left">
     <c:forEach items="${cafeList}" var="cafe">
       <div class="col">
         <div class="card">
-          <img src="../img/aaa.jpg" class="card-img-top" alt="...">
+          <img src="../img/aaa.jpg" class="card-img-top" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
           <div class="card-body">
             <a href='cafeDetail?no=${cafe.no}'><b>${cafe.name}</b></a><br>
             ${cafe.location}<br>
@@ -116,7 +115,6 @@
     </div>
   </c:if>
   </div>
-<!-- </div>  -->
   
   <c:if test='${empty cafeList}'>
    검색 결과가 존재하지 않습니다.<br><br>  
