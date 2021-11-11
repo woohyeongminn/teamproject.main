@@ -13,7 +13,7 @@
 	justify-content: center;
 }
 .form-control {
-  height:25px;
+  height:23px;
 }
 </style>
 <script type="text/javascript">
@@ -72,27 +72,27 @@
   </div>
   <div class="form-check">
   <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault2" value="1">
     어학
   </label><br>
   <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="2">
     자격증
   </label><br>
   <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="3">
     취업
   </label><br>
   <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="4">
     IT
   </label><br>
   <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="5">
     예체능
   </label><br>
   <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="6">
     기타
   </label><br>
   </div>
@@ -118,15 +118,15 @@
   </div>
   <div class="form-check">
   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
+  <label class="form-check-label" for="flexRadioDefault2" value="1">
     대면
   </label><br>
   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="2">
     비대면
   </label><br>
   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="3">
     대면/비대면
   </label><br>
   </div>
@@ -134,7 +134,7 @@
     <div class="mb-3 row">
     <label for='f-introduction' class="col-sm-2 col-form-label">소개글</label>
     <div class="col-sm-10">
-      <input id='f-introduction' type='introduction' name='introduction' class="form-control">
+      <input id='f-introduction' type='text' name='introduction' class="form-control">
     </div>
     </div>
     

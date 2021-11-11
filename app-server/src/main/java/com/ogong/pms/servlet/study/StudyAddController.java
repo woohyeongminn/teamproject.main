@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.study;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +23,7 @@ public class StudyAddController extends HttpServlet {
 
   @Override
   public void init() {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
@@ -42,10 +41,10 @@ public class StudyAddController extends HttpServlet {
 
       study.setStudyTitle(request.getParameter("studytitle"));
       study.setOwner(member);
-      study.setSubjectNo(Integer.parseInt(request.getParameter("subjectno")));
+      study.setSubjectName(request.getParameter("subjectname"));
       study.setArea(request.getParameter("area"));
       study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberofpeple")));
-      study.setFaceNo(Integer.parseInt(request.getParameter("faceno")));
+      study.setFaceName(request.getParameter("facename"));
       study.setIntroduction(request.getParameter("introduction"));
       System.out.println(study);
 
