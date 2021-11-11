@@ -82,16 +82,7 @@
 	<thead>
 	  <tr>
 	    <th>번호</th>
-	    
-        <c:choose>
-          <c:when test="${not empty loginAdmin}">
-           <th style="margin-left: auto;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">스터디카페</th>
-          </c:when>
-          <c:otherwise>
-           <th>스터디카페</th>
-          </c:otherwise>
-        </c:choose>
-	    
+	    <th data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">스터디카페</th>
 	    <th>별점</th>
 	    <th>내용</th>
 	    <th>등록일</th>

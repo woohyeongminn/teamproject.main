@@ -2,79 +2,58 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>🏘 스터디 카페</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <style>
-  legend {
-  text-align: center;
-  }
-  legend:hover {
-    color: lightgrey;
-  }
-  h3 {
-    text-align: center;
-    font-weight: bolder;
-  }
+
+ <style>
+ * {
+ font-size: 14px;
+ }
   rect {
-  width: 414px;
   fill: lightyellow;
   }
   text {
   fill: black;
   }
-  button[type=button] {
-    margin-block: 10px;
-    border-radius: 10px;
-    background-color: beige;
-    color: black;
-  }
-  button[type=button]:hover {
-    background-color: blanchedalmond;
-    color: black;
-  }
-  .btn-secondary:focus {
-  background-color: beige;
-  color: black;
-  }
-  button[type=button1] {
-    margin-left: 15px;
-    border-radius: 10px;
-    border-color: lightgray;
-    background-color: beige;
-    color: black;
-  }
-  button[type=button1]:hover {
-    background-color: blanchedalmond;
-    color: black;
-  }
-  .dropdown-menu {
-  background-color: rgba(211, 211, 211, 0);
-  border: rgba(211, 211, 211, 0);
-  }
-  .btn-group {
-  margin-top: 10px;
-  display: block;
-  }
-  .offcanvas-start {
-  width: 350px;
-  }
-  button[type=button2] {
-  margin-left: 70px;
-    color: black;
-  }
-  button[type=button2]:hover {
-    color: black;
+  #search {
+    text-align: center;
+    padding: 20px;
   }
   div {
   margin-right: 10px;
   }
+  /* .c-content {
+    display: flex;
+    --desktopSearchBarHeight: 38px;
+    --desktopSearchBarPadding: 20px;
+    --desktopSearchBar: calc(var(--desktopSearchBarHeight) + var(--desktopSearchBarPadding) + var(--desktopSearchBarPadding));
+    height: calc(100% - var(--desktopSearchBar));
+  } */
+  #content {
+    float: center;
+    margin-left: 50px;
+    margin-top: 50px;
+    height: 650px;
+    ine-height: 27px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    xborder: 1px solid black;
+  }
+  
+  /* content 안의 스크롤 색상 지정 */
+  #content::-webkit-scrollbar {
+    width: 10px;
+  }
+  #content::-webkit-scrollbar-thumb {
+    background-color: rgb(247, 231, 215);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+  #content::-webkit-scrollbar-track {
+    background-color: rgb(250, 250, 234);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
+  
   a {
   color : black;
   text-decoration : blink;
@@ -82,54 +61,18 @@
   a:hover {
   color : lightgray;
   }
-  body {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-  }
-  #search {
-    text-align: center;
-  }
-  .form-select {
-    display: inline-block;
-  }
-  .c-content {
-    height: 530px;
-  }
-  #content {
-    margin-left: 20px;
-    width: 47%;
-    xborder: 1px solid black;
-    float: left;
-    overflow-y: scroll;
-    height: inherit;
-    overflow-x:hidden
-  }
   .col {
     width: 355px;
   }
   .card {
-    height: 433px;
-  }
-  .c-top {
-  width: 100%;
-  padding: 20px 0 20px 0px;
-  text-align: center;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-}
-  .c-top:hover {
-    color: cornflowerblue;
+    height: 450px;
   }
   </style>
+  
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
-<section>
-<div class="c-top" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-      🏘 스터디 카페 목록
-      </div>
 <br>
+
   <div id="search">
     <form action="search">
     <select name="where">
@@ -137,27 +80,24 @@
       <option value="2">이름</option>
     </select>
     <input type="text" name="keyword">
-    <button class="btn btn-outline-dark">검색</button>
+    <input type="hidden" name="perNo" value="${perNo}">
+    <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <br>
 
-<div class="c-content">
-<div id="content">
-<c:if test='${not empty cafeList}'>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+<!-- <div class="c-content"> -->
+  <div id="content">
+  <c:if test='${not empty cafeList}'>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="float: left">
     <c:forEach items="${cafeList}" var="cafe">
       <div class="col">
         <div class="card">
           <img src="../img/aaa.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">
-              <a href='cafeDetail?no=${cafe.no}'>${cafe.name}</a>
-            </h5>
-            <p>
-            ${fn:split(cafe.location, ',')[0]}<br>
-            ${cafe.openTime} ~ ${cafe.closeTime}<br>
-            ⭐${cafe.avgReview}(${cafe.countReview})</p>
+            <a href='cafeDetail?no=${cafe.no}'><b>${cafe.name}</b></a><br>
+            ${cafe.location}<br>
+            영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
+            ⭐${cafe.avgReview}(${cafe.countReview})<br>
             <script>
          if(${cafe.cafeStatus == 1}) {
            document.write("<label for='f-cafeStatus'>❗ </label>승인 대기 중인 카페입니다.");
@@ -175,32 +115,18 @@
     </c:forEach>
     </div>
   </c:if>
+  </div>
+<!-- </div>  -->
   
   <c:if test='${empty cafeList}'>
    검색 결과가 존재하지 않습니다.<br><br>  
-</c:if>
-</div>
-  
-  <div id="map" style="width:770px;height:530px;"></div>
-  
-</div>  
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요"></script>
-  <script>
-    var container = document.getElementById('map');
-    var options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3
-    };
-    var map = new kakao.maps.Map(container, options);
-  </script>
+  </c:if>
+
+  </div>  
+</div>   
   
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 
   <jsp:include page="AdminMenu.jsp"/>
     
 </div>
-
-</section>
-   <jsp:include page="../footer.jsp"/>
-</body>
-</html>

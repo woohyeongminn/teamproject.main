@@ -3,13 +3,13 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-  
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  
   <style>
+  * {
+  font-size: 14px;
+  }
   .all-content {
   width: 100%;
   max-width: 900px;
@@ -37,7 +37,6 @@
 </style>
 
 </head>
-<body>
 
 <section>
 <fieldset>
@@ -67,7 +66,7 @@
 <tbody>
 
 <c:forEach items="${adminNoticeList}" var="noticeList">
-  <tr>
+  <tr data-no="${noticeList.adminNotiNo}">
     <td><b> ${noticeList.adminNotiNo} </b></td>
     <td><a href='detail?no=${noticeList.adminNotiNo}'>${noticeList.adminNotiTitle}</a></td>
     <td>${noticeList.adminNotiRegisteredDate}</td>
@@ -106,5 +105,16 @@
 </fieldset>
 </section>
 
-</body>
-</html>
+<script>
+document.querySelectorAll("tbody a").forEach((aTag) => {
+  aTag.target.onclick = () => false;
+});
+
+var trList = document.querySelectorAll("tbody tr");
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+      window.location.href = e.currentTarget.querySelector("a").href; // 방법 2) 현재 페이지를 그 링크로 바꾸게 해라
+    };
+  });
+</script>
+

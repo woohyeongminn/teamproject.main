@@ -11,7 +11,7 @@ public interface NoticeDao {
   void insertFilepath(AdminNotice adminNotice) throws Exception;
   void updateTitle(AdminNotice notice) throws Exception;
   void updateContent(AdminNotice notice) throws Exception;
-  //  void updateFilepath(AdminNotice notice) throws Exception;
+  void updateFilepath(AdminNotice notice) throws Exception;
   void delete(int noticeNo) throws Exception;
   void deletenoticefile(int noticeNo) throws Exception;
   List<AdminNotice> findAll() throws Exception;
