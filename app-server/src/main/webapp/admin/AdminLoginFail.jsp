@@ -3,16 +3,18 @@
     trimDirectiveWhitespaces="true"%>
 
 <style>
-p {
+h1 {
 text-align: center;
 margin-top: 50px;
+margin-bottom: 300px;
+}
+p {
+text-align: center;
 margin-bottom: 300px;
 font-size: 14px;
 }
 </style>
 
-<br>
-
-  <p>공지글 등록이 완료되었습니다.<br>
-  <br>공지게시판 목록으로 돌아갑니다.</p>
-<br>
+  <h1>로그인 실패!</h1>
+  <p>이메일 또는 암호가 일치하지 않습니다!<br>
+  <br>로그인 페이지로 돌아갑니다.</p>
