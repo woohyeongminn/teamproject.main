@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSession;
-import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.dao.NoticeDao;
-import com.ogong.pms.domain.Admin;
 import com.ogong.pms.domain.AdminNotice;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
@@ -28,27 +26,27 @@ public class AdminNoticeAddController extends HttpServlet {
 
   SqlSession sqlSession;
   NoticeDao noticeDao;
-  AdminDao adminDao;
+  // AdminDao adminDao;
 
   @Override
   public void init() throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
-    adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
+    //    adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      Admin loginAdmin = (Admin) request.getSession().getAttribute("loginAdmin");
-      Admin admin = adminDao.findByAdminNo(loginAdmin.getMasterNo());
-
-      if (admin == null) {
-        request.getRequestDispatcher("/admin/NoticeAdd.jsp").forward(request, response);
-      }
+      //      Admin loginAdmin = (Admin) request.getSession().getAttribute("loginAdmin");
+      //      Admin admin = adminDao.findByAdminNo(loginAdmin.getMasterNo());
+      //
+      //      if (admin == null) {
+      //        request.getRequestDispatcher("/admin/NoticeAdd.jsp").forward(request, response);
+      //      }
 
       AdminNotice adminNotice = new AdminNotice();
 
@@ -81,6 +79,7 @@ public class AdminNoticeAddController extends HttpServlet {
       sqlSession.commit();
       response.setHeader("Refresh", "1;url=list"); 
 
+      request.setAttribute("pageTitle", "🔔 공지게시글 등록");
       request.setAttribute("contentUrl", "/admin/NoticeAdd.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
       // request.getRequestDispatcher("/admin/NoticeAdd.jsp").forward(request, response);

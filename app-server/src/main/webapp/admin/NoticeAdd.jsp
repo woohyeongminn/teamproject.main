@@ -3,10 +3,6 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-
 <style>
 p {
 text-align: center;
@@ -24,6 +20,3 @@ font-size: 14px;
   <p>공지글 등록이 완료되었습니다.<br>
   <br>공지게시판 목록으로 돌아갑니다.</p>
 <br>
-
-</body>
-</html>

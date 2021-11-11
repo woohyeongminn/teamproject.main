@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
     
-<!DOCTYPE html>
-<html>
-<head>
-
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
@@ -98,7 +94,7 @@
   
   <tr id="blockbox">
     <th scope="row"><label for='f-content' id="content">내용</label></th>
-    <td><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" autocomplete='off' placeholder="내용을 입력해 주세요."></textarea></td>
+    <td><textarea id='f-content' name='content' rows="20" wrap="virtual" autocomplete='off' placeholder="내용을 입력해 주세요."></textarea></td>
     <td></td>
   </tr>
   
@@ -108,7 +104,7 @@
     <div class="button">
               <label for="chooseFile" id="click"><b>👉 CLICK HERE! 👈</b></label>
           </div>
-          <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"></td>
+          <input type="file" id="chooseFile" name="filepath" accept="image/*" onchange="loadFile(this)"></td>
     <!-- <input style="display: block;" type="file" name="filepath" id="input-image"> -->
     <td></td>
   </tr>
@@ -183,5 +179,3 @@ document.querySelector("#notice-add").onsubmit = () => {
 };
 </script>
 
-</body>
-</html>
