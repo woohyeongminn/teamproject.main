@@ -3,10 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <style>
 * {
   font-size: 14px;
@@ -28,12 +24,11 @@
 </style>
 </head>
 
-<body>
 <div class="all-content">
   <c:if test='${not empty ceoMemberList}'>
     <table class="table table-responsive text-cente">
         <thead class="t-top">
-          <tr>
+          <tr style="margin-left: auto;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <th>번호</th>
             <th>이름</th>
             <th>닉네임</th>
@@ -58,5 +53,9 @@
         <p>등록된 기업회원이 없습니다.</p>
     </c:if>
   </div>
-</body>
-</html>
+  
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+  <jsp:include page="AdminMenu.jsp"/>
+    
+</div>

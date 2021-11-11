@@ -3,14 +3,8 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-
 <!-- 아이콘 -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-
-<meta charset="UTF-8">
 
 <style>
    .card {
@@ -75,55 +69,6 @@
   a:hover {
   color : white;
   }
-  .offcanvas-start {
-  width: 350px;
-  }
-  .btn-group {
-  margin-top: 10px;
-  display: block;
-  }
-  .btn-secondary:focus {
-  background-color: beige;
-  color: black;
-  }
-  button[type=button2] {
-  margin-left: 70px;
-    color: black;
-    font-size: 14px;
-  }
-  button[type=button2]:hover {
-    color: black;
-  }
-  button[type=button] {
-    margin-block: 10px;
-    border: 1.5px solid;
-    border-radius: 10px;
-    background-color: white;
-    color: black;
-    font-size: 14px;
-    line-height: 14px;
-  }
-  button[type=button]:hover {
-    background-color: beige;
-    color: black;
-  }
-  .dropdown-menu {
-  background-color: rgba(211, 211, 211, 0);
-  border: rgba(211, 211, 211, 0);
-  }
-	button[type=button1] {
-	    margin-left: 15px;
-	    margin-bottom: 5px;
-	    border-radius: 5px;
-	    border: 1px solid;
-	    background-color: white;
-	    color: black;
-	    font-size: 14px;
-	}
-  button[type=button1]:hover {
-    background-color: beige;
-    color: black;
-  }
 </style>
 
 </head>
@@ -155,6 +100,7 @@
   </div>
   
 </div>
+
 </fieldset>
 </section>
   
@@ -162,7 +108,4 @@
 
   <jsp:include page="AdminMenu.jsp"/>
   
-  </div>
-    
-</body>
-</html>
+</div>

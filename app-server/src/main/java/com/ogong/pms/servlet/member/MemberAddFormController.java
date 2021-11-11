@@ -39,6 +39,7 @@ public class MemberAddFormController extends HttpServlet {
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
+      e.printStackTrace();
       request.setAttribute("error", e);
       request.getRequestDispatcher("/Error.jsp").forward(request, response);
     }

@@ -3,9 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
   
 <style>
@@ -96,7 +93,6 @@
 </style>
 
 </head>
-<body>
 
 	<section>
 
@@ -106,7 +102,7 @@
 	<hr>
 	
 	<form action='login' method='post' name='login' onsubmit="return notEmpty()">
-	      <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
+	      <input class="input" id='f-email' type='email' name='email' autocomplete='off' placeholder='E-mail'>
 	      <br>
 	      <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
 	  <div class="inner">
@@ -115,7 +111,7 @@
 		      <span id="remember">
 		      정보 기억하기
 		     </span>
-		  </div>
+		  </div>  
 	      <button type="submit" class="btn btn-outline-dark" value="로그인">로그인</button> 
 	  </div>
 	</form>
@@ -139,6 +135,3 @@ function notEmpty() {
 	  }
 }
 </script>
-
-</body>
-</html>

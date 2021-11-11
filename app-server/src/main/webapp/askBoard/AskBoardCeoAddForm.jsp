@@ -19,9 +19,6 @@
     line-height: 14px;
   }
   </style>
-</head>
-
-<body>
 <br>
   <form method="post">
     <label for='f-status'>공개</label>

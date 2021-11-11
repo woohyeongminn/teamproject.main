@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>개인회원 로그인</title>
+
 <style>
   label {
     margin-right: 5px;
@@ -36,9 +32,7 @@
   text-align-last: center;
   }
 </style>
-</head>
 
-<body>
   <br>
  <button class = "btn btn-outline-dark" ><a href='detail'>마이페이지</a></button>
  <button class = "btn btn-outline-dark" ><a href='../bookmark/list?perno=${loginUser.perNo}'>내 북마크</a></button>
@@ -51,5 +45,4 @@
  <button><a href='../mystudy/guilderList?perNo=${perMember.perNo}'>내 스터디(구성원)</a></button>
  <button><a href='../mystudy/waitinglist?perNo=${perMember.perNo}'>내 스터디(승인 대기)</a></button> --%>
  <button class = "btn btn-outline-dark" ><a href='../mystudy/list'>내 스터디 목록(통합)</a></button>
- </body>
-</html>
+

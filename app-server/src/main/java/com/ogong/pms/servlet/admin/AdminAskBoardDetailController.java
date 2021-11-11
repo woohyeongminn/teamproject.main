@@ -1,13 +1,12 @@
 package com.ogong.pms.servlet.admin;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
@@ -18,13 +17,13 @@ public class AdminAskBoardDetailController extends HttpServlet {
   AskBoardDao askBoardDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
   }
 
   @Override
-  public void service(ServletRequest request, ServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {

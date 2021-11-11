@@ -113,7 +113,7 @@
   </table>
   
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <button type="submit" class="btn btn-outline-dark" value="등록">등록</button>
+   <button type="submit" class="btn btn-outline-dark" value="등록" onclick="addnotice();">등록</button>
   </div>
   
 </form>
@@ -154,6 +154,31 @@ document.querySelector("#notice-add").onsubmit = () => {
     Swal.fire('제목이나 내용을 입력해 주세요.')
     return false; // 일단 서버에 보내지 마
   }
+};
+</script>
+
+<script type="text/javascript">
+
+function addnotice(){
+	  Swal.fire({
+	    title: '🔔 공지게시글 등록',
+	    text: "정말 등록하시겠습니까?",
+	    icon: 'question',
+	    showCancelButton: true,
+	    timer: 50000,
+	    confirmButtonColor: '#3085d6',
+	    cancelButtonColor: '#d33',
+	    confirmButtonText: '네',
+	    cancelButtonText: '아니오'
+	    }).then((result) => {
+	      if (result.value) {
+	    	  '🔔 공지게시글 등록',
+	        '공지게시글 등록이 완료되었습니다.',
+	        'success'
+	        }
+	      })
+	    }
+	    
 /*   if (document.querySelector("#f-title").value != "" &&
 	        document.querySelector("#f-content").value != "") {
     Swal.fire({
@@ -176,6 +201,6 @@ document.querySelector("#notice-add").onsubmit = () => {
         }
       })
   } */
-};
+
 </script>
 

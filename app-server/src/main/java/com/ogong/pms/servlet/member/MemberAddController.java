@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.member;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +19,15 @@ public class MemberAddController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   // 개인
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -45,7 +44,8 @@ public class MemberAddController extends HttpServlet {
       memberDao.insert(member);
       sqlSession.commit();
 
-      request.setAttribute("pageTitle", "✏회원 가입");
+      response.setHeader("Refresh", "2;url=form");
+      request.setAttribute("pageTitle", " 👋환영 합니다!");
       request.setAttribute("contentUrl", "/member/PerMemberAdd.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 

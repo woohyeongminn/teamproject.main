@@ -3,11 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
 <style>
   .card {
     width: 400px;
@@ -66,9 +61,7 @@
   }
 </style>
 
-
 </head>
-<body>
 
 <section>
 <fieldset>
@@ -82,10 +75,10 @@
 
   <div class="profile">
     <p><label for='f-nickName' class='form-label'>닉네임　&emsp;</label>
-    <input id='f-profile' type='text' name='nickName' placeholder='닉네임 👑'></p>
+    <input id='f-profile' type='text' name='nickName' autocomplete='off' placeholder='닉네임 👑'></p>
     <br>
     <p><label for='f-email' class='form-label'>이메일　&emsp;</label>
-    <input id='f-profile' type='email' name='email' placeholder='이메일'></p>
+    <input id='f-profile' type='email' name='email' autocomplete='off' placeholder='이메일'></p>
     <br>
     <p><label for='f-password' class='form-label'>비밀번호&emsp;</label>
     <input id='f-profile' type='password' name='password' placeholder='비밀번호'></p>
@@ -139,6 +132,3 @@ function notEmpty() {
     }
 }
 </script>
-
-</body>
-</html>
