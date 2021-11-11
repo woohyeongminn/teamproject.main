@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.domain.FreeBoard;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/freeboard/update")
 public class FreeBoardUpdateController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -22,7 +23,7 @@ public class FreeBoardUpdateController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
+  public void init() {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");

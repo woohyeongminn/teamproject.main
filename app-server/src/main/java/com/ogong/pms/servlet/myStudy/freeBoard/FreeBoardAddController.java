@@ -14,6 +14,7 @@ import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 
+@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
 @WebServlet("/freeboard/add")
 public class FreeBoardAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -23,7 +24,7 @@ public class FreeBoardAddController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
+  public void init() {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");

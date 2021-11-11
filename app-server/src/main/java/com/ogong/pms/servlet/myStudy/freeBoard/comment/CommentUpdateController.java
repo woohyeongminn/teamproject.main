@@ -26,7 +26,7 @@ public class CommentUpdateController extends HttpServlet {
   CommentDao commentDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
+  public void init() {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");

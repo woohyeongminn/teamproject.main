@@ -33,7 +33,16 @@
 <thead>
   <tr id="head">
       <th>번호</th>
-      <th>제목</th>
+      
+    <c:choose>
+	    <c:when test="${not empty loginAdmin}">
+	     <th style="margin-left: auto;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">제목</th>
+	    </c:when>
+	    <c:otherwise>
+	     <th>제목</th>
+	    </c:otherwise>
+	  </c:choose>
+      
       <th>작성자</th>
       <th>조회수</th>
       <th>등록일</th>
@@ -62,6 +71,13 @@
 </c:forEach>
 </tbody>
 </table>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+  <jsp:include page="AdminMenu.jsp"/>
+    
+</div>
+
 </fieldset>
 <c:if test="${empty adminAskBoardList}">
        등록된 문의글이 없습니다.

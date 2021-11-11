@@ -35,8 +35,10 @@ public class AdminPerMemberDetailController extends GenericServlet {
         throw new Exception("해당 번호의 회원이 없습니다.");
       }
 
+      request.setAttribute("pageTitle", "📖 개인 회원 상세");
       request.setAttribute("perMember", perMember);
-      request.getRequestDispatcher("/admin/AdminPerMemberDetail.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/admin/AdminPerMemberDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

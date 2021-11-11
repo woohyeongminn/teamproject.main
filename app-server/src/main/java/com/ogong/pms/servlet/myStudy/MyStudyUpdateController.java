@@ -21,7 +21,7 @@ public class MyStudyUpdateController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
+  public void init() {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");

@@ -78,7 +78,7 @@
     </select>
     <input type="text" name="keyword">
     <input type="hidden" name="perNo" value="${perNo}">
-    <button class="btn btn-outline-dark">검색</button>
+    <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
 
