@@ -32,7 +32,10 @@ public class CeoCafeAddFormController extends HttpServlet {
       CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
       request.setAttribute("ceoMember", ceoMember);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeAddForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "👩‍🏫 스터디카페 등록");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeAddForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

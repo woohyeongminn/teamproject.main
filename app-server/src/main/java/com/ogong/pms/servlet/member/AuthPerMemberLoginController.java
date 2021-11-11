@@ -49,11 +49,10 @@ public class AuthPerMemberLoginController extends HttpServlet {
         }
       }
 
-      //      request.setAttribute("perMember", member);
-      // 로그인 성공한다면, 로그인 사용자 정보를 세션 객체에 보관한다.
+      request.setAttribute("pageTitle", "🖐 "+ member.getPerNickname()+"님 환영합니다");
       request.getSession().setAttribute("loginUser", member);
-      //      request.getRequestDispatcher("memberSession.jsp").forward(request, response);
-      request.getRequestDispatcher("/member/PerMemberLogin.jsp").forward(request, response);
+      request.setAttribute("contentUrl", "/member/PerMemberLogin.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

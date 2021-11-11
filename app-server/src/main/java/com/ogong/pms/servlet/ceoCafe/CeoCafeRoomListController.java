@@ -9,18 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeRoomDao;
+import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeRoom;
 
 @WebServlet("/ceomember/cafe/room/list")
 public class CeoCafeRoomListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  CafeDao cafeDao;
   CafeRoomDao cafeRoomDao;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
     cafeRoomDao = (CafeRoomDao) 웹애플리케이션공용저장소.getAttribute("cafeRoomDao");
   }
 
@@ -30,6 +34,7 @@ public class CeoCafeRoomListController extends HttpServlet {
 
     try {
       int cafeNo = Integer.parseInt(request.getParameter("cafeno"));    //카페번호
+      Cafe cafe = cafeDao.findByCafeNo(cafeNo);
 
       List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeNo);
 
@@ -42,7 +47,10 @@ public class CeoCafeRoomListController extends HttpServlet {
 
       request.setAttribute("cafeNo", cafeNo);
       request.setAttribute("cafeRoomList", cafeRoomList);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeRoomList.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "👩‍🏫 " + cafe.getName() + " -" + " 스터디룸 목록");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeRoomList.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

@@ -6,42 +6,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>예약 내역 상세</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <style>
-  a {
-   text-decoration:none;
-  }
-  label {
-    display: inline-block;
-    margin-right: 5px;
-    margin-left: 20px;
-    width: 130px;
-  }
+<meta charset="UTF-8">
+<style>
+* {
+  font-size: 14px;
+}
+
+a {
+ text-decoration:none;
+}
+
+label {
+  display: inline-block;
+  margin-right: 5px;
+  margin-left: 20px;
+  width: 130px;
+}
+
 .all-content {
   width: 100%;
   margin: 0 auto;
 }
-
-.c-top {
-  width: 100%;
-  padding: 20px 0 20px 0px;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-  text-align: center;
-}
-
-
 </style>
 </head>
 
 <body>
-  <jsp:include page="../header.jsp"/>
-  <div class="c-top">
-      📝 예약내역 상세
-    </div>
   <div class="all-content">
   <div id='content'>
     <label>예약날짜</label>${cafeReser.reservationDate}<br>
@@ -62,7 +51,7 @@
 
 <!-- 결제 거절 버튼 -->
 <c:if test="${cafeReser.reservationStatusName eq '결제완료'}">
-<a href='#<%-- ?no=${cafeReser.reservationNo}--%>' class="btn btn-outline-dark">결제 환불</a>
+<a href='#<%-- ?no=${cafeReser.reservationNo}--%>' class="btn btn-outline-dark">결제취소(환불)</a>
 </c:if>
 
 <a href="list?ceono=${ceoMember.ceoNo}" class="btn btn-outline-dark">목록</a>

@@ -14,6 +14,9 @@ public class PerLoginFormController extends HttpServlet {
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("/member/PerMemberLoginForm.jsp").forward(request, response);
+
+    request.setAttribute("pageTitle", " 🖐 개인 회원 로그인 ");
+    request.setAttribute("contentUrl", "/member/PerMemberLoginForm.jsp");
+    request.getRequestDispatcher("/template1.jsp").forward(request, response);
   } 
 }

@@ -8,40 +8,28 @@
 <head>
 <meta charset="UTF-8">
 <title>개인회원 프로필 수정</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
  <style>
-    label {
-      margin-right: 5px;
-      text-align: center;
-      display: inline;
-      width: 60px;
-    }
-    legend {
+ * {
+  font-size: 14px;
+  }
+  
+  label {
+    margin-right: 5px;
     text-align: center;
-    font-family
-    }
-  .n-btn {
-    border-radius: 10px;
-    background-color: blanchedalmond;
-    color: black;
-    font-size: 18px;
+    display: inline;
+    width: 60px;
+    size:100px;
   }
-  .n-btn:hover {
-    background-color: lightyellow;
-    color: black;
+  
+  .btn {
+    line-height: 14px;
   }
-
  </style>
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
-  <legend>✏ 개인 회원 프로필 수정</legend><br>
-
   
-  <form  action="update">  
+  <form  method="post">  
     <span>(${loginUser.perNo})</span><br>
     
     <label for='f-nickname'>닉네임</label>
@@ -104,10 +92,10 @@
 		  </table>
 		 </section>
   
-  <br><button class="n-btn w100 btn-sm btn-default cert-hidden" type="submit" value="수정">수정하기</button>
+  <br><button class="btn btn-outline-dark" type="submit" value="수정">수정하기</button>
   </form> 
 
-  <script type="text/javascript" src="update.js"></script>
+  <script type="text/javascript" src="../js/update.js"></script>
   
  </body>
 </html>

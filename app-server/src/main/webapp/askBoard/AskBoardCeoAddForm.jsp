@@ -29,7 +29,7 @@
 
 <body>
 <br>
-  <form>
+  <form method="post">
     <label for='f-status'>공개</label>
     <select id="f-status" name='status' >
       <option value='1' name='status'>공개</option>

@@ -27,7 +27,7 @@
 </style>
 </head>
 <body>
-  <form action="perupdate">
+  <form action="perupdate" method="post">
     <span>(${perAskBoard.askNo})</span><br>
     
     <label for='f-title'>제목</label>

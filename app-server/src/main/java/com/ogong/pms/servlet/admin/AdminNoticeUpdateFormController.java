@@ -33,7 +33,11 @@ public class AdminNoticeUpdateFormController extends GenericServlet {
 
       request.setAttribute("notice", notice);
 
-      request.getRequestDispatcher("/admin/NoticeUpdateform.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "🔔 공지게시글 변경");
+      request.setAttribute("contentUrl", "/admin/NoticeUpdateform.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
+      //request.getRequestDispatcher("/admin/NoticeUpdateform.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

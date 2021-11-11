@@ -46,9 +46,6 @@
  </head> 
  
   <body>
-    <jsp:include page="../header.jsp"/>
-      <legend><b>✏ 개인 회원 프로필 수정</b></legend><br>
-        
          
       <section class="n-section-block">
         <table class="n-table table-row my-info-modify">

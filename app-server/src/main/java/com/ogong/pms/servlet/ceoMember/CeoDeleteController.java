@@ -60,9 +60,9 @@ public class CeoDeleteController extends HttpServlet {
       ceoMemberDao.updateActive(ceoMember);
       sqlSession.commit();
 
-      response.sendRedirect("logout");
       //        AuthCeoMemberLoginHandler.loginCeoMember = null;
       //        AuthCeoMemberLoginHandler.accessLevel = Menu.LOGOUT;
+      response.sendRedirect("logout");
 
     } catch (Exception e) {
       request.setAttribute("error", e);

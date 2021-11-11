@@ -40,9 +40,6 @@ public class CeoReservationRejectController extends HttpServlet {
       cafeReservationDao.deleteReservation(resNo, 5);
       sqlSession.commit();
 
-      response.sendRedirect("detail?resno=" + resNo);
-
-
       //    } else if (reserDate.toLocalDate().compareTo(today.toLocalDate()) == 0) {
       //      System.out.println(" >> 당일 예약은 거절 불가능합니다.");
       //      return;
@@ -50,6 +47,8 @@ public class CeoReservationRejectController extends HttpServlet {
       //      System.out.println(" >> 지난 예약은 선택할 수 없습니다.");
       //      return;
       //    }
+
+      response.sendRedirect("detail?resno=" + resNo);
 
     } catch (Exception e) {
       e.printStackTrace();

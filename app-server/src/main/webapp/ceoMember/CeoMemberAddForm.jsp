@@ -2,12 +2,10 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업회원 회원가입</title>
 <style>
   label {
     margin-right: 5px;
@@ -24,8 +22,8 @@
   input:invalid {
     color: grey;
   }
-  
 </style>
+
 <script type="text/javascript">
 function checkValue() {
 	
@@ -83,7 +81,6 @@ function checkValue() {
 	        return false;
 	   }
 }
-
 </script>
 </head>
 
@@ -110,8 +107,8 @@ function checkValue() {
 	  
 	  <label for='f-tel' class='form-label' >전화번호</label>
 	  <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
-	  <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='3' maxlength='4'  style="width:50px;"/> -
-	  <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='3' maxlength='4'  style="width:50px;"/> <br>
+	  <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
+	  <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
 	  
 	  <label for='f-bossname' class='form-label'>대표자명</label>
     <input id='f-bossname' type='text' name='bossname' placeholder="대표자명"/><br>
@@ -140,7 +137,7 @@ function checkValue() {
 	  <input id='f-passwordcheck' type='password' name='passwordcheck' placeholder="비밀번호 확인"/><br>
 	  
 	  <button type="submit" class="class="btn btn-outline-dark">회원가입</button>
-	  <input type="button" class="class="btn btn-outline-dark"> 취소</input>
+	  <input type="button" class="class="btn btn-outline-dark">취소</input>
 	 </form>
 	 </div>
  </body>

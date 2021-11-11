@@ -48,6 +48,8 @@ public class CeoCafeRoomAddContoller extends HttpServlet {
       cafeRoom.setRoomPrice(Integer.parseInt(request.getParameter("roomPrice")));
       cafeRoom.setRoomStatus(1);
 
+      cafe.setInfo(cafe.getInfo().replace("\n", "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
+
       //fileNames.add(new CafeImage(fileName));
 
       //      if (!fileNames.isEmpty()) {

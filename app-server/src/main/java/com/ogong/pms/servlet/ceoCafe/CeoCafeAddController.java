@@ -52,8 +52,6 @@ public class CeoCafeAddController extends HttpServlet {
       cafe.setCafeStatus(Integer.parseInt(request.getParameter("cafeStatus")));
       //cafe.setCafeImgs(request.getParameter("filename[]"));
 
-      System.out.println(cafe);
-
       cafeDao.insertCafe(cafe);
       sqlSession.commit();
 

@@ -27,15 +27,10 @@ public class MemberDetailController extends GenericServlet {
       throws ServletException, IOException {
 
     try {
-      //      int no = Integer.parseInt(request.getParameter("no")); 
-      //      Member member = memberDao.findByNo(no);
 
-      //      if (member == null) {
-      //        throw new Exception("해당 번호의 회원이 없습니다.");
-      //      } 
-      //
-      //      request.setAttribute("perMember", member);
-      request.getRequestDispatcher("/member/PerMemberDetail.jsp").forward(request, response);
+      request.setAttribute("pageTitle", "📜 마이페이지");
+      request.setAttribute("contentUrl", "/member/PerMemberDetail.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

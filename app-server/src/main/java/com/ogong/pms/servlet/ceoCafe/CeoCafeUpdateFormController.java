@@ -40,7 +40,10 @@ public class CeoCafeUpdateFormController extends HttpServlet  {
 
       request.setAttribute("cafe", cafe);
       request.setAttribute("cafeStatus", status);
-      request.getRequestDispatcher("/ceoCafe/CeoCafeUpdateForm.jsp").forward(request, response);
+
+      request.setAttribute("pageTitle", "🙂 마이페이지");
+      request.setAttribute("contentUrl", "/ceoCafe/CeoCafeUpdateForm.jsp");
+      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       request.setAttribute("error", e);

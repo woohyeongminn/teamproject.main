@@ -3,33 +3,36 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업회원 스터디카페 등록</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <style>
-   a {
-   text-decoration:none;
-  }
-  label {
-    display: inline-block;
-    margin-right: 5px;
-    width: 130px;
-  }
-  #aside {
-     width: 120px;
-     height: 171px;
-     float: left;
-  }
-  #content {
-     margin-left: 130px;
-  } 
+<style>
+* {
+  font-size: 14px;
+}
 
-  #input-file-button {
+ a {
+ text-decoration:none;
+}
+  
+label {
+  display: inline-block;
+  margin-right: 5px;
+  width: 130px;
+}
+  
+#aside {
+   width: 120px;
+   height: 171px;
+   float: left;
+}
+  
+#content {
+   margin-left: 130px;
+} 
+
+ #input-file-button {
   display: inline-table;
   width: 120px;
   padding: 2px;
@@ -40,7 +43,7 @@
   cursor: pointer;
   text-align: center;
   margin-top: 5px;
- }
+}
 
  #c-image {
   width: 120px;
@@ -54,23 +57,25 @@
   margin-left: 41px;
   vertical-align: 4px;
 }
+
 #c-review {
   width: 427px;
   background-color: whitesmoke;
   height: 80px;
   margin-bottom: 10px;
 }
+
 #button {
   margin-left: 130px;
   margin-top: 30px;
 }
-#b-but {
+
+#b-btn {
   width: 140px;
   padding: 5px;
   margin-right: 10px;
   background-color: dimgray(209, 209, 209);
   border-radius: 4px;
-  color: black;
   font-size: smaller;
   cursor: pointer;
   text-align: center;
@@ -88,16 +93,10 @@
   background-color: rgb(247, 231, 215);
   text-align: center;
 }
-
-
 </style>
 </head>
 
 <body>
-  <jsp:include page="../header.jsp"/>
-  <div class="c-top">
-        👩‍🏫 내 스터디카페 등록
-    </div>
   <div class="all-content">
   <br>
   <p>스터디 카페를 등록하고 승인을 기다리세요:)</p>
@@ -148,7 +147,7 @@
       
     </div>
     <div id='button'>
-     <button id='b-but' type="submit" value="등록" formaction="add">등록</button>
+     <button id='b-btn' type="submit" value="등록" class="btn btn-outline-dark">등록</button>
     </div>
   </form>
   </div>
