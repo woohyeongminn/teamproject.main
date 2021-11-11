@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.member;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,35 +23,38 @@ public class AuthPerMemberLoginController extends HttpServlet {
   }
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
       String email = request.getParameter("email");
       String password = request.getParameter("password");
 
-      Member member = memberDao.findByEmailAndPassword(email, password);
+      Member member = null;
+      member = memberDao.findByEmailAndPassword(email, password);
 
-      if (member == null) {
-        throw new Exception("이메일과 암호가 일치하는 회원을 찾을 수 없습니다.");
+      if (member != null) {
+        //      if (member != null && member.getPerStatus() == Member.PER) {
+        //        if (member.getActive() == Member.OUTUSER) {
+        //          throw new Exception ("<p>회원가입을 진행해 주세요.</p>");
+        //        }
+        //      }
+        request.setAttribute("pageTitle", "🖐 "+ member.getPerNickname()+"님 환영합니다");
+        request.getSession().setAttribute("loginUser", member);
+        request.setAttribute("contentUrl", "/member/PerMemberLogin.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
+
+      } else {
+        request.setAttribute("pageTitle", "해당 계정이 존재하지 않습니다.");
+        request.setAttribute("contentUrl", "/member/PerMemberLoginFail.jsp");
+        request.getRequestDispatcher("/template1.jsp").forward(request, response);
       }
-
-      if (member != null && member.getPerStatus() == Member.PER) {
-        if (member.getActive() == Member.OUTUSER) {
-          throw new Exception ("<p>회원가입을 진행해 주세요.</p>");
-        }
-      }
-
-      request.setAttribute("pageTitle", "🖐 "+ member.getPerNickname()+"님 환영합니다");
-      request.getSession().setAttribute("loginUser", member);
-      request.setAttribute("contentUrl", "/member/PerMemberLogin.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
       e.printStackTrace();

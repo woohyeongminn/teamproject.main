@@ -24,6 +24,8 @@ public interface CeoMemberDao {
   void updateEmail(CeoMember ceoMember) throws Exception;
   void updatePassword(CeoMember ceoMember) throws Exception;
 
+  void updateCeoMember(CeoMember ceoMember) throws Exception;
+
   void updateActive(CeoMember ceoMember) throws Exception;
 
   void delete(int no) throws Exception;

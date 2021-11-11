@@ -53,7 +53,7 @@ public class CeoCafeDetailController extends HttpServlet {
 
       } else {
 
-        cafe.setInfo(cafe.getInfo().replace("\n", "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
+        /* cafe.setInfo(cafe.getInfo().replace("\n", "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")); */
 
         HashMap<String,Object> params = new HashMap<>();
         params.put("cafeNo", cafe.getNo());

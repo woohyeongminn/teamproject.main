@@ -4,6 +4,31 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
+
+
+
+
+
+<!-- 이거 안쓰고 CeoCafeMyDetail 사용 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +107,7 @@
   <div id='aside'>
     <span id='c-image'>대표이미지</span>
   </div>
-  <form action='updateform'>
+  <form action='updateform' method='post' enctype="multipart/form-data">
   <div id='content'>
     <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
     <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>

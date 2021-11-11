@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<!DOCTYPE html>
-<html>
-<head>
 
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
@@ -122,7 +119,7 @@
               <br>
               <label for="chooseFile" id="click"><b>👉 CLICK HERE! 👈</b></label>
           </div>
-          <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)"></td>
+          <input type="file" id="chooseFile" name="filepath" accept="image/*" onchange="loadFile(this)"></td>
     <td></td>
   </tr>
   
@@ -151,6 +148,3 @@ document.querySelector("#notice-update").onsubmit = () => {
   }
 };
 </script>
-
-</body>
-</html>

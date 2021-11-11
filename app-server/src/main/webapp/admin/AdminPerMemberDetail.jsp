@@ -7,12 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>개인회원 상세(관리자)</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   
-   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
-   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<title>관리자 | 개인 회원 상세</title>
 <style>
+ * {
+  font-size: 14px;
+  }
   label {
     margin-right: 5px;
     text-align: center;
@@ -22,19 +21,26 @@
   legend {
   text-align: center;
   }
+    .btn {
+    line-height: 14px;
+  }
+     #info {
+  text-align-last: center;
+  }
 </style>
-</head>>
+</head>
 
 <body>
-<jsp:include page="../header.jsp"/>
-   <b> 📖 개인회원 상세</b>
    <hr>
-   <span>(${perMember.perNo})</span><br>
+   <div id="info">
+   <span>${perMember.perNo}</span><br>
    <img src="..." alt="..." class="img-circle"><br>
    <span>이름ㅣ</span><span><a href='permemberdetail?no=${perMember.perNo}'>${perMember.perName}</span></a><br>
    <span>닉네임ㅣ</span><span>${perMember.perNickname}</span><br>
    <span>이메일ㅣ</span><span>${perMember.perEmail}</span><br>
    <span>가입일ㅣ</span><span>${perMember.perRegisteredDate}</span><br>
+   </div>
+   <br>
    <button type="button"  value="목록" formaction="permemberlist" class="btn btn-outline-dark">
     <a href='permemberlist'>목록</a>
    </button>

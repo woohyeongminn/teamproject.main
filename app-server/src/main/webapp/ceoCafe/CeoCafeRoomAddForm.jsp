@@ -88,16 +88,11 @@ label {
 
 <body>
 <div class="all-content">
+      <form action="add" method="post" enctype="multipart/form-data">
     <div id='aside'>
       <span id='c-image'>사진</span>
-      <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input id="input-roomFile" type="file" multiple="multiple" style='display:none' name='filename[]'/>
-        <label id="input-file-button" for="input-file">
-          파일 첨부
-        </label>
-      </form>
+        <input id="input-roomFile" type="file" multiple="multiple" name='photo'/>
     </div>
-    <form action='add'>
     <div id='content'>
       <input type ='hidden' name='cafeno' value='${cafeNo}'>
       
@@ -130,9 +125,9 @@ label {
          -->
     </div>
     <div id='button'>
-     <button id='b-but' type="submit" value="등록" formaction="add">등록</button>
+     <button id='b-but' type="submit" value="등록" >등록</button>
     </div>
-  </form>
+    </form>
   </div> 
 </body>
 </html>

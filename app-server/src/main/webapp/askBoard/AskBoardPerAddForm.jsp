@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>등록 | 문의 게시글</title>
   <style>
   * {
   font-size: 14px;
@@ -25,9 +19,6 @@
     line-height: 14px;
   }
   </style>
-</head>
-
-<body>
 <br>
   <form method="post">
     <label for='f-status'>공개</label>
@@ -37,19 +28,18 @@
     </select><br> 
     
     <div id="passwordRow">
-      <label for='f-tempPW' size='100px'>🔑비밀번호</label>
+      <label for='f-tempPW' size='100px'>🔏비밀번호</label>
       <input id='f-tempPW' type='password' name='tempPW' placeholder="4자리"></input>
     </div><br>
   
     <br>
 		  <label for="f-title" class="form-label">제목</label>
-		  <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요"></input>
+      <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요"></input>
     
-		  <label for="f-content" class="form-label">내용</label>
-		  <input class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요"></input>
+      <label for="f-content" class="form-label">내용</label>
+      <textarea class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
     
     <input type ='hidden' name='writer' value='${loginUser.perNo}'></input>      
-  
     <br><br>
     
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -71,8 +61,17 @@ fStatus.addEventListener("input", function() {
 	}
 });
 </script>
-</body>
-</html>
+
+<!-- 
+<script type="text/javascript">
+function popupOpen() {
+	var popUrl = "${contextPath}/mylist";
+	var popOption = "width=1200, heigth=600, resizable=no, scrollvars=no, status=no;";
+	var p = window.open(popUrl, "popUrl", popOption);
+	p.focus();
+}
+</script>
+ -->
 
 
 

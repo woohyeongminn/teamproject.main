@@ -19,7 +19,7 @@
       <tr>
         <th>번호</th>
         <th>북마크</th>
-        <th>제목</th>
+        <th data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">제목</th>
         <th>대면/비대면</th>
         <th>조장</th>
         <th>분야</th>
@@ -44,5 +44,12 @@
       </c:forEach>
     </tbody>
   </table>
+  
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+
+  <jsp:include page="AdminMenu.jsp"/>
+    
+</div>
+
 </body>
 </html>

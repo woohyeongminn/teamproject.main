@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>등록 | 문의 게시글</title>
   <style>
   * {
   font-size: 14px;
@@ -25,9 +19,6 @@
     line-height: 14px;
   }
   </style>
-</head>
-
-<body>
 <br>
   <form method="post">
     <label for='f-status'>공개</label>
@@ -41,23 +32,19 @@
       <input id='f-tempPW' type='password' name='tempPW' placeholder="4자리"></input>
     </div><br>
   
-    <br>
-    <div class="mb-3">
+      <br>
       <label for="f-title" class="form-label">제목</label>
       <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요"></input>
-    </div>
     
-    <div class="mb-3">
       <label for="f-content" class="form-label">내용</label>
-      <input class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요"></input>
-    </div>
+      <textarea class="form-control" id="f-content" name="content" placeholder="내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
     
     <input type ='hidden' name='writer' value='${loginCeoUser.ceoNo}'></input>      
   
     <br><br>
     
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="peradd">등록하기</button>
+     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="ceoadd">등록하기</button>
    </div> 
   </form>
 
@@ -75,8 +62,6 @@ fStatus.addEventListener("input", function() {
   }
 });
 </script>
-</body>
-</html>
 
 
 

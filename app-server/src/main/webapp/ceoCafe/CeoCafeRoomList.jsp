@@ -42,7 +42,7 @@
           <div class="col mb-5">
               <div class="card h-100">
                   <a href='detail?roomno=${cafeRoom.roomNo}'>
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <img class="card-img-top" src="../upload/cafe/${cafeRoom.roomImg}_80x80.jpg" alt="..." />
                   </a>
                   <div class="card-body p-3">
                       <div class="text-center">

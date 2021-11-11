@@ -34,7 +34,7 @@ public class AdminNoticeUpdateController extends HttpServlet {
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -44,6 +44,8 @@ public class AdminNoticeUpdateController extends HttpServlet {
       if (notice == null) {
         throw new Exception(" >> 해당 번호의 공지글을 찾을 수 없습니다.");
       } 
+
+      //AdminNotice notice = new AdminNotice();
 
       notice.setAdminNotiTitle(request.getParameter("title"));
       notice.setAdminNotiContent(request.getParameter("content"));
@@ -70,6 +72,7 @@ public class AdminNoticeUpdateController extends HttpServlet {
 
       noticeDao.updateTitle(notice);
       noticeDao.updateContent(notice);
+      //noticeDao.updateFilepath(notice);
       noticeDao.deletenoticefile(noticeNo);
       noticeDao.insertFilepath(notice);
       sqlSession.commit();

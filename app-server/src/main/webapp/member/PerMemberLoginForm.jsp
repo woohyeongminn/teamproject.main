@@ -2,108 +2,127 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
-<title>개인회원 로그인</title>
 <style>
-  * {
-  font-size: 14px;
-  }
-  
   label {
-    margin-right: 5px;
-    text-align: center;
-    display: inline;
-    width: 60px;
-    size:100px;
-  }
-  
-  .btn {
-    line-height: 14px;
-  }
-    label {
-    margin-left: 10px;
+    margin-right: 10px;
     text-align: center;
     display: inline;
     width: 60px;
   }
   
-  input {
-  border : white;
-  outline-color : lightgray;
+  legend {
+  text-align: center;
+  font-size: 16px;
   }
   
-  input[type=checkbox]:checked {
+  form {
+  max-width: 500px;
+  }
+  
+  .input {
+  display: inline-block;
+  padding:10px;
+  width:100%;
+  margin-top: 10px;
+  border-color : lightgray;
+  border-radius: 6px;
+  }
+  
+  .input[type=checkbox]:checked {
   background-color: black;
   }
+  
   p {
   text-align-last: center;
   }
-    div {
+  
+  div {
   margin-right: 10px;
   xdisplay: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
   }
+  
   a {
   color : black;
   text-decoration : blink;
   }
+  
   a:hover {
-  color : white;
+  color : darkgray;
   }
-    .all-content {
+  
+  .btn {
+   width: 100%;
+   font-size: 14px;
+   line-height: 24px;
+   
+  }
+  
+  .form-check {
+  display: block;
+  padding: 0;
+  margin-bottom: 12px;
+  text-align: left;
+  }
+
+  .form-check span {
+  font-size: 14px;
+  }
+  
+   .c-top {
+  width: 100%;
+  padding: 20px 0 20px 50px;
+  font-weight: bold;
+  background-color: rgb(247, 231, 215);
+}
+
+  .all-content {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
+    padding: 50px;
+    margin-top:40px;
+    text-align: center;
   }
   .inner {
-    float: left;
+    max-width: 500px;
+    margin : 10px 0;
+  }
+  
+  .mb {
+  margin : 0;
+  text-align: center;
+  }
+  
+  .mb a {
+  padding: 5px;
+  font-size: 14px;
   }
   
 </style>
-</head>
-<body>
-
-<br>
 <div class="all-content">
-<fieldset>
+<b style="font-size:20px"> 🙋개인 회원 로그인 </b>
 <br>
 <hr>
-<table class="table table-responsive">
-<td><form action='login' method="post"></td>
-<br>
-<p><label for='f-email' class='form-label' size='100px'>이메일</label>
-<input id='f-email' type='email' name='email' placeholder='아이디' size='20'></p>
-<br>
-<p><label for='f-password' class='form-label' size='100px'>비밀번호</label>
-<input id='f-password' type='password' name='password' placeholder='패스워드' size='20'><br></p>
-<br>
-</table>
-</fieldset>
-    <div class="inner">
-  <span ></span>
-	    <div class="form-check">
-		    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-		    <label class="form-check-label" for="dropdownCheck">
-		    정보 기억하기
-		    </label>
-	    </div>
-	 </div>
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<button type="submit" class= "btn btn-outline-dark" value="로그인" >로그인</button> 
-  </form>
-  </div>
-
-  <div>
-    <div class="dropdown-divider"></div>
-     <a class="dropdown-item" href="addform">회원가입</a>
-     <a class="dropdown-item" href="#">비밀번호찾기</a>
+<form action='login' method='post'>
+  <!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
+  <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
+  <br>
+  <!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
+  <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
+  <div class="inner">
+    <div class="form-check">
+       <input type="checkbox" class="rememberCheck" id="dropdownCheck">
+       <span>정보 기억하기</span>
     </div>
+    <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
   </div>
-
-</body>
-</html>
+</form>
+<div class="mb">
+   <a href="addform">회원가입</a> |
+   <a href="#">비밀번호찾기</a>
+</div>
+</div>

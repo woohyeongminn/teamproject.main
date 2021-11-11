@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<!DOCTYPE html>
-<html>
-<head>
-
+  
    <!-- 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   
@@ -79,7 +75,6 @@
   </style>
   
 </head>
-<body>
 
 <section>
 <fieldset>
@@ -128,6 +123,3 @@
 </div>
 </fieldset>
 </section>
-
-</body>
-</html>

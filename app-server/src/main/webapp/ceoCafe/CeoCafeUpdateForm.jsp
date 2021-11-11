@@ -222,7 +222,7 @@ input {
      </li>
      <li id="tab2" class="btnCon"><a class="tabbtn" href="cafe/detail">내 카페</a>
        <div class="tabCon" >
-         <form action='update'>
+         <form action='update' method='post' enctype="multipart/form-data">
 				  <div class = "cafe-top">
 					  <div id='aside'>
 					    <span id='c-image'>대표이미지</span>

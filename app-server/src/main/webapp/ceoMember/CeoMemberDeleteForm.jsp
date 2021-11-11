@@ -21,7 +21,7 @@
 </head>
 
 <body>
-  <form action='delete'>
+  <form action='delete' method='post' enctype="multipart/form-data">
 	  <label for='f-email' class='form-label' size='100px'>이메일</label>
 	  <input id='f-email' type='email' name='email' placeholder='아이디' size='20'><br>
 	

@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>상세 | 문의 게시글</title>
+
   <style>
   * {
   font-size: 14px;
@@ -23,14 +19,8 @@
   .btn {
     line-height: 14px;
   }
-  
   </style>
-</head>
 
-</head>
-
-<body>
-    
      <span id='no' name='no'>(${askBoard.askNo})</span><br>
      <span>제목ㅣ</span> <span>${askBoard.askTitle}</span><br>
      <span>내용ㅣ</span> <span>${askBoard.askContent}</span><br>
@@ -51,9 +41,7 @@
          </span><br>
         </c:otherwise>
      </c:choose>
-</body>
-</html>  
-     
+
      
      
      

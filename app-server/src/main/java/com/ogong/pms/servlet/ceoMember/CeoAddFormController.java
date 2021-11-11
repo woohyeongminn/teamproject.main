@@ -26,7 +26,7 @@ public class CeoAddFormController extends HttpServlet {
 
   // 기업 회원가입
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
