@@ -11,11 +11,6 @@
   font-size: 14px;
 }
 
-h3 {
-  text-align: center;
-  font-weight: bolder;
-}
-
 .all-content {
   width: 100%;
   margin: 0 auto;

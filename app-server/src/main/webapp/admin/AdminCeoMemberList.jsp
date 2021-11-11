@@ -7,33 +7,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업회원 목록</title>
-   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
-   
-   <script src="../node_modules/@popperjs/core/dist/umd/popper.js"></script> <!-- 의존하는 것 우선 -->
-   <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <style>
-  label {
-    margin-right: 5px;
-    text-align: center;
-    display: inline;
-  }
-  legend {
+* {
+  font-size: 14px;
+}
+
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.t-top {
   text-align: center;
-  }
+}
+
+.t-content {
+  text-align: center;
+}
 </style>
 </head>
 
 <body>
-<jsp:include page="../header.jsp"/>
-  <hr>
-  <fieldset>
-  <legend>
-   <b> 📗 기업회원 목록</b>
-  </legend>
-    <table class="table">
-
-        <thead>
+<div class="all-content">
+  <c:if test='${not empty ceoMemberList}'>
+    <table class="table table-responsive text-cente">
+        <thead class="t-top">
           <tr>
             <th>번호</th>
             <th>이름</th>
@@ -42,7 +41,7 @@
             <th>가입일</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody class="t-content">
           <c:forEach items="${ceoMemberList}" var="ceoMember">
              <tr>
               <td>(${ceoMember.ceoNo})</td>
@@ -53,7 +52,11 @@
              </tr>
          </c:forEach>
         </tbody>
-  </table>
-  </fieldset>
+    </table>
+    </c:if>
+    <c:if test="${empty ceoMemberList}">
+        <p>등록된 기업회원이 없습니다.</p>
+    </c:if>
+  </div>
 </body>
 </html>

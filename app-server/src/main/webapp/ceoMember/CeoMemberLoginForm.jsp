@@ -13,6 +13,7 @@
     display: inline;
     width: 60px;
   }
+  
   legend {
   text-align: center;
   font-size: 16px;
@@ -21,6 +22,7 @@
   form {
   max-width: 500px;
   }
+  
   .input {
   display: inline-block;
   padding:10px;
@@ -29,12 +31,15 @@
   border-color : lightgray;
   border-radius: 6px;
   }
+  
   .input[type=checkbox]:checked {
   background-color: black;
   }
+  
   p {
   text-align-last: center;
   }
+  
   div {
   margin-right: 10px;
   xdisplay: flex;
@@ -42,10 +47,12 @@
   flex-direction: row;
   justify-content: center;
   }
+  
   a {
   color : black;
   text-decoration : blink;
   }
+  
   a:hover {
   color : darkgray;
   }
@@ -106,7 +113,7 @@
 <b style="font-size:20px"> 기업 회원 로그인 </b>
 <br>
 <hr>
-<form action='login'>
+<form action='login' method='post'>
 	<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
 	<input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
 	<br>

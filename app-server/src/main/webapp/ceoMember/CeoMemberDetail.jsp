@@ -182,10 +182,13 @@ font-weight: bold;
 		   <ul>
 		    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
 		    <div class="tabCon" >
-			  <form action='updateform'>
+			  <form action='updateform' method='post' enctype="multipart/form-data">
 				   <div class="profile">
 					   <div class="profile-header">
-					      <a href="#"><img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img"></a>
+					      <a href="../upload/ceoMember/${ceoMember.ceoPhoto}" >
+						        <img id="f-photo-image" src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
+						    </a>
+						    <input id='f-photo' type='file' name='photo' class="form-control">
 					   </div>
 					    <label for='f-name' class='form-label'>이름</label>
 			        <input id='f-name' type='text' name='name' readonly value='${ceoMember.ceoName}'><br>

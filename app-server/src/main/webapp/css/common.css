@@ -2,13 +2,10 @@
 
 /* 에러 */
 #error-content {
-  xborder: 1px dashed yellow;
-  margin-left: 100px; 
 }
 
-.error-container {
-  xborder: 1px solid red;
-  width: 800px;
+.error-container pre {
+  padding: 30px;
 }
 
 body::-webkit-scrollbar {
