@@ -105,7 +105,7 @@
 	<br>
 	<hr>
 	
-	<form action='login' name='login' onsubmit="return notEmpty()">
+	<form action='login' method='post' name='login' onsubmit="return notEmpty()">
 	      <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
 	      <br>
 	      <input class="input" id='f-password' type='password' name='password' placeholder='Password'>

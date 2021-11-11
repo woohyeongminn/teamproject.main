@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.ceoMember;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,14 +24,14 @@ public class AuthCeoMemberLoginController extends HttpServlet {
   //  }
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
 
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
