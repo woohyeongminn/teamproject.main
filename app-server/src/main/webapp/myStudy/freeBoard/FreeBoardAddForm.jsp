@@ -1,57 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+  pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>등록 | 자유 게시판</title>
 <style>
 * {
-    font-size: 14px;
+    font-size:16px;
 }
-
-label {
-	margin-right: 5px;
-	text-align: center;
-	display: inline;
-	width: 60px;
+.all-content {
+	display: flex;
+	justify-content: center;
 }
-
-legend {
-	text-align: center;
-}
-
-input {
-	border: white;
-	outline-color: lightgray;
+.form-control {
+  height:23px;
 }
 </style>
+<script type="text/javascript">
+  function checkValue() {
+
+  var form = document.studyInfo;
+
+  if (!form.title.value) {
+    alert("제목을 입력하세요.");
+    return false;
+  }
+
+  if (!form.content.value) {
+    alert("내용을 입력하세요.");
+    return false;
+  }
+
+  if (!form.filepath.value) {
+    alert("파일을 선택하세요.");
+    return false;
+  }
+}
+</script>
 </head>
 <body>
-	<fieldset>
-		<br>
-		<legend>
-			<b>🪧 자유게시판 등록</b>
-		</legend>
-		<br>
-		<hr>
-		<table class="table table-responsive">
-			<thead>
-				<tr>
-					<th><label for='f-title'>제목</label></th>
-					<th><label for='f-content'>내용</label></th>
-					<th><label for='f-filepath'>파일</label></th>
-				</tr>
-			</thead>
-			<form action='add' method='post' enctype="multipart/form-data">
-				<input type='hidden' name='studyno' value='${studyno}'>
-				<td></label><input id='f-title' type='text' name='title'></td>
-				<td><input id='f-content' type='text' name='content'></td>
-				<td><input id='f-filepath' type='file' name='filepath'></td>
-		</table>
-	</fieldset>
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		<button type="submit" class="btn btn-outline-dark" value="등록">등록</button>
-		</form>
-	</div>
+<div class="all-content">
+  <form action='add' method='post' name='freeBoardInfo' onsubmit="return checkValue()">
+	<input type='hidden' name='studyno' value='${studyno}'>
+	<div id='content'>
+      <br>
+    <div class="mb-3 row">
+    <label for='f-title' class="col-sm-2 col-form-label">제목</label>
+    <div class="col-sm-6">
+    <input id='f-title' type='text' name='title' class="form-control">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for='f-content' class="col-sm-2 col-form-label">내용</label>
+    <div class="col-sm-6">
+    <input id='f-content' type='text' name='content' class="form-control">
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label for='f-filepath' class="col-sm-2 col-form-label">파일</label>
+    <div class="col-sm-6">
+    <input id='f-filepath' type='file' name='filepath' class="form-control">
+    </div>
+  </div>
+
+  <%-- <label for='f-filepath' class='form-label'>파일</label>
+	    <input id='f-filepath' type='file' name='filepath' /><br>
+	    
+	    <c:if test="${empty filepath}">
+	      <input id='f-filepath' type='hidden' name='filepath' value="cafe_80x80.jpg"/><br>
+	    </c:if> --%>
+    </div>
+    <br>
+	<button class="btn btn-primary btn-sm">등록</button><br>
+</form>
+  </div>
 </body>
 </html>

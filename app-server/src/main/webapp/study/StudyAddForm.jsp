@@ -67,6 +67,7 @@
 <div class="all-content">
   <form action='add' method='post' name='studyInfo' onsubmit="return checkValue()">
     <div id='content'>
+      <br>
     <div class="mb-3 row">
     <label for='f-studytitle' class="col-sm-2 col-form-label">제목</label>
     <div class="col-sm-6">

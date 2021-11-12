@@ -1,9 +1,9 @@
 package com.ogong.pms.servlet.myStudy.freeBoard;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +25,7 @@ public class FreeBoardAddController extends HttpServlet {
 
   @Override
   public void init() {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
@@ -36,15 +36,12 @@ public class FreeBoardAddController extends HttpServlet {
       throws ServletException, IOException {
 
     try {
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      Member member = memberDao.findByNo(loginUser.getPerNo());
-
       int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
       FreeBoard freeBoard = new FreeBoard();
 
       freeBoard.setStudyNo(studyNo);
-      freeBoard.setFreeBoardWriter(member);
+      freeBoard.setFreeBoardWriter((Member) request.getSession().getAttribute("loginUser"));
       freeBoard.setFreeBoardTitle(request.getParameter("title"));
       freeBoard.setFreeBoardContent(request.getParameter("content"));
       System.out.println(freeBoard);
