@@ -8,6 +8,8 @@
   padding: 30px;
 }
 
+html{cursor: url(../img/cursor.cur), auto}
+
 body::-webkit-scrollbar {
     width: 10px;
   }
