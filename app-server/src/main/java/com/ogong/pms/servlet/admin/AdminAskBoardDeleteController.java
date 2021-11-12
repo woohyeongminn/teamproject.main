@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.AskBoardDao;
 
-@WebServlet("/admin/askboarddelete")
+@WebServlet("/admin/askboard/delete")
 public class AdminAskBoardDeleteController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,7 @@ public class AdminAskBoardDeleteController extends HttpServlet {
       askBoardDao.deletereply(askNo);
       askBoardDao.delete(askNo);
       sqlSession.commit();
-      response.sendRedirect("askboardlist");
+      response.sendRedirect("list");
 
     } catch (Exception e) {
       e.getStackTrace();

@@ -57,7 +57,7 @@
 		  <div>
 		      <td>${askBoard.askNo}.</td>
 		  </div>
-				  <td><a href='askboarddetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+				  <td><a href='detail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
 				  <td>[개인]${askBoard.askMemberWriter.perNickname}</td>
 				  <td>${askBoard.askVeiwCount}</td>
 				  <td>${askBoard.askRegisteredDate}</td>

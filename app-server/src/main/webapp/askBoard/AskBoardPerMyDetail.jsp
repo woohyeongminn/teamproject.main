@@ -19,8 +19,7 @@
     line-height: 14px;
   }
 </style>
-</head>
-<body>
+  <div id="mian">
      <span id='no' name='no'>(${myAskBoard.askNo})</span><br>
      <span>제목ㅣ</span> <span>${myAskBoard.askTitle}</span><br>
      <span>내용ㅣ</span> <span>${myAskBoard.askContent}</span><br>
@@ -40,8 +39,10 @@
 	       ${myAskBoard.reply.replyRegisteredDate}
 	       </span><br>
 	      </c:otherwise>
+	   </div>   
      </c:choose>
       <br>
+   
      <button class = "btn btn-outline-dark" type="submit" value="수정" formaction="add">
      <a href='perupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
      </button>

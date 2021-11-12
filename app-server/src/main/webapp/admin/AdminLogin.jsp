@@ -124,7 +124,7 @@ font-size: 14px;
 	    <button class="dromdown-item" type="button1">
 	      <a href="/ogong/adminNotice/list" style="color: black;">📢 공지사항</a></button><br>
 	    <button class="dromdown-item" type="button1">
-	      <a href="/ogong/admin/askboardlist" style="color: black;">💬 문의사항</a></button>
+	      <a href="/ogong/admin/askboard/list" style="color: black;">💬 문의사항</a></button>
 	  </div>
 	</div>
 	

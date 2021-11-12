@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/admin/askboardlist")
+@WebServlet("/admin/askboard/list")
 public class AdminAskBoardListController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class AdminAskBoardListController extends HttpServlet {
 
       request.setAttribute("pageTitle", "💬문의글 목록");
       request.setAttribute("adminAskBoardList", adminAskBoardList);
-      request.setAttribute("contentUrl", "/admin/AskBoardList.jsp");
+      request.setAttribute("contentUrl", "/admin/AdminAskBoardList.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {
