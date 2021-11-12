@@ -2,7 +2,6 @@ package com.ogong.pms.servlet.cafe;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,13 +18,13 @@ public class CafeSearchHandler extends HttpServlet {
   CafeDao cafeDao;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     cafeDao = (CafeDao) 웹애플리케이션공용저장소.getAttribute("cafeDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
