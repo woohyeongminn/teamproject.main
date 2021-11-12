@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.study;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,24 +23,21 @@ public class StudyAddController extends HttpServlet {
 
   @Override
   public void init() {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      Member member = memberDao.findByNo(loginUser.getPerNo());
-
       Study study = new Study();
 
       study.setStudyTitle(request.getParameter("studytitle"));
-      study.setOwner(member);
+      study.setOwner((Member) request.getSession().getAttribute("loginUser"));
       study.setSubjectNo(Integer.parseInt(request.getParameter("subjectno")));
       study.setArea(request.getParameter("area"));
       study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberofpeple")));
@@ -50,8 +46,8 @@ public class StudyAddController extends HttpServlet {
       System.out.println(study);
 
       studyDao.insert(study);
-      studyDao.insertGuilder(study.getStudyNo(), member.getPerNo());
-      studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
+      studyDao.insertGuilder(study.getStudyNo(), ((Member) request.getSession().getAttribute("loginUser")).getPerNo());
+      studyDao.updateGuilder(study.getStudyNo(), ((Member) request.getSession().getAttribute("loginUser")).getPerNo());
       sqlSession.commit();
 
       // request.setAttribute("member", member);

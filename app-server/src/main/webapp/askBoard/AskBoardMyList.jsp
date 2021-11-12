@@ -40,18 +40,25 @@
 <c:forEach items="${myAskBoardList}" var="askBoard">
 <tr>
     <c:if test="${askBoard.askMemberWriter.perNo == loginUser.perNo}">
-      <div>
-        <td>${askBoard.askNo}.</td>
-      </div>
-        <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
-        <td>${askBoard.askMemberWriter.perNickname}</td>
-        <td>${askBoard.askVeiwCount}</td>
-        <td>${askBoard.askRegisteredDate}</td>     
            <c:choose>
              <c:when test="${empty askBoard.reply}">
-               <td> 📔 </td>
+				      <div>
+				        <td>${askBoard.askNo}.</td>
+				      </div>
+				        <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+				        <td>${askBoard.askMemberWriter.perNickname}</td>
+				        <td>${askBoard.askVeiwCount}</td>
+				        <td>${askBoard.askRegisteredDate}</td>               
+                <td> 📔 </td>
              </c:when>
             <c:otherwise>
+              <div>
+                <td>${askBoard.askNo}.</td>
+              </div>
+                <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+                <td>${askBoard.askMemberWriter.perNickname}</td>
+                <td>${askBoard.askVeiwCount}</td>
+                <td>${askBoard.askRegisteredDate}</td>              
                <td> 📖 </td>
             </c:otherwise>
            </c:choose> 
