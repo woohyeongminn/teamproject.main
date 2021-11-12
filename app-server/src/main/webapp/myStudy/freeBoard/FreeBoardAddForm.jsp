@@ -69,7 +69,7 @@
 	    <input id='f-filepath' type='file' name='filepath' /><br>
 	    
 	    <c:if test="${empty filepath}">
-	      <input id='f-filepath' type='hidden' name='filepath' value="cafe_80x80.jpg"/><br>
+	      <input id='f-filepath' type='hidden' name='filepath' value="freeboard_80x80.jpg"/><br>
 	    </c:if> --%>
     </div>
     <br>

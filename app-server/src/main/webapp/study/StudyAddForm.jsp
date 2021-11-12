@@ -70,13 +70,13 @@
       <br>
     <div class="mb-3 row">
     <label for='f-studytitle' class="col-sm-2 col-form-label">제목</label>
-    <div class="col-sm-6">
+    <div class="col-sm-10">
     <input id='f-studytitle' type='text' name='studytitle' class="form-control">
     </div>
   </div>
 
   <label for='f-subjectno'>분야</label><br>
-  <select name="subjectno">
+  <select name="subjectno" form-select-border-width:"300">
   <option value="1" name="faceno" selected>어학</option>
         <option value="2" selected>자격증</option>
         <option value="3" selected>취업</option>
@@ -87,7 +87,7 @@
 
   <div class="mb-3 row">
   <label for='f-area' class="col-sm-2 col-form-label">지역</label>
-  <div class="col-sm-6">
+  <div class="col-sm-10">
     <input id='f-area' type='text' name='area' class="form-control">
   </div>
   </div>
