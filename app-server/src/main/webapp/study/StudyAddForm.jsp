@@ -27,7 +27,7 @@
   }
 
   if (!form.subjectno.value) {
-    alert("분야를 입력하세요.");
+    alert("분야를 선택하세요.");
     return false;
   }
 
@@ -36,13 +36,23 @@
     return false;
   }
 
+  if (!form.area.value.contains("시") || !form.area.value.contains("구") || !form.area.value.contains("도")) {
+    alert("@@시 / @@도 / @@구 등을 입력하세요.");
+    return false;
+  }
+
   if (!form.numberofpeple.value) {
     alert("최대 인원수를 입력하세요.");
     return false;
   }
 
+  if (form.numberofpeple.value == 0 || form.numberofpeple.value > 30) {
+    alert("인원수는 1명 이상 30명 이하로만 입력 가능합니다.");
+    return false;
+  }
+
   if (!form.faceno.value) {
-    alert("대면 상태를 입력하세요.");
+    alert("대면 상태를 선택하세요.");
     return false;
   }
 
@@ -55,9 +65,6 @@
 <body>
 <div class="container">
   <form action='add' method='post' name='studyInfo' onsubmit="return checkValue()">
-    <input type='hidden' name='perno' value='${member.perNo}'>
-  <br>
-  
   <div class="mb-3 row">
     <label for='f-studytitle' class="col-sm-2 col-form-label">제목</label>
     <div class="col-sm-6">
@@ -65,37 +72,15 @@
     </div>
   </div>
 
-  <div class="mb-3 row">
-    <label for='f-subjectno' class="col-sm-2 col-form-label">분야</label>
-    <div class="col-sm-6">
-    </div>
-  </div>
-  <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2" value="1">
-    어학
-  </label><br>
-  <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1" value="2">
-    자격증
-  </label><br>
-  <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1" value="3">
-    취업
-  </label><br>
-  <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1" value="4">
-    IT
-  </label><br>
-  <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1" value="5">
-    예체능
-  </label><br>
-  <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1" value="6">
-    기타
-  </label><br>
-  </div>
+  <label for='f-subjectno'>분야</label><br>
+  <select name="subjectno">
+  <option value="1" name="faceno" selected>어학</option>
+        <option value="2" selected>자격증</option>
+        <option value="3" selected>취업</option>
+        <option value="4" selected>IT</option>
+        <option value="5" selected>예체능</option>
+        <option value="6" selected>기타</option>
+  </select>
 
   <div class="mb-3 row">
   <label for='f-area' class="col-sm-2 col-form-label">지역</label>
@@ -111,25 +96,12 @@
   </div>
   </div>
 
-  <div class="mb-3 row">
-  <label for='f-faceno' class="col-sm-2 col-form-label">대면 상태</label>
-  <div class="col-sm-6">
-  </div>
-  </div>
-  <div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-  <label class="form-check-label" for="flexRadioDefault2" value="1">
-    대면
-  </label><br>
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1" value="2">
-    비대면
-  </label><br>
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-  <label class="form-check-label" for="flexRadioDefault1" value="3">
-    대면/비대면
-  </label><br>
-  </div>
+  <label for='f-viewCount'>대면 상태</label><br>
+  <select name="faceno">
+  <option value="1" name="faceno" selected>대면</option>
+        <option value="2" selected>비대면</option>
+        <option value="3" selected>대면/비대면</option>
+  </select>
 
     <div class="mb-3 row">
     <label for='f-introduction' class="col-sm-2 col-form-label">소개글</label>

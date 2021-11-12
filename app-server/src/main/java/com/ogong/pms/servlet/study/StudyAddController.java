@@ -30,27 +30,24 @@ public class StudyAddController extends HttpServlet {
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      Member member = memberDao.findByNo(loginUser.getPerNo());
-
       Study study = new Study();
 
       study.setStudyTitle(request.getParameter("studytitle"));
-      study.setOwner(member);
-      study.setSubjectName(request.getParameter("subjectname"));
+      study.setOwner((Member) request.getSession().getAttribute("loginUser"));
+      study.setSubjectNo(Integer.parseInt(request.getParameter("subjectno")));
       study.setArea(request.getParameter("area"));
       study.setNumberOfPeple(Integer.parseInt(request.getParameter("numberofpeple")));
-      study.setFaceName(request.getParameter("facename"));
+      study.setFaceNo(Integer.parseInt(request.getParameter("faceno")));
       study.setIntroduction(request.getParameter("introduction"));
       System.out.println(study);
 
       studyDao.insert(study);
-      studyDao.insertGuilder(study.getStudyNo(), member.getPerNo());
-      studyDao.updateGuilder(study.getStudyNo(), member.getPerNo());
+      studyDao.insertGuilder(study.getStudyNo(), ((Member) request.getSession().getAttribute("loginUser")).getPerNo());
+      studyDao.updateGuilder(study.getStudyNo(), ((Member) request.getSession().getAttribute("loginUser")).getPerNo());
       sqlSession.commit();
 
       // request.setAttribute("member", member);
