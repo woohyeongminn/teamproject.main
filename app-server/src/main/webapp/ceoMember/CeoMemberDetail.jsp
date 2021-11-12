@@ -177,7 +177,6 @@ ul{list-style:none;}
 					      <a href="../upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
 						        <img id="f-photo-image" style="margin-top: 8px;"   src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
 						    </a>
-						    <!-- <input id='f-photo' type='file' name='photo' class="form-control"> -->
 					   </div>
 					    <label for='f-name' class='form-label'>이름</label>
 			        <input id='f-name' type='text' name='name' readonly value='${ceoMember.ceoName}'><br>

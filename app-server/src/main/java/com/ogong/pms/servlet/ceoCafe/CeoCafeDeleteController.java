@@ -32,7 +32,7 @@ public class CeoCafeDeleteController extends HttpServlet {
   }
 
   @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
       int cafeNo = Integer.parseInt(request.getParameter("cafeno"));
