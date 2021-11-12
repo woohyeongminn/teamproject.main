@@ -5,12 +5,18 @@
 <head>
 <meta charset="utf-8">
 <title>오늘의 공부</title>
-<link rel="icon" href="./img/favicon.ico" type="image/x-icon" sizes="16x16">
+<link rel="icon" href="./img/favicon.ico" type="image/x-icon" sizes="16x16" style="background-color: rgba(255, 255, 255, 0);">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 <link rel="stylesheet" href="css/common.css">
 
 <style>
+
+p#music {
+width: 100%;
+background-color: whitesmoke;
+}
+
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -208,7 +214,7 @@ bottom: 20px;
       <i class="fas fa-graduation-cap fa-2x"></i></a>
     </nav>
 
-<p align="center"><iframe width="20" height="20" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/131362507&amp;color=%2397cbff&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true" frameborder="no" scrolling="no" allow="autoplay"></iframe></p>
+<p id="music" align="center"><iframe width="20" height="20" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/131362507&amp;color=%2397cbff&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true" frameborder="no" scrolling="no" allow="autoplay"></iframe></p>
 
     <jsp:include page="footer.jsp"/>
     
