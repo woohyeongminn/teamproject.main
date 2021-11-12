@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.cafe;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,14 +20,14 @@ public class CafeMyReviewUpdateController extends HttpServlet {
   SqlSession sqlSession;
 
   @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+  public void init() throws ServletException {
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     cafeReviewDao = (CafeReviewDao) 웹애플리케이션공용저장소.getAttribute("cafeReviewDao");
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
   }
 
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {
@@ -42,7 +41,7 @@ public class CafeMyReviewUpdateController extends HttpServlet {
       cafeReviewDao.updateCafeReview(cafeReview);
       sqlSession.commit();
 
-      response.sendRedirect("reviewList?perNo=" + member.getPerNo());
+      response.sendRedirect("reviewList");
 
     } catch (Exception e) {
       e.printStackTrace();
