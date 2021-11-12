@@ -25,7 +25,7 @@ public class CeoUpdateFormController extends HttpServlet  {
 
   // 기업회원 개인정보 수정은 이름,이메일,비밀번호만 가능
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
     try {

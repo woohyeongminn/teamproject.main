@@ -22,7 +22,7 @@
 </head>
 <body>
  <br>
-  <form> 
+  <form method="post"> 
     <div class="title">
     <label for='f-title' class='form-label'>제목</label>
     <input type ='text' class="form-control" name='title' placeholder="제목을 입력하세요"><br>

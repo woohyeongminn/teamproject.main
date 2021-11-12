@@ -115,14 +115,14 @@
 <hr>
 <form action='login' method='post'>
 	<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
-	<input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
+	<input class="input" id='f-email' type='email' name='email' placeholder='E-mail' value="${cookie.email.value}">
 	<br>
 	<!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
 	<input class="input" id='f-password' type='password' name='password' placeholder='Password'>
 	<div class="inner">
 	  <div class="form-check">
-		   <input type="checkbox" class="rememberCheck" id="dropdownCheck">
-		   <span>정보 기억하기</span>
+		   <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""} }>
+		   <span>이메일 기억하기</span>
 	  </div>
 	  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
 	</div>

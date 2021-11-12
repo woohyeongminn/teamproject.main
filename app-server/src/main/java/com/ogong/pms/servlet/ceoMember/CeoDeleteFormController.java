@@ -27,7 +27,7 @@ public class CeoDeleteFormController extends HttpServlet {
 
   // 수정해야함
   @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     try {
       //      int no = Integer.parseInt(request.getParameter("no"));
