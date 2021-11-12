@@ -60,6 +60,9 @@
   .card {
     height: 450px;
   }
+  .card-body {
+  line-height: 25px;
+  }
   .btn-sm, .btn-group-sm > .btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;

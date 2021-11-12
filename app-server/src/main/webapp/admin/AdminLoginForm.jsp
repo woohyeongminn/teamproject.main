@@ -3,8 +3,6 @@
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<meta charset="UTF-8">
-  
 <style>
   legend {
   text-align: center;
@@ -45,7 +43,7 @@
   button {
    width: 100%;
   }
-  input#dropdownCheck {
+  input#f-saveEmail {
     width: 15px;
     height: 15px;
   }
@@ -102,18 +100,24 @@
 	<hr>
 	
 	<form action='login' method='post' name='login' onsubmit="return notEmpty()">
-	      <input class="input" id='f-email' type='email' name='email' autocomplete='off' placeholder='E-mail'>
+	      <input class="input" id='f-email' type='email' name='email'
+	      autocomplete='off' placeholder='E-mail' value="${cookie.email.value}">
 	      <br>
 	      <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
+	  
+	 <div class="mb-3 row"> 
 	  <div class="inner">
 		  <div class="form-check">
-		    <input type="checkbox" class="form-check-input" id="dropdownCheck">
-		      <span id="remember">
+		    <input type="checkbox" class="form-check-input" id="f-saveEmail"
+		    name="saveEmail" ${not empty cookie.email ? "checked" : ""}>
+		      <label class="form-check-label" for="flexCheckDefault">
 		      정보 기억하기
-		     </span>
+		     </label>
 		  </div>  
-	      <button type="submit" class="btn btn-outline-dark" value="로그인">로그인</button> 
 	  </div>
+	 </div>
+		  
+	      <button type="submit" class="btn btn-outline-dark" value="로그인">로그인</button> 
 	</form>
 	
 	</div>
