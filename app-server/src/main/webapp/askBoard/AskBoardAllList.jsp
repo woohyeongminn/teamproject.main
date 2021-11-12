@@ -44,9 +44,7 @@
       <c:choose>
         <c:when test="${askBoard.askMemberWriter.perStatus == 1}">
          <tr>
-          <div>
-            <td>${askBoard.askNo}.</td>
-          </div>
+          <td>${askBoard.askNo}.</td>
            <td><a href='detail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
 			     <td>[개인]${askBoard.askMemberWriter.perNickname}</td>
 			     <td>${askBoard.askVeiwCount}</td>

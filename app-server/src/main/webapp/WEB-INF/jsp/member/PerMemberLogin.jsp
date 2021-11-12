@@ -40,7 +40,7 @@
  <button class = "btn btn-outline-dark" ><a href='../cafe/list'>스터디카페 예약하기</a></button>
  <button class = "btn btn-outline-dark" ><a href='../cafe/reservationList'>내 예약 목록</a></button>
  <button class = "btn btn-outline-dark" ><a href='../cafe/reviewList'>내 리뷰 목록</a></button>
- <button class = "btn btn-outline-dark" ><a href='../askboard/mylist'>내 문의게시판</a></button>
+ <button class = "btn btn-outline-dark" ><a href='../askboard/permylist'>내 문의게시판</a></button>
 <%--  <button><a href='../mystudy/ownerList?perNo=${perMember.perNo}'>내 스터디(조장)</a></button>
  <button><a href='../mystudy/guilderList?perNo=${perMember.perNo}'>내 스터디(구성원)</a></button>
  <button><a href='../mystudy/waitinglist?perNo=${perMember.perNo}'>내 스터디(승인 대기)</a></button> --%>

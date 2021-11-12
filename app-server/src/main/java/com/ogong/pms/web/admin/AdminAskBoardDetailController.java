@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
 
-@WebServlet("/admin/askboarddetail")
+@WebServlet("/admin/askboard/detail")
 public class AdminAskBoardDetailController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class AdminAskBoardDetailController extends HttpServlet {
 
       request.setAttribute("pageTitle", "💬문의글 상세");
       request.setAttribute("adminAskBoard", adminAskBoard);
-      request.setAttribute("contentUrl", "/admin/AskBoardDetail.jsp");
+      request.setAttribute("contentUrl", "/admin/AdminAskBoardDetail.jsp");
       request.getRequestDispatcher("/template1.jsp").forward(request, response);
 
     } catch (Exception e) {

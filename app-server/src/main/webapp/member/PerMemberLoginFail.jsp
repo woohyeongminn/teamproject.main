@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>로그인 | 실패</title>
 <style>
   * {
   font-size: 14px;
@@ -30,7 +24,7 @@
   </style>
 </head>
 <body>
-<br><p>❌등록된 회원이 아닙니다.❌</p>
+<br><p> ⚠등록된 회원이 아닙니다. ⚠</p>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 	     <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="peradd">
 	     <a href="/ogong/login">로그인</a>
