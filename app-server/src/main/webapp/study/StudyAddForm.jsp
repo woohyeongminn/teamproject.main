@@ -129,7 +129,7 @@
 
   <div class="mb-3 row">
   <label for='f-viewCount'>대면 상태</label>
-  <select name="faceno" form-select-font-size:100px>
+  <select name="faceno">
   <option value="1" name="faceno" selected>대면</option>
         <option value="2" selected>비대면</option>
         <option value="3" selected>대면/비대면</option>
@@ -142,9 +142,9 @@
     </div>
     </div>
     <div id='button'>
-	<button class="btn btn-dark">등록</button>
-  </div>
-</form>
+      <button class="btn btn-dark">등록</button>
+    </div>
+  </form>
   </div>
 </body>
 </html>

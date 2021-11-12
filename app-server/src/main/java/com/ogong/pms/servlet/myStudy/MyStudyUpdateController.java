@@ -1,7 +1,6 @@
 package com.ogong.pms.servlet.myStudy;
 
 import java.io.IOException;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +21,7 @@ public class MyStudyUpdateController extends HttpServlet {
 
   @Override
   public void init() {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
+    ServletContext 웹애플리케이션공용저장소 = getServletContext();
     sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
     // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
     studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");

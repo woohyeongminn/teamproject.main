@@ -7,7 +7,7 @@
 <title>상세 | 스터디 찾기</title>
 <style>
 *{
-  font-size:14px;
+    font-size:14px;
 }
 label {
 	margin-right: 5px;
@@ -18,7 +18,6 @@ label {
 </style>
 </head>
 <body>
-	<h1>📖 스터디 상세</h1>
 		<span>번호 </span> <span>${study.studyNo}</span><br>
     <span>북마크 </span> <span>${study.countBookMember}</span><br>
     <span>제목 </span> <span>${study.studyTitle}</span><br>
