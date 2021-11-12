@@ -6,14 +6,16 @@
 <title>등록 | 스터디 찾기</title>
 <style>
 * {
-    font-size:16px;
+    font-size:14px;
 }
 .all-content {
-	display: flex;
-	justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+	display:flex;
+	justify-content:center;
 }
-.form-control {
-  height:23px;
+#button {
+  text-align: center;
 }
 </style>
 <script type="text/javascript">
@@ -69,14 +71,13 @@
     <div id='content'>
       <br>
     <div class="mb-3 row">
-    <label for='f-studytitle' class="col-sm-2 col-form-label">제목</label>
-    <div class="col-sm-10">
+    <label for='f-studytitle'>제목</label>
     <input id='f-studytitle' type='text' name='studytitle' class="form-control">
     </div>
-  </div>
 
-  <label for='f-subjectno'>분야</label><br>
-  <select name="subjectno" form-select-border-width:"300">
+  <div class="mb-3 row">
+  <label for='f-subjectno'>분야</label>
+  <select name="subjectno">
   <option value="1" name="faceno" selected>어학</option>
         <option value="2" selected>자격증</option>
         <option value="3" selected>취업</option>
@@ -84,15 +85,15 @@
         <option value="5" selected>예체능</option>
         <option value="6" selected>기타</option>
   </select>
+</div>
 
   <div class="mb-3 row">
-  <label for='f-area' class="col-sm-2 col-form-label">지역</label>
-  <div class="col-sm-10">
+  <label for='f-area'>지역</label>
     <input id='f-area' type='text' name='area' class="form-control">
   </div>
-  </div>
 
-  <label for='f-numberofpeple'>최대 인원수</label><br>
+  <div class="mb-3 row">
+  <label for='f-numberofpeple'>최대 인원수</label>
   <select name="numberofpeple">
   <option value="2" name="numberofpeple" selected>2</option>
         <option value="3" selected>3</option>
@@ -123,24 +124,26 @@
         <option value="28" selected>28</option>
         <option value="29" selected>29</option>
         <option value="30" selected>30</option>
-  </select><br>
+  </select>
+  </div>
 
-  <label for='f-viewCount'>대면 상태</label><br>
-  <select name="faceno">
+  <div class="mb-3 row">
+  <label for='f-viewCount'>대면 상태</label>
+  <select name="faceno" form-select-font-size:100px>
   <option value="1" name="faceno" selected>대면</option>
         <option value="2" selected>비대면</option>
         <option value="3" selected>대면/비대면</option>
   </select>
+  </div>
 
     <div class="mb-3 row">
-    <label for='f-introduction' class="col-sm-2 col-form-label">소개글</label>
-    <div class="col-sm-10">
-      <input id='f-introduction' type='text' name='introduction' class="form-control">
+    <label for='f-introduction'>소개글</label>
+      <textarea id='f-introduction' type='text' name='introduction' class="form-control" rows="3"></textarea>
     </div>
     </div>
-    </div>
-    <br>
-	<button class="btn btn-primary btn-sm">등록</button><br>
+    <div id='button'>
+	<button class="btn btn-dark">등록</button>
+  </div>
 </form>
   </div>
 </body>
