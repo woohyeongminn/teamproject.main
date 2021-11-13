@@ -58,5 +58,3 @@ label {
 
 		<br>
 <!-- 	</form> -->
-</body>
-</html>

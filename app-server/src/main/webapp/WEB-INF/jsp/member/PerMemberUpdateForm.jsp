@@ -74,10 +74,10 @@ function checkValue() {
         </a>
        </div>
         
-       <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'>
+       <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'><br>
 
        <label for='f-name' class='form-label'>이름</label>
-       <input id='f-name' type='text' name='perName' value='${ceoMember.ceoName}'><br>
+       <input id='f-name' type='text' name='perName' value='${perMember.perName}'><br>
        
        <label for='f-nickname' class='form-label'>닉네임</label>
        <input id='f-nickname' type='text' name='perNickname' value='${perMember.perNickname}'><br>
@@ -92,7 +92,6 @@ function checkValue() {
        <input id='f-registeredDate' type='text' name='perRegisteredDate' readonly value='${perMember.perRegisteredDate}'><br>
      </div>
     
-    <!-- 
 		 <section class="n-section-block">
 		  <table class="n-table table-row my-info-modify">
 		   <tr id="password-area">
@@ -131,7 +130,7 @@ function checkValue() {
 		         </div>
 		       </td>
 		   </tr>
-     -->
+     
 		  </table>
 		 </section>
   

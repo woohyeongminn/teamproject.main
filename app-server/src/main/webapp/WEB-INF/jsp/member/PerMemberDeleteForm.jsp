@@ -19,7 +19,7 @@
 
 <body>
   <form action='delete' method='post'>
-    <input type='hidden' name='ceoNo' value="${perMember.perNo}"><br>
+    <input type='hidden' name='perNo' value="${perMember.perNo}"><br>
 
     <label for='f-email' class='form-label' size='100px'>이메일</label>
     <input id='f-email' type='email' name='perEmail' placeholder='아이디' size='20'><br>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
@@ -79,7 +80,7 @@ public class PerMemberController {
     return mv;
   }
 
-  @GetMapping("/member/detail")
+  @RequestMapping("/member/detail")
   public ModelAndView detail(HttpSession session) throws Exception {
 
     Member loginPer = (Member) session.getAttribute("loginUser");
@@ -102,7 +103,7 @@ public class PerMemberController {
     return mv;
   }
 
-  @GetMapping("/member/updateform")
+  @RequestMapping("/member/updateform")
   public ModelAndView updateForm() {
     ModelAndView mv = new ModelAndView();
 
@@ -113,7 +114,7 @@ public class PerMemberController {
 
   }
 
-  @PostMapping("/member/update")
+  @RequestMapping("/member/update")
   protected ModelAndView update(Member member, Part photoFile) throws Exception {
 
     Member oldMember = memberDao.findByNo(member.getPerNo());
@@ -182,7 +183,7 @@ public class PerMemberController {
     return mv;
   }
 
-  @PostMapping("/member/deleteform")
+  @RequestMapping("/member/deleteform")
   protected ModelAndView deleteForm(Member perMember) throws Exception {
 
     if (perMember == null) {
