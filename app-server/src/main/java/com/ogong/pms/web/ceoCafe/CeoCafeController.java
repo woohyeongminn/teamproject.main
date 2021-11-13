@@ -36,7 +36,7 @@ public class CeoCafeController {
   @Autowired ServletContext sc;
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------
-  //기업 내 카페 (상세 1개)
+  //기업 MY카페 (상세 1개)
   @GetMapping("/ceomember/cafe/detail")
   public ModelAndView ceoCafeDetail(HttpSession session) throws Exception {
 
@@ -87,7 +87,7 @@ public class CeoCafeController {
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------
-  //기업 카페 등록 폼
+  // 카페 등록 폼
   @GetMapping("/ceomember/cafe/addform")
   public ModelAndView ceoCafeAddForm(HttpSession session) throws Exception {
 
@@ -108,6 +108,7 @@ public class CeoCafeController {
     return mv;
   }
 
+  // 카페 등록
   @PostMapping("/ceomember/cafe/add")
   public ModelAndView ceoCafeAdd(HttpSession session, Cafe cafe, String inputOpenTime, String inputCloseTime, Part photoFile) throws Exception {
 
@@ -192,7 +193,7 @@ public class CeoCafeController {
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------
-  //기업 카페 삭제 폼
+  // 카페 삭제 폼
   @GetMapping("/ceomember/cafe/deleteform")
   public ModelAndView ceoCafeDeleteForm(int cafeno) throws Exception {
 
@@ -215,6 +216,7 @@ public class CeoCafeController {
     return mv;
   }
 
+  // 카페 삭제
   @GetMapping("/ceomember/cafe/delete")
   public ModelAndView ceoCafeDelete(int cafeno) throws Exception {
 
@@ -245,8 +247,70 @@ public class CeoCafeController {
     return mv;
   }
 
+  //------------------------------------------------------------------------------------------------------------------------------------------------------
+  // 카페 수정 폼
+  @GetMapping("/ceomember/cafe/updateform")
+  public ModelAndView ceoCafeUpdateForm(int cafeno) throws Exception {
 
+    Cafe cafe = cafeDao.findByCafeNo(cafeno);
 
+    if (cafe == null) {
+      throw new Exception("등록된 카페가 없습니다.");
+    }
+
+    String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("cafe", cafe);
+    mv.addObject("cafeStatus", status);
+
+    mv.addObject("pageTitle", "👩‍🏫 스터디카페 수정 - "+ cafe.getName());
+    mv.addObject("contentUrl", "ceoCafe/CeoCafeUpdateForm.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
+  @PostMapping("/ceomember/cafe/update")
+  public ModelAndView ceoCafeUpdate(Cafe cafe, String inputOpenTime, String inputCloseTime) throws Exception {
+
+    Cafe oldcafe = cafeDao.findByCafeNo(cafe.getNo());
+
+    if (oldcafe == null) {
+      throw new Exception("등록된 카페가 없습니다.");
+    }
+
+    //cafe.setCafeImgs(request.getParameter("filename[]"));
+
+    //      List<CafeImage> imageList = cafe.getCafeImgs();
+    //
+    //      if (!imageList.isEmpty()) {
+    //        CafeImage cafeImage = new CafeImage();
+    //        cafeImage.setName(request.getParameter("filename[]"));
+    //        cafeImage.setCafeNo(cafe.getNo());
+    //
+    //        ArrayList<CafeImage> cafeImageList = new ArrayList<>();
+    //        cafeImageList.add(cafeImage);
+    //
+    //        HashMap<String,Object> params = new HashMap<>(); 
+    //        params.put("fileNames", cafeImageList);
+    //        params.put("cafeNo", cafe.getNo());
+    //
+    //        cafeDao.insertCafeImage(params);
+    //        sqlSession.commit();
+    //      }
+
+    //sqlSession.rollback();
+
+    cafe.setOpenTime(LocalTime.parse(inputOpenTime));
+    cafe.setCloseTime(LocalTime.parse(inputCloseTime));
+
+    cafeDao.updateCafe(cafe);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:detail");
+    return mv;
+  }
 
 
 
