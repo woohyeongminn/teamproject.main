@@ -13,7 +13,6 @@ public class AuthPerMemberLogoutController {
 
     session.invalidate();
     ModelAndView mv = new ModelAndView();
-
     mv.setViewName("redirect:../index");
     return mv;
 
