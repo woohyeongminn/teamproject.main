@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 스터디 관리</title>
 <style>
-*{
+* {
   font-size:14px;
 }
 label {
@@ -17,7 +16,6 @@ label {
 </style>
 </head>
 <body>
-	<h1>📖 스터디 상세</h1>
 		<label for='f-studyNo'>번호</label>
 		<input id='f-studyNo' type='text' name='studyno' value='${study.studyNo}' readonly><br>
 
