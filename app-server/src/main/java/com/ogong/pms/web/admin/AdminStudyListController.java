@@ -1,49 +1,30 @@
 package com.ogong.pms.web.admin;
 
-import java.io.IOException;
 import java.util.Collection;
-import javax.servlet.GenericServlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/admin/study/list")
-public class AdminStudyListController extends GenericServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminStudyListController {
 
+  @Autowired
   StudyDao studyDao;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-  }
+  @GetMapping("/admin/study/list")
+  public ModelAndView list() throws Exception {
+    Collection<Study> studyList = studyDao.findAll();
 
-  @Override
-  public void service(ServletRequest request, ServletResponse response)
-      throws ServletException, IOException {
+    ModelAndView mv = new ModelAndView();
 
-    try {
-      Collection<Study> studyList = studyDao.findAll();
+    mv.addObject("studyList", studyList);
+    mv.addObject("pageTitle", "스터디 관리");
+    mv.addObject("contentUrl", "admin/AdminStudyList.jsp");
+    mv.setViewName("template1");
 
-      if (studyList == null) {
-        throw new Exception("스터디 목록이 없습니다.");
-      }
-
-      request.setAttribute("studyList", studyList);
-      request.setAttribute("pageTitle", "스터디 목록");
-      request.setAttribute("contentUrl", "/admin/AdminStudyList.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    return mv;
   }
 }
