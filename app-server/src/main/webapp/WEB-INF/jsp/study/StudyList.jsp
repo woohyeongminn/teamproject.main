@@ -109,11 +109,9 @@ ul{
     <button class="btn btn-outline-dark">검색</button>
     </form>
   </div>
-  <br>
-  <button>
-    <a href='form?perno=${loginUser.perNo}'>등록</a>
-  </button>
-  <br>
+  <div id='button'>
+      <button class="btn btn-dark">글쓰기</button>
+  </div>
 <c:if test='${not empty studyList}'>
   <div id="content">
     <div class="row row-cols-1 row-cols-md-3 g-4">
