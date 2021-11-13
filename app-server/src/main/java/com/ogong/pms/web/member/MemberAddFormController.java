@@ -1,48 +1,26 @@
 package com.ogong.pms.web.member;
 
-import java.io.IOException;
-import java.util.List;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/addform")
-public class MemberAddFormController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class MemberAddFormController {
 
-  MemberDao memberDao;
+  @Autowired MemberDao memberDao;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-  }
+  @GetMapping("/member/addform")
+  public ModelAndView form(HttpServletRequest request, HttpServletResponse response)  {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "✏회원 가입");
+    mv.addObject("contentUrl", "/member/PerMemberAddForm.jsp");
+    mv.setViewName("template1");
+    return mv;
 
-  // 개인
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-    try {
-
-      List<Member> memberList = memberDao.findAll();
-
-      request.setAttribute("memberList", memberList);
-      request.setAttribute("pageTitle", "✏회원 가입");
-      request.setAttribute("contentUrl", "/member/PerMemberAddForm.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
   }
 }
 

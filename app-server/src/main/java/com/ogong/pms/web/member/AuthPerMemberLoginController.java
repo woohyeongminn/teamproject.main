@@ -36,11 +36,7 @@ public class AuthPerMemberLoginController {
     if (member != null) {
       session.setAttribute("loginUser", member);
       mv.setViewName("redirect:../index");
-      //      if (member != null && member.getPerStatus() == Member.PER) {
-      //        if (member.getActive() == Member.OUTUSER) {
-      //          throw new Exception ("<p>회원가입을 진행해 주세요.</p>");
-      //        }
-      //      }
+
 
     } else {
       mv.addObject("pageTitle", "해당 계정이 존재하지 않습니다.");
