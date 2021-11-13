@@ -39,7 +39,7 @@ public class StudyBookMarkAddController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    mv.setViewName("redirect:list");
+    mv.setViewName("redirect:../study/detail?studyno=" + study.getStudyNo());
 
     return mv;
   }
