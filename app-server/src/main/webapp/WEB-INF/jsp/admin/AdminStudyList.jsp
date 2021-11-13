@@ -4,15 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>목록 | 스터디 관리</title>
 <style>
-  *{
-    font-size:14px;
-  }
+* {
+  font-size:14px;
+}
 </style>
 </head>
 <body>
-  <h1>📖 스터디 목록</h1>
   <br>
   <table class="table table-hover">
     <thead>
@@ -44,12 +42,8 @@
       </c:forEach>
     </tbody>
   </table>
-  
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-
   <jsp:include page="AdminMenu.jsp"/>
-    
 </div>
-
 </body>
 </html>

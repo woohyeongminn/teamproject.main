@@ -46,7 +46,6 @@ public class AdminCafeReviewControlHandler {
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:reviewList");
-    //    mv.setViewName("redirect:cafeList");
     return mv;
   } 
 }

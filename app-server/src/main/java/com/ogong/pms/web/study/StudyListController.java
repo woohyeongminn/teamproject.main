@@ -25,10 +25,6 @@ public class StudyListController {
     // 종료 스터디 목록
     Collection<Study> studyEndList = studyDao.findAllEnd();
 
-    // if (studyList.isEmpty()) {
-    // throw new Exception("스터디 목록이 없습니다.");
-    // }
-
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("studyList", studyList);

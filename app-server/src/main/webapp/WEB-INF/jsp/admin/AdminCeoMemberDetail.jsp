@@ -30,26 +30,26 @@ legend {
 }
 
 .profile {
-  max-width: 400px;
+  max-width: 500px;
   margin: 100px auto 0;
   background-color: white;
   border-radius: 15px;
   border: 2px solid rgb(110, 110, 110);
   text-align: center;
   padding-bottom: 30px;
+  padding-left: 60px;
 }
 
 .profile > label {
   margin-right: 5px;
   text-align: center;
-  display: inline;
-  width: 60px;
+  font-weight: 600;
 }
 
 .profile > label, span {
   display: inline-block;
-  padding: 5px 0;
-  width: 100px;
+  padding: 5px 5px;
+  width: 103px;
 }
 
 .profile input {
@@ -71,9 +71,10 @@ legend {
 .profile .profile-header>a {
   display:inline-block;
   text-decoration:none;
-  width: 100px;
-  height: 100px;
-  border-radius: 1000px;
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  border-radius: 100px;
   position: absolute;
   left: 50%;
   margin-top: 30px;
@@ -82,12 +83,6 @@ legend {
   background-color: white;
   vertical-align: middle;
 }
-
- .profile .profile-header .profile-img {
-    margin-top: 8px;
-    margin-left: 3px;
-}
-
 
  .btn_wrap {
   max-width: 420px;
@@ -117,37 +112,39 @@ legend {
   <br><br><br>
     <div class="all-content"> 
       <div class="profile">
-        <div class="profile-header">
-           <a href="../upload/ceoMember/${ceoMember.ceoPhoto}" >
-               <img id="f-photo-image" src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
-           </a>
-        </div>
-         <label for='f-name' class='form-label'>이름</label>
-         <input id='f-name' type='text' name='name' readonly value='${ceoMember.ceoName}'><br>
-         
-         <label class="profile-label" for='f-nickname' class='form-label'>닉네임</label>
-         <input id='f-nickname' type='text' name='nickname' readonly value='${ceoMember.ceoNickname}'><br>
-         
-         <label for='f-tel' class='form-label'>전화번호</label>
-         <input id='f-tel' type='tel' name='tel' readonly value='${ceoMember.ceoTel}'><br>
-         
-         <label for='f-bossName' class='form-label'>대표자명</label>
-         <input id='f-bossName' type='bossName' name='bossName' readonly value='${ceoMember.ceoBossName}'><br>
-         
-         <label for='f-licenseNo' class='form-label'>사업자 번호</label>
-         <input id='f-licenseNo' type='licenseNo' name='licenseNo' readonly value='${ceoMember.ceoLicenseNo}'><br>
-         
-         <label for='f-email' class='form-label'>이메일</label>
-         <input id='f-email' type='email' name='email' readonly value='${ceoMember.ceoEmail}'><br>
-         
-         <label for='f-registeredDate' class='form-label'>가입일</label>
-         <input id='f-registeredDate' type='registeredDate'
-          name='registeredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
+	          <div class="profile-header">
+                <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
+                    <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg" style="width: 110px">
+                </a>
+                <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
+              </div>
+	        
+	        <label for='f-name' class='form-label'>이름</label>
+	        <input id='f-name' type='text' name='ceoName' readonly value='${ceoMember.ceoName}'><br>
+	        
+	        <label class="profile-label" for='f-nickname' class='form-label'>닉네임</label>
+	        <input id='f-nickname' type='text' name='ceoNickname' readonly value='${ceoMember.ceoNickname}'><br>
+	        
+	        <label for='f-tel' class='form-label'>전화번호</label>
+	        <input id='f-tel' type='tel' name='ceoTel' readonly value='${ceoMember.ceoTel}'><br>
+	        
+	        <label for='f-bossName' class='form-label'>대표자명</label>
+	        <input id='f-bossName' type='bossName' name='ceoBossName' readonly value='${ceoMember.ceoBossName}'><br>
+	        
+	        <label for='f-licenseNo' class='form-label'>사업자 번호</label>
+	        <input id='f-licenseNo' type='licenseNo' name='ceoLicenseNo' readonly value='${ceoMember.ceoLicenseNo}'><br>
+	        
+	        <label for='f-email' class='form-label'>이메일</label>
+	        <input id='f-email' type='email' name='ceoEmail' readonly value='${ceoMember.ceoEmail}'><br>
+	        
+	        <label for='f-registeredDate' class='form-label'>가입일</label>
+	        <input id='f-registeredDate' type='text'
+	         name='ceoRegisteredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
         </div>
         
         <div class="btn_wrap">
           <a href='list' class = "btn btn-outline-dark">목록</a>
-          <a href='delete?no=${ceoMember.ceoNo}' class = "btn btn-outline-dark">탈퇴시키기</a>
+          <a href='delete?ceono=${ceoMember.ceoNo}' class = "btn btn-outline-dark">탈퇴시키기</a>
         </div>
       </div>
 </body>

@@ -94,7 +94,7 @@
     <c:forEach items="${cafeList}" var="cafe">
       <div class="col">
         <div class="card">
-          <img src="../img/aaa.jpg" class="card-img-top" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <img src="${contextPath}/img/aaa.jpg" class="card-img-top" alt="..." data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
           <div class="card-body">
             <a href='cafeDetail?no=${cafe.no}'><b>${cafe.name}</b></a><br>
             ${cafe.location}<br>
