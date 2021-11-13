@@ -366,6 +366,10 @@
     where 
       sbm.member_no=#{memberNo} and sbm.study_no=#{studyNo}
    </select>
+   
+  <select id="myBookmark" resultType="int">
+   select count(*) from study_bookmark where study_no=#{studyNo} and member_no=#{memberNo};
+   </select>
 
 </mapper>
 

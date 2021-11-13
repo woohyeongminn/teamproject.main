@@ -5,7 +5,7 @@
 <head>
 <style>
 * {
-    font-size:14px;
+  font-size:14px;
 }
 .all-content {
   width: 100%;

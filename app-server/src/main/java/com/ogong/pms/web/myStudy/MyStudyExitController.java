@@ -18,7 +18,7 @@ public class MyStudyExitController {
   @Autowired
   StudyDao studyDao;
 
-  @GetMapping("/study/exit")
+  @GetMapping("/mystudy/exit")
   public ModelAndView exit(int studyno, HttpSession session) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
