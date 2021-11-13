@@ -39,7 +39,7 @@ public class CeoMemberController {
 
     ModelAndView mv = new ModelAndView();
 
-    // 중복체크 하려고?
+    // 중복체크 하려고
     //Collection<CeoMember> ceoMemberList  = ceoMemberDao.findAll();
     //request.setAttribute("ceoMemberList", ceoMemberList);
 
@@ -84,6 +84,17 @@ public class CeoMemberController {
         @Override
         public String apply(String name, ThumbnailParameter param) {
           return name + "_80x80";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/ceoMember") + "/" + filename)
+      .size(110, 110)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_110x110";
         }
       });
     }
@@ -193,6 +204,17 @@ public class CeoMemberController {
         @Override
         public String apply(String name, ThumbnailParameter param) {
           return name + "_80x80";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/ceoMember") + "/" + filename)
+      .size(80, 80)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_110x110";
         }
       });
 

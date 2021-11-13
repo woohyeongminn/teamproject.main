@@ -104,26 +104,27 @@
   
 </style>
 
-<div class="all-content">
-<b style="font-size:20px"> 기업 회원 로그인 </b>
-<br>
-<hr>
-<form action='login' method='post'>
-	<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
-	<input class="input" id='f-email' type='email' name='email' placeholder='E-mail' value="${cookie.email.value}">
-	<br>
-	<!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
-	<input class="input" id='f-password' type='password' name='password' placeholder='Password'>
-	<div class="inner">
-	  <div class="form-check">
-		   <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""} }>
-		   <span>이메일 기억하기</span>
-	  </div>
-	  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+<body>
+	<div class="all-content">
+		<b style="font-size:20px"> 기업 회원 로그인 </b>
+		<br><hr>
+		<form action='login' method='post'>
+			<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
+			<input class="input" id='f-email' type='email' name='email' placeholder='E-mail' value="${cookie.email.value}">
+			<br>
+			<!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
+			<input class="input" id='f-password' type='password' name='password' placeholder='Password'>
+			<div class="inner">
+			  <div class="form-check">
+				   <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""} }>
+				   <span>이메일 기억하기</span>
+			  </div>
+			  <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+			</div>
+		</form>
+		<div class="mb">
+			 <a href="${contextPath}/app/ceomember/addform">회원가입</a> |
+			 <a href="#">비밀번호찾기</a>
+		</div>
 	</div>
-</form>
-<div class="mb">
-	 <a href="${contextPath}/app/ceomember/addform">회원가입</a> |
-	 <a href="#">비밀번호찾기</a>
-</div>
-</div>
+</body>
