@@ -35,7 +35,7 @@
 완료된 스터디 입니다.
 </c:when>
 
-<c:when test="${fn:length(study.members) eq study.numberOfPeple}">
+<c:when test="${study.countMember eq study.numberOfPeple}">
 참여 가능 인원수를 초과하였습니다.
 </c:when>
 </c:choose>
