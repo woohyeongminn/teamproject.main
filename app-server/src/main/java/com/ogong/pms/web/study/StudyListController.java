@@ -1,7 +1,6 @@
 package com.ogong.pms.web.study;
 
 import java.util.Collection;
-import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +11,8 @@ import com.ogong.pms.domain.Study;
 @Controller
 public class StudyListController {
 
-  @Autowired StudyDao studyDao;
-  @Autowired ServletContext sc;
+  @Autowired
+  StudyDao studyDao;
 
   @GetMapping("/study/list")
   public ModelAndView list() throws Exception {

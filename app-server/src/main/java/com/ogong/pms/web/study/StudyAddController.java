@@ -1,6 +1,5 @@
 package com.ogong.pms.web.study;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +13,10 @@ import com.ogong.pms.domain.Study;
 @Controller
 public class StudyAddController {
 
-  @Autowired SqlSessionFactory sqlSessionFactory;
-  @Autowired StudyDao studyDao;
-  @Autowired ServletContext sc;
+  @Autowired
+  SqlSessionFactory sqlSessionFactory;
+  @Autowired
+  StudyDao studyDao;
 
   @PostMapping("/study/add")
   public ModelAndView add(Study study, HttpSession session) throws Exception {
@@ -32,8 +32,10 @@ public class StudyAddController {
     System.out.println(study);
 
     studyDao.insert(study);
-    studyDao.insertGuilder(study.getStudyNo(), ((Member) session.getAttribute("loginUser")).getPerNo());
-    studyDao.updateGuilder(study.getStudyNo(), ((Member) session.getAttribute("loginUser")).getPerNo());
+    studyDao.insertGuilder(study.getStudyNo(),
+        ((Member) session.getAttribute("loginUser")).getPerNo());
+    studyDao.updateGuilder(study.getStudyNo(),
+        ((Member) session.getAttribute("loginUser")).getPerNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
