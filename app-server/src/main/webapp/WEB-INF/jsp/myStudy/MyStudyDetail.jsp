@@ -12,10 +12,15 @@
     margin: 0 auto;
     font-size: 14px;
   }
-  thead, tbody, tfoot, tr, td, th {
+  tr#bottombox {
     border-color: black;
+  }
+  thead, tbody, tfoot, tr, td, th {
     border-style: solid;
     border-width: 0;
+  }
+  tr#middlebox {
+  border-color: #d1d0d0;
   }
   tr#blockbox {
     vertical-align: top;
@@ -78,7 +83,7 @@
   <input type='hidden' name='subjectNo' value='${study.subjectNo}'>
   
   <br>
-  <table class="table table-responsive text-center">
+  <table class="table table-hover text-center">
   <thead>
   
   <tr id="first">
@@ -96,49 +101,49 @@
 		</th>
 	</tr>
 	
-	<tr>
+	<tr id="middlebox">
     <th scope="row"><label for='f-studyNo'>번호</label></th>
     <td><input id='f-studyNo' type='text' name='studyNo' value="${study.studyNo}" readonly></td>
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="middlebox">
     <th scope="row"><label for='f-bookMember'>북마크</label></th>
     <td><input id='f-bookMember' type='text' name='bookMember' value="${study.countBookMember}" readonly></td>
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="middlebox">
     <th scope="row"><label for='f-owner'>조장</label></th>
     <td><input id='f-owner' type='text' name='owner' value="${study.owner.perNickname}" readonly></td>
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="middlebox">
     <th scope="row"><label for='f-subjectName'>분야</label></th>
     <td><input id='f-subjectName' type='text' name='subjectName' value="${study.subjectName}" readonly></td>
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="middlebox">
     <th scope="row"><label for='f-area'>지역</label></th>
     <td><input id='f-area' type='text' name='area' value="${study.area}" readonly></td>
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="middlebox">
     <th scope="row"><label for='f-countMember'>인원수</label></th>
     <td><input id='f-countMember' type='text' name='countMember' value="${study.countMember}" readonly></td>
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="middlebox">
     <th scope="row"><label for='f-numberOfPeple'>최대 인원수</label></th>
     <td><input id='f-numberOfPeple' type='text' name='numberOfPeple' value="${study.numberOfPeple}" readonly></td>
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="middlebox">
     <th scope="row"><label for='f-faceName'>대면 상태</label></th>
     <td><input id='f-faceName' type='text' name='faceName' value="${study.faceName}" readonly></td>
     <td></td>
@@ -150,7 +155,7 @@
     <td></td>
   </tr>
   
-  <tr>
+  <tr id="bottombox">
     <th scope="row"><label for='f-point'>활동 점수</label></th>
     <td><input id='f-point' type='text' name='point' value="${study.point}" readonly></td>
     <td></td>
