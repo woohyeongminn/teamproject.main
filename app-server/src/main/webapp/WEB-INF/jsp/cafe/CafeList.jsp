@@ -89,7 +89,7 @@
     <c:if test='${cafe.countRoom > 0}'>
       <div class="col">
         <div class="card">
-          <img src="../upload/cafe/${cafe.cafeImgs[0].name}_329x247.jpg" class="card-img-top" alt="...">
+          <img src="${contextPath}/upload/cafe/${cafe.cafeImgs[0].name}_329x247.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title" style="font-size:14px; font-weight: bold;">
               <a href='detail?no=${cafe.no}'>${cafe.name}</a>
