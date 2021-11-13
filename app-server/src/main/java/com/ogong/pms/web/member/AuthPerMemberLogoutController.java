@@ -13,11 +13,8 @@ public class AuthPerMemberLogoutController {
 
     session.invalidate();
     ModelAndView mv = new ModelAndView();
-
-    mv.setViewName("../index");
+    mv.setViewName("redirect:../index");
     return mv;
 
-    //request.getRequestDispatcher("/member/PerMemberLoginForm.jsp").forward(request, response);
-    //AuthCeoMemberLogoutController.accessLevel = Menu.LOGOUT;
   }
 }
