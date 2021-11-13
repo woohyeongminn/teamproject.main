@@ -25,10 +25,10 @@
     <span>(${perAskBoard.askNo})</span><br>
     
     <label for='f-title'>제목</label>
-    <input id='f-title' type='text' name='title' value='${perAskBoard.askTitle}'><br>
+    <input id='f-title' type='text' name='askTitle' value='${perAskBoard.askTitle}'><br>
     
     <label for='f-content'>내용</label>
-    <input id='f-content' type='text' name='content' value='${perAskBoard.askContent}'><br>
+    <input id='f-content' type='text' name='askContent' value='${perAskBoard.askContent}'><br>
     
     <span id='f-registeredDate'>${perAskBoard.askRegisteredDate}</span><br>
     <input type ='hidden' name='askNo' value='${perAskBoard.askNo}'>

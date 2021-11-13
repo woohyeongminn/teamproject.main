@@ -89,7 +89,7 @@
   <tr id="first">
     <th scope="col"></th>
     <th scope="col" id="title">| 📰 ${study.studyTitle} ✏ |</th>
-    <th scope="col" id="countbox">
+    <th scope="col">
 		<c:choose>
 			<c:when test="${study.countMember < study.numberOfPeple}">
 	    [모집 중]

@@ -27,13 +27,11 @@
 <br><p> ⚠등록된 회원이 아닙니다. ⚠</p>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 	     <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="peradd">
-	     <a href="/ogong/login">로그인</a>
+	     <a href="${contextPath}/app/login">로그인</a>
 	     </button>
      </div>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
        <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="peradd">
-       <a href="/ogong/signup">회원가입</a>
+       <a href="${contextPath}/app/signup">회원가입</a>
        </button>
      </div>
-</body>
-</html>
