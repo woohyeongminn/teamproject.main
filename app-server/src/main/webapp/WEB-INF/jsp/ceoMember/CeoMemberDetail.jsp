@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
 <style>
 * {
@@ -162,7 +160,6 @@ ul{list-style:none;}
   color: white;
 }
 </style>
-</head>
 
 <body>
     <br><br><br>
@@ -170,60 +167,56 @@ ul{list-style:none;}
 		  <div class="tabmenu">
 		   <ul>
 		    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
-		    <div class="tabCon" >
+		    <div class="tabCon">
 			  <form action='updateform' method='post' enctype="multipart/form-data">
+			     <input type='hidden' name='ceoNo' value='${ceoMember.ceoNo}'>
+
 				   <div class="profile">
 					   <div class="profile-header">
-					      <a href="../upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
-						        <img id="f-photo-image" style="margin-top: 8px;"   src="../upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
+					      <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
+						        <img id="f-photo-image" style="margin-top: 8px;" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
 						    </a>
+			       <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
 					   </div>
+
 					    <label for='f-name' class='form-label'>이름</label>
-			        <input id='f-name' type='text' name='name' readonly value='${ceoMember.ceoName}'><br>
+			        <input id='f-name' type='text' name='ceoName' readonly value='${ceoMember.ceoName}'><br>
 			        
 			        <label class="profile-label" for='f-nickname' class='form-label'>닉네임</label>
-			        <input id='f-nickname' type='text' name='nickname' readonly value='${ceoMember.ceoNickname}'><br>
+			        <input id='f-nickname' type='text' name='ceoNickname' readonly value='${ceoMember.ceoNickname}'><br>
 			        
 			        <label for='f-tel' class='form-label'>전화번호</label>
-			        <input id='f-tel' type='tel' name='tel' readonly value='${ceoMember.ceoTel}'><br>
+			        <input id='f-tel' type='tel' name='ceoTel' readonly value='${ceoMember.ceoTel}'><br>
 			        
 			        <label for='f-bossName' class='form-label'>대표자명</label>
-			        <input id='f-bossName' type='bossName' name='bossName' readonly value='${ceoMember.ceoBossName}'><br>
+			        <input id='f-bossName' type='bossName' name='ceoBossName' readonly value='${ceoMember.ceoBossName}'><br>
 			        
 			        <label for='f-licenseNo' class='form-label'>사업자 번호</label>
-			        <input id='f-licenseNo' type='licenseNo' name='licenseNo' readonly value='${ceoMember.ceoLicenseNo}'><br>
+			        <input id='f-licenseNo' type='licenseNo' name='ceoLicenseNo' readonly value='${ceoMember.ceoLicenseNo}'><br>
 			        
 			        <label for='f-email' class='form-label'>이메일</label>
-			        <input id='f-email' type='email' name='email' readonly value='${ceoMember.ceoEmail}'><br>
+			        <input id='f-email' type='email' name='ceoEmail' readonly value='${ceoMember.ceoEmail}'><br>
 			        
 			        <label for='f-registeredDate' class='form-label'>가입일</label>
-			        <input id='f-registeredDate' type='registeredDate'
-			         name='registeredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
+			        <input id='f-registeredDate' type='text'
+			         name='ceoRegisteredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
 					   </div>
 					   
 					   <div class="btn_wrap">
-					     <a href='updateform' class = "btn btn-outline-dark">프로필 수정하기</a>
+					     <button type="submit" value="수정" class ="btn btn-outline-dark">프로필 수정하기</button>
 					     <a href='deleteform' class = "btn btn-outline-dark">탈퇴하기</a>
 			       </div>
 			    </form>
 			  </div>
 			 </li>
-			 <li id="tab2" class="btnCon"><a class="tabbtn" href="cafe/detail">내 카페</a>
-			  <div class="tabCon" >
-			     <%-- <jsp:include page="../ceoCafe/CeoCafeMyDetail.jsp"/> --%>
-				    <!-- <a href='cafe/detail' class = "btn btn-outline-dark">내 카페</a> -->
-			  </div>
-			 </li>
-			 <li id="tab3" class="btnCon"><a class="tabbtn" href="../askboard/mylist">내 문의내역</a>
+			 <li id="tab2" class="btnCon"><a class="tabbtn" href="${contextPath}/app/askboard/mylist">내 문의내역</a>
 			  <div class="tabCon" >
 			      <!-- <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a> -->
 		    </div>
 		    </li>
 	    </ul>
-	    </div> 
+	   </div> 
     </div> 
   <script>
   location.href = "#tab1";
   </script>
-</body>
-</html>

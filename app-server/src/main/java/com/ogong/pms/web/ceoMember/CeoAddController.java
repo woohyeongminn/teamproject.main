@@ -28,36 +28,18 @@ public class CeoAddController extends HttpServlet {
 
   // 기업 개인
   @PostMapping("/ceomember/add")
-  public ModelAndView add(CeoMember ceoMember, Part photoFile, String[] tel, String site) throws Exception {
-
-    //    List<CeoMember> ceoMemberList = ceoMemberDao.findAll();
-    //    CeoMember ceoMember = new CeoMember();
-
-    //    ceoMember.setCeoName(request.getParameter("name"));
-    //    ceoMember.setCeoNickname(request.getParameter("nickname"));
-    //    int tel1 = Integer.parseInt(request.getParameter("tel1"));
-    //    int tel2 = Integer.parseInt(request.getParameter("tel2"));
-    //    int tel3 = Integer.parseInt(request.getParameter("tel3"));
+  public ModelAndView coeAdd(CeoMember ceoMember, Part ceoPhoto, String[] tel, String site) throws Exception {
 
     String ceoTel = tel[0] + "-" + tel[1] + "-" + tel[2];
     ceoMember.setCeoTel(ceoTel);
 
-    //    ceoMember.setCeoBossName(request.getParameter("bossname"));
-    //    ceoMember.setCeoLicenseNo(request.getParameter("licenseno"));
-    //    String email = request.getParameter("email");
-    //    String site = request.getParameter("site");
-
     ceoMember.setCeoEmail(ceoMember.getCeoEmail() +'@'+ site);
 
-    //    ceoMember.setCeoPassword(request.getParameter("ceoPassword"));
-    //    ceoMember.setCeoRegisteredDate(new Date(System.currentTimeMillis()));
     ceoMember.setCeoStatus(CeoMember.CEO);
 
-    //    Part photoPart = request.getPart("photo");
-    if (photoFile.getSize() > 0) {
-      // if (photoFile != null) {
+    if (ceoPhoto.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
-      photoFile.write(sc.getRealPath("/upload/ceoMember") + "/" + filename);
+      ceoPhoto.write(sc.getRealPath("/upload/ceoMember") + "/" + filename);
       ceoMember.setCeoPhoto(filename);
 
       Thumbnails.of(sc.getRealPath("/upload/ceoMember") + "/" + filename)

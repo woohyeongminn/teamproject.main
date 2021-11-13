@@ -22,7 +22,6 @@
   text-align: center;
 }
 </style>
-</head>
 
 <div class="all-content">
   <c:if test='${not empty ceoMemberList}'>
