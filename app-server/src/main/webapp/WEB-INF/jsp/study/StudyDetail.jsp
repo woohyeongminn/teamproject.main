@@ -80,10 +80,10 @@
 		  <c:choose>
 		    <c:when test="${study.owner.perNo eq loginUser.perNo}">
 			    <button class="btn btn-outline-light">
-			      <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'>수정</a>
+			      <a href='updateform?studyno=${study.studyNo}'>수정</a>
 			    </button>
 			    <button class="btn btn-outline-light">
-			      <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}'>삭제</a>
+			      <a href='delete?studyno=${study.studyNo}'>삭제</a>
 			    </button>
 		    </c:when>
 		    <c:when test="${study.owner.perNo ne member.perNo}">
