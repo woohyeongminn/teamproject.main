@@ -49,8 +49,30 @@
     <span>${study.owner.perNickname}</span>
     <td><fmt:formatDate value="${study.registeredDate}" pattern="yyyy.MM.dd" /></td>
     <p class="lead">${study.introduction}</p>
+    <c:choose>
+    <c:when test="${study.countMember ne study.numberOfPeple}">[모집중]</c:when>
+    <c:otherwise>[모집 완료]</c:otherwise>
+    </c:choose>
+    <ul class="list-group">
+		  <li class="list-group-item d-flex justify-content-between align-items-center">
+		    🔎 분야
+		    <span class="badge bg-primary rounded-pill">${study.subjectName}</span>
+		  </li>
+		  <li class="list-group-item d-flex justify-content-between align-items-center">
+		    🌐 지역
+		    <span class="badge bg-primary rounded-pill">${study.area}</span>
+		  </li>
+		  <li class="list-group-item d-flex justify-content-between align-items-center">
+        🎭 대면 상태
+        <span class="badge bg-primary rounded-pill">${study.faceName}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🏆 활동 점수
+        <span class="badge bg-primary rounded-pill">${study.point}</span>
+      </li>
+		</ul>
   </div>
-</main>
+</main><br>
 
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
@@ -58,10 +80,10 @@
 		  <c:choose>
 		    <c:when test="${study.owner.perNo eq loginUser.perNo}">
 			    <button class="btn btn-outline-light">
-			      <a href='updateform?studyno=${study.studyNo}'>수정</a>
+			      <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'>수정</a>
 			    </button>
 			    <button class="btn btn-outline-light">
-			      <a href='delete?studyno=${study.studyNo}'>삭제</a>
+			      <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}'>삭제</a>
 			    </button>
 		    </c:when>
 		    <c:when test="${study.owner.perNo ne member.perNo}">
