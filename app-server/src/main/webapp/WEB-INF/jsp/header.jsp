@@ -5,7 +5,7 @@
 <header>
 <div class="header_background">
   <div class='header_logo'>
-    <a href="${contextPath}/app/index.jsp"><img src="${contextPath}/img/logo.png"></a>
+    <a href="${contextPath}/app/index"><img src="${contextPath}/img/logo.png"></a>
   </div>
 
   <ul class="header_menu">
