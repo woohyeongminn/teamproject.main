@@ -3,10 +3,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <title>기업회원 스터디룸 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -76,14 +72,13 @@ label {
 }
 
 </style>
-</head>
 
 <body>
 <div class="all-content">
     <div id='aside'>
       <span id='c-image'>사진</span>
       <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input id="input-roomFile" type="file" multiple="multiple" style='display:none' name='filename[]'/>
+        <input id="input-roomFile" type="file" multiple="multiple" style='display:none' name='photoFile'/>
         <label id="input-file-button" for="input-file">
           파일 첨부
         </label>
@@ -92,13 +87,13 @@ label {
     <form action='update' method='post' enctype="multipart/form-data">
     <div id='content'>
       <input type ='hidden' name='cafeno' value='${cafeRoom.cafe.no}'>
-      <input type ='hidden' name='roomno' value='${cafeRoom.roomNo}'>
+      <input type ='hidden' name='roomNo' value='${cafeRoom.roomNo}'>
       
       <label for='f-roomName'>스터디룸 이름</label>
-      <input id='f-roomName' type='text' name='name' value='${cafeRoom.roomName}'><br>
+      <input id='f-roomName' type='text' name='roomName' value='${cafeRoom.roomName}'><br>
       
       <label for='f-roomInfo'>스터디룸 설명</label>
-      <input id='f-roomInfo' type='text' name='info'  value='${cafeRoom.roomInfo}'><br>
+      <input id='f-roomInfo' type='text' name='roomInfo'  value='${cafeRoom.roomInfo}'><br>
       
       <label for='f-roomPeople'>스터디룸 최대인원</label>
       <input id='f-roomPeople' type="number" pattern="\d*" name='people'  value='${cafeRoom.people}'><br>
@@ -123,10 +118,9 @@ label {
 
     </div>
     <div id='button'>
-     <button type="submit" value="수정" formaction="update"   class="btn btn-outline-dark">수정</button>
+     <button type="submit" value="수정" formaction="update" class="btn btn-outline-dark">수정</button>
      <a href="detail?roomno=${cafeRoom.roomNo}" class="btn btn-outline-dark">뒤로가기</a>
     </div>
   </form> 
   </div>
 </body>
-</html>
