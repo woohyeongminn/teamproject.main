@@ -52,7 +52,7 @@ thead, tbody, tfoot, tr, td, th {
     border-width: 0;
     line-height: 40px;
 }
-p {
+p#titlename {
     margin-top: 0;
     margin-bottom: 1rem;
     font-weight: bolder;
@@ -68,7 +68,7 @@ p {
     <li id="tab1" class="btnCon"><a class="btn first" href="#tab1">👩🏻‍🎓 조장 | 스터디 목록</a>
       <div class="tabCon" >
       <br>
-      <p>📖 | 👩🏻‍🎓 조장 | 스터디 목록</p>
+      <p id="titlename">📖 | 👩🏻‍🎓 조장 | 스터디 목록</p>
       <br><br>
 	    <table class="table table-hover">
 	    <thead>
@@ -110,7 +110,7 @@ p {
     <li id="tab2" class="btnCon"><a class="btn" href="#tab2">👨‍👩 구성원 | 스터디 목록</a>
       <div class="tabCon" >
       <br>
-      <p>📖 | 👨‍👩‍👧‍👧 구성원 | 스터디 목록</p>
+      <p id="titlename">📖 | 👨‍👩‍👧‍👧 구성원 | 스터디 목록</p>
       <br><br>
 		  <table class="table table-hover">
 		    <thead>
@@ -151,7 +151,7 @@ p {
     <li id="tab3" class="btnCon"><a class="btn" href="#tab3">📖 참여 대기중</a>
       <div class="tabCon" >
       <br>
-      <p>📖 참여 대기중 스터디 목록</p>
+      <p id="titlename">📖 참여 대기중 스터디 목록</p>
       <br><br>
 	    <table class="table table-hover">
 	    <thead>
