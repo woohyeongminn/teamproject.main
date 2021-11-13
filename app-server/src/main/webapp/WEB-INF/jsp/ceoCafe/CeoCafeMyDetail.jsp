@@ -16,68 +16,19 @@
  a {
    text-decoration:none;
 }
- 
+
+.template-content {
+    height: 1100px;
+}
+
  .all-content {
-  width: 100%;
+  width: 800px;
   margin: 0 auto;
   height: 800px;
 }
- 
-.template-content {
-    height: 1300px;
-}
 
 ul {
-list-style:none;
-}
-
-.tabmenu{ 
-  max-width:900px; 
-  margin: 0 auto; 
-  position:relative; 
-}
-
-.tabmenu > ul {
-  padding: 0;
-}
-
-.tabmenu > ul > li{
-  display:  inline-block;
-  width:33.33%; 
-  float:left;  
-  text-align:center; 
-  background :#f9f9f9;
-}
-
-.tabmenu > ul > li > a{
-  display:block;
-  line-height:40px;
-  height:40px;
-  text-decoration:none; 
-  color: #000;
-}
-
-.tabCon{
-  display:none; 
-  padding: 20px;
-  position:absolute;
-  left:0;
-  box-sizing: border-box; 
-  border : 5px solid #f9f9f9;
-  width: 900px;
-  height: 620px;
-}
-
-.btnCon:target  {
-  background : #ccc;
-}
-
-.btnCon:target .tabCon {
-  display: block;
-}
-
-.btnCon:target .tabbtn {
-  font-weight: bold;
+  list-style:none;
 }
 
 .cafe-top {
@@ -235,135 +186,103 @@ button {
 
 <body>
 <br><br><br>
-<div class="all-content"> 
-  <div class="tabmenu">
-  <ul>
-   <li id="tab1" class="btnCon"><a class="tabbtn first" href="../detail">내 프로필</a>
-	   <div class="tabCon" >
+<div class="all-content">
+	<c:choose>
+	<c:when test='${empty cafe}'>
+	  <span>등록된 카페가 없습니다.</span><br>
+	  <a href='addform' class="btn btn-outline-dark">카페 등록하러 가기</a>
+	</c:when>
+	
+	<c:otherwise>
+	<div class = "cafe-top">
+	 <h4>[${cafe.name}]</h4>
+		<div class="slide">
+		    <ul>
+		      <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
+		    <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
+		    <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
+		       <%-- <li><img src="../upload/cafe/${cafe.cafeImgs[2].name}.jpg" style="width:100%"></li> --%>
+		  </ul>
+		</div>
+	</div>
+	
+	<!-- 카페 상세 글 부분 -->      
+	<div id='content'>
+	  <form action='updateform' class="cafe-form" method='post' enctype="multipart/form-data">
+	  <input id='c-no' type='hidden' value='${cafe.no}'>
+	 <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
+	 <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
+	 <div class="label-wrap"><label for='f-location'>주소</label> <span style="height: fit-content;">${cafe.location}</span></div>
+	  </form>
+	</div>
+	<div class="cafe-bottom">
+	  <div class="label-wrap"><label for='f-info'>소개글</label><span style="height: fit-content;">${cafe.info}</span></div>
+	 <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
+	 <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
+	 <label for='f-holiday'>이번주 휴무일</label><span>${cafe.holiday}</span><br>
+	 <label for='f-viewCount'>상태</label><span>${cafeStatus}</span><br>
+	 <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span>
+	</div>
+	
+	<!-- 리뷰 부분 감싸는 박스 -->
+	<div class="cafe-bottom-review">
+	
+	<!-- 리뷰 시작부분에 선 -->
+	<hr style="border-top: 4px double #bbb; text-align: center; display: inline-block; width: 48%; margin: 6px 0">
+	<i class="far fa-comments" style="color:#bbb; font-size: large;"></i>
+	<hr style="border-top: 4px double #bbb; text-align: center; display: inline-block; width: 47.5%;  margin: 6px 0">
+	
+	<!-- 리뷰 보여지는 부분 -->
+	<c:if test='${not empty reviewList}'>
+	 <div class = "review-wrap">
+	  <c:forEach items="${reviewList}" var="review">
+	   <div id='c-review'>
+	   <p id='c-review-content'>${review.content}</p>
+	     <span id='c-grade'>
+	       <c:set var="grade" value="${review.grade}" /> 
+	          <% 
+	          int grade = (int) pageContext.getAttribute("grade");
+	          String star = CafeHandlerHelper.getReviewGradeStatusLabel(grade);
+	          pageContext.setAttribute("star", star);
+	          %>
+	       <span style="font-size: 12px;">${star}(${review.grade}/5)</span>
+	     </span>
+	     <span style="font-size: 12px;"> | ${review.member.perNickname} | ${review.registeredDate}</span>
 	   </div>
-   </li>
-   <li id="tab2" class="btnCon"><a class="tabbtn" href="cafe/detail">내 카페</a>
-    <div class="tabCon" style="height: fit-content;">
-		  <c:choose>
-		  <c:when test='${empty cafe}'>
-		     <span>등록된 카페가 없습니다.</span><br>
-		     <a href='addform' class="btn btn-outline-dark">카페 등록하러 가기</a>
-		  </c:when>
-		  
-		  <c:otherwise>
-		  <div class = "cafe-top">
-	    <h4>[${cafe.name}]</h4>
-	    
-	    <!-- 카페 이미지 목록 (슬라이드) -->
-       <!-- <span id='c-image'><img src="../../img/aaa.jpg" style="width: 370px; height: 200px;"></span> -->
-					  
-					  
-					  
-			  <div class="slide">
-			    <ul>
-			      <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
-			      <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
-			      <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
-            <%-- <li><img src="../upload/cafe/${cafe.cafeImgs[2].name}.jpg" style="width:100%"></li> --%>
-			    </ul>
-			  </div>
-       </div>
-
-
-
-      <!-- 카페 상세 글 부분 -->      
-		  <div id='content'>
-		    <form action='updateform' class="cafe-form" method='post' enctype="multipart/form-data">
-		    <input id='c-no' type='hidden' value='${cafe.no}'>
-		    <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
-		    <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
-		    <div class="label-wrap"><label for='f-location'>주소</label> <span style="height: fit-content;">${cafe.location}</span></div>
-		    </form>
-		  </div>
-		  <div class="cafe-bottom">
-		    <div class="label-wrap"><label for='f-info'>소개글</label><span style="height: fit-content;">${cafe.info}</span></div>
-		    <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
-		    <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
-		    <label for='f-holiday'>이번주 휴무일</label><span>${cafe.holiday}</span><br>
-		    <label for='f-viewCount'>상태</label><span>${cafeStatus}</span><br>
-		    <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span>
-		  </div>
-		  
-		  
-		  
-		  <!-- 리뷰 시작부분에 선 -->
-		  <div class="cafe-bottom-review">
-			  <hr style="border-top: 4px double #bbb; text-align: center; display: inline-block; width: 48%; margin: 6px 0">
-			  <i class="far fa-comments" style="color:#bbb; font-size: large;"></i>
-			  <hr style="border-top: 4px double #bbb; text-align: center; display: inline-block; width: 47.5%;  margin: 6px 0">
-		  
-		  
-		  
-		  
-		  <!-- 리뷰 보여지는 부분 -->
-		   <c:if test='${not empty reviewList}'>
-		    <div class = "review-wrap">
-		     <c:forEach items="${reviewList}" var="review">
-		      <div id='c-review'>
-		      <p id='c-review-content'>${review.content}</p>
-	         <span id='c-grade'>
-	           <c:set var="grade" value="${review.grade}" /> 
-	              <% 
-	              int grade = (int) pageContext.getAttribute("grade");
-	              String star = CafeHandlerHelper.getReviewGradeStatusLabel(grade);
-	              pageContext.setAttribute("star", star);
-	              %>
-	           <span style="font-size: 12px;">${star}(${review.grade}/5)</span>
-	         </span>
-	         <span style="font-size: 12px;"> | ${review.member.perNickname} | ${review.registeredDate}</span>
-		      </div>
-		     </c:forEach>
-		     </div>
-		   </c:if>
-		   <c:if test='${empty reviewList}'>
-		     <p>등록된 리뷰가 없습니다.</p><br>  
-		   </c:if>
-		   </div>
-		   
-		   
-		   <!-- 버튼 -->
-		   <div id='button_wrap'>
-		     <button id='b-but' type="submit" value="수정" formaction="updateform">
-		        <a href='updateform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 수정</a>
-		     </button>
-		     
-		     <button id='b-but' type="submit" value="삭제" formaction="deleteform">
-		        <a href='deleteform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 삭제</a>
-		     </button>
-		     
-		       <!--
-		        <button onclick="window.open('http://localhost:8080/ogong/ceomember/cafe//deleteform?no=${cafe.no}&ceono=${ceoMember.ceoNo}','deleteform','width=430,height=200,location=no,status=no,scrollbars=yes');">스터디카페 삭제</button>
-		       -->
-		     
-		      <button id='b-but' type="submit" value="스터디룸관리">
-		        <a href='room/list?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디룸 관리</a>
-		      </button>
-		      <button id='b-but' type="submit" value="예약관리">
-		        <a href='reser/list' class="btn btn-outline-dark">예약 관리</a>
-		      </button>
-		    </div>
-		   </c:otherwise>
-		  </c:choose>
-		  </div>
-     </li>
-     
-     
-     
-     <li id="tab3" class="btnCon"><a class="tabbtn" href="#tab3">내 문의내역</a>
-      <div class="tabCon" >
-        <!-- <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a> -->
-      </div>
-     </li>
-  </ul>
-  </div>
-</div>
-<script>
-  location.href = "#tab2";
-</script>
+	  </c:forEach>
+	  </div>
+	</c:if>
+	
+	<c:if test='${empty reviewList}'>
+	  <p>등록된 리뷰가 없습니다.</p><br>  
+	</c:if>
+	</div>
+	
+	<!-- 버튼 -->
+	<div id='button_wrap'>
+	  <button id='b-but' type="submit" value="수정" formaction="updateform">
+	     <a href='updateform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 수정</a>
+	  </button>
+	  
+	  <button id='b-but' type="submit" value="삭제" formaction="deleteform">
+	     <a href='deleteform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 삭제</a>
+	  </button>
+	  
+	    <!--
+	     <button onclick="window.open('http://localhost:8080/ogong/ceomember/cafe//deleteform?no=${cafe.no}&ceono=${ceoMember.ceoNo}','deleteform','width=430,height=200,location=no,status=no,scrollbars=yes');">스터디카페 삭제</button>
+	    -->
+	  
+	   <button id='b-but' type="submit" value="스터디룸관리">
+	     <a href='room/list?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디룸 관리</a>
+	   </button>
+	   
+	   <button id='b-but' type="submit" value="예약관리">
+	     <a href='reser/list' class="btn btn-outline-dark">예약 관리</a>
+	   </button>
+	 </div>
+	 
+	</c:otherwise>
+ </c:choose>
+ </div>
 </body>
 </html>

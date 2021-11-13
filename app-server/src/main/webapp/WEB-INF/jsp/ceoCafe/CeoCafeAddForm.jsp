@@ -3,9 +3,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <style>
 * {
@@ -86,15 +83,7 @@ label {
   margin: 0 auto;
 }
 
-.c-top {
-  width: 100%;
-  padding: 20px 0 20px 0px;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-  text-align: center;
-}
 </style>
-</head>
 
 <body>
   <div class="all-content">
@@ -102,18 +91,19 @@ label {
   <p>스터디 카페를 등록하고 승인을 기다리세요:)</p>
   <hr>
     <div id='aside'>
-      <span id='c-image'>대표이미지</span>
-      <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input id="input-file" type="file" multiple="multiple" style='display:none' name='filename[]'/>
-        <label id="input-file-button" for="input-file">
-          파일 첨부
-        </label>
-      </form>
+    <span id='c-image'>대표이미지</span>
+    <form action='add' method='post' enctype="multipart/form-data">
+      <!-- 여러개 등록 -->
+      <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
+        <!-- <input id="input-file" type="file" multiple="multiple" style='display:none' name='filename[]'/> -->
+        
+        <input id="input-file" type="file" multiple="multiple" style='display:none' name='photoFile'/>
+        <label id="input-file-button" for="input-file">파일 첨부</label>
+        
+      <!-- </form> -->
     </div>
-    <!-- <form action='add' method='post' enctype="multipart/form-data"> -->
-    <form action='add' method='get'>
+    
     <div id='content'>
-      
       <label for='f-cafeName'>상호명</label>
       <input id='f-cafeName' type='text' name='name'><br>
       
@@ -127,13 +117,13 @@ label {
       <input id='f-location' type='text' name='location'><br>
       
       <label for='f-tel'>전화번호</label>
-      <input id='f-tel' type='tel' name='tel'><br>
+      <input id='f-tel' type='tel' name='phone'><br>
   
       <label for='f-openTime'>오픈시간</label>
-      <input id='f-openTime' type='time' name='openTime'><br>
+      <input id='f-openTime' type='time' name='inputOpenTime'><br>
   
       <label for='f-closeTime'>마감시간</label>
-      <input id='f-closeTime' type='time' name='closeTime'><br>
+      <input id='f-closeTime' type='time' name='inputCloseTime'><br>
       
       <label for='f-holiday'>이번주 휴무일</label>
       <input id='f-holiday' type='date' name='holiday'><br>
@@ -145,14 +135,6 @@ label {
         <option value="3" disabled>운영중단</option>
         <option value="4" disabled>삭제</option>
       </select><br>
-      
-   <%--    <label for='f-photo' class='form-label'>사진등록</label>
-	    <input id='f-photo' type='file' name='photo' /><br>
-	    
-	    <c:if test="${empty photo}">
-	      <input id='f-photo' type='hidden' name='filename' value="cafe_80x80.jpg"/><br>
-	    </c:if> --%>
-	    
     </div>
     <div id='button'>
      <button id='b-btn' type="submit" value="등록" class="btn btn-outline-dark">등록</button>
@@ -160,4 +142,3 @@ label {
   </form>
   </div>
 </body>
-</html>
