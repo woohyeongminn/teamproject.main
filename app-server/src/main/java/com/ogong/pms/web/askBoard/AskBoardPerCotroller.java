@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
@@ -15,7 +17,7 @@ public class AskBoardPerCotroller {
   @Autowired  AskBoardDao askBoardDao;
   @Autowired  SqlSessionFactory sqlSessionFactory;
 
-  @GetMapping("/askboard/permylist")
+  @RequestMapping("/askboard/permylist")
   public ModelAndView list() throws Exception {
 
     Collection<AskBoard> myAskBoardList = askBoardDao.findAll();
@@ -43,6 +45,38 @@ public class AskBoardPerCotroller {
 
     return mv;
   } 
+
+  @GetMapping("/askboard/perupdateform")
+  public ModelAndView updateForm(int askNo) throws Exception {
+
+    AskBoard perAskBoard = askBoardDao.findByNo(askNo);
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "💬문의글 수정");
+    mv.addObject("perAskBoard", perAskBoard);
+    mv.addObject("contentUrl", "askBoard/AskBoardPerUpdateForm.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  @PostMapping("/askboard/perupdate")
+  public ModelAndView update(AskBoard askBoard) throws Exception {
+
+    AskBoard prevAskBoard = askBoardDao.findByNo(askBoard.getAskNo());
+    if (prevAskBoard == null) {
+      throw new Exception("해당 번호의 문의글이 없습니다.");
+    }
+    askBoard.setAskRegisteredDate(prevAskBoard.getAskRegisteredDate());
+    askBoardDao.update(askBoard);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.setViewName("redirect:permylist");
+
+    return mv;
+  }
 
   @GetMapping("/askboard/perdelete")
   public ModelAndView delete(int askNo) throws Exception { 

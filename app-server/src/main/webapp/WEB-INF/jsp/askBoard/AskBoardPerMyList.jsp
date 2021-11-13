@@ -19,8 +19,6 @@
     line-height: 14px;
   }
   </style>
-</head>
-<body>
 <fieldset>
 <br>
 <hr>
@@ -35,10 +33,9 @@
 		  <th>답변📔/📖</th>
 	</tr>
 </thead>
-<tbody>
 
 <c:forEach items="${myAskBoardList}" var="askBoard">
-<tr>
+  <tr>
     <c:if test="${askBoard.askMemberWriter.perNo == loginUser.perNo}">
 				        <td>${askBoard.askNo}.</td>
 				        <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
@@ -54,11 +51,11 @@
             </c:otherwise>
            </c:choose> 
     </c:if>
-</tr>
+  </tr>
 </c:forEach>
 </table>
 </fieldset>
-</tbody> 
+
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
      <a href='peraddform'>등록하기</a>

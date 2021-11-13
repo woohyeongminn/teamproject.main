@@ -24,6 +24,6 @@
   <p>답변이 등록되었습니다.</p>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="peradd">
-     <a href="../admin/askboardlist">문의글 목록</a>
+     <a href="../admin/askboard/list">문의글 목록</a>
      </button>
    </div> 
