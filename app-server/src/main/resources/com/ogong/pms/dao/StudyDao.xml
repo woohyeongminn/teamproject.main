@@ -201,7 +201,7 @@
   <!--  ===[스터디 검색]=== -->
   <select id="findByKeyword" resultMap="StudyMap">
    <include refid="select1"/>
-   where ${input} like(concat('%',#{keyword},'%'))
+   where ${where} like(concat('%',#{keyword},'%'))
     group by s.study_no
     order by s.created_dt
   </select>

@@ -99,7 +99,7 @@ ul{
       <div class="tabCon" >
       <br>
 	<div id="search">
-    <form action="search">
+    <form action="search" method='get'>
     <select name="where">
       <option value="1">분야</option>
       <option value="2">제목</option>
@@ -148,7 +148,7 @@ ul{
       <div class="tabCon" >
       <br>
   <div id="search">
-    <form action="search">
+    <form action="search" method='get'>
     <select name="where">
       <option value="1">분야</option>
       <option value="2">제목</option>
@@ -193,7 +193,7 @@ ul{
       <div class="tabCon" >
       <br>
   <div id="search">
-    <form action="search">
+    <form action="search" method='get'>
     <select name="where">
       <option value="1">분야</option>
       <option value="2">제목</option>
