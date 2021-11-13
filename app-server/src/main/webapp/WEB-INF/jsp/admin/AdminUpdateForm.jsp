@@ -88,7 +88,7 @@
   </div>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<button type="submit" class="btn btn-outline-dark" value="변경" >변경</button> 
+<button type="submit" class="btn btn-outline-dark" value="변경">변경</button> 
 </div>
 
 </div>
@@ -102,32 +102,32 @@ function notEmpty() {
   
   var valueForm = document.adminPro;
   
-  if(!valueForm.nickName.value){
+  if(!valueForm.masterNickname.value){
     Swal.fire("닉네임을 입력하세요.");
     return false;
   }
   
-  if(valueForm.nickName.value == ""){
+  if(valueForm.masterNickname.value == ""){
     Swal.fire("하나 이상의 문자열을 입력하세요.");
       return false;
     }
   
-  if(!valueForm.email.value){
+  if(!valueForm.masterEmail.value){
     Swal.fire("이메일을 입력하세요.");
     return false;
   }
   
-  if(valueForm.email.value == ""){
+  if(valueForm.masterEmail.value == ""){
     Swal.fire("하나 이상의 문자열을 입력하세요.");
       return false;
     }
   
-  if(!valueForm.password.value){
+  if(!valueForm.masterPassword.value){
     Swal.fire("비밀번호를 입력하세요.");
     return false;
   }
   
-  if(valueForm.password.value == ""){
+  if(valueForm.masterPassword.value == ""){
     Swal.fire("하나 이상의 문자열을 입력하세요.");
       return false;
     }
