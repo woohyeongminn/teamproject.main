@@ -76,9 +76,9 @@ font-size: 14px;
 	  </button>
 	  <div class="dropdown-menu" role="menu" style="border-color: white;">
 	    <button class="dromdown-item" type="button1">
-	      <a href='logout' style="color: black;">🖐 로그아웃</a></button><br>
+	      <a href='${contextPath}/app/admin/logout' style="color: black;">🖐 로그아웃</a></button><br>
 	    <button class="dromdown-item" type="button1">
-	      <a href='detail' style="color: black;">🙂 마이페이지</a></button>
+	      <a href='${contextPath}/app/admin/detail' style="color: black;">🙂 마이페이지</a></button>
 	  </div>
 	</div>
 	
@@ -90,7 +90,7 @@ font-size: 14px;
 	    <button class="dromdown-item" type="button1">
 	      <a href="${contextPath}/app/admin/permemberlist" style="color: black;">🎓 개인 회원</a></button><br>
 	    <button class="dromdown-item" type="button1">
-	      <a href="/ogong/admin/ceomember/list" style="color: black;">👔 기업 회원</a></button>
+	      <a href="${contextPath}/app/admin/ceomember/list" style="color: black;">👔 기업 회원</a></button>
 	  </div>
 	</div>
 	
@@ -100,7 +100,7 @@ font-size: 14px;
 	  </button>
 	  <div class="dropdown-menu" role="menu" style="border-color: white;">
 	    <button class="dromdown-item" type="button1">
-	      <a href="study/list" style="color: black;">📚 스터디 목록</a></button><br>
+	      <a href="${contextPath}/app/admin/study/list" style="color: black;">📚 스터디 목록</a></button><br>
 	  </div>
 	</div>
 	
@@ -110,9 +110,9 @@ font-size: 14px;
 	  </button>
 	  <div class="dropdown-menu" role="menu" style="border-color: white;">
 	    <button class="dromdown-item" type="button1">
-	      <a href="/ogong/admin/cafeList" style="color: black;">📝 장소 목록</a></button><br>
+	      <a href="${contextPath}/app/admin/cafeList" style="color: black;">📝 장소 목록</a></button><br>
 	    <button class="dromdown-item" type="button1">
-	      <a href="/ogong/admin/reviewList" style="color: black;">🔖 장소 리뷰</a></button>
+	      <a href="${contextPath}/app/admin/reviewList" style="color: black;">🔖 장소 리뷰</a></button>
 	  </div>
 	</div>
 	
@@ -122,9 +122,9 @@ font-size: 14px;
 	  </button>
 	  <div class="dropdown-menu" role="menu" style="border-color: white;">
 	    <button class="dromdown-item" type="button1">
-	      <a href="/ogong/adminNotice/list" style="color: black;">📢 공지사항</a></button><br>
+	      <a href="${contextPath}/app/adminNotice/list" style="color: black;">📢 공지사항</a></button><br>
 	    <button class="dromdown-item" type="button1">
-	      <a href="/ogong/admin/askboard/list" style="color: black;">💬 문의사항</a></button>
+	      <a href="${contextPath}/app/admin/askboard/list" style="color: black;">💬 문의사항</a></button>
 	  </div>
 	</div>
 	

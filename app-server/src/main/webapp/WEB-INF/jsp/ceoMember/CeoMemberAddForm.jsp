@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <style>
   label {
@@ -29,12 +26,12 @@ function checkValue() {
 	
 	var form = document.ceoInfo;
 	
-	if(!form.name.value){
+	if(!form.ceoName.value){
 	      alert("이름을 입력하세요.");
 	      return false;
 	 }
 	
-	if(!form.nickname.value){
+	if(!form.ceoNickname.value){
 	      alert("닉네임을 입력하세요.");
 	      return false;
 	  }
@@ -44,17 +41,17 @@ function checkValue() {
         return false;
     }
 	
-	if(!form.bossname.value){
+	if(!form.ceoBossname.value){
         alert("대표자명을 입력하세요.");
         return false;
     }
 	
-	if(!form.licenseno.value){
+	if(!form.ceoLicenseno.value){
         alert("사업자번호를 입력하세요.");
         return false;
     }
 
-	  if(!form.email.value){
+	  if(!form.ceoEmail.value){
 	        alert("이메일을 입력하세요.");
 	        return false;
 	   }
@@ -69,20 +66,19 @@ function checkValue() {
 	        return false;
 	   }
 	  
-	  if(form.passwordcheck.value ==""){
+	  if(form.ceoPassword.value ==""){
 	        alert("비밀번호 확인란에 입력해주세요.");
 	        form.passwordcheck.focus();
 	        return false;
 	    }
 	  
-	  if(form.password.value != form.passwordcheck.value){
+	  if(form.ceoPassword.value != form.password.value){
 	        alert("비밀번호를 동일하게 입력하세요.");
 	        form.passwordcheck.focus();
 	        return false;
 	   }
 }
 </script>
-</head>
 
 <body>
 	<div class="all-content">
@@ -96,33 +92,33 @@ function checkValue() {
   
   <form action='add' name='ceoInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
 	  <label for='f-name' class='form-label'>이름</label>
-	  <input id='f-name' type='text' name='name' placeholder="이름"/><br>
+	  <input id='f-name' type='text' name='ceoName' placeholder="이름"/><br>
 	  
 	  <label for='f-nickname' class='form-label'>닉네임</label>
-	  <input id='f-nickname' type='text' name='nickname' placeholder="닉네임" />
+	  <input id='f-nickname' type='text' name='ceoNickname' placeholder="닉네임" />
 	  <input type="button" value="중복확인" /><br>
 
 	  <label for='f-photo' class='form-label'>사진</label>
-	  <input id='f-photo' type='file' name='photo' /><br>
+	  <input id='f-photo' type='file' name='photoFile' /><br>
 	  <p>사진 미선택시 기본 프로필 사진이 등록됩니다.</p>
 	  <c:if test="${empty photo}">
-	    <input id='f-photo' type='hidden' name='photo' value="ceoProfile"/><br>
+	    <input id='f-photo' type='hidden' name='photoFile' value="ceoProfile"/><br>
 	  </c:if>
 	  
 	  <label for='f-tel' class='form-label' >전화번호</label>
-	  <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
-	  <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
-	  <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
+	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
+	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
+	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
 	  
 	  <label for='f-bossname' class='form-label'>대표자명</label>
-    <input id='f-bossname' type='text' name='bossname' placeholder="대표자명"/><br>
+    <input id='f-bossname' type='text' name='ceoBossName' placeholder="대표자명"/><br>
     
     <label for='f-licenseno' class='form-label'>사업자 등록번호</label>
-    <input id='f-licenseno' type='text' name='licenseno'
+    <input id='f-licenseno' type='text' name='ceoLicenseNo'
      pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="사업자 등록번호"/><br>
     
 	  <label for='f-email' class='form-label'>이메일</label>
-	  <input id='f-email' type='text' name='email' pattern="^[a-zA-Z0-9]+$" placeholder="이메일" onkeydown="inputEmail()"/>@
+	  <input id='f-email' type='text' name='ceoEmail' pattern="^[a-zA-Z0-9]+$" placeholder="이메일" onkeydown="inputEmail()"/>@
 	  <select name="site">
 		  <option>naver.com</option>
 		  <option>daum.net</option>
@@ -138,11 +134,9 @@ function checkValue() {
 	   placeholder="비밀번호"/><br>
 	 
 	  <label for='f-passwordcheck' class='form-label'>비밀번호 확인</label>
-	  <input id='f-passwordcheck' type='password' name='passwordcheck' placeholder="비밀번호 확인"/><br>
+	  <input id='f-passwordcheck' type='password' name='ceoPassword' placeholder="비밀번호 확인"/><br>
 	  
 	  <button type="submit" class="class="btn btn-outline-dark">회원가입</button>
 	  <input type="button" class="class="btn btn-outline-dark">취소</input>
 	 </form>
 	 </div>
- </body>
-</html>
