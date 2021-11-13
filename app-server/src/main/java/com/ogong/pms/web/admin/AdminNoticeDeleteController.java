@@ -1,53 +1,34 @@
 package com.ogong.pms.web.admin;
 
-import java.io.IOException;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 
-@WebServlet("/adminNotice/delete")
-public class AdminNoticeDeleteController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminNoticeDeleteController {
 
-  SqlSession sqlSession;
-  NoticeDao noticeDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired NoticeDao noticeDao;
 
-  @Override
-  public void init() throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
-  }
+  @GetMapping("/adminNotice/delete")
+  public ModelAndView noticeDelete(int no) throws Exception {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    AdminNotice notice = noticeDao.findByNoticeNo(no);
 
-    try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
-
-      AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
-
-      if (notice == null) {
-        throw new Exception (" >> 해당 번호의 공지글이 없습니다.<br>");
-
-      }
-
-      noticeDao.deletenoticefile(noticeNo);
-      noticeDao.delete(noticeNo);
-      sqlSession.commit();
-
-      response.sendRedirect("list");
-
-    } catch (Exception e) {
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    if (notice == null) {
+      throw new Exception (" >> 해당 번호의 공지글이 없습니다.");
     }
+
+    noticeDao.deletenoticefile(no);
+    noticeDao.delete(no);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:list");
+    return mv;
   }
 }

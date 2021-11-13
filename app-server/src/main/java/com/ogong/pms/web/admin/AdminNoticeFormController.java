@@ -1,26 +1,20 @@
 package com.ogong.pms.web.admin;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-@WebServlet("/adminNotice/form")
-public class AdminNoticeFormController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminNoticeFormController {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @GetMapping("/adminNotice/form")
+  public ModelAndView noticeForm() {
 
-    //request.getRequestDispatcher("/admin/NoticeAddForm.jsp").forward(request, response);
-
-    request.setAttribute("pageTitle", "🔔 공지게시글 등록");
-    request.setAttribute("contentUrl", "/admin/NoticeAddForm.jsp");
-    request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "🔔 공지게시글 등록");
+    mv.addObject("contentUrl", "admin/NoticeAddForm.jsp");
+    mv.setViewName("template1");
+    return mv;
   } 
 }
 

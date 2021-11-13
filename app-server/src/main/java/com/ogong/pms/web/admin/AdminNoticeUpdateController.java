@@ -1,16 +1,13 @@
 package com.ogong.pms.web.admin;
 
-import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 import net.coobird.thumbnailator.ThumbnailParameter;
@@ -18,70 +15,64 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/adminNotice/update")
-public class AdminNoticeUpdateController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminNoticeUpdateController {
 
-  SqlSession sqlSession;
-  NoticeDao noticeDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired NoticeDao noticeDao;
+  @Autowired ServletContext sc;
 
-  @Override
-  public void init() throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
-  }
+  @PostMapping("/adminNotice/update")
+  public ModelAndView noticeUpdate(AdminNotice adminNotice, Part filepath) throws Exception {
 
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    AdminNotice notice = noticeDao.findByNoticeNo(adminNotice.getAdminNotiNo());
 
-    try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
-      AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
+    if (notice == null) {
+      throw new Exception(" >> 해당 번호의 공지글을 찾을 수 없습니다.");
+    } 
 
-      if (notice == null) {
-        throw new Exception(" >> 해당 번호의 공지글을 찾을 수 없습니다.");
-      } 
+    adminNotice.setAdminNotiFile(notice.getAdminNotiFile());
+    adminNotice.setAdminNotiRegisteredDate(notice.getAdminNotiRegisteredDate());
 
-      //AdminNotice notice = new AdminNotice();
+    if (filepath.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      filepath.write(sc.getRealPath("/upload/notice") + "/" + filename);
+      notice.setAdminNotiFile(filename); // 실제 저장한 파일명을 데이터 베이스에 저장하도록
 
-      notice.setAdminNotiTitle(request.getParameter("title"));
-      notice.setAdminNotiContent(request.getParameter("content"));
+      Thumbnails.of(sc.getRealPath("/upload/notice") + "/" + filename)
+      .size(20, 20)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_20x20";
+        }
+      });
 
-      Part photoPart = request.getPart("filepath");
-      if (photoPart.getSize() > 0) {
-        String filename = UUID.randomUUID().toString();
-        photoPart.write(getServletContext().getRealPath("/upload/notice") + "/" + filename);
-        // 상속받은 서블릿 중에서 getServletContext를 리턴받는 애가 있음
-        // 걔를 통해서 getRealPath(업로드 경로)를 알아내서 저장
-        notice.setAdminNotiFile(filename); // 실제 저장한 파일명을 데이터 베이스에 저장하도록
+      Thumbnails.of(sc.getRealPath("/upload/notice") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
 
-        Thumbnails.of(getServletContext().getRealPath("/upload/notice") + "/" + filename)
-        .size(20, 20)
-        .outputFormat("jpg")
-        .crop(Positions.CENTER)
-        .toFiles(new Rename() {
-          @Override
-          public String apply(String name, ThumbnailParameter param) {
-            return name + "_20x20";
-          }
-        });
-      }
-
-      noticeDao.updateTitle(notice);
-      noticeDao.updateContent(notice);
-      //noticeDao.updateFilepath(notice);
-      noticeDao.deletenoticefile(noticeNo);
-      noticeDao.insertFilepath(notice);
-      sqlSession.commit();
-
-      response.sendRedirect("list");
-
-    } catch (Exception e) {
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      adminNotice.setAdminNotiFile(filename);
     }
+
+    noticeDao.updateTitle(adminNotice);
+    noticeDao.updateContent(adminNotice);
+    noticeDao.deletenoticefile(notice.getAdminNotiNo());
+    noticeDao.insertFilepath(adminNotice);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:list");
+    return mv;
+
   }
 }

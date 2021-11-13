@@ -101,20 +101,20 @@
   
   <tr id="blockbox">
     <th scope="row"><label for='f-title'>제목</label></th>
-    <td><input id='f-title' type='text' name='title' placeholder='${notice.adminNotiTitle}' autocomplete='off'></td>
+    <td><input id='f-title' type='text' name='adminNotiTitle' placeholder='${notice.adminNotiTitle}' autocomplete='off'></td>
     <td></td>
   </tr>
   
   <tr id="blockbox">
     <th scope="row"><label for='f-content' id="content">내용</label></th>
-    <td><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" autocomplete='off' placeholder='${notice.adminNotiContent}'></textarea></td>
+    <td><textarea id='f-content' type='text' name='adminNotiContent' rows="20" wrap="virtual" autocomplete='off' placeholder='${notice.adminNotiContent}'></textarea></td>
     <td></td>
   </tr>
   
   <tr id="blockbox">
     <th scope="row"><label for='f-filepath'>파일</label></th>
     <td><div class="img_button">
-    <img id="f-photo-image" src="../upload/notice/${notice.adminNotiFile}"></div>
+    <img id="f-photo-image" src="${contextPath}/upload/notice/${notice.adminNotiFile}"></div>
     <div class="click_button">
               <br>
               <label for="chooseFile" id="click"><b>👉 CLICK HERE! 👈</b></label>
@@ -126,7 +126,7 @@
   </thead>
   </table>
   
-  <input type='hidden' name='no' value='${notice.adminNotiNo}'>
+  <input type='hidden' name='adminNotiNo' value='${notice.adminNotiNo}'>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
   <button type="submit" class="btn btn-outline-dark" value="변경">변경</button>
   </div>

@@ -1,47 +1,28 @@
 package com.ogong.pms.web.admin;
 
-import java.io.IOException;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 
-@WebServlet("/adminNotice/Updateform")
-public class AdminNoticeUpdateFormController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminNoticeUpdateFormController {
 
-  NoticeDao noticeDao;
+  @Autowired NoticeDao noticeDao;
 
-  @Override
-  public void init() throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
-  }
+  @GetMapping("/adminNotice/Updateform")
+  public ModelAndView noticeUpdateForm(int no) throws Exception {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    AdminNotice notice = noticeDao.findByNoticeNo(no);
 
-    try {
-      int noticeNo = Integer.parseInt(request.getParameter("no"));
-      AdminNotice notice = noticeDao.findByNoticeNo(noticeNo);
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("notice", notice);
+    mv.addObject("pageTitle", "🔔 공지게시글 변경");
+    mv.addObject("contentUrl", "admin/NoticeUpdateform.jsp");
+    mv.setViewName("template1");
+    return mv;
 
-      request.setAttribute("notice", notice);
-
-      request.setAttribute("pageTitle", "🔔 공지게시글 변경");
-      request.setAttribute("contentUrl", "/admin/NoticeUpdateform.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-      //request.getRequestDispatcher("/admin/NoticeUpdateform.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
   }
 }
-

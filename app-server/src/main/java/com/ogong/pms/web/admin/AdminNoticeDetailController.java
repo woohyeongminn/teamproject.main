@@ -1,51 +1,32 @@
 package com.ogong.pms.web.admin;
 
-import java.io.IOException;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.NoticeDao;
 import com.ogong.pms.domain.AdminNotice;
 
-@WebServlet("/adminNotice/detail")
-public class AdminNoticeDetailController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminNoticeDetailController {
 
-  NoticeDao noticeDao;
+  @Autowired NoticeDao noticeDao;
 
-  @Override
-  public void init() throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    noticeDao = (NoticeDao) 웹애플리케이션공용저장소.getAttribute("noticeDao");
-  }
+  @GetMapping("/adminNotice/detail")
+  public ModelAndView noticeDetail(int no) throws Exception {
 
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    AdminNotice adminNotice = noticeDao.findByNoticeNo(no);
 
-    try {
-      int adminnotiNo = Integer.parseInt(request.getParameter("no"));
-      AdminNotice adminNotice = noticeDao.findByNoticeNo(adminnotiNo);
-
-      if (adminNotice == null) {
-        throw new Exception(" >> 해당 번호의 공지글이 없습니다.");
-      }
-
-      request.setAttribute("adminNotice", adminNotice);
-
-      request.setAttribute("pageTitle", "🔔 공지게시글 상세");
-      request.setAttribute("contentUrl", "/admin/NoticeDetail.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-      //request.getRequestDispatcher("/admin/NoticeDetail.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    if (adminNotice == null) {
+      throw new Exception(" >> 해당 번호의 공지글이 없습니다.");
     }
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("adminNotice", adminNotice);
+    mv.addObject("pageTitle", "🔔 공지게시글 상세");
+    mv.addObject("contentUrl", "admin/NoticeDetail.jsp");
+    mv.setViewName("template1");
+    return mv;
   }
 }
 
