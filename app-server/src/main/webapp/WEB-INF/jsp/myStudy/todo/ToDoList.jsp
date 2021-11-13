@@ -105,7 +105,7 @@
 	</table>
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-outline-dark"><a href="addform?studyno=${study.studyNo}&perno=${member.perNo}">등록</a></button>
+      <button class="btn btn-outline-dark"><a href="addform?studyno=${study.studyNo}">등록</a></button>
   </div>
  
 </div>

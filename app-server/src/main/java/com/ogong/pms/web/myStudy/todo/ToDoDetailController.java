@@ -31,7 +31,7 @@ public class ToDoDetailController {
     mv.addObject("todo", todo);
     mv.addObject("member", member);
     mv.addObject("study", myStudy);
-    mv.addObject("pageTitle", "📋 내 스터디 상세");
+    mv.addObject("pageTitle", "📋 To-Do List 상세");
     mv.addObject("contentUrl", "myStudy/todo/ToDoDetail.jsp");
     mv.setViewName("template1");
     return mv;
