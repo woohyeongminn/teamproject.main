@@ -29,15 +29,16 @@ public class FreeBoardAddController {
   ServletContext sc;
 
   @PostMapping("/freeboard/add")
-  public ModelAndView add(Study study, Part photoFile, HttpSession session) throws Exception {
-    FreeBoard freeBoard = new FreeBoard();
+  public ModelAndView add(FreeBoard freeBoard, Part photoFile, HttpSession session)
+      throws Exception {
+    // FreeBoard freeBoard = new FreeBoard();
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
-      photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
+      photoFile.write(sc.getRealPath("/upload/freeboard") + "/" + filename);
       freeBoard.setFreeBoardFile(filename);
 
-      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename).size(20, 20)
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(20, 20)
       .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
@@ -45,7 +46,7 @@ public class FreeBoardAddController {
         }
       });
 
-      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename).size(100, 100)
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(100, 100)
       .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
@@ -65,7 +66,7 @@ public class FreeBoardAddController {
 
     ModelAndView mv = new ModelAndView();
 
-    mv.setViewName("redirect:list?studyno=" + study.getStudyNo());
+    mv.setViewName("redirect:list?studyno=" + freeBoard.getStudyNo());
 
     return mv;
   }
