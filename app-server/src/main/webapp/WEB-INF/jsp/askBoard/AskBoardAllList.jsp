@@ -45,7 +45,7 @@
         <c:when test="${askBoard.askMemberWriter.perStatus == 1}">
          <tr>
           <td>${askBoard.askNo}.</td>
-           <td><a href='detail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+           <td><a href='alldetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
 			     <td>[개인]${askBoard.askMemberWriter.perNickname}</td>
 			     <td>${askBoard.askVeiwCount}</td>
 			     <td>${askBoard.askRegisteredDate}</td>
@@ -62,7 +62,7 @@
 			    <div>
 			      <td>${askBoard.askNo}.</td>
 			    </div>
-				    <td><a href='detail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+				    <td><a href='alldetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
 				    <td>[사장]${askBoard.askCeoWriter.ceoNickname}</td>
 				    <td>${askBoard.askVeiwCount}</td>
 				    <td>${askBoard.askRegisteredDate}</td>

@@ -1,66 +1,34 @@
 package com.ogong.pms.web.askBoard;
 
-import java.io.IOException;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.dao.CeoMemberDao;
 import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.CeoMember;
 
-@WebServlet("/askboard/ceoadd")
-public class AskBoardCeoAddCotroller extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+// 수정 필요
+@Controller
+public class AskBoardCeoAddCotroller {
 
-  SqlSession sqlSession;
-  AskBoardDao askBoardDao;
-  CeoMemberDao ceoMemberDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired AskBoardDao askBoardDao;
+  @Autowired CeoMemberDao ceoMemberDao;
 
-  @Override
-  public void init() {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    askBoardDao = (AskBoardDao) 웹애플리케이션공용저장소.getAttribute("askBoardDao");
-    ceoMemberDao = (CeoMemberDao) 웹애플리케이션공용저장소.getAttribute("ceoMemberDao");
-  }
+  @PostMapping("/askboard/ceoadd")
+  public ModelAndView add(AskBoard askBoard) throws Exception {
 
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    askBoardDao.insertCeo(askBoard);
+    sqlSessionFactory.openSession().commit();
 
-    try {
+    ModelAndView mv = new ModelAndView();
 
-      int no = Integer.parseInt(request.getParameter("writer"));
-      CeoMember ceoMember = ceoMemberDao.findByNo(no);
+    mv.addObject("pageTitle", "💬문의글 등록");
+    mv.addObject("contentUrl", "askBoard/AskBoardCeoAdd.jsp");
+    mv.setViewName("template1");
 
-      AskBoard askBoard = new AskBoard();
-
-      askBoard.setAskTitle(request.getParameter("title"));
-      askBoard.setAskContent(request.getParameter("content"));
-      askBoard.setAskCeoWriter(ceoMember);
-      askBoard.setAskStatus(Integer.parseInt(request.getParameter("status")));
-
-      if (askBoard.getAskStatus() == 2) {
-        askBoard.setAskTempPW(Integer.parseInt(request.getParameter("tempPW")));
-      }
-
-      askBoardDao.insertCeo(askBoard);
-      sqlSession.commit();
-
-      request.setAttribute("pageTitle", "💬문의글 등록");
-      request.setAttribute("contentUrl", "/askBoard/AskBoardCeoAdd.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      sqlSession.rollback();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    return mv;
   }
 }
