@@ -42,31 +42,37 @@
 
   var form = document.studyInfo;
 
-  if (form.study.status.value == 2) {
+  if (form.studyStatus.value == 2) {
 	  alert("완료된 스터디 입니다.");
     return false;
   }
   
-  for (Member guilder : form.study.members.value) {
-     if (form.guilder.perNo.value == form.member.perNo.value) {
+  for (Member guilder : form.members.value) {
+     if (form.guilder.perNo.value == form.loginUser.perNo.value) {
     	 alert("이미 참여 중인 스터디입니다.");
        return false;
      }
    }
 
-    for (Member memberWating : form.study.watingMember.value) {
-      if (form.memberWating.perNo.value == form.member.perNo.value) {
+    for (Member memberWating : form.watingMember.value) {
+      if (form.memberWating.perNo.value == form.loginUser.perNo.value) {
     	  alert("이미 승인 대기 중인 스터디입니다.");
         return false;
       }
     }
   
-  if (form.study.countMember.value == form.study.numberOfPeple.value) {
+  if (form.countMember.value == form.numberOfPeple.value) {
 	    alert("참여 가능 인원수를 초과하였습니다.");
 	    return false;
 	}
 }
 </script>
+
+<!-- <input name="members" type="text" value="${study.members}"/>
+<input name="watingMember" type="text" value="${study.watingMember}"/>
+<input name="studyStatus" type="text" value="${study.studyStatus}"/>
+<input name="countMember" type="text" value="${study.countMember}"/>
+<input name="numberOfPeple" type="text" value="${study.numberOfPeple}"/> -->
 
     <!-- Custom styles for this template -->
     <!-- <link href="sticky-footer.css" rel="stylesheet"> -->
