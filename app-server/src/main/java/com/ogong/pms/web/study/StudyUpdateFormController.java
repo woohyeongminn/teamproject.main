@@ -23,7 +23,7 @@ public class StudyUpdateFormController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    mv.addObject("pageTitle", "내 스터디 수정");
+    mv.addObject("pageTitle", "스터디 수정");
     mv.addObject("contentUrl", "myStudy/MyStudyUpdateForm.jsp");
     mv.setViewName("template1");
 
