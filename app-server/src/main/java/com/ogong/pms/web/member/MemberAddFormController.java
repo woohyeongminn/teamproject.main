@@ -1,7 +1,5 @@
 package com.ogong.pms.web.member;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +12,11 @@ public class MemberAddFormController {
   @Autowired MemberDao memberDao;
 
   @GetMapping("/member/addform")
-  public ModelAndView form(HttpServletRequest request, HttpServletResponse response)  {
+  public ModelAndView addForm() {
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("pageTitle", "✏회원 가입");
-    mv.addObject("contentUrl", "/member/PerMemberAddForm.jsp");
+    mv.addObject("contentUrl", "member/PerMemberAddForm.jsp");
     mv.setViewName("template1");
     return mv;
 
