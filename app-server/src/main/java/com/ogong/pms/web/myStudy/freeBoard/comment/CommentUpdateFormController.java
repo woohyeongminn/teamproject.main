@@ -1,38 +1,29 @@
 package com.ogong.pms.web.myStudy.freeBoard.comment;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CommentDao;
-import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Comment;
-import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.Study;
 
-public class CommentUpdateFormController extends HttpServlet {
+@Controller
+public class CommentUpdateFormController {
 
-  StudyDao studyDao;
-  FreeBoardDao freeBoardDao;
+  @Autowired
   CommentDao commentDao;
 
-  @WebServlet("/freeboard/comment/updateform")
-  protected void service(HttpServletRequest request, HttpServletResponse response) {
-    int studyNo = Integer.parseInt(request.getParameter("studyno"));
-    Study study = studyDao.findByNo(studyNo);
+  @GetMapping("/freeboard/comment/updateform")
+  public ModelAndView updateform(int commentno) throws Exception {
+    Comment comment = commentDao.findByNo(commentno);
 
-    int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
-    FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
+    ModelAndView mv = new ModelAndView();
 
-    int commentNo = Integer.parseInt(request.getParameter("commentno"));
-    Comment comment = commentDao.findByNo(commentNo);
+    mv.addObject("comment", comment);
+    mv.addObject("pageTitle", "댓글 수정");
+    mv.addObject("contentUrl", "myStudy/freeBoard/comment/CommentUpdateForm.jsp");
+    mv.setViewName("template1");
 
-    request.setAttribute("study", study);
-    request.setAttribute("freeBoard", freeBoard);
-    request.setAttribute("comment", comment);
-    request.setAttribute("pageTitle", "댓글 수정");
-    request.setAttribute("contentUrl", "/myStudy/freeBoard/comment/CommentUpdateForm.jsp");
-    request.getRequestDispatcher("/template1.jsp").forward(request, response);
+    return mv;
   }
 }
