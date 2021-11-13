@@ -163,11 +163,12 @@
   margin-bottom: 100px;
   }
   
- div#button_wrap {
+/*  div#button_wrap {
     margin: 20px 0;
-  }
+  } */
   
   button[type=submit] {
+  margin: 20px 0;
     font-size: 14px;
     line-height: 14px;
   }
@@ -192,16 +193,18 @@ display: none;
 </head>
 
 <div class="all-content"> 
-  <input id='c-no' type='hidden' value='${cafe.no}'><br>
+
+ <form action='cafeApproval' name='approval' method='post'>
+   <input id='c-no' type='hidden' name="no" value='${cafe.no}'>
 
   <div class = "cafe-top">
   <h4><b>${cafe.name}</b></h4>
   
 	  <div class="slide">
        <ul>
-         <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
-         <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
-         <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
+         <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
+         <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
+         <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
        </ul>
     </div>
   </div>
@@ -220,17 +223,16 @@ display: none;
         <label for='f-holiday'>이번주 휴무일</label><span>${cafe.holiday}</span><br>
         <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span><br>
         <label for='f-cafeStatus'>운영 상태</label>
-    
-   <form action='cafeApproval' name='approval' method='post'>
-	   <input type="hidden" value="${cafe.no}" name="no"/>
+
 		    <select name="cafeStatus">
 		      <c:if test='${cafe.cafeStatus==1}'>
 		          <option value="${cafe.cafeStatus}">승인 대기</option>
 		          <option value="2" name="cafeStatus" >운영 중</option>
-		          <option value="3" name="cafeStatus" >운영 중단</option>
+		          <option value="3" disabled>운영 중단</option>
 		          <option value="4" disabled>삭제</option>
 		       </c:if>
 		     </select><br>
+		  
     </div>
 
         <!-- 리뷰 시작부분에 선 -->
@@ -265,40 +267,8 @@ display: none;
        </c:if>
        </div>
 
-<script type="text/javascript">
-/* function disagree()  {
-	Swal.fire({
-		title: '승인을 거절하시겠습니까?',
-		text: '거절하시려면 확인을 눌러 주세요.',
-		icon: 'warning'
-	}).then((result) => {
-		return 
-	})
-} */
-function disagree(){
-	Swal.fire({
-		title: '승인을 거절하시겠습니까?',
-		text: "거절하시려면 거절 버튼을 눌러 주세요.",
-		icon: 'warning',
-		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: '거절',
-		cancelButtonText: '취소'
-		}).then((result) => {
-			if (result.value) {
-				location.href = "/ogong/admin/cafeList";
-				}
-			})
-		}
-
-</script>
-
-<div id='button_wrap'>
-	<button type="submit" class="btn btn-outline-dark">승인</button>
-	</form>
-	<button type="submit" class="btn btn-outline-dark" onclick="disagree();">거절</button>
-	<button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
-</div>
-
+  <div id='button_wrap'>
+		<button type="submit" class="btn btn-outline-dark">승인</button>
+  </div>
+  </form>
 </div>
