@@ -154,7 +154,6 @@ ul{list-style:none;}
   color: white;
 }
 </style>
-
 <body>
     <br><br><br>
     <div class="all-content"> 

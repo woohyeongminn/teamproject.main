@@ -33,13 +33,9 @@
 			<th>답변📔/📖</th>
 	  </tr>   
  </thead>
-
 <tbody>
-
 <c:forEach items="${askBoardList}" var="askBoard">
- 
   <c:choose>
-  
     <c:when test="${askBoard.askStatus == 1}">
       <c:choose>
         <c:when test="${askBoard.askMemberWriter.perStatus == 1}">
@@ -102,12 +98,18 @@
    <button class ="btn btn-outline-dark" type="submit" value="등록" formaction="add">
    <a href='peraddform'>등록하기</a>
    </button>
+   <button class ="btn btn-outline-dark" type="submit" value="등록" formaction="add">
+   <a href='permylist'>내 문의글</a>
+   </button>
 </div>
 </c:if>
 <c:if test="${not empty loginCeoUser}">
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
    <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
    <a href='ceoaddform'>등록하기</a>
+   </button>
+   <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
+   <a href='ceomylist'>내 문의글</a>
    </button>
 </div>
 </c:if>
