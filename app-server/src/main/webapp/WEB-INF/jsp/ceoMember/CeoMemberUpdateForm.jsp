@@ -157,10 +157,15 @@ ul{list-style:none;}
     display: block;
 }
 
-#f-registeredDate:focus {
-border:0;
-outline: none;
+#f-registeredDate {
+  border:0;
 }
+
+#f-registeredDate:focus {
+  border:0;
+  outline: none;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -218,7 +223,7 @@ function checkValue() {
         </a>
        </div>
         
-       <input id='f-photo' type='file' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
+       <input id='f-photo' type='file' name='photoFile' value='${ceoMember.ceoPhoto}'>
 
        <label for='f-name' class='form-label'>이름</label>
        <input id='f-name' type='text' name='ceoName' value='${ceoMember.ceoName}'><br>
@@ -232,21 +237,20 @@ function checkValue() {
        <label for='f-email' class='form-label'>이메일</label>
        <input id='f-email' type='email' name='ceoEmail' value='${ceoMember.ceoEmail}'><br>
        
-       <label for='f-password' class='form-label'>암호</label>
+       <%--<label for='f-password' class='form-label'>암호</label>
        <input id='f-password' type='password' name='ceoPassword' value='${ceoMember.ceoPassword}'><br>
-	     <%-- <input id='f-password' type='hidden' name='ceoPassword' value='${ceoMember.ceoPassword}'> --%>
+	      <input id='f-password' type='hidden' name='ceoPassword' value='${ceoMember.ceoPassword}'> --%>
        
        <label for='f-registeredDate' class='form-label'>가입일</label>
        <input id='f-registeredDate' type='text' name='ceoRegisteredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
+     </div>
      
-	   <%-- 
 			<section class="n-section-block">
 		      <table class="n-table table-row my-info-modify">
 		       <tr id="password-area">
 		         <th scope="row">비밀번호</th>
 		         <td><button  class="n-btn w100 btn-sm btn-default cert-hidden" id="change-password-btn">비밀번호 변경</button></td>
 		       </tr>
-		       
 		       
 		       <!--비밀번호 변경-->
 		       <tr id="change-password-area" style="display: none">
@@ -281,8 +285,7 @@ function checkValue() {
 		       </tr>
 		      </table>
 		     </section>
-		     --%>
-	      </div>
+	      
 	      <div class="btn_wrap">
 		      <button type="submit" class="btn btn-outline-dark">수정</button>
 		      <a href='detail' class="btn btn-outline-dark">뒤로가기</a>
@@ -292,7 +295,6 @@ function checkValue() {
      </li>
      <li id="tab2" class="btnCon"><a class="tabbtn" href="${contextPath}/app/askboard/mylist">내 문의내역</a>
         <div class="tabCon" >
-           <!-- <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a> -->
         </div>
      </li>
     </ul>

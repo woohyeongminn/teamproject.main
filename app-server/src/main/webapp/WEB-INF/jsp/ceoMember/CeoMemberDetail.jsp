@@ -168,8 +168,9 @@ ul{list-style:none;}
 		   <ul>
 		    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
 		    <div class="tabCon">
-			  <form action='updateform' method='post' enctype="multipart/form-data">
+			  <form method='post' enctype="multipart/form-data">
 			     <input type='hidden' name='ceoNo' value='${ceoMember.ceoNo}'>
+			     <input type='hidden' name='ceoNo' value='${ceoMember.ceoPassword}'>
 
 				   <div class="profile">
 					   <div class="profile-header">
@@ -203,15 +204,14 @@ ul{list-style:none;}
 					   </div>
 					   
 					   <div class="btn_wrap">
-					     <button type="submit" value="수정" class ="btn btn-outline-dark">프로필 수정하기</button>
-					     <a href='deleteform' class = "btn btn-outline-dark">탈퇴하기</a>
+					     <input type="submit" value="프로필 수정하기" formaction="updateform" class ="btn btn-outline-dark"/>
+               <input type="submit" value="탈퇴하기" formaction="deleteform" class ="btn btn-outline-dark"/>
 			       </div>
 			    </form>
 			  </div>
 			 </li>
 			 <li id="tab2" class="btnCon"><a class="tabbtn" href="${contextPath}/app/askboard/mylist">내 문의내역</a>
 			  <div class="tabCon" >
-			      <!-- <a href='../askboard/mylist' class = "btn btn-outline-dark">내 문의게시판</a> -->
 		    </div>
 		    </li>
 	    </ul>

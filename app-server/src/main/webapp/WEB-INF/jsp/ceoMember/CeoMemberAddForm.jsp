@@ -99,11 +99,11 @@ function checkValue() {
 	  <input type="button" value="중복확인" /><br>
 
 	  <label for='f-photo' class='form-label'>사진</label>
-	  <input id='f-photo' type='file' name='ceoPhoto' /><br>
-	  <p>사진 미선택시 기본 프로필 사진이 등록됩니다.</p>
+	  <input id='f-photo' type='file' name='photoFile' /><br>
+	  <%-- <p>사진 미선택시 기본 프로필 사진이 등록됩니다.</p>
 	  <c:if test="${empty photo}">
 	    <input id='f-photo' type='hidden' name='photoFile' value="ceoProfile"/><br>
-	  </c:if>
+	  </c:if> --%>
 	  
 	  <label for='f-tel' class='form-label' >전화번호</label>
 	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
