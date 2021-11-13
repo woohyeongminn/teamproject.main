@@ -81,7 +81,7 @@
 
   <div class="card-header">
   <i class="far fa-address-card" style="margin-left: auto;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"></i>
-      <img src="/ogong/img/logoface.png" alt="Profile Image" class="profile-img">
+      <img src="${contextPath}/img/logoface.png" alt="Profile Image" class="profile-img">
   </div>
 
   <div class="profile">
@@ -95,6 +95,7 @@
   </div>
 
   <div id="box">
+    <input type='hidden' name='masterNo' value='${loginAdmin.masterNo}'>
     <button type="submit" class="btn btn-outline-dark" value="변경" id="submit"><a href='updateForm'>변경</a></button> 
     <button type="submit" class="btn btn-outline-dark" value="로그아웃" id="submit"><a href='logout'>로그아웃</a></button> 
   </div>
