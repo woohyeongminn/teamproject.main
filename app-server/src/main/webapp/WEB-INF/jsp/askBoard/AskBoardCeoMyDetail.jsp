@@ -46,7 +46,7 @@
      <a href='ceoupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
      </button>
      <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
-     <a href='delete?askNo=${myAskBoard.askNo}'>문의글삭제</a>
+     <a href='ceodelete?askNo=${myAskBoard.askNo}'>문의글삭제</a>
      </button>
      <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="list">
      <a href='mylist'>내 목록보기</a>

@@ -1,30 +1,19 @@
 package com.ogong.pms.web.askBoard;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-@WebServlet("/askboard/peraddform")
-public class AskBoardPerAddFormCotroller extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AskBoardPerAddFormCotroller {
 
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @GetMapping("/askboard/peraddform")
+  public ModelAndView addFrom() {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "💬문의글 등록");
+    mv.addObject("contentUrl", "askBoard/AskBoardPerAddForm.jsp");
+    mv.setViewName("template1");
 
-    try {
-
-      request.setAttribute("pageTitle", "💬문의글 등록");
-      request.setAttribute("contentUrl", "/askBoard/AskBoardPerAddForm.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    return mv;
   }
 }

@@ -41,7 +41,11 @@
          </span><br>
         </c:otherwise>
      </c:choose>
-
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+   <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="list">
+   <a href='alllist'>목록보기</a>
+   </button>
+</div>
      
      
      
