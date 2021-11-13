@@ -171,8 +171,6 @@ public class CeoMemberController {
   @PostMapping("/ceomember/update")
   public ModelAndView ceoUpdate(CeoMember ceoMember, Part photoFile) throws Exception {
 
-    System.out.println(ceoMember);
-
     CeoMember oldCeoMember = ceoMemberDao.findByNo(ceoMember.getCeoNo());
 
     if (oldCeoMember == null) {
