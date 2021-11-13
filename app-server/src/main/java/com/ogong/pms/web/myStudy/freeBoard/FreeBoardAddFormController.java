@@ -1,52 +1,33 @@
 package com.ogong.pms.web.myStudy.freeBoard;
 
-import java.io.IOException;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import javax.servlet.http.HttpSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.MemberDao;
+import com.ogong.pms.domain.FreeBoard;
 
-@WebServlet("/freeboard/addform")
-public class FreeBoardAddFormController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class FreeBoardAddFormController {
 
-  MemberDao memberDao;
+  @Autowired
+  SqlSessionFactory sqlSessionFactory;
+  @Autowired
   FreeBoardDao freeBoardDao;
-  SqlSession sqlSession;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-  }
+  @GetMapping("/freeboard/form")
+  public ModelAndView addform(HttpSession session) {
+    // int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    ModelAndView mv = new ModelAndView();
 
-    try {
-      // int perNo = Integer.parseInt(request.getParameter("perNo"));
-      // Member member = memberDao.findByNo(perNo);
+    mv.addObject("studyno", ((FreeBoard) session.getAttribute("studyno")).getStudyNo());
+    mv.addObject("pageTitle", "자유 게시판 등록");
+    mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardAddForm.jsp");
+    mv.setViewName("template1");
 
-      int studyNo = Integer.parseInt(request.getParameter("studyno"));
-
-      // request.setAttribute("member", member);
-      request.setAttribute("studyno", studyNo);
-      request.setAttribute("pageTitle", "자유 게시판 등록");
-      request.setAttribute("contentUrl", "/myStudy/freeBoard/FreeBoardAddForm.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    return mv;
   }
 }

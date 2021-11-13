@@ -16,7 +16,7 @@ public class MyStudyUpdateFormController {
   @Autowired
   StudyDao studyDao;
 
-  @GetMapping("/study/updateform")
+  @GetMapping("/mystudy/updateform")
   public ModelAndView updateform(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
 

@@ -3,10 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>등록 | 스터디 찾기</title>
 <style>
 * {
-    font-size:14px;
+  font-size:14px;
 }
 .all-content {
   width: 100%;

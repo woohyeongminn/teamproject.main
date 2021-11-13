@@ -74,8 +74,6 @@
   }
   </style>
   
-</head>
-
 <section>
 <fieldset>
 

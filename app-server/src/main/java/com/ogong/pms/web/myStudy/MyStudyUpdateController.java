@@ -16,7 +16,7 @@ public class MyStudyUpdateController {
   @Autowired
   StudyDao studyDao;
 
-  @PostMapping("/study/update")
+  @PostMapping("/mystudy/update")
   public ModelAndView update(Study study) throws Exception {
     Study oldStudy = studyDao.findByNo(study.getStudyNo());
 

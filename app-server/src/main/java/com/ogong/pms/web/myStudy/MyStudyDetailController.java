@@ -1,46 +1,31 @@
 package com.ogong.pms.web.myStudy;
 
-import java.io.IOException;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/mystudy/detail")
-public class MyStudyDetailController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class MyStudyDetailController {
 
-  StudyDao studyDao;
+  @Autowired StudyDao studyDao;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-  }
+  @GetMapping("/mystudy/detail")
+  public ModelAndView mystudyDetail(HttpSession session, int studyNo) throws Exception {
 
-  @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    Member loginUser = (Member) session.getAttribute("loginUser");
 
-    try {
-      Member loginUser = (Member) request.getSession().getAttribute("loginUser");
-      int studyNo = Integer.parseInt(request.getParameter("studyNo"));
+    Study myStudy = studyDao.findByMyNo(studyNo, loginUser.getPerNo());
 
-      Study myStudy = studyDao.findByMyNo(studyNo, loginUser.getPerNo());
-
-      request.setAttribute("study", myStudy);
-      request.getRequestDispatcher("/myStudy/MyStudyDetail.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("study", myStudy);
+    mv.addObject("pageTitle", "🗃 내 스터디 상세");
+    mv.addObject("contentUrl", "myStudy/MyStudyDetail.jsp");
+    mv.setViewName("template1");
+    return mv;
   }
 }

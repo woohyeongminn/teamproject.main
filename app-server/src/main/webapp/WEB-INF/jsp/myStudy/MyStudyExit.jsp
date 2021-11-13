@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 내 스터디</title>
 <style>
-*{
+* {
   font-size:14px;
 }
 label {
@@ -18,13 +17,12 @@ label {
 </style>
 </head>
 <body>
-	<h1>🖊 내 스터디 탈퇴</h1>
-	<c:if test="study.owner.perNo eq loginUser.perNo">
+	<c:if test="${study.owner.perNo eq loginUser.perNo}">
 		<c:choose>
-			<c:when test="study.countMember > 0">
+			<c:when test="${study.countMember > 0}">
         구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.
       </c:when>
-			<c:when test="study.watingCountMember > 0">
+			<c:when test="${study.watingCountMember > 0}">
         승인 대기 중인 구성원이 없어야 스터디 탈퇴가 가능합니다.
       </c:when>
 		</c:choose>
@@ -32,7 +30,7 @@ label {
 	<span>스터디 탈퇴가 완료되었습니다.</span>
 	<br>
 	<button>
-		<a href='../mystudy/list'>목록</a>
+		<a href='${contextPath}/app/mystudy/list'>목록</a>
 	</button>
 </body>
 </html>

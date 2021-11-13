@@ -3,10 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 스터디 찾기</title>
 </head>
 <body>
-	<h1>📖 북마크 추가</h1>
 	<table border='1'>
 		<tbody>
 			<c:forEach items="${study.members}" var="joinMember">

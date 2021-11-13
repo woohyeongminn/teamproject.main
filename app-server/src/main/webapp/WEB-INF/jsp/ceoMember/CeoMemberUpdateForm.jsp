@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
-<!DOCTYPE html>
 <meta charset="UTF-8">
 <script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
 <style>
@@ -124,11 +123,6 @@ ul{list-style:none;}
   vertical-align: middle;
 }
 
- .profile .profile-header .profile-img {
-    margin-top: 8px;
-    margin-left: 3px;
-}
-
  .btn_wrap {
   max-width: 420px;
   margin: 20px auto 0;
@@ -219,7 +213,7 @@ function checkValue() {
      <div class="profile">
       <div class="profile-header">
         <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
-          <img id="f-photo-image" style="margin-top: 8px;" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
+          <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_110x110.jpg">
         </a>
        </div>
         
@@ -300,8 +294,8 @@ function checkValue() {
     </ul>
    </div> 
   </div>
+</body>
  <script type="text/javascript" src="../js/update.js"></script>
  <script>
   location.href = "#tab1";
  </script>
-</body>

@@ -140,3 +140,4 @@ function checkValue() {
 	  <input type="button" class="class="btn btn-outline-dark">취소</input>
 	 </form>
 	 </div>
+</body>

@@ -16,7 +16,7 @@ public class MyStudyDeleteController {
   @Autowired
   StudyDao studyDao;
 
-  @GetMapping("/study/delete")
+  @GetMapping("/mystudy/delete")
   public ModelAndView delete(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
