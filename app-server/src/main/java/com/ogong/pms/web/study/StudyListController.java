@@ -30,12 +30,14 @@ public class StudyListController {
     // }
 
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("studyList", studyList);
     mv.addObject("studyIngList", studyIngList);
     mv.addObject("studyEndList", studyEndList);
     mv.addObject("pageTitle", "스터디 목록");
     mv.addObject("contentUrl", "study/StudyList.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
 }

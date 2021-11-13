@@ -23,10 +23,12 @@ public class StudyDetailController {
     }
 
     ModelAndView mv = new ModelAndView();
+
     mv.addObject("study", study);
     mv.addObject("pageTitle", "스터디 상세");
     mv.addObject("contentUrl", "study/StudyDetail.jsp");
     mv.setViewName("template1");
+
     return mv;
   }
 }

@@ -1,7 +1,6 @@
 package com.ogong.pms.web.study;
 
 import java.util.List;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,9 @@ public class StudySearchController {
   StudyDao studyDao;
 
   @GetMapping("/study/search")
-  public ModelAndView search(String where, String keyword, HttpSession session) throws Exception {
+  public ModelAndView search(String where, String keyword) throws Exception {
     // String where = (String) session.getAttribute("where");
+    // String keyword = (String) session.getAttribute("keyword");
 
     if (where.equals("1")) {
       where = "ss.name";
@@ -28,8 +28,6 @@ public class StudySearchController {
     } else if (where.equals("3")) {
       where = "s.area";
     }
-
-    // String keyword = (String) session.getAttribute("keyword");
 
     List<Study> studyList = studyDao.findByKeyword(where, keyword);
 
@@ -52,7 +50,9 @@ public class StudySearchController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("studyList", studyList);
-    mv.setViewName("redirect:list");
+    mv.addObject("pageTitle", "스터디 목록");
+    mv.addObject("contentUrl", "study/StudyList.jsp");
+    mv.setViewName("template1");
 
     return mv;
   }
