@@ -1,59 +1,78 @@
 package com.ogong.pms.web.myStudy.freeBoard;
 
-import java.io.IOException;
-import javax.servlet.ServletConfig;
+import java.util.UUID;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import javax.servlet.http.Part;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.domain.FreeBoard;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
-@MultipartConfig(maxFileSize = 1024 * 1024 * 10)
-@WebServlet("/freeboard/update")
-public class FreeBoardUpdateController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class FreeBoardUpdateController {
 
-  // MemberDao memberDao;
+  @Autowired
+  SqlSessionFactory sqlSessionFactory;
+  @Autowired
   FreeBoardDao freeBoardDao;
-  // PromptFreeBoard promptFreeBoard;
-  SqlSession sqlSession;
+  @Autowired
+  ServletContext sc;
+  // @Autowired PromptFreeBoard promptFreeBoard;
 
-  @Override
-  public void init() {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
-  }
+  @PostMapping("/freeboard/update")
+  public ModelAndView update(FreeBoard freeBoard, Part photoFile) throws Exception {
+    // int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
-  @Override
-  public void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    FreeBoard oldFreeBoard =
+        freeBoardDao.findByNo(freeBoard.getFreeBoardNo(), freeBoard.getStudyNo());
 
-    try {
-      // int perNo = Integer.parseInt(request.getParameter("perNo"));
-      int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
-
-      FreeBoard freeBoard = freeBoardDao.findByNo(freeBoardNo, studyNo);
-
-      freeBoard.setFreeBoardTitle(request.getParameter("title"));
-      freeBoard.setFreeBoardContent(request.getParameter("content"));
-
-      freeBoardDao.update(freeBoard, studyNo);
-      sqlSession.commit();
-
-      response.sendRedirect("detail?studyno=" + studyNo + "&freeboardno=" + freeBoardNo);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      sqlSession.rollback();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    if (oldFreeBoard == null) {
+      throw new Exception("해당 번호의 자유 게시판이 없습니다.");
     }
+
+    // freeBoard.setFreeBoardTitle(request.getParameter("title"));
+    // freeBoard.setFreeBoardContent(request.getParameter("content"));
+    freeBoard.setFreeBoardFile(oldFreeBoard.getFreeBoardFile());
+
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/freeboard") + "/" + filename);
+      freeBoard.setFreeBoardFile(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(20, 20)
+      .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_20x20";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(100, 100)
+      .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
+
+      freeBoard.setFreeBoardFile(filename);
+    }
+
+    freeBoardDao.update(freeBoard, freeBoard.getStudyNo());
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.setViewName("redirect:detail?studyno=" + freeBoard.getStudyNo() + "&freeboardno="
+        + freeBoard.getFreeBoardNo());
+
+    return mv;
   }
 }

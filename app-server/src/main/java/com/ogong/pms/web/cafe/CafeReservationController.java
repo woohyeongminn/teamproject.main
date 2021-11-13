@@ -199,7 +199,7 @@ public class CafeReservationController {
       int totalPrice,
       String selectedDate,
       int people,
-      HttpSession session) throws Exception {
+      HttpSession session) {
 
     Member member = (Member) session.getAttribute("loginUser");
 
@@ -214,10 +214,20 @@ public class CafeReservationController {
     reservation.setRoomNo(roomNo);
     reservation.setReservationStatus(1); // 1 : 예약완료
 
-    cafeReservationDao.insertReservation(reservation);
-    sqlSessionFactory.openSession().commit();
+    try {
+      cafeReservationDao.insertReservation(reservation);
+      sqlSessionFactory.openSession().commit();
+    } catch (Exception e) {
+      sqlSessionFactory.openSession().rollback();
+    }
 
-    List<Map<String,String>> myStudy = studyDao.findAllByMyNo(member.getPerNo());
+    List<Map<String, String>> myStudy = null;
+
+    try {
+      myStudy = studyDao.findAllByMyNo(member.getPerNo());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     ModelAndView mv = new ModelAndView();
 
