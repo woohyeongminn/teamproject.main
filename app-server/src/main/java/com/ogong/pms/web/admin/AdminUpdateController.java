@@ -1,57 +1,35 @@
 package com.ogong.pms.web.admin;
 
-import java.io.IOException;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AdminDao;
 import com.ogong.pms.domain.Admin;
 
-@WebServlet("/admin/update")
-public class AdminUpdateController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class AdminUpdateController {
 
-  AdminDao adminDao;
-  SqlSession sqlSession;
+  @Autowired AdminDao adminDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired ServletContext sc;
 
-  @Override
-  public void init() throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    adminDao = (AdminDao) 웹애플리케이션공용저장소.getAttribute("adminDao");
-  }
+  @PostMapping("/admin/update")
+  public ModelAndView update(Admin admin) throws Exception {
 
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    Admin adminInfo = adminDao.findByAdminNo(admin.getMasterNo());
 
-    try {
-      Admin loginAdmin = (Admin) request.getSession().getAttribute("loginAdmin");
-      Admin admin = adminDao.findByAdminNo(loginAdmin.getMasterNo());
+    if (adminInfo == null) {
+      throw new Exception(" >> 다시 선택해 주세요.");
+    } 
 
-      if (admin == null) {
-        throw new Exception(" >> 다시 선택해 주세요.");
-      } 
+    adminDao.updateAdmin(admin);
+    sqlSessionFactory.openSession().commit();
 
-      admin.setMasterNickname(request.getParameter("nickName"));
-      admin.setMasterEmail(request.getParameter("email"));
-      admin.setMasterPassword(request.getParameter("password"));
-
-      adminDao.updateNickname(admin);
-      adminDao.updateEmail(admin);
-      adminDao.updatePassword(admin);
-
-      sqlSession.commit();
-
-      response.sendRedirect("logout");
-
-    } catch (Exception e) {
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:logout");
+    return mv;
   }
 }

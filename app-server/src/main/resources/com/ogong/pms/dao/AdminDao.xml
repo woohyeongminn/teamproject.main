@@ -21,8 +21,25 @@
     from
       admin
     </sql>
+    
+  <update id="updateAdmin" parameterType="admin">
+    update admin
+    <set>
+      <if test="masterNickname != null">
+      nickname=#{masterNickname},
+      </if>
+      <if test="masterEmail != null">
+      email=#{masterEmail},
+      </if>
+      <if test="masterPassword != null">
+      password=password(#{masterPassword})
+      </if>
+    </set>
+    where
+      admin_no=#{masterNo}
+  </update>
   
-  <update id="updateNickname" parameterType="admin">
+  <!-- <update id="updateNickname" parameterType="admin">
     update admin set
       nickname=#{masterNickname}
     where admin_no=#{masterNo}
@@ -38,7 +55,7 @@
     update admin set
       password=password(#{masterPassword})
     where admin_no=#{masterNo}
-  </update>
+  </update> -->
   
   <select id="findByAdminNo" resultMap="AdminMap" parameterType="int">
     <include refid="select1"/>
