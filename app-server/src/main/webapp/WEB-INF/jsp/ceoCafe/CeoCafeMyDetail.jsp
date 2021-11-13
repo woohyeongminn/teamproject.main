@@ -22,7 +22,7 @@
 }
 
  .all-content {
-  width: 800px;
+  width: 1000px;
   margin: 0 auto;
   height: 800px;
 }
@@ -31,9 +31,15 @@ ul {
   list-style:none;
 }
 
+.cafe-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .cafe-top {
-  width: 100%;
-  height: 300px;
+  width: 50%;
+   margin: 8px 8px 0 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -60,61 +66,32 @@ ul {
     }
 
 
-#content {
-  display: block;
-  width: 100%;
-  padding: 10px 10px 0 10px;
-}
-  
-.cafe-form {  
-  text-align: left;
-}
-  
-.cafe-form > label {
-	width: 120px;
-	font-weight: bold;
-	padding: 5px 0;
-}
-
-.cafe-form > span {
-	    display: inline-block;
-    width: 122px;
-	padding: 5px 0;
-}
-
-#c-image {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-
 .cafe-bottom {
-  width: 100%;
-  text-align: left;
-  padding: 5px 10px;
+      width: 50%;
+    text-align: left;
+    padding: 5px 0;
+    margin-top: 30px;
+    margin-left: 15px;
 }
 
-.cafe-bottom > label {
-	 width: 15%;
-	 font-weight: bold;
-	 padding: 5px 0;
+.cafe-bottom label {
+       width: 135px;
+   font-weight: bold;
+   padding: 5px 0;
 }
 
-.cafe-bottom > span {
-	width: 80%;
-	padding: 5px 0;
+.cafe-bottom span {
+  width: 80%;
+  padding: 5px 0;
 }
 
 .label-wrap {
   width: 100%;
   height: fit-content;
-  display: flex;
-  flex-direction: row;
-  
 }
 
 .label-wrap > label {
-   width: 15%;
+   width: 135px;
    font-weight: bold;
    padding: 5px 0;
 }
@@ -128,7 +105,7 @@ ul {
 
 .cafe-bottom-review {
   width: 100%;
-  padding: 0 10px 30px 10px;
+  padding: 0 10px 30px 0px;
   text-align: left;
 }
  
@@ -146,10 +123,6 @@ ul {
 
 #c-review-content {
   margin: 0;
-}
-
-#c-grade {
-
 }
   
 #c-review {
@@ -194,36 +167,35 @@ button {
 	</c:when>
 	
 	<c:otherwise>
-	<div class = "cafe-top">
-	 <h4>[${cafe.name}]</h4>
-		<div class="slide">
-		    <ul>
-		      <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
-		    <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
-		    <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
-		       <%-- <li><img src="../upload/cafe/${cafe.cafeImgs[2].name}.jpg" style="width:100%"></li> --%>
-		  </ul>
+	<div class="cafe-wrap">
+		<div class="cafe-top">
+		 <h4 style="text-align: center;">[${cafe.name}]</h4>
+			<div class="slide">
+			    <ul>
+			      <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
+				    <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
+				    <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
+			       <%-- <li><img src="../upload/cafe/${cafe.cafeImgs[2].name}.jpg" style="width:100%"></li> --%>
+			  </ul>
+			</div>
 		</div>
-	</div>
-	
-	<!-- 카페 상세 글 부분 -->      
-	<div id='content'>
-	  <form action='updateform' class="cafe-form" method='post' enctype="multipart/form-data">
-	  <input id='c-no' type='hidden' value='${cafe.no}'>
-	 <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
-	 <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
-	 <div class="label-wrap"><label for='f-location'>주소</label> <span style="height: fit-content;">${cafe.location}</span></div>
+		
+		<!-- 카페 상세 글 부분 -->      
+		 <div class="cafe-bottom">
+		<form action='updateform' method='post' enctype="multipart/form-data">
+			 <input id='c-no' type='hidden' value='${cafe.no}'>
+			 <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
+			 <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
+			 <div class="label-wrap"><label for='f-location'>주소</label> <span style="height: fit-content;">${cafe.location}</span></div>
+			 <div class="label-wrap"><label for='f-info'>소개글</label><span style="height: fit-content;">${cafe.info}</span></div>
+			 <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
+			 <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
+			 <label for='f-holiday'>이번주 휴무일</label><span>${cafe.holiday}</span><br>
+			 <label for='f-viewCount'>상태</label><span>${cafeStatus}</span><br>
+			 <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span>
 	  </form>
+		 </div>
 	</div>
-	<div class="cafe-bottom">
-	  <div class="label-wrap"><label for='f-info'>소개글</label><span style="height: fit-content;">${cafe.info}</span></div>
-	 <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
-	 <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
-	 <label for='f-holiday'>이번주 휴무일</label><span>${cafe.holiday}</span><br>
-	 <label for='f-viewCount'>상태</label><span>${cafeStatus}</span><br>
-	 <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span>
-	</div>
-	
 	<!-- 리뷰 부분 감싸는 박스 -->
 	<div class="cafe-bottom-review">
 	
