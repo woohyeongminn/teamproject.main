@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 내 스터디</title>
 <style>
 * {
     font-size:14px;
@@ -23,22 +22,22 @@
 
   var form = document.myStudyInfo;
 
-  if (!form.studytitle.value) {
+  if (!form.studyTitle.value) {
     alert("제목을 입력하세요.");
     return false;
   }
 
-  if (!form.numberofpeple.value) {
+  if (!form.numberOfPeple.value) {
     alert("최대 인원수를 입력하세요.");
     return false;
   }
 
-  if (form.numberofpeple.value == 0 || form.numberofpeple.value > 30) {
-    alert("인원수는 1명 이상 30명 이하로만 입력 가능합니다.");
+  if (form.numberOfPeple.value < 2 && form.numberOfPeple.value > 30) {
+    alert("인원수는 2명 이상 30명 이하로만 입력 가능합니다.");
     return false;
   }
 
-  if (!form.faceno.value) {
+  if (!form.faceNo.value) {
     alert("대면 상태를 선택하세요.");
     return false;
   }
@@ -52,18 +51,19 @@
 </head>
 <body>
 <div class="all-content">
-  <form action='add' method='post' name='myStudyInfo' onsubmit="return checkValue()">
+  <form action='update' method='post' name='myStudyInfo' onsubmit="return checkValue()">
+    <input type="hidden" name="studyNo" value="${study.studyNo}">
     <div id='content'>
       <br>
     <div class="mb-3 row">
-    <label for='f-studytitle'>제목</label>
-    <input id='f-studytitle' type='text' name='studytitle' class="form-control">
+    <label for='f-studyTitle'>제목</label>
+    <input id='f-studyTitle' type='text' name='studyTitle' class="form-control">
     </div>
 
   <div class="mb-3 row">
-    <label for='f-numberofpeple'>최대 인원수</label>
-    <select name="numberofpeple">
-    <option value="2" name="numberofpeple" selected>2</option>
+    <label for='f-numberOfPeple'>최대 인원수</label>
+    <select name="f-numberOfPeple">
+    <option value="2" name="numberOfPeple" selected>2</option>
           <option value="3" selected>3</option>
           <option value="4" selected>4</option>
           <option value="5" selected>5</option>
@@ -94,6 +94,15 @@
           <option value="30" selected>30</option>
     </select>
     </div>
+
+  <div class="mb-3 row">
+  <label for='f-faceNo'>대면 상태</label>
+  <select name="faceNo">
+  <option value="1" name="faceNo" selected>대면</option>
+        <option value="2" selected>비대면</option>
+        <option value="3" selected>대면/비대면</option>
+  </select>
+  </div>
 
     <div class="mb-3 row">
     <label for='f-introduction'>소개글</label>

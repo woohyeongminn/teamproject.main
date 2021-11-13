@@ -9,9 +9,6 @@
   * {
   font-size: 14px;
   }
-/*   #all {
-  margin: 80px 0 0 0;
-  } */
    .all-content {
   width: 65%;
   margin: 0 auto;
@@ -167,42 +164,6 @@ button {
  div#button_wrap {
     margin: 20px 0;
 }
-/* .btn_wrap .btn {
-  margin: 0 7px;
-  padding: 5px 10px;
-  height: auto;
-  line-height: inherit;
-} */
-  /* #aside {
-     width: 120px;
-     height: 200px;
-     float: left;
-     background-color: lightyellow;
-     display: table;
-  } */
-  /* #c-image {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-  } */
-  /* #content {
-     margin-left: 130px;
-  } */
-  /* label {
-    display: inline-block;
-    margin-right: 5px;
-    width: 130px;
-  } */
-  /* #c-review {
-    width: 427px;
-    background-color: whitesmoke;
-    height: 80px;
-    margin-bottom: 10px;
-  }
-  #c-grade {
-     margin-left: 41px;
-     vertical-align: 4px;
-  } */
   button[type=submit] {
     font-size: 14px;
     line-height: 14px;
@@ -237,34 +198,18 @@ display: none;
 <div class="all-content"> 
   <input id='c-no' type='hidden' value='${cafe.no}'><br>
 
-  <!-- <div id='aside'>
-    <span id='c-image'>대표이미지</span>
-  </div> -->
-  
   <div class = "cafe-top">
       <h4>[${cafe.name}]</h4>
       
         <div class="slide">
           <ul>
-            <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
-            <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
-            <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
+            <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
+            <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
+            <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
           </ul>
         </div>
        </div>
-  
-  <%-- <div id='content'>
-    <label for='f-bossName'>대표자</label><span id='deleted'>${cafe.ceoMember.ceoBossName}</span><br>
-    <label for='f-licenseNo'>사업자 등록 번호</label><span id='deleted'>${cafe.ceoMember.ceoLicenseNo}</span><br>    
-    <label for='f-info'>소개글</label>${cafe.info}<br>
-    <label for='f-location'>주소</label>${cafe.location}<br>
-    <label for='f-tel'>전화번호</label>${cafe.phone}<br>
-    <label for='f-openTime'>오픈 시간</label>${cafe.openTime}<br>
-    <label for='f-closeTime'>마감 시간</label>${cafe.closeTime}<br>
-    <label for='f-holiday'>이번 주 휴무일</label>${cafe.holiday}<br>
-    <label for='f-viewCount'>조회수</label>${cafe.viewCount}<br>
-    <label for='f-review'>리뷰 평점</label>⭐${cafe.avgReview}(${cafe.countReview})<br> --%>
-    
+
     <!-- 카페 상세 글 부분 -->      
       <div id='content'>
         <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
@@ -297,25 +242,6 @@ display: none;
         <i class="far fa-comments" style="color:#bbb; font-size: large;"></i>
         <hr style="border-top: 4px double #bbb; text-align: center; display: inline-block; width: 48%;  margin: 6px 0">
     
-<%-- <c:if test='${not empty reviewList}'>
-  <c:forEach items="${reviewList}" var="review">
-    <div id='c-review'>
-      <span>${review.member.perNickname}</span> 
-      <span id='c-grade'>
-        <c:set var="grade" value="${review.grade}" /> 
-          <% 
-          int grade = (int) pageContext.getAttribute("grade");
-          String star = CafeHandlerHelper.getReviewGradeStatusLabel(grade);
-          pageContext.setAttribute("star", star);
-          %>
-      ${star}(${review.grade}/5)
-      </span>
-      <span id='c-grade'>${review.registeredDate}</span>
-      <br><p id='c-review-content'>${review.content}</p><br>
-    </div>
-  </c:forEach>
-</c:if> --%>
-
 <!-- 리뷰 보여지는 부분 -->
        <c:if test='${not empty reviewList}'>
         <div class = "review-wrap">
@@ -343,10 +269,40 @@ display: none;
        </div>
 
   <div id='button_wrap'>
-	  <button type="submit" class="btn btn-outline-dark"><a href="/ogong/admin/cafeList">목록</a></button>
-	  <button id="agree" type="submit" class="btn btn-outline-dark"><a href="/ogong/admin/cafeControl?no=${cafe.no}">승인</a></button>
-	  <button id="deleted" type="submit" class="btn btn-outline-dark"><a href="/ogong/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
-	  <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='/ogong/admin/logout'>로그아웃</a></button> 
+	  <button type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeList">목록</a></button>
+	  
+	  <c:if test="${cafe.cafeStatus != 4}">
+	  <button id="agree" type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeControl?no=${cafe.no}">승인</a></button>
+	  </c:if>
+	  
+	  <c:if test="${cafe.cafeStatus == 1}">
+	  <button type="submit" class="btn btn-outline-dark" onclick="disagree();">거절</button>
+	  </c:if>
+	  
+	  <button id="deleted" type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
+	  <button type="submit" class="btn btn-outline-dark" value="로그아웃" ><a href='${contextPath}/app/admin/logout'>로그아웃</a></button> 
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+function disagree(){
+  Swal.fire({
+    title: '승인을 거절하시겠습니까?',
+    text: "거절하시려면 거절 버튼을 눌러 주세요.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '거절',
+    cancelButtonText: '취소',
+    timer: 10000
+    }).then((result) => {
+      if (result.value) {
+        location.href = "${contextPath}/app/admin/cafeList";
+        }
+      })
+    }
+
+</script>
