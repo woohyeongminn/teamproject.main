@@ -213,10 +213,11 @@ bottom: 20px;
       <a class="navbar-brand" href="#first">
       <i class="fas fa-graduation-cap fa-2x"></i></a>
     </nav>
-
+<!-- 
 <p id="music" align="center"><iframe width="20" height="20" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/131362507&amp;color=%2397cbff&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true" frameborder="no" scrolling="no" allow="autoplay"></iframe></p>
 
     <jsp:include page="footer.jsp"/>
+     -->
     
 </body>
 </html>

@@ -16,7 +16,7 @@
 스터디룸<br>
 <div class="btn-group-vertical" role="group">
   <c:forEach items="${roomList}" var="studyRoom">
-    <input type="radio" class="btn-check" name="roomName" id="${studyRoom.roomName}" value="${studyRoom.roomNo}" autocomplete="off">
+    <input type="radio" class="btn-check" name="roomNo" id="${studyRoom.roomName}" value="${studyRoom.roomNo}" autocomplete="off">
     <label class="btn btn-outline-primary" for="${studyRoom.roomName}">${studyRoom.roomName}</label>
 		<input type="hidden" name="cafeNo" value="${studyRoom.cafe.no}">
   </c:forEach>

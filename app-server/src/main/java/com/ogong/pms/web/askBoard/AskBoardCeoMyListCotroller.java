@@ -1,4 +1,4 @@
-package com.ogong.pms.servlet.askBoard;
+package com.ogong.pms.web.askBoard;
 
 import java.io.IOException;
 import java.util.Collection;
