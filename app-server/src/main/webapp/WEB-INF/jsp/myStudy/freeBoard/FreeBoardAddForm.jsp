@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>등록 | 자유 게시판</title>
 <style>
 * {
     font-size:16px;

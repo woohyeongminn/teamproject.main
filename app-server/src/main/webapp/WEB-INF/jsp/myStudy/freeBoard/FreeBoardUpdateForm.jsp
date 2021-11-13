@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상세 | 자유 게시판</title>
 <style>
   * {
     font-size:14px;
@@ -25,7 +24,6 @@
 </style>
 </head>
 <body>
-  <h5>🪧 자유게시판 수정</h5>
   <form action="update" method='post' enctype="multipart/form-data">
     <input type ='hidden' name='freeboardno' value='${freeboardno}'>
     <input type ='hidden' name='studyno' value='${studyno}'>

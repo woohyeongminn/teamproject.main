@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 내 스터디</title>
 <style>
 *{
   font-size:14px;
@@ -18,7 +17,6 @@ label {
 </style>
 </head>
 <body>
-	<h1>🖊 내 스터디 탈퇴</h1>
 	<c:if test="study.owner.perNo eq loginUser.perNo">
 		<c:choose>
 			<c:when test="study.countMember > 0">

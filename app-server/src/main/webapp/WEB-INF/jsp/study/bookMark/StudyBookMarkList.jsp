@@ -4,15 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>목록 | 내 북마크</title>
 <style>
-	*{
+	* {
 	  font-size:14px;
 	}
 </style>
 </head>
 <body>
-	<h3>🌟 내 북마크 목록</h3>
 	<input type="hidden" name="loginUser" value="${loginUser.perNo}">
 	<table class="table table-hover">
 		<thead>

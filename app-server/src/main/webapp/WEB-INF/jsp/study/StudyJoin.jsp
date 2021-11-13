@@ -6,9 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>참여 신청 | 스터디 찾기</title>
 <style>
-  *{
+  * {
     font-size:14px;
   }
 </style>

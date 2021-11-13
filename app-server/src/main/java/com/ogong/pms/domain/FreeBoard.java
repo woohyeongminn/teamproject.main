@@ -15,7 +15,8 @@ public class FreeBoard {
   private Date freeBoardRegisteredDate;     //글 작성일
 
   private int countFile;       // 첨부파일 수
-  private List<FreeBoardFile> freeBoardFile;  // 첨부파일
+  private List<FreeBoardFile> freeBoardFiles;  // 첨부파일
+  private String freeBoardFile;  // 첨부파일
 
   private int countComment;       // 댓글 수
   private List<Comment> comment = new ArrayList<>(); //댓글
@@ -28,8 +29,9 @@ public class FreeBoard {
         + freeBoardTitle + ", freeBoardContent=" + freeBoardContent + ", freeBoardWriter="
         + freeBoardWriter + ", freeBoardViewcount=" + freeBoardViewcount
         + ", freeBoardRegisteredDate=" + freeBoardRegisteredDate + ", countFile=" + countFile
-        + ", freeBoardFile=" + freeBoardFile + ", countComment=" + countComment + ", comment="
-        + comment + ", countLike=" + countLike + "]";
+        + ", freeBoardFiles=" + freeBoardFiles + ", freeBoardFile=" + freeBoardFile
+        + ", countComment=" + countComment + ", comment=" + comment + ", countLike=" + countLike
+        + "]";
   }
 
   public int getStudyNo() {
@@ -96,11 +98,19 @@ public class FreeBoard {
     this.countFile = countFile;
   }
 
-  public List<FreeBoardFile> getFreeBoardFile() {
+  public List<FreeBoardFile> getFreeBoardFiles() {
+    return freeBoardFiles;
+  }
+
+  public void setFreeBoardFiles(List<FreeBoardFile> freeBoardFiles) {
+    this.freeBoardFiles = freeBoardFiles;
+  }
+
+  public String getFreeBoardFile() {
     return freeBoardFile;
   }
 
-  public void setFreeBoardFile(List<FreeBoardFile> freeBoardFile) {
+  public void setFreeBoardFile(String freeBoardFile) {
     this.freeBoardFile = freeBoardFile;
   }
 
@@ -126,19 +136,5 @@ public class FreeBoard {
 
   public void setCountLike(int countLike) {
     this.countLike = countLike;
-  }
-
-  public String getFileNames() {
-    if (this.freeBoardFile == null) {
-      return "";
-    }
-    StringBuilder names = new StringBuilder();
-    for (FreeBoardFile freeBoardFile : this.freeBoardFile) {
-      if (names.length() > 0) {
-        names.append(", ");
-      }
-      names.append(freeBoardFile.getAtcFileName());
-    }
-    return names.toString();
   }
 }

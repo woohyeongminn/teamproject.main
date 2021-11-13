@@ -4,9 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 자유 게시판</title>
 <style>
-*{
+* {
   font-size:14px;
 }
 label {
@@ -18,7 +17,6 @@ label {
 </style>
 </head>
 <body>
-	<h1>🪧 자유 게시판 상세</h1>
 		<span>번호ㅣ</span> <span>${freeBoard.freeBoardNo}</span><br> <span>제목ㅣ</span>
 		<span>${freeBoard.freeBoardTitle}</span><br> <span>작성자ㅣ</span> <span>${freeBoard.freeBoardWriter.perNickname}</span><br>
 		<span>내용ㅣ</span> <span>${freeBoard.freeBoardContent}</span><br> <span>작성일ㅣ</span>
