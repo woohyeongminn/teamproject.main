@@ -1,60 +1,64 @@
 package com.ogong.pms.web.member;
 
-import java.io.IOException;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
-@WebServlet("/member/add")
+@Controller
 public class MemberAddController extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
-  MemberDao memberDao;
-  SqlSession sqlSession;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired MemberDao memberDao;
+  @Autowired ServletContext sc;
 
-  @Override
-  public void init() throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-  }
+  @PostMapping("/member/add")
+  protected ModelAndView add(Member member) throws Exception {
 
-  // 개인
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    //    if (photoFile.getSize() > 0) {
+    //      String filename = UUID.randomUUID().toString();
+    //      photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
+    //      member.setPhoto(filename);
+    //
+    //      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //      .size(20, 20)
+    //      .outputFormat("jpg")
+    //      .crop(Positions.CENTER)
+    //      .toFiles(new Rename() {
+    //        @Override
+    //        public String apply(String name, ThumbnailParameter param) {
+    //          return name + "_20x20";
+    //        }
+    //      });
+    //
+    //      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+    //      .size(100, 100)
+    //      .outputFormat("jpg")
+    //      .crop(Positions.CENTER)
+    //      .toFiles(new Rename() {
+    //        @Override
+    //        public String apply(String name, ThumbnailParameter param) {
+    //          return name + "_100x100";
+    //        }
+    //      });
+    //    }
 
-    try {
-      Member member = new Member();
+    memberDao.insert(member);
+    sqlSessionFactory.openSession().commit();
 
-      member.setPerName(request.getParameter("name"));
-      member.setPerNickname(request.getParameter("nickname"));
-      member.setPerEmail(request.getParameter("email"));
-      member.setPerPassword(request.getParameter("password"));
-      member.setPerPhoto(request.getParameter("photo"));
-      member.setPerTel(request.getParameter("tel"));
-      member.setPerStatus(Member.PER);
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("refresh", "2;url=form");
+    mv.addObject("pageTitle", "👋환영 합니다!");
+    mv.addObject("contentUrl", "member/PerMemberAdd.jsp");
+    mv.setViewName("template1");
+    return mv;
 
-      memberDao.insert(member);
-      sqlSession.commit();
-
-      response.setHeader("Refresh", "2;url=form");
-      request.setAttribute("pageTitle", " 👋환영 합니다!");
-      request.setAttribute("contentUrl", "/member/PerMemberAdd.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      sqlSession.rollback();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
   }
 }
 

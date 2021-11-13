@@ -31,8 +31,8 @@
     
   <insert id="insert" parameterType="AdminNotice" 
           useGeneratedKeys="true" keyColumn="notice_no" keyProperty="adminNotiNo">
-    insert into notice(title,content,created_dt)
-    values(#{adminNotiTitle},#{adminNotiContent},#{adminNotiRegisteredDate})
+    insert into notice(title,content)
+    values(#{adminNotiTitle},#{adminNotiContent})
   </insert>
   
   <select id="findAll" resultMap="NoticeMap" parameterType="map">

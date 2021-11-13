@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <style>
   label {
@@ -106,9 +103,7 @@
   }
   
 </style>
-</head>
 
-<body>
 <div class="all-content">
 <b style="font-size:20px"> 기업 회원 로그인 </b>
 <br>
@@ -128,9 +123,7 @@
 	</div>
 </form>
 <div class="mb">
-	 <a href="addform">회원가입</a> |
+	 <a href="${contextPath}/app/ceomember/addform">회원가입</a> |
 	 <a href="#">비밀번호찾기</a>
 </div>
 </div>
-</body>
-</html>
