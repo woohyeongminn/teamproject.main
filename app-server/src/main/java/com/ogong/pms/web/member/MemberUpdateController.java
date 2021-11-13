@@ -1,64 +1,82 @@
 package com.ogong.pms.web.member;
 
-import java.io.IOException;
-import javax.servlet.ServletConfig;
+import java.util.UUID;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import javax.servlet.http.Part;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
-@WebServlet("/member/update")
-public class MemberUpdateController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class MemberUpdateController {
 
-  MemberDao memberDao;
-  SqlSession sqlSession;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired MemberDao memberDao;
+  @Autowired ServletContext sc;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-  }
 
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @PostMapping("/member/update")
+  protected ModelAndView update(Member member, Part photoFile/*, HttpServletResponse res*/) throws Exception {
 
-    try {
-      int no = Integer.parseInt(request.getParameter("no"));
-      Member perMember = memberDao.findByNo(no);
+    Member oldMember = memberDao.findByNo(member.getPerNo());
+    if (oldMember == null) {
+      throw new Exception("해당 번호의 회원이 없습니다.");
+    } 
 
-      if (perMember == null) {
-        throw new Exception("해당 번호의 회원이 없습니다.");
-      }
+    member.setPerPhoto(oldMember.getPerPhoto());
+    member.setPerRegisteredDate(oldMember.getPerRegisteredDate());
 
-      perMember.setPerNickname(request.getParameter("nickname"));
-      perMember.setPerName(request.getParameter("name"));
-      perMember.setPerEmail(request.getParameter("email"));
-      perMember.setPerPassword(request.getParameter("confirmPassword"));
-      perMember.setPerPhoto(request.getParameter("photo"));
-      perMember.setPerTel(request.getParameter("tel"));
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/member") + "/" + filename);
+      member.setPerPhoto(filename);
 
-      memberDao.updateName(perMember);
-      memberDao.updateNickname(perMember);
-      memberDao.updateEmail(perMember);
-      memberDao.updatePassword(perMember);
-      memberDao.updatePhoto(perMember);
-      memberDao.updateTel(perMember);
-      sqlSession.commit();
+      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+      .size(20, 20)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_20x20";
+        }
+      });
 
-      response.sendRedirect("detail?no="+ perMember.getPerNo());
+      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+      .size(100, 100)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
 
-    }catch (Exception e) {
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+      member.setPerPhoto(filename);
     }
+
+    memberDao.updateName(member);
+    memberDao.updateNickname(member);
+    memberDao.updateEmail(member);
+    memberDao.updatePassword(member);
+    memberDao.updatePhoto(member);
+    memberDao.updateTel(member);
+
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+    //mv.setViewName("redirect:detail?no="+ member.getPerNo());
+    //res.sendRedirect("detail?no"+member.getPerNo());
+    return mv;
   }
 }
 

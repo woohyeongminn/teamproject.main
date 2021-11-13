@@ -23,12 +23,12 @@
 
   var form = document.studyInfo;
 
-  if (!form.studytitle.value) {
+  if (!form.studyTitle.value) {
     alert("제목을 입력하세요.");
     return false;
   }
 
-  if (!form.subjectno.value) {
+  if (!form.subjectNo.value) {
     alert("분야를 선택하세요.");
     return false;
   }
@@ -43,17 +43,17 @@
     return false;
   }
 
-  if (!form.numberofpeple.value) {
+  if (!form.numberOfPeple.value) {
     alert("최대 인원수를 입력하세요.");
     return false;
   }
 
-  if (form.numberofpeple.value == 0 || form.numberofpeple.value > 30) {
+  if (form.numberOfPeple.value == 0 || form.numberOfPeple.value > 30) {
     alert("인원수는 1명 이상 30명 이하로만 입력 가능합니다.");
     return false;
   }
 
-  if (!form.faceno.value) {
+  if (!form.faceNo.value) {
     alert("대면 상태를 선택하세요.");
     return false;
   }
@@ -71,14 +71,14 @@
     <div id='content'>
       <br>
     <div class="mb-3 row">
-    <label for='f-studytitle'>제목</label>
-    <input id='f-studytitle' type='text' name='studytitle' class="form-control">
+    <label for='f-studyTitle'>제목</label>
+    <input id='f-studyTitle' type='text' name='studyTitle' class="form-control">
     </div>
 
   <div class="mb-3 row">
-  <label for='f-subjectno'>분야</label>
-  <select name="subjectno">
-  <option value="1" name="faceno" selected>어학</option>
+  <label for='f-subjectNo'>분야</label>
+  <select name="subjectNo">
+  <option value="1" name="subjectNo" selected>어학</option>
         <option value="2" selected>자격증</option>
         <option value="3" selected>취업</option>
         <option value="4" selected>IT</option>
@@ -93,9 +93,9 @@
   </div>
 
   <div class="mb-3 row">
-  <label for='f-numberofpeple'>최대 인원수</label>
-  <select name="numberofpeple">
-  <option value="2" name="numberofpeple" selected>2</option>
+  <label for='f-numberOfPeple'>최대 인원수</label>
+  <select name="numberOfPeple">
+  <option value="2" name="numberOfPeple" selected>2</option>
         <option value="3" selected>3</option>
         <option value="4" selected>4</option>
         <option value="5" selected>5</option>
@@ -128,9 +128,9 @@
   </div>
 
   <div class="mb-3 row">
-  <label for='f-viewCount'>대면 상태</label>
-  <select name="faceno">
-  <option value="1" name="faceno" selected>대면</option>
+  <label for='f-faceNo'>대면 상태</label>
+  <select name="faceNo">
+  <option value="1" name="faceNo" selected>대면</option>
         <option value="2" selected>비대면</option>
         <option value="3" selected>대면/비대면</option>
   </select>

@@ -34,7 +34,7 @@
 </form>
 </c:if>
 <br>
-<button type="button" class="btn btn-outline-dark"><a href="list?perNo=${perNo}">목록</a></button>
-<button type="button" class="btn btn-outline-dark"><a href="reservationList?perNo=${perNo}">내 예약내역 보기</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="list">목록</a></button>
+<button type="button" class="btn btn-outline-dark"><a href="reservationList">내 예약내역 보기</a></button>
 </body>
 </html>

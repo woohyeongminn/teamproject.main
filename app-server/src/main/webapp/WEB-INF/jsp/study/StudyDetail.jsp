@@ -4,10 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 스터디 찾기</title>
 <style>
 *{
-    font-size:14px;
+  font-size:14px;
 }
 label {
 	margin-right: 5px;
@@ -35,7 +34,7 @@ label {
       <a href='updateform?studyno=${study.studyNo}'>수정</a>
     </button>
     <button>
-       <a href='delete?studyno=${study.studyNo}'>삭제</a>
+      <a href='delete?studyno=${study.studyNo}'>삭제</a>
     </button>
     </c:when>
     <c:when test="${study.owner.perNo ne member.perNo}">

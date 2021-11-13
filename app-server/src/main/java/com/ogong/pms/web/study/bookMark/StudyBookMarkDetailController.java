@@ -1,55 +1,33 @@
 package com.ogong.pms.web.study.bookMark;
 
-import java.io.IOException;
-import javax.servlet.GenericServlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
-@WebServlet("/bookmark/detail")
-public class StudyBookMarkDetailController extends GenericServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class StudyBookMarkDetailController {
 
-  // MemberDao memberDao;
+  @Autowired
   StudyDao studyDao;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-  }
+  @GetMapping("/bookmark/detail")
+  public ModelAndView detail(int studyno) throws Exception {
+    Study study = studyDao.findByNo(studyno);
 
-  @Override
-  public void service(ServletRequest request, ServletResponse response)
-      throws ServletException, IOException {
-
-    try {
-      // int perNo = Integer.parseInt(request.getParameter("perno"));
-      // Member member = memberDao.findByNo(perNo);
-
-      int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      Study study = studyDao.findByNo(studyNo);
-
-      if (study == null) {
-        throw new Exception("해당 번호의 북마크가 없습니다.");
-      }
-
-      // request.setAttribute("member", member);
-      request.setAttribute("study", study);
-      request.setAttribute("pageTitle", "북마크 상세");
-      request.setAttribute("contentUrl", "/study/bookMark/StudyBookMarkDetail.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
+    if (study == null) {
+      throw new Exception("해당 번호의 북마크가 없습니다.");
     }
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("study", study);
+    mv.addObject("pageTitle", "북마크 상세");
+    mv.addObject("contentUrl", "study/bookMark/StudyBookMarkDetail.jsp");
+    mv.setViewName("template1");
+
+    return mv;
   }
 }

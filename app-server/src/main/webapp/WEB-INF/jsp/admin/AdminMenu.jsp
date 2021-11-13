@@ -69,9 +69,9 @@
      </button>
      <div class="dropdown-menu" role="menu" style="border-color: white;">
        <button class="dromdown-item" type="button1">
-         <a href='logout' style="color: black; text-decoration: none;">🖐 로그아웃</a></button><br>
+         <a href='${contextPath}/app/admin/logout' style="color: black; text-decoration: none;">🖐 로그아웃</a></button><br>
        <button class="dromdown-item" type="button1">
-         <a href='/ogong/admin/detail' style="color: black; text-decoration: none;">🙂 마이페이지</a></button>
+         <a href='${contextPath}/app/admin/detail' style="color: black; text-decoration: none;">🙂 마이페이지</a></button>
      </div>
    </div>
    
@@ -81,9 +81,9 @@
      </button>
      <div class="dropdown-menu" role="menu" style="border-color: white;">
        <button class="dromdown-item" type="button1">
-         <a href="/ogong/admin/permemberlist" style="color: black; text-decoration: none;">🎓 개인 회원</a></button><br>
+         <a href="${contextPath}/app/admin/permemberlist" style="color: black; text-decoration: none;">🎓 개인 회원</a></button><br>
        <button class="dromdown-item" type="button1">
-         <a href="/ogong/admin/ceomember/list" style="color: black; text-decoration: none;">👔 기업 회원</a></button>
+         <a href="${contextPath}/app/admin/ceomember/list" style="color: black; text-decoration: none;">👔 기업 회원</a></button>
      </div>
    </div>
      
@@ -93,7 +93,7 @@
      </button>
      <div class="dropdown-menu" role="menu" style="border-color: white;">
        <button class="dromdown-item" type="button1">
-         <a href="study/list" style="color: black; text-decoration: none;">📚 스터디 목록</a></button><br>
+         <a href="${contextPath}/app/admin/study/list" style="color: black; text-decoration: none;">📚 스터디 목록</a></button><br>
      </div>
    </div>
    
@@ -103,9 +103,9 @@
      </button>
      <div class="dropdown-menu" role="menu" style="border-color: white;">
        <button class="dromdown-item" type="button1">
-         <a href="/ogong/admin/cafeList" style="color: black; text-decoration: none;">📝 장소 목록</a></button><br>
+         <a href="${contextPath}/app/admin/cafeList" style="color: black; text-decoration: none;">📝 장소 목록</a></button><br>
        <button class="dromdown-item" type="button1">
-         <a href="/ogong/admin/reviewList" style="color: black; text-decoration: none;">🔖 장소 리뷰</a></button>
+         <a href="${contextPath}/app/admin/reviewList" style="color: black; text-decoration: none;">🔖 장소 리뷰</a></button>
      </div>
    </div>
    
@@ -115,9 +115,9 @@
      </button>
      <div class="dropdown-menu" role="menu" style="border-color: white;">
        <button class="dromdown-item" type="button1">
-         <a href="/ogong/adminNotice/list" style="color: black; text-decoration: none;">📢 공지사항</a></button><br>
+         <a href="${contextPath}/app/adminNotice/list" style="color: black; text-decoration: none;">📢 공지사항</a></button><br>
        <button class="dromdown-item" type="button1">
-         <a href="/ogong/admin/askboardlist" style="color: black; text-decoration: none;">💬 문의사항</a></button>
+         <a href="${contextPath}/app/admin/askboardlist" style="color: black; text-decoration: none;">💬 문의사항</a></button>
      </div>
    </div>
      

@@ -88,13 +88,13 @@
   
   <tr id="blockbox">
     <th scope="row"><label for='f-title'>제목</label></th>
-    <td><input id='f-title' type='text' name='title' placeholder="제목을 입력해 주세요." autocomplete='off'></td>
+    <td><input id='f-title' type='text' name='adminNotiTitle' placeholder="제목을 입력해 주세요." autocomplete='off'></td>
     <td></td>
   </tr>
   
   <tr id="blockbox">
     <th scope="row"><label for='f-content' id="content">내용</label></th>
-    <td><textarea id='f-content' name='content' rows="20" wrap="virtual" autocomplete='off' placeholder="내용을 입력해 주세요."></textarea></td>
+    <td><textarea id='f-content' name='adminNotiContent' rows="20" wrap="virtual" autocomplete='off' placeholder="내용을 입력해 주세요."></textarea></td>
     <td></td>
   </tr>
   
