@@ -133,12 +133,6 @@ ul{list-style:none;}
   vertical-align: middle;
 }
 
- .profile .profile-header .profile-img {
-    margin-top: 8px;
-    margin-left: 3px;
-}
-
-
  .btn_wrap {
   max-width: 420px;
   margin: 20px auto 0;
@@ -173,12 +167,12 @@ ul{list-style:none;}
 			     <input type='hidden' name='ceoNo' value='${ceoMember.ceoPassword}'>
 
 				   <div class="profile">
-					   <div class="profile-header">
+					    <div class="profile-header">
 					      <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
-						        <img id="f-photo-image" style="margin-top: 8px;" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg">
+						        <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg" style="width: 110px">
 						    </a>
-			       <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
-					   </div>
+			          <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
+					    </div>
 
 					    <label for='f-name' class='form-label'>이름</label>
 			        <input id='f-name' type='text' name='ceoName' readonly value='${ceoMember.ceoName}'><br>
