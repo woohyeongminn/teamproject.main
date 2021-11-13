@@ -4,15 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>목록 | 자유 게시판</title>
 <style>
-	*{
+	* {
 	  font-size:14px;
 	}
 </style>
 </head>
 <body>
-	<h1>🪧 자유 게시판 목록</h1>
 	<table class="table table-hover">
 		<thead>
 			<tr>

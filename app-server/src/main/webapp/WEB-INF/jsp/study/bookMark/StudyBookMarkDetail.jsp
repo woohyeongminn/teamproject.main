@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상세 | 내 북마크</title>
 <style>
-*{
+* {
   font-size:14px;
 }
 label {
@@ -17,7 +16,6 @@ label {
 </style>
 </head>
 <body>
-	<h1>🌟 내 북마크 상세</h1>
 	<input type="hidden" name="loginUser" value="${loginUser.perNo}">
 	<label for='f-studyNo'>번호</label>
 	<input id='f-studyNo' type='text' name='studyno'

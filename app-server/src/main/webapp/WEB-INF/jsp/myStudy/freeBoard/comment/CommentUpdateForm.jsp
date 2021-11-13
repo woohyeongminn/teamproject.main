@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>댓글 수정 | 자유 게시판</title>
 <style>
-*{
+* {
   font-size:14px;
 }
 label {

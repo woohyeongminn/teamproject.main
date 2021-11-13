@@ -5,7 +5,7 @@
 <html>
 <head>
 <style>
-*{
+* {
   font-size:14px;
 }
 label {
