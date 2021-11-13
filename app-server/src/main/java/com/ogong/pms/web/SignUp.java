@@ -1,22 +1,20 @@
 package com.ogong.pms.web;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-@WebServlet("/signup")
-public class SignUp extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class SignUp  {
 
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+  @GetMapping("/signup")
+  protected ModelAndView signUp() {
+    ModelAndView mv = new ModelAndView();
 
-    request.setAttribute("pageTitle", "회원가입");
-    request.setAttribute("contentUrl", "signUp.jsp");
-    request.getRequestDispatcher("/template1.jsp").forward(request, response);
+    mv.addObject("pageTitle", "회원가입");
+    mv.addObject("contentUrl", "signUp.jsp");
+    mv.setViewName("template1");
+
+    return mv;
   } 
 }

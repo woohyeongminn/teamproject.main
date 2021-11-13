@@ -5,15 +5,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
 
 @Controller
-public class AuthPerMemberLoginController {
+public class PerMemberAuthController {
 
   @Autowired MemberDao memberDao;
+
+  @GetMapping("/member/form")
+  public ModelAndView perLoginForm() {
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", " 🖐 오늘의 공부 로그인 ");
+    mv.addObject("contentUrl", "member/PerMemberLoginForm.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  } 
 
   @PostMapping("/member/login")
   public ModelAndView perLogin(String email, String password, String saveEmail, HttpServletResponse response, HttpSession session) throws Exception {
@@ -36,11 +48,7 @@ public class AuthPerMemberLoginController {
     if (member != null) {
       session.setAttribute("loginUser", member);
       mv.setViewName("redirect:../index");
-      //      if (member != null && member.getPerStatus() == Member.PER) {
-      //        if (member.getActive() == Member.OUTUSER) {
-      //          throw new Exception ("<p>회원가입을 진행해 주세요.</p>");
-      //        }
-      //      }
+
 
     } else {
       mv.addObject("pageTitle", "해당 계정이 존재하지 않습니다.");
@@ -49,4 +57,13 @@ public class AuthPerMemberLoginController {
     }
     return mv;
   } 
+
+  @GetMapping("/member/logout")
+  public ModelAndView perLogout(HttpSession session) throws Exception {
+
+    session.invalidate();
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("redirect:../index");
+    return mv;
+  }
 }
