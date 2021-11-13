@@ -1,56 +1,32 @@
 package com.ogong.pms.web.myStudy.freeBoard;
 
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.FreeBoardDao;
-import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.FreeBoard;
 
-@WebServlet("/freeboard/list")
-public class FreeBoardListController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class FreeBoardListController {
 
-  // MemberDao memberDao;
-  StudyDao studyDao;
+  @Autowired
   FreeBoardDao freeBoardDao;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    // memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    freeBoardDao = (FreeBoardDao) 웹애플리케이션공용저장소.getAttribute("freeBoardDao");
-  }
+  @GetMapping("/freeboard/list")
+  public ModelAndView list(int studyno) throws Exception {
+    // int studyNo = Integer.parseInt(request.getParameter("studyno"));
 
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyno);
 
-    try {
-      // int perNo = Integer.parseInt(request.getParameter("perNo"));
-      // Member member = memberDao.findByNo(perNo);
+    ModelAndView mv = new ModelAndView();
 
-      int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyNo);
+    mv.addObject("freeBoardList", freeBoardList);
+    mv.addObject("pageTitle", "자유 게시판 목록");
+    mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardList.jsp");
+    mv.setViewName("template1");
 
-      // request.setAttribute("member", member);
-      request.setAttribute("studyno", studyNo);
-      request.setAttribute("freeBoardList", freeBoardList);
-      request.setAttribute("pageTitle", "자유 게시판 목록");
-      request.setAttribute("contentUrl", "/myStudy/freeBoard/FreeBoardList.jsp");
-      request.getRequestDispatcher("/template1.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    return mv;
   }
 }
