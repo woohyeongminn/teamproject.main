@@ -11,6 +11,10 @@
   margin: 0 auto; 
   position:relative; 
   }
+   p#titlename {
+   font-weight: bolder;
+   font-size: 20px;
+  }
   #countProgressing {
   color: white;
   outline: none;
@@ -20,6 +24,9 @@
   color: black;
   outline: none;
   border: white;
+  width: 300px;
+  text-align: center;
+  font-size: 16px;
   }
   thead, tbody, tfoot, tr, td, th {
     border-color: inherit;
@@ -27,12 +34,15 @@
     border-width: 0;
     text-align: center;
   }
+  td#box_two {
+    border-color: white;
+  }
+  td#boxsize {
+    width: 300px;
+    border-color: white;
+  }
   td#textbox {
     text-overflow: ellipsis;
-  }
-  p#titlename {
-    font-weight: bolder;
-    font-size: 20px;
   }
   button {
   font-size: 14px;
@@ -67,13 +77,7 @@
 			</thead>
 		<tbody>
 		
-		<c:if test='${empty countProgressing}'>
-      <input id="not_countProgressing" type="text" name="countProgressing" value="[등록된 To-Do List가 없습니다.]" readonly>
-    </c:if>
-    
-    <c:if test='${not empty countProgressing}'>
-      <input id="countProgressing" type="text" name="countProgressing" value="[등록된 To-Do List]" readonly>
-		
+		<tr>
 			<c:forEach items="${countProgressing}" var="todo">
 				<tr>
 					<td>${todo.todocomplete}</td>
@@ -84,7 +88,18 @@
 					<td>${todo.todoDate}</td>
 				</tr>
 			</c:forEach>
-		</c:if>
+		
+		<td id="box_two"></td>
+    <td id="box_two"></td>
+    <td id="boxsize">
+      <c:if test='${empty countProgressing}'>
+        <input id="not_countProgressing" type="text" name="countProgressing" value="[등록된 To-Do List가 없습니다.]" readonly>
+      </c:if>
+    </td>
+    <td id="box_two"></td>
+    <td id="box_two"></td>
+    <td id="box_two"></td>
+		</tr>
 		
 		</tbody>
 	</table>
