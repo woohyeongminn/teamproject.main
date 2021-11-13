@@ -49,7 +49,7 @@
   }
 
   if (form.numberOfPeple.value < 2 && form.numberOfPeple.value > 30) {
-    alert("인원수는 1명 이상 30명 이하로만 입력 가능합니다.");
+    alert("인원수는 2명 이상 30명 이하로만 입력 가능합니다.");
     return false;
   }
 

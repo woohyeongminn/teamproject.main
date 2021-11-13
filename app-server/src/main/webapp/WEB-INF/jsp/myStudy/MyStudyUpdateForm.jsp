@@ -52,6 +52,7 @@
 <body>
 <div class="all-content">
   <form action='update' method='post' name='myStudyInfo' onsubmit="return checkValue()">
+    <input type="hidden" name="studyNo" value="${study.studyNo}">
     <div id='content'>
       <br>
     <div class="mb-3 row">
@@ -93,6 +94,15 @@
           <option value="30" selected>30</option>
     </select>
     </div>
+
+  <div class="mb-3 row">
+  <label for='f-faceNo'>대면 상태</label>
+  <select name="faceNo">
+  <option value="1" name="faceNo" selected>대면</option>
+        <option value="2" selected>비대면</option>
+        <option value="3" selected>대면/비대면</option>
+  </select>
+  </div>
 
     <div class="mb-3 row">
     <label for='f-introduction'>소개글</label>
