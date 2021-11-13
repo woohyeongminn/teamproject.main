@@ -19,7 +19,7 @@
 <body>
 <br><br>
 <div class="all-content">
-<form action="reviewUpdate">
+<form action="reviewUpdate" method="post">
 	<div id='content'>
     내용 <input type="text" name="content" value="${cafeReview.content}"><br>
     평점(0~5점) <input type="number" min="0" max="5" name="grade" value="${cafeReview.grade}">
