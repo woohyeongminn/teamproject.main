@@ -12,7 +12,7 @@ public class StudyAddFormController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("pageTitle", "스터디 등록");
-    mv.addObject("contentUrl", "/study/StudyAddForm.jsp");
+    mv.addObject("contentUrl", "study/StudyAddForm.jsp");
     mv.setViewName("template1");
     return mv;
   }
