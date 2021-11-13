@@ -88,7 +88,7 @@ font-size: 14px;
 	  </button>
 	  <div class="dropdown-menu" role="menu" style="border-color: white;">
 	    <button class="dromdown-item" type="button1">
-	      <a href="/ogong/admin/permemberlist" style="color: black;">🎓 개인 회원</a></button><br>
+	      <a href="${contextPath}/app/admin/permemberlist" style="color: black;">🎓 개인 회원</a></button><br>
 	    <button class="dromdown-item" type="button1">
 	      <a href="/ogong/admin/ceomember/list" style="color: black;">👔 기업 회원</a></button>
 	  </div>

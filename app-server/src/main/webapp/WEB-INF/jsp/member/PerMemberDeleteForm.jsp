@@ -25,7 +25,7 @@
 <body>
   <h5>개인 회원 탈퇴</h5>
 
-  <form action='delete'>
+  <form action='delete' method="post">
   <label for='f-email' class='form-label' size='100px'>이메일</label> <input id='f-email' type='email' name='email' placeholder='아이디' size='20'><br>
   <label for='f-password' class='form-label' size='100px'>암호</label> <input id='f-password' type='password' name='password' placeholder='암호' size='20'><br>
   <input type ='hidden' name='no' value='${perMember.perNo}'>
