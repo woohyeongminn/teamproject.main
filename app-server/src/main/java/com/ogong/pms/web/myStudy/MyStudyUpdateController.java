@@ -3,7 +3,7 @@ package com.ogong.pms.web.myStudy;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
@@ -16,7 +16,7 @@ public class MyStudyUpdateController {
   @Autowired
   StudyDao studyDao;
 
-  @GetMapping("/study/update")
+  @PostMapping("/study/update")
   public ModelAndView update(Study study) throws Exception {
     Study oldStudy = studyDao.findByNo(study.getStudyNo());
 
