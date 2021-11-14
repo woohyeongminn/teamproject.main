@@ -41,8 +41,9 @@
   function checkValue() {
 
   var form = document.studyInfo;
-
-  if (form.studyStatus.value == 2) {
+  var studyStatus = ${study.studyStatus};
+  console.log(studyStatus);
+  if (studyStatus == 2) {
 	  alert("완료된 스터디 입니다.");
     return false;
   }
@@ -81,7 +82,12 @@
     
 <!-- Begin page content -->
 <main class="flex-shrink-0">
-  <div class="container">
+  <div class="container" name="studyInfo">
+  <input type="hidden" name="members" value="${study.members}">
+  <input type="hidden" name="watingMember" value="${study.watingMember}">
+  <input type="hidden" name="studyStatus" value="${study.studyStatus}">
+  <input type="hidden" name="countMember" value="${study.countMember}">
+  <input type="hidden" name="numberOfPeple" value="${study.numberOfPeple}">
     <h1 class="mt-5">${study.studyTitle}</h1>
     <span>${study.owner.perNickname}</span>
     <td><fmt:formatDate value="${study.registeredDate}" pattern="yyyy.MM.dd" /></td>
@@ -124,9 +130,7 @@
 			    </button>
 		    </c:when>
 		    <c:when test="${study.owner.perNo ne member.perNo}">
-			    <button class="btn btn-outline-light">
-			      <a href='join?studyno=${study.studyNo}'>참여 신청</a>
-			    </button>
+			    <button class="btn btn-outline-light" onclick="return checkValue();">참여 신청</button>
 		    </c:when>
 	    </c:choose>
 	    <c:if test="${myBookmark == '0'}">
