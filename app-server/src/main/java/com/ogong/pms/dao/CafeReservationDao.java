@@ -15,6 +15,7 @@ public interface CafeReservationDao {
   CafeReservation findReservationByMember(@Param("memberNo")int memberNo, @Param("reserNo")int reserNo) throws Exception;
   CafeReservation findReservationByCeoMember(@Param("ceoNo")int ceoNo, @Param("reserNo")int reserNo) throws Exception;
   void insertReservation(CafeReservation cafeReservation) throws Exception;
+  void insertPaymentReservation(CafeReservation cafeReservation) throws Exception;
   void updateReservationStatusComplete() throws Exception;
   void deleteReservation(@Param("reservationNo")int reservationNo, @Param("status")int status) throws Exception;
 

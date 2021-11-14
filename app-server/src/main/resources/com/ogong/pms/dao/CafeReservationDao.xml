@@ -109,11 +109,20 @@
       rs.studycafe_rsv_no asc
   </select>
   
+  <!-- 예약만 -->
   <insert id="insertReservation">
   insert into studycafe_reservation
     (studyroom_no, member_no, using_dt, start_time,using_time, people, 
     total_price, rsv_status_no, review) 
   values(#{roomNo},#{member.perNo},#{useDate},#{startTime},#{useTime},#{useMemberNumber},#{totalPrice},#{reservationStatus},1)
+  </insert>
+  
+  <!-- 예약+결제 -->
+  <insert id="insertPaymentReservation">
+  insert into studycafe_reservation
+    (studyroom_no, member_no, using_dt, start_time,using_time, people, 
+    total_price, rsv_status_no, payment_uid, payment_type, review) 
+  values(#{roomNo},#{member.perNo},#{useDate},#{startTime},#{useTime},#{useMemberNumber},#{totalPrice},#{reservationStatus},#{paymentUid},#{paymentType},1)
   </insert>
   
   <!-- 리뷰 등록시 상태변경 -->
