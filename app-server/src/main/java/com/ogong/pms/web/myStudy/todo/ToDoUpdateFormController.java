@@ -1,14 +1,11 @@
 package com.ogong.pms.web.myStudy.todo;
 
-import java.io.IOException;
-import javax.servlet.GenericServlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
-import org.apache.ibatis.session.SqlSession;
+import javax.servlet.http.HttpSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
@@ -16,49 +13,30 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 import com.ogong.pms.domain.ToDo;
 
-@WebServlet("/mystudy/todo/updateform")
-public class ToDoUpdateFormController extends GenericServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class ToDoUpdateFormController {
 
-  StudyDao studyDao;
-  MemberDao memberDao;
-  ToDoDao toDoDao;
-  SqlSession sqlSession;
+  @Autowired StudyDao studyDao;
+  @Autowired MemberDao memberDao;
+  @Autowired ToDoDao toDoDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    toDoDao = (ToDoDao) 웹애플리케이션공용저장소.getAttribute("toDoDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-  }
+  @GetMapping("/mystudy/todo/updateform")
+  public ModelAndView todoUpdateForm(HttpSession session, int studyno, int todono) throws Exception {
 
-  @Override
-  public void service(ServletRequest request, ServletResponse response)
-      throws ServletException, IOException {
+    Member member = (Member) session.getAttribute("loginUser");
 
-    try {
+    Study myStudy = studyDao.findByNo(studyno);
 
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
+    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todono);
 
-      int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      Study myStudy = studyDao.findByNo(studyNo);
-
-      int todoNo = Integer.parseInt(request.getParameter("todono"));
-      ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todoNo);
-
-      request.setAttribute("todo", todo);
-      request.setAttribute("member", member);
-      request.setAttribute("study", myStudy);
-
-      request.getRequestDispatcher("/myStudy/todo/ToDoUpdateForm.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("todo", todo);
+    mv.addObject("member", member);
+    mv.addObject("study", myStudy);
+    mv.addObject("pageTitle", "📋 To-Do List 변경");
+    mv.addObject("contentUrl", "myStudy/todo/ToDoUpdateForm.jsp");
+    mv.setViewName("template1");
+    return mv;
   }
 }

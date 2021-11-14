@@ -49,7 +49,7 @@ public class CafeReviewController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("reviewList", reviewList);
-    mv.addObject("pageTitle", "내 리뷰 내역");
+    mv.addObject("pageTitle", "📝 리뷰 내역");
     mv.addObject("contentUrl", "cafe/CafeReviewList.jsp");
     mv.setViewName("template1");
 
@@ -64,7 +64,7 @@ public class CafeReviewController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("cafeReview", cafeReview);
-    mv.addObject("pageTitle", "리뷰 수정");
+    mv.addObject("pageTitle", "📝 리뷰 수정");
     mv.addObject("contentUrl", "cafe/CafeReviewUpdateForm.jsp");
     mv.setViewName("/template1");
 
@@ -83,7 +83,7 @@ public class CafeReviewController {
     return mv;
   }
 
-  @GetMapping("/cafe/reviewDelete")
+  @PostMapping("/cafe/reviewDelete")
   public ModelAndView delete(int reviewNo) throws Exception {
 
     cafeReviewDao.deleteCafeReview(reviewNo);
