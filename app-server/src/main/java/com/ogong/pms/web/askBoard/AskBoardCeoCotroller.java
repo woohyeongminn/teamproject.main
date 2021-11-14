@@ -1,6 +1,7 @@
 package com.ogong.pms.web.askBoard;
 
 import java.util.Collection;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.domain.CeoMember;
 
 @Controller
 public class AskBoardCeoCotroller {
@@ -17,14 +19,16 @@ public class AskBoardCeoCotroller {
   @Autowired  SqlSessionFactory sqlSessionFactory;
 
   @GetMapping("/askboard/ceomylist")
-  public ModelAndView list() throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
 
-    Collection<AskBoard> myAskBoardList = askBoardDao.findAll();
+    CeoMember loginCeoUser = (CeoMember) session.getAttribute("loginCeoUser");
+
+    Collection<AskBoard> ceoMyAskBoardList = askBoardDao.findCeoMyAll(loginCeoUser.getCeoNo());
 
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("pageTitle", "💬문의글 목록");
-    mv.addObject("myAskBoardList", myAskBoardList);
+    mv.addObject("ceoMyAskBoardList", ceoMyAskBoardList);
     mv.addObject("contentUrl", "askBoard/AskBoardCeoMyList.jsp");
     mv.setViewName("template1");
 

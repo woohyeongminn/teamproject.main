@@ -18,12 +18,13 @@ public class CafeReservation {
   private String wirteReviewLable; // 리뷰 작성가능 / 작성불가 출력
   private int roomNo; // 룸 예약시 룸 번호
   private String roomName;  // 룸 이름
-  private int paymentNo; // 결제시 결제 번호
   private int reservationStatus; // 1 : 예약완료(현장결제) , 2 : 결제완료 , 
   //                                3 : 예약취소(개인) , 4 : 결제취소(개인) ,
   //                                5 : 예약거절(사장) , 6 : 결제거절(사장)
   //                                7 : 이용완료
   private String reservationStatusName; // 예약상태이름
+  private String paymentUid; // 결제 고유 번호
+  private String paymentType; // 결제방법
 
   @Override
   public String toString() {
@@ -31,9 +32,10 @@ public class CafeReservation {
         + cafe + ", reservationDate=" + reservationDate + ", useDate=" + useDate + ", startTime="
         + startTime + ", useTime=" + useTime + ", useMemberNumber=" + useMemberNumber
         + ", totalPrice=" + totalPrice + ", wirteReview=" + wirteReview + ", wirteReviewLable="
-        + wirteReviewLable + ", roomNo=" + roomNo + ", roomName=" + roomName + ", paymentNo="
-        + paymentNo + ", reservationStatus=" + reservationStatus + ", reservationStatusName="
-        + reservationStatusName + "]";
+        + wirteReviewLable + ", roomNo=" + roomNo + ", roomName=" + roomName
+        + ", reservationStatus=" + reservationStatus + ", reservationStatusName="
+        + reservationStatusName + ", paymentUid=" + paymentUid + ", paymentType=" + paymentType
+        + "]";
   }
 
   public int getReservationNo() {
@@ -132,14 +134,6 @@ public class CafeReservation {
     this.roomName = roomName;
   }
 
-  public int getPaymentNo() {
-    return paymentNo;
-  }
-
-  public void setPaymentNo(int paymentNo) {
-    this.paymentNo = paymentNo;
-  }
-
   public int getReservationStatus() {
     return reservationStatus;
   }
@@ -162,6 +156,22 @@ public class CafeReservation {
 
   public void setWirteReviewLable(String wirteReviewLable) {
     this.wirteReviewLable = wirteReviewLable;
+  }
+
+  public String getPaymentUid() {
+    return paymentUid;
+  }
+
+  public void setPaymentUid(String paymentUid) {
+    this.paymentUid = paymentUid;
+  }
+
+  public String getPaymentType() {
+    return paymentType;
+  }
+
+  public void setPaymentType(String paymentType) {
+    this.paymentType = paymentType;
   }
 
 }

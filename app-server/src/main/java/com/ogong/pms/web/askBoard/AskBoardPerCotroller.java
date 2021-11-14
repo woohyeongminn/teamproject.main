@@ -1,6 +1,7 @@
 package com.ogong.pms.web.askBoard;
 
 import java.util.Collection;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.domain.Member;
 
 @Controller
 public class AskBoardPerCotroller {
@@ -18,14 +20,15 @@ public class AskBoardPerCotroller {
   @Autowired  SqlSessionFactory sqlSessionFactory;
 
   @RequestMapping("/askboard/permylist")
-  public ModelAndView list() throws Exception {
+  public ModelAndView list(HttpSession session) throws Exception {
 
-    Collection<AskBoard> myAskBoardList = askBoardDao.findAll();
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    Collection<AskBoard> perMyAskBoardList = askBoardDao.findPerMyAll(loginUser.getPerNo());
 
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("pageTitle", "💬문의글 목록");
-    mv.addObject("myAskBoardList", myAskBoardList);
+    mv.addObject("perMyAskBoardList", perMyAskBoardList);
     mv.addObject("contentUrl", "askBoard/AskBoardPerMyList.jsp");
     mv.setViewName("template1");
 

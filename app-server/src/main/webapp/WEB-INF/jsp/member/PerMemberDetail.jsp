@@ -162,14 +162,14 @@ ul{list-style:none;}
        <ul>
         <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
         <div class="tabCon">
-        <form method="post" enctype="multipart/form-data">
+        <form method="request" enctype="multipart/form-data">
            <input type='hidden' name='perNo' value='${perMember.perNo}'>
            <input type='hidden' name='perNo' value='${perMember.perPassword}'>
 
            <div class="profile">
               <div class="profile-header">
                 <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
-                    <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${perMember.perPhoto}_80x80.jpg" style="width: 110px">
+                    <img id="f-photo-image" src="${contextPath}/upload/member/${perMember.perPhoto}_110x110.jpg" style="width: 110px">
                 </a>
                 <input type='hidden' name='ceoPhoto' value='${perMember.perPhoto}'>
               </div>
@@ -196,6 +196,7 @@ ul{list-style:none;}
                <input type="submit" value="프로필 수정하기" formaction="updateform" class ="btn btn-outline-dark"/>
                <input type="submit" value="탈퇴하기" formaction="deleteform" class ="btn btn-outline-dark"/>
                <input type="submit" value="내 문의글" formaction="../askboard/permylist" class ="btn btn-outline-dark"/>
+							 <input type ="submit" value="내 예약 목록" formaction="../cafe/reservationList"class ="btn btn-outline-dark"/>
              </div>
           </form>
         </div>
@@ -215,11 +216,10 @@ ul{list-style:none;}
   location.href = "#tab1";
   </script>
      
+     <!-- 
 		 <button class = "btn btn-outline-dark" ><a href='../study/list?perno=${loginUser.perNo}'>스터디 찾기</a></button>
 		 <button class = "btn btn-outline-dark" ><a href='../cafe/list'>스터디카페 예약하기</a></button>
-     <!-- 
      <button class = "btn btn-outline-dark" ><a href='../bookmark/list?perno=${loginUser.perNo}'>내 북마크</a></button>
 		 <button class = "btn btn-outline-dark" ><a href='../cafe/reviewList'>내 리뷰 목록</a></button>
-		 <button class = "btn btn-outline-dark" ><a href='../cafe/reservationList'>내 예약 목록</a></button>
      -->
      

@@ -64,7 +64,7 @@
       <hr>
        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
          <button class="btn btn-outline-dark" type="submit" >✔가입하기</button> 
-         <button class="btn btn-outline-dark" >❌취소하기</button>
+         <a type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
        </div> 
    </form>
    </div>
