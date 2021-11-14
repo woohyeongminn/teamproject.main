@@ -20,12 +20,10 @@
 ul{
   list-style:none;
 }
-
 .template-content {
   height: 1600px;
   overflow: scroll;
 }
-
 .tabmenu{
   max-width:900px;
   margin: 0 auto;
@@ -36,14 +34,11 @@ ul{
   display: inline-block;
   width:33.33%; 
   float:left;
-  xtext-align:center;
 }
 .tabmenu ul li a{
   display:block;
   line-height:40px;
-  xheight:40px;
   text-decoration:none; 
-  xcolor: #000;
 }
 .tabCon{
   display:none;
@@ -52,11 +47,11 @@ ul{
   left:0;
   top:40px;
   box-sizing: border-box;
-  xborder : 5px solid #f9f9f9;
   width: 900px;
 }
 .btnCon:target  {
   background : rgb(247, 231, 215);
+  xfont-weight: bold;
 }
 .btnCon:target .tabCon{
   display: block;

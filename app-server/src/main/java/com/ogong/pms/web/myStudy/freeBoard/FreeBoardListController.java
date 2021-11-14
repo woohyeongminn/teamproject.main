@@ -22,6 +22,7 @@ public class FreeBoardListController {
 
     ModelAndView mv = new ModelAndView();
 
+    mv.addObject("studyno", studyno);
     mv.addObject("freeBoardList", freeBoardList);
     mv.addObject("pageTitle", "자유 게시판 목록");
     mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardList.jsp");

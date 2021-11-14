@@ -4,23 +4,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 <style>
-  label {
-    margin-right: 5px;
-    text-align: center;
-    display: inline;
-    width: 60px;
-  }
-  legend {
-  text-align: center;
-  }
   form {
   max-width: 500px;
   }
-  input:invalid {
-    color: grey;
+  .btn {
+   font-size: 14px;
+   line-height: 14px;
   }
+  b {
+  text-align: center;
+  font-size:20px
+  }  
+ .all-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }  
 </style>
-
 <script type="text/javascript">
 function checkValue() {
 	
@@ -79,45 +80,44 @@ function checkValue() {
 	   }
 }
 </script>
-
-<body>
 	<div class="all-content">
-  <b style="font-size:20px"> 기업 회원가입 </b>
-  <br>
+	<br>
+  <b style="font-size:20px">🏢기업 회원가입 </b>
+<body>
   <hr>
    <%--  <c:forEach items="${ceoMemberList}" var="ceoMember">
       <c:if test="${ceoMember.ceoNickname eq nickname}">
       </c:if>
     </c:forEach> --%>
   
-  <form action='add' name='ceoInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
-	  <label for='f-name' class='form-label'>이름</label>
+  <form id="member-form" action='add' name='ceoInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
+	  <label for='f-name' class="col-sm-2 col-form-label">이름</label>
 	  <input id='f-name' type='text' name='ceoName' placeholder="이름"/><br>
 	  
-	  <label for='f-nickname' class='form-label'>닉네임</label>
+	  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
 	  <input id='f-nickname' type='text' name='ceoNickname' placeholder="닉네임" />
-	  <input type="button" value="중복확인" /><br>
+	  <input type="button" class="btn btn-outline-dark" value="중복확인" /><br>
 
-	  <label for='f-photo' class='form-label'>사진</label>
+	  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
 	  <input id='f-photo' type='file' name='photoFile' /><br>
 	  <%-- <p>사진 미선택시 기본 프로필 사진이 등록됩니다.</p>
 	  <c:if test="${empty photo}">
 	    <input id='f-photo' type='hidden' name='photoFile' value="ceoProfile"/><br>
 	  </c:if> --%>
 	  
-	  <label for='f-tel' class='form-label' >전화번호</label>
+	  <label for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
 	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
 	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
 	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
 	  
-	  <label for='f-bossname' class='form-label'>대표자명</label>
+	  <label for='f-bossname' class="col-sm-2 col-form-label">대표자명</label>
     <input id='f-bossname' type='text' name='ceoBossName' placeholder="대표자명"/><br>
     
-    <label for='f-licenseno' class='form-label'>사업자 등록번호</label>
+    <label for='f-licenseno' class="col-sm-2 col-form-label">사업자 등록번호</label>
     <input id='f-licenseno' type='text' name='ceoLicenseNo'
      pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="사업자 등록번호"/><br>
     
-	  <label for='f-email' class='form-label'>이메일</label>
+	  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
 	  <input id='f-email' type='text' name='ceoEmail' pattern="^[a-zA-Z0-9]+$" placeholder="이메일" onkeydown="inputEmail()"/>@
 	  <select name="site">
 		  <option>naver.com</option>
@@ -125,19 +125,21 @@ function checkValue() {
 		  <option>gmail.com</option>
 		  <option>kakao.com</option>
 	  </select>
-	  <input type="button" value="중복확인"/><br>
+	  <input type="button" class="btn btn-outline-dark" value="중복확인"/><br>
 	  
-	  <label for='f-password' class='form-label'>비밀번호</label>
+	  <label for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
 	  <input id='f-password' type='password' name='password'
 	   pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,16}$"
 	   title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
 	   placeholder="비밀번호"/><br>
 	 
-	  <label for='f-passwordcheck' class='form-label'>비밀번호 확인</label>
+	  <label for='f-passwordcheck' class="col-sm-2 col-form-label">비밀번호 확인</label>
 	  <input id='f-passwordcheck' type='password' name='ceoPassword' placeholder="비밀번호 확인"/><br>
-	  
-	  <button type="submit" class="class="btn btn-outline-dark">회원가입</button>
-	  <input type="button" class="class="btn btn-outline-dark">취소</input>
+    <hr>
+     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+       <button class="btn btn-outline-dark" type="submit" >가입하기</button> 
+       <button class="btn btn-outline-dark" >취소하기</button>
+     </div>
 	 </form>
 	 </div>
 </body>
