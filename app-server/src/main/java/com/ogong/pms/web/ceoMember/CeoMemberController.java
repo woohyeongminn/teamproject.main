@@ -104,8 +104,8 @@ public class CeoMemberController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("Refresh", "1;url=list");
-    mv.addObject("pageTitle", "기업 회원가입");
+    mv.addObject("Refresh", "2;url=list");
+    mv.addObject("pageTitle", "👋환영 합니다!");
     mv.addObject("contentUrl", "ceoMember/CeoMemberAdd.jsp");
     mv.setViewName("template1");
     return mv;

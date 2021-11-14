@@ -38,7 +38,14 @@ public class PerMemberController {
   }
 
   @PostMapping("/member/add")
-  protected ModelAndView add(Member member, Part photoFile) throws Exception {
+  protected ModelAndView add(Member member, Part photoFile, String[] tel, String site) throws Exception {
+
+    String ceoTel = tel[0] + "-" + tel[1] + "-" + tel[2];
+    member.setPerTel(ceoTel);
+
+    member.setPerEmail(member.getPerEmail() +'@'+ site);
+
+    member.setPerStatus(Member.PER);
 
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
@@ -46,24 +53,35 @@ public class PerMemberController {
       member.setPerPhoto(filename);
 
       Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
-      .size(20, 20)
+      .size(40, 40)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
       .toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
-          return name + "_20x20";
+          return name + "_40x40";
         }
       });
 
       Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
-      .size(100, 100)
+      .size(80, 80)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
       .toFiles(new Rename() {
         @Override
         public String apply(String name, ThumbnailParameter param) {
-          return name + "_100x100";
+          return name + "_80x80";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/member") + "/" + filename)
+      .size(110, 110)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_110x110";
         }
       });
     }
@@ -104,10 +122,23 @@ public class PerMemberController {
   }
 
   @RequestMapping("/member/updateform")
-  public ModelAndView updateForm() {
+  public ModelAndView updateForm(HttpSession session) throws Exception {
+
+    Member loginPer = (Member) session.getAttribute("loginUser");
+
+    if (loginPer == null) {
+      throw new Exception("로그인한 회원이 없습니다.");
+    } 
+
+    Member perMember = memberDao.findByNo(loginPer.getPerNo());
+
+    if (perMember == null) {
+      throw new Exception("해당 번호의 회원이 없습니다.");
+    }
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("pageTitle", "💬프로필 수정");
+    mv.addObject("perMember", perMember);
+    mv.addObject("pageTitle", "📝프로필 수정");
     mv.addObject("contentUrl", "member/PerMemberUpdateForm.jsp");
     mv.setViewName("template1");
     return mv;
