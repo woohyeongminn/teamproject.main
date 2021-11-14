@@ -26,6 +26,8 @@ legend {
    max-width: 900px;
    margin: 0 auto;
   height: 700px;
+      display: flex;
+    flex-direction: column;
 }
 
 button {
@@ -39,13 +41,25 @@ button {
   height: auto;
   line-height: inherit;
 }
+
+.text {
+    display: inline-block;
+    margin: 0 auto;
+    }
+    
+ .btn {
+     display: inline-block;
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 20px;
+ }
  
 </style>
 
 <body>
   <br><br><br>
    <div class="all-content">
-		   <P>&emsp;&emsp;등록된 스터디카페 삭제 시 복구가 불가능합니다.</P>
+		   <P class="text">&emsp;&emsp;등록된 스터디카페 삭제 시 복구가 불가능합니다.</P>
 		   <a href='delete?cafeno=${cafe.no}' class='btn btn-outline-dark'>삭제</a>
    </div>
 </body>
