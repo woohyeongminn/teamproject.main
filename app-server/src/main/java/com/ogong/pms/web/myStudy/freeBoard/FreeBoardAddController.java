@@ -28,7 +28,7 @@ public class FreeBoardAddController {
   ServletContext sc;
 
   @PostMapping("/mystudy/freeboard/add")
-  public ModelAndView add(FreeBoard freeBoard, Part photoFile, int studyno, HttpSession session)
+  public ModelAndView add(FreeBoard freeBoard, Part photoFile, HttpSession session)
       throws Exception {
     // FreeBoard freeBoard = new FreeBoard();
 
@@ -58,7 +58,7 @@ public class FreeBoardAddController {
       });
     }
 
-    freeBoard.setStudyNo(studyno);
+    // freeBoard.setStudyNo(studyno);
     freeBoard.setFreeBoardWriter((Member) session.getAttribute("loginUser"));
     // freeBoard.setFreeBoardTitle(request.getParameter("title"));
     // freeBoard.setFreeBoardContent(request.getParameter("content"));

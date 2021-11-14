@@ -22,17 +22,17 @@
 
   var form = document.freeBoardInfo;
 
-  if (!form.title.value) {
+  if (!form.freeBoardTitle.value) {
     alert("제목을 입력하세요.");
     return false;
   }
 
-  if (!form.content.value) {
+  if (!form.freeBoardContent.value) {
     alert("내용을 입력하세요.");
     return false;
   }
 
-  if (!form.filepath.value) {
+  if (!form.freeBoardFile.value) {
     alert("파일을 선택하세요.");
     return false;
   }
@@ -42,29 +42,29 @@
 <body>
 <div class="all-content">
   <form action='add' method='post' name='freeBoardInfo' onsubmit="return checkValue()">
-	<input type='hidden' name='studyno' value='${studyno}'>
+	<input type='hidden' name='studyNo' value='${studyno}'>
 	<div id='content'>
       <br>
   <div class="mb-3 row">
-    <label for='f-title'>제목</label>
-    <input id='f-title' type='text' name='title' class="form-control">
+    <label for='f-freeBoardTitle'>제목</label>
+    <input id='f-freeBoardTitle' type='text' name='freeBoardTitle' class="form-control">
   </div>
 
   <div class="mb-3 row">
-    <label for='f-content'>내용</label>
-    <textarea id='f-content' type='text' name='content' class="form-control" rows="3"></textarea>
+    <label for='f-freeBoardContent'>내용</label>
+    <textarea id='f-freeBoardContent' type='text' name='freeBoardContent' class="form-control" rows="3"></textarea>
   </div>
 
   <div class="mb-3 row">
-    <label for='f-filepath'>파일</label>
-    <input id='f-filepath' type='file' name='filepath' class="form-control">
+    <label for='f-freeBoardFile'>파일</label>
+    <input id='f-freeBoardFile' type='file' name='freeBoardFile' class="form-control">
   </div>
 
-   <%-- <label for='f-filepath' class='form-label'>파일</label>
-   <input id='f-filepath' type='file' name='filepath' /><br>
+   <%-- <label for='f-freeBoardFile' class='form-label'>파일</label>
+   <input id='f-freeBoardFile' type='file' name='freeBoardFile' /><br>
    
-   <c:if test="${empty filepath}">
-     <input id='f-filepath' type='hidden' name='filepath' value="freeboard_80x80.jpg"/><br>
+   <c:if test="${empty freeBoardFile}">
+     <input id='f-freeBoardFile' type='hidden' name='freeBoardFile' value="freeboard_80x80.jpg"/><br>
    </c:if> --%>
   </div>
 	<div id='button'>
