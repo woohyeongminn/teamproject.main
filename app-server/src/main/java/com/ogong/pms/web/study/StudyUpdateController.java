@@ -1,4 +1,4 @@
-package com.ogong.pms.web.myStudy;
+package com.ogong.pms.web.study;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +9,14 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
 @Controller
-public class MyStudyUpdateController {
+public class StudyUpdateController {
 
   @Autowired
   SqlSessionFactory sqlSessionFactory;
   @Autowired
   StudyDao studyDao;
 
-  @PostMapping("/mystudy/update")
+  @PostMapping("/study/update")
   public ModelAndView update(Study study) throws Exception {
     Study oldStudy = studyDao.findByNo(study.getStudyNo());
 

@@ -5,42 +5,13 @@
 <html>
 <head>
 <style>
-* {
-  font-size:14px;
-  justify-content: center;
-}
-.card w-50 {
-  justify-content: center;
-}
+	* {
+	  font-size:14px;
+	}
 </style>
 </head>
 <body>
-<br>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="btn btn-light">
-      <a href='addform?studyno=${studyno}'>등록</a>
-    </button>
-  </div>
 <c:if test='${not empty freeBoardList}'>
-<div class="row row-cols-1 row-cols-md-1 g-5">
-<c:forEach items="${freeBoardList}" var="freeBoard">
-<div class="card w-50">
-  <div class="card-body">
-    <h5 class="card-title" style="font-weight: bold">
-      <a href="detail?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}">${freeBoard.freeBoardTitle}</a>
-    </h5>
-    <p class="card-text">${freeBoard.freeBoardContent}</p>
-    <p class="card-text"><small class="text-muted">${freeBoard.freeBoardWriter.perNickname}</small></p>
-  </div>
-</div>
-</c:forEach>
-</div>
-</c:if>
-<c:if test="${empty freeBoardList}">
-  등록된 게시글이 없습니다.
-</c:if>
-<!-- 이미지 -->
-<!-- <c:if test='${not empty freeBoardList}'>
 <c:forEach items="${freeBoardList}" var="freeBoard">
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
@@ -62,9 +33,8 @@
 </c:if>
 <c:if test="${empty freeBoardList}">
   등록된 게시글이 없습니다.
-</c:if> -->
-<!-- 테이블 -->
-	<!-- <table class="table table-hover">
+</c:if>
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>No.</th>
@@ -87,6 +57,10 @@
 	</table>
 	<c:if test="${empty freeBoardList}">
     등록된 게시글이 없습니다.
-  </c:if> -->
+  </c:if>
+	<br>
+	<button>
+		<a href='addform?studyno=${studyno}'>등록</a>
+	</button>
 </body>
 </html>

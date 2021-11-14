@@ -38,11 +38,11 @@
 <c:when test="${empty adminAskBoard.reply}">
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 	   <button class = "btn btn-outline-dark" type="submit" value="답변" formaction="reply">
-	    <a href='../askboard/replyaddform?askNo=${adminAskBoard.askNo}'>답변등록</a>
+	    <a href='../../askboard/replyaddform?askNo=${adminAskBoard.askNo}'>답변등록</a>
 	   </button>
 	   <button class = "btn btn-outline-dark" type="submit" value="삭제" formaction="delete">
 	   <a href='delete?askNo=${adminAskBoard.askNo}'>문의글삭제</a>
-	   </button>  
+	   </button>   
   </div>
 </c:when>
 <c:otherwise>

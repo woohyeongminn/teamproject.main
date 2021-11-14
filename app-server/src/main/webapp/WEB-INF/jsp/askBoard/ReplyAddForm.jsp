@@ -25,12 +25,12 @@
   <form method="post"> 
     <div class="title">
     <label for='f-title' class='form-label'>제목</label>
-    <input type ='text' class="form-control" name='title' placeholder="제목을 입력하세요"><br>
+    <input type ='text' class="form-control" name='replyTitle' placeholder="제목을 입력하세요"><br>
     </div>
     
     <div class="content">
     <label for='f-content' class='form-label' size='100px'>내용</label>
-    <input type='text' class="form-control" name='content' placeholder="내용을 입력하세요"><br>
+    <input type='text' class="form-control" name='replyContent' placeholder="내용을 입력하세요"><br>
     </div>
     
     <input type ='hidden' name='askNo' value='${askBoard.askNo}'></input> 

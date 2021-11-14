@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>목록 | 조장인 스터디</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style>
 *{
   margin:0; padding:0;
-  font-size:15px; 
+  font-size:14px; 
   line-height:1.3;
 }
 ul{list-style:none;}
@@ -29,8 +23,6 @@ ul{list-style:none;}
 }
 .tabmenu ul li .btn{
   display:block;
-  line-height:40px;
-  height:40px;
   text-decoration:none; 
   color: #000;
 }
@@ -60,84 +52,65 @@ ul{list-style:none;}
   float: left;
 }
 
-.card {
-display: flex;
-flex-direction: row;
+table tr {
+  height: 50px;
 }
 
-.card .body-photo {
-width: 30%;
+table td button {
+  margin: 0 auto;
 }
 
-.card .body-photo a{
-display: inline-block;
-vertical-align: middle;
+.swal2-radio {
+  display: grid !important;
 }
-
-.card .body-left {
-width: 30%;
-vertical-align: middle;
-}
-
-.card .body-left a{
-display: inline-block;
-vertical-align: middle;
-}
-
-.card .body-right {
-width: 40%;
-vertical-align: middle;
-}
-
- .c-top {
-  width: 100%;
-  padding: 20px 0 20px 50px;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-  text-align: center;
-}
-
 </style>
 </head>
 <body>
-<jsp:include page="../../header.jsp"/>
-<div class="c-top">
-  👩‍👧‍👧 ‍[${study.studyTitle}] 구성원 목록
-</div>
+
 <div class="tabmenu">
   <ul>
     <li id="tab1" class="btnCon"><a class="btn first" href="#tab1">참여중인 구성원</a>
       <div class="tabCon" >
       <br>
-      <br><br>
-      <table class="table table-hover">
+      <table class="table table-hover text-center align-middle">
+      <thead>
+        <tr>
+          <th>닉네임</th>
+          <c:if test="${loginUser.perNo eq study.owner.perNo}">
+	          <th>조장 권한 위임</th>
+	          <th>탈퇴시키기</th>
+          </c:if>
+        </tr>
+        </thead>
         <tbody>
           <c:forEach items="${guildersList}" var="guilderMember">
-          <div class="card">
-            <div class="body-photo">${guilderMember.perPhoto} 프로필사진</div>
-            <div class="body-left">
-              <a class="profile" href="detail?guilderNo=${guilderMember.perNo}">
-              <c:choose>
-	              <c:when test="${study.owner.perNo == guilderMember.perNo}">
-	                조장 : ${guilderMember.perNickname}
-	              </c:when>
-                <c:otherwise> ${guilderMember.perNickname} </c:otherwise>
+          <tr>
+           <c:choose>
+              <c:when test="${study.owner.perNo == guilderMember.perNo}">
+		          <td colspan="3">
+		            <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
+		            <a class="profile" href="detail?guilderNo=${guilderMember.perNo}">
+		               👑 ${guilderMember.perNickname} [조장]</a></td>
+			        </c:when>
+	            <c:otherwise> 
+	              <td>
+	               <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
+	               <a class="profile" href="detail?guilderNo=${guilderMember.perNo}">${guilderMember.perNickname}</a></td>
+	            </c:otherwise>
+		        </c:choose>
+		        <c:choose>
+              <c:when test="${loginUser.perNo eq study.owner.perNo}">
+                <c:if test="${study.owner.perNo != guilderMember.perNo}">
+                  <td><button class="btn btn-outline-dark" onclick='return submitBtn(this.form,${guilderMember.perNo},${study.studyNo});'>조장권한위임</button></td>
+				          <td><button class="btn btn-outline-dark" onclick='return submitBtn2(this.form,${guilderMember.perNo},${study.studyNo});'>탈퇴시키기</button></td>
+				        </c:if>
+              </c:when>
               </c:choose>
-              </a>
-            </div>
-          
-          <c:if test="${loginUser.perNo eq study.owner.perNo}">
-            <!--<c:if test="${study.owner.perNo != guilderMember.perNo}">-->
-		          <a type="button" class="btn btn-outline-dark" href="entrustexit?guilderMemberNo=${guilderMember.perNo}&studyNo=${study.studyNo}">조장 권한 넘겨주기(후 탈퇴))</a>
-		          <a type="button" class="btn btn-outline-dark" href="entrust?guilderMemberNo=${guilderMember.perNo}&studyNo=${study.studyNo}">조장 권한 넘겨주기(후 구성원)</a>
-		          <a type="button" class="btn btn-outline-dark" href="delete?guilderMemberNo=${guilderMember.perNo}&studyNo=${study.studyNo}">탈퇴시키기</a>
-           <!--  </c:if> --> 
-          </c:if>
-          
-          </div>
-          </c:forEach>
+	          </tr>
+	       </c:forEach>
         </tbody>
       </table>
+		                
       <c:if test="${empty guildersList}">
         스터디에 참여 중인 구성원이 없습니다.
       </c:if>
@@ -178,7 +151,96 @@ vertical-align: middle;
 
 <script>
 location.href = "#tab1";
+
+function submitBtn(frm,guilderMemberNo,studyNo) {
+	
+	var form = document.createElement('form');
+	form.setAttribute('method', 'post');
+
+	var hiddenField = document.createElement('input');
+	hiddenField.setAttribute('type', 'hidden');
+	hiddenField.setAttribute('name', 'guilderMemberNo');
+	hiddenField.setAttribute('value', guilderMemberNo);
+	form.appendChild(hiddenField);
+
+	var hiddenField = document.createElement('input');
+	hiddenField.setAttribute('type', 'hidden');
+	hiddenField.setAttribute('name', 'studyNo');
+	hiddenField.setAttribute('value', studyNo);
+	form.appendChild(hiddenField);
+
+	document.body.appendChild(form);
+	
+	(async () => {
+	
+	const inputOptions = new Promise((resolve) => {
+		  setTimeout(() => {
+		    resolve({
+		      'entrust': '조장 권한 넘겨주고 스터디 구성원 되기',
+		      'entrustexit': '조장 권한 넘겨주고 스터디 탈퇴'
+		    })
+		  }, 1000)
+		})
+
+		const { value: color } = await Swal.fire({
+		  title: '조장 권한 넘겨주기',
+		  input: 'radio',
+		  inputOptions: inputOptions,
+		  inputValidator: (value) => {
+		    if (!value) {
+		      return '둘 중 하나를 선택해주세요!'
+		    }
+		  }
+		})
+
+		if(color) {
+      if (color == 'entrust'){
+          form.setAttribute('action', 'entrust');
+          form.submit();
+          return true;
+        } else if (color == 'entrustexit'){
+				form.setAttribute('action', 'entrustexit');
+	      form.submit();
+				return true;
+			}
+		}
+	})()
+};
+
+function submitBtn2(frm,guilderMemberNo,studyNo) {
+	
+	var form = document.createElement('form');
+	form.setAttribute('method', 'post');
+
+	var hiddenField = document.createElement('input');
+	hiddenField.setAttribute('type', 'hidden');
+	hiddenField.setAttribute('name', 'guilderMemberNo');
+	hiddenField.setAttribute('value', guilderMemberNo);
+	form.appendChild(hiddenField);
+
+	var hiddenField = document.createElement('input');
+	hiddenField.setAttribute('type', 'hidden');
+	hiddenField.setAttribute('name', 'studyNo');
+	hiddenField.setAttribute('value', studyNo);
+	form.appendChild(hiddenField);
+
+	document.body.appendChild(form);
+	
+  Swal.fire({
+      title: '정말 탈퇴시키겠습니까?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '네',
+      cancelButtonText: '아니오'
+  }).then((result) => {
+      if (result.isConfirmed) {
+     		 form.setAttribute('action', 'delete');
+         form.submit();
+         return true;
+      }
+  })
+};
+
 </script>
-  
-</body>
-</html>

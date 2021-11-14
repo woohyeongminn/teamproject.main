@@ -1,4 +1,4 @@
-package com.ogong.pms.web.myStudy;
+package com.ogong.pms.web.study;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,21 +9,21 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
 @Controller
-public class MyStudyUpdateFormController {
+public class StudyUpdateFormController {
 
   @Autowired
   SqlSessionFactory sqlSessionFactory;
   @Autowired
   StudyDao studyDao;
 
-  @GetMapping("/mystudy/updateform")
+  @GetMapping("/study/updateform")
   public ModelAndView updateform(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    mv.addObject("pageTitle", "내 스터디 수정");
+    mv.addObject("pageTitle", "스터디 수정");
     mv.addObject("contentUrl", "myStudy/MyStudyUpdateForm.jsp");
     mv.setViewName("template1");
 

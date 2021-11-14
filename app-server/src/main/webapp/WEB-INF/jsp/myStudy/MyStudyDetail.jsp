@@ -89,7 +89,7 @@
   <tr id="first">
     <th scope="col"></th>
     <th scope="col" id="title">| 📰 ${study.studyTitle} ✏ |</th>
-    <th scope="col" id="countbox">
+    <th scope="col">
 		<c:choose>
 			<c:when test="${study.countMember < study.numberOfPeple}">
 	    [모집 중]
@@ -168,21 +168,21 @@
     <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button>
 	    <c:if test='${study.owner.perNo == loginUser.perNo}'>
 		    <button type="submit" class="btn btn-outline-dark" value="변경" formaction="updateform">
-		       <a href='${contextPath}/app/study/updateform?studyno=${study.studyNo}'>변경</a></button>
+		       <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'>변경</a></button>
 		    <button type="submit" class="btn btn-outline-dark" value="삭제">
-		       <a href='${contextPath}/app/study/delete?studyno=${study.studyNo}'>삭제</a></button>
+		       <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}'>삭제</a></button>
 		  </c:if>
 	  <button type="submit" class="btn btn-outline-dark" value="탈퇴">
-      <a href='${contextPath}/app/study/exit?studyno=${study.studyNo}'>탈퇴</a></button>
+      <a href='${contextPath}/app/mystudy/exit?studyno=${study.studyNo}'>탈퇴</a></button>
     <button type="submit" class="btn btn-outline-dark" value="구성원">
-      <a href='guilder/list?studyNo=${study.studyNo}'>구성원</a></button>
+      <a href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>구성원</a></button>
     <button type="submit" class="btn btn-outline-dark" value="캘린더">
       <a href='${contextPath}/app/mystudy/calendar/list'>캘린더</a></button>
     <button type="submit" class="btn btn-outline-dark" value="자유 게시판">
-      <a href="${contextPath}/app/freeboard/list?studyno=${study.studyNo}">자유 게시판</a></button>
+      <a href="${contextPath}/app/mystudy/freeboard/list?studyno=${study.studyNo}">자유 게시판</a></button>
     <button type="submit" class="btn btn-outline-dark" value="자유 게시판">
-      <a href='todo/list?studyno=${study.studyNo}&perno=${member.perNo}'>To-Do</a></button>
-    <button type="submit" class="btn btn-outline-dark" value="자유 게시판">
+      <a href='${contextPath}/app/mystudy/todo/list?studyno=${study.studyNo}&perno=${loginUser.perNo}'>To-Do</a></button>
+    <button type="submit" class="btn btn-outline-dark" value="To-Do">
       <a href='list'>화상미팅</a></button>
   </div>
 

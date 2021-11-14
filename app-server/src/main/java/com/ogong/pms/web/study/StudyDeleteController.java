@@ -1,4 +1,4 @@
-package com.ogong.pms.web.myStudy;
+package com.ogong.pms.web.study;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +9,14 @@ import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Study;
 
 @Controller
-public class MyStudyDeleteController {
+public class StudyDeleteController {
 
   @Autowired
   SqlSessionFactory sqlSessionFactory;
   @Autowired
   StudyDao studyDao;
 
-  @GetMapping("/mystudy/delete")
+  @GetMapping("/study/delete")
   public ModelAndView delete(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
 

@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
@@ -44,6 +45,38 @@ public class AskBoardCeoCotroller {
     mv.addObject("myAskBoard", myAskBoard);
     mv.addObject("contentUrl", "askBoard/AskBoardCeoMyDetail.jsp");
     mv.setViewName("template1");
+
+    return mv;
+  }
+
+  @GetMapping("/askboard/ceoupdateform")
+  public ModelAndView updateForm(int askNo) throws Exception {
+
+    AskBoard perAskBoard = askBoardDao.findByNo(askNo);
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "💬문의글 수정");
+    mv.addObject("perAskBoard", perAskBoard);
+    mv.addObject("contentUrl", "askBoard/AskBoardCeoUpdateForm.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  @PostMapping("/askboard/ceoupdate")
+  public ModelAndView update(AskBoard askBoard) throws Exception {
+
+    AskBoard prevAskBoard = askBoardDao.findByNo(askBoard.getAskNo());
+    if (prevAskBoard == null) {
+      throw new Exception("해당 번호의 문의글이 없습니다.");
+    }
+    askBoard.setAskRegisteredDate(prevAskBoard.getAskRegisteredDate());
+    askBoardDao.update(askBoard);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.setViewName("redirect:ceomylist");
 
     return mv;
   }

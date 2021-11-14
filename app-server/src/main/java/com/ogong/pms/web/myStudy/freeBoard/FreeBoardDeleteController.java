@@ -16,7 +16,7 @@ public class FreeBoardDeleteController {
   @Autowired
   FreeBoardDao freeBoardDao;
 
-  @GetMapping("/freeboard/delete")
+  @GetMapping("/mystudy/freeboard/delete")
   public ModelAndView delete(int freeboardno, int studyno) throws Exception {
     // int studyNo = Integer.parseInt(request.getParameter("studyno"));
     // int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));

@@ -26,7 +26,7 @@ public class FreeBoardUpdateController {
   ServletContext sc;
   // @Autowired PromptFreeBoard promptFreeBoard;
 
-  @PostMapping("/freeboard/update")
+  @PostMapping("/mystudy/freeboard/update")
   public ModelAndView update(FreeBoard freeBoard, Part photoFile) throws Exception {
     // int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 

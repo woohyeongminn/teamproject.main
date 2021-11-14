@@ -20,33 +20,42 @@
     line-height: 14px;
   }
  </style>
-</head>
 
 <body>
-  
-  <form  method="post">  
-    <span>(${loginUser.perNo})</span><br>
+<br><br><br>
+<div class="all-content">
+  <div class="tabmenu">
+   <ul>
+    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
+    <div class="tabCon">
+    <form action='update' method='post' enctype="multipart/form-data">
+      <input type='hidden' name='perNo' value='${perMmber.perNo}'>
     
-    <p><label for='f-photo' class='form-label' size='100px'>사진</label>
-    <input id='f-photo' type='file' name='photoFile' placeholder="사진"><br>
+     <div class="profile">
+      <div class="profile-header">
+        <a href="${contextPath}/upload/perMember/${perMember.perPhoto}.jpg" >
+          <img id="f-photo-image" src="${contextPath}/upload/perMember/${perMember.perPhoto}_110x110.jpg">
+        </a>
+       </div>
+        
+       <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'><br>
+
+       <label for='f-name' class='form-label'>이름</label>
+       <input id='f-name' type='text' name='perName' value='${perMember.perName}'><br>
+       
+       <label for='f-nickname' class='form-label'>닉네임</label>
+       <input id='f-nickname' type='text' name='perNickname' value='${perMember.perNickname}'><br>
+       
+       <label for='f-tel' class='form-label'>전화번호</label>
+       <input id='f-tel' type='tel' name='perTel' value='${perMember.perTel}'><br>
+       
+       <label for='f-email' class='form-label'>이메일</label>
+       <input id='f-email' type='email' name='perEmail' value='${perMember.perEmail}'><br>
+       
+    <label for='f-registeredDate' class='form-label'>가입일</label>
+       <input id='f-registeredDate' type='text' name='perRegisteredDate' readonly value='${perMember.perRegisteredDate}'><br>
+     </div>
     
-    <label for='f-nickname'>닉네임</label>
-    <input id='f-nickname' type='text' name='nickname' value='${loginUser.perNickname}'><br>
-    
-    <label for='f-name'>이름</label>
-    <input id='f-name' type='text' name='name' value='${loginUser.perName}'><br>
-    
-    <label for='f-email'>이메일</label> 
-    <input id='f-email' type='email' name='email' value='${loginUser.perEmail}'><br>
-    <br>
-     
-    <label for='f-tel'>전화</label> 
-    <input id='f-tel' type='tel' name='tel' value='${loginUser.perTel}'><br>
-    
-    <span>가입일ㅣ</span> <span>${loginUser.perRegisteredDate}</span><br>
-    <input type ='hidden' name='no' value='${loginUser.perNo}'>
-    
-    <!-- 
 		 <section class="n-section-block">
 		  <table class="n-table table-row my-info-modify">
 		   <tr id="password-area">
@@ -85,7 +94,7 @@
 		         </div>
 		       </td>
 		   </tr>
-     -->
+     
 		  </table>
 		 </section>
   
@@ -391,9 +400,6 @@
   });
   function getMemberRefundAccount() {}
   </script>
-  
- </body>
-</html>
 
 
 
