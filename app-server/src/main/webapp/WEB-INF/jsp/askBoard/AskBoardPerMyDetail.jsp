@@ -20,6 +20,9 @@
   p, #info, #createDt{
   text-align:right;
   }
+  textarea {
+  color: white;
+  }
 </style>
   <div id="mian">
       <p>등록일ㅣ${myAskBoard.askRegisteredDate}</p>

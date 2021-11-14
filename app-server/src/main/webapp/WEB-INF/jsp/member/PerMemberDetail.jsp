@@ -15,6 +15,22 @@ font-size: 14px;
     margin: 0 auto;
     text-align: center;
 }
+#f-photo-image {
+ border-radius: 20px; 
+ border-style: ridge;
+}
+.round {
+  max-width: 500px;
+  background-color: white;
+  border-radius: 15px;
+  border: 2px solid rgb(110, 110, 110);
+  text-align: center;
+  padding-bottom: 14px;
+  padding-left: 10px;
+}
+.in {
+margin-top: 10px
+}
 #createDt {
   text-align:right;
   font-size: 14px;
@@ -22,46 +38,62 @@ font-size: 14px;
 #name, #email, #tel {
 text-align:left;
 }
-label {
-
+#crud {
+ font-size: 14px;
+ margin-left: 310px;
 }
+#pN {
+margin-left: 38px;
+}
+#pE {
+margin-left: 24px;
+}
+#pT {
+margin-left: 8px;
+}
+
 </style>
 
 <form>
 	<div class="all">
-	     <div id="photo">
+	     <br><div class="photo">
 	      <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
 	       <img id="f-photo-image" src="${contextPath}/upload/member/${perMember.perPhoto}_110x110.jpg" style="width: 110px">
 	      </a>
 	       <input type='hidden' name='perPhoto' value='${perMember.perPhoto}'>
 	     </div>  
 	    <div id="nickname">
-	      <br><b>'${perMember.perNickname}'님</b>
+	      <b class="col-sm-2 col-form-label">'${perMember.perNickname}'님</b>
 	    </div>
-	    <div id="createDt">
+	    <div id="createDt" >
 	      가입일: ${perMember.perRegisteredDate}
 	    </div><hr>
-	    <div id="name">
-	      <label>이름</label>
-	      <b>${perMember.perName}</b>
+	   <div class="round"> 
+	    <div class="in">
+		    <div id="name">
+		      <label>이름</label>
+		      <b id="pN">${perMember.perName}</b>
+		    </div>
+		    <div id="email">
+		      <label>이메일</label>
+		      <b id="pE">${perMember.perEmail}</b>
+		    </div>        
+		    <div id="tel">
+		      <label>전화번호</label>
+		      <b id="pT">${perMember.perTel}</b>
+	      </div>
+	      <div id="crud">
+				  <a href="updateform" >프로필 수정</a> |
+		      <a href="deleteform">회원 탈퇴</a>
+	      </div>
 	    </div>
-	    <div id="email">
-	      <label>이메일</label>
-	      <b>${perMember.perEmail}</b>
-	    </div>        
-	    <div id="tel">
-	      <label>전화번호</label>
-	      <b>${perMember.perTel}</b>
-      </div><hr>
-      
-		<br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		  <input type="submit" value="프로필 수정" formaction="updateform" class ="btn btn-outline-dark"/>
-		  <input type="submit" value="내 문의글" formaction="../askboard/permylist" class ="btn btn-outline-dark"/>
-		  <input type="submit" value="내 북마크" formaction="../bookmark/list?perno=${loginUser.perNo}" class ="btn btn-outline-dark"/>
-		  <input type="submit" value="내 리뷰" formaction="../cafe/reviewList" class ="btn btn-outline-dark"/>
-		  <input type="submit" value="내 예약 " formaction="../cafe/reservationList"class ="btn btn-outline-dark"/>
-		  <input type="submit" value="회원탈퇴" formaction="deleteform" class ="btn btn-outline-dark"/>
-</div>
+    </div>
+		<hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-center">
+		  <input type="submit" value="📚내 북마크" formaction="../bookmark/list?perno=${loginUser.perNo}" class ="btn btn-outline-dark"/>
+		  <input type="submit" value="🧾내 예약 " formaction="../cafe/reservationList"class ="btn btn-outline-dark"/>
+		  <input type="submit" value="✒내 리뷰" formaction="../cafe/reviewList" class ="btn btn-outline-dark"/>
+		  <input type="submit" value="💬내 문의글" formaction="../askboard/permylist" class ="btn btn-outline-dark"/>
+   </div>
 </div>
 </form>
 
