@@ -81,7 +81,7 @@ table td button {
 	          <th>탈퇴시키기</th>
           </c:if>
         </tr>
-        </thead>
+       </thead>
         <tbody>
           <c:forEach items="${guildersList}" var="guilderMember">
           <tr>
@@ -101,8 +101,8 @@ table td button {
 		        <c:choose>
               <c:when test="${loginUser.perNo eq study.owner.perNo}">
                 <c:if test="${study.owner.perNo != guilderMember.perNo}">
-                  <td><button class="btn btn-outline-dark" onclick='return submitBtn(this.form,${guilderMember.perNo},${study.studyNo});'>조장권한위임</button></td>
-				          <td><button class="btn btn-outline-dark" onclick='return submitBtn2(this.form,${guilderMember.perNo},${study.studyNo});'>탈퇴시키기</button></td>
+                  <td><button class="btn btn-outline-dark" onclick='return submitBtn("owner1","guilderMemberNo",${guilderMember.perNo},"studyNo",${study.studyNo});'>조장권한위임</button></td>
+				          <td><button class="btn btn-outline-dark" onclick='return submitBtn("owner2","guilderMemberNo",${guilderMember.perNo},"studyNo",${study.studyNo});'>탈퇴시키기</button></td>
 				        </c:if>
               </c:when>
               </c:choose>
@@ -123,18 +123,25 @@ table td button {
     <li id="tab2" class="btnCon"><a class="btn" href="#tab2">승인대기중인 구성원</a>
       <div class="tabCon" >
       <br>
-      <br><br>
-      <table class="table table-hover">
+      <table class="table table-hover text-center align-middle">
+      <thead>
+        <tr>
+          <th>닉네임</th>
+          <th>승인</th>
+          <th>거절</th>
+        </tr>
+       </thead>
         <tbody>
           <c:forEach items="${waitingGuilderList}" var="waitingMember">
-            <div class="card">
-	            <div class="body-photo">${waitingMember.perPhoto} 프로필사진</div>
-	            <div class="body-left"><a class="profile" href="detail?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a></div>
-	            <div class="body-right">
-	            <a type="button" class="ownerbtn" href="agree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}">승인</a>
-	            <a type="button" class="ownerbtn" href="disagree?watingMemberNo=${waitingMember.perNo}&studyNo=${study.studyNo}">거절</a>
-              </div>
-            </div>
+            <tr>
+              <td>
+                 <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
+                 <a class="profile" href="detail?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a>
+              </td>
+              
+	            <td><button class="btn btn-outline-dark" onclick='return submitBtn("agree","watingMemberNo",${waitingMember.perNo},"studyNo",${study.studyNo});'>승인</button></td>
+	            <td><button class="btn btn-outline-dark" onclick='return submitBtn("disagree","watingMemberNo",${waitingMember.perNo},"studyNo",${study.studyNo});'>거절</button></td>
+            </tr>
           </c:forEach>
         </tbody>
       </table>
@@ -152,25 +159,27 @@ table td button {
 <script>
 location.href = "#tab1";
 
-function submitBtn(frm,guilderMemberNo,studyNo) {
-	
+function submitBtn(str, name1, value1, name2, value2) {
+	console.log(str, name1, value1, name2, value2);
 	var form = document.createElement('form');
 	form.setAttribute('method', 'post');
 
 	var hiddenField = document.createElement('input');
 	hiddenField.setAttribute('type', 'hidden');
-	hiddenField.setAttribute('name', 'guilderMemberNo');
-	hiddenField.setAttribute('value', guilderMemberNo);
+	hiddenField.setAttribute('name', name1);
+	hiddenField.setAttribute('value', value1);
 	form.appendChild(hiddenField);
 
 	var hiddenField = document.createElement('input');
 	hiddenField.setAttribute('type', 'hidden');
-	hiddenField.setAttribute('name', 'studyNo');
-	hiddenField.setAttribute('value', studyNo);
+	hiddenField.setAttribute('name', name2);
+	hiddenField.setAttribute('value', value2);
 	form.appendChild(hiddenField);
 
 	document.body.appendChild(form);
 	
+	if (str == 'owner1'){
+		
 	(async () => {
 	
 	const inputOptions = new Promise((resolve) => {
@@ -205,42 +214,57 @@ function submitBtn(frm,guilderMemberNo,studyNo) {
 			}
 		}
 	})()
-};
-
-function submitBtn2(frm,guilderMemberNo,studyNo) {
 	
-	var form = document.createElement('form');
-	form.setAttribute('method', 'post');
-
-	var hiddenField = document.createElement('input');
-	hiddenField.setAttribute('type', 'hidden');
-	hiddenField.setAttribute('name', 'guilderMemberNo');
-	hiddenField.setAttribute('value', guilderMemberNo);
-	form.appendChild(hiddenField);
-
-	var hiddenField = document.createElement('input');
-	hiddenField.setAttribute('type', 'hidden');
-	hiddenField.setAttribute('name', 'studyNo');
-	hiddenField.setAttribute('value', studyNo);
-	form.appendChild(hiddenField);
-
-	document.body.appendChild(form);
+	} else if (str == 'owner2') {
+		Swal.fire({
+		      title: '정말 탈퇴시키겠습니까?',
+		      icon: 'question',
+		      showCancelButton: true,
+		      confirmButtonColor: '#3085d6',
+		      cancelButtonColor: '#d33',
+		      confirmButtonText: '네',
+		      cancelButtonText: '아니오'
+		  }).then((result) => {
+		      if (result.isConfirmed) {
+		         form.setAttribute('action', 'delete');
+		         form.submit();
+		         return true;
+		      }
+		  })
+	} else if (str == 'agree') {
+		Swal.fire({
+	          title: '정말 승인하시겠습니까?',
+	          icon: 'question',
+	          showCancelButton: true,
+	          confirmButtonColor: '#3085d6',
+	          cancelButtonColor: '#d33',
+	          confirmButtonText: '네',
+	          cancelButtonText: '아니오'
+	      }).then((result) => {
+	          if (result.isConfirmed) {
+	             form.setAttribute('action', 'agree');
+	             form.submit();
+	             return true;
+	          }
+	      })	
+	} else if (str == 'disagree') {
+		Swal.fire({
+            title: '정말 거절하시겠습니까?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '네',
+            cancelButtonText: '아니오'
+        }).then((result) => {
+            if (result.isConfirmed) {
+               form.setAttribute('action', 'disagree');
+               form.submit();
+               return true;
+            }
+        })  
+	}
 	
-  Swal.fire({
-      title: '정말 탈퇴시키겠습니까?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '네',
-      cancelButtonText: '아니오'
-  }).then((result) => {
-      if (result.isConfirmed) {
-     		 form.setAttribute('action', 'delete');
-         form.submit();
-         return true;
-      }
-  })
 };
 
 </script>
