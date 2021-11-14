@@ -24,17 +24,15 @@ public class ToDoAddController extends HttpServlet {
   @Autowired SqlSessionFactory sqlSessionFactory;
 
   @PostMapping("/mystudy/todo/add")
-  public ModelAndView todoAdd(ToDo todo, HttpSession session, int studyno) throws Exception {
+  public ModelAndView todoAdd(ToDo todo, HttpSession session) throws Exception {
 
-    Member loginUser = (Member) session.getAttribute("loginUser");
+    //Member loginUser = (Member) session.getAttribute("loginUser");
 
-    if (loginUser == null) {
-      throw new Exception("로그인 한 회원이 없습니다.");
-    }
+    todo.setTodoWriter((Member) session.getAttribute("loginUser"));
 
-    Member member = memberDao.findByNo(loginUser.getPerNo());
+    //    Member member = memberDao.findByNo(loginUser.getPerNo());
 
-    Study myStudy = studyDao.findByNo(studyno);
+    Study myStudy = studyDao.findByNo(todo.getStudyNo());
 
     if (myStudy.getStudyTitle() == null) {
       throw new Exception(" >> 가입된 스터디가 없습니다.");
@@ -44,7 +42,7 @@ public class ToDoAddController extends HttpServlet {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list?studyno="+myStudy.getStudyNo()+member.getPerNo());
+    mv.setViewName("redirect:list?studyno="+myStudy.getStudyNo());
     return mv;
 
   }

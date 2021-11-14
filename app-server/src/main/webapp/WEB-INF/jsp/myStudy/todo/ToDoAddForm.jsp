@@ -72,7 +72,7 @@
 <div class="all-content">
 <form action='add' method='post'>
 
-<input type='hidden' name='studyno' value='${studyno}'>
+<input type='hidden' name='studyNo' value='${studyno}'>
 <%-- <input type='hidden' name='perno' value='${member.perNo}'> --%>
 
 	<br>
@@ -87,25 +87,26 @@
 	
 	<tr id="blockbox">
     <th scope="row" id="middlebox"><label for='f-progress_no'>상태</label></th>
-    <td><input id='f-progress_no' type='text' name='progress_no' value="진행 중" readonly></td>
-    <td></td>
+    <td><input id='f-progress_no' type='text' name='todocomplete' value="진행 중" readonly></td>
+    <td><input id='f-progress_no' type='hidden' name='todoStatus' value="1" readonly></td>
   </tr>
   
   <tr id="blockbox">
     <th scope="row" id="middlebox"><label for='f-content'>내용</label></th>
-    <td><textarea id='f-content' type='text' name='content'></textarea></td>
+    <td><textarea id='f-content' type='text' name='todoContent'></textarea></td>
     <td></td>
   </tr>
 	
   <tr id="blockbox">
     <th scope="row" id="middlebox"><label for='f-note'>비고</label></th>
-    <td><input id='f-note' type='text' name='note'></td>
+    <td><input id='f-note' type='text' name='todoRemark'></td>
     <td></td>
   </tr>
   
   <tr id="bottombox">
     <th scope="row" id="middlebox"><label for='f-writer'>작성자</label></th>
-    <td><input id='f-writer' type='text' name='perNickname' value='${loginUser.perNickname}' readonly></td>
+    <td>
+    <input id='f-writer' type='text' value='${member.perNickname}' readonly></td>
     <td></td>
   </tr>
 	
