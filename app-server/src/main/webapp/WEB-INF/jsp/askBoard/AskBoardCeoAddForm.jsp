@@ -20,16 +20,16 @@
   }
   </style>
 <br>
-  <form method="post">
+  <form id="all" action="ceoadd" method="post">
     <label for='f-status'>공개</label>
     <select id="f-status" name='status' >
-      <option value='1' name='status'>공개</option>
-      <option value='2' name='status'>비공개</option>
+      <option value='1' name='askStatus'>공개</option>
+      <option value='2' name='askStatus'>비공개</option>
     </select><br> 
     
     <div id="passwordRow">
       <label for='f-tempPW' size='100px'>🔏비밀번호</label>
-      <input id='f-tempPW' type='password' name='tempPW' placeholder="4자리"></input>
+      <input id='f-tempPW' type='password' name='pw' placeholder="4자리"></input>
     </div><br>
   
       <br>
