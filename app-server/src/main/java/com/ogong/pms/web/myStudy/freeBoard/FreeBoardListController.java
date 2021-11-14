@@ -14,7 +14,7 @@ public class FreeBoardListController {
   @Autowired
   FreeBoardDao freeBoardDao;
 
-  @GetMapping("/freeboard/list")
+  @GetMapping("/mystudy/freeboard/list")
   public ModelAndView list(int studyno) throws Exception {
     // int studyNo = Integer.parseInt(request.getParameter("studyno"));
 

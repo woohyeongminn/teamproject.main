@@ -17,7 +17,7 @@ public class FreeBoardAddFormController {
   @Autowired
   FreeBoardDao freeBoardDao;
 
-  @GetMapping("/freeboard/form")
+  @GetMapping("/mystudy/freeboard/form")
   public ModelAndView addform(HttpSession session) {
     // int studyNo = Integer.parseInt(request.getParameter("studyno"));
 

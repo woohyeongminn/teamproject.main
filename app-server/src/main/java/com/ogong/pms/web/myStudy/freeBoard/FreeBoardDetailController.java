@@ -18,7 +18,7 @@ public class FreeBoardDetailController {
   @Autowired
   CommentDao commentDao;
 
-  @GetMapping("/freeboard/detail")
+  @GetMapping("/mystudy/freeboard/detail")
   public ModelAndView detail(int freeboardno, int studyno) throws Exception {
     // int studyNo = Integer.parseInt(request.getParameter("studyno"));
     // int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));

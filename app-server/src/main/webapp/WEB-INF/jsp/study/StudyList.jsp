@@ -201,7 +201,7 @@ ul{
     </div>
     <div class="card-body">
       <h5 class="card-title" style="font-weight: bold">
-        ${study.studyTitle}
+        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
       </h5>
       <p class="card-text">${study.introduction}</p>
       ${study.faceName}<br>
@@ -253,7 +253,7 @@ ul{
     </div>
     <div class="card-body">
       <h5 class="card-title" style="font-weight: bold">
-        ${study.studyTitle}
+        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
       </h5>
       <p class="card-text">${study.introduction}</p>
       ${study.faceName}<br>

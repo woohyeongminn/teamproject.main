@@ -16,7 +16,7 @@ public class FreeBoardUpdateFormController {
   @Autowired
   FreeBoardDao freeBoardDao;
 
-  @GetMapping("/freeboard/updateform")
+  @GetMapping("/mystudy/freeboard/updateform")
   public ModelAndView updateform(int freeboardno, int studyno) throws Exception {
     // int studyNo = Integer.parseInt(request.getParameter("studyno"));
     // int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
