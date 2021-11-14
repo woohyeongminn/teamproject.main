@@ -20,43 +20,7 @@
     line-height: 14px;
   }
  </style>
-<script type="text/javascript">
-function checkValue() {
-  
-  var form = document.ceoInfo;
-  
-  if(!form.name.value){
-        alert("이름을 입력하세요.");
-        return false;
-   }
-  
-  if(!form.nickname.value){
-        alert("닉네임을 입력하세요.");
-        return false;
-   }
-  
-  if(!form.tel1.value && !form.tel2.value && !form.tel3.value){
-        alert("전화번호를 입력하세요.");
-        return false;
-   }
 
-   if(!form.email.value){
-        alert("이메일을 입력하세요.");
-        return false;
-    }
-   
-    if(!form.email.value != "checkEmail"){
-        alert("이메일 중복체크를 해주세요.");
-        return false;
-    }
-     
-   if(!form.password.value){
-        alert("비밀번호를 입력하세요.");
-        return false;
-    }
-}
-
-</script>
 <body>
 <br><br><br>
 <div class="all-content">
@@ -436,9 +400,6 @@ function checkValue() {
   });
   function getMemberRefundAccount() {}
   </script>
-  
- </body>
-</html>
 
 
 
