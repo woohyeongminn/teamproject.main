@@ -19,43 +19,22 @@
   .btn {
     line-height: 14px;
   }
+   .all-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  } 
  </style>
-
 <body>
-<br><br><br>
-<div class="all-content">
-  <div class="tabmenu">
-   <ul>
-    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
-    <div class="tabCon">
-    <form action='update' method='post' enctype="multipart/form-data">
-      <input type='hidden' name='perNo' value='${perMmber.perNo}'>
-    
-     <div class="profile">
-      <div class="profile-header">
-        <a href="${contextPath}/upload/perMember/${perMember.perPhoto}.jpg" >
-          <img id="f-photo-image" src="${contextPath}/upload/perMember/${perMember.perPhoto}_110x110.jpg">
-        </a>
-       </div>
-        
-       <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'><br>
-
-       <label for='f-name' class='form-label'>이름</label>
-       <input id='f-name' type='text' name='perName' value='${perMember.perName}'><br>
-       
-       <label for='f-nickname' class='form-label'>닉네임</label>
-       <input id='f-nickname' type='text' name='perNickname' value='${perMember.perNickname}'><br>
-       
-       <label for='f-tel' class='form-label'>전화번호</label>
-       <input id='f-tel' type='tel' name='perTel' value='${perMember.perTel}'><br>
-       
-       <label for='f-email' class='form-label'>이메일</label>
-       <input id='f-email' type='email' name='perEmail' value='${perMember.perEmail}'><br>
-       
-    <label for='f-registeredDate' class='form-label'>가입일</label>
-       <input id='f-registeredDate' type='text' name='perRegisteredDate' readonly value='${perMember.perRegisteredDate}'><br>
-     </div>
-    
+   <div class="all-content">
+   <br>
+   <b style="font-size: 20px">✏내 프로필 수정</b><br> 
+   <hr>
+		 
+		 
+		 
+		 
 		 <section class="n-section-block">
 		  <table class="n-table table-row my-info-modify">
 		   <tr id="password-area">
@@ -69,9 +48,9 @@
 		         <div class="my-info-modify">
 		             <div class="my-info-modify">
 		               <div class="input">
-		                   <label for="password">현재 비밀번호</label>
-		                   <input type="password" class="n-input" id="password">
-		                   <span id="password-invalid" class="validate danger"></span>
+		                   <label for="nowpassword">현재 비밀번호</label>
+		                   <input type="password" class="n-input" id="nowpassword">
+		                   <span id="now-password-invalid" class="validate danger"></span>
 		               </div>
 		               
 		               <div class="input">
@@ -87,10 +66,6 @@
 		                   <span id="confirm-password-invalid" class="validate danger"></span>
 		                   <span  id="valid-confirmPassword" class="validate" style="display: none">사용 가능한 비밀번호입니다.</span>
 		               </div>
-		               <div class="btn-group">
-		                   <button type="button" class="n-btn btn-sm btn-lighter" id="change-password-cancel-btn">취소</button>
-		                   <button type="button" class="n-btn btn-sm btn-accent disabled" id="change-password-finish-btn" disabled >완료</button>
-		               </div>
 		         </div>
 		       </td>
 		   </tr>
@@ -98,9 +73,34 @@
 		  </table>
 		 </section>
   
-  <br><button class="btn btn-outline-dark" type="submit" value="수정">수정하기</button>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+         <button class="btn btn-outline-dark" type="submit" >수정하기</button> 
+         <a type="buttion" href="${contextPath}/app/member/detail" class="btn btn-outline-dark" >취소하기</a>
+       </div>
   </form> 
-
+</body>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   <script type="text/javascript" >
   $(document).ready(function () {
 

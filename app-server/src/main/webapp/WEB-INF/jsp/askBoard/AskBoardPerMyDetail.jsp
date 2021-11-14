@@ -20,37 +20,34 @@
   }
 </style>
   <div id="mian">
-     <span id='no' name='no'>(${myAskBoard.askNo})</span><br>
-     <span>제목ㅣ</span> <span>${myAskBoard.askTitle}</span><br>
-     <span>내용ㅣ</span> <span>${myAskBoard.askContent}</span><br>
-     <span>작성자ㅣ</span> <span>${myAskBoard.askMemberWriter.perNickname}</span><br>
-     <span>작성일ㅣ</span> <span>${myAskBoard.askRegisteredDate}</span><br>
-     
-     <c:choose>
+      <span id='no' name='no'>${myAskBoard.askNo}</span><br>
+      <label for="f-title" class="form-label">제목</label>
+      <input type="text" class="form-control" name="title" value="${myAskBoard.askTitle}" readonly></input>
+    
+      <label for="f-content" class="form-label">내용</label>
+      <textarea class="form-control" id="f-content" name="content" placeholder="${myAskBoard.askContent}" class="form-control" cols="50" rows="3" readonly></textarea>
+ 
+      <span>작성자ㅣ${myAskBoard.askMemberWriter.perNickname}</span><br>
+      <span>등록일ㅣ${myAskBoard.askRegisteredDate}</span><br>
+      <c:choose>
 	      <c:when test="${empty myAskBoard.reply}">
-		      <span>
-		        등록된 답변이 없습니다.
-		      </span><br>  
+	      <br><label>답변📔 </label>
+      	<textarea class="form-control" id="f-content" name="content" 
+	      placeholder="등록된 답변이 없습니다." class="form-control" cols="50" rows="2" readonly></textarea>
 	      </c:when>
 	      <c:otherwise>
-	       <span>관리자ㅣ</span>
-	       <span>
-	       ${myAskBoard.reply.replyTitle} | ${myAskBoard.reply.replyContent} | 
-	       ${myAskBoard.reply.replyRegisteredDate}
-	       </span><br>
+	      <br><label>답변📖  등록일ㅣ${myAskBoard.reply.replyRegisteredDate} </label>
+        <textarea class="form-control" id="f-content" name="content" 
+        placeholder="${myAskBoard.reply.replyContent}"
+         class="form-control" cols="50" rows="2" readonly></textarea>
 	      </c:otherwise>
      </c:choose>
   </div>   
-      <br>
-   
-     <button class = "btn btn-outline-dark" type="submit" value="수정" formaction="add">
-     <a href='perupdateform?askNo=${myAskBoard.askNo}'>문의글수정</a>
-     </button>
-     <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
-     <a href='perdelete?askNo=${myAskBoard.askNo}'>문의글삭제</a>
-     </button>
-     <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="list">
-     <a href='permylist'>내 목록보기</a>
-     </button> 
+      
+     <br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	     <a href='perupdateform?askNo=${myAskBoard.askNo}' type="button" class="btn btn-outline-dark">수정하기</a>
+	     <a href='perdelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark">삭제하기</a>
+	    <a href='permylist' type="button" class="btn btn-outline-dark" >뒤로가기</a>
+     </div>
      
      

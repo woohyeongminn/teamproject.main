@@ -24,8 +24,3 @@
 </head>
 <body>
   <p>문의글이 등록되었습니다.</p>
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="permylist">
-     내 문의글 보기
-     </button>
-   </div> 
