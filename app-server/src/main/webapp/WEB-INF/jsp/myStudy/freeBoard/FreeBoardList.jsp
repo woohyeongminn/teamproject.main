@@ -12,13 +12,16 @@
 .card w-50 {
   justify-content: center;
 }
+#empty-freeboard {
+  text-align: center;
+}
 </style>
 </head>
 <body>
 <br>
   <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
     <button class="btn btn-light">
-      <a href='addform?studyno=${studyno}'>등록</a>
+      <a href='form?studyno=${studyno}'>등록</a>
     </button>
   </div>
 <c:if test='${not empty freeBoardList}'>
@@ -36,9 +39,11 @@
 </c:forEach>
 </div>
 </c:if>
+<div id="empty-freeboard">
 <c:if test="${empty freeBoardList}">
   등록된 게시글이 없습니다.
 </c:if>
+</div>
 <!-- 이미지 -->
 <!-- <c:if test='${not empty freeBoardList}'>
 <c:forEach items="${freeBoardList}" var="freeBoard">
