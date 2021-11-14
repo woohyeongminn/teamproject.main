@@ -95,7 +95,7 @@
       <div class="modal-body">
         <form id="reviewForm" action="reviewAdd" method="POST">
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">점수</label>
+            <label for="recipient-name" class="col-form-label">평점</label>
             <input type="number" min="0" max="5" name="grade" class="form-control" id="recipient-name">
           </div>
           <div class="mb-3">
@@ -106,8 +106,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" id="btnReviewAdd">등록</button>
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-outline-dark" id="btnReviewAdd">등록</button>
       </div>
     </div>
   </div>
@@ -164,7 +164,7 @@ document.querySelector("#btnReviewAdd").onclick = () => {
   var content = document.querySelector('textarea[name="content"]');
   
    if (grade.value.length == 0 || content.value.length == 0){
-    swal.fire("점수와 내용을 모두 입력해주세요.");
+    swal.fire("평점과 내용을 모두 입력해주세요.");
     return false;
   } else {
     Swal.fire({

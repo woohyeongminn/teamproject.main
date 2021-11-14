@@ -58,7 +58,7 @@
 	      <button class="btn btn-outline-dark btn-sm"><a href="reviewUpdateForm?reviewNo=${review.reviewNo}">수정</a></button>
 	    </td>
 	    <td>
-	      <button class="btn btn-outline-dark btn-sm"><a href="reviewDelete?reviewNo=${review.reviewNo}">삭제</a></button>
+	      <button class="btn btn-outline-dark btn-sm" onclick='return btnDelete(${review.reviewNo})'>삭제</button>
 	    </td>
 	 </tr>
 	</c:forEach>
@@ -71,3 +71,34 @@
 </c:if>
 <br>
 </div>
+
+
+<script>
+function btnDelete(reviewNo) {
+	Swal.fire({
+    title: '리뷰를 정말 삭제하시겠습니까?',
+    showCancelButton: true,
+    confirmButtonText: '네',
+    cancelButtonText: '아니오'
+  }).then((result) => {
+    if (result.value) { 
+    	var form = document.createElement('form');
+   	  form.setAttribute('method', 'post');
+   	  form.setAttribute('action', 'reviewDelete');
+
+   	  var hiddenField = document.createElement('input');
+   	  hiddenField.setAttribute('type', 'hidden');
+   	  hiddenField.setAttribute('name', "reviewNo");
+   	  hiddenField.setAttribute('value', reviewNo);
+   	  form.appendChild(hiddenField);
+
+   	  document.body.appendChild(form);
+   	  
+	    form.submit();
+	    return true;
+    }
+  })
+}
+
+</script>
+
