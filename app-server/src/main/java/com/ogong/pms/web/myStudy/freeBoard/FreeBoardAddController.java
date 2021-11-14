@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -33,7 +32,11 @@ public class FreeBoardAddController {
       throws Exception {
     // FreeBoard freeBoard = new FreeBoard();
 
-    if (photoFile.getSize() > 0) {
+    if (photoFile == null) {
+      System.out.println("파일 X");
+    }
+
+    else if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/freeboard") + "/" + filename);
       freeBoard.setFreeBoardFile(filename);
@@ -55,7 +58,7 @@ public class FreeBoardAddController {
       });
     }
 
-    freeBoard.setStudyNo(((Study) session.getAttribute("studyno")).getStudyNo());
+    // freeBoard.setStudyNo(studyno);
     freeBoard.setFreeBoardWriter((Member) session.getAttribute("loginUser"));
     // freeBoard.setFreeBoardTitle(request.getParameter("title"));
     // freeBoard.setFreeBoardContent(request.getParameter("content"));

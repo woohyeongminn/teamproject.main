@@ -24,14 +24,15 @@ public class CommentAddController {
   CommentDao commentDao;
 
   @PostMapping("/freeboard/comment/add")
-  public ModelAndView add(Comment comment, HttpSession session) throws Exception {
+  public ModelAndView add(Comment comment, int freeboardno, int studyno, HttpSession session)
+      throws Exception {
     // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
     // System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
     // }
 
     // int studyNo = Integer.parseInt(request.getParameter("studyno"));
     // int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
-    FreeBoard freeBoard = freeBoardDao.findByNo(comment.getBoardNo(), comment.getStudyNo());
+    FreeBoard freeBoard = freeBoardDao.findByNo(freeboardno, studyno);
     // String commentText = request.getParameter("commenttext");
 
     if (freeBoard == null) {
