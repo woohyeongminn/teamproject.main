@@ -1,5 +1,6 @@
 package com.ogong.pms.web.myStudy.freeBoard.comment;
 
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Member;
 
 @Controller
 public class CommentAddController {
@@ -21,7 +23,7 @@ public class CommentAddController {
   CommentDao commentDao;
 
   @PostMapping("/freeboard/comment/add")
-  public ModelAndView add(Comment comment) throws Exception {
+  public ModelAndView add(Comment comment, HttpSession session) throws Exception {
     // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
     // System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");
     // }
@@ -37,7 +39,7 @@ public class CommentAddController {
 
     // Comment comment = new Comment();
 
-    // comment.setCommentWriter((Member) session.getAttribute("loginUser"));
+    comment.setCommentWriter((Member) session.getAttribute("loginUser"));
     // comment.setStudyNo(comment.getStudyNo());
     // comment.setBoardNo(comment.getBoardNo());
     // comment.setCommentText(commentText);
