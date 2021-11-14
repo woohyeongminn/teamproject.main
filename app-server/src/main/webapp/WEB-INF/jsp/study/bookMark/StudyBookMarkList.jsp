@@ -16,6 +16,9 @@
   padding: 1rem 1rem;
   height: 160px;
 }
+#empty-bookmark {
+  text-align: center;
+}
 </style>
 </head>
 <body>
@@ -47,10 +50,13 @@
  </div>
  </div>
 </c:if>
+<div id="empty-bookmark">
 <c:if test='${empty studyList}'>
    북마크한 스터디가 없습니다.
 </c:if>
-	
+</div>
+</body>
+</html>
 <!-- <table class="table table-hover">
 		<thead>
 			<tr>
@@ -79,5 +85,3 @@
 			</c:forEach>
 		</tbody>
 	</table> -->
-</body>
-</html>
