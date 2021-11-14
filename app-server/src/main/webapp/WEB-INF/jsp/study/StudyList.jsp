@@ -15,7 +15,7 @@
   margin:0;
   padding:0;
   font-size:14px;
-  line-height:1.3;
+  line-height:1.5;
 }
 ul{
   list-style:none;
@@ -29,7 +29,7 @@ ul{
   display: inline-block;
   width:33.33%; 
   float:left;
-  text-align:center;
+  xtext-align:center;
 }
 .tabmenu ul li a{
   display:block;
@@ -49,7 +49,7 @@ ul{
   width: 900px;
 }
 .btnCon:target  {
-  background : #ccc;
+  background : rgb(247, 231, 215);
 }
 .btnCon:target .tabCon{
   display: block;
@@ -57,7 +57,10 @@ ul{
 .card-body {
 	flex: 1 1 auto;
 	padding: 1rem 1rem;
-	height: 190px;
+	height: 185px;
+}
+#search {
+  text-align:center;
 }
 </style>
 </head>
@@ -105,17 +108,41 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-    <button class="btn btn-outline-dark">검색</button>
+    <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <br>
-  <button>
-    <a href='form'>등록</a>
-  </button>
+  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+	  <button class="btn btn-light">
+	    <a href='form'>글쓰기</a>
+	  </button>
+  </div>
   <br>
 <c:if test='${not empty studyList}'>
-  <div id="content">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+<div id="content">
+  <div class="row row-cols-1 row-cols-md-2 g-5">
+  <c:forEach items="${studyList}" var="study">
+  <div class="col">
+	<div class="card">
+	  <div class="card-header">
+	    ${study.subjectName}
+	  </div>
+	  <div class="card-body">
+	    <h5 class="card-title" style="font-weight: bold">
+        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+	    </h5>
+	    <p class="card-text">${study.introduction}</p>
+	    ${study.faceName}<br>
+      인원 ${study.countMember}/${study.numberOfPeple}<br>
+      ${study.owner.perNickname}
+      ⭐${study.countBookMember}
+	  </div>
+  </div>
+  </div>
+ </c:forEach>
+ </div>
+ </div>
+  <!-- <div id="content">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
     <c:forEach items="${studyList}" var="study">
       <div class="col">
         <div class="card">
@@ -134,7 +161,7 @@ ul{
       </div>
     </c:forEach>
     </div>
-  </div>
+  </div> -->
 </c:if>
 <c:if test='${empty studyList}'>
    검색 결과가 존재하지 않습니다.<br><br>
@@ -154,32 +181,39 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-    <button class="btn btn-outline-dark">검색</button>
+    <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
+  </div>
+  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-light">
+      <a href='form'>글쓰기</a>
+    </button>
   </div>
   <br>
 <c:if test='${not empty studyIngList}'>
-  <div id="content">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-    <c:forEach items="${studyIngList}" var="study">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
-            ${study.faceName}<br>
-            <c:if test="${study.faceName ne '비대면'}">
-            ${study.area}<br>
-            </c:if>
-            인원 ${study.countMember}/${study.numberOfPeple}<br>
-            ${study.owner.perNickname}
-            🔖${study.countBookMember}
-          </div>
-        </div>
-      </div>
-    </c:forEach>
+<div id="content">
+  <div class="row row-cols-1 row-cols-md-2 g-5">
+  <c:forEach items="${studyIngList}" var="study">
+  <div class="col">
+  <div class="card">
+    <div class="card-header">
+      ${study.subjectName}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" style="font-weight: bold">
+        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+      </h5>
+      <p class="card-text">${study.introduction}</p>
+      ${study.faceName}<br>
+      인원 ${study.countMember}/${study.numberOfPeple}<br>
+      ${study.owner.perNickname}
+      ⭐${study.countBookMember}
     </div>
   </div>
+  </div>
+ </c:forEach>
+ </div>
+ </div>
 </c:if>
 <c:if test='${empty studyIngList}'>
    검색 결과가 존재하지 않습니다.<br><br>
@@ -199,32 +233,39 @@ ul{
       <option value="3">지역</option>
     </select>
     <input type="text" name="keyword">
-    <button class="btn btn-outline-dark">검색</button>
+    <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
+  </div>
+  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button class="btn btn-light">
+      <a href='form'>글쓰기</a>
+    </button>
   </div>
   <br>
 <c:if test='${not empty studyEndList}'>
   <div id="content">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-    <c:forEach items="${studyEndList}" var="study">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <span style="color:royalblue">${study.subjectName}</span><br>
-            <span style="font-weight: bold"><a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a></span><br>
-            ${study.faceName}<br>
-            <c:if test="${study.faceName ne '비대면'}">
-            ${study.area}<br>
-            </c:if>
-            인원 ${study.countMember}/${study.numberOfPeple}<br>
-            ${study.owner.perNickname}
-            🔖${study.countBookMember}
-          </div>
-        </div>
-      </div>
-    </c:forEach>
+  <div class="row row-cols-1 row-cols-md-2 g-5">
+  <c:forEach items="${studyEndList}" var="study">
+  <div class="col">
+  <div class="card">
+    <div class="card-header">
+      ${study.subjectName}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" style="font-weight: bold">
+        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+      </h5>
+      <p class="card-text">${study.introduction}</p>
+      ${study.faceName}<br>
+      인원 ${study.countMember}/${study.numberOfPeple}<br>
+      ${study.owner.perNickname}
+      ⭐${study.countBookMember}
     </div>
   </div>
+  </div>
+ </c:forEach>
+ </div>
+ </div>
 </c:if>
 <c:if test='${empty studyEndList}'>
    검색 결과가 존재하지 않습니다.<br><br>

@@ -28,7 +28,7 @@ public class FreeBoardAddController {
   @Autowired
   ServletContext sc;
 
-  @PostMapping("/freeboard/add")
+  @PostMapping("/mystudy/freeboard/add")
   public ModelAndView add(FreeBoard freeBoard, Part photoFile, HttpSession session)
       throws Exception {
     // FreeBoard freeBoard = new FreeBoard();

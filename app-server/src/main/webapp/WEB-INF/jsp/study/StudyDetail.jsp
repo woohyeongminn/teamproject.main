@@ -37,6 +37,43 @@
       }
     </style>
 
+<script type="text/javascript">
+  function checkValue() {
+
+  var form = document.studyInfo;
+
+  if (form.studyStatus.value == 2) {
+	  alert("완료된 스터디 입니다.");
+    return false;
+  }
+  
+  for (Member guilder : form.members.value) {
+     if (form.guilder.perNo.value == form.loginUser.perNo.value) {
+    	 alert("이미 참여 중인 스터디입니다.");
+       return false;
+     }
+   }
+
+    for (Member memberWating : form.watingMember.value) {
+      if (form.memberWating.perNo.value == form.loginUser.perNo.value) {
+    	  alert("이미 승인 대기 중인 스터디입니다.");
+        return false;
+      }
+    }
+  
+  if (form.countMember.value == form.numberOfPeple.value) {
+	    alert("참여 가능 인원수를 초과하였습니다.");
+	    return false;
+	}
+}
+</script>
+
+<!-- <input name="members" type="text" value="${study.members}"/>
+<input name="watingMember" type="text" value="${study.watingMember}"/>
+<input name="studyStatus" type="text" value="${study.studyStatus}"/>
+<input name="countMember" type="text" value="${study.countMember}"/>
+<input name="numberOfPeple" type="text" value="${study.numberOfPeple}"/> -->
+
     <!-- Custom styles for this template -->
     <!-- <link href="sticky-footer.css" rel="stylesheet"> -->
   </head>
@@ -80,10 +117,10 @@
 		  <c:choose>
 		    <c:when test="${study.owner.perNo eq loginUser.perNo}">
 			    <button class="btn btn-outline-light">
-			      <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'>수정</a>
+			      <a href='updateform?studyno=${study.studyNo}'>수정</a>
 			    </button>
 			    <button class="btn btn-outline-light">
-			      <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}'>삭제</a>
+			      <a href='delete?studyno=${study.studyNo}'>삭제</a>
 			    </button>
 		    </c:when>
 		    <c:when test="${study.owner.perNo ne member.perNo}">

@@ -23,31 +23,11 @@ public class StudyJoinController {
   public ModelAndView join(int studyno, HttpSession session) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
-    // if (study.getStatus() == 2) {
-    // throw new Exception(" >> 완료된 스터디 입니다.");
-    // }
-
     List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
     study.setWatingMember(waitingGuilder);
 
     List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
     study.setMembers(guilders);
-
-    // for (Member guilder : study.getMembers()) {
-    // if (guilder.getPerNo() == member.getPerNo()) {
-    // throw new Exception(" >> 이미 참여 중인 스터디입니다.");
-    // }
-    // }
-
-    // for (Member memberWating : study.getWatingMember()) {
-    // if (memberWating.getPerNo() == member.getPerNo()) {
-    // throw new Exception(" >> 이미 승인 대기 중인 스터디입니다.");
-    // }
-    // }
-
-    // if (study.getMembers().size() == study.getNumberOfPeple()) {
-    // throw new Exception(" >> 참여 가능 인원수를 초과하였습니다.");
-    // }
 
     study.getWatingMember().add((Member) session.getAttribute("loginUser"));
     studyDao.insertGuilder(study.getStudyNo(),
@@ -57,10 +37,8 @@ public class StudyJoinController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    // mv.addObject("contentUrl", "study/StudyJoin.jsp");
+    //    mv.addObject("contentUrl", "study/StudyJoin.jsp");
     mv.setViewName("redirect:list");
     return mv;
-
-    // System.out.println(" >> 참여 신청이 완료되었습니다.\n 승인이 완료될 때까지 기다려 주세요.");
   }
 }
