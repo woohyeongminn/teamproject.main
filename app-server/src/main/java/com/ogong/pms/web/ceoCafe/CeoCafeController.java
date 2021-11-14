@@ -210,7 +210,7 @@ public class CeoCafeController {
     mv.addObject("cafe", cafe);
     mv.addObject("cafeStatus", status);
 
-    mv.addObject("pageTitle", "👩‍🏫 스터디카페 삭제 - "+ cafe.getName());
+    mv.addObject("pageTitle", "👩‍🏫 " + cafe.getName() + " - 내 카페 삭제");
     mv.addObject("contentUrl", "ceoCafe/CeoCafeDeleteForm.jsp");
     mv.setViewName("template1");
     return mv;
@@ -264,7 +264,7 @@ public class CeoCafeController {
     mv.addObject("cafe", cafe);
     mv.addObject("cafeStatus", status);
 
-    mv.addObject("pageTitle", "👩‍🏫 스터디카페 수정 - "+ cafe.getName());
+    mv.addObject("pageTitle", "👩‍🏫 " + cafe.getName() + " - 내 카페 수정");
     mv.addObject("contentUrl", "ceoCafe/CeoCafeUpdateForm.jsp");
     mv.setViewName("template1");
     return mv;

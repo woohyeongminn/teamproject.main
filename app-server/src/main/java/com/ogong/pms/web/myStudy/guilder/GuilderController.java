@@ -111,4 +111,38 @@ public class GuilderController {
     return mv;
   }
 
+  // 대기중인 사람 승인
+  @PostMapping("/mystudy/guilder/agree")
+  public ModelAndView agree(
+      int watingMemberNo, 
+      int studyNo, 
+      HttpSession session) throws Exception {
+
+    studyDao.updateGuilder(studyNo, watingMemberNo);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.setViewName("redirect:list?&studyNo="+studyNo+"#tab1");
+
+    return mv;
+  }
+
+  // 대기중인 사람 거절
+  @PostMapping("/mystudy/guilder/disagree")
+  public ModelAndView disagree(
+      int watingMemberNo, 
+      int studyNo, 
+      HttpSession session) throws Exception {
+
+    studyDao.deleteGuilder(studyNo, watingMemberNo);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.setViewName("redirect:list?&studyNo="+studyNo+"#tab1");
+
+    return mv;
+  }
+
 }

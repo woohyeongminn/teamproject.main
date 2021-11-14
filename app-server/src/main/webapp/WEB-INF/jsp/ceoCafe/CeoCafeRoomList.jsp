@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
 <head>
   <meta charset="UTF-8">
   <!-- 아이콘 -->
@@ -31,7 +29,6 @@
   text-align: center;
 }
 </style>
-</head>
 
 <body>
 <div class="all-content">
@@ -42,7 +39,7 @@
           <div class="col mb-5">
               <div class="card h-100">
                   <a href='detail?roomno=${cafeRoom.roomNo}'>
-                    <img class="card-img-top" src="../upload/cafe/${cafeRoom.roomImg}_80x80.jpg" alt="..." />
+                    <img class="card-img-top" src="${contextPath}/upload/cafe/${cafeRoom.roomImg}_80x80.jpg" alt="..." />
                   </a>
                   <div class="card-body p-3">
                       <div class="text-center">
@@ -52,7 +49,14 @@
                           <c:if test="${cafeRoom.roomStatus == 2}">
                           <p style="color:red">운영중단</p>
                           </c:if>
-                          <h5 class="fw-bolder"><a href='detail?roomno=${cafeRoom.roomNo}'><b>${cafeRoom.roomName}</b></a></h5>
+                          <h5 class="fw-bolder">
+	                          <c:if test="${cafeRoom.roomStatus == 1}">
+	                            <a href='detail?roomno=${cafeRoom.roomNo}'><b>${cafeRoom.roomName}</b></a>
+	                          </c:if>
+	                          <c:if test="${cafeRoom.roomStatus == 2}">
+	                            <b>${cafeRoom.roomName}</b>
+	                          </c:if>
+                          </h5>
                           <p>소개 | ${cafeRoom.roomInfo}</p>
                           <p>인원수 | ${cafeRoom.people}</p>
                           <p>시간당 금액 | ${cafeRoom.roomPrice}</p>
@@ -73,4 +77,3 @@
 </section>
 </div>
 </body>
-</html>
