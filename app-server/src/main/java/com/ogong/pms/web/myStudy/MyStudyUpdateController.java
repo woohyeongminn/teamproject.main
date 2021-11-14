@@ -38,7 +38,7 @@ public class MyStudyUpdateController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    mv.setViewName("redirect:detail?studyno=" + study.getStudyNo());
+    mv.setViewName("redirect:detail?studyNo=" + study.getStudyNo());
 
     return mv;
   }
