@@ -60,8 +60,13 @@ public class CeoCafeReservationController {
     String reviewStatusLable = CafeHandlerHelper.getReviewStatusLabel(
         String.valueOf(cafeReservation.getWirteReview()));
 
+
+    String memberNick = cafeReservation.getMember().getPerNickname();
+
+
     ModelAndView mv = new ModelAndView();
 
+    mv.addObject("memberNick", memberNick);
     mv.addObject("cafeReser", cafeReservation);
     mv.addObject("reviewStatusLable", reviewStatusLable);
     mv.addObject("cafeReserEndTime", 
