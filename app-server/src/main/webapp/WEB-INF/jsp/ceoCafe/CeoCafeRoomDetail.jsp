@@ -3,97 +3,190 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 * {
   font-size: 14px;
 }
-
-a {
- text-decoration:none;
+  
+ a {
+   text-decoration:none;
 }
 
-label {
-  display: inline-block;
-  margin-right: 5px;
-  width: 130px;
+.template-content {
+    height: 1100px;
 }
 
-#aside {
-   width: 120px;
-   height: 171px;
-   float: left;
-   background-color: lightsteelblue;
-   display: table;
-}
-
-#content {
-   margin-left: 130px;
-}
-
-#c-image {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-
-#c-grade {
-   margin-left: 41px;
-   vertical-align: 4px;
-}
-
-#c-review {
-  width: 427px;
-  background-color: whitesmoke;
-  height: 80px;
-  margin-bottom: 10px;
-}
-
-.all-content {
-  width: 100%;
+ .all-content {
+  width: 1000px;
   margin: 0 auto;
-  padding: 40px;
-  margin-top:50px;
+  height: 800px;
 }
 
-.c-top {
-  width: 100%;
-  padding: 20px 0 20px 0px;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
-  text-align: center;
+ul {
+  list-style:none;
 }
+
+.cafe-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cafe-top {
+  width: 50%;
+   margin: 8px 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+    .slide{height:300px;overflow:hidden;}
+    .slide li:nth-child(1){display:inline-block; background:#ffa; width: 100%; height:300px;}
+
+
+
+.cafe-bottom {
+      width: 50%;
+    text-align: left;
+    padding: 5px 0;
+    margin-top: 30px;
+    margin-left: 15px;
+}
+
+.cafe-bottom label {
+       width: 135px;
+   font-weight: bold;
+   padding: 5px 0;
+}
+
+.cafe-bottom span {
+  width: 80%;
+  padding: 5px 0;
+}
+
+.label-wrap {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+    flex-direction: row;
+}
+
+.label-wrap > label {
+   width: 135px;
+   font-weight: bold;
+   padding: 5px 0;
+}
+
+.label-wrap > span {
+  width:80%;
+  height:80px;
+  padding: 5px 0;
+  overflow: scroll;
+}
+
+.cafe-bottom-review {
+  width: 100%;
+  padding: 0 10px 30px 0px;
+  text-align: left;
+}
+ 
+.line {
+   width: 100%;
+   height: 4px;
+   background: gray;
+}
+
+.review-wrap {
+  width: 830px;
+  height: 180px;
+  overflow: scroll;
+}
+
+#c-review-content {
+  margin: 0;
+}
+  
+#c-review {
+  background-color: whitesmoke;
+  height: fit-content;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+  
+button {
+  border: 0;
+  background: transparent;
+}
+
+.btn_wrap {
+  max-width: 420px;
+  margin: 20px auto 0;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+ 
+.btn_wrap .btn {
+  margin: 0 7px;
+  padding: 5px 10px;
+  height: auto;
+  line-height: inherit;
+}
+
 </style>
 </head>
 
 <body>
+<br><br><br>
 <div class="all-content">
-  <h5>[${cafeRoom.roomName}]</h5>
-  <div id='aside'>
-    <span id='c-image'>대표이미지</span>
-  </div>
-  <form action='updateform' method='post' enctype="multipart/form-data">
-  <div id='content'>
-	  <c:if test="${cafeRoom.roomStatus == 1}">
-	  <p>운영중</p>
-	  </c:if>
-	  <c:if test="${cafeRoom.roomStatus == 2}">
-	  <p style="color:gray">운영중단</p>
-	  </c:if>
-    <label for='f-image'>대표이미지</label><span>${cafeRoom.roomImg}</span><br>
-    <label for='f-roomInfo'>소개글</label><span>${cafeRoom.roomInfo}</span><br>
-    <label for='f-people'>인원</label><span>${cafeRoom.people}</span><br>
-    <label for='f-roomPrice'>시간당금액</label><span>${cafeRoom.roomPrice}</span><br>
-  </div>
-   <div id='button'>
-	      <a href='updateform?roomno=${cafeRoom.roomNo}' class="btn btn-outline-dark"> 스터디룸 수정</a>
-	      <a href='delete?roomno=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}' class="btn btn-outline-dark">스터디룸 삭제</a>
-        <a href='list?cafeno=${cafeRoom.cafe.no}' class="btn btn-outline-dark">목록</a>
+  <div class="cafe-wrap">
+    <div class="cafe-top">
+      <div class="slide">
+          <ul>
+            <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
+          </ul>
+      </div>
     </div>
+    
+    <!-- 룸 상세 글 부분 -->      
+     <div class="cafe-bottom">
+     <form action='updateform' method='post' enctype="multipart/form-data">
+      <input id='c-no' type='hidden' value='${cafe.no}'>
+      <h4 style="text-align: center; margin-bottom: 30px;">[${cafeRoom.roomName}]</h4>
+      <div class="label-wrap">
+        <label for='f-roomInfo'>소개글</label>
+         <span style="height: fit-content;">${cafeRoom.roomInfo}</span>
+      </div>
+      <label for='f-people'>인원</label>
+      <span>${cafeRoom.people}</span><br>
+      <label for='f-roomPrice'>시간당금액</label>
+      <span>${cafeRoom.roomPrice}</span><br>
+
     </form>
-</div>
+     </div>
+  </div>
+  
+  <!-- 버튼 -->
+  <div id='button_wrap'>
+    <button id='b-but' type="submit" value="수정" formaction="updateform">
+        <a href='updateform?roomno=${cafeRoom.roomNo}' class="btn btn-outline-dark"> 스터디룸 수정</a>
+    </button>
+    
+    <button id='b-but' type="submit" value="삭제" formaction="deleteform">
+        <a href='delete?roomno=${cafeRoom.roomNo}&cafeno=${cafeRoom.cafe.no}' class="btn btn-outline-dark">스터디룸 삭제</a>
+    </button>
+      <button id='b-but' type="submit" value="삭제" formaction="deleteform">
+      <a href='list?cafeno=${cafeRoom.cafe.no}' class="btn btn-outline-dark">목록</a>
+    </button>
+    </div>
+ </div>
 </body>
 </html>
