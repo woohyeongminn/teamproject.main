@@ -2,6 +2,7 @@ package com.ogong.pms.web.myStudy.todo;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +22,9 @@ public class ToDoListController {
   @Autowired ToDoDao toDoDao;
 
   @GetMapping("/mystudy/todo/list")
-  public ModelAndView todoList(int perno, int studyno) throws Exception {
+  public ModelAndView todoList(HttpSession session, int studyno) throws Exception {
 
-    Member member = memberDao.findByNo(perno);
+    Member member = (Member) session.getAttribute("loginUser");
 
     Study myStudy = studyDao.findByNo(studyno);
     List<ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());

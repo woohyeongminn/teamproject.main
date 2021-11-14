@@ -1,63 +1,38 @@
 package com.ogong.pms.web.myStudy.todo;
 
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.ibatis.session.SqlSession;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.ToDo;
 
-@WebServlet("/mystudy/todo/addform")
-public class ToDoAddFormController extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+@Controller
+public class ToDoAddFormController {
 
-  StudyDao studyDao;
-  MemberDao memberDao;
-  ToDoDao toDoDao;
-  SqlSession sqlSession;
+  @Autowired StudyDao studyDao;
+  @Autowired MemberDao memberDao;
+  @Autowired ToDoDao toDoDao;
 
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    ServletContext 웹애플리케이션공용저장소 = config.getServletContext();
-    studyDao = (StudyDao) 웹애플리케이션공용저장소.getAttribute("studyDao");
-    memberDao = (MemberDao) 웹애플리케이션공용저장소.getAttribute("memberDao");
-    toDoDao = (ToDoDao) 웹애플리케이션공용저장소.getAttribute("toDoDao");
-    sqlSession = (SqlSession) 웹애플리케이션공용저장소.getAttribute("sqlSession");
-  }
+  @GetMapping("/mystudy/todo/addform")
+  public ModelAndView todoAddForm(HttpSession session, int studyno) throws Exception {
 
-  @Override
-  protected void service(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+    Member member = (Member) session.getAttribute("loginUser");
 
-    try {
+    List<ToDo> todoList = toDoDao.findAll(studyno);
 
-      int perNo = Integer.parseInt(request.getParameter("perno"));
-      Member member = memberDao.findByNo(perNo);
-
-      int studyNo = Integer.parseInt(request.getParameter("studyno"));
-      //      Member member = AuthPerMemberLoginHandler.getLoginUser();
-      //      Study myStudy = studyDao.findByNo(studyNo);
-
-      List<ToDo> todoList = toDoDao.findAll(studyNo);
-
-      request.setAttribute("member", member);
-      request.setAttribute("studyno", studyNo);
-      request.setAttribute("todoList", todoList); // todoList가 없을 때 사용하기 jsp에서
-      request.getRequestDispatcher("/myStudy/todo/ToDoAddForm.jsp").forward(request, response);
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      request.setAttribute("error", e);
-      request.getRequestDispatcher("/Error.jsp").forward(request, response);
-    }
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("member", member);
+    mv.addObject("studyno", studyno);
+    mv.addObject("todoList", todoList);
+    mv.addObject("pageTitle", "📋 To-Do List 등록");
+    mv.addObject("contentUrl", "myStudy/todo/ToDoAddForm.jsp");
+    mv.setViewName("template1");
+    return mv;
   }
 }

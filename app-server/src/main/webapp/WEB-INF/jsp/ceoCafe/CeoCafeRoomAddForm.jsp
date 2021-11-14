@@ -3,10 +3,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <style>
 * {
@@ -84,28 +80,27 @@ label {
   text-align: center;
 }
 </style>
-</head>
 
 <body>
 <div class="all-content">
-      <form action="add" method="post" enctype="multipart/form-data">
+    <form action="add" method="post" enctype="multipart/form-data">
     <div id='aside'>
       <span id='c-image'>사진</span>
-        <input id="input-roomFile" type="file" multiple="multiple" name='photo'/>
+        <input id="input-roomFile" type="file" multiple="multiple" name='photoFile'/>
     </div>
     <div id='content'>
       <input type ='hidden' name='cafeno' value='${cafeNo}'>
       
-      <label for='f-roomName'>스터디룸 이름</label>
-      <input id='f-roomName' type='text' name='name'><br>
+      <label for='f-roomName'>룸 이름</label>
+      <input id='f-roomName' type='text' name='roomName'><br>
       
-      <label for='f-roomInfo'>스터디룸 설명</label>
-      <input id='f-roomInfo' type='text' name='info'><br>
+      <label for='f-roomInfo'>설명</label>
+      <input id='f-roomInfo' type='text' name='roomInfo'><br>
       
-      <label for='f-roomPeople'>스터디룸 최대인원</label>
+      <label for='f-roomPeople'>최대인원</label>
       <input id='f-roomPeople' type="number" pattern="\d*" name='people'><br>
 
-      <label for='f-roomPrice'>스터디룸 시간당금액</label>
+      <label for='f-roomPrice'>시간당금액</label>
       <input id='f-roomPrice' type='tel' pattern="\d*"  name='roomPrice'><br>
       
       
@@ -130,4 +125,3 @@ label {
     </form>
   </div> 
 </body>
-</html>

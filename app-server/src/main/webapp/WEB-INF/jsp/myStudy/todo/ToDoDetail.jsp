@@ -23,6 +23,10 @@
     font: small-caption;
     width: 100px;
   }
+  tr#bottom {
+    border-color: black;
+    border-bottom: solid;
+  }
   th#middlebox {
   text-align: justify;
    width: 100px;
@@ -111,12 +115,11 @@
       <td></td>
     </tr>
     
-    <tr>
+    <tr id="bottom">
       <th scope="row" id="middlebox"><label for='todoWriter'>작성자</label></th>
       <td><input id='todoWriter' type='text' name='todoWriter' value="${todo.todoWriter.perNickname}" readonly></td>
       <td></td>
     </tr>
-    
     
     </thead>
     </table>
