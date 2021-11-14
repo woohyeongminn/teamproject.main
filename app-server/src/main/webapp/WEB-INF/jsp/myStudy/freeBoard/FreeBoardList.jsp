@@ -7,7 +7,7 @@
 <style>
 * {
   font-size:14px;
-  justify-content: center;
+  xjustify-content: center;
 }
 .card w-50 {
   justify-content: center;
@@ -19,22 +19,28 @@
 </head>
 <body>
 <br>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <div id="button" class="d-grid gap-5 d-md-flex justify-content-md-end">
     <button class="btn btn-light">
       <a href='form?studyno=${studyno}'>등록</a>
     </button>
   </div>
+  <br>
 <c:if test='${not empty freeBoardList}'>
-<div class="row row-cols-1 row-cols-md-1 g-5">
+<div class="row row-cols-1 row-cols-md-3 g-5">
 <c:forEach items="${freeBoardList}" var="freeBoard">
-<div class="card w-50">
+<div class="col">
+<div class="card">
   <div class="card-body">
     <h5 class="card-title" style="font-weight: bold">
       <a href="detail?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}">${freeBoard.freeBoardTitle}</a>
     </h5>
     <p class="card-text">${freeBoard.freeBoardContent}</p>
-    <p class="card-text"><small class="text-muted">${freeBoard.freeBoardWriter.perNickname}</small></p>
+    <p class="card-text">
+      <small class="text-muted">${freeBoard.freeBoardWriter.perNickname}</small>
+      <small class="text-muted">👁 ${freeBoard.freeBoardViewcount}</small>
+    </p>
   </div>
+</div>
 </div>
 </c:forEach>
 </div>
