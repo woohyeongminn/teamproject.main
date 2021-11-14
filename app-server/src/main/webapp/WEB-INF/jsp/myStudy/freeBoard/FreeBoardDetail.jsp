@@ -5,9 +5,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.1/examples/sticky-footer/">
 
     <!-- Bootstrap core CSS -->
 <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -35,6 +35,10 @@
           font-size: 3.5rem;
         }
       }
+      
+      #empty-comment {
+			  text-align: center;
+			}
     </style>
 
     <!-- Custom styles for this template -->
@@ -73,10 +77,10 @@
 <div class="card">
   <div class="card-body">
   <span>댓글</span>
-  <form action='/ogong/freeboard/comment/add' method='post'>
-    <input type='hidden' name='studyno' value='${freeBoard.studyNo}'/>
-    <input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'/>
-    <textarea id='f-commentText' type="text" name='commenttext' class="form-control"></textarea>
+  <form action='${contextPath}/app/freeboard/comment/add' method='post'>
+    <input type='hidden' name='studyNo' value='${freeBoard.studyNo}'/>
+    <input type='hidden' name='boardNo' value='${freeBoard.freeBoardNo}'/>
+    <textarea id='f-commentText' type="text" name='commentText' class="form-control"></textarea>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button class="btn btn btn-light btn-sm">등록</button>
     </div>
@@ -84,7 +88,9 @@
   </div>
 </div>
 <br>
+<div id="empty-comment">
   <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
+</div>
   <c:forEach items="${commentList}" var="comment">
   <div class="card">
   <div class="card-body">
@@ -92,12 +98,14 @@
     <span>${comment.commentText}</span><br>
     <span>${comment.commentRegisteredDate}</span>
     <div class="btn-group" role="group" aria-label="Basic outlined example">
-    <button class="btn btn-link">
-      <a href='comment/updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>수정</a>
-    </button>
-    <button class="btn btn-link">
-      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>삭제</a>
-    </button>
+	    <c:if test="${comment.commentWriter.perNo eq loginUser.perNo}">
+		    <button class="btn btn-link">
+		      <a href='comment/updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>수정</a>
+		    </button>
+		    <button class="btn btn-link">
+		      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>삭제</a>
+		    </button>
+		  </c:if>
     </div>
     </div>
     </div>

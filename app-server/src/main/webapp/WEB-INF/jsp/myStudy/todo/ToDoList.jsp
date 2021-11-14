@@ -79,7 +79,7 @@
 		
 		<tr>
 			<c:forEach items="${countProgressing}" var="todo">
-				<tr>
+				<tr data-no="${todo.todoNo}">
 					<td>${todo.todocomplete}</td>
 					<td>${todo.todoNo}</td>
 					<td id="textbox"><a href="detail?todono=${todo.todoNo}&studyno=${study.studyNo}&perno=${member.perNo}">${todo.todoContent}</a></td>
@@ -109,3 +109,16 @@
   </div>
  
 </div>
+
+<script>
+document.querySelectorAll("tbody a").forEach((aTag) => {
+  aTag.target.onclick = () => false;
+});
+
+var trList = document.querySelectorAll("tbody tr");
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+      window.location.href = e.currentTarget.querySelector("a").href; // 방법 2) 현재 페이지를 그 링크로 바꾸게 해라
+    };
+  });
+</script>

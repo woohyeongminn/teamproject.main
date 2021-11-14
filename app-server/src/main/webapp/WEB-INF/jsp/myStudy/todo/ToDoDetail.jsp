@@ -23,6 +23,10 @@
     font: small-caption;
     width: 100px;
   }
+  tr#bottom {
+    border-color: black;
+    border-bottom: solid;
+  }
   th#middlebox {
   text-align: justify;
    width: 100px;
@@ -111,12 +115,11 @@
       <td></td>
     </tr>
     
-    <tr>
+    <tr id="bottom">
       <th scope="row" id="middlebox"><label for='todoWriter'>작성자</label></th>
       <td><input id='todoWriter' type='text' name='todoWriter' value="${todo.todoWriter.perNickname}" readonly></td>
       <td></td>
     </tr>
-    
     
     </thead>
     </table>
@@ -124,7 +127,7 @@
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button class="btn btn-outline-dark"><a href="list?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">목록</a></button>
       <c:if test='${todo.todoWriter.perNickname eq member.perNickname}'>
-      <button class="btn btn-outline-dark"><a href="updateform?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">수정</a></button>
+      <button class="btn btn-outline-dark"><a href="updateform?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">변경</a></button>
       <button class="btn btn-outline-dark"><a href="delete?todono=${todo.todoNo}&perno=${member.perNo}&studyno=${study.studyNo}">삭제</a></button>
       </c:if>
   </div>
