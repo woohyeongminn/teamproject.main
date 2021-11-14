@@ -23,28 +23,32 @@
   }
   </style>
   <div id="mian">
-     <span id='no' name='no'>${askBoard.askNo}</span><br>
-      <label for="f-title" class="form-label">제목</label>
-      <input type="text" class="form-control" name="title" value="${askBoard.askTitle}"></input>
+      
+      <p>등록일ㅣ${askBoard.askRegisteredDate}</p>
+      <b>제목</b>
+      <input type="text" class="form-control" name="title" value="${askBoard.askTitle}" readonly></input>
     
-      <label for="f-content" class="form-label">내용</label>
-      <textarea class="form-control" id="f-content" name="content" value="${askBoard.askContent}" class="form-control" cols="50" rows="8"></textarea>
-    
-     <span>작성자ㅣ${askBoard.askMemberWriter.perNickname}</span><br>
-     <span>등록일ㅣ${askBoard.askRegisteredDate}</span><br>
-     <c:choose>
+      <br><b>내용</b>
+      <textarea class="form-control" id="f-content" name="content" placeholder="${askBoard.askContent}" class="form-control" cols="50" rows="3" readonly></textarea>
+ 
+      <br><div id="info">
+      <span>작성자:</span><b>${askBoard.askMemberWriter.perNickname}</p>
+      </div><hr>
+      <c:choose>
         <c:when test="${empty askBoard.reply}">
-        <br><label>답변📔 </label>
+        <label>답변📔 </label>
         <textarea class="form-control" id="f-content" name="content" 
-        placeholder="등록된 답변이 없습니다." class="form-control" cols="50" rows="2"></textarea>
+        placeholder="등록된 답변이 없습니다." class="form-control" cols="50" rows="2" readonly></textarea>
         </c:when>
         <c:otherwise>
-         <br><label>답변📖  등록일ㅣ${askBoard.reply.replyRegisteredDate} </label>
-        <textarea class="form-control" id="f-content" name="content"
-         placeholder="${askBoard.reply.replyContent}"
-        class="form-control" cols="50" rows="2" readonly></textarea>
+        <label>답변📖  등록일ㅣ${askBoard.reply.replyRegisteredDate} </label>
+        <textarea class="form-control" id="f-content" name="content" 
+        placeholder="${askBoard.reply.replyContent}"
+         class="form-control" cols="50" rows="2" readonly></textarea>
         </c:otherwise>
      </c:choose>
+  </div>
+
      
 <c:choose>     
 <c:when test="${loginUser.perNo == askBoard.askMemberWriter.perNo}">
