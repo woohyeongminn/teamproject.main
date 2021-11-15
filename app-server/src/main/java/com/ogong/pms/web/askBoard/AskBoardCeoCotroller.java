@@ -1,6 +1,7 @@
 package com.ogong.pms.web.askBoard;
 
 import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,37 @@ public class AskBoardCeoCotroller {
 
   @Autowired  AskBoardDao askBoardDao;
   @Autowired  SqlSessionFactory sqlSessionFactory;
+
+  @GetMapping("/askboard/ceoaddform")
+  public ModelAndView addFrom() {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "💬문의글 등록");
+    mv.addObject("contentUrl", "askBoard/AskBoardCeoAddForm.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  @PostMapping("/askboard/ceoadd")
+  public ModelAndView add(HttpSession session, HttpServletRequest request, AskBoard askBoard) throws Exception {
+
+    if (askBoard.getAskStatus() == 2) {
+      askBoard.setAskTempPW(Integer.parseInt(request.getParameter("pw")));
+    }
+    askBoard.setAskCeoWriter((CeoMember) session.getAttribute("loginCeoUser"));
+    askBoardDao.insertPer(askBoard);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "💬문의글 등록");
+    mv.addObject("refresh", "1;url=ceomylist");
+    mv.addObject("contentUrl", "askBoard/AskBoardCeoAdd.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+
+  }
 
   @GetMapping("/askboard/ceomylist")
   public ModelAndView list(HttpSession session) throws Exception {

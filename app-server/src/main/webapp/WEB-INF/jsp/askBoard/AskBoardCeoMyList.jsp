@@ -53,7 +53,7 @@
 </c:forEach>
 </table>
  <c:if test="${empty ceoMyAskBoardList}">
-  <b font-size="14" text-align="center">❕ 등록한 게시글이 없습니다.</b>
+  <b font-size="14" text-align="center">❕❔ 등록한 게시글이 없습니다.</b>
  </c:if>
 </fieldset>
 

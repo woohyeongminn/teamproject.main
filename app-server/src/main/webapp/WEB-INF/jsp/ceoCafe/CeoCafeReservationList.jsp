@@ -4,15 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 <style>
-* {
-  font-size: 14px;
-}
+
 
 .all-content {
-  width: 100%;
-  margin: 0 auto;
+width: 800px;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
+table {
+font-size: 12px;
+}
 .t-top {
   text-align: center;
 }
@@ -30,10 +32,9 @@
 <thead class="t-top">
   <tr>
     <th>번호</th>
-    <th>예약 날짜</th>
-    <th>이용 날짜</th>
-    <th>예약 장소</th>
-    <th>이용 시작 시간</th>
+    <th>예약일</th>
+    <th>이용일</th>
+    <th>이용 시간</th>
     <th>스터디룸</th>
     <th>결제 금액</th>
     <th>예약 상태</th>
@@ -43,10 +44,9 @@
   <c:forEach items="${reserList}" var="reservation">
   <tr>
       <td><a href='detail?resno=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
-      <td><${reservation.reservationDate}</td>
+      <td>${reservation.reservationDate}</td>
       <td>${reservation.useDate}</td>
-      <td>${reservation.cafe.name}</td>
-      <td>${reservation.startTime}</td>      <!-- 이용시간 -->
+      <td>${reservation.startTime} ~ ${cafeReserEndTime} (${cafeReser.useTime}시간)</td>      <!-- 이용시간 -->
       <td>${reservation.roomName}</td>       <!-- 스터디룸 -->
       <td>${reservation.totalPrice}</td>      
       <td>${reservation.reservationStatusName}</td>

@@ -37,9 +37,9 @@
 <c:forEach items="${askBoardList}" var="askBoard">
   <c:choose>
     <c:when test="${askBoard.askStatus == 1}">
+     <tr>
       <c:choose>
         <c:when test="${askBoard.askMemberWriter.perStatus == 1}">
-         <tr>
           <td>${askBoard.askNo}.</td>
            <td><a href='alldetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
 			     <td>[개인]${askBoard.askMemberWriter.perNickname}</td>
@@ -55,13 +55,11 @@
             </c:choose>
         </c:when>
         <c:when test="${askBoard.askCeoWriter.ceoStatus == 2}">
-			    <div>
-			      <td>${askBoard.askNo}.</td>
-			    </div>
-				    <td><a href='alldetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
-				    <td>[사장]${askBoard.askCeoWriter.ceoNickname}</td>
-				    <td>${askBoard.askVeiwCount}</td>
-				    <td>${askBoard.askRegisteredDate}</td>
+			    <td>${askBoard.askNo}.</td>
+			    <td><a href='alldetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+			    <td>[사장]${askBoard.askCeoWriter.ceoNickname}</td>
+			    <td>${askBoard.askVeiwCount}</td>
+			    <td>${askBoard.askRegisteredDate}</td>
 			       <c:choose>
 			        <c:when test="${empty askBoard.reply}">
 			         <td> 📔 </td>
@@ -71,9 +69,10 @@
 			        </c:otherwise>
 			      </c:choose>
         </c:when>
-      </c:choose>
+       </c:choose>
       </tr>
     </c:when>
+    
     <c:otherwise>
 			<tr>
 				<div>

@@ -20,11 +20,11 @@
   }
   </style>
 <br>
-  <form id="all" method="post">
+  <form id="all" action="peradd" method="post">
     <label for='f-status'>공개</label>
-    <select id="f-status" name='status' >
-	    <option value='1' name='status'>공개</option>
-	    <option value='2' name='status'>비공개</option>
+    <select id="f-status" name='askStatus' >
+	    <option value='1' name='askStatus'>공개</option>
+	    <option value='2' name='askStatus'>비공개</option>
     </select><br> 
     
     <div id="passwordRow">
@@ -40,11 +40,8 @@
       <label for="f-content" class="form-label">내용</label>
       <textarea id="content"  class="form-control" id="f-content" name="askContent" placeholder="내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
      
-     <input type ='hidden' name='writer' value='${loginUser.perNo}'></input>      
-    <br><br>
-    
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="peradd">등록하기</button>
+    <hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <button class="btn btn-outline-dark" type="submit" value="등록" >등록하기</button>
      <a href="permylist" type="button" class="btn btn-outline-dark" >취소하기</a>
    </div> 
   </form>

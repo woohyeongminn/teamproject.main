@@ -138,7 +138,7 @@ public class PerMemberController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("perMember", perMember);
-    mv.addObject("pageTitle", "📝프로필 수정");
+    mv.addObject("pageTitle", "📜 마이페이지");
     mv.addObject("contentUrl", "member/PerMemberUpdateForm.jsp");
     mv.setViewName("template1");
     return mv;
