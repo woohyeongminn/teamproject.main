@@ -22,7 +22,7 @@ public class CommentAddController {
   @Autowired
   CommentDao commentDao;
 
-  @PostMapping("/freeboard/comment/add")
+  @PostMapping("/mystudy/freeboard/comment/add")
   public ModelAndView add(Comment comment, HttpSession session) throws Exception {
     // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
     // System.out.println(" >> 로그인 한 회원만 등록 가능합니다.");

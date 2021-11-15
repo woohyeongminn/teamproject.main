@@ -6,13 +6,70 @@
 <head>
 <style>
 * {
+  margin:0;
+  padding:0;
   font-size:14px;
+  line-height:1.5;
+}
+#search {
+  text-align:center;
+}
+#empty-study {
+  text-align: center;
 }
 </style>
 </head>
 <body>
   <br>
-  <table class="table table-hover">
+  <!-- 검색 -->
+  <div id="search">
+    <form action="search" method='get'>
+    <select name="where">
+      <option value="1">분야</option>
+      <option value="2">제목</option>
+      <option value="3">지역</option>
+    </select>
+    <input type="text" name="keyword">
+    <button class="btn btn-outline-dark btn-sm">검색</button>
+    </form>
+  </div>
+  <!--  -->
+  <c:if test='${not empty studyList}'>
+  <div id="content">
+    <div class="row row-cols-1 row-cols-md-2 g-5">
+    <c:forEach items="${studyList}" var="study">
+    <div class="col">
+    <div class="card">
+      <div class="card-header">
+        ${study.subjectName}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" style="font-weight: bold">
+          <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+        </h5>
+        <p class="card-text">${study.introduction}</p>
+        ${study.faceName}<br>
+        인원 ${study.countMember}/${study.numberOfPeple}<br>
+        ${study.owner.perNickname}
+        ⭐${study.countBookMember}
+      </div>
+    </div>
+    </div>
+  </c:forEach>
+  </div>
+  </div>
+</c:if>
+<div id="empty-study">
+<c:if test='${empty studyList}'>
+  검색 결과가 존재하지 않습니다.<br><br>
+</c:if>
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <jsp:include page="AdminMenu.jsp"/>
+</div>
+</body>
+</html>
+  <!-- <table class="table table-hover">
     <thead>
       <tr>
         <th>번호</th>
@@ -41,9 +98,4 @@
         </tr>
       </c:forEach>
     </tbody>
-  </table>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <jsp:include page="AdminMenu.jsp"/>
-</div>
-</body>
-</html>
+  </table> -->
