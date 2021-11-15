@@ -269,7 +269,7 @@ function modal(id) {
     });
 }
 
-// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
+// style 한번에 오브젝트로 설정(위에 함수로 준 스타일)
 Element.prototype.setStyle = function(styles) {
     for (var k in styles) this.style[k] = styles[k];
     return this;
