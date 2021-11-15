@@ -1,5 +1,6 @@
 package com.ogong.pms.web.myStudy.freeBoard.comment;
 
+import java.sql.Date;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class CommentAddController {
     // comment.setStudyNo(comment.getStudyNo());
     // comment.setBoardNo(comment.getBoardNo());
     // comment.setCommentText(commentText);
-    // comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
+    comment.setCommentRegisteredDate(new Date(System.currentTimeMillis()));
     freeBoard.getComment().add(comment);
     System.out.println(comment);
 
