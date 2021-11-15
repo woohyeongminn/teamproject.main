@@ -86,7 +86,6 @@
 </footer><br>
 
 <!-- 댓글 -->
-<c:if test="${loginUser eq null}">
 <div class="card">
   <div class="card-body">
   <span>댓글</span>
@@ -102,7 +101,6 @@
   </form>
   </div>
 </div>
-</c:if>
 <br>
 <div id="empty-comment">
   <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
