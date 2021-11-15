@@ -11,6 +11,10 @@
   font-size:14px;
   line-height:1.5;
 }
+.template-content {
+  height: 1500px;
+  overflow: scroll;
+}
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;

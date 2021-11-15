@@ -1,6 +1,7 @@
 package com.ogong.pms.web.askBoard;
 
 import java.util.Collection;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import com.ogong.pms.domain.AskBoard;
 public class AskBoardAllCotroller {
 
   @Autowired AskBoardDao askBoardDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
 
   @GetMapping("/askboard/alllist")
   public ModelAndView list() throws Exception {
@@ -36,6 +38,12 @@ public class AskBoardAllCotroller {
     if (askBoard == null) {
       throw new Exception("문의게시글 상세 오류!");
     }
+
+    int i = askBoard.getAskVeiwCount() + 1;
+    askBoard.setAskVeiwCount(i);
+
+    askBoardDao.updateViewCount(askBoard);
+    sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
 

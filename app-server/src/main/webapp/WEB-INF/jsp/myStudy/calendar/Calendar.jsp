@@ -12,10 +12,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>myStudy | calendar</title>
- <link href="../../css/calstyle.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<jsp:include page="../../header.jsp"/>
+ <link href="${contextPath}/css/calstyle.css" rel="stylesheet" type="text/css">
     <div class="c-top">
         🗓️ 캘린더
     </div>
@@ -44,6 +41,4 @@
 	    </div>
     </div>
     
-     <script type="text/javascript" src="../../js/calendar.js"></script>
-</body>
-</html>
+     <script type="text/javascript" src="${contextPath}/js/calendar.js"></script>

@@ -14,6 +14,11 @@
      text-align: center;
      padding-bottom: 30px;
      padding-left: 60px;
+     font-size:14px;
+}
+#f-photo-image {
+ border-radius: 20px; 
+ border-style: ridge;
 }
 .btn {
     font-size: 14px;
@@ -30,7 +35,7 @@ b {
     text-align: center;
 }
 #name {
-    margin-top: 5px;
+    margin-top: 15px;
     margin-right: 213px;
 }
 #nickname {
@@ -48,53 +53,64 @@ b {
 #password {
     margin-right: 175px;
 }
+#i-name, #i-nickname, #i-email,
+#i-password, #i-registeredDate, #i-tel {
+  xborder:0 solid black;
+
+}
+#i-name {
+  margin-top:10px;
+  margin-right: 70px;
+}
+#i-nickname {
+  margin-right: 83px;
+}
+#i-email {
+  margin-right: 83px;
+}
+#i-tel {
+  margin-right: 97px;
+}
+#i-password {
+  margin-right: 97px;
+}
+
+#i-registeredDate {
+  margin-right: 83px;
+}
 
 </style>
 <br><b>📝프로필 수정</b><hr>
-<form>
+<form method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
   <div class="all">
-    <div id="photo" >
+  
        <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'>
-    <a href="${contextPath}/upload/ceoMember/${perMember.perPhoto}.jpg" >
+    <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
       <img id="f-photo-image" src="${contextPath}/upload/member/${perMember.perPhoto}_110x110.jpg">
-    </a>
-    </div>
+    </a><hr>
     
      <div class="profile">
-      <div id="name">
-       <label for='f-name' class='form-label'>이름</label>
-       <input id='f-name' type='text' name='perName' value='${perMember.perName}'><br>
-      </div>
-      
-      <div id="nickname"> 
-       <label for='f-nickname' class='form-label'>닉네임</label>
-       <input id='f-nickname' type='text' name='perNickname' value='${perMember.perNickname}'><br>
-      </div>
-      
-      <div id="email"> 
-       <label for='f-email' class='form-label'>이메일</label>
-       <input id='f-email' type='email' name='perEmail' value='${perMember.perEmail}'><br>
-      </div> 
-      
-      <div id="tel"> 
-       <label for='f-tel' class='form-label'>전화번호</label>
-       <input id='f-tel' type='tel' name='perTel' value='${perMember.perTel}'><br>
-      </div>
 
-      <div id="password"> 
-       <label for='f-password' class='form-label'>비밀번호</label>
-       <input id='f-password' type='password' name="perPassword"><br>
-      </div>
+       <label for='f-name' class='form-label'>이름</label>
+       <input id='i-name'  type='text' name='perName' value='${perMember.perName}' readonly><br>
       
-      <div id="date"> 
+       <label for='f-nickname' class='form-label'>닉네임</label>
+       <input id='i-nickname' type='text' name='perNickname' value='${perMember.perNickname}'><br>
+      
+       <label for='f-email' class='form-label'>이메일</label>
+       <input id='i-email'  type='email' name='perEmail' value='${perMember.perEmail}'><br>
+      
+       <label for='f-tel' class='form-label'>전화번호</label>
+       <input id='i-tel' type='tel' name='perTel' value='${perMember.perTel}'><br>
+
+       <label for='f-password' class='form-label'>비밀번호</label>
+       <input id='i-password' type='password' name="perPassword" placeholder="*****"><br>
+      
+      <input type="hidden" name="perNo" value="${perMember.perNo}"/>
+
        <label for='f-registeredDate' class='form-label'>가입일</label>
-       <input id='f-registeredDate' name='ceoRegisteredDate' readonly value='${perMember.perRegisteredDate}'><br>
-      </div>
+       <input id='i-registeredDate'  name='perRegisteredDate' readonly value='${perMember.perRegisteredDate}'><br>
     </div>
-  </div>
-</form>
-  
- 
  
     <hr><div class="d-grid gap-2 d-md-flex justify-content-md-center">
       <input type="submit" value="수정하기" formaction="update" class ="btn btn-outline-dark"/>
@@ -102,4 +118,15 @@ b {
     </div>
   </div>
 </form>
+
+<script>  
+  document.querySelector("#all").onsubmit = () => {
+  if (document.querySelector("#password").value == "") {
+    alert("**비밀번호를 입력해주세요.")
+    return false;
+};
+</script>
+
+
+
      
