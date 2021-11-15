@@ -88,9 +88,9 @@
 </table>
 </fieldset>
 
-<c:if test="${empty askBoardList}">
-   <form id="empty">등록된 문의글이 없습니다.</form><br>
-</c:if>
+ <c:if test="${empty askBoardList}">
+  <b font-size="14" text-align="center">❕❔ 등록한 게시글이 없습니다.</b>
+ </c:if>
 
 <c:if test="${not empty loginUser}">
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
