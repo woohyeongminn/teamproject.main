@@ -33,7 +33,8 @@
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <!--  -->
+  <br>
+  <!-- 목록 -->
   <c:if test='${not empty studyList}'>
   <div id="content">
     <div class="row row-cols-1 row-cols-md-2 g-5">
