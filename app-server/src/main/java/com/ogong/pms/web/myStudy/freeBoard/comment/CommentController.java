@@ -39,7 +39,7 @@ public class CommentController {
     ModelAndView mv = new ModelAndView();
 
     mv.setViewName(
-        "redirect:detail?studyno=" + comment.getStudyNo() + "&freeboardno=" + comment.getBoardNo());
+        "redirect:../detail?studyno=" + comment.getStudyNo() + "&freeboardno=" + comment.getBoardNo());
 
     return mv;
   }
