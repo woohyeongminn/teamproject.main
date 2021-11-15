@@ -13,7 +13,7 @@ public class CommentUpdateFormController {
   @Autowired
   CommentDao commentDao;
 
-  @GetMapping("/freeboard/comment/updateform")
+  @GetMapping("/mystudy/freeboard/comment/updateform")
   public ModelAndView updateform(int commentno) throws Exception {
     Comment comment = commentDao.findByNo(commentno);
 
