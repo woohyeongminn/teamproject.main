@@ -9,10 +9,6 @@
 * {
 	font-size: 14px;
 }
-	
- a {
-   text-decoration:none;
-}
 
 .template-content {
     height: 1100px;
@@ -80,6 +76,8 @@ ul {
 .cafe-bottom span {
   width: 80%;
   padding: 5px 0;
+  margin-left: 5px;
+}
 }
 
 .label-wrap {
@@ -98,6 +96,7 @@ ul {
   height:80px;
   padding: 5px 0;
   overflow: scroll;
+  
 }
 
 .cafe-bottom-review {
@@ -239,7 +238,7 @@ button {
 			 <input id='c-no' type='hidden' value='${cafe.no}'>
 			 <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
 			 <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
-			 <div class="label-wrap"><label for='f-location'>주소</label> <span style="height: fit-content;">${cafe.location}</span></div>
+			 <div class="label-wrap"><label for='f-location'>주소</label><span style="height: fit-content;">${cafe.location}</span></div>
 			 <div class="label-wrap"><label for='f-info'>소개글</label><span style="height: fit-content;">${cafe.info}</span></div>
 			 <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
 			 <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
