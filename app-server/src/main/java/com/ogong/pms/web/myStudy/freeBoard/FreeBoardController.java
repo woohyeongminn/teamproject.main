@@ -194,12 +194,15 @@ public class FreeBoardController {
       throw new Exception("해당 번호의 자유 게시판이 없습니다.");
     }
 
-    if (!freeBoard.getFreeBoardFile().isEmpty()) {
+    if (freeBoard.getFreeBoardFile() == null) {
+      System.out.println("파일 X");
+
+    } else if (!freeBoard.getFreeBoardFile().isEmpty()) {
+      freeBoardDao.deleteFile(freeboardno);
       throw new Exception("게시글의 첨부파일이 모두 삭제됩니다.");
     }
 
     freeBoardDao.deleteComment(freeboardno);
-    freeBoardDao.deleteFile(freeboardno);
     freeBoardDao.delete(freeboardno, studyno);
     sqlSessionFactory.openSession().commit();
 
