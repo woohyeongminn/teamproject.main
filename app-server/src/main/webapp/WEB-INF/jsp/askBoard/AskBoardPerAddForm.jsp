@@ -22,7 +22,7 @@
 <br>
   <form id="all" action="peradd" method="post">
     <label for='f-status'>공개</label>
-    <select id="f-status" name='status' >
+    <select id="f-status" name='askStatus' >
 	    <option value='1' name='askStatus'>공개</option>
 	    <option value='2' name='askStatus'>비공개</option>
     </select><br> 
@@ -30,7 +30,7 @@
     <div id="passwordRow">
        <br>
       <label for='f-tempPW' size='100px'>🔏비밀번호</label>
-      <input id='f-tempPW' type='password' name='pw' placeholder="4자리"></input>
+      <input id='f-tempPW' type='password' name='password' placeholder="4자리"></input>
     </div><br>
   
       <br>
