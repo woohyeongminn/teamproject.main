@@ -20,7 +20,7 @@ public class StudyBookmarkController {
   @Autowired
   StudyDao studyDao;
 
-  @GetMapping("/bookmark/add")
+  @GetMapping("/study/bookmark/add")
   public ModelAndView add(int studyno, HttpSession session) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
@@ -45,7 +45,7 @@ public class StudyBookmarkController {
     return mv;
   }
 
-  @GetMapping("/bookmark/list")
+  @GetMapping("/study/bookmark/list")
   public ModelAndView list(HttpSession session) throws Exception {
     Collection<Study> studyList =
         studyDao.findByMyBookmark(((Member) session.getAttribute("loginUser")).getPerNo());
@@ -60,7 +60,7 @@ public class StudyBookmarkController {
     return mv;
   }
 
-  @GetMapping("/bookmark/detail")
+  @GetMapping("/study/bookmark/detail")
   public ModelAndView detail(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
