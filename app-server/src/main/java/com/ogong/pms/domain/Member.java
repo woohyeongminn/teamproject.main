@@ -21,14 +21,15 @@ public class Member {
   private int perStatus; // 1: 개인, 2: 사장
   private int active;   //  1: 일반, 2: 탈퇴
 
+
+
   @Override
   public String toString() {
     return "Member [perNo=" + perNo + ", perName=" + perName + ", perNickname=" + perNickname
         + ", perEmail=" + perEmail + ", perPassword=" + perPassword + ", perTel=" + perTel
-        + ", perPhoto=" + perPhoto + ", perRegisteredDate=" + perRegisteredDate + ", active="
-        + active + ", perStatus=" + perStatus + "]";
+        + ", perPhoto=" + perPhoto + ", perRegisteredDate=" + perRegisteredDate + ", perStatus="
+        + perStatus + ", active=" + active + "]";
   }
-
   public int getPerNo() {
     return perNo;
   }

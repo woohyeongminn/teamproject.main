@@ -49,7 +49,6 @@ public class PerMemberAuthController {
       session.setAttribute("loginUser", member);
       mv.setViewName("redirect:../index");
 
-
     } else {
       mv.addObject("pageTitle", "해당 계정이 존재하지 않습니다.");
       mv.addObject("contentUrl", "member/PerMemberLoginFail.jsp");
