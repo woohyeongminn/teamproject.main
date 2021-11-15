@@ -35,7 +35,7 @@ margin-top: 10px
   text-align:right;
   font-size: 14px;
 }
-#name, #email, #tel {
+#nickname, #email, #tel {
 text-align:left;
 }
 #crud {
@@ -43,7 +43,7 @@ text-align:left;
  margin-left: 310px;
 }
 #pN {
-margin-left: 38px;
+margin-left: 22px;
 }
 #pE {
 margin-left: 24px;
@@ -62,17 +62,17 @@ margin-left: 8px;
 	      </a>
 	       <input type='hidden' name='perPhoto' value='${perMember.perPhoto}'>
 	     </div>  
-	    <div id="nickname">
-	      <b class="col-sm-2 col-form-label">'${perMember.perNickname}'님</b>
+	    <div id="name">
+	      <b class="col-sm-2 col-form-label">'${perMember.perName}'님</b>
 	    </div>
 	    <div id="createDt" >
 	      가입일: ${perMember.perRegisteredDate}
 	    </div><hr>
 	   <div class="round"> 
 	    <div class="in">
-		    <div id="name">
-		      <label>이름</label>
-		      <b id="pN">${perMember.perName}</b>
+		    <div id="nickname">
+		      <label>닉네임</label>
+		      <b id="pN">${perMember.perNickname}</b>
 		    </div>
 		    <div id="email">
 		      <label>이메일</label>
