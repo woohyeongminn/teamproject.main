@@ -54,7 +54,7 @@ public class StudyBookmarkController {
 
     mv.addObject("studyList", studyList);
     mv.addObject("pageTitle", "북마크 목록");
-    mv.addObject("contentUrl", "study/bookMark/StudyBookMarkList.jsp");
+    mv.addObject("contentUrl", "study/bookmark/StudyBookmarkList.jsp");
     mv.setViewName("template1");
 
     return mv;
@@ -72,7 +72,7 @@ public class StudyBookmarkController {
 
     mv.addObject("study", study);
     mv.addObject("pageTitle", "북마크 상세");
-    mv.addObject("contentUrl", "study/bookMark/StudyBookMarkDetail.jsp");
+    mv.addObject("contentUrl", "study/bookmark/StudyBookmarkDetail.jsp");
     mv.setViewName("template1");
 
     return mv;
