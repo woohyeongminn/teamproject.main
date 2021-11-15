@@ -141,10 +141,10 @@ margin: 10px 0;
 			        <!-- 네이버 로그인 버튼 노출 영역 -->
 						  <div id="naver_id_login"></div>
 						  <script type="text/javascript">
-						    var naver_id_login = new naver_id_login("wh8zH3W5STAuoCbw48Fz", "http://localhost:8080/ogong/adminNotice/list");
+						    var naver_id_login = new naver_id_login("wh8zH3W5STAuoCbw48Fz", "http://localhost:8080/ogong/app/index");
 						    var state = naver_id_login.getUniqState();
 						    naver_id_login.setButton("green", 1, 40);
-						    naver_id_login.setDomain("http://localhost:8080/ogong/login");
+						    naver_id_login.setDomain("http://localhost:8080/ogong/app/login");
 						    naver_id_login.setState(state);
 						    naver_id_login.setPopup();
 						    naver_id_login.init_naver_id_login();
