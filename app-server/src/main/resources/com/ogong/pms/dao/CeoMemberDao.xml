@@ -121,8 +121,6 @@
     where
      member_no=#{ceoNo}
   </update>
-   
-   
     
 <!--   <update id="updateName" parameterType="CeoMember">
 	  update member set
@@ -178,8 +176,17 @@
     where
      member_no=#{ceoNo}
   </update>
-  
-  
+
+
+<!-- 아이디 중복 확인하기  -->
+<select id="idOverlap" resultType="string">
+  select
+    email
+  from
+    member
+  where
+    email = #{ceoEmail}
+</select>
   
 </mapper>
 
