@@ -1,4 +1,4 @@
-package com.ogong.pms.web.study.bookMark;
+package com.ogong.pms.web.study.bookmark;
 
 import java.util.Collection;
 import java.util.List;
