@@ -16,12 +16,6 @@ DROP TABLE IF EXISTS studycafe_reservation RESTRICT;
 -- 스터디카페사진
 DROP TABLE IF EXISTS studycafe_photo RESTRICT;
 
--- 결제유형
-DROP TABLE IF EXISTS studycafe_payment_type RESTRICT;
-
--- 결제
-DROP TABLE IF EXISTS studycafe_payment RESTRICT;
-
 -- 카페운영상태
 DROP TABLE IF EXISTS studycafe_operating_status RESTRICT;
 
@@ -60,9 +54,6 @@ DROP TABLE IF EXISTS study_board RESTRICT;
 
 -- 스터디
 DROP TABLE IF EXISTS study RESTRICT;
-
--- 결제현황
-DROP TABLE IF EXISTS studycafe_payment_status RESTRICT;
 
 -- 첨부파일
 DROP TABLE IF EXISTS notice_file RESTRICT;
@@ -187,17 +178,19 @@ CREATE UNIQUE INDEX UIX_studycafe_reservation_status
 
 -- 스터디카페예약
 CREATE TABLE studycafe_reservation (
-  studycafe_rsv_no INTEGER  NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
-  studyroom_no     INTEGER  NOT NULL COMMENT '스터디룸번호', -- 스터디룸번호
-  member_no        INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
-  rsv_dt           DATETIME NOT NULL DEFAULT now() COMMENT '예약일', -- 예약일
-  using_dt         DATE     NOT NULL COMMENT '이용날짜', -- 이용날짜
-  start_time       TIME     NOT NULL COMMENT '시작시간', -- 시작시간
-  using_time       INTEGER  NOT NULL COMMENT '이용시간', -- 이용시간
-  people           INTEGER  NOT NULL DEFAULT 1 COMMENT '사용인원수', -- 사용인원수
-  total_price      INTEGER  NOT NULL COMMENT '총금액', -- 총금액
-  rsv_status_no    INTEGER  NOT NULL COMMENT '예약상태번호', -- 예약상태번호
-  review           INTEGER  NOT NULL COMMENT '리뷰작성여부' -- 리뷰작성여부
+  studycafe_rsv_no INTEGER     NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
+  studyroom_no     INTEGER     NOT NULL COMMENT '스터디룸번호', -- 스터디룸번호
+  member_no        INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  rsv_dt           DATETIME    NOT NULL DEFAULT now() COMMENT '예약일', -- 예약일
+  using_dt         DATE        NOT NULL COMMENT '이용날짜', -- 이용날짜
+  start_time       TIME        NOT NULL COMMENT '시작시간', -- 시작시간
+  using_time       INTEGER     NOT NULL COMMENT '이용시간', -- 이용시간
+  people           INTEGER     NOT NULL DEFAULT 1 COMMENT '사용인원수', -- 사용인원수
+  total_price      INTEGER     NOT NULL COMMENT '총금액', -- 총금액
+  rsv_status_no    INTEGER     NOT NULL COMMENT '예약상태번호', -- 예약상태번호
+  review           INTEGER     NOT NULL COMMENT '리뷰작성여부', -- 리뷰작성여부
+  payment_uid      VARCHAR(50) NULL     COMMENT '결제고유번호', -- 결제고유번호
+  payment_type     VARCHAR(50) NULL     COMMENT '결제방법' -- 결제방법
 )
 COMMENT '스터디카페예약';
 
@@ -228,46 +221,6 @@ ALTER TABLE studycafe_photo
 
 ALTER TABLE studycafe_photo
   MODIFY COLUMN photo_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '사진번호';
-
--- 결제유형
-CREATE TABLE studycafe_payment_type (
-  payment_type_no INTEGER     NOT NULL COMMENT '결제유형번호', -- 결제유형번호
-  name            VARCHAR(50) NOT NULL COMMENT '결제유형명' -- 결제유형명
-)
-COMMENT '결제유형';
-
--- 결제유형
-ALTER TABLE studycafe_payment_type
-  ADD CONSTRAINT PK_studycafe_payment_type -- 결제유형 기본키
-    PRIMARY KEY (
-      payment_type_no -- 결제유형번호
-    );
-
--- 결제유형 유니크 인덱스
-CREATE UNIQUE INDEX UIX_studycafe_payment_type
-  ON studycafe_payment_type ( -- 결제유형
-    name ASC -- 결제유형명
-  );
-
--- 결제
-CREATE TABLE studycafe_payment (
-  payment_no        INTEGER  NOT NULL COMMENT '결제번호', -- 결제번호
-  studycafe_rsv_no  INTEGER  NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
-  payment_type_no   INTEGER  NOT NULL COMMENT '결제유형번호', -- 결제유형번호
-  payment_status_no INTEGER  NOT NULL COMMENT '결제현황', -- 결제현황
-  payment_dt        DATETIME NOT NULL DEFAULT now() COMMENT '결제일' -- 결제일
-)
-COMMENT '결제';
-
--- 결제
-ALTER TABLE studycafe_payment
-  ADD CONSTRAINT PK_studycafe_payment -- 결제 기본키
-    PRIMARY KEY (
-      payment_no -- 결제번호
-    );
-
-ALTER TABLE studycafe_payment
-  MODIFY COLUMN payment_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '결제번호';
 
 -- 카페운영상태
 CREATE TABLE studycafe_operating_status (
@@ -573,26 +526,6 @@ CREATE INDEX IX_study
 
 ALTER TABLE study
   MODIFY COLUMN study_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '스터디번호';
-
--- 결제현황
-CREATE TABLE studycafe_payment_status (
-  payment_status_no INTEGER     NOT NULL COMMENT '결제현황', -- 결제현황
-  name              VARCHAR(50) NOT NULL COMMENT '현황' -- 현황
-)
-COMMENT '결제현황';
-
--- 결제현황
-ALTER TABLE studycafe_payment_status
-  ADD CONSTRAINT PK_studycafe_payment_status -- 결제현황 기본키
-    PRIMARY KEY (
-      payment_status_no -- 결제현황
-    );
-
--- 결제현황 유니크 인덱스
-CREATE UNIQUE INDEX UIX_studycafe_payment_status
-  ON studycafe_payment_status ( -- 결제현황
-    name ASC -- 현황
-  );
 
 -- 첨부파일
 CREATE TABLE notice_file (
@@ -903,36 +836,6 @@ ALTER TABLE studycafe_photo
     )
     REFERENCES studycafe ( -- 스터디카페
       cafe_no -- 스터디카페번호
-    );
-
--- 결제
-ALTER TABLE studycafe_payment
-  ADD CONSTRAINT FK_studycafe_payment_type_TO_studycafe_payment -- 결제유형 -> 결제
-    FOREIGN KEY (
-      payment_type_no -- 결제유형번호
-    )
-    REFERENCES studycafe_payment_type ( -- 결제유형
-      payment_type_no -- 결제유형번호
-    );
-
--- 결제
-ALTER TABLE studycafe_payment
-  ADD CONSTRAINT FK_studycafe_payment_status_TO_studycafe_payment -- 결제현황 -> 결제
-    FOREIGN KEY (
-      payment_status_no -- 결제현황
-    )
-    REFERENCES studycafe_payment_status ( -- 결제현황
-      payment_status_no -- 결제현황
-    );
-
--- 결제
-ALTER TABLE studycafe_payment
-  ADD CONSTRAINT FK_studycafe_reservation_TO_studycafe_payment -- 스터디카페예약 -> 결제
-    FOREIGN KEY (
-      studycafe_rsv_no -- 스터디카페예약번호
-    )
-    REFERENCES studycafe_reservation ( -- 스터디카페예약
-      studycafe_rsv_no -- 스터디카페예약번호
     );
 
 -- 카페휴무일

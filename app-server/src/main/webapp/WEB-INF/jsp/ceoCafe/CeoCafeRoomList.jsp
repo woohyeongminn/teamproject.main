@@ -67,12 +67,15 @@
         </c:forEach>
   
 		  <c:if test="${empty cafeRoomList}">
-		    <p>등록한 스터디룸이 없습니다.</p>
+		    <span style="width: fit-content">등록한 스터디룸이 없습니다.</span>
 		  </c:if>
-		    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+		  
+		    
+    </div>
+    
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="margin-top: 20px;">
           <div class="text-center"><a href="addform?cafeno=${cafeNo}"  class="btn btn-outline-dark">등록하기</a></div>
        </div>
-    </div>
   </div>
 </section>
 </div>

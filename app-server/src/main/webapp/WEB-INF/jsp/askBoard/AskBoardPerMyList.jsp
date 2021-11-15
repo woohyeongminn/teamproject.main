@@ -34,38 +34,49 @@
 	</tr>
 </thead>
 
-<c:forEach items="${myAskBoardList}" var="askBoard">
+<c:forEach items="${perMyAskBoardList}" var="askBoard">
   <tr>
-    <c:if test="${askBoard.askMemberWriter.perNo == loginUser.perNo}">
-				        <td>${askBoard.askNo}.</td>
-				        <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
-				        <td>${askBoard.askMemberWriter.perNickname}</td>
-				        <td>${askBoard.askVeiwCount}</td>
-				        <td>${askBoard.askRegisteredDate}</td>               
-           <c:choose>
-             <c:when test="${empty askBoard.reply}">
-                <td> 📔 </td>
-             </c:when>
-            <c:otherwise>
-               <td> 📖 </td>
-            </c:otherwise>
-           </c:choose> 
-    </c:if>
+    <td>${askBoard.askNo}.</td>
+    <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
+    <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askMemberWriter.perNickname}</a></td>
+    <td>${askBoard.askVeiwCount}</td>
+    <td>${askBoard.askRegisteredDate}</td>               
+       <c:choose>
+         <c:when test="${empty askBoard.reply}">
+            <td> 📔 </td>
+         </c:when>
+        <c:otherwise>
+           <td> 📖 </td>
+        </c:otherwise>
+       </c:choose> 
   </tr>
 </c:forEach>
 </table>
+ <c:if test="${empty perMyAskBoardList}">
+  <b font-size="14" text-align="center">❕❔ 등록한 게시글이 없습니다.</b>
+ </c:if>
 </fieldset>
 
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="add">
-     <a href='peraddform'>등록하기</a>
-     </button>
-   </div>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class = "btn btn-outline-dark" type="submit" value="목록" formaction="add">
-     <a href='alllist'>문의글 전체보기</a>
-   </button>
+      <a href='peraddform' type="button" class="btn btn-outline-dark" >등록하기</a> 
+     <a href='alllist' type="button" class="btn btn-outline-dark" >전체보기</a>
+   </div>
 
+<script>
+document.querySelectorAll("tbody a").forEach((aTag) => {
+  aTag.onclick = () => false;
+});
+
+var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
+trList.forEach(function(trTag) {
+  trTag.onclick = (e) => {
+    //console.log(e.currentTarget.querySelector("a").href);
+    //e.currentTarget.querySelector("a").click();
+    window.location.href = e.currentTarget.querySelector("a").href;
+    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
+  };
+});
+</script>
 
 
 

@@ -1,6 +1,8 @@
 package com.ogong.pms.web.askBoard;
 
 import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.domain.CeoMember;
 
 @Controller
 public class AskBoardCeoCotroller {
@@ -16,15 +19,48 @@ public class AskBoardCeoCotroller {
   @Autowired  AskBoardDao askBoardDao;
   @Autowired  SqlSessionFactory sqlSessionFactory;
 
-  @GetMapping("/askboard/ceomylist")
-  public ModelAndView list() throws Exception {
+  @GetMapping("/askboard/ceoaddform")
+  public ModelAndView addFrom() {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("pageTitle", "💬문의글 등록");
+    mv.addObject("contentUrl", "askBoard/AskBoardCeoAddForm.jsp");
+    mv.setViewName("template1");
 
-    Collection<AskBoard> myAskBoardList = askBoardDao.findAll();
+    return mv;
+  }
+
+  @PostMapping("/askboard/ceoadd")
+  public ModelAndView add(HttpSession session, HttpServletRequest request, AskBoard askBoard) throws Exception {
+
+    if (askBoard.getAskStatus() == 2) {
+      askBoard.setAskTempPW(Integer.parseInt(request.getParameter("pw")));
+    }
+    askBoard.setAskCeoWriter((CeoMember) session.getAttribute("loginCeoUser"));
+    askBoardDao.insertPer(askBoard);
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("pageTitle", "💬문의글 등록");
+    mv.addObject("refresh", "1;url=ceomylist");
+    mv.addObject("contentUrl", "askBoard/AskBoardCeoAdd.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+
+  }
+
+  @GetMapping("/askboard/ceomylist")
+  public ModelAndView list(HttpSession session) throws Exception {
+
+    CeoMember loginCeoUser = (CeoMember) session.getAttribute("loginCeoUser");
+
+    Collection<AskBoard> ceoMyAskBoardList = askBoardDao.findCeoMyAll(loginCeoUser.getCeoNo());
 
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("pageTitle", "💬문의글 목록");
-    mv.addObject("myAskBoardList", myAskBoardList);
+    mv.addObject("ceoMyAskBoardList", ceoMyAskBoardList);
     mv.addObject("contentUrl", "askBoard/AskBoardCeoMyList.jsp");
     mv.setViewName("template1");
 

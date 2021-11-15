@@ -20,28 +20,29 @@
   }
   </style>
 <br>
-  <form method="post">
+  <form id="all" action="peradd" method="post">
     <label for='f-status'>공개</label>
     <select id="f-status" name='status' >
-	    <option value='1' name='status'>공개</option>
-	    <option value='2' name='status'>비공개</option>
+	    <option value='1' name='askStatus'>공개</option>
+	    <option value='2' name='askStatus'>비공개</option>
     </select><br> 
     
     <div id="passwordRow">
+       <br>
       <label for='f-tempPW' size='100px'>🔏비밀번호</label>
-      <input id='f-tempPW' type='password' name='password' placeholder="4자리"></input>
+      <input id='f-tempPW' type='password' name='pw' placeholder="4자리"></input>
     </div><br>
   
-    <br>
+      <br>
 		  <label for="f-title" class="form-label">제목</label>
-      <input type="text" class="form-control" name="askTitle" placeholder="제목을 입력하세요"></input>
+      <input id="title"  type="text" class="form-control" name="askTitle" placeholder="제목을 입력하세요"></input>
     
       <label for="f-content" class="form-label">내용</label>
-      <textarea class="form-control" id="f-content" name="askContent" placeholder="내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
-      <br><br>
-    
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="peradd">등록하기</button>
+      <textarea id="content"  class="form-control" id="f-content" name="askContent" placeholder="내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
+     
+    <hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
+     <button class="btn btn-outline-dark" type="submit" value="등록" >등록하기</button>
+     <a href="permylist" type="button" class="btn btn-outline-dark" >취소하기</a>
    </div> 
   </form>
 
@@ -60,16 +61,17 @@ fStatus.addEventListener("input", function() {
 });
 </script>
 
-<!-- 
-<script type="text/javascript">
-function popupOpen() {
-	var popUrl = "${contextPath}/mylist";
-	var popOption = "width=1200, heigth=600, resizable=no, scrollvars=no, status=no;";
-	var p = window.open(popUrl, "popUrl", popOption);
-	p.focus();
-}
+<script>  
+  document.querySelector("#all").onsubmit = () => {
+  if (document.querySelector("#title").value == "") {
+    alert("**제목을 입력해주세요.")
+    return false;
+  } else if (document.querySelector("#content").value == "") {
+    alert("**내용을 입력해주세요.")
+    return false;
+  }
+};
 </script>
- -->
 
 
 

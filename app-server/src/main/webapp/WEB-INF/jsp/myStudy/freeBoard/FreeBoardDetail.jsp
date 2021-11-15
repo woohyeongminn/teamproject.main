@@ -77,10 +77,12 @@
 <div class="card">
   <div class="card-body">
   <span>댓글</span>
-  <form action='${contextPath}/app/freeboard/comment/add' method='post'>
-    <input type='hidden' name='studyno' value='${freeBoard.studyNo}'/>
-    <input type='hidden' name='freeboardno' value='${freeBoard.freeBoardNo}'/>
-    <textarea id='f-commentText' type="text" name='commenttext' class="form-control"></textarea>
+  <!-- <form action='${contextPath}/app/freeboard/comment/add' method='post'> -->
+  <form action='comment/add' method="post">
+    <!-- <input type='hidden' name='commentWriter' value='${loginUser}'/> -->
+    <input type='hidden' name='studyNo' value='${freeBoard.studyNo}'/>
+    <input type='hidden' name='boardNo' value='${freeBoard.freeBoardNo}'/>
+    <textarea id='f-commentText' type="text" name='commentText' class="form-control"></textarea>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button class="btn btn btn-light btn-sm">등록</button>
     </div>

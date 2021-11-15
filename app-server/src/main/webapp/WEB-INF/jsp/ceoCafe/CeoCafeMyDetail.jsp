@@ -3,9 +3,6 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
@@ -154,8 +151,64 @@ button {
   line-height: inherit;
 }
 
+
+
+  #modal.modal-overlay {
+            width: 100%;
+            height: 1400px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        #modal .modal-window {
+            background: rgb(247, 231, 215);
+				    opacity: 0.9;
+				    color: black;
+				    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+				    backdrop-filter: blur( 13.5px );
+				    -webkit-backdrop-filter: blur( 13.5px );
+				    border-radius: 10px;
+				    width: 400px;
+				    height: 200px;
+				    position: relative;
+				    top: -100px;
+				    padding: 10px;
+        }
+        #modal .title {
+            padding-left: 10px;
+            display: inline;
+            font-size: 14px;
+            
+        }
+        #modal .title h2 {
+            display: inline;
+        }
+        #modal .close-area {
+            display: inline;
+            float: right;
+            padding-right: 10px;
+            cursor: pointer;
+            height: 30px;
+				    padding: 10px;
+				    padding-top: 0;
+        }
+        
+        #modal .content {
+            margin-top: 20px;
+            padding: 0px 10px;
+        }
+        
 </style>
-</head>
 
 <body>
 <br><br><br>
@@ -235,15 +288,11 @@ button {
 	  <button id='b-but' type="submit" value="수정" formaction="updateform">
 	     <a href='updateform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 수정</a>
 	  </button>
-	  
-	  <button id='b-but' type="submit" value="삭제" formaction="deleteform">
-	     <a href='deleteform?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디카페 삭제</a>
-	  </button>
-	  
-	    <!--
-	     <button onclick="window.open('http://localhost:8080/ogong/ceomember/cafe//deleteform?no=${cafe.no}&ceono=${ceoMember.ceoNo}','deleteform','width=430,height=200,location=no,status=no,scrollbars=yes');">스터디카페 삭제</button>
-	    -->
-	  
+	 
+	   <button id='btn-modal' type="submit" value="삭제" class="btn btn-outline-dark">
+       스터디카페 삭제
+     </button>
+	 
 	   <button id='b-but' type="submit" value="스터디룸관리">
 	     <a href='room/list?cafeno=${cafe.no}' class="btn btn-outline-dark">스터디룸 관리</a>
 	   </button>
@@ -252,9 +301,43 @@ button {
 	     <a href='reser/list' class="btn btn-outline-dark">예약 관리</a>
 	   </button>
 	 </div>
-	 
+	 </div>
 	</c:otherwise>
  </c:choose>
+
  </div>
 </body>
-</html>
+
+  <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div class="close-area" style="width: 30px; height: 30px;">X</div>
+            <div class="content" style="text-align: center;">
+                <p style="font-weight: bold; text-align: center;">
+                정말 삭제하시겠습니까?<br>
+                등록된 스터디카페 삭제 시 복구가 불가능합니다.
+                </p>
+                <a href='delete?cafeno=${cafe.no}' class="btn btn-outline-dark" style="width: 150px; margin-top: 20px;">삭제</a>
+            </div>
+        </div>
+    </div>
+    
+<script>
+const modal = document.getElementById("modal")
+const btnModal = document.getElementById("btn-modal")
+btnModal.addEventListener("click", e => {
+    modal.style.display = "flex"
+})
+
+const closeBtn = modal.querySelector(".close-area")
+closeBtn.addEventListener("click", e => {
+    modal.style.display = "none"
+})
+
+modal.addEventListener("click", e => {
+    const evTarget = e.target
+    if(evTarget.classList.contains("modal-overlay")) {
+        modal.style.display = "none"
+    }
+})
+
+</script>
