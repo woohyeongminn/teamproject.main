@@ -11,6 +11,15 @@
   font-size:14px;
   line-height:1.5;
 }
+.template-content {
+  height: 1500px;
+  overflow: scroll;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  height: 160px;
+}
 #search {
   text-align:center;
 }
@@ -20,6 +29,7 @@
 </style>
 </head>
 <body>
+  <br>
   <br>
   <!-- 검색 -->
   <div id="search">
@@ -34,10 +44,11 @@
     </form>
   </div>
   <br>
+  <br>
   <!-- 목록 -->
   <c:if test='${not empty studyList}'>
   <div id="content">
-    <div class="row row-cols-1 row-cols-md-2 g-5">
+    <div class="row row-cols-1 row-cols-md-3 g-5">
     <c:forEach items="${studyList}" var="study">
     <div class="col">
     <div class="card">
