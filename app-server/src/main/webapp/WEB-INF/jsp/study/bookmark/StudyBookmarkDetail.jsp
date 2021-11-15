@@ -82,8 +82,11 @@
   <div class="container">
     <div class="btn-group" role="group" aria-label="Basic outlined example">
 	    <button class="btn btn-outline-light">
-			<a href='delete?studyno=${study.studyNo}'>삭제</a>
-		</button>
+				<a href='delete?studyno=${study.studyNo}'>삭제</a>
+			</button>
+			<button class="btn btn-outline-light">
+        <a href='../join?studyno=${study.studyNo}'>참여 신청</a>
+      </button>
 		<button class="btn btn-outline-light">
 	        <a href='list'>목록</a>
 	    </button>
