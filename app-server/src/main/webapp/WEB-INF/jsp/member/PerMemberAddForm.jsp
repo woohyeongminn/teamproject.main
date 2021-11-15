@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
  <style>
   form {
@@ -85,6 +86,7 @@
       <input id='i-passwordcheck' type='password' name='perPassword' placeholder="비밀번호 확인"/><br>
      </div>
       <hr>
+      
        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
          <button class="btn btn-outline-dark" type="submit" >✔가입하기</button> 
          <a type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>

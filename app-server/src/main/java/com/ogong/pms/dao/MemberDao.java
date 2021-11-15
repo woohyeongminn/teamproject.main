@@ -25,6 +25,7 @@ public interface MemberDao {
 
 
 
+
   //  void selectOnByNickname(Member member) throws Exception;
   //  int indexNo(int no) throws Exception;
   //  List<Member> findByKeyword(String keyword) throws Exception;
