@@ -34,8 +34,9 @@ public class AskBoardPerCotroller {
   public ModelAndView add(HttpSession session, HttpServletRequest request, AskBoard askBoard) throws Exception {
 
     if (askBoard.getAskStatus() == 2) {
-      askBoard.setAskTempPW(Integer.parseInt(request.getParameter("pw")));
+      askBoard.setAskTempPW(Integer.parseInt(request.getParameter("password")));
     }
+
     askBoard.setAskMemberWriter((Member) session.getAttribute("loginUser"));
     askBoardDao.insertPer(askBoard);
     sqlSessionFactory.openSession().commit();
