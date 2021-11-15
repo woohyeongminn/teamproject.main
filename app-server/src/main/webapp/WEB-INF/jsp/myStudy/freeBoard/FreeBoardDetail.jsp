@@ -41,6 +41,18 @@
 			}
     </style>
 
+<script type="text/javascript">
+  function checkValue() {
+
+  var form = document.freeBoardInfo;
+
+  if (!form.commentText.value) {
+    alert("댓글을 입력하세요.");
+    return false;
+  }
+}
+</script>
+
     <!-- Custom styles for this template -->
     <!-- <link href="sticky-footer.css" rel="stylesheet"> -->
   </head>
@@ -74,6 +86,7 @@
 </footer><br>
 
 <!-- 댓글 -->
+<c:if test="${loginUser eq null}">
 <div class="card">
   <div class="card-body">
   <span>댓글</span>
@@ -89,6 +102,7 @@
   </form>
   </div>
 </div>
+</c:if>
 <br>
 <div id="empty-comment">
   <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>

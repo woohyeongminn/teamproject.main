@@ -32,10 +32,10 @@
     return false;
   }
 
-  if (!form.freeBoardFile.value) {
-    alert("파일을 선택하세요.");
-    return false;
-  }
+  // if (!form.freeBoardFile.value) {
+  //   alert("파일을 선택하세요.");
+  //   return false;
+  // }
 }
 </script>
 </head>
