@@ -68,9 +68,9 @@ header {
 }
 
 header a {
-  text-decoration: none;
-  color: black;
-  font-size: 12px;
+  text-decoration: none !important;
+  color: black !important;
+  font-size: 12px !important;
 }
 
 .header_logo {
