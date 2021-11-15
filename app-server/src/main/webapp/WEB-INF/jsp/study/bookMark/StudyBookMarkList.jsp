@@ -5,14 +5,59 @@
 <html>
 <head>
 <style>
-	* {
-	  font-size:14px;
-	}
+* {
+  margin:0;
+  padding:0;
+  font-size:14px;
+  line-height:1.5;
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  height: 160px;
+}
+#empty-bookmark {
+  text-align: center;
+}
 </style>
 </head>
 <body>
-	<input type="hidden" name="loginUser" value="${loginUser.perNo}">
-	<table class="table table-hover">
+<br>
+<br>
+<c:if test='${not empty studyList}'>
+<div id="content">
+<input type="hidden" name="loginUser" value="${loginUser.perNo}">
+  <div class="row row-cols-1 row-cols-md-3 g-5">
+  <c:forEach items="${studyList}" var="study">
+  <div class="col">
+  <div class="card">
+    <div class="card-header">
+      ${study.subjectName}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" style="font-weight: bold">
+        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+      </h5>
+      <p class="card-text">${study.introduction}</p>
+      ${study.faceName}<br>
+      인원 ${study.countMember}/${study.numberOfPeple}<br>
+      ${study.owner.perNickname}
+      ⭐${study.countBookMember}
+    </div>
+  </div>
+  </div>
+ </c:forEach>
+ </div>
+ </div>
+</c:if>
+<div id="empty-bookmark">
+<c:if test='${empty studyList}'>
+   북마크한 스터디가 없습니다.
+</c:if>
+</div>
+</body>
+</html>
+<!-- <table class="table table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -39,6 +84,4 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
-</body>
-</html>
+	</table> -->

@@ -117,7 +117,7 @@
 var trList = document.querySelectorAll("tbody tr");
 trList.forEach(function(tr) {
 	
-	if (tr.children[6].innerText != "예약완료") {
+	if (tr.children[6].innerText != "예약완료(현장결제)") {
 		tr.children[0].children[0].disabled = true;
 	}
 

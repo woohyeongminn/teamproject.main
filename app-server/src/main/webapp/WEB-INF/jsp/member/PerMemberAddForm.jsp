@@ -20,7 +20,8 @@
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
-  }  
+  } 
+
 </style>
 <body>
   <div class="all-content">
@@ -28,43 +29,58 @@
    <b style="font-size: 20px">🙋개인 회원 가입</b><br> 
    <hr>
     <form id="member-form" action='add' name='perInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
-      <label for='f-name' class="col-sm-2 col-form-label">이름</label>
-      <input id='f-name' type='text' name='perName' placeholder="*필수"/><br>
       
-      <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
-      <input id='f-nickname' type='text' name='perNickname' placeholder="*필수" />
-      <input type="button" class="btn btn-outline-dark" value="중복확인" /><br>
-  
-      <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
-      <input id='f-photo' type='file' name='photoFile' /><br>
-  
-      <label for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
-      <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
-      <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
-      <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
-      
-      <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-      <input id='f-email' type='text' name='perEmail' pattern="^[a-zA-Z0-9]+$" placeholder="*필수" onkeydown="inputEmail()"/>@
-      <select name="site">
-        <option>naver.com</option>
-        <option>daum.net</option>
-        <option>gmail.com</option>
-        <option>kakao.com</option>
-      </select>
-      <input type="button" class="btn btn-outline-dark" value="중복확인"/><br>
-      
-      <label for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
-      <input id='f-password' type='password' name='password'
-       pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,16}$"
-       title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
-       placeholder="*필수"/><br>
+      <div id="mn">
+	      <label for='f-name' class="col-sm-2 col-form-label">이름</label>
+	      <input id='f-name' type='text' name='perName' placeholder="*필수"/><br>
+      </div>
      
+      <div id="mNn">
+	      <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
+	      <input id='f-nickname' type='text' name='perNickname' placeholder="*필수" />
+	      <input type="button" class="btn btn-outline-dark" value="중복확인" /><br>
+      </div>
+  
+      <div id="mp">
+	      <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
+        <input id='f-photo' type='file' name='photoFile' /><br>
+      </div>
+  
+      <div id="mt">
+	      <label for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
+	      <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
+	      <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
+	      <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
+      </div>
+
+      <div id="mE">
+	      <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
+	      <input id='f-email' type='text' name='perEmail' pattern="^[a-zA-Z0-9]+$" placeholder="*필수" onkeydown="inputEmail()"/>@
+	      <select name="site">
+	        <option>naver.com</option>
+	        <option>daum.net</option>
+	        <option>gmail.com</option>
+	        <option>kakao.com</option>
+	      </select>
+	      <input type="button" class="btn btn-outline-dark" value="중복확인"/><br>
+      </div>      
+      
+      <div id="mpw">
+	      <label for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
+	      <input id='f-password' type='password' name='password'
+	       pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,16}$"
+	       title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
+	       placeholder="*필수"/><br>
+      </div>
+     
+     <div id="mpwc">
       <label for='f-passwordcheck' class="col-sm-2 col-form-label">비밀번호 확인</label>
       <input id='f-passwordcheck' type='password' name='perPassword' placeholder="비밀번호 확인"/><br>
+     </div>
       <hr>
        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
          <button class="btn btn-outline-dark" type="submit" >✔가입하기</button> 
-         <button class="btn btn-outline-dark" >❌취소하기</button>
+         <a type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
        </div> 
    </form>
    </div>

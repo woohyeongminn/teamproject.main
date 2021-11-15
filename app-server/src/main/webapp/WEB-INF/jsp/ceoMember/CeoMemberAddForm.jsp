@@ -92,10 +92,10 @@ function checkValue() {
   
   <form id="member-form" action='add' name='ceoInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
 	  <label for='f-name' class="col-sm-2 col-form-label">이름</label>
-	  <input id='f-name' type='text' name='ceoName' placeholder="이름"/><br>
+	  <input id='f-name' type='text' name='ceoName' placeholder="*필수"/><br>
 	  
 	  <label for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
-	  <input id='f-nickname' type='text' name='ceoNickname' placeholder="닉네임" />
+	  <input id='f-nickname' type='text' name='ceoNickname' placeholder="*필수" />
 	  <input type="button" class="btn btn-outline-dark" value="중복확인" /><br>
 
 	  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
@@ -111,14 +111,14 @@ function checkValue() {
 	  <input id='f-tel' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
 	  
 	  <label for='f-bossname' class="col-sm-2 col-form-label">대표자명</label>
-    <input id='f-bossname' type='text' name='ceoBossName' placeholder="대표자명"/><br>
+    <input id='f-bossname' type='text' name='ceoBossName' placeholder="*필수"/><br>
     
     <label for='f-licenseno' class="col-sm-2 col-form-label">사업자 등록번호</label>
     <input id='f-licenseno' type='text' name='ceoLicenseNo'
-     pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="사업자 등록번호"/><br>
+     pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="*필수"/><br>
     
 	  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-	  <input id='f-email' type='text' name='ceoEmail' pattern="^[a-zA-Z0-9]+$" placeholder="이메일" onkeydown="inputEmail()"/>@
+	  <input id='f-email' type='text' name='ceoEmail' pattern="^[a-zA-Z0-9]+$" placeholder="*필수" onkeydown="inputEmail()"/>@
 	  <select name="site">
 		  <option>naver.com</option>
 		  <option>daum.net</option>
@@ -131,14 +131,14 @@ function checkValue() {
 	  <input id='f-password' type='password' name='password'
 	   pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,16}$"
 	   title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
-	   placeholder="비밀번호"/><br>
+	   placeholder="*필수"/><br>
 	 
 	  <label for='f-passwordcheck' class="col-sm-2 col-form-label">비밀번호 확인</label>
 	  <input id='f-passwordcheck' type='password' name='ceoPassword' placeholder="비밀번호 확인"/><br>
     <hr>
-     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <button class="btn btn-outline-dark" type="submit" >가입하기</button> 
-       <button class="btn btn-outline-dark" >취소하기</button>
+     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+       <button class="btn btn-outline-dark" type="submit" >✔가입하기</button> 
+        <a type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
      </div>
 	 </form>
 	 </div>

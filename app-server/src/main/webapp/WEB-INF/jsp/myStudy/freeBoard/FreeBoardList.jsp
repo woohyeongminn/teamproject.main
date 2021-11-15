@@ -9,9 +9,6 @@
   font-size:14px;
   xjustify-content: center;
 }
-.card w-50 {
-  justify-content: center;
-}
 #empty-freeboard {
   text-align: center;
 }

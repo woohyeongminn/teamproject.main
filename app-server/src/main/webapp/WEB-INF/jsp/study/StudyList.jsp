@@ -64,6 +64,9 @@ ul{
 #search {
   text-align:center;
 }
+#empty-study {
+  text-align: center;
+}
 </style>
 </head>
 	<!-- <h3><a href="list?perno=${perno}">📖 스터디 목록</a></h3><br> -->
@@ -165,9 +168,11 @@ ul{
     </div>
   </div> -->
 </c:if>
+<div id="empty-study">
 <c:if test='${empty studyList}'>
    검색 결과가 존재하지 않습니다.<br><br>
 </c:if>
+</div>
 </div>
 </li>
 
@@ -217,9 +222,11 @@ ul{
  </div>
  </div>
 </c:if>
+<div id="empty-study">
 <c:if test='${empty studyIngList}'>
    검색 결과가 존재하지 않습니다.<br><br>
 </c:if>
+</div>
 </div>
 </li>
 
@@ -269,9 +276,11 @@ ul{
  </div>
  </div>
 </c:if>
+<div id="empty-study">
 <c:if test='${empty studyEndList}'>
    검색 결과가 존재하지 않습니다.<br><br>
 </c:if>
+</div>
 </div>
 </li>
 </ul>

@@ -77,7 +77,9 @@
 <div class="card">
   <div class="card-body">
   <span>댓글</span>
-  <form action='${contextPath}/app/freeboard/comment/add' method='post'>
+  <!-- <form action='${contextPath}/app/freeboard/comment/add' method='post'> -->
+  <form action='comment/add' method="post">
+    <!-- <input type='hidden' name='commentWriter' value='${loginUser}'/> -->
     <input type='hidden' name='studyNo' value='${freeBoard.studyNo}'/>
     <input type='hidden' name='boardNo' value='${freeBoard.freeBoardNo}'/>
     <textarea id='f-commentText' type="text" name='commentText' class="form-control"></textarea>

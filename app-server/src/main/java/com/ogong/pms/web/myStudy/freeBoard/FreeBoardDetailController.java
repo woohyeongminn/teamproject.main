@@ -1,6 +1,7 @@
 package com.ogong.pms.web.myStudy.freeBoard;
 
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,7 @@ import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
+import com.ogong.pms.domain.Member;
 
 @Controller
 public class FreeBoardDetailController {
@@ -19,7 +21,7 @@ public class FreeBoardDetailController {
   CommentDao commentDao;
 
   @GetMapping("/mystudy/freeboard/detail")
-  public ModelAndView detail(int freeboardno, int studyno) throws Exception {
+  public ModelAndView detail(int freeboardno, int studyno, HttpSession session) throws Exception {
     // int studyNo = Integer.parseInt(request.getParameter("studyno"));
     // int freeBoardNo = Integer.parseInt(request.getParameter("freeboardno"));
 
@@ -31,8 +33,10 @@ public class FreeBoardDetailController {
 
     List<Comment> commentList = commentDao.findAll(freeboardno);
 
+    Member member = (Member) session.getAttribute("loginUser");
     ModelAndView mv = new ModelAndView();
 
+    mv.addObject("loginUser", member);
     mv.addObject("freeBoard", freeBoard);
     mv.addObject("commentList", commentList);
     mv.addObject("pageTitle", "자유 게시판 상세");
