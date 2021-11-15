@@ -74,6 +74,12 @@ public class AskBoardPerCotroller {
     AskBoard myAskBoard = askBoardDao.findByNo(askNo);
     ModelAndView mv = new ModelAndView();
 
+    int i = myAskBoard.getAskVeiwCount() + 1;
+    myAskBoard.setAskVeiwCount(i);
+
+    askBoardDao.updateViewCount(myAskBoard);
+    sqlSessionFactory.openSession().commit();
+
     mv.addObject("pageTitle", "💬문의글 상세");
     mv.addObject("myAskBoard", myAskBoard);
     mv.addObject("contentUrl", "askBoard/AskBoardPerMyDetail.jsp");
