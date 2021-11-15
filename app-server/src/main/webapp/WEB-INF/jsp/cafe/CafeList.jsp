@@ -30,7 +30,7 @@
   .form-select {
     display: inline-block;
   }
-	div.template-wrap:nth-of-type(2) {
+	div.template-wrap:nth-of-type(3) {
 	  --desktopHeaderContentHeight: 60px;
     --headerVerticalPadding: 10px;
     --desktopNavHeight: calc(var(--headerVerticalPadding) + var(--desktopHeaderContentHeight) + var(--headerVerticalPadding));

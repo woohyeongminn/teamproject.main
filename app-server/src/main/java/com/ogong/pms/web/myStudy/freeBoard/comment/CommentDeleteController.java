@@ -13,7 +13,7 @@ public class CommentDeleteController {
   @Autowired
   CommentDao commentDao;
 
-  @GetMapping("/freeboard/comment/delete")
+  @GetMapping("/mystudy/freeboard/comment/delete")
   public ModelAndView delete(int commentno) throws Exception {
     // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
     // System.out.println(" >> 삭제 권한이 없습니다.");

@@ -37,7 +37,7 @@ public class StudyJoinController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    //    mv.addObject("contentUrl", "study/StudyJoin.jsp");
+    // mv.addObject("contentUrl", "study/StudyJoin.jsp");
     mv.setViewName("redirect:list");
     return mv;
   }

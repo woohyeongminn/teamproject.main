@@ -16,7 +16,7 @@ public class CommentUpdateController {
   @Autowired
   CommentDao commentDao;
 
-  @PostMapping("/freeboard/comment/update")
+  @PostMapping("/mystudy/freeboard/comment/update")
   public ModelAndView update(Comment comment) throws Exception {
     // if (AuthPerMemberLoginHandler.getLoginUser() == null) {
     // System.out.println(" >> 변경 권한이 없습니다.");
