@@ -1,5 +1,6 @@
 package com.ogong.pms.web.study.bookMark;
 
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,7 +13,7 @@ import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
 @Controller
-public class StudyBookMarkAddController {
+public class StudyBookmarkController {
 
   @Autowired
   SqlSessionFactory sqlSessionFactory;
@@ -40,6 +41,39 @@ public class StudyBookMarkAddController {
 
     mv.addObject("study", study);
     mv.setViewName("redirect:../study/detail?studyno=" + study.getStudyNo());
+
+    return mv;
+  }
+
+  @GetMapping("/bookmark/list")
+  public ModelAndView list(HttpSession session) throws Exception {
+    Collection<Study> studyList =
+        studyDao.findByMyBookmark(((Member) session.getAttribute("loginUser")).getPerNo());
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("studyList", studyList);
+    mv.addObject("pageTitle", "북마크 목록");
+    mv.addObject("contentUrl", "study/bookMark/StudyBookMarkList.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  @GetMapping("/bookmark/detail")
+  public ModelAndView detail(int studyno) throws Exception {
+    Study study = studyDao.findByNo(studyno);
+
+    if (study == null) {
+      throw new Exception("해당 번호의 북마크가 없습니다.");
+    }
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("study", study);
+    mv.addObject("pageTitle", "북마크 상세");
+    mv.addObject("contentUrl", "study/bookMark/StudyBookMarkDetail.jsp");
+    mv.setViewName("template1");
 
     return mv;
   }
