@@ -43,7 +43,7 @@ public class CeoMemberController {
     //Collection<CeoMember> ceoMemberList  = ceoMemberDao.findAll();
     //request.setAttribute("ceoMemberList", ceoMemberList);
 
-    mv.addObject("pageTitle", "기업 회원가입");
+    mv.addObject("pageTitle", "오늘의공부 회원가입");
     mv.addObject("contentUrl", "ceoMember/CeoMemberAddForm.jsp");
     mv.setViewName("template1");
     return mv;
