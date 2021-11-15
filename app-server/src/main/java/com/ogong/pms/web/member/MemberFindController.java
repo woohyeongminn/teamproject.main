@@ -1,7 +1,6 @@
 package com.ogong.pms.web.member;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,31 +22,31 @@ public class MemberFindController  {
 
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("pageTitle", "이메일 찾기");
+    mv.addObject("pageTitle", "찾기");
     mv.addObject("contentUrl", "member/FindEmailForm.jsp");
     mv.setViewName("template1");
     return mv;
   }
 
   @RequestMapping("/member/findemail")
-  public ModelAndView findEmail(HttpServletRequest request) throws Exception {
+  public ModelAndView findEmail(String[] tel, String name) throws Exception {
     ModelAndView mv = new ModelAndView();
 
-    Member perMember = new Member();
-
-    if (Integer.parseInt(request.getParameter("status")) == 1) {
-      perMember = memberDao.findByTel(request.getParameter("tel"));
-    } else if (Integer.parseInt(request.getParameter("status")) == 2) {
-      perMember = memberDao.findByName(request.getParameter("name"));
-    }
+    String perTel = tel[0] + "-" + tel[1] + "-" + tel[2];
+    Member perMember = memberDao.findEmail(name, perTel);
 
     if (perMember != null) {
-      mv.addObject("pageTitle", "🔎이메일 찾기");
+      String findemail = perMember.getPerEmail().replace(".com", "****");
+      System.out.println(perMember);
+      mv.addObject("pageTitle", "🔎이메일 찾기완료");
+      mv.addObject("findemail", findemail);
       mv.addObject("perMember", perMember);
       mv.addObject("contentUrl", "member/FindEmail.jsp");
       mv.setViewName("template1");
+
     } else {
-      mv.addObject("pageTitle", "🔎이메일 찾기");
+      mv.addObject("pageTitle", "🔎이메일 찾기실패");
+      mv.addObject("refresh", "2;url=findemailform");
       mv.addObject("contentUrl", "member/FindEmailFail.jsp");
       mv.setViewName("template1");
     }

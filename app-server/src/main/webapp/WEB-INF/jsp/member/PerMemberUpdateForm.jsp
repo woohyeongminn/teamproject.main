@@ -78,16 +78,15 @@ b {
 #i-registeredDate {
   margin-right: 83px;
 }
-
 </style>
 <br><b>📝프로필 수정</b><hr>
 <form method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
   <div class="all">
   
        <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'>
-    <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
+      <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
       <img id="f-photo-image" src="${contextPath}/upload/member/${perMember.perPhoto}_110x110.jpg">
-    </a><hr>
+      </a><hr>
     
      <div class="profile">
 

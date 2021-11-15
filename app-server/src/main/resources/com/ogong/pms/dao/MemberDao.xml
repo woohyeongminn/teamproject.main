@@ -34,6 +34,12 @@
     member m
 	</sql>
 
+  <select id="findEmail" resultMap="MemberMap">
+  <include refid="select1"/>
+  where
+   name=#{name} and tel=#{tel} and status=1
+  </select>
+
   <select id="findByEmailAndPassword" resultMap="MemberMap">
     select
       m.member_no member_no,
@@ -68,6 +74,7 @@
 		values(#{perName},#{perNickname},#{perEmail},password(#{perPassword}),#{perTel},#{perPhoto},#{perStatus})
   </insert>
   
+  <!-- 
   <select id="findByName" resultMap="MemberMap" parameterType="string">
     <include refid="select1"/>
   where
@@ -85,6 +92,7 @@
   where
     tel=#{tel} and m.status=1
   </select>
+   -->
   
   <update id="updateName" parameterType="member">
   update member set
