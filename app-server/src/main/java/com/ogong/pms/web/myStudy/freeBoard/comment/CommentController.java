@@ -61,7 +61,7 @@ public class CommentController {
   @PostMapping("/mystudy/freeboard/comment/update")
   public ModelAndView update(Comment comment) throws Exception {
     Comment oldComment = commentDao.findByNo(comment.getCommentNo());
-
+    System.out.println(comment.getCommentNo());
     if (oldComment == null) {
       throw new Exception("해당 번호의 댓글이 없습니다.");
     }
