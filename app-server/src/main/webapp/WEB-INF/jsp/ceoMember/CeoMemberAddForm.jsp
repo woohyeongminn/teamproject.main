@@ -151,6 +151,9 @@ function checkValue() {
 			  <option>daum.net</option>
 			  <option>gmail.com</option>
 			  <option>kakao.com</option>
+			  <option>직접입력
+			   <input type="text" name="site"/>
+			  </option>
 		  </select>
 		  <input type="button" class="btn btn-outline-dark checkBtn" value="중복확인"/><br>
 		  

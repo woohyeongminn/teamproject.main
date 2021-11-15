@@ -82,7 +82,6 @@ ul {
   height: fit-content;
   display: flex;
   flex-direction: row;
-  
 }
 
 .label-wrap > label {
@@ -100,6 +99,8 @@ ul {
 
 .label-wrap > input {
   width: 250px;
+  box-sizing: border-box;
+  margin-left: 5px;
 }
 
  #input-file-button {
@@ -119,8 +120,9 @@ ul {
 
 
 .btn {
-    width: 70%;
-    margin-top: 15px;
+    padding: 5px 77px;
+    margin-top: 32px;
+    margin-right: 10px;
 }
 
 </style>
@@ -186,6 +188,7 @@ ul {
     
 	    <div id='button-wrap'>
 	     <button id='b-btn' type="submit" value="수정" class="btn btn-outline-dark">수정</button>
+	     <a href="detail" class="btn btn-outline-dark">취소</a>
 	    </div>
    </form>
    </div>
