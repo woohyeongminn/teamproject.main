@@ -51,11 +51,11 @@ b {
 
 </style>
 <br><b>📝프로필 수정</b><hr>
-<form>
+<form method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
   <div class="all">
     <div id="photo" >
        <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'>
-    <a href="${contextPath}/upload/ceoMember/${perMember.perPhoto}.jpg" >
+    <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
       <img id="f-photo-image" src="${contextPath}/upload/member/${perMember.perPhoto}_110x110.jpg">
     </a>
     </div>
@@ -85,16 +85,14 @@ b {
        <label for='f-password' class='form-label'>비밀번호</label>
        <input id='f-password' type='password' name="perPassword"><br>
       </div>
-      
+
+      <input type="hidden" name="perNo" value="${perMember.perNo}"/>
+
       <div id="date"> 
        <label for='f-registeredDate' class='form-label'>가입일</label>
        <input id='f-registeredDate' name='ceoRegisteredDate' readonly value='${perMember.perRegisteredDate}'><br>
       </div>
     </div>
-  </div>
-</form>
-  
- 
  
     <hr><div class="d-grid gap-2 d-md-flex justify-content-md-center">
       <input type="submit" value="수정하기" formaction="update" class ="btn btn-outline-dark"/>
