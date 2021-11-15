@@ -40,8 +40,8 @@ public class PerMemberController {
   @PostMapping("/member/add")
   protected ModelAndView add(Member member, Part photoFile, String[] tel, String site) throws Exception {
 
-    String ceoTel = tel[0] + "-" + tel[1] + "-" + tel[2];
-    member.setPerTel(ceoTel);
+    String perTel = tel[0] + "-" + tel[1] + "-" + tel[2];
+    member.setPerTel(perTel);
 
     member.setPerEmail(member.getPerEmail() +'@'+ site);
 
