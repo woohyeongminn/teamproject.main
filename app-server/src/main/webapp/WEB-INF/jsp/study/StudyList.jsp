@@ -129,7 +129,15 @@ ul{
   <div class="col">
 	<div class="card">
 	  <div class="card-header">
-	    ${study.subjectName}
+      <c:choose>
+        <c:when test="${study.countMember ne study.numberOfPeple}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:otherwise>
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:otherwise>
+      </c:choose>
+      ${study.subjectName}
 	  </div>
 	  <div class="card-body">
 	    <h5 class="card-title" style="font-weight: bold">
