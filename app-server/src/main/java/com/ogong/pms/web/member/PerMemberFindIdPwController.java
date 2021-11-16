@@ -41,8 +41,8 @@ public class PerMemberFindIdPwController  {
 
     if (perMember != null) {
       String findemail = perMember.getPerEmail().replace(
-          perMember.getPerEmail().substring(
-              perMember.getPerEmail().lastIndexOf("@"), perMember.getPerEmail().length()),"*****");
+          perMember.getPerEmail().substring(perMember.getPerEmail().lastIndexOf("@"),
+              perMember.getPerEmail().length()),"*****");
 
       System.out.println(perMember);
       mv.addObject("pageTitle", "🔎이메일 찾기완료");
