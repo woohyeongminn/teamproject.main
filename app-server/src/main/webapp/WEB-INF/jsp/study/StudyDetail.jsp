@@ -128,21 +128,22 @@
 			      <a href='delete?studyno=${study.studyNo}'>삭제</a>
 			    </button>
 		    </c:when>
-		    <c:when test="${study.owner.perNo ne member.perNo}">
-			    <c:forEach var="memberWating" items="${study.watingMember}">
-            <c:if test="${memberWating.perNo ne loginUser.perNo}">
-              <button class="btn btn-outline-light">참여 신청</button>
+		    <c:when test="${study.owner.perNo ne loginUser.perNo}">
+			    <c:forEach var="watingMember" items="${study.watingMember}">
+            <c:if test="${watingMember.perNo != loginUser.perNo}">
+              <button class="btn btn-outline-light">참여 신청1</button>
             </c:if>
           </c:forEach>
           <c:forEach var="guilder" items="${study.members}">
             <c:if test="${guilder.perNo ne loginUser.perNo}">
+              <button class="btn btn-outline-light">참여 신청2</button>
             </c:if>
           </c:forEach>
-          <c:if test="${study.status ne 2}">
-            <button class="btn btn-outline-light">참여 신청</button>
+          <c:if test="${study.studyStatus ne 2}">
+            <button class="btn btn-outline-light">참여 신청3</button>
           </c:if>
           <c:if test="${study.countMember ne study.numberOfPeple}">
-            <button class="btn btn-outline-light">참여 신청</button>
+            <button class="btn btn-outline-light">참여 신청4</button>
           </c:if>
 		    </c:when>
 	    </c:choose>

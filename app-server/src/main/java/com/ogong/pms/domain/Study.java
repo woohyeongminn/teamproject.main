@@ -22,8 +22,8 @@ public class Study {
   private Member owner;         // 작성자(조장)
   private int status;           // 구성원 상태
 
-  private int watingCountMember;                            // 승인대기중인 구성원 수
-  private List<Member> watingMember = new ArrayList<>();    // 승인대기중
+  private int waitingCountMember;                            // 승인대기중인 구성원 수
+  private List<Member> waitingMember = new ArrayList<>();    // 승인대기중
 
   private int countMember;                                  // 참여중인 구성원 수
   private List<Member> members = new ArrayList<>();         // 참여중
@@ -35,12 +35,40 @@ public class Study {
   private List<FreeBoard> myStudyFreeBoard = new ArrayList<>();     // 내 스터디 자유 게시판
   private List<ToDo> myStudyToDo = new ArrayList<>();               // 내 스터디 투두리스트
 
+  @Override
+  public String toString() {
+    return "Study [studyNo=" + studyNo + ", studyTitle=" + studyTitle + ", subjectNo=" + subjectNo
+        + ", subjectName=" + subjectName + ", area=" + area + ", numberOfPeple=" + numberOfPeple
+        + ", faceNo=" + faceNo + ", faceName=" + faceName + ", introduction=" + introduction
+        + ", registeredDate=" + registeredDate + ", point=" + point + ", studyStatus=" + studyStatus
+        + ", report=" + report + ", owner=" + owner + ", status=" + status + ", waitingCountMember="
+        + waitingCountMember + ", waitingMember=" + waitingMember + ", countMember=" + countMember
+        + ", members=" + members + ", countBookMember=" + countBookMember + ", bookMarkMember="
+        + bookMarkMember + ", myStudyCalender=" + myStudyCalender + ", myStudyFreeBoard="
+        + myStudyFreeBoard + ", myStudyToDo=" + myStudyToDo + ", getWatingMemberNames()="
+        + getWatingMemberNames() + ", getMemberNames()=" + getMemberNames() + ", getStudyNo()="
+        + getStudyNo() + ", getStudyTitle()=" + getStudyTitle() + ", getSubjectNo()="
+        + getSubjectNo() + ", getSubjectName()=" + getSubjectName() + ", getArea()=" + getArea()
+        + ", getNumberOfPeple()=" + getNumberOfPeple() + ", getFaceNo()=" + getFaceNo()
+        + ", getFaceName()=" + getFaceName() + ", getIntroduction()=" + getIntroduction()
+        + ", getRegisteredDate()=" + getRegisteredDate() + ", getPoint()=" + getPoint()
+        + ", getStudyStatus()=" + getStudyStatus() + ", getReport()=" + getReport()
+        + ", getOwner()=" + getOwner() + ", getStatus()=" + getStatus()
+        + ", getWaitingCountMember()=" + getWaitingCountMember() + ", getWaitingMember()="
+        + getWaitingMember() + ", getCountMember()=" + getCountMember() + ", getMembers()="
+        + getMembers() + ", getCountBookMember()=" + getCountBookMember() + ", getBookMarkMember()="
+        + getBookMarkMember() + ", getMyStudyCalender()=" + getMyStudyCalender()
+        + ", getMyStudyFreeBoard()=" + getMyStudyFreeBoard() + ", getMyStudyToDo()="
+        + getMyStudyToDo() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+        + ", toString()=" + super.toString() + "]";
+  }
+
   public String getWatingMemberNames() {
     if (this.members == null) {
       return "";
     }
     StringBuilder names = new StringBuilder();
-    for (Member member : this.watingMember) {
+    for (Member member : this.waitingMember) {
       if (names.length() > 0) {
         names.append(",");
       }
@@ -183,20 +211,20 @@ public class Study {
     this.status = status;
   }
 
-  public int getWatingCountMember() {
-    return watingCountMember;
+  public int getWaitingCountMember() {
+    return waitingCountMember;
   }
 
-  public void setWatingCountMember(int watingCountMember) {
-    this.watingCountMember = watingCountMember;
+  public void setWaitingCountMember(int waitingCountMember) {
+    this.waitingCountMember = waitingCountMember;
   }
 
-  public List<Member> getWatingMember() {
-    return watingMember;
+  public List<Member> getWaitingMember() {
+    return waitingMember;
   }
 
-  public void setWatingMember(List<Member> watingMember) {
-    this.watingMember = watingMember;
+  public void setWaitingMember(List<Member> waitingMember) {
+    this.waitingMember = waitingMember;
   }
 
   public int getCountMember() {
@@ -254,18 +282,4 @@ public class Study {
   public void setMyStudyToDo(List<ToDo> myStudyToDo) {
     this.myStudyToDo = myStudyToDo;
   }
-
-  @Override
-  public String toString() {
-    return "Study [studyNo=" + studyNo + ", studyTitle=" + studyTitle + ", subjectNo=" + subjectNo
-        + ", subjectName=" + subjectName + ", area=" + area + ", numberOfPeple=" + numberOfPeple
-        + ", faceNo=" + faceNo + ", faceName=" + faceName + ", introduction=" + introduction
-        + ", registeredDate=" + registeredDate + ", point=" + point + ", studyStatus=" + studyStatus
-        + ", report=" + report + ", owner=" + owner + ", status=" + status + ", watingCountMember="
-        + watingCountMember + ", watingMember=" + watingMember + ", countMember=" + countMember
-        + ", members=" + members + ", countBookMember=" + countBookMember + ", bookMarkMember="
-        + bookMarkMember + ", myStudyCalender=" + myStudyCalender + ", myStudyFreeBoard="
-        + myStudyFreeBoard + ", myStudyToDo=" + myStudyToDo + "]";
-  }
-
 }
