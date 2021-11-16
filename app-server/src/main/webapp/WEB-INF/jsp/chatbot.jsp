@@ -48,8 +48,8 @@ a {
 	  <iframe src="https://service.dongledongle.com/TodayStudy" frameborder="0" width="100%" height="470px;"></iframe>
 	  
 	  <div class="choice" style="display: block; text-align: right; margin-right: 20px;">
-		  <input type="submit" id="btnBack" value="돌아가기" class="btn btn-outline-dark"
-		         onClick="location.href='${contextPath}/app/index'" style="font-size: 12px; line-height: 12px; margin-right:5px;">
+		  <%-- <input type="submit" id="btnBack" value="돌아가기" class="btn btn-outline-dark"
+		         onClick="location.href='${contextPath}/app/index'" style="font-size: 12px; line-height: 12px; margin-right:5px;"> --%>
 		         
 		  <a href="javascript:close()" id="btnJoin" class="btn btn-outline-dark" style="font-size: 12px; line-height: 12px;">회원가입</a>
 	  </div>
