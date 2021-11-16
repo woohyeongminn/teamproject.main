@@ -6,7 +6,7 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
- <style>
+<style>
   form {
   max-width: 500px;
   }
@@ -27,8 +27,8 @@
   #top {
   text-align: center;
   }
-
 </style>
+
 <body>
   <div class="all-content">
    <br>
@@ -73,7 +73,6 @@
 	      <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
 	      <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
       </div>
-
       
       <div id="mpw">
 	      <label id='f-password' for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
@@ -194,9 +193,7 @@ function idOverlap(){
     });
     
   }
-</script>
 
-<script>
 function nickOverlap(){
   
   var form = document.perInfo;

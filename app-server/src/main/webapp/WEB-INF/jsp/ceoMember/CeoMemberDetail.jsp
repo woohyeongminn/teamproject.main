@@ -203,7 +203,7 @@ ul{list-style:none;}
 			    </form>
 			  </div>
 			 </li>
-			 <li id="tab2" class="btnCon"><a class="tabbtn" href="${contextPath}/app/askboard/mylist">내 문의내역</a>
+			 <li id="tab2" class="btnCon"><a class="tabbtn" href="../askboard/ceomylist">내 문의내역</a>
 			  <div class="tabCon" >
 		    </div>
 		    </li>

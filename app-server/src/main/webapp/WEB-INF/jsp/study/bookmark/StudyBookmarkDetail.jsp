@@ -28,7 +28,6 @@
         -moz-user-select: none;
         user-select: none;
       }
-
       @media (min-width: 768px) {
         .bd-placeholder-img-lg {
           font-size: 3.5rem;
@@ -36,49 +35,11 @@
       }
     </style>
 
-<script type="text/javascript">
-  function checkValue() {
-
-  var form = document.studyInfo;
-  var studyStatus = ${study.studyStatus};
-  console.log(studyStatus);
-  if (studyStatus == 2) {
-	  alert("완료된 스터디 입니다.");
-    return false;
-  }
-  
-  for (Member guilder : form.members.value) {
-     if (form.guilder.perNo.value == form.loginUser.perNo.value) {
-    	 alert("이미 참여 중인 스터디입니다.");
-       return false;
-     }
-   }
-
-    for (Member memberWating : form.watingMember.value) {
-      if (form.memberWating.perNo.value == form.loginUser.perNo.value) {
-    	  alert("이미 승인 대기 중인 스터디입니다.");
-        return false;
-      }
-    }
-  
-  if (form.countMember.value == form.numberOfPeple.value) {
-	    alert("참여 가능 인원수를 초과하였습니다.");
-	    return false;
-	}
-}
-</script>
-
-<!-- <input name="members" type="text" value="${study.members}"/>
-<input name="watingMember" type="text" value="${study.watingMember}"/>
-<input name="studyStatus" type="text" value="${study.studyStatus}"/>
-<input name="countMember" type="text" value="${study.countMember}"/>
-<input name="numberOfPeple" type="text" value="${study.numberOfPeple}"/> -->
-
     <!-- Custom styles for this template -->
     <!-- <link href="sticky-footer.css" rel="stylesheet"> -->
   </head>
   <body class="d-flex flex-column h-100">
-    
+
 <!-- Begin page content -->
 <main class="flex-shrink-0">
   <div class="container" name="studyInfo">
@@ -119,45 +80,14 @@
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
     <div class="btn-group" role="group" aria-label="Basic outlined example">
-		  <c:choose>
-		    <c:when test="${study.owner.perNo eq loginUser.perNo}">
-			    <button class="btn btn-outline-light">
-			      <a href='updateform?studyno=${study.studyNo}'>수정</a>
-			    </button>
-			    <button class="btn btn-outline-light">
-			      <a href='delete?studyno=${study.studyNo}'>삭제</a>
-			    </button>
-		    </c:when>
-		    <c:when test="${study.owner.perNo ne member.perNo}">
-			    <c:forEach var="memberWating" items="${study.watingMember}">
-            <c:if test="${memberWating.perNo ne loginUser.perNo}">
-              <button class="btn btn-outline-light">참여 신청</button>
-            </c:if>
-          </c:forEach>
-          <c:forEach var="guilder" items="${study.members}">
-            <c:if test="${guilder.perNo ne loginUser.perNo}">
-            </c:if>
-          </c:forEach>
-          <c:if test="${study.status ne 2}">
-            <button class="btn btn-outline-light">참여 신청</button>
-          </c:if>
-          <c:if test="${study.countMember ne study.numberOfPeple}">
-            <button class="btn btn-outline-light">참여 신청</button>
-          </c:if>
-		    </c:when>
-	    </c:choose>
-	    <c:if test="${myBookmark == '0'}">
-		    <button class="btn btn-outline-light">
-		      <a href='${contextPath}/app/bookmark/add?studyno=${study.studyNo}'>북마크 추가</a>
-		    </button>
-		  </c:if>
-      <c:if test="${myBookmark == '1'}">
-		    <button class="btn btn-outline-light">
-		      <a href='${contextPath}/app/bookmark/delete?studyno=${study.studyNo}'>북마크 삭제</a>
-		    </button>
-			</c:if>
 	    <button class="btn btn-outline-light">
-	      <a href='list'>목록</a>
+				<a href='delete?studyno=${study.studyNo}'>삭제</a>
+			</button>
+			<button class="btn btn-outline-light">
+        <a href='../join?studyno=${study.studyNo}'>참여 신청</a>
+      </button>
+		<button class="btn btn-outline-light">
+	        <a href='list'>목록</a>
 	    </button>
 		</div>
   </div>
