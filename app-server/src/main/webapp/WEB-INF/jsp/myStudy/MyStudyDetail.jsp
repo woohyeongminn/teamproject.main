@@ -209,24 +209,60 @@
       <a href='${contextPath}/app/mystudy/todo/list?studyno=${study.studyNo}&perno=${loginUser.perNo}'>To-Do</a></button>
  --%>    <button type="submit" class="btn btn-outline-dark" value="화상미팅">
       <a href='list'>화상미팅</a></button>
-      
-      <button id="popup_open_btn" class="btn btn-outline-dark">To-Do</button>
-      <div id="my_modal">
-      <h4>📋 오늘의 공부</h4>
+  
+  
+  
+  <!--  모달 시작 -->
+  <button id="popup_open_btn" class="btn btn-outline-dark">To-Do</button>
+  <div id="my_modal">
+   <h4>📋 오늘의 공부</h4>
+   
   <div class="input-group mb-3" style="width: 50%;">
-    <input type="text" class="form-control" id="input">
-    <button class="btn btn-outline-dark" type="button" id="buttonsave">입력</button>
+    <form action='todo/add' method='post' id="todobox">
+    <input type='hidden' name='studyNo' value='${study.studyNo}'>
+	    <input type="text" class="form-control" id="input" name='todoContent'>
+	      <input id='f-progress_no' type='hidden' class="form-control" name='todocomplete' value="진행 중" readonly>
+	      <input id='f-progress_no' type='hidden' class="form-control" name='todoStatus' value="1" readonly>
+	      <input id='f-writer' type='hidden' class="form-control" value='${member.perNickname}' readonly>
+      <button class="btn btn-outline-dark" type="submit" id="buttonsave">입력</button>
+    </form>
   </div>
+  
   <ul class="list-group" style="width: 50%;" id="list">
     <li class="list-group-item">📋 TO DO LIST</li>
+	    <c:if test="${empty todoList}">
+	      등록된 To-Do List가 없습니다.
+	    </c:if>
+    <c:forEach items="${todoList}" var="todo">
+      <c:if test="${not empty todoList}">
+        <li class="list-group-item">${todo.todoContent}
+          <form action='todo/delete' id="tododelete">
+          <input type='hidden' name='studyno' value='${study.studyNo}'>
+          <input type='hidden' name='todono' value='${todo.todoNo}'>
+        <button style='float: right;' class='btn btn-outline-dark' type='submit' onclick='remove("+cnt+")'>삭제</button>
+          </form>
+        </li>
+      </c:if>
+    </c:forEach>
   </ul>
     <a class="modal_close_btn">닫기</a>
 </div>
   </div>
+  <!-- // 모달 -->
+
+
 
 </div>
 
 <script>
+/* document.querySelector("#todobox").onsubmit = () => {
+	  if (document.querySelector("#input").value == "") {
+	    Swal.fire('내용을 입력해 주세요.')
+	    return false;
+	  }
+	}; */
+
+
 function modal(id) {
     var zIndex = 9999;
     var modal = document.getElementById(id);

@@ -9,9 +9,13 @@ public interface MemberDao {
   void insert(Member member) throws Exception;
   List<Member> findAll() throws Exception;
   Member findByNo(int no) throws Exception;
-  Member findByName(String inputName) throws Exception;
-  Member findByEmail(String inputEmail) throws Exception;
-  Member findByTel(String inputTel) throws Exception;
+  //Member findByName(String inputName) throws Exception;
+  //Member findByEmail(String inputEmail) throws Exception;
+  //Member findByTel(String inputTel) throws Exception;
+
+  Member findEmailByNameAndTel(@Param("name") String name, @Param("tel") String tel) throws Exception;
+  Member findByNameAndEmail(@Param("name") String name, @Param("email") String email) throws Exception;
+
   Member findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
   void updateName(Member member) throws Exception;
   void updateNickname(Member member) throws Exception;
@@ -20,12 +24,10 @@ public interface MemberDao {
   void updateEmail(Member member) throws Exception;
   void updatePassword(Member member) throws Exception;
   void updateActive(Member member) throws Exception;
+
+  String idOverlap(String id) throws Exception;  
+  String nickOverlap(String nick) throws Exception;  
   // void delete(int no) throws Exception;
-
-
-
-
-
   //  void selectOnByNickname(Member member) throws Exception;
   //  int indexNo(int no) throws Exception;
   //  List<Member> findByKeyword(String keyword) throws Exception;

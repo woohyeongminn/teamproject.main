@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
  <style>
   form {
@@ -48,21 +50,21 @@
      
       
       <div id="mE">
-	      <label id='f-email' for='f-email' class="col-sm-2 col-form-label">이메일</label>
-	      <input id='i-email' type='text' name='perEmail' pattern="^[a-zA-Z0-9]+$" placeholder="*필수" onkeydown="inputEmail()"/>@
+	      <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
+	      <input id='f-email' type='text' name='id' pattern="^[a-zA-Z0-9]+$" placeholder="*필수"/>@
 	      <select name="site">
 	        <option>naver.com</option>
 	        <option>daum.net</option>
 	        <option>gmail.com</option>
 	        <option>kakao.com</option>
 	      </select>
-	      <input type="button" class="btn btn-outline-dark" value="인증하기"/><br>
+	      <input type="button" class="btn btn-outline-dark" value="중복확인" onclick="idOverlap()"/><br>
       </div>   
          
       <div id="mNn">
 	      <label id='f-nicknam'for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
-	      <input id='i-nickname' type='text' name='perNickname' placeholder="*필수" />
-	      <input type="button" class="btn btn-outline-dark" value="중복확인" /><br>
+	      <input id='i-nickname' type='text' name='nick' placeholder="*필수" />
+	      <input type="button" class="btn btn-outline-dark" value="중복확인" onclick="nickOverlap()"/><br>
       </div>
   
       <div id="mt">
@@ -157,6 +159,79 @@ document.querySelector("#member-form").onsubmit = () => {
 };
 </script>
 
+<script>
+function idOverlap(){
+  
+  var form = document.perInfo;
+  
+      console.log("idOverlap 호출")
+      console.log("아이디 입력 값 : "+form.id.value)
+    $.ajax({
+      type :"post",/* 전송 방식 */
+      url :"idOverlap", /* 컨트롤러 사용할 때. 내가 보낼 데이터의 주소. */
+      data : {"id" : form.id.value+"@"+form.site.value},
+      /* JSON형식 안에 JSON 형식으로 표현한 데이터. 
+            "파라미터 이름" : 폼태그에 적은 NAME 값.ID입력창의 NAME값.value 여러 개도 가능
+      data :{ "id" : joinForm.id.value, 
+      "id1" : joinForm.password.value}, 이렇게도 사용 가능.         
+      */
+      dataType : "text",  /* text, xml, html, script, json, jsonp 가능 */
+            //정상적인 통신을 했다면 function은 백엔드 단에서 데이터를 처리.
+            
+      success : function(data){ 
+        
+        console.log(data);
+        
+        if(data=="1"){
+          alert("사용 가능한 이메일 입니다.");
+        }else{  //ajax가 제대로 안됐을 때 .
+          alert("이미 사용중인 이메일 입니다.");
+        }
+      },
+      error : function(){
+        alert("아이디 중복 확인 ajax 실행 실패");
+      }
+    });
+    
+  }
+</script>
+
+<script>
+function nickOverlap(){
+  
+  var form = document.perInfo;
+  
+      console.log("nickOverlap 호출")
+      console.log("닉네임 입력 값 : "+form.nick.value)
+    $.ajax({
+      type :"post",/* 전송 방식 */
+      url :"nickOverlap", /* 컨트롤러 사용할 때. 내가 보낼 데이터의 주소. */
+      data : {"nick" : form.nick.value},
+      /* JSON형식 안에 JSON 형식으로 표현한 데이터. 
+            "파라미터 이름" : 폼태그에 적은 NAME 값.ID입력창의 NAME값.value 여러 개도 가능
+      data :{ "id" : joinForm.id.value, 
+      "id1" : joinForm.password.value}, 이렇게도 사용 가능.         
+      */
+      dataType : "text",  /* text, xml, html, script, json, jsonp 가능 */
+            //정상적인 통신을 했다면 function은 백엔드 단에서 데이터를 처리.
+            
+      success : function(data){ 
+        
+        console.log(data);
+        
+        if(data=="1"){
+          alert("사용 가능한 닉네임 입니다.");
+        }else{  //ajax가 제대로 안됐을 때 .
+          alert("이미 사용중인 닉네임 입니다.");
+        }
+      },
+      error : function(){
+        alert("닉네임 중복 확인 ajax 실행 오류");
+      }
+    });
+    
+  }
+</script>
  
 
 

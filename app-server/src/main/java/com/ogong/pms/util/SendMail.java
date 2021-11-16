@@ -1,4 +1,4 @@
-package com.ogong.pms.web.member;
+package com.ogong.pms.util;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
