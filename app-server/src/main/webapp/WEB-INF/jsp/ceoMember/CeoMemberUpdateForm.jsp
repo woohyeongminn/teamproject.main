@@ -163,6 +163,10 @@ max-width: 500px;
   outline: none;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  }
 </style>
 
 
@@ -203,6 +207,9 @@ max-width: 500px;
        
        <label for='f-password' class='form-label'>비밀번호</label>
        <a href='javascript:openPwPopup()' class="btn-default btn-sm" role="button" style="border: 1px solid; border-radius: 3px;">비밀번호 변경</a><br>
+       
+       <label for='f-password' class='form-label'>암호</label>
+       <input id='f-password' type='password' name='ceoPassword' value='${ceoMember.ceoPassword}'><br>
        
        <label for='f-registeredDate' class='form-label'>가입일</label>
        <input id='f-registeredDate' type='text' name='ceoRegisteredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>

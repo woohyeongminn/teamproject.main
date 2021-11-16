@@ -83,6 +83,8 @@ ul {
 .label-wrap {
   width: 100%;
   height: fit-content;
+  display: flex;
+  flex-direction: row;
 }
 
 .label-wrap > label {
@@ -92,7 +94,7 @@ ul {
 }
 
 .label-wrap > span {
-  width:80%;
+  width:70%;
   height:80px;
   padding: 5px 0;
   overflow: scroll;
@@ -112,7 +114,7 @@ ul {
 }
 
 .review-wrap {
-  width: 830px;
+  width: 99%;
   height: 180px;
   overflow: scroll;
 }
@@ -223,11 +225,15 @@ button {
 		<div class="cafe-top">
 		 <h4 style="text-align: center;">[${cafe.name}]</h4>
 			<div class="slide">
+			
+			   <c:forEach items="${cafe.cafeImgs}" var="cafeImgs">
+			   
+			   </c:forEach>
+			
 			    <ul>
 			      <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
 				    <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
 				    <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
-			       <%-- <li><img src="../upload/cafe/${cafe.cafeImgs[2].name}.jpg" style="width:100%"></li> --%>
 			  </ul>
 			</div>
 		</div>
@@ -238,8 +244,12 @@ button {
 			 <input id='c-no' type='hidden' value='${cafe.no}'>
 			 <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
 			 <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
-			 <div class="label-wrap"><label for='f-location'>주소</label><span style="height: fit-content;">${cafe.location}</span></div>
-			 <div class="label-wrap"><label for='f-info'>소개글</label><span style="height: fit-content;">${cafe.info}</span></div>
+			 <div class="label-wrap">
+			   <label for='f-location'>주소</label><span style="height: fit-content;">${cafe.location}</span>
+			 </div>
+			 <div class="label-wrap">
+			   <label for='f-info'>소개글</label><span style="height: fit-content;">${cafe.info}</span>
+			 </div>
 			 <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
 			 <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
 			 <label for='f-holiday'>이번주 휴무일</label><span>${cafe.holiday}</span><br>

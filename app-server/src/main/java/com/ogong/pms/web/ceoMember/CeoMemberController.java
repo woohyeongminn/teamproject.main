@@ -121,15 +121,26 @@ public class CeoMemberController {
     ceoMemberService.idOverlap(id,response);  //서비스에 있는 idOverlap 호출.
   }
 
+  //닉네임 중복확인 처리
+  @RequestMapping(value="/ceomember/nickOverlap", method=RequestMethod.POST)
+  public void nickOverlap(HttpServletResponse response, @RequestParam("nick") String nick) throws IOException {
+    //@RequestParam는 요청의 특정 파라미터 값을 찾아낼 때 사용하는 어노테이션
+    ceoMemberService.nickOverlap(nick,response);  //서비스에 있는 nickOverlap 호출.
+  }
+
   //------------------------------------------------------------------------------------------------------------------------------------------------------
   //마이페이지
   @GetMapping("/ceomember/detail")
   public ModelAndView ceoDetail(HttpSession session) throws Exception {
 
+    ModelAndView mv = new ModelAndView();
+
     CeoMember loginCeo = (CeoMember) session.getAttribute("loginCeoUser");
 
     if (loginCeo == null) {
-      throw new Exception("로그인한 회원이 없습니다.");
+      mv.addObject("pageTitle", "로그인 선택");
+      mv.addObject("contentUrl", "login.jsp");
+      mv.setViewName("template1");
     } 
 
     CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
@@ -139,8 +150,6 @@ public class CeoMemberController {
     } 
 
     Cafe cafe = cafeDao.findByCeoMember(ceoMember.getCeoNo());
-
-    ModelAndView mv = new ModelAndView();
 
     if (cafe != null) {
       String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
@@ -153,7 +162,6 @@ public class CeoMemberController {
     }
 
     mv.addObject("ceoMember", ceoMember);
-
     mv.addObject("pageTitle", "🙂 마이페이지");
     mv.addObject("contentUrl", "ceoMember/CeoMemberDetail.jsp");
     mv.setViewName("template1");
@@ -163,7 +171,17 @@ public class CeoMemberController {
   //------------------------------------------------------------------------------------------------------------------------------------------------------
   // 기업회원 수정 폼
   @PostMapping("/ceomember/updateform")
-  public ModelAndView ceoUpdateForm(CeoMember ceoMember) throws Exception {
+  public ModelAndView ceoUpdateForm(CeoMember ceoMember, HttpSession session) throws Exception {
+
+    ModelAndView mv = new ModelAndView();
+
+    CeoMember loginCeo = (CeoMember) session.getAttribute("loginCeoUser");
+
+    if (loginCeo == null) {
+      mv.addObject("pageTitle", "로그인 선택");
+      mv.addObject("contentUrl", "login.jsp");
+      mv.setViewName("template1");
+    } 
 
     if (ceoMember == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
@@ -173,7 +191,6 @@ public class CeoMemberController {
     String tel2 = ceoMember.getCeoTel().substring(4, 8);
     String tel3 = ceoMember.getCeoTel().substring(9, 13);
 
-    ModelAndView mv = new ModelAndView();
     mv.addObject("ceoMember", ceoMember);
     mv.addObject("tel1", tel1);
     mv.addObject("tel2", tel2);

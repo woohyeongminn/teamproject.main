@@ -6,6 +6,13 @@
 <script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
 <script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
   
+<style>
+.dropdown-item:focus {
+  background-color: white;
+}
+</style>
+
+
 <header>
 <div class="header_background">
   <div class='header_logo'>
@@ -27,7 +34,7 @@
     </c:when>
     </c:choose>
     <li>
-      <a class="dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
+      <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
         고객센터
       </a>
       <ul class="dropdown-menu">
