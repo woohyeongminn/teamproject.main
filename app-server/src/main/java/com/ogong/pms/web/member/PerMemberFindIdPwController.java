@@ -40,9 +40,11 @@ public class PerMemberFindIdPwController  {
     Member perMember = memberDao.findEmailByNameAndTel(perName, perTel);
 
     if (perMember != null) {
-      String findemail = perMember.getPerEmail().replace(
-          perMember.getPerEmail().substring(perMember.getPerEmail().lastIndexOf("@"),
-              perMember.getPerEmail().length()),"*****");
+      String findemail = 
+          perMember.getPerEmail().replace(
+              perMember.getPerEmail().substring(
+                  perMember.getPerEmail().lastIndexOf("@"),perMember.getPerEmail().length()),
+              "*****");
 
       System.out.println(perMember);
       mv.addObject("pageTitle", "🔎이메일 찾기완료");

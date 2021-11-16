@@ -33,7 +33,7 @@ public class AskBoardCeoCotroller {
   public ModelAndView add(HttpSession session, HttpServletRequest request, AskBoard askBoard) throws Exception {
 
     if (askBoard.getAskStatus() == 2) {
-      askBoard.setAskTempPW(Integer.parseInt(request.getParameter("pw")));
+      askBoard.setAskTempPW(Integer.parseInt(request.getParameter("password")));
     }
     askBoard.setAskCeoWriter((CeoMember) session.getAttribute("loginCeoUser"));
     askBoardDao.insertPer(askBoard);
@@ -94,11 +94,11 @@ public class AskBoardCeoCotroller {
   @GetMapping("/askboard/ceoupdateform")
   public ModelAndView updateForm(int askNo) throws Exception {
 
-    AskBoard perAskBoard = askBoardDao.findByNo(askNo);
+    AskBoard ceoAskBoard = askBoardDao.findByNo(askNo);
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("pageTitle", "💬문의글 수정");
-    mv.addObject("perAskBoard", perAskBoard);
+    mv.addObject("ceoAskBoard", ceoAskBoard);
     mv.addObject("contentUrl", "askBoard/AskBoardCeoUpdateForm.jsp");
     mv.setViewName("template1");
 
