@@ -50,8 +50,9 @@ public class PerMemberAuthController {
       mv.setViewName("redirect:../index");
 
     } else {
-      mv.addObject("pageTitle", "해당 계정이 존재하지 않습니다.");
-      mv.addObject("contentUrl", "member/PerMemberLoginFail.jsp");
+      mv.addObject("pageTitle", "⚠정보 오류");
+      mv.addObject("refresh", "2;url=form");
+      mv.addObject("contentUrl", "member/InputFail.jsp");
       mv.setViewName("template1");
     }
     return mv;

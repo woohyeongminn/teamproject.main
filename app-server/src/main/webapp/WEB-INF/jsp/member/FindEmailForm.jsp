@@ -2,54 +2,77 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<meta charset="UTF-8">
-<div class="all-content">
-<b style="font-size:20px"> 이메일 찾기 </b>
-<br>
-<hr>
-  <form action=findemail method="post">
-    <label for='f-status'>이메일 찾기</label>
-    <select id="f-status" name='status' >
-      <option value='1' name='status'>전화번호로 찾기</option>
-      <option value='2' name='status'>이름으로 찾기</option>
-    </select><br> 
 
-    <div id="telRow">
-       <br>
-      <label for='f-tempPW' size='100px'>📞전화번호</label>
-      <input id='f-tempPW' type='tel' name='tel' placeholder="입력하세요"></input>
-    </div><br>    
-    <div id="nameRow">
-       <br>
-      <label for='f-name' size='100px'>🖊이름</label>
-      <input id='f-name' type='text' name='name' placeholder="입력하세요"></input>
-    </div><br> 
-    
-    <hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-outline-dark" type="submit" value="찾기" >이메일 찾기</button>
-     <a href="${contextPath}/app/login" type="button" class="btn btn-outline-dark" >취소하기</a>
-   </div> 
-  </form>
-        
-       
-    
-    
-<script>
-var fStatus = document.querySelector("#f-status");
-var nameRow = document.querySelector("#nameRow");
-var telRow = document.querySelector("#telRow");
-
-nameRow.style["display"] = "none";
-telRow.style["display"] = "none";
-
-fStatus.addEventListener("input", function() {
-  if (fStatus.value == "2") {
-	  telRow.style["display"] = "none";
-    nameRow.style["display"] = "";
-  } else  {
-	    telRow.style["display"] = "";
-	    nameRow.style["display"] = "none";
+<script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
+ <style>
+  form {
+  max-width: 500px;
   }
-});
-</script> 
-    
+  .btn {
+   font-size: 14px;
+   line-height: 12px;
+  }
+  b {
+  text-align: center;
+  font-size:20px
+  }  
+ #all-content {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    font-size:14px;
+  } 
+  #top {
+  text-align: center;
+  }
+
+</style>
+<body>
+  <div id="all-content">
+   <br>
+    <div id="top">
+      <b style="font-size: 20px">🔍이메일 찾기</b><br> 
+    </div>
+   <hr>
+    <form id="member-form" action='findemail' name='perInfo' method='post' >
+
+      <div id="mn">
+        <label id='f-name' for='f-name' class="col-sm-2 col-form-label">이름</label>
+        <input id='i-name' type='text' name='perName' placeholder="*필수"/><br>
+      </div>
+
+      <div id="mt">
+        <label id='f-tel'for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
+        <input id='i-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
+        <input id='i-tel1' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
+        <input id='i-tel2' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
+      </div>
+      
+       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+         <button class="btn btn-outline-dark" type="submit" >🔍이메일 찾기</button> 
+       </div><hr> 
+       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+         <a href="getpwbyemailform">비밀번호 찾기</a> |
+         <a href="${contextPath}/app/index">취소하기</a>
+       </div> 
+   </form>
+   </div>
+</body>
+
+<script>  
+  document.querySelector("#all-content").onsubmit = () => {
+  if (document.querySelector("#i-name").value == "") {
+    alert("**이름을 입력해주세요.")
+    return false;
+  } else if (document.querySelector("#i-tel").value == "" ||
+		  document.querySelector("#i-tel1").value == "" ||
+		  document.querySelector("#i-tel2").value == "") {
+    alert("**전화번호를 입력해주세요.")
+    return false;
+  }
+};
+</script>
+ 
+
+
+

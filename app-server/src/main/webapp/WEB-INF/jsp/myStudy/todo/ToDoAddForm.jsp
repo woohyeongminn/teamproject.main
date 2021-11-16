@@ -97,11 +97,11 @@
     <td></td>
   </tr>
 	
-  <tr id="blockbox">
+<!--   <tr id="blockbox">
     <th scope="row" id="middlebox"><label for='f-note'>비고</label></th>
     <td><input id='f-note' type='text' name='todoRemark'></td>
     <td></td>
-  </tr>
+  </tr> -->
   
   <tr id="bottombox">
     <th scope="row" id="middlebox"><label for='f-writer'>작성자</label></th>

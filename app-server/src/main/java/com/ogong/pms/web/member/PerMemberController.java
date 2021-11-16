@@ -1,7 +1,9 @@
 package com.ogong.pms.web.member;
 
+import java.io.IOException;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
@@ -23,7 +27,7 @@ import net.coobird.thumbnailator.name.Rename;
 @Controller
 public class PerMemberController {
 
-
+  @Autowired MemberService memberService;
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired MemberDao memberDao;
   @Autowired ServletContext sc;
@@ -41,12 +45,13 @@ public class PerMemberController {
   }
 
   @PostMapping("/member/add")
-  protected ModelAndView add(Member member, Part photoFile, String[] tel, String site) throws Exception {
+  protected ModelAndView add(Member member, Part photoFile, String[] tel, String nick, String id, String site) throws Exception {
 
     String perTel = tel[0] + "-" + tel[1] + "-" + tel[2];
     member.setPerTel(perTel);
 
-    member.setPerEmail(member.getPerEmail() +'@'+ site);
+    member.setPerEmail(id +'@'+ site);
+    member.setPerNickname(nick);
 
     member.setPerStatus(Member.PER);
 
@@ -99,6 +104,20 @@ public class PerMemberController {
     mv.setViewName("template1");
 
     return mv;
+  }
+
+  //이메일 중복확인 처리
+  @RequestMapping(value="/member/idOverlap", method=RequestMethod.POST)
+  public void idOverlap(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
+    //@RequestParam는 요청의 특정 파라미터 값을 찾아낼 때 사용하는 어노테이션
+    memberService.idOverlap(id,response);  //서비스에 있는 idOverlap 호출.
+  }
+
+  //닉네임 중복확인 처리
+  @RequestMapping(value="/member/nickOverlap", method=RequestMethod.POST)
+  public void nickOverlap(HttpServletResponse response, @RequestParam("nick") String nick) throws IOException {
+    //@RequestParam는 요청의 특정 파라미터 값을 찾아낼 때 사용하는 어노테이션
+    memberService.nickOverlap(nick,response);  //서비스에 있는 nickOverlap 호출.
   }
 
   @RequestMapping("/member/detail")
