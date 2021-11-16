@@ -156,6 +156,16 @@
     member_no=#{perNo}
   </update>
 
+<!-- 아이디 중복 확인하기  -->
+<select id="idOverlap" resultType="string">
+  select
+    email
+  from
+    member
+  where
+    email = #{perEmail}
+</select>
+
 </mapper>
 
 

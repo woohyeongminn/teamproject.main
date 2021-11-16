@@ -16,7 +16,7 @@
   text-align: center;
   font-size:20px
   }  
- .all-content {
+ #all-content {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
@@ -28,7 +28,7 @@
 
 </style>
 <body>
-  <div class="all-content">
+  <div id="all-content">
    <br>
     <div id="top">
       <b style="font-size: 20px">🔍이메일 찾기</b><br> 
@@ -44,18 +44,34 @@
       <div id="mt">
         <label id='f-tel'for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
         <input id='i-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
-        <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
-        <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
-      </div><hr>
+        <input id='i-tel1' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
+        <input id='i-tel2' type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
+      </div>
       
        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
          <button class="btn btn-outline-dark" type="submit" >🔍이메일 찾기</button> 
-         <a type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
+       </div><hr> 
+       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+         <a href="getpwbyemailform">비밀번호 찾기</a> |
+         <a href="${contextPath}/app/index">취소하기</a>
        </div> 
    </form>
    </div>
 </body>
 
+<script>  
+  document.querySelector("#all-content").onsubmit = () => {
+  if (document.querySelector("#i-name").value == "") {
+    alert("**이름을 입력해주세요.")
+    return false;
+  } else if (document.querySelector("#i-tel").value == "" ||
+		  document.querySelector("#i-tel1").value == "" ||
+		  document.querySelector("#i-tel2").value == "") {
+    alert("**전화번호를 입력해주세요.")
+    return false;
+  }
+};
+</script>
  
 
 

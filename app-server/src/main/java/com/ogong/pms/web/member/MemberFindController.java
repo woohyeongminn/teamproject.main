@@ -49,9 +49,9 @@ public class MemberFindController  {
       mv.setViewName("template1");
 
     } else {
-      mv.addObject("pageTitle", "🔎정보 오류");
+      mv.addObject("pageTitle", "⚠정보 오류");
       mv.addObject("refresh", "2;url=findemailform");
-      mv.addObject("contentUrl", "member/FindFail.jsp");
+      mv.addObject("contentUrl", "member/InputFail.jsp");
       mv.setViewName("template1");
     }
     return mv;
@@ -87,15 +87,15 @@ public class MemberFindController  {
       memberDao.updatePassword(perMember);
       sqlSessionFactory.openSession().commit();
 
-      mv.addObject("pageTitle", "🔎임시 비밀번호 발급");
+      mv.addObject("pageTitle", "📧임시 비밀번호 발급");
       mv.addObject("perMember", perMember);
       mv.addObject("contentUrl", "member/GetPwByEmail.jsp");
       mv.setViewName("template1");
 
     } else {
-      mv.addObject("pageTitle", "🔎정보 오류");
+      mv.addObject("pageTitle", "⚠정보 오류");
       mv.addObject("refresh", "2;url=getpwbyemailform");
-      mv.addObject("contentUrl", "member/FindFail.jsp");
+      mv.addObject("contentUrl", "member/InputFail.jsp");
       mv.setViewName("template1");
     }
     return mv;

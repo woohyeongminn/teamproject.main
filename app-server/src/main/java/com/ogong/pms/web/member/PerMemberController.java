@@ -41,12 +41,12 @@ public class PerMemberController {
   }
 
   @PostMapping("/member/add")
-  protected ModelAndView add(Member member, Part photoFile, String[] tel, String site) throws Exception {
+  protected ModelAndView add(Member member, Part photoFile, String[] tel,String id, String site) throws Exception {
 
     String perTel = tel[0] + "-" + tel[1] + "-" + tel[2];
     member.setPerTel(perTel);
 
-    member.setPerEmail(member.getPerEmail() +'@'+ site);
+    member.setPerEmail(id +'@'+ site);
 
     member.setPerStatus(Member.PER);
 

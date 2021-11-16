@@ -24,12 +24,9 @@ public interface MemberDao {
   void updateEmail(Member member) throws Exception;
   void updatePassword(Member member) throws Exception;
   void updateActive(Member member) throws Exception;
+
+  String idOverlap(String id) throws Exception;  
   // void delete(int no) throws Exception;
-
-
-
-
-
   //  void selectOnByNickname(Member member) throws Exception;
   //  int indexNo(int no) throws Exception;
   //  List<Member> findByKeyword(String keyword) throws Exception;
