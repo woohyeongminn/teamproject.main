@@ -168,7 +168,7 @@ public class PerMemberController {
   }
 
   @RequestMapping("/member/update")
-  protected ModelAndView update(Member member, Part photoFile) throws Exception {
+  protected ModelAndView update(Member member, Part photoFile, String nick) throws Exception {
 
     Member oldMember = memberDao.findByNo(member.getPerNo());
 
@@ -215,11 +215,13 @@ public class PerMemberController {
       });
 
       member.setPerPhoto(filename);
+      member.setPerNickname(nick);
       member.setPerRegisteredDate(oldMember.getPerRegisteredDate());
 
     } else {
       // 기존 정보로 
       member.setPerPhoto(oldMember.getPerPhoto());
+      member.setPerNickname(nick);
       member.setPerRegisteredDate(oldMember.getPerRegisteredDate());
     }
 
