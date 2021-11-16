@@ -155,14 +155,14 @@
      email = #{ceoEmail}
     where
      member_no=#{ceoNo}
-  </update>
+  </update> -->
   
    <update id="updatePassword" parameterType="CeoMember">
     update member set
      password = password(#{ceoPassword})
     where
      member_no=#{ceoNo}
-  </update> -->
+  </update>
   
   <update id="updateActive" parameterType="CeoMember">
     update member set

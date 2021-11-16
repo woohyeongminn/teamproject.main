@@ -106,7 +106,7 @@ public class CeoMemberController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("Refresh", "2;url=list");
+    mv.addObject("refresh", "2;url=form");
     mv.addObject("pageTitle", "👋환영 합니다!");
     mv.addObject("contentUrl", "ceoMember/CeoMemberAdd.jsp");
     mv.setViewName("template1");
@@ -179,13 +179,16 @@ public class CeoMemberController {
 
   //기업회원 개인정보 수정
   @PostMapping("/ceomember/update")
-  public ModelAndView ceoUpdate(CeoMember ceoMember, Part photoFile) throws Exception {
+  public ModelAndView ceoUpdate(CeoMember ceoMember, String tel1, String tel2, String tel3, Part photoFile) throws Exception {
 
     CeoMember oldCeoMember = ceoMemberDao.findByNo(ceoMember.getCeoNo());
 
     if (oldCeoMember == null) {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
+
+    String ceoTel = tel1 + "-" + tel2 + "-" + tel3;
+    ceoMember.setCeoTel(ceoTel);
 
     // 사진
     if (photoFile.getSize() > 0) {
@@ -241,9 +244,52 @@ public class CeoMemberController {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:detail");
     return mv;
-
   }
 
+  // 기업회원 비밀번호 변경 폼
+  @GetMapping("/ceomember/openPwPopup")
+  public ModelAndView openPwPopup(HttpSession session) throws Exception {
+
+    CeoMember loginCeo = (CeoMember) session.getAttribute("loginCeoUser");
+
+    if (loginCeo == null) {
+      throw new Exception("로그인한 회원이 없습니다.");
+    } 
+
+    CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("ceoMember", ceoMember);
+    mv.addObject("pageTitle", "비밀번호 변경");
+    mv.setViewName("ceoMember/openPwPopup");
+    return mv;
+  }
+
+  //기업회원 비밀번호 변경
+  @PostMapping("/ceomember/updatepassword")
+  public ModelAndView ceoUpdatePw(int ceoNo, String oldPw, String newPw, String newPwChk) throws Exception {
+
+    CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+
+    if (ceoMember == null) {
+      throw new Exception("해당 번호의 회원이 없습니다.");
+    }
+
+    if (!ceoMember.getCeoPassword().equals(oldPw)) {
+      throw new Exception("기존 비밀번호 확인을 실패하였습니다.");
+    }
+
+    if (!newPw.equals(newPwChk)) {
+      throw new Exception("새로운 비밀번호 확인을 실패하였습니다.");
+    }
+
+    ceoMember.setCeoPassword(newPwChk);
+    ceoMemberDao.updatePassword(ceoMember);
+
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("updatePwPopup.jsp");
+    return mv;
+  }
   //------------------------------------------------------------------------------------------------------------------------------------------------------
   // 기업회원 탈퇴 폼
   @PostMapping("/ceomember/deleteform")

@@ -78,14 +78,14 @@ ul{list-style:none;}
 }
 
 .profile {
-  max-width: 500px;
-  margin: 100px auto 0;
-  background-color: white;
-  border-radius: 15px;
-  border: 2px solid rgb(110, 110, 110);
-  text-align: center;
-  padding-bottom: 30px;
-  padding-left: 60px;
+max-width: 500px;
+    margin: 100px auto 0;
+    background-color: white;
+    border-radius: 15px;
+    border: 2px solid rgb(110, 110, 110);
+    text-align: left;
+    padding-bottom: 30px;
+    padding-left: 100px;
 }
 
 .profile > label {
@@ -95,9 +95,9 @@ ul{list-style:none;}
 }
 
 .profile > label, span {
-  display: inline-block;
-  padding: 5px 5px;
-  width: 103px;
+    display: inline-block;
+    padding: 5px 5px;
+    width: 103px;
 }
 
 .profile .profile-header {
@@ -149,56 +149,22 @@ ul{list-style:none;}
     margin: 0 auto;
     margin-bottom: 20px;
     display: block;
+    font-size: 13px;
+    margin-right: 135px;
 }
 
-#f-registeredDate {
+#f-registeredDate , #f-email {
   border:0;
 }
 
-#f-registeredDate:focus {
+#f-registeredDate, #f-email:focus {
   border:0;
   outline: none;
 }
 
 </style>
 
-<script type="text/javascript">
-function checkValue() {
-  
-  var form = document.ceoInfo;
-  
-  if(!form.name.value){
-        alert("이름을 입력하세요.");
-        return false;
-   }
-  
-  if(!form.nickname.value){
-        alert("닉네임을 입력하세요.");
-        return false;
-   }
-  
-  if(!form.tel1.value && !form.tel2.value && !form.tel3.value){
-        alert("전화번호를 입력하세요.");
-        return false;
-   }
 
-   if(!form.email.value){
-        alert("이메일을 입력하세요.");
-        return false;
-    }
-   
-    if(!form.email.value != "checkEmail"){
-        alert("이메일 중복체크를 해주세요.");
-        return false;
-    }
-     
-   if(!form.password.value){
-        alert("비밀번호를 입력하세요.");
-        return false;
-    }
-}
-
-</script>
 
 <body>
 <br><br><br>
@@ -207,6 +173,7 @@ function checkValue() {
    <ul>
     <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
     <div class="tabCon">
+    
     <form action='update' method='post' enctype="multipart/form-data">
       <input type='hidden' name='ceoNo' value='${ceoMember.ceoNo}'>
     
@@ -220,66 +187,26 @@ function checkValue() {
        <input id='f-photo' type='file' name='photoFile' value='${ceoMember.ceoPhoto}'>
 
        <label for='f-name' class='form-label'>이름</label>
-       <input id='f-name' type='text' name='ceoName' value='${ceoMember.ceoName}'><br>
+       <input id='f-name' type='text' name='ceoName' value='${ceoMember.ceoName}' style="width: 150px;"><br>
        
        <label for='f-nickname' class='form-label'>닉네임</label>
-       <input id='f-nickname' type='text' name='ceoNickname' value='${ceoMember.ceoNickname}'><br>
+       <input id='f-nickname' type='text' name='ceoNickname' value='${ceoMember.ceoNickname}' style="width: 150px;"><br>
        
        <label for='f-tel' class='form-label'>전화번호</label>
-       <input id='f-tel' type='tel' name='ceoTel' value='${ceoMember.ceoTel}'><br>
+	     <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:40px;"/> -
+	     <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:40px;"/> -
+	     <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:40px;"/> <br>
        
        <label for='f-email' class='form-label'>이메일</label>
-       <input id='f-email' type='email' name='ceoEmail' value='${ceoMember.ceoEmail}'><br>
+       <input id='f-email' type='email' name='ceoEmail' value='${ceoMember.ceoEmail}' readonly><br>
        
-       <%--<label for='f-password' class='form-label'>암호</label>
-       <input id='f-password' type='password' name='ceoPassword' value='${ceoMember.ceoPassword}'><br>
-	      <input id='f-password' type='hidden' name='ceoPassword' value='${ceoMember.ceoPassword}'> --%>
+       <label for='f-password' class='form-label'>비밀번호</label>
+       <a href='javascript:openPwPopup()' class="btn-default btn-sm" role="button" style="outline: black;">비밀번호 변경</a><br>
        
        <label for='f-registeredDate' class='form-label'>가입일</label>
        <input id='f-registeredDate' type='text' name='ceoRegisteredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>
      </div>
      
-			<section class="n-section-block">
-		      <table class="n-table table-row my-info-modify">
-		       <tr id="password-area">
-		         <th scope="row">비밀번호</th>
-		         <td><button  class="n-btn w100 btn-sm btn-default cert-hidden" id="change-password-btn">비밀번호 변경</button></td>
-		       </tr>
-		       
-		       <!--비밀번호 변경-->
-		       <tr id="change-password-area" style="display: none">
-		         <th scope="row">비밀번호</th>
-		           <td colspan="2">
-		               <div class="my-info-modify">
-		                   <div class="input">
-		                       <label for="password">현재 비밀번호</label>
-		                       <input type="password" class="n-input" id="password">
-		                       <span id="password-invalid" class="validate danger"></span>
-		                   </div>
-		                   
-		                   <div class="input">
-		                       <label for="newPassword">신규 비밀번호</label>
-		                       <input type="password" class="n-input" id="newPassword" maxlength="20">
-		                       <span id = "new-password-invalid" class="validate danger"></span>
-		                       <span id="valid-newPassword" class="validate" style="display: none">사용 가능한 비밀번호입니다.</span>
-		                   </div>
-		                   
-		                   <div class="input">
-		                       <label for="confirmPassword">신규 비밀번호 재 입력</label>
-		                       <input type="password" class="n-input" id="confirmPassword" maxlength="20">
-		                       <span id="confirm-password-invalid" class="validate danger"></span>
-		                       <span  id="valid-confirmPassword" class="validate" style="display: none">사용 가능한 비밀번호입니다.</span>
-		                   </div>
-		                   <div class="btn-group">
-		                       <button type="button" class="n-btn btn-sm btn-lighter" id="change-password-cancel-btn">취소</button>
-		                       <button type="button" class="n-btn btn-sm btn-accent disabled" id="change-password-finish-btn" disabled >완료</button>
-		                   </div>
-		             </div>
-		           </td>
-		       </tr>
-		      </table>
-		     </section>
-	      
 	      <div class="btn_wrap">
 		      <button type="submit" class="btn btn-outline-dark">수정</button>
 		      <a href='detail' class="btn btn-outline-dark">뒤로가기</a>
@@ -295,7 +222,35 @@ function checkValue() {
    </div> 
   </div>
 </body>
- <script type="text/javascript" src="../js/update.js"></script>
  <script>
   location.href = "#tab1";
  </script>
+ 
+ <script type="text/javascript">
+function checkValue() {
+  
+  var form = document.ceoInfo;
+    
+    if(!form.ceoName.value){
+          alert("이름을 입력하세요.");
+          return false;
+     }
+    
+    if(!form.ceoNickname.value){
+          alert("닉네임을 입력하세요.");
+          return false;
+      }
+    
+      if(!form.tel1.value && !form.tel2.value && !form.tel3.value){
+          alert("전화번호를 입력하세요.");
+          return false;
+      }
+
+};
+
+function openPwPopup() {
+	window.open("openPwPopup", "비밀번호 변경", "width=640px, height=400")
+	
+};
+
+</script>

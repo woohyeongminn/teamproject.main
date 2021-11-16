@@ -87,7 +87,7 @@
      pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="*필수"/><br>
     
 	  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-	  <input id='f-email' type='text' name='id' pattern="^[a-zA-Z0-9]+$" placeholder="*필수"/>@
+	  <input id='f-email' type='text' name='id' pattern="^[a-zA-Z0-9]+$" placeholder="*필수"/> @ 
 	  <select name="site" style="height: 24px;">
 		  <option>naver.com</option>
 		  <option>daum.net</option>
@@ -95,6 +95,7 @@
 		  <option>kakao.com</option>
 	  </select>
 	  <input type="button" class="btn btn-outline-dark" value="중복확인" onclick="idOverlap()"/><br>
+	  <input type="hidden" name="idDuplication" value="idUncheck"/>
 	  
 	  <label for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
 	  <input id='f-password' type='password' name='password'
@@ -138,6 +139,7 @@ function idOverlap(){
     	  
     	  if(data=="1"){
           alert("이 아이디는 사용 가능합니다.");
+          form.idDuplication.value = "idCheck";
         }else{  //ajax가 제대로 안됐을 때 .
           alert("이 아이디는 사용  불가능합니다.");
         }
@@ -147,7 +149,8 @@ function idOverlap(){
       }
     });
     
-  }
+  };
+
 </script>
 
 
@@ -187,11 +190,11 @@ function checkValue() {
           return false;
      }
     
-/*     if(!form.email.value != "checkEmail"){
+    if(form.id.value != "idCheck"){
            alert("이메일 중복체크를 해주세요.");
            return false;
      }
-      */
+     
     if(!form.password.value){
           alert("비밀번호를 입력하세요.");
           return false;
