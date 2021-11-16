@@ -35,7 +35,7 @@ width: 800px;
 height: 300px;
 transform:translate(-50%, -50%);
 padding:30px;
-background:#fff;
+background:rgb(255 248 241);
 border-radius:6px;
 display: flex;
 flex-direction: row;
@@ -62,7 +62,7 @@ text-decoration:none;
 }
 
 .layerPopup .layerBox .leftbox {
-  background-color: white;
+  background-color: rgb(255 248 241);
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ text-decoration:none;
   height: 260px;
   z-index: 99999;
   top: -20px;
-  background-color: white;
+  background-color: rgb(255 248 241);
   border-radius: 10px;
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.418);
 }
@@ -82,19 +82,19 @@ text-decoration:none;
   margin-top: 35%;
   height: 35%;
   text-align: right;
-  background-color: white;
+  background-color: rgb(255 248 241);
   padding: 40px 20px 0 20px;
 }
 .leftbox .leftbottom {
   bottom: 0;
   width: 100%;
   height: 10%;
-  background-color: white;
+  background-color: rgb(255 248 241);
   color: rgb(123 111 109);
 }
 
 .layerPopup .layerBox .rightbox {
-  background-color: white;
+  background-color: rgb(255 248 241);
   width: 35%;
   display: flex;
   flex-direction: column;
@@ -105,18 +105,18 @@ text-decoration:none;
   width: 241px;
   height: 20%;
   z-index: 33333;
-  background-color: white;
-  padding: 20px 20px 0 20px;
+  background-color: rgb(255 248 241);
+  padding: 20px 10px 0 10px;
 }
 .rightbox .rightmiddle {
-  margin-top: 33%;
-  width: 86%;
-  height: 65%;
+  margin-top: 35%;
+  width: 85%;
+  height: 80%;
   z-index: 55555;
   border-top: 1px solid;
   border-top-color: rgb(159 146 143);
-  background-color: white;
-  padding: 40px 20px 0 20px;
+  background-color: rgb(255 248 241);
+  padding: 0 20px;
   text-align: center;
   -webkit-text-stroke: thin;
 }
@@ -125,7 +125,7 @@ text-decoration:none;
   width: 100%;
   height: 10%;
   z-index: 99999;
-  background-color: white;
+  background-color: rgb(255 248 241);
 }
 
 .layerPopup div{
@@ -193,7 +193,9 @@ svg#icon {
 
       <div class="tempbox">
         <div class="middlecontent">
-        <p><i id="icon" class="fas fa-user-graduate"></i>&emsp;<i id="icon" class="far fa-envelope"></i>&emsp;<i id="icon" class="fas fa-comments"></i></p>
+        <p><a href="${contextPath}/app/index"><i id="icon" class="fas fa-user-graduate"></i>&emsp;</a>
+           <a href="${contextPath}/app/index"><i id="icon" class="far fa-envelope"></i>&emsp;</a>
+           <a href="${contextPath}/app/askboard/alllist"><i id="icon" class="fas fa-comments"></i></a></p>
         </div>
       </div>
 
@@ -213,6 +215,7 @@ svg#icon {
 
       <div class="rightmiddle">
         <div class="middlecontent">
+        <p><br></p>
           <p>환영합니다!</p>
           <p>오늘의 공부 홈페이지입니다.</p>
         </div>

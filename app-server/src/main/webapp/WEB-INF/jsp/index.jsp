@@ -180,8 +180,6 @@ bottom: 20px;
 <div id="first"></div>
     <jsp:include page="header.jsp"/>
 
-<jsp:include page="mainPopup.jsp"/>
-
   <section>
     <div class="contents">
     
