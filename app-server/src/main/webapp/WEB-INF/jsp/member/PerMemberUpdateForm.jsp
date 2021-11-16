@@ -61,8 +61,7 @@
 	         title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
 	         placeholder="*입력하세요"/><br>
 	      </div>  
-	  
-	  
+	      <input type="hidden" for='f-no' name='perNo' value="${perMember.perNo}" /> 
 	    <hr>  
 	   <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 	    <input type="submit" value="🛠수정하기" class ="btn btn-outline-dark"/>
@@ -73,9 +72,14 @@
 
 <script>  
   document.querySelector("#all").onsubmit = () => {
-  if (document.querySelector("#password").value == "") {
+  if (document.querySelector("#i-password").value == "") {
     alert("**비밀번호를 입력해주세요.")
     return false;
+};
+  document.querySelector("#all").onsubmit = () => {
+	  if (document.querySelector("#i-nickname").value == "") {
+	    alert("**닉네임을 입력해주세요")
+	    return false;
 };
 </script>
 <script>
