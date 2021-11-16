@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,7 +45,7 @@
 <main class="flex-shrink-0">
   <div class="container" name="studyInfo">
   <input type="hidden" name="members" value="${study.members}">
-  <input type="hidden" name="watingMember" value="${study.watingMember}">
+  <input type="hidden" name="waitingMember" value="${study.waitingMember}">
   <input type="hidden" name="studyStatus" value="${study.studyStatus}">
   <input type="hidden" name="countMember" value="${study.countMember}">
   <input type="hidden" name="numberOfPeple" value="${study.numberOfPeple}">
