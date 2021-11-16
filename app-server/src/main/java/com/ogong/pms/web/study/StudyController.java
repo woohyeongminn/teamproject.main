@@ -1,5 +1,6 @@
 package com.ogong.pms.web.study;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -36,6 +37,13 @@ public class StudyController {
   public ModelAndView add(Study study, HttpSession session) throws Exception {
     study.setOwner((Member) session.getAttribute("loginUser"));
     System.out.println(study);
+
+    study.setMembers(new ArrayList<>());
+    study.setWaitingMember(new ArrayList<>());
+    study.setMyStudyCalender(new ArrayList<>());
+    study.setMyStudyFreeBoard(new ArrayList<>());
+    study.setMyStudyToDo(new ArrayList<>());
+    study.setBookMarkMember(new ArrayList<>());
 
     studyDao.insert(study);
     studyDao.insertGuilder(study.getStudyNo(),
@@ -93,6 +101,22 @@ public class StudyController {
     } else {
       int myBookmark = studyDao.myBookmark(studyno, 0);
       mv.addObject("myBookmark", myBookmark);
+    }
+
+    List<Member> guilders = studyDao.findByGuildersAll(studyno);
+
+    if (!guilders.isEmpty()) {
+      study.setMembers(guilders);
+      mv.addObject("guildersList", guilders);
+      System.out.println(guilders);
+    }
+
+    List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(studyno);
+
+    if (!waitingGuilder.isEmpty()) {
+      study.setWaitingMember(waitingGuilder);
+      mv.addObject("waitingGuilderList", waitingGuilder);
+      System.out.println(waitingGuilder);
     }
 
     mv.addObject("study", study);
