@@ -22,7 +22,7 @@ public class MemberFindController  {
 
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("pageTitle", "찾기");
+    mv.addObject("pageTitle", "내 정보 찾기");
     mv.addObject("contentUrl", "member/FindEmailForm.jsp");
     mv.setViewName("template1");
     return mv;
