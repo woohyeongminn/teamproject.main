@@ -42,9 +42,9 @@ public class MyStudyWaitingListController extends HttpServlet {
       List<Study> waitingStudyList = new ArrayList<>();
       for (int i = 0; i < studyList.size(); i++) {
         List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
-        studyList.get(i).setWatingMember(waiting);
+        studyList.get(i).setWaitingMember(waiting);
 
-        for (Member mem : studyList.get(i).getWatingMember()) {
+        for (Member mem : studyList.get(i).getWaitingMember()) {
           if (member.getPerNo() == mem.getPerNo()) {
             waitingStudyList.add(studyList.get(i));
           }

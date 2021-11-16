@@ -25,7 +25,7 @@ public class StudyBookmarkController {
     Study study = studyDao.findByNo(studyno);
 
     List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
-    study.setWatingMember(waitingGuilder);
+    study.setWaitingMember(waitingGuilder);
 
     List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
     study.setMembers(guilders);

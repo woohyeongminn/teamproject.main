@@ -60,9 +60,9 @@ public class MyStudyController {
 
     for (int i = 0; i < studyList.size(); i++) {
       List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
-      studyList.get(i).setWatingMember(waiting);
+      studyList.get(i).setWaitingMember(waiting);
 
-      for (Member mem : studyList.get(i).getWatingMember()) {
+      for (Member mem : studyList.get(i).getWaitingMember()) {
         if (loginUser.getPerNo() == mem.getPerNo()) {
           waitingStudyList.add(studyList.get(i));
         }

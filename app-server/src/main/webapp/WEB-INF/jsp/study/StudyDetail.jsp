@@ -54,7 +54,7 @@
      }
    }
 
-    for (Member memberWating : form.watingMember.value) {
+    for (Member memberWating : form.waitingMember.value) {
       if (form.memberWating.perNo.value == form.loginUser.perNo.value) {
     	  alert("이미 승인 대기 중인 스터디입니다.");
         return false;
@@ -69,7 +69,7 @@
 </script>
 
 <!-- <input name="members" type="text" value="${study.members}"/>
-<input name="watingMember" type="text" value="${study.watingMember}"/>
+<input name="waitingMember" type="text" value="${study.waitingMember}"/>
 <input name="studyStatus" type="text" value="${study.studyStatus}"/>
 <input name="countMember" type="text" value="${study.countMember}"/>
 <input name="numberOfPeple" type="text" value="${study.numberOfPeple}"/> -->
@@ -83,7 +83,7 @@
 <main class="flex-shrink-0">
   <div class="container" name="studyInfo">
   <input type="hidden" name="members" value="${study.members}">
-  <input type="hidden" name="watingMember" value="${study.watingMember}">
+  <input type="hidden" name="waitingMember" value="${study.waitingMember}">
   <input type="hidden" name="studyStatus" value="${study.studyStatus}">
   <input type="hidden" name="countMember" value="${study.countMember}">
   <input type="hidden" name="numberOfPeple" value="${study.numberOfPeple}">
@@ -129,8 +129,8 @@
 			    </button>
 		    </c:when>
 		    <c:when test="${study.owner.perNo ne loginUser.perNo}">
-			    <c:forEach var="watingMember" items="${study.watingMember}">
-            <c:if test="${watingMember.perNo != loginUser.perNo}">
+			    <c:forEach var="waitingMember" items="${study.waitingMember}">
+            <c:if test="${waitingMember.perNo != loginUser.perNo}">
               <button class="btn btn-outline-light">참여 신청1</button>
             </c:if>
           </c:forEach>
