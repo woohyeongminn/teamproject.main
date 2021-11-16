@@ -132,11 +132,8 @@ text-decoration:none;
 display : inline;
 }
 .layerPopup form{
-margin-top : 200px;
 font-size:14px;
 font-weight:500;
-weight: 100%;
-height : 30px;
 line-height:30px
 }
 .layerPopup #close {
