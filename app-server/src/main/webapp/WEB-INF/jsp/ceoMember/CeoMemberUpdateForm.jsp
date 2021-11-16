@@ -13,6 +13,7 @@ body {
 }
 a {
 text-decoration: none;
+color: black;
 }
 
 legend {
@@ -193,15 +194,15 @@ max-width: 500px;
        <input id='f-nickname' type='text' name='ceoNickname' value='${ceoMember.ceoNickname}' style="width: 150px;"><br>
        
        <label for='f-tel' class='form-label'>전화번호</label>
-	     <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:40px;"/> -
-	     <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:40px;"/> -
-	     <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:40px;"/> <br>
+	     <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:40px;" value="${tel1}"/> -
+	     <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:40px;" value="${tel2}"/> -
+	     <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:40px;" value="${tel3}"/> <br>
        
        <label for='f-email' class='form-label'>이메일</label>
        <input id='f-email' type='email' name='ceoEmail' value='${ceoMember.ceoEmail}' readonly><br>
        
        <label for='f-password' class='form-label'>비밀번호</label>
-       <a href='javascript:openPwPopup()' class="btn-default btn-sm" role="button" style="outline: black;">비밀번호 변경</a><br>
+       <a href='javascript:openPwPopup()' class="btn-default btn-sm" role="button" style="border: 1px solid; border-radius: 3px;">비밀번호 변경</a><br>
        
        <label for='f-registeredDate' class='form-label'>가입일</label>
        <input id='f-registeredDate' type='text' name='ceoRegisteredDate' readonly value='${ceoMember.ceoRegisteredDate}'><br>

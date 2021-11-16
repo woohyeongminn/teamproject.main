@@ -169,8 +169,15 @@ public class CeoMemberController {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
+    String tel1 = ceoMember.getCeoTel().substring(0, 3);
+    String tel2 = ceoMember.getCeoTel().substring(4, 8);
+    String tel3 = ceoMember.getCeoTel().substring(9, 13);
+
     ModelAndView mv = new ModelAndView();
     mv.addObject("ceoMember", ceoMember);
+    mv.addObject("tel1", tel1);
+    mv.addObject("tel2", tel2);
+    mv.addObject("tel3", tel3);
     mv.addObject("pageTitle", "🙂 마이페이지 - 프로필 수정");
     mv.addObject("contentUrl", "ceoMember/CeoMemberUpdateForm.jsp");
     mv.setViewName("template1");
