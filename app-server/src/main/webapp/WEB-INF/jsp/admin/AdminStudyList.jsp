@@ -45,7 +45,7 @@
   </div>
   <br>
   <br>
-  <!-- 목록 -->
+  <!-- 스터디 목록 -->
   <c:if test='${not empty studyList}'>
   <div id="content">
     <div class="row row-cols-1 row-cols-md-3 g-5">
@@ -54,13 +54,19 @@
     <div class="card">
       <div class="card-header">
         <c:choose>
-          <c:when test="${study.countMember ne study.numberOfPeple}">
-            <button type="button" class="btn btn-primary btn-sm">모집중</button>
-          </c:when>
-          <c:otherwise>
-            <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-          </c:otherwise>
-        </c:choose>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+      </c:choose>
         ${study.subjectName}
       </div>
       <div class="card-body">
