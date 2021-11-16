@@ -53,9 +53,19 @@
     <td><fmt:formatDate value="${study.registeredDate}" pattern="yyyy.MM.dd" /></td>
     <p class="lead">${study.introduction}</p>
     <c:choose>
-    <c:when test="${study.countMember ne study.numberOfPeple}">[모집중]</c:when>
-    <c:otherwise>[모집 완료]</c:otherwise>
-    </c:choose>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+      </c:choose>
     <ul class="list-group">
 		  <li class="list-group-item d-flex justify-content-between align-items-center">
 		    🔎 분야
