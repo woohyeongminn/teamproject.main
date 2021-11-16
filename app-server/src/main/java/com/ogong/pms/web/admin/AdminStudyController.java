@@ -58,7 +58,7 @@ public class AdminStudyController {
     }
 
     List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
-    study.setWatingMember(waitingGuilder);
+    study.setWaitingMember(waitingGuilder);
 
     List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
     study.setMembers(guilders);

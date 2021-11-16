@@ -159,12 +159,12 @@ public class StudyController {
     Study study = studyDao.findByNo(studyno);
 
     List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(study.getStudyNo());
-    study.setWatingMember(waitingGuilder);
+    study.setWaitingMember(waitingGuilder);
 
     List<Member> guilders = studyDao.findByGuildersAll(study.getStudyNo());
     study.setMembers(guilders);
 
-    study.getWatingMember().add((Member) session.getAttribute("loginUser"));
+    study.getWaitingMember().add((Member) session.getAttribute("loginUser"));
     studyDao.insertGuilder(study.getStudyNo(),
         ((Member) session.getAttribute("loginUser")).getPerNo());
     sqlSessionFactory.openSession().commit();

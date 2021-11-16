@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,7 +45,7 @@
 <main class="flex-shrink-0">
   <div class="container" name="studyInfo">
   <input type="hidden" name="members" value="${study.members}">
-  <input type="hidden" name="watingMember" value="${study.watingMember}">
+  <input type="hidden" name="waitingMember" value="${study.waitingMember}">
   <input type="hidden" name="studyStatus" value="${study.studyStatus}">
   <input type="hidden" name="countMember" value="${study.countMember}">
   <input type="hidden" name="numberOfPeple" value="${study.numberOfPeple}">
@@ -53,9 +54,19 @@
     <td><fmt:formatDate value="${study.registeredDate}" pattern="yyyy.MM.dd" /></td>
     <p class="lead">${study.introduction}</p>
     <c:choose>
-    <c:when test="${study.countMember ne study.numberOfPeple}">[모집중]</c:when>
-    <c:otherwise>[모집 완료]</c:otherwise>
-    </c:choose>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+      </c:choose>
     <ul class="list-group">
 		  <li class="list-group-item d-flex justify-content-between align-items-center">
 		    🔎 분야
