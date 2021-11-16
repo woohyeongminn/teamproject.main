@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,12 +37,14 @@
       }
     </style>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   function checkValue() {
 
   var form = document.studyInfo;
   var studyStatus = ${study.studyStatus};
+  
   console.log(studyStatus);
+  
   if (studyStatus == 2) {
 	  alert("완료된 스터디 입니다.");
     return false;
@@ -66,7 +69,7 @@
 	    return false;
 	}
 }
-</script>
+</script> -->
 
 <!-- <input name="members" type="text" value="${study.members}"/>
 <input name="waitingMember" type="text" value="${study.waitingMember}"/>
@@ -129,44 +132,69 @@
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
     <div class="btn-group" role="group" aria-label="Basic outlined example">
-		  <c:choose>
-		    <c:when test="${study.owner.perNo eq loginUser.perNo}">
-			    <button class="btn btn-outline-light">
-			      <a href='updateform?studyno=${study.studyNo}'>수정</a>
-			    </button>
-			    <button class="btn btn-outline-light">
-			      <a href='delete?studyno=${study.studyNo}'>삭제</a>
-			    </button>
-		    </c:when>
-		    <c:when test="${study.owner.perNo ne loginUser.perNo}">
+	    <!-- 내가 쓴 글 -->
+	    <c:if test="${study.owner.perNo eq loginUser.perNo}">
+		    <button class="btn btn-outline-light">
+		      <a href='updateform?studyno=${study.studyNo}'>수정</a>
+		    </button>
+		    <button class="btn btn-outline-light">
+		      <a href='delete?studyno=${study.studyNo}'>삭제</a>
+		    </button>
+	    </c:if>
+
+	    <c:if test="${loginUser ne null}">
+		    <!-- 스터디 참여 -->
+				<!-- <c:if test="${study.owner.perNo ne loginUser.perNo}">
+				  <c:forEach var="waitingMember" items="${study.waitingMember}">
+				    <c:if test="${waitingMember.perNo ne loginUser.perNo}">
+				      <button class="btn btn-outline-light">
+				      참여 신청1
+				      </button>
+				    </c:if>
+				  </c:forEach>
+				  
+				  <c:forEach var="guilder" items="${study.members}">
+				    <c:if test="${guilder.perNo ne loginUser.perNo}">
+				      <button class="btn btn-outline-light">
+				      참여 신청2
+				      </button>
+				    </c:if>
+				  </c:forEach>
+				  
+				  <c:if test="${study.studyStatus ne 2 || study.countMember ne study.numberOfPeple}">
+				    <button class="btn btn-outline-light">
+				      <a href='join?studyno=${study.studyNo}'>참여 신청3</a>
+				    </button>
+				  </c:if>
+				</c:if> -->
+		    
+		    <!-- 스터디 참여 -->
+		    <c:if test="${study.owner.perNo ne loginUser.perNo}">
 			    <c:forEach var="waitingMember" items="${study.waitingMember}">
-            <c:if test="${waitingMember.perNo != loginUser.perNo}">
-              <button class="btn btn-outline-light">참여 신청1</button>
-            </c:if>
-          </c:forEach>
-          <c:forEach var="guilder" items="${study.members}">
-            <c:if test="${guilder.perNo ne loginUser.perNo}">
-              <button class="btn btn-outline-light">참여 신청2</button>
-            </c:if>
-          </c:forEach>
-          <c:if test="${study.studyStatus ne 2}">
-            <button class="btn btn-outline-light">참여 신청3</button>
-          </c:if>
-          <c:if test="${study.countMember ne study.numberOfPeple}">
-            <button class="btn btn-outline-light">참여 신청4</button>
-          </c:if>
-		    </c:when>
-	    </c:choose>
-	    <c:if test="${myBookmark == '0'}">
-		    <button class="btn btn-outline-light">
-		      <a href='${contextPath}/app/bookmark/add?studyno=${study.studyNo}'>북마크 추가</a>
-		    </button>
-		  </c:if>
-      <c:if test="${myBookmark == '1'}">
-		    <button class="btn btn-outline-light">
-		      <a href='${contextPath}/app/bookmark/delete?studyno=${study.studyNo}'>북마크 삭제</a>
-		    </button>
+		        <c:forEach var="guilder" items="${study.members}">
+		          <c:if test="${(waitingMember.perNo ne loginUser.perNo) || (guilder.perNo ne loginUser.perNo) || (study.studyStatus ne 2) || (study.countMember ne study.numberOfPeple)}">
+		            <button class="btn btn-outline-light">
+	                <a href='join?studyno=${study.studyNo}'>참여 신청</a>
+		            </button>
+		          </c:if>
+		        </c:forEach>
+	        </c:forEach>
+	      </c:if>
+
+		    <!-- 북마크 -->
+		    <c:if test="${myBookmark eq '0'}">
+			    <button class="btn btn-outline-light">
+			      <a href='${contextPath}/app/bookmark/add?studyno=${study.studyNo}'>북마크 추가</a>
+			    </button>
+			  </c:if>
+		     <c:if test="${myBookmark eq '1'}">
+			    <button class="btn btn-outline-light">
+			      <a href='${contextPath}/app/bookmark/delete?studyno=${study.studyNo}'>북마크 삭제</a>
+			    </button>
+				</c:if>
 			</c:if>
+
+	    <!-- 목록 -->
 	    <button class="btn btn-outline-light">
 	      <a href='list'>목록</a>
 	    </button>
