@@ -37,7 +37,7 @@ public class GuilderController {
 
     List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(myStudy.getStudyNo());
     if (!waitingGuilder.isEmpty()) {
-      myStudy.setWatingMember(waitingGuilder);
+      myStudy.setWaitingMember(waitingGuilder);
       mv.addObject("waitingGuilderList", waitingGuilder);
     }
 

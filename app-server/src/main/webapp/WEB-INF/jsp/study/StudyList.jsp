@@ -116,11 +116,13 @@ ul{
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-	  <button class="btn btn-light">
-	    <a href='form'>글쓰기</a>
-	  </button>
-  </div>
+  <c:if test="${loginUser ne null}">
+	  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+		  <button class="btn btn-light">
+		    <a href='form'>글쓰기</a>
+		  </button>
+	  </div>
+  </c:if>
   <br>
 <c:if test='${not empty studyList}'>
 <div id="content">
@@ -130,12 +132,18 @@ ul{
 	<div class="card">
 	  <div class="card-header">
       <c:choose>
-        <c:when test="${study.countMember ne study.numberOfPeple}">
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
           <button type="button" class="btn btn-primary btn-sm">모집중</button>
         </c:when>
-        <c:otherwise>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
           <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-        </c:otherwise>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
       </c:choose>
       ${study.subjectName}
 	  </div>
@@ -199,11 +207,13 @@ ul{
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="btn btn-light">
-      <a href='form'>글쓰기</a>
-    </button>
-  </div>
+  <c:if test="${loginUser ne null}">
+    <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-light">
+        <a href='form'>글쓰기</a>
+      </button>
+    </div>
+  </c:if>
   <br>
 <c:if test='${not empty studyIngList}'>
 <div id="content">
@@ -212,6 +222,20 @@ ul{
   <div class="col">
   <div class="card">
     <div class="card-header">
+      <c:choose>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+      </c:choose>
       ${study.subjectName}
     </div>
     <div class="card-body">
@@ -253,11 +277,13 @@ ul{
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="btn btn-light">
-      <a href='form'>글쓰기</a>
-    </button>
-  </div>
+  <c:if test="${loginUser ne null}">
+    <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-light">
+        <a href='form'>글쓰기</a>
+      </button>
+    </div>
+  </c:if>
   <br>
 <c:if test='${not empty studyEndList}'>
   <div id="content">
@@ -266,6 +292,20 @@ ul{
   <div class="col">
   <div class="card">
     <div class="card-header">
+      <c:choose>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+          <button type="button" class="btn btn-primary btn-sm">모집중</button>
+        </c:when>
+        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+        </c:when>
+      </c:choose>
       ${study.subjectName}
     </div>
     <div class="card-body">

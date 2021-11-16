@@ -190,15 +190,21 @@ svg#icon {
 
       <div class="tempbox">
         <div class="middlecontent">
-        <p><a href="${contextPath}/app/index"><i id="icon" class="fas fa-user-graduate"></i>&emsp;</a>
-           <a href="${contextPath}/app/index"><i id="icon" class="far fa-envelope"></i>&emsp;</a>
+        
+        <p>
+        <!-- <iframe width="20" height="20" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/131362507&amp;color=%2397cbff&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true"
+        frameborder="no" scrolling="no" allow="autoplay" style="padding-top: 8px;"></iframe>&emsp; -->  
+        
+        <a href="javascript:closePop();"><i id="icon" class="fas fa-user-graduate"></i>&emsp;</a>
+           <a href="javascript:openchatbot()"><i id="icon" class="far fa-envelope"></i>&emsp;</a>
            <a href="${contextPath}/app/askboard/alllist"><i id="icon" class="fas fa-comments"></i></a></p>
         </div>
       </div>
 
       <div class="leftbottom">
-        <div id="check" ><input type="checkbox" name="chkbox" value="checkbox" id='chkbox' >
-          <label for="chkbox">&nbsp&nbsp오늘 하루 동안 보지 않기</label></div>
+        <div id="check" >
+          <input type="checkbox" class="form-check-input" name="chkbox" value="checkbox" id='chkbox' >
+          <label for="chkbox">&nbsp&nbsp오늘 하루 보지 않기</label></div>
       </div>
           
     </div>
@@ -214,7 +220,7 @@ svg#icon {
         <div class="middlecontent">
         <p><br></p>
           <p>환영합니다!</p>
-          <p>오늘의 공부 홈페이지입니다.</p>
+          <p>오늘의 공부 홈페이지입니다!</p>
         </div>
       </div>
 
@@ -230,6 +236,12 @@ svg#icon {
 
 </body>
 </html>
+
+<script type="text/JavaScript">
+function openchatbot() {	
+	window.open("todaystudy", "오늘의 공부 챗봇", "width=400px; height=550px;")
+}
+</script>
 
 <script language="JavaScript">
 //head 태그 안에 스크립트 선언
