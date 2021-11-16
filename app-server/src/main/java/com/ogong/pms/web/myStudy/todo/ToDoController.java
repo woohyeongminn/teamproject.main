@@ -26,22 +26,22 @@ public class ToDoController extends HttpServlet {
   @Autowired ToDoDao toDoDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
 
-  @GetMapping("/mystudy/todo/addform")
-  public ModelAndView todoAddForm(HttpSession session, int studyno) throws Exception {
-
-    Member member = (Member) session.getAttribute("loginUser");
-
-    List<ToDo> todoList = toDoDao.findAll(studyno);
-
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("member", member);
-    mv.addObject("studyno", studyno);
-    mv.addObject("todoList", todoList);
-    mv.addObject("pageTitle", "📋 To-Do List 등록");
-    mv.addObject("contentUrl", "myStudy/todo/ToDoAddForm.jsp");
-    mv.setViewName("template1");
-    return mv;
-  }
+  //  @GetMapping("/mystudy/todo/addform")
+  //  public ModelAndView todoAddForm(HttpSession session, int studyno) throws Exception {
+  //
+  //    Member member = (Member) session.getAttribute("loginUser");
+  //
+  //    List<ToDo> todoList = toDoDao.findAll(studyno);
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //    mv.addObject("member", member);
+  //    mv.addObject("studyno", studyno);
+  //    mv.addObject("todoList", todoList);
+  //    mv.addObject("pageTitle", "📋 To-Do List 등록");
+  //    mv.addObject("contentUrl", "myStudy/todo/ToDoAddForm.jsp");
+  //    mv.setViewName("template1");
+  //    return mv;
+  //  }
 
   @PostMapping("/mystudy/todo/add")
   public ModelAndView todoAdd(ToDo todo, HttpSession session) throws Exception {
@@ -58,7 +58,7 @@ public class ToDoController extends HttpServlet {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list?studyno="+myStudy.getStudyNo());
+    mv.setViewName("redirect:../detail?studyNo="+myStudy.getStudyNo());
     return mv;
   }
 
@@ -104,66 +104,66 @@ public class ToDoController extends HttpServlet {
     }
   }
 
-  @GetMapping("/mystudy/todo/detail")
-  public ModelAndView todoDetail(int perno, int studyno, int todono) throws Exception {
+  //  @GetMapping("/mystudy/todo/detail")
+  //  public ModelAndView todoDetail(int perno, int studyno, int todono) throws Exception {
+  //
+  //    Member member = memberDao.findByNo(perno);
+  //
+  //    Study myStudy = studyDao.findByNo(studyno);
+  //
+  //    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todono);
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //    mv.addObject("todo", todo);
+  //    mv.addObject("member", member);
+  //    mv.addObject("study", myStudy);
+  //    mv.addObject("pageTitle", "📋 To-Do List 상세");
+  //    mv.addObject("contentUrl", "myStudy/todo/ToDoDetail.jsp");
+  //    mv.setViewName("template1");
+  //    return mv;
+  //  }
 
-    Member member = memberDao.findByNo(perno);
-
-    Study myStudy = studyDao.findByNo(studyno);
-
-    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todono);
-
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("todo", todo);
-    mv.addObject("member", member);
-    mv.addObject("study", myStudy);
-    mv.addObject("pageTitle", "📋 To-Do List 상세");
-    mv.addObject("contentUrl", "myStudy/todo/ToDoDetail.jsp");
-    mv.setViewName("template1");
-    return mv;
-  }
-
-  @GetMapping("/mystudy/todo/updateform")
-  public ModelAndView todoUpdateForm(HttpSession session, int studyno, int todono) throws Exception {
-
-    Member member = (Member) session.getAttribute("loginUser");
-
-    Study myStudy = studyDao.findByNo(studyno);
-
-    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todono);
-
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("todo", todo);
-    mv.addObject("member", member);
-    mv.addObject("study", myStudy);
-    mv.addObject("pageTitle", "📋 To-Do List 변경");
-    mv.addObject("contentUrl", "myStudy/todo/ToDoUpdateForm.jsp");
-    mv.setViewName("template1");
-    return mv;
-  }
-
-  @PostMapping("/mystudy/todo/update")
-  public ModelAndView todoUpdate(HttpSession session, int studyno, ToDo todo, String progress_no) throws Exception {
-
-    Study myStudy = studyDao.findByNo(studyno);
-
-    ToDo oldtodo = toDoDao.findByNo(myStudy.getStudyNo(), todo.getTodoNo());
-
-    if (oldtodo == null) {
-      throw new Exception("다시 선택하세요.");
-    }
-
-    int status = Integer.parseInt(progress_no);
-
-    todo.setTodoStatus(status);
-
-    toDoDao.update(todo);
-    sqlSessionFactory.openSession().commit();
-
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list?studyno="+myStudy.getStudyNo());
-    return mv;
-  }
+  //  @GetMapping("/mystudy/todo/updateform")
+  //  public ModelAndView todoUpdateForm(HttpSession session, int studyno, int todono) throws Exception {
+  //
+  //    Member member = (Member) session.getAttribute("loginUser");
+  //
+  //    Study myStudy = studyDao.findByNo(studyno);
+  //
+  //    ToDo todo = toDoDao.findByNo(myStudy.getStudyNo(), todono);
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //    mv.addObject("todo", todo);
+  //    mv.addObject("member", member);
+  //    mv.addObject("study", myStudy);
+  //    mv.addObject("pageTitle", "📋 To-Do List 변경");
+  //    mv.addObject("contentUrl", "myStudy/todo/ToDoUpdateForm.jsp");
+  //    mv.setViewName("template1");
+  //    return mv;
+  //  }
+  //
+  //  @PostMapping("/mystudy/todo/update")
+  //  public ModelAndView todoUpdate(HttpSession session, int studyno, ToDo todo, String progress_no) throws Exception {
+  //
+  //    Study myStudy = studyDao.findByNo(studyno);
+  //
+  //    ToDo oldtodo = toDoDao.findByNo(myStudy.getStudyNo(), todo.getTodoNo());
+  //
+  //    if (oldtodo == null) {
+  //      throw new Exception("다시 선택하세요.");
+  //    }
+  //
+  //    int status = Integer.parseInt(progress_no);
+  //
+  //    todo.setTodoStatus(status);
+  //
+  //    toDoDao.update(todo);
+  //    sqlSessionFactory.openSession().commit();
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //    mv.setViewName("redirect:list?studyno="+myStudy.getStudyNo());
+  //    return mv;
+  //  }
 
   @GetMapping("/mystudy/todo/delete")
   public ModelAndView todoDelete(HttpSession session, int studyno, int todono) throws Exception {
@@ -178,7 +178,8 @@ public class ToDoController extends HttpServlet {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:list?perno="+member.getPerNo()+"&studyno="+myStudy.getStudyNo());
+    mv.setViewName("redirect:../detail?studyNo="+myStudy.getStudyNo());
+    // mv.setViewName("redirect:list?perno="+member.getPerNo()+"&studyno="+myStudy.getStudyNo());
     return mv;
   }
 }
