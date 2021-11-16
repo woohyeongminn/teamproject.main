@@ -12,7 +12,10 @@ public interface MemberDao {
   //Member findByName(String inputName) throws Exception;
   //Member findByEmail(String inputEmail) throws Exception;
   //Member findByTel(String inputTel) throws Exception;
-  Member findEmail(@Param("name") String name, @Param("tel") String tel) throws Exception;
+
+  Member findEmailByNameAndTel(@Param("name") String name, @Param("tel") String tel) throws Exception;
+  Member findByNameAndEmail(@Param("name") String name, @Param("email") String email) throws Exception;
+
   Member findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
   void updateName(Member member) throws Exception;
   void updateNickname(Member member) throws Exception;

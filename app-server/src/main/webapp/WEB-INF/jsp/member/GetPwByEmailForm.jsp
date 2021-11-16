@@ -31,25 +31,30 @@
   <div class="all-content">
    <br>
     <div id="top">
-      <b style="font-size: 20px">🔍이메일 찾기</b><br> 
+      <b style="font-size: 20px">🔍임시 비밀번호 발급</b><br> 
     </div>
    <hr>
-    <form id="member-form" action='findemail' name='perInfo' method='post' >
+    <form id="member-form" action='getpwbyemail' name='perInfo' method='post' >
 
       <div id="mn">
         <label id='f-name' for='f-name' class="col-sm-2 col-form-label">이름</label>
         <input id='i-name' type='text' name='perName' placeholder="*필수"/><br>
       </div>
 
-      <div id="mt">
-        <label id='f-tel'for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
-        <input id='i-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
-        <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
-        <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
+      <div id="mE">
+        <label id='f-email' for='f-email' class="col-sm-2 col-form-label">이메일</label>
+        <input id='i-email' type='text' name='perEmail' pattern="^[a-zA-Z0-9]+$" placeholder="*필수" onkeydown="inputEmail()"/>@
+        <select name="site">
+          <option>naver.com</option>
+          <option>daum.net</option>
+          <option>gmail.com</option>
+          <option>kakao.com</option>
+        </select>
+        <input type="button" class="btn btn-outline-dark" value="인증하기"/><br>
       </div><hr>
       
        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-         <button class="btn btn-outline-dark" type="submit" >🔍이메일 찾기</button> 
+         <button class="btn btn-outline-dark" type="submit" >🔍비밀번호 발급</button> 
          <a type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
        </div> 
    </form>
