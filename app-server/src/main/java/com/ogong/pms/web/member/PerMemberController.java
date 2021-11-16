@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
@@ -18,6 +19,7 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.name.Rename;
 
+@RestController
 @Controller
 public class PerMemberController {
 
@@ -25,6 +27,7 @@ public class PerMemberController {
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired MemberDao memberDao;
   @Autowired ServletContext sc;
+
 
   @GetMapping("/member/addform")
   public ModelAndView addForm() {
@@ -257,4 +260,7 @@ public class PerMemberController {
     mv.setViewName("redirect:logout");
     return mv;
   }
+
 }
+
+

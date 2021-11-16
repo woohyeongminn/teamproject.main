@@ -41,6 +41,18 @@
 			}
     </style>
 
+<script type="text/javascript">
+  function checkValue() {
+
+  var form = document.freeBoardInfo;
+
+  if (!form.commentText.value) {
+    alert("댓글을 입력하세요.");
+    return false;
+  }
+}
+</script>
+
     <!-- Custom styles for this template -->
     <!-- <link href="sticky-footer.css" rel="stylesheet"> -->
   </head>

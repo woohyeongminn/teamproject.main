@@ -32,10 +32,10 @@
     return false;
   }
 
-  if (!form.freeBoardFile.value) {
-    alert("파일을 선택하세요.");
-    return false;
-  }
+  /* if (!form.filepath.value) {
+	  alert("파일을 선택하세요.");
+	  return false;
+	} */
 }
 </script>
 </head>
@@ -60,12 +60,12 @@
     <input id='f-freeBoardFile' type='file' name='freeBoardFile' class="form-control">
   </div>
 
-   <%-- <label for='f-freeBoardFile' class='form-label'>파일</label>
+   <!-- <label for='f-freeBoardFile' class='form-label'>파일</label>
    <input id='f-freeBoardFile' type='file' name='freeBoardFile' /><br>
    
    <c:if test="${empty freeBoardFile}">
      <input id='f-freeBoardFile' type='hidden' name='freeBoardFile' value="freeboard_80x80.jpg"/><br>
-   </c:if> --%>
+   </c:if> -->
   </div>
 	<div id='button'>
     <button class="btn btn-dark">등록</button>

@@ -10,7 +10,7 @@ public class CalendarListController {
   @RequestMapping("/mystudy/calendar/list")
   public ModelAndView calList() {
     ModelAndView mv = new ModelAndView();
-    mv.addObject("contentUrl","/myStudy/calendar/Calendar.jsp");
+    mv.addObject("contentUrl","myStudy/calendar/Calendar.jsp");
     mv.setViewName("template1");
     return mv;
   }

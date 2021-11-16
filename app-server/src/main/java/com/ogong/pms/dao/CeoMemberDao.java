@@ -30,4 +30,7 @@ public interface CeoMemberDao {
 
   void delete(int no) throws Exception;
 
+  String idOverlap(String id) throws Exception;
+
 }
+

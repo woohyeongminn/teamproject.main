@@ -1,8 +1,10 @@
 package com.ogong.pms.web.ceoMember;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -10,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
@@ -29,6 +34,7 @@ public class CeoMemberController {
   @Autowired CeoMemberDao ceoMemberDao;
   @Autowired CafeDao cafeDao;
   @Autowired CafeReviewDao cafeReviewDao;
+  @Autowired CeoMemberService ceoMemberService;
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired ServletContext sc;
 
@@ -39,10 +45,6 @@ public class CeoMemberController {
 
     ModelAndView mv = new ModelAndView();
 
-    // 중복체크 하려고
-    //Collection<CeoMember> ceoMemberList  = ceoMemberDao.findAll();
-    //request.setAttribute("ceoMemberList", ceoMemberList);
-
     mv.addObject("pageTitle", "오늘의공부 회원가입");
     mv.addObject("contentUrl", "ceoMember/CeoMemberAddForm.jsp");
     mv.setViewName("template1");
@@ -51,12 +53,12 @@ public class CeoMemberController {
 
   //기업 회원가입
   @PostMapping("/ceomember/add")
-  public ModelAndView coeAdd(CeoMember ceoMember, Part photoFile, String[] tel, String site) throws Exception {
+  public ModelAndView coeAdd(CeoMember ceoMember, Part photoFile, String tel1, String tel2, String tel3, String id, String site) throws Exception {
 
-    String ceoTel = tel[0] + "-" + tel[1] + "-" + tel[2];
+    String ceoTel = tel1 + "-" + tel2 + "-" + tel3;
     ceoMember.setCeoTel(ceoTel);
 
-    ceoMember.setCeoEmail(ceoMember.getCeoEmail() +'@'+ site);
+    ceoMember.setCeoEmail(id+'@'+ site);
 
     ceoMember.setCeoStatus(CeoMember.CEO);
 
@@ -109,6 +111,14 @@ public class CeoMemberController {
     mv.addObject("contentUrl", "ceoMember/CeoMemberAdd.jsp");
     mv.setViewName("template1");
     return mv;
+  }
+
+
+  //아이디 중복확인 처리
+  @RequestMapping(value="/ceomember/idOverlap", method=RequestMethod.POST)
+  public void idOverlap(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
+    //@RequestParam는 요청의 특정 파라미터 값을 찾아낼 때 사용하는 어노테이션
+    ceoMemberService.idOverlap(id,response);  //서비스에 있는 idOverlap 호출.
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -250,6 +260,25 @@ public class CeoMemberController {
     mv.setViewName("template1");
     return mv;
   }
+
+
+  // 비밀번호 체크
+  //  @PostMapping("/ceomember/deleteCheck")
+  //  public ModelAndView ceoDeleteCheck(int ceoNo, String inputCeoPassword) throws Exception {
+  //    CeoMember ceoMember = ceoMemberDao.findByNo(ceoNo);
+  //
+  //    if (ceoMember == null) {
+  //      throw new Exception("로그인 하세요.");
+  //    }
+  //
+  //    if (!ceoMember.getCeoPassword().equals(inputCeoPassword)) {
+  //      throw new Exception("패스워드가 일치하지 않습니다.");
+  //    } 
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //    mv.addObject("ceoMember", ceoMember);
+  //    return mv;
+  //  }
 
   // 기업회원 탈퇴
   @PostMapping("/ceomember/delete")
