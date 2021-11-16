@@ -166,6 +166,16 @@
     email = #{perEmail}
 </select>
 
+<!-- 닉네임 중복 확인하기  -->
+<select id="nickOverlap" resultType="string">
+  select
+    nickname
+  from
+    member
+  where
+    nickname = #{perNickname}
+</select>
+
 </mapper>
 
 

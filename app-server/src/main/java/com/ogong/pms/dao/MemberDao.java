@@ -26,6 +26,7 @@ public interface MemberDao {
   void updateActive(Member member) throws Exception;
 
   String idOverlap(String id) throws Exception;  
+  String nickOverlap(String nick) throws Exception;  
   // void delete(int no) throws Exception;
   //  void selectOnByNickname(Member member) throws Exception;
   //  int indexNo(int no) throws Exception;
