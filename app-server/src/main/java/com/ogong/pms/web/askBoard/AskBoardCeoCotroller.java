@@ -36,7 +36,7 @@ public class AskBoardCeoCotroller {
       askBoard.setAskTempPW(Integer.parseInt(request.getParameter("password")));
     }
     askBoard.setAskCeoWriter((CeoMember) session.getAttribute("loginCeoUser"));
-    askBoardDao.insertPer(askBoard);
+    askBoardDao.insertCeo(askBoard);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
