@@ -184,7 +184,7 @@ svg#icon {
 
       <div class="lefttop">
         <div class="hellopopup">
-          <img src="../img/hello.gif" width=515 height=260 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
+          <img src="${contextPath}/img/hello.gif" width=515 height=260 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
           </div>
       </div>
 
@@ -206,7 +206,7 @@ svg#icon {
     <div class="rightbox">
       <div class="righttop">
         <div class="content">
-          <img src="../img/logo.png" usemap="#popup" alt="event page" id="logo">
+          <img src="${contextPath}/img/logo.png" usemap="#popup" alt="event page" id="logo">
           </div>
       </div>
 
