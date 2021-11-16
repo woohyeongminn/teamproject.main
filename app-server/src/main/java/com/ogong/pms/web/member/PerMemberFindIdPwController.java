@@ -14,7 +14,7 @@ import com.ogong.pms.util.RandomPw;
 import com.ogong.pms.util.SendMail;
 
 @Controller
-public class MemberFindController  {
+public class PerMemberFindIdPwController  {
 
   @Autowired MemberDao memberDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
