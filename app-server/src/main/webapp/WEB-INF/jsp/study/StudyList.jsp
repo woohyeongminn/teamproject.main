@@ -116,11 +116,13 @@ ul{
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-	  <button class="btn btn-light">
-	    <a href='form'>글쓰기</a>
-	  </button>
-  </div>
+  <c:if test="${loginUser ne null}">
+	  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+		  <button class="btn btn-light">
+		    <a href='form'>글쓰기</a>
+		  </button>
+	  </div>
+  </c:if>
   <br>
 <c:if test='${not empty studyList}'>
 <div id="content">
@@ -205,11 +207,13 @@ ul{
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="btn btn-light">
-      <a href='form'>글쓰기</a>
-    </button>
-  </div>
+  <c:if test="${loginUser ne null}">
+    <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-light">
+        <a href='form'>글쓰기</a>
+      </button>
+    </div>
+  </c:if>
   <br>
 <c:if test='${not empty studyIngList}'>
 <div id="content">
@@ -273,11 +277,13 @@ ul{
     <button class="btn btn-outline-dark btn-sm">검색</button>
     </form>
   </div>
-  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button class="btn btn-light">
-      <a href='form'>글쓰기</a>
-    </button>
-  </div>
+  <c:if test="${loginUser ne null}">
+    <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-light">
+        <a href='form'>글쓰기</a>
+      </button>
+    </div>
+  </c:if>
   <br>
 <c:if test='${not empty studyEndList}'>
   <div id="content">
