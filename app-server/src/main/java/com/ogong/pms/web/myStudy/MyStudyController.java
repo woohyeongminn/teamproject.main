@@ -146,6 +146,12 @@ public class MyStudyController {
   public ModelAndView delete(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
+    // 승인 대기 중인 구성원 O
+    if (study.getWaitingCountMember() > 0) {
+      studyDao.deleteAllWaitingGuilder(study.getStudyNo());
+      sqlSessionFactory.openSession().commit();
+    }
+
     studyDao.updateStatusDelete(study);
     sqlSessionFactory.openSession().commit();
 
