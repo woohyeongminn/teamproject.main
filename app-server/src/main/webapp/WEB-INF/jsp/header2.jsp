@@ -15,7 +15,7 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="${contextPath}/app/index">Home</a></li>
           <li><a class="nav-link scrollto" href="${contextPath}/app/study/list">스터디 찾기</a></li>
           <li><a class="nav-link scrollto" href="${contextPath}/app/cafe/list">장소 찾기</a></li>
           
