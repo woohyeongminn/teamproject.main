@@ -51,14 +51,14 @@
 <table class="table table-responsive text-center align-middle">
 <thead>
   <tr>
-    <th>선택</th>
-    <th>예약날짜</th>
-    <th>이용날짜</th>
-    <th>이용시간</th>
+    <th width="5%">선택</th>
+    <th width="8%">예약날짜</th>
+    <th width="8%">이용날짜</th>
+    <th width=15%;>이용시간</th>
     <th>스터디카페 - 스터디룸</th>
-    <th>결제금액</th>
-    <th>예약상태</th>
-    <th>리뷰</th>
+    <th width="7%">결제금액</th>
+    <th width="15%">예약상태</th>
+    <th width="8%">리뷰</th>
   </tr>
 </thead>
 <tbody>

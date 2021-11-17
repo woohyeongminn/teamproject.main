@@ -55,6 +55,24 @@
       sr.cafe_no=#{cafeNo}
   </select>
   
+  <select id="findReviewListByCafeNo_" resultMap="reviewMap">
+    <include refid="reviewListSelect"/>
+    where 
+      sr.cafe_no=#{cafeNo}
+    limit #{offset}, #{length}
+  </select>
+  
+  <select id="countReviewList" resultType="int">
+    select
+      count(*)
+    from
+      studycafe_review r
+	    join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
+	    join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
+    where
+      sr.cafe_no=#{cafeNo}
+  </select>
+  
   <!-- 내 리뷰 목록 -->
   <select id="findReviewListByMember" resultMap="reviewMap">
     <include refid="reviewListSelect"/>
