@@ -43,6 +43,9 @@
 
 /* 헤더 position: absolute; */
 
+#header {
+position: absolute;
+}
 
 .template-wrap {
     width:100%;
@@ -67,16 +70,28 @@
     color: #443d5e;
 }
 
+.template-content {
+  position: absolute;
+  top: 100px;
+  height: 800px;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+}
 
 </style>
 </head>
 	<body>
-		<jsp:include page="header2.jsp"/>
-		
+	  <div class="header=wrap">
+		  <jsp:include page="header2.jsp"/>
+		</div>
 		
 		<!-- template-wrap 은 100% 짜리 배경-->
 		
-		<div class="template-wrap" style="background-color: rgb(247, 231, 215);">
+		<!-- <div class="template-wrap" style="background-color: rgb(247, 231, 215);"> -->
+		<div class="template-wrap">
 		  <div class="template-top">
         ${pageTitle}
       </div>
@@ -88,7 +103,6 @@
 			</div>  
 		</div>
 		
-		  <jsp:include page="footer2.jsp"/>
-		
+	<jsp:include page="footer2.jsp"/>
 	</body>
 </html>

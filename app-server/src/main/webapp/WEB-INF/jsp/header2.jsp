@@ -7,7 +7,9 @@
   <header id="header" class="fixed-top d-flex align-items-center header-transparent">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Today Study</a></h1>
+      <h1 class="logo me-auto">
+      <a href="index.html"><img src="${contextPath}/css/assets/img/logo.png"></a>
+      </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="${contextPath}/css/assets/img/logo.png" alt="" class="img-fluid"></a>-->
 

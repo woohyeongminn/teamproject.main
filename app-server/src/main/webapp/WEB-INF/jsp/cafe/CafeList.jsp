@@ -22,7 +22,6 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
-    font-size: 14px;
   }
   #search {
     text-align: center;
@@ -76,12 +75,12 @@
 
   <div id="search">
     <form action="search">
-    <select name="where">
+    <select name="where" style="line-height: normal; font-size: 13.5px;">
       <option value="1">지역</option>
       <option value="2">이름</option>
     </select>
-    <input type="text" name="keyword">
-    <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">검색</button>
+    <input type="text" name="keyword" style="line-height: 13.5px; font-size: 13.5px;">
+    <button class="btn btn-outline-dark btn-sm" style="line-height: 13.5px; font-size: 13.5px; margin-bottom: 4px;">검색</button>
     </form>
   </div>
 

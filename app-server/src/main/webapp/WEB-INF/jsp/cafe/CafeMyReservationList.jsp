@@ -9,20 +9,34 @@
   <meta charset="UTF-8">
   <style>
   * {
-    font-size: 14px;
+    font-size: 13px;
   }
   .all-content {
     width: 100%;
     margin: 0 auto;
-    padding: 80px 0;
+    padding: 30px 0;
   }
   </style>
 </head>
 <body>
 
 <div class="all-content">
+
+  <div id="search">
+    <form action="reservationList">
+    <span>조회기간</span>
+    <select name="searchDate">
+      <option value="1">예약날짜</option>
+      <option value="2">이용날짜</option>
+    </select>
+    <input type="date" name="startDate"> ~ <input type="date" name="endDate">
+    <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">조회</button>
+    </form>
+  </div>
+<hr>
+
 <form id="reservationForm" action="reservationDelete" method="POST">
-<c:if test='${not empty reserList}'>
+
 <table class="table table-responsive text-center align-middle">
 <thead>
   <tr>
@@ -70,13 +84,12 @@
 	</c:forEach>
 	</tbody>
 </table>
-</c:if>
 <c:if test='${empty reserList}'>
-   예약 내역이 없습니다.<br><br>  
+   <p class="text-center">예약 내역이 없습니다.</p>
 </c:if>
-
-<div class="btnSection text-center">
-  <button type="button" class="btn btn-outline-dark" id="btnCancle">
+<br><br>
+<div class="btnSection">
+  <button type="button" class="btn btn-outline-dark btn-sm" id="btnCancle">
     예약취소
   </button>
 </div>

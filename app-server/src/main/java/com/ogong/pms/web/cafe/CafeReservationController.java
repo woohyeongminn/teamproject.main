@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
@@ -33,7 +34,10 @@ public class CafeReservationController {
   @Autowired StudyDao studyDao;
 
   @GetMapping("/cafe/reservationList")
-  public ModelAndView list(HttpSession session) throws Exception {
+  public ModelAndView list(HttpSession session,
+      String searchDate,
+      @RequestParam(required=false, defaultValue="")String startDate,
+      @RequestParam(required=false, defaultValue="")String endDate) throws Exception {
 
     Member member = (Member) session.getAttribute("loginUser");
 
@@ -43,7 +47,16 @@ public class CafeReservationController {
     cafeReservationDao.updateReservationStatusComplete();
     sqlSessionFactory.openSession().commit();
 
-    reserList = cafeReservationDao.findReservationListByMember(member.getPerNo());
+    if(!startDate.equals("")) {
+      if (searchDate.equals("1")) {
+        searchDate = "rs.rsv_dt";
+      } else if (searchDate.equals("2")) {
+        searchDate = "rs.using_dt";
+      }
+
+      reserList = cafeReservationDao.searchReservationListByMember(
+          member.getPerNo(), searchDate, Date.valueOf(startDate), Date.valueOf(endDate));
+    }
 
     for (CafeReservation cafeReser : reserList) {
 
