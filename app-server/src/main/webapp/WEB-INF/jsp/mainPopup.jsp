@@ -71,15 +71,15 @@ text-decoration:none;
 .leftbox .lefttop {
   position: absolute;
   width: 515px;
-  height: 260px;
+  height: 240px;
   z-index: 99999;
-  top: -20px;
+  top: -45px;
   background-color: rgb(255 248 241);
   border-radius: 10px;
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.418);
 }
 .leftbox .tempbox {
-  margin-top: 35%;
+  margin-top: 30%;
   height: 35%;
   text-align: right;
   background-color: rgb(255 248 241);
@@ -106,11 +106,12 @@ text-decoration:none;
   height: 20%;
   z-index: 33333;
   background-color: rgb(255 248 241);
-  padding: 20px 10px 0 10px;
+  padding: 0 10px;
 }
 .rightbox .rightmiddle {
-  margin-top: 35%;
-  width: 85%;
+  margin-top: 28%;
+  margin-left: 10px;
+  width: 100%;
   height: 80%;
   z-index: 55555;
   border-top: 1px solid;
@@ -123,7 +124,7 @@ text-decoration:none;
 .rightbox .rightbottom {
   bottom: 0;
   width: 100%;
-  height: 10%;
+  height: 3%;
   z-index: 99999;
   background-color: rgb(255 248 241);
 }
@@ -184,21 +185,27 @@ svg#icon {
 
       <div class="lefttop">
         <div class="hellopopup">
-          <img src="${contextPath}/img/hello.gif" width=515 height=260 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
+          <img src="${contextPath}/img/hello.gif" width=515 height=240 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
           </div>
       </div>
 
       <div class="tempbox">
         <div class="middlecontent">
-        <p><a href="${contextPath}/app/index"><i id="icon" class="fas fa-user-graduate"></i>&emsp;</a>
-           <a href="${contextPath}/app/index"><i id="icon" class="far fa-envelope"></i>&emsp;</a>
+        
+        <p>
+        <!-- <iframe width="20" height="20" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/131362507&amp;color=%2397cbff&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true"
+        frameborder="no" scrolling="no" allow="autoplay" style="padding-top: 8px;"></iframe>&emsp; -->  
+        
+        <a href="javascript:closePop();"><i id="icon" class="fas fa-user-graduate"></i>&emsp;</a>
+           <a href="javascript:openchatbot()"><i id="icon" class="far fa-envelope"></i>&emsp;</a>
            <a href="${contextPath}/app/askboard/alllist"><i id="icon" class="fas fa-comments"></i></a></p>
         </div>
       </div>
 
       <div class="leftbottom">
-        <div id="check" ><input type="checkbox" name="chkbox" value="checkbox" id='chkbox' >
-          <label for="chkbox">&nbsp&nbsp오늘 하루 동안 보지 않기</label></div>
+        <div id="check" >
+          <input type="checkbox" class="form-check-input" name="chkbox" value="checkbox" id='chkbox' style="margin-top: 8px;">
+          <label for="chkbox">&nbsp&nbsp오늘 하루 보지 않기</label></div>
       </div>
           
     </div>
@@ -212,9 +219,9 @@ svg#icon {
 
       <div class="rightmiddle">
         <div class="middlecontent">
-        <p><br></p>
+        <br>
           <p>환영합니다!</p>
-          <p>오늘의 공부 홈페이지입니다.</p>
+          <p>오늘의 공부 홈페이지입니다!</p>
         </div>
       </div>
 
@@ -230,6 +237,12 @@ svg#icon {
 
 </body>
 </html>
+
+<script type="text/JavaScript">
+function openchatbot() {	
+	window.open("todaystudy", "오늘의 공부 챗봇", "width=400px; height=550px;")
+}
+</script>
 
 <script language="JavaScript">
 //head 태그 안에 스크립트 선언
