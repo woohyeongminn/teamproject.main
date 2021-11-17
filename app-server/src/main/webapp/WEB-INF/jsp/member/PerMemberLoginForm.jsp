@@ -107,16 +107,16 @@
   <br>
   <hr>
   <form id="member-form" action='login' method='post'>
-    <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
+    <input class="input" id='f-email' type='email' name='email' placeholder='E-mail' value="${cookie.email.value}">
     <br>
     <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
-    <div class="inner">
-      <div class="form-check">
-        <input type="checkbox" class="rememberCheck" id="dropdownCheck">
-        <span>정보 기억하기</span>
+      <div class="inner">
+        <div class="form-check">
+           <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""} }>
+           <span>이메일 기억하기</span>
+        </div>
+        <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
       </div>
-      <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
-    </div>
   </form>
 	<div class="mb">
 	   <a href="addform">회원가입</a> |
