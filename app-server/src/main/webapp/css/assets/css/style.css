@@ -1070,13 +1070,13 @@ section {
 #faq .faq-list .question {
   display: block;
   position: relative;
-  font-family: #1bb1dc;
+  font-family: rgb(155 136 131);
   font-size: 18px;
   line-height: 24px;
   font-weight: 400;
   padding-left: 25px;
   cursor: pointer;
-  color: #158caf;
+  color: rgb(155 136 131);
   transition: 0.3s;
 }
 #faq .faq-list i {

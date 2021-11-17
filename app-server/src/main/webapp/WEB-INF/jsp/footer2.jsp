@@ -16,14 +16,18 @@
               <div class="col-sm-6">
 
                 <div class="footer-info">
-                  <h3>TODAY STUDY</h3>
+                  <h3>🎓 오늘의 공부</h3>
                 </div>
 
                 <div class="footer-newsletter">
-                  <h4>Our Newsletter</h4>
-                  <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem.</p>
+                  <h4>TODAY STUDY</h4>
+                  <p style="margin:0;">오늘의 공부는 웹 사이트 내에서 스터디 모임,</p>
+                  <p style="margin:0;">장소 탐색 예약 기능을 제공하고 있으며</p>
+                  <p style="margin:0;">별도의 복잡한 프로그램 설치 없이 편리하게</p>
+                  <p style="margin:0;">이용할 수 있도록 제공하는 사이트입니다.</p>
+                  <br>
                   <form action="" method="post">
-                    <input type="email" name="email"><input type="submit" value="Subscribe">
+                    <input type="email" name="email"><input type="submit" value="사이트 소개">
                   </form>
                 </div>
 
@@ -33,7 +37,7 @@
                 <div class="footer-links">
                   <h4>Useful Links</h4>
                   <ul>
-                    <li><a href="#">오늘의 공부 소개</a></li>
+                    <li><a href="#">오늘의 공부</a></li>
                     <li><a href="#about">이용약관</a></li>
                     <li><a href="#">개인정보처리방침</a></li>
                     <li><a href="#">1:1문의</a></li>
@@ -91,7 +95,7 @@
                   <div class="sent-message">Your message has been sent. Thank you!</div>
                 </div>
 
-                <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
+                <div class="text-center"><button type="submit" title="Send Message">✉ 이메일 보내기</button></div>
               </form>
 
             </div>
