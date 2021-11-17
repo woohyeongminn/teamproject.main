@@ -27,7 +27,7 @@ public class IndexController {
 
     List<Study> findstudyList = studyDao.findAll();
 
-    if (findstudyList == null) {
+    if (findstudyList.isEmpty()) {
       throw new Exception("스터디 정보가 없습니다.");
     }
 
