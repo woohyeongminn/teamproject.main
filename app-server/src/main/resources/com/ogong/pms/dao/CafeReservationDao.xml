@@ -68,6 +68,19 @@
     order by
       rs.studycafe_rsv_no asc
   </select>
+
+  <!-- 기간 검색 + 내 예약 리스트 -->
+  <select id="searchReservationListByMember" resultMap="reservationMap">
+  <include refid="reservationListSelect"/>
+    <where>
+      rs.member_no=#{memberNo}
+      <if test="searchDate != null">
+        and ${searchDate} between #{startDate} and #{endDate}
+      </if>    
+    </where>
+    order by
+      rs.studycafe_rsv_no asc
+  </select>
   
   <!-- 해당 날짜의 예약 리스트 -->
   <select id="findReservationListByDate" resultMap="reservationMap">
