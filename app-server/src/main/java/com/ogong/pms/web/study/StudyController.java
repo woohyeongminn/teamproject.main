@@ -116,26 +116,6 @@ public class StudyController {
       mv.addObject("myBookmark", myBookmark);
     }
 
-    /*
-     * List<Member> guilders = studyDao.findByGuildersAll(studyno);
-     * 
-     * if (!guilders.isEmpty()) { study.setMembers(guilders); mv.addObject("guildersList",
-     * guilders); System.out.println(guilders); }
-     * 
-     * List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(studyno);
-     * 
-     * if (!waitingGuilder.isEmpty()) { study.setWaitingMember(waitingGuilder);
-     * mv.addObject("waitingGuilderList", waitingGuilder); System.out.println(waitingGuilder); }
-     * 
-     * List<Member> waitingGuilderList = studyDao.findByWaitingGuilderAll(studyno);
-     * 
-     * if (waitingGuilderList.isEmpty()) { mv.addObject("waitingGuilderList", true); }
-     * 
-     * if (!waitingGuilderList.isEmpty()) { for (Member waitingGuilder : waitingGuilderList) { if
-     * (waitingGuilder.getPerNo() != ((Member) session.getAttribute("loginUser")).getPerNo()) {
-     * mv.addObject("waitingGuilder", true); } } }
-     */
-
     mv.addObject("study", study);
     mv.addObject("pageTitle", "스터디 상세");
     mv.addObject("contentUrl", "study/StudyDetail.jsp");
