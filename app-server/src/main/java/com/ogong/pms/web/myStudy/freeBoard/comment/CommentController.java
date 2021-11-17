@@ -44,24 +44,25 @@ public class CommentController {
     return mv;
   }
 
-  @GetMapping("/mystudy/freeboard/comment/updateform")
-  public ModelAndView updateform(int commentno) throws Exception {
-    Comment comment = commentDao.findByNo(commentno);
-
-    ModelAndView mv = new ModelAndView();
-
-    mv.addObject("comment", comment);
-    mv.addObject("pageTitle", "댓글 수정");
-    mv.addObject("contentUrl", "myStudy/freeBoard/comment/CommentUpdateForm.jsp");
-    mv.setViewName("template1");
-
-    return mv;
-  }
+  //  @GetMapping("/mystudy/freeboard/comment/updateform")
+  //  public ModelAndView updateform(int commentno) throws Exception {
+  //    Comment comment = commentDao.findByNo(commentno);
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //
+  //    mv.addObject("comment", comment);
+  //    mv.addObject("pageTitle", "댓글 수정");
+  //    mv.addObject("contentUrl", "myStudy/freeBoard/comment/CommentUpdateForm.jsp");
+  //    mv.setViewName("template1");
+  //
+  //    return mv;
+  //  }
 
   @PostMapping("/mystudy/freeboard/comment/update")
   public ModelAndView update(Comment comment) throws Exception {
     Comment oldComment = commentDao.findByNo(comment.getCommentNo());
     System.out.println(comment.getCommentNo());
+
     if (oldComment == null) {
       throw new Exception("해당 번호의 댓글이 없습니다.");
     }

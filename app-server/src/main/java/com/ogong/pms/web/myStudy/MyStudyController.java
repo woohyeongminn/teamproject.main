@@ -273,8 +273,7 @@ public class MyStudyController {
     mv.addObject("waitingStudyList", waitingStudyList);
     mv.addObject("myStudyList", myStudyList);
     mv.addObject("pageTitle", "🗃 내 스터디 목록");
-    mv.addObject("contentUrl", "myStudy/MyStudyList2.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("myStudy/MyStudyList2");
 
     return mv;
   }

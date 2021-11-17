@@ -13,7 +13,7 @@ public class login {
 
     mv.addObject("pageTitle", "로그인 선택");
     mv.addObject("contentUrl", "login.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template2");
 
     return mv;
   } 
