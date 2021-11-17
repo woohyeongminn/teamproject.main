@@ -94,7 +94,7 @@ color: black;
   </div>
 		
 	<hr><div class="d-grid gap-2 d-md-flex justify-content-md-center">
-    <a href="../bookmark/list?perno=${loginUser.perNo}" type="button" class ="btn btn-outline-dark">📚내 북마크</a>
+    <a href="../study/bookmark/list?perno=${loginUser.perNo}" type="button" class ="btn btn-outline-dark">📚내 북마크</a>
     <a href="../cafe/reservationList" type="button" class ="btn btn-outline-dark">🧾내 예약 </a>
 	  <a href="../cafe/reviewList" type="button" class ="btn btn-outline-dark">✒내 리뷰</a>
     <a href="../askboard/permylist" type="button" class ="btn btn-outline-dark">💬내 문의글</a>
