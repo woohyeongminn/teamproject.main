@@ -30,11 +30,50 @@
 
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="${contextPath}/css/assets/css/style.css">
+  <!-- =======================================================
+  * Template Name: Rapid - v4.6.0
+  * Template URL: https://bootstrapmade.com/rapid-multipurpose-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  
+  
+<style>
 
+
+/* 헤더 position: absolute; */
+
+
+.template-wrap {
+    width:100%;
+    background-color: #d3eef7;
+    height: 100px;
+    top: 90px;
+    position: absolute;
+    width: 100%;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+    
+.template-top {
+    display: inline-block;
+    width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+    vertical-align: middle;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-left: 105px;
+    color: #443d5e;
+}
+
+
+</style>
 </head>
-<body>
-<jsp:include page="header2.jsp"/>
-
+	<body>
+		<jsp:include page="header2.jsp"/>
+		
+		
 		<!-- template-wrap 은 100% 짜리 배경-->
 		
 		<div class="template-wrap" style="background-color: rgb(247, 231, 215);">
@@ -50,5 +89,6 @@
 		</div>
 		
 		  <jsp:include page="footer2.jsp"/>
+		
 	</body>
 </html>

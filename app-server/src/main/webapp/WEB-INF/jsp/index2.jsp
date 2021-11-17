@@ -195,8 +195,8 @@ svg#icon {
 
   <jsp:include page="header2.jsp"/>
 
-    <!-- 메인 팝업 -->
-    <jsp:include page="mainPopup2.jsp"/>
+  <!-- 메인 팝업 -->
+  <jsp:include page="mainPopup2.jsp"/>
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="clearfix">
