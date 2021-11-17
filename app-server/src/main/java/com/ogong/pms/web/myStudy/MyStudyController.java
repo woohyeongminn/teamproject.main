@@ -22,7 +22,8 @@ public class MyStudyController {
   SqlSessionFactory sqlSessionFactory;
   @Autowired
   StudyDao studyDao;
-  @Autowired ToDoDao toDoDao;
+  @Autowired
+  ToDoDao toDoDao;
 
   @GetMapping("/mystudy/list")
   public ModelAndView mystudyList(HttpSession session) throws Exception {
@@ -151,13 +152,29 @@ public class MyStudyController {
   }
 
   @GetMapping("/mystudy/exit")
-  public ModelAndView exit(int studyno, HttpSession session) throws Exception {
+  public ModelAndView exit(int studyno, int guilderno, HttpSession session) throws Exception {
     Study study = studyDao.findByNo(studyno);
 
-    if (study.getOwner().getPerNo() == ((Member) session.getAttribute("loginUser")).getPerNo()
-        && study.getCountMember() == 0) {
-      studyDao.updateStatusDelete(study);
-      sqlSessionFactory.openSession().commit();
+    if (study.getOwner().getPerNo() == ((Member) session.getAttribute("loginUser")).getPerNo()) {
+      // 참여 중인 구성원 O
+      if (study.getCountMember() > 1) {
+        studyDao.updateOwner(study.getStudyNo(), guilderno);
+        sqlSessionFactory.openSession().commit();
+
+        studyDao.deleteGuilder(study.getStudyNo(),
+            ((Member) session.getAttribute("loginUser")).getPerNo());
+        sqlSessionFactory.openSession().commit();
+
+        // 승인 대기 중인 구성원 O
+      } else if (study.getWaitingCountMember() > 0) {
+        studyDao.deleteAllWaitingGuilder(study.getStudyNo());
+        sqlSessionFactory.openSession().commit();
+
+        // 참여 중인 구성원 X
+      } else if (study.getCountMember() > 1) {
+        studyDao.updateStatusDelete(study);
+        sqlSessionFactory.openSession().commit();
+      }
     }
 
     studyDao.deleteGuilder(study.getStudyNo(),
@@ -167,7 +184,7 @@ public class MyStudyController {
 
     mv.addObject("study", study);
     mv.addObject("pageTitle", "내 스터디 탈퇴");
-    mv.addObject("contentUrl", "myStudy/MyStudyExit.jsp");
+    mv.setViewName("redirect:list");
     mv.setViewName("template1");
 
     return mv;
