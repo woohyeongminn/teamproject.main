@@ -25,6 +25,9 @@
   #top {
   text-align: center;
   }
+  a {
+  color: black;
+  }  
 
 </style>
 <body>
@@ -41,7 +44,7 @@
 
       <div id="me">
         <label id='f-email' for='f-email' class="col-sm-2 col-form-label">이메일</label>
-        <input id='i-email' type='text' name='perEmail' pattern="^[a-zA-Z0-9]+$" placeholder="*필수" onkeydown="inputEmail()"/>@
+        <input id='i-email' type='text' name='perEmail' pattern="^[a-zA-Z0-9]+$" placeholder="*필수" onkeydown="inputEmail()"/> @
         <select name="site">
           <option>naver.com</option>
           <option>daum.net</option>

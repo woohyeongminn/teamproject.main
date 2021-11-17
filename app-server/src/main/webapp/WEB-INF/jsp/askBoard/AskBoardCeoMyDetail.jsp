@@ -20,6 +20,9 @@
   p, #info, #createDt{
   text-align:right;
   }
+  a {
+  color: black;
+  }  
 </style>
   <div id="mian">
       

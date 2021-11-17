@@ -23,6 +23,9 @@
   textarea {
   color: white;
   }
+  a {
+  color: black;
+  }  
 </style>
   <div id="mian">
       <p>등록일ㅣ${myAskBoard.askRegisteredDate}</p>
