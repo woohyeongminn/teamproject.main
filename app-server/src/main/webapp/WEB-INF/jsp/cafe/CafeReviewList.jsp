@@ -24,7 +24,6 @@
 <body>
 <br><br>
 <div class="all-content">
-<c:if test='${not empty reviewList}'>
 <table class="table table-responsive text-center align-middle">
 	<thead>
 	  <tr>
@@ -64,11 +63,10 @@
 	</c:forEach>
   </tbody>
 </table>
+<c:if test='${empty reviewList}'>
+   <p class="text-center">등록된 리뷰가 없습니다.</p>  
 </c:if>
 
-<c:if test='${empty reviewList}'>
-   등록된 리뷰가 없습니다.<br><br>  
-</c:if>
 <br>
 </div>
 

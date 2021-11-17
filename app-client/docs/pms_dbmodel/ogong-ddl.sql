@@ -181,7 +181,7 @@ CREATE TABLE studycafe_reservation (
   studycafe_rsv_no INTEGER     NOT NULL COMMENT '스터디카페예약번호', -- 스터디카페예약번호
   studyroom_no     INTEGER     NOT NULL COMMENT '스터디룸번호', -- 스터디룸번호
   member_no        INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-  rsv_dt           DATETIME    NOT NULL DEFAULT now() COMMENT '예약일', -- 예약일
+  rsv_dt           DATE        NOT NULL DEFAULT curdate() COMMENT '예약일', -- 예약일
   using_dt         DATE        NOT NULL COMMENT '이용날짜', -- 이용날짜
   start_time       TIME        NOT NULL COMMENT '시작시간', -- 시작시간
   using_time       INTEGER     NOT NULL COMMENT '이용시간', -- 이용시간
