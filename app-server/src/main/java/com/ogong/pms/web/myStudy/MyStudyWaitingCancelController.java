@@ -35,7 +35,7 @@ public class MyStudyWaitingCancelController extends HttpServlet {
       int perNo = Integer.parseInt(request.getParameter("perNo"));
       int studyNo = Integer.parseInt(request.getParameter("studyNo"));
 
-      studyDao.updateGuilderExpulsion(studyNo, perNo);
+      studyDao.deleteGuilder(studyNo, perNo);
 
       response.sendRedirect("waitinglist?perNo=" + perNo);
 
