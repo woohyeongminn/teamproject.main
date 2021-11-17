@@ -22,6 +22,7 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
+    font-size: 14px;
   }
   #search {
     text-align: center;
@@ -61,10 +62,13 @@
     width: 355px;
   }
   .card {
-    height: 372px;
+    height: 381px;
   }
   footer {
     display: none;
+  }
+  .badge {
+    color: slategray;
   }
   </style>
 </head>
@@ -77,7 +81,7 @@
       <option value="2">이름</option>
     </select>
     <input type="text" name="keyword">
-    <button class="btn btn-outline-dark btn-sm">검색</button>
+    <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">검색</button>
     </form>
   </div>
 
@@ -97,7 +101,15 @@
             <p style="font-size:14px;">
             ${fn:split(cafe.location, ',')[0]}<br>
             ${cafe.openTime} ~ ${cafe.closeTime}<br>
-            ⭐${cafe.avgReview}(${cafe.countReview})</p>
+            ⭐${cafe.avgReview}(${cafe.countReview})<br>
+            <span>
+              <c:forEach items="${cafeRoomList}" var="cafeRoom">
+                <c:if test="${cafe.no eq cafeRoom.cafe.no}">
+                  <span class="badge rounded-pill" style="background-color: rgb(247, 231, 215);">${cafeRoom.people}인</span>
+                </c:if>
+              </c:forEach>
+            </span>
+            </p>
           </div>
         </div>
       </div>

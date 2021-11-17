@@ -26,9 +26,11 @@ public class CafeController {
   public ModelAndView list() throws Exception {
 
     List<Cafe> cafeList = cafeDao.getCafeListByMember();
+    List<CafeRoom> cafeRoomList = cafeRoomDao.findAllCafeRoomListByMember();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("cafeList", cafeList);
+    mv.addObject("cafeRoomList", cafeRoomList);
     mv.addObject("pageTitle", "스터디 장소 검색");
     mv.addObject("contentUrl", "cafe/CafeList.jsp");
     mv.setViewName("template1");
@@ -47,9 +49,11 @@ public class CafeController {
     }
 
     List<Cafe> cafeList = cafeDao.findCafeListByLocation(where, keyword);
+    List<CafeRoom> cafeRoomList = cafeRoomDao.findAllCafeRoomListByMember();
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("cafeList", cafeList);
+    mv.addObject("cafeRoomList", cafeRoomList);
     mv.addObject("pageTitle", "스터디 장소 검색");
     mv.addObject("contentUrl", "cafe/CafeList.jsp");
     mv.setViewName("template1");
