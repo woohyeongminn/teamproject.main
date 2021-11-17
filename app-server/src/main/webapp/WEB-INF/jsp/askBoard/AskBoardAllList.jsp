@@ -55,7 +55,7 @@
 			   <th>작성자</th>
 			   <th>조회수</th>
 			   <th>등록일</th>
-			   <th>답변📔/📖</th>
+			   <th>답변</th>
 	    </tr>   
     </thead>
     
@@ -73,10 +73,10 @@
 								     <td>${askBoard.askRegisteredDate}</td>
                      <c:choose>
                         <c:when test="${empty askBoard.reply}">
-                           <td> 📔 </td>
+                           <td> 🗨 </td>
                         </c:when>
                         <c:otherwise>
-                           <td> 📖 </td>
+                           <td> 💬 </td>
                         </c:otherwise>
                      </c:choose>
                   </c:when>
@@ -88,10 +88,10 @@
 								     <td>${askBoard.askRegisteredDate}</td>
 			               <c:choose>
                         <c:when test="${empty askBoard.reply}">
-                           <td> 📔 </td>
+                           <td> 🗨 </td>
                         </c:when>
 			                  <c:otherwise>
-			                     <td> 📖 </td>
+			                     <td> 💬 </td>
 			                  </c:otherwise>
 			               </c:choose>
                   </c:when>
