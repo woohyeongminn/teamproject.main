@@ -5,10 +5,10 @@
   <footer>
     <div class="footer_background">
       <ul class="footer_company">
-        <li class="footer_li"><a href="../index.jsp" class="footer_a">오늘의 공부 소개</a></li>
+        <li class="footer_li"><a href="${contextPath}/app/index" class="footer_a">오늘의 공부 소개</a></li>
         <li class="footer_li"><a href="#" class="footer_a">이용약관</a></li>
         <li class="footer_li"><a href="#" class="footer_a">개인정보처리방침</a></li>
-        <li class="footer_li"><a href="/ogong/admin/askboardlist" class="footer_a">1:1문의</a></li>
+        <li class="footer_li"><a href="${contextPath}/app/adminNotice/list" class="footer_a">1:1문의</a></li>
         <li class="footer_li"><a href="#" class="footer_a">법적고지</a></li>
         <li class="footer_li"><a href="#" class="footer_a">사이트맵</a></li>
       </ul>

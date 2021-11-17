@@ -80,7 +80,7 @@ public class PerMemberFindIdPwController  {
 
     String perName = member.getPerName();
     String perEmail = member.getPerEmail() + "@" + site;
-
+    String web ="www." + site;
     Member perMember = memberDao.findByNameAndEmail(perName, perEmail);
 
     RandomPw randomPw = new RandomPw();
@@ -94,6 +94,7 @@ public class PerMemberFindIdPwController  {
 
       mv.addObject("pageTitle", "📧임시 비밀번호 발급");
       mv.addObject("perMember", perMember);
+      mv.addObject("web", web);
       mv.addObject("contentUrl", "member/GetPwByEmail.jsp");
       mv.setViewName("template1");
 

@@ -50,7 +50,7 @@
         <div class="col-lg-6 intro-info order-lg-first order-last" data-aos="zoom-in" data-aos-delay="100">
           <h2>Today Study<br>for Your <span>Life!</span></h2>
           <div>
-            <a href="#about" class="btn-get-started scrollto">🎓 오늘의 공부 시작하기</a>
+            <a href="#about" class="btn-get-started scrollto">🎓 시작하기</a>
           </div>
         </div>
 
@@ -78,11 +78,10 @@
 
           <div class="col-lg-7 col-md-6">
             <div class="about-content" data-aos="fade-left" data-aos-delay="100">
-              <h2>About</h2>
-              <h3>Welcom to '오늘의 공부'</h3>
-              <p>오늘의 공부에서 원하는 모임과 스터디를 개설하고
-                새로운 사람들을 만나고, 모임 장소까지 한번에 예약할 수 있습니다.
-              </p>
+              <h2>Welcome</h2>
+              <h3>'오늘의 공부'에 오신 걸 환영합니다!</h3>
+              <p style="margin:0px">오늘의 공부에서 원하는 모임과 스터디를 개설하고 새로운 사람들을 만나고,</p>
+              <p>모임 장소까지 한번에 예약할 수 있습니다.</p>
               <ul>
                 <li><i class="bi bi-check-circle"></i> 새로운 스터디 개설하기!</li>
                 <li><i class="bi bi-check-circle"></i> 스터디 카페 예약까지 한번에!</li>
@@ -100,8 +99,8 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h3>Services</h3>
-          <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
+          <h3>Today Study</h3>
+          <p>현재 이용 중인 스터디를 둘러보시고 원하는 스터디에 가입 신청을 넣어 보세요!</p>
         </header>
 
         <div class="row">
@@ -109,45 +108,63 @@
           <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
               <div class="icon" style="background: #fceef3;"><i class="bi bi-briefcase" style="color: #ff689b;"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+              <h4 class="title"><a href="">삼성뿌셔</a></h4><p id="wanted" style="text-align: right;">[모집중]</p>
+              <p class="description">취업 뿌셔뿌셔</p>
+              <p class="description">대면/비대면</p>
+              <p class="description">인원 7/7</p>
+              <p class="description">초보초보쌩초보 ⭐0</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="box">
               <div class="icon" style="background: #fff0da;"><i class="bi bi-card-checklist" style="color: #e98e06;"></i></div>
-              <h4 class="title"><a href="">Dolor Sitema</a></h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+              <h4 class="title"><a href="">정처기 준비</a></h4><p id="wanted" style="text-align: right;">[모집중]</p>
+              <p class="description">한 번에 붙자</p>
+              <p class="description">비대면</p>
+              <p class="description">인원 1/10</p>
+              <p class="description">초보초보쌩초보 ⭐2</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
               <div class="icon" style="background: #e6fdfc;"><i class="bi bi-bar-chart" style="color: #3fcdc7;"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+              <h4 class="title"><a href="">하반기 삼성 공모전</a></h4><p id="wanted" style="text-align: right;">[모집중]</p>
+              <p class="description">공모전 아자</p>
+              <p class="description">대면/비대면</p>
+              <p class="description">인원 1/6</p>
+              <p class="description">미술부장 ⭐2</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 wow" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
               <div class="icon" style="background: #eafde7;"><i class="bi bi-binoculars" style="color:#41cf2e;"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+              <h4 class="title"><a href="">중앙대 컴공 기말고사</a></h4><p id="wanted" style="text-align: right;">[모집중]</p>
+              <p class="description">시험 아자</p>
+              <p class="description">대면</p>
+              <p class="description">인원 1/3</p>
+              <p class="description">코딩부장 ⭐2</p>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200"">
         <div class=" box">
             <div class="icon" style="background: #e1eeff;"><i class="bi bi-brightness-high" style="color: #2282ff;"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+            <h4 class="title"><a href="">알고리즘 스터디</a></h4><p id="wanted" style="text-align: right;">[모집중]</p>
+              <p class="description">지옥같은 SI 탈출</p>
+              <p class="description">비대면</p>
+              <p class="description">인원 1/12</p>
+              <p class="description">코딩부장 ⭐2</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
           <div class="box">
             <div class="icon" style="background: #ecebff;"><i class="bi bi-calendar4-week" style="color: #8660fe;"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+            <h4 class="title"><a href="">JAVA</a></h4><p id="wanted" style="text-align: right;">[모집완료]</p>
+              <p class="description">공부가 제일 좋아</p>
+              <p class="description">대면/비대면</p>
+              <p class="description">인원 1/10</p>
+              <p class="description">미술부장 ⭐2</p>
           </div>
         </div>
 
@@ -185,15 +202,26 @@
 
         <div class="row feature-item">
           <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-            <img src="${contextPath}/css/assets/img/features-1.svg" class="img-fluid" alt="">
+            <img src="${contextPath}/css/assets/img/part2.png" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0" data-aos="fade-left" data-aos-delay="150">
-            <h4>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h4>
-            <p>
-              Ipsum in aspernatur ut possimus sint. Quia omnis est occaecati possimus ea. Quas molestiae perspiciatis occaecati qui rerum. Deleniti quod porro sed quisquam saepe. Numquam mollitia recusandae non ad at et a.
+          <br>
+            <h4>나만의 스터디 매니저</h4>
+            <hr><br>
+            <p><i class="bi bi-check-circle"></i>
+              장소 탐색 및 예약 가능
             </p>
-            <p>
-              Ad vitae recusandae odit possimus. Quaerat cum ipsum corrupti. Odit qui asperiores ea corporis deserunt veritatis quidem expedita perferendis. Qui rerum eligendi ex doloribus quia sit. Porro rerum eum eum.
+            <p><i class="bi bi-check-circle"></i>
+              나만의 공부 스타일 등록
+            </p>
+            <p><i class="bi bi-check-circle"></i>
+              화상 채팅 기능을 통한 비대면 모임 활성화
+            </p>
+            <p><i class="bi bi-check-circle"></i>
+              가격 및 다양한 옵션을 체크하여 맞춤형 장소 제공
+            </p>
+            <p><i class="bi bi-check-circle"></i>
+              누적 공부 시간 기록, 투두 리스트 등 편리한 기능
             </p>
           </div>
         </div>
