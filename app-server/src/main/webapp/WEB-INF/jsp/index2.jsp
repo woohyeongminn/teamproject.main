@@ -3,6 +3,162 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+.layerPopup img{
+margin-bottom : 20px;
+}
+.layerPopup:before {
+display:block;
+content:"";
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.5);
+z-index:9000
+}
+.layerPopup .layerBox {
+z-index:10000;
+position:fixed;
+left:50%;
+top:48%;
+width: 800px;
+height: 300px;
+transform:translate(-50%, -50%);
+padding:30px;
+background:rgb(255 248 241);
+border-radius:6px;
+display: flex;
+flex-direction: row;
+}
+.layerPopup .layerBox .title {
+margin-bottom:10px;
+padding-bottom:10px;
+font-weight:600;
+text-align: center;
+border-bottom:1px solid #d9d9d9;
+}
+.layerPopup .layerBox .btnTodayHide {
+font-size:14px;
+font-weight:600;
+color:black; 
+float: left;
+text-decoration:none;
+width: 150px;
+height : 30px;
+line-height:30px;
+border:black solid 1px;
+text-align : center;
+text-decoration:none;
+}
+.layerPopup .layerBox .leftbox {
+  background-color: rgb(255 248 241);
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.leftbox .lefttop {
+  position: absolute;
+  width: 515px;
+  height: 240px;
+  z-index: 99999;
+  top: -45px;
+  background-color: rgb(255 248 241);
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.418);
+}
+.leftbox .tempbox {
+  margin-top: 30%;
+  height: 35%;
+  text-align: right;
+  background-color: rgb(255 248 241);
+  padding: 40px 20px 0 20px;
+}
+.leftbox .leftbottom {
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  background-color: rgb(255 248 241);
+  color: rgb(123 111 109);
+}
+.layerPopup .layerBox .rightbox {
+  background-color: rgb(255 248 241);
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+.rightbox .righttop {
+  position: absolute;
+  width: 241px;
+  height: 20%;
+  z-index: 33333;
+  background-color: rgb(255 248 241);
+  padding: 0 10px;
+}
+.rightbox .rightmiddle {
+  margin-top: 28%;
+  margin-left: 10px;
+  width: 100%;
+  height: 80%;
+  z-index: 55555;
+  border-top: 1px solid;
+  border-top-color: rgb(159 146 143);
+  background-color: rgb(255 248 241);
+  padding: 0 20px;
+  text-align: center;
+  -webkit-text-stroke: thin;
+}
+.rightbox .rightbottom {
+  bottom: 0;
+  width: 100%;
+  height: 3%;
+  z-index: 99999;
+  background-color: rgb(255 248 241);
+}
+.layerPopup div{
+display : inline;
+}
+.layerPopup form{
+font-size:14px;
+font-weight:500;
+line-height:30px
+}
+.layerPopup #close {
+font-size:16px;
+font-weight:600;
+width: 40px;
+height : 30px;
+color:black;
+float: right;
+line-height:30px;
+text-align : center;
+text-decoration:underline;
+color: rgb(123 111 109);
+}
+.layerPopup a{
+text-decoration : none;
+color : rgb(163 150 148);
+width: 50px;
+height : 40px;
+}
+input[type=checkbox]:checked {
+  background-color: black;
+}
+img#logo {
+  width: 250px;
+  margin-bottom: 0;
+}
+svg#icon {
+  width: 40px;
+  height: 30px;
+  border: 3px solid;
+  border-radius: 5px;
+  border-inline: none;
+  color: rgb(159 146 143);
+}
+</style>
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -73,6 +229,9 @@
     </div>
   </header><!-- End Header -->
 
+    <!-- 메인 팝업 -->
+    <jsp:include page="mainPopup2.jsp"/>
+
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="clearfix">
     <div class="container d-flex h-100">
@@ -102,7 +261,7 @@
 
           <div class="col-lg-5 col-md-6">
             <div class="about-img" data-aos="fade-right" data-aos-delay="100">
-              <img src="${contextPath}/css/assets/img/about-img.jpg" alt="">
+              <img src="${contextPath}/img/main_2.jpg" alt="" id="main_2">
             </div>
           </div>
 
