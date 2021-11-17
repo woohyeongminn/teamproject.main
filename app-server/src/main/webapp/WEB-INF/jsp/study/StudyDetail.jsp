@@ -84,7 +84,7 @@
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
-  <div class="container" name="studyInfo">
+  <div class="container">
   <input type="hidden" name="members" value="${study.members}">
   <input type="hidden" name="waitingMember" value="${study.waitingMember}">
   <input type="hidden" name="studyStatus" value="${study.studyStatus}">
@@ -134,12 +134,8 @@
     <div class="btn-group" role="group" aria-label="Basic outlined example">
       <!-- 내가 쓴 글 -->
       <c:if test="${study.owner.perNo eq loginUser.perNo}">
-        <button class="btn btn-outline-light">
-          <a href='updateform?studyno=${study.studyNo}'>수정</a>
-        </button>
-        <button class="btn btn-outline-light">
-          <a href='delete?studyno=${study.studyNo}'>삭제</a>
-        </button>
+	      <a href='updateform?studyno=${study.studyNo}' class="btn btn-light">수정</a>
+	      <a href='delete?studyno=${study.studyNo}' class="btn btn-light">삭제</a>
       </c:if>
 
       <c:if test="${loginUser ne null}">
@@ -147,7 +143,7 @@
         <c:if test="${study.owner.perNo ne loginUser.perNo}">
           <c:choose>
             <c:when test="${guilder == 'false'}">
-                <a href='join?studyno=${study.studyNo}' class="btn btn-outline-light">참여 신청1</a>
+              <a href='join?studyno=${study.studyNo}' class="btn btn-light">참여 신청</a>
             </c:when>
             <c:when test="${guilder == 'waitingGuilder'}">
               <p>승인 대기중</p>
@@ -160,21 +156,15 @@
         
         <!-- 북마크 -->
         <c:if test="${myBookmark eq '0'}">
-          <button class="btn btn-outline-light">
-            <a href='${contextPath}/app/bookmark/add?studyno=${study.studyNo}'>북마크 추가</a>
-          </button>
+          <a href='${contextPath}/app/bookmark/add?studyno=${study.studyNo}' class="btn btn-light">북마크 추가</a>
         </c:if>
         <c:if test="${myBookmark eq '1'}">
-          <button class="btn btn-outline-light">
-            <a href='${contextPath}/app/bookmark/delete?studyno=${study.studyNo}'>북마크 삭제</a>
-          </button>
+          <a href='${contextPath}/app/bookmark/delete?studyno=${study.studyNo}' class="btn btn-light">북마크 삭제</a>
         </c:if>
       </c:if>
         
       <!-- 목록 -->
-      <button class="btn btn-outline-light">
-        <a href='list'>목록</a>
-      </button>
+      <a href='list' class="btn btn-light">목록</a>
     </div>
   </div>
 </footer>
