@@ -85,11 +85,17 @@ public class MyStudyController {
   public ModelAndView mystudyDetail(HttpSession session, int studyNo) throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
+    ModelAndView mv = new ModelAndView();
 
     Study myStudy = studyDao.findByMyNo(studyNo, loginUser.getPerNo());
     List<ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());
 
-    ModelAndView mv = new ModelAndView();
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyNo, loginUser.getPerNo());
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
+
     mv.addObject("member", loginUser);
     mv.addObject("study", myStudy);
     mv.addObject("todoList", todoList);
