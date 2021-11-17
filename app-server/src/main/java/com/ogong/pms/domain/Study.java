@@ -7,17 +7,17 @@ import java.util.List;
 public class Study {
   private int studyNo;          // 스터디 번호
   private String studyTitle;    // 스터디명
-  private int subjectNo;        // 분야
+  private int subjectNo;        // 분야 번호
   private String subjectName;   // 분야
   private String area;          // 지역
   private int numberOfPeple;    // 인원수
-  private int faceNo;           // 대면/비대면
+  private int faceNo;           // 대면/비대면 번호
   private String faceName;      // 대면/비대면
   private String introduction;  // 소개글
-  private Date registeredDate;  // 스터디 가입일
+  private Date registeredDate;  // 스터디 생성일
   private int point;            // 스터디 점수
-  private int studyStatus;            // 스터디 상태
-  private int report;            // 스터디 신고여부
+  private int studyStatus;      // 스터디 상태
+  private int report;           // 스터디 신고여부
 
   private Member owner;         // 작성자(조장)
   private int status;           // 구성원 상태

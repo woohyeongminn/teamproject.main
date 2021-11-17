@@ -10,28 +10,28 @@ values (4, '삭제');
 
 -- 카페
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (1, '에이스터디카페', '스터디 모임 전문 공간 에이스터디카페 입니다.\n매일 소독제 청소 & 정기 방역으로 쾌적한 환경 제공', 
+values (1, '에이 스터디 카페', '스터디 모임 전문 공간 에이스터디카페 입니다.\n매일 소독제 청소 & 정기 방역으로 쾌적한 환경 제공', 
 '서울 강남구 역삼동 818-13, 맨하탄어학원빌딩 4층', '02-111-1111', '08:00', '21:00', 2, 8);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (2, '해피해피스터디카페', '안녕하세요! 강남에 위치한 해피해피스터디카페 입니다.\n담요, 독서대, 학용품, 핸드폰 충전기, 무선마우스, 개인 스탠드 조명 비치되어 있습니다', 
+values (2, '해피해피 스터디 카페', '안녕하세요! 강남에 위치한 해피해피스터디카페 입니다.\n담요, 독서대, 학용품, 핸드폰 충전기, 무선마우스, 개인 스탠드 조명 비치되어 있습니다', 
 '서울 강남구 역삼동 819-9, 5층', '02-123-1234', '07:00', '23:00', 2, 9);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (3, '초심스터디카페', '안녕하세요! 초심스터디카페 입니다.', 
+values (3, '초심 스터디 카페', '안녕하세요! 초심스터디카페 입니다.', 
 '서울 서초구 서초동 1316-28, 우송빌딩 지하 2층', '02-1245-9999', '09:00', '23:00', 2, 10);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (4, '와!스터디카페', '공부가 잘 되는 공간, 와!스터디카페 입니다.', 
+values (4, '와! 스터디 카페', '공부가 잘 되는 공간, 와!스터디카페 입니다.', 
 '서울 강남구 강남대로98길 17, 3층', '02-1245-9999', '05:00', '23:00', 2, 11);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (5, '오호라스터디카페', '오호라스터디카페 입니다.', 
+values (5, '오호라 스터디 카페', '오호라스터디카페 입니다.', 
 '서울 강남구 테헤란로5길 36, 1층', '02-1245-9999', '00:00', '23:00', 2, 12);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (6, '광명스터디카페', '공부가 잘 되는 공간, 광명스터디카페 입니다.', 
+values (6, '광명 스터디카페', '공부가 잘 되는 공간, 광명스터디카페 입니다.', 
 '경기 광명시 철산동 264, 2층 2호', '010-5555-5555', '06:00', '22:00', 2, 13);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (7, '비트스터디카페 판교센터', '안녕하세요! 비트스터디카페 판교센터 입니다.', 
+values (7, '비트 스터디 카페 판교센터', '안녕하세요! 비트스터디카페 판교센터 입니다.', 
 '경기 성남시 분당구 판교동 577-3, 나이스빌딩 4층 402호', '010-6789-5555', '05:00', '23:00', 2, 14);
 insert into studycafe(cafe_no, name, info, location, phone, open_time, close_time, operating_status_no, member_no)
-values (8, '어라운드스터디카페', '어라운드스터디카페 강남역삼점입니다\n3,4층 : 스터디존 5층 : 카페존 & 테라스', 
+values (8, '어라운드 스터디 카페', '어라운드스터디카페 강남역삼점입니다\n3,4층 : 스터디존 5층 : 카페존 & 테라스', 
 '서울 강남구 역삼동 817-19, 3~5층, 나이스빌딩 4층 402호', '010-4545-7878', '05:00', '23:00', 1, 15);
 
 -- 카페 사진

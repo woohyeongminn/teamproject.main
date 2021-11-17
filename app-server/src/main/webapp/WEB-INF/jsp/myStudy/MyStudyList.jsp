@@ -101,7 +101,7 @@ p#titlename {
 		    </tbody>
 		  </table>
 		  <c:if test="${empty ownerStudyList}">
-		    조장으로 참여 중인 스터기가 없습니다.
+		    조장으로 참여 중인 스터디가 없습니다.
 		  </c:if>
       
       </div>

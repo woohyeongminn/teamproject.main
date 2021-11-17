@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Todat Study</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="vendors/feather/feather.css">
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
+</head>
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <div class="input-group">
+              
+              <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-bell mx-0"></i>
+              <span class="count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Member</p>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-success">
+                    <i class="ti-info-alt mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">변경</h6>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-warning">
+                    <i class="ti-settings mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">삭제</h6>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-thumbnail">
+                  <div class="preview-icon bg-info">
+                    <i class="ti-user mx-0"></i>
+                  </div>
+                </div>
+                <div class="preview-item-content">
+                  <h6 class="preview-subject font-weight-normal">탈퇴시키기</h6>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+              <img src="images/faces/face28.jpg" alt="profile"/>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item">
+                <i class="ti-settings text-primary"></i>
+                마이페이지
+              </a>
+              <a class="dropdown-item">
+                <i class="ti-power-off text-primary"></i>
+                로그아웃
+              </a>
+            </div>
+          </li>
+          <li class="nav-item nav-settings d-none d-lg-flex">
+            <a class="nav-link" href="#">
+              <i class="icon-ellipsis"></i>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close ti-close"></i>
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">MEMBERS</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      투두 내용 반복문 돌려서 리스트 출력
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Prepare for presentation
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox">
+                      Resolve all the low priority tickets due today
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Schedule meeting for next week
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+                <li class="completed">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="checkbox" type="checkbox" checked>
+                      Project review
+                    </label>
+                  </div>
+                  <i class="remove ti-close"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- To do section tab ends -->
+          <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+            <div class="d-flex align-items-center justify-content-between border-bottom">
+              <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">구성원 목록</p>
+              <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">All</small>
+            </div>
+            <ul class="chat-list">
+              <li class="list active">
+                <div class="profile"><img src="images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>초보초보썡초보</p>
+                  <p>조장</p>
+                </div>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face2.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>중수중수중중수</p>
+                  <p>구성원</p>
+                </div>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                <div class="info">
+                  <p>고수고수왕고수</p>
+                  <p>구성원</p>
+                </div>
+              </li>
+              <li class="list">
+                <div class="profile"><img src="images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                <div class="info">
+                  <p>코딩부장</p>
+                  <p>구성원</p>
+                </div>
+              </li>
+              
+            </ul>
+          </div>
+          <!-- chat tab ends -->
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#스터디리스트">
+              <i class="icon-grid menu-icon"></i>
+              <span class="menu-title"> MY STUDY LIST </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#owner" aria-expanded="false" aria-controls="owner">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">조장</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="owner">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#detail">스터디 이름1</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#detail">스터디 이름2</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#detail">스터디 이름3</a></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#guilder" aria-expanded="false" aria-controls="guilder">
+              <i class="icon-bar-graph menu-icon"></i>
+              <span class="menu-title">구성원</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="guilder">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#detail">스터디 이름1</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#waiting" aria-expanded="false" aria-controls="waiting">
+              <i class="icon-grid-2 menu-icon"></i>
+              <span class="menu-title">승인 대기 중</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="waiting">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#detail">스터디 이름1</a></li>
+              </ul>
+            </div>
+          </li>
+          
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-12 grid-margin">
+              <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                  <h3 class="font-weight-bold">중앙대 컴공 기말고사</h3>
+                  <h6 class="font-weight-normal mb-0">소개글 안녕안녕안녕hello 하하하하핳 어서오세요</h6>
+                </div>
+                <div class="col-12 col-xl-4">
+                 <div class="justify-content-end d-flex">
+                  <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
+                    
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
+                      <a class="dropdown-item" href="#">January - March</a>
+                      <a class="dropdown-item" href="#">March - June</a>
+                      <a class="dropdown-item" href="#">June - August</a>
+                      <a class="dropdown-item" href="#">August - November</a>
+                    </div>
+                  </div>
+                 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card tale-bg">
+                <div class="card-people mt-auto">
+                  <img src="images/dashboard/people.svg" alt="people">
+                  <div class="weather-info" style="left: 120px; right: 0;">
+                    <div class="d-flex">
+                      <div class="ml-2">
+                        <h4 class="location font-weight-normal">조장</h4>
+                        <h4 class="location font-weight-normal">분야</h4>
+                        <h4 class="location font-weight-normal">지역</h4>
+                        <h4 class="location font-weight-normal">북마크</h4>
+                        <h4 class="location font-weight-normal">대면상태</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 grid-margin transparent">
+              <div class="row">
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-tale">
+                    <a href="#구성원" style="text-decoration: none; color: white;">
+                      <div class="card-body">
+                        <p class="mb-4">구성원</p>
+                        <p class="fs-30 mb-2">Guilder</p>
+                        <p>Member 3/10</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-dark-blue">
+                    <a href="#자유게시판" style="text-decoration: none; color: white;"></a>
+                      <div class="card-body">
+                        <p class="mb-4">자유게시판</p>
+                        <p class="fs-30 mb-2">Free Board</p>
+                        <p>new!</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+                  <div class="card card-light-blue">
+                    <a href="#캘린더" style="text-decoration: none; color: white;">
+                      <div class="card-body">
+                        <p class="mb-4">캘린더</p>
+                        <p class="fs-30 mb-2">Calender</p>
+                        <p>2021-11-17</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 stretch-card transparent">
+                  <div class="card card-light-danger">
+                    <a href="#화상미팅" style="text-decoration: none; color: white;">
+                      <div class="card-body">
+                        <p class="mb-4">화상미팅</p>
+                        <p class="fs-30 mb-2">Meet</p>
+                        <p>Today Study</p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-5 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">To Do Lists</h4>
+									<div class="list-wrapper pt-2">
+										<ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+											<li>
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox">
+														Meeting with Urban Team
+													</label>
+												</div>
+												<i class="remove ti-close"></i>
+											</li>
+											<li class="completed">
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox" checked>
+														Duplicate a project for new customer
+													</label>
+												</div>
+												<i class="remove ti-close"></i>
+											</li>
+											<li>
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox">
+														Project meeting with CEO
+													</label>
+												</div>
+												<i class="remove ti-close"></i>
+											</li>
+											<li class="completed">
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox" checked>
+														Follow up of team zilla
+													</label>
+												</div>
+												<i class="remove ti-close"></i>
+											</li>
+											<li>
+												<div class="form-check form-check-flat">
+													<label class="form-check-label">
+														<input class="checkbox" type="checkbox">
+														Level up for Antony
+													</label>
+												</div>
+												<i class="remove ti-close"></i>
+											</li>
+										</ul>
+                  </div>
+                  <div class="add-items d-flex mb-0 mt-2">
+										<input type="text" class="form-control todo-list-input"  placeholder="Add new task">
+										<button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+									</div>
+								</div>
+							</div>
+            </div>
+
+            <!-- <div class="col-lg-5 grid-margin stretch-card">
+              <div class="card"><div class="card-body p-0 d-flex">
+                <div class="dashboard-custom-date-picker"><div>
+                  <div class="react-datepicker">
+                    <div class="react-datepicker__triangle"></div>
+                    <button type="button" class="react-datepicker__navigation react-datepicker__navigation--previous">Previous Month</button><button type="button" class="react-datepicker__navigation react-datepicker__navigation--next">Next Month</button><div class="react-datepicker__month-container"><div class="react-datepicker__header"><div class="react-datepicker__current-month">November 2021</div><div class="react-datepicker__header__dropdown react-datepicker__header__dropdown--scroll"></div><div class="react-datepicker__day-names"><div class="react-datepicker__day-name">Su</div><div class="react-datepicker__day-name">Mo</div><div class="react-datepicker__day-name">Tu</div><div class="react-datepicker__day-name">We</div><div class="react-datepicker__day-name">Th</div><div class="react-datepicker__day-name">Fr</div><div class="react-datepicker__day-name">Sa</div></div></div><div class="react-datepicker__month" role="listbox" aria-label="month-2021-11"><div class="react-datepicker__week"><div class="react-datepicker__day react-datepicker__day--031 react-datepicker__day--weekend react-datepicker__day--outside-month" aria-label="day-31" role="option" aria-disabled="false">31</div><div class="react-datepicker__day react-datepicker__day--001" aria-label="day-1" role="option" aria-disabled="false">1</div><div class="react-datepicker__day react-datepicker__day--002" aria-label="day-2" role="option" aria-disabled="false">2</div><div class="react-datepicker__day react-datepicker__day--003" aria-label="day-3" role="option" aria-disabled="false">3</div><div class="react-datepicker__day react-datepicker__day--004" aria-label="day-4" role="option" aria-disabled="false">4</div><div class="react-datepicker__day react-datepicker__day--005 react-datepicker__day--selected" aria-label="day-5" role="option" aria-disabled="false">5</div><div class="react-datepicker__day react-datepicker__day--006 react-datepicker__day--weekend" aria-label="day-6" role="option" aria-disabled="false">6</div></div><div class="react-datepicker__week"><div class="react-datepicker__day react-datepicker__day--007 react-datepicker__day--weekend" aria-label="day-7" role="option" aria-disabled="false">7</div><div class="react-datepicker__day react-datepicker__day--008" aria-label="day-8" role="option" aria-disabled="false">8</div><div class="react-datepicker__day react-datepicker__day--009" aria-label="day-9" role="option" aria-disabled="false">9</div><div class="react-datepicker__day react-datepicker__day--010" aria-label="day-10" role="option" aria-disabled="false">10</div><div class="react-datepicker__day react-datepicker__day--011" aria-label="day-11" role="option" aria-disabled="false">11</div><div class="react-datepicker__day react-datepicker__day--012" aria-label="day-12" role="option" aria-disabled="false">12</div><div class="react-datepicker__day react-datepicker__day--013 react-datepicker__day--weekend" aria-label="day-13" role="option" aria-disabled="false">13</div></div><div class="react-datepicker__week"><div class="react-datepicker__day react-datepicker__day--014 react-datepicker__day--weekend" aria-label="day-14" role="option" aria-disabled="false">14</div><div class="react-datepicker__day react-datepicker__day--015" aria-label="day-15" role="option" aria-disabled="false">15</div><div class="react-datepicker__day react-datepicker__day--016" aria-label="day-16" role="option" aria-disabled="false">16</div><div class="react-datepicker__day react-datepicker__day--017 react-datepicker__day--today" aria-label="day-17" role="option" aria-disabled="false">17</div><div class="react-datepicker__day react-datepicker__day--018" aria-label="day-18" role="option" aria-disabled="false">18</div><div class="react-datepicker__day react-datepicker__day--019" aria-label="day-19" role="option" aria-disabled="false">19</div><div class="react-datepicker__day react-datepicker__day--020 react-datepicker__day--weekend" aria-label="day-20" role="option" aria-disabled="false">20</div></div><div class="react-datepicker__week"><div class="react-datepicker__day react-datepicker__day--021 react-datepicker__day--weekend" aria-label="day-21" role="option" aria-disabled="false">21</div><div class="react-datepicker__day react-datepicker__day--022" aria-label="day-22" role="option" aria-disabled="false">22</div><div class="react-datepicker__day react-datepicker__day--023" aria-label="day-23" role="option" aria-disabled="false">23</div><div class="react-datepicker__day react-datepicker__day--024" aria-label="day-24" role="option" aria-disabled="false">24</div><div class="react-datepicker__day react-datepicker__day--025" aria-label="day-25" role="option" aria-disabled="false">25</div><div class="react-datepicker__day react-datepicker__day--026" aria-label="day-26" role="option" aria-disabled="false">26</div><div class="react-datepicker__day react-datepicker__day--027 react-datepicker__day--weekend" aria-label="day-27" role="option" aria-disabled="false">27</div></div><div class="react-datepicker__week"><div class="react-datepicker__day react-datepicker__day--028 react-datepicker__day--weekend" aria-label="day-28" role="option" aria-disabled="false">28</div><div class="react-datepicker__day react-datepicker__day--029" aria-label="day-29" role="option" aria-disabled="false">29</div><div class="react-datepicker__day react-datepicker__day--030" aria-label="day-30" role="option" aria-disabled="false">30</div><div class="react-datepicker__day react-datepicker__day--001 react-datepicker__day--outside-month" aria-label="day-1" role="option" aria-disabled="false">1</div><div class="react-datepicker__day react-datepicker__day--002 react-datepicker__day--outside-month" aria-label="day-2" role="option" aria-disabled="false">2</div><div class="react-datepicker__day react-datepicker__day--003 react-datepicker__day--outside-month" aria-label="day-3" role="option" aria-disabled="false">3</div><div class="react-datepicker__day react-datepicker__day--004 react-datepicker__day--weekend react-datepicker__day--outside-month" aria-label="day-4" role="option" aria-disabled="false">4</div>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+          </div>
+          </div>
+          
+          
+        </div>
+        
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>   
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="vendors/chart.js/Chart.min.js"></script>
+  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="js/dashboard.js"></script>
+  <script src="js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>
+

@@ -201,4 +201,97 @@ public class MyStudyController {
 
     return mv;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+  @GetMapping("/mystudy/list2")
+  public ModelAndView mystudyList2(HttpSession session) throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+    List<Study> studyList = studyDao.findAll();
+
+    List<Study> myStudyList = studyDao.findAllMyStudyByMyNo(loginUser.getPerNo());
+
+    if (myStudyList.isEmpty()) {
+      throw new Exception("가입한 스터디가 없습니다.");
+    }
+
+    // 조장
+    List<Study> ownerStudyList = new ArrayList<>();
+
+    for (Study study : studyList) {
+      if (study.getOwner().getPerNo() == loginUser.getPerNo()) {
+        ownerStudyList.add(study);
+      }
+    }
+
+    // 구성원
+    List<Study> guilderMembers = new ArrayList<>();
+
+    for (int i = 0; i < studyList.size(); i++) {
+      List<Member> guilders = studyDao.findByGuildersAll(studyList.get(i).getStudyNo());
+      studyList.get(i).setMembers(guilders);
+
+      for (Member mem : studyList.get(i).getMembers()) {
+        if (mem.getPerNo() == loginUser.getPerNo()) {
+          if (studyList.get(i).getOwner().getPerNo() != loginUser.getPerNo()) {
+            guilderMembers.add(studyList.get(i));
+          }
+        }
+      }
+    }
+
+    // 승인 대기
+    List<Study> waitingStudyList = new ArrayList<>();
+
+    for (int i = 0; i < studyList.size(); i++) {
+      List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
+      studyList.get(i).setWaitingMember(waiting);
+
+      for (Member mem : studyList.get(i).getWaitingMember()) {
+        if (loginUser.getPerNo() == mem.getPerNo()) {
+          waitingStudyList.add(studyList.get(i));
+        }
+      }
+    }
+
+    System.out.println(myStudyList);
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("ownerStudyList", ownerStudyList);
+    mv.addObject("guilderMembers", guilderMembers);
+    mv.addObject("waitingStudyList", waitingStudyList);
+    mv.addObject("myStudyList", myStudyList);
+    mv.addObject("pageTitle", "🗃 내 스터디 목록");
+    mv.addObject("contentUrl", "myStudy/MyStudyList2.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
