@@ -13,13 +13,16 @@
     width: 60px;
     size:100px;
   }
-  
   .btn {
     line-height: 14px;
   }
+  a {
+  color: black;
+  }  
 </style>
 </head>
 <body>
+<br>
   <form id="all" action="perupdate" method="post">
     <span>(${perAskBoard.askNo})</span><br>
     

@@ -10,12 +10,16 @@
     margin: 0 auto;
     font-size:16px;
     text-align: center;
-  } 
+  }
+  a {
+  color: black;
+  }   
 </style>
 <br>
 <div class="main">
-<b>'${perMember.perName}' 님의 이메일은 [${findemail}] 입니다.</b>
-    <hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
+   <b>'${perMember.perName}' 님의 이메일은 [${findemail}] 입니다.</b>
+   <hr><br>
+   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <a href="${contextPath}/app/login" style="font-size: 14px">로그인</a> |
      <a href="getpwbyemailform" style="font-size: 14px">비밀번호 찾기</a>
    </div>

@@ -4,17 +4,11 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>myStudy | calendar</title>
  <link href="${contextPath}/css/calstyle.css" rel="stylesheet" type="text/css">
     <div class="c-top">
-        🗓️ 캘린더
+        <b>🗓️ 캘린더</b>
     </div>
     <div class="calendarwrap">
 	    <div class="calendar">

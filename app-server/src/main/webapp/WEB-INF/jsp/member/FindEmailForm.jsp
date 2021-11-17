@@ -12,11 +12,7 @@
    font-size: 14px;
    line-height: 12px;
   }
-  b {
-  text-align: center;
-  font-size:20px
-  }  
- #all-content {
+  #all-content {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
@@ -25,17 +21,19 @@
   #top {
   text-align: center;
   }
-
+  a {
+  color: black;
+  }
 </style>
+
 <body>
   <div id="all-content">
    <br>
     <div id="top">
       <b style="font-size: 20px">🔍이메일 찾기</b><br> 
     </div>
-   <hr>
+    <hr>
     <form id="member-form" action='findemail' name='perInfo' method='post' >
-
       <div id="mn">
         <label id='f-name' for='f-name' class="col-sm-2 col-form-label">이름</label>
         <input id='i-name' type='text' name='perName' placeholder="*필수"/><br>
@@ -56,7 +54,7 @@
          <a href="${contextPath}/app/index">취소하기</a>
        </div> 
    </form>
-   </div>
+  </div>
 </body>
 
 <script>  

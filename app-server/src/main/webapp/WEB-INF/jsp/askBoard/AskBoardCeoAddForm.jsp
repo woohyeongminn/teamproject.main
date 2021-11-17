@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <style>
+<style>
   * {
   font-size: 14px;
   }
@@ -14,11 +14,13 @@
     width: 60px;
     size:100px;
   }
-  
   .btn {
     line-height: 14px;
   }
-  </style>
+  a {
+  color: black;
+  }  
+</style>
 <br>
   <form id="all" action="ceoadd" method="post">
     <label for='f-status'>공개</label>

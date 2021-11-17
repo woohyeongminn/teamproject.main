@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
+<%-- <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
 <script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
 <script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  
+   --%>
 <style>
 .dropdown-item:focus {
   background-color: white;
@@ -33,7 +33,10 @@
         <li><a href="${contextPath}/app/ceomember/cafe/detail">내 카페</a></li>
     </c:when>
     </c:choose>
-    <li>
+    
+    <li><a href="${contextPath}/app/adminNotice/list">공지사항</a></li>
+    
+    <%-- <li>
       <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
         고객센터
       </a>
@@ -41,7 +44,7 @@
         <li><a class="dropdown-item" href="${contextPath}/app/adminNotice/list">공지사항</a></li>
         <li><a class="dropdown-item" href="${contextPath}/app/askboard/alllist">문의게시판</a></li>
       </ul>
-   </li>
+   </li> --%>
   </ul>
 
   <ul class="header_login">

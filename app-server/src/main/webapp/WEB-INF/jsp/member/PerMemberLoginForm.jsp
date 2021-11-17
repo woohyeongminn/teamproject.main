@@ -78,7 +78,6 @@
   font-weight: bold;
   background-color: rgb(247, 231, 215);
 }
-
   .all-content {
     width: 100%;
     max-width: 500px;
@@ -101,31 +100,29 @@
   padding: 5px;
   font-size: 14px;
   }
-  
 </style>
+
 <div class="all-content">
-<b style="font-size:20px"> 🙋개인 회원 로그인 </b>
-<br>
-<hr>
-<form id="member-form" action='login' method='post'>
-  <!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
-  <input class="input" id='f-email' type='email' name='email' placeholder='E-mail'>
+  <b style="font-size:20px"> 🙋개인 회원 로그인 </b>
   <br>
-  <!-- <label for='f-password' class='form-label' size='100px'>비밀번호</label> -->
-  <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
-  <div class="inner">
-    <div class="form-check">
-       <input type="checkbox" class="rememberCheck" id="dropdownCheck">
-       <span>정보 기억하기</span>
-    </div>
-    <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
-  </div>
-</form>
-<div class="mb">
-   <a href="addform">회원가입</a> |
-   <a href="findemailform">이메일찾기</a> |<a href="getpwbyemailform">비밀번호찾기</a>
-</div>
-</div>
+  <hr>
+  <form id="member-form" action='login' method='post'>
+    <input class="input" id='f-email' type='email' name='email' placeholder='E-mail' value="${cookie.email.value}">
+    <br>
+    <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
+      <div class="inner">
+        <div class="form-check">
+           <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""} }>
+           <span>이메일 기억하기</span>
+        </div>
+        <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
+      </div>
+  </form>
+	<div class="mb">
+	   <a href="addform">회원가입</a> |
+	   <a href="findemailform">이메일찾기</a>|<a href="getpwbyemailform">비밀번호찾기</a>
+	</div>
+</div>    
 
 <script>
 document.querySelector("#member-form").onsubmit = () => {

@@ -14,13 +14,20 @@
     width: 60px;
     size:100px;
   }
-  
   .btn {
     line-height: 14px;
   }
+  a {
+  color: black;
+  }  
   </style>
 <fieldset>
 <br>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+   <a href='permylist' >내 글</a> |
+   <a href='alllist' >전체 글</a>
+</div>
+
 <hr>
 <table class="table table-responsive text-center">
 <thead>
@@ -38,8 +45,15 @@
   <tr>
     <td>${askBoard.askNo}.</td>
     <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askTitle}</a></td>
-    <td><a href='permydetail?askNo=${askBoard.askNo}'>${askBoard.askMemberWriter.perNickname}</a></td>
-    <td>${askBoard.askVeiwCount}</td>
+    <td>${askBoard.askMemberWriter.perNickname}</td>
+    <c:choose>
+      <c:when test="${askBoard.askStatus == 1}">    
+        <td>${askBoard.askVeiwCount}</td>
+      </c:when>
+      <c:otherwise>
+        <td>🔐</td>
+      </c:otherwise>
+    </c:choose>    
     <td>${askBoard.askRegisteredDate}</td>               
        <c:choose>
          <c:when test="${empty askBoard.reply}">
@@ -53,14 +67,13 @@
 </c:forEach>
 </table>
  <c:if test="${empty perMyAskBoardList}">
-  <b font-size="14" text-align="center">❕❔ 등록한 게시글이 없습니다.</b>
+  <b style="font-size:14; text-align: center">❕❔ 등록한 게시글이 없습니다.</b>
  </c:if>
 </fieldset>
 
-   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href='peraddform' type="button" class="btn btn-outline-dark" >등록하기</a> 
-     <a href='alllist' type="button" class="btn btn-outline-dark" >전체보기</a>
-   </div>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+   <a href='peraddform' type="button" class="btn btn-outline-dark" >등록하기</a> 
+</div>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {

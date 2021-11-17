@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"
 trimDirectiveWhitespaces="true"%>
-
 <!-- 아이콘 -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-
 <!DOCTYPE html>
 <html>
 <head>
-
 <style>
 .layerPopup img{
 margin-bottom : 20px;
 }
-
 .layerPopup:before {
 display:block;
 content:"";
@@ -25,7 +21,6 @@ height:100%;
 background:rgba(0,0,0,.5);
 z-index:9000
 }
-
 .layerPopup .layerBox {
 z-index:10000;
 position:fixed;
@@ -60,14 +55,12 @@ border:black solid 1px;
 text-align : center;
 text-decoration:none;
 }
-
 .layerPopup .layerBox .leftbox {
   background-color: rgb(255 248 241);
   width: 70%;
   display: flex;
   flex-direction: column;
 }
-
 .leftbox .lefttop {
   position: absolute;
   width: 515px;
@@ -92,14 +85,12 @@ text-decoration:none;
   background-color: rgb(255 248 241);
   color: rgb(123 111 109);
 }
-
 .layerPopup .layerBox .rightbox {
   background-color: rgb(255 248 241);
   width: 35%;
   display: flex;
   flex-direction: column;
 }
-
 .rightbox .righttop {
   position: absolute;
   width: 241px;
@@ -127,7 +118,6 @@ text-decoration:none;
   z-index: 99999;
   background-color: rgb(255 248 241);
 }
-
 .layerPopup div{
 display : inline;
 }
@@ -170,18 +160,14 @@ svg#icon {
   color: rgb(159 146 143);
 }
 </style>
-
 <!-- layer popup content -->
 </head>
 <body>
-
 <div class="layerPopup" id="layer_popup" style="visibility: visible;">    
   <form name="pop_form">
-
   <div class="layerBox">
   
     <div class="leftbox">
-
       <div class="lefttop">
         <div class="hellopopup">
           <img src="${contextPath}/img/hello.gif" width=515 height=260 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
@@ -203,7 +189,7 @@ svg#icon {
 
       <div class="leftbottom">
         <div id="check" >
-          <input type="checkbox" class="form-check-input" name="chkbox" value="checkbox" id='chkbox' >
+          <input type="checkbox" class="form-check-input" name="chkbox" value="checkbox" id='chkbox' style="margin-top: 8px;">
           <label for="chkbox">&nbsp&nbsp오늘 하루 보지 않기</label></div>
       </div>
           
@@ -218,7 +204,7 @@ svg#icon {
 
       <div class="rightmiddle">
         <div class="middlecontent">
-        <p><br></p>
+        <br>
           <p>환영합니다!</p>
           <p>오늘의 공부 홈페이지입니다!</p>
         </div>

@@ -23,18 +23,21 @@
   textarea {
   color: white;
   }
+  a {
+  color: black;
+  }  
 </style>
   <div id="mian">
-      <p>등록일ㅣ${myAskBoard.askRegisteredDate}</p>
       <b>제목</b>
       <input type="text" class="form-control" name="title" value="${myAskBoard.askTitle}" readonly></input>
     
       <br><b>내용</b>
       <textarea class="form-control" id="f-content" name="content" placeholder="${myAskBoard.askContent}" class="form-control" cols="50" rows="3" readonly></textarea>
  
-      <br><div id="info">
-      <span>작성자:</span><b>${myAskBoard.askMemberWriter.perNickname}</p>
-      </div><hr>
+       <div id="info">
+        <b>작성자 :</b><span>${myAskBoard.askCeoWriter.ceoNickname}</span><br>
+        <b>등록일 :</b><span>${myAskBoard.askRegisteredDate}</span>
+       </div>
       <c:choose>
 	      <c:when test="${empty myAskBoard.reply}">
 	      <label>답변📔 </label>
@@ -50,10 +53,23 @@
      </c:choose>
   </div>   
  
-     <br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	     <a href='perupdateform?askNo=${myAskBoard.askNo}' type="button" class="btn btn-outline-dark">수정하기</a>
-	     <a href='perdelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark">삭제하기</a>
-	    <a href='permylist' type="button" class="btn btn-outline-dark" >뒤로가기</a>
-     </div>
+<br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <c:choose>
+   <c:when test="${empty myAskBoard.reply}">
+     <a href='perupdateform?askNo=${myAskBoard.askNo}' type="button" class="btn btn-outline-dark">수정하기</a>
+   </c:when>
+   <c:otherwise>
+     <a id="notEmptyReply" type="button" class = "btn btn-outline-dark" onclick="notEmptyReply(this);">수정하기</a>        
+   </c:otherwise>
+  </c:choose>
+  <a href='perdelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark">문의글삭제</a>
+  <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
+</div>
+
+<script>
+function notEmptyReply(obj) { 
+    alert("답변이 등록된 글은 수정할 수 없습니다.")
+    }
+</script>
      
      

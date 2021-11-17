@@ -13,7 +13,15 @@ values(3, 'ID 및 PW 찾기에 관하여',
 insert into notice_file(notice_file_no, notice_no, filepath)
 values(1, 1, 'gif');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(2, 3, 'jpeg');
+values(2, 2, 'jpg');
+insert into notice_file(notice_file_no, notice_no, filepath)
+values(3, 3, 'jpg');
+
+-- 첨부파일
+DROP TABLE IF EXISTS notice_file RESTRICT;
+
+-- 공지사항
+DROP TABLE IF EXISTS notice RESTRICT;
 
 -- 확인용
 /*

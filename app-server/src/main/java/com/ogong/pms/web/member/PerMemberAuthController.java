@@ -30,13 +30,14 @@ public class PerMemberAuthController {
   @PostMapping("/member/login")
   public ModelAndView perLogin(String email, String password, String saveEmail, HttpServletResponse response, HttpSession session) throws Exception {
     Cookie cookie = null;
+
     if (saveEmail != null) {
       cookie = new Cookie("email", email);
       cookie.setMaxAge(60 * 60 * 24 * 7);
 
     } else {
       cookie = new Cookie("email", "");
-      cookie.setMaxAge(0); // 유효기간을 0으로 설정하면 웹브라우저가 받는 즉시 무효한 쿠기가 된다.
+      cookie.setMaxAge(0);        // 유효기간을 0으로 설정, 웹브라우저가 받는 즉시 무효한 쿠키가 된다
     }
 
     response.addCookie(cookie);

@@ -12,7 +12,7 @@
   }
   .btn {
    font-size: 14px;
-   line-height: 12px;
+   line-height: 10px;
   }
   b {
   text-align: center;
@@ -27,8 +27,10 @@
   #top {
   text-align: center;
   }
+  a {
+  color:black;
+  }  
 </style>
-
 <body>
   <div class="all-content">
    <br>
@@ -51,7 +53,7 @@
       
       <div id="mE">
 	      <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-	      <input id='f-email' type='text' name='id' pattern="^[a-zA-Z0-9]+$" placeholder="*필수"/>@
+	      <input id='f-email' type='text' name='id' pattern="^[a-zA-Z0-9]+$" placeholder="*필수"/> @
 	      <select name="site">
 	        <option>naver.com</option>
 	        <option>daum.net</option>
@@ -88,12 +90,12 @@
      </div>
       <hr>
       
-       <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-         <button class="btn btn-outline-dark" type="submit" >✔가입하기</button> 
-         <a type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
-       </div> 
+     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+       <button class="btn btn-outline-dark" type="submit" >✔가입하기</button> 
+       <button class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</button>
+     </div> 
    </form>
-   </div>
+  </div>
 </body>
 
 <script type="text/javascript">
