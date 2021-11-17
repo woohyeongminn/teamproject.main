@@ -37,12 +37,31 @@ public class CafeReservationController {
   public ModelAndView list(HttpSession session,
       String searchDate,
       @RequestParam(required=false, defaultValue="")String startDate,
-      @RequestParam(required=false, defaultValue="")String endDate) throws Exception {
+      @RequestParam(required=false, defaultValue="")String endDate,
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "10") int pageSize) throws Exception {
 
     Member member = (Member) session.getAttribute("loginUser");
 
+    int count = cafeReservationDao.countByMember(member.getPerNo(),null);
+
+    if (pageSize < 5 || pageSize > 10) {
+      pageSize = 10;
+    }
+
+    int totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
+
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+
+    int offset = pageSize * (pageNo - 1);
+    int length = pageSize;
+
+    ModelAndView mv = new ModelAndView();
+
     List<CafeReservation> reserList = 
-        cafeReservationDao.findReservationListByMember(member.getPerNo());
+        cafeReservationDao.findReservationListByMember(member.getPerNo(), offset, length);
 
     cafeReservationDao.updateReservationStatusComplete();
     sqlSessionFactory.openSession().commit();
@@ -54,8 +73,34 @@ public class CafeReservationController {
         searchDate = "rs.using_dt";
       }
 
-      reserList = cafeReservationDao.searchReservationListByMember(
-          member.getPerNo(), searchDate, Date.valueOf(startDate), Date.valueOf(endDate));
+      HashMap<String,Object> params = new HashMap<>();
+      params.put("memberNo", member.getPerNo());
+      params.put("searchDate", searchDate);
+      params.put("startDate", Date.valueOf(startDate));
+      params.put("endDate", Date.valueOf(endDate));
+
+      count = cafeReservationDao.countByMember(params);
+
+      if (pageSize < 5 || pageSize > 10) {
+        pageSize = 10;
+      }
+
+      totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
+
+      if (pageNo < 1 || pageNo > totalPage) {
+        pageNo = 1;
+      }
+
+      offset = pageSize * (pageNo - 1);
+      length = pageSize;
+
+      params.put("offset", offset);
+      params.put("length", length);
+
+      reserList = cafeReservationDao.searchReservationListByMember(params);
+      mv.addObject("startDate", startDate);
+      mv.addObject("endDate", endDate);
+      mv.addObject("searchDate", searchDate);
     }
 
     for (CafeReservation cafeReser : reserList) {
@@ -69,10 +114,11 @@ public class CafeReservationController {
       }
     }
 
-    ModelAndView mv = new ModelAndView();
-
     mv.addObject("reserList", reserList);
     mv.addObject("pageTitle", "내 예약 내역");
+    mv.addObject("totalPage", totalPage);
+    mv.addObject("pageNo", pageNo);
+    mv.addObject("pageSize", pageSize);
     mv.addObject("contentUrl", "cafe/CafeMyReservationList.jsp");
     mv.setViewName("template1");
 
