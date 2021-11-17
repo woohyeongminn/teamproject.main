@@ -70,9 +70,8 @@
   <b style="font-size:14; text-align: center">❕❔ 등록한 게시글이 없습니다.</b>
  </c:if>
 </fieldset>
-
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <a href='peraddform' type="button" class="btn btn-outline-dark" >등록하기</a> 
+   <a href='peraddform' type="button" class="btn btn-outline-dark" >✔등록하기</a> 
 </div>
 
 <script>

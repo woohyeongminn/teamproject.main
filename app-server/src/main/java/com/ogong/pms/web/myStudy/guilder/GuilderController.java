@@ -62,7 +62,7 @@ public class GuilderController {
     studyDao.updateOwner(myStudy.getStudyNo(), guilderMemberNo);
     sqlSessionFactory.openSession().commit();
 
-    studyDao.updateGuilderExpulsion(myStudy.getStudyNo(), loginUser.getPerNo());
+    studyDao.deleteGuilder(myStudy.getStudyNo(), loginUser.getPerNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -101,7 +101,7 @@ public class GuilderController {
 
     Study myStudy = studyDao.findByNo(studyNo);
 
-    studyDao.updateGuilderExpulsion(myStudy.getStudyNo(), guilderMemberNo);
+    studyDao.deleteGuilder(myStudy.getStudyNo(), guilderMemberNo);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

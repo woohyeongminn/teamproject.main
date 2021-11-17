@@ -301,20 +301,20 @@
   </update>
   
   <!--  ===[구성원 탈퇴시키기 및 탈퇴하기]=== -->
-  <update id="updateGuilderExpulsion" parameterType="map">
+  <!-- <update id="updateGuilderExpulsion" parameterType="map">
   update study_guilder set 
    status=3
   where
    study_no=#{studyNo} and member_no=#{memberNo}
-  </update>
+  </update> -->
   
   <!--  ===[구성원 전체 탈퇴시키기(삭제x상태변경)]=== -->
-  <update id="updateGuilderExpulsionAll" parameterType="int">
+  <!-- <update id="updateGuilderExpulsionAll" parameterType="int">
   update study_guilder set 
    status=3
   where
    study_no=#{studyNo}
-  </update>
+  </update> -->
   
 <!--  ===[구성원에서 삭제하기]=== -->
   <delete id="deleteGuilder" parameterType="map"> 
@@ -328,6 +328,13 @@
   delete from study_guilder 
   where
    study_no=#{studyNo}
+  </delete>
+  
+  <!--  ===[승인 대기 중인 구성원 전체 삭제하기]=== -->
+  <delete id="deleteAllWaitingGuilder" parameterType="int"> 
+  delete from study_guilder 
+  where
+   study_no=#{studyNo} and status=2
   </delete>
   
   <!-- 구성원 승인 여부 -->

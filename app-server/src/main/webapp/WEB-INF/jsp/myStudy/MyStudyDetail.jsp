@@ -166,6 +166,11 @@
 	</table>
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	 <c:choose>
+	   <c:when test="${status == 'waiting'}">
+      <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button> 	    
+	   </c:when>
+	   <c:otherwise>
     <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button>
 	    <c:if test='${study.owner.perNo == loginUser.perNo}'>
 		    <button type="submit" class="btn btn-outline-dark" value="변경" formaction="updateform">
@@ -184,8 +189,9 @@
     <button type="submit" class="btn btn-outline-dark" value="화상미팅">
       <a href='list'>화상미팅</a></button>
 	  <button id="popup_open_btn" class="btn btn-outline-dark">To-Do</button>
-	  
     <!-- todo 모달 -->
     <jsp:include page="todo/ToDoPopup.jsp"/>
+	   </c:otherwise>
+	 </c:choose>
     
 </div>
