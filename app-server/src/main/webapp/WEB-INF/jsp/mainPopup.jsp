@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"
 trimDirectiveWhitespaces="true"%>
-
 <!-- 아이콘 -->
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-
 <!DOCTYPE html>
 <html>
 <head>
-
 <style>
 .layerPopup img{
 margin-bottom : 20px;
 }
-
 .layerPopup:before {
 display:block;
 content:"";
@@ -25,7 +21,6 @@ height:100%;
 background:rgba(0,0,0,.5);
 z-index:9000
 }
-
 .layerPopup .layerBox {
 z-index:10000;
 position:fixed;
@@ -60,26 +55,24 @@ border:black solid 1px;
 text-align : center;
 text-decoration:none;
 }
-
 .layerPopup .layerBox .leftbox {
   background-color: rgb(255 248 241);
   width: 70%;
   display: flex;
   flex-direction: column;
 }
-
 .leftbox .lefttop {
   position: absolute;
   width: 515px;
-  height: 240px;
+  height: 260px;
   z-index: 99999;
-  top: -45px;
+  top: -20px;
   background-color: rgb(255 248 241);
   border-radius: 10px;
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.418);
 }
 .leftbox .tempbox {
-  margin-top: 30%;
+  margin-top: 35%;
   height: 35%;
   text-align: right;
   background-color: rgb(255 248 241);
@@ -92,26 +85,23 @@ text-decoration:none;
   background-color: rgb(255 248 241);
   color: rgb(123 111 109);
 }
-
 .layerPopup .layerBox .rightbox {
   background-color: rgb(255 248 241);
   width: 35%;
   display: flex;
   flex-direction: column;
 }
-
 .rightbox .righttop {
   position: absolute;
   width: 241px;
   height: 20%;
   z-index: 33333;
   background-color: rgb(255 248 241);
-  padding: 0 10px;
+  padding: 20px 10px 0 10px;
 }
 .rightbox .rightmiddle {
-  margin-top: 28%;
-  margin-left: 10px;
-  width: 100%;
+  margin-top: 35%;
+  width: 85%;
   height: 80%;
   z-index: 55555;
   border-top: 1px solid;
@@ -124,11 +114,10 @@ text-decoration:none;
 .rightbox .rightbottom {
   bottom: 0;
   width: 100%;
-  height: 3%;
+  height: 10%;
   z-index: 99999;
   background-color: rgb(255 248 241);
 }
-
 .layerPopup div{
 display : inline;
 }
@@ -171,21 +160,17 @@ svg#icon {
   color: rgb(159 146 143);
 }
 </style>
-
 <!-- layer popup content -->
 </head>
 <body>
-
 <div class="layerPopup" id="layer_popup" style="visibility: visible;">    
   <form name="pop_form">
-
   <div class="layerBox">
   
     <div class="leftbox">
-
       <div class="lefttop">
         <div class="hellopopup">
-          <img src="${contextPath}/img/hello.gif" width=515 height=240 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
+          <img src="${contextPath}/img/hello.gif" width=515 height=260 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
           </div>
       </div>
 
