@@ -123,7 +123,7 @@
 </form>
 <div class="mb">
    <a href="addform">회원가입</a> |
-   <a href="findemailform">이메일찾기</a>|<a href="getpwbyemailform">비밀번호찾기</a>
+   <a href="findemailform">이메일찾기</a> |<a href="getpwbyemailform">비밀번호찾기</a>
 </div>
 </div>
 

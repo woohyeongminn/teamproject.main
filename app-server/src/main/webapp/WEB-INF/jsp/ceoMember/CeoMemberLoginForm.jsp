@@ -108,7 +108,7 @@
 	<div class="all-content">
 		<b style="font-size:20px"> 기업 회원 로그인 </b>
 		<br><hr>
-		<form action='login' method='post'>
+		<form action='login' method='post' id="ceoMember-form">
 			<!-- <label for='f-email' class='form-label' size='100px'>이메일</label> -->
 			<input class="input" id='f-email' type='email' name='email' placeholder='E-mail' value="${cookie.email.value}">
 			<br>
@@ -124,7 +124,19 @@
 		</form>
 		<div class="mb">
 			 <a href="${contextPath}/app/ceomember/addform">회원가입</a> |
-			 <a href="#">비밀번호찾기</a>
+			 <a href="findemailform">이메일찾기</a> |
+			 <a href="getpwbyemailform">비밀번호찾기</a>
 		</div>
 	</div>
 </body>
+
+<script>
+document.querySelector("#member-form").onsubmit = () => {
+  if (document.querySelector("#f-email").value == "" ||
+      document.querySelector("#f-password").value == "") {
+    window.alert("이메일 패스워드를 입력해주세요.")
+    //Swal.fire("필수 입력 항목이 비어 있습니다.")
+    return false;
+  }
+};
+</script>

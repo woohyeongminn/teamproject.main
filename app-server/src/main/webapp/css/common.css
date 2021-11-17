@@ -105,7 +105,6 @@ header a {
 .header_menu li a {
   padding: 4px;
   font-size: 12px;
-  
 }
 
 .header_menu li a:hover {
@@ -125,6 +124,10 @@ header a {
 .header_login li {
   font-size: 12px;
   padding: 2px 8px;
+}
+
+.dropdown-item:focus {
+  background-color: white;
 }
 
 @media screen and (max-width: 768px) {

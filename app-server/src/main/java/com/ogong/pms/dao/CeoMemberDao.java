@@ -14,6 +14,9 @@ public interface CeoMemberDao {
   CeoMember findByTel(String inputTel) throws Exception;
   CeoMember findByEmailAndPassword(@Param("email") String email, @Param("password") String password) throws Exception;
 
+  CeoMember findEmailByNameAndTel(@Param("name") String name, @Param("tel") String tel) throws Exception;
+  CeoMember findByNameAndEmail(@Param("name") String name, @Param("email") String email) throws Exception;
+
   void insert(CeoMember ceoMember) throws Exception;
   void insertCeo(CeoMember ceoMember) throws Exception;
 
@@ -31,6 +34,7 @@ public interface CeoMemberDao {
   void delete(int no) throws Exception;
 
   String idOverlap(String id) throws Exception;
+  String nickOverlap(String nick) throws Exception;
 
 }
 
