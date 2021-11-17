@@ -11,6 +11,7 @@ public interface CafeRoomDao {
   List<CafeRoom> getCafeRoomList() throws Exception;
   List<CafeRoom> findCafeRoomListByCafe(int cafeNo) throws Exception;
   List<CafeRoom> findCafeRoomListByMember(int cafeNo) throws Exception;
+  List<CafeRoom> findAllCafeRoomListByMember() throws Exception;
   CafeRoom findByRoomNo(int roomNo) throws Exception;
   void insertCafeRoom(CafeRoom cafeRoom) throws Exception;
   void updateCafeRoom(CafeRoom cafeRoom) throws Exception;
