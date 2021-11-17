@@ -40,8 +40,8 @@
 
   <jsp:include page="header2.jsp"/>
 
-    <!-- 메인 팝업(얘 닫히는 게 이상함) -->
-    <%-- <jsp:include page="mainPopup2.jsp"/> --%>
+  <!-- 메인 팝업(얘 닫히는 게 이상함) -->
+  <%-- <jsp:include page="mainPopup2.jsp"/> --%>
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="clearfix">
