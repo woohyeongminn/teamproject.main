@@ -63,7 +63,7 @@
   <div class="container">
     <h1 class="mt-5">${freeBoard.freeBoardTitle}</h1>
       <span>${freeBoard.freeBoardWriter.perNickname}</span>
-      <td><fmt:formatDate value="${freeBoard.freeBoardRegisteredDate}" pattern="yyyy.MM.dd" /></td>
+      <td><fmt:formatDate value="${freeBoard.freeBoardRegisteredDate}" pattern="yyyy-MM-dd" /></td>
     <p class="lead">${freeBoard.freeBoardContent}</p>
   </div>
 </main>
@@ -79,7 +79,7 @@
   </div>
 </footer><br>
 
-<!-- 댓글 -->
+<!-- 댓글 등록 -->
 <div class="card">
   <div class="card-body">
   <span>댓글</span>
@@ -99,6 +99,8 @@
 <div id="empty-comment">
   <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
 </div>
+  
+  <!-- 댓글 목록 -->
   <c:forEach items="${commentList}" var="comment">
   <div class="card">
   <div class="card-body">
@@ -107,6 +109,39 @@
     <span>${comment.commentRegisteredDate}</span>
     <div class="btn-group" role="group" aria-label="Basic outlined example">
 	    <c:if test="${comment.commentWriter.perNo eq loginUser.perNo}">
+	    
+			<!-- 댓글 수정 -->
+			<button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">수정</button>
+			
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        <!-- <form> -->
+			          <form action='comment/update' method="post">
+					        <input type='hidden' name='studyNo' value='${comment.studyNo}'/>
+	                <input type='hidden' name='boardNo' value='${comment.boardNo}'/>
+	                <input type='hidden' name='commentNo' value='${comment.commentNo}'/>
+				          <div class="mb-3">
+				            <label for="message-text" class="col-form-label">내용</label>
+				            <!-- <textarea class="form-control" id="message-text"></textarea> -->
+				            <textarea type="text" class="form-control" id='f-commentText' name='commentText' ></textarea>
+				          </div>
+					        <button type="button" class="btn btn-light" data-bs-dismiss="modal">취소</button>
+					        <button class="btn btn-dark">수정</button>
+				        </form>
+				      </div>
+				      <!-- <div class="modal-footer">
+				      </div> -->
+			      <!-- </form> -->
+			    </div>
+			  </div>
+			</div>
+	    
 	      <a href='comment/updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link">수정</a>
 	      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link">삭제</a>
 		  </c:if>
