@@ -142,6 +142,7 @@
 		    </button>
 	    </c:if>
 
+      <!-- 스터디 참여 ver.1 -->
 	    <!-- <c:forEach var="waitingGuilder" items="${waitingGuilderList}">
             <c:if test="${waitingGuilder.perNo ne loginUser.perNo}">
               <button class="btn btn-outline-light">
@@ -152,14 +153,14 @@
 
       <c:forEach var="waitingGuilder" items="${waitingGuilderList}" >
         <c:choose>
-         <c:when test="${loginUser.perNo == waiting.perNo}">
+         <c:when test="${loginUser.perNo eq waitingGuilder.perNo}">
            <button class="btn btn-dark" style="display: none;">승인 대기</button>
            <p>승인 대기</p>
          </c:when>
          <c:otherwise>
            <button class="btn btn-dark" style="display: block;">참여 신청</button>
          </c:otherwise>
-         </c:choose>
+        </c:choose>
       </c:forEach>
 
 	    <c:if test="${loginUser ne null}">
@@ -181,7 +182,7 @@
 				  </c:if> -->
 				</c:if>
 
-		    <!-- 스터디 참여 -->
+		    <!-- 스터디 참여 ver.2 -->
 		    <!-- <c:if test="${study.owner.perNo ne loginUser.perNo}">
 			    <c:forEach var="waitingMember" items="${study.waitingMember}">
 		        <c:forEach var="guilder" items="${study.members}">
