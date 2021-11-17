@@ -15,13 +15,13 @@ body {
 }
 
 a {
-  color: #1bb1dc;
+  color: rgb(191 179 176);
   text-decoration: none;
   transition: 0.5s;
 }
 
 a:hover, a:active, a:focus {
-  color: #0a98c0;
+  color: rgb(155 136 131);
   outline: none;
   text-decoration: none;
 }
@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 600;
-  color: #413e66;
+  color: #4e4847;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -354,7 +354,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 #hero .intro-info h2 {
-  color: #413e66;
+  color: #4e4847;
   margin-bottom: 40px;
   font-size: 48px;
   font-weight: 700;
@@ -397,7 +397,7 @@ section {
 --------------------------------*/
 .section-header h3 {
   font-size: 36px;
-  color: #413e66;
+  color: #4e4847;
   text-align: center;
   font-weight: 700;
   position: relative;
@@ -408,7 +408,7 @@ section {
   margin: auto;
   font-size: 15px;
   padding-bottom: 60px;
-  color: #535074;
+  color: #444;
   width: 50%;
 }
 @media (max-width: 767px) {
@@ -420,7 +420,7 @@ section {
 /* Section with background
 --------------------------------*/
 .section-bg {
-  background: #f9fbfd8a;
+  background: #f6f2f196;
 }
 
 /* About Us Section
@@ -432,12 +432,12 @@ section {
   padding-top: 40px;
 }
 #about .about-content h2 {
-  color: #413e66;
+  color: #4e4847;
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
 }
 #about .about-content h3 {
-  color: #696592;
+  color: rgb(191 179 176);
   font-weight: 400;
   font-size: 22px;
   font-style: italic;
@@ -636,6 +636,7 @@ section {
 #features h4 {
   font-weight: 600;
   font-size: 24px;
+  color: #4e4847;
 }
 
 /* Portfolio Section
@@ -870,6 +871,14 @@ section {
   background-color: #1bb1dc;
 }
 
+/* features icon
+-------------------------------- */
+i#iconcircle {
+	font-size: 20px;
+	color: rgb(155 136 131);
+	margin-right: 4px;
+}
+
 /* Team Section
 --------------------------------*/
 #team {
@@ -1003,7 +1012,7 @@ section {
 }
 #pricing .card .card-title {
   margin-bottom: 16px;
-  color: #535074;
+  color: #4e4847;
 }
 #pricing .card .card-block {
   padding-top: 0;
@@ -1012,7 +1021,7 @@ section {
 #pricing .card .list-group-item {
   border: 0px;
   padding: 6px;
-  color: #413e66;
+  color: rgb(82 69 66);
   font-weight: 300;
 }
 #pricing .card h3 {
@@ -1093,7 +1102,7 @@ section {
   display: none;
 }
 #faq .faq-list .collapsed {
-  color: black;
+  color: #4e4847;
 }
 #faq .faq-list .collapsed:hover {
   color: rgb(155 136 131);
@@ -1149,7 +1158,7 @@ section {
 }
 #footer .footer-top {
   padding: 60px 0 30px 0;
-  background: #f9fbfd8a;
+  background: #f6f2f196;
 }
 #footer .footer-top .footer-info {
   margin-bottom: 30px;
@@ -1160,7 +1169,7 @@ section {
   padding: 2px 0 2px 0;
   line-height: 1;
   font-family: "Montserrat", sans-serif;
-  color: #413e66;
+  color: #4e4847;
   font-weight: 400;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -1201,7 +1210,7 @@ section {
 #footer .footer-top h4 {
   font-size: 14px;
   font-weight: bold;
-  color: #413e66;
+  color: #4e4847;
   text-transform: uppercase;
   position: relative;
   padding-bottom: 10px;
@@ -1221,7 +1230,7 @@ section {
   padding-top: 0;
 }
 #footer .footer-top .footer-links ul a {
-  color: #696592;
+  color: #444;
 }
 #footer .footer-top .footer-links ul a:hover {
   color: rgb(155 136 131);
@@ -1344,7 +1353,7 @@ section {
 #footer .copyright {
   text-align: center;
   padding-top: 30px;
-  color: #535074;
+  color: rgb(128 113 109);
   font-size: 15px;
 }
 #footer .credits {

@@ -8,7 +8,7 @@
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto">
-      <a href="index.html"><img src="${contextPath}/css/assets/img/logo.png"></a>
+      <a href="${contextPath}/app/index2"><img src="${contextPath}/css/assets/img/logo.png"></a>
       </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="${contextPath}/css/assets/img/logo.png" alt="" class="img-fluid"></a>-->
