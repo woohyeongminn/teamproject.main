@@ -17,7 +17,7 @@
   .btn {
     line-height: 14px;
   }
-  p, #info, #createDt{
+  #info {
   text-align:right;
   }
   a {
@@ -25,8 +25,6 @@
   }  
 </style>
   <div id="mian">
-      
-      <p>등록일ㅣ${myAskBoard.askRegisteredDate}</p>
       <b>제목</b>
       <input type="text" class="form-control" name="title" value="${myAskBoard.askTitle}" readonly></input>
     
@@ -34,7 +32,10 @@
       <textarea class="form-control" id="f-content" name="content" placeholder="${myAskBoard.askContent}" class="form-control" cols="50" rows="3" readonly></textarea>
  
       <br><div id="info">
-      <span>작성자:</span><b>${myAskBoard.askCeoWriter.ceoNickname}</p>
+		   <div id="info">
+		    <b>작성자 :</b><span>${myAskBoard.askCeoWriter.ceoNickname}</span><br>
+		    <b>등록일 :</b><span>${myAskBoard.askRegisteredDate}</span>
+		   </div>
       </div><hr>
       <c:choose>
         <c:when test="${empty myAskBoard.reply}">
@@ -50,10 +51,18 @@
         </c:otherwise>
      </c:choose>
   </div>   
-     <br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a href='ceoupdateform?askNo=${myAskBoard.askNo}' type="button" class="btn btn-outline-dark">수정하기</a>
-       <a href='ceodelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark">삭제하기</a>
-      <a href='ceomylist' type="button" class="btn btn-outline-dark" >뒤로가기</a>
-     </div>
-     
+<br>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <c:choose>
+   <c:when test="${empty myAskBoard.reply}">
+     <a href='ceoupdateform?askNo=${myAskBoard.askNo}' type="button" class="btn btn-outline-dark">수정하기</a>
+   </c:when>
+   <c:otherwise>
+     <a id="notEmptyReply" type="button" class = "btn btn-outline-dark" onclick="notEmptyReply(this);">수정하기</a>        
+   </c:otherwise>
+  </c:choose>       
+  <a href='ceodelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark">문의글삭제</a>
+  <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
+</div>
+    
      

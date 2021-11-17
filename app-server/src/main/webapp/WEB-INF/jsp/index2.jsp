@@ -7,12 +7,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Today Study - Index</title>
+  <title>오늘의 공부</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="${contextPath}/css/assets/img/favicon.png" rel="icon">
+<%--   <link href="${contextPath}/css/assets/img/favicon.png" rel="icon"> --%>
+<link rel="icon" href="${contextPath}/img/favicon.ico" type="image/x-icon" sizes="16x16" style="background-color: rgba(255, 255, 255, 0);">
   <link href="${contextPath}/css/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -49,7 +50,7 @@
         <div class="col-lg-6 intro-info order-lg-first order-last" data-aos="zoom-in" data-aos-delay="100">
           <h2>Today Study<br>for Your <span>Life!</span></h2>
           <div>
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            <a href="#about" class="btn-get-started scrollto">🎓 오늘의 공부 시작하기</a>
           </div>
         </div>
 
@@ -166,11 +167,12 @@
       <div class="container" data-aos="zoom-out">
         <div class="row">
           <div class="col-lg-9 text-center text-lg-start">
-            <h3 class="cta-title">👋Hi ChatBot</h3>
-            <p class="cta-text"> 오늘의 공부 챗봇을 통해 관리자에게 실시간 문의가 가능합니다.</p>
+            <h3 class="cta-title">👋 Hello</h3>
+            <p class="cta-text" style="margin: 0;"> 질문이 있으신가요?</p>
+            <p class="cta-text"> 오늘의 공부 챗봇을 통해 실시간으로 문의해 보세요!</p>
           </div>
           <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#">CONNECT</a>
+            <a class="cta-btn align-middle" href="javascript:openchatbot()">🙄 문의하기</a>
           </div>
         </div>
 
@@ -226,7 +228,7 @@
                   <li class="list-group-item">⩗ 친절해요</li>
                   <li class="list-group-item">⩗ 깨끗해요</li>
                 </ul>
-                <a href="#" class="btn">Reservation</a>
+                <a href="#" class="btn">✔ 예약하기</a>
               </div>
             </div>
           </div>
@@ -246,7 +248,7 @@
                   <li class="list-group-item">⩗ 넓고 쾌적해요</li>
                   <li class="list-group-item">⩗ 음료를 제공해줘요</li>
                 </ul>
-                <a href="#" class="btn">Reservation</a>
+                <a href="#" class="btn">✔ 예약하기</a>
               </div>
             </div>
           </div>
@@ -266,7 +268,7 @@
                   <li class="list-group-item">⩗ 노트북 대여가 가능해요</li>
                   <li class="list-group-item">⩗ 이용금액이 저렴해요</li>
                 </ul>
-                <a href="#" class="btn">Reservation</a>
+                <a href="#" class="btn">✔ 예약하기</a>
               </div>
             </div>
           </div>
@@ -280,44 +282,44 @@
     <section id="faq" class="faq">
       <div class="container" data-aos="fade-up">
         <header class="section-header">
-          <h3>Asked Questions</h3>
+          <h3>Q & A = ?</h3>
           <p>자주 묻는 질문</p>
         </header>
 
         <ul class="faq-list" data-aso="fade-up" data-aos-delay="100">
 
           <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">이런저런거 어떻게 해결하나요? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">스터디 카페 이용 방법?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                해당 홈페이지 로그인 후 상단의 "스터디 찾기" 메뉴를 이용해 주세요.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">으아아아아아아아? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">아이디/비밀번호를 까먹었어요<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq2" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                해당 홈페이지 로그인 버튼 클릭 후 하단의 ID/PW를 이용해 주세요. 자세한 사항은 "공지사항"을 참고해 주세요.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">저것도 궁금쓰? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">스터디 카페 등록 방법이 궁금해요!<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq3" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                스터디 카페(장소) 등록은 실제 운영 중이어야 하며 사업자등록증을 요구하고 있습니다. 자세한 문의는 "오늘의 공부 챗봇" 또는 "문의게시판"을 이용해 주세요.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">이것도 궁금쓰? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">이메일로 문의 드리고 싶어요!<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq4" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                메인에서 메일 보내기 서비스를 이용하실 수 있습니다. 해당 서비스를 통해 관리자에게 메일을 보내 주세요.
               </p>
             </div>
           </li>
@@ -345,5 +347,11 @@
   <script src="${contextPath}/css/assets/js/main.js"></script>
 
 </body>
+
+<script type="text/JavaScript">
+function openchatbot() {  
+  window.open("todaystudy", "오늘의 공부 챗봇", "width=400px; height=550px;")
+}
+</script>
 
 </html>

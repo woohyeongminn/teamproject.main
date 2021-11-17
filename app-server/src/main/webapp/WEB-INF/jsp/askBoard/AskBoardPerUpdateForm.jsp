@@ -22,6 +22,7 @@
 </style>
 </head>
 <body>
+<br>
   <form id="all" action="perupdate" method="post">
     <span>(${perAskBoard.askNo})</span><br>
     
