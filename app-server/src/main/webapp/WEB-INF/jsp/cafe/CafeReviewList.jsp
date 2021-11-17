@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <style>
   * {
-    font-size: 14px;
+    font-size: 13px;
   }
   a {
    text-decoration:none;
