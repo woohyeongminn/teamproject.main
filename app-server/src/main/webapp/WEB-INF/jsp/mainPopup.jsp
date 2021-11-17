@@ -71,15 +71,15 @@ text-decoration:none;
 .leftbox .lefttop {
   position: absolute;
   width: 515px;
-  height: 260px;
+  height: 240px;
   z-index: 99999;
-  top: -20px;
+  top: -45px;
   background-color: rgb(255 248 241);
   border-radius: 10px;
   box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.418);
 }
 .leftbox .tempbox {
-  margin-top: 35%;
+  margin-top: 30%;
   height: 35%;
   text-align: right;
   background-color: rgb(255 248 241);
@@ -106,11 +106,12 @@ text-decoration:none;
   height: 20%;
   z-index: 33333;
   background-color: rgb(255 248 241);
-  padding: 20px 10px 0 10px;
+  padding: 0 10px;
 }
 .rightbox .rightmiddle {
-  margin-top: 35%;
-  width: 85%;
+  margin-top: 28%;
+  margin-left: 10px;
+  width: 100%;
   height: 80%;
   z-index: 55555;
   border-top: 1px solid;
@@ -123,7 +124,7 @@ text-decoration:none;
 .rightbox .rightbottom {
   bottom: 0;
   width: 100%;
-  height: 10%;
+  height: 3%;
   z-index: 99999;
   background-color: rgb(255 248 241);
 }
@@ -184,7 +185,7 @@ svg#icon {
 
       <div class="lefttop">
         <div class="hellopopup">
-          <img src="${contextPath}/img/hello.gif" width=515 height=260 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
+          <img src="${contextPath}/img/hello.gif" width=515 height=240 usemap="#popup" alt="event page" id="hello" style="border-radius: 10px;">
           </div>
       </div>
 
@@ -203,7 +204,7 @@ svg#icon {
 
       <div class="leftbottom">
         <div id="check" >
-          <input type="checkbox" class="form-check-input" name="chkbox" value="checkbox" id='chkbox' >
+          <input type="checkbox" class="form-check-input" name="chkbox" value="checkbox" id='chkbox' style="margin-top: 8px;">
           <label for="chkbox">&nbsp&nbsp오늘 하루 보지 않기</label></div>
       </div>
           
@@ -218,7 +219,7 @@ svg#icon {
 
       <div class="rightmiddle">
         <div class="middlecontent">
-        <p><br></p>
+        <br>
           <p>환영합니다!</p>
           <p>오늘의 공부 홈페이지입니다!</p>
         </div>
