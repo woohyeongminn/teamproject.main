@@ -118,9 +118,7 @@ ul{
   </div>
   <c:if test="${loginUser ne null}">
 	  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-		  <button class="btn btn-light">
-		    <a href='form'>글쓰기</a>
-		  </button>
+		  <a href='form' class="btn btn-light">글쓰기</a>
 	  </div>
   </c:if>
   <br>
@@ -209,9 +207,7 @@ ul{
   </div>
   <c:if test="${loginUser ne null}">
     <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-light">
-        <a href='form'>글쓰기</a>
-      </button>
+      <a href='form' class="btn btn-light">글쓰기</a>
     </div>
   </c:if>
   <br>
@@ -279,9 +275,7 @@ ul{
   </div>
   <c:if test="${loginUser ne null}">
     <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-light">
-        <a href='form'>글쓰기</a>
-      </button>
+      <a href='form' class="btn btn-light">글쓰기</a>
     </div>
   </c:if>
   <br>

@@ -1,5 +1,3 @@
--- 예약테이블에 예약날짜 컬럼 타입 변경! 꼭 해주기!
-alter table studycafe_reservation modify rsv_dt date;
 -- 카페 운영상태
 insert into studycafe_operating_status(operating_status_no, name)
 values (1, '승인대기');

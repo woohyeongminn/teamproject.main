@@ -329,6 +329,14 @@
   where
    study_no=#{studyNo}
   </delete>
+  
+  <!-- 구성원 승인 여부 -->
+  <select id="findGuilderStatusByNo" resultType="Integer">
+  select status from
+   study_guilder
+  where
+   study_no=#{studyNo} and member_no=#{memberNo}
+  </select>
 
 <!--  ===========================[북마크]=========================== -->
 

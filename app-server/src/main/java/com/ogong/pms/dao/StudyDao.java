@@ -35,6 +35,7 @@ public interface StudyDao {
   void updateGuilderExpulsion(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void updateGuilderExpulsionAll(int studyNo) throws Exception;
   void deleteGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
+  Integer findGuilderStatusByNo(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
 
   //--------------- [ 북마크 ] ----------------------------------------
   void insertBookmark(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;

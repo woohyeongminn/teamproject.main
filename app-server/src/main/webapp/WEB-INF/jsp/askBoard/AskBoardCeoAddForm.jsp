@@ -30,16 +30,16 @@
     </select><br> 
     
     <div id="passwordRow">
-      <label for='f-tempPW' size='100px'>🔏비밀번호</label>
-      <input id='f-tempPW' type='password' name='password' placeholder="4자리"></input>
+      <label for='f-tempPW' size='100px'>비밀번호</label>
+      <input id='f-tempPW' type='password' name='password' pattern="[0-9]+" minlength='4' maxlength='4' placeholder="*숫자 4자리"></input>
     </div><br>
   
       <br>
       <label for="f-title" class="form-label">제목</label>
-      <input id="title"  type="text" class="form-control" name="askTitle" placeholder="제목을 입력하세요"></input>
+      <input id="title"  type="text" class="form-control" name="askTitle" placeholder="*제목을 입력하세요"></input>
     
       <label for="f-content" class="form-label">내용</label>
-      <textarea id="content" class="form-control" id="f-content" name="askContent" placeholder="내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
+      <textarea id="content" class="form-control" id="f-content" name="askContent" placeholder="*내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
     
     <hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class="btn btn-outline-dark" type="submit" value="등록" formaction="ceoadd">등록하기</button>
