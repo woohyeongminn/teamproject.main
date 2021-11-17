@@ -37,10 +37,10 @@
                 <div class="footer-links">
                   <h4>Useful Links</h4>
                   <ul>
-                    <li><a href="#">오늘의 공부</a></li>
-                    <li><a href="#about">이용약관</a></li>
+                    <li><a href="${contextPath}/app/index">오늘의 공부</a></li>
+                    <li><a href="${contextPath}/app/askboard/alllist">이용약관</a></li>
                     <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">1:1문의</a></li>
+                    <li><a href="${contextPath}/app/adminNotice/list">1:1문의</a></li>
                     <li><a href="#">법적고지</a></li>
                   </ul>
                 </div>

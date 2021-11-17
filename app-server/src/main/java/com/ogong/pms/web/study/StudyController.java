@@ -98,25 +98,22 @@ public class StudyController {
       System.out.println(myBookmark);
       mv.addObject("myBookmark", myBookmark);
 
+      Integer guilder = null;
+      guilder = studyDao.findGuilderStatusByNo(studyno, ((Member) session.getAttribute("loginUser")).getPerNo());
+
+      if (guilder == null) {
+        mv.addObject("guilder", "false");
+
+      } else if (guilder == 1) {
+        mv.addObject("guilder", "waitingGuilder");
+
+      } else if (guilder == 2) {
+        mv.addObject("guilder", "guilder");
+      }
+
     } else {
       int myBookmark = studyDao.myBookmark(studyno, 0);
       mv.addObject("myBookmark", myBookmark);
-    }
-
-    List<Member> guilders = studyDao.findByGuildersAll(studyno);
-
-    if (!guilders.isEmpty()) {
-      study.setMembers(guilders);
-      mv.addObject("guildersList", guilders);
-      System.out.println(guilders);
-    }
-
-    List<Member> waitingGuilder = studyDao.findByWaitingGuilderAll(studyno);
-
-    if (!waitingGuilder.isEmpty()) {
-      study.setWaitingMember(waitingGuilder);
-      mv.addObject("waitingGuilderList", waitingGuilder);
-      System.out.println(waitingGuilder);
     }
 
     mv.addObject("study", study);

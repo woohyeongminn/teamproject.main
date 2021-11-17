@@ -37,7 +37,7 @@
 		  <th>작성자</th>
 		  <th>조회수</th>
 		  <th>등록일</th>
-		  <th>답변📔/📖</th>
+		  <th>답변</th>
 	</tr>
 </thead>
 
@@ -57,10 +57,10 @@
     <td>${askBoard.askRegisteredDate}</td>               
        <c:choose>
          <c:when test="${empty askBoard.reply}">
-            <td> 📔 </td>
+            <td> 🗨 </td>
          </c:when>
         <c:otherwise>
-           <td> 📖 </td>
+           <td> 💬 </td>
         </c:otherwise>
        </c:choose> 
   </tr>
@@ -70,9 +70,8 @@
   <b style="font-size:14; text-align: center">❕❔ 등록한 게시글이 없습니다.</b>
  </c:if>
 </fieldset>
-
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <a href='peraddform' type="button" class="btn btn-outline-dark" >등록하기</a> 
+   <a href='peraddform' type="button" class="btn btn-outline-dark" >✔등록하기</a> 
 </div>
 
 <script>

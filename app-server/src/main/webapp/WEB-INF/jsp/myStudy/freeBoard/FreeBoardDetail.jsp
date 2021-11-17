@@ -72,15 +72,9 @@
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
     <div class="btn-group" role="group" aria-label="Basic outlined example">
-    <button class="btn btn-outline-light">
-      <a href='list?studyno=${freeBoard.studyNo}'>목록</a>
-    </button>
-    <button class="btn btn-outline-light">
-      <a href='updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>수정</a>
-    </button>
-    <button class="btn btn-outline-light">
-      <a href='delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}'>삭제</a>
-    </button>
+	    <a href='list?studyno=${freeBoard.studyNo}' class="btn btn-light">목록</a>
+	    <a href='updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="btn btn-light">수정</a>
+	    <a href='delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="btn btn-light">삭제</a>
     </div>
   </div>
 </footer><br>
@@ -113,12 +107,8 @@
     <span>${comment.commentRegisteredDate}</span>
     <div class="btn-group" role="group" aria-label="Basic outlined example">
 	    <c:if test="${comment.commentWriter.perNo eq loginUser.perNo}">
-		    <button class="btn btn-link">
-		      <a href='comment/updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>수정</a>
-		    </button>
-		    <button class="btn btn-link">
-		      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}'>삭제</a>
-		    </button>
+	      <a href='comment/updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link">수정</a>
+	      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link">삭제</a>
 		  </c:if>
     </div>
     </div>

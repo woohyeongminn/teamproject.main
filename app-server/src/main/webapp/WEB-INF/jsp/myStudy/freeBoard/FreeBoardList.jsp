@@ -17,9 +17,7 @@
 <body>
 <br>
   <div id="button" class="d-grid gap-5 d-md-flex justify-content-md-end">
-    <button class="btn btn-light">
-      <a href='form?studyno=${studyno}'>등록</a>
-    </button>
+    <a href='form?studyno=${studyno}' class="btn btn-light">등록</a>
   </div>
   <br>
 <c:if test='${not empty freeBoardList}'>

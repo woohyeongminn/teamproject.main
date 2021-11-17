@@ -7,9 +7,13 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <style>
   * {
     font-size: 13px;
+  }
+  .page-link {
+    color: black;
   }
   .all-content {
     width: 100%;
@@ -24,6 +28,7 @@
 
   <div id="search">
     <form action="reservationList">
+    <i class="fas fa-search"></i>
     <span>조회기간</span>
     <select name="searchDate">
       <option value="1">예약날짜</option>
@@ -33,21 +38,27 @@
     <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">조회</button>
     </form>
   </div>
-<hr>
+  <div>
+    <c:if test="${not empty startDate}">
+      <i class="fas fa-check"></i>
+      <span> 검색 | ${startDate} ~ ${endDate} </span> 
+    </c:if>
+  </div>
+<br>
 
 <form id="reservationForm" action="reservationDelete" method="POST">
 
 <table class="table table-responsive text-center align-middle">
 <thead>
   <tr>
-    <th>선택</th>
-    <th>예약날짜</th>
-    <th>이용날짜</th>
-    <th>이용시간</th>
+    <th width="5%">선택</th>
+    <th width="8%">예약날짜</th>
+    <th width="8%">이용날짜</th>
+    <th width=15%;>이용시간</th>
     <th>스터디카페 - 스터디룸</th>
-    <th>결제금액</th>
-    <th>예약상태</th>
-    <th>리뷰</th>
+    <th width="7%">결제금액</th>
+    <th width="15%">예약상태</th>
+    <th width="8%">리뷰</th>
   </tr>
 </thead>
 <tbody>
@@ -87,12 +98,45 @@
 <c:if test='${empty reserList}'>
    <p class="text-center">예약 내역이 없습니다.</p>
 </c:if>
-<br><br>
+
 <div class="btnSection">
   <button type="button" class="btn btn-outline-dark btn-sm" id="btnCancle">
     예약취소
   </button>
 </div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <c:if test="${pageNo > 1}">
+        <a class="page-link" href="reservationList?pageNo=${pageNo-1}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </c:if>
+      <c:if test="${pageNo <= 1}">
+	      <a class="page-link" href="#" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+      </c:if>
+    </li>
+    <c:forEach var="page" begin="1" end="${totalPage}">
+	    <li class="page-item"><a class="page-link" href="reservationList?pageNo=${page}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}">${page}</a></li>
+    </c:forEach>
+    <li class="page-item">
+      <c:if test="${pageNo < totalPage}">
+        <a class="page-link" href="reservationList?pageNo=${pageNo+1}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+      </c:if>
+      <c:if test="${pageNo >= totalPage}">
+	      <a class="page-link" href="#" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+      </c:if>
+      
+    </li>
+  </ul>
+</nav> <!-- pagination -->
 
 </form>	
 </div> <!-- .all-content -->

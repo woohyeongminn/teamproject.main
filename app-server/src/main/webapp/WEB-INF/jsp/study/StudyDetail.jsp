@@ -46,28 +46,28 @@
   console.log(studyStatus);
   
   if (studyStatus == 2) {
-	  alert("완료된 스터디 입니다.");
+    alert("완료된 스터디 입니다.");
     return false;
   }
   
   for (Member guilder : form.members.value) {
      if (form.guilder.perNo.value == form.loginUser.perNo.value) {
-    	 alert("이미 참여 중인 스터디입니다.");
+       alert("이미 참여 중인 스터디입니다.");
        return false;
      }
    }
 
     for (Member memberWating : form.waitingMember.value) {
       if (form.memberWating.perNo.value == form.loginUser.perNo.value) {
-    	  alert("이미 승인 대기 중인 스터디입니다.");
+        alert("이미 승인 대기 중인 스터디입니다.");
         return false;
       }
     }
   
   if (form.countMember.value == form.numberOfPeple.value) {
-	    alert("참여 가능 인원수를 초과하였습니다.");
-	    return false;
-	}
+      alert("참여 가능 인원수를 초과하였습니다.");
+      return false;
+  }
 }
 </script> -->
 
@@ -84,7 +84,7 @@
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
-  <div class="container" name="studyInfo">
+  <div class="container">
   <input type="hidden" name="members" value="${study.members}">
   <input type="hidden" name="waitingMember" value="${study.waitingMember}">
   <input type="hidden" name="studyStatus" value="${study.studyStatus}">
@@ -109,15 +109,15 @@
         </c:when>
       </c:choose>
     <ul class="list-group">
-		  <li class="list-group-item d-flex justify-content-between align-items-center">
-		    🔎 분야
-		    <span class="badge bg-primary rounded-pill">${study.subjectName}</span>
-		  </li>
-		  <li class="list-group-item d-flex justify-content-between align-items-center">
-		    🌐 지역
-		    <span class="badge bg-primary rounded-pill">${study.area}</span>
-		  </li>
-		  <li class="list-group-item d-flex justify-content-between align-items-center">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🔎 분야
+        <span class="badge bg-primary rounded-pill">${study.subjectName}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        🌐 지역
+        <span class="badge bg-primary rounded-pill">${study.area}</span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
         🎭 대면 상태
         <span class="badge bg-primary rounded-pill">${study.faceName}</span>
       </li>
@@ -125,94 +125,47 @@
         🏆 활동 점수
         <span class="badge bg-primary rounded-pill">${study.point}</span>
       </li>
-		</ul>
+    </ul>
   </div>
 </main><br>
 
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
     <div class="btn-group" role="group" aria-label="Basic outlined example">
-	    <!-- 내가 쓴 글 -->
-	    <c:if test="${study.owner.perNo eq loginUser.perNo}">
-		    <button class="btn btn-outline-light">
-		      <a href='updateform?studyno=${study.studyNo}'>수정</a>
-		    </button>
-		    <button class="btn btn-outline-light">
-		      <a href='delete?studyno=${study.studyNo}'>삭제</a>
-		    </button>
-	    </c:if>
+      <!-- 내가 쓴 글 -->
+      <c:if test="${study.owner.perNo eq loginUser.perNo}">
+	      <a href='updateform?studyno=${study.studyNo}' class="btn btn-light">수정</a>
+	      <a href='delete?studyno=${study.studyNo}' class="btn btn-light">삭제</a>
+      </c:if>
 
-      <!-- 스터디 참여 ver.1 -->
-	    <!-- <c:forEach var="waitingGuilder" items="${waitingGuilderList}">
-            <c:if test="${waitingGuilder.perNo ne loginUser.perNo}">
-              <button class="btn btn-outline-light">
-              참여 신청1
-              </button>
-            </c:if>
-          </c:forEach> -->
-
-      <c:forEach var="waitingGuilder" items="${waitingGuilderList}" >
-        <c:choose>
-         <c:when test="${loginUser.perNo eq waitingGuilder.perNo}">
-           <button class="btn btn-dark" style="display: none;">승인 대기</button>
-           <p>승인 대기</p>
-         </c:when>
-         <c:otherwise>
-           <button class="btn btn-dark" style="display: block;">참여 신청</button>
-         </c:otherwise>
-        </c:choose>
-      </c:forEach>
-
-	    <c:if test="${loginUser ne null}">
-		    <!-- 스터디 참여 -->
-				<c:if test="${study.owner.perNo ne loginUser.perNo}">
-
-				  <!-- <c:forEach var="guilder" items="${study.members}">
-				    <c:if test="${guilder.perNo ne loginUser.perNo}">
-				      <button class="btn btn-outline-light">
-				      참여 신청2
-				      </button>
-				    </c:if>
-				  </c:forEach> -->
-
-				  <!-- <c:if test="${study.studyStatus ne 2 || study.countMember ne study.numberOfPeple}">
-				    <button class="btn btn-outline-light">
-				      <a href='join?studyno=${study.studyNo}'>참여 신청3</a>
-				    </button>
-				  </c:if> -->
-				</c:if>
-
-		    <!-- 스터디 참여 ver.2 -->
-		    <!-- <c:if test="${study.owner.perNo ne loginUser.perNo}">
-			    <c:forEach var="waitingMember" items="${study.waitingMember}">
-		        <c:forEach var="guilder" items="${study.members}">
-		          <c:if test="${(waitingMember.perNo ne loginUser.perNo) || (guilder.perNo ne loginUser.perNo) || (study.studyStatus ne 2) || (study.countMember ne study.numberOfPeple)}">
-		            <button class="btn btn-outline-light">
-	                <a href='join?studyno=${study.studyNo}'>참여 신청</a>
-		            </button>
-		          </c:if>
-		        </c:forEach>
-	        </c:forEach>
-	      </c:if> -->
-
-		    <!-- 북마크 -->
-		    <c:if test="${myBookmark eq '0'}">
-			    <button class="btn btn-outline-light">
-			      <a href='${contextPath}/app/bookmark/add?studyno=${study.studyNo}'>북마크 추가</a>
-			    </button>
-			  </c:if>
-		    <c:if test="${myBookmark eq '1'}">
-			    <button class="btn btn-outline-light">
-			      <a href='${contextPath}/app/bookmark/delete?studyno=${study.studyNo}'>북마크 삭제</a>
-			    </button>
-				</c:if>
-			</c:if>
-
-	    <!-- 목록 -->
-	    <button class="btn btn-outline-light">
-	      <a href='list'>목록</a>
-	    </button>
-		</div>
+      <c:if test="${loginUser ne null}">
+        <!-- 스터디 참여 -->
+        <c:if test="${study.owner.perNo ne loginUser.perNo}">
+          <c:choose>
+            <c:when test="${guilder == 'false'}">
+              <a href='join?studyno=${study.studyNo}' class="btn btn-light">참여 신청</a>
+            </c:when>
+            <c:when test="${guilder == 'waitingGuilder'}">
+              <p>승인 대기중</p>
+            </c:when>
+            <c:when test="${guilder == 'guilder'}">
+              <p>참여중</p>
+            </c:when>
+          </c:choose>
+        </c:if>
+        
+        <!-- 북마크 -->
+        <c:if test="${myBookmark eq '0'}">
+          <a href='${contextPath}/app/bookmark/add?studyno=${study.studyNo}' class="btn btn-light">북마크 추가</a>
+        </c:if>
+        <c:if test="${myBookmark eq '1'}">
+          <a href='${contextPath}/app/bookmark/delete?studyno=${study.studyNo}' class="btn btn-light">북마크 삭제</a>
+        </c:if>
+      </c:if>
+        
+      <!-- 목록 -->
+      <a href='list' class="btn btn-light">목록</a>
+    </div>
   </div>
 </footer>
 

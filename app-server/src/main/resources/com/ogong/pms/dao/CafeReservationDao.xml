@@ -66,7 +66,8 @@
     where 
       rs.member_no=#{memberNo}
     order by
-      rs.studycafe_rsv_no asc
+      rs.studycafe_rsv_no desc
+    limit #{offset}, #{length}
   </select>
 
   <!-- 기간 검색 + 내 예약 리스트 -->
@@ -79,8 +80,21 @@
       </if>    
     </where>
     order by
-      rs.studycafe_rsv_no asc
+      rs.studycafe_rsv_no desc
+    limit #{offset}, #{length}
   </select>
+  
+  <select id="countByMember" resultType="int">
+    select
+      count(*)
+    from 
+      studycafe_reservation rs
+    where 
+      rs.member_no=#{memberNo}
+      <if test="searchDate != null">
+        and ${searchDate} between #{startDate} and #{endDate}
+      </if>
+  </select> 
   
   <!-- 해당 날짜의 예약 리스트 -->
   <select id="findReservationListByDate" resultMap="reservationMap">

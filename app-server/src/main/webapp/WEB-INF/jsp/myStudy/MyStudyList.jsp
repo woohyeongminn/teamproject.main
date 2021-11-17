@@ -172,7 +172,7 @@ p#titlename {
 		        <tr>
 		          <td>${study.studyNo}</td>
 		          <td>${study.countBookMember}</td>
-		          <td><a href='waitingdetail?studyNo=${study.studyNo}'>${study.studyTitle}</a></td>
+		          <td><a href='${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}'>${study.studyTitle}</a></td>
 		          <td>${study.faceName}</td>
 		          <td>${study.owner.perNickname}</td>
 		          <td>${study.subjectName}</td>

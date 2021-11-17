@@ -166,15 +166,19 @@
 	</table>
 	
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	 <c:choose>
+	   <c:when test="${status == 'waiting'}">
+      <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button> 	    
+	   </c:when>
+	   <c:otherwise>
     <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button>
 	    <c:if test='${study.owner.perNo == loginUser.perNo}'>
-		    <button type="submit" class="btn btn-outline-dark" value="변경" formaction="updateform">
-		       <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'>변경</a></button>
-		    <button type="submit" class="btn btn-outline-dark" value="삭제">
-		       <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}'>삭제</a></button>
+		    <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark" formaction="updateform">수정</a>
+		    <c:if test="${!(study.countMember > '1')}">
+		      <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}' class="btn btn-outline-dark">삭제</a>
+		    </c:if>
 		  </c:if>
-	  <button type="submit" class="btn btn-outline-dark" value="탈퇴">
-      <a href='${contextPath}/app/mystudy/exit?studyno=${study.studyNo}'>탈퇴</a></button>
+    <a href='${contextPath}/app/mystudy/exit?studyno=${study.studyNo}' class="btn btn-outline-dark" >탈퇴</a>
     <button type="submit" class="btn btn-outline-dark" value="구성원">
       <a href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>구성원</a></button>
     <button type="submit" class="btn btn-outline-dark" value="캘린더">
@@ -184,8 +188,9 @@
     <button type="submit" class="btn btn-outline-dark" value="화상미팅">
       <a href='list'>화상미팅</a></button>
 	  <button id="popup_open_btn" class="btn btn-outline-dark">To-Do</button>
-	  
     <!-- todo 모달 -->
     <jsp:include page="todo/ToDoPopup.jsp"/>
+	   </c:otherwise>
+	 </c:choose>
     
 </div>

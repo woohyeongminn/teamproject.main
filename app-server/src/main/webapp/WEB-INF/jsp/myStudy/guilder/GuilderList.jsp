@@ -89,13 +89,12 @@ table td button {
               <c:when test="${study.owner.perNo == guilderMember.perNo}">
 		          <td colspan="3">
 		            <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
-		            <a class="profile" href="detail?guilderNo=${guilderMember.perNo}">
-		               👑 ${guilderMember.perNickname} [조장]</a></td>
+		            <span> 👑 ${guilderMember.perNickname} [조장] </span></td>
 			        </c:when>
 	            <c:otherwise> 
 	              <td>
 	               <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
-	               <a class="profile" href="detail?guilderNo=${guilderMember.perNo}">${guilderMember.perNickname}</a></td>
+	               <span> ${guilderMember.perNickname} </span></td>
 	            </c:otherwise>
 		        </c:choose>
 		        <c:choose>
@@ -136,7 +135,7 @@ table td button {
             <tr>
               <td>
                  <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
-                 <a class="profile" href="detail?watingNo=${waitingMember.perNo}">${waitingMember.perNickname}</a>
+                 <span> ${waitingMember.perNickname} </span>
               </td>
               
 	            <td><button class="btn btn-outline-dark" onclick='return submitBtn("agree","watingMemberNo",${waitingMember.perNo},"studyNo",${study.studyNo});'>승인</button></td>

@@ -1,6 +1,6 @@
 package com.ogong.pms.dao;
 
-import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import com.ogong.pms.domain.CafeReservation;
@@ -10,8 +10,10 @@ public interface CafeReservationDao {
   //-----------------------CafeReservation--------------------------------------
 
   List<CafeReservation> getCafeReservationList() throws Exception;
-  List<CafeReservation> findReservationListByMember(int memberNo) throws Exception;
-  List<CafeReservation> searchReservationListByMember(@Param("memberNo")int memberNo, @Param("searchDate")String searchDate, @Param("startDate")Date startDate, @Param("endDate")Date endDate) throws Exception;
+  List<CafeReservation> findReservationListByMember(@Param("memberNo")int memberNo, @Param("offset")int offset, @Param("length")int length) throws Exception;
+  List<CafeReservation> searchReservationListByMember(HashMap<String,Object> params) throws Exception;
+  int countByMember(@Param("memberNo")int memberNo, @Param("searchDate")String searchDate) throws Exception;
+  int countByMember(HashMap<String,Object> params) throws Exception;
   List<CafeReservation> findReservationListByDate(@Param("selectedDate")String selectedDate, @Param("roomNo")int roomNo) throws Exception;
   List<CafeReservation> findReservationListByCeoMember(int ceoNo) throws Exception;
   CafeReservation findReservationByMember(@Param("memberNo")int memberNo, @Param("reserNo")int reserNo) throws Exception;

@@ -28,24 +28,28 @@
   <c:when test="${not empty loginUser}">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
        <a href='permylist' >내 글</a> |
-       <a href='alllist' >전체 글</a>
+       <a href='alllist' >전체 글</a> | 
+       <a href='alllist' >최신순</a> 
     </div>
   </c:when>
   
   <c:when test="${not empty loginCeoUser}">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
        <a href='ceomylist' >내 글</a>
-       <a href='alllist' >전체 글</a>
+       <a href='alllist' >전체 글</a> | 
+       <a href='alllist' >최신순</a>
     </div>
   </c:when>
   
   <c:when test="${empty loginUser && empty loginCeoUser}">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
        <a href="javascript:logout(this);" attr-a="onclick : attr-a">내 글</a> |
-       <a href='alllist' >전체 글</a>
+       <a href='alllist' >전체 글</a> | 
+       <a href='alllist' >최신순</a>
     </div>  
   </c:when>
 </c:choose>
+
 <hr>
   <table class="table table-responsive text-center">
 	  <thead>
@@ -55,7 +59,7 @@
 			   <th>작성자</th>
 			   <th>조회수</th>
 			   <th>등록일</th>
-			   <th>답변📔/📖</th>
+			   <th>답변</th>
 	    </tr>   
     </thead>
     
@@ -73,10 +77,10 @@
 								     <td>${askBoard.askRegisteredDate}</td>
                      <c:choose>
                         <c:when test="${empty askBoard.reply}">
-                           <td> 📔 </td>
+                           <td> 🗨 </td>
                         </c:when>
                         <c:otherwise>
-                           <td> 📖 </td>
+                           <td> 💬 </td>
                         </c:otherwise>
                      </c:choose>
                   </c:when>
@@ -88,10 +92,10 @@
 								     <td>${askBoard.askRegisteredDate}</td>
 			               <c:choose>
                         <c:when test="${empty askBoard.reply}">
-                           <td> 📔 </td>
+                           <td> 🗨 </td>
                         </c:when>
 			                  <c:otherwise>
-			                     <td> 📖 </td>
+			                     <td> 💬 </td>
 			                  </c:otherwise>
 			               </c:choose>
                   </c:when>
@@ -111,7 +115,6 @@
     </tbody>
   </table>
 </fieldset>
-
 <c:if test="${empty askBoardList}">
  <div style="text-align: center"> 
   <b style="font-size:14; text-align: center">❕❔ 등록된 게시글이 없습니다.</b>
@@ -155,7 +158,7 @@ trList.forEach(function(trTag) {
 });
 
 function lockAskBaord(obj) {
-	alert("비공개 처리된 문의글입니다.")
+	alert("🔐 비공개 처리된 문의글입니다.")
 	}
 
 function logout(obj) { 

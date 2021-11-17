@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -41,7 +42,7 @@
   <jsp:include page="header2.jsp"/>
 
   <!-- 메인 팝업(얘 닫히는 게 이상함) -->
-  <%-- <jsp:include page="mainPopup2.jsp"/> --%>
+  <jsp:include page="mainPopup2.jsp"/>
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="clearfix">
@@ -50,12 +51,12 @@
         <div class="col-lg-6 intro-info order-lg-first order-last" data-aos="zoom-in" data-aos-delay="100">
           <h2>Today Study<br>for Your <span>Life!</span></h2>
           <div>
-            <a href="#about" class="btn-get-started scrollto">🎓 오늘의 공부 시작하기</a>
+            <a href="${contextPath}/app/signup" class="btn-get-started scrollto">🎓 시작하기</a>
           </div>
         </div>
 
         <div class="col-lg-6 intro-img order-lg-last order-first" data-aos="zoom-out" data-aos-delay="200">
-          <img src="${contextPath}/css/assets/img/intro-img.svg" alt="" class="img-fluid">
+          <img src="${contextPath}/css/assets/img/meet.png" alt="" class="img-fluid">
         </div>
       </div>
 
@@ -78,11 +79,10 @@
 
           <div class="col-lg-7 col-md-6">
             <div class="about-content" data-aos="fade-left" data-aos-delay="100">
-              <h2>About</h2>
-              <h3>Welcom to '오늘의 공부'</h3>
-              <p>오늘의 공부에서 원하는 모임과 스터디를 개설하고
-                새로운 사람들을 만나고, 모임 장소까지 한번에 예약할 수 있습니다.
-              </p>
+              <h2>Welcome</h2>
+              <h3>'오늘의 공부'에 오신 걸 환영합니다!</h3>
+              <p style="margin:0px">오늘의 공부에서 원하는 모임과 스터디를 개설하고 새로운 사람들을 만나고,</p>
+              <p>모임 장소까지 한번에 예약할 수 있습니다.</p>
               <ul>
                 <li><i class="bi bi-check-circle"></i> 새로운 스터디 개설하기!</li>
                 <li><i class="bi bi-check-circle"></i> 스터디 카페 예약까지 한번에!</li>
@@ -100,56 +100,39 @@
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h3>Services</h3>
-          <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
+          <h3>Today Study</h3>
+          <p>현재 이용 중인 스터디를 둘러보시고 원하는 스터디에 가입 신청을 넣어 보세요!</p>
         </header>
 
         <div class="row">
-
-          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <div class="icon" style="background: #fceef3;"><i class="bi bi-briefcase" style="color: #ff689b;"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+        <c:forEach items="${studyList}" var="study">
+          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
               <div class="icon" style="background: #fff0da;"><i class="bi bi-card-checklist" style="color: #e98e06;"></i></div>
-              <h4 class="title"><a href="">Dolor Sitema</a></h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+              <h4 class="title"><a href="${contextPath}/app/study/detail?studyno=${study.studyNo}">${study.studyTitle}</a></h4>
+              
+              <c:choose>
+				        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+				          <p id="wanted" style="text-align: right;font-size:12px;font-family: fantasy;margin: 0;">모집중</p>
+				        </c:when>
+				        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+				          <p id="wanted" style="text-align: right;font-size:12px;font-family: fantasy;margin: 0;">모집중</p>
+				        </c:when>
+				        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+				          <p id="wanted" style="text-align: right;font-size:12px;font-family: fantasy;margin: 0;">모집완료</p>
+				        </c:when>
+				        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+				          <p id="wanted" style="text-align: right;font-size:12px;font-family: fantasy;margin: 0;">모집완료</p>
+				        </c:when>
+			        </c:choose>
+              
+              <p style="text-align: justify; -webkit-text-stroke-width: thin;">${study.introduction}</p>
+              <p class="description">인원 ${study.countMember}/${study.numberOfPeple}</p>
+              <p class="description">${study.subjectName} | ${study.faceName}</p>
+              <p class="description">${study.owner.perNickname} ⭐${study.countBookMember}</p>
             </div>
           </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-            <div class="box">
-              <div class="icon" style="background: #e6fdfc;"><i class="bi bi-bar-chart" style="color: #3fcdc7;"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 wow" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <div class="icon" style="background: #eafde7;"><i class="bi bi-binoculars" style="color:#41cf2e;"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200"">
-        <div class=" box">
-            <div class="icon" style="background: #e1eeff;"><i class="bi bi-brightness-high" style="color: #2282ff;"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-          <div class="box">
-            <div class="icon" style="background: #ecebff;"><i class="bi bi-calendar4-week" style="color: #8660fe;"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-          </div>
-        </div>
+        </c:forEach>
 
       </div>
 
@@ -185,15 +168,26 @@
 
         <div class="row feature-item">
           <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
-            <img src="${contextPath}/css/assets/img/features-1.svg" class="img-fluid" alt="">
+            <img src="${contextPath}/css/assets/img/part2.png" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0" data-aos="fade-left" data-aos-delay="150">
-            <h4>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h4>
-            <p>
-              Ipsum in aspernatur ut possimus sint. Quia omnis est occaecati possimus ea. Quas molestiae perspiciatis occaecati qui rerum. Deleniti quod porro sed quisquam saepe. Numquam mollitia recusandae non ad at et a.
+          <br>
+            <h4>나만의 스터디 매니저</h4>
+            <hr><br>
+            <p><i class="bi bi-check-circle" id="iconcircle"></i>
+              장소 탐색 및 예약 가능
             </p>
-            <p>
-              Ad vitae recusandae odit possimus. Quaerat cum ipsum corrupti. Odit qui asperiores ea corporis deserunt veritatis quidem expedita perferendis. Qui rerum eligendi ex doloribus quia sit. Porro rerum eum eum.
+            <p><i class="bi bi-check-circle" id="iconcircle"></i>
+              나만의 공부 스타일 등록
+            </p>
+            <p><i class="bi bi-check-circle" id="iconcircle"></i>
+              화상 채팅 기능을 통한 비대면 모임 활성화
+            </p>
+            <p><i class="bi bi-check-circle" id="iconcircle"></i>
+              가격 및 다양한 옵션을 체크하여 맞춤형 장소 제공
+            </p>
+            <p><i class="bi bi-check-circle" id="iconcircle"></i>
+              누적 공부 시간 기록, 투두 리스트 등 편리한 기능
             </p>
           </div>
         </div>
@@ -221,14 +215,14 @@
               </div>
               <div class="card-block">
                 <h4 class="card-title">
-                  에이 스터디 카페 강남점
+                  에이 스터디 카페
                 </h4>
                 <ul class="list-group">
                   <li class="list-group-item">별점 ⭐5.0</li>
                   <li class="list-group-item">⩗ 친절해요</li>
                   <li class="list-group-item">⩗ 깨끗해요</li>
                 </ul>
-                <a href="#" class="btn">✔ 예약하기</a>
+                <a href="${contextPath}/app/cafe/detail?no=1" class="btn">✔ 예약하기</a>
               </div>
             </div>
           </div>
@@ -241,14 +235,14 @@
               </div>
               <div class="card-block">
                 <h4 class="card-title">
-                  해피해피 스터디 카페
+                  오호라 스터디 카페
                 </h4>
                 <ul class="list-group">
                   <li class="list-group-item">별점 ⭐4.2</li>
                   <li class="list-group-item">⩗ 넓고 쾌적해요</li>
                   <li class="list-group-item">⩗ 음료를 제공해줘요</li>
                 </ul>
-                <a href="#" class="btn">✔ 예약하기</a>
+                <a href="${contextPath}/app/cafe/detail?no=5" class="btn">✔ 예약하기</a>
               </div>
             </div>
           </div>
@@ -261,14 +255,14 @@
               </div>
               <div class="card-block">
                 <h4 class="card-title">
-                  룰루랄라 스터디 카페
+                  비트 스터디 카페 판교센터
                 </h4>
                 <ul class="list-group">
                   <li class="list-group-item">별점 ⭐4.0</li>
                   <li class="list-group-item">⩗ 노트북 대여가 가능해요</li>
                   <li class="list-group-item">⩗ 이용금액이 저렴해요</li>
                 </ul>
-                <a href="#" class="btn">✔ 예약하기</a>
+                <a href="${contextPath}/app/cafe/detail?no=7" class="btn">✔ 예약하기</a>
               </div>
             </div>
           </div>
