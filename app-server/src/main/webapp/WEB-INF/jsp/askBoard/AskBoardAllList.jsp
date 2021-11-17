@@ -24,6 +24,28 @@
 
 <fieldset>
 <br>
+<c:choose>
+  <c:when test="${not empty loginUser}">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+       <a href='permylist' >내 글</a> |
+       <a href='alllist' >전체 글</a>
+    </div>
+  </c:when>
+  
+  <c:when test="${not empty loginCeoUser}">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+       <a href='ceomylist' >내 글</a>
+       <a href='alllist' >전체 글</a>
+    </div>
+  </c:when>
+  
+  <c:when test="${empty loginUser && empty loginCeoUser}">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+       <a href="javascript:logout(this);" attr-a="onclick : attr-a">내 글</a> |
+       <a href='alllist' >전체 글</a>
+    </div>  
+  </c:when>
+</c:choose>
 <hr>
   <table class="table table-responsive text-center">
 	  <thead>
@@ -79,7 +101,9 @@
             <c:otherwise>
               <tr>
                 <td>${askBoard.askNo}.</td>
-				        <td></td><td>🔒 비밀글입니다.</td><td></td><td></td><td></td>
+				        <td></td>
+					        <td><a href="javascript:lockAskBaord(this);" attr-a="onclick : attr-a">🔐 비공개</a></td>
+					        <td></td><td></td><td></td>
 			        </tr>
             </c:otherwise>
           </c:choose>
@@ -89,22 +113,31 @@
 </fieldset>
 
 <c:if test="${empty askBoardList}">
-  <b>❕❔ 등록한 게시글이 없습니다.</b>
+ <div style="text-align: center"> 
+  <b style="font-size:14; text-align: center">❕❔ 등록된 게시글이 없습니다.</b>
+ </div> 
 </c:if>
 
-<c:if test="${not empty loginUser}">
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	   <a href='peraddform' type="button" class ="btn btn-outline-dark">등록하기</a>
-	   <a href='permylist' type="button" class ="btn btn-outline-dark" type="botton" >내 문의글</a>
-  </div>
-</c:if>
+<c:choose>
+	<c:when test="${not empty loginUser}">
+	  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		   <a href='peraddform' type="button" class ="btn btn-outline-dark">등록하기</a>
+	  </div>
+	</c:when>
+	
+	<c:when test="${not empty loginCeoUser}">
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	     <a href='ceoaddform' type="button" class = "btn btn-outline-dark">등록하기</a>
+		</div>
+	</c:when>
+	
+	<c:when test="${empty loginUser && empty loginCeoUser}">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+       <a id="notlogin" type="button" class = "btn btn-outline-dark" onclick="logout();">등록하기</a>
+    </div>	
+	</c:when>
+</c:choose>
 
-<c:if test="${not empty loginCeoUser}">
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <a href='ceoaddform' type="button" class = "btn btn-outline-dark">등록하기</a>
-	   <a href='ceomylist' type="button" class = "btn btn-outline-dark">내 문의글</a>
-	</div>
-</c:if>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
@@ -120,8 +153,15 @@ trList.forEach(function(trTag) {
     //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
   };
 });
-</script>
 
+function lockAskBaord(obj) {
+	alert("비공개 처리된 문의글입니다.")
+	}
+
+function logout(obj) { 
+	  alert("로그인 해주세요.")
+	  }
+</script>
 
 
 
