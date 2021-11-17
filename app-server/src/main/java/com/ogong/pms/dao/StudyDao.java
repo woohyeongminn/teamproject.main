@@ -23,7 +23,8 @@ public interface StudyDao {
   Study findByNo(int studyinputNo) throws Exception;
 
   //--------------- [ 내 스터디 ] ----------------------------------------
-  List<Map<String,String>> findAllByMyNo(int memberNo) throws Exception;
+  List<Map<String,String>> findAllByMyNo(int memberNo) throws Exception;            // 카페에서 사용
+  List<Study> findAllMyStudyByMyNo(int memberNo) throws Exception;
   Study findByMyNo(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
 
   //--------------- [ 구성원 ] ----------------------------------------

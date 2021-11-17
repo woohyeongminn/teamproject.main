@@ -241,11 +241,19 @@
       order by s.created_dt
   </select>
   
-  <!--  ===[내 스터디 목록(간단)]=== -->
+  <!--  ===[내 스터디 목록(간단) - 카페에서 사용]=== -->
   <select id="findAllByMyNo" resultType="HashMap">
     <include refid="select4"/>
     where sg.status=2
       and sg.member_no=#{memberNo};
+  </select>
+  
+  <!--  ===[내 스터디 목록]=== -->
+  <select id="findAllMyStudyByMyNo" resultMap="StudyMap">
+    <include refid="select1"/>
+    where
+      (sg.status=2 and sg.member_no=#{memberNo})
+      or s.member_no=${memberNo}
   </select>
   
  <!--  ===[스터디 상세]=== -->

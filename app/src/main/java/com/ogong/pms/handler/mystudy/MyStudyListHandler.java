@@ -41,6 +41,8 @@ public class MyStudyListHandler extends AbstractStudyHandler {
       }
     }
 
+
+
     if(joinCount == 0) {
       System.out.println(" >> 가입한 스터디가 없습니다.\n");
     }
