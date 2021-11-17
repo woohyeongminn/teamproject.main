@@ -14,6 +14,7 @@
   legend {
   text-align: center;
   }
+  
 </style>
 
 <body>

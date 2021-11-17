@@ -14,9 +14,11 @@
     width: 60px;
     size:100px;
   }
-  
   .btn {
     line-height: 14px;
+  }
+  a {
+  color: black;
   }
 </style>
 

@@ -27,8 +27,10 @@
   #top {
   text-align: center;
   }
+  a {
+  color:black;
+  }  
 </style>
-
 <body>
   <div class="all-content">
    <br>

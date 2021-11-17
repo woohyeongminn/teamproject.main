@@ -25,6 +25,9 @@
   #top {
   text-align: center;
   }
+  a {
+  color: black;
+  }  
 
 </style>
 <body>

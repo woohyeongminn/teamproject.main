@@ -51,6 +51,9 @@ margin-left: 24px;
 #pT {
 margin-left: 8px;
 }
+a {
+color: black;
+}
 </style>
 
 <div class="all">

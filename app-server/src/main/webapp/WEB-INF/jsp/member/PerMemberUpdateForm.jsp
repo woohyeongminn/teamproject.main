@@ -24,7 +24,10 @@
  } 
  #title {
  text-align: center;
- } 
+ }
+  a {
+  color: black;
+  }  
 </style>
 
 <div class="all-content">     

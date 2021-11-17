@@ -12,10 +12,6 @@
    font-size: 14px;
    line-height: 12px;
   }
-  b {
-  text-align: center;
-  font-size:20px
-  }  
   #all-content {
     width: 100%;
     max-width: 500px;
@@ -24,6 +20,9 @@
   } 
   #top {
   text-align: center;
+  }
+  a {
+  color: black;
   }
 </style>
 

@@ -17,6 +17,9 @@
   .btn {
     line-height: 14px;
   }
+  a {
+  color: black;
+  }  
 </style>
 <br>
   <form id="all" action="ceoadd" method="post">
