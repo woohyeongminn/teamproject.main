@@ -54,7 +54,7 @@ public class StudyController {
 
     ModelAndView mv = new ModelAndView();
 
-    mv.setViewName("redirect:list");
+    mv.setViewName("redirect:detail?studyno=" + study.getStudyNo());
 
     return mv;
   }
@@ -132,7 +132,7 @@ public class StudyController {
 
     mv.addObject("study", study);
     mv.addObject("pageTitle", "스터디 수정");
-    mv.addObject("contentUrl", "myStudy/MyStudyUpdateForm.jsp");
+    mv.addObject("contentUrl", "study/StudyUpdateForm.jsp");
     mv.setViewName("template1");
 
     return mv;
@@ -193,7 +193,7 @@ public class StudyController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    mv.setViewName("redirect:list");
+    mv.setViewName("redirect:detail?studyno=" + study.getStudyNo());
 
     return mv;
   }

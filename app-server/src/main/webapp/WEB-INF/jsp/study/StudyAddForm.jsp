@@ -27,10 +27,10 @@
     return false;
   }
 
-  if (!form.subjectNo.value) {
+  /* if (!form.subjectNo.value) {
     alert("분야를 선택하세요.");
     return false;
-  }
+  } */
 
   if (!form.area.value) {
     alert("지역을 입력하세요.");
@@ -42,20 +42,20 @@
     return false;
   }
 
-  if (!form.numberOfPeple.value) {
-    alert("최대 인원수를 입력하세요.");
+  /* if (!form.numberOfPeple.value) {
+    alert("최대 인원수를 선택하세요.");
     return false;
-  }
+  } */
 
-  if (form.numberOfPeple.value < 2 && form.numberOfPeple.value > 30) {
+  /* if (form.numberOfPeple.value < 2 && form.numberOfPeple.value > 30) {
     alert("인원수는 2명 이상 30명 이하로만 입력 가능합니다.");
     return false;
-  }
+  } */
 
-  if (!form.faceNo.value) {
+  /* if (!form.faceNo.value) {
     alert("대면 상태를 선택하세요.");
     return false;
-  }
+  } */
 
   if (!form.introduction.value) {
     alert("소개글을 입력하세요.");
