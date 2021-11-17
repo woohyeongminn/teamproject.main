@@ -15,7 +15,8 @@
 <br>
 <div class="main">
 <b>'${perMember.perName}'님</b>
-<b>'${perMember.perEmail}'로 임시 비밀번호가 발급되었습니다.</b>
+<b>'${perMember.perEmail}'로</b><br>
+<b>임시 비밀번호가 발급되었습니다.</b>
     <hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <a href="${contextPath}/app/login" style="font-size: 14px">로그인</a>
    </div>

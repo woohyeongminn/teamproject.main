@@ -29,45 +29,45 @@
 
 <div class="all-content">     
   <br><div id="title"><b>📝 프로필 수정</b></div><hr>
-    <form action='update' name='perInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
-	   <div id="photo">
+  <form action='update' name='perInfo' method='post' enctype="multipart/form-data" onsubmit="return checkValue()">
+	  <div id="photo">
 	    <input id='f-photo' type='file' name='photoFile' value='${perMember.perPhoto}'/>
-	     <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
+	    <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
 	      <img id="f-photo-image" src="${contextPath}/upload/member/${perMember.perPhoto}_110x110.jpg">
-	     </a>
-	   </div>
-	    <hr>
-	      <div id="mN">
-	        <label id='f-name' for='f-name' class="col-sm-2 col-form-label">이름</label>
-	        <input type='text' name='perName' value="${perMember.perName}" readonly style="border:0 solid black"/><br>
-	      </div>      
-	      <div id="mE">
-	        <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
-	        <input type='text' name='perEmail' value="${perMember.perEmail}" readonly style="border:0 solid black"/>  
-	      </div>
-	      <div id="mT">
-	        <label for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
-	        <input type='text' name='perTel' value="${perMember.perTel}" readonly style="border:0 solid black"/>  
-	      </div>        
-	      <div id="mNn">
-	        <label id='f-nicknam'for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
-	        <input id='i-nickname' type='text' name='nick' value="${perMember.perNickname}" />
-	        <input type="button" class="btn btn-outline-dark" value="중복확인" onclick="nickOverlap()"/><br>
-	      </div>
-	      <div id="mpw">
-	        <label id='f-password' for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
-	        <input id='i-password' type='password' name='perPassword'
+	    </a>
+	  </div>
+	  <hr>
+	  <div id="mN">
+	    <label id='f-name' for='f-name' class="col-sm-2 col-form-label">이름</label>
+	    <input type='text' name='perName' value="${perMember.perName}" readonly style="border:0 solid black"/><br>
+	  </div>      
+	  <div id="mE">
+	    <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
+	    <input type='text' name='perEmail' value="${perMember.perEmail}" readonly style="border:0 solid black"/>  
+	  </div>
+	  <div id="mT">
+	    <label for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
+	    <input type='text' name='perTel' value="${perMember.perTel}" readonly style="border:0 solid black"/>  
+	  </div>        
+	  <div id="mNn">
+	    <label id='f-nicknam'for='f-nickname' class="col-sm-2 col-form-label">닉네임</label>
+	    <input id='i-nickname' type='text' name='nick' value="${perMember.perNickname}" />
+	    <input type="button" class="btn btn-outline-dark" value="중복확인" onclick="nickOverlap()"/><br>
+	  </div>
+	  <div id="mpw">
+	    <label id='f-password' for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
+	    <input id='i-password' type='password' name='perPassword'
 	         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{7,16}$"
 	         title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
 	         placeholder="*입력하세요"/><br>
-	      </div>  
-	      <input type="hidden" for='f-no' name='perNo' value="${perMember.perNo}" /> 
-	    <hr>  
-	   <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+	  </div>  
+	  <input type="hidden" for='f-no' name='perNo' value="${perMember.perNo}" /> 
+	  <hr>  
+	  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 	    <input type="submit" value="🛠수정하기" class ="btn btn-outline-dark"/>
 	    <input type="submit" value="❌취소하기" formaction="${contextPath}/app/member/detail" class ="btn btn-outline-dark"/>
-	   </div>
-	  </form>
+	  </div>
+	</form>
 </div>
 
 <script>  
