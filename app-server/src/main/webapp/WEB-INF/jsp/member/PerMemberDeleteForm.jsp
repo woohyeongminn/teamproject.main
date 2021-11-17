@@ -14,8 +14,8 @@
   legend {
   text-align: center;
   }
+  
 </style>
-</head>
 
 <body>
   <form action='delete' method='post'>

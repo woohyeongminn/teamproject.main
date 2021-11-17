@@ -42,9 +42,7 @@ public class AskBoardCeoCotroller {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("pageTitle", "💬문의글 등록");
-    mv.addObject("refresh", "1;url=ceomylist");
-    mv.addObject("contentUrl", "askBoard/AskBoardCeoAdd.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("redirect:ceomylist");
 
     return mv;
 
