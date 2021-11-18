@@ -90,19 +90,48 @@ a:hover {
 }
 </style>
 
-<!-- 내 스터디 삭제 & 탈퇴 -->
+
 <script>
+  <!-- 내 스터디 삭제 -->
 	function delBtn_click(waitingGuilder) {
 		if (waitingGuilder > 0) {
-			alert('스터디 삭제 시 승인 대기 중인 구성원도 모두 거절됩니다.<br/>정말 삭제하시겠습니까?');
-		}
+			if (confirm("스터디 삭제 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 삭제하시겠습니까?")) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+		} else {
+      if (confirm("정말 삭제하시겠습니까?")) {
+          return true;
+      } else {
+          return false;
+      }
+    }
 	}
 	
-	function exitBtn_click(waitingGuilder) {
-	    if (waitingGuilder > 0) {
-	      alert('스터디 탈퇴 시 승인 대기 중인 구성원도 모두 거절됩니다.<br/>정말 탈퇴하시겠습니까?');
-	    }
-	  }
+	<!-- 내 스터디 탈퇴 -->
+	function exitBtn_click(countMember, waitingGuilder) {
+		if (countMember > 1) {
+			if (confirm("구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.")) {
+          return true;
+      } else {
+          return false;
+      }
+		}
+		if (waitingGuilder > 0) {
+      if (confirm("스터디 탈퇴 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 탈퇴하시겠습니까?")) {
+          return true;
+      } else {
+          return false;
+      }
+    } else {
+      if (confirm("정말 탈퇴하시겠습니까?")) {
+          return true;
+      } else {
+          return false;
+      }
+    }
+  }
 </script>
 
 <br>
@@ -219,13 +248,10 @@ a:hover {
 						href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'
 						class="btn btn-outline-dark" formaction="updateform">수정</a>
 					<c:if test="${!(study.countMember > '1')}">
-						<a
-							href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}'
-							class="btn btn-outline-dark" onclick="delBtn_click(${study.waitingCountMember}); return false;">삭제</a>
+					  <button type="button" class="btn btn-outline-dark" onclick="delBtn_click(${study.waitingCountMember}); return delete(${study.studyNo});">삭제</button>
 					</c:if>
 				</c:if>
-				<a href='${contextPath}/app/mystudy/exit?studyno=${study.studyNo}'
-					class="btn btn-outline-dark" onclick="exitBtn_click(${study.waitingCountMember}); return false;">탈퇴</a>
+				<button type="button" class="btn btn-outline-dark" onclick="exitBtn_click(${study.CountMember}, ${study.waitingCountMember}); return exit(${study.studyNo});">탈퇴</button>
 				<button type="submit" class="btn btn-outline-dark" value="구성원">
 					<a
 						href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>구성원</a>
@@ -246,5 +272,6 @@ a:hover {
 				<jsp:include page="todo/ToDoPopup.jsp" />
 			</c:otherwise>
 		</c:choose>
-
 	</div>
+
+</div>
