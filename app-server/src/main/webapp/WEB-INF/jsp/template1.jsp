@@ -4,6 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
+<style>
+	.inner-page {
+	  height: 800px;
+	}
+</style>
+
 <head>
 <c:if test="${not empty refresh}">
   <meta http-equiv="Refresh" content="${refresh}">   
@@ -48,7 +55,7 @@
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <section class="inner-page pt-4" style="height: 800px;">
+    <section class="inner-page pt-4">
       <div class="container">
         <p>
           <jsp:include page="${contentUrl}"/>
