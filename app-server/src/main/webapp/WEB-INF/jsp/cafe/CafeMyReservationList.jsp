@@ -3,25 +3,25 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-  <style>
-  * {
-    font-size: 13px;
-  }
-  .page-link {
-    color: black;
-  }
-  .all-content {
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px 0;
-  }
-  </style>
-</head>
+
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<style>
+* {
+  font-size: 13px;
+}
+.page-link {
+  color: black;
+}
+.all-content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+.dropdown a > span {
+  font-size: 14px;
+}
+</style>
+
 <body>
 
 <div class="all-content">

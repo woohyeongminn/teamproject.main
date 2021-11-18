@@ -107,7 +107,7 @@
   .studyInfo {
     background-color: rgb(239 230 225);
     height: 200px;
-    width: 97%;
+    width: 96%;
     margin: 0 auto;
     border-radius: 20px;
     margin-bottom: 30px;
@@ -199,140 +199,133 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row studyInfo">
-                <div class="col-6" style="padding: 25px; font-size: 14px;">
-                  
-                  <span class="font-weight-bold" style="font-size: 16px;">
-                  ${study.studyTitle} &nbsp; ⭐${study.countBookMember}
-                  </span>
-                  <br>
-                  <br>
-                  <c:choose>
-                      <c:when test="${study.countMember < study.numberOfPeple}">
-                      [모집 중]
-                      </c:when>
-                      <c:otherwise>
-                      [모집 완료]
-                      </c:otherwise>
-                    </c:choose>
-                    <br>
-                    <span class="location font-weight-normal">소개 | </span>
-                    <span class="font-weight-normal mb-0">${study.introduction}</span>
-                    <br>
-                    
-                    <span class="location font-weight-normal">조장 | </span>
-                    <span>${study.owner.perNickname}</span>
-                    <br>
-                    
-                    <span class="location font-weight-normal">분야 | </span>
-                    <span>${study.subjectName}</span>
-                    <br>
-                    
-                    <span class="location font-weight-normal">지역 | </span>
-                    <span>${study.area}</span>
-                    <br>
-                    
-                    <%-- <span class="location font-weight-normal">북마크</span>
-                    <span>${study.countBookMember}</span> --%>
-                    
-                    <span class="location font-weight-normal">대면상태 | </span>
-                    <span>${study.faceName}</span>
-                    <br>
-                </div>
+            <div class="col-6" style="padding: 25px; font-size: 14px;">
+              
+              <span class="font-weight-bold" style="font-size: 16px;">
+              ${study.studyTitle} &nbsp; ⭐${study.countBookMember}
+              </span>
+              <br>
+              <br>
+              <c:choose>
+                  <c:when test="${study.countMember < study.numberOfPeple}">
+                  [모집 중]
+                  </c:when>
+                  <c:otherwise>
+                  [모집 완료]
+                  </c:otherwise>
+                </c:choose>
+                <br>
+                <span class="location font-weight-normal">소개 | </span>
+                <span class="font-weight-normal mb-0">${study.introduction}</span>
+                <br>
                 
+                <span class="location font-weight-normal">조장 | </span>
+                <span>${study.owner.perNickname}</span>
+                <br>
                 
+                <span class="location font-weight-normal">분야 | </span>
+                <span>${study.subjectName}</span>
+                <br>
                 
-                <div class="col-6" style="padding: 25px; font-size: 14px;">
-                <c:if test='${study.owner.perNo == loginUser.perNo}'>
-					        <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark">수정</a>
-					        <c:if test="${!(study.countMember > '1')}">
-					          <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}' class="btn btn-outline-dark">삭제</a>
-					        </c:if>
-					      </c:if>
-                </div>
+                <span class="location font-weight-normal">지역 | </span>
+                <span>${study.area}</span>
+                <br>
                 
+                <%-- <span class="location font-weight-normal">북마크</span>
+                <span>${study.countBookMember}</span> --%>
                 
+                <span class="location font-weight-normal">대면상태 | </span>
+                <span>${study.faceName}</span>
+                <br>
+            </div>
+            
+            <div class="col-6" style="padding: 25px; font-size: 14px;">
+             <c:if test='${study.owner.perNo == loginUser.perNo}'>
+			        <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark">수정</a>
+	                
+			        <c:if test="${!(study.countMember > '1')}">
+			          <button type="button" class="btn btn-outline-dark" onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
+			        </c:if>
+			      </c:if>
+			      
+			      <button type="button" class="btn btn-outline-dark"
+	             onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">탈퇴</button>
+            </div>
           </div>
+          
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
-                    
-                    
-                    
-                    <%-- <jsp:include page="todo/ToDoPopup.jsp"/> --%>
-                    
-                    
-                    <!-- 여기 -->
-                    <div class="col-md-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">To Do Lists</h4>
-                  <div class="list-wrapper pt-2">
-                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                      <li>
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox">
-                            Meeting with Urban Team
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li class="completed">
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox" checked>
-                            Duplicate a project for new customer
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li>
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox">
-                            Project meeting with CEO
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li class="completed">
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox" checked>
-                            Follow up of team zilla
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li>
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox">
-                            Level up for Antony
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="add-items d-flex mb-0 mt-2">
-                    <input type="text" class="form-control todo-list-input"  placeholder="Add new task">
-                    <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-                  </div>
-                </div>
-              </div>
-                    
-                    
-                    
+              <%-- <jsp:include page="todo/ToDoPopup.jsp"/> --%>
+               <!-- 여기 -->
+               <div class="col-md-6 grid-margin stretch-card">
+	              <div class="card">
+	                <div class="card-body">
+	                  <h4 class="card-title">To Do Lists</h4>
+	                  <div class="list-wrapper pt-2">
+	                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+	                      <li>
+	                        <div class="form-check form-check-flat">
+	                          <label class="form-check-label">
+	                            <input class="checkbox" type="checkbox">
+	                            Meeting with Urban Team
+	                          </label>
+	                        </div>
+	                        <i class="remove ti-close"></i>
+	                      </li>
+	                      <li class="completed">
+	                        <div class="form-check form-check-flat">
+	                          <label class="form-check-label">
+	                            <input class="checkbox" type="checkbox" checked>
+	                            Duplicate a project for new customer
+	                          </label>
+	                        </div>
+	                        <i class="remove ti-close"></i>
+	                      </li>
+	                      <li>
+	                        <div class="form-check form-check-flat">
+	                          <label class="form-check-label">
+	                            <input class="checkbox" type="checkbox">
+	                            Project meeting with CEO
+	                          </label>
+	                        </div>
+	                        <i class="remove ti-close"></i>
+	                      </li>
+	                      <li class="completed">
+	                        <div class="form-check form-check-flat">
+	                          <label class="form-check-label">
+	                            <input class="checkbox" type="checkbox" checked>
+	                            Follow up of team zilla
+	                          </label>
+	                        </div>
+	                        <i class="remove ti-close"></i>
+	                      </li>
+	                      <li>
+	                        <div class="form-check form-check-flat">
+	                          <label class="form-check-label">
+	                            <input class="checkbox" type="checkbox">
+	                            Level up for Antony
+	                          </label>
+	                        </div>
+	                        <i class="remove ti-close"></i>
+	                      </li>
+	                    </ul>
+	                  </div>
+	                  <div class="add-items d-flex mb-0 mt-2">
+	                    <input type="text" class="form-control todo-list-input"  placeholder="Add new task">
+	                    <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+	                  </div>
+	                </div>
+	              </div>
             </div>
             <div class="col-md-6 grid-margin transparent">
               <div class="row">
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card" style="background-color: #fbb172">
-                    <a href="'${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}' style="text-decoration: none;">
+                    <a href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}' style="text-decoration: none;">
                       <div class="card-body" style="color: white;">
                         <p class="mb-4">구성원</p>
                         <p class="fs-30 mb-2">Guilder</p>
-                        <p>Member 3/10</p>
+                        <p>Member ${study.countMember}/${study.numberOfPeple}</p>
                       </div>
                     </a>
                   </div>
@@ -364,7 +357,7 @@
                 </div>
                 <div class="col-md-6 stretch-card transparent">
                   <div class="card" style="background-color: #49a3f1">
-                    <a href="#화상미팅" style="text-decoration: none;">
+                    <a href="'${contextPath}/app/mystudy/test?studyno=${study.studyNo}' style="text-decoration: none;">
                       <div class="card-body" style="color: white;">
                         <p class="mb-4">화상미팅</p>
                         <p class="fs-30 mb-2">Meet</p>
@@ -389,6 +382,56 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+
+
+
+
+
+
+  <script>
+  <!-- 내 스터디 삭제 -->
+  function delBtn_click(waitingGuilder) {
+    if (waitingGuilder > 0) {
+      if (confirm("스터디 삭제 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 삭제하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/delete?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+
+    } else {
+      if (confirm("정말 삭제하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/delete?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+    }
+  }
+  
+  <!-- 내 스터디 탈퇴 -->
+  function exitBtn_click(studyno, countMember, waitingGuilder) {
+    if (countMember > 1) {
+      if (confirm("구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.") == true) {
+        location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+
+    } else if (waitingGuilder > 0) {
+      if (confirm("스터디 탈퇴 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 탈퇴하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+
+    } else {
+      if (confirm("정말 탈퇴하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+    }
+  }
+  </script>
 
   <!-- plugins:js -->
   <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>

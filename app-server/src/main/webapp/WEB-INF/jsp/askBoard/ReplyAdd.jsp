@@ -6,7 +6,12 @@
   * {
   font-size: 14px;
   }
-  
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }   
   label {
     margin-right: 5px;
     text-align: center;
@@ -21,11 +26,11 @@
   color: black;
   }  
   </style>
-</head>
-<body>
+<div class="all-content">
   <p>답변이 등록되었습니다.</p>
    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <button class = "btn btn-outline-dark" type="submit" value="등록" formaction="peradd">
      <a href="../admin/askboard/list">문의글 목록</a>
      </button>
    </div> 
+</div>   

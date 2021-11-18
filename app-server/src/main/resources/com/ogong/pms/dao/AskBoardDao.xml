@@ -67,16 +67,23 @@
       ab.ask_board_no asc
   </select>
   
-  <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
+    <select id="findAlll" resultMap="AskBoardMap" parameterType="map">
   <include refid="select1"/>
       abr.reply_dt r_dt
   <include refid="from1"/>
-  where
-     m.member_no=#{perMemberNo}
      order by
-      ab.ask_board_no asc
+     ab.ask_board_no desc
+     limit #{offset}, #{length}
   </select>
   
+  <select id="countAll" resultType="int">
+  <include refid="select1"/>
+      count(*)
+   <include refid="from1"/>
+  </select>   
+  
+
+ 
   <select id="findCeoMyAll" resultMap="AskBoardMap" parameterType="int">
   <include refid="select1"/>
       abr.reply_dt r_dt

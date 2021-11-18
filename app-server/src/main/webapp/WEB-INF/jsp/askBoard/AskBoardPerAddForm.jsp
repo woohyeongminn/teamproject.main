@@ -6,7 +6,12 @@
   * {
   font-size: 14px;
   }
-  
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }   
   label {
     margin-right: 5px;
     text-align: center;
@@ -20,7 +25,8 @@
   a {
   color: black;
   }  
-  </style>
+</style>
+<div class="all-content">
 <br>
   <form id="all" action="peradd" method="post">
     <label for='f-status'>공개</label>
@@ -47,7 +53,7 @@
      <a href="permylist" type="button" class="btn btn-outline-dark" >❌취소하기</a>
    </div> 
   </form>
-
+</div>
 <script>
 var fStatus = document.querySelector("#f-status");
 var passwordRow = document.querySelector("#passwordRow");
