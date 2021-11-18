@@ -117,16 +117,10 @@ ul {
     <form action='add' method='post' enctype="multipart/form-data">
     <div class="cafe-wrap">
 		  <div class = "cafe-top">
-		  
 		    <!-- 여러개 등록 -->
-		      <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
-		        <!-- <input id="input-file" type="file" multiple="multiple" style='display:none' name='filename[]'/> -->
-	          <div class="cafeImg">	        
-		        </div>
-		        <input id="input-file" type="file" multiple="multiple" style='display:none' name='photoFile'/>
-		        <label id="input-file-button" for="input-file">파일 첨부</label>
-		      <!-- </form> -->
-		  </div>
+      <div class="cafeImg"></div>
+     <!-- <input type="file" multiple="multiple" name="photoFile"> -->
+    </div>
 	  
 		  <!-- 카페 상세 글 부분 -->      
 		  <div class="cafe-bottom">

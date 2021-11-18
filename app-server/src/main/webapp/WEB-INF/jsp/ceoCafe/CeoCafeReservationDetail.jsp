@@ -34,7 +34,6 @@ margin-top: 50px;
 text-align: center;
     display: inline-block;
     width: 135px;
-    background-color: aquamarine;
 }
 
 label {
@@ -71,7 +70,7 @@ text-align: left;
     <label>스터디룸</label>
     <span>${cafeReser.roomName}</span><br>
     
-    <label>예약자 이름</label>
+    <label>예약자</label>
     <span>${memberNick}</span><br>
     
     <label>예약일</label>
