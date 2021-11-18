@@ -6,6 +6,12 @@
   * {
   font-size: 14px;
   }
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }   
   label {
     margin-right: 5px;
     text-align: center;
@@ -20,7 +26,7 @@
   color: black;
   }  
 </style>
-</head>
+<div class="all-content">
 <body>
   <form id="all" action="ceoupdate" method="post">
     <span>(${ceoAskBoard.askNo})</span><br>
@@ -40,7 +46,8 @@
     <a type="button"  class ="btn btn-outline-dark" href="ceomylist">취소하기</a>
     </div>
   </form>
-  
+</body>
+</div>  
   <script>  
   document.querySelector("#all").onsubmit = () => {
   if (document.querySelector("#title").value == "") {

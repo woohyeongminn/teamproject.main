@@ -6,7 +6,12 @@
   * {
   font-size: 14px;
   }
-  
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }  
   label {
     margin-right: 5px;
     text-align: center;
@@ -21,8 +26,8 @@
   color: black;
   }
 </style>
-
 <fieldset>
+<div class="all-content">
 <br>
 <c:choose>
   <c:when test="${not empty loginUser}">
@@ -114,7 +119,6 @@
        </c:forEach>
     </tbody>
   </table>
-</fieldset>
 <c:if test="${empty askBoardList}">
  <div style="text-align: center"> 
   <b style="font-size:14; text-align: center">❕❔ 등록된 게시글이 없습니다.</b>
@@ -133,13 +137,9 @@
 	     <a href='ceoaddform' type="button" class = "btn btn-outline-dark">✔등록하기</a>
 		</div>
 	</c:when>
-	
-	<c:when test="${empty loginUser && empty loginCeoUser}">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a id="notlogin" type="button" class = "btn btn-outline-dark" onclick="logout();">✔등록하기</a>
-    </div>	
-	</c:when>
 </c:choose>
+</div>
+</fieldset>
 
 
 <script>

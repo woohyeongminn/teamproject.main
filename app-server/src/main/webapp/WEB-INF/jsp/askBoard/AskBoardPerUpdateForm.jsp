@@ -6,6 +6,12 @@
   * {
   font-size: 14px;
   }
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }  
   label {
     margin-right: 5px;
     text-align: center;
@@ -20,8 +26,7 @@
   color: black;
   }  
 </style>
-</head>
-<body>
+<div class="all-content">
 <br>
   <form id="all" action="perupdate" method="post">
     <span>(${perAskBoard.askNo})</span><br>
@@ -41,7 +46,7 @@
     <a type="button"  class ="btn btn-outline-dark" href="permylist">취소하기</a>
     </div>
   </form>
-  
+</div>  
 <script>  
   document.querySelector("#all").onsubmit = () => {
   if (document.querySelector("#title").value == "") {

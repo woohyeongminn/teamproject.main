@@ -6,7 +6,12 @@
   * {
   font-size: 14px;
   }
-  
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }   
   label {
     margin-right: 5px;
     text-align: center;
@@ -21,7 +26,7 @@
   text-align:right;
   }
 </style>
-
+<div class="all-content">
 <div id="mian">
   <br>
   <b>제목</b>
@@ -69,8 +74,6 @@
   <c:when test="${not empty loginUser && (loginUser.perNo != askBoard.askMemberWriter.perNo)}">
      <br>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a id="notWriter" type="button" class = "btn btn-outline-dark" onclick="notWriterUpdate(this);">수정하기</a>
-       <a id="notWriter" type="button" class = "btn btn-outline-dark" onclick="notWriterDelete(this);">문의글삭제</a>
        <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
      </div>
   </c:when>  
@@ -92,29 +95,19 @@
   <c:when test="${not empty loginCeoUser && (loginCeoUser.ceoNo != askBoard.askCeoWriter.ceoNo)}">
      <br>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a id="notWriter" type="button" class = "btn btn-outline-dark" onclick="notWriterUpdate(this);">수정하기</a>
-       <a id="notWriter" type="button" class = "btn btn-outline-dark" onclick="notWriterDelete(this);">문의글삭제</a>
        <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
      </div>
   </c:when>
   <c:otherwise>
      <br>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a id="notlogin" type="button" class = "btn btn-outline-dark" onclick="logout(this);">수정하기</a>
-       <a id="notlogin" type="button" class = "btn btn-outline-dark" onclick="logout(this);">문의글삭제</a>
        <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
      </div>
   </c:otherwise>
 </c:choose>
+</div>
 
 <script>
-function notWriterUpdate(obj) {
-	  alert("작성자만 수정할 수 있습니다.")
-	  }
-
-function notWriterDelete(obj) { 
-    alert("작성자만 삭제할 수 있습니다.")
-    }
 function logout(obj) { 
     alert("로그인 해주세요.")
     }
