@@ -82,8 +82,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="${contextPath}/app/index2" target="_blank">
-        <img src="${contextPath}/css/admin/assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-2 font-weight-bold text-white">오늘의 공부 👑</span>
+        <span class="ms-2 font-weight-bold text-white">👑　오늘의 공부</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -120,6 +119,14 @@
               <i class="material-icons opacity-10">business</i>
             </div>
             <span class="nav-link-text ms-1">장소</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " ${contextPath}/app/admin/reviewList">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">article</i>
+            </div>
+            <span class="nav-link-text ms-1">리뷰</span>
           </a>
         </li>
         <li class="nav-item">
@@ -227,7 +234,7 @@
         </div>
         <div class="col-auto my-auto">
           <div class="h-100">
-            <h5 class="mb-1">
+            <h5 class="mb-1" style="color: #4e4847;">
               ${loginAdmin.masterNickname}
             </h5>
             <p class="mb-0 font-weight-normal text-sm">
@@ -268,7 +275,7 @@
               <div class="card-header pb-0 p-3">
                 <div class="row">
                   <div class="col-md-8 d-flex align-items-center">
-                    <h5 class="mb-0">Profile</h5>
+                    <h5 class="mb-0" style="color: #4e4847;">Profile</h5>
                   </div>
                   <div class="col-md-4 text-end">
                     <a href="updateForm">
@@ -280,8 +287,8 @@
               <br>
               <div class="card-body p-3">
                 <ul class="list-group">
-                  <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark" style="font-size: 14px;">Full Name:</strong> &nbsp; <input id='f-profile' type='text' name='nickName' value='${loginAdmin.masterNickname} 👑' readonly></li>
-                  <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark" style="font-size: 14px;">Email:</strong> &nbsp; <input id='f-profile' type='email' name='email' value='${loginAdmin.masterEmail}' readonly> </li>
+                  <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark" style="font-size: 14px; color: #4e4847;">Full Name:</strong> &nbsp; <input id='f-profile' type='text' name='nickName' value='${loginAdmin.masterNickname} 👑' readonly></li>
+                  <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark" style="font-size: 14px; color: #4e4847;">Email:</strong> &nbsp; <input id='f-profile' type='email' name='email' value='${loginAdmin.masterEmail}' readonly> </li>
                   <li class="list-group-item border-0 ps-0 pb-0">
                   </li>
                 </ul>

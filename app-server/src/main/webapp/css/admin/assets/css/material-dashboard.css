@@ -7228,7 +7228,7 @@ textarea.form-control-lg {
   color: #f0f2f5 !important; }
 
 .text-dark {
-  color: #344767 !important; }
+  color: #4e4847 !important; }
 
 .text-white {
   color: #fff !important; }
@@ -15115,14 +15115,14 @@ hr.horizontal {
   .sidenav .navbar-heading {
     transition: all 0.1s ease; }
   .sidenav .navbar-brand {
-    padding: 1.5rem 2rem; }
+    padding: 1.5rem 2rem 0; }
   .sidenav .collapse .nav-item .nav-link.active {
     color: #fff !important; }
     .sidenav .collapse .nav-item .nav-link.active i {
       color: #fff !important; }
 
 .sidenav-header {
-  height: 4.875rem; }
+  height: 3rem; }
 
 .sidenav-footer .card.card-background:after {
   opacity: 0.65; }
@@ -15365,7 +15365,7 @@ hr.horizontal {
       border-radius: 0.875rem; }
   .nav.nav-pills .nav-link {
     z-index: 3;
-    color: #344767;
+    color: #4e4847;
     border-radius: 0.5rem;
     background-color: inherit; }
     .nav.nav-pills .nav-link.active {

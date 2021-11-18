@@ -12,74 +12,92 @@
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <style>
 .inner-page {
-  height: 230vmin;
+	height: 230vmin;
 }
+
 * {
-  margin:0;
-  padding:0;
-  font-size:14px;
-  line-height:1.5;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 1.5;
 }
-ul{
-  list-style:none;
+
+ul {
+	list-style: none;
 }
-.tabmenu{
-  max-width:1000px;
-  margin: 0 auto;
-  position:relative;
-  margin-top: 50px;
+
+.tabmenu {
+	max-width: 1000px;
+	margin: 0 auto;
+	position: relative;
+	margin-top: 50px;
 }
-.tabmenu ul li{
-  display: inline-block;
-  width:33.33%; 
-  float:left;
+
+.tabmenu ul li {
+	display: inline-block;
+	width: 33.33%;
+	float: left;
 }
-.tabmenu ul li a{
-  display:block;
-  line-height:40px;
-  text-decoration:none; 
+
+.tabmenu ul li a {
+	display: block;
+	line-height: 40px;
+	text-decoration: none;
 }
-.tabCon{
-  display:none;
-  padding: 20px 0px;
-  position:absolute; 
-  left:0;
-  top:40px;
-  box-sizing: border-box;
-  width: 1000px;
+
+.tabCon {
+	display: none;
+	padding: 20px 0px;
+	position: absolute;
+	left: 0;
+	top: 40px;
+	box-sizing: border-box;
+	width: 1000px;
 }
-.btnCon:target  {
-  background : rgb(247, 231, 215);
-  xfont-weight: bold;
+
+.btnCon:target {
+	background: rgb(247, 231, 215);
+	xfont-weight: bold;
 }
-.btnCon:target .tabCon{
-  display: block;
+
+.btnCon:target .tabCon {
+	display: block;
 }
+
 .card-body {
 	flex: 1 1 auto;
 	padding: 1rem 1rem;
 	height: 185px;
 }
+
 #search {
-  text-align:center;
+	text-align: center;
 }
+
 #content {
 	max-height: 1350px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
+
 #empty-study {
-  text-align: center;
+	text-align: center;
+}
+
+.mb-3 select {
+	height: 35px;
+	width: 470px;
+	xwidth: 100px;
 }
 </style>
 </head>
-	<!-- <h3><a href="list?perno=${perno}">📖 스터디 목록</a></h3><br> -->
-	<!-- <div class="row" style="background-color: yellow">
+<!-- <h3><a href="list?perno=${perno}">📖 스터디 목록</a></h3><br> -->
+<!-- <div class="row" style="background-color: yellow">
   <div class="col-md-4"><a href='list?perno=${perno}'>전체</a></div>
   <div class="col-md-4"><a href='list/ing?perno=${perno}'>진행</a></div>
   <div class="col-md-4"><a href='list/end?perno=${perno}'>완료</a></div>
   </div> -->
-	<!-- <button>
+<!-- <button>
 		<a href='list?perno=${perno}'>전체</a>
 	</button>
 	<button>
@@ -91,7 +109,7 @@ ul{
 	<br>
 	
 	<!-- [GR] Search Ver.2 -->
-	<!-- <div class="input-group mb-3">
+<!-- <div class="input-group mb-3">
 		<select name="sk">
 			<option value="area">지역</option>
 			<option value="subjectName">분야</option>
@@ -102,69 +120,196 @@ ul{
 		<input type="submit" value="검색" class="btn btn-outline-secondary"
 			id="button-addon2">
 	</div>  -->
-	<body>
-  <div class="tabmenu">
-  <ul>
-  <!-- 전체 스터디 목록 -->
-    <li id="tab1" class="btnCon"><a class="btn first" href="#tab1">전체</a>
-      <div class="tabCon" >
-      <br>
-	<div id="search">
-    <form action="search" method='get'>
-    <select name="where">
-      <option value="1">분야</option>
-      <option value="2">제목</option>
-      <option value="3">지역</option>
-    </select>
-    <input type="text" name="keyword">
-    <button class="btn btn-outline-dark btn-sm">검색</button>
-    </form>
-  </div>
-  <c:if test="${loginUser ne null}">
-	  <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-		  <a href='form' class="btn btn-light">글쓰기</a>
-	  </div>
-  </c:if>
-  <br>
-<c:if test='${not empty studyList}'>
-<div id="content">
-  <div class="row row-cols-1 row-cols-md-2 g-5">
-  <c:forEach items="${studyList}" var="study">
-  <div class="col">
-	<div class="card">
-	  <div class="card-header">
-      <c:choose>
-        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
-          <button type="button" class="btn btn-primary btn-sm">모집중</button>
-        </c:when>
-        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
-          <button type="button" class="btn btn-primary btn-sm">모집중</button>
-        </c:when>
-        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
-          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-        </c:when>
-        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
-          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-        </c:when>
-      </c:choose>
-      ${study.subjectName}
-	  </div>
-	  <div class="card-body">
-	    <h5 class="card-title" style="font-weight: bold">
-        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
-	    </h5>
-	    <p class="card-text">${study.introduction}</p>
-	    ${study.faceName}<br>
-      인원 ${study.countMember}/${study.numberOfPeple}<br>
-      ${study.owner.perNickname}
-      ⭐${study.countBookMember}
-	  </div>
-  </div>
-  </div>
- </c:forEach>
- </div>
- </div>
-  <!-- <div id="content">
+<body>
+	<div class="tabmenu">
+		<ul>
+			<!-- 전체 스터디 목록 -->
+			<li id="tab1" class="btnCon"><a class="btn first" href="#tab1">전체</a>
+				<div class="tabCon">
+					<br>
+					<div id="search">
+						<form action="search" method='get'>
+							<select name="where">
+								<option value="1">분야</option>
+								<option value="2">제목</option>
+								<option value="3">지역</option>
+							</select> <input type="text" name="keyword">
+							<button class="btn btn-outline-dark btn-sm">검색</button>
+						</form>
+					</div>
+
+					<!-- 스터디 등록 -->
+					<c:if test="${loginUser ne null}">
+						<!-- <div id="button"
+							class="d-grid gap-2 d-md-flex justify-content-md-end">
+							<a href='form' class="btn btn-light">글쓰기</a>
+						</div> -->
+
+						<!-- 글쓰기 버튼 -->
+						<button type="button" class="btn btn-light" data-bs-toggle="modal"
+							data-bs-target="#exampleModal" data-bs-whatever="@mdo">글쓰기</button>
+						<div class="modal fade" id="exampleModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+
+									<!-- 상단 헤더 -->
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">스터디 등록</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+
+									<div class="modal-body">
+										<form action='add' method='post'>
+											<!-- 제목 -->
+											<div class="mb-3">
+												<label for='f-studyTitle'>제목</label> <input
+													id='f-studyTitle' type='text' name='studyTitle'
+													class="form-control" required
+													oninvalid="this.setCustomValidity('제목을 입력하세요.')"
+													oninput="this.setCustomValidity('')">
+											</div>
+
+											<!-- 분야 -->
+											<div class="mb-3">
+												<label for='f-subjectNo'>분야</label> <select name="subjectNo">
+													<option value="1" name="subjectNo" selected>어학</option>
+													<option value="2" selected>자격증</option>
+													<option value="3" selected>취업</option>
+													<option value="4" selected>IT</option>
+													<option value="5" selected>예체능</option>
+													<option value="6" selected>기타</option>
+												</select>
+											</div>
+
+											<!-- 지역 -->
+											<div class="mb-3">
+												<label for='f-area'>지역</label> <input id='f-area'
+													type='text' name='area' class="form-control" required
+													oninvalid="this.setCustomValidity('지역을 입력하세요.')"
+													oninput="this.setCustomValidity('')">
+											</div>
+
+											<!-- 최대 인원수 -->
+											<div class="mb-3">
+												<label for='f-numberOfPeple'>최대 인원수</label> <select
+													name="numberOfPeple">
+													<option value="2" name="numberOfPeple" selected>2</option>
+													<option value="3" selected>3</option>
+													<option value="4" selected>4</option>
+													<option value="5" selected>5</option>
+													<option value="6" selected>6</option>
+													<option value="7" selected>7</option>
+													<option value="8" selected>8</option>
+													<option value="9" selected>9</option>
+													<option value="10" selected>10</option>
+													<option value="11" selected>11</option>
+													<option value="12" selected>12</option>
+													<option value="13" selected>13</option>
+													<option value="14" selected>14</option>
+													<option value="15" selected>15</option>
+													<option value="16" selected>16</option>
+													<option value="17" selected>17</option>
+													<option value="18" selected>18</option>
+													<option value="19" selected>19</option>
+													<option value="20" selected>20</option>
+													<option value="21" selected>21</option>
+													<option value="22" selected>22</option>
+													<option value="23" selected>23</option>
+													<option value="24" selected>24</option>
+													<option value="25" selected>25</option>
+													<option value="26" selected>26</option>
+													<option value="27" selected>27</option>
+													<option value="28" selected>28</option>
+													<option value="29" selected>29</option>
+													<option value="30" selected>30</option>
+												</select>
+											</div>
+
+											<!-- 대면 상태 -->
+											<div class="mb-3">
+												<label for='f-faceNo'>대면 상태</label> <select name="faceNo">
+													<option value="1" name="faceNo" selected>대면</option>
+													<option value="2" selected>비대면</option>
+													<option value="3" selected>대면/비대면</option>
+												</select>
+											</div>
+
+											<!-- 소개글 -->
+											<div class="mb-3">
+												<label for='f-introduction'>소개글</label>
+												<textarea id='f-introduction' type='text'
+													name='introduction' class="form-control" rows="3" required
+													oninvalid="this.setCustomValidity('소개글을 입력하세요.')"
+													oninput="this.setCustomValidity('')"></textarea>
+											</div>
+
+											<!-- 진행 상태 -->
+											<div class="mb-3">
+												<label for='f-studyStatus'>진행 상태</label> <select
+													name="studyStatus">
+													<option value="1" name="studyStatus" selected>진행</option>
+													<option value="2" disabled>종료</option>
+												</select>
+											</div>
+
+											<!-- 하단 버튼 -->
+											<div class="modal-footer">
+												<button type="button" class="btn btn-light"
+													data-bs-dismiss="modal">취소</button>
+												<button class="btn btn-dark">등록</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:if>
+					<br>
+
+					<c:if test='${not empty studyList}'>
+						<div id="content">
+							<div class="row row-cols-1 row-cols-md-2 g-5">
+								<c:forEach items="${studyList}" var="study">
+									<div class="col">
+										<div class="card">
+											<div class="card-header">
+												<c:choose>
+													<c:when
+														test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+														<button type="button" class="btn btn-primary btn-sm">모집중</button>
+													</c:when>
+													<c:when
+														test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+														<button type="button" class="btn btn-primary btn-sm">모집중</button>
+													</c:when>
+													<c:when
+														test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+														<button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+													</c:when>
+													<c:when
+														test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+														<button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+													</c:when>
+												</c:choose>
+												${study.subjectName}
+											</div>
+											<div class="card-body">
+												<h5 class="card-title" style="font-weight: bold">
+													<a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+												</h5>
+												<p class="card-text">${study.introduction}</p>
+												${study.faceName}<br> 인원
+												${study.countMember}/${study.numberOfPeple}<br>
+												${study.owner.perNickname} ⭐${study.countBookMember}
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+						<!-- <div id="content">
     <div class="row row-cols-1 row-cols-md-2 g-4">
     <c:forEach items="${studyList}" var="study">
       <div class="col">
@@ -185,158 +330,164 @@ ul{
     </c:forEach>
     </div>
   </div> -->
-</c:if>
-<div id="empty-study">
-<c:if test='${empty studyList}'>
-   검색 결과가 존재하지 않습니다.<br><br>
-</c:if>
-</div>
-</div>
-</li>
+					</c:if>
+					<div id="empty-study">
+						<c:if test='${empty studyList}'>
+   검색 결과가 존재하지 않습니다.<br>
+							<br>
+						</c:if>
+					</div>
+				</div></li>
 
-<!-- 진행 스터디 목록 -->
-<li id="tab2" class="btnCon"><a class="btn" href="#tab2">진행</a>
-      <div class="tabCon" >
-      <br>
-  <div id="search">
-    <form action="search" method='get'>
-    <select name="where">
-      <option value="1">분야</option>
-      <option value="2">제목</option>
-      <option value="3">지역</option>
-    </select>
-    <input type="text" name="keyword">
-    <button class="btn btn-outline-dark btn-sm">검색</button>
-    </form>
-  </div>
-  <c:if test="${loginUser ne null}">
-    <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href='form' class="btn btn-light">글쓰기</a>
-    </div>
-  </c:if>
-  <br>
-<c:if test='${not empty studyIngList}'>
-<div id="content">
-  <div class="row row-cols-1 row-cols-md-2 g-5">
-  <c:forEach items="${studyIngList}" var="study">
-  <div class="col">
-  <div class="card">
-    <div class="card-header">
-      <c:choose>
-        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
-          <button type="button" class="btn btn-primary btn-sm">모집중</button>
-        </c:when>
-        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
-          <button type="button" class="btn btn-primary btn-sm">모집중</button>
-        </c:when>
-        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
-          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-        </c:when>
-        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
-          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-        </c:when>
-      </c:choose>
-      ${study.subjectName}
-    </div>
-    <div class="card-body">
-      <h5 class="card-title" style="font-weight: bold">
-        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
-      </h5>
-      <p class="card-text">${study.introduction}</p>
-      ${study.faceName}<br>
-      인원 ${study.countMember}/${study.numberOfPeple}<br>
-      ${study.owner.perNickname}
-      ⭐${study.countBookMember}
-    </div>
-  </div>
-  </div>
- </c:forEach>
- </div>
- </div>
-</c:if>
-<div id="empty-study">
-<c:if test='${empty studyIngList}'>
-   검색 결과가 존재하지 않습니다.<br><br>
-</c:if>
-</div>
-</div>
-</li>
+			<!-- 진행 스터디 목록 -->
+			<li id="tab2" class="btnCon"><a class="btn" href="#tab2">진행</a>
+				<div class="tabCon">
+					<br>
+					<div id="search">
+						<form action="search" method='get'>
+							<select name="where">
+								<option value="1">분야</option>
+								<option value="2">제목</option>
+								<option value="3">지역</option>
+							</select> <input type="text" name="keyword">
+							<button class="btn btn-outline-dark btn-sm">검색</button>
+						</form>
+					</div>
+					<c:if test="${loginUser ne null}">
+						<div id="button"
+							class="d-grid gap-2 d-md-flex justify-content-md-end">
+							<a href='form' class="btn btn-light">글쓰기</a>
+						</div>
+					</c:if>
+					<br>
+					<c:if test='${not empty studyIngList}'>
+						<div id="content">
+							<div class="row row-cols-1 row-cols-md-2 g-5">
+								<c:forEach items="${studyIngList}" var="study">
+									<div class="col">
+										<div class="card">
+											<div class="card-header">
+												<c:choose>
+													<c:when
+														test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+														<button type="button" class="btn btn-primary btn-sm">모집중</button>
+													</c:when>
+													<c:when
+														test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+														<button type="button" class="btn btn-primary btn-sm">모집중</button>
+													</c:when>
+													<c:when
+														test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+														<button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+													</c:when>
+													<c:when
+														test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+														<button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+													</c:when>
+												</c:choose>
+												${study.subjectName}
+											</div>
+											<div class="card-body">
+												<h5 class="card-title" style="font-weight: bold">
+													<a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+												</h5>
+												<p class="card-text">${study.introduction}</p>
+												${study.faceName}<br> 인원
+												${study.countMember}/${study.numberOfPeple}<br>
+												${study.owner.perNickname} ⭐${study.countBookMember}
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</c:if>
+					<div id="empty-study">
+						<c:if test='${empty studyIngList}'>
+   검색 결과가 존재하지 않습니다.<br>
+							<br>
+						</c:if>
+					</div>
+				</div></li>
 
-<!-- 종료 스터디 목록 -->
-<li id="tab3" class="btnCon"><a class="btn" href="#tab3">종료</a>
-      <div class="tabCon" >
-      <br>
-  <div id="search">
-    <form action="search" method='get'>
-    <select name="where">
-      <option value="1">분야</option>
-      <option value="2">제목</option>
-      <option value="3">지역</option>
-    </select>
-    <input type="text" name="keyword">
-    <button class="btn btn-outline-dark btn-sm">검색</button>
-    </form>
-  </div>
-  <c:if test="${loginUser ne null}">
-    <div id="button" class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href='form' class="btn btn-light">글쓰기</a>
-    </div>
-  </c:if>
-  <br>
-<c:if test='${not empty studyEndList}'>
-  <div id="content">
-  <div class="row row-cols-1 row-cols-md-2 g-5">
-  <c:forEach items="${studyEndList}" var="study">
-  <div class="col">
-  <div class="card">
-    <div class="card-header">
-      <c:choose>
-        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
-          <button type="button" class="btn btn-primary btn-sm">모집중</button>
-        </c:when>
-        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
-          <button type="button" class="btn btn-primary btn-sm">모집중</button>
-        </c:when>
-        <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
-          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-        </c:when>
-        <c:when test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
-          <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
-        </c:when>
-      </c:choose>
-      ${study.subjectName}
-    </div>
-    <div class="card-body">
-      <h5 class="card-title" style="font-weight: bold">
-        <a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
-      </h5>
-      <p class="card-text">${study.introduction}</p>
-      ${study.faceName}<br>
-      인원 ${study.countMember}/${study.numberOfPeple}<br>
-      ${study.owner.perNickname}
-      ⭐${study.countBookMember}
-    </div>
-  </div>
-  </div>
- </c:forEach>
- </div>
- </div>
-</c:if>
-<div id="empty-study">
-<c:if test='${empty studyEndList}'>
-   검색 결과가 존재하지 않습니다.<br><br>
-</c:if>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<script>
-location.href = "#tab1";
-</script>
+			<!-- 종료 스터디 목록 -->
+			<li id="tab3" class="btnCon"><a class="btn" href="#tab3">종료</a>
+				<div class="tabCon">
+					<br>
+					<div id="search">
+						<form action="search" method='get'>
+							<select name="where">
+								<option value="1">분야</option>
+								<option value="2">제목</option>
+								<option value="3">지역</option>
+							</select> <input type="text" name="keyword">
+							<button class="btn btn-outline-dark btn-sm">검색</button>
+						</form>
+					</div>
+					<c:if test="${loginUser ne null}">
+						<div id="button"
+							class="d-grid gap-2 d-md-flex justify-content-md-end">
+							<a href='form' class="btn btn-light">글쓰기</a>
+						</div>
+					</c:if>
+					<br>
+					<c:if test='${not empty studyEndList}'>
+						<div id="content">
+							<div class="row row-cols-1 row-cols-md-2 g-5">
+								<c:forEach items="${studyEndList}" var="study">
+									<div class="col">
+										<div class="card">
+											<div class="card-header">
+												<c:choose>
+													<c:when
+														test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
+														<button type="button" class="btn btn-primary btn-sm">모집중</button>
+													</c:when>
+													<c:when
+														test="${study.countMember eq study.numberOfPeple && study.studyStatus ne '2'}">
+														<button type="button" class="btn btn-primary btn-sm">모집중</button>
+													</c:when>
+													<c:when
+														test="${study.countMember ne study.numberOfPeple && study.studyStatus eq '2'}">
+														<button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+													</c:when>
+													<c:when
+														test="${study.countMember eq study.numberOfPeple && study.studyStatus eq '2'}">
+														<button type="button" class="btn btn-secondary btn-sm">모집완료</button>
+													</c:when>
+												</c:choose>
+												${study.subjectName}
+											</div>
+											<div class="card-body">
+												<h5 class="card-title" style="font-weight: bold">
+													<a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
+												</h5>
+												<p class="card-text">${study.introduction}</p>
+												${study.faceName}<br> 인원
+												${study.countMember}/${study.numberOfPeple}<br>
+												${study.owner.perNickname} ⭐${study.countBookMember}
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</c:if>
+					<div id="empty-study">
+						<c:if test='${empty studyEndList}'>
+   검색 결과가 존재하지 않습니다.<br>
+							<br>
+						</c:if>
+					</div>
+				</div></li>
+		</ul>
+	</div>
+	<script>
+		location.href = "#tab1";
+	</script>
 </body>
 </html>
-	<!-- <table class="table table-hover">
+<!-- <table class="table table-hover">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -350,8 +501,8 @@ location.href = "#tab1";
 				<th>최대 인원수</th>
 			</tr>
 			</thead> -->
-			<!-- [GR] Search Ver.2 -->
-			<!-- request.setCharacterEncoding("utf-8");
+<!-- [GR] Search Ver.2 -->
+<!-- request.setCharacterEncoding("utf-8");
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -406,8 +557,8 @@ location.href = "#tab1";
 			}
 			} -->
 
-			<!-- [GR] Search Ver.3 -->
-			<!-- @ include file="/study/StudySearch.jsp"%>
+<!-- [GR] Search Ver.3 -->
+<!-- @ include file="/study/StudySearch.jsp"%>
 			
 			request.setCharacterEncoding("utf-8");
 			String sk = request.getParameter("sk");
@@ -445,7 +596,7 @@ location.href = "#tab1";
 
 			while (rs.next()) {
 			%> -->
-		<!-- <tbody>
+<!-- <tbody>
 			<c:forEach items="${studyList}" var="study">
 				<tr>
 					<td>${study.studyNo}</td>
@@ -460,9 +611,9 @@ location.href = "#tab1";
 				</tr>
 			</c:forEach>
 		</tbody> -->
-		<!-- }
+<!-- }
 		rs.close();
 		pstmt.close();
 		conn.close();
 		%>  -->
-	<!-- </table> -->
+<!-- </table> -->
