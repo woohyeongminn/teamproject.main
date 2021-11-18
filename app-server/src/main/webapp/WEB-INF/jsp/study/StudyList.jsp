@@ -12,7 +12,7 @@
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <style>
 .inner-page {
-  height: 250vmin;
+  height: 300vmin;
 }
 * {
   margin:0;
