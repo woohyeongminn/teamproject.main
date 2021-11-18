@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* <!-- ======= 기존 css ======= --> */
+
 /* 에러 */
 #error-content {
 }
@@ -184,35 +186,39 @@ header a {
 }
 
 /* content */
-.template-wrap {
+.top-template-wrap {
 	width: 100%;
 }
-
-.template-wrap .template-content {
-	width: 1200px;
-	margin: 0 auto;
-	background-color: white;
-}
-
-.template-wrap .template-top {
+.top-template-wrap .template-top {
   width: 1200px;
   margin: 0 auto;
   padding: 20px 0 20px 0;
-  font-weight: bold;
-  background-color: rgb(247, 231, 215);
+  background-color: #f7ece5;
   text-align: center;
   font-size: 14px;
+  font-weight: bold;
+}
+
+.template-wrap {
+  width: 100%;
+}
+
+.template-wrap .template-content {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: white;
 }
 
 /*footer 시작*/
-footer {
-	width: 100%;
-	background-color: whitesmoke;
+#ogong-footer {
+  position:fixed;
+  width:100%;
+  background-color:#f6f2f1;
+  margin-top: 1000px;
 }
 
 .footer_background {
-  background-color: whitesmoke;
-  position: inherit;
+  background-color: #f6f2f1;
   z-index:-99;
   width: 1200px;
   height:200px;

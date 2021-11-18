@@ -33,7 +33,7 @@ public class CafeController {
     mv.addObject("cafeRoomList", cafeRoomList);
     mv.addObject("pageTitle", "스터디 장소 검색");
     mv.addObject("contentUrl", "cafe/CafeList.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template3");
 
     return mv;
   }
@@ -56,7 +56,7 @@ public class CafeController {
     mv.addObject("cafeRoomList", cafeRoomList);
     mv.addObject("pageTitle", "스터디 장소 검색");
     mv.addObject("contentUrl", "cafe/CafeList.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("template3");
 
     return mv;
   }

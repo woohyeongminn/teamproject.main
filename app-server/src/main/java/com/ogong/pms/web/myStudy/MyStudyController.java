@@ -217,6 +217,16 @@ public class MyStudyController {
   public ModelAndView mystudyList2(HttpSession session) throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
+
+    ModelAndView mv = new ModelAndView();
+
+    if (loginUser == null) {
+      mv.addObject("pageTitle", "로그인 선택");
+      mv.addObject("contentUrl", "login.jsp");
+      mv.setViewName("template1");
+      return mv;
+    }
+
     List<Study> studyList = studyDao.findAll();
 
     List<Study> myStudyList = studyDao.findAllMyStudyByMyNo(loginUser.getPerNo());
@@ -266,14 +276,13 @@ public class MyStudyController {
 
     System.out.println(myStudyList);
 
-    ModelAndView mv = new ModelAndView();
-
     mv.addObject("ownerStudyList", ownerStudyList);
     mv.addObject("guilderMembers", guilderMembers);
     mv.addObject("waitingStudyList", waitingStudyList);
     mv.addObject("myStudyList", myStudyList);
     mv.addObject("pageTitle", "🗃 내 스터디 목록");
-    mv.setViewName("myStudy/MyStudyList2");
+    mv.addObject("contentUrl", "myStudy/MyStudyList2.jsp");
+    mv.setViewName("template1");
 
     return mv;
   }
