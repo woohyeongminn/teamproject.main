@@ -21,7 +21,7 @@ public class AdminController {
   public ModelAndView detail() {
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "🙂 마이페이지");
+    mv.addObject("pageTitle", "👑 관리자");
     mv.addObject("contentUrl", "admin/AdminDetail.jsp");
     mv.setViewName("template1");
     return mv;
@@ -31,7 +31,7 @@ public class AdminController {
   public ModelAndView updateForm() {
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "🙂 마이페이지");
+    mv.addObject("pageTitle", "👑 관리자");
     mv.addObject("contentUrl", "admin/AdminUpdateForm.jsp");
     mv.setViewName("template1");
     return mv;

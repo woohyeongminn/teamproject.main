@@ -39,7 +39,7 @@ public class AdminPerMemberController {
     }
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "📖 개인 회원 상세");
+    mv.addObject("pageTitle", "📖 개인 회원");
     mv.addObject("perMember", perMember);
     mv.addObject("contentUrl", "admin/AdminPerMemberDetail.jsp");
     mv.setViewName("template1");
