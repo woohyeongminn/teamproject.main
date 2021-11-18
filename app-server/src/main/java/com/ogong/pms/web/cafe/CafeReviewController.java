@@ -49,7 +49,8 @@ public class CafeReviewController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("reviewList", reviewList);
-    mv.addObject("pageTitle", "📝 리뷰 내역");
+    mv.addObject("count", reviewList.size());
+    mv.addObject("pageTitle", "✒ 리뷰 내역");
     mv.addObject("contentUrl", "cafe/CafeReviewList.jsp");
     mv.setViewName("template1");
 
