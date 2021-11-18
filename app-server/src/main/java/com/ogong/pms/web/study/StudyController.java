@@ -22,6 +22,7 @@ public class StudyController {
   @Autowired
   StudyDao studyDao;
 
+  /* 스터디 등록 폼 */
   @GetMapping("/study/form")
   public ModelAndView form() {
     ModelAndView mv = new ModelAndView();
@@ -33,6 +34,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 등록 */
   @PostMapping("/study/add")
   public ModelAndView add(Study study, HttpSession session) throws Exception {
     study.setOwner((Member) session.getAttribute("loginUser"));
@@ -59,6 +61,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 목록 */
   @GetMapping("/study/list")
   public ModelAndView list() throws Exception {
     // 전체 스터디 목록
@@ -82,6 +85,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 상세 */
   @GetMapping("/study/detail")
   public ModelAndView detail(int studyno, HttpSession session) throws Exception {
     Study study = studyDao.findByNo(studyno);
@@ -124,6 +128,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 수정 폼 */
   @GetMapping("/study/updateform")
   public ModelAndView updateform(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
@@ -138,6 +143,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 수정 */
   @PostMapping("/study/update")
   public ModelAndView update(Study study) throws Exception {
     Study oldStudy = studyDao.findByNo(study.getStudyNo());
@@ -160,6 +166,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 삭제 */
   @GetMapping("/study/delete")
   public ModelAndView delete(int studyno) throws Exception {
     Study study = studyDao.findByNo(studyno);
@@ -175,6 +182,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 참여 */
   @GetMapping("/study/join")
   public ModelAndView join(int studyno, HttpSession session) throws Exception {
     Study study = studyDao.findByNo(studyno);
@@ -198,6 +206,7 @@ public class StudyController {
     return mv;
   }
 
+  /* 스터디 검색 */
   @GetMapping("/study/search")
   public ModelAndView search(String where, String keyword) throws Exception {
     if (where.equals("1")) {
