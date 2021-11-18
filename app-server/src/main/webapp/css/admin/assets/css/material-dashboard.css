@@ -15115,14 +15115,14 @@ hr.horizontal {
   .sidenav .navbar-heading {
     transition: all 0.1s ease; }
   .sidenav .navbar-brand {
-    padding: 1.5rem 2rem; }
+    padding: 1.5rem 2rem 0; }
   .sidenav .collapse .nav-item .nav-link.active {
     color: #fff !important; }
     .sidenav .collapse .nav-item .nav-link.active i {
       color: #fff !important; }
 
 .sidenav-header {
-  height: 4.875rem; }
+  height: 3rem; }
 
 .sidenav-footer .card.card-background:after {
   opacity: 0.65; }
