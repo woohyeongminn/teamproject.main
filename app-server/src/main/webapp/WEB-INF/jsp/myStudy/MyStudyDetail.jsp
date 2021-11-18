@@ -173,7 +173,7 @@
 	   <c:otherwise>
     <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button>
 	    <c:if test='${study.owner.perNo == loginUser.perNo}'>
-		    <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark" formaction="updateform">수정</a>
+		    <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark">수정</a>
 		    <c:if test="${!(study.countMember > '1')}">
 		      <a href='${contextPath}/app/mystudy/delete?studyno=${study.studyNo}' class="btn btn-outline-dark">삭제</a>
 		    </c:if>

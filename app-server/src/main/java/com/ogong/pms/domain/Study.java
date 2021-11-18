@@ -16,11 +16,11 @@ public class Study {
   private String introduction;  // 소개글
   private Date registeredDate;  // 스터디 생성일
   private int point;            // 스터디 점수
-  private int studyStatus;      // 스터디 상태
+  private int studyStatus;      // 스터디 상태       1.진행중 2.완료 3.삭제
   private int report;           // 스터디 신고여부
 
   private Member owner;         // 작성자(조장)
-  private int status;           // 구성원 상태
+  private int status;           // 구성원 상태       1.승인대기중 2.승인 3.거절
 
   private int waitingCountMember;                            // 승인대기중인 구성원 수
   private List<Member> waitingMember = new ArrayList<>();    // 승인대기중
