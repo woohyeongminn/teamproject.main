@@ -12,7 +12,7 @@
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <style>
 .inner-page {
-  height: 300vmin;
+  height: 230vmin;
 }
 * {
   margin:0;
@@ -23,12 +23,8 @@
 ul{
   list-style:none;
 }
-.template-content {
-  height: 1500px;
-  overflow: scroll;
-}
 .tabmenu{
-  max-width:900px;
+  max-width:1000px;
   margin: 0 auto;
   position:relative;
   margin-top: 50px;
@@ -45,12 +41,12 @@ ul{
 }
 .tabCon{
   display:none;
-  padding: 20px;
+  padding: 20px 0px;
   position:absolute; 
   left:0;
   top:40px;
   box-sizing: border-box;
-  width: 900px;
+  width: 1000px;
 }
 .btnCon:target  {
   background : rgb(247, 231, 215);
@@ -66,6 +62,11 @@ ul{
 }
 #search {
   text-align:center;
+}
+#content {
+	max-height: 1350px;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 #empty-study {
   text-align: center;
