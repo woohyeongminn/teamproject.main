@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- ======= 메인에서 사용 ======= -->
+
 <!-- ======= Footer ======= -->
   <footer id="footer" class="section-bg">
     <div class="footer-top">

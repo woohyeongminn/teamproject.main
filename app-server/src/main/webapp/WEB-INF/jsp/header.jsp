@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- =======  기존 헤더  ======= -->
+
+
 <%-- <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
 <script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
 <script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>

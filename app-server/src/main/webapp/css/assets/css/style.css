@@ -233,7 +233,7 @@ h1, h2, h3, h4, h5, h6 {
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #413e66;
+  color: rgb(155 136 131);
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -284,10 +284,10 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile a, .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #413e66;
+  color: #4e4847;
 }
 .navbar-mobile a:hover, .navbar-mobile .active, .navbar-mobile li:hover > a {
-  color: #1bb1dc;
+  color: rgb(155 136 131);
 }
 .navbar-mobile .getstarted, .navbar-mobile .getstarted:focus {
   margin: 15px;
@@ -1121,7 +1121,8 @@ i#iconcircle {
 --------------------------------------------------------------*/
 .breadcrumbs {
   padding: 15px 0;
-  background: #f9f9fb;
+  /* background: #f9f9fb; */
+  background: rgb(239 230 225);
   min-height: 40px;
   margin-top: 90px;
 }
