@@ -3,31 +3,36 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <style>
-  * {
-    font-size: 13px;
-  }
-  a {
-   text-decoration:none;
-  }
-  .all-content {
-    width: 100%;
-    margin: 0 auto;
-    padding: 40px 0;
-  }
-  </style>
-</head>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<meta charset="UTF-8">
+<style>
+* {
+  font-size: 13px;
+}
+a {
+ text-decoration:none;
+}
+a:hover {
+  color: white;
+}
+.all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.dropdown a > span {
+  font-size: 14px;
+}
+</style>
 <body>
-<br><br>
 <div class="all-content">
+<i class="fas fa-angle-double-right"></i>
+<span> 총 <strong style="font-size: 12px;">${count}</strong>개의 리뷰를 작성하셨습니다. </span>
+<br><br>
 <table class="table table-responsive text-center align-middle">
 	<thead>
 	  <tr>
-	    <th>번호</th>
 	    <th>스터디카페</th>
 	    <th>별점</th>
 	    <th>내용</th>
@@ -40,7 +45,6 @@
 
 	<c:forEach items="${reviewList}" var="review">
 	 <tr>
-	    <td>${review.reviewNo}</td>
 	    <td><a href='detail?no=${review.cafe.no}'>${review.cafe.name}</a></td>
 	    <td>
 	    <c:set var="grade" value="${review.grade}" /> 

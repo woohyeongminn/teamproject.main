@@ -15,6 +15,7 @@ public interface StudyDao {
   void updateNumberOfPeple(Study study) throws Exception;
   void updateFaceNo(Study study) throws Exception;
   void updateIntroduction(Study study) throws Exception;
+  void updateStudyStatus(Study study) throws Exception;
   void deleteAllBookmark(int studyNo) throws Exception;
   List<Study> findAll() throws Exception;
   List<Study> findAllIng() throws Exception;

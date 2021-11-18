@@ -91,7 +91,7 @@
       <hr>
       
      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-       <button class="btn btn-outline-dark" type="submit" >✔가입하기</button> 
+       <button id="x-add-btn" class="btn btn-outline-dark btn-primary" type="submit" >✔가입하기</button> 
        <button class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</button>
      </div> 
    </form>
@@ -161,6 +161,7 @@ document.querySelector("#member-form").onsubmit = () => {
 </script>
 
 <script>
+var addBtn = document.querySelector("#x-add-btn");
 function idOverlap(){
   
   var form = document.perInfo;
@@ -185,8 +186,10 @@ function idOverlap(){
         
         if(data=="1"){
           alert("사용 가능한 이메일 입니다.");
+          addBtn.removeAttribute("disabled");
         }else{  //ajax가 제대로 안됐을 때 .
           alert("이미 사용중인 이메일 입니다.");
+          addBtn.setAttribute("disabled", "disabled");
         }
       },
       error : function(){
@@ -220,16 +223,18 @@ function nickOverlap(){
         
         if(data=="1"){
           alert("사용 가능한 닉네임 입니다.");
+          addBtn.removeAttribute("disabled");
         }else{  //ajax가 제대로 안됐을 때 .
           alert("이미 사용중인 닉네임 입니다.");
+          addBtn.setAttribute("disabled", "disabled");
         }
       },
       error : function(){
         alert("닉네임 중복 확인 ajax 실행 오류");
       }
     });
-    
   }
+  
 </script>
  
 

@@ -170,17 +170,8 @@ public class MyStudyController {
 
     ModelAndView mv = new ModelAndView();
 
+    // 참여 중인 구성원 O
     if (study.getCountMember() > 1) {
-      // 참여 중인 구성원 O
-      // if (study.getCountMember() > 1) {
-      // studyDao.updateOwner(study.getStudyNo(), guilderno);
-      // sqlSessionFactory.openSession().commit();
-      //
-      // studyDao.deleteGuilder(study.getStudyNo(),
-      // ((Member) session.getAttribute("loginUser")).getPerNo());
-      // sqlSessionFactory.openSession().commit();
-      // }
-
       mv.setViewName("redirect:guilder/list?studyNo=" + study.getStudyNo());
 
     } else {
@@ -199,11 +190,10 @@ public class MyStudyController {
 
       studyDao.deleteGuilder(study.getStudyNo(),
           ((Member) session.getAttribute("loginUser")).getPerNo());
+      sqlSessionFactory.openSession().commit();
 
       mv.addObject("study", study);
-      mv.addObject("pageTitle", "내 스터디 탈퇴");
       mv.setViewName("redirect:list");
-      mv.setViewName("template1");
     }
 
     return mv;

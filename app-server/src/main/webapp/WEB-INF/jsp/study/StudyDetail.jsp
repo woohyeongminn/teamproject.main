@@ -37,52 +37,11 @@
       }
     </style>
 
-<!-- <script type="text/javascript">
-  function checkValue() {
-
-  var form = document.studyInfo;
-  var studyStatus = ${study.studyStatus};
-  
-  console.log(studyStatus);
-  
-  if (studyStatus == 2) {
-    alert("완료된 스터디 입니다.");
-    return false;
-  }
-  
-  for (Member guilder : form.members.value) {
-     if (form.guilder.perNo.value == form.loginUser.perNo.value) {
-       alert("이미 참여 중인 스터디입니다.");
-       return false;
-     }
-   }
-
-    for (Member memberWating : form.waitingMember.value) {
-      if (form.memberWating.perNo.value == form.loginUser.perNo.value) {
-        alert("이미 승인 대기 중인 스터디입니다.");
-        return false;
-      }
-    }
-  
-  if (form.countMember.value == form.numberOfPeple.value) {
-      alert("참여 가능 인원수를 초과하였습니다.");
-      return false;
-  }
-}
-</script> -->
-
-<!-- <input name="members" type="text" value="${study.members}"/>
-<input name="waitingMember" type="text" value="${study.waitingMember}"/>
-<input name="studyStatus" type="text" value="${study.studyStatus}"/>
-<input name="countMember" type="text" value="${study.countMember}"/>
-<input name="numberOfPeple" type="text" value="${study.numberOfPeple}"/> -->
-
-    <!-- Custom styles for this template -->
-    <!-- <link href="sticky-footer.css" rel="stylesheet"> -->
+  <!-- Custom styles for this template -->
   </head>
   <body class="d-flex flex-column h-100">
 
-<!-- Begin page content -->
+<!-- 스터디 상세 -->
 <main class="flex-shrink-0">
   <div class="container">
   <input type="hidden" name="members" value="${study.members}">
@@ -90,10 +49,14 @@
   <input type="hidden" name="studyStatus" value="${study.studyStatus}">
   <input type="hidden" name="countMember" value="${study.countMember}">
   <input type="hidden" name="numberOfPeple" value="${study.numberOfPeple}">
+  
+    <!-- 스터디 메인 정보 -->
     <h1 class="mt-5">${study.studyTitle}</h1>
     <span>${study.owner.perNickname}</span>
     <td><fmt:formatDate value="${study.registeredDate}" pattern="yyyy.MM.dd" /></td>
     <p class="lead">${study.introduction}</p>
+    
+    <!-- 스터디 모집 여부 -->
     <c:choose>
         <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
           <button type="button" class="btn btn-primary btn-sm">모집중</button>
@@ -108,6 +71,8 @@
           <button type="button" class="btn btn-secondary btn-sm">모집완료</button>
         </c:when>
       </c:choose>
+
+    <!-- 스터디 부가 정보 -->
     <ul class="list-group">
       <li class="list-group-item d-flex justify-content-between align-items-center">
         🔎 분야
@@ -138,6 +103,7 @@
 	      <a href='delete?studyno=${study.studyNo}' class="btn btn-light">삭제</a>
       </c:if>
 
+      <!-- 회원 -->
       <c:if test="${loginUser ne null}">
         <!-- 스터디 참여 -->
         <c:if test="${study.owner.perNo ne loginUser.perNo}">
@@ -163,7 +129,8 @@
         </c:if>
       </c:if>
         
-      <!-- 목록 -->
+      <!-- 회원 & 비회원 -->
+      <!-- 스터디 목록 -->
       <a href='list' class="btn btn-light">목록</a>
     </div>
   </div>

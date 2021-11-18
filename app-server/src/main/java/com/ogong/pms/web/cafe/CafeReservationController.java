@@ -115,7 +115,7 @@ public class CafeReservationController {
     }
 
     mv.addObject("reserList", reserList);
-    mv.addObject("pageTitle", "내 예약 내역");
+    mv.addObject("pageTitle", "🧾 내 예약 내역");
     mv.addObject("totalPage", totalPage);
     mv.addObject("pageNo", pageNo);
     mv.addObject("pageSize", pageSize);
