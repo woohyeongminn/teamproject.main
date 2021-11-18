@@ -107,7 +107,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="${contextPath}/app/admin/detail" style="background-color: rgb(161 135 120);">
+          <a class="nav-link text-white" href="${contextPath}/app/admin/detail">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">face</i>
             </div>
@@ -115,7 +115,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="${contextPath}/app/admin/detail">
+          <a class="nav-link text-white active bg-gradient-primary" href="${contextPath}/app/admin/detail" style="background-color: rgb(161 135 120);">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
