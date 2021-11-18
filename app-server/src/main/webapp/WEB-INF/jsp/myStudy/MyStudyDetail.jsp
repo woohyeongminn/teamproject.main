@@ -273,7 +273,7 @@ a:hover {
 						게시판</a>
 				</button>
 				<button type="submit" class="btn btn-outline-dark" value="화상미팅">
-					<a href='list'>화상미팅</a>
+					<a href='${contextPath}/app/mystudy/test?studyno=${study.studyNo}'>화상미팅</a></button>
 				</button>
 				<button id="popup_open_btn" class="btn btn-outline-dark">To-Do</button>
 				<!-- todo 모달 -->
