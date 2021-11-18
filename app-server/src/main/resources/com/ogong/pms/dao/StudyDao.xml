@@ -131,19 +131,20 @@
   <insert id="insert" parameterType="Study"
    useGeneratedKeys="true" keyColumn="study_no" keyProperty="studyNo">
   insert into study
-     (name, subject_no, no_people, face_no, introduction, area, member_no)
+     (name, subject_no, no_people, face_no, introduction, area, member_no, status)
      values
-     (#{studyTitle}, #{subjectNo}, #{numberOfPeple}, #{faceNo}, #{introduction}, #{area}, #{owner.perNo})
+     (#{studyTitle}, #{subjectNo}, #{numberOfPeple}, #{faceNo}, #{introduction}, #{area}, #{owner.perNo}, #{studyStatus})
   </insert>
   
   <!--  ===[스터디 수정]=== -->
   <update id="update" parameterType="Study">
   update study set
-    name=#{studyTitle},no_people=#{numberOfPeple},face_no=#{faceNo},introduction=#{introduction}
+    name=#{studyTitle}, no_people=#{numberOfPeple}, face_no=#{faceNo}, introduction=#{introduction}, status=#{studyStatus}
    where
     study_no=#{studyNo}
   </update>
   
+  <!--  ===[스터디 상태 종료로 변경]=== -->
    <update id="updateStatusEnd" parameterType="Study">
   update study set
     status=2
@@ -151,6 +152,7 @@
     study_no=#{studyNo}
   </update>
   
+  <!--  ===[스터디 상태 삭제로 변경]=== -->
   <update id="updateStatusDelete" parameterType="Study">
   update study set
     status=3
@@ -158,30 +160,42 @@
     study_no=#{studyNo}
   </update>
   
+  <!--  ===[스터디 제목 변경]=== -->
   <update id="updateStudyTitle" parameterType="Study">
     update study set
      name = #{studyTitle}
     where
      study_no=#{studyNo}
   </update>
-  
+
+  <!--  ===[스터디 최대 인원수 변경]=== -->
   <update id="updateNumberOfPeple" parameterType="Study">
     update study set
      no_people = #{numberOfPeple}
     where
      study_no=#{studyNo}
   </update>
-  
+
+  <!--  ===[스터디 대면 상태 변경]=== -->
   <update id="updateFaceNo" parameterType="Study">
     update study set
      face_no = #{faceNo}
     where
      study_no=#{studyNo}
   </update>
-  
+
+  <!--  ===[스터디 소개글 변경]=== -->
   <update id="updateIntroduction" parameterType="Study">
     update study set
      introduction = #{introduction}
+    where
+     study_no=#{studyNo}
+  </update>
+
+  <!--  ===[스터디 상태 변경]=== -->
+  <update id="updateStudyStatus" parameterType="Study">
+    update study set
+     status = #{studyStatus}
     where
      study_no=#{studyNo}
   </update>

@@ -156,6 +156,7 @@ public class StudyController {
     studyDao.updateNumberOfPeple(study);
     studyDao.updateFaceNo(study);
     studyDao.updateIntroduction(study);
+    studyDao.updateStudyStatus(study);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

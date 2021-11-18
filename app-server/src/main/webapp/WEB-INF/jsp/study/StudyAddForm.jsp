@@ -25,7 +25,6 @@
 	<div class="all-content">
 		<form action='add' method='post'>
 			<div id='content'>
-				<br>
 				<div class="mb-3 row">
 					<label for='f-studyTitle'>제목</label> <input id='f-studyTitle'
 						type='text' name='studyTitle' class="form-control" required
@@ -101,6 +100,14 @@
 						oninvalid="this.setCustomValidity('소개글을 입력하세요.')"
 						oninput="this.setCustomValidity('')"></textarea>
 				</div>
+
+				<div class="mb-3 row">
+					<label for='f-studyStatus'>진행 상태</label> <select name="studyStatus">
+						<option value="1" name="studyStatus" selected>진행</option>
+						<option value="2" disabled>종료</option>
+					</select>
+				</div>
+				<br>
 			</div>
 			<div id='button'>
 				<button class="btn btn-dark">등록</button>
