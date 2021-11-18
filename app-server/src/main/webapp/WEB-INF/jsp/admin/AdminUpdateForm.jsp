@@ -101,7 +101,7 @@
         <li class="nav-item">
           <a class="nav-link text-white active bg-gradient-primary" href="${contextPath}/app/admin/login" style="background-color: rgb(161 135 120);">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
+              <i class="material-icons opacity-10">face</i>
             </div>
             <span class="nav-link-text ms-1">관리자</span>
           </a>
@@ -109,23 +109,23 @@
         <li class="nav-item">
           <a class="nav-link text-white " href="${contextPath}/app/admin/login">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">person</i>
             </div>
             <span class="nav-link-text ms-1">회원</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="${contextPath}/css/admin/pages/tables.html">
+          <a class="nav-link text-white " href="${contextPath}/app/admin/study/list">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">mode</i>
             </div>
             <span class="nav-link-text ms-1">스터디</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="${contextPath}/css/admin/pages/tables.html">
+          <a class="nav-link text-white " href="${contextPath}/app/admin/cafeList">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">business</i>
             </div>
             <span class="nav-link-text ms-1">장소</span>
           </a>
@@ -133,7 +133,7 @@
         <li class="nav-item">
           <a class="nav-link text-white " href="${contextPath}/css/admin/pages/tables.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">help</i>
             </div>
             <span class="nav-link-text ms-1">고객센터</span>
           </a>

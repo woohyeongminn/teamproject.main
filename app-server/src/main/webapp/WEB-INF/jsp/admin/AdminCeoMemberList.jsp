@@ -64,6 +64,22 @@
     left: 22%;
     overflow-y: scroll;
   }
+  
+  .card-body::-webkit-scrollbar {
+    width: 10px;
+  }
+  .card-body::-webkit-scrollbar-thumb {
+  background-color: rgb(247, 231, 215);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  }
+  .card-body::-webkit-scrollbar-track {
+  background-color: rgb(250, 250, 234);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+  }
+  
   .ms-2 {
   font-size: 16px;
   }
@@ -94,7 +110,7 @@
         <li class="nav-item">
           <a class="nav-link text-white " href="${contextPath}/app/admin/detail">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
+              <i class="material-icons opacity-10">face</i>
             </div>
             <span class="nav-link-text ms-1">관리자</span>
           </a>
@@ -108,17 +124,17 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="${contextPath}/css/admin/pages/tables.html">
+          <a class="nav-link text-white " href="${contextPath}/app/admin/study/list">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">mode</i>
             </div>
             <span class="nav-link-text ms-1">스터디</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="${contextPath}/css/admin/pages/tables.html">
+          <a class="nav-link text-white " href="${contextPath}/app/admin/cafeList">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">business</i>
             </div>
             <span class="nav-link-text ms-1">장소</span>
           </a>
@@ -126,7 +142,7 @@
         <li class="nav-item">
           <a class="nav-link text-white " href="${contextPath}/css/admin/pages/tables.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="material-icons opacity-10">help</i>
             </div>
             <span class="nav-link-text ms-1">고객센터</span>
           </a>
@@ -176,7 +192,7 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${ceoMemberList}" var="ceoMember">
-                      <tr data-no="${ceoMember.ceoNo}">
+                      <tr>
                         <td>
                           <p class="text-xs font-weight-bold mb-0" style="padding: 0.75rem 0 0.75rem 1.5rem;">${ceoMember.ceoNo}</p>
                         </td>
@@ -223,22 +239,6 @@
 <script src="${contextPath}/css/admin/assets/js/core/bootstrap.min.js"></script>
 <%-- <script src="${contextPath}/css/admin/assets/js/plugins/perfect-scrollbar.min.js"></script> --%>
 <script src="${contextPath}/css/admin/assets/js/plugins/smooth-scrollbar.min.js"></script>
-
-<script>
-document.querySelectorAll("tbody a").forEach((aTag) => {
-  aTag.onclick = () => false;
-});
-
-var trList = document.querySelectorAll("tbody tr"); // 리턴 객체는 HTMLCollection 타입 객체이다.
-trList.forEach(function(trTag) {
-  trTag.onclick = (e) => {
-    //console.log(e.currentTarget.querySelector("a").href);
-    //e.currentTarget.querySelector("a").click();
-    window.location.href = e.currentTarget.querySelector("a").href;
-    //window.location.href = "detail?no=" + e.currentTarget.getAttribute("data-no");
-  };
-});
-</script>
 
 <script>
   var win = navigator.platform.indexOf('Win') > -1;
