@@ -1,36 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>내 스터디 목록</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Today Study</title>
+
   <!-- plugins:css -->
-  <link rel="stylesheet" href="vendors/feather/feather.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/vendors/feather/feather.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/vendors/css/vendor.bundle.base.css">
   <!-- endinject -->
+  
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-  <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="${contextPath}/css/study/js/select.dataTables.min.css">
   <!-- End plugin css for this page -->
+  
   <!-- inject:css -->
-  <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="${contextPath}/css/study/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="images/favicon.png" />
-</head>
+  <link rel="shortcut icon" href="${contextPath}/css/study/images/favicon.png" />
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -50,12 +45,11 @@
               <i class="icon-bell mx-0"></i>
               <span class="count"></span>
             </a>
-            <div class="#" aria-labelledby="notificationDropdown">
-              
+            <div class="#" aria-labelledby="notificationDropdown"></div>
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face28.jpg" alt="profile"/>
+              <img src="${contextPath}/css/study/images/faces/face28.jpg" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -79,9 +73,10 @@
         </button>
       </div>
     </nav>
+    
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      
+    
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -96,18 +91,19 @@
         <div class="tab-content" id="setting-content">
           <p>스터디를 먼저 선택하세요</p>
         </div>
-
       </div>
+      
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="../index2">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">MY STUDY LIST</span>
             </a>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#owner" aria-expanded="false" aria-controls="owner">
               <i class="icon-layout menu-icon"></i>
@@ -135,7 +131,7 @@
             <div class="collapse" id="guilder">
               <ul class="nav flex-column sub-menu">
                 <c:forEach items="${guilderMembers}" var="study">
-                  <li class="nav-item"> <a class="nav-link" href="'${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
                 </c:forEach>
                 <c:if test="${empty guilderMembers}">
 					       <li class="nav-item">구성원으로 참여 중인 스터디가 없습니다.</li>
@@ -143,6 +139,7 @@
               </ul>
             </div>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#waiting" aria-expanded="false" aria-controls="waiting">
               <i class="icon-grid-2 menu-icon"></i>
@@ -152,14 +149,14 @@
             <div class="collapse" id="waiting">
               <ul class="nav flex-column sub-menu">
                 <c:forEach items="${waitingStudyList}" var="study">
-                <li class="nav-item"> <a class="nav-link" href="waitingdetail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
                 </c:forEach>
               </ul>
             </div>
           </li>
-          
         </ul>
       </nav>
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -195,40 +192,36 @@
                   </div>
                 </div>
               </div>
-          
-          
-        </div>
-        
+            </div>
+          </div>
+        </div>   
         <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>   
+    </div>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
+  <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
+  
   <!-- Plugin js for this page -->
-  <script src="vendors/chart.js/Chart.min.js"></script>
-  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="js/dataTables.select.min.js"></script>
-
+  <script src="${contextPath}/css/study/vendors/chart.js/Chart.min.js"></script>
+  <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
   <!-- End plugin js for this page -->
+  
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
-  <script src="js/settings.js"></script>
-  <script src="js/todolist.js"></script>
+  <script src="${contextPath}/css/study/js/off-canvas.js"></script>
+  <script src="${contextPath}/css/study/js/hoverable-collapse.js"></script>
+  <script src="${contextPath}/css/study/js/template.js"></script>
+  <script src="${contextPath}/css/study/js/settings.js"></script>
+  <script src="${contextPath}/css/study/js/todolist.js"></script>
   <!-- endinject -->
+  
   <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <script src="js/Chart.roundedBarCharts.js"></script>
+  <script src="${contextPath}/css/study/js/dashboard.js"></script>
+  <script src="${contextPath}/css/study/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 </body>
-
-</html>
-

@@ -162,6 +162,9 @@ svg#icon {
   border-inline: none;
   color: rgb(159 146 143);
 }
+p#popmain{
+  margin: 0;
+}
 </style>
 <!-- layer popup content -->
 </head>
@@ -208,8 +211,8 @@ svg#icon {
       <div class="rightmiddle">
         <div class="middlecontent">
         <br>
-          <p>환영합니다!</p>
-          <p>오늘의 공부 홈페이지입니다!</p>
+          <p id="popmain">환영합니다!</p>
+          <p id="popmain">오늘의 공부 홈페이지입니다!</p>
         </div>
       </div>
       <div class="rightbottom">

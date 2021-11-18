@@ -2,17 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- ======= 메인에서 사용 ======= -->
+
 <!-- ======= Footer ======= -->
   <footer id="footer" class="section-bg">
     <div class="footer-top">
       <div class="container">
-
         <div class="row">
-
           <div class="col-lg-6">
-
             <div class="row">
-
               <div class="col-sm-6">
 
                 <div class="footer-info">
@@ -26,8 +24,8 @@
                   <p style="margin:0;">별도의 복잡한 프로그램 설치 없이 편리하게</p>
                   <p style="margin:0;">이용할 수 있도록 제공하는 사이트입니다.</p>
                   <br>
-                  <form action="" method="post">
-                    <input type="email" name="email"><input type="submit" value="사이트 소개">
+                  <form action="#" method="post">
+                    <input type="email" name="email"><input type="submit" value="사이트 소개" disabled>
                   </form>
                 </div>
 
@@ -64,9 +62,7 @@
                 </div>
 
               </div>
-
             </div>
-
           </div>
 
           <div class="col-lg-6">
@@ -75,7 +71,7 @@
 
               <h4>Send us a message</h4>
 
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <form action="#" method="post" role="form" class="php-email-form">
                 <div class="form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                 </div>
@@ -95,15 +91,12 @@
                   <div class="sent-message">Your message has been sent. Thank you!</div>
                 </div>
 
-                <div class="text-center"><button type="submit" title="Send Message">✉ 이메일 보내기</button></div>
+                <div class="text-center"><button type="submit" title="Send Message" disabled>✉ 이메일 보내기</button></div>
               </form>
 
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
 
@@ -118,7 +111,7 @@
         Licensing information: https://bootstrapmade.com/license/
         Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Rapid
       -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a href="#">BootstrapMade</a>
       </div>
     </div>
   </footer><!-- End  Footer -->

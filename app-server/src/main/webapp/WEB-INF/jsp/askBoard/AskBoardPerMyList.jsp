@@ -6,7 +6,12 @@
   * {
   font-size: 14px;
   }
-  
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }  
   label {
     margin-right: 5px;
     text-align: center;
@@ -23,6 +28,7 @@
   </style>
 <fieldset>
 <br>
+<div class="all-content">
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
    <a href='permylist' >내 글</a> |
    <a href='alllist' >전체 글</a>
@@ -69,10 +75,11 @@
  <c:if test="${empty perMyAskBoardList}">
   <b style="font-size:14; text-align: center">❕❔ 등록한 게시글이 없습니다.</b>
  </c:if>
-</fieldset>
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
    <a href='peraddform' type="button" class="btn btn-outline-dark" >✔등록하기</a> 
 </div>
+</div> 
+</fieldset>
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {

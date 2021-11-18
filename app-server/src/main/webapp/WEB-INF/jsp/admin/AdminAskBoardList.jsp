@@ -2,16 +2,16 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-   <title>목록 | 문의 게시글</title>
   <style>
   * {
   font-size: 14px;
   }
-  
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }   
   label {
     margin-right: 5px;
     text-align: center;
@@ -28,6 +28,7 @@
 <body>
 <fieldset>
 <br>
+<div class="all-content">
 <hr>
 <table class="table table-responsive text-center">
 <thead>
@@ -100,10 +101,11 @@
     
 </div>
 
-</fieldset>
 <c:if test="${empty adminAskBoardList}">
        등록된 문의글이 없습니다.
 </c:if>
+</div>
+</fieldset>
 </body>
 </html>
 

@@ -30,7 +30,7 @@
   .form-select {
     display: inline-block;
   }
-	div.template-wrap:nth-of-type(2) {
+	.template-wrap {
 	  --desktopHeaderContentHeight: 60px;
     --headerVerticalPadding: 10px;
     --desktopNavHeight: calc(var(--headerVerticalPadding) + var(--desktopHeaderContentHeight) + var(--headerVerticalPadding));
@@ -68,6 +68,9 @@
   }
   .badge {
     color: slategray;
+  }
+  #main {
+    height: 100%;
   }
   </style>
 </head>

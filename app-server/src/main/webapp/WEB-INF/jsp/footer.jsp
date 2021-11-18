@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <footer>
+<!-- ======= 기존 푸터 ======= -->
+
+  <footer id="ogong-footer">
     <div class="footer_background">
       <ul class="footer_company">
         <li class="footer_li"><a href="${contextPath}/app/index" class="footer_a">오늘의 공부 소개</a></li>

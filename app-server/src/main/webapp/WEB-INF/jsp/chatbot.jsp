@@ -13,6 +13,41 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 
 <style>
+.tmHead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  height: 36px;
+  background-color: rgb(155 136 131);
+}
+
+#tmPopWrap h2 {
+  padding: 13px 24px;
+  min-height: 7px;
+  color: #ffffff;
+  font-size: 14px;
+  background: rgb(191 179 176);
+}
+
+.tmBtnArea.tmBtnLogin button {
+  color: #fff;
+  border: 1px solid rgb(191 179 176);
+  background-color: rgb(191 179 176);
+}
+
+#tmPopWrap {
+  display: none;
+  z-index: 30;
+  position: absolute;
+  background: #fff;
+  width: 80%;
+  max-width: 320px;
+  height: auto;
+  border: 1px solid rgb(191 179 176);
+}
+
 #chat img {
     position: fixed;
     right: 50px;
@@ -43,7 +78,7 @@ a {
     text-align: center;
     font-size: 14px;
     font-weight: bolder;
-    margin-top: 10px;">무엇이 궁금하신가요?</h4>
+    margin-top: 10px;"></h4>
 	  
 	  <iframe src="https://service.dongledongle.com/TodayStudy" frameborder="0" width="100%" height="470px;"></iframe>
 	  
