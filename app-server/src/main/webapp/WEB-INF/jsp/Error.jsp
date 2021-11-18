@@ -30,7 +30,7 @@ error.printStackTrace(new PrintWriter(out));
 </pre>
 </div><!-- #content --> 
 
-<jsp:include page="footer.jsp"/>
+<jsp:include page="footer2.jsp"/>
 
 </div><!-- .container -->
 
