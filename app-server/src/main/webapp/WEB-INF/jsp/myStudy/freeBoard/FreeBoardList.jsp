@@ -1,52 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-* {
-  font-size:14px;
-  xjustify-content: center;
-}
-#empty-freeboard {
-  text-align: center;
-}
-</style>
-</head>
-<body>
-<br>
-  <div id="button" class="d-grid gap-5 d-md-flex justify-content-md-end">
-    <a href='form?studyno=${studyno}' class="btn btn-light">등록</a>
-  </div>
-  <br>
-<c:if test='${not empty freeBoardList}'>
-<div class="row row-cols-1 row-cols-md-3 g-5">
-<c:forEach items="${freeBoardList}" var="freeBoard">
-<div class="col">
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title" style="font-weight: bold">
-      <a href="detail?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}">${freeBoard.freeBoardTitle}</a>
-    </h5>
-    <p class="card-text">${freeBoard.freeBoardContent}</p>
-    <p class="card-text">
-      <small class="text-muted">${freeBoard.freeBoardWriter.perNickname}</small>
-      <small class="text-muted">👁 ${freeBoard.freeBoardViewcount}</small>
-    </p>
-  </div>
-</div>
-</div>
-</c:forEach>
-</div>
-</c:if>
-<div id="empty-freeboard">
-<c:if test="${empty freeBoardList}">
-  등록된 게시글이 없습니다.
-</c:if>
-</div>
-<!-- 이미지 -->
-<!-- <c:if test='${not empty freeBoardList}'>
+  <head>
+    <style>
+      * {
+        font-size: 14px;
+        xjustify-content: center;
+      }
+      #empty-freeboard {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <br />
+    <div id="button" class="d-grid gap-5 d-md-flex justify-content-md-end">
+      <a href="form?studyno=${studyno}" class="btn btn-light">등록</a>
+    </div>
+    <br />
+    <c:if test="${not empty freeBoardList}">
+      <div class="row row-cols-1 row-cols-md-3 g-5">
+        <c:forEach items="${freeBoardList}" var="freeBoard">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title" style="font-weight: bold">
+                  <a
+                    href="detail?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}"
+                    >${freeBoard.freeBoardTitle}</a
+                  >
+                </h5>
+                <p class="card-text">${freeBoard.freeBoardContent}</p>
+                <p class="card-text">
+                  <small class="text-muted"
+                    >${freeBoard.freeBoardWriter.perNickname}</small
+                  >
+                  <small class="text-muted"
+                    >👀 ${freeBoard.freeBoardViewcount}</small
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+      </div>
+    </c:if>
+    <div id="empty-freeboard">
+      <c:if test="${empty freeBoardList}"> 등록된 게시글이 없습니다. </c:if>
+    </div>
+    <!-- 이미지 -->
+    <!-- <c:if test='${not empty freeBoardList}'>
 <c:forEach items="${freeBoardList}" var="freeBoard">
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
@@ -69,8 +74,8 @@
 <c:if test="${empty freeBoardList}">
   등록된 게시글이 없습니다.
 </c:if> -->
-<!-- 테이블 -->
-	<!-- <table class="table table-hover">
+    <!-- 테이블 -->
+    <!-- <table class="table table-hover">
 		<thead>
 			<tr>
 				<th>No.</th>
@@ -94,5 +99,5 @@
 	<c:if test="${empty freeBoardList}">
     등록된 게시글이 없습니다.
   </c:if> -->
-</body>
+  </body>
 </html>

@@ -42,6 +42,7 @@ insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created
 values(3, 3, '관리자님', '이메일로 문의 드리고 싶어요!', 0, '2021-04-18', 2);
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
 values(4, 1, '궁금합니다.', '스터디생성방법이궁금해요.', 0, '2020-02-01', 1);
+20', 'testContent20', 0, '2020-02-01', 1);
 
 -------------------------------------------------------------------------------------------------
 -- 문의게시판 댓글 test 값
