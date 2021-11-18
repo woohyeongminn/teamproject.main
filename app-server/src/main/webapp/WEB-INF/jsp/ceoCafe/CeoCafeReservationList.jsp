@@ -46,7 +46,7 @@ font-size: 12px;
       <td><a href='detail?resno=${reservation.reservationNo}'>${reservation.reservationNo}</a></td>
       <td>${reservation.reservationDate}</td>
       <td>${reservation.useDate}</td>
-      <td>${reservation.startTime} ~ ${cafeReserEndTime} (${cafeReser.useTime}시간)</td>      <!-- 이용시간 -->
+      <td>${reservation.startTime} ~ ${cafeReserEndTime} (${reservation.useTime}시간)</td>      <!-- 이용시간 -->
       <td>${reservation.roomName}</td>       <!-- 스터디룸 -->
       <td>${reservation.totalPrice}</td>      
       <td>${reservation.reservationStatusName}</td>

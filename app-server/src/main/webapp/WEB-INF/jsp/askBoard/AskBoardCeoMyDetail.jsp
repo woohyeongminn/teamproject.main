@@ -6,7 +6,12 @@
   * {
   font-size: 14px;
   }
-  
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }  
   label {
     margin-right: 5px;
     text-align: center;
@@ -24,6 +29,7 @@
   color: black;
   }  
 </style>
+<div class="all-content">
   <div id="mian">
       <b>제목</b>
       <input type="text" class="form-control" name="title" value="${myAskBoard.askTitle}" readonly></input>
@@ -62,7 +68,12 @@
    </c:otherwise>
   </c:choose>       
   <a href='ceodelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark">문의글삭제</a>
-  <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
+  <a href='ceolist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
+</div>
 </div>
     
-     
+<script>
+function notEmptyReply(obj) { 
+    alert("답변이 등록된 글은 수정할 수 없습니다.")
+    }
+</script>     

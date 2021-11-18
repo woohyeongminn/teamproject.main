@@ -21,6 +21,7 @@
     
     <association property="member" javaType="member">
       <id column="member_no" property="perNo"/>
+      <result column="member_ninkname" property="perNickname"/>
     </association>
     
     <association property="cafe" javaType="cafe">
@@ -34,7 +35,8 @@
     select 
         rs.studycafe_rsv_no, 
         rs.studyroom_no, 
-        rs.member_no, 
+        rs.member_no,
+        m.nickname member_ninkname,
         rs.rsv_dt, 
         rs.using_dt,
         rs.start_time, 
@@ -52,6 +54,7 @@
         join studycafe_reservation_status rst on rs.rsv_status_no=rst.rsv_status_no
         join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
         join studycafe c on sr.cafe_no=c.cafe_no
+        join member m on rs.member_no=m.member_no
   </sql>
   
   <select id="getCafeReservationList" resultMap="reservationMap">

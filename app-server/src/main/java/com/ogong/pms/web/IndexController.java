@@ -15,14 +15,6 @@ public class IndexController {
   @Autowired StudyDao studyDao;
 
   @GetMapping("/index")
-  public ModelAndView index() {
-    ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "오늘의 공부");
-    mv.setViewName("index");
-    return mv;
-  }
-
-  @GetMapping("/index2")
   public ModelAndView index2() throws Exception {
 
     List<Study> findstudyList = studyDao.findAll();
@@ -44,7 +36,7 @@ public class IndexController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("studyList", studyList);
     mv.addObject("pageTitle", "오늘의 공부");
-    mv.setViewName("index2");
+    mv.setViewName("index");
     return mv;
   }
 }

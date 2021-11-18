@@ -2,26 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- =======  기존 헤더  ======= -->
-
-
-<%-- <link rel="stylesheet" href="${contextPath}/node_modules/bootstrap/dist/css/bootstrap.css">
-<script src="${contextPath}/node_modules/@popperjs/core/dist/umd/popper.js"></script>
-<script src="${contextPath}/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-   --%>
-<style>
-.dropdown-item:focus {
-  background-color: white;
-}
-</style>
-
+<!-- ======= 메인, 템플릿에서 사용 ======= -->
 
 <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center header-transparent" style="position:relative;">
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
     <div class="container d-flex align-items-center">
 
       <h1 class="logo me-auto">
-      <a href="${contextPath}/app/index2"><img src="${contextPath}/css/assets/img/logo.png"></a>
+      <a href="${contextPath}/app/index"><img src="${contextPath}/css/assets/img/logo.png"></a>
       </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="${contextPath}/css/assets/img/logo.png" alt="" class="img-fluid"></a>-->

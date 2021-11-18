@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- ======= 카페에서 사용 ======= -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +51,7 @@
 </style> 
 </head>
   <body>
-    <jsp:include page="header2.jsp"/>
+    <jsp:include page="header.jsp"/>
     
     <main id="main">
 
@@ -68,7 +71,7 @@
     </main><!-- End #main -->
     
     
-    <jsp:include page="footer3.jsp"/> 
+    <jsp:include page="footer2.jsp"/> 
     
   </body>
   
