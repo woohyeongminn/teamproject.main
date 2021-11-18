@@ -124,19 +124,19 @@
 <c:choose>
 	<c:when test="${not empty loginUser}">
 	  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		   <a href='peraddform' type="button" class ="btn btn-outline-dark">등록하기</a>
+		   <a href='peraddform' type="button" class ="btn btn-outline-dark">✔등록하기</a>
 	  </div>
 	</c:when>
 	
 	<c:when test="${not empty loginCeoUser}">
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	     <a href='ceoaddform' type="button" class = "btn btn-outline-dark">등록하기</a>
+	     <a href='ceoaddform' type="button" class = "btn btn-outline-dark">✔등록하기</a>
 		</div>
 	</c:when>
 	
 	<c:when test="${empty loginUser && empty loginCeoUser}">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a id="notlogin" type="button" class = "btn btn-outline-dark" onclick="logout();">등록하기</a>
+       <a id="notlogin" type="button" class = "btn btn-outline-dark" onclick="logout();">✔등록하기</a>
     </div>	
 	</c:when>
 </c:choose>
