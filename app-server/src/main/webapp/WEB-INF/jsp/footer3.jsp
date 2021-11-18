@@ -11,11 +11,11 @@ a {
 
 #footer .footer-top .footer-links ul li {
     padding: 3px 0;
-    font-size: 10px;
 }
 
 #footer .footer-top .footer-links {
     margin-bottom: 15px;
+    font-size: 10px;
 }
 
 #footer .footer-top .social-links a {
@@ -23,7 +23,14 @@ a {
     height: 26px;
 }
 
-p {
+#footer .footer-top .footer-links ul a {
+    font-size: 10px;
+}
+
+.footer-newsletter p {
+    font-size: 10px;
+}
+.footer-links p, strong {
     font-size: 10px;
 }
 </style>
@@ -62,7 +69,7 @@ p {
               <div class="col-sm-3">
                 <div class="footer-links">
                   <h4>Contact Us</h4>
-                  <p>
+                  <p style="font-size: 10px">
                     상호명 : 오늘의 공부 <br>
                     주소 : (우)1111 서울특별시 강남구<br>
                     역삼동 819-3 삼오빌딩<br>
