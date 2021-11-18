@@ -106,10 +106,9 @@
 
 <body>
   <div class="container-scroller">
-
-    <!-- temp -->
-    <!-- 안쓰는데 있어야함 / 빈 부분 공간차지하라고(템플릿) -->
     <div class="container-fluid page-body-wrapper">
+      
+      <!-- temp -->
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
@@ -185,7 +184,7 @@
         </ul>
       </nav><!-- side nav-->
       
-      <!-- partial -->
+      <!-- main-panel -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -225,12 +224,10 @@
               </div>
             </div>
           </div>
-        </div>   
-        <!-- partial -->
-    </div>
-    <!-- temp -->
-  </div>
-  <!-- container-scroller -->
+        </div>
+        
+   </div> <!-- end page-body-wrapper -->
+  </div> <!-- end container-scroller -->
 
 
 <script>
