@@ -89,8 +89,14 @@
       <label id='f-passwordcheck' for='f-passwordcheck' class="col-sm-2 col-form-label">재입력</label>
       <input id='i-passwordcheck' type='password' name='perPassword' placeholder="비밀번호 확인"/><br>
      </div>
-      <hr>
-      
+     <label >개인정보 수집 및 이용에 대한 안내</label>
+     <input id="perAgree" type="checkbox"/><br>
+     <label >이용 약관</label>
+     <input id="useAgree" type="checkbox"/><br>
+     <label >전체 동의</label>
+     <input id="allAgree" type="checkbox"/>
+     <hr>
+     
      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
        <button id="x-add-btn" class="btn btn-outline-dark btn-primary" type="submit" onclick="joinPopup()">✔가입하기</button> 
        <a id="x-cancle-btn" type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>

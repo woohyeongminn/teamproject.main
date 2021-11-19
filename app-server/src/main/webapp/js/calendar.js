@@ -42,7 +42,7 @@ let date = new Date();
     stringMonth = Dec;
   }
   */
-  document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
+  document.querySelector('.year-month').textContent = `${viewYear}년 Nov.`;
 
   const prevLast = new Date(viewYear, viewMonth, 0);
   const thisLast = new Date(viewYear, viewMonth + 1, 0);
