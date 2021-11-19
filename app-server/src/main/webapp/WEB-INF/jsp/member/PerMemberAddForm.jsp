@@ -13,6 +13,7 @@
   .btn {
    font-size: 14px;
    line-height: 10px;
+   
   }
   b {
   text-align: center;
@@ -202,7 +203,6 @@ function idOverlap(){
 function nickOverlap(){
   
   var form = document.perInfo;
-  
       console.log("nickOverlap 호출")
       console.log("닉네임 입력 값 : "+form.nick.value)
     $.ajax({

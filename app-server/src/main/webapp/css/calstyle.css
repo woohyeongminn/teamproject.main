@@ -4,7 +4,15 @@
   font-family: sans-serif;
   box-sizing: border-box;
 }
-
+   .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  } 
+  .btn {
+    line-height: 10px;
+  }
 .calendarwrap {
   display: flex;
   justify-content: center;
@@ -24,7 +32,8 @@
 }
 
 .year-month {
-  font-size: 35px;
+  font-size: 25px;
+  color: navy;
 }
 
 .nav {
@@ -103,7 +112,7 @@
   width: 30px;
   height: 30px;
   display: block;
-  background-color: #FF0000;
+  background-color: orange;
   border-radius: 50%;
   content: '';
 }

@@ -265,7 +265,7 @@ a:hover {
 						href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>구성원</a>
 				</button>
 				<button type="submit" class="btn btn-outline-dark" value="캘린더">
-					<a href='${contextPath}/app/mystudy/calendar/list'>캘린더</a>
+					<a href='${contextPath}/app/mystudy/calendar/list?studyNo=${study.studyNo}'>캘린더</a>
 				</button>
 				<button type="submit" class="btn btn-outline-dark" value="자유 게시판">
 					<a
