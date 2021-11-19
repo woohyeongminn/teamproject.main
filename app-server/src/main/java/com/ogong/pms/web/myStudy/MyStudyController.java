@@ -18,17 +18,153 @@ import com.ogong.pms.vo.ToDo;
 @Controller
 public class MyStudyController {
 
-  @Autowired
-  SqlSessionFactory sqlSessionFactory;
-  @Autowired
-  StudyDao studyDao;
-  @Autowired
-  ToDoDao toDoDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired StudyDao studyDao;
+  @Autowired ToDoDao toDoDao;
+
 
   @GetMapping("/mystudy/list")
   public ModelAndView mystudyList(HttpSession session) throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
+
+    ModelAndView mv = new ModelAndView();
+
+    if (loginUser == null) {
+      mv.setViewName("redirect:../login");
+      return mv;
+    }
+
+    List<Study> studyList = studyDao.findAll();
+
+    List<Study> myStudyList = studyDao.findAllMyStudyByMyNo(loginUser.getPerNo());
+
+    if (myStudyList.isEmpty()) {
+      throw new Exception("가입한 스터디가 없습니다.");
+    }
+
+    // 조장
+    List<Study> ownerStudyList = new ArrayList<>();
+
+    for (Study study : studyList) {
+      if (study.getOwner().getPerNo() == loginUser.getPerNo()) {
+        ownerStudyList.add(study);
+      }
+    }
+
+    // 구성원
+    List<Study> guilderMembers = new ArrayList<>();
+
+    for (int i = 0; i < studyList.size(); i++) {
+      List<Member> guilders = studyDao.findByGuildersAll(studyList.get(i).getStudyNo());
+      studyList.get(i).setMembers(guilders);
+
+      for (Member mem : studyList.get(i).getMembers()) {
+        if (mem.getPerNo() == loginUser.getPerNo()) {
+          if (studyList.get(i).getOwner().getPerNo() != loginUser.getPerNo()) {
+            guilderMembers.add(studyList.get(i));
+          }
+        }
+      }
+    }
+
+    // 승인 대기
+    List<Study> waitingStudyList = new ArrayList<>();
+
+    for (int i = 0; i < studyList.size(); i++) {
+      List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
+      studyList.get(i).setWaitingMember(waiting);
+
+      for (Member mem : studyList.get(i).getWaitingMember()) {
+        if (loginUser.getPerNo() == mem.getPerNo()) {
+          waitingStudyList.add(studyList.get(i));
+        }
+      }
+    }
+
+    mv.addObject("ownerStudyList", ownerStudyList);
+    mv.addObject("guilderMembers", guilderMembers);
+    mv.addObject("waitingStudyList", waitingStudyList);
+    mv.addObject("myStudyList", myStudyList);
+    mv.addObject("pageTitle", "🗃 내 스터디 목록");
+    mv.addObject("contentUrl", "myStudy/MyStudyList.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  //  // 기존 내 스터디 목록
+  //  @GetMapping("/mystudy/list")
+  //  public ModelAndView mystudyList(HttpSession session) throws Exception {
+  //
+  //    Member loginUser = (Member) session.getAttribute("loginUser");
+  //    List<Study> studyList = studyDao.findAll();
+  //
+  //    // 조장
+  //    List<Study> ownerStudyList = new ArrayList<>();
+  //
+  //    for (Study study : studyList) {
+  //      if (study.getOwner().getPerNo() == loginUser.getPerNo()) {
+  //        ownerStudyList.add(study);
+  //      }
+  //    }
+  //
+  //    // 구성원
+  //    List<Study> guilderMembers = new ArrayList<>();
+  //
+  //    for (int i = 0; i < studyList.size(); i++) {
+  //      List<Member> guilders = studyDao.findByGuildersAll(studyList.get(i).getStudyNo());
+  //      studyList.get(i).setMembers(guilders);
+  //
+  //      for (Member mem : studyList.get(i).getMembers()) {
+  //        if (mem.getPerNo() == loginUser.getPerNo()) {
+  //          if (studyList.get(i).getOwner().getPerNo() != loginUser.getPerNo()) {
+  //            guilderMembers.add(studyList.get(i));
+  //          }
+  //        }
+  //      }
+  //    }
+  //
+  //    // 승인 대기
+  //    List<Study> waitingStudyList = new ArrayList<>();
+  //
+  //    for (int i = 0; i < studyList.size(); i++) {
+  //      List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
+  //      studyList.get(i).setWaitingMember(waiting);
+  //
+  //      for (Member mem : studyList.get(i).getWaitingMember()) {
+  //        if (loginUser.getPerNo() == mem.getPerNo()) {
+  //          waitingStudyList.add(studyList.get(i));
+  //        }
+  //      }
+  //    }
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //
+  //    mv.addObject("ownerStudyList", ownerStudyList);
+  //    mv.addObject("guilderMembers", guilderMembers);
+  //    mv.addObject("waitingStudyList", waitingStudyList);
+  //    mv.addObject("pageTitle", "🗃 내 스터디 목록");
+  //    mv.addObject("contentUrl", "myStudy/MyStudyList.jsp");
+  //    mv.setViewName("template1");
+  //
+  //    return mv;
+  //  }
+
+
+  @GetMapping("/mystudy/detail")
+  public ModelAndView mystudyDetail(HttpSession session, int studyNo) throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    ModelAndView mv = new ModelAndView();
+
+    // 사이드바 메뉴때문에 목록도 보내야함
+    if (loginUser == null) {
+      mv.setViewName("redirect:../login");
+      return mv;
+    }
+
     List<Study> studyList = studyDao.findAll();
 
     // 조장
@@ -70,32 +206,18 @@ public class MyStudyController {
       }
     }
 
-    ModelAndView mv = new ModelAndView();
-
     mv.addObject("ownerStudyList", ownerStudyList);
     mv.addObject("guilderMembers", guilderMembers);
     mv.addObject("waitingStudyList", waitingStudyList);
-    mv.addObject("pageTitle", "🗃 내 스터디 목록");
-    mv.addObject("contentUrl", "myStudy/MyStudyList.jsp");
-    mv.setViewName("template1");
 
-    return mv;
-  }
-
-  @GetMapping("/mystudy/detail")
-  public ModelAndView mystudyDetail(HttpSession session, int studyNo) throws Exception {
-
-    Member loginUser = (Member) session.getAttribute("loginUser");
-    ModelAndView mv = new ModelAndView();
-
+    // 상세 정보
     Study myStudy = studyDao.findByMyNo(studyNo, loginUser.getPerNo());
     List<ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());
 
     Integer guilderStatus = studyDao.findGuilderStatusByNo(studyNo, loginUser.getPerNo());
-    System.out.println(guilderStatus);
 
     if (guilderStatus == 1) {
-      mv.addObject("status", "waiting");
+      mv.addObject("status","waiting");
     }
 
     mv.addObject("member", loginUser);
@@ -106,6 +228,33 @@ public class MyStudyController {
     mv.setViewName("template1");
     return mv;
   }
+
+  //  // 기존 내 스터디 디테일
+  //  @GetMapping("/mystudy/detail")
+  //  public ModelAndView mystudyDetail(HttpSession session, int studyNo) throws Exception {
+  //
+  //    Member loginUser = (Member) session.getAttribute("loginUser");
+  //
+  //    ModelAndView mv = new ModelAndView();
+  //
+  //    Study myStudy = studyDao.findByMyNo(studyNo, loginUser.getPerNo());
+  //    List<ToDo> todoList = toDoDao.findAll(myStudy.getStudyNo());
+  //
+  //    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyNo, loginUser.getPerNo());
+  //    System.out.println(guilderStatus);
+  //
+  //    if (guilderStatus == 1) {
+  //      mv.addObject("status", "waiting");
+  //    }
+  //
+  //    mv.addObject("member", loginUser);
+  //    mv.addObject("study", myStudy);
+  //    mv.addObject("todoList", todoList);
+  //    mv.addObject("pageTitle", "🗃 내 스터디 상세");
+  //    mv.addObject("contentUrl", "myStudy/MyStudyDetail.jsp");
+  //    mv.setViewName("template1");
+  //    return mv;
+  //  }
 
   @GetMapping("/mystudy/updateform")
   public ModelAndView updateform(int studyno) throws Exception {
@@ -198,83 +347,5 @@ public class MyStudyController {
 
     return mv;
   }
-
-
-
-  @GetMapping("/mystudy/list2")
-  public ModelAndView mystudyList2(HttpSession session) throws Exception {
-
-    Member loginUser = (Member) session.getAttribute("loginUser");
-
-    ModelAndView mv = new ModelAndView();
-
-    if (loginUser == null) {
-      mv.addObject("pageTitle", "로그인 선택");
-      mv.addObject("contentUrl", "login.jsp");
-      mv.setViewName("template1");
-      return mv;
-    }
-
-    List<Study> studyList = studyDao.findAll();
-
-    List<Study> myStudyList = studyDao.findAllMyStudyByMyNo(loginUser.getPerNo());
-
-    if (myStudyList.isEmpty()) {
-      throw new Exception("가입한 스터디가 없습니다.");
-    }
-
-    // 조장
-    List<Study> ownerStudyList = new ArrayList<>();
-
-    for (Study study : studyList) {
-      if (study.getOwner().getPerNo() == loginUser.getPerNo()) {
-        ownerStudyList.add(study);
-      }
-    }
-
-    // 구성원
-    List<Study> guilderMembers = new ArrayList<>();
-
-    for (int i = 0; i < studyList.size(); i++) {
-      List<Member> guilders = studyDao.findByGuildersAll(studyList.get(i).getStudyNo());
-      studyList.get(i).setMembers(guilders);
-
-      for (Member mem : studyList.get(i).getMembers()) {
-        if (mem.getPerNo() == loginUser.getPerNo()) {
-          if (studyList.get(i).getOwner().getPerNo() != loginUser.getPerNo()) {
-            guilderMembers.add(studyList.get(i));
-          }
-        }
-      }
-    }
-
-    // 승인 대기
-    List<Study> waitingStudyList = new ArrayList<>();
-
-    for (int i = 0; i < studyList.size(); i++) {
-      List<Member> waiting = studyDao.findByWaitingGuilderAll(studyList.get(i).getStudyNo());
-      studyList.get(i).setWaitingMember(waiting);
-
-      for (Member mem : studyList.get(i).getWaitingMember()) {
-        if (loginUser.getPerNo() == mem.getPerNo()) {
-          waitingStudyList.add(studyList.get(i));
-        }
-      }
-    }
-
-    System.out.println(myStudyList);
-
-    mv.addObject("ownerStudyList", ownerStudyList);
-    mv.addObject("guilderMembers", guilderMembers);
-    mv.addObject("waitingStudyList", waitingStudyList);
-    mv.addObject("myStudyList", myStudyList);
-    mv.addObject("pageTitle", "🗃 내 스터디 목록");
-    mv.addObject("contentUrl", "myStudy/MyStudyList2.jsp");
-    mv.setViewName("template1");
-
-    return mv;
-  }
-
-
 
 }

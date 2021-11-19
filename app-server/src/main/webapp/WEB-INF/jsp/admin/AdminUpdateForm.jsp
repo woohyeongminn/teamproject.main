@@ -242,7 +242,7 @@
         </div>
         <div class="col-auto my-auto">
           <div class="h-100">
-            <h5 class="mb-1">
+            <h5 class="mb-1" style="color: #4e4847;">
               ${loginAdmin.masterNickname}
             </h5>
             <p class="mb-0 font-weight-normal text-sm">
@@ -283,11 +283,11 @@
               <div class="card-header pb-0 p-3">
                 <div class="row">
                   <div class="col-md-8 d-flex align-items-center">
-                    <h5 class="mb-0">Profile</h5>
+                    <h5 class="mb-0" style="color: #4e4847;">Profile</h5>
                   </div>
                   <div class="col-md-4 text-end">
                   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-									<button type="submit" class="btn btn-outline-dark" value="변경">변경</button> 
+									<button type="submit" class="btn btn-outline-dark" value="수정">수정</button> 
 									</div>
                     <a href="updateForm">
                       <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
@@ -298,9 +298,9 @@
               <br>
               <div class="card-body p-3">
                 <ul class="list-group">
-                  <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark" style="font-size: 14px;">Full Name:</strong> &nbsp; <input id='f-profile' type='text' name='masterNickname' autocomplete='off' placeholder='닉네임 👑'></li>
-                  <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark" style="font-size: 14px;">Email:</strong> &nbsp; <input id='f-profile' type='email' name='masterEmail' autocomplete='off' placeholder='이메일'> </li>
-                  <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark" style="font-size: 14px;">Password:</strong> &nbsp; <input id='f-profile' type='password' name='masterPassword' placeholder='비밀번호'> </li>
+                  <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark" style="font-size: 14px; color: #4e4847;">Full Name:</strong> &nbsp; <input id='f-profile' type='text' name='masterNickname' autocomplete='off' placeholder='닉네임 👑'></li>
+                  <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark" style="font-size: 14px; color: #4e4847;">Email:</strong> &nbsp; <input id='f-profile' type='email' name='masterEmail' autocomplete='off' placeholder='이메일'> </li>
+                  <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark" style="font-size: 14px; color: #4e4847;">Password:</strong> &nbsp; <input id='f-profile' type='password' name='masterPassword' placeholder='비밀번호'> </li>
                   <li class="list-group-item border-0 ps-0 pb-0">
                   </li>
                 </ul>

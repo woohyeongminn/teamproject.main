@@ -58,7 +58,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
-        <p style="font-size:14px; font-weight:bold; text-align: center; margin-bottom: 0;">${pageTitle}</p>
+        <p style="font-size:14px; font-weight:bold; text-align: center; margin-bottom: 0; color:#4e4847; ">${pageTitle}</p>
       </div>
     </section><!-- End Breadcrumbs -->
       

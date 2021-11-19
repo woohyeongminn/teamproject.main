@@ -16,8 +16,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-<%--   <link href="${contextPath}/css/assets/img/favicon.png" rel="icon"> --%>
-<link rel="icon" href="${contextPath}/img/favicon.ico" type="image/x-icon" sizes="16x16" style="background-color: rgba(255, 255, 255, 0);">
+	<%--   <link href="${contextPath}/css/assets/img/favicon.png" rel="icon"> --%>
+	<link rel="icon" href="${contextPath}/img/favicon.ico" type="image/x-icon" sizes="16x16" style="background-color: rgba(255, 255, 255, 0);">
   <link href="${contextPath}/css/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -32,12 +32,6 @@
 
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="${contextPath}/css/assets/css/style.css">
-  <!-- =======================================================
-  * Template Name: Rapid - v4.6.0
-  * Template URL: https://bootstrapmade.com/rapid-multipurpose-bootstrap-business-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>

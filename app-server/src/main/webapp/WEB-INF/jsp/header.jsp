@@ -26,7 +26,7 @@
             </c:when>
             
             <c:when test="${not empty loginUser}">
-              <li><a class="nav-link scrollto"  href="${contextPath}/app/mystudy/list2">내 스터디</a></li>
+              <li><a class="nav-link scrollto"  href="${contextPath}/app/mystudy/list">내 스터디</a></li>
             </c:when>
             
             <c:when test="${not empty loginCeoUser}">

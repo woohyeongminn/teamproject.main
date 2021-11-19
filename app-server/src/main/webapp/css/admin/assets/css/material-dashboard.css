@@ -7228,7 +7228,7 @@ textarea.form-control-lg {
   color: #f0f2f5 !important; }
 
 .text-dark {
-  color: #344767 !important; }
+  color: #4e4847 !important; }
 
 .text-white {
   color: #fff !important; }
@@ -15365,7 +15365,7 @@ hr.horizontal {
       border-radius: 0.875rem; }
   .nav.nav-pills .nav-link {
     z-index: 3;
-    color: #344767;
+    color: #4e4847;
     border-radius: 0.5rem;
     background-color: inherit; }
     .nav.nav-pills .nav-link.active {
