@@ -62,9 +62,11 @@
 				<c:forEach items="${studyList}" var="study">
 					<div class="col">
 						<div class="card">
+
+							<!-- 스터디 메인 -->
 							<div class="card-header">
 
-								<!-- 모집중 & 모집완료 -->
+								<!-- 스터디 모집 상태 -->
 								<c:choose>
 									<c:when
 										test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
@@ -83,8 +85,11 @@
 										<button type="button" class="btn btn-secondary btn-sm">모집완료</button>
 									</c:when>
 								</c:choose>
+
 								${study.subjectName}
 							</div>
+
+							<!-- 스터디 부가 정보 -->
 							<div class="card-body">
 								<h5 class="card-title" style="font-weight: bold">
 									<a href='detail?studyno=${study.studyNo}'>${study.studyTitle}</a>
@@ -108,14 +113,14 @@
 			<br>
 		</c:if>
 	</div>
+</body>
+</html>
 
-	<!-- <div class="offcanvas offcanvas-start" tabindex="-1"
+<!-- 주석해야 버튼 CSS 적용 가능 -->
+<!-- <div class="offcanvas offcanvas-start" tabindex="-1"
 		id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 		<jsp:include page="AdminMenu.jsp" />
 	</div> -->
-
-</body>
-</html>
 
 <!-- 기존 ver -->
 <!-- <table class="table table-hover">
