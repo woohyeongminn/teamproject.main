@@ -1,7 +1,7 @@
 package com.ogong.pms.dao;
 
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.vo.Admin;
+import com.ogong.pms.domain.Admin;
 
 public interface AdminDao {
 

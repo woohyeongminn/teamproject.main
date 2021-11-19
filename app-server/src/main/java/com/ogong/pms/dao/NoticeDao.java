@@ -1,7 +1,7 @@
 package com.ogong.pms.dao;
 
 import java.util.List;
-import com.ogong.pms.vo.AdminNotice;
+import com.ogong.pms.domain.AdminNotice;
 
 public interface NoticeDao {
 

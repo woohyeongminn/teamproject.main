@@ -3,8 +3,8 @@ package com.ogong.pms.dao;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.vo.Member;
-import com.ogong.pms.vo.Study;
+import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Study;
 
 public interface StudyDao {
 

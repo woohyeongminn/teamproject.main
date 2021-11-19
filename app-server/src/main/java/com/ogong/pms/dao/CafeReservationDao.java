@@ -3,7 +3,7 @@ package com.ogong.pms.dao;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.vo.CafeReservation;
+import com.ogong.pms.domain.CafeReservation;
 
 public interface CafeReservationDao {
 

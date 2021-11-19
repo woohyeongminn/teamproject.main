@@ -2,7 +2,7 @@ package com.ogong.pms.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import com.ogong.pms.vo.CafeRoom;
+import com.ogong.pms.domain.CafeRoom;
 
 public interface CafeRoomDao {
 

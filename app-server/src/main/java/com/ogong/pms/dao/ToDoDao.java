@@ -2,7 +2,7 @@ package com.ogong.pms.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.vo.ToDo;
+import com.ogong.pms.domain.ToDo;
 
 public interface ToDoDao {
   void insert(ToDo todo) throws Exception;

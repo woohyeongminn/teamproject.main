@@ -2,7 +2,7 @@ package com.ogong.pms.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.vo.Member;
+import com.ogong.pms.domain.Member;
 
 public interface MemberDao {
 

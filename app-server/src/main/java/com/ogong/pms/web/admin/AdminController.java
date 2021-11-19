@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AdminDao;
-import com.ogong.pms.vo.Admin;
+import com.ogong.pms.domain.Admin;
 
 @Controller
 public class AdminController {

@@ -2,7 +2,7 @@ package com.ogong.pms.dao;
 
 import java.util.Collection;
 import java.util.Map;
-import com.ogong.pms.vo.AskBoard;
+import com.ogong.pms.domain.AskBoard;
 
 public interface AskBoardDao {
 

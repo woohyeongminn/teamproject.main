@@ -1,25 +1,25 @@
-package com.ogong.pms.vo;
+package com.ogong.pms.domain;
 
-public class CafeRoomImage {
+public class CafeImage {
 
   private int no;
   private String name;
-  private int cafeRoomNo;
+  private int cafeNo;
 
-  public CafeRoomImage() {}
+  public CafeImage() {}
 
-  public CafeRoomImage(String name) {
+  public CafeImage(String name) {
     this.name = name;
   }
 
-  public CafeRoomImage(int no, String name) {
+  public CafeImage(int no, String name) {
     this.no = no;
     this.name = name;
   }
 
   @Override
   public String toString() {
-    return "CafeImage [no=" + no + ", name=" + name + ", cafeNo=" + cafeRoomNo + "]";
+    return "CafeImage [no=" + no + ", name=" + name + ", cafeNo=" + cafeNo + "]";
   }
 
   public int getNo() {
@@ -39,10 +39,10 @@ public class CafeRoomImage {
   }
 
   public int getCafeNo() {
-    return cafeRoomNo;
+    return cafeNo;
   }
 
   public void setCafeNo(int cafeNo) {
-    this.cafeRoomNo = cafeNo;
+    this.cafeNo = cafeNo;
   }
 }
