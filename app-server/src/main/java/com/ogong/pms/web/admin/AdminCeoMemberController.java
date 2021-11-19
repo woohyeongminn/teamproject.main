@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.vo.CeoMember;
 
 @Controller
 public class AdminCeoMemberController {
@@ -24,7 +24,7 @@ public class AdminCeoMemberController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("ceoMemberList", ceoMemberList);
-    mv.addObject("pageTitle", " 🏢 기업회원 목록");
+    mv.addObject("pageTitle", "🏢 기업 회원");
     mv.addObject("contentUrl", "admin/AdminCeoMemberList.jsp");
     mv.setViewName("template1");
     return mv;
@@ -44,7 +44,7 @@ public class AdminCeoMemberController {
 
     mv.addObject("ceoMember", ceoMember);
 
-    mv.addObject("pageTitle", " 🏢 기업회원 상세");
+    mv.addObject("pageTitle", " 🏢 기업 회원");
     mv.addObject("contentUrl", "admin/AdminCeoMemberDetail.jsp");
     mv.setViewName("template1");
     return mv;

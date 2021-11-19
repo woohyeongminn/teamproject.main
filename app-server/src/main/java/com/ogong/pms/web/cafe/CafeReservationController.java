@@ -19,10 +19,10 @@ import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeRoomDao;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CafeRoom;
-import com.ogong.pms.domain.Member;
+import com.ogong.pms.vo.Cafe;
+import com.ogong.pms.vo.CafeReservation;
+import com.ogong.pms.vo.CafeRoom;
+import com.ogong.pms.vo.Member;
 
 @Controller
 public class CafeReservationController {

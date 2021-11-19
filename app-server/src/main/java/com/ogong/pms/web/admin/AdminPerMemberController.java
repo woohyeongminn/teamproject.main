@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
-import com.ogong.pms.domain.Member;
+import com.ogong.pms.vo.Member;
 
 @Controller
 public class AdminPerMemberController {
@@ -39,7 +39,7 @@ public class AdminPerMemberController {
     }
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("pageTitle", "📖 개인 회원 상세");
+    mv.addObject("pageTitle", "📖 개인 회원");
     mv.addObject("perMember", perMember);
     mv.addObject("contentUrl", "admin/AdminPerMemberDetail.jsp");
     mv.setViewName("template1");

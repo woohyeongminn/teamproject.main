@@ -13,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.dao.ToDoDao;
-import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
-import com.ogong.pms.domain.ToDo;
+import com.ogong.pms.vo.Member;
+import com.ogong.pms.vo.Study;
+import com.ogong.pms.vo.ToDo;
 
 @Controller
 public class ToDoController extends HttpServlet {

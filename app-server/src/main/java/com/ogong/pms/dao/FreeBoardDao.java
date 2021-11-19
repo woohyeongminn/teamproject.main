@@ -2,8 +2,8 @@ package com.ogong.pms.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.domain.FreeBoard;
-import com.ogong.pms.domain.FreeBoardFile;
+import com.ogong.pms.vo.FreeBoard;
+import com.ogong.pms.vo.FreeBoardFile;
 
 public interface FreeBoardDao {
   List<FreeBoard> findAll(int studyNo) throws Exception;

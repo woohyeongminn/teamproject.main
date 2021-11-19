@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.StudyDao;
-import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
+import com.ogong.pms.vo.Member;
+import com.ogong.pms.vo.Study;
 
 @Controller
 public class StudyController {
@@ -156,6 +156,7 @@ public class StudyController {
     studyDao.updateNumberOfPeple(study);
     studyDao.updateFaceNo(study);
     studyDao.updateIntroduction(study);
+    studyDao.updateStudyStatus(study);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

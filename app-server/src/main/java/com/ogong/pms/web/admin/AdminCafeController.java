@@ -1,6 +1,6 @@
 package com.ogong.pms.web.admin;
 
-import static com.ogong.pms.domain.Cafe.DELETE;
+import static com.ogong.pms.vo.Cafe.DELETE;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
-import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.vo.Cafe;
+import com.ogong.pms.vo.CafeReview;
 
 @Controller
 public class AdminCafeController {

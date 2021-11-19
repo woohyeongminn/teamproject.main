@@ -3,8 +3,8 @@ package com.ogong.pms.dao;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.domain.Member;
-import com.ogong.pms.domain.Study;
+import com.ogong.pms.vo.Member;
+import com.ogong.pms.vo.Study;
 
 public interface StudyDao {
 
@@ -15,6 +15,7 @@ public interface StudyDao {
   void updateNumberOfPeple(Study study) throws Exception;
   void updateFaceNo(Study study) throws Exception;
   void updateIntroduction(Study study) throws Exception;
+  void updateStudyStatus(Study study) throws Exception;
   void deleteAllBookmark(int studyNo) throws Exception;
   List<Study> findAll() throws Exception;
   List<Study> findAllIng() throws Exception;

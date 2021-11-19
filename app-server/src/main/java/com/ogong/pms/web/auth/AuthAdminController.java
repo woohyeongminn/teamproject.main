@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AdminDao;
-import com.ogong.pms.domain.Admin;
+import com.ogong.pms.vo.Admin;
 
 @Controller
 public class AuthAdminController {
@@ -48,9 +48,7 @@ public class AuthAdminController {
 
     if (admin != null) {
       session.setAttribute("loginAdmin", admin);
-      mv.addObject("pageTitle", "🖐 오늘의 공부 로그인");
-      mv.addObject("contentUrl", "admin/AdminLogin.jsp");
-      mv.setViewName("template1");
+      mv.setViewName("redirect:detail");
     }
 
     else {

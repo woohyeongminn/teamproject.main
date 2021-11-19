@@ -2,7 +2,7 @@ package com.ogong.pms.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import com.ogong.pms.domain.Comment;
+import com.ogong.pms.vo.Comment;
 
 public interface CommentDao {
   List<Comment> findAll(int boardNo) throws Exception;

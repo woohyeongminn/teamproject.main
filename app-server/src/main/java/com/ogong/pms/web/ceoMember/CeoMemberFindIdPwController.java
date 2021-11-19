@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.util.RandomPw;
 import com.ogong.pms.util.SendMail;
+import com.ogong.pms.vo.CeoMember;
 
 @Controller
 public class CeoMemberFindIdPwController  {
