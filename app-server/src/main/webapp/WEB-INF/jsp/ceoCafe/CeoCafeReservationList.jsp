@@ -27,6 +27,26 @@ font-size: 12px;
 
 <body>
 <div class="all-content">
+
+<div id="search">
+    <form action="list">
+    <i class="fas fa-search"></i>
+    <span>조회기간</span>
+    <select name="searchDate">
+      <option value="1">예약날짜</option>
+      <option value="2">이용날짜</option>
+    </select>
+    <input type="date" name="startDate"> ~ <input type="date" name="endDate">
+    <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">조회</button>
+    </form>
+  </div>
+  <div>
+    <c:if test="${not empty startDate}">
+      <i class="fas fa-check"></i>
+      <span> 검색 | ${startDate} ~ ${endDate} </span> 
+    </c:if>
+  </div>
+  
 <c:if test='${not empty reserList}'>
 <table class="table table-responsive text-cente">
 <thead class="t-top">

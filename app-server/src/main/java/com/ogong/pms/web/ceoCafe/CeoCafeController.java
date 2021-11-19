@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
@@ -110,7 +112,9 @@ public class CeoCafeController {
 
   // 카페 등록
   @PostMapping("/ceomember/cafe/add")
-  public ModelAndView ceoCafeAdd(HttpSession session, Cafe cafe, String inputOpenTime, String inputCloseTime, Part photoFile) throws Exception {
+  @RequestMapping(value = "fileupload2")
+  public ModelAndView ceoCafeAdd(HttpSession session, Cafe cafe, String inputOpenTime, String inputCloseTime,
+      MultipartHttpServletRequest mRequest, Part picFile) throws Exception {
 
     CeoMember loginCeo = (CeoMember) session.getAttribute("loginCeoUser");
 
@@ -122,9 +126,23 @@ public class CeoCafeController {
 
     cafe.setCeoMember(ceoMember); 
 
-    if (photoFile.getSize() > 0) {
+    //    List<MultipartFile> fileList = mRequest.getFiles("file");
+    //    String src = mRequest.getParameter("src");
+
+    //    for (MultipartFile mf : fileList) {
+    //      String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+    //      long fileSize = mf.getSize(); // 파일 사이즈
+    //
+    //      System.out.println("originFileName : " + originFileName);
+    //      System.out.println("fileSize : " + fileSize);
+    //
+    //      String safeFile = path + originFileName;
+    //      
+
+    if (picFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
-      photoFile.write(sc.getRealPath("/upload/cafe") + "/" + filename);
+      picFile.write(sc.getRealPath("/upload/cafe") + "/" + filename);
+
       //cafe.setCafeImgs(request.getParameter("filename[]"));
 
       Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)

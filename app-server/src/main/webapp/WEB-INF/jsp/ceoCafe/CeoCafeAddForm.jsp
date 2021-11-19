@@ -119,7 +119,7 @@ ul {
 		  <div class = "cafe-top">
 		    <!-- 여러개 등록 -->
       <div class="cafeImg"></div>
-     <!-- <input type="file" multiple="multiple" name="photoFile"> -->
+     <input multiple="multiple"  type="file" name="picFile" required="required">
     </div>
 	  
 		  <!-- 카페 상세 글 부분 -->      
@@ -156,3 +156,26 @@ ul {
     
   </form>
 </body>
+
+<script src='../node_modules/jquery/dist/jquery.js'></script>
+<script src="../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script>
+"use strict"
+
+$('#fileupload').fileupload({
+  url: 'upload.jsp',        // 서버에 요청할 URL
+  dataType: 'json',         // 서버가 보낸 응답이 JSON임을 지정하기
+  sequentialUploads: true,  // 여러 개의 파일을 업로드 할 때 순서대로 요청하기. 기본 값 false.
+  singleFileUploads: false, // 한 요청에 여러 개의 파일을 전송시키기. 기본 값 true.
+  done: function (e, data) { // 서버에서 응답이 오면 호출된다. 각 파일 별로 호출된다.
+    console.log('done()...');
+    console.log(data.result);
+    $.each(data.result.photoFile, function(index, file) {
+      $('<p/>').text(file.filename + " : " + file.filesize).appendTo(document.body);
+    });
+  }
+}); 
+
+</script>
