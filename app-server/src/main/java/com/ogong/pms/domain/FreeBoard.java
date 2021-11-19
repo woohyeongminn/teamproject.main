@@ -1,4 +1,4 @@
-package com.ogong.pms.vo;
+package com.ogong.pms.domain;
 
 import java.sql.Date;
 import java.util.ArrayList;

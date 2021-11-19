@@ -10,9 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.dao.CafeRoomDao;
-import com.ogong.pms.vo.Cafe;
-import com.ogong.pms.vo.CafeReview;
-import com.ogong.pms.vo.CafeRoom;
+import com.ogong.pms.domain.Cafe;
+import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.domain.CafeRoom;
 
 @Controller
 public class CafeController {

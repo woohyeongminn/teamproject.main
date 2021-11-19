@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.vo.CeoMember;
+import com.ogong.pms.domain.CeoMember;
 
 @WebServlet("/ceomember/find")
 public class CeoFindIdPwHandler extends HttpServlet {

@@ -1,4 +1,4 @@
-package com.ogong.pms.vo;
+package com.ogong.pms.domain;
 
 public class FreeBoardFile {
 
