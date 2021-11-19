@@ -4,6 +4,29 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
+    <!-- plugins:js -->
+  <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  
+  <!-- Plugin js for this page -->
+  <script src="${contextPath}/css/study/vendors/chart.js/Chart.min.js"></script>
+  <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
+  <!-- End plugin js for this page -->
+  
+  <!-- inject:js -->
+  <script src="${contextPath}/css/study/js/hoverable-collapse.js"></script>
+  <script src="${contextPath}/css/study/js/template.js"></script>
+  <script src="${contextPath}/css/study/js/settings.js"></script>
+  <script src="${contextPath}/css/study/js/todolist.js"></script>
+  <!-- endinject -->
+  
+  <!-- Custom js for this page-->
+  <script src="${contextPath}/css/study/js/dashboard.js"></script>
+  <!-- End custom js for this page-->
+  
   <!-- plugins:css -->
   <link rel="stylesheet" href="${contextPath}/css/study/vendors/feather/feather.css">
   <link rel="stylesheet" href="${contextPath}/css/study/vendors/ti-icons/css/themify-icons.css">
@@ -18,8 +41,8 @@
   
   <!-- inject:css -->
   <link rel="stylesheet" href="${contextPath}/css/study/css/vertical-layout-light/style.css">
-  
-   <style>
+
+  <style>
   .navbar {
     -webkit-box-shadow: 0;
     -moz-box-shadow: 0;
@@ -33,10 +56,9 @@
     max-height: 680px;
     padding: 30px;
   } 
-  
   .page-body-wrapper {
     padding-top: 0;
-  } 
+  }
   
   .sidebar .nav .nav-item .nav-link {
     color: black;
@@ -67,45 +89,42 @@
     color:black;
   }
  
-  .sidebar .nav.sub-menu .nav-item .nav-link:hover {
+ .sidebar .nav.sub-menu .nav-item .nav-link:hover {
     color:black;
     font-weight: bold;
   }
  
-  .sidebar .nav .nav-item.active > .nav-link:horver {
-    color:black;
-}
-
-  .menu-title {
-    font-weight: bold;
+ .menu-title {
+  font-weight: bold;
   }
  
-  .table thead th {
+ .table thead th {
     font-size: 14px;
   }
  
-  .table td, .jsgrid .jsgrid-table td {
+ .table td, .jsgrid .jsgrid-table td {
     font-size: 14px;
   } 
 
-  .study-table {
+.study-table {
     display: table-caption;
     height: 470px;
     overflow: scroll;
   }   
 
-  .study-table > th {
+.study-table > th {
     text-align: center;
   }
   
-  a {
-    text-decoration: none;
-    color: black;
+      
+ a {
+  text-decoration: none;
+  color: black;
   }
 
-  a:hover{
-    text-decoration: none;
-    color: black;
+ a:hover{
+  text-decoration: none;
+  color: black;
   }
   
   .studyInfo {
@@ -135,31 +154,70 @@
     color: black;
     background: transparent;
   }
+  
+  /* 투두 */
 
-    
+button#buttonsave {
+   background-color: white;
+}
+
+button#buttonsave:hover {
+  font-weight: bold;
+}
+
+
+.btn-group {
+    padding: 11px;
+    margin-top: 129px;
+    padding-left: 88px;
+}
+
+.addForm-control {
+    width: 367px;
+    padding: 0;
+    margin: 0;
+    height: 38px;
+    border: 0;
+    border-bottom: 1px solid gray;
+}
+
+.todoAddBtn {
+    font-size: 16px;
+    position: absolute;
+    z-index: 99999;
+    right: 0;
+    bottom: 6px;
+    height: 23px;
+    width: 46px;
+    border: 0;
+    margin: 0;
+}
+
+.list-group {
+    height: 267px;
+    overflow: scroll;
+}
+
+.todoDeleteBtn {
+    border: 0;
+    font-size: 13px;
+    position: absolute;
+    right: 12px;
+    bottom: 26%;
+    background-color: white;
+   } 
+   
+  .studyBtn {
+   padding: 10px 30px;
+   border-radius: 10px;
+  }
+  
 </style>
 
 <body>
-<div class="container-scroller">
-  <div class="container-fluid page-body-wrapper">
-    
-      <!-- temp -->
-      <div id="right-sidebar" class="settings-panel">
-        <i class="settings-close ti-close"></i>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">MEMBERS</a>
-          </li>
-        </ul>
-        
-        <div class="tab-content" id="setting-content">
-          <p>스터디를 먼저 선택하세요</p>
-        </div>
-      </div><!-- temp -->
-      
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper">
+
       <!-- side nav-->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
@@ -218,7 +276,7 @@
           </li>
         </ul>
       </nav><!-- side nav-->
-   
+
       <%-- main-panel --%>
       <div class="main-panel">
         <div class="content-wrapper">
@@ -265,159 +323,165 @@
                 <br>
             </div> <%-- end col-6 --%>
             
-            <div class="col-6" style="padding: 25px; font-size: 14px;">
-             <c:if test='${study.owner.perNo == loginUser.perNo}'>
-              <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark">수정</a>
-                  
-              <c:if test="${!(study.countMember > '1')}">
-                <button type="button" class="btn btn-outline-dark" onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
-              </c:if>
-             </c:if>
-            
-            <button type="button" class="btn btn-outline-dark" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">
-            <c:if test="${status == 'waiting'}">
-              가입 취소
-            </c:if>
-            <c:if test="${status != 'waiting'}">
-            탈퇴
-            </c:if>
-            </button>
-            </div> <%-- end col-6 --%>
-          </div> <%-- end row studyInfo --%>
+            <div class="col-6 btn-group">
+	             <c:if test='${study.owner.perNo == loginUser.perNo}'>
+	              <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark studyBtn">수정</a>
+	                  
+	              <c:if test="${!(study.countMember > '1')}">
+	                <button type="button" class="btn btn-outline-dark studyBtn" onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
+	              </c:if>
+	             </c:if>
+	            
+	            <button type="button" class="btn btn-outline-dark studyBtn" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">
+	            <c:if test="${status == 'waiting'}">
+	              가입 취소
+	            </c:if>
+	            <c:if test="${status != 'waiting'}">
+	            탈퇴
+	            </c:if>
+	            </button>
+           </div> <%-- end col-6 --%>
+         </div> <%-- end row studyInfo --%>
+          
+          
+          
+          
           
           <c:if test="${status != 'waiting'}">
           
           <%-- row sub-items --%>
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
-              <%-- <jsp:include page="todo/ToDoPopup.jsp"/> --%>
-               <%-- 여기 --%>
-               <div class="col-md-6 grid-margin stretch-card">
+            
+              <%-- TO DO --%>
+              <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">To Do Lists</h4>
-                    <div class="list-wrapper pt-2">
-                      <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                        <li>
-                          <div class="form-check form-check-flat">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox">
-                              Meeting with Urban Team
-                            </label>
-                          </div>
-                          <i class="remove ti-close"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check form-check-flat">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked>
-                              Duplicate a project for new customer
-                            </label>
-                          </div>
-                          <i class="remove ti-close"></i>
-                        </li>
-                        <li>
-                          <div class="form-check form-check-flat">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox">
-                              Project meeting with CEO
-                            </label>
-                          </div>
-                          <i class="remove ti-close"></i>
-                        </li>
-                        <li class="completed">
-                          <div class="form-check form-check-flat">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox" checked>
-                              Follow up of team zilla
-                            </label>
-                          </div>
-                          <i class="remove ti-close"></i>
-                        </li>
-                        <li>
-                          <div class="form-check form-check-flat">
-                            <label class="form-check-label">
-                              <input class="checkbox" type="checkbox">
-                              Level up for Antony
-                            </label>
-                          </div>
-                          <i class="remove ti-close"></i>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="add-items d-flex mb-0 mt-2">
-                      <input type="text" class="form-control todo-list-input"  placeholder="Add new task">
-                      <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-md-6 grid-margin transparent">
-              <div class="row">
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card" style="background-color: #fbb172">
-                    <a href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}' style="text-decoration: none;">
-                      <div class="card-body" style="color: white;">
-                        <p class="mb-4">구성원</p>
-                        <p class="fs-30 mb-2">Guilder</p>
-                        <p>Member ${study.countMember}/${study.numberOfPeple}</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4 stretch-card transparent">
-                  <div class="card" style="background-color: #ed6e99">
-                    <a href="${contextPath}/app/mystudy/freeboard/list?studyno=${study.studyNo}" style="text-decoration: none;">
-                      <div class="card-body" style="color: white;">
-                        <p class="mb-4">자유게시판</p>
-                        <p class="fs-30 mb-2">Board</p>
-                        <p>new!</p>
-                      </div>
-                    </a>
+                  <div class="card-body" style="padding: 5px;">
+								    <div class="input-group mb-3">
+									    <form action='todo/add' method='post' id="todobox">
+									       <input type='hidden' name='studyNo' value='${study.studyNo}'>
+									       <input type="text" class="addForm-control" id="input" name='todoContent'>
+									       <input id='f-progress_no' type='hidden' class="form-control" name='todocomplete' value="진행 중" readonly>
+									       <input id='f-progress_no' type='hidden' class="form-control" name='todoStatus' value="1" readonly>
+									       <input id='f-writer' type='hidden' class="form-control" value='${member.perNickname}' readonly>
+									       <button class="todoAddBtn" type="submit" id="buttonsave">입력</button>
+									    </form>
+								    </div>
+								  
+									  <ul class="list-group" id="list">
+									    <li class="list-group-item">📋 TO DO LIST</li>
+									      <c:if test="${empty todoList}">
+									        등록된 To-Do List가 없습니다.
+									      </c:if>
+									      <c:forEach items="${todoList}" var="todo">
+										      <c:if test="${not empty todoList}">
+										        <li class="list-group-item" style="text-align: justify;">${todo.todoContent}
+										          <form action='todo/delete' id="tododelete">
+											          <input type='hidden' name='studyno' value='${study.studyNo}'>
+											          <input type='hidden' name='todono' value='${todo.todoNo}'>
+											          <button class="todoDeleteBtn" type='submit' onclick='remove("+cnt+")'>삭제</button>
+										          </form>
+										        </li>
+										      </c:if>
+									      </c:forEach>
+									  </ul>
                   </div>
                 </div>
               </div>
-              
-              <div class="row">
-                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
-                  <div class="card" style="background-color: #7bc9b2">
-                    <a href='${contextPath}/app/mystudy/calendar/list' style="text-decoration: none;">
-                      <div class="card-body" style="color: white;">
-                        <p class="mb-4">캘린더</p>
-                        <p class="fs-30 mb-2">Calender</p>
-                        <p>2021-11-17</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-6 stretch-card transparent">
-                  <div class="card" style="background-color: #49a3f1">
-                    <a href='${contextPath}/app/mystudy/test?studyno=${study.studyNo}' style="text-decoration: none;">
-                      <div class="card-body" style="color: white;">
-                        <p class="mb-4">화상미팅</p>
-                        <p class="fs-30 mb-2">Meet</p>
-                        <p>Today Study</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
+	            <div class="col-md-6 grid-margin transparent">
+	              <div class="row">
+	                <div class="col-md-6 mb-4 stretch-card transparent">
+	                  <div class="card" style="background-color: #fbb172">
+	                    <a href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}' style="text-decoration: none;">
+	                      <div class="card-body" style="color: white;">
+	                        <p class="mb-4">구성원</p>
+	                        <p class="fs-30 mb-2">Guilder</p>
+	                        <p>Member ${study.countMember}/${study.numberOfPeple}</p>
+	                      </div>
+	                    </a>
+	                  </div>
+	                </div>
+	                <div class="col-md-6 mb-4 stretch-card transparent">
+	                  <div class="card" style="background-color: #ed6e99">
+	                    <a href="${contextPath}/app/mystudy/freeboard/list?studyno=${study.studyNo}" style="text-decoration: none;">
+	                      <div class="card-body" style="color: white;">
+	                        <p class="mb-4">자유게시판</p>
+	                        <p class="fs-30 mb-2">Board</p>
+	                        <p>new!</p>
+	                      </div>
+	                    </a>
+	                  </div>
+	                </div>
+	              </div>
+	              
+	              <div class="row">
+	                <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
+	                  <div class="card" style="background-color: #7bc9b2">
+	                    <a href='${contextPath}/app/mystudy/calendar/list' style="text-decoration: none;">
+	                      <div class="card-body" style="color: white;">
+	                        <p class="mb-4">캘린더</p>
+	                        <p class="fs-30 mb-2">Calender</p>
+	                        <p>2021-11-17</p>
+	                      </div>
+	                    </a>
+	                  </div>
+	                </div>
+	                <div class="col-md-6 stretch-card transparent">
+	                  <div class="card" style="background-color: #49a3f1">
+	                    <a href='${contextPath}/app/mystudy/test?studyno=${study.studyNo}' style="text-decoration: none;">
+	                      <div class="card-body" style="color: white;">
+	                        <p class="mb-4">화상미팅</p>
+	                        <p class="fs-30 mb-2">Meet</p>
+	                        <p>Today Study</p>
+	                      </div>
+	                    </a>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
           </div>
         </div> <%-- end row sub-items --%>
         </c:if>
+        
        </div> <%-- end content-wrapper --%>
      </div> <%-- main-panel --%>
+     
+     </div>
+   </div>
+  
+  
+  
+  
+  <!-- 투두 -->
+  <script type="text/javascript">
+  var button = document.getElementById('buttonsave');
+  var input = document.getElementById('input');
+  var list = document.getElementById('list');
+  var cnt = 1;
 
+  button.addEventListener('click', clickButton);
 
-  </div> <!-- end page-body-wrapper -->
-  </div> <!-- end container-scroller -->
+  function clickButton() {
+    var temp = document.createElement('li');
+    temp.setAttribute("class", "list-group-item");
+    temp.setAttribute("id", "li"+cnt);
+    temp.innerHTML = input.value;
+   /*  temp.innerHTML += "<button style='float: right;' class='btn btn-outline-dark' type='button' onclick='remove("+cnt+")'>삭제</button>"; */
+    temp.innerHTML += "<button class="todoDeleteBtn" type='submit' onclick='remove("+cnt+")'>삭제</button>";
+    list.appendChild(temp);
+    cnt++;
+  }
 
+  function remove(cnt) {
+    //window.alert(cnt);
+    var li = document.getElementById('li'+cnt);
+    list.removeChild(li);
+  }
+  </script>
 
-
-
-
-  <script>
+  
+  <script type="text/javascript">
   <!-- 내 스터디 삭제 -->
   function delBtn_click(waitingGuilder) {
     if (waitingGuilder > 0) {
@@ -446,8 +510,7 @@
       }
 
     } else if (waitingGuilder > 0) {
-      /* if (confirm("스터디 탈퇴 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 탈퇴하시겠습니까?") == true) { */
-      if (confirm("승인 대기 중인 스터디에서 탈퇴됩니다.\n정말 탈퇴하시겠습니까?") == true) {
+      if (confirm("스터디 탈퇴 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 탈퇴하시겠습니까?") == true) {
         location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
       } else {
         return false;
@@ -462,28 +525,7 @@
     }
   }
   </script>
+   
 
-  <!-- plugins:js -->
-  <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  
-  <!-- Plugin js for this page -->
-  <script src="${contextPath}/css/study/vendors/chart.js/Chart.min.js"></script>
-  <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
-  <!-- End plugin js for this page -->
-  
-  <!-- inject:js -->
-  <script src="${contextPath}/css/study/js/off-canvas.js"></script>
-  <script src="${contextPath}/css/study/js/hoverable-collapse.js"></script>
-  <script src="${contextPath}/css/study/js/template.js"></script>
-  <script src="${contextPath}/css/study/js/settings.js"></script>
-  <script src="${contextPath}/css/study/js/todolist.js"></script>
-  <!-- endinject -->
-  
-  <!-- Custom js for this page-->
-  <script src="${contextPath}/css/study/js/dashboard.js"></script>
-  <script src="${contextPath}/css/study/js/Chart.roundedBarCharts.js"></script>
-  <!-- End custom js for this page-->
 </body>
+      

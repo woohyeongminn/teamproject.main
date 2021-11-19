@@ -108,23 +108,6 @@
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper">
       
-      <!-- temp -->
-      <div id="right-sidebar" class="settings-panel">
-        <i class="settings-close ti-close"></i>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">MEMBERS</a>
-          </li>
-        </ul>
-        
-        <div class="tab-content" id="setting-content">
-          <p>스터디를 먼저 선택하세요</p>
-        </div>
-      </div><!-- temp -->
-      
       <!-- side nav-->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
@@ -233,7 +216,7 @@
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
   aTag.target.onclick = () => false;
-});
+});                
 
 var trList = document.querySelectorAll("tbody tr");
 trList.forEach(function(trTag) {
