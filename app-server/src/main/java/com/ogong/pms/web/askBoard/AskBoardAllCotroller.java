@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
-import com.ogong.pms.domain.AskBoard;
+import com.ogong.pms.vo.AskBoard;
 
 @Controller
 public class AskBoardAllCotroller {

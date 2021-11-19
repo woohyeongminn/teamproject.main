@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.CafeReservation;
-import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.vo.CafeReservation;
+import com.ogong.pms.vo.CeoMember;
 import com.ogong.pms.web.cafe.CafeHandlerHelper;
 
 @Controller

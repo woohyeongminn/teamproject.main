@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
-import com.ogong.pms.domain.AskBoard;
-import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.vo.AskBoard;
+import com.ogong.pms.vo.CeoMember;
 
 @Controller
 public class AskBoardCeoCotroller {

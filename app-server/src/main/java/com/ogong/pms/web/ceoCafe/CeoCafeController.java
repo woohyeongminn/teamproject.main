@@ -1,6 +1,6 @@
 package com.ogong.pms.web.ceoCafe;
 
-import static com.ogong.pms.domain.Cafe.DELETE;
+import static com.ogong.pms.vo.Cafe.DELETE;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
@@ -17,9 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReview;
-import com.ogong.pms.domain.CeoMember;
+import com.ogong.pms.vo.Cafe;
+import com.ogong.pms.vo.CafeReview;
+import com.ogong.pms.vo.CeoMember;
 import com.ogong.pms.web.cafe.CafeHandlerHelper;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;

@@ -1,9 +1,9 @@
 package com.ogong.pms.web.cafe;
 
-import static com.ogong.pms.domain.Cafe.DELETE;
-import static com.ogong.pms.domain.Cafe.GENERAL;
-import static com.ogong.pms.domain.Cafe.STOP;
-import static com.ogong.pms.domain.Cafe.WAIT;
+import static com.ogong.pms.vo.Cafe.DELETE;
+import static com.ogong.pms.vo.Cafe.GENERAL;
+import static com.ogong.pms.vo.Cafe.STOP;
+import static com.ogong.pms.vo.Cafe.WAIT;
 
 public abstract class CafeHandlerHelper {
 

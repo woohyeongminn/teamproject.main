@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
-import com.ogong.pms.domain.CafeReview;
+import com.ogong.pms.vo.CafeReview;
 
 @Controller
 public class AdminCafeReviewControlHandler {

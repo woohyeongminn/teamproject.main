@@ -1,6 +1,6 @@
 package com.ogong.pms.dao;
 
-import com.ogong.pms.domain.Study;
+import com.ogong.pms.vo.Study;
 
 public interface StudyGuilderDao {
 

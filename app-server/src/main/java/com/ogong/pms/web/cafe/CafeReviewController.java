@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
 import com.ogong.pms.dao.CafeReviewDao;
-import com.ogong.pms.domain.CafeReview;
-import com.ogong.pms.domain.Member;
+import com.ogong.pms.vo.CafeReview;
+import com.ogong.pms.vo.Member;
 
 @Controller
 public class CafeReviewController {
