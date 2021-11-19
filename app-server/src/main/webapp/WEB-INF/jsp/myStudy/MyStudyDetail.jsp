@@ -412,7 +412,7 @@
               <div class="row">
                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                   <div class="card" style="background-color: #7bc9b2">
-                    <a href='${contextPath}/app/mystudy/calendar/list' style="text-decoration: none;">
+                    <a href='${contextPath}/app/mystudy/calendar/list?studyNo=${study.studyNo}' style="text-decoration: none;">
                       <div class="card-body" style="color: white;">
                         <p class="mb-4">캘린더</p>
                         <p class="fs-30 mb-2">Calender</p>
@@ -496,6 +496,153 @@
   }
   </script>
 
+<br>
+<br>
+<br>
+
+<div class="all-content">
+
+	<input type='hidden' name='subjectNo' value='${study.subjectNo}'>
+
+	<br>
+	<table class="table table-hover text-center">
+		<thead>
+
+			<tr id="first">
+				<th scope="col"></th>
+				<th scope="col" id="title">| 📰 ${study.studyTitle} ✏ |</th>
+				<th scope="col"><c:choose>
+						<c:when test="${study.countMember < study.numberOfPeple}">
+	    [모집 중]
+	    </c:when>
+						<c:otherwise>
+	    [모집 완료]
+	    </c:otherwise>
+					</c:choose></th>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-studyNo'>번호</label></th>
+				<td><input id='f-studyNo' type='text' name='studyNo'
+					value="${study.studyNo}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-bookMember'>북마크</label></th>
+				<td><input id='f-bookMember' type='text' name='bookMember'
+					value="${study.countBookMember}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-owner'>조장</label></th>
+				<td><input id='f-owner' type='text' name='owner'
+					value="${study.owner.perNickname}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-subjectName'>분야</label></th>
+				<td><input id='f-subjectName' type='text' name='subjectName'
+					value="${study.subjectName}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-area'>지역</label></th>
+				<td><input id='f-area' type='text' name='area'
+					value="${study.area}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-countMember'>인원수</label></th>
+				<td><input id='f-countMember' type='text' name='countMember'
+					value="${study.countMember}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-numberOfPeple'>최대 인원수</label></th>
+				<td><input id='f-numberOfPeple' type='text'
+					name='numberOfPeple' value="${study.numberOfPeple}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="middlebox">
+				<th scope="row"><label for='f-faceName'>대면 상태</label></th>
+				<td><input id='f-faceName' type='text' name='faceName'
+					value="${study.faceName}" readonly></td>
+				<td></td>
+			</tr>
+
+			<tr id="blockbox">
+				<th scope="row"><label for='f-introduction'>소개글</label></th>
+				<td><textarea id='f-introduction' type='text'
+						name='introduction' rows="3" wrap="virtual" readonly>${study.introduction}</textarea></td>
+				<td></td>
+			</tr>
+
+			<tr id="bottombox">
+				<th scope="row"><label for='f-point'>활동 점수</label></th>
+				<td><input id='f-point' type='text' name='point'
+					value="${study.point}" readonly></td>
+				<td></td>
+			</tr>
+
+		</thead>
+	</table>
+
+	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		<c:choose>
+			<c:when test="${status == 'waiting'}">
+				<button type="submit" class="btn btn-outline-dark" value="목록">
+					<a href='list'>목록</a>
+				</button>
+			</c:when>
+			<c:otherwise>
+				<button type="submit" class="btn btn-outline-dark" value="목록">
+					<a href='list'>목록</a>
+				</button>
+				<c:if test='${study.owner.perNo == loginUser.perNo}'>
+					<a
+						href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'
+						class="btn btn-outline-dark" formaction="updateform">수정</a>
+					<c:if test="${!(study.countMember > '1')}">
+						<button type="button" class="btn btn-outline-dark"
+							onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
+						<!-- <button class="btn btn-outline-dark"
+							onclick="delBtn_click(${study.waitingCountMember}); return delete(${study.studyNo});">삭제</button> -->
+					</c:if>
+				</c:if>
+				<button type="button" class="btn btn-outline-dark"
+					onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">탈퇴</button>
+				<!-- <button class="btn btn-outline-dark"
+					onclick="exitBtn_click(${study.CountMember}, ${study.waitingCountMember}); return exit(${study.studyNo});">탈퇴</button> -->
+				<button type="submit" class="btn btn-outline-dark" value="구성원">
+					<a
+						href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>구성원</a>
+				</button>
+				<button type="submit" class="btn btn-outline-dark" value="캘린더">
+					<a href='${contextPath}/app/mystudy/calendar/list?studyNo=${study.studyNo}'>캘린더</a>
+				</button>
+				<button type="submit" class="btn btn-outline-dark" value="자유 게시판">
+					<a
+						href="${contextPath}/app/mystudy/freeboard/list?studyno=${study.studyNo}">자유
+						게시판</a>
+				</button>
+				<button type="submit" class="btn btn-outline-dark" value="화상미팅">
+					<a href='${contextPath}/app/mystudy/test?studyno=${study.studyNo}'>화상미팅</a></button>
+				</button>
+				<button id="popup_open_btn" class="btn btn-outline-dark">To-Do</button>
+				<!-- todo 모달 -->
+				<jsp:include page="todo/ToDoPopup.jsp" />
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+</div>
   <!-- plugins:js -->
   <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

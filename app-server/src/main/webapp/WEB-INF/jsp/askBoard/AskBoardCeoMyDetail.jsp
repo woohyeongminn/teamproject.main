@@ -67,8 +67,8 @@
      <a id="notEmptyReply" type="button" class = "btn btn-outline-dark" onclick="notEmptyReply(this);">수정하기</a>        
    </c:otherwise>
   </c:choose>       
-  <a href='ceodelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark">문의글삭제</a>
-  <a href='ceolist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
+  <a href='ceodelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark" onclick="deletePopup()">문의글삭제</a>
+  <a href='ceomylist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
 </div>
 </div>
     
@@ -76,4 +76,8 @@
 function notEmptyReply(obj) { 
     alert("답변이 등록된 글은 수정할 수 없습니다.")
     }
+function deletePopup() { 
+    alert("삭제 되었습니다.")
+    }
+    
 </script>     

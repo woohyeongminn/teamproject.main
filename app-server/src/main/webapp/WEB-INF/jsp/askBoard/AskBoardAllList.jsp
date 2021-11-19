@@ -29,31 +29,21 @@
 <fieldset>
 <div class="all-content">
 <br>
-<c:choose>
-  <c:when test="${not empty loginUser}">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<c:choose>
+    <c:when test="${not empty loginUser}">
        <a href='permylist' >내 글</a> |
+    </c:when>
+    <c:when test="${not empty loginCeoUser}">
+       <a href='ceomylist' >내 글</a> |
+    </c:when>
+    <c:when test="${empty loginUser && empty loginCeoUser}">
+       <a href="javascript:logout(this);" attr-a="onclick : attr-a">내 글</a> |
+    </c:when>
+</c:choose>
        <a href='alllist' >전체 글</a> | 
        <a href='alllist' >최신순</a> 
     </div>
-  </c:when>
-  
-  <c:when test="${not empty loginCeoUser}">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a href='ceomylist' >내 글</a>
-       <a href='alllist' >전체 글</a> | 
-       <a href='alllist' >최신순</a>
-    </div>
-  </c:when>
-  
-  <c:when test="${empty loginUser && empty loginCeoUser}">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-       <a href="javascript:logout(this);" attr-a="onclick : attr-a">내 글</a> |
-       <a href='alllist' >전체 글</a> | 
-       <a href='alllist' >최신순</a>
-    </div>  
-  </c:when>
-</c:choose>
 
 <hr>
   <table class="table table-responsive text-center">
