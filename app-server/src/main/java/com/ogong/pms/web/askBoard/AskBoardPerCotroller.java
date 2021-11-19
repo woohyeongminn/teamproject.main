@@ -43,10 +43,7 @@ public class AskBoardPerCotroller {
 
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("pageTitle", "💬문의글 등록");
-    mv.addObject("refresh", "1;url=permylist");
-    mv.addObject("contentUrl", "askBoard/AskBoardPerAdd.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("redirect:permylist");
 
     return mv;
 

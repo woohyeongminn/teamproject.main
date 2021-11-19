@@ -48,7 +48,7 @@
       <textarea id="content" class="form-control" id="f-content" name="askContent" placeholder="*내용을 입력하세요" class="form-control" cols="50" rows="8"></textarea>
     
     <hr><br><div class="d-grid gap-2 d-md-flex justify-content-md-end">
-     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="ceoadd">등록하기</button>
+     <button class="btn btn-outline-dark" type="submit" value="등록" formaction="ceoadd" onclick="popup()">등록하기</button>
      <a href="ceomylist" type="button" class="btn btn-outline-dark" >취소하기</a>
    </div> 
   </form>
@@ -78,6 +78,11 @@ fStatus.addEventListener("input", function() {
     return false;
   }
 };
+
+function popup() { 
+    alert("등록 되었습니다.")
+    }
+
 </script>
 
 

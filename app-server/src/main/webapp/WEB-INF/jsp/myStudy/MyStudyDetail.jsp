@@ -412,7 +412,7 @@
               <div class="row">
                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                   <div class="card" style="background-color: #7bc9b2">
-                    <a href='${contextPath}/app/mystudy/calendar/list' style="text-decoration: none;">
+                    <a href='${contextPath}/app/mystudy/calendar/list?studyNo=${study.studyNo}' style="text-decoration: none;">
                       <div class="card-body" style="color: white;">
                         <p class="mb-4">캘린더</p>
                         <p class="fs-30 mb-2">Calender</p>

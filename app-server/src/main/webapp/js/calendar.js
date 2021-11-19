@@ -4,6 +4,7 @@ let date = new Date();
   const viewYear = date.getFullYear();
   const viewMonth = date.getMonth();
   
+  /*
   if ((vieMonth +1) == 1) {
   const stringMonth = Jan;
   }
@@ -40,7 +41,7 @@ let date = new Date();
     if ((vieMonth +1) == 12) {
     stringMonth = Dec;
   }
-  
+  */
   document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
   const prevLast = new Date(viewYear, viewMonth, 0);

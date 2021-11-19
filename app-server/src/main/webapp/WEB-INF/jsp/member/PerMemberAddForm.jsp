@@ -92,8 +92,8 @@
       <hr>
       
      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-       <button id="x-add-btn" class="btn btn-outline-dark btn-primary" type="submit" >✔가입하기</button> 
-       <button class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</button>
+       <button id="x-add-btn" class="btn btn-outline-dark btn-primary" type="submit" onclick="joinPopup()">✔가입하기</button> 
+       <a id="x-cancle-btn" type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
      </div> 
    </form>
   </div>
@@ -233,6 +233,11 @@ function nickOverlap(){
         alert("닉네임 중복 확인 ajax 실행 오류");
       }
     });
+  }
+  
+  var name = document.querySelector("#f-name");
+  function joinPopup() {
+	  alert("✋'" + name + "'님 환영합니다.✋")
   }
   
 </script>
