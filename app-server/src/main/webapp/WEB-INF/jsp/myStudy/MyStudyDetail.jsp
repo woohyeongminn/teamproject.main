@@ -72,6 +72,10 @@
     font-weight: bold;
   }
  
+  .sidebar .nav .nav-item.active > .nav-link:horver {
+    color:black;
+}
+
   .menu-title {
     font-weight: bold;
   }
@@ -95,13 +99,13 @@
   }
   
   a {
-	  text-decoration: none;
-	  color: black;
+    text-decoration: none;
+    color: black;
   }
 
   a:hover{
-	  text-decoration: none;
-	  color: black;
+    text-decoration: none;
+    color: black;
   }
   
   .studyInfo {
@@ -112,6 +116,27 @@
     border-radius: 20px;
     margin-bottom: 30px;
   }
+  
+  .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
+    background: rgb(239 230 225);
+    color: #fff;
+  }
+
+.sidebar .nav .nav-item.active > .nav-link {
+    background: rgb(239 230 225);
+    position: relative;
+  }
+  
+  .sidebar .nav:not(.sub-menu) > .nav-item.active {
+    background: rgb(239 230 225);
+  }
+
+  .sidebar .nav.sub-menu .nav-item .nav-link.active {
+    color: black;
+    background: transparent;
+  }
+
+    
 </style>
 
 <body>
@@ -194,71 +219,6 @@
         </ul>
       </nav><!-- side nav-->
    
-<%-- ================================================================ 대기중인 스터디 ================================================================ --%>
-<c:choose>
-<c:when test="${status == 'waiting'}">
-
-      <%-- waiting-main-panel --%>
-      <div class="main-panel">
-        <div class="content-wrapper">
-        
-          <%-- row studyInfo --%>
-          <div class="row studyInfo">
-            <div class="col-6" style="padding: 25px; font-size: 14px;">
-              
-              <span class="font-weight-bold" style="font-size: 16px;">
-              ${study.studyTitle} &nbsp; ⭐${study.countBookMember}
-              </span>
-              <br>
-              <br>
-                <c:choose>
-	                  <c:when test="${study.countMember < study.numberOfPeple}">
-	                  [모집 중]
-	                  </c:when>
-	                  <c:otherwise>
-	                  [모집 완료]
-	                  </c:otherwise>
-                </c:choose>
-                <br>
-                <span class="location font-weight-normal">소개 | </span>
-                <span class="font-weight-normal mb-0">${study.introduction}</span>
-                <br>
-                
-                <span class="location font-weight-normal">조장 | </span>
-                <span>${study.owner.perNickname}</span>
-                <br>
-                
-                <span class="location font-weight-normal">분야 | </span>
-                <span>${study.subjectName}</span>
-                <br>
-                
-                <span class="location font-weight-normal">지역 | </span>
-                <span>${study.area}</span>
-                <br>
-                
-                <%-- <span class="location font-weight-normal">북마크</span>
-                <span>${study.countBookMember}</span> --%>
-                
-                <span class="location font-weight-normal">대면상태 | </span>
-                <span>${study.faceName}</span>
-                <br>
-            </div> <%-- end col-6 --%>
-            
-            <div class="col-6" style="padding: 25px; font-size: 14px;">
-              <%-- 버튼위치 --%>
-            </div> <%-- end col-6 --%>
-            
-          </div> <%-- end row studyInfo --%>
-          
-        </div> <%-- end content-wrapper --%>
-      </div> <%-- end waiting-main-panel --%>
-
-</c:when>
-
-
-<%-- ================================================================ 조장 & 구성원인 스터디 ================================================================ --%>
-<c:otherwise>
-      
       <%-- main-panel --%>
       <div class="main-panel">
         <div class="content-wrapper">
@@ -314,9 +274,18 @@
               </c:if>
              </c:if>
             
-            <button type="button" class="btn btn-outline-dark" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">탈퇴</button>
+            <button type="button" class="btn btn-outline-dark" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">
+            <c:if test="${status == 'waiting'}">
+              가입 취소
+            </c:if>
+            <c:if test="${status != 'waiting'}">
+            탈퇴
+            </c:if>
+            </button>
             </div> <%-- end col-6 --%>
           </div> <%-- end row studyInfo --%>
+          
+          <c:if test="${status != 'waiting'}">
           
           <%-- row sub-items --%>
           <div class="row">
@@ -324,64 +293,64 @@
               <%-- <jsp:include page="todo/ToDoPopup.jsp"/> --%>
                <%-- 여기 --%>
                <div class="col-md-6 grid-margin stretch-card">
-	              <div class="card">
-	                <div class="card-body">
-	                  <h4 class="card-title">To Do Lists</h4>
-	                  <div class="list-wrapper pt-2">
-	                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-	                      <li>
-	                        <div class="form-check form-check-flat">
-	                          <label class="form-check-label">
-	                            <input class="checkbox" type="checkbox">
-	                            Meeting with Urban Team
-	                          </label>
-	                        </div>
-	                        <i class="remove ti-close"></i>
-	                      </li>
-	                      <li class="completed">
-	                        <div class="form-check form-check-flat">
-	                          <label class="form-check-label">
-	                            <input class="checkbox" type="checkbox" checked>
-	                            Duplicate a project for new customer
-	                          </label>
-	                        </div>
-	                        <i class="remove ti-close"></i>
-	                      </li>
-	                      <li>
-	                        <div class="form-check form-check-flat">
-	                          <label class="form-check-label">
-	                            <input class="checkbox" type="checkbox">
-	                            Project meeting with CEO
-	                          </label>
-	                        </div>
-	                        <i class="remove ti-close"></i>
-	                      </li>
-	                      <li class="completed">
-	                        <div class="form-check form-check-flat">
-	                          <label class="form-check-label">
-	                            <input class="checkbox" type="checkbox" checked>
-	                            Follow up of team zilla
-	                          </label>
-	                        </div>
-	                        <i class="remove ti-close"></i>
-	                      </li>
-	                      <li>
-	                        <div class="form-check form-check-flat">
-	                          <label class="form-check-label">
-	                            <input class="checkbox" type="checkbox">
-	                            Level up for Antony
-	                          </label>
-	                        </div>
-	                        <i class="remove ti-close"></i>
-	                      </li>
-	                    </ul>
-	                  </div>
-	                  <div class="add-items d-flex mb-0 mt-2">
-	                    <input type="text" class="form-control todo-list-input"  placeholder="Add new task">
-	                    <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-	                  </div>
-	                </div>
-	              </div>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">To Do Lists</h4>
+                    <div class="list-wrapper pt-2">
+                      <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                        <li>
+                          <div class="form-check form-check-flat">
+                            <label class="form-check-label">
+                              <input class="checkbox" type="checkbox">
+                              Meeting with Urban Team
+                            </label>
+                          </div>
+                          <i class="remove ti-close"></i>
+                        </li>
+                        <li class="completed">
+                          <div class="form-check form-check-flat">
+                            <label class="form-check-label">
+                              <input class="checkbox" type="checkbox" checked>
+                              Duplicate a project for new customer
+                            </label>
+                          </div>
+                          <i class="remove ti-close"></i>
+                        </li>
+                        <li>
+                          <div class="form-check form-check-flat">
+                            <label class="form-check-label">
+                              <input class="checkbox" type="checkbox">
+                              Project meeting with CEO
+                            </label>
+                          </div>
+                          <i class="remove ti-close"></i>
+                        </li>
+                        <li class="completed">
+                          <div class="form-check form-check-flat">
+                            <label class="form-check-label">
+                              <input class="checkbox" type="checkbox" checked>
+                              Follow up of team zilla
+                            </label>
+                          </div>
+                          <i class="remove ti-close"></i>
+                        </li>
+                        <li>
+                          <div class="form-check form-check-flat">
+                            <label class="form-check-label">
+                              <input class="checkbox" type="checkbox">
+                              Level up for Antony
+                            </label>
+                          </div>
+                          <i class="remove ti-close"></i>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="add-items d-flex mb-0 mt-2">
+                      <input type="text" class="form-control todo-list-input"  placeholder="Add new task">
+                      <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
             </div>
             <div class="col-md-6 grid-margin transparent">
               <div class="row">
@@ -436,16 +405,13 @@
             </div>
           </div>
         </div> <%-- end row sub-items --%>
-        
-	     </div> <%-- end content-wrapper --%>
-	   </div> <%-- main-panel --%>
+        </c:if>
+       </div> <%-- end content-wrapper --%>
+     </div> <%-- main-panel --%>
 
-</c:otherwise>
-</c:choose>
 
-  </div> <%-- end page-body-wrapper --%>
-</div> <%-- end container-scroller --%>
-
+  </div> <!-- end page-body-wrapper -->
+  </div> <!-- end container-scroller -->
 
 
 
@@ -480,7 +446,8 @@
       }
 
     } else if (waitingGuilder > 0) {
-      if (confirm("스터디 탈퇴 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 탈퇴하시겠습니까?") == true) {
+      /* if (confirm("스터디 탈퇴 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 탈퇴하시겠습니까?") == true) { */
+      if (confirm("승인 대기 중인 스터디에서 탈퇴됩니다.\n정말 탈퇴하시겠습니까?") == true) {
         location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
       } else {
         return false;
