@@ -30,7 +30,7 @@
 <br>
 <div class="all-content">
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-   <a href='ceomylist' >내 글</a>
+   <a href='ceomylist' >내 글</a> |
    <a href='alllist' >전체 글</a>
 </div>
 <hr>
@@ -68,7 +68,7 @@
 	  <b style="font-size:14; text-align: center">❕❔ 등록한 게시글이 없습니다.</b>
 	 </c:if>
 	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	   <a href='ceoaddform' type="button" class="btn btn-outline-dark" >등록하기</a> 
+	   <a href='ceoaddform' type="button" class="btn btn-outline-dark" >✔등록하기</a> 
 	</div>
  </div>
 </fieldset>

@@ -150,7 +150,7 @@
     photo=#{perPhoto},
     tel=#{perTel}, 
     email=#{perEmail}, 
-    password=password(#{perPassword}),
+    password=password(#{perNo}),
     active=2 
   where
     member_no=#{perNo}

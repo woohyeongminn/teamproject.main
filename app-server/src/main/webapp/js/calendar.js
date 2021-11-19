@@ -3,7 +3,45 @@ let date = new Date();
   const renderCalender = () => {
   const viewYear = date.getFullYear();
   const viewMonth = date.getMonth();
-
+  
+  /*
+  if ((vieMonth +1) == 1) {
+  const stringMonth = Jan;
+  }
+  if ((vieMonth +1) == 2) {
+    stringMonth = Feb;
+  }
+  if ((vieMonth +1) == 3) {
+     stringMonth = Mar;
+  }
+  if ((vieMonth +1) == 4) {
+    stringMonth = Apr;
+  }
+  if ((vieMonth +1) == 5) {
+    stringMonth = May;
+  }
+  if ((vieMonth +1) == 6) {
+   stringMonth = Jun;
+  }  
+  if ((vieMonth +1) == 7) {
+    stringMonth = Jul;
+  }
+    if ((vieMonth +1) == 8) {
+     stringMonth = Aug;
+  }
+    if ((vieMonth +1) == 9) {
+    stringMonth = Sep;
+  }
+    if ((vieMonth +1) == 10) {
+    stringMonth = Oct;
+  }
+    if ((vieMonth +1) == 11) {
+    stringMonth = Nov;
+  }
+    if ((vieMonth +1) == 12) {
+    stringMonth = Dec;
+  }
+  */
   document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
 
   const prevLast = new Date(viewYear, viewMonth, 0);

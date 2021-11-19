@@ -98,11 +98,12 @@ public class PerMemberController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("refresh", "2;url=form");
-    mv.addObject("pageTitle", "👋환영 합니다!");
-    mv.addObject("contentUrl", "member/PerMemberAdd.jsp");
-    mv.setViewName("template1");
+    //    mv.addObject("refresh", "2;url=form");
+    //    mv.addObject("pageTitle", "👋환영 합니다!");
+    //    mv.addObject("contentUrl", "member/PerMemberAdd.jsp");
+    //    mv.setViewName("template1");
 
+    mv.setViewName("redirect:form");
     return mv;
   }
 
@@ -239,15 +240,11 @@ public class PerMemberController {
   }
 
   @RequestMapping("/member/deleteform")
-  protected ModelAndView deleteForm(Member perMember) throws Exception {
-
-    if (perMember == null) {
-      throw new Exception("회원이 존재하지 않습니다.");
-    }
-
+  protected ModelAndView deleteForm(HttpSession session) throws Exception {
+    Member perMember = (Member) session.getAttribute("loginUser");
     ModelAndView mv = new ModelAndView();
-    mv.addObject("perMember", perMember);
     mv.addObject("pageTitle", "개인 회원탈퇴");
+    mv.addObject("perMember", perMember);
     mv.addObject("contentUrl", "member/PerMemberDeleteForm.jsp");
     mv.setViewName("template1");
 
@@ -255,33 +252,38 @@ public class PerMemberController {
   }
 
   @PostMapping("/member/delete")
-  public ModelAndView ceoDelete(int perNo, String perEmail, String perPassword) throws Exception {
+  public ModelAndView delete(int perNo, String perEmail, String perPassword) throws Exception {
+    ModelAndView mv = new ModelAndView();
 
-    Member perMember = memberDao.findByNo(perNo);
+    Member perMember = memberDao.findByEmailAndPassword(perEmail, perPassword);
+    System.out.println(perMember);
+    if (perMember != null) {
 
-    if (perMember == null) {
-      throw new Exception("로그인 하세요.");
-    }
+      perMember.setPerName("Deleted Member("+ perMember.getPerName() +")");
+      perMember.setPerNickname("Deleted Member("+ perMember.getPerNickname() +")");
+      perMember.setPerEmail("Deleted Email");
+      perMember.setPerPassword("Deleted Password");
+      perMember.setPerPhoto("Deleted Photo");
+      perMember.setPerTel("Deleted Tel");
+      perMember.setPerStatus(1);
+      perMember.setActive(2);
 
-    if (!(perMember.getPerEmail().equals(perEmail)) && (perMember.getPerPassword().equals(perPassword))) {
-      throw new Exception("이메일과 패스워드가 일치하지 않습니다.");
+      System.out.println(perMember);
+      memberDao.updateActive(perMember);
+      sqlSessionFactory.openSession().commit();
+
+      mv.addObject("pageTitle", "감사합니다.");
+      mv.addObject("contentUrl", "member/PerMemberDelete.jsp");
+      mv.setViewName("template1");
+      return mv;
     } 
 
-    perMember.setPerName("Deleted Name");
-    perMember.setPerNickname("Deleted Member("+ perMember.getPerNickname() +")");
-    perMember.setPerEmail("Deleted Email");
-    perMember.setPerPassword("Deleted Password");
-    perMember.setPerPhoto("Deleted Photo");
-    perMember.setPerStatus(Member.PER);
-    perMember.setActive(Member.OUTUSER);
-
-    memberDao.updateActive(perMember);
-    sqlSessionFactory.openSession().commit();
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("redirect:logout");
+    mv.addObject("pageTitle", "⚠정보 오류");
+    mv.addObject("refresh", "2;url=deleteform");
+    mv.addObject("contentUrl", "member/InputFail.jsp");
+    mv.setViewName("template1");
     return mv;
-  }
-
+  } 
 }
 
 

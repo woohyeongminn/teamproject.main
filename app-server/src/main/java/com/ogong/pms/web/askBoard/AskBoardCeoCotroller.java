@@ -41,7 +41,6 @@ public class AskBoardCeoCotroller {
 
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("pageTitle", "💬문의글 등록");
     mv.setViewName("redirect:ceomylist");
 
     return mv;
