@@ -63,7 +63,6 @@
     max-width: 500px;
     margin: 0 auto;
     padding: 50px;
-    margin-top: 100px;
   }
   .inner {
     max-width: 500px;

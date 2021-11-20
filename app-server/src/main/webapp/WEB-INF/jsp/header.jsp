@@ -36,7 +36,7 @@
           
           <li class="dropdown"><a href="#"><span>고객센터</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="${contextPath}/app/adminNotice/list">공지사항</a></li>
+              <li><a href="${contextPath}/app/adminNotice/userlist">공지사항</a></li>
               <li><a href="${contextPath}/app/askboard/alllist">문의게시판</a></li>
             </ul>
           </li>

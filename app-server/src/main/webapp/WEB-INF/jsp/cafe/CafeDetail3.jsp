@@ -17,6 +17,9 @@
   .pt-4 {
     height: auto !important;
   }
+  .dropdown a > span {
+    font-size: 14px;
+  }
   .c-content {
     width: 100%;
     max-width: 720px;
@@ -238,7 +241,7 @@
         <span class="c-grade"></span>
       </div>
       <div class="c-place-grade">
-        <span class="c-grade-count"> 방문자리뷰 ${cafe.countReview}</span>
+        <span class="c-grade-count"> 방문자리뷰 </span> <span id="review-count1"></span>
       </div>
 	  </div>
 	  
@@ -331,7 +334,7 @@
 	  <div class="c-place-section-box">
 	   
 	   <h2 class="c-place-section-header">방문자 리뷰
-	     <em class="c-place-count" id="review-count" style="font-style: normal;"></em>
+	     <em class="c-place-count" id="review-count2" style="font-style: normal;"></em>
 	   </h2>
 	   
 	   <div class="c-place-section-content">
@@ -389,8 +392,8 @@ function reviewList(page){
                 if (loginUser != ""){
 	                if (loginUser == arr[i].member.perNo){
 		                strTag += '     <div class="c-review-list-btn">';
-		                strTag += '       <button class="btn btn-outline-dark btn-sm" id="btnUpdateForm'+i+'">수정</button>';
-		                strTag += '       <button class="btn btn-outline-dark btn-sm" id="btnDelete'+i+'">삭제</button>';
+		                strTag += '       <button class="btn btn-outline-dark btn-sm" id="btnUpdateForm'+i+'" onclick="btnUpdateForm(this,'+i+')">수정</button>';
+		                strTag += '       <button class="btn btn-outline-dark btn-sm" id="btnDelete'+i+'" onclick="btnDelete(this)">삭제</button>';
 		                strTag += '     </div>';
 	                }
                 }
@@ -450,21 +453,17 @@ function reviewList(page){
             	  $(".c-review-content ul").html("<p style='padding-top: 30px;'>등록된 리뷰가 없습니다.</p>");
               }
 
-              $("#review-count").text(count);
+              $("#review-count1").text(count);
+              $("#review-count2").text(count);
               $(".c-grade").text('⭐'+grade+'/5');
               
-              for (let idx = 0; idx < arr.length; idx++){
-            	  btnUpdateForm(document.querySelector("#btnUpdateForm"+idx),idx);
-            	  btnDelete(document.querySelector("#btnDelete"+idx));
-              }
-						    
           }
       });
     
   }
 
 function btnUpdateForm(e,idx){
-	e.onclick = () => {
+
 		var btnDiv = e.parentNode;
 		var grade = e.parentNode.parentNode.childNodes[0].childNodes[2];
 		var origin_grade = e.parentNode.parentNode.childNodes[0].childNodes[2].innerText;
@@ -482,23 +481,21 @@ function btnUpdateForm(e,idx){
 
     btnCancel(document.querySelector("#btnCancel"+idx),idx,origin_grade,origin_content,grade,content,btnDiv);
     btnUpdate(document.querySelector("#btnUpdate"+idx),idx);
-  };
+ 
 }
 
 function btnCancel(e,idx,origin_grade,origin_content,grade,content,btnDiv){
 	e.onclick = () => {
 	
     var strTag = "";
-    strTag += '<button class="btn btn-outline-dark btn-sm" id="btnUpdateForm'+idx+'">수정</button>';
-    strTag += ' <button class="btn btn-outline-dark btn-sm" id="btnDelete'+idx+'">삭제</button>';
+    strTag += '<button class="btn btn-outline-dark btn-sm" id="btnUpdateForm'+idx+'" onclick="btnUpdateForm(this,'+idx+')">수정</button>';
+    strTag += ' <button class="btn btn-outline-dark btn-sm" id="btnDelete'+idx+'" onclick="btnDelete(this)">삭제</button>';
 
     $(btnDiv).html(strTag);
     
     $(grade).html('<span style="font-size:12px;" id="review-grade">'+origin_grade);
     $(content).html('<span id="review-content">'+origin_content+'</span>');
-    
-    btnUpdateForm(document.querySelector("#btnUpdateForm"+idx),idx);
-    btnDelete(document.querySelector("#btnDelete"+idx));
+
   };
 }
 
@@ -537,30 +534,27 @@ function btnUpdate(e,idx){
 }
 
 function btnDelete(e){
-	  e.onclick = () => {
-	    
-	    var reviewNo = e.parentNode.parentNode.getAttribute("data-no");
-	    
-	    Swal.fire({
-	    	html: '<p style="font: message-box;font-weight: bold;">리뷰를 삭제하시면 재작성이 불가합니다.<br>삭제하시겠습니까?</p>',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: '네',
-        cancelButtonText: '아니오'
-      }).then((result) => {
-        if (result.value) { 
-        	$.ajax({
-                url : "reviewDelete",
-                type : "post",
-                dataType : "text",
-                data : {reviewNo : reviewNo},
-                success:function(data){
-                  reviewList();
-                }
-            });
-         }
-      })
-	  };
+   var reviewNo = e.parentNode.parentNode.getAttribute("data-no");
+   
+   Swal.fire({
+   	html: '<p style="font: message-box;font-weight: bold;">리뷰를 삭제하시면 재작성이 불가합니다.<br>삭제하시겠습니까?</p>',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '네',
+      cancelButtonText: '아니오'
+    }).then((result) => {
+      if (result.value) { 
+      	$.ajax({
+              url : "reviewDelete",
+              type : "post",
+              dataType : "text",
+              data : {reviewNo : reviewNo},
+              success:function(data){
+                reviewList();
+              }
+          });
+       }
+    })
 	}
 </script>
 
