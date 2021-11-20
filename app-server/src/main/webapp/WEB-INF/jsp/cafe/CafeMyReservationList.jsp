@@ -31,8 +31,8 @@
     <i class="fas fa-search"></i>
     <span>조회기간</span>
     <select name="searchDate">
-      <option value="1">예약날짜</option>
-      <option value="2">이용날짜</option>
+      <option value="1">예약일</option>
+      <option value="2">이용일</option>
     </select>
     <input type="date" name="startDate"> ~ <input type="date" name="endDate">
     <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">조회</button>
@@ -53,8 +53,8 @@
   <tr>
     <th width="5%">선택</th>
     <th width="3%">번호</th>
-    <th width="8%">예약날짜</th>
-    <th width="8%">이용날짜</th>
+    <th width="8%">예약일</th>
+    <th width="8%">이용일</th>
     <th width=15%;>이용시간</th>
     <th>스터디카페 - 스터디룸</th>
     <th width="7%">결제금액</th>
