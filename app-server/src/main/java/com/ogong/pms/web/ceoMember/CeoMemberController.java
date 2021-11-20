@@ -128,6 +128,13 @@ public class CeoMemberController {
     ceoMemberService.nickOverlap(nick,response);  //서비스에 있는 nickOverlap 호출.
   }
 
+  //사업자번호 중복확인 처리
+  @RequestMapping(value="/ceomember/licenseOverlap", method=RequestMethod.POST)
+  public void licenseOverlap(HttpServletResponse response, @RequestParam("license") String license) throws IOException {
+    //@RequestParam는 요청의 특정 파라미터 값을 찾아낼 때 사용하는 어노테이션
+    ceoMemberService.licenseOverlap(license,response);  //서비스에 있는 nickOverlap 호출.
+  }
+
   //------------------------------------------------------------------------------------------------------------------------------------------------------
   //마이페이지
   @GetMapping("/ceomember/detail")

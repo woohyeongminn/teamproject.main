@@ -35,6 +35,7 @@ public interface CeoMemberDao {
 
   String idOverlap(String id) throws Exception;
   String nickOverlap(String nick) throws Exception;
+  String licenseOverlap(String license) throws Exception;
 
 }
 
