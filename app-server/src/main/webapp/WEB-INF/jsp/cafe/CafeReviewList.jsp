@@ -27,6 +27,9 @@ button > a:hover {
 .dropdown a > span {
   font-size: 14px;
 }
+.page-link {
+  color: black;
+}
 </style>
 <body>
 <div class="all-content">
@@ -36,9 +39,9 @@ button > a:hover {
 <table class="table table-responsive text-center align-middle">
 	<thead>
 	  <tr>
-	    <th>스터디카페</th>
+	    <th width="150px">스터디카페</th>
 	    <th>별점</th>
-	    <th>내용</th>
+	    <th width="400px">내용</th>
 	    <th>등록일</th>
 	    <th>수정</th>
 	    <th>삭제</th>
@@ -68,13 +71,52 @@ button > a:hover {
 	    </td>
 	 </tr>
 	</c:forEach>
-<c:if test='${empty reviewList}'>
-   <p class="text-center">등록된 리뷰가 없습니다.</p>  
-</c:if>
   </tbody>
 </table>
-
+<c:if test='${empty reviewList}'>
+   <p class="text-center">등록된 리뷰가 없습니다.</p>
+</c:if>
 <br>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <c:if test="${pageNo > 1}">
+        <a class="page-link" href="reviewList?pageNo=${pageNo-1}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </c:if>
+      <c:if test="${pageNo <= 1}">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </c:if>
+    </li>
+    <c:forEach var="page" begin="1" end="${totalPage}">
+    <c:choose>
+      <c:when test="${pageNo == page}">
+        <li class="page-item"><a class="page-link" href="reviewList?pageNo=${page}" style="font-weight: bold;">${page}</a></li>
+      </c:when>
+      <c:otherwise>
+        <li class="page-item"><a class="page-link" href="reviewList?pageNo=${page}">${page}</a></li>
+      </c:otherwise>    
+    </c:choose>
+    </c:forEach>
+    <li class="page-item">
+      <c:if test="${pageNo < totalPage}">
+        <a class="page-link" href="reviewList?pageNo=${pageNo+1}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </c:if>
+      <c:if test="${pageNo >= totalPage}">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </c:if>
+      
+    </li>
+  </ul>
+</nav> <!-- pagination -->
 </div>
 
 
