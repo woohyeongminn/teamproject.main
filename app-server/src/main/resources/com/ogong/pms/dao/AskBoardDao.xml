@@ -59,40 +59,29 @@
       left outer join ask_board_reply abr on abr.ask_board_no=ab.ask_board_no
     </sql>
     
-  <select id="findAll" resultMap="AskBoardMap">
+<!-- ========================================================================= --> 
+
+  <select id="findAll" resultMap="AskBoardMap" parameterType="map">
   <include refid="select1"/>
       abr.reply_dt r_dt
   <include refid="from1"/>
      order by
-      ab.ask_board_no asc
+      ab.ask_board_no desc
+      limit #{offset}, #{length}      
   </select>
   
-    <select id="findAlll" resultMap="AskBoardMap" parameterType="map">
-  <include refid="select1"/>
-      abr.reply_dt r_dt
-  <include refid="from1"/>
-     order by
-     ab.ask_board_no desc
-     limit #{offset}, #{length}
-  </select>
-  
-  <select id="countAll" resultType="int">
-  <include refid="select1"/>
-      count(*)
-   <include refid="from1"/>
-  </select>   
-  
-  <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
+  <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="map">
   <include refid="select1"/>
       abr.reply_dt r_dt
   <include refid="from1"/>
   where
      m.member_no=#{perMemberNo}
      order by
-      ab.ask_board_no asc
+      ab.ask_board_no desc
+      limit #{offset}, #{length}
   </select>
  
-  <select id="findCeoMyAll" resultMap="AskBoardMap" parameterType="int">
+  <select id="findCeoMyAll" resultMap="AskBoardMap" parameterType="map">
   <include refid="select1"/>
       abr.reply_dt r_dt
   <include refid="from1"/>
@@ -100,8 +89,39 @@
   where
      m.member_no=#{ceoMemberNo}
      order by
-      ab.ask_board_no asc
+      ab.ask_board_no desc
+      limit #{offset}, #{length}
   </select>
+ 
+<!-- ========================================================================= --> 
+
+ <select id="count" resultType="int">
+    select
+      count(*)
+    from ask_board ab
+      inner join member m on m.member_no=ab.member_no
+ </select> 
+ 
+ <select id="countByPerNo" resultType="int" parameterType="int">
+    select
+      count(*)
+    from ask_board ab
+      inner join member m on m.member_no=ab.member_no
+    where 
+      m.member_no=#{perMemberNo}      
+ </select> 
+ 
+  <select id="countByCeoNo" resultType="int" parameterType="int">
+    select
+      count(*)
+    from ask_board ab
+      inner join member m on m.member_no=ab.member_no
+      left outer join ceo_member cm on cm.member_no = m.member_no
+    where 
+      cm.member_no=#{ceoMemberNo}      
+ </select>  
+
+<!-- ========================================================================= --> 
   
   <select id="findByNo" resultMap="AskBoardMap" parameterType="int">
   <include refid="select1"/>
@@ -137,9 +157,9 @@
     where ask_board_no=#{askNo}
   </update>
     
-  <update id="updateViewCount" parameterType="AskBoard">
+  <update id="updateViewCount" parameterType="int">
     update ask_board set
-      view_cnt=#{askVeiwCount}
+      view_cnt= view_cnt + 1
     where ask_board_no=#{askNo}
   </update>
   

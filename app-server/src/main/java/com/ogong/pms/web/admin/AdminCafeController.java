@@ -33,7 +33,7 @@ public class AdminCafeController {
 
     ModelAndView mv = new ModelAndView();
     mv.addObject("cafeList", cafeList);
-    mv.addObject("pageTitle", "🏘 스터디 카페 목록");
+    mv.addObject("pageTitle", "🏬 스터디 카페 목록");
     mv.addObject("contentUrl", "admin/AdminCafeList.jsp");
     mv.setViewName("template1");
     return mv;
@@ -60,7 +60,7 @@ public class AdminCafeController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("cafe", cafeList);
     mv.addObject("reviewList", reviewList);
-    mv.addObject("pageTitle", "🏘 스터디 카페 상세");
+    mv.addObject("pageTitle", "🏬 스터디 카페 상세");
     mv.addObject("contentUrl", "admin/AdminCafeDetail.jsp");
     mv.setViewName("template1");
     return mv;
@@ -121,7 +121,7 @@ public class AdminCafeController {
     ModelAndView mv = new ModelAndView();
     mv.addObject("cafe", cafe);
     mv.addObject("reviewList", reviewList);
-    mv.addObject("pageTitle", "🏘 스터디 카페 승인");
+    mv.addObject("pageTitle", "🏬 스터디 카페 승인");
     mv.addObject("contentUrl", "admin/AdminCafeApprovalForm.jsp");
     mv.setViewName("template1");
     return mv;

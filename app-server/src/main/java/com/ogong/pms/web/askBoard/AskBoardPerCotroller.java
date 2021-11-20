@@ -1,6 +1,7 @@
 package com.ogong.pms.web.askBoard;
 
 import java.util.Collection;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
@@ -50,14 +52,41 @@ public class AskBoardPerCotroller {
   }
 
   @RequestMapping("/askboard/permylist")
-  public ModelAndView list(HttpSession session) throws Exception {
+  public ModelAndView list(HttpSession session,
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "10") int pageSize) throws Exception {
 
     Member loginUser = (Member) session.getAttribute("loginUser");
-    Collection<AskBoard> perMyAskBoardList = askBoardDao.findPerMyAll(loginUser.getPerNo());
-
     ModelAndView mv = new ModelAndView();
 
+    if (loginUser == null) {
+      throw new Exception("로그아웃 상태");
+    }
+
+    int count = askBoardDao.countByPerNo(loginUser.getPerNo());
+
+    if (pageSize < 5 || pageSize > 10) {
+      pageSize = 10;
+    }
+
+    int totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
+
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("offset", pageSize * (pageNo - 1));
+    params.put("length", pageSize);
+    params.put("perMemberNo", loginUser.getPerNo());
+
+    Collection<AskBoard> perMyAskBoardList = askBoardDao.findPerMyAll(params);
+
+
     mv.addObject("pageTitle", "💬문의글 목록");
+    mv.addObject("totalPage", totalPage);
+    mv.addObject("pageNo", pageNo);
+    mv.addObject("pageSize", pageSize);
     mv.addObject("perMyAskBoardList", perMyAskBoardList);
     mv.addObject("contentUrl", "askBoard/AskBoardPerMyList.jsp");
     mv.setViewName("template1");
@@ -67,14 +96,11 @@ public class AskBoardPerCotroller {
 
   @GetMapping("/askboard/permydetail")
   public ModelAndView detail(int askNo) throws Exception {
-
     AskBoard myAskBoard = askBoardDao.findByNo(askNo);
+
     ModelAndView mv = new ModelAndView();
 
-    int i = myAskBoard.getAskVeiwCount() + 1;
-    myAskBoard.setAskVeiwCount(i);
-
-    askBoardDao.updateViewCount(myAskBoard);
+    askBoardDao.updateViewCount(myAskBoard.getAskNo());
     sqlSessionFactory.openSession().commit();
 
     mv.addObject("pageTitle", "💬문의글 상세");

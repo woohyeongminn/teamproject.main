@@ -107,6 +107,7 @@
   }
   .card-body2 {
     line-height: 25px;
+    padding-top: 10px;
   }
   .btn-sm, .btn-group-sm > .btn {
     padding: 0.25rem 0.5rem;
@@ -120,6 +121,9 @@
   .btn-sm, .btn-group-sm > .btn:hover {
     color: #4e4847;
     border-color: #4e4847;
+  }
+  label {
+  margin-left: 0;
   }
   </style>
   
@@ -183,30 +187,30 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " ${contextPath}/app/admin/reviewList">
+          <a class="nav-link text-white " href="${contextPath}/app/admin/reviewList">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">article</i>
             </div>
             <span class="nav-link-text ms-1">리뷰</span>
           </a>
         </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">CS pages - Admin</h6>
+        </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="${contextPath}/css/admin/pages/tables.html">
+          <a class="nav-link text-white " href="${contextPath}/app/adminNotice/list">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">help</i>
             </div>
-            <span class="nav-link-text ms-1">고객센터</span>
+            <span class="nav-link-text ms-1">공지사항</span>
           </a>
         </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-        </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="${contextPath}/app/admin/logout">
+          <a class="nav-link text-white " href="${contextPath}/app/admin/askboard/list">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
+              <i class="material-icons opacity-10">help</i>
             </div>
-            <span class="nav-link-text ms-1">Login</span>
+            <span class="nav-link-text ms-1">문의게시판</span>
           </a>
         </li>
       </ul>
@@ -245,16 +249,16 @@
 						            영업시간 ${cafe.openTime} ~ ${cafe.closeTime}<br>
 						            ⭐${cafe.avgReview}(${cafe.countReview})<br>
 						            <script>
-						         if(${cafe.cafeStatus == 1}) {
-						           document.write("<label for='f-cafeStatus'>❗ </label>승인 대기 중인 카페입니다.");
-						         } else if(${cafe.cafeStatus == 2}) {
-						           document.write("<label for='f-cafeStatus'>🔆 </label>현재 운영 중입니다.");
-						         } else if(${cafe.cafeStatus == 3}) {
-						           document.write("<label for='f-cafeStatus'>⛔ </label>운영 중단된 카페입니다.");
-						         } else if(${cafe.cafeStatus == 4}) {
-						           document.write("<label for='f-cafeStatus'>❌ </label>삭제된 카페입니다.");
-						         } 
-						       </script>
+								         if(${cafe.cafeStatus == 1}) {
+								           document.write("<label for='f-cafeStatus'>❗ </label>승인 대기 중인 카페입니다.");
+								         } else if(${cafe.cafeStatus == 2}) {
+								           document.write("<label for='f-cafeStatus'>🔆 </label>현재 운영 중입니다.");
+								         } else if(${cafe.cafeStatus == 3}) {
+								           document.write("<label for='f-cafeStatus'>⛔ </label>운영 중단된 카페입니다.");
+								         } else if(${cafe.cafeStatus == 4}) {
+								           document.write("<label for='f-cafeStatus'>❌ </label>삭제된 카페입니다.");
+								         } 
+								       </script>
 						          </div>
 						        </div>
 						      </div>
