@@ -59,6 +59,8 @@
     <include refid="reviewListSelect"/>
     where 
       sr.cafe_no=#{cafeNo}
+    order by 
+      r.review_no desc
     limit #{offset}, #{length}
   </select>
   
@@ -78,6 +80,8 @@
     <include refid="reviewListSelect"/>
     where 
       rs.member_no=#{memberNo}
+    order by 
+      r.review_no desc
     limit #{offset}, #{length}
   </select>
   
