@@ -122,7 +122,14 @@
       </c:if>
     </li>
     <c:forEach var="page" begin="1" end="${totalPage}">
-	    <li class="page-item"><a class="page-link" href="reservationList?pageNo=${page}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}">${page}</a></li>
+    <c:choose>
+      <c:when test="${pageNo == page}">
+        <li class="page-item"><a class="page-link" href="reservationList?pageNo=${page}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}" style="font-weight: bold;">${page}</a></li>
+      </c:when>
+      <c:otherwise>
+	      <li class="page-item"><a class="page-link" href="reservationList?pageNo=${page}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}">${page}</a></li>
+      </c:otherwise>    
+    </c:choose>
     </c:forEach>
     <li class="page-item">
       <c:if test="${pageNo < totalPage}">
