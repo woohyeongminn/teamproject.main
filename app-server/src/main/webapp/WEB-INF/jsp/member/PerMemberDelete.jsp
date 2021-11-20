@@ -21,6 +21,6 @@
    <b>이용해 주셔서 감사합니다.</b>
    <hr><br>
    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-     <button class="btn btn-outline-dark" href="logout" style="font-size: 14px" >첫 화면가기</button>
+     <button class="btn btn-outline-dark" href="${contextPath}/app/member/logout" style="font-size: 14px" >첫 화면가기</button>
    </div>
 </div>

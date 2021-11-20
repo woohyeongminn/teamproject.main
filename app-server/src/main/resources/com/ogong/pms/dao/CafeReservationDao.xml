@@ -18,6 +18,7 @@
     <result column="rsv_name" property="reservationStatusName"/>
     <result column="review" property="wirteReview"/>
     <result column="roomName" property="roomName"/>
+    <result column="payment_type" property="paymentType"/>
     
     <association property="member" javaType="member">
       <id column="member_no" property="perNo"/>
@@ -43,6 +44,7 @@
         rs.using_time, 
         rs.people, 
         rs.total_price,
+        rs.payment_type,
         if(rs.review=1,'false','true') review, 
         rst.rsv_status_no,
         rst.rsv_name, 
@@ -140,7 +142,8 @@
   </select>
   
   <!-- 예약만 -->
-  <insert id="insertReservation">
+  <insert id="insertReservation"
+      useGeneratedKeys="true" keyColumn="studycafe_rsv_no" keyProperty="reservationNo">
   insert into studycafe_reservation
     (studyroom_no, member_no, using_dt, start_time,using_time, people, 
     total_price, rsv_status_no, review) 
@@ -148,7 +151,8 @@
   </insert>
   
   <!-- 예약+결제 -->
-  <insert id="insertPaymentReservation">
+  <insert id="insertPaymentReservation"
+      useGeneratedKeys="true" keyColumn="studycafe_rsv_no" keyProperty="reservationNo">
   insert into studycafe_reservation
     (studyroom_no, member_no, using_dt, start_time,using_time, people, 
     total_price, rsv_status_no, payment_uid, payment_type, review) 

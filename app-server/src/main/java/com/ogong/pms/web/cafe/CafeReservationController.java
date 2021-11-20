@@ -10,10 +10,12 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReservationDao;
@@ -125,35 +127,52 @@ public class CafeReservationController {
     return mv;
   }
 
-  @GetMapping("/cafe/reservation")
-  public ModelAndView reservation1(int no) throws Exception {
+  @GetMapping("/cafe/reservationStudyRoom")
+  public ModelAndView reservation1(int roomNo, int cafeNo) throws Exception {
 
-    Cafe cafe = cafeDao.findByCafeNoMember(no);
+    CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
+    cafeRoom.setRoomInfo(cafeRoom.getRoomInfo().replace("\n", "<br>"));
+    Cafe cafe = cafeDao.findByCafeNo(cafeNo);
 
-    if (cafe == null) {
-      throw new Exception(" >> 해당 번호의 장소가 존재하지 않습니다.");
+    LocalTime startTime = cafe.getOpenTime();
+    LocalTime endTime = cafe.getCloseTime();
+    LocalTime tempEndTime = LocalTime.parse("00:00");
+    String status = "";
+
+    int availableTime = (int) ChronoUnit.HOURS.between(startTime, endTime);
+    HashMap<Integer, String> statusOfNumber = new HashMap<>();
+
+    for (int i = 0; i < availableTime; i++) {
+      if (i == 0) {
+        tempEndTime = startTime.plusHours(1);
+      } else {
+        startTime = tempEndTime;
+        tempEndTime = startTime.plusHours(1);
+      }
+
+      status = "예약 불가";
+
+      statusOfNumber.put(i+1, startTime + "," + tempEndTime + "," + status);
     }
-
-    List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByCafe(cafe.getNo());
 
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("roomList", roomList);
-    mv.addObject("pageTitle", "스터디룸 예약");
-    mv.addObject("contentUrl", "cafe/CafeReservation.jsp");
+    mv.addObject("cafeRoom", cafeRoom);
+    mv.addObject("cafe", cafe);
+    mv.addObject("statusOfNumber", statusOfNumber);
+    mv.addObject("pageTitle", cafe.getName() + " > " + cafeRoom.getRoomName());
+    mv.addObject("contentUrl", "cafe/CafeReservation_ing.jsp");
     mv.setViewName("template1");
 
     return mv;
   }
 
-  @GetMapping("/cafe/reservationSelectTime")
-  public ModelAndView reservation2(int roomNo, 
-      String date, 
-      int cafeNo, 
-      HttpSession session) throws Exception {
+  @GetMapping("/cafe/reservationTime")
+  @ResponseBody
+  public Object reservation2(int roomNo, int cafeNo, String date) throws Exception {
 
     Cafe cafe = cafeDao.findByCafeNo(cafeNo);
-    CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
+
     List<CafeReservation> todayReserList = 
         cafeReservationDao.findReservationListByDate(date, roomNo);
     ArrayList<LocalTime> useTimeList = new ArrayList<>();
@@ -202,75 +221,20 @@ public class CafeReservationController {
       statusOfNumber.put(i+1, startTime + "," + tempEndTime + "," + status);
     }
 
-    ModelAndView mv = new ModelAndView();
-
-    mv.addObject("pageTitle", "스터디룸 예약");
-    mv.addObject("statusOfNumber", statusOfNumber);
-    mv.addObject("roomNo", roomNo);
-    mv.addObject("selectedDate", date);
-    mv.addObject("people", cafeRoom.getPeople());
-    mv.addObject("perNo", ((Member) session.getAttribute("loginUser")).getPerNo());
-    mv.addObject("contentUrl", "cafe/CafeReservation2.jsp");
-    mv.setViewName("template1");
-
-    return mv;
+    return statusOfNumber;
   }
 
-  @GetMapping("/cafe/reservationPay")
-  public ModelAndView reservation3(String[] selectedTime, 
-      int roomNo, 
-      String selectedDate, 
-      int people,
-      HttpSession session) throws Exception {
-
-    HashMap<Integer,String> reservationInfo = new HashMap<>();
-    for(int i = 0; i < selectedTime.length; i++) {
-      int index = Integer.parseInt(selectedTime[i].split(",")[0]);
-      String startTime = selectedTime[i].split(",")[1];
-      String endTime = selectedTime[i].split(",")[2];
-      reservationInfo.put(index, startTime + "," + endTime);
-    }
-
-    CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
-    int totalPrice = cafeRoom.getRoomPrice() * reservationInfo.size();
-
-    ModelAndView mv = new ModelAndView();
-
-    mv.addObject("pageTitle", "스터디룸 예약");
-    mv.addObject("roomNo", roomNo);
-    mv.addObject("reservationInfo", reservationInfo);
-    mv.addObject("startTime", selectedTime[0].split(",")[1]);
-    mv.addObject("usingTime", reservationInfo.size());
-    mv.addObject("totalPrice", totalPrice);
-    mv.addObject("selectedDate", selectedDate);
-    mv.addObject("people", people);
-    mv.addObject("perNo", ((Member) session.getAttribute("loginUser")).getPerNo());
-    mv.addObject("contentUrl", "cafe/CafeReservation3.jsp");
-    mv.setViewName("template1");
-
-    return mv;
-  }
-
-  @GetMapping("/cafe/reservationEnd")
-  public ModelAndView reservation3(int roomNo, 
-      String startTime, 
-      int usingTime, 
-      int totalPrice,
-      String selectedDate,
-      int people,
+  @PostMapping(value="/cafe/completeReservation")
+  @ResponseBody
+  public ResponseEntity<HashMap<String, Object>> completeReservation(
+      CafeReservation reservation,
+      String startTimeStr,
       HttpSession session) {
 
     Member member = (Member) session.getAttribute("loginUser");
 
-    CafeReservation reservation = new CafeReservation();
-
     reservation.setMember(member);
-    reservation.setUseDate(Date.valueOf(selectedDate));
-    reservation.setStartTime(LocalTime.parse(startTime));
-    reservation.setUseTime(usingTime);
-    reservation.setUseMemberNumber(people);
-    reservation.setTotalPrice(totalPrice);
-    reservation.setRoomNo(roomNo);
+    reservation.setStartTime(LocalTime.parse(startTimeStr));
     reservation.setReservationStatus(1); // 1 : 예약완료
 
     try {
@@ -288,14 +252,51 @@ public class CafeReservationController {
       e.printStackTrace();
     }
 
+    HashMap<String,Object> result = new HashMap<>();
+    result.put("reservationNo", reservation.getReservationNo());
+
+    return ResponseEntity.ok(result);
+  }
+
+  @PostMapping(value="/cafe/paymentReservation")
+  @ResponseBody
+  public ResponseEntity<HashMap<String, Object>> paymentReservation(
+      CafeReservation reservation,
+      String startTimeStr,
+      HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+
+    reservation.setMember(member);
+    reservation.setStartTime(LocalTime.parse(startTimeStr));
+    reservation.setReservationStatus(2); // 2 : 결제완료
+
+    try {
+      cafeReservationDao.insertPaymentReservation(reservation);
+      sqlSessionFactory.openSession().commit();
+    } catch (Exception e) {
+      sqlSessionFactory.openSession().rollback();
+    }
+
+    HashMap<String,Object> result = new HashMap<>();
+    result.put("reservationNo", reservation.getReservationNo());
+
+    return ResponseEntity.ok(result);
+  }
+
+  @PostMapping(value="/cafe/reservationEndPage")
+  public ModelAndView reservationEndPage(int reservationNo, HttpSession session) throws Exception {
+
+    Member member = (Member) session.getAttribute("loginUser");
+    CafeReservation reservation = 
+        cafeReservationDao.findReservationByMember(member.getPerNo(), reservationNo);
+
     ModelAndView mv = new ModelAndView();
-
-    mv.addObject("pageTitle", "스터디룸 예약");
-    mv.addObject("perNo", member.getPerNo());
-    mv.addObject("myStudy", myStudy);
-    mv.addObject("contentUrl", "cafe/CafeReservationEnd.jsp");
+    mv.addObject("reservation", reservation);
+    mv.addObject("pageTitle", reservation.getCafe().getName() + " > " 
+        + reservation.getRoomName() + " > 예약완료");
+    mv.addObject("contentUrl", "cafe/CafeReservation_End.jsp");
     mv.setViewName("template1");
-
     return mv;
   }
 
@@ -313,3 +314,178 @@ public class CafeReservationController {
     return mv;
   }
 }
+
+
+//@GetMapping("/cafe/reservation")
+//  public ModelAndView reservation1(int no) throws Exception {
+//
+//    Cafe cafe = cafeDao.findByCafeNoMember(no);
+//
+//    if (cafe == null) {
+//      throw new Exception(" >> 해당 번호의 장소가 존재하지 않습니다.");
+//    }
+//
+//    List<CafeRoom> roomList = cafeRoomDao.findCafeRoomListByCafe(cafe.getNo());
+//
+//    ModelAndView mv = new ModelAndView();
+//
+//    mv.addObject("roomList", roomList);
+//    mv.addObject("pageTitle", "스터디룸 예약");
+//    mv.addObject("contentUrl", "cafe/CafeReservation.jsp");
+//    mv.setViewName("template1");
+//
+//    return mv;
+//  }
+//
+//  @GetMapping("/cafe/reservationSelectTime")
+//  public ModelAndView reservation2(int roomNo, 
+//      String date, 
+//      int cafeNo, 
+//      HttpSession session) throws Exception {
+//
+//    Cafe cafe = cafeDao.findByCafeNo(cafeNo);
+//    CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
+//    List<CafeReservation> todayReserList = 
+//        cafeReservationDao.findReservationListByDate(date, roomNo);
+//    ArrayList<LocalTime> useTimeList = new ArrayList<>();
+//
+//    try {
+//      if (!todayReserList.isEmpty()) {
+//        for (CafeReservation cafeReser : todayReserList) {
+//          for (int i = 0; i < cafeReser.getUseTime(); i++) {
+//            if (i == 0) {
+//              useTimeList.add(cafeReser.getStartTime().plusHours(1));
+//              continue;
+//            } else if (i > 0) {
+//              LocalTime tempTime = useTimeList.get(useTimeList.size()-1).plusHours(1);
+//              useTimeList.add(tempTime);
+//            }
+//          }
+//        }
+//      }
+//    } catch (NullPointerException e) {e.printStackTrace();}
+//
+//    LocalTime startTime = cafe.getOpenTime();
+//    LocalTime endTime = cafe.getCloseTime();
+//    LocalTime tempEndTime = LocalTime.parse("00:00");
+//    String status = "";
+//
+//    int availableTime = (int) ChronoUnit.HOURS.between(startTime, endTime);
+//    HashMap<Integer, String> statusOfNumber = new HashMap<>();
+//
+//    for (int i = 0; i < availableTime; i++) {
+//      if (i == 0) {
+//        tempEndTime = startTime.plusHours(1);
+//      } else {
+//        startTime = tempEndTime;
+//        tempEndTime = startTime.plusHours(1);
+//      }
+//
+//      status = "예약 가능";
+//
+//      if (useTimeList.size() != 0) {
+//        for (int j = 0; j < useTimeList.size(); j++) {
+//          if (useTimeList.get(j).compareTo(tempEndTime) == 0) {
+//            status = "예약 불가";
+//          }
+//        }
+//      }
+//      statusOfNumber.put(i+1, startTime + "," + tempEndTime + "," + status);
+//    }
+//
+//    ModelAndView mv = new ModelAndView();
+//
+//    mv.addObject("pageTitle", "스터디룸 예약");
+//    mv.addObject("statusOfNumber", statusOfNumber);
+//    mv.addObject("roomNo", roomNo);
+//    mv.addObject("selectedDate", date);
+//    mv.addObject("people", cafeRoom.getPeople());
+//    mv.addObject("perNo", ((Member) session.getAttribute("loginUser")).getPerNo());
+//    mv.addObject("contentUrl", "cafe/CafeReservation2.jsp");
+//    mv.setViewName("template1");
+//
+//    return mv;
+//  }
+//
+//  @GetMapping("/cafe/reservationPay")
+//  public ModelAndView reservation3(String[] selectedTime, 
+//      int roomNo, 
+//      String selectedDate, 
+//      int people,
+//      HttpSession session) throws Exception {
+//
+//    HashMap<Integer,String> reservationInfo = new HashMap<>();
+//    for(int i = 0; i < selectedTime.length; i++) {
+//      int index = Integer.parseInt(selectedTime[i].split(",")[0]);
+//      String startTime = selectedTime[i].split(",")[1];
+//      String endTime = selectedTime[i].split(",")[2];
+//      reservationInfo.put(index, startTime + "," + endTime);
+//    }
+//
+//    CafeRoom cafeRoom = cafeRoomDao.findByRoomNo(roomNo);
+//    int totalPrice = cafeRoom.getRoomPrice() * reservationInfo.size();
+//
+//    ModelAndView mv = new ModelAndView();
+//
+//    mv.addObject("pageTitle", "스터디룸 예약");
+//    mv.addObject("roomNo", roomNo);
+//    mv.addObject("reservationInfo", reservationInfo);
+//    mv.addObject("startTime", selectedTime[0].split(",")[1]);
+//    mv.addObject("usingTime", reservationInfo.size());
+//    mv.addObject("totalPrice", totalPrice);
+//    mv.addObject("selectedDate", selectedDate);
+//    mv.addObject("people", people);
+//    mv.addObject("perNo", ((Member) session.getAttribute("loginUser")).getPerNo());
+//    mv.addObject("contentUrl", "cafe/CafeReservation3.jsp");
+//    mv.setViewName("template1");
+//
+//    return mv;
+//  }
+//
+//  @GetMapping("/cafe/reservationEnd")
+//  public ModelAndView reservation3(int roomNo, 
+//      String startTime, 
+//      int usingTime, 
+//      int totalPrice,
+//      String selectedDate,
+//      int people,
+//      HttpSession session) {
+//
+//    Member member = (Member) session.getAttribute("loginUser");
+//
+//    CafeReservation reservation = new CafeReservation();
+//
+//    reservation.setMember(member);
+//    reservation.setUseDate(Date.valueOf(selectedDate));
+//    reservation.setStartTime(LocalTime.parse(startTime));
+//    reservation.setUseTime(usingTime);
+//    reservation.setUseMemberNumber(people);
+//    reservation.setTotalPrice(totalPrice);
+//    reservation.setRoomNo(roomNo);
+//    reservation.setReservationStatus(1); // 1 : 예약완료
+//
+//    try {
+//      cafeReservationDao.insertReservation(reservation);
+//      sqlSessionFactory.openSession().commit();
+//    } catch (Exception e) {
+//      sqlSessionFactory.openSession().rollback();
+//    }
+//
+//    List<Map<String, String>> myStudy = null;
+//
+//    try {
+//      myStudy = studyDao.findAllByMyNo(member.getPerNo());
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//
+//    ModelAndView mv = new ModelAndView();
+//
+//    mv.addObject("pageTitle", "스터디룸 예약");
+//    mv.addObject("perNo", member.getPerNo());
+//    mv.addObject("myStudy", myStudy);
+//    mv.addObject("contentUrl", "cafe/CafeReservationEnd.jsp");
+//    mv.setViewName("template1");
+//
+//    return mv;
+//  }

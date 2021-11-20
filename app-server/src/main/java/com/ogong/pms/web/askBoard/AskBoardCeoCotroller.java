@@ -1,6 +1,7 @@
 package com.ogong.pms.web.askBoard;
 
 import java.util.Collection;
+import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.AskBoardDao;
 import com.ogong.pms.domain.AskBoard;
@@ -48,15 +50,40 @@ public class AskBoardCeoCotroller {
   }
 
   @GetMapping("/askboard/ceomylist")
-  public ModelAndView list(HttpSession session) throws Exception {
+  public ModelAndView list(HttpSession session,
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "10") int pageSize) throws Exception {
 
     CeoMember loginCeoUser = (CeoMember) session.getAttribute("loginCeoUser");
-
-    Collection<AskBoard> ceoMyAskBoardList = askBoardDao.findCeoMyAll(loginCeoUser.getCeoNo());
-
     ModelAndView mv = new ModelAndView();
 
+    if (loginCeoUser == null) {
+      throw new Exception("로그아웃 상태");
+    }    
+
+    int count = askBoardDao.countByCeoNo(loginCeoUser.getCeoNo());
+
+    if (pageSize < 5 || pageSize > 10) {
+      pageSize = 10;
+    }
+
+    int totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
+
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+
+    HashMap<String,Object> params = new HashMap<>();
+    params.put("offset", pageSize * (pageNo - 1));
+    params.put("length", pageSize);
+    params.put("ceoMemberNo", loginCeoUser.getCeoNo());
+
+    Collection<AskBoard> ceoMyAskBoardList = askBoardDao.findCeoMyAll(params);
+
     mv.addObject("pageTitle", "💬문의글 목록");
+    mv.addObject("totalPage", totalPage);
+    mv.addObject("pageNo", pageNo);
+    mv.addObject("pageSize", pageSize);
     mv.addObject("ceoMyAskBoardList", ceoMyAskBoardList);
     mv.addObject("contentUrl", "askBoard/AskBoardCeoMyList.jsp");
     mv.setViewName("template1");

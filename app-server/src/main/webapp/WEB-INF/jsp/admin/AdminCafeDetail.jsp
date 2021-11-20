@@ -202,7 +202,7 @@
 
 	.review-wrap {
   height: 180px;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
 	}
   .review-wrap::-webkit-scrollbar {
    width: 10px;
@@ -337,7 +337,7 @@
               </div>
             </div>
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
+              <div class="table-responsive p-0" style="overflow-y: hidden;">
               <div class="all-content"> 
                 <div class = "cafe-top">
 					        <div class="slide">
@@ -406,20 +406,20 @@
 			       </c:if>
 	         </div>
 	        </div>
-        
-					  <div id='button_wrap'>
-					    <button id="deleted" type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
-					    
-					    <button type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeList">목록</a></button>
-	
-					    <c:if test="${cafe.cafeStatus == 1}">
-					    <button type="submit" class="btn btn-outline-dark" onclick="disagree();">거절</button>
-					    <button id="agree" type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeControl?no=${cafe.no}">승인</a></button>
-					    </c:if>
-					  </div>
-        
-             </div>
-           </div>
+         </div>
+          </div>
+           
+           <div id='button_wrap'>
+              <button id="deleted" type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeDelete?cafeNo=${cafe.no}">삭제</a></button>
+              
+              <button type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeList">목록</a></button>
+  
+              <c:if test="${cafe.cafeStatus == 1}">
+              <button type="submit" class="btn btn-outline-dark" onclick="disagree();">거절</button>
+              <button id="agree" type="submit" class="btn btn-outline-dark"><a href="${contextPath}/app/admin/cafeControl?no=${cafe.no}">승인</a></button>
+              </c:if>
+            </div>
+           
          </div>
        </div>
      </div>
