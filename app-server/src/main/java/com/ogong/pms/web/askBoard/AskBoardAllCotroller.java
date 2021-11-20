@@ -35,13 +35,13 @@ public class AskBoardAllCotroller {
 
   @RequestMapping("/askboard/alllist")
   public ModelAndView list(@RequestParam(defaultValue = "1") int pageNo, 
-      @RequestParam(defaultValue = "5") int pageSize) throws Exception {
+      @RequestParam(defaultValue = "10") int pageSize) throws Exception {
     ModelAndView mv = new ModelAndView();
 
     int count = askBoardDao.countAll();
 
     if (pageSize < 5 || pageSize > 10) {
-      pageSize = 5;
+      pageSize = 10;
     }
 
     int totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
@@ -75,10 +75,7 @@ public class AskBoardAllCotroller {
       throw new Exception("문의게시글 상세 오류!");
     }
 
-    int i = askBoard.getAskVeiwCount() + 1;
-    askBoard.setAskVeiwCount(i);
-
-    askBoardDao.updateViewCount(askBoard);
+    askBoardDao.updateViewCount(askBoard.getAskNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

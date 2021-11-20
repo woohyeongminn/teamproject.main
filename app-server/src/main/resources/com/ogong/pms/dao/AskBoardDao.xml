@@ -77,9 +77,10 @@
   </select>
   
   <select id="countAll" resultType="int">
-  <include refid="select1"/>
+  select
       count(*)
-   <include refid="from1"/>
+  from
+    ask_board 
   </select>   
   
   <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
@@ -137,9 +138,9 @@
     where ask_board_no=#{askNo}
   </update>
     
-  <update id="updateViewCount" parameterType="AskBoard">
+  <update id="updateViewCount" parameterType="int">
     update ask_board set
-      view_cnt=#{askVeiwCount}
+      view_cnt= view_cnt + 1
     where ask_board_no=#{askNo}
   </update>
   
