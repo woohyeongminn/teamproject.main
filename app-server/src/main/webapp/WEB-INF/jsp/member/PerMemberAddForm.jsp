@@ -6,6 +6,7 @@
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
+
 <style>
   form {
   max-width: 500px;
@@ -48,7 +49,7 @@
 
       <div id="mn">
         <label id='f-name' for='f-name' class="col-sm-2 col-form-label">이름</label>
-        <input id='i-name' type='text' name='perName' placeholder="*필수"/><br>
+        <input id='i-name' type='text' name='perName' value="${perName}" placeholder="*필수"/><br>
       </div>
      
       
@@ -69,14 +70,15 @@
 	      <input id='i-nickname' type='text' name='nick' placeholder="*필수" />
 	      <input type="button" class="btn btn-outline-dark" value="중복확인" onclick="nickOverlap()"/><br>
       </div>
-  
+
       <div id="mt">
 	      <label id='f-tel'for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
 	      <input id='i-tel' type='text' name='tel' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -
 	      <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> -
-	      <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/> <br>
+	      <input type='text' name='tel' pattern="[0-9]+" minlength='4' maxlength='4'  style="width:50px;"/>
+        <input type="button" class="btn btn-outline-dark" value="인증하기" /><br> 
       </div>
-      
+            
       <div id="mpw">
 	      <label id='f-password' for='f-password' class="col-sm-2 col-form-label">비밀번호</label>
 	      <input id='i-password' type='password' name='password'
@@ -98,7 +100,7 @@
      <hr>
      
      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-       <button id="x-add-btn" class="btn btn-outline-dark btn-primary" type="submit" onclick="joinPopup()">✔가입하기</button> 
+       <button id="x-add-btn" class="btn btn-outline-dark btn-primary" type="submit" onclick="joinPopup()" >✔가입하기</button> 
        <a id="x-cancle-btn" type="button" class="btn btn-outline-dark" href="${contextPath}/app/index">❌취소하기</a>
      </div> 
    </form>
@@ -240,12 +242,10 @@ function nickOverlap(){
       }
     });
   }
-  
-  var name = document.querySelector("#f-name");
+  var form = document.perInfo;
   function joinPopup() {
-	  alert("✋'" + name + "'님 환영합니다.✋")
+	  alert("'" + form.nick.value + "'님 환영합니다.✋")
   }
-  
 </script>
  
 
