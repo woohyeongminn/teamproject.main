@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 <script type="text/javascript" src="https://static.msscdn.net/mfile_outsrc/js/vendor/jquery-1.11.1.min.js?20160201"></script>
 <style>
@@ -184,11 +185,19 @@ a {
     
      <div class="profile">
       <div class="profile-header">
-        <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
-          <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_110x110.jpg">
-        </a>
+      <c:choose>
+         <c:when test="${not empty ceoMember.ceoPhoto}">
+           <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
+               <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_110x110.jpg" style="width: 110px">
+           </a>
+         </c:when>
+         <c:otherwise>
+            <a href="${contextPath}/img/ceoProfile.jpg" >
+               <img id="f-photo-image" src="${contextPath}/img/ceoProfile.jpg" style="width: 90px">
+            </a>
+         </c:otherwise>
+       </c:choose>
        </div>
-        
        <input id='f-photo' type='file' name='photoFile' value='${ceoMember.ceoPhoto}'>
 
        <label for='f-name' class='form-label'>이름</label>
