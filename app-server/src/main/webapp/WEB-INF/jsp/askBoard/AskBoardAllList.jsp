@@ -25,41 +25,43 @@
   a {
   color: black;
   }
+  #paging {
+  text-align: center;
+  }
 </style>
-<fieldset>
-<div class="all-content">
-<br>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<c:choose>
-    <c:when test="${not empty loginUser}">
-       <a href='permylist' >내 글</a> |
-    </c:when>
-    <c:when test="${not empty loginCeoUser}">
-       <a href='ceomylist' >내 글</a> |
-    </c:when>
-    <c:when test="${empty loginUser && empty loginCeoUser}">
-       <a href="javascript:logout(this);" attr-a="onclick : attr-a">내 글</a> |
-    </c:when>
-</c:choose>
-       <a href='alllist' >전체 글</a> | 
-       <a href='alllist' >최신순</a> 
-    </div>
 
-<hr>
-  <table class="table table-responsive text-center">
-	  <thead>
-	    <tr id="head">
-			   <th>번호</th>
-			   <th>제목</th>
-			   <th>작성자</th>
-			   <th>조회수</th>
-			   <th>등록일</th>
-			   <th>답변</th>
-	    </tr>   
-    </thead>
+<fieldset>
+  <div class="all-content">
+  <br>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <c:choose>
+	        <c:when test="${not empty loginUser}">
+	          <a href='permylist' >내 글</a> |
+	        </c:when>
+	        <c:when test="${not empty loginCeoUser}">
+	          <a href='ceomylist' >내 글</a> |
+	        </c:when>
+	        <c:when test="${empty loginUser && empty loginCeoUser}">
+	          <a href="javascript:logout(this);" attr-a="onclick : attr-a">내 글</a> |
+	        </c:when>
+      </c:choose>
+       <a href='alllist' >전체 글</a> 
+    </div>
+    <hr>
+    <table class="table table-responsive text-center">
+	    <thead>
+	      <tr id="head">
+			    <th>번호</th>
+			    <th>제목</th>
+			    <th>작성자</th>
+			    <th>조회수</th>
+			    <th>등록일</th>
+			    <th>답변</th>
+	      </tr>   
+      </thead>
     
-    <tbody>
-       <c:forEach items="${askBoardList}" var="askBoard">
+      <tbody>
+        <c:forEach items="${askBoardList}" var="askBoard">
           <c:choose>
             <c:when test="${askBoard.askStatus == 1}">
               <tr>
@@ -106,47 +108,47 @@
 			        </tr>
             </c:otherwise>
           </c:choose>
-       </c:forEach>
-    </tbody>
-  </table>
-<c:if test="${empty askBoardList}">
- <div style="text-align: center"> 
-  <b style="font-size:14; text-align: center">❕❔ 등록된 게시글이 없습니다.</b>
- </div> 
-</c:if>
+        </c:forEach>
+      </tbody>
+    </table>
+  
+    <c:if test="${empty askBoardList}">
+     <div style="text-align: center"> 
+      <b style="font-size:14; text-align: center">❕❔ 등록된 게시글이 없습니다.</b>
+     </div> 
+    </c:if>
 
-<p>
-<c:if test="${pageNo > 1}">
-  <a href="alllist?pageNo=${pageNo-1}&pageSize=${pageSize}">[이전]</a>
-</c:if>
-<c:if test="${pageNo <= 1}">
-  [이전]
-</c:if>
-  ${pageNo}
-<c:if test="${pageNo < totalPage}">
-  <a href="alllist?pageNo=${pageNo+1}&pageSize=${pageSize}">[다음]</a>
-</c:if>
-<c:if test="${pageNo >= totalPage}">
-  [다음]
-</c:if>
-</p>
+    <p id="paging">
+	      <c:if test="${pageNo > 1}">
+	        <a href="alllist?pageNo=${pageNo-1}&pageSize=${pageSize}">◀</a>
+	      </c:if>
+	      <c:if test="${pageNo <= 1}">
+	       ◀
+	      </c:if>
+	      ${pageNo}
+	      <c:if test="${pageNo < totalPage}">
+	        <a href="alllist?pageNo=${pageNo+1}&pageSize=${pageSize}"> ▶</a>
+	      </c:if>
+	      <c:if test="${pageNo >= totalPage}">
+	       ▶
+	      </c:if>
+    </p>
 
-<c:choose>
-	<c:when test="${not empty loginUser}">
-	  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		   <a href='peraddform' type="button" class ="btn btn-outline-dark">✔등록하기</a>
-	  </div>
-	</c:when>
-	
-	<c:when test="${not empty loginCeoUser}">
-		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	     <a href='ceoaddform' type="button" class = "btn btn-outline-dark">✔등록하기</a>
-		</div>
-	</c:when>
-</c:choose>
-</div>
+    <c:choose>
+				<c:when test="${not empty loginUser}">
+				  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					   <a href='peraddform' type="button" class ="btn btn-outline-dark">✔등록하기</a>
+				  </div>
+				</c:when>
+				
+				<c:when test="${not empty loginCeoUser}">
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				     <a href='ceoaddform' type="button" class = "btn btn-outline-dark">✔등록하기</a>
+					</div>
+				</c:when>
+    </c:choose>
+  </div>
 </fieldset>
-
 
 <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {

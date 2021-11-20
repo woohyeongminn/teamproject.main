@@ -59,29 +59,21 @@
       left outer join ask_board_reply abr on abr.ask_board_no=ab.ask_board_no
     </sql>
     
-  <select id="findAll" resultMap="AskBoardMap">
+  <select id="findAll" resultMap="AskBoardMap" parameterType="map">
   <include refid="select1"/>
       abr.reply_dt r_dt
   <include refid="from1"/>
      order by
-      ab.ask_board_no asc
+      ab.ask_board_no desc
+      limit #{offset}, #{length}      
   </select>
   
-    <select id="findAlll" resultMap="AskBoardMap" parameterType="map">
-  <include refid="select1"/>
-      abr.reply_dt r_dt
-  <include refid="from1"/>
-     order by
-     ab.ask_board_no desc
-     limit #{offset}, #{length}
-  </select>
-  
-  <select id="countAll" resultType="int">
-  select
+  <select id="count" resultType="int">
+    select
       count(*)
-  from
-    ask_board 
-  </select>   
+    from ask_board ab
+      inner join member m on m.member_no=ab.member_no
+  </select> 
   
   <select id="findPerMyAll" resultMap="AskBoardMap" parameterType="int">
   <include refid="select1"/>

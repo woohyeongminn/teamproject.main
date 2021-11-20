@@ -18,27 +18,12 @@ public class AskBoardAllCotroller {
   @Autowired AskBoardDao askBoardDao;
   @Autowired SqlSessionFactory sqlSessionFactory;
 
-  //  @GetMapping("/askboard/alllist")
-  //  public ModelAndView list() throws Exception {
-  //
-  //    ModelAndView mv = new ModelAndView();
-  //
-  //    Collection<AskBoard> askBoardList = askBoardDao.findAll();
-  //
-  //    mv.addObject("pageTitle", "💬문의글 목록");
-  //    mv.addObject("askBoardList", askBoardList);
-  //    mv.addObject("contentUrl", "askBoard/AskBoardAllList.jsp");
-  //    mv.setViewName("template1");
-  //
-  //    return mv;
-  //  }
-
   @RequestMapping("/askboard/alllist")
   public ModelAndView list(@RequestParam(defaultValue = "1") int pageNo, 
       @RequestParam(defaultValue = "10") int pageSize) throws Exception {
     ModelAndView mv = new ModelAndView();
 
-    int count = askBoardDao.countAll();
+    int count = askBoardDao.count();
 
     if (pageSize < 5 || pageSize > 10) {
       pageSize = 10;
@@ -54,7 +39,8 @@ public class AskBoardAllCotroller {
     params.put("offset", pageSize * (pageNo - 1));
     params.put("length", pageSize);
 
-    Collection<AskBoard> askBoardList = askBoardDao.findAlll(params);
+    Collection<AskBoard> askBoardList = askBoardDao.findAll(params);
+
     mv.addObject("pageTitle", "💬문의글 목록");
     mv.addObject("totalPage", totalPage);
     mv.addObject("pageNo", pageNo);
