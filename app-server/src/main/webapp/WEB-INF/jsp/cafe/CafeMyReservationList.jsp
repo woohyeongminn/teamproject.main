@@ -52,6 +52,7 @@
 <thead>
   <tr>
     <th width="5%">선택</th>
+    <th width="3%">번호</th>
     <th width="8%">예약날짜</th>
     <th width="8%">이용날짜</th>
     <th width=15%;>이용시간</th>
@@ -65,6 +66,7 @@
 	<c:forEach items="${reserList}" var="reservation">
 	<tr>
 	    <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="reservationNo" value="${reservation.reservationNo}"></td>
+	    <td>${reservation.reservationNo}</td>
 	    <td>${reservation.reservationDate}</td> 
 	    <td>${reservation.useDate}</td> 
 	    
