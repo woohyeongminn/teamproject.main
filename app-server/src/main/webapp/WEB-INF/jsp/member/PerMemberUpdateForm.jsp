@@ -64,7 +64,8 @@
 	         title="영어(대소문자), 숫자, 특수문자를 포함해 8자 이상 16자 이하로 입력해주세요."
 	         placeholder="*입력하세요"/><br>
 	  </div>  
-	  <input type="hidden" for='f-no' name='perNo' value="${perMember.perNo}" /> 
+	  <input type="hidden" for='f-no' name='perNo' value="${perMember.perNo}" />
+	  <p style="color:blue;">*비밀번호를 변경하지 않으려면 기존 비밀번호를 입력해주세요</p> 
 	  <hr>  
 	  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
 	    <input type="submit" value="🛠수정하기" class ="btn btn-outline-dark"/>

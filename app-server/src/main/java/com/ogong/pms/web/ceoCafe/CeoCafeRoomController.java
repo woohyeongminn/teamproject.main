@@ -205,4 +205,24 @@ public class CeoCafeRoomController {
     return mv;
 
   }
+
+
+  @GetMapping("/ceomember/cafe/room/search")
+  public ModelAndView search(String where, String keyword, int cafeno) throws Exception {
+
+    Cafe cafe = cafeDao.findByCafeNo(cafeno);
+
+    List<CafeRoom> cafeRoomList = cafeRoomDao.findRoomByKeyword(where, keyword, cafeno);
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("cafeRoomList", cafeRoomList);
+    mv.addObject("keyword", keyword);
+    mv.addObject("cafeNo", cafe.getNo());
+    mv.addObject("pageTitle", "👩‍🏫 " + cafe.getName() + " - 스터디룸 목록");
+    mv.addObject("contentUrl", "ceoCafe/CeoCafeRoomList.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
 }

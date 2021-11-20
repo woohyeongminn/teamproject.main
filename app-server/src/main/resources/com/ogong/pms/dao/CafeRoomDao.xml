@@ -51,6 +51,18 @@
       status asc, studyroom_no asc
   </select>
   
+    <!--  사장 용 카페 룸 검색 -->
+  <select id="findRoomByKeyword" resultMap="cafeRoomMap">
+   <include refid="cafeRoomListSelect"/>
+   where
+    ${where} like(concat('%',#{keyword},'%'))
+    and
+    cafe_no = #{cafeno}
+    order by
+      status asc, studyroom_no asc
+  </select>
+  
+  
   <!-- 멤버용 해당 카페 룸 리스트(운영중인 것만) -->
   <select id="findCafeRoomListByMember" resultMap="cafeRoomMap">
     <include refid="cafeRoomListSelect"/>

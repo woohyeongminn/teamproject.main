@@ -84,7 +84,7 @@ public class CafeController {
     mv.addObject("roomList", roomList);
     mv.addObject("roomListSize", roomList.size());
     mv.addObject("pageTitle", cafe.getName());
-    mv.addObject("contentUrl", "cafe/CafeDetail.jsp");
+    mv.addObject("contentUrl", "cafe/CafeDetail3.jsp");
     mv.setViewName("template1");
 
     return mv;
