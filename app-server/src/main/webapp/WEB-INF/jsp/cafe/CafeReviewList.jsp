@@ -13,6 +13,9 @@ a {
  text-decoration:none;
 }
 a:hover {
+  color: rgb(155 136 131);
+}
+button > a:hover {
   color: white;
 }
 .all-content {
@@ -65,11 +68,11 @@ a:hover {
 	    </td>
 	 </tr>
 	</c:forEach>
-  </tbody>
-</table>
 <c:if test='${empty reviewList}'>
    <p class="text-center">등록된 리뷰가 없습니다.</p>  
 </c:if>
+  </tbody>
+</table>
 
 <br>
 </div>
@@ -78,7 +81,8 @@ a:hover {
 <script>
 function btnDelete(reviewNo) {
 	Swal.fire({
-    title: '리뷰를 정말 삭제하시겠습니까?',
+		html: '<p style="font: message-box;font-weight: bold;">리뷰를 삭제하시면 재작성이 불가합니다.<br>삭제하시겠습니까?</p>',
+    icon: 'warning',
     showCancelButton: true,
     confirmButtonText: '네',
     cancelButtonText: '아니오'

@@ -3,46 +3,45 @@ let date = new Date();
   const renderCalender = () => {
   const viewYear = date.getFullYear();
   const viewMonth = date.getMonth();
-  
-  /*
-  if ((vieMonth +1) == 1) {
-  const stringMonth = Jan;
+
+  if (viewMonth  == 0) {
+    var month = "Jan.";
   }
-  if ((vieMonth +1) == 2) {
-    stringMonth = Feb;
+  else if (viewMonth  == 1) {
+    var month = "Feb.";
   }
-  if ((vieMonth +1) == 3) {
-     stringMonth = Mar;
+  else if (viewMonth  == 2) {
+    var month = "Mar.";
   }
-  if ((vieMonth +1) == 4) {
-    stringMonth = Apr;
+  else if (viewMonth  == 3) {
+    var month = "Apr.";
   }
-  if ((vieMonth +1) == 5) {
-    stringMonth = May;
+  else if (viewMonth  == 4) {
+    var month = "May.";
   }
-  if ((vieMonth +1) == 6) {
-   stringMonth = Jun;
+  else if (viewMonth  == 5) {
+   var month = "Jun.";
   }  
-  if ((vieMonth +1) == 7) {
-    stringMonth = Jul;
+  else if (viewMonth  == 6) {
+   var month = "Jul.";
   }
-    if ((vieMonth +1) == 8) {
-     stringMonth = Aug;
+  else if (viewMonth  == 7) {
+   var month = "Aug.";
   }
-    if ((vieMonth +1) == 9) {
-    stringMonth = Sep;
+  else if (viewMonth  == 8) {
+   var month = "Sep.";
   }
-    if ((vieMonth +1) == 10) {
-    stringMonth = Oct;
+  else if (viewMonth  == 9) {
+   var month = "Oct.";
   }
-    if ((vieMonth +1) == 11) {
-    stringMonth = Nov;
+  else if (viewMonth  == 10) {
+   var month = "Nov.";
   }
-    if ((vieMonth +1) == 12) {
-    stringMonth = Dec;
+  else if (viewMonth  == 11) {
+   var month = "Dec.";
   }
-  */
-  document.querySelector('.year-month').textContent = `${viewYear}년 ${viewMonth + 1}월`;
+  
+  document.querySelector('.year-month').textContent = `${month} ${viewYear}`;
 
   const prevLast = new Date(viewYear, viewMonth, 0);
   const thisLast = new Date(viewYear, viewMonth + 1, 0);

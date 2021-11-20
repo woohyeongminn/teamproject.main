@@ -67,14 +67,11 @@ public class AskBoardPerCotroller {
 
   @GetMapping("/askboard/permydetail")
   public ModelAndView detail(int askNo) throws Exception {
-
     AskBoard myAskBoard = askBoardDao.findByNo(askNo);
+
     ModelAndView mv = new ModelAndView();
 
-    int i = myAskBoard.getAskVeiwCount() + 1;
-    myAskBoard.setAskVeiwCount(i);
-
-    askBoardDao.updateViewCount(myAskBoard);
+    askBoardDao.updateViewCount(myAskBoard.getAskNo());
     sqlSessionFactory.openSession().commit();
 
     mv.addObject("pageTitle", "💬문의글 상세");

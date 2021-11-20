@@ -10,9 +10,8 @@ public interface AskBoardDao {
   void insertCeo(AskBoard askBoard) throws Exception;
   void update(AskBoard askBoard) throws Exception;
   void delete(int no) throws Exception;
-  Collection<AskBoard> findAll() throws Exception;
-  Collection<AskBoard> findAlll(Map<String,Object> params) throws Exception;
-  int countAll() throws Exception;
+  Collection<AskBoard> findAll(Map<String,Object> params) throws Exception;
+  int count() throws Exception;
 
   //개인회원 문의게시글 목록(로그인 유저)
   Collection<AskBoard> findPerMyAll(int perMemberNo) throws Exception;
@@ -23,7 +22,7 @@ public interface AskBoardDao {
 
   // 답변 전용
   void insertreply(AskBoard askBoard) throws Exception;
-  void updateViewCount(AskBoard askBoard) throws Exception;
+  void updateViewCount(int askNo) throws Exception;
   void deletereply(int no) throws Exception;
 
 }
