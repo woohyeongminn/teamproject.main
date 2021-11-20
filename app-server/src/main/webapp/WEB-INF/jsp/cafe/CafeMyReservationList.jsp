@@ -6,6 +6,9 @@
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
+html {
+   cursor: default;
+}
 * {
   font-size: 13px;
 }
@@ -20,6 +23,18 @@
 .dropdown a > span {
   font-size: 14px;
 }
+.notice-section {
+  margin-top: 40px;
+}
+.notice-section-body {
+  padding: 18px 18px 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #e3e3e3;
+}
+.notice-section-body > p {
+  color: #666;
+  line-height: 13px;
+}
 </style>
 
 <body>
@@ -31,11 +46,11 @@
     <i class="fas fa-search"></i>
     <span>조회기간</span>
     <select name="searchDate">
-      <option value="1">예약날짜</option>
-      <option value="2">이용날짜</option>
+      <option value="1">예약일</option>
+      <option value="2">이용일</option>
     </select>
     <input type="date" name="startDate"> ~ <input type="date" name="endDate">
-    <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">조회</button>
+    <button class="btn btn-outline-dark btn-sm" id="btnSearch" style="line-height: normal;">조회</button>
     </form>
   </div>
   <div>
@@ -52,8 +67,9 @@
 <thead>
   <tr>
     <th width="5%">선택</th>
-    <th width="8%">예약날짜</th>
-    <th width="8%">이용날짜</th>
+    <th width="5%">번호</th>
+    <th width="8%">예약일</th>
+    <th width="8%">이용일</th>
     <th width=15%;>이용시간</th>
     <th>스터디카페 - 스터디룸</th>
     <th width="7%">결제금액</th>
@@ -65,6 +81,7 @@
 	<c:forEach items="${reserList}" var="reservation">
 	<tr>
 	    <td><input class="form-check-input" type="checkbox" id="checkboxNoLabel" name="reservationNo" value="${reservation.reservationNo}"></td>
+	    <td>${reservation.reservationNo}</td>
 	    <td>${reservation.reservationDate}</td> 
 	    <td>${reservation.useDate}</td> 
 	    
@@ -120,7 +137,14 @@
       </c:if>
     </li>
     <c:forEach var="page" begin="1" end="${totalPage}">
-	    <li class="page-item"><a class="page-link" href="reservationList?pageNo=${page}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}">${page}</a></li>
+    <c:choose>
+      <c:when test="${pageNo == page}">
+        <li class="page-item"><a class="page-link" href="reservationList?pageNo=${page}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}" style="font-weight: bold;">${page}</a></li>
+      </c:when>
+      <c:otherwise>
+	      <li class="page-item"><a class="page-link" href="reservationList?pageNo=${page}&searchDate=${searchDate}&startDate=${startDate}&endDate=${endDate}">${page}</a></li>
+      </c:otherwise>    
+    </c:choose>
     </c:forEach>
     <li class="page-item">
       <c:if test="${pageNo < totalPage}">
@@ -139,6 +163,15 @@
 </nav> <!-- pagination -->
 
 </form>	
+
+<div class="notice-section">
+  <div class="notice-section-body">
+    <p><i class="fas fa-exclamation"></i> 리뷰쓰기는 이용 후 다음날부터 가능합니다. </p>
+    <p><i class="fas fa-exclamation"></i> 예약취소는 이용 하루 전까지만 가능합니다. </p>
+    <p><i class="fas fa-exclamation"></i> 결제취소는 해당 스터디카페에 문의하세요. </p>
+  </div> <!-- .notice-section-body -->
+</div> <!-- .notice-section -->
+
 </div> <!-- .all-content -->
 
 <!-- 리뷰쓰기 창 -->
@@ -174,16 +207,42 @@
 var trList = document.querySelectorAll("tbody tr");
 trList.forEach(function(tr) {
 	
-	if (tr.children[6].innerText != "예약완료(현장결제)") {
+	if (tr.children[7].innerText != "예약완료(현장결제)") {
 		tr.children[0].children[0].disabled = true;
 	}
 
 });
 
+document.querySelector("#btnSearch").onclick = () => {
+	var startDate = document.querySelector('input[name="startDate"]');
+	var endDate = document.querySelector('input[name="endDate"]');
+	
+	if ((startDate.value != "" && endDate.value == "") ||
+			(startDate.value == "" && endDate.value != "")) {
+		swal.fire('<p style="font: message-box;font-weight: bold;margin-bottom: 0;">시작일과 종료일을 모두 선택해주세요.</p>');
+		return false;
+	} else if (startDate.value > endDate.value) {
+		swal.fire('<p style="font: message-box;font-weight: bold;margin-bottom: 0;">시작일과 종료일을 올바르게 선택해주세요.</p>');
+		return false;
+	}
+}
+
 document.querySelector("#btnCancle").onclick = () => {
 	const selectedList = document.querySelectorAll('input[name="reservationNo"]:checked');
-	if (selectedList.length == 0){
-		swal.fire("취소할 예약을 선택해주세요.");
+	
+	var returnValue;
+	
+	selectedList.forEach(function(e) {
+		if (e.parentNode.parentNode.children[3].innerText == getToday()) {
+			swal.fire('<p style="font: message-box;font-weight: bold;margin-bottom: 0;">이용 하루 전 날까지만 취소 가능합니다.</p>');
+			returnValue = false;
+		} 
+	});
+	
+	if (returnValue == false) {
+		return false;
+	} else if (selectedList.length == 0){
+		swal.fire('<p style="font: message-box;font-weight: bold;margin-bottom: 0;">취소할 예약을 선택해주세요.</p>');
 		return false;
 	} else {
 		Swal.fire({
@@ -221,11 +280,11 @@ document.querySelector("#btnReviewAdd").onclick = () => {
   var content = document.querySelector('textarea[name="content"]');
   
    if (grade.value.length == 0 || content.value.length == 0){
-    swal.fire("평점과 내용을 모두 입력해주세요.");
+    swal.fire('<p style="font: message-box;font-weight: bold;margin-bottom: 0;">평점과 내용을 모두 입력해주세요.</p>');
     return false;
   } else {
     Swal.fire({
-          title: '리뷰를 정말 등록하시겠습니까?',
+          html: '<p style="font: message-box;font-weight: bold;margin-bottom: 0;">리뷰를 정말 등록하시겠습니까?</p>',
           showCancelButton: true,
           confirmButtonText: '네',
           cancelButtonText: '아니오'
@@ -237,4 +296,12 @@ document.querySelector("#btnReviewAdd").onclick = () => {
   } 
 }
 
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year + "-" + month + "-" + day;
+}
 </script>

@@ -5,8 +5,8 @@
 <style>
 p {
 text-align: center;
-margin-top: 50px;
-margin-bottom: 300px;
+margin-top: 10px;
+margin-bottom: 150px;
 font-size: 14px;
 }
 </style>

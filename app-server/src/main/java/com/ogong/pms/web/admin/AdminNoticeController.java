@@ -189,4 +189,35 @@ public class AdminNoticeController {
     mv.setViewName("redirect:list");
     return mv;
   }
+
+  // 유저용
+  @GetMapping("/adminNotice/userlist")
+  public ModelAndView noticeUserList() throws Exception {
+
+    Collection<AdminNotice> adminNoticeList = noticeDao.findAll();
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("adminNoticeList", adminNoticeList);
+    mv.addObject("pageTitle", "🔔 공지게시글 목록");
+    mv.addObject("contentUrl", "admin/UserNoticeList.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
+
+  @GetMapping("/adminNotice/userdetail")
+  public ModelAndView noticeUserDetail(int no) throws Exception {
+
+    AdminNotice adminNotice = noticeDao.findByNoticeNo(no);
+
+    if (adminNotice == null) {
+      throw new Exception(" >> 해당 번호의 공지글이 없습니다.");
+    }
+
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("adminNotice", adminNotice);
+    mv.addObject("pageTitle", "🔔 공지게시글 상세");
+    mv.addObject("contentUrl", "admin/UserNoticeDetail.jsp");
+    mv.setViewName("template1");
+    return mv;
+  }
 }

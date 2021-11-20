@@ -40,7 +40,7 @@ public class StudyBookmarkController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("study", study);
-    mv.setViewName("redirect:../study/detail?studyno=" + study.getStudyNo());
+    mv.setViewName("redirect:../detail?studyno=" + study.getStudyNo());
 
     return mv;
   }
@@ -74,6 +74,25 @@ public class StudyBookmarkController {
     mv.addObject("pageTitle", "북마크 상세");
     mv.addObject("contentUrl", "study/bookmark/StudyBookmarkDetail.jsp");
     mv.setViewName("template1");
+
+    return mv;
+  }
+
+  @GetMapping("/study/bookmark/delete")
+  public ModelAndView delete(int studyno, HttpSession session) throws Exception {
+    Study study = studyDao.findByNo(studyno);
+
+    if (study == null) {
+      throw new Exception("해당 번호의 북마크가 없습니다.");
+    }
+
+    studyDao.deleteBookmark(study.getStudyNo(), ((Member) session.getAttribute("loginUser")).getPerNo());
+    sqlSessionFactory.openSession().commit();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("study", study);
+    mv.setViewName("redirect:list");
 
     return mv;
   }
