@@ -77,13 +77,20 @@
 <body>
 
   <div id="search">
-    <form action="search">
-    <select name="where" style="line-height: normal; font-size: 13.5px;">
-      <option value="1">지역</option>
-      <option value="2">이름</option>
-    </select>
-    <input type="text" name="keyword" style="line-height: 13.5px; font-size: 13.5px;">
-    <button class="btn btn-outline-dark btn-sm" style="line-height: 13.5px; font-size: 13.5px; margin-bottom: 4px;">검색</button>
+  <div style="float:left; font-size:13.5px; padding-top: 5px; display: none;"><span>최신순</span> | <span>평점순</span></div>
+    <form action="search" class="row g-3 justify-content-center">
+    <div class="col-auto">
+	    <select name="where" style="line-height: normal; font-size: 13.5px;" class="form-select form-select-sm">
+	      <option value="1">지역</option>
+	      <option value="2">이름</option>
+	    </select>
+    </div>
+    <div class="col-auto">
+      <input type="text" name="keyword" style="line-height: 13.5px; font-size: 13.5px;" class="form-control form-control-sm">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-outline-dark" style="line-height: 13.5px; font-size: 13.5px; margin-bottom: 4px;">검색</button>
+    </div>
     </form>
   </div>
 

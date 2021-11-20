@@ -13,6 +13,9 @@ a {
  text-decoration:none;
 }
 a:hover {
+  color: rgb(155 136 131);
+}
+button > a:hover {
   color: white;
 }
 .all-content {
