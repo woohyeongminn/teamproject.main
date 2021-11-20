@@ -68,6 +68,9 @@ public class CafeReservationController {
     cafeReservationDao.updateReservationStatusComplete();
     sqlSessionFactory.openSession().commit();
 
+    reserList = 
+        cafeReservationDao.findReservationListByMember(member.getPerNo(), offset, length);
+
     if(!startDate.equals("")) {
       if (searchDate.equals("1")) {
         searchDate = "rs.rsv_dt";

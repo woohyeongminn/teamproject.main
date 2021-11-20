@@ -45,16 +45,36 @@ public class CafeReviewController {
   }
 
   @GetMapping("/cafe/reviewList")
-  public ModelAndView list(HttpSession session) throws Exception {
+  public ModelAndView list(HttpSession session,
+      @RequestParam(defaultValue = "1") int pageNo, 
+      @RequestParam(defaultValue = "5") int pageSize) throws Exception {
 
     Member member = (Member) session.getAttribute("loginUser");
 
-    List<CafeReview> reviewList = cafeReviewDao.findReviewListByMember(member.getPerNo());
+    int count = cafeReviewDao.countReviewList("rs.member_no", member.getPerNo());
+
+    if (pageSize < 4 || pageSize > 10) {
+      pageSize = 5;
+    }
+
+    int totalPage = count / pageSize + ((count % pageSize) > 0 ? 1 : 0);
+
+    if (pageNo < 1 || pageNo > totalPage) {
+      pageNo = 1;
+    }
+
+    int offset = pageSize * (pageNo - 1);
+    int length = pageSize;
+
+    List<CafeReview> reviewList = cafeReviewDao.findReviewListByMember(member.getPerNo(),offset,length);
 
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("reviewList", reviewList);
-    mv.addObject("count", reviewList.size());
+    mv.addObject("count", count);
+    mv.addObject("totalPage", totalPage);
+    mv.addObject("pageNo", pageNo);
+    mv.addObject("pageSize", pageSize);
     mv.addObject("pageTitle", "✒ 리뷰 내역");
     mv.addObject("contentUrl", "cafe/CafeReviewList.jsp");
     mv.setViewName("template1");
@@ -70,7 +90,7 @@ public class CafeReviewController {
 
     HashMap<String,Object> result = new HashMap<>();
 
-    int count = cafeReviewDao.countReviewList(cafeNo);
+    int count = cafeReviewDao.countReviewList("sr.cafe_no", cafeNo);
 
     if (pageSize < 4 || pageSize > 10) {
       pageSize = 4;

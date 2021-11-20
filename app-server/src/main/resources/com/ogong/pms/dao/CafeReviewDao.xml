@@ -70,7 +70,7 @@
 	    join studycafe_reservation rs on r.studycafe_rsv_no=rs.studycafe_rsv_no
 	    join studycafe_room sr on rs.studyroom_no=sr.studyroom_no
     where
-      sr.cafe_no=#{cafeNo}
+      ${column}=#{no}
   </select>
   
   <!-- 내 리뷰 목록 -->
@@ -78,6 +78,7 @@
     <include refid="reviewListSelect"/>
     where 
       rs.member_no=#{memberNo}
+    limit #{offset}, #{length}
   </select>
   
   <select id="findByReviewNo" resultMap="reviewMap">

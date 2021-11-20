@@ -426,7 +426,11 @@ function reviewList(page){
 	            	strTag += '</li>';
 	            	
 	            	for (let p=1; p <= totalPage; p++){
-	            		strTag += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="reviewList('+p+')">'+p+'</a></li>';
+	            		if (pageNo == p) {
+	            			strTag += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="reviewList('+p+')" style="font-weight: bold;">'+p+'</a></li>';
+	            		} else {
+	            			strTag += '<li class="page-item"><a class="page-link" href="javascript:void(0);" onclick="reviewList('+p+')">'+p+'</a></li>';
+	            		}
 	            	}
 	            	
 	            	strTag += '<li class="page-item">';
