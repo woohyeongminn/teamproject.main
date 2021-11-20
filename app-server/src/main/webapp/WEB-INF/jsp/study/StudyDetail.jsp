@@ -42,7 +42,9 @@
           <thead>
             <tr>
               <th>대면 상태</th>
-              <th>지역</th>
+              <c:if test="${study.faceNo ne '2'}">
+                <th>지역</th>
+              </c:if>
               <th>인원수</th>
               <th>비고</th>
             </tr>
@@ -50,7 +52,9 @@
           <tbody>
             <tr>
               <td>${study.faceName}</td>
-              <td>${study.area}</td>
+              <c:if test="${study.faceNo ne '2'}">
+                <td>${study.area}</td>
+              </c:if>
               <td>${study.numberOfPeple}</td>
               <td>
               <c:if test="${study.studyStatus eq '1'}">진행</c:if>
