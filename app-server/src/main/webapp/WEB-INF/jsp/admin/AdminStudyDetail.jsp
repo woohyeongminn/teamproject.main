@@ -92,8 +92,8 @@
 <footer class="footer mt-auto py-3 bg-light">
   <div class="container">
     <div class="btn-group" role="group" aria-label="Basic outlined example">
-			<a href='../study/delete?studyno=${study.studyNo}' class="btn btn-outline-light">삭제</a>
-			<a href='../study/list' class="btn btn-outline-light">목록</a>
+			<a href='../study/delete?studyno=${study.studyNo}' class="btn btn-light">삭제</a>
+			<a href='../study/list' class="btn btn btn-light">목록</a>
 		</div>
   </div>
 </footer>
