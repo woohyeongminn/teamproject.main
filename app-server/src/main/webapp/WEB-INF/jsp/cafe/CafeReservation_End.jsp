@@ -19,6 +19,9 @@
   .pt-4 {
     height: auto !important;
   }
+  .dropdown a > span {
+    font-size: 14px;
+  }
   .c-content {
     width: 100%;
     max-width: 720px;
