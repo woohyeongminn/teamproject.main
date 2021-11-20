@@ -72,10 +72,7 @@ public class AskBoardCeoCotroller {
       throw new Exception("문의게시글 상세 오류!");
     }
 
-    int i = myAskBoard.getAskVeiwCount() + 1;
-    myAskBoard.setAskVeiwCount(i);
-
-    askBoardDao.updateViewCount(myAskBoard);
+    askBoardDao.updateViewCount(myAskBoard.getAskNo());
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();

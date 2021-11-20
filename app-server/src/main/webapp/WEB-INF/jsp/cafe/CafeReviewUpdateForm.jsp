@@ -49,7 +49,8 @@ document.querySelector("#btnUpdate").onclick = () => {
     return false;
 	} else {
     Swal.fire({
-      title: '리뷰를 정말 수정하시겠습니까?',
+    	html: '<p style="font: message-box;font-weight: bold;margin-bottom: 0;">리뷰를 정말 수정하시겠습니까?</p>',
+    	icon: 'warning',
       showCancelButton: true,
       confirmButtonText: '네',
       cancelButtonText: '아니오'
