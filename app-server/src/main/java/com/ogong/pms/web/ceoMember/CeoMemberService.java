@@ -52,4 +52,25 @@ public class CeoMemberService {
       e.printStackTrace();
     }
   }
+
+  public void licenseOverlap(String license, HttpServletResponse response) throws IOException {
+
+    String licenseNo;
+
+    try {
+      licenseNo = ceoMemberDao.licenseOverlap(license);
+
+      if (licenseNo == null) {                //id가 없어야 true(사용 가능)
+        response.getWriter().print("1");
+
+      } else if (licenseNo != null) {          //id가 있으면 false(중복으로 사용 불가능)
+        response.getWriter().print("0");
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+
 }
