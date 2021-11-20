@@ -177,12 +177,18 @@
       (#{name},#{info},#{location},#{phone},#{openTime,jdbcType=TIME},#{closeTime,jdbcType=TIME},#{ceoMember.ceoNo},1)
   </insert>
   
-  <insert id="insertCafeImage">
+<!--   <insert id="insertCafeImage">
     insert into studycafe_photo(name, cafe_no) 
     values
     <foreach collection="fileNames" item="CafeImage" separator="," >
     (#{CafeImage.name},#{cafeNo})
     </foreach>
+  </insert> -->
+  
+    <insert id="insertCafeImage">
+    insert into studycafe_photo(name, cafe_no) 
+    values
+    (#{cafeImage},#{cafeNo})
   </insert>
   
   <insert id="insertCafeHolidays">

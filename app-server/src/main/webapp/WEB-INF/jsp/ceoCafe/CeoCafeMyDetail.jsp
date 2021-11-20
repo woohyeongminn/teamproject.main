@@ -68,7 +68,7 @@ ul {
 }
 
 .cafe-bottom label {
-       width: 135px;
+   width: 135px;
    font-weight: bold;
    padding: 5px 0;
 }
