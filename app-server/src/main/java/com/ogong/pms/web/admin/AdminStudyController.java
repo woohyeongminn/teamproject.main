@@ -24,7 +24,7 @@ public class AdminStudyController {
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("studyList", studyList);
-    mv.addObject("pageTitle", "스터디 관리");
+    mv.addObject("pageTitle", "스터디 목록");
     mv.addObject("contentUrl", "admin/AdminStudyList.jsp");
     mv.setViewName("template1");
 
