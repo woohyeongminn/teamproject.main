@@ -216,8 +216,10 @@ button {
 <div class="all-content">
 	<c:choose>
 	<c:when test='${empty cafe}'>
-	  <span>등록된 카페가 없습니다.</span><br>
-	  <a href='addform' class="btn btn-outline-dark">카페 등록하러 가기</a>
+	  <div class="add-wrap" style="text-align: center;">
+		  <span style= "font-size: 16px; font-weight: bold; display: inline-block; margin-bottom: 20px;">등록된 카페가 없습니다.</span><br>
+		  <a href='addform' class="btn btn-outline-dark">카페 등록하러 가기</a>
+	  </div>
 	</c:when>
 	
 	<c:otherwise>

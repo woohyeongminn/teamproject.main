@@ -107,7 +107,9 @@ public class CeoCafeController {
   // 카페 등록
   @PostMapping("/ceomember/cafe/add")
   public ModelAndView ceoCafeAdd(HttpSession session, Cafe cafe, String inputOpenTime, String inputCloseTime,
-      Part[] fileList) throws Exception {
+      Part[] photoFile,
+      String addr2,
+      String addr3) throws Exception {
 
     CeoMember loginCeo = (CeoMember) session.getAttribute("loginCeoUser");
 
@@ -117,52 +119,49 @@ public class CeoCafeController {
 
     CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
-    cafe.setCeoMember(ceoMember); 
-    for (Part file : fileList) {
+    cafe.setCeoMember(ceoMember);
+
+    System.out.println(photoFile);
+
+    for (Part file : photoFile) {
+
+      System.out.println(file);
+
       if (file.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
         file.write(sc.getRealPath("/upload/cafe") + "/" + filename);
 
         cafe.setMainImg(filename);
-        //        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
-        //        .size(100, 100)
-        //        .outputFormat("jpg")
-        //        .crop(Positions.CENTER)
-        //        .toFiles(new Rename() {
-        //          @Override
-        //          public String apply(String name, ThumbnailParameter param) {
-        //            return name + "_200x200";
-        //          }
-        //        });
+        //      List<CafeImage> imageList = cafe.getCafeImgs();
         //
-        //        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
-        //        .size(329, 247)
-        //        .outputFormat("jpg")
-        //        .crop(Positions.CENTER)
-        //        .toFiles(new Rename() {
-        //          @Override
-        //          public String apply(String name, ThumbnailParameter param) {
-        //            return name + "_329x247";
-        //          }
-        //        });
+        //      if (!imageList.isEmpty()) {
+        //        CafeImage cafeImage = new CafeImage();
+        //        cafeImage.setName(request.getParameter("filename[]"));
+        //        cafeImage.setCafeNo(cafe.getNo());
         //
-        //        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
-        //        .size(800, 300)
-        //        .outputFormat("jpg")
-        //        .crop(Positions.CENTER)
-        //        .toFiles(new Rename() {
-        //          @Override
-        //          public String apply(String name, ThumbnailParameter param) {
-        //            return name + "_800x300";
-        //          }
-        //        });
+        //        ArrayList<CafeImage> cafeImageList = new ArrayList<>();
+        //        cafeImageList.add(cafeImage);
+        //
+        //        HashMap<String,Object> params = new HashMap<>(); 
+        //        params.put("fileNames", cafeImageList);
+        //        params.put("cafeNo", cafe.getNo());
+        //
+        //        cafeDao.insertCafeImage(params);
+        //        sqlSession.commit();
+        //      }
 
-
+        //sqlSession.rollback();
       }
     }
 
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));
     cafe.setCloseTime(LocalTime.parse(inputCloseTime));
+
+    //    AddressSearchApi api = new AddressSearchApi();
+    //    Address address = api.searchAddress();
+    //    String addressString = address.getLnmAdres();
+    //    System.out.println(" 기본 주소 : " + addressString);
+    cafe.setLocation(addr2 + " " +addr3);
 
     cafeDao.insertCafe(cafe);
     sqlSessionFactory.openSession().commit();
@@ -170,26 +169,6 @@ public class CeoCafeController {
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:detail");
     return mv;
-
-    //      List<CafeImage> imageList = cafe.getCafeImgs();
-    //
-    //      if (!imageList.isEmpty()) {
-    //        CafeImage cafeImage = new CafeImage();
-    //        cafeImage.setName(request.getParameter("filename[]"));
-    //        cafeImage.setCafeNo(cafe.getNo());
-    //
-    //        ArrayList<CafeImage> cafeImageList = new ArrayList<>();
-    //        cafeImageList.add(cafeImage);
-    //
-    //        HashMap<String,Object> params = new HashMap<>(); 
-    //        params.put("fileNames", cafeImageList);
-    //        params.put("cafeNo", cafe.getNo());
-    //
-    //        cafeDao.insertCafeImage(params);
-    //        sqlSession.commit();
-    //      }
-
-    //sqlSession.rollback();
   }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------
