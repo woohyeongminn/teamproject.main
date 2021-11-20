@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
@@ -23,10 +21,6 @@ import com.ogong.pms.domain.Cafe;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.web.cafe.CafeHandlerHelper;
-import net.coobird.thumbnailator.ThumbnailParameter;
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Positions;
-import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 public class CeoCafeController {
@@ -112,9 +106,8 @@ public class CeoCafeController {
 
   // 카페 등록
   @PostMapping("/ceomember/cafe/add")
-  @RequestMapping(value = "fileupload2")
   public ModelAndView ceoCafeAdd(HttpSession session, Cafe cafe, String inputOpenTime, String inputCloseTime,
-      MultipartHttpServletRequest mRequest, Part picFile) throws Exception {
+      Part[] fileList) throws Exception {
 
     CeoMember loginCeo = (CeoMember) session.getAttribute("loginCeoUser");
 
@@ -125,58 +118,47 @@ public class CeoCafeController {
     CeoMember ceoMember = ceoMemberDao.findByNo(loginCeo.getCeoNo());
 
     cafe.setCeoMember(ceoMember); 
+    for (Part file : fileList) {
+      if (file.getSize() > 0) {
+        String filename = UUID.randomUUID().toString();
+        file.write(sc.getRealPath("/upload/cafe") + "/" + filename);
 
-    //    List<MultipartFile> fileList = mRequest.getFiles("file");
-    //    String src = mRequest.getParameter("src");
+        cafe.setMainImg(filename);
+        //        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+        //        .size(100, 100)
+        //        .outputFormat("jpg")
+        //        .crop(Positions.CENTER)
+        //        .toFiles(new Rename() {
+        //          @Override
+        //          public String apply(String name, ThumbnailParameter param) {
+        //            return name + "_200x200";
+        //          }
+        //        });
+        //
+        //        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+        //        .size(329, 247)
+        //        .outputFormat("jpg")
+        //        .crop(Positions.CENTER)
+        //        .toFiles(new Rename() {
+        //          @Override
+        //          public String apply(String name, ThumbnailParameter param) {
+        //            return name + "_329x247";
+        //          }
+        //        });
+        //
+        //        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+        //        .size(800, 300)
+        //        .outputFormat("jpg")
+        //        .crop(Positions.CENTER)
+        //        .toFiles(new Rename() {
+        //          @Override
+        //          public String apply(String name, ThumbnailParameter param) {
+        //            return name + "_800x300";
+        //          }
+        //        });
 
-    //    for (MultipartFile mf : fileList) {
-    //      String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-    //      long fileSize = mf.getSize(); // 파일 사이즈
-    //
-    //      System.out.println("originFileName : " + originFileName);
-    //      System.out.println("fileSize : " + fileSize);
-    //
-    //      String safeFile = path + originFileName;
-    //      
 
-    if (picFile.getSize() > 0) {
-      String filename = UUID.randomUUID().toString();
-      picFile.write(sc.getRealPath("/upload/cafe") + "/" + filename);
-
-      //cafe.setCafeImgs(request.getParameter("filename[]"));
-
-      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
-      .size(100, 100)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_200x200";
-        }
-      });
-
-      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
-      .size(329, 247)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_329x247";
-        }
-      });
-
-      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
-      .size(800, 300)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_800x300";
-        }
-      });
+      }
     }
 
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));
