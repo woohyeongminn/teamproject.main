@@ -27,16 +27,17 @@
 			<input type="hidden" name="studyNo" value="${study.studyNo}">
 			<div id='content'>
 				<div class="mb-3 row">
-					<label for='f-studyTitle'>제목</label> <input id='f-studyTitle'
-						type='text' name='studyTitle' class="form-control" required
+					<label for='f-studyTitle'>제목</label>
+					<input id='f-studyTitle' type='text' name='studyTitle'
+						value="${study.studyTitle}" class="form-control" required
 						oninvalid="this.setCustomValidity('제목을 입력하세요.')"
 						oninput="this.setCustomValidity('')">
 				</div>
 
 				<div class="mb-3 row">
-					<label for='f-numberOfPeple'>최대 인원수</label> <select
-						name="numberOfPeple">
-						<option value="2" name="numberOfPeple" selected>2</option>
+					<label for='f-numberOfPeple'>최대 인원수</label>
+					<select name="numberOfPeple" value="${study.numberOfPeple}">
+						<option value="2" selected>2</option>
 						<option value="3" selected>3</option>
 						<option value="4" selected>4</option>
 						<option value="5" selected>5</option>
@@ -69,8 +70,9 @@
 				</div>
 
 				<div class="mb-3 row">
-					<label for='f-faceNo'>대면 상태</label> <select name="faceNo">
-						<option value="1" name="faceNo" selected>대면</option>
+					<label for='f-faceNo'>대면 상태</label>
+					<select name="faceNo" value="${study.faceNo}">
+						<option value="1" selected>대면</option>
 						<option value="2" selected>비대면</option>
 						<option value="3" selected>대면/비대면</option>
 					</select>
@@ -79,14 +81,16 @@
 				<div class="mb-3 row">
 					<label for='f-introduction'>소개글</label>
 					<textarea id='f-introduction' type='text' name='introduction'
-						class="form-control" rows="3" required
-						oninvalid="this.setCustomValidity('소개글을 입력하세요.')"
-						oninput="this.setCustomValidity('')"></textarea>
+						value="${study.introduction}" class="form-control" rows="3"
+						required oninvalid="this.setCustomValidity('소개글을 입력하세요.')"
+						oninput="this.setCustomValidity('')">
+					</textarea>
 				</div>
 
 				<div class="mb-3 row">
-					<label for='f-studyStatus'>진행 상태</label> <select name="studyStatus">
-						<option value="1" name="studyStatus" selected>진행</option>
+					<label for='f-studyStatus'>진행 상태</label>
+					<select name="studyStatus" value="${study.studyStatus}">
+						<option value="1" selected>진행</option>
 						<option value="2" selected>종료</option>
 					</select>
 				</div>
