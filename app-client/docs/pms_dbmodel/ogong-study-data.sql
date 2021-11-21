@@ -44,32 +44,33 @@ insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, whether_report) 
 values(8, '불법광고', 4, 20, 2, '흑채 팔아요~', '2021-3-3', 7, 2);
 
--- 길더
+-- 길더 (조장도 길더에 들어가야함)
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(1,1,'2021-10-25',2);
+values(1,1,'2021-1-1',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(1,2,'2021-10-25',2);
+values(2,1,'2021-2-2',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(1,3,'2021-10-25',2);
+values(3,2,'2021-3-3',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(3,4,'2021-10-25',2);
+values(4,3,'2021-3-3',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(3,5,'2021-10-25',2);
+values(5,3,'2021-3-3',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(2,8,'2021-10-25',2);
+values(6,2,'2021-7-6',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(1,7,'2021-10-25',2);
+values(7,1,'2021-6-6',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(7,6,'2021-10-25',2);
+values(8,7,'2021-3-3',2);
 
+--------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------------------------
 
