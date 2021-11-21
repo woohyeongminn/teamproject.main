@@ -1,31 +1,31 @@
 -- 회원 test 값
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
 values(1, '김초보', '초보초보쌩초보', 'naver@test.com', password('n1'), '010-1111-1111',
-'naver.gif', '2020-01-01', 1, 1);
+'perProfile_color', '2020-01-01', 1, 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
 values(2, '반미술', '미술부장', 'gmail@test.com', password('g1'), '010-2222-2222',
-'gmail.gif', '2021-03-15', 1, 1);
+'perProfile_color', '2021-03-15', 1, 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
 values(3, '이코딩', '코딩부장', 'kakao@test.com', password('k1'), '010-3333-3333',
-'kakao.gif','2021-10-16', 1, 1);
+'perProfile_color','2021-10-16', 1, 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
 values(4, '우음악', '음악대장', 'daum@test.com', password('d1'), '010-4444-4444', 
-'daum.gif', '2021-08-23', 1, 1);
+'perProfile_color', '2021-08-23', 1, 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
 values(5, '조고수', '고수고수왕고수', 'hanmail@test.com', password('h11'), '010-5555-5555',
-'hanmail.gif', '2021-02-03', 1, 1); 
+'perProfile_color', '2021-02-03', 1, 1); 
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
 values(6, '송중수', '중수중수중중수', 'todaystudymail@gmail.com', password('t1'), '010-6666-6666',
-'gmail.jpg', '2021-04-14', 1, 1);
+'perProfile_color', '2021-04-14', 1, 1);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active, report) 
 values(7, '박명수', '한머리두냄새', 'onehair@twosmell.com', password('o1'), '010-7777-7777',
-'test.jpg', '2021-10-15', 1, 1, 6);
+'perProfile_color', '2021-10-15', 1, 1, 6);
 
 -- ceomember가 16번까지 있으니까 member 더 추가하려면 17번부터~
 

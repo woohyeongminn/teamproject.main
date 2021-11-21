@@ -11,17 +11,61 @@ values(3, 'ID 및 PW 찾기에 관하여',
 
 -- 공지사항 test 값 >> 첨부파일
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(1, 1, 'gif');
+values(1, 1, 'park');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(2, 2, 'jpg');
+values(2, 2, 'park2');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(3, 3, 'jpg');
+values(3, 3, 'park3');
 
 -- 첨부파일
 DROP TABLE IF EXISTS notice_file RESTRICT;
 
 -- 공지사항
 DROP TABLE IF EXISTS notice RESTRICT;
+----------------------------------------------------------------------------------------------
+-- 첨부파일
+CREATE TABLE notice_file (
+  notice_file_no INTEGER      NOT NULL COMMENT '첨부파일번호', -- 첨부파일번호
+  notice_no      INTEGER      NOT NULL COMMENT '공지사항번호', -- 공지사항번호
+  filepath       VARCHAR(255) NOT NULL COMMENT '첨부파일명' -- 첨부파일명
+)
+COMMENT '첨부파일';
+
+-- 첨부파일
+ALTER TABLE notice_file
+  ADD CONSTRAINT PK_notice_file -- 첨부파일 기본키
+    PRIMARY KEY (
+      notice_file_no -- 첨부파일번호
+    );
+
+ALTER TABLE notice_file
+  MODIFY COLUMN notice_file_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '첨부파일번호';
+
+-- 공지사항
+CREATE TABLE notice (
+  notice_no  INTEGER      NOT NULL COMMENT '공지사항번호', -- 공지사항번호
+  title      VARCHAR(255) NOT NULL COMMENT '제목', -- 제목
+  content    VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
+  created_dt DATETIME     NOT NULL DEFAULT now() COMMENT '등록일' -- 등록일
+)
+COMMENT '공지사항';
+
+-- 공지사항
+ALTER TABLE notice
+  ADD CONSTRAINT PK_notice -- 공지사항 기본키
+    PRIMARY KEY (
+      notice_no -- 공지사항번호
+    );
+
+-- 공지사항 인덱스
+CREATE INDEX IX_notice
+  ON notice( -- 공지사항
+    title ASC -- 제목
+  );
+
+ALTER TABLE notice
+  MODIFY COLUMN notice_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '공지사항번호';
+
 
 -- 확인용
 /*
@@ -42,7 +86,6 @@ insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created
 values(3, 3, '관리자님', '이메일로 문의 드리고 싶어요!', 0, '2021-04-18', 2);
 insert into ask_board(ask_board_no, member_no, title, content, view_cnt, created_dt, use_secret) 
 values(4, 1, '궁금합니다.', '스터디생성방법이궁금해요.', 0, '2020-02-01', 1);
-20', 'testContent20', 0, '2020-02-01', 1);
 
 -------------------------------------------------------------------------------------------------
 -- 문의게시판 댓글 test 값

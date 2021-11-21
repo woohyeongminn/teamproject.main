@@ -98,7 +98,7 @@
   <aside class="sidenav navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="${contextPath}/app/index2" target="_blank">
+      <a class="navbar-brand m-0" href="${contextPath}/app/index" target="_blank">
         <span class="ms-2 font-weight-bold text-white">👑　오늘의 공부</span>
       </a>
     </div>
@@ -205,9 +205,22 @@
 	                      </td>
 	                      <td>
 	                        <div class="d-flex px-2 py-1">
-	                          <div>
-	                            <img src="${contextPath}/img/KakaoTalk_20211113_014317649.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
-	                          </div>
+                           <div class="profile">
+                              <div class="profile-header">
+                              <c:choose>
+                                <c:when test="${not empty perMember.perPhoto}">
+                                  <a href="${contextPath}/upload/member/${perMember.perPhoto}.jpg" >
+                                      <img id="f-photo-image" src="${contextPath}/upload/member/${perMember.perPhoto}_40x40.jpg">
+                                  </a>
+                                </c:when>
+                                <c:otherwise>
+                                   <a href="${contextPath}/img/perProfile_color.jpg" >
+                                      <img id="f-photo-image" src="${contextPath}/img/perProfile_color.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                                   </a>
+                                </c:otherwise>
+                              </c:choose>
+                              </div>
+                            </div>
 	                          <div class="d-flex flex-column justify-content-center">
 	                            <h6 class="mb-0 text-sm" style="color:#4e4847;"><a href='permemberdetail?no=${perMember.perNo}'>${perMember.perNickname}</a></h6>
 	                            <p class="text-xs text-secondary mb-0">${perMember.perEmail}</p>
