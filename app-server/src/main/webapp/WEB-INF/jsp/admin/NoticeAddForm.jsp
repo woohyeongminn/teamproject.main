@@ -158,7 +158,7 @@
   <aside class="sidenav navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="${contextPath}/app/index2" target="_blank">
+      <a class="navbar-brand m-0" href="${contextPath}/app/index" target="_blank">
         <span class="ms-2 font-weight-bold text-white">👑　오늘의 공부</span>
       </a>
     </div>
@@ -268,7 +268,7 @@
 									    <div class="button">
 									    <label for="chooseFile" id="click"><b>👉 CLICK HERE! 👈</b></label>
 									    </div>
-									    <input type="file" id="chooseFile" name="filepath" accept="image/*" onchange="loadFile(this)"></td>
+									    <input type="file" id="chooseFile" name="filepath" accept="image/*"></th>
                     <th></th>
                   </tr>
   
@@ -276,7 +276,7 @@
                 </table>
   
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-outline-dark" id="addnotice">등록</button>
+                <button type="button" class="btn btn-outline-dark" id="addnotice" style="line-height: 5px;">등록</button>
               </div>
               
              </div>
@@ -313,16 +313,6 @@ inputImage.addEventListener("change", e => {
 </script>
 
 <script>
-document.querySelector("#notice-add").onsubmit = () => {
-  if (document.querySelector("#f-title").value == "" ||
-        document.querySelector("#f-content").value == "") {
-    Swal.fire('제목이나 내용을 입력해 주세요.')
-    return false;
-  }
-};
-</script>
-
-<script>
 document.querySelector("#addnotice").onclick = () => {
 	var adminNotiTitle = document.querySelector('input[name=adminNotiTitle]').value;
 	var adminNotiContent = document.querySelector('textarea[name=adminNotiContent]').value;
@@ -344,7 +334,7 @@ document.querySelector("#addnotice").onclick = () => {
 		   cancelButtonText: '아니오'
 	   }).then((result) => {
 	     if (result.value) {
-	    	 document.querySelector("#notice-add").submit;
+	    	 document.querySelector("#notice-add").submit();
        }
      })
   }

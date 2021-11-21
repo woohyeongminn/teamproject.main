@@ -55,6 +55,10 @@
 		  xdisplay: block;
 		}
 		
+		.section-header p {
+		  padding-bottom: 50px;
+		}
+		
     .pt-4 {
 		  height: auto;
 		}
@@ -66,6 +70,18 @@
     #search {
 		  text-align: center;
 		}
+		
+		form {
+      padding-bottom: 50px;
+    }
+
+		.modal-backdrop {
+      position: relative;
+    }
+
+    .modal-backdrop.show {
+      opacity: 0;
+    }
 
 		.mb-3 select {
 		  height: 33.5px;
@@ -76,7 +92,15 @@
 		#empty-study {
 		  text-align: center;
 		}
+		
+		#services .box {
+		  height: 309.6px;
+		}
     </style>
+
+    <script>
+	    location.href = "#tab1";
+	  </script>
 
   </head>
   <body>
@@ -110,6 +134,7 @@
               <button class="btn btn-outline-dark btn-sm">검색</button>
             </form>
           </div>
+          <br>
           
           <c:if test="${loginUser ne null}">
           <!-- 스터디 등록 -->
@@ -335,7 +360,8 @@
               <button class="btn btn-outline-dark btn-sm">검색</button>
             </form>
           </div>
-          
+          <br>
+
           <c:if test="${loginUser ne null}">
           <!-- 스터디 등록 -->
             <button type="button" class="btn btn-light" data-bs-toggle="modal"
@@ -559,7 +585,8 @@
               <button class="btn btn-outline-dark btn-sm">검색</button>
             </form>
           </div>
-          
+          <br>
+
           <c:if test="${loginUser ne null}">
           <!-- 스터디 등록 -->
             <button type="button" class="btn btn-light" data-bs-toggle="modal"
@@ -762,9 +789,5 @@
     </ul>
   </div>
 
-  <script>
-    location.href = "#tab1";
-  </script>
-  
   </body>
 </html>

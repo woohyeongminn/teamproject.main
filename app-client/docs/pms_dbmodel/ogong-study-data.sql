@@ -76,11 +76,20 @@ values(8,7,'2021-3-3',2);
 
 -------------------------------------------------------------------------------------------------
 -- 캘린더 중요도 값
-insert into study_calender_importance(importance_no, importance) values(5, '★☆☆☆☆');
-insert into study_calender_importance(importance_no, importance) values(4, '★★☆☆☆');
-insert into study_calender_importance(importance_no, importance) values(3, '★★★☆☆');
-insert into study_calender_importance(importance_no, importance) values(2, '★★★★☆');
-insert into study_calender_importance(importance_no, importance) values(1, '★★★★★');
+insert into study_calendar_importance(importance_no, importance) values(5, '★☆☆☆☆');
+insert into study_calendar_importance(importance_no, importance) values(4, '★★☆☆☆');
+insert into study_calendar_importance(importance_no, importance) values(3, '★★★☆☆');
+insert into study_calendar_importance(importance_no, importance) values(2, '★★★★☆');
+insert into study_calendar_importance(importance_no, importance) values(1, '★★★★★');
+
+insert into study_calendar(calendar_dt, content, importance_no, member_no, study_no)
+ values('2021-10-15', '생일', 1, 1, 1);
+insert into study_calendar(calendar_dt, content, importance_no, member_no, study_no)
+ values('2021-8-15', '광복', 2, 1, 2);
+insert into study_calendar(calendar_dt, content, importance_no, member_no, study_no)
+ values('2021-4-1', '만우절', 3, 1, 3); 
+insert into study_calendar(calendar_dt, content, importance_no, member_no, study_no)
+ values('2021-6-6', '현충일', 5, 1, 3); 
 
 -- 스터디 전체 조회 (북마크한 사람들 카운트만, 구성원들 카운드만)
 /*

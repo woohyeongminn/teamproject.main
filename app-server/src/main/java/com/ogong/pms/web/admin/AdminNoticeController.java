@@ -69,10 +69,7 @@ public class AdminNoticeController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    mv.addObject("refresh", "2;url=list");
-    mv.addObject("pageTitle", "🔔 공지게시글 등록");
-    mv.addObject("contentUrl", "admin/NoticeAdd.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("redirect:list");
     return mv;
   }
 

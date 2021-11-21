@@ -146,7 +146,7 @@
   <aside class="sidenav navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="${contextPath}/app/index2" target="_blank">
+      <a class="navbar-brand m-0" href="${contextPath}/app/index" target="_blank">
         <span class="ms-2 font-weight-bold text-white">👑　오늘의 공부</span>
       </a>
     </div>
@@ -242,7 +242,7 @@
 						    <c:forEach items="${cafeList}" var="cafe">
 						      <div class="col2">
 						        <div class="card2">
-						          <img src="${contextPath}/img/aaa.jpg" class="card-img-top" alt="...">
+						          <img src="${contextPath}/upload/cafe/${cafe.cafeImgs[0].name}_329x247.jpg" class="card-img-top" alt="...">
 						          <div class="card-body2">
 						            <a href='cafeDetail?no=${cafe.no}'><b>${cafe.name}</b></a><br>
 						            ${cafe.location}<br>
