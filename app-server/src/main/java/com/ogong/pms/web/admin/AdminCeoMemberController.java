@@ -65,7 +65,7 @@ public class AdminCeoMemberController {
     ceoMember.setCeoBossName("Deleted Member("+ ceoMember.getCeoBossName() +")");
     ceoMember.setCeoEmail("Deleted Email");
     ceoMember.setCeoPassword("Deleted Password");
-    ceoMember.setCeoPhoto("Deleted Photo");
+    ceoMember.setCeoPhoto("ceoProfile");
     ceoMember.setCeoLicenseNo("Deleted LicenseNo");
     ceoMember.setCeoStatus(CeoMember.CEO);
     ceoMember.setActive(CeoMember.OUTUSER);

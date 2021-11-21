@@ -128,11 +128,11 @@ public class AdminCafeController {
   }
 
   @PostMapping("/admin/cafeApproval") // update 형식
-  public ModelAndView cafeApproval(int no, int cafeStatus) throws Exception {
+  public ModelAndView cafeApproval(int no) throws Exception {
 
     Cafe cafe = cafeDao.findByCafeNo(no);
 
-    cafe.setCafeStatus(cafeStatus);
+    //cafe.setCafeStatus(2);
 
     cafeDao.updateCafeStatusToGENERAL(cafe.getNo());
     sqlSessionFactory.openSession().commit();

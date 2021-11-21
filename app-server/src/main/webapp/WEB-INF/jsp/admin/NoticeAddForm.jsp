@@ -276,7 +276,7 @@
                 </table>
   
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="btn btn-outline-dark" id="addnotice" style="line-height: 5px;">등록</button>
+                <button type="button" class="btn btn-outline-dark" id="addnotice" style="line-height: 5px; margin-top: 10px;">등록</button>
               </div>
               
              </div>

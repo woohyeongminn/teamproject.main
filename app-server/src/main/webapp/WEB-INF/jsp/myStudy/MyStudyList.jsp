@@ -195,11 +195,11 @@
                     <table class="table table-borderless">
                       <thead>
                         <tr style="width: 100%;text-align: center;">
-                          <th class="border-bottom" width="190px">스터디명</th>
+                          <th class="border-bottom" width="185px">스터디명</th>
                           <th class="border-bottom" width="108px">분야</th>
                           <th class="border-bottom" width="163px">조장</th>
                           <th class="border-bottom" width="150px">대면/비대면</th>
-                          <th class="border-bottom" width="98px">인원수</th>
+                          <th class="border-bottom" width="110px">인원수</th>
                         </tr>
                       </thead>
                       
