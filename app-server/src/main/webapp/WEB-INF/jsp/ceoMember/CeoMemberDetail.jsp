@@ -170,7 +170,7 @@ ul{list-style:none;}
 					    <c:choose>
 						    <c:when test="${not empty ceoMember.ceoPhoto}">
 	                <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
-	                    <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_110x110.jpg" style="width: 110px">
+	                    <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg" style="width: 90px;">
 	                </a>
 	  			        <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
 						    </c:when>
