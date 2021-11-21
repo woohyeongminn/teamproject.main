@@ -6,25 +6,73 @@
 <mapper namespace="com.ogong.pms.dao.CalendarDao">
 
   <resultMap type="Calendar" id="CalendarMap">
-  <id column="calender_no" property="calenderNo"/>
-  <result column="year" property="year"/>
-  <result column="month" property="month"/>
-  <result column="day" property="day"/>
-  <result column="day_week" property="dayOftheWeek"/>
-  <result column="content" property="calenderContent"/>
-  <result column="end_dt" property="endDay"/>
-  <result column="importance_no" property="importanceNo"/>
-  <result column="importance" property="importanceCalender"/>
+	  <id column="calender_no" property="calendarNo"/>
+	  <result column="calendar_dt" property="calendarDate"/>
+	  <result column="content" property="calendarContent"/>
+	  <result column="importance_no" property="importanceNo"/>
+  <result column="importance" property="importance"/>
+
+  <association property="writer" javaType="Member">
+	  <id column="member_no" property="perNo"/>
+	  <result column="member_nickname" property="perNickname"/>
+	  <result column="member_status" property="perStatus"/>
+  </association>
+
   </resultMap>
 
-  <insert id="insert" parameterType="Calendar"> 
+  <insert id="insert" parameterType="Calendar"
+  useGeneratedKeys="true" keyColumn="calendar_no" keyProperty="calendarNo"> 
+  insert into study_calendar
+     (calendar_dt, content, importance_no, member_no, study_no)
+     values
+     (#{calendarDate}, #{calendarContent}, #{importanceNo}, #{writer.perNo}, #{studyNo})
   </insert>
   
-  
-  
-  <select id="findAll" resultMap="CalendarMap">
-  
+  <select id="findAll" resultMap="CalendarMap" parameterType="int">
+    select
+     sc.calendar_dt date,
+     sc.content content,
+     sc.importance_no, 
+     sci.importance importance,
+     m.nickname writer, 
+     s.name study_name
+    from
+     study_calendar sc
+    left outer join study_calendar_importance sci on sci.importance_no=sc.importance_no
+    left outer join member m on m.member_no=sc.member_no
+    left outer join study_guilder sg on sg.study_no=sc.study_no
+    left outer join study s on s.study_no=sg.study_no
+    where s.study_no=${studyNo};  
   </select>
+  
+  <select id="findByNo" resultMap="CalendarMap" parameterType="int">
+		select
+		 sc.calendar_dt date,
+		 sc.content content,
+		 sc.importance_no, 
+		 sci.importance importance,
+		 m.nickname writer, 
+		 s.name study_name
+		from
+		 study_calendar sc
+		left outer join study_calendar_importance sci on sci.importance_no=sc.importance_no
+		left outer join member m on m.member_no=sc.member_no
+		left outer join study_guilder sg on sg.study_no=sc.study_no
+		left outer join study s on s.study_no=sg.study_no
+		where calendar_no=${calendarNo}; 
+  </select>
+  
+  <update id="update" parameterType="map">
+   update study_calendar set
+    content = #{calendar.calendarContent}
+   where
+    calendar_no=#{calendar.calendarNo} 
+  </update>
 
+  <delete id="delete" parameterType="int">
+   delete from study_calendar
+   where
+    calendar_no=#{calendarNo}
+  </delete>  
 
 </mapper>

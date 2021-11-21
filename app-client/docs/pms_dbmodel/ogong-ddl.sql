@@ -38,10 +38,10 @@ DROP TABLE IF EXISTS study_subject RESTRICT;
 DROP TABLE IF EXISTS study_face_status RESTRICT;
 
 -- 캘린더중요도
-DROP TABLE IF EXISTS study_calender_importance RESTRICT;
+DROP TABLE IF EXISTS study_calendar_importance RESTRICT;
 
 -- 캘린더
-DROP TABLE IF EXISTS study_calender RESTRICT;
+DROP TABLE IF EXISTS study_calendar RESTRICT;
 
 -- 스터디게시판첨부파일
 DROP TABLE IF EXISTS study_board_file RESTRICT;
@@ -380,35 +380,33 @@ CREATE UNIQUE INDEX UIX_study_face_status
   );
 
 -- 캘린더중요도
-CREATE TABLE study_calender_importance (
+CREATE TABLE study_calendar_importance (
   importance_no INTEGER      NOT NULL COMMENT '중요도상태번호', -- 중요도상태번호
   importance    VARCHAR(255) NOT NULL COMMENT '중요도' -- 중요도
 )
 COMMENT '캘린더중요도';
 
 -- 캘린더중요도
-ALTER TABLE study_calender_importance
-  ADD CONSTRAINT PK_study_calender_importance -- 캘린더중요도 기본키
+ALTER TABLE study_calendar_importance
+  ADD CONSTRAINT PK_study_calendar_importance -- 캘린더중요도 기본키
     PRIMARY KEY (
       importance_no -- 중요도상태번호
     );
 
 -- 캘린더중요도 유니크 인덱스
-CREATE UNIQUE INDEX UIX_study_calender_importance
-  ON study_calender_importance ( -- 캘린더중요도
+CREATE UNIQUE INDEX UIX_study_calendar_importance
+  ON study_calendar_importance ( -- 캘린더중요도
     importance ASC -- 중요도
   );
 
-ALTER TABLE study_calender_importance
+ALTER TABLE study_calendar_importance
   MODIFY COLUMN importance_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '중요도상태번호';
 
 -- 캘린더
-CREATE TABLE study_calender (
-  calender_no   INTEGER      NOT NULL COMMENT '캘린더번호', -- 캘린더번호
-  calender_dt   DATE         NOT NULL COMMENT '날짜', -- 날짜
-  day_week      VARCHAR(3)   NOT NULL COMMENT '요일', -- 요일
+CREATE TABLE study_calendar (
+  calendar_no   INTEGER      NOT NULL COMMENT '캘린더번호', -- 캘린더번호
+  calendar_dt   DATE         NOT NULL COMMENT '날짜', -- 날짜
   content       VARCHAR(255) NOT NULL COMMENT '내용', -- 내용
-  end_dt        DATE         NOT NULL COMMENT '종료일', -- 종료일
   importance_no INTEGER      NOT NULL COMMENT '중요도상태번호', -- 중요도상태번호
   member_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
   study_no      INTEGER      NOT NULL COMMENT '스터디번호' -- 스터디번호
@@ -416,14 +414,14 @@ CREATE TABLE study_calender (
 COMMENT '캘린더';
 
 -- 캘린더
-ALTER TABLE study_calender
-  ADD CONSTRAINT PK_study_calender -- 캘린더 기본키
+ALTER TABLE study_calendar
+  ADD CONSTRAINT PK_study_calendar -- 캘린더 기본키
     PRIMARY KEY (
-      calender_no -- 캘린더번호
+      calendar_no -- 캘린더번호
     );
 
-ALTER TABLE study_calender
-  MODIFY COLUMN calender_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '캘린더번호';
+ALTER TABLE study_calendar
+  MODIFY COLUMN calendar_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '캘린더번호';
 
 -- 스터디게시판첨부파일
 CREATE TABLE study_board_file (
@@ -891,18 +889,18 @@ ALTER TABLE study_todolist
     );
 
 -- 캘린더
-ALTER TABLE study_calender
-  ADD CONSTRAINT FK_study_calender_importance_TO_study_calender -- 캘린더중요도 -> 캘린더
+ALTER TABLE study_calendar
+  ADD CONSTRAINT FK_study_calendar_importance_TO_study_calendar -- 캘린더중요도 -> 캘린더
     FOREIGN KEY (
       importance_no -- 중요도상태번호
     )
-    REFERENCES study_calender_importance ( -- 캘린더중요도
+    REFERENCES study_calendar_importance ( -- 캘린더중요도
       importance_no -- 중요도상태번호
     );
 
 -- 캘린더
-ALTER TABLE study_calender
-  ADD CONSTRAINT FK_study_guilder_TO_study_calender -- 스터디구성원 -> 캘린더
+ALTER TABLE study_calendar
+  ADD CONSTRAINT FK_study_guilder_TO_study_calendar -- 스터디구성원 -> 캘린더
     FOREIGN KEY (
       member_no, -- 회원번호
       study_no   -- 스터디번호

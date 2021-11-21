@@ -52,10 +52,10 @@ public class ReplyController extends HttpServlet {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-
-    mv.addObject("pageTitle", "📖답변 등록");
-    mv.addObject("contentUrl", "askBoard/ReplyAdd.jsp");
-    mv.setViewName("template1");
+    mv.setViewName("redirect:../admin/askboard/list");
+    //    mv.addObject("pageTitle", "📖답변 등록");
+    //    mv.addObject("contentUrl", "askBoard/ReplyAdd.jsp");
+    //    mv.setViewName("template1");
     return mv;
   }
 }

@@ -284,6 +284,12 @@ public class PerMemberController {
     mv.setViewName("template1");
     return mv;
   } 
-}
 
+  @RequestMapping("/member/sample")
+  public ModelAndView sample() throws Exception {
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("member/Sample");
+    return mv;
+  }
+}
 

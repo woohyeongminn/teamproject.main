@@ -7,6 +7,11 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
  <link href="${contextPath}/css/calstyle.css" rel="stylesheet" type="text/css">
+
+<c:forEach items="${calendarList}" var="calendar">
+ <p>${calendar.importance}</p>
+</c:forEach>
+
 <div class="all-content"> 
   <div class="c-top">
     </div>
@@ -29,38 +34,47 @@
             <a href="../detail?studyNo=${myStudy.studyNo}">뒤로가기</a>                
           </div> 
 					<!-- Modal -->
-					<div class="modal fade" id="addCalendarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					  <div class="modal-dialog">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="staticBackdropLabel">일정 등록</h5>
-					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					      </div>
-					      <div class="modal-body">
-					        <label>📅</label>
-					        <input type="date"/>
-							    <label for='f-status'>⭐</label>
-							    <select id="f-status" name='important' >
-							      <option value='1' name='important'>⭐☆☆☆☆</option>
-							      <option value='2' name='important'>⭐⭐☆☆☆</option>
-							      <option value='2' name='important'>⭐⭐⭐☆☆</option>
-							      <option value='2' name='important'>⭐⭐⭐⭐☆</option>
-							      <option value='2' name='important'>⭐⭐⭐⭐⭐</option>
-							    </select><br><hr>					        
-					        <label>📝</label>
-					        <input type="text" name="content" placeholder="*내용을 입력하세요." /><br>
-					        <label >💡</label>
-					        <input id="alarm" type="checkbox"/><br>
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-outline-dark" onclick="addCalendar(this)" data-bs-dismiss="modal">등록</button>
-					        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-					      </div>
-					    </div>
-					  </div>
-					</div> <!-- d-grid gap-2 d-md-flex justify-content-md-end  -->    
-         
-          <!-- Button trigger modal -->
+					<form action="add" method="post">
+						<div class="modal fade" id="addCalendarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						     
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="staticBackdropLabel">일정 등록</h5>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      
+						      <div class="modal-body">
+							      <div class="addcalendar">
+							        <label>📅</label>
+							        <input type="date" name="calendarDate"/>
+									    <label for='f-status'>⭐</label>
+									    <select id="f-status" name='importanceNo' >
+									      <option value='1' name='importanceNo'>⭐⭐⭐⭐⭐</option>
+									      <option value='2' name='importanceNo'>⭐⭐⭐⭐☆</option>
+									      <option value='2' name='importanceNo'>⭐⭐⭐☆☆</option>
+									      <option value='2' name='importanceNo'>⭐⭐☆☆☆</option>
+									      <option value='2' name='importanceNo'>⭐☆☆☆☆</option>
+									    </select><br><hr>					        
+							        
+							        <label>📝</label>
+							        <input type="text" name="calendarContent" placeholder="*내용을 입력하세요." /><br>
+							        <label >💡</label>
+							        <input id="alarm" type="checkbox"/><br>
+							        <input type="hidden" name=studyNo value="${myStudy.studyNo}"/>
+							      </div>
+						      </div>
+						      
+						      <div class="modal-footer">
+						        <button type="submit" class="btn btn-outline-dark" onclick="addCalendar(this)" data-bs-dismiss="modal">등록</button>
+						        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+						      </div>
+						      
+						    </div>
+						  </div>
+						</div> <!-- d-grid gap-2 d-md-flex justify-content-md-end  -->    
+          </form>
+          
           <!-- Modal -->
           <div class="modal fade" id="searchCalendarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
