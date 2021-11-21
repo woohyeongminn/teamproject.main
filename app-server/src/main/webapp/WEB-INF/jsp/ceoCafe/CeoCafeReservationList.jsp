@@ -12,6 +12,10 @@ width: 800px;
     margin-top: 50px;
 }
 
+#search {
+    font-size: 12px;
+}
+
 table {
 font-size: 12px;
 }
@@ -32,12 +36,12 @@ font-size: 12px;
     <form action="list">
     <i class="fas fa-search"></i>
     <span>조회기간</span>
-    <select name="searchDate">
+    <select name="searchDate" style="height: 22px; padding: 0 5px;">
       <option value="1">예약날짜</option>
       <option value="2">이용날짜</option>
     </select>
     <input type="date" name="startDate"> ~ <input type="date" name="endDate">
-    <button class="btn btn-outline-dark btn-sm" style="line-height: normal;">조회</button>
+    <button class="btn btn-outline-dark btn-sm" style="line-height: normal; padding: 3px 10px; margin-bottom: 4px; font-size: 12px;">조회</button>
     </form>
   </div>
   <div>
