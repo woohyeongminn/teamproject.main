@@ -4,6 +4,7 @@
     trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 	<style>
 	*{
 	 font-size: 13.5px;
@@ -188,6 +189,12 @@
     border: none;
     color: midnightblue;
   }
+  .c-place-section-map {
+    padding: 17px 18px 15px;
+  }
+  #find-location:hover {
+    color: rgb(155 136 131);
+  }
 	</style>
 
 <body>
@@ -328,8 +335,8 @@
         </c:forEach>
       </c:if>
       </ul>
-     </div>
-	  </div>
+     </div> <!-- .c-place-section-content -->
+	  </div> <!-- .c-place-section-box -->
 	  
 	  <div class="c-place-section-box">
 	   
@@ -350,14 +357,37 @@
 	        </ul>
 	      </nav>     
      </div> <!-- review pagination -->
-	   
 	  </div> <!-- .c-place-section-box -->
+	  
+	  <div class="c-place-section-box">
+     
+     <div class="c-place-section-header" style="display:flex;align-content:stretch;justify-content:space-between;">
+        <span>찾아가는 길</span>
+        <p class="text-end" style="margin-bottom:0px;">
+          <a id="find-location" target="_blank"><i class="fas fa-external-link-alt"></i> 길찾기</a>
+        </p>
+     </div>
+     
+     <div class="c-place-section-map">
+        <div id="map" style="width: 638px;height: 258px;"></div>
+     </div>
+     
+     <div class="c-place-section-map" style="padding: 0px 18px 15px;">
+        <strong class="c-icon">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 18" class="c-info-icon" aria-hidden="true"><path d="M15 6.97a6.92 6.92 0 0 1-1.12 3.77l-5.51 7.08a.47.47 0 0 1-.74 0L2.1 10.71A6.93 6.93 0 0 1 1 6.97 7 7 0 0 1 8 0v.93V0a7 7 0 0 1 7 6.97zm-13 0c0 1.15.4 2.3.99 3.24L8 16.7l5.04-6.5A5.95 5.95 0 0 0 8 1C4.66 1 2 3.64 2 6.97zm6-1.54A1.58 1.58 0 0 0 8 8.6a1.57 1.57 0 0 0 0-3.16zm0-.93a2.51 2.51 0 0 1 0 5.02A2.51 2.51 0 1 1 8 4.5z"></path></svg>
+         </strong>
+         <div>
+           <span class="c-location-value">${cafe.location}</span>
+         </div>
+     </div>
+
+    </div> <!-- .c-place-section-box -->
 	</div> <!-- .c-body -->
 </div> <!-- .c-content -->
 
 
 
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=19b698969a5fbbf08d3bddab4e1ceacc&libraries=services"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script> <!-- jQuery -->
 <script>
 reviewList();
@@ -556,6 +586,59 @@ function btnDelete(e){
        }
     })
 	}
+	
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};  
+
+//지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+//일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+var mapTypeControl = new kakao.maps.MapTypeControl();
+
+// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new kakao.maps.ZoomControl();
+map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+var originLocation = "${cafe.location}";
+var editLocation = originLocation.split(",")[0];
+
+//주소로 좌표를 검색합니다
+geocoder.addressSearch(editLocation, function(result, status) {
+
+// 정상적으로 검색이 완료됐으면 
+ if (status === kakao.maps.services.Status.OK) {
+
+    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    var location_link = document.querySelector("#find-location");
+    location_link.setAttribute('href', 'https://map.kakao.com/link/to/${cafe.name},'+result[0].y+','+result[0].x);
+
+    // 결과값으로 받은 위치를 마커로 표시합니다
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: coords
+    });
+
+    // 인포윈도우로 장소에 대한 설명을 표시합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content: '<div style="width:150px;text-align:center;padding:6px 0;">${cafe.name}</div>'
+    });
+    infowindow.open(map, marker);
+
+    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    map.setCenter(coords);
+} 
+});
 </script>
 
 

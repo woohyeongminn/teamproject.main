@@ -33,6 +33,7 @@ public class FreeBoardController {
   @Autowired
   ServletContext sc;
 
+  /* 자유 게시판 등록 폼 */
   @GetMapping("/mystudy/freeboard/form")
   public ModelAndView addform(int studyno, HttpSession session) {
     ModelAndView mv = new ModelAndView();
@@ -45,6 +46,7 @@ public class FreeBoardController {
     return mv;
   }
 
+  /* 자유 게시판 등록 */
   @PostMapping("/mystudy/freeboard/add")
   public ModelAndView add(FreeBoard freeBoard, Part photoFile, HttpSession session)
       throws Exception {
@@ -88,6 +90,7 @@ public class FreeBoardController {
     return mv;
   }
 
+  /* 자유 게시판 목록 */
   @GetMapping("/mystudy/freeboard/list")
   public ModelAndView list(int studyno) throws Exception {
     List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyno);
@@ -103,6 +106,7 @@ public class FreeBoardController {
     return mv;
   }
 
+  /* 자유 게시판 상세 */
   @GetMapping("/mystudy/freeboard/detail")
   public ModelAndView detail(int freeboardno, int studyno, HttpSession session) throws Exception {
     FreeBoard freeBoard = freeBoardDao.findByNo(freeboardno, studyno);
@@ -126,6 +130,7 @@ public class FreeBoardController {
     return mv;
   }
 
+  /* 자유 게시판 수정 폼 */
   @GetMapping("/mystudy/freeboard/updateform")
   public ModelAndView updateform(int freeboardno, int studyno) throws Exception {
     FreeBoard freeBoard = freeBoardDao.findByNo(freeboardno, studyno);
@@ -140,6 +145,7 @@ public class FreeBoardController {
     return mv;
   }
 
+  /* 자유 게시판 수정 */
   @PostMapping("/mystudy/freeboard/update")
   public ModelAndView update(FreeBoard freeBoard, Part photoFile) throws Exception {
     FreeBoard oldFreeBoard =
@@ -186,6 +192,7 @@ public class FreeBoardController {
     return mv;
   }
 
+  /* 자유 게시판 삭제 */
   @GetMapping("/mystudy/freeboard/delete")
   public ModelAndView delete(int freeboardno, int studyno) throws Exception {
     FreeBoard freeBoard = freeBoardDao.findByNo(freeboardno, studyno);

@@ -24,6 +24,7 @@ public class CommentController {
   @Autowired
   CommentDao commentDao;
 
+  /* 댓글 등록 */
   @PostMapping("/mystudy/freeboard/comment/add")
   public ModelAndView add(Comment comment, HttpSession session) throws Exception {
     FreeBoard freeBoard = freeBoardDao.findByNo(comment.getBoardNo(), comment.getStudyNo());
@@ -44,6 +45,7 @@ public class CommentController {
     return mv;
   }
 
+  /* 댓글 수정 폼 */
   //  @GetMapping("/mystudy/freeboard/comment/updateform")
   //  public ModelAndView updateform(int commentno) throws Exception {
   //    Comment comment = commentDao.findByNo(commentno);
@@ -58,6 +60,7 @@ public class CommentController {
   //    return mv;
   //  }
 
+  /* 댓글 수정 */
   @PostMapping("/mystudy/freeboard/comment/update")
   public ModelAndView update(Comment comment) throws Exception {
     Comment oldComment = commentDao.findByNo(comment.getCommentNo());
@@ -79,6 +82,7 @@ public class CommentController {
     return mv;
   }
 
+  /* 댓글 삭제 */
   @GetMapping("/mystudy/freeboard/comment/delete")
   public ModelAndView delete(int commentno) throws Exception {
     Comment comment = commentDao.findByNo(commentno);
