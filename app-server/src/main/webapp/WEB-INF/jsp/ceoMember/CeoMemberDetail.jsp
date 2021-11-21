@@ -167,10 +167,19 @@ ul{list-style:none;}
 
 				   <div class="profile">
 					    <div class="profile-header">
-					      <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
-						        <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_110x110.jpg" style="width: 110px">
-						    </a>
-			          <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
+					    <c:choose>
+						    <c:when test="${not empty ceoMember.ceoPhoto}">
+	                <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
+	                    <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_110x110.jpg" style="width: 110px">
+	                </a>
+	  			        <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
+						    </c:when>
+						    <c:otherwise>
+						       <a href="${contextPath}/img/ceoProfile.jpg" >
+	                    <img id="f-photo-image" src="${contextPath}/img/ceoProfile.jpg" style="width: 90px">
+	                 </a>
+						    </c:otherwise>
+					    </c:choose>
 					    </div>
 
 					    <label for='f-name' class='form-label'>이름</label>
@@ -199,14 +208,12 @@ ul{list-style:none;}
 					   <div class="btn_wrap">
 					     <input type="submit" value="프로필 수정하기" formaction="updateform" class ="btn btn-outline-dark"/>
                <input type="submit" value="탈퇴하기" formaction="deleteform" class ="btn btn-outline-dark"/>
+               <a href="../askboard/ceomylist" class ="btn btn-outline-dark">내 문의내역</a>
 			       </div>
 			    </form>
 			  </div>
 			 </li>
-			 <li id="tab2" class="btnCon"><a class="tabbtn" href="../askboard/ceomylist">내 문의내역</a>
-			  <div class="tabCon" >
-		    </div>
-		    </li>
+			
 	    </ul>
 	   </div> 
    </div>

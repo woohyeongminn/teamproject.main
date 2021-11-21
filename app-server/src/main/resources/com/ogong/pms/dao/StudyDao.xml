@@ -217,7 +217,7 @@
    <include refid="select1"/>
    where ${where} like(concat('%',#{keyword},'%'))
     group by s.study_no
-    order by s.created_dt
+    order by s.study_no desc
   </select>
   
   <!--  ===[스터디 검색]=== -->
@@ -236,7 +236,7 @@
     <include refid="select1"/>
     where s.status=1 or s.status=2
       group by s.study_no
-      order by s.created_dt
+      order by s.study_no desc
   </select>
   
   <!--  ===[전체 스터디 목록(진행 중)]=== -->
@@ -244,7 +244,7 @@
     <include refid="select1"/>
     where s.status=1
       group by s.study_no
-      order by s.created_dt
+      order by s.study_no desc
   </select>
   
    <!--  ===[전체 스터디 목록(완료)]=== -->
@@ -252,7 +252,7 @@
     <include refid="select1"/>
     where s.status=2
       group by s.study_no
-      order by s.created_dt
+      order by s.study_no desc
   </select>
   
   <!--  ===[내 스터디 목록(간단) - 카페에서 사용]=== -->

@@ -84,7 +84,8 @@
     
     <label for='f-licenseno' class="col-sm-2 col-form-label">사업자 등록번호</label>
     <input id='f-licenseno' type='text' name='ceoLicenseNo'
-     pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="*필수"/><br>
+     pattern="[0-9]{10}" title='10자리 숫자를 입력해주세요.' maxlength='10' placeholder="*필수"/>
+    <input type="button" class="btn btn-outline-dark" value="중복확인" onclick="licenseOverlap()"/><br>
     
 	  <label for='f-email' class="col-sm-2 col-form-label">이메일</label>
 	  <input id='f-email' type='text' name='id' pattern="^[a-zA-Z0-9]+$" placeholder="*필수"/> @ 
@@ -156,11 +157,11 @@ function nickOverlap(){
  var form = document.ceoInfo;
  
      console.log("nickOverlap 호출")
-     console.log("닉네임 입력 값 : "+form.nick.value)
+     console.log("닉네임 입력 값 : "+form.ceoNickname.value)
    $.ajax({
      type :"post",/* 전송 방식 */
      url :"nickOverlap", /* 컨트롤러 사용할 때. 내가 보낼 데이터의 주소. */
-     data : {"nick" : form.nick.value},
+     data : {"nick" : form.ceoNickname.value},
      /* JSON형식 안에 JSON 형식으로 표현한 데이터. 
            "파라미터 이름" : 폼태그에 적은 NAME 값.ID입력창의 NAME값.value 여러 개도 가능
      data :{ "id" : joinForm.id.value, 
@@ -184,9 +185,42 @@ function nickOverlap(){
      }
    });
    
- }  
+ };
   
-  
+ function licenseOverlap(){
+	 
+	 var form = document.ceoInfo;
+	 
+	     console.log("licenseOverlap 호출")
+	     console.log("사업자번호 입력 값 : "+form.ceoLicenseNo.value)
+	   $.ajax({
+	     type :"post",/* 전송 방식 */
+	     url :"licenseOverlap", /* 컨트롤러 사용할 때. 내가 보낼 데이터의 주소. */
+	     data : {"license" : form.ceoLicenseNo.value},
+	     /* JSON형식 안에 JSON 형식으로 표현한 데이터. 
+	           "파라미터 이름" : 폼태그에 적은 NAME 값.ID입력창의 NAME값.value 여러 개도 가능
+	     data :{ "id" : joinForm.id.value, 
+	     "id1" : joinForm.password.value}, 이렇게도 사용 가능.         
+	     */
+	     dataType : "text",  /* text, xml, html, script, json, jsonp 가능 */
+	           //정상적인 통신을 했다면 function은 백엔드 단에서 데이터를 처리.
+	           
+	     success : function(data){ 
+	       
+	       console.log(data);
+	       
+	       if(data=="1"){
+	         alert("사용 가능한 사업자번호 입니다.");
+	       }else{  //ajax가 제대로 안됐을 때 .
+	         alert("이미 사용중인 사업자번호 입니다.");
+	       }
+	     },
+	     error : function(){
+	       alert("사업자번호 중복 확인 ajax 실행 오류");
+	     }
+	   });
+	   
+	 };
   
 </script>
 

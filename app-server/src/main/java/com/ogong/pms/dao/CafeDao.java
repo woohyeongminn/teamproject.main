@@ -32,7 +32,7 @@ public interface CafeDao {
   void updateCafeStatusToGENERAL(int cafeNo) throws Exception;
 
   // 카페 이미지
-  void insertCafeImage(HashMap<String,Object> params) throws Exception;
+  void insertCafeImage(@Param("cafeImage")String cafeImage, @Param("cafeNo")int cafeNo) throws Exception;
   void deleteCafeImage(HashMap<String,Object> param) throws Exception;
 
 }

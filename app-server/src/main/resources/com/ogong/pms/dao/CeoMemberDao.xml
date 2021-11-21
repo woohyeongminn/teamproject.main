@@ -209,6 +209,18 @@
 	    nickname = #{ceoNickname}
 	</select>
   
+  <!-- 사업자번호 중복 확인하기  -->
+  <select id="licenseOverlap" resultType="string">
+    select
+      cm.license_no license_no
+    from
+      member m
+    join
+      ceo_member cm on m.member_no=cm.member_no
+    where
+      license_no = #{license}
+  </select>
+  
 </mapper>
 
 
