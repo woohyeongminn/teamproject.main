@@ -313,7 +313,7 @@ document.querySelector("#updatenotice").onclick = () => {
        cancelButtonText: '아니오'
      }).then((result) => {
        if (result.value) {
-         document.querySelector("#notice-update").submit;
+         document.querySelector("#notice-update").submit();
        }
      })
   }

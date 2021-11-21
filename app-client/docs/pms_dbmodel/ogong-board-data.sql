@@ -11,11 +11,11 @@ values(3, 'ID 및 PW 찾기에 관하여',
 
 -- 공지사항 test 값 >> 첨부파일
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(1, 1, 'park');
+values(1, 1, 'park.jpg');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(2, 2, 'park2');
+values(2, 2, 'park2.jpg');
 insert into notice_file(notice_file_no, notice_no, filepath)
-values(3, 3, 'park3');
+values(3, 3, 'park3.jpg');
 
 -- 첨부파일
 DROP TABLE IF EXISTS notice_file RESTRICT;

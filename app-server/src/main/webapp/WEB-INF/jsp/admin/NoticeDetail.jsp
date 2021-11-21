@@ -247,13 +247,13 @@
   
 								  <tr id="blockbox">
 								    <th scope="row" id="second"><label for='f-content' id="content">내용</label></th>
-								    <th scope="col"><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" readonly>${adminNotice.adminNotiContent}</textarea></td>
+								    <th scope="col"><textarea id='f-content' type='text' name='content' rows="20" wrap="virtual" readonly>${adminNotice.adminNotiContent}</textarea></th>
 								    <th></th>
 								  </tr>
 								  
 								  <tr id="blockbox">
                     <th scope="row" id="third"><label for='f-filepath'>파일</label></th>
-                    <th scope="col"><img id="f-photo-image" src="${contextPath}/upload/notice/${adminNotice.adminNotiFile}.jpg"></td>
+                    <th scope="col"><img id="f-photo-image" src="${contextPath}/upload/notice/${adminNotice.adminNotiFile}"></th>
                     <th></th>
                   </tr>
   
