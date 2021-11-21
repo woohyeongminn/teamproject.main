@@ -7,6 +7,7 @@ import com.ogong.pms.domain.FreeBoardFile;
 
 public interface FreeBoardDao {
   List<FreeBoard> findAll(int studyNo) throws Exception;
+  List<FreeBoard> findAllByMemberNo(int memberNo) throws Exception;
   FreeBoard findByNo(@Param("freeBoardNo") int boardNo, @Param("studyNo") int studyNo) throws Exception;
 
   void insert(FreeBoard freeBoard) throws Exception;
@@ -20,8 +21,10 @@ public interface FreeBoardDao {
   void updateViewCount(@Param("freeBoard") FreeBoard freeBoard, @Param("studyNo") int studyNo) throws Exception;
 
   void delete(@Param("freeBoardNo") int freeBoardNo, @Param("studyNo") int studyNo) throws Exception;
+  void deleteByMemberNo(int memberNo) throws Exception;
 
   void deleteFile(int freeBoardNo) throws Exception;    /*게시글 첨부파일 전체 삭제*/
+
   void deleteFileOne(@Param("fileNo")int fileNo, @Param("freeBoardNo")int freeBoardNo) throws Exception;    /*게시글 첨부파일 하나씩 삭제*/
 
   void deleteComment(int freeBoardNo) throws Exception;

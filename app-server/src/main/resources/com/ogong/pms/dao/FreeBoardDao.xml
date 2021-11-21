@@ -105,10 +105,22 @@
       st_board_no=#{freeBoard.freeBoardNo} and study_no=#{studyNo}
   </update>
   
-  <delete id="delete" parameterType="map">
+  <select id="findAllByMemberNo" resultMap="FreeBoardMap" parameterType="int">
+   <include refid="select1"/>
+   where
+      m.member_no=#{memberNo}
+  </select>
+  
+   <delete id="delete" parameterType="map">
      delete from study_board
       where
        st_board_no=#{freeBoardNo} and study_no=#{studyNo}
+   </delete>
+   
+   <delete id="deleteByMemberNo" parameterType="map">
+     delete from study_board
+      where
+       member_no=#{memberNo}
    </delete>
    
   <delete id="deleteFile" parameterType="map">
@@ -123,11 +135,11 @@
        st_board_no=#{freeBoardNo} and file_no=#{fileNo}
    </delete>
    
-   <delete id="deleteComment" parameterType="map">
+   <!-- <delete id="deleteComment" parameterType="map">
      delete from study_board_comment
       where
        st_board_no=#{freeBoardNo}
-   </delete>
+   </delete> -->
    
   </mapper>
   

@@ -40,6 +40,12 @@
       sbc.st_board_no=#{boardNo}
   </select>
   
+ <!--  <select id="findAllByMemberNo" resultMap="CommentMap" parameterType="int">
+   <include refid="select1"/>
+   where
+      m.member_no=#{memberNo}
+  </select> -->
+  
   <insert id="insert">
      insert into study_board_comment(content, created_dt, st_board_no, member_no, study_no)
      values(#{comment.commentText}, #{comment.commentRegisteredDate}, #{boardNo}, #{comment.commentWriter.perNo}, #{studyNo})
@@ -55,6 +61,12 @@
     delete from study_board_comment
     where
       comment_no=#{commentNo}
+  </delete>
+  
+  <delete id="deleteByMemberNo" parameterType="int">
+    delete from study_board_comment
+    where
+      member_no=#{memberNo}
   </delete>
    
   <select id="findByNo" resultMap="CommentMap" parameterType="int">

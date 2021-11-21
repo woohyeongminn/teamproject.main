@@ -6,8 +6,10 @@ import com.ogong.pms.domain.Comment;
 
 public interface CommentDao {
   List<Comment> findAll(int boardNo) throws Exception;
+  //  List<Comment> findAllByMemberNo(int memberNo) throws Exception;
   void insert(@Param("studyNo")int studyNo, @Param("boardNo")int BoardNo, @Param("comment")Comment comment) throws Exception;
   void updateContent(Comment comment) throws Exception;
   void delete(int commentNo) throws Exception;
+  void deleteByMemberNo(int memberNo) throws Exception;
   Comment findByNo(int commentNo) throws Exception;
 }
