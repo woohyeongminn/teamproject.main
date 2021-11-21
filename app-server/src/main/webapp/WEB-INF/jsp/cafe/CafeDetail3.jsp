@@ -432,7 +432,7 @@ function reviewList(page){
                 strTag += '   </div>';
                 strTag += '   <div class="c-review-list-info">';
                 strTag += '     <div class="c-review-list-info-img">';
-                strTag += '       <img src="${contextPath}/img/KakaoTalk_20211113_014317649.jpg">';
+                strTag += '       <img src="${contextPath}/img/perProfile_color.jpg">';
                 strTag += '     </div>';
                 strTag += '     <span style="font-size: smaller;">'+arr[i].member.perNickname+'</span>';
                 strTag += '     <span style="font-size: smaller; color: #8f8f8f;">'+arr[i].registeredDateStr+'</span>';

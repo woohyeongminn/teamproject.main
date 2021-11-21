@@ -115,7 +115,7 @@ public class CeoCafeController {
   public ModelAndView ceoCafeAdd(
       HttpSession session, Cafe cafe,
       String inputOpenTime, String inputCloseTime,
-      String te1, String tel2, String tel3,
+      String tel1, String tel2, String tel3,
       String addr1, String addr2, String addr3,
       Part[] photoFileList) throws Exception {
 
@@ -175,7 +175,7 @@ public class CeoCafeController {
     //sqlSession.rollback();
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));
     cafe.setCloseTime(LocalTime.parse(inputCloseTime));
-    cafe.setPhone(te1 + "-" + tel2 + "-" + tel3);
+    cafe.setPhone(tel1 + "-" + tel2 + "-" + tel3);
     cafe.setLocation(addr2 + " " + addr3 + "(" + addr1 + ")");
 
     cafeDao.insertCafe(cafe);
