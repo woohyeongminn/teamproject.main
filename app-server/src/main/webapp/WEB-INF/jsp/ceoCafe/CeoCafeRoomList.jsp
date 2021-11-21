@@ -33,7 +33,7 @@
 <body>
   <div class="all-content">
 
-		<div id="search">
+		<div id="search" style="display: inline-block;">
 		  <form action="search" method='get'>
 		    <select name="where">
 		      <option value="name">이름</option>
@@ -43,7 +43,12 @@
 		    <button class="btn btn-outline-dark btn-sm">검색</button>
 		  </form>
 		</div>
-		          
+		
+		<div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="margin-top: 20px; display: inline-block;">
+       <a href="list?cafeno=${cafeNo}" class="btn btn-outline-dark" style="width: 78px; padding: 2px;">목록</a>
+       <a href="addform?cafeno=${cafeNo}" class="btn btn-outline-dark" style="width: 78px; padding: 2px;">등록하기</a>
+    </div>
+              
 		<section class="py-5">
 		    <div class="container px-4 px-lg-5 mt-5">
 		        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -51,9 +56,16 @@
 		          <c:forEach items="${cafeRoomList}" var="cafeRoom">
 		          <div class="col mb-5">
 		              <div class="card h-100">
-		                  <a href='detail?roomno=${cafeRoom.roomNo}'>
-		                    <img class="card-img-top" src="${contextPath}/upload/cafe/${cafeRoom.roomImg}_80x80.jpg" alt="..." />
-		                  </a>
+		                <c:choose>
+			                <c:when test="${not empty cafeRoom.roomImg}">
+			                  <a href='detail?roomno=${cafeRoom.roomNo}'>
+			                    <img class="card-img-top" src="${contextPath}/upload/cafe/${cafeRoom.roomImg}_250x180.jpg" alt="..." />
+			                  </a>
+			                </c:when>
+			                <c:otherwise>
+	                    		<img class="card-img-top" src="${contextPath}/img/studyroom1.jpg" alt="..." style="width: 250px; height: 180px;"/>
+			                </c:otherwise>
+		                </c:choose>
 		                  <div class="card-body p-3">
 		                      <div class="text-center">
 		                          <c:if test="${cafeRoom.roomStatus == 1}">
@@ -93,12 +105,7 @@
               </c:if> -->
 			    </div>
 			    
-			    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="margin-top: 20px;">
-               <div class="text-center" style="margin-bottom: 10px;">
-                  <a href="list?cafeno=${cafeNo}"  class="btn btn-outline-dark" style="width: 78px;">목록</a>
-                </div>
-			       <div class="text-center"><a href="addform?cafeno=${cafeNo}"  class="btn btn-outline-dark">등록하기</a></div>
-			    </div>
+			    
 		  </div>
 		</section>
   </div>

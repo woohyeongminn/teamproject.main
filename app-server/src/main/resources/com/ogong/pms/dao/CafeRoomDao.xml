@@ -26,15 +26,18 @@
   <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ스터디룸ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
   <sql id="cafeRoomListSelect">
     select
-      studyroom_no, 
-      name room_name, 
-      cafe_no,
-      Introduction,
-      people,
-      hourly_amount,
-      status
+      sr.studyroom_no, 
+      sr.name room_name, 
+      sr.cafe_no,
+      sr.Introduction,
+      sr.people,
+      sr.hourly_amount,
+      sr.status,
+      srp.photo_no photo_no,
+      srp.name photo_name
     from 
-      studycafe_room
+      studycafe_room sr
+     left outer join studycafe_room_photo srp on srp.studyroom_no=sr.studyroom_no
   </sql>
   
   <!-- 전체 룸 리스트 -->
@@ -112,6 +115,12 @@
     <foreach collection="fileNames" item="roomImage" separator="," >
     (#{roomImage.name},#{cafeRoomNo})
     </foreach>
+  </insert>
+  
+  <insert id="insertRoomImage">
+    insert into studycafe_room_photo(name, studyroom_no) 
+    values
+    (#{roomImage.name},#{cafeRoomNo})
   </insert>
   
   <update id="updateCafeRoom" parameterType="CafeRoom">

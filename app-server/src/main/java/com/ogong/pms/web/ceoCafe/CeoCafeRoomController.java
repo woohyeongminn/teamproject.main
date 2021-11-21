@@ -36,6 +36,9 @@ public class CeoCafeRoomController {
 
     List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeno);
 
+    System.out.println(cafeRoomList);
+
+
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("cafeNo", cafe.getNo());
@@ -100,17 +103,6 @@ public class CeoCafeRoomController {
       cafeRoom.setRoomImg(filename);
 
       Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
-      .size(40, 40)
-      .outputFormat("jpg")
-      .crop(Positions.CENTER)
-      .toFiles(new Rename() {
-        @Override
-        public String apply(String name, ThumbnailParameter param) {
-          return name + "_40x40";
-        }
-      });
-
-      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
       .size(80, 80)
       .outputFormat("jpg")
       .crop(Positions.CENTER)
@@ -118,6 +110,28 @@ public class CeoCafeRoomController {
         @Override
         public String apply(String name, ThumbnailParameter param) {
           return name + "_80x80";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+      .size(250, 180)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_250x180";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+      .size(450, 300)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_450x300";
         }
       });
     }
@@ -133,7 +147,10 @@ public class CeoCafeRoomController {
     //      }
 
     cafeRoomDao.insertCafeRoom(cafeRoom);
+    cafeRoomDao.insertCafeRoomImage( )
     sqlSessionFactory.openSession().commit();
+
+
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:list?cafeno="+ cafe.getNo());

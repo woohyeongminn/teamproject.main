@@ -18,7 +18,7 @@
 }
 
 .template-content {
-    height: 1100px;
+    height: 900px;
 }
 
  .all-content {
@@ -45,10 +45,6 @@ ul {
   justify-content: space-between;
   margin-bottom: 15px;
 }
-
-    .slide{height:300px;overflow:hidden;}
-    .slide li:nth-child(1){display:inline-block; background:#ffa; width: 100%; height:300px;}
-
 
 
 .cafe-bottom {
@@ -149,18 +145,23 @@ button {
 <div class="all-content">
   <div class="cafe-wrap">
     <div class="cafe-top">
-      <div class="slide">
-          <ul>
-            <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
-          </ul>
-      </div>
+      <c:choose>
+         <c:when test="${not empty cafeRoom.roomImg}">
+           <a href='detail?roomno=${cafeRoom.roomNo}'>
+             <img class="card-img-top" src="${contextPath}/upload/cafe/${cafeRoom.roomImg}_450x300.jpg" alt="..." />
+           </a>
+         </c:when>
+         <c:otherwise>
+             <img class="card-img-top" src="${contextPath}/img/studyroom1.jpg" alt="..." style="width: 450px; height: 300px;"/>
+         </c:otherwise>
+       </c:choose>
     </div>
     
     <!-- 룸 상세 글 부분 -->      
      <div class="cafe-bottom">
      <form action='updateform' method='post' enctype="multipart/form-data">
       <input id='c-no' type='hidden' value='${cafe.no}'>
-      <h4 style="text-align: center; margin-bottom: 30px;">[${cafeRoom.roomName}]</h4>
+      <h4 style="margin-bottom: 30px;">[${cafeRoom.roomName}]</h4>
       <div class="label-wrap">
         <label for='f-roomInfo'>소개글</label>
          <span style="height: fit-content;">${cafeRoom.roomInfo}</span>
