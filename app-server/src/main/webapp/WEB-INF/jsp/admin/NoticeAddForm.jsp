@@ -268,7 +268,7 @@
 									    <div class="button">
 									    <label for="chooseFile" id="click"><b>👉 CLICK HERE! 👈</b></label>
 									    </div>
-									    <input type="file" id="chooseFile" name="filepath" accept="image/*" onchange="loadFile(this)"></td>
+									    <input type="file" id="chooseFile" name="filepath" accept="image/*"></th>
                     <th></th>
                   </tr>
   
@@ -276,7 +276,7 @@
                 </table>
   
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-outline-dark" id="addnotice">등록</button>
+                <button type="button" class="btn btn-outline-dark" id="addnotice" style="line-height: 5px;">등록</button>
               </div>
               
              </div>
@@ -313,16 +313,6 @@ inputImage.addEventListener("change", e => {
 </script>
 
 <script>
-document.querySelector("#notice-add").onsubmit = () => {
-  if (document.querySelector("#f-title").value == "" ||
-        document.querySelector("#f-content").value == "") {
-    Swal.fire('제목이나 내용을 입력해 주세요.')
-    return false;
-  }
-};
-</script>
-
-<script>
 document.querySelector("#addnotice").onclick = () => {
 	var adminNotiTitle = document.querySelector('input[name=adminNotiTitle]').value;
 	var adminNotiContent = document.querySelector('textarea[name=adminNotiContent]').value;
@@ -344,7 +334,7 @@ document.querySelector("#addnotice").onclick = () => {
 		   cancelButtonText: '아니오'
 	   }).then((result) => {
 	     if (result.value) {
-	    	 document.querySelector("#notice-add").submit;
+	    	 document.querySelector("#notice-add").submit();
        }
      })
   }
