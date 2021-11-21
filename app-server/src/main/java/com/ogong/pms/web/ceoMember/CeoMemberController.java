@@ -95,6 +95,9 @@ public class CeoMemberController {
           return name + "_110x110";
         }
       });
+
+    } else {
+      ceoMember.setCeoPhoto("ceoProfile");
     }
 
     ceoMemberDao.insert(ceoMember);

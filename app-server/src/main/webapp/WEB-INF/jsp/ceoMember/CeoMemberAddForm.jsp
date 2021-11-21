@@ -9,7 +9,6 @@
 
 <style>
 
-  
  .all-content {
     width: 100%;
     max-width: 600px;
@@ -69,10 +68,7 @@
 
 	  <label for='f-photo' class="col-sm-2 col-form-label">사진</label>
 	  <input id='f-photo' type='file' name='photoFile' /><br>
-	  <%-- <p>사진 미선택시 기본 프로필 사진이 등록됩니다.</p>
-	  <c:if test="${empty photo}">
-	    <input id='f-photo' type='hidden' name='photoFile' value="ceoProfile"/><br>
-	  </c:if> --%>
+	  <p style="text-align: center; font-size: 10px; margin-left: 85px;">사진 미선택시 기본 프로필 사진이 등록됩니다.</p>
 	  
 	  <label for='f-tel' class="col-sm-2 col-form-label">전화번호</label>
 	  <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3'  style="width:50px;"/> -

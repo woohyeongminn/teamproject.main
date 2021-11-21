@@ -95,7 +95,7 @@ ul{list-style:none;}
   font-weight: 600;
 }
 
-.profile > label, span {
+.profile > label {
   display: inline-block;
   padding: 5px 5px;
   width: 103px;
