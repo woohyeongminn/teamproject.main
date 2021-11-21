@@ -3,6 +3,7 @@ package com.ogong.pms.web.ceoCafe;
 import static com.ogong.pms.domain.Cafe.DELETE;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
@@ -24,6 +24,10 @@ import com.ogong.pms.domain.CafeImage;
 import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CeoMember;
 import com.ogong.pms.web.cafe.CafeHandlerHelper;
+import net.coobird.thumbnailator.ThumbnailParameter;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import net.coobird.thumbnailator.name.Rename;
 
 @Controller
 public class CeoCafeController {
@@ -109,15 +113,14 @@ public class CeoCafeController {
     return mv;
   }
 
-  // 카페 등록
-  @ResponseBody
+  //카페 등록
   @PostMapping("/ceomember/cafe/add")
   public ModelAndView ceoCafeAdd(
       HttpSession session, Cafe cafe,
       String inputOpenTime, String inputCloseTime,
       String tel1, String tel2, String tel3,
       String addr1, String addr2, String addr3,
-      Part[] photoFileList) throws Exception {
+      Collection<Part> photoFileList) throws Exception {
 
     CeoMember loginCeo = (CeoMember) session.getAttribute("loginCeoUser");
 
@@ -129,62 +132,54 @@ public class CeoCafeController {
 
     cafe.setCeoMember(ceoMember);
 
+    ArrayList<CafeImage> cafeImageList = new ArrayList<>();
 
-    System.out.println(photoFileList);
-
-
-    if (photoFileList.length > 0) {
-
-      ArrayList<CafeImage> cafeImageList = new ArrayList<>();
-
-      for (Part photoFile : photoFileList) {
+    for (Part photoFile : photoFileList) {
+      if (photoFile.getSize() > 0) {
         String filename = UUID.randomUUID().toString();
         photoFile.write(sc.getRealPath("/upload/cafe") + "/" + filename);
 
         CafeImage cafeImage = new CafeImage();
         cafeImage.setName(filename);
 
+        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+        .size(680, 264)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_680x264";   // 카페 상세용 사이즈
+          }
+        });
+
+        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+        .size(329, 247)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_329x247";   // 카페 목록용 사이즈
+          }
+        });
+
         cafeImageList.add(cafeImage);
-
       }
-      cafe.setCafeImgs(cafeImageList);
     }
-
-    //    if (!multipartFile.isEmpty()) {
-    //      fileUpload(multipartFile, cafe);
-    //    }
-
-    //      List<CafeImage> imageList = cafe.getCafeImgs();
-    //
-    //      if (!imageList.isEmpty()) {
-    //        CafeImage cafeImage = new CafeImage();
-    //        cafeImage.setName(request.getParameter("filename[]"));
-    //        cafeImage.setCafeNo(cafe.getNo());
-    //
-    //        ArrayList<CafeImage> cafeImageList = new ArrayList<>();
-    //        cafeImageList.add(cafeImage);
-    //
-    //        HashMap<String,Object> params = new HashMap<>(); 
-    //        params.put("fileNames", cafeImageList);
-    //        params.put("cafeNo", cafe.getNo());
-    //
-    //        cafeDao.insertCafeImage(params);
-    //        sqlSession.commit();
-    //      }
-
-    //sqlSession.rollback();
+    cafe.setCafeImgs(cafeImageList);
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));
     cafe.setCloseTime(LocalTime.parse(inputCloseTime));
     cafe.setPhone(tel1 + "-" + tel2 + "-" + tel3);
-    cafe.setLocation(addr2 + " " + addr3 + "(" + addr1 + ")");
+    cafe.setLocation(addr2 + ", " + addr3);
 
     cafeDao.insertCafe(cafe);
     sqlSessionFactory.openSession().commit();
 
-    Cafe myCafe = cafeDao.findByCafeNoMember(loginCeo.getCeoNo());
+    Cafe myCafe = cafeDao.findByCeoMember(loginCeo.getCeoNo());
 
-    for (int i = 0; i < myCafe.getCafeImgs().size(); i++) {
-      String img = myCafe.getCafeImgs().get(i).getName();
+    for (int i = 0; i < cafe.getCafeImgs().size(); i++) {
+      String img = cafe.getCafeImgs().get(i).getName();
       cafeDao.insertCafeImage(img, myCafe.getNo());
     }
 
@@ -192,99 +187,6 @@ public class CeoCafeController {
     mv.setViewName("redirect:detail");
     return mv;
   }
-
-  //  @ResponseBody
-  //  @RequestMapping(value = "/file-upload", method = RequestMethod.POST)
-  //  public String fileUpload(List<MultipartFile> multipartFile, Cafe cafe) throws Exception {
-  //    String strResult = "{ \"result\":\"FAIL\" }";
-  //
-  //    //String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-  //    String contextRoot = sc.getRealPath("/");
-  //    String fileRoot;
-  //
-  //    ArrayList<CafeImage> cafeImageList = new ArrayList<>();
-  //    try {
-  //      // 파일이 있을때
-  //      if(multipartFile.size() > 0 && !multipartFile.get(0).getOriginalFilename().equals("")) {
-  //        for(MultipartFile file:multipartFile) {
-  //          fileRoot = contextRoot + "upload/cafe";
-  //          System.out.println(fileRoot);
-  //
-  //          String originalFileName = file.getOriginalFilename();   //오리지날 파일명
-  //          String extension = originalFileName.substring(originalFileName.lastIndexOf("."));   //파일 확장자
-  //          String savedFileName = UUID.randomUUID() + extension;   //저장될 파일 명
-  //
-  //          File targetFile = new File(fileRoot + savedFileName);   
-  //          try {
-  //            InputStream fileStream = file.getInputStream();
-  //            FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
-  //
-  //            CafeImage cafeImage = new CafeImage();
-  //            cafeImage.setName(savedFileName);
-  //            cafeImage.setCafeNo(cafe.getNo());
-  //            cafeImageList.add(cafeImage);
-  //
-  //            cafeDao.insertCafeImage(savedFileName, cafe.getNo());
-  //
-  //          } catch (Exception e) {
-  //            //파일삭제
-  //            FileUtils.deleteQuietly(targetFile);    //저장된 현재 파일 삭제
-  //            e.printStackTrace();
-  //            break;
-  //          }
-  //        }
-  //        strResult = "{ \"result\":\"OK\" }";
-  //      } else {
-  //        strResult = "{ \"result\":\"OK\" }";
-  //      }
-  //    } catch(Exception e){
-  //      e.printStackTrace();
-  //    }
-  //    return strResult;
-  //  }
-
-
-
-  //  public String fileUpload(List<MultipartFile> multipartFile) {
-  //    String strResult = "{ \"result\":\"FAIL\" }";
-  //    //String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-  //    String contextRoot = sc.getRealPath("/");
-  //    String fileRoot;
-  //    try {
-  //      // 파일이 있을때 탄다.
-  //      if(multipartFile.size() > 0 && !multipartFile.get(0).getOriginalFilename().equals("")) {
-  //
-  //        for(MultipartFile file:multipartFile) {
-  //          fileRoot = contextRoot + "upload/cafe";
-  //          System.out.println(fileRoot);
-  //
-  //          String originalFileName = file.getOriginalFilename();   //오리지날 파일명
-  //          String extension = originalFileName.substring(originalFileName.lastIndexOf("."));   //파일 확장자
-  //          String savedFileName = UUID.randomUUID() + extension;   //저장될 파일 명
-  //
-  //          File targetFile = new File(fileRoot + savedFileName);   
-  //          try {
-  //            InputStream fileStream = file.getInputStream();
-  //            FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
-  //
-  //          } catch (Exception e) {
-  //            //파일삭제
-  //            FileUtils.deleteQuietly(targetFile);    //저장된 현재 파일 삭제
-  //            e.printStackTrace();
-  //            break;
-  //          }
-  //        }
-  //        strResult = "{ \"result\":\"OK\" }";
-  //      }
-  //     
-  //      // 파일 아무것도 첨부 안했을때 탄다.(게시판일때, 업로드 없이 글을 등록하는경우)
-  //      else
-  //        strResult = "{ \"result\":\"OK\" }";
-  //    } catch(Exception e){
-  //      e.printStackTrace();
-  //    }
-  //    return strResult;
-  //  }
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------
   // 카페 삭제 폼

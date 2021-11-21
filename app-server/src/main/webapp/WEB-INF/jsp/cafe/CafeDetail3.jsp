@@ -217,11 +217,11 @@
 		  <div class="carousel-inner">
 		    <c:forEach items="${cafe.cafeImgs}" var="cafeImg" varStatus="status">
 		      <c:if test="${status.first}">
-		        <div class="carousel-item active c-photo" style="background-image: url(${contextPath}/upload/cafe/${cafeImg.name}.jpg)">
+		        <div class="carousel-item active c-photo" style="background-image: url(${contextPath}/upload/cafe/${cafeImg.name}_680x264.jpg)">
             </div>
 		      </c:if>
 		      <c:if test="${not status.first}">
-		        <div class="carousel-item c-photo" style="background-image: url(${contextPath}/upload/cafe/${cafeImg.name}.jpg)">
+		        <div class="carousel-item c-photo" style="background-image: url(${contextPath}/upload/cafe/${cafeImg.name}_680x264.jpg)">
             </div>
 		      </c:if>
 		    </c:forEach>
