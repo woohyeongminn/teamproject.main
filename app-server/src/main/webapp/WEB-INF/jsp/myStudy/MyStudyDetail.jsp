@@ -213,9 +213,24 @@ button#buttonsave:hover {
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>
+            <a class="nav-link" data-toggle="collapse" href="#guilder" aria-expanded="false" aria-controls="guilder">
               <span class="menu-title" style="color:black">구성원&nbsp;＞</span>
             </a>
+            
+            <div class="collapse" id="guilder">
+              <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>참여 중인 구성원</a></li>
+                <%-- <c:if test="${empty guilderMembers}">
+                 <li class="nav-item">참여 중인 구성원이 없습니다.</li>
+                </c:if> --%>
+              </ul>
+              <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href='${contextPath}/app/mystudy/guilder/waitinglist?studyNo=${study.studyNo}'>승인 대기 중인 구성원</a></li>
+                <%-- <c:if test="${empty waitingGuilderList}">
+                 <li class="nav-item">승인 대기 중인 구성원이 없습니다.</li>
+                </c:if> --%>
+              </ul>
+            </div>
             
           </li>
           

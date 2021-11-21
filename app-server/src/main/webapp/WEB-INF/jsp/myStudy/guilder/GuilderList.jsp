@@ -38,10 +38,26 @@ ul{list-style:none;}
   left:0; top:40px; 
   box-sizing: border-box; 
   border : 5px solid #f9f9f9;
-  width: 900px;
-  height: 800px;
-  overflow: scroll;
+  width: 800px;
+  height: 500px;
+  overflow-y: scroll;
 }
+
+  .tabCon::-webkit-scrollbar {
+    width: 10px;
+  }
+  .tabCon::-webkit-scrollbar-thumb {
+  background-color: rgb(247, 231, 215);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  }
+  .tabCon::-webkit-scrollbar-track {
+  background-color: rgb(250, 250, 234);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+  }
+
 .btnCon:target  {
   background : #ccc;
 }
@@ -70,6 +86,13 @@ table td button {
 font-size: 12px;
     padding: 10px;
     border-radius: 13px;
+}
+
+.content-wrapper {
+  background-color: white;
+  border-radius: 20px;
+  height: 800px;
+  padding: 30px;
 }
 </style>
 
@@ -111,7 +134,7 @@ font-size: 12px;
 						              </c:when>
 						              <c:otherwise> 
 						                <td>
-						                 <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
+						                 <img src="${contextPath}/img/perProfile_color.jpg" width="50px">
 						                 <span> ${guilderMember.perNickname} </span></td>
 						              </c:otherwise>
 						            </c:choose>
@@ -135,40 +158,6 @@ font-size: 12px;
 						      </div>
 						      
 						    </li>
-						    
-						    <c:if test="${loginUser.perNo eq study.owner.perNo}">
-						    <li id="tab2" class="btnCon"><a class="btn" href="#tab2">승인대기중인 구성원</a>
-						      <div class="tabCon" >
-						      <br>
-						      <table class="table table-hover text-center align-middle">
-						      <thead>
-						        <tr>
-						          <th>닉네임</th>
-						          <th>승인</th>
-						          <th>거절</th>
-						        </tr>
-						       </thead>
-						        <tbody>
-						          <c:forEach items="${waitingGuilderList}" var="waitingMember">
-						            <tr>
-						              <td>
-						                 <img src="${contextPath}/img/KakaoTalk_20211113_014317871.jpg" width="50px">
-						                 <span> ${waitingMember.perNickname} </span>
-						              </td>
-						              
-						              <td><button class="btn btn-outline-dark" style="font-size: 12px; padding: 10px; border-radius: 13px;" onclick='return submitBtn("agree","watingMemberNo",${waitingMember.perNo},"studyNo",${study.studyNo});'>승인</button></td>
-						              <td><button class="btn btn-outline-dark" style="font-size: 12px; padding: 10px; border-radius: 13px;" onclick='return submitBtn("disagree","watingMemberNo",${waitingMember.perNo},"studyNo",${study.studyNo});'>거절</button></td>
-						            </tr>
-						          </c:forEach>
-						        </tbody>
-						      </table>
-						      <c:if test="${empty waitingGuilderList}">
-						      승인 대기 중인 구성원이 없습니다.
-						      </c:if>
-						      </div>
-						      
-						    </li> 
-						    </c:if>   
 						    
 						  </ul>
 						</div>
@@ -256,40 +245,7 @@ function submitBtn(str, name1, value1, name2, value2) {
              return true;
           }
       })
-  } else if (str == 'agree') {
-    Swal.fire({
-            title: '정말 승인하시겠습니까?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '네',
-            cancelButtonText: '아니오'
-        }).then((result) => {
-            if (result.isConfirmed) {
-               form.setAttribute('action', 'agree');
-               form.submit();
-               return true;
-            }
-        })  
-  } else if (str == 'disagree') {
-    Swal.fire({
-            title: '정말 거절하시겠습니까?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '네',
-            cancelButtonText: '아니오'
-        }).then((result) => {
-            if (result.isConfirmed) {
-               form.setAttribute('action', 'disagree');
-               form.submit();
-               return true;
-            }
-        })  
-  }
-  
+  } 
 };
 
 </script>
