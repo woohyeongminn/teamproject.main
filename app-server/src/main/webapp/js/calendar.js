@@ -1,6 +1,6 @@
 let date = new Date();
 
-  const renderCalender = () => {
+  const renderCalendar = () => {
   const viewYear = date.getFullYear();
   const viewMonth = date.getMonth();
 
@@ -90,22 +90,22 @@ let date = new Date();
   }
 };
 
-renderCalender();
+renderCalendar();
 
 const prevMonth = () => {
   //date.setDate(1);
   date.setMonth(date.getMonth() - 1);
-  renderCalender();
+  renderCalendar();
 };
 
 const nextMonth = () => {
   //date.setDate(1);
   date.setMonth(date.getMonth() + 1);
-  renderCalender();
+  renderCalendar();
 };
 
 const goToday = () => {
   date = new Date();
-  renderCalender();
+  renderCalendar();
 };
 
