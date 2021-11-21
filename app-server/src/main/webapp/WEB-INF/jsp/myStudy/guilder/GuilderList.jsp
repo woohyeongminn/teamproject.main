@@ -35,7 +35,7 @@ ul{list-style:none;}
   display:none; 
   padding: 20px;
   position:absolute; 
-  left:0; top:40px; 
+  left:0;
   box-sizing: border-box; 
   border : 5px solid #f9f9f9;
   width: 800px;
@@ -94,6 +94,10 @@ font-size: 12px;
   height: 800px;
   padding: 30px;
 }
+
+.tabmenu ul li .btn:hover {
+color: white;
+}
 </style>
 
 <body>
@@ -110,7 +114,7 @@ font-size: 12px;
           <div class="row">
            <div class="tabmenu">
 						  <ul>
-						    <li id="tab1" class="btnCon"><a class="btn first" href="#tab1">참여중인 구성원</a>
+						    <li id="tab1" class="btnCon">
 						      <div class="tabCon" >
 						      <br>
 						      <table class="table table-hover text-center align-middle">

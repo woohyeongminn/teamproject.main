@@ -35,12 +35,12 @@ ul{list-style:none;}
   display:none; 
   padding: 20px;
   position:absolute; 
-  left:0; top:40px; 
+  left:0;
   box-sizing: border-box; 
   border : 5px solid #f9f9f9;
   width: 800px;
   height: 500px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
   .tabCon::-webkit-scrollbar {
@@ -112,7 +112,7 @@ font-size: 12px;
 						  <ul>
 						    
 						    <c:if test="${loginUser.perNo eq study.owner.perNo}">
-						    <li id="tab2" class="btnCon"><a class="btn" href="#tab2">승인대기중인 구성원</a>
+						    <li id="tab2" class="btnCon">
 						      <div class="tabCon" >
 						      <br>
 						      <table class="table table-hover text-center align-middle">

@@ -74,5 +74,11 @@
    where
     calendar_no=#{calendarNo}
   </delete>  
+  
+  <delete id="deleteByMemberNo" parameterType="int">
+   delete from study_calendar
+   where
+    member_no=#{memberNo}
+  </delete>  
 
 </mapper>

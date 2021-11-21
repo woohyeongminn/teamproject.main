@@ -39,8 +39,11 @@ public class MyStudyController {
 
     List<Study> myStudyList = studyDao.findAllMyStudyByMyNo(loginUser.getPerNo());
 
-    if (myStudyList.isEmpty()) {
-      throw new Exception("가입한 스터디가 없습니다.");
+    if ( myStudyList.isEmpty()) {
+      mv.addObject("refresh", "2;url=../study/list");
+      mv.addObject("contentUrl", "myStudy/MyStudyNull.jsp");
+      mv.setViewName("template1");
+      return mv;
     }
 
     // 조장

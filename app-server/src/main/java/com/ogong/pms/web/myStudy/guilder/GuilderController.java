@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.ogong.pms.dao.CalendarDao;
 import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
@@ -26,6 +27,7 @@ public class GuilderController {
   @Autowired CommentDao commentDao;
   @Autowired FreeBoardDao freeBoardDao;
   @Autowired ToDoDao toDoDao;
+  @Autowired CalendarDao calendarDao;
 
   // 스터디 구성원 목록(참여 중인 구성원)
   @GetMapping("/mystudy/guilder/list")
@@ -97,6 +99,16 @@ public class GuilderController {
     studyDao.updateOwner(myStudy.getStudyNo(), guilderMemberNo);
     sqlSessionFactory.openSession().commit();
 
+    commentDao.deleteByMemberNo(loginUser.getPerNo());
+
+    List<FreeBoard> freeBoardList = freeBoardDao.findAllByMemberNo(loginUser.getPerNo());
+    for (FreeBoard freeBoard : freeBoardList) {
+      freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
+    }
+
+    freeBoardDao.deleteByMemberNo(loginUser.getPerNo());
+    toDoDao.deleteByMemberNo(loginUser.getPerNo());
+    calendarDao.deleteByMemberNo(loginUser.getPerNo());
     studyDao.deleteGuilder(myStudy.getStudyNo(), loginUser.getPerNo());
     sqlSessionFactory.openSession().commit();
 
@@ -143,7 +155,7 @@ public class GuilderController {
 
     freeBoardDao.deleteByMemberNo(guilderMemberNo);
     toDoDao.deleteByMemberNo(guilderMemberNo);
-
+    calendarDao.deleteByMemberNo(guilderMemberNo);
     Study myStudy = studyDao.findByNo(studyNo);
 
     studyDao.deleteGuilder(myStudy.getStudyNo(), guilderMemberNo);
