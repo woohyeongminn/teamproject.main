@@ -8,10 +8,6 @@
 
  <link href="${contextPath}/css/calstyle.css" rel="stylesheet" type="text/css">
 
-<c:forEach items="${calendarList}" var="calendar">
- <p>${calendar.importance}</p>
-</c:forEach>
-
 <div class="all-content"> 
   <div class="c-top">
     </div>
