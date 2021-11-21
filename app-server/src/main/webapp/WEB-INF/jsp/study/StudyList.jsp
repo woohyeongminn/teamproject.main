@@ -15,49 +15,46 @@
 		}
 		
 		ul {
-		  xlist-style: none;
+		  list-style: none;
 		}
 		
-		.tabmenu {
+		/* .tabmenu {
 		  xmax-width: 1000px;
 		  xmargin: 0 auto;
 		  xposition: relative;
 		  xmargin-top: 50px;
-		}
+		} */
 		
 		.tabmenu ul li {
-		  xdisplay: inline-block;
-		  xwidth: 33.33%;
-		  xfloat: left;
+		  display: inline-block;
+		  width: 20%;
+		  float: left;
 		}
 		
 		.tabmenu ul li a {
-		  xdisplay: block;
+		  display: block;
+		  /* ------------- */
 		  xline-height: 40px;
 		  xtext-decoration: none;
 		}
 		
 		.tabCon {
-		  xdisplay: none;
+		  display: none;
+		  position: absolute;
+		  /* ------------- */
 		  xpadding: 20px 0px;
-		  xposition: absolute;
 		  xleft: 0;
 		  xtop: 40px;
 		  xbox-sizing: border-box;
 		  xwidth: 1000px;
 		}
 		
-		.btnCon:target {
+		/* .btnCon:target {
 		  xbackground: rgb(247, 231, 215);
-		}
+		} */
 		
 		.btnCon:target .tabCon {
-		  xdisplay: block;
-		}
-		
-		.back-to-top.active {
-	    visibility: visible;
-	    opacity: 1;
+		  display: block;
 		}
 		
 		.modal-backdrop {
@@ -79,7 +76,11 @@
     .mb-3 select {
       height: 33.5px;
       width: 442px;
-      xwidth: 100px;
+      /* width: 100px; */
+    }
+    
+    #services {
+      width: 100%;
     }
 		
 		.section-header p {
@@ -91,7 +92,7 @@
 		} */
 		
     .pt-4 {
-		  height: auto;
+		  height: 425vmin;
 		}
 		
 		.section-bg {
@@ -103,10 +104,6 @@
 		  padding-bottom: 50px;
 		}
 		
-		/* form {
-      padding-bottom: 50px;
-    } */
-
 		#empty-study {
 		  text-align: center;
 		}
