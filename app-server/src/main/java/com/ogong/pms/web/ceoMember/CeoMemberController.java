@@ -1,7 +1,6 @@
 package com.ogong.pms.web.ceoMember;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -19,10 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CafeDao;
 import com.ogong.pms.dao.CafeReviewDao;
 import com.ogong.pms.dao.CeoMemberDao;
-import com.ogong.pms.domain.Cafe;
-import com.ogong.pms.domain.CafeReview;
 import com.ogong.pms.domain.CeoMember;
-import com.ogong.pms.web.cafe.CafeHandlerHelper;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -156,17 +152,17 @@ public class CeoMemberController {
       throw new Exception("해당 번호의 회원이 없습니다.");
     } 
 
-    Cafe cafe = cafeDao.findByCeoMember(ceoMember.getCeoNo());
-
-    if (cafe != null) {
-      String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
-      List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
-
-      mv.addObject("ceoMember", ceoMember);
-      mv.addObject("cafe", cafe);
-      mv.addObject("cafeStatus", status);
-      mv.addObject("reviewList", reviewList);
-    }
+    //    Cafe cafe = cafeDao.findByCeoMember(ceoMember.getCeoNo());
+    //
+    //    if (cafe != null) {
+    //      String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
+    //      List<CafeReview> reviewList = cafeReviewDao.findReviewListByCafeNo(cafe.getNo());
+    //
+    //      mv.addObject("ceoMember", ceoMember);
+    //      mv.addObject("cafe", cafe);
+    //      mv.addObject("cafeStatus", status);
+    //      mv.addObject("reviewList", reviewList);
+    //    }
 
     mv.addObject("ceoMember", ceoMember);
     mv.addObject("pageTitle", "🙂 마이페이지");

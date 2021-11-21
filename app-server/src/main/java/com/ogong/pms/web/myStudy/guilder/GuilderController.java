@@ -8,8 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import com.ogong.pms.dao.CommentDao;
+import com.ogong.pms.dao.FreeBoardDao;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.dao.StudyDao;
+import com.ogong.pms.dao.ToDoDao;
+import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
 import com.ogong.pms.domain.Study;
 
@@ -19,6 +23,9 @@ public class GuilderController {
   @Autowired SqlSessionFactory sqlSessionFactory;
   @Autowired StudyDao studyDao;
   @Autowired MemberDao memberDao;
+  @Autowired CommentDao commentDao;
+  @Autowired FreeBoardDao freeBoardDao;
+  @Autowired ToDoDao toDoDao;
 
   // 스터디 구성원 목록
   @GetMapping("/mystudy/guilder/list")
@@ -98,6 +105,16 @@ public class GuilderController {
       int guilderMemberNo, 
       int studyNo, 
       HttpSession session) throws Exception {
+
+    commentDao.deleteByMemberNo(guilderMemberNo);
+
+    List<FreeBoard> freeBoardList = freeBoardDao.findAllByMemberNo(guilderMemberNo);
+    for (FreeBoard freeBoard : freeBoardList) {
+      freeBoardDao.deleteFile(freeBoard.getFreeBoardNo());
+    }
+
+    freeBoardDao.deleteByMemberNo(guilderMemberNo);
+    toDoDao.deleteByMemberNo(guilderMemberNo);
 
     Study myStudy = studyDao.findByNo(studyNo);
 

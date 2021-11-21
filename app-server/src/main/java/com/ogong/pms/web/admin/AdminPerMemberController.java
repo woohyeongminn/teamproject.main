@@ -59,7 +59,7 @@ public class AdminPerMemberController {
     perMember.setPerNickname("Deleted Member("+ perMember.getPerNickname() +")");
     perMember.setPerEmail("Deleted Email");
     perMember.setPerPassword("Deleted Password");
-    perMember.setPerPhoto("Deleted Photo");
+    perMember.setPerPhoto("perProfile");
     perMember.setPerStatus(Member.PER);
     perMember.setActive(Member.OUTUSER);
 

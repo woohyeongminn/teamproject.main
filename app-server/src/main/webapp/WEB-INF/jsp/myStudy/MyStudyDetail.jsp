@@ -2,31 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-    <!-- plugins:js -->
-  <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  
-  <!-- Plugin js for this page -->
-  <script src="${contextPath}/css/study/vendors/chart.js/Chart.min.js"></script>
-  <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
-  <!-- End plugin js for this page -->
-  
-  <!-- inject:js -->
-  <script src="${contextPath}/css/study/js/hoverable-collapse.js"></script>
-  <script src="${contextPath}/css/study/js/template.js"></script>
-  <script src="${contextPath}/css/study/js/settings.js"></script>
-  <script src="${contextPath}/css/study/js/todolist.js"></script>
-  <!-- endinject -->
-  
-  <!-- Custom js for this page-->
-  <script src="${contextPath}/css/study/js/dashboard.js"></script>
-  <!-- End custom js for this page-->
-  
   <!-- plugins:css -->
   <link rel="stylesheet" href="${contextPath}/css/study/vendors/feather/feather.css">
   <link rel="stylesheet" href="${contextPath}/css/study/vendors/ti-icons/css/themify-icons.css">
@@ -42,6 +21,13 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="${contextPath}/css/study/css/vertical-layout-light/style.css">
 
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
+  
   <style>
   .navbar {
     -webkit-box-shadow: 0;
@@ -209,7 +195,6 @@ button#buttonsave:hover {
    
   .studyBtn {
    padding: 10px 30px;
-   border-radius: 10px;
   }
   
 </style>
@@ -228,54 +213,67 @@ button#buttonsave:hover {
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#owner" aria-expanded="false" aria-controls="owner">
-              <span class="menu-title" style="color:black">조장</span>
-              <span>&nbsp;＞</span>
+            <a class="nav-link" href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>
+              <span class="menu-title" style="color:black">구성원&nbsp;＞</span>
             </a>
-            <div class="collapse" id="owner">
-              <ul class="nav flex-column sub-menu">
-                 <c:forEach items="${ownerStudyList}" var="study">
-                     <li class="nav-item"><a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
-                 </c:forEach>
-                 <c:if test="${empty ownerStudyList}">
-                    <li class="nav-item">조장으로 참여 중인 스터디가 없습니다.</li>
-                 </c:if>
-              </ul>
-            </div>
+            
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#guilder" aria-expanded="false" aria-controls="guilder">
-              <span class="menu-title" style="color:black">구성원</span>
-              <span>&nbsp;＞</span>
+            <a class="nav-link" href="${contextPath}/app/mystudy/freeboard/list?studyno=${study.studyNo}">
+              <span class="menu-title" style="color:black">자유게시판&nbsp;＞</span>
             </a>
-            <div class="collapse" id="guilder">
-              <ul class="nav flex-column sub-menu">
-                <c:forEach items="${guilderMembers}" var="study">
-                  <li class="nav-item"> <a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
-                </c:forEach>
-                <c:if test="${empty guilderMembers}">
-                 <li class="nav-item">구성원으로 참여 중인 스터디가 없습니다.</li>
-                </c:if>
-              </ul>
-            </div>
+            
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#waiting" aria-expanded="false" aria-controls="waiting">
-              <span class="menu-title" style="color:black">승인 대기 중</span>
+            <a class="nav-link" href="${contextPath}/app/mystudy/calendar/list?studyNo=${study.studyNo}">
+              <span class="menu-title" style="color:black">캘린더&nbsp;＞</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="${contextPath}/app/mystudy/todo/list?studyno=${study.studyNo}">
+              <span class="menu-title" style="color:black">투두리스트&nbsp;＞</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="${contextPath}/app/mystudy/test?studyno=${study.studyNo}">
+              <span class="menu-title" style="color:black">화상미팅&nbsp;＞</span>
+            </a>
+          </li>
+              
+          <li class="nav-item">
+            <a class="nav-link" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">
+              <span class="menu-title" style="color:black">
+              <c:if test="${status == 'waiting'}">
+                가입 취소&nbsp;＞
+              </c:if>
+              <c:if test="${status != 'waiting'}">
+                탈퇴&nbsp;＞
+              </c:if>
+              </span>
+            </a>
+          </li>
+          
+          <c:if test="${study.owner.perNo == member.perNo}">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#controll" aria-expanded="false" aria-controls="waiting">
+              <span class="menu-title" style="color:black">관리</span>
               <span>&nbsp;＞</span>
             </a>
-            <div class="collapse" id="waiting">
+            <div class="collapse" id="controll">
               <ul class="nav flex-column sub-menu">
-                <c:forEach items="${waitingStudyList}" var="study">
-                <li class="nav-item"> <a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
-                </c:forEach>
+                <li class="nav-item"> <a class="nav-link" href="#">수정</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#">삭제</a></li>
               </ul>
             </div>
           </li>
+          </c:if>
         </ul>
       </nav><!-- side nav-->
+
 
       <%-- main-panel --%>
       <div class="main-panel">
@@ -332,19 +330,9 @@ button#buttonsave:hover {
 	              </c:if>
 	             </c:if>
 	            
-	            <button type="button" class="btn btn-outline-dark studyBtn" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">
-	            <c:if test="${status == 'waiting'}">
-	              가입 취소
-	            </c:if>
-	            <c:if test="${status != 'waiting'}">
-	            탈퇴
-	            </c:if>
-	            </button>
+	            
            </div> <%-- end col-6 --%>
          </div> <%-- end row studyInfo --%>
-          
-          
-          
           
           
           <c:if test="${status != 'waiting'}">
@@ -369,9 +357,13 @@ button#buttonsave:hover {
 								    </div>
 								  
 									  <ul class="list-group" id="list">
-									    <li class="list-group-item">📋 TO DO LIST</li>
+									    <li class="list-group-item">
+									       <a href='${contextPath}/app/mystudy/todo/list?studyno=${study.studyNo}'>
+									         📋 TO DO LIST
+									       </a>
+									    </li>
 									      <c:if test="${empty todoList}">
-									        등록된 To-Do List가 없습니다.
+									        <br>&nbsp;등록된 To-Do List가 없습니다.
 									      </c:if>
 									      <c:forEach items="${todoList}" var="todo">
 										      <c:if test="${not empty todoList}">
@@ -453,10 +445,8 @@ button#buttonsave:hover {
        </div> <%-- end content-wrapper --%>
      </div> <%-- main-panel --%>
      
-     </div>
-   </div>
-  
-  
+ </div> <!-- end page-body-wrapper -->
+</div> <!-- end container-scroller -->
   
   
   <!-- 투두 -->
@@ -530,181 +520,19 @@ button#buttonsave:hover {
       }
     }
   }
-  </script>
-   
-
-<<<<<<< HEAD
-=======
-<br>
-<br>
-<br>
-
-<div class="all-content">
-
-	<input type='hidden' name='subjectNo' value='${study.subjectNo}'>
-
-	<br>
-	<table class="table table-hover text-center">
-		<thead>
-
-			<tr id="first">
-				<th scope="col"></th>
-				<th scope="col" id="title">| 📰 ${study.studyTitle} ✏ |</th>
-				<th scope="col"><c:choose>
-						<c:when test="${study.countMember < study.numberOfPeple}">
-	    [모집 중]
-	    </c:when>
-						<c:otherwise>
-	    [모집 완료]
-	    </c:otherwise>
-					</c:choose></th>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-studyNo'>번호</label></th>
-				<td><input id='f-studyNo' type='text' name='studyNo'
-					value="${study.studyNo}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-bookMember'>북마크</label></th>
-				<td><input id='f-bookMember' type='text' name='bookMember'
-					value="${study.countBookMember}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-owner'>조장</label></th>
-				<td><input id='f-owner' type='text' name='owner'
-					value="${study.owner.perNickname}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-subjectName'>분야</label></th>
-				<td><input id='f-subjectName' type='text' name='subjectName'
-					value="${study.subjectName}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-area'>지역</label></th>
-				<td><input id='f-area' type='text' name='area'
-					value="${study.area}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-countMember'>인원수</label></th>
-				<td><input id='f-countMember' type='text' name='countMember'
-					value="${study.countMember}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-numberOfPeple'>최대 인원수</label></th>
-				<td><input id='f-numberOfPeple' type='text'
-					name='numberOfPeple' value="${study.numberOfPeple}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="middlebox">
-				<th scope="row"><label for='f-faceName'>대면 상태</label></th>
-				<td><input id='f-faceName' type='text' name='faceName'
-					value="${study.faceName}" readonly></td>
-				<td></td>
-			</tr>
-
-			<tr id="blockbox">
-				<th scope="row"><label for='f-introduction'>소개글</label></th>
-				<td><textarea id='f-introduction' type='text'
-						name='introduction' rows="3" wrap="virtual" readonly>${study.introduction}</textarea></td>
-				<td></td>
-			</tr>
-
-			<tr id="bottombox">
-				<th scope="row"><label for='f-point'>활동 점수</label></th>
-				<td><input id='f-point' type='text' name='point'
-					value="${study.point}" readonly></td>
-				<td></td>
-			</tr>
-
-		</thead>
-	</table>
-
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		<c:choose>
-			<c:when test="${status == 'waiting'}">
-				<button type="submit" class="btn btn-outline-dark" value="목록">
-					<a href='list'>목록</a>
-				</button>
-			</c:when>
-			<c:otherwise>
-				<button type="submit" class="btn btn-outline-dark" value="목록">
-					<a href='list'>목록</a>
-				</button>
-				<c:if test='${study.owner.perNo == loginUser.perNo}'>
-					<a
-						href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'
-						class="btn btn-outline-dark" formaction="updateform">수정</a>
-					<c:if test="${!(study.countMember > '1')}">
-						<button type="button" class="btn btn-outline-dark"
-							onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
-						<!-- <button class="btn btn-outline-dark"
-							onclick="delBtn_click(${study.waitingCountMember}); return delete(${study.studyNo});">삭제</button> -->
-					</c:if>
-				</c:if>
-				<button type="button" class="btn btn-outline-dark"
-					onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">탈퇴</button>
-				<!-- <button class="btn btn-outline-dark"
-					onclick="exitBtn_click(${study.CountMember}, ${study.waitingCountMember}); return exit(${study.studyNo});">탈퇴</button> -->
-				<button type="submit" class="btn btn-outline-dark" value="구성원">
-					<a
-						href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>구성원</a>
-				</button>
-				<button type="submit" class="btn btn-outline-dark" value="캘린더">
-					<a href='${contextPath}/app/mystudy/calendar/list?studyNo=${study.studyNo}'>캘린더</a>
-				</button>
-				<button type="submit" class="btn btn-outline-dark" value="자유 게시판">
-					<a
-						href="${contextPath}/app/mystudy/freeboard/list?studyno=${study.studyNo}">자유
-						게시판</a>
-				</button>
-				<button type="submit" class="btn btn-outline-dark" value="화상미팅">
-					<a href='${contextPath}/app/mystudy/test?studyno=${study.studyNo}'>화상미팅</a></button>
-				</button>
-				<button id="popup_open_btn" class="btn btn-outline-dark">To-Do</button>
-				<!-- todo 모달 -->
-				<jsp:include page="todo/ToDoPopup.jsp" />
-			</c:otherwise>
-		</c:choose>
-	</div>
-
-</div>
-  <!-- plugins:js -->
-  <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  
-  <!-- Plugin js for this page -->
-  <script src="${contextPath}/css/study/vendors/chart.js/Chart.min.js"></script>
-  <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
-  <!-- End plugin js for this page -->
+</script>
   
   <!-- inject:js -->
   <script src="${contextPath}/css/study/js/off-canvas.js"></script>
   <script src="${contextPath}/css/study/js/hoverable-collapse.js"></script>
-  <script src="${contextPath}/css/study/js/template.js"></script>
+  <%--   <script src="${contextPath}/css/study/js/template.js"></script> --%>
   <script src="${contextPath}/css/study/js/settings.js"></script>
   <script src="${contextPath}/css/study/js/todolist.js"></script>
   <!-- endinject -->
   
   <!-- Custom js for this page-->
   <script src="${contextPath}/css/study/js/dashboard.js"></script>
-  <script src="${contextPath}/css/study/js/Chart.roundedBarCharts.js"></script>
+  <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>
   <!-- End custom js for this page-->
->>>>>>> branch 'main' of https://github.com/woohyeongminn/teamproject.main.git
 </body>
       

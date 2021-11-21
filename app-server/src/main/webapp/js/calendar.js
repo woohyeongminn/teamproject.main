@@ -58,11 +58,13 @@ let date = new Date();
 
   if (PLDay !== 6) {
     for (let i = 0; i < PLDay + 1; i++) {
+      // 앞에 새로운 배열값 추가(unshift)
       prevDates.unshift(PLDate - i);
     }
   }
 
   for (let i = 1; i < 7 - TLDay; i++) {
+    // 뒤에 새로운 배열값 추가(push)
     nextDates.push(i);
   }
 
@@ -75,6 +77,7 @@ let date = new Date();
                       ? 'this'
                       : 'other';
     dates[i] = `<div class="date"><span class=${condition}>${date}</span></div>`;
+    
   });
 
   document.querySelector('.dates').innerHTML = dates.join('');

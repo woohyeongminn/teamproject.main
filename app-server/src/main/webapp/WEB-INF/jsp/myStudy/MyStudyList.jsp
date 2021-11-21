@@ -70,6 +70,25 @@
     font-weight: bold;
   }
  
+   .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
+    background: rgb(239 230 225);
+    color: #fff;
+  }
+
+ .sidebar .nav .nav-item.active > .nav-link {
+    background: rgb(239 230 225);
+    position: relative;
+  }
+  
+  .sidebar .nav:not(.sub-menu) > .nav-item.active {
+    background: rgb(239 230 225);
+  }
+
+  .sidebar .nav.sub-menu .nav-item .nav-link.active {
+    color: black;
+    background: transparent;
+  }
+  
  .menu-title {
   font-weight: bold;
   }
@@ -119,8 +138,7 @@
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#owner" aria-expanded="false" aria-controls="owner">
-              <span class="menu-title" style="color:black">조장</span>
-              <span>&nbsp;＞</span>
+              <span class="menu-title" style="color:black">조장&nbsp;＞</span>
             </a>
             <div class="collapse" id="owner">
               <ul class="nav flex-column sub-menu">
@@ -136,8 +154,7 @@
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#guilder" aria-expanded="false" aria-controls="guilder">
-              <span class="menu-title" style="color:black">구성원</span>
-              <span>&nbsp;＞</span>
+              <span class="menu-title" style="color:black">구성원&nbsp;＞</span>
             </a>
             <div class="collapse" id="guilder">
               <ul class="nav flex-column sub-menu">
@@ -153,8 +170,7 @@
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#waiting" aria-expanded="false" aria-controls="waiting">
-              <span class="menu-title" style="color:black">승인 대기 중</span>
-              <span>&nbsp;＞</span>
+              <span class="menu-title" style="color:black">승인 대기 중&nbsp;＞</span>
             </a>
             <div class="collapse" id="waiting">
               <ul class="nav flex-column sub-menu">
@@ -233,7 +249,6 @@ trList.forEach(function(trTag) {
   <!-- endinject -->
   
   <!-- Plugin js for this page -->
-  <script src="${contextPath}/css/study/vendors/chart.js/Chart.min.js"></script>
   <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
@@ -249,6 +264,5 @@ trList.forEach(function(trTag) {
   
   <!-- Custom js for this page-->
   <script src="${contextPath}/css/study/js/dashboard.js"></script>
-  <script src="${contextPath}/css/study/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 </body>

@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-  <style>
-  * {
-  font-size: 14px;
-  }
+<style>
   .allbox {
   max-width:1000px; 
   margin: 0 auto; 
@@ -57,60 +54,76 @@
   }
 </style>
 
-  <br><br><br>
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper">
 
-<div class="allbox">
-	<p id="titlename">📖 | To-Do List 목록 </p>
-	
-	<table class="table table-hover">
-		<thead>
-		
-			<tr id="topbox">
-				<th>상태</th>
-				<th>번호</th>
-				<th>내용</th>
-				<th>비고</th>
-				<th>작성자</th>
-				<th>날짜</th>
-			</tr>
-			
-			</thead>
-		<tbody>
-		
-		<tr>
-			<c:forEach items="${countProgressing}" var="todo">
-				<tr data-no="${todo.todoNo}">
-					<td>${todo.todocomplete}</td>
-					<td>${todo.todoNo}</td>
-					<td id="textbox"><a href="detail?todono=${todo.todoNo}&studyno=${study.studyNo}&perno=${member.perNo}">${todo.todoContent}</a></td>
-					<td id="textbox">${todo.todoRemark}</td>
-					<td>${todo.todoWriter.perNickname}</td>
-					<td>${todo.todoDate}</td>
-				</tr>
-			</c:forEach>
-		
-		<td id="box_two"></td>
-    <td id="box_two"></td>
-    <td id="boxsize">
-      <c:if test='${empty countProgressing}'>
-        <input id="not_countProgressing" type="text" name="countProgressing" value="[등록된 To-Do List가 없습니다.]" readonly>
-      </c:if>
-    </td>
-    <td id="box_two"></td>
-    <td id="box_two"></td>
-    <td id="box_two"></td>
-		</tr>
-		
-		</tbody>
-	</table>
-	
-	<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-outline-dark"><a href="addform?studyno=${study.studyNo}&perno=${member.perNo}">등록</a></button>
-  </div>
- 
-</div>
+      <jsp:include page="../MyStudyDetailNav.jsp"/>
 
-<script>
+      <%-- main-panel --%>
+      <div class="main-panel">
+        <div class="content-wrapper">
+        
+          <%-- row sub-items --%>
+          <div class="row">
+            <div class="allbox">
+						  <table class="table table-hover">
+						    <thead>
+						    
+						      <tr id="topbox">
+						        <th>상태</th>
+						        <th>번호</th>
+						        <th>내용</th>
+						        <th>비고</th>
+						        <th>작성자</th>
+						        <th>날짜</th>
+						      </tr>
+						      
+						      </thead>
+						    <tbody>
+						    
+						    <tr>
+						      <c:forEach items="${countProgressing}" var="todo">
+						        <tr data-no="${todo.todoNo}">
+						          <td>${todo.todocomplete}</td>
+						          <td>${todo.todoNo}</td>
+						          <td id="textbox"><a href="detail?todono=${todo.todoNo}&studyno=${study.studyNo}&perno=${member.perNo}">${todo.todoContent}</a></td>
+						          <td id="textbox">${todo.todoRemark}</td>
+						          <td>${todo.todoWriter.perNickname}</td>
+						          <td>${todo.todoDate}</td>
+						        </tr>
+						      </c:forEach>
+						    
+						    <td id="box_two"></td>
+						    <td id="box_two"></td>
+						    <td id="boxsize">
+						      <c:if test='${empty countProgressing}'>
+						        <input id="not_countProgressing" type="text" name="countProgressing" value="[등록된 To-Do List가 없습니다.]" readonly>
+						      </c:if>
+						    </td>
+						    <td id="box_two"></td>
+						    <td id="box_two"></td>
+						    <td id="box_two"></td>
+						    </tr>
+						    
+						    </tbody>
+						  </table>
+						  
+						  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						      <button class="btn btn-outline-dark"><a href="addform?studyno=${study.studyNo}&perno=${member.perNo}">등록</a></button>
+						  </div>
+						 
+						</div>
+          </div> <%-- end row sub-items --%>
+        
+        
+       </div> <%-- end content-wrapper --%>
+     </div> <%-- main-panel --%>
+     
+     </div>
+   </div>
+
+  <script>
 document.querySelectorAll("tbody a").forEach((aTag) => {
   aTag.target.onclick = () => false;
 });
@@ -122,3 +135,6 @@ trList.forEach(function(trTag) {
     };
   });
 </script>
+
+</body>
+      

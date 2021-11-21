@@ -49,7 +49,7 @@
     order by
     todolist_no asc
   </select>
-
+  
   <select id="findByNo" resultMap="ToDoMap" parameterType="map">
     <include refid="select1" />
     where
@@ -75,4 +75,8 @@
     where todolist_no=#{todoNo}
   </delete>
 
+<delete id="deleteByMemberNo" parameterType="int">
+    delete from study_todolist
+    where member_no=#{memberNo}
+  </delete>
 </mapper>

@@ -12,6 +12,7 @@ public interface ToDoDao {
   ToDo findByNo(@Param("studyNo") int studyNo, @Param("todoNo") int todoNo) throws Exception;
 
   void delete(int todoNo) throws Exception;
+  void deleteByMemberNo(int memberNo) throws Exception;
 
   void update(ToDo todo) throws Exception;
 }

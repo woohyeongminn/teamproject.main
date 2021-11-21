@@ -159,12 +159,12 @@ public class MyStudyController {
 
     ModelAndView mv = new ModelAndView();
 
-    // 사이드바 메뉴때문에 목록도 보내야함
     if (loginUser == null) {
       mv.setViewName("redirect:../login");
       return mv;
     }
 
+    // 사이드바 메뉴때문에 목록도 보내야함
     List<Study> studyList = studyDao.findAll();
 
     // 조장
@@ -225,6 +225,7 @@ public class MyStudyController {
     mv.addObject("todoList", todoList);
     mv.addObject("pageTitle", "🗃 내 스터디 상세");
     mv.addObject("contentUrl", "myStudy/MyStudyDetail.jsp");
+    //    mv.addObject("contentUrl", "myStudy/MyStudyDetail2.jsp");
     mv.setViewName("template1");
     return mv;
   }

@@ -103,7 +103,7 @@
   
   <tr id="blockbox">
     <th scope="row" id="third"><label for='f-filepath'>파일</label></th>
-    <td><img id="f-photo-image" src="${contextPath}/upload/notice/${adminNotice.adminNotiFile}"></td>
+    <td><img id="f-photo-image" src="${contextPath}/upload/notice/${adminNotice.adminNotiFile}.jpg"></td>
     <td></td>
   </tr>
   
@@ -111,11 +111,7 @@
   </table>
   
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button type="submit" class="btn btn-outline-dark" value="목록"><a href='list'>목록</a></button>
-      <c:if test="${not empty loginAdmin}">
-        <button type="submit" class="btn btn-outline-dark" value="변경"><a href='Updateform?no=${adminNotice.adminNotiNo}'>변경</a></button>
-        <button type="submit" class="btn btn-outline-dark" value="삭제"><a href='delete?no=${adminNotice.adminNotiNo}'>삭제</a></button>
-      </c:if>
+    <button type="submit" class="btn btn-outline-dark" value="목록"><a href='userlist'>목록</a></button>
   </div>
 
 </div>

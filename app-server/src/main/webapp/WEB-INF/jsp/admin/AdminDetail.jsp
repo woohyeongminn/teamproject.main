@@ -53,14 +53,14 @@
   .container-fluid {
     padding: 0;
     width: 74%;
-    margin-left: 24%;
+    margin-left: 300px;
     margin-bottom: 100px;
   }
   .card-body {
     margin: 0;
     padding: 0;
     width: 74%;
-    left: 22%;
+    left: 275px;
   }
   .ms-2 {
   font-size: 16px;
@@ -81,7 +81,7 @@
   <aside class="sidenav navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="${contextPath}/app/index2" target="_blank">
+      <a class="navbar-brand m-0" href="${contextPath}/app/index" target="_blank">
         <span class="ms-2 font-weight-bold text-white">👑　오늘의 공부</span>
       </a>
     </div>
@@ -186,7 +186,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">개인회원</p>
-                <h4 class="mb-0"><a href=${contextPath}/app/admin/permemberlist>Member User</a></h4>
+                <h4 class="mb-0"><a href=${contextPath}/app/admin/permemberlist>Member</a></h4>
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">기업회원</p>
-                <h4 class="mb-0"><a href=${contextPath}/app/admin/ceomember/list>Business User</a></h4>
+                <h4 class="mb-0"><a href=${contextPath}/app/admin/ceomember/list>Business</a></h4>
               </div>
             </div>
           </div>
