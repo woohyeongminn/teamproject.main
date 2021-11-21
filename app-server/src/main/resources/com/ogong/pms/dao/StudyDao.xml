@@ -267,7 +267,7 @@
     <include refid="select1"/>
     where
       (sg.status=2 and sg.member_no=#{memberNo})
-      or s.member_no=${memberNo}
+      or s.member_no=#{memberNo}
   </select>
   
  <!--  ===[스터디 상세]=== -->

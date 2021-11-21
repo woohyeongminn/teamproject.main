@@ -1,0 +1,112 @@
+@charset "UTF-8";
+.navbar {
+    -webkit-box-shadow: 0;
+    -moz-box-shadow: 0;
+    box-shadow: none;
+  }
+  
+  .content-wrapper {
+    /* background: rgb(239 230 225); */
+    background-color: white;
+    border-radius: 20px;
+    max-height: 680px;
+    padding: 30px;
+  } 
+  .page-body-wrapper {
+    padding-top: 0;
+  }
+  
+  .sidebar .nav .nav-item .nav-link {
+    color: black;
+  }
+  
+  .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link:hover {
+    background-color: rgb(239 230 225);
+    color: black;
+  }
+  
+  .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link[aria-expanded="true"] {
+    border-radius: 8px 8px 0 0;
+    background: rgb(239 230 225);
+    color: black;
+  }
+
+  .sidebar .nav.sub-menu {
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style: none;
+    padding: 0px 0 0 24px;
+    background: rgb(239 230 225);
+    padding-bottom: 12px;
+    color:black;
+  }
+
+  .sidebar .nav.sub-menu .nav-item .nav-link {
+    color:black;
+  }
+ 
+ .sidebar .nav.sub-menu .nav-item .nav-link:hover {
+    color:black;
+    font-weight: bold;
+  }
+ 
+ .menu-title {
+  font-weight: bold;
+  }
+ 
+ .table thead th {
+    font-size: 14px;
+  }
+ 
+ .table td, .jsgrid .jsgrid-table td {
+    font-size: 14px;
+  } 
+
+.study-table {
+    display: table-caption;
+    height: 470px;
+    overflow: scroll;
+  }   
+
+.study-table > th {
+    text-align: center;
+  }
+  
+      
+ a {
+  text-decoration: none;
+  color: black;
+  }
+
+ a:hover{
+  text-decoration: none;
+  color: black;
+  }
+  
+  .studyInfo {
+    background-color: rgb(239 230 225);
+    height: 200px;
+    width: 96%;
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"] {
+    background: rgb(239 230 225);
+    color: #fff;
+  }
+
+.sidebar .nav .nav-item.active > .nav-link {
+    background: rgb(239 230 225);
+    position: relative;
+  }
+  
+  .sidebar .nav:not(.sub-menu) > .nav-item.active {
+    background: rgb(239 230 225);
+  }
+
+  .sidebar .nav.sub-menu .nav-item .nav-link.active {
+    color: black;
+    background: transparent;
+  }
