@@ -6,9 +6,10 @@
 <style>
 	p {
 		text-align: center;
-		margin-top: 50px;
+		margin-top: 20px;
 		margin-bottom: 300px;
 		font-size: 14px;
+		font-weight: bold;
 	}
 </style>
 

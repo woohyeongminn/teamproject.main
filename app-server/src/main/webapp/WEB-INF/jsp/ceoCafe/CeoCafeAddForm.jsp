@@ -19,8 +19,9 @@ label {
   width: 130px;
 }
 
-.template-content {
-    height: 1100px;
+.inner-page {
+  height: 1300px;
+  text-align: center;
 }
 
  .all-content {
@@ -35,35 +36,37 @@ ul {
 
 .cafe-wrap {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
 .cafe-top {
-    width: 40%;
-    margin: 8px 8px 0 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 0 auto;
     margin-bottom: 15px;
+    width: 60%;
 }
 
 .cafe-top .cafeImg {
-  width: 400px;
-  height: 300px;
+  width: 600px;
+  height: 250px;
   background-color: gray;
 }
 
 .cafe-bottom {
-  width: 55%;
   text-align: left;
   padding: 5px 0;
+  width: 60%;
+  margin: 12px auto;
 }
 
 .cafe-bottom > label {
    width: 22%;
    font-weight: bold;
    padding: 5px 0;
+   margin-bottom: 7px;
 }
 
 .cafe-bottom > span {
@@ -72,17 +75,15 @@ ul {
 }
 
 .label-wrap {
-  width: 100%;
   height: fit-content;
   display: flex;
-  flex-direction: row;
-  
 }
 
 .label-wrap > label {
    width: 22%;
    font-weight: bold;
    padding: 5px 0;
+   margin-bottom: 7px;
 }
 
 .label-wrap > span {
@@ -93,7 +94,7 @@ ul {
 }
 
  #input-file-button {
-      display: inline-table;
+    display: inline-table;
     width: 120px;
     height: 25px;
     line-height: 25px;
@@ -109,9 +110,15 @@ ul {
 
 .form-control {
   display: inline-block;
-  width: 200px;
+  width: 325px;
 }
 
+.addBtn {
+  width: 78%;
+    height: 44px;
+    margin-top: 28px;
+    margin-left: 2px;
+}
 </style>
 
 <body>
@@ -123,11 +130,18 @@ ul {
     <div class="cafe-wrap">
       <div class = "cafe-top">
       
-        <!-- 여러개 등록 -->
-      <div class="cafeImg"></div>
-      <!-- <input multiple="multiple"  type="file" name="picFile" required="required"> -->
-      <input type="file" name="photoFile" multiple>
-    
+      <!-- 여러개 등록 -->
+      <div class="cafeImg"></div><br>
+      
+      <input id="input_file" type="file" name="photoFileList" multiple>
+      <!-- <span style="font-size:10px; color: gray; text-align:left; ">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
+      
+      <div class="data_file_txt" id="data_file_txt" style="margin:40px;">
+		    <span>첨부 파일 :</span>
+		    <br>
+		    <div id="articlefileChange">
+		    </div>
+		  </div> -->
     </div>
     
       <!-- 카페 상세 글 부분 -->      
@@ -138,14 +152,16 @@ ul {
          <label for='f-name'>상호명</label>
          <input id='f-name' type='text' name='name' class="form-control"><br>
          
+         <br>
          <div class="label-wrap">
             <label for='f-location'>주소</label>
-						<button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
+						<button type="button" class="btn btn-default" style="padding: 5px 10px; border: 1px solid; margin-left: 5px;"
+             onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
          </div>
          
          <div class="label-wrap">
            <label> </label>
-            <div class="form-group">                   
+            <div class="form-group" style="margin-left: 5px;">                   
 								<input class="form-control" placeholder="우편번호" name="addr1" id="addr1" type="text" readonly>
 						    <br>
 						    <input class="form-control" placeholder="도로명 주소" name="addr2" id="addr2" type="text" readonly/>
@@ -154,37 +170,40 @@ ul {
 					  </div>
           </div>
          
-        
+         <br>
          <div class="label-wrap">
            <label for='f-info'>소개글</label>
-           <input id='f-info' type='text' name='info' class="form-control">
+           <input id='f-info' type='text' name='info' class="form-control" style="width:54%; margin-left: 5px; height: 100px;">
          </div>
 
-         <label for='f-tel'>전화번호</label><br>
-         <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3' class="form-control" style="width:50px;"/> -
-		     <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='3' maxlength='4' class="form-control" style="width:50px;"/> -
-		     <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='3' maxlength='4' class="form-control" style="width:50px;"/> <br>
+         <br>
+         <label for='f-tel'>전화번호</label>
+         <input id='f-tel' type='text' name='tel1' pattern="[0-9]+" minlength='3' maxlength='3' class="form-control" style="width:55px;"/> -
+		     <input id='f-tel' type='text' name='tel2' pattern="[0-9]+" minlength='3' maxlength='4' class="form-control" style="width:55px;"/> -
+		     <input id='f-tel' type='text' name='tel3' pattern="[0-9]+" minlength='3' maxlength='4' class="form-control" style="width:55px;"/> <br>
 
          <label for='f-openTime'>운영시간</label>
-         <input id='f-openTime' type='time' name='inputOpenTime'> ~ <input id='f-closeTime' type='time' name='inputCloseTime'><br>
+         <input id='f-openTime' type='time' name='inputOpenTime' class="form-control" style="width: 125px;">
+          ~ 
+         <input id='f-closeTime' type='time' name='inputCloseTime' class="form-control"  style="width: 125px;"><br>
          
          <label for='f-holiday'>이번주 휴무일</label>
-         <input id='f-holiday' type='date' name='holiday'><br>
+         <input id='f-holiday' type='date' name='holiday' class="form-control"><br>
          
          <label for='f-viewCount'>상태</label>
-         <select name="cafeStatus">       
+         <select name="cafeStatus" class="form-control">       
            <option value="1" name="cafeStatus" selected>승인대기</option>
            <option value="2" disabled>운영중</option>
            <option value="3" disabled>운영중단</option>
            <option value="4" disabled>삭제</option>
          </select>
+         
+         <div id='button'>
+			     <button id='b-btn' value="등록" class="btn btn-outline-dark addBtn">등록</button>
+			   </div>
+    
       </div>
     </div>
-    
-    <div id='button'>
-     <button id='b-btn' type="submit" value="등록" class="btn btn-outline-dark">등록</button>
-    </div>
-    
   </form>
 </div>
 </body>
@@ -192,12 +211,135 @@ ul {
 <!-- 다음 주소 검색 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<script src='../node_modules/jquery/dist/jquery.js'></script>
-<script src="../node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="../node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-<script src="../node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+<script src='${contextPath}/node_modules/jquery/dist/jquery.js'></script>
+<script src="${contextPath}/node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="${contextPath}/node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="${contextPath}/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
-<<script type="text/javascript">
+<!--
+<script type="text/javascript">
+function main() {
+	
+    if(!checkValue()) {
+        return false;
+    }
+
+    if(!registerAction()) {
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+  
+<script type="text/javascript">
+/* 첨부파일 버튼 실행 */
+$(document).ready(function() {
+	      $("#input_file").on("click", fileCheck);
+	    });
+
+// 파일 현재 필드 숫자 totalCount랑 비교값
+var fileCount = 0;
+
+// 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
+var totalCount = 10;
+
+// 파일 고유넘버
+var fileNum = 0;
+
+// 첨부파일 배열
+var content_files = new Array();
+
+/* 파일 업로드 조건 체크 */
+function fileCheck(e) {
+    var files = e.target.files;
+    
+    // 파일 배열 담기
+    var filesArr = Array.prototype.slice.call(files);
+    
+    // 파일 개수 확인 및 제한
+    if (fileCount + filesArr.length > totalCount) {
+      $.alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
+      return;
+    } else {
+       fileCount = fileCount + filesArr.length;
+    }
+    
+    // 각각의 파일 배열담기 및 기타
+    filesArr.forEach(function (f) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        content_files.push(f);
+        $('#articlefileChange').append(
+          '<div id="file' + fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">'
+          + '<font style="font-size:12px">' + f.name + '</font>'  
+          + '<img src="../../../img/icon_minus.png" style="color:red; width:20px; height:auto; margin-left: 5px; vertical-align: middle; cursor: pointer;"/>' 
+          + '<div/>'
+    );
+        fileNum ++;
+      };
+      reader.readAsDataURL(f);
+    });
+    console.log(content_files);
+    //초기화 한다.
+    $("#input_file").val("");
+  }
+
+/*  파일 부분 삭제 함수 */
+function fileDelete(fileNum){
+    var no = fileNum.replace(/[^0-9]/g, "");
+    content_files[no].is_delete = true;
+  $('#' + fileNum).remove();
+  fileCount --;
+    console.log(content_files);
+};
+
+</script>
+
+<script>
+	
+/* 폼 submit 로직 */
+function registerAction() {
+ var form = $("form")[0];        
+ var formData = new FormData(form);
+   for (var x = 0; x < content_files.length; x++) {
+     // 삭제 안한것만 담아 준다. 
+     if(!content_files[x].is_delete){
+        formData.append("article_file", content_files[x]);
+     }
+   }
+   
+   // 파일업로드 multiple ajax처리 
+	 $.ajax({
+	      type: "POST",
+	      enctype: "multipart/form-data",
+	      url: "/file-upload",
+	      data : formData,
+	      processData: false,
+	      contentType: false,
+	      success: function (data) {
+	    	  
+	     if(JSON.parse(data)['result'] == "OK") {
+	        alert("파일업로드 성공");
+	     } else
+	       alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+	     }, error: function (xhr, status, error) {
+	         alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
+	        return false;
+	     }
+	    });
+	   return false;
+ }
+</script>
+
+-->
+
+<script type="text/javascript">
 function execPostCode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -237,6 +379,7 @@ function execPostCode() {
 }
 
 </script>
+
 
 
 
