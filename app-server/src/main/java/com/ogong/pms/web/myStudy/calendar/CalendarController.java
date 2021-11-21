@@ -63,7 +63,7 @@ public class CalendarController {
     mv.addObject("pageTitle","CALENDAR📆");
     mv.addObject("myStudy", myStudy);
     mv.addObject("calendarList", calendarList);
-    mv.addObject("contentUrl","myStudy/calendar/Calendar.jsp");
+    mv.addObject("contentUrl","myStudy/calendar/selectable.jsp");
     mv.setViewName("template1");
     return mv;
   }
