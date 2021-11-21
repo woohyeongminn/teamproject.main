@@ -70,6 +70,10 @@
     #search {
 		  text-align: center;
 		}
+		
+		form {
+      padding-bottom: 50px;
+    }
 
 		.modal-backdrop {
       position: relative;

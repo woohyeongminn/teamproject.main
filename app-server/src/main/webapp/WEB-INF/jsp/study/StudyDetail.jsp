@@ -95,18 +95,18 @@
           북마크 <ins>${study.countBookMember}</ins><sub>명</sub>
           </p>
         </div>
-        
+
         <div class="p-4">
 		      <h4 class="fst-italic">메뉴</h4>
 		      <ol class="list-unstyled mb-0">
-		        
+
 		        <c:if test="${study.owner.perNo eq loginUser.perNo}">
 		        <!-- 스터디 수정 -->
 		        <!-- <li><a href="updateform?studyno=${study.studyNo}" class="btn btn-link">수정</a></li> -->
-		        
+
 		        <li><button type="button" class="btn btn-link" data-bs-toggle="modal"
               data-bs-target="#exampleModal" data-bs-whatever="@mdo">수정</button></li>
-            
+
 		      <div class="modal fade" id="exampleModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
