@@ -128,7 +128,7 @@
 						          <label for='f-studyTitle'>제목</label>
 						          <input id='f-studyTitle' type='text' name='studyTitle'
 						            value="${study.studyTitle}" class="form-control" required
-						            oninvalid="this.setCustomValidity('제목을 입력하세요.')"
+						            oninvalid="this.setCustomValidity('1자 이상 50자 이하로 입력하세요.')"
 						            oninput="this.setCustomValidity('')">
 						        </div>
 
