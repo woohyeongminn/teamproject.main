@@ -172,8 +172,8 @@
     </nav>
   </div>
 
-    <!--===== 전체 스터디 목록 =====-->
-    <!-- <li id="tab1" class="btnCon"><a class="btn" href="#tab1">전체</a>
+    <!--===== 진행 스터디 목록 =====-->
+    <!-- <li id="tab1" class="btnCon"><a class="btn" href="#tab1">진행</a>
       <div class="tabCon"> -->
   
     <!-- 스터디 목록 -->
@@ -341,30 +341,30 @@
 
 
         <div class="row">
-        <c:if test='${not empty studyList}'>
-          <c:forEach items="${studyList}" var="study">
+        <c:if test='${not empty studyIngList}'>
+          <c:forEach items="${studyIngList}" var="study">
             <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
               <div class="box">
                 
                 <c:choose>
-	                <c:when test="${study.subjectNo eq '1'}">
-	                  <div class="icon" style="background:#fceef3;"><i class="bi bi-globe2" style="color:#ff689b;"></i></div>
-	                </c:when>
-	                <c:when test="${study.subjectNo eq '2'}">
-	                  <div class="icon" style="background:#fff0da;"><i class="bi bi-book" style="color:#e98e06;"></i></div>
-	                </c:when>
-	                <c:when test="${study.subjectNo eq '3'}">
-	                  <div class="icon" style="background:#e6fdfc;"><i class="bi bi-briefcase" style="color:#3fcdc7;"></i></div>
-	                </c:when>
-	                <c:when test="${study.subjectNo eq '4'}">
-	                  <div class="icon" style="background:#eafde7;"><i class="bi bi-display" style="color:#41cf2e;"></i></div>
-	                </c:when>
-	                <c:when test="${study.subjectNo eq '5'}">
-	                  <div class="icon" style="background:#e1eeff;"><i class="bi bi-lightbulb" style="color:#2282ff;"></i></div>
-	                </c:when>
-	                <c:when test="${study.subjectNo eq '6'}">
-	                  <div class="icon" style="background:#ecebff;"><i class="bi bi-collection" style="color:#8660fe;"></i></div>
-	                </c:when>
+                  <c:when test="${study.subjectNo eq '1'}">
+                    <div class="icon" style="background:#fceef3;"><i class="bi bi-globe2" style="color:#ff689b;"></i></div>
+                  </c:when>
+                  <c:when test="${study.subjectNo eq '2'}">
+                    <div class="icon" style="background:#fff0da;"><i class="bi bi-book" style="color:#e98e06;"></i></div>
+                  </c:when>
+                  <c:when test="${study.subjectNo eq '3'}">
+                    <div class="icon" style="background:#e6fdfc;"><i class="bi bi-briefcase" style="color:#3fcdc7;"></i></div>
+                  </c:when>
+                  <c:when test="${study.subjectNo eq '4'}">
+                    <div class="icon" style="background:#eafde7;"><i class="bi bi-display" style="color:#41cf2e;"></i></div>
+                  </c:when>
+                  <c:when test="${study.subjectNo eq '5'}">
+                    <div class="icon" style="background:#e1eeff;"><i class="bi bi-lightbulb" style="color:#2282ff;"></i></div>
+                  </c:when>
+                  <c:when test="${study.subjectNo eq '6'}">
+                    <div class="icon" style="background:#ecebff;"><i class="bi bi-collection" style="color:#8660fe;"></i></div>
+                  </c:when>
                 </c:choose>
   
                 <h4 class="title"><a href="detail?studyno=${study.studyNo}">${study.studyTitle}</a></h4>
@@ -398,7 +398,7 @@
         
         <!-- 검색 결과 -->
           <div id="empty-study">
-            <c:if test='${empty studyList}'>
+            <c:if test='${empty studyIngList}'>
               검색 결과가 존재하지 않습니다.
               <br>
             </c:if>
@@ -411,7 +411,7 @@
 
      <!-- </div>
    </li> -->
-   <!--===== End 전체 스터디 목록 =====-->
+   <!--===== End 진행 스터디 목록 =====-->
 
 
 
