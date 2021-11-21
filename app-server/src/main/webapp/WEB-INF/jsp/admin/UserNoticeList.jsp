@@ -76,24 +76,9 @@
 </tbody>
 </table>
 
-<c:choose>
-<c:when test="${not empty loginAdmin}">
-
-  <div id="addbutton">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button type="submit" class="btn btn-outline-dark" value="등록"><a href='form' id='add'>등록</a></button>
-    </div>
-  </div>
-  
-  </c:when>
-  <c:otherwise>
-  
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <button type="submit" class="btn btn-outline-dark"><a href="../index.jsp">이전</a></button>
   </div>
-
-</c:otherwise>
-</c:choose>
 
 </div>
 </fieldset>

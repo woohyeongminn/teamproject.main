@@ -252,7 +252,7 @@
   
 </head>
 
- <form action='cafeApproval' name='approval' method='post'>
+ <form action='cafeApproval' id='approval' method='post'>
   <input id='c-no' type='hidden' name="no" value='${cafe.no}'>
 
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -389,10 +389,10 @@
 	                 </c:if>
 	                 
 	                 <c:if test="${cafe.cafeStatus == 1}">
-								    <select name="cafeStatus">
+								    <select name="f-cafeStatus">
 								      <c:if test='${cafe.cafeStatus==1}'>
 								          <option value="${cafe.cafeStatus}">승인 대기</option>
-								          <option value="2" name="cafeStatus" >운영 중</option>
+								          <option value="2" id="f-cafeStatus">운영 중</option>
 								          <option value="3" disabled>운영 중단</option>
 								          <option value="4" disabled>삭제</option>
 								       </c:if>
@@ -434,7 +434,7 @@
           </div>
           
             <div id='button_wrap'>
-					    <button type="submit" class="btn btn-outline-dark" onclick="agree();">승인</button>
+					    <button type="button" class="btn btn-outline-dark" id="agree" style="line-height: 5px;">승인</button>
 					  </div>
         
             </div>
@@ -451,20 +451,26 @@
 <script src="${contextPath}/css/admin/assets/js/core/popper.min.js"></script>
 <script src="${contextPath}/css/admin/assets/js/core/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-function agree(){
-  Swal.fire({
-    title: '승인되었습니다.',
-    icon: 'info',
-    confirmButtonColor: '#3085d6',
-    confirmButtonText: '확인',
-    timer: 80000
-    }).then((result) => {
-      if (result.value) {
-        location.href = "${contextPath}/app/admin/cafeList";
-        }
-      })
-    }
+<script>
+document.querySelector("#agree").onclick = () => {
+	  var no = document.querySelector('input[name=no]').value;
+
+	  console.log(document.querySelector("#f-cafeStatus").value);
+	  
+ 	  if (document.querySelector("#f-cafeStatus").value == "2") {
+	     Swal.fire({
+	       title: '승인되었습니다.',
+	       icon: 'info',
+	       confirmButtonColor: '#3085d6',
+	       confirmButtonText: '확인'
+	     }).then((result) => {
+	       if (result.value) {
+	         document.querySelector("#approval").submit();
+	       }
+	     })
+ 	  }
+	}
+
 </script>
 
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
