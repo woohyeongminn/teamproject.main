@@ -29,7 +29,7 @@
   .content-wrapper {
     background: rgb(239 230 225);
     border-radius: 20px;
-    max-height: 680px;
+    max-height: 300px;
   }
   
   .page-body-wrapper {
@@ -190,34 +190,17 @@
               <div class="card">
                 <div class="card-body">
                   <p class="card-title mb-0"></p>
-                  <div class="table-responsive">
+                  <div class="table-responsive" style="text-align: center;">
                   
-                    <table class="table table-borderless">
-                      <thead>
-                        <tr style="width: 100%;text-align: center;">
-                          <th class="border-bottom" width="185px">스터디명</th>
-                          <th class="border-bottom" width="108px">분야</th>
-                          <th class="border-bottom" width="163px">조장</th>
-                          <th class="border-bottom" width="150px">대면/비대면</th>
-                          <th class="border-bottom" width="110px">인원수</th>
-                        </tr>
-                      </thead>
+                      <br>
+                      가입된 스터디가 없습니다.
+                      <br>
+                      스터디 가입을 진행해주세요.
+                      <br>
+                      스터디 찾기 페이지로 이동합니다.
+                      <br>
+                      <br>
                       
-                      <tbody class="study-table">
-                        <c:forEach items="${myStudyList}" var="studyList">
-                          <c:if test="${studyList.studyStatus != 3}">
-		                        <tr style="width: 100%;text-align: center;">
-		                          <td class="text-muted" width="5%"><a href="${contextPath}/app/mystudy/detail?studyNo=${studyList.studyNo}">${studyList.studyTitle}</a></td>
-		                          <td class="text-muted" width="5%">${studyList.subjectName}</td>
-		                          <td class="text-muted" width="5%">${studyList.owner.perNickname}</td>
-		                          <td class="text-muted" width="5%">${studyList.faceName}</td>
-		                          <td class="text-muted" width="5%">${studyList.countMember}/${studyList.numberOfPeple}명</td>
-		                        </tr>
-                          </c:if>
-                        </c:forEach>
-                      </tbody>
-                    </table>
-                    
                   </div>
                 </div>
               </div>
@@ -227,22 +210,6 @@
         
    </div> <!-- end page-body-wrapper -->
   </div> <!-- end container-scroller -->
-
-
-<script>
-document.querySelectorAll("tbody a").forEach((aTag) => {
-  aTag.target.onclick = () => false;
-});                
-
-var trList = document.querySelectorAll("tbody tr");
-trList.forEach(function(trTag) {
-  trTag.onclick = (e) => {
-      window.location.href = e.currentTarget.querySelector("a").href; // 방법 2) 현재 페이지를 그 링크로 바꾸게 해라
-    };
-  });
-</script>
-
-
 
   <!-- plugins:js -->
   <script src="${contextPath}/css/study/vendors/js/vendor.bundle.base.js"></script>

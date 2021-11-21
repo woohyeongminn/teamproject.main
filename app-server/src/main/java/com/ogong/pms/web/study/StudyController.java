@@ -61,25 +61,46 @@ public class StudyController {
     return mv;
   }
 
-  /* 스터디 목록 */
+  /* 전체 스터디 목록 */
   @GetMapping("/study/list")
   public ModelAndView list() throws Exception {
-    // 전체 스터디 목록
     Collection<Study> studyList = studyDao.findAll();
-
-    // 진행 스터디 목록
-    Collection<Study> studyIngList = studyDao.findAllIng();
-
-    // 종료 스터디 목록
-    Collection<Study> studyEndList = studyDao.findAllEnd();
 
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("studyList", studyList);
-    mv.addObject("studyIngList", studyIngList);
-    mv.addObject("studyEndList", studyEndList);
     mv.addObject("pageTitle", "스터디 목록");
     mv.addObject("contentUrl", "study/StudyList.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  /* 진행 스터디 목록 */
+  @GetMapping("/study/list/ing")
+  public ModelAndView ingList() throws Exception {
+    Collection<Study> studyIngList = studyDao.findAllIng();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("studyIngList", studyIngList);
+    mv.addObject("pageTitle", "스터디 목록");
+    mv.addObject("contentUrl", "study/StudyIngList.jsp");
+    mv.setViewName("template1");
+
+    return mv;
+  }
+
+  /* 종료 스터디 목록 */
+  @GetMapping("/study/list/end")
+  public ModelAndView endList() throws Exception {
+    Collection<Study> studyEndList = studyDao.findAllEnd();
+
+    ModelAndView mv = new ModelAndView();
+
+    mv.addObject("studyEndList", studyEndList);
+    mv.addObject("pageTitle", "스터디 목록");
+    mv.addObject("contentUrl", "study/StudyEndList.jsp");
     mv.setViewName("template1");
 
     return mv;
