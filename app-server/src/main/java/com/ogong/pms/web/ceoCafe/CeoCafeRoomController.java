@@ -36,7 +36,7 @@ public class CeoCafeRoomController {
 
     List<CafeRoom> cafeRoomList = cafeRoomDao.findCafeRoomListByCafe(cafeno);
 
-    System.out.println(cafeRoomList);
+    System.out.println("********************************" + cafeRoomList);
 
 
     ModelAndView mv = new ModelAndView();
@@ -96,6 +96,8 @@ public class CeoCafeRoomController {
     cafeRoom.setCafe(cafe);
     cafeRoom.setRoomStatus(1);
 
+    cafeRoomDao.insertCafeRoom(cafeRoom);
+
     // 사진
     if (photoFile.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
@@ -134,7 +136,12 @@ public class CeoCafeRoomController {
           return name + "_450x300";
         }
       });
+
+      cafeRoomDao.insertRoomImage(filename, cafeRoom.getRoomNo());
     }
+
+    System.out.println("*****************" + cafeRoom.getRoomImg());
+
 
     //fileNames.add(new CafeImage(fileName));
 
@@ -146,11 +153,8 @@ public class CeoCafeRoomController {
     //        cafeRoomDao.insertCafeRoomImage(params);
     //      }
 
-    cafeRoomDao.insertCafeRoom(cafeRoom);
-    cafeRoomDao.insertCafeRoomImage( )
+
     sqlSessionFactory.openSession().commit();
-
-
 
     ModelAndView mv = new ModelAndView();
     mv.setViewName("redirect:list?cafeno="+ cafe.getNo());

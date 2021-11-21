@@ -12,6 +12,7 @@
     <result column="people" property="people"/>
     <result column="hourly_amount" property="roomPrice"/>
     <result column="status" property="roomStatus"/>
+    <result column="photo_name" property="roomImg"/>
 
     <association property="cafe" javaType="cafe">
       <id column="cafe_no" property="no"/>
@@ -109,18 +110,18 @@
     values (#{roomName},#{cafe.no},#{roomInfo},#{people},#{roomPrice})
   </insert>
   
-  <insert id="insertCafeRoomImage">
+  <!-- <insert id="insertCafeRoomImage">
     insert into studycafe_room_photo(name, studyroom_no) 
     values
     <foreach collection="fileNames" item="roomImage" separator="," >
     (#{roomImage.name},#{cafeRoomNo})
     </foreach>
-  </insert>
+  </insert> -->
   
   <insert id="insertRoomImage">
     insert into studycafe_room_photo(name, studyroom_no) 
     values
-    (#{roomImage.name},#{cafeRoomNo})
+    (#{filename},#{cafeRoomNo})
   </insert>
   
   <update id="updateCafeRoom" parameterType="CafeRoom">

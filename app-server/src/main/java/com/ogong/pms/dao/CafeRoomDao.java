@@ -23,7 +23,7 @@ public interface CafeRoomDao {
 
   // 스터디룸 이미지
   void insertCafeRoomImage(HashMap<String,Object> params) throws Exception;
-  void insertRoomImage(@Param("name")String name, @Param("cafeRoomNo")String cafeRoomNo) throws Exception;
+  void insertRoomImage(@Param("filename")String filename, @Param("cafeRoomNo")int cafeRoomNo) throws Exception;
   void deleteCafeRoomImage(HashMap<String,Object> params) throws Exception;
 
 }

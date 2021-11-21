@@ -18,8 +18,13 @@
   width: 100%;
   margin: 0 auto;
   padding: 40px;
-  margin-top:50px;
+  padding-top: 0;
 }
+
+.pt-4 {
+    height: 1400px;
+}
+
 
 .c-top {
   width: 100%;
@@ -33,12 +38,12 @@
 <body>
   <div class="all-content">
 
-		<div id="search" style="display: inline-block;">
+		<div id="search" style="display: inline-block; margin-left: 45px;">
 		  <form action="search" method='get'>
 		    <select name="where">
 		      <option value="name">이름</option>
 		    </select>
-		    <input type="text" name="keyword">
+		    <input type="text" name="keyword" style="height: 27px; padding-bottom: 6px;">
 		    <input type="hidden" name="cafeno" value="${cafeNo}">
 		    <button class="btn btn-outline-dark btn-sm">검색</button>
 		  </form>
@@ -49,23 +54,24 @@
        <a href="addform?cafeno=${cafeNo}" class="btn btn-outline-dark" style="width: 78px; padding: 2px;">등록하기</a>
     </div>
               
-		<section class="py-5">
+		<section class="py-1">
 		    <div class="container px-4 px-lg-5 mt-5">
 		        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 		          
 		          <c:forEach items="${cafeRoomList}" var="cafeRoom">
 		          <div class="col mb-5">
 		              <div class="card h-100">
+		              
 		                <c:choose>
-			                <c:when test="${not empty cafeRoom.roomImg}">
-			                  <a href='detail?roomno=${cafeRoom.roomNo}'>
-			                    <img class="card-img-top" src="${contextPath}/upload/cafe/${cafeRoom.roomImg}_250x180.jpg" alt="..." />
-			                  </a>
+			                <c:when test="${empty cafeRoom.roomImg}">
+	                    		<img class="card-img-top" src="${contextPath}/img/studyroom1.jpg" alt="..." style="width: 250px; height: 180px;"/>
 			                </c:when>
 			                <c:otherwise>
-	                    		<img class="card-img-top" src="${contextPath}/img/studyroom1.jpg" alt="..." style="width: 250px; height: 180px;"/>
+			                    <img class="card-img-top" src="${contextPath}/upload/cafe/${cafeRoom.roomImg}_250x180.jpg" alt="..." />
 			                </c:otherwise>
 		                </c:choose>
+		                
+		                
 		                  <div class="card-body p-3">
 		                      <div class="text-center">
 		                          <c:if test="${cafeRoom.roomStatus == 1}">
