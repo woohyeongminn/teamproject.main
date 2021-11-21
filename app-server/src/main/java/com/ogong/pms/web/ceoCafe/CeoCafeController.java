@@ -171,7 +171,7 @@ public class CeoCafeController {
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));
     cafe.setCloseTime(LocalTime.parse(inputCloseTime));
     cafe.setPhone(tel1 + "-" + tel2 + "-" + tel3);
-    cafe.setLocation(addr2 + " " + addr3 + "(" + addr1 + ")");
+    cafe.setLocation(addr2 + ", " + addr3);
 
     cafeDao.insertCafe(cafe);
     sqlSessionFactory.openSession().commit();
