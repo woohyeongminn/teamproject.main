@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- plugins:css -->
   <link rel="stylesheet" href="${contextPath}/css/study/vendors/feather/feather.css">
@@ -21,13 +19,12 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="${contextPath}/css/study/css/vertical-layout-light/style.css">
 
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script> 
+	<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
   <script src="${contextPath}/css/study/vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="${contextPath}/css/study/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <script src="${contextPath}/css/study/js/dataTables.select.min.js"></script>
-  
   <style>
   .navbar {
     -webkit-box-shadow: 0;
@@ -195,6 +192,7 @@ button#buttonsave:hover {
    
   .studyBtn {
    padding: 10px 30px;
+   border-radius: 10px;
   }
   
 </style>
@@ -213,67 +211,51 @@ button#buttonsave:hover {
           </li>
           
           <li class="nav-item">
-            <a class="nav-link" href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>
-              <span class="menu-title" style="color:black">구성원&nbsp;＞</span>
+            <a class="nav-link" data-toggle="collapse" href="#owner" aria-expanded="false" aria-controls="owner">
+              <span class="menu-title" style="color:black">조장&nbsp;＞</span>
             </a>
-            
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/app/mystudy/freeboard/list?studyno=${study.studyNo}">
-              <span class="menu-title" style="color:black">자유게시판&nbsp;＞</span>
-            </a>
-            
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/app/mystudy/calendar/list?studyNo=${study.studyNo}">
-              <span class="menu-title" style="color:black">캘린더&nbsp;＞</span>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/app/mystudy/todo/list?studyno=${study.studyNo}">
-              <span class="menu-title" style="color:black">투두리스트&nbsp;＞</span>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="${contextPath}/app/mystudy/test?studyno=${study.studyNo}">
-              <span class="menu-title" style="color:black">화상미팅&nbsp;＞</span>
-            </a>
-          </li>
-              
-          <li class="nav-item">
-            <a class="nav-link" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">
-              <span class="menu-title" style="color:black">
-              <c:if test="${status == 'waiting'}">
-                가입 취소&nbsp;＞
-              </c:if>
-              <c:if test="${status != 'waiting'}">
-                탈퇴&nbsp;＞
-              </c:if>
-              </span>
-            </a>
-          </li>
-          
-          <c:if test="${study.owner.perNo == member.perNo}">
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#controll" aria-expanded="false" aria-controls="waiting">
-              <span class="menu-title" style="color:black">관리</span>
-              <span>&nbsp;＞</span>
-            </a>
-            <div class="collapse" id="controll">
+            <div class="collapse" id="owner">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">수정</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">삭제</a></li>
+                 <c:forEach items="${ownerStudyList}" var="study">
+                     <li class="nav-item"><a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
+                 </c:forEach>
+                 <c:if test="${empty ownerStudyList}">
+                    <li class="nav-item">조장으로 참여 중인 스터디가 없습니다.</li>
+                 </c:if>
               </ul>
             </div>
           </li>
-          </c:if>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#guilder" aria-expanded="false" aria-controls="guilder">
+              <span class="menu-title" style="color:black">구성원&nbsp;＞</span>
+            </a>
+            <div class="collapse" id="guilder">
+              <ul class="nav flex-column sub-menu">
+                <c:forEach items="${guilderMembers}" var="study">
+                  <li class="nav-item"> <a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
+                </c:forEach>
+                <c:if test="${empty guilderMembers}">
+                 <li class="nav-item">구성원으로 참여 중인 스터디가 없습니다.</li>
+                </c:if>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#waiting" aria-expanded="false" aria-controls="waiting">
+              <span class="menu-title" style="color:black">승인 대기 중&nbsp;＞</span>
+            </a>
+            <div class="collapse" id="waiting">
+              <ul class="nav flex-column sub-menu">
+                <c:forEach items="${waitingStudyList}" var="study">
+                <li class="nav-item"> <a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
+                </c:forEach>
+              </ul>
+            </div>
+          </li>
         </ul>
       </nav><!-- side nav-->
-
 
       <%-- main-panel --%>
       <div class="main-panel">
@@ -330,9 +312,19 @@ button#buttonsave:hover {
 	              </c:if>
 	             </c:if>
 	            
-	            
+	            <button type="button" class="btn btn-outline-dark studyBtn" onclick="return exitBtn_click(${study.studyNo}, ${study.CountMember}, ${study.waitingCountMember});">
+	            <c:if test="${status == 'waiting'}">
+	              가입 취소
+	            </c:if>
+	            <c:if test="${status != 'waiting'}">
+	            탈퇴
+	            </c:if>
+	            </button>
            </div> <%-- end col-6 --%>
          </div> <%-- end row studyInfo --%>
+          
+          
+          
           
           
           <c:if test="${status != 'waiting'}">
@@ -358,10 +350,10 @@ button#buttonsave:hover {
 								  
 									  <ul class="list-group" id="list">
 									    <li class="list-group-item">
-									       <a href='${contextPath}/app/mystudy/todo/list?studyno=${study.studyNo}'>
-									         📋 TO DO LIST
-									       </a>
-									    </li>
+                         <a href='${contextPath}/app/mystudy/todo/list?studyno=${study.studyNo}'>
+                           📋 TO DO LIST
+                         </a>
+                      </li>
 									      <c:if test="${empty todoList}">
 									        <br>&nbsp;등록된 To-Do List가 없습니다.
 									      </c:if>
@@ -445,8 +437,10 @@ button#buttonsave:hover {
        </div> <%-- end content-wrapper --%>
      </div> <%-- main-panel --%>
      
- </div> <!-- end page-body-wrapper -->
-</div> <!-- end container-scroller -->
+     </div>
+   </div>
+  
+  
   
   
   <!-- 투두 -->
@@ -520,9 +514,9 @@ button#buttonsave:hover {
       }
     }
   }
-</script>
-  
-  <!-- inject:js -->
+  </script>
+
+<!-- inject:js -->
   <script src="${contextPath}/css/study/js/off-canvas.js"></script>
   <script src="${contextPath}/css/study/js/hoverable-collapse.js"></script>
   <%--   <script src="${contextPath}/css/study/js/template.js"></script> --%>
