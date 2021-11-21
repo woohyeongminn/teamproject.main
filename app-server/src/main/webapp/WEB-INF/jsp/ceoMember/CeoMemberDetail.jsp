@@ -39,19 +39,9 @@ ul{list-style:none;}
 }
 
 .tabmenu > ul > li{
-  display:  inline-block;
-  width:33.33%; 
-  float:left;  
-  text-align:center; 
-  background :#f9f9f9;
 }
 
 .tabmenu > ul > li > a{
-  display:block;
-  line-height:40px;
-  height:40px;
-  text-decoration:none; 
-  color: #000;
 }
 
 .tabCon{
@@ -59,8 +49,7 @@ ul{list-style:none;}
   padding: 20px;
   position:absolute;
   left:0;
-  box-sizing: border-box; 
-  border : 5px solid #f9f9f9;
+  box-sizing: border-box;
   width: 900px;
   height: 620px;
 }
@@ -155,11 +144,10 @@ ul{list-style:none;}
 }
 </style>
 <body>
-    <br><br><br>
     <div class="all-content"> 
 		  <div class="tabmenu">
 		   <ul>
-		    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
+		    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1"></a>
 		    <div class="tabCon">
 			  <form method='post' enctype="multipart/form-data">
 			     <input type='hidden' name='ceoNo' value='${ceoMember.ceoNo}'>

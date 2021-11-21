@@ -40,28 +40,16 @@ ul{list-style:none;}
 }
 
 .tabmenu > ul > li{
-  display:  inline-block;
-  width:33.33%; 
-  float:left;  
-  text-align:center; 
-  background :#f9f9f9;
 }
 
 .tabmenu > ul > li > a{
-  display:block;
-  line-height:40px;
-  height:40px;
-  text-decoration:none; 
-  color: #000;
 }
 
 .tabCon{
   display:none; 
-  padding: 20px;
   position:absolute;
   left:0;
   box-sizing: border-box; 
-  border : 5px solid #f9f9f9;
   width: 900px;
   height: 620px;
 }
@@ -85,9 +73,9 @@ max-width: 500px;
     background-color: white;
     border-radius: 15px;
     border: 2px solid rgb(110, 110, 110);
-    text-align: left;
+    text-align: center;
     padding-bottom: 30px;
-    padding-left: 100px;
+    padding-left: 60px;
 }
 
 .profile > label {
@@ -96,7 +84,7 @@ max-width: 500px;
   font-weight: 600;
 }
 
-.profile > label, span {
+.profile > label {
     display: inline-block;
     padding: 5px 5px;
     width: 103px;
@@ -177,7 +165,7 @@ a {
 <div class="all-content">
   <div class="tabmenu">
    <ul>
-    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1">내 프로필</a>
+    <li id="tab1" class="btnCon"><a class="tabbtn first" href="#tab1"></a>
     <div class="tabCon">
     
     <form action='update' method='post' enctype="multipart/form-data">
@@ -188,8 +176,9 @@ a {
       <c:choose>
          <c:when test="${not empty ceoMember.ceoPhoto}">
            <a href="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}.jpg" >
-               <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_110x110.jpg" style="width: 110px">
+               <img id="f-photo-image" src="${contextPath}/upload/ceoMember/${ceoMember.ceoPhoto}_80x80.jpg" style="width: 90px;">
            </a>
+           <input type='hidden' name='ceoPhoto' value='${ceoMember.ceoPhoto}'>
          </c:when>
          <c:otherwise>
             <a href="${contextPath}/img/ceoProfile.jpg" >
@@ -215,7 +204,7 @@ a {
        <input id='f-email' type='email' name='ceoEmail' value='${ceoMember.ceoEmail}' readonly><br>
        
        <label for='f-password' class='form-label'>비밀번호</label>
-       <a href='javascript:openPwPopup()' class="btn-default btn-sm" role="button" style="border: 1px solid; border-radius: 3px;">비밀번호 변경</a><br>
+         <a href='javascript:openPwPopup()' class="btn-default btn-sm" role="button" style="border: 1px solid; border-radius: 3px; padding: 4px 38px;">비밀번호 변경</a><br>
        
        <%-- <label for='f-password' class='form-label'>암호</label>
        <input id='f-password' type='password' name='ceoPassword' value='${ceoMember.ceoPassword}'><br> --%>
@@ -231,10 +220,7 @@ a {
       </form>
      </div>
      </li>
-     <li id="tab2" class="btnCon"><a class="tabbtn" href="${contextPath}/app/askboard/mylist">내 문의내역</a>
-        <div class="tabCon" >
-        </div>
-     </li>
+     
     </ul>
    </div> 
   </div>
