@@ -163,10 +163,11 @@ button {
       <input type ='hidden' name='cafeno' value='${cafeRoom.cafe.no}'>
       <input type ='hidden' name='roomNo' value='${cafeRoom.roomNo}'>
       
+      <label for='f-roomInfo'>룸 이름</label><br>
       <input id='f-roomName' type='text' name='roomName' value='${cafeRoom.roomName}' placeholder="${cafeRoom.roomName}" class="form-control"><br>
       
-        <label for='f-roomInfo'>소개글</label><br>
-         <input id='f-roomInfo' type='text' name='roomInfo'  value='${cafeRoom.roomInfo}' style="height: 200px;" class="form-control"><br>
+      <label for='f-roomInfo'>소개글</label><br>
+      <input id='f-roomInfo' type='text' name='roomInfo'  value='${cafeRoom.roomInfo}' style="height: 200px;" class="form-control"><br>
       
       <label for='f-people'>인원</label>
       <input id='f-roomPeople' type="number" pattern="\d*" name='people'  value='${cafeRoom.people}' class="form-control"><br>
