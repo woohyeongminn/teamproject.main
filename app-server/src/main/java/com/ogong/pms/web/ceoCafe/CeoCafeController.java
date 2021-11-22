@@ -68,6 +68,9 @@ public class CeoCafeController {
 
     } else {
 
+      System.out.println("*************" + cafe.getCafeImgs());
+      System.out.println("*************" + cafe.getCafeImageNames());
+
       /* cafe.setInfo(cafe.getInfo().replace("\n", "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")); */
 
       HashMap<String,Object> params = new HashMap<>();
@@ -210,11 +213,6 @@ public class CeoCafeController {
       throw new Exception("등록된 카페가 없습니다.");
     }
 
-    System.out.println("*************" + cafe.getCafeImgs());
-    System.out.println("*************" + cafe.getCafeImgs());
-
-
-
     String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
 
     ModelAndView mv = new ModelAndView();
@@ -285,15 +283,18 @@ public class CeoCafeController {
   @PostMapping("/ceomember/cafe/update")
   public ModelAndView ceoCafeUpdate(Cafe cafe, Collection<Part> photoFileList, String inputOpenTime, String inputCloseTime) throws Exception {
 
-    Cafe oldcafe = cafeDao.findByCafeNo(cafe.getNo());
-
-    if (oldcafe == null) {
-      throw new Exception("등록된 카페가 없습니다.");
-    }
+    //    Cafe oldcafe = cafeDao.findByCafeNo(cafe.getNo());
+    //
+    //    if (oldcafe == null) {
+    //      throw new Exception("등록된 카페가 없습니다.");
+    //    }
 
     ArrayList<CafeImage> cafeImageList = new ArrayList<>();
 
     if (!cafeImageList.isEmpty()) {
+
+      cafeDao.deleteCafePhoto(cafe.getNo());
+
       for (Part photoFile : photoFileList) {
         if (photoFile.getSize() > 0) {
           String filename = UUID.randomUUID().toString();
@@ -340,15 +341,11 @@ public class CeoCafeController {
       }
 
       cafe.setCafeImgs(cafeImageList);
+    }
 
-      for (int i = 0; i < cafe.getCafeImgs().size(); i++) {
-        String img = cafe.getCafeImgs().get(i).getName();
-        cafeDao.insertCafeImage(img, cafe.getNo());
-      }
-
-    } else {
-      // 기존 정보로 
-      cafe.setCafeImgs(oldcafe.getCafeImgs());
+    for (int i = 0; i < cafe.getCafeImgs().size(); i++) {
+      String img = cafe.getCafeImgs().get(i).getName();
+      cafeDao.insertCafeImage(img, cafe.getNo());
     }
 
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));

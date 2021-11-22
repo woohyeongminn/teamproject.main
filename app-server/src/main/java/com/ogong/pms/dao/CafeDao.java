@@ -35,4 +35,6 @@ public interface CafeDao {
   void insertCafeImage(@Param("cafeImage")String cafeImage, @Param("cafeNo")int cafeNo) throws Exception;
   void deleteCafeImage(HashMap<String,Object> param) throws Exception;
 
+  void deleteCafePhoto(int cafeNo) throws Exception;
+
 }
