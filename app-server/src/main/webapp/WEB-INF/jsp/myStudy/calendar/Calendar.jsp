@@ -14,9 +14,43 @@
 <script src='${contextPath}/css/calendar/daygrid/main.js'></script>
 <script src='${contextPath}/css/calendar/timegrid/main.js'></script>
 
+<style>
+  .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  }
+  .fc-sun {
+  color: red;
+  }
+  .fc-day.fc-widget-content.fc-mon.fc-today {
+  background-color: #EFE6E1; 
+  }
+  .fc-prev-button.fc-button.fc-button-primary {
+  background-color: #EFE6E1; 
+  color:black;
+  }
+  .fc-today-button.fc-button.fc-button-primary {
+  background-color: #EFE6E1; 
+  color:black;
+  }
+  .fc-next-button.fc-button.fc-button-primary {
+  background-color: #EFE6E1;
+  color:black; 
+  } 
+  .fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button-active {
+  background-color: #EFE6E1;
+  color:black; 
+  }
+  .fc-timeGridWeek-button.fc-button.fc-button-primary {
+  background-color: #EFE6E1;
+  color:black; 
+  }      
+</style>
+
 <div style="text-align: center;">
-  <p style="font-size:18px;">📆</p>
-  <b style="font-size:18px;">${myStudy.studyTitle}</b>
+  <p style="font-size:18px;">📝 ${myStudy.studyTitle}</p>
 </div>
 
 <script>
@@ -28,7 +62,7 @@
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        right: 'dayGridMonth,timeGridWeek'
       },
       defaultDate: '2021-11-23',
       navLinks: true, // can click day/week names to navigate views
@@ -48,61 +82,8 @@
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
+      locale:'ko',
       events: [
-        {
-          title: 'All Day Event',
-          start: '2020-02-01'
-        },
-        {
-          title: 'Long Event',
-          start: '2020-02-07',
-          end: '2020-02-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-02-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2020-02-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2020-02-11',
-          end: '2020-02-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-02-12T10:30:00',
-          end: '2020-02-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2020-02-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2020-02-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2020-02-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2020-02-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2020-02-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2020-02-28'
-        }
       ]
     });
 
@@ -123,12 +104,15 @@
     max-width: 900px;
     margin: 0 auto;
   }
-
+   .all-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 14px;
+  } 
 </style>
-</head>
-<body>
-
+<div class="all-content"> 
+ <body>
   <div id='calendar'></div>
-
-</body>
-</html>
+ </body>
+</div>

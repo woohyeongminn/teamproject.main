@@ -2,8 +2,7 @@ let date = new Date();
 
   const renderCalendar = () => {
   const viewYear = date.getFullYear();
-  
- viewMonth = date.getMonth();
+  const viewMonth = date.getMonth();
 
   if (viewMonth  == 0) {
     var month = "Jan.";
