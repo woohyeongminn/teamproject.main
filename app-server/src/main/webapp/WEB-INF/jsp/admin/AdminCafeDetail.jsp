@@ -110,12 +110,12 @@
   }
 
   .slide{height:300px;overflow:hidden;}
-  .slide ul{width:calc(100% * 4);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
-  .slide li{width:calc(100% / 4);height:300px;}
-  .slide li:nth-child(1){background:#ffa;}
+  .slide ul{width:calc(100% * 3);display:flex;animation:slide s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
+  .slide li{width:calc(100% / 3);height:300px;}
+/*   .slide li:nth-child(1){background:#ffa;}
   .slide li:nth-child(2){background:#faa;}
   .slide li:nth-child(3){background:#afa;}
-  .slide li:nth-child(4){background:#aaf;}
+  .slide li:nth-child(4){background:#aaf;} */
   @keyframes slide {
    0% {margin-left:0;} /* 0 ~ 10  : 정지 */
    10% {margin-left:0;} /* 10 ~ 25 : 변이 */
@@ -340,13 +340,22 @@
               <div class="table-responsive p-0" style="overflow-y: hidden;">
               <div class="all-content"> 
                 <div class = "cafe-top">
-					        <div class="slide">
-					          <ul>
-					            <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
-					            <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
-					            <li><img src="${contextPath}/upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
-					          </ul>
-					        </div>
+					        <c:choose>
+						        <c:when test="${empty cafe.cafeImgs}">
+						          <div style="width: 488px; height: 300px; margin-bottom:10px; background-color: lightgray"></div>
+						          <span >등록된 카페 이미지가 없습니다.</span>
+						        </c:when>
+						        
+						        <c:otherwise>
+						          <div class="slide">
+						            <ul>
+						           <c:forEach items="${cafe.cafeImgs}" var="cafeImg">
+						              <li><img src="${contextPath}/upload/cafe/${cafeImg.name}_488x300.jpg" style="width:100%"></li>
+						           </c:forEach>
+						           </ul>
+						        </div>
+						        </c:otherwise>
+						     </c:choose>
 					       </div>
               
 			            <!-- 카페 상세 글 부분 -->      

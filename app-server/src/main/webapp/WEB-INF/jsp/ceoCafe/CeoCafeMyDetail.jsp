@@ -40,8 +40,8 @@ ul {
 }
 
     .slide{height:300px;overflow:hidden;}
-    .slide ul{width:calc(100% * 4);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
-    .slide li{width:calc(100% / 4);height:300px;}
+    .slide ul{width:calc(100% * 3);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
+    .slide li{width:calc(100% / 3);height:300px;}
     /* .slide li:nth-child(1){background:#ffa;}
     .slide li:nth-child(2){background:#faa;}
     .slide li:nth-child(3){background:#afa;}
@@ -77,7 +77,6 @@ ul {
   width: 80%;
   padding: 5px 0;
   margin-left: 5px;
-}
 }
 
 .label-wrap {
