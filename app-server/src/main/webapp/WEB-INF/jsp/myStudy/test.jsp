@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>화상미팅</title>
 <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
 <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
 
@@ -23,6 +23,10 @@ video {
 
 <label>방번호</label>
 <input id="txt-roomid" placeholder="Unique Room Id">
+
+<div class="col-lg-3 cta-btn-container text-center">
+  <a class="cta-btn align-middle" href="javascript:openchatbot()">채팅하기</a>
+</div>
 
 <hr>
 
@@ -65,6 +69,17 @@ document.getElementById('btn-open-or-join-room').onclick = function(){
 }
 
 </script>
+
+<script type="text/JavaScript">
+function openchatbot() {  
+	url = "https://service.dongledongle.com/study-ogong";
+	name = "스터디 채팅방";
+	specs = "width=400px; height=550px";
+  window.open(url, name, specs);
+  return false;
+}
+</script>
+
 </body>
 </html>
 
