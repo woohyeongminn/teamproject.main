@@ -1,28 +1,3 @@
--- 사장
-DROP TABLE IF EXISTS ceo_member RESTRICT;
-
--- 사장
-CREATE TABLE ceo_member (
-  member_no  INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-  bossname   VARCHAR(50) NOT NULL COMMENT '대표자명', -- 대표자명
-  license_no VARCHAR(13) NOT NULL COMMENT '사업자등록번호' -- 사업자등록번호
-)
-COMMENT '사장';
-
--- 사장
-ALTER TABLE ceo_member
-  ADD CONSTRAINT PK_ceo_member -- 사장 기본키
-    PRIMARY KEY (
-      member_no -- 회원번호
-    );
-
--- 사장 유니크 인덱스
-CREATE UNIQUE INDEX UIX_ceo_member
-  ON ceo_member ( -- 사장
-    member_no ASC -- 회원번호
-  );
-
-
 -- 회원 test 값
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status) 
 values(8, '김은채', '채채', 'cafe1@naver.com', password('c1'), '010-2473-1038',
@@ -62,15 +37,15 @@ values(16, '차은우', '얼천', 'cafe9@naver.com', password('c9'), '010-9415-2
 
 
 insert into member(member_no, name, nickname, email, password, tel, photo, status) 
-values(25, '박태은', '오호라', 'cafe9@naver.com', password('c9'), '010-9415-2257', 
+values(25, '박태은', '오호라', 'cafe10@naver.com', password('c10'), '010-5231-7851', 
 'ceoProfile','2021-03-18', 2);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, status) 
-values(26, '홍수정', '이런저런', 'cafe9@naver.com', password('c9'), '010-9415-2257', 
+values(26, '홍수정', '이런저런', 'cafe11@naver.com', password('c11'), '010-4675-0215', 
 'ceoProfile','2021-08-22', 2);
 
 insert into member(member_no, name, nickname, email, password, tel, photo, status) 
-values(27, '구시영', '구구구', 'cafe9@naver.com', password('c9'), '010-9415-2257', 
+values(27, '구시영', '구구구', 'cafe12@naver.com', password('c12'), '010-3648-3485', 
 'ceoProfile_color','2021-11-11', 2);
 
 
