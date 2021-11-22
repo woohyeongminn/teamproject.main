@@ -6,9 +6,21 @@ values(2,'완료');
 
 -- 투두리스트 test 값
 insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
-values(1, 1,1,'내일 맛있는 거 먹기','토요일',1);
+values(1, 3, 1,'단어장 구매하기','노트 5개',1);
 insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
-values(2, 1,1,'대면 싫어요','월요일',2);
+values(2, 1, 1,'자격증 정리하기','날짜 정리',2);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(3, 1, 1,'자격증 접수하기','토요일',1);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(4, 1, 1,'면접 준비','옷 사기',2);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(5, 1, 1,'이력서 작성하기','주말까지',1);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(6, 1, 1,'백엔드 정리하기','내용 정리',2);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(7, 5, 1,'기타 사기','각자 1개씩',2);
+insert into study_todolist(todolist_no, study_no,member_no,content,note,progress_no) 
+values(8, 6, 1,'장비 구매하기','등산 전까지',1);
 
 -- todolist_no 넣어 준 이유: 강제로 번호 주입
 -- 테스트 추가하고 싶으면 제외하고 넣으면 됨
