@@ -187,7 +187,7 @@
         
         <!-- 검색 -->
           <div id="search" style="width: 1299px;">
-            <form action="search" method='get' style="width: 1299px;">
+            <form action="../search" method='get' style="width: 1299px;">
               <select name="where">
                 <option value="1">분야</option>
                 <option value="2">제목</option>
@@ -229,7 +229,7 @@
                  </div>
 
                  <div class="modal-body">
-                   <form action='add' method='post'>
+                   <form action='../add' method='post'>
                      <!-- 제목 -->
                      <div class="mb-3">
                        <label for='f-studyTitle'>제목</label> <input
@@ -367,7 +367,7 @@
                   </c:when>
                 </c:choose>
   
-                <h4 class="title"><a href="detail?studyno=${study.studyNo}">${study.studyTitle}</a></h4>
+                <h4 class="title"><a href="../detail?studyno=${study.studyNo}">${study.studyTitle}</a></h4>
   
                 <c:choose>
                   <c:when test="${study.countMember ne study.numberOfPeple && study.studyStatus ne '2'}">
