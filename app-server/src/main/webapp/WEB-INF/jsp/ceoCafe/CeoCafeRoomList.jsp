@@ -64,7 +64,8 @@
 		              
 		                <c:choose>
 			                <c:when test="${empty cafeRoom.roomImg}">
-	                    		<img class="card-img-top" src="${contextPath}/img/studyroom1.jpg" alt="..." style="width: 250px; height: 180px;"/>
+	                    		<div style="width: 250px; height: 180px; background-color: lightgray;"></div>
+	                    		<span style="text-align: center;">등록된 스터디룸 사진이 없습니다.</span>
 			                </c:when>
 			                <c:otherwise>
 			                    <img class="card-img-top" src="${contextPath}/upload/cafe/${cafeRoom.roomImg}_250x180.jpg" alt="..." />

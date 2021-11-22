@@ -143,7 +143,8 @@ button {
 <body>
 <br><br><br>
 <div class="all-content">
-  <div class="cafe-wrap">
+  <div>
+<form action='updateform' method='post' enctype="multipart/form-data" class="cafe-wrap">
     <div class="cafe-top">
       <c:choose>
          <c:when test="${not empty cafeRoom.roomImg}">
@@ -152,14 +153,15 @@ button {
            </a>
          </c:when>
          <c:otherwise>
-             <img class="card-img-top" src="${contextPath}/img/studyroom1.jpg" alt="..." style="width: 450px; height: 300px;"/>
+             <div style="width: 450px; height: 300px; background-color: lightgray;"></div>
+             <span style="display:inline-block; width:100%; text-align: center;">등록된 스터디룸 사진이 없습니다.</span>
          </c:otherwise>
        </c:choose>
     </div>
     
     <!-- 룸 상세 글 부분 -->      
      <div class="cafe-bottom">
-     <form action='updateform' method='post' enctype="multipart/form-data">
+     
       <input id='c-no' type='hidden' value='${cafe.no}'>
       <h4 style="margin-bottom: 30px;">[${cafeRoom.roomName}]</h4>
       <div class="label-wrap">
@@ -171,8 +173,8 @@ button {
       <label for='f-roomPrice'>시간당금액</label>
       <span>${cafeRoom.roomPrice}</span><br>
 
-    </form>
      </div>
+    </form>
   </div>
   
   <!-- 버튼 -->

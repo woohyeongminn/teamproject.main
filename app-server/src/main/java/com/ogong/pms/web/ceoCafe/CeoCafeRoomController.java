@@ -182,7 +182,7 @@ public class CeoCafeRoomController {
   }
 
   @PostMapping("/ceomember/cafe/room/update")
-  public ModelAndView roomUpdate(int cafeno, CafeRoom cafeRoom) throws Exception {
+  public ModelAndView roomUpdate(int cafeno, CafeRoom cafeRoom, Part photoFile) throws Exception {
 
     CafeRoom oldcafeRoom = cafeRoomDao.findByRoomNo(cafeRoom.getRoomNo());
 
@@ -195,9 +195,50 @@ public class CeoCafeRoomController {
     cafeRoom.setRoomStatus(1);
     cafeRoom.setCafe(cafe);
 
-    //    사진 어떻게 할까 고민....
-    //    String mainImg = Prompt.inputString(String.format(" 스터디룸 사진(%s) : ", cafeRoom.getRoomImg()));
-    //    cafeRoom.setRoomImg(mainImg);
+    // 사진
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/cafe") + "/" + filename);
+      cafeRoom.setRoomImg(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+      .size(80, 80)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_80x80";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+      .size(250, 180)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_250x180";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+      .size(450, 300)
+      .outputFormat("jpg")
+      .crop(Positions.CENTER)
+      .toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_450x300";
+        }
+      });
+
+      cafeRoomDao.insertRoomImage(filename, cafeRoom.getRoomNo());
+
+    } else {
+      cafeRoom.setRoomImg(oldcafeRoom.getRoomImg());
+    }
 
     cafeRoomDao.updateCafeRoom(cafeRoom);
     sqlSessionFactory.openSession().commit();
