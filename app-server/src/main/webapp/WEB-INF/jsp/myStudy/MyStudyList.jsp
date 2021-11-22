@@ -100,6 +100,27 @@
  .table td, .jsgrid .jsgrid-table td {
     font-size: 14px;
   } 
+  
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .table-responsive::-webkit-scrollbar {
+    height: 15px;
+  }
+  .table-responsive::-webkit-scrollbar-thumb {
+  background-color: rgb(247, 231, 215);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  }
+  .table-responsive::-webkit-scrollbar-track {
+  background-color: rgb(250, 250, 234);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+  }
 
 .study-table {
     display: table-caption;

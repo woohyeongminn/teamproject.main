@@ -16,8 +16,29 @@
 <script src='${contextPath}/css/calendar/timegrid/main.js'></script>
 
 <style>
+.pt-4 {
+  max-height: 697px;
+  margin-bottom: 100px;
+}
+
 .breadcrumbs {
 	padding: 15px 0 0 0;
+}
+
+.fc-button-primary {
+  color: black;
+  background-color: #efe6e1;
+  border-color: #2C3E50;
+}
+
+.fc-button-primary:hover {
+  color: black;
+  background-color: #efe6e1;
+}
+
+button.fc-dayGridMonth-button.fc-button.fc-button-primary:active {
+  color: black;
+  background-color: #efe6e1;
 }
 
 .fc-sun {

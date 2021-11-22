@@ -10,9 +10,33 @@
     xjustify-content: center;
   }
   
+  .content-wrapper {
+    background-color: white;
+    border-radius: 20px;
+    max-height: 700px;
+    padding: 30px;
+    overflow-y: scroll;
+  }
+  
+  .content-wrapper::-webkit-scrollbar {
+    width: 10px;
+  }
+  .content-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgb(247, 231, 215);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  }
+  .content-wrapper::-webkit-scrollbar-track {
+  background-color: rgb(250, 250, 234);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+  }
+  
   #empty-freeboard {
     text-align: center;
   }
+  
     </style>
     
 <body>
@@ -62,56 +86,6 @@
 				    <div id="empty-freeboard">
 				      <c:if test="${empty freeBoardList}"> <br>등록된 게시글이 없습니다. </c:if>
 				    </div>
-				    <!-- 이미지 -->
-				    <!-- <c:if test='${not empty freeBoardList}'>
-				<c:forEach items="${freeBoardList}" var="freeBoard">
-				<div class="card mb-3" style="max-width: 540px;">
-				  <div class="row g-0">
-				    <div class="col-md-4">
-				      <img src="${contextPath}/upload/upload/freeboard/"${freeboard.freeboardImgs[0].name} class="img-fluid rounded-start" alt="...">
-				    </div>
-				    <div class="col-md-8">
-				      <div class="card-body">
-				        <h5 class="card-title">
-				          <a href="detail?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}">${freeBoard.freeBoardTitle}</a>
-				        </h5>
-				        <p class="card-text">${freeBoard.freeBoardContent}</p>
-				        <p class="card-text"><small class="text-muted">${freeBoard.freeBoardWriter.perNickname}</small></p>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				</c:forEach>
-				</c:if>
-				<c:if test="${empty freeBoardList}">
-				  등록된 게시글이 없습니다.
-				</c:if> -->
-				    <!-- 테이블 -->
-				    <!-- <table class="table table-hover">
-				    <thead>
-				      <tr>
-				        <th>No.</th>
-				        <th>제목</th>
-				        <th>작성자</th>
-				        <th>조회수</th>
-				      </tr>
-				      </thread>
-				    <tbody>
-				      <c:forEach items="${freeBoardList}" var="freeBoard">
-				        <tr>
-				          <td>${freeBoard.freeBoardNo}</td>
-				          <td><a
-				            href="detail?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}">${freeBoard.freeBoardTitle}</a></td>
-				          <td>${freeBoard.freeBoardWriter.perNickname}</td>
-				          <td>${freeBoard.freeBoardViewcount}</td>
-				        </tr>
-				      </c:forEach>
-				    </tbody>
-				  </table>
-				  <c:if test="${empty freeBoardList}">
-				    등록된 게시글이 없습니다.
-				  </c:if> -->
-            
             
           </div> <%-- end row sub-items --%>
         
