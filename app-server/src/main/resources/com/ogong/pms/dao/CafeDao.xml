@@ -120,7 +120,7 @@
   
   <sql id="listOrder1">
     order by 
-      c.operating_status_no asc,c.cafe_no asc
+      c.operating_status_no asc,c.cafe_no desc
   </sql>
   
   <!-- 관리자용 전체리스트 -->
