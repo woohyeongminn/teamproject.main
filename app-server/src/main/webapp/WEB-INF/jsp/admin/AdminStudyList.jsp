@@ -196,7 +196,6 @@
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">번호</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">스터디명</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">소개글</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">대면/비대면</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">인원수</th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">조장</th>
@@ -216,9 +215,6 @@
                               <p class="text-xs text-secondary mb-0">${study.subjectName}</p>
                             </div>
                           </div>
-                        </td>
-                        <td> 
-                          <p class="text-xs font-weight-bold mb-0">${study.introduction}</p>
                         </td>
                         <td> 
                           <p class="text-xs font-weight-bold mb-0">${study.faceName}</p>
