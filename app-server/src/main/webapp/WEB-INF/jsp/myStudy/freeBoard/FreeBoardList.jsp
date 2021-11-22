@@ -28,12 +28,12 @@
           <%-- row sub-items --%>
           <div class="row">
             
-            <div id="button" class="d-grid gap-5 d-md-flex justify-content-md-end">
+            <div id="button" class="d-grid gap-5 d-md-flex justify-content-md-center">
 				      <a href="form?studyno=${studyno}" class="btn btn-light">등록</a>
 				    </div>
 				    <br>
 				    <c:if test="${not empty freeBoardList}">
-				      <div class="row row-cols-1 row-cols-md-3 g-5">
+				      <div class="row row-cols-1 row-cols-md-3 g-3">
 				        <c:forEach items="${freeBoardList}" var="freeBoard">
 				          <div class="col">
 				            <div class="card" style="border: 1px solid #e3e3e3;">
@@ -60,7 +60,7 @@
 				      </div>
 				    </c:if>
 				    <div id="empty-freeboard">
-				      <c:if test="${empty freeBoardList}"> 등록된 게시글이 없습니다. </c:if>
+				      <c:if test="${empty freeBoardList}"> <br>등록된 게시글이 없습니다. </c:if>
 				    </div>
 				    <!-- 이미지 -->
 				    <!-- <c:if test='${not empty freeBoardList}'>

@@ -26,6 +26,12 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+<!-- 구글 -->
+<meta name = "google-signin-client_id"content = "866898854522-6sla16re13s21boo6nf9u8116n62aafv.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+
 <style>
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
@@ -157,6 +163,7 @@ section {
               </script>
 
 						<!-- 카카오 로그인 -->
+						<div id="kakao_id_login">
 						<a
 							href="https://kauth.kakao.com/oauth/authorize?client_id=9e2ad8ce072bca1d727914f05e243cbb&redirect_uri=http://localhost:8080/ogong/app/login&response_type=code">
 							<img src={kakao_login}></img> <span>카카오 로그인</span>
@@ -230,6 +237,16 @@ section {
 								  };
               </script>
               
+            </div> 
+             
+            <div id="google_id_login">
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            </div>
+            <a href="#" onclick="signOut();">Sign out</a>
+             
+             
+             
+             
 					</div>
 				</div>
 
@@ -245,6 +262,55 @@ section {
 
 		</div>
 	</section>
+
+
+<script type="text/javascript">
+function onSignIn(googleUser) {
+	
+	/* var auth2 = gapi.auth2.getAuthInstande();
+  
+  if (auth2.isSigendIn.get()){ */
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+ /*  } */
+ 
+ $.ajax({
+	 url:"/member/login",
+	 type:"POST",
+	 data: ,
+	 contentType: "text",
+	 
+	 success: function(result) {
+		 if (result){ alert("저장되었습니다.");
+		 
+		 } else {
+			 alert("잠시 후에 시도해주세요."); }
+		 },
+			 
+	  error: function() {
+		  alert("에러 발생");
+		 }
+
+   })
+
+}
+
+var id_token = roorleUser.getAuthResponse().id_token;
+console.log("ID Token: " + id_token);
+</script>
+
+
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
 
 </body>
 </html>
