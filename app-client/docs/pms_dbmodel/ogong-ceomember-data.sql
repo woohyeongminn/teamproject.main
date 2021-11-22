@@ -1,3 +1,28 @@
+-- 사장
+DROP TABLE IF EXISTS ceo_member RESTRICT;
+
+-- 사장
+CREATE TABLE ceo_member (
+  member_no  INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
+  bossname   VARCHAR(50) NOT NULL COMMENT '대표자명', -- 대표자명
+  license_no VARCHAR(13) NOT NULL COMMENT '사업자등록번호' -- 사업자등록번호
+)
+COMMENT '사장';
+
+-- 사장
+ALTER TABLE ceo_member
+  ADD CONSTRAINT PK_ceo_member -- 사장 기본키
+    PRIMARY KEY (
+      member_no -- 회원번호
+    );
+
+-- 사장 유니크 인덱스
+CREATE UNIQUE INDEX UIX_ceo_member
+  ON ceo_member ( -- 사장
+    member_no ASC -- 회원번호
+  );
+
+
 -- 회원 test 값
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status) 
 values(8, '김은채', '채채', 'cafe1@naver.com', password('c1'), '010-2473-1038',

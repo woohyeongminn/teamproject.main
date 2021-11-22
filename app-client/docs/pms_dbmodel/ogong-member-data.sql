@@ -1,3 +1,40 @@
+-- 회원
+DROP TABLE IF EXISTS member RESTRICT;
+
+-- 회원
+CREATE TABLE member (
+  member_no  INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  name       VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  nickname   VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
+  email      VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+  password   VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호
+  tel        VARCHAR(30)  NOT NULL COMMENT '전화', -- 전화
+  photo      VARCHAR(255) NULL     COMMENT '사진', -- 사진
+  created_dt DATE         NOT NULL DEFAULT curdate() COMMENT '가입일', -- 가입일
+  status     INTEGER      NOT NULL COMMENT '상태', -- 상태
+  active     INTEGER      NOT NULL DEFAULT 1 COMMENT '탈퇴', -- 탈퇴
+  report     INTEGER      NULL     DEFAULT 0 COMMENT '신고횟수' -- 신고횟수
+)
+COMMENT '회원';
+
+-- 회원
+ALTER TABLE member
+  ADD CONSTRAINT PK_member -- 회원 기본키
+    PRIMARY KEY (
+      member_no -- 회원번호
+    );
+
+-- 회원 유니크 인덱스
+CREATE UNIQUE INDEX UIX_member
+  ON member ( -- 회원
+    email ASC,    -- 이메일
+    nickname ASC  -- 닉네임
+  );
+
+ALTER TABLE member
+  MODIFY COLUMN member_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+
+
 -- 회원 test 값
 insert into member(member_no, name, nickname, email, password, tel, photo, created_dt, status, active) 
 values(1, '김초보', '초보초보쌩초보', 'chobo@naver.com', password('c123456!'), '010-1352-2269',

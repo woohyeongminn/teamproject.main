@@ -62,7 +62,7 @@
     width: 100%;
     height: 415px;
     left: 22%;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
   }
   
   .card-body::-webkit-scrollbar {

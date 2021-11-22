@@ -164,13 +164,13 @@
   <!-- <div class="tabmenu">
     <ul> -->
 
-  <div class="nav-scroller py-1 mb-2" style="text-align:-webkit-center;">
+  <!-- <div class="nav-scroller py-1 mb-2" style="text-align:-webkit-center;">
     <nav class="nav d-flex justify-content-between">
       <a class="p-2 link-secondary" href="${contextPath}/app/study/list">전체</a>
       <a class="p-2 link-secondary" href="${contextPath}/app/study/list/ing">진행</a>
       <a class="p-2 link-secondary" href="${contextPath}/app/study/list/end">종료</a>
     </nav>
-  </div>
+  </div> -->
 
     <!--===== 내 북마크 목록 =====-->
     <!-- <li id="tab1" class="btnCon"><a class="btn" href="#tab1">전체</a>
@@ -178,11 +178,6 @@
 
     <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h3 style="width: 1299px;">Today Study</h3>
-          <p style="width: 1299px;">함께 성장할 스터디를 모집해보세요</p>
-        </header>
 
 
 
