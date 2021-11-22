@@ -145,7 +145,7 @@
       </div>
       
       <div class="c-room-booking-select people">
-          <input class="form-control" type="number" min="1" max="${cafeRoom.people}" value="${cafeRoom.people}" id="people">
+          <input class="form-control" type="number" min="1" max="${cafeRoom.people}" value="1" id="people">
       </div>
       
       <div class="c-room-booking-select price" id="price">
@@ -189,7 +189,7 @@ flatpickr("#calendar");
 var dateInput = document.querySelector("#calendar");
 dateInput.flatpickr({
 	// 최소 날짜
-	//minDate:new Date().fp_incr(1),
+	minDate:new Date().fp_incr(1),
 });
 
 var time_section = document.getElementById("time-value");
@@ -284,7 +284,7 @@ document.querySelector("#calendar").onchange = () => {
                  
                  
                  // 가격 계산
-                 function totalPrice(checkedValue){
+                 function totalPrice(checkedValue, peopleNumber){
                    if(checkedValue.length > 0){
                 	 var price_section = document.getElementById("price");
                 	 
@@ -295,7 +295,13 @@ document.querySelector("#calendar").onchange = () => {
                 	 selectedTime = document.getElementById(min).value;
                    startTime = selectedTime.split(",")[1];
                    usingTime = max-min+1;
-                   price = usingTime * ${cafeRoom.roomPrice};
+                   
+                   if (peopleNumber != null){
+                	   price = usingTime * ${cafeRoom.roomPrice} * peopleNumber;
+                   } else {
+                	   price = usingTime * ${cafeRoom.roomPrice};
+                	   
+                   }
                    
                    if(document.querySelector('#price h3') != null) 
                     document.querySelector('#price h3').remove();
@@ -321,7 +327,10 @@ document.querySelector("#calendar").onchange = () => {
                    
                  } // 가격 계산 함수 끝
                  
-                 
+                 document.querySelector("#people").onclick = (e) => {
+                	 //console.log(e.currentTarget.value);
+                	 totalPrice(checkedValue, e.currentTarget.value);
+                 } // 가격 계산 * 인원수
             }
         }
     };
@@ -330,6 +339,8 @@ document.querySelector("#calendar").onchange = () => {
     xhr.open("GET", "reservationTime?cafeNo="+${cafe.no}+"&roomNo="+${cafeRoom.roomNo}+"&date="+selectDate, true);
     xhr.send();
 };
+
+
 
 var selectedDate;
 var selectedTime;

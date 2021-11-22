@@ -105,6 +105,12 @@
             
               <div class="p-3">${reservation.useDate}&nbsp;${reservation.startTime} ~ ${endTime} (${reservation.useTime}시간)</div>
             </div>
+            <div class="col-3">
+              <div class="p-3">인원수</div>
+            </div>
+            <div class="col-9">
+              <div class="p-3">${reservation.useMemberNumber}명</div>
+            </div>
 				    <div class="col-3">
 				      <div class="p-3">예약자 정보</div>
 				    </div>

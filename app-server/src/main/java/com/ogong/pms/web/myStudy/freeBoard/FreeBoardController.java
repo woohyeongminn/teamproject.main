@@ -34,11 +34,23 @@ public class FreeBoardController {
 
   /* 자유 게시판 등록 폼 */
   @GetMapping("/mystudy/freeboard/form")
-  public ModelAndView addform(int studyno, HttpSession session) {
+  public ModelAndView addform(int studyno, HttpSession session) throws Exception {
     ModelAndView mv = new ModelAndView();
 
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyno, loginUser.getPerNo());
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
+
+    Study study = studyDao.findByMyNo(studyno, loginUser.getPerNo());
+
+    mv.addObject("member", loginUser);
     mv.addObject("studyno", studyno);
-    mv.addObject("pageTitle", "자유 게시판 등록");
+    mv.addObject("study", study);
+    mv.addObject("pageTitle", study.getStudyTitle() + " - 자유 게시판 등록");
     mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardAddForm.jsp");
     mv.setViewName("template1");
 
@@ -91,17 +103,25 @@ public class FreeBoardController {
 
   /* 자유 게시판 목록 */
   @GetMapping("/mystudy/freeboard/list")
-  public ModelAndView list(int studyno) throws Exception {
+  public ModelAndView list(int studyno, HttpSession session) throws Exception {
     List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyno);
-
-    Study study = studyDao.findByNo(studyno);
 
     ModelAndView mv = new ModelAndView();
 
+    Study study = studyDao.findByNo(studyno);
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyno, loginUser.getPerNo());
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
+
     mv.addObject("studyno", studyno);
     mv.addObject("study", study);
+    mv.addObject("member", loginUser);
     mv.addObject("freeBoardList", freeBoardList);
-    mv.addObject("pageTitle", "자유 게시판 목록");
+    mv.addObject("pageTitle", study.getStudyTitle() + " - 자유 게시판 목록");
     mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardList.jsp");
     mv.setViewName("template1");
 
@@ -117,15 +137,25 @@ public class FreeBoardController {
       throw new Exception("해당 번호의 자유 게시판이 없습니다.");
     }
 
-    List<Comment> commentList = commentDao.findAll(freeboardno);
-
-    Member member = (Member) session.getAttribute("loginUser");
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("loginUser", member);
+    List<Comment> commentList = commentDao.findAll(freeboardno);
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyno, loginUser.getPerNo());
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
+
+    Study study = studyDao.findByMyNo(studyno, loginUser.getPerNo());
+
+    mv.addObject("member", loginUser);
+    mv.addObject("study", study);
     mv.addObject("freeBoard", freeBoard);
     mv.addObject("commentList", commentList);
-    mv.addObject("pageTitle", "자유 게시판 상세");
+    mv.addObject("pageTitle", study.getStudyTitle() + " - 자유 게시판 상세");
     mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardDetail.jsp");
     mv.setViewName("template1");
 
@@ -134,13 +164,24 @@ public class FreeBoardController {
 
   /* 자유 게시판 수정 폼 */
   @GetMapping("/mystudy/freeboard/updateform")
-  public ModelAndView updateform(int freeboardno, int studyno) throws Exception {
+  public ModelAndView updateform(int freeboardno, int studyno,HttpSession session) throws Exception {
     FreeBoard freeBoard = freeBoardDao.findByNo(freeboardno, studyno);
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyno, loginUser.getPerNo());
+    Study study = studyDao.findByMyNo(studyno, loginUser.getPerNo());
 
     ModelAndView mv = new ModelAndView();
 
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
+
     mv.addObject("freeBoard", freeBoard);
-    mv.addObject("pageTitle", "자유 게시판 수정");
+    mv.addObject("study", study);
+    mv.addObject("member", loginUser);
+    mv.addObject("pageTitle", study.getStudyTitle() + " - 자유 게시판 수정");
     mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardUpdateForm.jsp");
     mv.setViewName("template1");
 
