@@ -42,10 +42,10 @@ ul {
     .slide{height:300px;overflow:hidden;}
     .slide ul{width:calc(100% * 4);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
     .slide li{width:calc(100% / 4);height:300px;}
-    .slide li:nth-child(1){background:#ffa;}
+    /* .slide li:nth-child(1){background:#ffa;}
     .slide li:nth-child(2){background:#faa;}
     .slide li:nth-child(3){background:#afa;}
-    .slide li:nth-child(4){background:#aaf;}
+    .slide li:nth-child(4){background:#aaf;} */
     @keyframes slide {
       0% {margin-left:0;} /* 0 ~ 10  : 정지 */
       10% {margin-left:0;} /* 10 ~ 25 : 변이 */
@@ -214,31 +214,39 @@ button {
 <body>
 <br><br><br>
 <div class="all-content">
+	
 	<c:choose>
-	<c:when test='${empty cafe}'>
-	  <div class="add-wrap" style="text-align: center;">
-		  <span style= "font-size: 16px; font-weight: bold; display: inline-block; margin-bottom: 20px;">등록된 카페가 없습니다.</span><br>
-		  <a href='addform' class="btn btn-outline-dark">카페 등록하러 가기</a>
-	  </div>
-	</c:when>
+		<c:when test='${empty cafe}'>
+		  <div class="add-wrap" style="text-align: center;">
+			  <span style= "font-size: 16px; font-weight: bold; display: inline-block; margin-bottom: 20px;">등록된 카페가 없습니다.</span><br>
+			  <a href='addform' class="btn btn-outline-dark">카페 등록하러 가기</a>
+		  </div>
+		</c:when>
 	
 	<c:otherwise>
 	<div class="cafe-wrap">
 		<div class="cafe-top">
 		 <h4 style="text-align: center;">[${cafe.name}]</h4>
-			<div class="slide">
-			
-			   <c:forEach items="${cafe.cafeImgs}" var="cafeImgs">
-			   
-			   </c:forEach>
-			
-			    <ul>
-			      <li><img src="../../upload/cafe/${cafe.cafeImgs[0].name}" style="width:100%"></li>
-				    <li><img src="../../upload/cafe/${cafe.cafeImgs[1].name}" style="width:100%"></li>
-				    <li><img src="../../upload/cafe/${cafe.cafeImgs[2].name}" style="width:100%"></li>
-			  </ul>
-			</div>
+		 
+		 <c:choose>
+			  <c:when test="${empty cafe.cafeImgs}">
+			    <div style="width: 488px; height: 300px; margin-bottom:10px; background-color: lightgray"></div>
+			    <span >등록된 카페 이미지가 없습니다.</span>
+			  </c:when>
+			  
+			  <c:otherwise>
+			    <div class="slide">
+	          <ul>
+	         <c:forEach items="${cafe.cafeImgs}" var="cafeImg">
+	            <li><img src="${contextPath}/upload/cafe/${cafeImg.name}_488x300.jpg" style="width:100%"></li>
+	         </c:forEach>
+	         </ul>
+	      </div>
+			  </c:otherwise>
+	   </c:choose>
 		</div>
+		 
+			
 		
 		<!-- 카페 상세 글 부분 -->      
 		 <div class="cafe-bottom">
@@ -254,7 +262,7 @@ button {
 			 </div>
 			 <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
 			 <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
-			 <label for='f-holiday'>이번주 휴무일</label><span>${cafe.holiday}</span><br>
+			 <label for='f-holiday'>휴무일</label><span>${cafe.holiday}</span><br>
 			 <label for='f-viewCount'>상태</label><span>${cafeStatus}</span><br>
 			 <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span>
 	  </form>
@@ -312,11 +320,12 @@ button {
 	     <a href='reser/list' class="btn btn-outline-dark">예약 관리</a>
 	   </button>
 	 </div>
-	 </div>
+	 
+	 
 	</c:otherwise>
  </c:choose>
 
- </div>
+	 </div>
 </body>
 
   <div id="modal" class="modal-overlay">

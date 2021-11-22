@@ -134,14 +134,7 @@ ul {
       <div class="cafeImg"></div><br>
       
       <input id="input_file" type="file" name="photoFileList" multiple>
-      <!-- <span style="font-size:10px; color: gray; text-align:left; ">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
       
-      <div class="data_file_txt" id="data_file_txt" style="margin:40px;">
-		    <span>첨부 파일 :</span>
-		    <br>
-		    <div id="articlefileChange">
-		    </div>
-		  </div> -->
     </div>
     
       <!-- 카페 상세 글 부분 -->      
@@ -187,7 +180,7 @@ ul {
           ~ 
          <input id='f-closeTime' type='time' name='inputCloseTime' class="form-control"  style="width: 125px;"><br>
          
-         <label for='f-holiday'>이번주 휴무일</label>
+         <label for='f-holiday'>휴무일</label>
          <input id='f-holiday' type='date' name='holiday' class="form-control"><br>
          
          <label for='f-viewCount'>상태</label>

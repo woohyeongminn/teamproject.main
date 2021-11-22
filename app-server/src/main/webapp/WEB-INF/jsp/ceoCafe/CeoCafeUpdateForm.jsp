@@ -134,14 +134,23 @@ ul {
       <div class="cafe-top">
       <h4 style="text-align: center;">[${cafe.name}]</h4>
       
-        <!-- 여러개 등록 -->
-          <!-- <form action="upload.php" method="post" enctype="multipart/form-data"> -->
-            <!-- <input id="input-file" type="file" multiple="multiple" style='display:none' name='filename[]'/> -->
-            <div class="cafeImg">         
-            </div>
-            <input id="input-file" type="file" multiple="multiple" style='display:none' name='photoFile'/>
-            <label id="input-file-button" for="input-file">파일 첨부</label>
-          <!-- </form> -->
+        <c:choose>
+	        <c:when test="${empty cafe.cafeImgs}">
+	          <div style="width: 488px; height: 300px; margin-bottom:10px; background-color: lightgray"></div>
+	          <span >등록된 카페 이미지가 없습니다.</span>
+	        </c:when>
+	        
+	        <c:otherwise>
+	          <div class="slide">
+	            <ul>
+	           <c:forEach items="${cafe.cafeImgs}" var="cafeImg">
+	              <li><img src="${contextPath}/upload/cafe/${cafeImg.name}_488x300.jpg" style="width:100%"></li>
+	           </c:forEach>
+	           </ul>
+	        </div>
+	        </c:otherwise>
+       </c:choose>
+       <input id="input_file" type="file" name="photoFileList" multiple value="${cafe.cafeImgs}">
       </div>
     
       <!-- 카페 상세 글 부분 -->      
@@ -150,8 +159,8 @@ ul {
          <label for='f-bossName'>대표자</label><span>${cafe.ceoMember.ceoBossName}</span><br>
          <label for='f-licenseNo'>사업자 등록번호</label><span>${cafe.ceoMember.ceoLicenseNo}</span><br>
          
-         <label for='f-name'>상호명</label>
-         <input id='f-name' type='text' name='name' value='${cafe.name}'><br>
+        <%--  <label for='f-name'>상호명</label>
+         <input id='f-name' type='text' name='name' value='${cafe.name}' readonly="readonly"><br> --%>
          
          <div class="label-wrap">
            <label for='f-location'>주소</label>
@@ -169,7 +178,7 @@ ul {
          <label for='f-openTime'>운영시간</label>
          <input id='f-openTime' type='time' name='inputOpenTime' value='${cafe.openTime}' style="width: 105px"> ~ <input id='f-closeTime' type='time' name='inputCloseTime' value='${cafe.closeTime}'  style="width: 105px"><br>
          
-         <label for='f-holiday'>이번주 휴무일</label>
+         <label for='f-holiday'>휴무일</label>
          <input id='f-holiday' type='date' name='holiday' value='${cafe.holiday}' ><br>
          
          <label for='f-viewCount'>상태</label>

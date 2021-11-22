@@ -164,6 +164,17 @@ public class CeoCafeController {
           }
         });
 
+        Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+        .size(488, 300)
+        .outputFormat("jpg")
+        .crop(Positions.CENTER)
+        .toFiles(new Rename() {
+          @Override
+          public String apply(String name, ThumbnailParameter param) {
+            return name + "_488x300";   // 사장 마이카페 사이즈
+          }
+        });
+
         cafeImageList.add(cafeImage);
       }
     }
@@ -267,7 +278,7 @@ public class CeoCafeController {
   }
 
   @PostMapping("/ceomember/cafe/update")
-  public ModelAndView ceoCafeUpdate(Cafe cafe, String inputOpenTime, String inputCloseTime) throws Exception {
+  public ModelAndView ceoCafeUpdate(Cafe cafe, Collection<Part> photoFileList, String inputOpenTime, String inputCloseTime) throws Exception {
 
     Cafe oldcafe = cafeDao.findByCafeNo(cafe.getNo());
 
@@ -275,27 +286,65 @@ public class CeoCafeController {
       throw new Exception("등록된 카페가 없습니다.");
     }
 
-    //cafe.setCafeImgs(request.getParameter("filename[]"));
+    ArrayList<CafeImage> cafeImageList = new ArrayList<>();
 
-    //      List<CafeImage> imageList = cafe.getCafeImgs();
-    //
-    //      if (!imageList.isEmpty()) {
-    //        CafeImage cafeImage = new CafeImage();
-    //        cafeImage.setName(request.getParameter("filename[]"));
-    //        cafeImage.setCafeNo(cafe.getNo());
-    //
-    //        ArrayList<CafeImage> cafeImageList = new ArrayList<>();
-    //        cafeImageList.add(cafeImage);
-    //
-    //        HashMap<String,Object> params = new HashMap<>(); 
-    //        params.put("fileNames", cafeImageList);
-    //        params.put("cafeNo", cafe.getNo());
-    //
-    //        cafeDao.insertCafeImage(params);
-    //        sqlSession.commit();
-    //      }
+    if (!cafeImageList.isEmpty()) {
+      for (Part photoFile : photoFileList) {
+        if (photoFile.getSize() > 0) {
+          String filename = UUID.randomUUID().toString();
+          photoFile.write(sc.getRealPath("/upload/cafe") + "/" + filename);
 
-    //sqlSession.rollback();
+          CafeImage cafeImage = new CafeImage();
+          cafeImage.setName(filename);
+
+          Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+          .size(680, 264)
+          .outputFormat("jpg")
+          .crop(Positions.CENTER)
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_680x264";   // 카페 상세용 사이즈
+            }
+          });
+
+          Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+          .size(329, 247)
+          .outputFormat("jpg")
+          .crop(Positions.CENTER)
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_329x247";   // 카페 목록용 사이즈
+            }
+          });
+
+          Thumbnails.of(sc.getRealPath("/upload/cafe") + "/" + filename)
+          .size(488, 300)
+          .outputFormat("jpg")
+          .crop(Positions.CENTER)
+          .toFiles(new Rename() {
+            @Override
+            public String apply(String name, ThumbnailParameter param) {
+              return name + "_488x300";   // 사장 마이카페 사이즈
+            }
+          });
+
+          cafeImageList.add(cafeImage);
+        }
+      }
+
+      cafe.setCafeImgs(cafeImageList);
+
+      for (int i = 0; i < cafe.getCafeImgs().size(); i++) {
+        String img = cafe.getCafeImgs().get(i).getName();
+        cafeDao.insertCafeImage(img, cafe.getNo());
+      }
+
+    } else {
+      // 기존 정보로 
+      cafe.setCafeImgs(oldcafe.getCafeImgs());
+    }
 
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));
     cafe.setCloseTime(LocalTime.parse(inputCloseTime));
@@ -307,17 +356,5 @@ public class CeoCafeController {
     mv.setViewName("redirect:detail");
     return mv;
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
