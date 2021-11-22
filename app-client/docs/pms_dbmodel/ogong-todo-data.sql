@@ -1,6 +1,7 @@
 -- 투두 진행 상태 필수 값
 insert into study_todolist_progress(progress_no,name) 
 values(1,'진행');
+
 insert into study_todolist_progress(progress_no,name) 
 values(2,'완료');
 

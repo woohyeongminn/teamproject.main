@@ -1,11 +1,7 @@
 -- 스터디 조장, 구성원 테스트 값 보면서 넣어야 함
 
 insert into study_board (st_board_no, title, content, view_ct, created_dt, member_no, study_no)
-values (1, '뭔가 공부를 허투루 한 기분인데 이게 맞는건가요?', 'C++강의를 들으면서 기본적인 문법은 어느정도 알겠다 싶어서 콘솔로 게임을 만들어보려고하는데
-테트리스를 만들어보라길래 딱 앉았더니 머리가 백지가 되버리는겁니다 도저히 어떻게 만들어야할지 생각이안나서
-여기저기 찾아보니까 뭐 학부 1학년도 문법떼자마자 바로 만들 수 있는 수준이라던데 갑자기 자괴감이 들더군요..
-프로그래밍이 재능의 영역인가 싶기도하고; 이게 제가 공부를 똑바로 안하고 넘어가서 그런건가요.. 
-선생님의 강의를 들으면서 공부가 재밌어질정도가 되었었는데 갑자기 현타가 와버렸습니다', '3', '2021-11-1', '1' , '1');
+values (1, '뭔가 공부를 허투루 한 기분인데 이게 맞는건가요?', '도저히 어떻게 만들어야할지 생각이안나서 여기저기 찾아보니까 뭐 학부 1학년도 문법떼자마자 바로 만들 수 있는 수준이라던데 갑자기 자괴감이 들더군요.. 선생님의 강의를 들으면서 공부가 재밌어질정도가 되었었는데 갑자기 현타가 와버렸습니다', '3', '2021-11-1', '1' , '1');
 
 insert into study_board (st_board_no, title, content, view_ct, created_dt, member_no, study_no)
 values (2, '난이도 급상승', '이 DFS 파트부터 난이도 갑자기 급상승
@@ -29,33 +25,7 @@ values (6, '왜 이렇게 작성하는건지 이해가 안되는데', '따라치
 자바 문법은 이해가 됩니다만.. 왜 이렇게 만드는건지 이해가 안돼요.', '3', '2021-11-5', '1' , '1');
 
 insert into study_board (st_board_no, title, content, view_ct, created_dt, member_no, study_no)
-values (7, '에러 해결 공유', '# cerbot-auto wget으로 설치 시 404 Not Found
-
-강좌에 나오는 cerbot-auto 스크립트는 서비스 종료됐어요. >> 관련링크
-
-제로초님이 잘 정리해놓으신 블로그 글이 있어요 그대로 따라하시면 돼요 >> 제로초님 블로그 글
-
-# nginx 서버 시작했을 때 certbot (:: address already in use)
-
-기존 노드 서버가 실행 중일 때 (http 80포트를 사용 중일 때) 나타나요. 저 같은 경우는 강의에서 안내해주신 kill -9 [PID] 명령을 실행했는데도 lsof -i tcp:80 했을때 노드 서버가 계속 확인돼서, npx pm2 kill 로 pm2를 통해 노드 서버를 종료하니 nginx 가 정상 실행됐어요.
-
-# nginx status 했을 때 nginx: [warn] conflicting server name "__URL__" on 0.0.0.0:__PORT__, ignored
-
-중복된 server_name을 nginx 설정 파일에 넣었을 때 발생해요. 
-
-1. cat /etc/nginx/nginx.conf | grep "server_name"
-2. cat /etc/nginx/sites-enabled/default | grep "server_name"
-
-두 가지 명령을 사용해서 중복된 server_name이 있는지 확인하고, 있다면 중복을 제거해주세요. 2번의 default 설정이 1번의 설정을 덮어씌운다는 점에 주의해주세요.
-
-아래는 위에 올린 제로초님 글 중의 내용입니다.
-
-# nginx reload, restart 등이 안된다면
-
-1. 설정 파일 내 세미콜론 누락 확인
-2. 누락이 없다면 다음 글 참고 >> stackoverflow
-
-모두 좋은 강의로 즐코하세용', '1', '2021-11-6', '2' , '1');
+values (7, '에러 해결 공유', '# nginx reload, restart 등이 안된다면 1. 설정 파일 내 세미콜론 누락 확인 2. 누락이 없다면 다음 글 참고 >> stackoverflow 모두 좋은 강의로 즐코하세용', '1', '2021-11-6', '2' , '1');
 
 insert into study_board (st_board_no, title, content, view_ct, created_dt, member_no, study_no)
 values (8, '안녕하세요', '오늘의 공부 처음 사용하는데 되게 괜찮은거같아요!', '2', '2021-11-7', '3' , '1');
