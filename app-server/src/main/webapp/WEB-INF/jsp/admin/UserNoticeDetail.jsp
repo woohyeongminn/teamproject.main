@@ -103,7 +103,7 @@
   
   <tr id="blockbox">
     <th scope="row" id="third"><label for='f-filepath'>파일</label></th>
-    <td><img id="f-photo-image" src="${contextPath}/upload/notice/${adminNotice.adminNotiFile}.jpg"></td>
+    <td><img id="f-photo-image" src="${contextPath}/upload/notice/${adminNotice.adminNotiFile}"></td>
     <td></td>
   </tr>
   

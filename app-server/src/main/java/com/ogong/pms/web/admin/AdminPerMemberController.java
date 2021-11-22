@@ -55,11 +55,12 @@ public class AdminPerMemberController {
       throw new Exception("해당 번호의 회원이 없습니다.");
     }
 
-    perMember.setPerName("Deleted Name");
+    perMember.setPerName("Deleted Member("+ perMember.getPerName() +")");
     perMember.setPerNickname("Deleted Member("+ perMember.getPerNickname() +")");
     perMember.setPerEmail("Deleted Email");
     perMember.setPerPassword("Deleted Password");
     perMember.setPerPhoto("perProfile");
+    perMember.setPerTel("Deleted Tel");
     perMember.setPerStatus(Member.PER);
     perMember.setActive(Member.OUTUSER);
 
