@@ -59,7 +59,7 @@ public class CalendarController {
       Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
       List<Calendar> calendarList = calendarDao.findAll(studyNo);
 
-      mv.addObject("pageTitle","📆CALENDAR");
+      mv.addObject("pageTitle","CALENDAR");
       mv.addObject("myStudy", myStudy);
       mv.addObject("calendarList", calendarList);
       mv.addObject("contentUrl","myStudy/calendar/Calendar.jsp");
