@@ -57,6 +57,7 @@
    <include refid="select1"/>
    where
       sb.study_no=#{studyNo}
+   order by st_board_no desc
   </select>
   
   <select id="findByNo" resultMap="FreeBoardMap" parameterType="map">
