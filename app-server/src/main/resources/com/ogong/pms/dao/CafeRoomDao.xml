@@ -144,7 +144,7 @@
   </update>
   
   
-    <update id="updateCafeRoomStatus" parameterType="CafeRoom">
+   <update id="updateCafeRoomStatus" parameterType="CafeRoom">
     update studycafe_room set
     status = 2
     where studyroom_no=#{roomNo}
@@ -163,6 +163,14 @@
       </foreach>
     </where>
   </delete>
+  
+  
+  <delete id="deleteCafeRoomPhoto">
+    delete from studycafe_room_photo
+    where
+      studyroom_no=#{studyroomNo}
+  </delete>
+  
 </mapper>
 
 

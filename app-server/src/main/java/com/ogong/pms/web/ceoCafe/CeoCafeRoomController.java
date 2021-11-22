@@ -184,11 +184,11 @@ public class CeoCafeRoomController {
   @PostMapping("/ceomember/cafe/room/update")
   public ModelAndView roomUpdate(int cafeno, CafeRoom cafeRoom, Part photoFile) throws Exception {
 
-    CafeRoom oldcafeRoom = cafeRoomDao.findByRoomNo(cafeRoom.getRoomNo());
+    //CafeRoom oldcafeRoom = cafeRoomDao.findByRoomNo(cafeRoom.getRoomNo());
 
-    if (oldcafeRoom == null) {
-      throw new Exception("등록된 스터디룸이 없습니다.");
-    }
+    //    if (oldcafeRoom == null) {
+    //      throw new Exception("등록된 스터디룸이 없습니다.");
+    //    }
 
     Cafe cafe = cafeDao.findByCafeNo(cafeno);
 
@@ -197,6 +197,9 @@ public class CeoCafeRoomController {
 
     // 사진
     if (photoFile.getSize() > 0) {
+
+      cafeRoomDao.deleteCafeRoomPhoto(cafeRoom.getRoomNo());
+
       String filename = UUID.randomUUID().toString();
       photoFile.write(sc.getRealPath("/upload/cafe") + "/" + filename);
       cafeRoom.setRoomImg(filename);
@@ -236,8 +239,6 @@ public class CeoCafeRoomController {
 
       cafeRoomDao.insertRoomImage(filename, cafeRoom.getRoomNo());
 
-    } else {
-      cafeRoom.setRoomImg(oldcafeRoom.getRoomImg());
     }
 
     cafeRoomDao.updateCafeRoom(cafeRoom);
