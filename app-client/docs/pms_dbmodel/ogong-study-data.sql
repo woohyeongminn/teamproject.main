@@ -122,28 +122,43 @@ insert into study_guilder(member_no,study_no,created_dt,status)
 values(7,7,'2021-11-7',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(17,17,'2021-11-17',2);
+values(17,8,'2021-11-8',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(18,18,'2021-11-18',2);
+values(18,9,'2021-11-9',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(19,19,'2021-11-19',2);
+values(19,10,'2021-11-10',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(20,20,'2021-11-20',2);
+values(20,11,'2021-11-11',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(21,21,'2021-11-20',2);
+values(21,12,'2021-11-12',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(22,22,'2021-11-20',2);
+values(22,13,'2021-11-13',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(23,23,'2021-11-20',2);
+values(23,14,'2021-11-14',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(24,24,'2021-11-20',2);
+values(24,15,'2021-11-15',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,16,'2021-11-16',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,17,'2021-11-17',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,18,'2021-11-18',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,19,'2021-11-19',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,20,'2021-11-20',2);
 
 -------------------------------------------------------------------------------------------------
 
