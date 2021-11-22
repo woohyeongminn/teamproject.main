@@ -201,7 +201,7 @@ values(19, '일본어 공부 하실 분', 1, 3, 2, '수강 인증 날짜 잘 지
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status, area) 
-values(20, '8월말 실기시험을 목표로 코딩웍스 웹디자인기능사 실기시험 완벽 가이드(HTML+CSS+JQUERY) 완강까지 함께 하실 분~!', 2, 13, 3, '스터디 주제 : 웹디자인 기능사 실기 공부
+values(20, '코딩웍스 웹디자인기능사 실기시험 완벽 가이드(HTML+CSS+JQUERY) 완강까지 함께 하실 분~!', 2, 13, 3, '스터디 주제 : 웹디자인 기능사 실기 공부
 
 스터디 목표 : 코딩웍스 웹디자인기능사 실기시험 완벽 가이드(HTML+CSS+JQUERY) 완강
 
