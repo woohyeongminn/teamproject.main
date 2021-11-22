@@ -211,25 +211,24 @@
           </li>
           
           <c:if test="${study.owner.perNo == member.perNo}">
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#controll" aria-expanded="false" aria-controls="waiting">
-              <span class="menu-title" style="color:black">관리</span>
-              <span>&nbsp;＞</span>
-            </a>
-            <div class="collapse" id="controll">
-	                <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark studyBtn">수정</a>
-	                
-	                <c:if test="${!(study.countMember > '1')}">
-	                  <button type="button" class="btn btn-outline-dark studyBtn" onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
-	                </c:if>
-               </c:if>
+	          <li class="nav-item">
+	            <a class="nav-link" data-toggle="collapse" href="#controll" aria-expanded="false" aria-controls="waiting">
+	              <span class="menu-title" style="color:black">관리</span>
+	              <span>&nbsp;＞</span>
+	            </a>
+	            <div class="collapse" id="controll">
+			           <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark studyBtn">수정</a>
+			                
+		             <c:if test="${!(study.countMember > '1')}">
+		               <button type="button" class="btn btn-outline-dark studyBtn" onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
+		             </c:if>
+	            </div>
+	          </li>
+          </c:if>
               
-              </ul>
-            </div>
-          </li>
-         </c:if>
+        </c:if>
+       </ul>
          
-        </ul>
       </nav><!-- side nav-->
 
   <!-- inject:js -->

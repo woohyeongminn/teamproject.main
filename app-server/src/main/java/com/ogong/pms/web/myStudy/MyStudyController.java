@@ -261,10 +261,19 @@ public class MyStudyController {
   //  }
 
   @GetMapping("/mystudy/updateform")
-  public ModelAndView updateform(int studyno) throws Exception {
+  public ModelAndView updateform(int studyno, HttpSession session) throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
     Study study = studyDao.findByNo(studyno);
 
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyno, loginUser.getPerNo());
+
     ModelAndView mv = new ModelAndView();
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
 
     mv.addObject("study", study);
     mv.addObject("pageTitle", "내 스터디 수정");
@@ -275,7 +284,10 @@ public class MyStudyController {
   }
 
   @PostMapping("/mystudy/update")
-  public ModelAndView update(Study study) throws Exception {
+  public ModelAndView update(Study study, HttpSession session) throws Exception {
+
+    Member loginUser = (Member) session.getAttribute("loginUser");
+
     Study oldStudy = studyDao.findByNo(study.getStudyNo());
 
     if (oldStudy == null) {
@@ -289,6 +301,12 @@ public class MyStudyController {
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
+
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(study.getStudyNo(), loginUser.getPerNo());
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
 
     mv.addObject("study", study);
     mv.setViewName("redirect:detail?studyNo=" + study.getStudyNo());
