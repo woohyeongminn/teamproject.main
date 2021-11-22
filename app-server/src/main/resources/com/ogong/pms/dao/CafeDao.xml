@@ -256,7 +256,7 @@
     </where>
   </delete>
   
-   <delete id="deleteCafePhoto">
+  <delete id="deleteCafePhoto">
     delete from studycafe_photo
      where 
       cafe_no=#{cafeNo}

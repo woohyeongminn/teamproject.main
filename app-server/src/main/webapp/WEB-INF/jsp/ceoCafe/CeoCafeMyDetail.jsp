@@ -262,7 +262,14 @@ button {
 			 <label for='f-tel'>전화번호</label><span>${cafe.phone}</span><br>
 			 <label for='f-openTime'>운영시간</label><span>${cafe.openTime} AM ~ ${cafe.closeTime} PM</span><br>
 			 <label for='f-holiday'>휴무일</label><span>${cafe.holiday}</span><br>
-			 <label for='f-viewCount'>상태</label><span>${cafeStatus}</span><br>
+			 <label for='f-viewCount'>상태</label>
+			 <c:if test="${cafeStatus eq '승인대기'}">
+			   <span style="color:red;">${cafeStatus}</span>
+			 </c:if>
+			 <c:if test="${cafeStatus ne '승인대기'}">
+			   <span>${cafeStatus}</span>
+			 </c:if>
+			 <br>
 			 <label for='f-review'>리뷰평점</label><span>⭐${cafe.avgReview} / ${cafe.countReview}개</span>
 	  </form>
 		 </div>

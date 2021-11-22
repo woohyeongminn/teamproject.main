@@ -270,7 +270,24 @@ public class CeoCafeController {
 
     String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
 
+    String tel1 = cafe.getPhone().substring(0, 3);
+    String tel2 = cafe.getPhone().substring(4, 8);
+    String tel3 = cafe.getPhone().substring(9, 13);
+
+
+    String[] strArr = cafe.getLocation().split(", ");
+    //    Arrays.toString(strArr);
+    String addr1 = strArr[0];
+    String addr2 = strArr[1];
+
     ModelAndView mv = new ModelAndView();
+    mv.addObject("tel1", tel1);
+    mv.addObject("tel2", tel2);
+    mv.addObject("tel3", tel3);
+
+    mv.addObject("addr1", addr1);
+    mv.addObject("addr2", addr2);
+
     mv.addObject("cafe", cafe);
     mv.addObject("cafeStatus", status);
 
@@ -281,7 +298,12 @@ public class CeoCafeController {
   }
 
   @PostMapping("/ceomember/cafe/update")
-  public ModelAndView ceoCafeUpdate(Cafe cafe, Collection<Part> photoFileList, String inputOpenTime, String inputCloseTime) throws Exception {
+  public ModelAndView ceoCafeUpdate(
+      Cafe cafe,
+      Collection<Part> photoFileList,
+      String tel1, String tel2, String tel3,
+      String addr1, String addr2,
+      String inputOpenTime, String inputCloseTime) throws Exception {
 
     //    Cafe oldcafe = cafeDao.findByCafeNo(cafe.getNo());
     //
@@ -289,9 +311,12 @@ public class CeoCafeController {
     //      throw new Exception("등록된 카페가 없습니다.");
     //    }
 
+    String cafePhone = tel1 + "-" + tel2 + "-" + tel3;
+    cafe.setPhone(cafePhone);
+
     ArrayList<CafeImage> cafeImageList = new ArrayList<>();
 
-    if (!cafeImageList.isEmpty()) {
+    if (!photoFileList.isEmpty()) {
 
       cafeDao.deleteCafePhoto(cafe.getNo());
 
