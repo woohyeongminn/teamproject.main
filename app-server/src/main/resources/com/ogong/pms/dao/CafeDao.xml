@@ -256,6 +256,12 @@
     </where>
   </delete>
   
+   <delete id="deleteCafePhoto">
+    delete from studycafe_photo
+     where 
+      cafe_no=#{cafeNo}
+  </delete>
+  
   <!-- 금주의 휴무일 가져오기 -->
   <select id="getCafeHoliday" resultType="string">
     select 
