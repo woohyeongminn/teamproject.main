@@ -31,7 +31,10 @@
   }
   a {
   color:black;
-  }  
+  } 
+  #x-add-btn {
+  background: white;
+  } 
 </style>
 <body>
   <div class="all-content">
@@ -45,6 +48,7 @@
       <div id="mp">
         <label id='f-photo' for='f-photo' class="col-sm-2 col-form-label">사진</label>
         <input id='f-photo' type='file' name='photoFile' /><br>
+        <p style="color: blue; margin-left: 85px;">*미선택시 기본이미지로 등록됩니다.</p>
       </div>
 
       <div id="mn">
@@ -91,6 +95,7 @@
       <label id='f-passwordcheck' for='f-passwordcheck' class="col-sm-2 col-form-label">재입력</label>
       <input id='i-passwordcheck' type='password' name='perPassword' placeholder="비밀번호 확인"/><br>
      </div>
+     <br>
      <label >개인정보 수집 및 이용에 대한 안내</label>
      <input id="perAgree" type="checkbox"/><br>
      <label >이용 약관</label>
@@ -242,10 +247,20 @@ function nickOverlap(){
       }
     });
   }
-  var form = document.perInfo;
-  function joinPopup() {
-	  alert("'" + form.nick.value + "'님 환영합니다.✋")
+ // var form = document.perInfo;
+ // function joinPopup() {
+ //	  alert("'" + form.nick.value + "'님 환영합니다.✋")
+ // }
+ 
+ function checkCapsLock(event)  {
+  if (event.getModifierState("CapsLock")) {
+    document.getElementById("message").innerText 
+      = "Caps Lock이 켜져 있습니다."
+  }else {
+    document.getElementById("message").innerText 
+      = ""
   }
+}
 </script>
  
 

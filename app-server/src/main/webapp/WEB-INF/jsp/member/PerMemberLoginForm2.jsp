@@ -112,18 +112,18 @@
     <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
       <div class="inner">
         <div class="form-check">
-           <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""}>
+           <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""} }>
            <span>이메일 기억하기</span>
         </div>
         <button type="submit" class="btn btn-outline-dark" value="로그인" >로그인</button> 
       </div>
   </form>
-  <div class="mb">
-     <a href="addform">회원가입</a> |
-     
-     <a href="findemailform">이메일찾기</a> |
-     <a href="getpwbyemailform">비밀번호찾기</a>
-  </div>
+	<div class="mb">
+	   <a href="addform">회원가입</a> |
+	   
+	   <a href="findemailform">이메일찾기</a> |
+	   <a href="getpwbyemailform">비밀번호찾기</a>
+	</div>
 </div>    
 
 <script>
@@ -135,14 +135,4 @@ document.querySelector("#member-form").onsubmit = () => {
     return false;
   }
 };
-
-function checkCapsLock(event)  {
-	  if (event.getModifierState("CapsLock")) {
-	    document.getElementById("message").innerText 
-	      = "Caps Lock이 켜져 있습니다."
-	  }else {
-	    document.getElementById("message").innerText 
-	      = ""
-	  }
-	}
 </script>

@@ -92,17 +92,16 @@ public class PerMemberController {
           return name + "_110x110";
         }
       });
+
+    } else {
+
+      member.setPerPhoto("perProfile");
     }
 
     memberDao.insert(member);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
-    //    mv.addObject("refresh", "2;url=form");
-    //    mv.addObject("pageTitle", "👋환영 합니다!");
-    //    mv.addObject("contentUrl", "member/PerMemberAdd.jsp");
-    //    mv.setViewName("template1");
-
     mv.setViewName("redirect:form");
     return mv;
   }
@@ -279,7 +278,7 @@ public class PerMemberController {
     } 
 
     mv.addObject("pageTitle", "⚠정보 오류");
-    mv.addObject("refresh", "2;url=deleteform");
+    mv.addObject("refresh", "1;url=deleteform");
     mv.addObject("contentUrl", "member/InputFail.jsp");
     mv.setViewName("template1");
     return mv;

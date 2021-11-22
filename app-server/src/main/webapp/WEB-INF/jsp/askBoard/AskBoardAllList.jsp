@@ -118,22 +118,6 @@
      </div> 
     </c:if>
 
-    <p id="paging">
-	      <c:if test="${pageNo > 1}">
-	        <a href="alllist?pageNo=${pageNo-1}&pageSize=${pageSize}">◀</a>
-	      </c:if>
-	      <c:if test="${pageNo <= 1}">
-	       ◀
-	      </c:if>
-	      ${pageNo}
-	      <c:if test="${pageNo < totalPage}">
-	        <a href="alllist?pageNo=${pageNo+1}&pageSize=${pageSize}"> ▶</a>
-	      </c:if>
-	      <c:if test="${pageNo >= totalPage}">
-	       ▶
-	      </c:if>
-    </p>
-
     <c:choose>
 				<c:when test="${not empty loginUser}">
 				  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -147,6 +131,21 @@
 					</div>
 				</c:when>
     </c:choose>
+    <p id="paging">
+        <c:if test="${pageNo > 1}">
+          <a href="alllist?pageNo=${pageNo-1}&pageSize=${pageSize}">◀</a>
+        </c:if>
+        <c:if test="${pageNo <= 1}">
+         ◀
+        </c:if>
+        ${pageNo}
+        <c:if test="${pageNo < totalPage}">
+          <a href="alllist?pageNo=${pageNo+1}&pageSize=${pageSize}"> ▶</a>
+        </c:if>
+        <c:if test="${pageNo >= totalPage}">
+         ▶
+        </c:if>
+    </p>    
   </div>
 </fieldset>
 

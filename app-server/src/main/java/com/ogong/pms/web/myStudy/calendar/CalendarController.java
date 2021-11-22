@@ -50,21 +50,28 @@ public class CalendarController {
 
   }
 
-
   @RequestMapping("/mystudy/calendar/list")
   public ModelAndView calList(HttpSession session, int studyNo) throws Exception {
     Member member = (Member) session.getAttribute("loginUser");
-
-    Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
-    List<Calendar> calendarList = calendarDao.findAll(studyNo);
-
     ModelAndView mv = new ModelAndView();
 
-    mv.addObject("pageTitle","CALENDAR");
-    mv.addObject("myStudy", myStudy);
-    mv.addObject("calendarList", calendarList);
-    mv.addObject("contentUrl","myStudy/calendar/Calendar.jsp");
-    mv.setViewName("template1");
+    if (member != null) {
+      Study myStudy = studyDao.findByMyNo(studyNo, member.getPerNo());
+      List<Calendar> calendarList = calendarDao.findAll(studyNo);
+
+      mv.addObject("pageTitle","CALENDAR");
+      mv.addObject("myStudy", myStudy);
+      mv.addObject("calendarList", calendarList);
+      mv.addObject("contentUrl","myStudy/calendar/Calendar.jsp");
+      //mv.addObject("contentUrl","myStudy/calendar/Test2Calendar.jsp");
+      mv.setViewName("template1");
+
+    } else {
+      mv.addObject("pageTitle", "⚠정보 오류");
+      mv.addObject("refresh", "2;url=findemailform");
+      mv.addObject("contentUrl", "member/InputFail.jsp");
+      mv.setViewName("template1");  
+    }
     return mv;
   }
 }

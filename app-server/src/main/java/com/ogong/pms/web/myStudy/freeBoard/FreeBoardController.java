@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.CommentDao;
 import com.ogong.pms.dao.FreeBoardDao;
+import com.ogong.pms.dao.StudyDao;
 import com.ogong.pms.domain.Comment;
 import com.ogong.pms.domain.FreeBoard;
 import com.ogong.pms.domain.Member;
+import com.ogong.pms.domain.Study;
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -24,14 +26,11 @@ import net.coobird.thumbnailator.name.Rename;
 @Controller
 public class FreeBoardController {
 
-  @Autowired
-  SqlSessionFactory sqlSessionFactory;
-  @Autowired
-  FreeBoardDao freeBoardDao;
-  @Autowired
-  CommentDao commentDao;
-  @Autowired
-  ServletContext sc;
+  @Autowired SqlSessionFactory sqlSessionFactory;
+  @Autowired StudyDao studyDao;
+  @Autowired FreeBoardDao freeBoardDao;
+  @Autowired CommentDao commentDao;
+  @Autowired ServletContext sc;
 
   /* 자유 게시판 등록 폼 */
   @GetMapping("/mystudy/freeboard/form")
@@ -95,9 +94,12 @@ public class FreeBoardController {
   public ModelAndView list(int studyno) throws Exception {
     List<FreeBoard> freeBoardList = freeBoardDao.findAll(studyno);
 
+    Study study = studyDao.findByNo(studyno);
+
     ModelAndView mv = new ModelAndView();
 
     mv.addObject("studyno", studyno);
+    mv.addObject("study", study);
     mv.addObject("freeBoardList", freeBoardList);
     mv.addObject("pageTitle", "자유 게시판 목록");
     mv.addObject("contentUrl", "myStudy/freeBoard/FreeBoardList.jsp");
