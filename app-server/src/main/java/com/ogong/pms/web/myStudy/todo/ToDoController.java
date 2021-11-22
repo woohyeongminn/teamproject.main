@@ -40,7 +40,7 @@ public class ToDoController extends HttpServlet {
     mv.addObject("studyno", studyno);
     mv.addObject("study", myStudy);
     mv.addObject("todoList", todoList);
-    mv.addObject("pageTitle", myStudy.getStudyTitle() + " - " + "📋 To-Do List 등록");
+    mv.addObject("pageTitle", myStudy.getStudyTitle() + " - " + "To-Do List 등록");
     mv.addObject("contentUrl", "myStudy/todo/ToDoAddForm.jsp");
     mv.setViewName("template1");
     return mv;
@@ -94,7 +94,7 @@ public class ToDoController extends HttpServlet {
     mv.addObject("member", loginUser);
     mv.addObject("study", myStudy);
     mv.addObject("countProgressing", countProgressing);
-    mv.addObject("pageTitle", myStudy.getStudyTitle() + " - " + "📋 To-Do List 목록");
+    mv.addObject("pageTitle", myStudy.getStudyTitle() + " - " + "To-Do List 목록");
     mv.addObject("contentUrl", "myStudy/todo/ToDoList.jsp");
     mv.setViewName("template1");
     return mv;
@@ -125,7 +125,7 @@ public class ToDoController extends HttpServlet {
     mv.addObject("todo", todo);
     mv.addObject("member", member);
     mv.addObject("study", myStudy);
-    mv.addObject("pageTitle", myStudy.getStudyTitle() + " - " + "📋 To-Do List 상세");
+    mv.addObject("pageTitle", myStudy.getStudyTitle() + " - " + "To-Do List 상세");
     mv.addObject("contentUrl", "myStudy/todo/ToDoDetail.jsp");
     mv.setViewName("template1");
     return mv;

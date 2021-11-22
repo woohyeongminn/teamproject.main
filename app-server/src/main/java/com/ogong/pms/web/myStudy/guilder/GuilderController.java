@@ -50,7 +50,14 @@ public class GuilderController {
     //      mv.addObject("waitingGuilderList", waitingGuilder);
     //    }
 
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyNo, loginUser.getPerNo());
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
+    }
+
     mv.addObject("study", myStudy);
+    mv.addObject("member", loginUser);
     mv.addObject("contentUrl", "myStudy/guilder/GuilderList.jsp");
     mv.setViewName("template1");
 
@@ -76,6 +83,12 @@ public class GuilderController {
     if (!waitingGuilder.isEmpty()) {
       myStudy.setWaitingMember(waitingGuilder);
       mv.addObject("waitingGuilderList", waitingGuilder);
+    }
+
+    Integer guilderStatus = studyDao.findGuilderStatusByNo(studyNo, loginUser.getPerNo());
+
+    if (guilderStatus == 1) {
+      mv.addObject("status","waiting");
     }
 
     mv.addObject("study", myStudy);

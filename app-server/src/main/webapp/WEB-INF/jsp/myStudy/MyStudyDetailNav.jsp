@@ -147,7 +147,9 @@
             <a class="nav-link" href="${contextPath}/app/mystudy/list" style="background-color:rgb(239 230 225);">
               <span class="menu-title" style="color:black"> 📚 MY STUDY LIST</span>
             </a>
-          </li>
+           </li>
+          
+        <c:if test="${status != 'waiting'}">
           
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#guilder" aria-expanded="false" aria-controls="guilder">
@@ -215,13 +217,18 @@
               <span>&nbsp;＞</span>
             </a>
             <div class="collapse" id="controll">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">수정</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">삭제</a></li>
+	                <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark studyBtn">수정</a>
+	                
+	                <c:if test="${!(study.countMember > '1')}">
+	                  <button type="button" class="btn btn-outline-dark studyBtn" onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
+	                </c:if>
+               </c:if>
+              
               </ul>
             </div>
           </li>
-          </c:if>
+         </c:if>
+         
         </ul>
       </nav><!-- side nav-->
 

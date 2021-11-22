@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<!DOCTYPE html>
-<html>
-<head>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <style>
 * {
   font-size:14px;
@@ -17,6 +16,60 @@
   text-align: center;
 }
 </style>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper">
+
+      <jsp:include page="../MyStudyDetailNav.jsp"/>
+
+      <%-- main-panel --%>
+      <div class="main-panel">
+        <div class="content-wrapper">
+        
+          <%-- row sub-items --%>
+          <div class="row">
+            <div class="all-content">
+						  <form action='add' method='post' name='freeBoardInfo' onsubmit="return checkValue()">
+						  <input type='hidden' name='studyNo' value='${freeBoard.studyNo}'>
+						  <div id='content'>
+						      <br>
+						  <div class="mb-3 row">
+						    <label for='f-freeBoardTitle'>제목</label>
+						    <input id='f-freeBoardTitle' type='text' name='freeBoardTitle' class="form-control">
+						  </div>
+						
+						  <div class="mb-3 row">
+						    <label for='f-freeBoardContent'>내용</label>
+						    <textarea id='f-freeBoardContent' type='text' name='freeBoardContent' class="form-control" rows="3"></textarea>
+						  </div>
+						
+						  <div class="mb-3 row">
+						    <label for='f-freeBoardFile'>파일</label>
+						    <input id='f-freeBoardFile' type='file' name='freeBoardFile' class="form-control">
+						  </div>
+						
+						   <!-- <label for='f-freeBoardFile' class='form-label'>파일</label>
+						   <input id='f-freeBoardFile' type='file' name='freeBoardFile' /><br>
+						   
+						   <c:if test="${empty freeBoardFile}">
+						     <input id='f-freeBoardFile' type='hidden' name='freeBoardFile' value="freeboard_80x80.jpg"/><br>
+						   </c:if> -->
+						  </div>
+						  <div id='button'>
+						    <button class="btn btn-dark">수정</button>
+						  </div>
+						  </form>
+						</div>
+          </div> <%-- end row sub-items --%>
+        
+        
+       </div> <%-- end content-wrapper --%>
+     </div> <%-- main-panel --%>
+     
+     </div>
+   </div>
+
 <script type="text/javascript">
   function checkValue() {
 
@@ -38,39 +91,5 @@
   } */
 }
 </script>
-</head>
-<body>
-<div class="all-content">
-  <form action='add' method='post' name='freeBoardInfo' onsubmit="return checkValue()">
-  <input type='hidden' name='studyNo' value='${freeBoard.studyNo}'>
-  <div id='content'>
-      <br>
-  <div class="mb-3 row">
-    <label for='f-freeBoardTitle'>제목</label>
-    <input id='f-freeBoardTitle' type='text' name='freeBoardTitle' class="form-control">
-  </div>
-
-  <div class="mb-3 row">
-    <label for='f-freeBoardContent'>내용</label>
-    <textarea id='f-freeBoardContent' type='text' name='freeBoardContent' class="form-control" rows="3"></textarea>
-  </div>
-
-  <div class="mb-3 row">
-    <label for='f-freeBoardFile'>파일</label>
-    <input id='f-freeBoardFile' type='file' name='freeBoardFile' class="form-control">
-  </div>
-
-   <!-- <label for='f-freeBoardFile' class='form-label'>파일</label>
-   <input id='f-freeBoardFile' type='file' name='freeBoardFile' /><br>
-   
-   <c:if test="${empty freeBoardFile}">
-     <input id='f-freeBoardFile' type='hidden' name='freeBoardFile' value="freeboard_80x80.jpg"/><br>
-   </c:if> -->
-  </div>
-  <div id='button'>
-    <button class="btn btn-dark">수정</button>
-  </div>
-  </form>
-</div>
 </body>
-</html>
+      

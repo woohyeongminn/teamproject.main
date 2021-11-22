@@ -19,6 +19,14 @@
 <meta name="theme-color" content="#7952b3">
 
 <style>
+.inner-page {
+    height: 1000px;
+}
+
+.main-panel {
+    height: 800px;
+}
+
  .bd-placeholder-img {
    font-size: 1.125rem;
    text-anchor: middle;
@@ -39,7 +47,7 @@
  
  .lead {
     height: 300px;
-    background-color: #f7f7f7;
+    background-color: #f9f9f9;
     overflow: scroll;
     padding: 15px;
     width: 790px;
@@ -56,12 +64,33 @@
     margin-left: 20px;
  }
  
+ .comment-wrap {
+    display: flex;
+    flex-direction: row;
+ }
+ 
  .comment-top {
      display: inline-block;
     font-size: 13px;
     padding-bottom: 5px;
     padding-left: 2px
  }
+ 
+ .commentList-wrap::-webkit-scrollbar {
+    width: 10px;
+  }
+  .commentList-wrap::-webkit-scrollbar-thumb {
+  background-color: rgb(247, 231, 215);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  }
+  .commentList-wrap::-webkit-scrollbar-track {
+  background-color: rgb(250, 250, 234);
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+  }
+ 
 </style>
     
 <body>
@@ -93,78 +122,81 @@
                     <a href='updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="f-btn ">수정 &nbsp; | </a>
                     <a href='delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="f-btn">삭제</a>
                 </div>
-              </footer><br>
+              </footer>
               
               <!-- 댓글 등록 -->
               <div class="card">
-                <div class="card-body">
+                <div class="card-body" style=" padding-bottom: 0;">
                 <span class="comment-top">댓글작성</span>
                 <!-- <form action='${contextPath}/app/freeboard/comment/add' method='post'> -->
                 <form action='comment/add' method="post">
-                  <!-- <input type='hidden' name='commentWriter' value='${loginUser}'/> -->
+                  <!-- <input type='hidden' name='commentWriter' value='${member}'/> -->
                   <input type='hidden' name='studyNo' value='${freeBoard.studyNo}'/>
                   <input type='hidden' name='boardNo' value='${freeBoard.freeBoardNo}'/>
-                  <textarea id='f-commentText' type="text" name='commentText' class="form-control"></textarea>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn btn-light btn-sm">등록</button>
+                  <div class="comment-wrap">
+	                  <textarea id='f-commentText' type="text" name='commentText' class="form-control" style="width: 90%;"></textarea>
+	                  <button class="btn btn-light" style=" padding: 22px 18px; border-radius: 11px; margin-left: 8px;">등록</button>
                   </div>
+                  
                 </form>
                 </div>
               </div>
+              
               <br>
               <div id="empty-comment">
                 <c:if test="${empty commentList}">등록된 댓글이 없습니다.</c:if>
               </div>
                 
-                <!-- 댓글 목록 -->
-                <c:forEach items="${commentList}" var="comment">
-                <div class="card">
-                <div class="card-body">
-                  <span style="font-weight: bold">${comment.commentWriter.perNickname}</span><br>
-                  <span>${comment.commentText}</span><br>
-                  <span>${comment.commentRegisteredDate}</span>
-                  <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <c:if test="${comment.commentWriter.perNo eq loginUser.perNo}">
-                    
-                    <!-- 댓글 수정 -->
-                    <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">수정</button>
-                    
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <!-- <form> -->
-                              <form action='comment/update' method="post">
-                                <input type='hidden' name='studyNo' value='${comment.studyNo}'/>
-                                <input type='hidden' name='boardNo' value='${comment.boardNo}'/>
-                                <input type='hidden' name='commentNo' value='${comment.commentNo}'/>
-                                <div class="mb-3">
-                                  <label for="message-text" class="col-form-label">내용</label>
-                                  <!-- <textarea class="form-control" id="message-text"></textarea> -->
-                                  <textarea type="text" class="form-control" id='f-commentText' name='commentText' ></textarea>
-                                </div>
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">취소</button>
-                                <button class="btn btn-dark">수정</button>
-                              </form>
-                            </div>
-                            <!-- <div class="modal-footer">
-                            </div> -->
-                          <!-- </form> -->
-                        </div>
-                      </div>
-                    </div>
-                    
-                      <a href='comment/updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link">수정</a>
-                      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link">삭제</a>
-                    </c:if>
-                  </div>
-                  </div>
-                  </div>
-                </c:forEach>
+                
+                <div class="commentList-wrap" style="max-height: 300px; overflow-y: scroll;">
+	                <!-- 댓글 목록 -->
+	                <c:forEach items="${commentList}" var="comment">
+	                <div class="card2">
+	                <div class="card-body" style="padding: 5px 23px;">
+	                  <span style="font-size: 15px;">${comment.commentText}</span><br>
+	                  
+	                  <span style="font-size: 12px;">${comment.commentWriter.perNickname} | ${comment.commentRegisteredDate}</span>
+	                  <div class="btn-group" role="group" aria-label="Basic outlined example">
+	                    <c:if test="${comment.commentWriter.perNo eq member.perNo}">
+	                    
+	                    <!-- 댓글 수정 -->
+	                    <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" style="font-size: 12px; padding: 3px 6px;">수정</button>
+	                    
+	                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	                      <div class="modal-dialog">
+	                        <div class="modal-content">
+	                            <div class="modal-header">
+	                              <h5 class="modal-title" id="exampleModalLabel">댓글 수정</h5>
+	                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                            </div>
+	                            <div class="modal-body">
+	                              <!-- <form> -->
+	                              <form action='comment/update' method="post">
+	                                <input type='hidden' name='studyNo' value='${comment.studyNo}'/>
+	                                <input type='hidden' name='boardNo' value='${comment.boardNo}'/>
+	                                <input type='hidden' name='commentNo' value='${comment.commentNo}'/>
+	                                <div class="mb-3">
+	                                  <label for="message-text" class="col-form-label">내용</label>
+	                                  <!-- <textarea class="form-control" id="message-text"></textarea> -->
+	                                  <textarea type="text" class="form-control" id='f-commentText' name='commentText' ></textarea>
+	                                </div>
+	                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">취소</button>
+	                                <button class="btn btn-dark">수정</button>
+	                              </form>
+	                            </div>
+	                            <!-- <div class="modal-footer">
+	                            </div> -->
+	                          <!-- </form> -->
+	                        </div>
+	                      </div>
+	                    </div>
+	                      <a href='comment/delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}&commentno=${comment.commentNo}' class="btn btn-link" style="font-size: 12px; padding: 3px 6px;">삭제</a>
+	                    </c:if>
+	                  </div>
+	                  </div>
+	                 </div>
+	                </c:forEach>
+               </div>
              </div>
             
           </div> <%-- end row sub-items --%>
