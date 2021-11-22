@@ -16,6 +16,11 @@
 <script src='${contextPath}/css/calendar/timegrid/main.js'></script>
 
 <style>
+.pt-4 {
+  max-height: 697px;
+  margin-bottom: 100px;
+}
+
 .breadcrumbs {
 	padding: 15px 0 0 0;
 }
