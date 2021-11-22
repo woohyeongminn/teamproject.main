@@ -92,6 +92,10 @@ public class PerMemberController {
           return name + "_110x110";
         }
       });
+
+    } else {
+
+      member.setPerPhoto("perProfile");
     }
 
     memberDao.insert(member);

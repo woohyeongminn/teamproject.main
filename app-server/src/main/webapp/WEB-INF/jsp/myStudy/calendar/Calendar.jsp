@@ -15,7 +15,8 @@
 <script src='${contextPath}/css/calendar/timegrid/main.js'></script>
 
 <div style="text-align: center;">
-  <b style="font-size:18px;">${myStudy.studyTitle}📆</b>
+  <p style="font-size:18px;">📆</p>
+  <b style="font-size:18px;">${myStudy.studyTitle}</b>
 </div>
 
 <script>
