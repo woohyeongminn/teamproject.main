@@ -223,12 +223,12 @@
 		              <c:when test="${guilder == 'false'}">
 		                <li><a href='join?studyno=${study.studyNo}' class="btn btn-light">참여 신청</a></li>
 		              </c:when>
-		              <c:when test="${guilder == 'waitingGuilder'}">
+		              <!-- <c:when test="${guilder == 'waitingGuilder'}">
 		                <li>승인 대기중</li>
 		              </c:when>
 		              <c:when test="${guilder == 'guilder'}">
 		                <li>참여중</li>
-		              </c:when>
+		              </c:when> -->
 		            </c:choose>
 		          </c:if>
 		          
