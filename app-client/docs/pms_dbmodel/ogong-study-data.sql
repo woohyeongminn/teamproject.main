@@ -46,35 +46,35 @@ values(7, '프랑스어 공부 하실 분', 1, 14, 1, '열심히 참여하실 �
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status, area) 
-values(8, '컴퓨터 활용능력 1급 스터디', 2, 16, 2, '인강을 통해 학습, 메신저와 대면 스터디로 질답 공유', '2021-11-8', 8, 2, '시흥시');
+values(8, '컴퓨터 활용능력 1급 스터디', 2, 16, 2, '인강을 통해 학습, 메신저와 대면 스터디로 질답 공유', '2021-11-8', 17, 2, '시흥시');
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
-values(9, 'CS / Java / Spring 모의 면접 스터디 팀원 구합니다 !', 3, 18, 3, 'CS, Java, Spring 모의 면접 진행할 팀원 모집', '2021-11-9', 9, 1);
+values(9, 'CS / Java / Spring 모의 면접 스터디 팀원 구합니다 !', 3, 18, 3, 'CS, Java, Spring 모의 면접 진행할 팀원 모집', '2021-11-9', 18, 1);
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status, area) 
-values(10, 'c언어 알고리즘 스터디', 4, 20, 1, '알고리즘 문제 푼 후 코드리뷰', '2021-11-10', 10, 2, '양주시');
+values(10, 'c언어 알고리즘 스터디', 4, 20, 1, '알고리즘 문제 푼 후 코드리뷰', '2021-11-10', 19, 2, '양주시');
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
-values(11, '에어로빅 배우실 분 구해요', 5, 22, 2, '몸치 대환영', '2021-11-11', 11, 1);
+values(11, '에어로빅 배우실 분 구해요', 5, 22, 2, '몸치 대환영', '2021-11-11', 20, 1);
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status, area) 
-values(12, '식물 키우기 스터디 모집', 6, 24, 3, '식물 자주 죽이시는 분 대환영', '2021-11-12', 12, 2, '평택시');
+values(12, '식물 키우기 스터디 모집', 6, 24, 3, '식물 자주 죽이시는 분 대환영', '2021-11-12', 21, 2, '평택시');
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
-values(13, '독일어 공부 하실 분', 1, 26, 1, '성실하게 참여하실 분 아니면 신청하지도 마세요', '2021-11-13', 13, 1);
+values(13, '독일어 공부 하실 분', 1, 26, 1, '성실하게 참여하실 분 아니면 신청하지도 마세요', '2021-11-13', 22, 1);
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status, area) 
-values(14, '방학기념 컴퓨터 초보를 위한 스터디', 2, 28, 2, '방학 동안 컴퓨터활용능력을 기르고 자격증까지 취득할 수 있는 스터디를 진행하고자 합니다. 원하시는 다른 주제가 있다면 스터디원분들과 같이 정하고 싶습니다!', '2021-11-14', 14, 2, '제주시');
+values(14, '방학기념 컴퓨터 초보를 위한 스터디', 2, 28, 2, '방학 동안 컴퓨터활용능력을 기르고 자격증까지 취득할 수 있는 스터디를 진행하고자 합니다. 원하시는 다른 주제가 있다면 스터디원분들과 같이 정하고 싶습니다!', '2021-11-14', 23, 2, '제주시');
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
-values(15, '취업용 포트폴리오 스터디 모집', 3, 30, 3, '취업을 위한 웹사이트 제작 및 배포가 목표 입니다. 혼자서 포트폴리오 제작 하시는데 어려움을 겪고 계신분들 환영 합니다.', '2021-11-15', 15, 1);
+values(15, '취업용 포트폴리오 스터디 모집', 3, 30, 3, '취업을 위한 웹사이트 제작 및 배포가 목표 입니다. 혼자서 포트폴리오 제작 하시는데 어려움을 겪고 계신분들 환영 합니다.', '2021-11-15', 24, 1);
 
 insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status, area) 
@@ -122,33 +122,6 @@ insert into study_guilder(member_no,study_no,created_dt,status)
 values(7,7,'2021-11-7',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
-values(8,8,'2021-11-8',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(9,9,'2021-11-9',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(10,10,'2021-11-10',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(11,11,'2021-11-11',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(12,12,'2021-11-12',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(13,13,'2021-11-13',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(14,14,'2021-11-14',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(15,15,'2021-11-15',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
-values(16,16,'2021-11-16',2);
-
-insert into study_guilder(member_no,study_no,created_dt,status) 
 values(17,17,'2021-11-17',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
@@ -159,6 +132,18 @@ values(19,19,'2021-11-19',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
 values(20,20,'2021-11-20',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(21,21,'2021-11-20',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(22,22,'2021-11-20',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(23,23,'2021-11-20',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(24,24,'2021-11-20',2);
 
 -------------------------------------------------------------------------------------------------
 
