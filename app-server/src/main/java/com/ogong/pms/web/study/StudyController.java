@@ -229,7 +229,7 @@ public class StudyController {
   }
 
   /* 스터디 검색 */
-  @GetMapping("/study/search")
+  @GetMapping("/study/list/search")
   public ModelAndView search(String where, String keyword) throws Exception {
     if (where.equals("1")) {
       where = "ss.name";
