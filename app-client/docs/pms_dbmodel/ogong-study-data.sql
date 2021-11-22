@@ -164,6 +164,9 @@ values(1,19,'2021-11-19',2);
 insert into study_guilder(member_no,study_no,created_dt,status) 
 values(1,20,'2021-11-20',2);
 
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,21,'2021-11-21',2);
+
 -------------------------------------------------------------------------------------------------
 
 -- 캘린더 중요도 값
