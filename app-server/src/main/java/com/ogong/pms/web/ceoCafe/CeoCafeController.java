@@ -210,6 +210,11 @@ public class CeoCafeController {
       throw new Exception("등록된 카페가 없습니다.");
     }
 
+    System.out.println("*************" + cafe.getCafeImgs());
+    System.out.println("*************" + cafe.getCafeImgs());
+
+
+
     String status = CafeHandlerHelper.getCafeStatusLabel(cafe.getCafeStatus());
 
     ModelAndView mv = new ModelAndView();

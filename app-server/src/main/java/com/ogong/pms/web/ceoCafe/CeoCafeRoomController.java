@@ -140,9 +140,6 @@ public class CeoCafeRoomController {
       cafeRoomDao.insertRoomImage(filename, cafeRoom.getRoomNo());
     }
 
-    System.out.println("*****************" + cafeRoom.getRoomImg());
-
-
     //fileNames.add(new CafeImage(fileName));
 
     //      if (!fileNames.isEmpty()) {
@@ -183,12 +180,6 @@ public class CeoCafeRoomController {
 
   @PostMapping("/ceomember/cafe/room/update")
   public ModelAndView roomUpdate(int cafeno, CafeRoom cafeRoom, Part photoFile) throws Exception {
-
-    //CafeRoom oldcafeRoom = cafeRoomDao.findByRoomNo(cafeRoom.getRoomNo());
-
-    //    if (oldcafeRoom == null) {
-    //      throw new Exception("등록된 스터디룸이 없습니다.");
-    //    }
 
     Cafe cafe = cafeDao.findByCafeNo(cafeno);
 
