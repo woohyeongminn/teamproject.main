@@ -31,7 +31,8 @@ public interface StudyDao {
   //--------------- [ 구성원 ] ----------------------------------------
   List<Member> findByWaitingGuilderAll(int studyNo) throws Exception;
   List<Member> findByGuildersAll(int studyNo) throws Exception;
-  void insertGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
+  void insertGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo, int status) throws Exception;
+  void insertOwner(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo, int status) throws Exception;
   void updateOwner(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   void updateGuilder(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;
   //  void updateGuilderExpulsion(@Param("studyNo")int studyNo, @Param("memberNo")int memberNo) throws Exception;

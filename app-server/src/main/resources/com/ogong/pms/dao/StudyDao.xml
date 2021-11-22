@@ -305,6 +305,12 @@
     insert into study_guilder(study_no, member_no, status) 
     values(#{studyNo},#{memberNo},1)
   </insert>
+  
+    <!--  ===[스터디 등록 시 작성자 -> 조장]=== -->
+  <insert id="insertOwner" parameterType="map">
+    insert into study_guilder(study_no, member_no, status) 
+    values(#{studyNo},#{memberNo},2)
+  </insert>
 
  <!--  ===[조장권한 위임]=== -->
   <update id="updateOwner" parameterType="map">
