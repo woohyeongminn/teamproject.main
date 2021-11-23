@@ -271,14 +271,12 @@ public class PerMemberController {
       memberDao.updateActive(perMember);
       sqlSessionFactory.openSession().commit();
 
-      mv.addObject("pageTitle", "감사합니다.");
-      mv.addObject("contentUrl", "member/PerMemberDelete.jsp");
-      mv.setViewName("template1");
+      mv.setViewName("redirect:logout");
       return mv;
     } 
 
     mv.addObject("pageTitle", "⚠정보 오류");
-    mv.addObject("refresh", "1;url=deleteform");
+    mv.addObject("refresh", "2;url=deleteform");
     mv.addObject("contentUrl", "member/InputFail.jsp");
     mv.setViewName("template1");
     return mv;

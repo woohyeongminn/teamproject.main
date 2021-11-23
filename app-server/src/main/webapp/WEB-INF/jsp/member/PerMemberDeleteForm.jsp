@@ -77,7 +77,7 @@
       </div>         
       
        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-         <button class="btn btn-outline-dark" type="submit" >❌탈퇴하기</button> 
+         <button class="btn btn-outline-dark" type="submit" onclick="deleteMember()">❌탈퇴하기</button> 
        </div><hr> 
        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
          <a href="detail">취소하기</a>
@@ -110,6 +110,10 @@ fStatus.addEventListener("input", function() {
 	  etc.style["display"] = "none";
   }
 });
+
+function deleteMember(){
+	alert("탈퇴 되었습니다. 이용해주셔서 감사합니다.")
+}
 
 </script>
  
