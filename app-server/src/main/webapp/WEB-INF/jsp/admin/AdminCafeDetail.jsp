@@ -123,8 +123,8 @@
    35% {margin-left:-100%;} /* 35 ~ 50 : 변이 */
    50% {margin-left:-200%;}
    60% {margin-left:-200%;}
-   75% {margin-left:-300%;}
-   85% {margin-left:-300%;}
+   /* 75% {margin-left:-300%;}
+   85% {margin-left:-300%;} */
    100% {margin-left:0;}
   }
 

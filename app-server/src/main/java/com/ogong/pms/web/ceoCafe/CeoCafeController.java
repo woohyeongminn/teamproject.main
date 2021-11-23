@@ -274,7 +274,6 @@ public class CeoCafeController {
     String tel2 = cafe.getPhone().substring(4, 8);
     String tel3 = cafe.getPhone().substring(9, 13);
 
-
     String[] strArr = cafe.getLocation().split(", ");
     //    Arrays.toString(strArr);
     String addr1 = strArr[0];
@@ -375,6 +374,8 @@ public class CeoCafeController {
     cafe.setCloseTime(LocalTime.parse(inputCloseTime));
     cafe.setPhone(tel1 + "-" + tel2 + "-" + tel3);
     cafe.setLocation(addr2 + ", " + addr3);
+
+    System.out.println("*******************************"+cafe);
 
     cafeDao.updateCafe(cafe);
     sqlSessionFactory.openSession().commit();

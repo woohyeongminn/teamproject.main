@@ -49,6 +49,25 @@ ul {
     width: 60%;
 }
 
+.slide{height:300px;overflow:hidden;}
+    .slide ul{width:calc(100% * 3);display:flex;animation:slide 8s infinite;} /* slide를 8초동안 진행하며 무한반복 함 */
+    .slide li{width:calc(100% / 3);height:300px;}
+    /* .slide li:nth-child(1){background:#ffa;}
+    .slide li:nth-child(2){background:#faa;}
+    .slide li:nth-child(3){background:#afa;}
+    .slide li:nth-child(4){background:#aaf;} */
+    @keyframes slide {
+      0% {margin-left:0;} /* 0 ~ 10  : 정지 */
+      10% {margin-left:0;} /* 10 ~ 25 : 변이 */
+      25% {margin-left:-100%;} /* 25 ~ 35 : 정지 */
+      35% {margin-left:-100%;} /* 35 ~ 50 : 변이 */
+      50% {margin-left:-200%;}
+      60% {margin-left:-200%;}
+      /* 75% {margin-left:-300%;}
+      85% {margin-left:-300%;} */
+      100% {margin-left:0;}
+    }
+    
 .cafe-top .cafeImg {
   width: 600px;
   height: 250px;
@@ -129,13 +148,14 @@ ul {
   <hr>
     <form action='update' method='post' enctype="multipart/form-data">
     <input type="hidden" name="name" value="${cafe.name}"/>
+    <input type="hidden" name="no" value="${cafe.no}"/>
     <div class="cafe-wrap">
       <div class = "cafe-top">
       
       <c:choose>
           <c:when test="${empty cafe.cafeImgs}">
             <div style="width: 488px; height: 300px; margin-bottom:10px; margin: 0 auto; background-color: lightgray"></div>
-            <span >등록된 카페 이미지가 없습니다.</span>
+            <span>등록된 카페 이미지가 없습니다.</span>
           </c:when>
           
           <c:otherwise>
