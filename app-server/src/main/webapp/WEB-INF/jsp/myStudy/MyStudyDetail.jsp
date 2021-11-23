@@ -211,7 +211,7 @@ button#buttonsave:hover {
               <span class="menu-title" style="color:black"> 📚 MY STUDY LIST</span>
             </a>
           </li>
-          
+          <c:if test="${status != 'waiting'}">
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#guilder" aria-expanded="false" aria-controls="guilder">
               <span class="menu-title" style="color:black">구성원&nbsp;＞</span>
@@ -272,19 +272,24 @@ button#buttonsave:hover {
           </li>
           
           <c:if test="${study.owner.perNo == member.perNo}">
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#controll" aria-expanded="false" aria-controls="waiting">
-              <span class="menu-title" style="color:black">관리</span>
-              <span>&nbsp;＞</span>
-            </a>
-            <div class="collapse" id="controll">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">수정</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">삭제</a></li>
-              </ul>
-            </div>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#controll" aria-expanded="false" aria-controls="waiting">
+                <span class="menu-title" style="color:black">관리&nbsp;＞</span>
+              </a>
+              <div class="collapse" id="controll">
+                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'>수정</a></li>
+                 </ul>
+                 
+                 <c:if test="${!(study.countMember > '1')}">
+                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a href="#" onclick="return delBtn_click(${study.waitingCountMember});"> 삭제</a></li>
+                 </ul>
+                 </c:if>
+              </div>
+            </li>
           </c:if>
+         </c:if>
         </ul>
       </nav><!-- side nav-->
 

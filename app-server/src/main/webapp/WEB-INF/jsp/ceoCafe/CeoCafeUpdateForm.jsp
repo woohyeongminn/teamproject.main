@@ -127,7 +127,7 @@ ul {
   <br>
   <h4 style="text-align: center;">[${cafe.name}]</h4>
   <hr>
-    <form action='update' name='cafeInfo' method='post' enctype="multipart/form-data">
+    <form action='update' method='post' enctype="multipart/form-data">
     <input type="hidden" name="name" value="${cafe.name}"/>
     <div class="cafe-wrap">
       <div class = "cafe-top">
@@ -224,6 +224,7 @@ ul {
       </div>
     </div>
   </form>
+  
 </div>
 </body>
 

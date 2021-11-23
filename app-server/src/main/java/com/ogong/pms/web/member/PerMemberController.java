@@ -262,7 +262,7 @@ public class PerMemberController {
       perMember.setPerNickname("Deleted Member("+ perMember.getPerNickname() +")");
       perMember.setPerEmail("Deleted Email");
       perMember.setPerPassword("Deleted Password");
-      perMember.setPerPhoto("Deleted Photo");
+      perMember.setPerPhoto("perProfile");
       perMember.setPerTel("Deleted Tel");
       perMember.setPerStatus(1);
       perMember.setActive(2);

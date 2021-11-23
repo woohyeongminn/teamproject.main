@@ -156,19 +156,22 @@
               <span class="menu-title" style="color:black">구성원&nbsp;＞</span>
             </a>
             <div class="collapse" id="guilder">
-              <c:if test="${loginUser.perNo eq study.owner.perNo}">
+            
+              <c:if test="${member.perNo eq study.owner.perNo}">
                <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>참여 중인 구성원</a></li>
-              </ul>
-              <ul class="nav flex-column sub-menu">
+              <!-- </ul>
+              <ul class="nav flex-column sub-menu"> -->
                   <li class="nav-item"> <a class="nav-link" href='${contextPath}/app/mystudy/guilder/waitinglist?studyNo=${study.studyNo}'>승인 대기 중인 구성원</a></li>
               </ul>
               </c:if>
-              <c:if test="${loginUser.perNo ne study.owner.perNo}">
+              
+              <c:if test="${member.perNo ne study.owner.perNo}">
               <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href='${contextPath}/app/mystudy/guilder/list?studyNo=${study.studyNo}'>참여 중인 구성원</a></li>
               </ul>
               </c:if>
+              
             </div>
           </li>
           
@@ -213,15 +216,18 @@
           <c:if test="${study.owner.perNo == member.perNo}">
 	          <li class="nav-item">
 	            <a class="nav-link" data-toggle="collapse" href="#controll" aria-expanded="false" aria-controls="waiting">
-	              <span class="menu-title" style="color:black">관리</span>
-	              <span>&nbsp;＞</span>
+	              <span class="menu-title" style="color:black">관리&nbsp;＞</span>
 	            </a>
 	            <div class="collapse" id="controll">
-			           <a href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}' class="btn btn-outline-dark studyBtn">수정</a>
-			                
-		             <c:if test="${!(study.countMember > '1')}">
-		               <button type="button" class="btn btn-outline-dark studyBtn" onclick="return delBtn_click(${study.waitingCountMember});">삭제</button>
-		             </c:if>
+		             <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href='${contextPath}/app/mystudy/updateform?studyno=${study.studyNo}'>수정</a></li>
+                 </ul>
+                 
+                 <c:if test="${!(study.countMember > '1')}">
+	               <ul class="nav flex-column sub-menu">
+	                  <li class="nav-item"><a href="#" onclick="return delBtn_click(${study.waitingCountMember});"> 삭제</a></li>
+	               </ul>
+                 </c:if>
 	            </div>
 	          </li>
           </c:if>
@@ -231,6 +237,51 @@
          
       </nav><!-- side nav-->
 
+<script type="text/javascript">
+  <!-- 내 스터디 삭제 -->
+  function delBtn_click(waitingGuilder) {
+    if (waitingGuilder > 0) {
+      if (confirm("스터디 삭제 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 삭제하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/delete?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+
+    } else {
+      if (confirm("정말 삭제하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/delete?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+    }
+  }
+  
+  <!-- 내 스터디 탈퇴 -->
+  function exitBtn_click(studyno, countMember, waitingGuilder) {
+    if (countMember > 1) {
+      if (confirm("구성원에게 조장 권한을 위임하고 탈퇴를 진행해 주세요.") == true) {
+        location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+
+    } else if (waitingGuilder > 0) {
+      if (confirm("스터디 탈퇴 시, 승인 대기 중인 구성원도 모두 거절됩니다.\n정말 탈퇴하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+
+    } else {
+      if (confirm("정말 탈퇴하시겠습니까?") == true) {
+        location.href="${contextPath}/app/mystudy/exit?studyno=${study.studyNo}";
+      } else {
+        return false;
+      }
+    }
+  }
+  </script>
+  
   <!-- inject:js -->
   <script src="${contextPath}/css/study/js/off-canvas.js"></script>
   <script src="${contextPath}/css/study/js/hoverable-collapse.js"></script>
