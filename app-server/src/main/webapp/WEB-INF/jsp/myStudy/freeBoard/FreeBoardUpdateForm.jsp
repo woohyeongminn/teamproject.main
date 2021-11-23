@@ -30,8 +30,9 @@
           <%-- row sub-items --%>
           <div class="row">
             <div class="all-content">
-						  <form action='add' method='post' name='freeBoardInfo' onsubmit="return checkValue()">
+						  <form action='update' method='post' name='freeBoardInfo' onsubmit="return checkValue()">
 						  <input type='hidden' name='studyNo' value='${freeBoard.studyNo}'>
+						  <input type='hidden' name='freeBoardNo' value='${freeBoard.freeBoardNo}'>
 						  <div id='content'>
 						      <br>
 						  <div class="mb-3 row">
