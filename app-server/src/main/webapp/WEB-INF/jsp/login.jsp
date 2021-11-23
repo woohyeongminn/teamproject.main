@@ -27,7 +27,7 @@
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <!-- 구글 -->
-<meta name = "google-signin-client_id"content = "866898854522-6sla16re13s21boo6nf9u8116n62aafv.apps.googleusercontent.com">
+<meta name = "google-signin-client_id"content = "876093660376-d5kctlkgkubq3t2mhje0v1v7nih54vb4.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
@@ -241,13 +241,13 @@ section {
             </div> 
              
            
+					</div>
             <div id="google_id_login">
-            <img src="${contextPath}/img/google_40x40.png" style="padding: 10px; width: 58px;"></img>
+            <%-- <img src="${contextPath}/img/google_40x40.png" style="padding: 10px; width: 58px;"></img> --%>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
             </div>
-            <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
             <!-- <a href="#" onclick="signOut();">Sign out</a> -->
              
-					</div>
 					</div>
 				</div>
 
@@ -289,7 +289,7 @@ function onSignIn(googleUser) {
 	 success: function(data) {
 		 if (data){
 			 
-			 alert(data);
+			 alert("로그인 성공! 새로고침을 해 주세요!");
 		 
 			 
 		 } else {

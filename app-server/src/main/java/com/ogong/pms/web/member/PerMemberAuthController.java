@@ -3,6 +3,7 @@ package com.ogong.pms.web.member;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import com.ogong.pms.domain.Member;
 public class PerMemberAuthController {
 
   @Autowired MemberDao memberDao;
+  @Autowired SqlSessionFactory sqlSessionFactory;
 
   @GetMapping("/member/form")
   public ModelAndView perLoginForm() {
@@ -73,14 +75,35 @@ public class PerMemberAuthController {
 
   @PostMapping("/member/google")
   @ResponseBody
-  public String test(@RequestParam("name") String name,@RequestParam("email") String email) {
+  public ModelAndView test(@RequestParam("name") String name,@RequestParam("email") String email, HttpSession session) throws Exception {
 
     System.out.println("*********************"+name);
     System.out.println("*********************"+email);
 
-    return name+","+email;
+    Member member = new Member();
+    member.setPerTel("010-8125-1563");
+
+    member.setPerEmail(email);
+    member.setPerName(name);
+    member.setPerNickname(name);
+    member.setPerPhoto("perProfile");
+    member.setPerPassword("1234");
+
+    member.setPerStatus(Member.PER);
+
+    memberDao.insert(member);
+    sqlSessionFactory.openSession().commit();
+
+    Member member2 = memberDao.findByEmailAndPassword(email, member.getPerPassword());
+
+    ModelAndView mv = new ModelAndView();
+
+    if (member2 != null) {
+      session.setAttribute("loginUser", member2);
+      //mv.setViewName("redirect:../index");
+    }
+
+    return mv;
   }
-
-
 
 }
