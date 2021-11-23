@@ -42,10 +42,10 @@
 					    <textarea id='f-freeBoardContent' type='text' name='freeBoardContent' class="form-control" rows="3"></textarea>
 					  </div>
 					
-					  <div class="mb-3 row">
+					  <!-- <div class="mb-3 row">
 					    <label for='f-freeBoardFile'>파일</label>
 					    <input id='f-freeBoardFile' type='file' name='freeBoardFile' class="form-control">
-					  </div>
+					  </div> -->
 					
 					   <!-- <label for='f-freeBoardFile' class='form-label'>파일</label>
 					   <input id='f-freeBoardFile' type='file' name='freeBoardFile' /><br>

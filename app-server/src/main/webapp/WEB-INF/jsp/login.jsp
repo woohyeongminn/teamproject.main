@@ -150,6 +150,8 @@ section {
 						<span class="card-text">개인 회원 로그인<br> 페이지로 이동합니다.
 						</span> <span><a href="member/form" class="btn btn-outline-dark">LOGIN</a>&emsp;</span>
 
+            <div clss= "snsLogin" style="display: flex; flex-direction: row;">
+
 						<!-- 네이버 로그인 버튼 노출 영역 -->
 						<div id="naver_id_login"></div>
 						<script type="text/javascript">
@@ -165,7 +167,7 @@ section {
 						<!-- 카카오 로그인 -->
 						<div id="kakao_id_login">
 						<a href="https://kauth.kakao.com/oauth/authorize?client_id=9e2ad8ce072bca1d727914f05e243cbb&redirect_uri=http://localhost:8080/ogong/app/login&response_type=code">
-							<img src="${contextPath}/img/kakao_login.png"></img>
+							<img src="${contextPath}/img/kakao_40x40.jpg" style="padding: 10px; margin-left: 10px;"></img>
 						</a>
 
 						<script type="text/javascript">
@@ -238,14 +240,14 @@ section {
               
             </div> 
              
+           
             <div id="google_id_login">
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <img src="${contextPath}/img/google_40x40.png" style="padding: 10px; width: 58px;"></img>
             </div>
-            <a href="#" onclick="signOut();">Sign out</a>
+            <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+            <!-- <a href="#" onclick="signOut();">Sign out</a> -->
              
-             
-             
-             
+					</div>
 					</div>
 				</div>
 
@@ -264,6 +266,7 @@ section {
 
 
 <script type="text/javascript">
+
 function onSignIn(googleUser) {
 	
 	/*  var auth2 = gapi.auth2.getAuthInstande();
