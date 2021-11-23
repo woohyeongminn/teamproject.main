@@ -27,7 +27,7 @@
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <!-- 구글 -->
-<meta name = "google-signin-client_id"content = "866898854522-6sla16re13s21boo6nf9u8116n62aafv.apps.googleusercontent.com">
+<meta name = "google-signin-client_id"content = "876093660376-d5kctlkgkubq3t2mhje0v1v7nih54vb4.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 
@@ -286,7 +286,7 @@ function onSignIn(googleUser) {
 	 success: function(data) {
 		 if (data){
 			 
-			 alert(data);
+			 location.href = "../index";
 		 
 			 
 		 } else {
