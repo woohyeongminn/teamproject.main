@@ -241,13 +241,13 @@ section {
             </div> 
              
            
+					</div>
             <div id="google_id_login">
-            <img src="${contextPath}/img/google_40x40.png" style="padding: 10px; width: 58px;"></img>
+            <%-- <img src="${contextPath}/img/google_40x40.png" style="padding: 10px; width: 58px;"></img> --%>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
             </div>
-            <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
             <!-- <a href="#" onclick="signOut();">Sign out</a> -->
              
-					</div>
 					</div>
 				</div>
 
@@ -289,7 +289,7 @@ function onSignIn(googleUser) {
 	 success: function(data) {
 		 if (data){
 			 
-			 location.href = "../index";
+			 alert("로그인 성공! 새로고침을 해 주세요!");
 		 
 			 
 		 } else {
