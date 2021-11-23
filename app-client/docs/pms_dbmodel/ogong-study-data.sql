@@ -96,6 +96,10 @@ insert into study(
 study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status, area) 
 values(20, '웹 디자인 기능사 실기 시험', 2, 13, 3, '최소 주2회 공부한 내용 공유', '2021-11-20', 1, 2, '부천시');
 
+insert into study(
+study_no, name, subject_no, no_people, face_no, introduction, created_dt, member_no, status) 
+values(21, '불법 광고', 3, 3, 2, '불법 광고', '2021-11-21', 1, 1);
+
 -------------------------------------------------------------------------------------------------
 
 -- 길더 (조장도 길더에 들어 가야 함)
@@ -159,6 +163,9 @@ values(1,19,'2021-11-19',2);
 
 insert into study_guilder(member_no,study_no,created_dt,status) 
 values(1,20,'2021-11-20',2);
+
+insert into study_guilder(member_no,study_no,created_dt,status) 
+values(1,21,'2021-11-21',2);
 
 -------------------------------------------------------------------------------------------------
 

@@ -72,8 +72,8 @@
           </c:choose>
           </h4>
           <p class="mb-0">
-          참여 <ins>${study.waitingCountMember}</ins><sub>명</sub><br>
-          승인 대기 <ins>${study.countMember}</ins><sub>명</sub><br>
+          참여 <ins>${study.countMember}</ins><sub>명</sub><br>
+          승인 대기 <ins>${study.waitingCountMember}</ins><sub>명</sub><br>
           북마크 <ins>${study.countBookMember}</ins><sub>명</sub>
           </p>
         </div>
@@ -84,10 +84,10 @@
 
           <c:if test="${study.owner.perNo eq loginUser.perNo}">
             <!-- 스터디 수정 -->
-            <li><a href="../updateform?studyno=${study.studyNo}" class="btn btn-link">수정</a></li>
+            <!-- <li><a href="../updateform?studyno=${study.studyNo}" class="btn btn-light">수정</a></li> -->
             
-            <li><button type="button" class="btn btn-link" data-bs-toggle="modal"
-              data-bs-target="#exampleModal" data-bs-whatever="@mdo">Test</button></li>
+            <li><button type="button" class="btn btn-light" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" data-bs-whatever="@mdo">수정</button></li>
             
           <div class="modal fade" id="exampleModal" tabindex="-1"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -191,29 +191,29 @@
           </div>
     
             <!-- 스터디 삭제 -->
-              <li><a href='delete?studyno=${study.studyNo}' class="btn btn-link">삭제</a><li>
+              <li><a href='delete?studyno=${study.studyNo}' class="btn btn-light">삭제</a><li>
             </c:if>
             
               <!-- 스터디 참여 -->
               <c:if test="${study.owner.perNo ne loginUser.perNo}">
                 <c:choose>
                   <c:when test="${guilder == 'false'}">
-                    <li><a href='join?studyno=${study.studyNo}' class="btn btn-link">참여 신청</a></li>
+                    <li><a href='join?studyno=${study.studyNo}' class="btn btn-light">참여 신청</a></li>
                   </c:when>
-                  <c:when test="${guilder == 'waitingGuilder'}">
+                  <!-- <c:when test="${guilder == 'waitingGuilder'}">
                     <li>승인 대기중</li>
                   </c:when>
                   <c:when test="${guilder == 'guilder'}">
                     <li>참여중</li>
-                  </c:when>
+                  </c:when> -->
                 </c:choose>
               </c:if>
               
               <!-- 스터디 북마크 -->
-               <li><a href='delete?studyno=${study.studyNo}' class="btn btn-link">북마크 삭제</a></li>
+               <li><a href='delete?studyno=${study.studyNo}' class="btn btn-light">북마크 삭제</a></li>
     
             <!-- 스터디 목록 -->
-            <li><a href="list" class="btn btn-link">목록</a></li>
+            <li><a href="list" class="btn btn-light">목록</a></li>
           </ol>
         </div>
       </div>

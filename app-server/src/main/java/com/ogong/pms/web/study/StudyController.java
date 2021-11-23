@@ -48,8 +48,8 @@ public class StudyController {
     study.setBookMarkMember(new ArrayList<>());
 
     studyDao.insert(study);
-    studyDao.insertGuilder(study.getStudyNo(),
-        ((Member) session.getAttribute("loginUser")).getPerNo());
+    studyDao.insertOwner(study.getStudyNo(),
+        ((Member) session.getAttribute("loginUser")).getPerNo(), 2);
     studyDao.updateGuilder(study.getStudyNo(),
         ((Member) session.getAttribute("loginUser")).getPerNo());
     sqlSessionFactory.openSession().commit();
@@ -217,7 +217,7 @@ public class StudyController {
 
     study.getWaitingMember().add((Member) session.getAttribute("loginUser"));
     studyDao.insertGuilder(study.getStudyNo(),
-        ((Member) session.getAttribute("loginUser")).getPerNo());
+        ((Member) session.getAttribute("loginUser")).getPerNo(), 1);
     sqlSessionFactory.openSession().commit();
 
     ModelAndView mv = new ModelAndView();
@@ -229,7 +229,7 @@ public class StudyController {
   }
 
   /* 스터디 검색 */
-  @GetMapping("/study/list/search")
+  @GetMapping("/study/search")
   public ModelAndView search(String where, String keyword) throws Exception {
     if (where.equals("1")) {
       where = "ss.name";
