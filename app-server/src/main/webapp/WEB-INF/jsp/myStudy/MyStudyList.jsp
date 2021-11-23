@@ -198,6 +198,9 @@
                 <c:forEach items="${waitingStudyList}" var="study">
                 <li class="nav-item"> <a class="nav-link" href="${contextPath}/app/mystudy/detail?studyNo=${study.studyNo}">${study.studyTitle}</a></li>
                 </c:forEach>
+                <c:if test="${empty waitingStudyList}">
+                 <li class="nav-item">&nbsp;&nbsp;스터디가 없습니다.</li>
+                </c:if>
               </ul>
             </div>
           </li>

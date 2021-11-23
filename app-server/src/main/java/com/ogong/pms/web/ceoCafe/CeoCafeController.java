@@ -274,7 +274,6 @@ public class CeoCafeController {
     String tel2 = cafe.getPhone().substring(4, 8);
     String tel3 = cafe.getPhone().substring(9, 13);
 
-
     String[] strArr = cafe.getLocation().split(", ");
     //    Arrays.toString(strArr);
     String addr1 = strArr[0];
@@ -302,7 +301,7 @@ public class CeoCafeController {
       Cafe cafe,
       Collection<Part> photoFileList,
       String tel1, String tel2, String tel3,
-      String addr1, String addr2,
+      String addr1, String addr2, String addr3,
       String inputOpenTime, String inputCloseTime) throws Exception {
 
     //    Cafe oldcafe = cafeDao.findByCafeNo(cafe.getNo());
@@ -310,9 +309,6 @@ public class CeoCafeController {
     //    if (oldcafe == null) {
     //      throw new Exception("등록된 카페가 없습니다.");
     //    }
-
-    String cafePhone = tel1 + "-" + tel2 + "-" + tel3;
-    cafe.setPhone(cafePhone);
 
     ArrayList<CafeImage> cafeImageList = new ArrayList<>();
 
@@ -373,8 +369,13 @@ public class CeoCafeController {
       cafeDao.insertCafeImage(img, cafe.getNo());
     }
 
+    cafe.setCafeImgs(cafeImageList);
     cafe.setOpenTime(LocalTime.parse(inputOpenTime));
     cafe.setCloseTime(LocalTime.parse(inputCloseTime));
+    cafe.setPhone(tel1 + "-" + tel2 + "-" + tel3);
+    cafe.setLocation(addr2 + ", " + addr3);
+
+    System.out.println("*******************************"+cafe);
 
     cafeDao.updateCafe(cafe);
     sqlSessionFactory.openSession().commit();

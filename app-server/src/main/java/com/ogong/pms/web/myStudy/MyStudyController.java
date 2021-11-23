@@ -89,6 +89,7 @@ public class MyStudyController {
     mv.addObject("guilderMembers", guilderMembers);
     mv.addObject("waitingStudyList", waitingStudyList);
     mv.addObject("myStudyList", myStudyList);
+    mv.addObject("member", loginUser);
     mv.addObject("pageTitle", "🗃 내 스터디 목록");
     mv.addObject("contentUrl", "myStudy/MyStudyList.jsp");
     mv.setViewName("template1");
@@ -276,6 +277,7 @@ public class MyStudyController {
     }
 
     mv.addObject("study", study);
+    mv.addObject("member", loginUser);
     mv.addObject("pageTitle", "내 스터디 수정");
     mv.addObject("contentUrl", "myStudy/MyStudyUpdateForm.jsp");
     mv.setViewName("template1");

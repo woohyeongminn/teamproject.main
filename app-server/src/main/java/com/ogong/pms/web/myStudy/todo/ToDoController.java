@@ -174,9 +174,9 @@ public class ToDoController extends HttpServlet {
   //  }
 
   @GetMapping("/mystudy/todo/delete")
-  public ModelAndView todoDelete(HttpSession session, int studyno, int todono) throws Exception {
+  public ModelAndView todoDelete(int studyno, int todono) throws Exception {
 
-    Member member = (Member) session.getAttribute("loginUser");
+    //Member member = (Member) session.getAttribute("loginUser");
 
     Study myStudy = studyDao.findByNo(studyno);
 

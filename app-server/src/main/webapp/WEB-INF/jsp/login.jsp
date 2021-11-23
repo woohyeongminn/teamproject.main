@@ -164,9 +164,8 @@ section {
 
 						<!-- 카카오 로그인 -->
 						<div id="kakao_id_login">
-						<a
-							href="https://kauth.kakao.com/oauth/authorize?client_id=9e2ad8ce072bca1d727914f05e243cbb&redirect_uri=http://localhost:8080/ogong/app/login&response_type=code">
-							<img src={kakao_login}></img> <span>카카오 로그인</span>
+						<a href="https://kauth.kakao.com/oauth/authorize?client_id=9e2ad8ce072bca1d727914f05e243cbb&redirect_uri=http://localhost:8080/ogong/app/login&response_type=code">
+							<img src="${contextPath}/img/kakao_login.png"></img>
 						</a>
 
 						<script type="text/javascript">
@@ -267,7 +266,7 @@ section {
 <script type="text/javascript">
 function onSignIn(googleUser) {
 	
-	/* var auth2 = gapi.auth2.getAuthInstande();
+	/*  var auth2 = gapi.auth2.getAuthInstande();
   
   if (auth2.isSigendIn.get()){ */
 	  var profile = googleUser.getBasicProfile();
@@ -275,17 +274,21 @@ function onSignIn(googleUser) {
 	  console.log('Name: ' + profile.getName());
 	  console.log('Image URL: ' + profile.getImageUrl());
 	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
- /*  } */
+  /* }  */
  
  $.ajax({
-	 url:"/member/login",
+	 url:"member/google",
 	 type:"POST",
-	 data: ,
-	 contentType: "text",
-	 
-	 success: function(result) {
-		 if (result){ alert("저장되었습니다.");
+	 data: {
+		 name: profile.getName(),
+		 email: profile.getEmail()
+	 },
+	 success: function(data) {
+		 if (data){
+			 
+			 alert(data);
 		 
+			 
 		 } else {
 			 alert("잠시 후에 시도해주세요."); }
 		 },

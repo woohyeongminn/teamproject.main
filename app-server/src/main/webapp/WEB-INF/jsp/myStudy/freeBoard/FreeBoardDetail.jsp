@@ -118,9 +118,11 @@
               <!-- 버튼 -->
               <footer class="mt-auto py-0">
                 <div class="btn-group">
-                    <a href='list?studyno=${freeBoard.studyNo}' class="f-btn">목록 &nbsp;| </a>
-                    <a href='updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="f-btn ">수정 &nbsp; | </a>
-                    <a href='delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="f-btn">삭제</a>
+                  <a href='list?studyno=${freeBoard.studyNo}' class="f-btn">목록</a>
+                  <c:if test="${loginUser.perNo eq freeBoard.freeBoardWriter.perNo}">
+	                  <a href='updateform?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="f-btn "> |&nbsp; 수정</a>
+	                  <a href='delete?studyno=${freeBoard.studyNo}&freeboardno=${freeBoard.freeBoardNo}' class="f-btn"> |&nbsp; 삭제</a>
+                  </c:if>
                 </div>
               </footer>
               
