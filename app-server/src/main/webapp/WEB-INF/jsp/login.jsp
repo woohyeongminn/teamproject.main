@@ -266,7 +266,7 @@ section {
 <script type="text/javascript">
 function onSignIn(googleUser) {
 	
-	/* var auth2 = gapi.auth2.getAuthInstande();
+	/*  var auth2 = gapi.auth2.getAuthInstande();
   
   if (auth2.isSigendIn.get()){ */
 	  var profile = googleUser.getBasicProfile();
@@ -274,17 +274,23 @@ function onSignIn(googleUser) {
 	  console.log('Name: ' + profile.getName());
 	  console.log('Image URL: ' + profile.getImageUrl());
 	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
- /*  } */
+  /* }  */
  
  $.ajax({
-	 url:"/member/login",
+	 url:"member/google",
 	 type:"POST",
-	 data: ,
+	 data: {
+		 name: "profile.getName()",
+		 email: "profile.getEmail()"
+	 },
 	 contentType: "text",
 	 
-	 success: function(result) {
-		 if (result){ alert("저장되었습니다.");
+	 success: function(data) {
+		 if (data){
+			 
+			 alert("저장되었습니다.");
 		 
+			 
 		 } else {
 			 alert("잠시 후에 시도해주세요."); }
 		 },
