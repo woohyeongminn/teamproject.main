@@ -92,6 +92,7 @@ public class GuilderController {
     }
 
     mv.addObject("study", myStudy);
+    mv.addObject("member", loginUser);
     mv.addObject("contentUrl", "myStudy/guilder/WaitingGuilderList.jsp");
     mv.setViewName("template1");
 
