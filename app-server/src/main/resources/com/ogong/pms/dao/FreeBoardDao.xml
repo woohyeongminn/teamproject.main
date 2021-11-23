@@ -136,11 +136,11 @@
        st_board_no=#{freeBoardNo} and file_no=#{fileNo}
    </delete>
    
-   <!-- <delete id="deleteComment" parameterType="map">
+   <delete id="deleteComment" parameterType="map">
      delete from study_board_comment
       where
        st_board_no=#{freeBoardNo}
-   </delete> -->
+   </delete>
    
   </mapper>
   

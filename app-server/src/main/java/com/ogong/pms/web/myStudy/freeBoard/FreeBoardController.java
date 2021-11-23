@@ -1,7 +1,6 @@
 package com.ogong.pms.web.myStudy.freeBoard;
 
 import java.util.List;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -25,7 +24,7 @@ public class FreeBoardController {
   @Autowired StudyDao studyDao;
   @Autowired FreeBoardDao freeBoardDao;
   @Autowired CommentDao commentDao;
-  @Autowired ServletContext sc;
+  /* @Autowired ServletContext sc; */
 
   /* 자유 게시판 등록 폼 */
   @GetMapping("/mystudy/freeboard/form")
@@ -57,25 +56,31 @@ public class FreeBoardController {
   public ModelAndView add(FreeBoard freeBoard, Part photoFile, HttpSession session)
       throws Exception {
 
-    /*
-     * if (photoFile == null) { System.out.println("파일 X"); }
-     * 
-     * else if (photoFile.getSize() > 0) { String filename = UUID.randomUUID().toString();
-     * photoFile.write(sc.getRealPath("/upload/freeboard") + "/" + filename);
-     * freeBoard.setFreeBoardFile(filename);
-     * 
-     * Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(20, 20)
-     * .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
-     * 
-     * @Override public String apply(String name, ThumbnailParameter param) { return name +
-     * "_20x20"; } });
-     * 
-     * Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(100, 100)
-     * .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
-     * 
-     * @Override public String apply(String name, ThumbnailParameter param) { return name +
-     * "_100x100"; } }); }
-     */
+    /* if (photoFile == null) {
+      System.out.println("파일 X");
+    }
+
+    else if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/freeboard") + "/" + filename);
+      freeBoard.setFreeBoardFile(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(20, 20)
+      .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_20x20";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(100, 100)
+      .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
+    } */
 
     freeBoard.setFreeBoardWriter((Member) session.getAttribute("loginUser"));
     System.out.println(freeBoard);
@@ -187,29 +192,31 @@ public class FreeBoardController {
       throw new Exception("해당 번호의 자유 게시판이 없습니다.");
     }
 
-    /*
-     * freeBoard.setFreeBoardFile(oldFreeBoard.getFreeBoardFile());
-     * 
-     * if (photoFile.getSize() == 0) { System.out.println(photoFile.getSize());
-     * 
-     * } else if (photoFile.getSize() > 0) { String filename = UUID.randomUUID().toString();
-     * photoFile.write(sc.getRealPath("/upload/freeboard") + "/" + filename);
-     * freeBoard.setFreeBoardFile(filename);
-     * 
-     * Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(20, 20)
-     * .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
-     * 
-     * @Override public String apply(String name, ThumbnailParameter param) { return name +
-     * "_20x20"; } });
-     * 
-     * Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(100, 100)
-     * .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
-     * 
-     * @Override public String apply(String name, ThumbnailParameter param) { return name +
-     * "_100x100"; } });
-     * 
-     * freeBoard.setFreeBoardFile(filename); }
-     */
+    /* freeBoard.setFreeBoardFile(oldFreeBoard.getFreeBoardFile());
+
+    if (photoFile.getSize() > 0) {
+      String filename = UUID.randomUUID().toString();
+      photoFile.write(sc.getRealPath("/upload/freeboard") + "/" + filename);
+      freeBoard.setFreeBoardFile(filename);
+
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(20, 20)
+      .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_20x20";
+        }
+      });
+
+      Thumbnails.of(sc.getRealPath("/upload/freeboard") + "/" + filename).size(100, 100)
+      .outputFormat("jpg").crop(Positions.CENTER).toFiles(new Rename() {
+        @Override
+        public String apply(String name, ThumbnailParameter param) {
+          return name + "_100x100";
+        }
+      });
+
+      freeBoard.setFreeBoardFile(filename);
+    } */
 
     freeBoardDao.update(freeBoard, freeBoard.getStudyNo());
     sqlSessionFactory.openSession().commit();
@@ -231,12 +238,13 @@ public class FreeBoardController {
       throw new Exception("해당 번호의 자유 게시판이 없습니다.");
     }
 
-    /*
-     * if (freeBoard.getFreeBoardFile() == null) { System.out.println("파일 X");
-     * 
-     * } else if (!freeBoard.getFreeBoardFile().isEmpty()) { freeBoardDao.deleteFile(freeboardno);
-     * throw new Exception("게시글의 첨부파일이 모두 삭제됩니다."); }
-     */
+    /* if (freeBoard.getFreeBoardFile() == null) {
+      System.out.println("파일 X");
+
+    } else if (!freeBoard.getFreeBoardFile().isEmpty()) {
+      freeBoardDao.deleteFile(freeboardno);
+      throw new Exception("게시글의 첨부파일이 모두 삭제됩니다.");
+    } */
 
     freeBoardDao.deleteComment(freeboardno);
     freeBoardDao.delete(freeboardno, studyno);
