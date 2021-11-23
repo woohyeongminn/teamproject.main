@@ -37,12 +37,16 @@
 						      <br>
 						  <div class="mb-3 row">
 						    <label for='f-freeBoardTitle'>제목</label>
-						    <input id='f-freeBoardTitle' type='text' name='freeBoardTitle' class="form-control">
+						    <input id='f-freeBoardTitle' type='text' name='freeBoardTitle' class="form-control" required
+			           oninvalid="this.setCustomValidity('제목을 입력하세요.')"
+			           oninput="this.setCustomValidity('')">
 						  </div>
 						
 						  <div class="mb-3 row">
 						    <label for='f-freeBoardContent'>내용</label>
-						    <textarea id='f-freeBoardContent' type='text' name='freeBoardContent' class="form-control" rows="3"></textarea>
+						    <textarea id='f-freeBoardContent' type='text' name='freeBoardContent' class="form-control" rows="3" required
+			           oninvalid="this.setCustomValidity('제목을 입력하세요.')"
+			           oninput="this.setCustomValidity('')"></textarea>
 						  </div>
 						
 						  <!-- <div class="mb-3 row">
@@ -71,7 +75,7 @@
      </div>
    </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   function checkValue() {
 
   var form = document.freeBoardInfo;
@@ -91,6 +95,6 @@
     return false;
   } */
 }
-</script>
+</script> -->
 </body>
       
