@@ -283,15 +283,13 @@ function onSignIn(googleUser) {
 	 url:"member/google",
 	 type:"POST",
 	 data: {
-		 name: "profile.getName()",
-		 email: "profile.getEmail()"
+		 name: profile.getName(),
+		 email: profile.getEmail()
 	 },
-	 contentType: "text",
-	 
 	 success: function(data) {
 		 if (data){
 			 
-			 alert("저장되었습니다.");
+			 alert(data);
 		 
 			 
 		 } else {

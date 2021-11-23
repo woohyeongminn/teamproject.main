@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.ogong.pms.dao.MemberDao;
 import com.ogong.pms.domain.Member;
@@ -70,12 +71,14 @@ public class PerMemberAuthController {
   }
 
 
-  @PostMapping("/member/google")   
-  public void test(@RequestParam("name") String name,@RequestParam("email") String email) {
+  @PostMapping("/member/google")
+  @ResponseBody
+  public String test(@RequestParam("name") String name,@RequestParam("email") String email) {
 
     System.out.println("*********************"+name);
     System.out.println("*********************"+email);
 
+    return name+","+email;
   }
 
 
