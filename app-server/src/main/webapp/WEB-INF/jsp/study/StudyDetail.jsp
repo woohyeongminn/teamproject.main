@@ -219,17 +219,9 @@
 		        <c:if test="${loginUser ne null}">
 		          <!-- 스터디 참여 -->
 		          <c:if test="${study.owner.perNo ne loginUser.perNo}">
-		            <c:choose>
-		              <c:when test="${guilder == 'false'}">
-		                <li><a href='join?studyno=${study.studyNo}' class="btn btn-light">참여 신청</a></li>
-		              </c:when>
-		              <!-- <c:when test="${guilder == 'waitingGuilder'}">
-		                <li>승인 대기중</li>
-		              </c:when>
-		              <c:when test="${guilder == 'guilder'}">
-		                <li>참여중</li>
-		              </c:when> -->
-		            </c:choose>
+	              <c:if test="${guilder == 'false'}">
+	                <li><a href='join?studyno=${study.studyNo}' class="btn btn-light">참여 신청</a></li>
+	              </c:if>
 		          </c:if>
 		          
 		          <!-- 스터디 북마크 -->

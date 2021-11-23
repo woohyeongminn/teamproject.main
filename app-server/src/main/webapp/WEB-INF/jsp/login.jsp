@@ -164,9 +164,8 @@ section {
 
 						<!-- 카카오 로그인 -->
 						<div id="kakao_id_login">
-						<a
-							href="https://kauth.kakao.com/oauth/authorize?client_id=9e2ad8ce072bca1d727914f05e243cbb&redirect_uri=http://localhost:8080/ogong/app/login&response_type=code">
-							<img src={kakao_login}></img> <span>카카오 로그인</span>
+						<a href="https://kauth.kakao.com/oauth/authorize?client_id=9e2ad8ce072bca1d727914f05e243cbb&redirect_uri=http://localhost:8080/ogong/app/login&response_type=code">
+							<img src="${contextPath}/img/kakao_login.png"></img>
 						</a>
 
 						<script type="text/javascript">
