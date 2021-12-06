@@ -34,16 +34,17 @@
 </style>
 <div class="all-content">
   <div id="mian">
+      <br>
       <b>제목</b>
       <input type="text" class="form-control" name="title" value="${myAskBoard.askTitle}" readonly></input>
-    
-      <br><b>내용</b>
+      <br> 
+      <b>내용</b>
       <textarea class="form-control" id="f-content" name="content" placeholder="${myAskBoard.askContent}" class="form-control" cols="50" rows="3" readonly></textarea>
- 
-       <div id="info">
+      <br>  
+      <div id="info">
         <b>작성자 :</b><span>${myAskBoard.askCeoWriter.ceoNickname}</span><br>
         <b>등록일 :</b><span>${myAskBoard.askRegisteredDate}</span>
-       </div>
+      </div>
       <c:choose>
 	      <c:when test="${empty myAskBoard.reply}">
 	      <label>답변📔 </label>
@@ -68,7 +69,7 @@
      <a id="notEmptyReply" type="button" class = "btn btn-outline-dark" onclick="notEmptyReply(this);">수정하기</a>        
    </c:otherwise>
   </c:choose>
-  <a href='perdelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark" onclick="deletePopup()">문의글삭제</a>
+  <a href='perdelete?askNo=${myAskBoard.askNo}' type="button" class = "btn btn-outline-dark" onclick="deletePopup()">삭제하기</a>
   <a href='permylist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
 </div>
 </div>

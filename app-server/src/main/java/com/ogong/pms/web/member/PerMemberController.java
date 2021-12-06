@@ -164,7 +164,6 @@ public class PerMemberController {
     mv.addObject("contentUrl", "member/PerMemberUpdateForm.jsp");
     mv.setViewName("template1");
     return mv;
-
   }
 
   @RequestMapping("/member/update")

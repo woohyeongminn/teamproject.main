@@ -110,6 +110,7 @@
     <input class="input" id='f-email' type='email' name='email' placeholder='E-mail' value="${cookie.email.value}">
     <br>
     <input class="input" id='f-password' type='password' name='password' placeholder='Password'>
+     
       <div class="inner">
         <div class="form-check">
            <input id="f-saveEmail" type="checkbox" class="rememberCheck" name="saveEmail" ${not empty cookie.email ? "checked":""}>

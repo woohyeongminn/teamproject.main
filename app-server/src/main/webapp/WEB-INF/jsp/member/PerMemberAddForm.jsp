@@ -14,7 +14,6 @@
   .btn {
    font-size: 14px;
    line-height: 10px;
-   
   }
   b {
   text-align: center;
@@ -115,7 +114,7 @@
 <script type="text/javascript">
 function checkValue() {
   
-  var form = document.ceoInfo;
+  var form = document.perInfo;
   
   if(!form.perName.value){
         alert("이름을 입력하세요.");
@@ -186,13 +185,7 @@ function idOverlap(){
       type :"post",/* 전송 방식 */
       url :"idOverlap", /* 컨트롤러 사용할 때. 내가 보낼 데이터의 주소. */
       data : {"id" : form.id.value+"@"+form.site.value},
-      /* JSON형식 안에 JSON 형식으로 표현한 데이터. 
-            "파라미터 이름" : 폼태그에 적은 NAME 값.ID입력창의 NAME값.value 여러 개도 가능
-      data :{ "id" : joinForm.id.value, 
-      "id1" : joinForm.password.value}, 이렇게도 사용 가능.         
-      */
       dataType : "text",  /* text, xml, html, script, json, jsonp 가능 */
-            //정상적인 통신을 했다면 function은 백엔드 단에서 데이터를 처리.
             
       success : function(data){ 
         

@@ -22,9 +22,16 @@
   .btn {
     line-height: 14px;
   }
-  #info {
+  p, #info, #createDt{
   text-align:right;
   }
+  textarea {
+  color: white;
+  }
+  a {
+  color: black;
+  }  xt-align:right;
+  
 </style>
 <div class="all-content">
 <div id="mian">
@@ -67,7 +74,7 @@
           <a id="notEmptyReply" type="button" class = "btn btn-outline-dark" onclick="notEmptyReply(this);">수정하기</a>        
         </c:otherwise>
        </c:choose>
-       <a href='perdelete?askNo=${askBoard.askNo}' type="button" class = "btn btn-outline-dark">문의글삭제</a>
+       <a href='perdelete?askNo=${askBoard.askNo}' type="button" class = "btn btn-outline-dark">삭제하기</a>
        <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
      </div>
   </c:when>
@@ -88,7 +95,7 @@
           <a id="notEmptyReply" type="button" class = "btn btn-outline-dark" onclick="notEmptyReply(this);">수정하기</a>        
         </c:otherwise>
        </c:choose>       
-       <a href='ceodelete?askNo=${askBoard.askNo}' type="button" class = "btn btn-outline-dark">문의글삭제</a>
+       <a href='ceodelete?askNo=${askBoard.askNo}' type="button" class = "btn btn-outline-dark">삭제하기</a>
        <a href='alllist' type="button" class="btn btn-outline-dark" >뒤로 가기</a>
      </div>
   </c:when>

@@ -52,6 +52,5 @@ public class MemberService {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 }
