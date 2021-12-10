@@ -1,3 +1,6 @@
+
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=woohyeongminn&show_icons=true&theme=radical)
+
 # :books: 오늘의 공부
 
 [김은채](https://github.com/Kimeunchaee)
@@ -5,3 +8,5 @@
 [송다혜](https://github.com/ssongdahye)
 [우형민](https://github.com/woohyeongminn)
 [조솔](https://github.com/jo-sol)
+
+
