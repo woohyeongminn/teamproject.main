@@ -1,6 +1,4 @@
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=woohyeongminn&show_icons=true&theme=radical)
-
 # :books: 오늘의 공부
 
 [김은채](https://github.com/Kimeunchaee)
