@@ -58,6 +58,7 @@ public class PerMemberFindIdPwController  {
       mv.addObject("refresh", "2;url=findemailform");
       mv.addObject("contentUrl", "member/InputFail.jsp");
       mv.setViewName("template1");
+
     }
     return mv;
   } 
